@@ -481,6 +481,8 @@ body.m-mode .legend{font-size:.7rem;}
             <option value="focus">Custom (%)</option>
           </select></label>
         <label class="dsel"><span>At least 1 worker per building</span><input type="checkbox" id="minOneChk"></label>
+        <label class="dsel"><span>Optimise by economic value</span><input type="checkbox" id="byValueChk"></label>
+        <p class="small" style="margin:0;">Off: workers and solver go for the most units. On: they go for the highest economic output, so a Gold Mine at 50 per unit outranks a Papyrus Workshop at 10. Displayed production stays in units either way.</p>
         <div id="focusBox" hidden><p class="small">Share of the resident pool; the rest goes by output.</p><div id="focusList"></div></div>
         <p class="small" id="researchInfo" style="margin:8px 0 0;"></p>
         <div id="researchBox" hidden>
@@ -509,6 +511,12 @@ body.m-mode .legend{font-size:.7rem;}
         <div class="bigval" id="totalOut">–</div>
         <div class="subval" id="outSub"></div>
         <table class="ptable" id="prodTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Economic output</h2>
+        <div class="bigval" id="ecoTotal">–</div>
+        <div class="subval" id="ecoSub"></div>
+        <table class="ptable" id="ecoTable"></table>
       </div>
       <div class="panel">
         <h2>Occupancy per field</h2>
@@ -569,20 +577,20 @@ body.m-mode .legend{font-size:.7rem;}
   // a = width (x-axis) at rotation 0, b = height (y-axis) at rotation 0
   // ra/rb = matching range width/height at rotation 0 (source buildings only)
   var DEFS = [
-    {key:'natron', base:25, workers:20, wfam:'B', name:'Natron Basin', cat:'prod', a:5,b:4, max:2, target:2, color:'#c9a15a'},
-    {key:'gold', base:25, workers:25, wfam:'B', name:'Gold Mine', cat:'prod', a:5,b:4, max:3, target:3, color:'#caa63d'},
-    {key:'sand', base:20, workers:20, wfam:'A', name:'Sandstone Quarry', cat:'prod', a:4,b:4, max:5, target:5, color:'#b6a17d'},
-    {key:'papyrus', base:20, workers:20, wfam:'A', name:'Papyrus Workshop', cat:'prod', a:4,b:4, max:4, target:4, color:'#8fb96a'},
-    {key:'moertel', base:20, workers:20, wfam:'A', name:'Mortar Workshop', cat:'prod', a:4,b:4, max:3, target:3, color:'#a89a86'},
-    {key:'fisch', base:20, workers:20, wfam:'A', name:'Fish Pond', cat:'prod', a:4,b:4, max:1, target:1, color:'#5a9fbd'},
-    {key:'hiero', base:25, workers:20, wfam:'B', name:'Hieroglyph Press', cat:'prod', a:5,b:4, max:2, target:2, color:'#c67d54'},
-    {key:'trocken', base:25, workers:20, wfam:'B', name:'Drying Area', cat:'prod', a:5,b:4, max:1, target:1, color:'#d3bf6e'},
-    {key:'lehm', base:20, workers:20, wfam:'A', name:'Mudbrick Yard', cat:'prod', a:4,b:3, max:1, target:1, color:'#b0703c'},
-    {key:'flachs', base:20, workers:20, wfam:'A', name:'Flax Field', cat:'prod', a:4,b:3, max:3, target:3, color:'#79965a'},
+    {key:'natron', resName:"Preserving Linen", unitValue:40, base:25, workers:20, wfam:'B', name:'Natron Basin', cat:'prod', a:5,b:4, max:2, target:2, color:'#c9a15a'},
+    {key:'gold', resName:"Pharaoh's Gold", unitValue:50, base:25, workers:25, wfam:'B', name:'Gold Mine', cat:'prod', a:5,b:4, max:3, target:3, color:'#caa63d'},
+    {key:'sand', resName:"Lime Sand Mix", unitValue:10, base:20, workers:20, wfam:'A', name:'Sandstone Quarry', cat:'prod', a:4,b:4, max:5, target:5, color:'#b6a17d'},
+    {key:'papyrus', resName:"Papyrus Scroll", unitValue:10, base:20, workers:20, wfam:'A', name:'Papyrus Workshop', cat:'prod', a:4,b:4, max:4, target:4, color:'#8fb96a'},
+    {key:'moertel', resName:"Wet Mortar", unitValue:10, base:20, workers:20, wfam:'A', name:'Mortar Workshop', cat:'prod', a:4,b:4, max:3, target:3, color:'#a89a86'},
+    {key:'fisch', resName:"Fish", unitValue:10, base:20, workers:20, wfam:'A', name:'Fish Pond', cat:'prod', a:4,b:4, max:1, target:1, color:'#5a9fbd'},
+    {key:'hiero', resName:"Scroll of Knowledge", unitValue:40, base:25, workers:20, wfam:'B', name:'Hieroglyph Press', cat:'prod', a:5,b:4, max:2, target:2, color:'#c67d54'},
+    {key:'trocken', resName:"Dried Fish", unitValue:20, base:25, workers:20, wfam:'B', name:'Drying Area', cat:'prod', a:5,b:4, max:1, target:1, color:'#d3bf6e'},
+    {key:'lehm', resName:"Mudbrick", unitValue:10, base:20, workers:20, wfam:'A', name:'Mudbrick Yard', cat:'prod', a:4,b:3, max:1, target:1, color:'#b0703c'},
+    {key:'flachs', resName:"Linen Cloth", unitValue:10, base:20, workers:20, wfam:'A', name:'Flax Field', cat:'prod', a:4,b:3, max:3, target:3, color:'#79965a'},
 
     {key:'mumie', must:true, must:true, name:'Mummification Hall', cat:'plain', a:4,b:4, max:1, target:1, color:'#948a77'},
     {key:'klein_h', res1:3, resStep:1, name:'Small Dwelling', cat:'plain', a:3,b:2, max:8, target:8, color:'#c7ad82'},
-    {key:'gross_h', res1:18, resStep:3, name:'Large Dwelling', cat:'plain', a:4,b:3, max:3, target:3, color:'#c2a066'},
+    {key:'gross_h', res1:5, resStep:3, resSteps:'3;25:4;43:5', name:'Large Dwelling', cat:'plain', a:4,b:3, max:3, target:3, color:'#c2a066'},
 
     {key:'teich', name:'Small Pond', cat:'source', a:2,b:1, ra:4,rb:3, water:120, max:4, target:4, color:'#3fa0c8'},
     {key:'kanal', name:'Canal', cat:'source', a:5,b:1, ra:9,rb:5, water:400, max:4, target:4, color:'#2778a0'},
@@ -600,9 +608,12 @@ body.m-mode .legend{font-size:.7rem;}
     DEFS.forEach(function(d){
       var src = base[d.key];
       if (!src) return;
-      ['res1','resStep','wfam','workers','must','base','capMax'].forEach(function(f){
+      ['res1','resStep','wfam','workers','must','base','capMax','resName','unitValue','resSteps'].forEach(function(f){
         if (d[f] === undefined && src[f] !== undefined) d[f] = src[f];
       });
+      // the large dwelling used a flat +3 with a fudged start of 18; the real curve
+      // starts at 5 and steps up at level 25 and 43
+      if (d.key === 'gross_h' && d.res1 === 18){ d.res1 = 5; d.resSteps = '3;25:4;43:5'; }
     });
   })();
   reindexDefs();
@@ -807,12 +818,14 @@ body.m-mode .legend{font-size:.7rem;}
                               '<option value="B"' + (def.wfam==='B'?' selected':'') + '>B</option>' +
                               '<option value="fix"' + (def.wfam==='fix'?' selected':'') + '>fixed</option></select>' +
                             (def.wfam==='fix' ? ' <input data-f="workers" type="number" min="0" value="'+(def.workers||20)+'">' : '') +
+                            ' · resource <input class="nm" style="width:110px;text-align:left" data-f="resName" type="text" value="'+((def.resName||'').replace(/"/g,'&quot;'))+'">' +
+                            ' · value/unit <input data-f="unitValue" type="number" min="0" value="'+(def.unitValue||0)+'">' +
                             ' · base <input data-f="base" type="number" min="1" value="'+(def.base||20)+'">' +
                             ' · own worker cap (0=family) <input data-f="capMax" type="number" min="0" value="'+(def.capMax||0)+'">' +
                             ' · workers man. <input data-f="wman" type="number" min="0" value="'+(def.wman||0)+'">' +
                             ' · level (0=auto) <input data-f="lvl" type="number" min="0" value="'+(def.lvl||0)+'">' : '') +
         (def.cat==='plain' ? ' · residents L1 <input data-f="res1" type="number" min="0" value="'+(def.res1||0)+'">' +
-                                ' +/lvl <input data-f="resStep" type="number" min="0" value="'+(def.resStep||0)+'">' +
+                                ' +/lvl <input class="nm" style="width:96px;text-align:center" data-f="resSteps" type="text" title="3 = +3 every level. 3;25:4;43:5 = +3, then +4 from level 25, +5 from level 43." value="'+(def.resSteps || def.resStep || 0)+'">' +
                                 ' · level (0=auto) <input data-f="lvl" type="number" min="0" value="'+(def.lvl||0)+'">' : '') +
         (def.cat!=='source' ? ' · <label style="display:inline-flex;align-items:center;gap:3px;">' +
              '<input data-f="must" type="checkbox"' + (def.must?' checked':'') + '> required</label>' : '') +
@@ -822,12 +835,14 @@ body.m-mode .legend{font-size:.7rem;}
         var f = inp.getAttribute('data-f');
         if (f==='wfam'){ def.wfam = inp.value; saveTypes(); buildPalette(); renderProduction(); return; }
         if (f==='must'){ def.must = inp.checked; saveTypes(); return; }
+        if (f==='resName'){ def.resName = inp.value; saveTypes(); renderProduction(); return; }
+        if (f==='resSteps'){ def.resSteps = inp.value.trim(); saveTypes(); renderProduction(); return; }
         if (f==='name'){ def.name = inp.value || def.name; }
         else {
           var v = num(inp.value, def[f]);
           if (f==='a'||f==='b') v = Math.max(1, Math.min(12, v));
           def[f] = v;
-          if (f==='workers'||f==='lvl'||f==='wman'||f==='res1'||f==='resStep'||f==='base'||f==='capMax'){
+          if (f==='workers'||f==='lvl'||f==='wman'||f==='res1'||f==='resStep'||f==='base'||f==='capMax'||f==='unitValue'){
             if (typeof renderProduction==='function') renderProduction();
           }
         }
@@ -2184,9 +2199,9 @@ body.m-mode .legend{font-size:.7rem;}
               var n = counts[d.key] || 0;
               if (!n) return;
               var lvl = levelOf(d, stx);
-              if (d.cat === 'plain' && (d.res1 > 0 || d.resStep > 0)) pool += n * residentsOf(d, lvl);
+              if (d.cat === 'plain' && (d.res1 > 0 || d.resStep > 0 || d.resSteps)) pool += n * residentsOf(d, lvl);
               if (d.cat === 'prod'){
-                var per = perWorker(d, stx, pass.pct), cap = capOf(d, lvl);
+                var per = perWorker(d, stx, pass.pct) * valueOf(d), cap = capOf(d, lvl);
                 for (var i = 0; i < n; i++) list.push({per:per, cap:cap});
               }
             });
@@ -2328,7 +2343,7 @@ body.m-mode .legend{font-size:.7rem;}
     gods: {horus:0, isis:0, thot:0, seth:0, sobek:0, taweret:0, sachmet:0, hathor:0},
     tiers: [{upTo:120,pct:0},{upTo:310,pct:10},{upTo:630,pct:25},{upTo:999999,pct:50}],
     research: RESEARCH_DEFAULT.slice(),
-    dist: 'balance', focus: {}, minOne: true, resOffset: -1, capA: 0, capB: 26
+    dist: 'balance', focus: {}, minOne: true, resOffset: -1, capA: 0, capB: 26, byValue: false
   };
   var PCFG_DEFAULT = JSON.parse(JSON.stringify(PCFG));
   function mergePCFG(saved){                 // missing fields fall back to the defaults
@@ -2386,13 +2401,42 @@ body.m-mode .legend{font-size:.7rem;}
     var s = st.byKey[def.key];
     return s && s.max ? s.max : 1;
   }
+  // "3;25:4;43:5" = +3 per level, +4 from level 25 on, +5 from level 43 on
+  function stepsOf(def){
+    var raw = (def.resSteps === undefined || def.resSteps === null) ? '' : String(def.resSteps).trim();
+    var out = [];
+    if (raw){
+      raw.split(';').forEach(function(part){
+        part = part.trim();
+        if (!part) return;
+        var p = part.split(':');
+        if (p.length === 1) out.push({from:1, step: parseFloat(p[0]) || 0});
+        else out.push({from: parseInt(p[0], 10) || 1, step: parseFloat(p[1]) || 0});
+      });
+    }
+    if (!out.length) out = [{from:1, step: def.resStep || 0}];
+    out.sort(function(a, b){ return a.from - b.from; });
+    return out;
+  }
   function residentsOf(def, level){
     if (!level) return 0;
-    if (def.res1 !== undefined) return def.res1 + (def.resStep||0) * (level-1);
-    return 0;
+    if (def.res1 === undefined && !def.resStep && !def.resSteps) return 0;
+    var sc = stepsOf(def), total = def.res1 || 0;
+    for (var L = 2; L <= level; L++){
+      var st = sc[0].step;
+      for (var i = 0; i < sc.length; i++) if (L >= sc[i].from) st = sc[i].step;
+      total += st;
+    }
+    return total;
   }
   // output of one building, per worker
   function baseOf(def){ return (def.base > 0) ? def.base : 20; }   // 20 or 25 in game
+  // worth of one unit of the resource. Only used for ranking and for the economy panel -
+  // every number the tool prints as production stays in units.
+  function valueOf(def){
+    if (!PCFG.byValue) return 1;
+    return (def.unitValue > 0) ? def.unitValue : 1;
+  }
   function perWorker(def, st, wpct){
     var s = st.byKey[def.key] || {pct:0, max:0};
     var g = PCFG.gods, spec = GOD_OF[def.key] ? (g[GOD_OF[def.key]]||0) : 0;
@@ -2472,7 +2516,7 @@ body.m-mode .legend{font-size:.7rem;}
         if (!moved) break;
       }
     } else {                                          // max output: best value per worker first
-      auto.sort(function(a, b){ return b.per - a.per; })
+      auto.sort(function(a, b){ return b.per * valueOf(b.def) - a.per * valueOf(a.def); })
           .forEach(function(s){
             var give = Math.max(0, Math.min(s.cap - s.workers, left));
             s.workers += give; left -= give;
@@ -2487,7 +2531,7 @@ body.m-mode .legend{font-size:.7rem;}
     var pool = 0, houses = 0, houseRows = [];
     placed.forEach(function(b){
       var def = DEF_BY_KEY[b.key];
-      if (!def || def.cat !== 'plain' || !(def.res1 > 0 || def.resStep > 0)) return;
+      if (!def || def.cat !== 'plain' || !(def.res1 > 0 || def.resStep > 0 || def.resSteps)) return;
       var lvl = levelOf(def, st), r = residentsOf(def, lvl);
       pool += r; houses++;
       var row = houseRows.filter(function(h){ return h.key === def.key; })[0];
@@ -2601,6 +2645,7 @@ body.m-mode .legend{font-size:.7rem;}
       tbl.innerHTML = '<tr><td class="nm"><span class="empty-hint">No production buildings on the grid yet.</span></td></tr>';
       document.getElementById('totalOut').textContent = '–';
       document.getElementById('outSub').textContent = '';
+      renderEco([]);
       return;
     }
     var agg = {};
@@ -2671,9 +2716,38 @@ body.m-mode .legend{font-size:.7rem;}
         if (d) d.hidden = !d.hidden;
       });
     });
+    renderEco(rows);
     document.getElementById('totalOut').textContent = fmt(ev.total);
     document.getElementById('outSub').textContent =
       ev.used + ' / ' + ev.pool + ' assigned · ' + ev.slots.length + ' buildings · Click a row to see the maths.';
+  }
+
+  // ---- economy panel: output = productivity x value per unit (same as the in-game screen) ----
+  function renderEco(rows){
+    var tbl = document.getElementById('ecoTable');
+    if (!tbl) return;
+    if (!rows.length){
+      tbl.innerHTML = "<tr><td class=\"nm\"><span class=\"empty-hint\">No production buildings on the grid yet.</span></td></tr>";
+      document.getElementById('ecoTotal').textContent = '\u2013';
+      document.getElementById('ecoSub').textContent = '';
+      return;
+    }
+    var list = rows.map(function(r){
+      var val = (r.def.unitValue > 0) ? r.def.unitValue : 0;
+      return {name: r.def.resName || r.def.name, prod: r.out, val: val, eco: r.out * val};
+    }).sort(function(a, b){ return b.eco - a.eco; });
+    var total = 0;
+    list.forEach(function(x){ total += x.eco; });
+    var html = "<tr><th>Resource</th><th class=\"num\">Productivity</th><th class=\"num\">Value</th><th class=\"num\">Output</th></tr>";
+    list.forEach(function(x){
+      html += '<tr><td class="nm">' + x.name + '</td>' +
+              '<td class="num">' + fmt(x.prod) + '</td>' +
+              '<td class="num">' + (x.val || '\u2013') + '</td>' +
+              '<td class="num">' + fmt(x.eco) + '</td></tr>';
+    });
+    tbl.innerHTML = html;
+    document.getElementById('ecoTotal').textContent = fmt(total);
+    document.getElementById('ecoSub').textContent = ' per second · ' + rows.length + ' resources · value per unit is editable under Edit types';
   }
 
   document.getElementById('prodEditToggle').addEventListener('click', function(){
@@ -2699,6 +2773,8 @@ body.m-mode .legend{font-size:.7rem;}
     if (fb) fb.hidden = (PCFG.dist !== 'focus');
     var mc = document.getElementById('minOneChk');
     if (mc) mc.checked = (PCFG.minOne !== false);
+    var bv = document.getElementById('byValueChk');
+    if (bv) bv.checked = !!PCFG.byValue;
     if (typeof buildFocusList === 'function') buildFocusList();
   }
 
@@ -2836,6 +2912,10 @@ body.m-mode .legend{font-size:.7rem;}
   var minChk = document.getElementById('minOneChk');
   minChk.addEventListener('change', function(){
     PCFG.minOne = minChk.checked; savePCFG(); renderProduction();
+  });
+  var valChk = document.getElementById('byValueChk');
+  valChk.addEventListener('change', function(){
+    PCFG.byValue = valChk.checked; savePCFG(); renderProduction();
   });
   document.getElementById('distSel').addEventListener('change', function(){
     PCFG.dist = this.value; savePCFG();
