@@ -103,12 +103,12 @@ h1{font-size:1.5rem; font-weight:700; letter-spacing:.02em; color:var(--accent-d
   text-transform:uppercase; letter-spacing:.12em; font-size:.68rem; font-weight:600;
   color:var(--ink-soft);
 }
-.app{max-width:1180px; margin:0 auto;}
+.app{max-width:1440px; margin:0 auto;}
 .head{display:flex; flex-direction:column; gap:4px; margin-bottom:16px;}
 .head p{margin:0; color:var(--ink-soft); font-size:.88rem; max-width:62ch;}
 
 .layout{display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;}
-.board{flex:0 0 auto;}
+.board{flex:0 0 auto; max-width:100%; min-width:0;}
 .side{flex:1 1 320px; min-width:300px; display:flex; flex-direction:column; gap:16px;}
 
 .toolbar{
@@ -172,6 +172,25 @@ h1{font-size:1.5rem; font-weight:700; letter-spacing:.02em; color:var(--accent-d
 .tag.ok{background:var(--good);}
 .tag.partial{background:var(--warn);}
 .tag.bad{background:var(--bad);}
+/* one title bar at the top of a tile, one figures bar at the bottom - both flush with
+   the edges, so a tile reads as a labelled block instead of scattered chips */
+.tlabel{
+  position:absolute; pointer-events:none; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:space-between;
+  box-sizing:border-box;
+}
+.tlabel .nm, .tlabel .ft{
+  display:block; color:#fff; line-height:1.32; padding:0 3px;
+  background:rgba(20,16,10,.55); overflow:hidden;
+  text-align:center; word-break:normal; overflow-wrap:break-word;
+}
+.tlabel .nm{font-weight:600; letter-spacing:.01em;}
+.tlabel .ft{
+  font-family:'JetBrains Mono',monospace; font-weight:700; letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.tlabel .ft b{color:#ffe9b8; font-weight:700;}
+#overlay.tiny-cells .tlabel{display:none;}
 .outline .water{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   font-family:'JetBrains Mono', monospace; font-size:10px; font-weight:700;
@@ -417,8 +436,12 @@ body.m-mode .legend{font-size:.7rem;}
         <button class="btn" id="modeBtn" title="Switch between phone and desktop view">📱 Phone view</button>
         <button class="btn" id="zoomOut" title="Zoom out">−</button>
         <button class="btn" id="zoomIn" title="Zoom in">+</button>
+        <button class="btn" id="zoomFit" title="Back to fit">⤢</button>
         <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
           <input type="checkbox" id="showRanges"> Show ranges of all water sources
+        </label>
+        <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
+          <input type="checkbox" id="showLabels" checked> Names &amp; workers on the grid
         </label>
         <button class="btn primary" id="loadPresetBtn">Load full solution (25/25 supplied)</button>
         <button class="btn" id="resetBtn">Reset</button>
@@ -540,6 +563,9 @@ body.m-mode .legend{font-size:.7rem;}
   var userZoom = false;
   function applyCellSize(){
     document.documentElement.style.setProperty('--cs', CS+'px');
+    // pin the board to the grid's width, otherwise the wrapping toolbar decides how wide it is
+    var board = document.querySelector('.board');
+    if (board) board.style.width = document.body.classList.contains('m-mode') ? '' : (26 * CS + 30) + 'px';
     var ov = document.getElementById('overlay');
     if (ov){
       ov.classList.toggle('small-cells', CS < 15);
@@ -550,13 +576,17 @@ body.m-mode .legend{font-size:.7rem;}
   var modePref = null;                       // 'mobile' | 'desktop' | null = automatic
   try{ modePref = localStorage.getItem(MODE_KEY) || null; }catch(e){}
   function currentMode(){ return modePref || (window.innerWidth <= 820 ? 'mobile' : 'desktop'); }
+  var CS_MAX = 60;                     // manual zoom ceiling
   function fitCellSize(){
     if (userZoom) return;
     if (currentMode() === 'mobile'){
-      var avail = Math.min(window.innerWidth - 46, 1180);
-      CS = Math.max(8, Math.min(20, Math.floor(avail / 26)));
+      var avail = Math.min(window.innerWidth - 30, 1440);
+      CS = Math.max(8, Math.min(26, Math.floor(avail / 26)));
     } else {
-      CS = 20;
+      var app = document.querySelector('.app');
+      var w = app ? app.clientWidth : 1180;
+      var avail2 = w - 20 - 320 - 32;   // gap + side panel + gridwrap padding
+      CS = Math.max(20, Math.min(36, Math.floor(avail2 / 26)));
     }
     applyCellSize();
   }
@@ -1031,6 +1061,65 @@ body.m-mode .legend{font-size:.7rem;}
     lastGhostCells = [];
   }
 
+  // short form for tiles that cannot hold the full name: initials for multi-word names,
+  // the first few letters otherwise
+  function shortOf(def){
+    if (def.short) return def.short;
+    var n = (def.name || '').trim();
+    var parts = n.split(/\s+/);
+    if (parts.length > 1) return parts.map(function(p){ return p.charAt(0).toUpperCase(); }).join('');
+    return n.slice(0, 5);
+  }
+  // title bar + figures bar, fitted to the building's footprint. `foot` is a list of
+  // lines; lines that do not fit are dropped from the bottom up.
+  function makeTileLabel(b, def, foot){
+    var wpx = b.w * CS, hpx = b.h * CS;
+    var fs = Math.max(6, Math.min(14, Math.round(CS * 0.44)));
+    var lineH = Math.ceil(fs * 1.34);
+    var rows = Math.floor(hpx / lineH);
+    var maxChars = Math.floor((wpx - 7) / (fs * 0.66));
+    if (rows < 1 || maxChars < 4) return null;
+
+    foot = (foot || []).filter(function(x){ return x; }).map(String);
+    var name = def.name || '', longest = 0;
+    name.split(/\s+/).forEach(function(w){ if (w.length > longest) longest = w.length; });
+    // a single long word gets a smaller font rather than one orphaned letter on line two
+    var nameFs = (longest > maxChars) ? Math.max(6, Math.floor(fs * maxChars / longest)) : fs;
+    var nameChars = Math.max(1, Math.floor((wpx - 7) / (nameFs * 0.66)));
+    var nameRows = Math.ceil((name.length + 1) / nameChars);
+    if (nameChars < 7 || nameRows > 2){           // three broken lines are unreadable
+      name = shortOf(def);
+      nameFs = fs;
+      nameChars = maxChars;
+      if (name.length > maxChars) name = name.slice(0, maxChars);
+      nameRows = 1;
+    }
+    while (foot.length && nameRows + foot.length > rows) foot.pop();
+    if (nameRows + foot.length > rows && nameRows === 2){
+      name = shortOf(def);
+      nameFs = fs;
+      if (name.length > maxChars) name = name.slice(0, maxChars);
+      nameRows = 1;
+    }
+    if (nameRows > rows) return null;
+    foot = foot.map(function(t){                  // "400 water" -> "400" when it is too long
+      if (t.replace(/<[^>]+>/g, '').length <= maxChars) return t;
+      var head = t.replace(/<[^>]+>/g, '').split(' ')[0];
+      return head.length <= maxChars ? head : '';
+    }).filter(function(x){ return x; });
+
+    var el = document.createElement('div');
+    el.className = 'tlabel';
+    el.style.left = px(b.x); el.style.top = px(b.y);
+    el.style.width = px(b.w); el.style.height = px(b.h);
+    el.style.fontSize = fs + 'px';
+    el.innerHTML = '<span class="nm"' + (nameFs !== fs ? ' style="font-size:' + nameFs + 'px"' : '') +
+                   '>' + name + '</span>' +
+                   (foot.length ? '<span class="ft">' + foot.join('<br>') + '</span>' : '');
+    overlay.appendChild(el);
+    return el;
+  }
+
   // ---- main render: cell backgrounds + building fills + status outlines ----
   function renderAll(){
     for (var y=0;y<N;y++){
@@ -1052,6 +1141,16 @@ body.m-mode .legend{font-size:.7rem;}
 
     overlay.innerHTML='';
     var showRanges = document.getElementById('showRanges').checked;
+    var lblChk = document.getElementById('showLabels');
+    var showLabels = !lblChk || lblChk.checked;
+    // who actually works where - so the number on the tile is the real one, not a per-type total
+    var ev = null, wmap = {};
+    if (showLabels && typeof evaluate === 'function'){
+      try{
+        ev = evaluate();
+        ev.slots.forEach(function(s){ wmap[s.b.uid] = s.workers; });
+      }catch(e){ ev = null; }
+    }
     if (showRanges){
       placed.forEach(function(b){
         var def = DEF_BY_KEY[b.key];
@@ -1075,18 +1174,36 @@ body.m-mode .legend{font-size:.7rem;}
       var wp = (typeof waterPct === 'function') ? waterPct(total) : (total>=NEED?50:0);
       var status = (wp >= 50) ? 'ok' : (wp > 0 ? 'partial' : 'bad');   // show the tier, not pass/fail
       counters[status]++;
-      var outlineEl = makeOutline(status, b.x, b.y, b.w, b.h,
-                                  status==='ok' ? '✓' : (status==='partial' ? '◐' : '✕'), status);
-      var waterLabel = document.createElement('span');
-      waterLabel.className = 'water';
-      waterLabel.textContent = total + ' · ' + wp + '%';
-      outlineEl.appendChild(waterLabel);
+      var tag = showLabels ? null : (status==='ok' ? '✓' : (status==='partial' ? '◐' : '✕'));
+      var outlineEl = makeOutline(status, b.x, b.y, b.w, b.h, tag, status);
+      if (showLabels){
+        makeTileLabel(b, def, [total + ' · <b>' + wp + '%</b>', (wmap[b.uid] || 0) + ' wk']);
+      } else {
+        var waterLabel = document.createElement('span');
+        waterLabel.className = 'water';
+        waterLabel.style.fontSize = Math.max(8, Math.min(16, Math.round(CS * 0.5))) + 'px';
+        waterLabel.textContent = total + ' · ' + wp + '%';
+        outlineEl.appendChild(waterLabel);
+      }
 
       var row = document.createElement('div');
       row.className='status-row '+status;
       row.innerHTML = '<span>'+def.name+' #'+countByKey[b.key]+'</span><span class="w">'+total+' water · +'+wp+'%</span>';
       statusListEl.appendChild(row);
     });
+    if (showLabels){
+      placed.forEach(function(b){
+        var def = DEF_BY_KEY[b.key];
+        if (def.cat === 'prod') return;                 // already labelled above
+        var sub = '';
+        if (def.cat === 'source') sub = def.water + ' water';
+        else if (typeof residentsOf === 'function'){
+          var r = residentsOf(def, (typeof levelOf === 'function' && ev) ? levelOf(def, ev.st) : 0);
+          if (r > 0) sub = r + ' res';
+        }
+        makeTileLabel(b, def, [sub]);
+      });
+    }
     if (!anyProd){
       statusListEl.innerHTML = '<div class="empty-hint">No production buildings placed yet.</div>';
     }
@@ -1437,7 +1554,7 @@ body.m-mode .legend{font-size:.7rem;}
       if (!pinch){ pinch = {d: pinchDist(), cs: CS}; return; }
       var d = pinchDist();
       if (pinch.d > 10 && d > 10){
-        var next = Math.max(8, Math.min(34, Math.round(pinch.cs * d / pinch.d)));
+        var next = Math.max(8, Math.min(CS_MAX, Math.round(pinch.cs * d / pinch.d)));
         if (next !== CS){ userZoom = true; CS = next; applyCellSize(); renderAll(); }
       }
       e.preventDefault();
@@ -1566,10 +1683,13 @@ body.m-mode .legend{font-size:.7rem;}
   });
 
   document.getElementById('zoomIn').addEventListener('click', function(){
-    userZoom = true; CS = Math.min(34, CS+3); applyCellSize(); renderAll();
+    userZoom = true; CS = Math.min(CS_MAX, CS+3); applyCellSize(); renderAll();
   });
   document.getElementById('zoomOut').addEventListener('click', function(){
     userZoom = true; CS = Math.max(7, CS-3); applyCellSize(); renderAll();
+  });
+  document.getElementById('zoomFit').addEventListener('click', function(){
+    userZoom = false; fitCellSize(); renderAll();
   });
   document.getElementById('modeBtn').addEventListener('click', function(){
     modePref = (currentMode() === 'mobile') ? 'desktop' : 'mobile';
@@ -1583,6 +1703,7 @@ body.m-mode .legend{font-size:.7rem;}
   });
 
   document.getElementById('showRanges').addEventListener('change', renderAll);
+  document.getElementById('showLabels').addEventListener('change', renderAll);
   document.getElementById('resetBtn').addEventListener('click', function(){
     placed = [];
     for (var y=0;y<N;y++){ occ[y]=new Array(N).fill(null); }
