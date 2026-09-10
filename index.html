@@ -394,6 +394,20 @@ body.m-mode .legend{font-size:.7rem;}
   .legend{font-size:.7rem;}
 }
 
+/* ---- side tabs: plan / result / settings ---- */
+.tabs{display:flex; gap:4px; background:var(--panel); border:1px solid var(--line);
+  border-radius:9px; padding:4px; margin-bottom:2px;}
+.tabs button{
+  flex:1 1 0; font:inherit; font-size:.78rem; font-weight:700; cursor:pointer;
+  border:1px solid transparent; background:transparent; color:var(--ink-soft);
+  padding:8px 6px; border-radius:6px; white-space:nowrap;
+}
+.tabs button:hover{background:var(--panel-2); color:var(--ink);}
+.tabs button[aria-selected="true"]{background:var(--accent); border-color:var(--accent-deep); color:#fff;}
+.tabpane{display:flex; flex-direction:column; gap:16px;}
+.tabpane[hidden]{display:none;}
+body.m-mode .tabs button{padding:11px 6px; font-size:.85rem;}
+
 .fieldbars{display:flex; flex-direction:column; gap:6px;}
 .fbar-row{display:grid; grid-template-columns:64px 1fr 48px; align-items:center; gap:8px; font-size:.76rem;}
 .fbar-track{height:8px; border-radius:5px; background:var(--panel-2); overflow:hidden; border:1px solid var(--line);}
@@ -423,7 +437,7 @@ body.m-mode .legend{font-size:.7rem;}
   <div class="head">
     <span class="eyebrow">Field Layout · Water Supply</span>
     <h1>Irrigation Planner</h1>
-    <p>Four fields, 12×12 slots each, with a T-shaped river between them (160 water for the outermost 2 rows on each river-facing side; it does not stack with itself). Click a building in the list on the right, press <b>R</b> to rotate, click a field to place it, right-click to remove. Drag an already-placed building to move it. A production building counts the sum of every source (river + water-source buildings) whose range touches its footprint anywhere — each source once, whether or not they overlap. Goal: ≥640 per building. On a phone: tap a building in the list – an action bar appears at the bottom. Tapping or dragging on the grid aims it, tapping the same spot again (or ✓ Place) drops it. The arrows nudge by one cell, ⟳ rotates. Tap a placed building to select it: rotate, move or delete it (with undo). Pinch with two fingers to zoom.</p>
+    <p>Four fields of 12×12 slots with the river between them. A production building counts the sum of every source whose range touches its footprint anywhere — each source once, whether or not they overlap. Goal: <b>≥640 water</b>. Click a building on the right, press <b>R</b> to rotate, click a field to place it; right-click removes, dragging moves. On a phone the bar at the bottom guides you.</p>
   </div>
 
   <div class="layout">
@@ -440,8 +454,13 @@ body.m-mode .legend{font-size:.7rem;}
         <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
           <input type="checkbox" id="showRanges"> Show ranges of all water sources
         </label>
-        <label style="display:flex;align-items:center;gap:5px;cursor:pointer;">
-          <input type="checkbox" id="showLabels" checked> Names &amp; workers on the grid
+        <label style="display:flex;align-items:center;gap:5px;">Tiles
+          <select id="labelMode">
+            <option value="workers" selected>name + workers</option>
+            <option value="water">name + water</option>
+            <option value="name">name only</option>
+            <option value="off">off</option>
+          </select>
         </label>
         <button class="btn primary" id="loadPresetBtn">Load full solution (25/25 supplied)</button>
         <button class="btn" id="resetBtn">Reset</button>
@@ -461,17 +480,16 @@ body.m-mode .legend{font-size:.7rem;}
     </div>
 
     <div class="side">
-      <div class="panel">
-        <h2>Slot usage (all four fields)</h2>
-        <div class="budget" id="budgetBox"><span class="num" id="budgetNum">–</span><span>/ 576 slots used</span></div>
-        <p class="note" id="budgetNote" style="margin-top:4px;"></p>
+      <div class="tabs" id="tabbar" role="tablist">
+        <button data-tab="plan" aria-selected="true">Plan</button>
+        <button data-tab="result" aria-selected="false">Result</button>
+        <button data-tab="setup" aria-selected="false">Settings</button>
       </div>
-
+      <div class="tabpane" data-tab="plan">
       <div class="panel" id="bldPanel">
         <h2 class="panelhead">Buildings &amp; target count<button class="btn tiny" id="editToggle">Edit types</button></h2>
         <div class="palette" id="palette"></div>
       </div>
-
       <div class="panel" id="solverPanel">
         <h2>Auto-layout solver</h2>
         <div class="solverbox">
@@ -492,7 +510,35 @@ body.m-mode .legend{font-size:.7rem;}
           <div class="small" id="solveMsg">Set how many of each building you want above, then let the solver find the best arrangement.</div>
         </div>
       </div>
-
+      <div class="panel">
+        <h2>Slot usage (all four fields)</h2>
+        <div class="budget" id="budgetBox"><span class="num" id="budgetNum">–</span><span>/ 576 slots used</span></div>
+        <p class="note" id="budgetNote" style="margin-top:4px;"></p>
+      </div>
+      <div class="panel">
+        <h2>Occupancy per field</h2>
+        <div class="fieldbars" id="fieldbars"></div>
+      </div>
+      </div>
+      <div class="tabpane" data-tab="result" hidden>
+      <div class="panel">
+        <h2>Output</h2>
+        <div class="bigval" id="totalOut">–</div>
+        <div class="subval" id="outSub"></div>
+        <table class="ptable" id="prodTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Economic output</h2>
+        <div class="bigval" id="ecoTotal">–</div>
+        <div class="subval" id="ecoSub"></div>
+        <table class="ptable" id="ecoTable"></table>
+      </div>
+      <div class="panel">
+        <h2>Production buildings · water status</h2>
+        <div class="statuslist" id="statuslist"><div class="empty-hint">No production buildings placed yet.</div></div>
+      </div>
+      </div>
+      <div class="tabpane" data-tab="setup" hidden>
       <div class="panel" id="outPanel">
         <h2 class="panelhead">Production &amp; bonuses<button class="btn tiny" id="prodEditToggle">Edit research</button></h2>
         <div class="bonusgrid" id="bonusGrid"></div>
@@ -528,27 +574,6 @@ body.m-mode .legend{font-size:.7rem;}
         </div>
         <textarea class="io" id="ioBox" hidden placeholder="Paste a configuration here, then press Import"></textarea>
       </div>
-
-      <div class="panel">
-        <h2>Output</h2>
-        <div class="bigval" id="totalOut">–</div>
-        <div class="subval" id="outSub"></div>
-        <table class="ptable" id="prodTable"></table>
-      </div>
-      <div class="panel">
-        <h2>Economic output</h2>
-        <div class="bigval" id="ecoTotal">–</div>
-        <div class="subval" id="ecoSub"></div>
-        <table class="ptable" id="ecoTable"></table>
-      </div>
-      <div class="panel">
-        <h2>Occupancy per field</h2>
-        <div class="fieldbars" id="fieldbars"></div>
-      </div>
-
-      <div class="panel">
-        <h2>Production buildings · water status</h2>
-        <div class="statuslist" id="statuslist"><div class="empty-hint">No production buildings placed yet.</div></div>
       </div>
     </div>
   </div>
@@ -607,31 +632,32 @@ body.m-mode .legend{font-size:.7rem;}
   // a = width (x-axis) at rotation 0, b = height (y-axis) at rotation 0
   // ra/rb = matching range width/height at rotation 0 (source buildings only)
   var DEFS = [
-    {key:'natron', resName:"Preserving Linen", unitValue:40, base:25, workers:20, wfam:'B', name:'Natron Basin', cat:'prod', a:5,b:4, max:2, target:2, color:'#c9a15a'},
-    {key:'gold', resName:"Pharaoh's Gold", unitValue:50, base:25, workers:25, wfam:'B', name:'Gold Mine', cat:'prod', a:5,b:4, max:3, target:3, color:'#caa63d'},
-    {key:'sand', resName:"Lime Sand Mix", unitValue:10, base:20, workers:20, wfam:'A', name:'Sandstone Quarry', cat:'prod', a:4,b:4, max:5, target:5, color:'#b6a17d'},
-    {key:'papyrus', resName:"Papyrus Scroll", unitValue:10, base:20, workers:20, wfam:'A', name:'Papyrus Workshop', cat:'prod', a:4,b:4, max:4, target:4, color:'#8fb96a'},
-    {key:'moertel', resName:"Wet Mortar", unitValue:10, base:20, workers:20, wfam:'A', name:'Mortar Workshop', cat:'prod', a:4,b:4, max:3, target:3, color:'#a89a86'},
-    {key:'fisch', resName:"Fish", unitValue:10, base:20, workers:20, wfam:'A', name:'Fish Pond', cat:'prod', a:4,b:4, max:1, target:1, color:'#5a9fbd'},
-    {key:'hiero', resName:"Scroll of Knowledge", unitValue:40, base:25, workers:20, wfam:'B', name:'Hieroglyph Press', cat:'prod', a:5,b:4, max:2, target:2, color:'#c67d54'},
-    {key:'trocken', resName:"Dried Fish", unitValue:20, base:25, workers:20, wfam:'B', name:'Drying Area', cat:'prod', a:5,b:4, max:1, target:1, color:'#d3bf6e'},
-    {key:'lehm', resName:"Mudbrick", unitValue:10, base:20, workers:20, wfam:'A', name:'Mudbrick Yard', cat:'prod', a:4,b:3, max:1, target:1, color:'#b0703c'},
-    {key:'flachs', resName:"Linen Cloth", unitValue:10, base:20, workers:20, wfam:'A', name:'Flax Field', cat:'prod', a:4,b:3, max:3, target:3, color:'#79965a'},
+    {key:'natron', resName:"Preserving Linen", unitValue:40, base:25, workers:20, wfam:'B', name:'Natron Basin', cat:'prod', a:5,b:4, max:2, target:2, color:'#8b7ac0'},
+    {key:'gold', resName:"Pharaoh's Gold", unitValue:50, base:25, workers:25, wfam:'B', name:'Gold Mine', cat:'prod', a:5,b:4, max:3, target:3, color:'#d9a520'},
+    {key:'sand', resName:"Lime Sand Mix", unitValue:10, base:20, workers:20, wfam:'A', name:'Sandstone Quarry', cat:'prod', a:4,b:4, max:5, target:5, color:'#b07d3a'},
+    {key:'papyrus', resName:"Papyrus Scroll", unitValue:10, base:20, workers:20, wfam:'A', name:'Papyrus Workshop', cat:'prod', a:4,b:4, max:4, target:4, color:'#4e9a51'},
+    {key:'moertel', resName:"Wet Mortar", unitValue:10, base:20, workers:20, wfam:'A', name:'Mortar Workshop', cat:'prod', a:4,b:4, max:3, target:3, color:'#78899a'},
+    {key:'fisch', resName:"Fish", unitValue:10, base:20, workers:20, wfam:'A', name:'Fish Pond', cat:'prod', a:4,b:4, max:1, target:1, color:'#2e9bb5'},
+    {key:'hiero', resName:"Scroll of Knowledge", unitValue:40, base:25, workers:20, wfam:'B', name:'Hieroglyph Press', cat:'prod', a:5,b:4, max:2, target:2, color:'#c1553b'},
+    {key:'trocken', resName:"Dried Fish", unitValue:20, base:25, workers:20, wfam:'B', name:'Drying Area', cat:'prod', a:5,b:4, max:1, target:1, color:'#c99a2e'},
+    {key:'lehm', resName:"Mudbrick", unitValue:10, base:20, workers:20, wfam:'A', name:'Mudbrick Yard', cat:'prod', a:4,b:3, max:1, target:1, color:'#a85b32'},
+    {key:'flachs', resName:"Linen Cloth", unitValue:10, base:20, workers:20, wfam:'A', name:'Flax Field', cat:'prod', a:4,b:3, max:3, target:3, color:'#7fa83f'},
 
-    {key:'mumie', must:true, must:true, name:'Mummification Hall', cat:'plain', a:4,b:4, max:1, target:1, color:'#948a77'},
-    {key:'klein_h', res1:3, resStep:1, name:'Small Dwelling', cat:'plain', a:3,b:2, max:8, target:8, color:'#c7ad82'},
-    {key:'gross_h', res1:5, resStep:3, resSteps:'3;25:4;43:5', name:'Large Dwelling', cat:'plain', a:4,b:3, max:3, target:3, color:'#c2a066'},
+    {key:'mumie', must:true, must:true, name:'Mummification Hall', cat:'plain', a:4,b:4, max:1, target:1, color:'#6e665c'},
+    {key:'klein_h', res1:3, resStep:1, name:'Small Dwelling', cat:'plain', a:3,b:2, max:8, target:8, color:'#c2b49a'},
+    {key:'gross_h', res1:5, resStep:3, resSteps:'3;25:4;43:5', name:'Large Dwelling', cat:'plain', a:4,b:3, max:3, target:3, color:'#a8977a'},
 
-    {key:'teich', name:'Small Pond', cat:'source', a:2,b:1, ra:4,rb:3, water:120, max:4, target:4, color:'#3fa0c8'},
-    {key:'kanal', name:'Canal', cat:'source', a:5,b:1, ra:9,rb:5, water:400, max:4, target:4, color:'#2778a0'},
-    {key:'schaduf', name:'Shaduf', cat:'source', a:3,b:3, ra:7,rb:7, water:400, max:3, target:3, color:'#1e5e83'},
-    {key:'becken', name:'Ritual Water Basin', cat:'source', a:4,b:3, ra:10,rb:9, water:500, max:1, target:1, color:'#123f57'}
+    {key:'teich', name:'Small Pond', cat:'source', a:2,b:1, ra:4,rb:3, water:120, max:4, target:4, color:'#5bb8d4'},
+    {key:'kanal', name:'Canal', cat:'source', a:5,b:1, ra:9,rb:5, water:400, max:4, target:4, color:'#2a7fa8'},
+    {key:'schaduf', name:'Shaduf', cat:'source', a:3,b:3, ra:7,rb:7, water:400, max:3, target:3, color:'#1d5c82'},
+    {key:'becken', name:'Ritual Water Basin', cat:'source', a:4,b:3, ra:10,rb:9, water:500, max:1, target:1, color:'#0f3547'}
   ];
   var DEFAULT_DEFS = JSON.parse(JSON.stringify(DEFS));
   var DEF_BY_KEY = {};
   function reindexDefs(){ DEF_BY_KEY = {}; DEFS.forEach(function(d){ DEF_BY_KEY[d.key]=d; }); }
   (function(){ try{ var raw = localStorage.getItem('irrigation_planner_types_v1');
       if (raw){ var a = JSON.parse(raw); if (Array.isArray(a) && a.length) DEFS = a; } }catch(e){} })();
+  var COLOR_FIX = {natron:['#c9a15a','#8b7ac0'], gold:['#caa63d','#d9a520'], sand:['#b6a17d','#b07d3a'], papyrus:['#8fb96a','#4e9a51'], moertel:['#a89a86','#78899a'], fisch:['#5a9fbd','#2e9bb5'], hiero:['#c67d54','#c1553b'], trocken:['#d3bf6e','#c99a2e'], lehm:['#b0703c','#a85b32'], flachs:['#79965a','#7fa83f'], mumie:['#948a77','#6e665c'], klein_h:['#c7ad82','#c2b49a'], gross_h:['#c2a066','#a8977a'], teich:['#3fa0c8','#5bb8d4'], kanal:['#2778a0','#2a7fa8'], schaduf:['#1e5e83','#1d5c82'], becken:['#123f57','#0f3547']};
   (function migrateDefs(){                       // older saves lack the newer fields
     var base = {};
     DEFAULT_DEFS.forEach(function(d){ base[d.key] = d; });
@@ -643,6 +669,8 @@ body.m-mode .legend{font-size:.7rem;}
       });
       // the large dwelling used a flat +3 with a fudged start of 18; the real curve
       // starts at 5 and steps up at level 25 and 43
+      // the palette was reworked - update a saved colour only if it is still the old default
+      if (COLOR_FIX[d.key] && String(d.color).toLowerCase() === COLOR_FIX[d.key][0]) d.color = COLOR_FIX[d.key][1];
       if (d.key === 'gross_h' && d.res1 === 18){ d.res1 = 5; d.resSteps = '3;25:4;43:5'; }
     });
   })();
@@ -1141,8 +1169,9 @@ body.m-mode .legend{font-size:.7rem;}
 
     overlay.innerHTML='';
     var showRanges = document.getElementById('showRanges').checked;
-    var lblChk = document.getElementById('showLabels');
-    var showLabels = !lblChk || lblChk.checked;
+    var lblSel = document.getElementById('labelMode');
+    var lblMode = lblSel ? lblSel.value : 'workers';
+    var showLabels = (lblMode !== 'off');
     // who actually works where - so the number on the tile is the real one, not a per-type total
     var ev = null, wmap = {};
     if (showLabels && typeof evaluate === 'function'){
@@ -1177,7 +1206,10 @@ body.m-mode .legend{font-size:.7rem;}
       var tag = showLabels ? null : (status==='ok' ? '✓' : (status==='partial' ? '◐' : '✕'));
       var outlineEl = makeOutline(status, b.x, b.y, b.w, b.h, tag, status);
       if (showLabels){
-        makeTileLabel(b, def, [total + ' · <b>' + wp + '%</b>', (wmap[b.uid] || 0) + ' wk']);
+        var foot = (lblMode === 'workers') ? [(wmap[b.uid] || 0) + ' wk']
+                 : (lblMode === 'water')   ? [total + ' · <b>' + wp + '%</b>'] : [];
+        var lb = makeTileLabel(b, def, foot);
+        if (lb) lb.title = def.name + ' — ' + total + ' water, +' + wp + '%, ' + (wmap[b.uid] || 0) + ' workers';
       } else {
         var waterLabel = document.createElement('span');
         waterLabel.className = 'water';
@@ -1201,7 +1233,7 @@ body.m-mode .legend{font-size:.7rem;}
           var r = residentsOf(def, (typeof levelOf === 'function' && ev) ? levelOf(def, ev.st) : 0);
           if (r > 0) sub = r + ' res';
         }
-        makeTileLabel(b, def, [sub]);
+        makeTileLabel(b, def, (lblMode === 'name') ? [] : [sub]);
       });
     }
     if (!anyProd){
@@ -1703,7 +1735,7 @@ body.m-mode .legend{font-size:.7rem;}
   });
 
   document.getElementById('showRanges').addEventListener('change', renderAll);
-  document.getElementById('showLabels').addEventListener('change', renderAll);
+  document.getElementById('labelMode').addEventListener('change', renderAll);
   document.getElementById('resetBtn').addEventListener('click', function(){
     placed = [];
     for (var y=0;y<N;y++){ occ[y]=new Array(N).fill(null); }
@@ -3043,6 +3075,29 @@ body.m-mode .legend{font-size:.7rem;}
     document.getElementById('focusBox').hidden = (PCFG.dist !== 'focus');
     buildFocusList(); renderProduction();
   });
+  // ---- side tabs ----
+  (function(){
+    var bar = document.getElementById('tabbar');
+    if (!bar) return;
+    var KEY = 'irrigation_tab_v1';
+    function show(name){
+      [].forEach.call(bar.querySelectorAll('button'), function(b){
+        b.setAttribute('aria-selected', b.getAttribute('data-tab') === name ? 'true' : 'false');
+      });
+      [].forEach.call(document.querySelectorAll('.tabpane'), function(p){
+        p.hidden = (p.getAttribute('data-tab') !== name);
+      });
+      try{ localStorage.setItem(KEY, name); }catch(e){}
+    }
+    bar.addEventListener('click', function(e){
+      var b = e.target.closest ? e.target.closest('button[data-tab]') : null;
+      if (b) show(b.getAttribute('data-tab'));
+    });
+    var saved = null;
+    try{ saved = localStorage.getItem(KEY); }catch(e){}
+    show((saved === 'result' || saved === 'setup') ? saved : 'plan');
+  })();
+
   syncWaterFromTiers();
   refreshBudget();
   renderAll();
