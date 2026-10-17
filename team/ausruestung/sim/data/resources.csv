@@ -1,0 +1,9 @@
+resource_id,name_de,name_en,category,base_storage_cap,storage_cap_factor,start_amount,icon_key,notes
+res_food,Nahrung,Food,basic,1000,1,400,icon_food,Winter -30% Produktion
+res_wood,Holz,Wood,basic,1000,1,400,icon_wood,
+res_stone,Stein,Stone,basic,1000,1,250,icon_stone,
+res_gold,Gold (Muscheln),Gold,basic,500,1,120,icon_gold,Steinzeit-Skin: Muschelgeld
+res_knowledge,Wissen,Knowledge,progress,200,0.2,0,icon_knowledge,Epochen-Aufstieg
+res_population,Einwohner,Population,population,0,0,0,icon_pop,Kapazität aus Hütten
+res_hero_xp,Heldenerfahrung,Hero XP,hero,0,0,0,icon_hero_xp,kein Lagerlimit
+res_gems,Kristalle,Gems,premium,0,0,0,icon_gems,Name offen

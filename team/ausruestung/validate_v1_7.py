@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prüft Budget, Referenzfaktoren und E2-Startartefakte für Ausrüstung v1.7.2."""
+"""Prüft Budget, Referenzfaktoren und E2-Startartefakte für Ausrüstung v1.7.3."""
 import csv
 import sys
 from pathlib import Path
@@ -31,13 +31,14 @@ need(len({row['artifact_id'] for row in artifacts}) == len(artifacts), 'Doppelte
 need(len([row for row in slots if row['slot_group'] != 'artifact']) == 8, 'Erwartet 8 Gear-Slots')
 need(len([row for row in slots if row['slot_group'] == 'artifact']) == 2, 'Erwartet 2 Artefaktslots')
 need(abs(sum(float(row['stat_budget_share_pct']) for row in slots) - 100) < 1e-9, 'Slot-Shares summieren sich nicht auf 100 %')
-need(config.get('gear_main_budget_master_mult') == '1.40', 'Budget-Multiplikator Meister ist nicht 1,40')
-need(config.get('gear_rarity_mult_master') == '1.40', 'Raritäts-Multiplikator Meister ist nicht 1,40')
-need(rarities.get('gr_master', {}).get('stat_mult_pct') == '140', 'Raritäts-CSV Meister ist nicht 140')
+need(config.get('gear_main_budget_master_mult') == '1.38', 'Budget-Multiplikator Meister ist nicht 1,38')
+need(config.get('gear_rarity_mult_master') == '1.38', 'Raritäts-Multiplikator Meister ist nicht 1,38')
+need(rarities.get('gr_master', {}).get('stat_mult_pct') == '138', 'Raritäts-CSV Meister ist nicht 138')
+need(rarities.get('gr_fine', {}).get('stat_mult_pct') == '120', 'Raritäts-CSV Geschliffen ist nicht 120')
 need(config.get('e2_center_max_level') == '15', 'E2-Feuerobergrenze ist nicht 15')
 need(config.get('gear_main_budget_max_level_e1') == '9', 'E1-Referenzstufe ist nicht 9')
 need(config.get('gear_main_budget_max_level_e2') == '14', 'E2-Referenzstufe ist nicht 14')
-need(config.get('gear_tier_ratio_max') == '1.15', 'Gesamtfaktor-Ratio-Deckel ist nicht 1,15')
+need(config.get('gear_tier_ratio_max') == '1.15', 'Ratio-Deckel pro Teil ist nicht 1,15')
 need(config.get('gear_class_affinity_locks') == '0', 'Klassenaffinität ist als Lock gesetzt')
 need(config.get('gear_budget_excludes') == 'crit;ult_cd', 'Budgetausschlüsse stimmen nicht')
 need(config.get('gear_start_artifact_1') == 'art_e1_firestone', 'E1-Startartefakt ist nicht konfiguriert')
@@ -118,22 +119,31 @@ e2_factors = [full_factor(class_id, 'gr_master', 14, 2) for class_id in classes]
 need(max(e1_factors) <= float(config['ref_gear_factor_max_e1']) + 1e-9, 'E1-Gesamtfaktor über dem Deckel')
 need(max(e2_factors) <= float(config['ref_gear_factor_max_e2']) + 1e-9, 'E2-Gesamtfaktor über dem Deckel')
 
-actual_ratios = []
-for class_id in classes:
-    actual_ratios.append(full_factor(class_id, 'gr_master', 9, 1) / full_factor(class_id, 'gr_fine', 9, 1))
-    actual_ratios.append(full_factor(class_id, 'gr_master', 14, 2) / full_factor(class_id, 'gr_fine', 14, 2))
 ratio_limit = float(config['gear_tier_ratio_max'])
-need(max(actual_ratios) <= ratio_limit + 1e-9, 'Konkretes Meister/Geschliffen-Gesamtfaktorverhältnis über 1,15')
-formula_ratios = []
-for budget in (float(config['ref_gear_factor_max_e1']) - 1, float(config['ref_gear_factor_max_e2']) - 1):
-    fine_budget = budget * float(rarities['gr_fine']['stat_mult_pct']) / float(rarities['gr_master']['stat_mult_pct'])
-    formula_ratios.append((1 + budget) / (1 + fine_budget))
-need(max(formula_ratios) <= ratio_limit + 1e-9, 'Budgetformel Meister/Geschliffen-Gesamtfaktorverhältnis über 1,15')
+rarity_mult = {key: float(row['stat_mult_pct']) / 100 for key, row in rarities.items()}
+piece_rows = {}
+for row in equipment:
+    if row['gear_rarity_id'] in ('gr_master', 'gr_fine'):
+        piece_rows.setdefault((row['class_affinity'], row['slot_id']), {})[row['gear_rarity_id']] = row
+piece_ratios = []
+for (class_id, slot_id), tiers in piece_rows.items():
+    master = tiers.get('gr_master')
+    fine = tiers.get('gr_fine')
+    need(master is not None and fine is not None, f'Meister/Geschliffen-Teil fehlt: {class_id}/{slot_id}')
+    if master is None or fine is None:
+        continue
+    need(master['main_stat_id'] == fine['main_stat_id'], f'Hauptwert unterscheidet sich nach Rarität: {class_id}/{slot_id}')
+    for level in (1, int(config['gear_main_budget_max_level_e1']), int(config['gear_main_budget_max_level_e2'])):
+        level_mult = 1 + float(config['gear_stat_per_level_pct']) / 100 * (level - 1)
+        master_value = float(master['main_stat_base_pct']) * rarity_mult['gr_master'] * level_mult
+        fine_value = float(fine['main_stat_base_pct']) * rarity_mult['gr_fine'] * level_mult
+        ratio = master_value / fine_value
+        piece_ratios.append(ratio)
+        need(ratio <= ratio_limit + 1e-9, f'Meister/Geschliffen-Hauptwert pro Teil über 1,15: {class_id}/{slot_id}, Stufe {level} ({ratio:.6f})')
 
 print(f"E1 Gesamtfaktor max: {max(e1_factors):.6f} / {float(config['ref_gear_factor_max_e1']):.3f}")
 print(f"E2 Gesamtfaktor max: {max(e2_factors):.6f} / {float(config['ref_gear_factor_max_e2']):.2f}")
-print(f"E1/E2 Budgetformel-Ratio max: {max(formula_ratios):.6f} / {ratio_limit:.2f}")
-print(f"Konkrete CSV-Build-Ratio max: {max(actual_ratios):.6f} / {ratio_limit:.2f}")
+print(f"Meister/Geschliffen-Hauptwert pro Teil max: {max(piece_ratios):.6f} / {ratio_limit:.2f}")
 if errors:
     print('\n'.join('FEHLER: ' + message for message in errors))
     sys.exit(1)

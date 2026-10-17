@@ -1,0 +1,11 @@
+rate_id,banner_id,rarity,base_rate_pct,soft_pity_start,soft_pity_increment_pct,hard_pity,featured_hero_id,featured_share_pct,guarantee_after_loss
+rate_tut_ssr,banner_tutorial,SSR,100.0,0,0,1,hero_ruka,100,no
+rate_starter_ssr,banner_starter,SSR,4.0,0,0,20,,0,no
+rate_starter_sr,banner_starter,SR,26.0,0,0,0,,0,no
+rate_starter_r,banner_starter,R,70.0,0,0,0,,0,no
+rate_std_ssr,banner_standard,SSR,2.0,61,6.0,80,,0,no
+rate_std_sr,banner_standard,SR,18.0,0,0,10,,0,no
+rate_std_r,banner_standard,R,80.0,0,0,0,,0,no
+rate_feat_ssr,banner_featured_nara,SSR,2.0,61,6.0,80,hero_nara,50,yes
+rate_feat_sr,banner_featured_nara,SR,18.0,0,0,10,,0,no
+rate_feat_r,banner_featured_nara,R,80.0,0,0,0,,0,no

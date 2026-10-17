@@ -1,4 +1,4 @@
-# Ausrüstung & Artefakte – Konzept v1.7.2 (Epodarien)
+# Ausrüstung & Artefakte – Konzept v1.7.3 (Epodarien)
 
 Stand 17.10.2026. Aktive Tabellen: `equipment.csv`, `artifacts.csv`, `gear_slots.csv`, `gear_rarities.csv`, `gear_sets.csv`, `gear_upgrade_costs.csv`, `stat_definitions.csv`, `items.csv`, `game_config_ausruestung.csv`. Rechenregeln: `NOTES_v1.7.md`; UI-Pflichten: `gear_qol_spec_v1.md`.
 
@@ -86,12 +86,13 @@ Im PvP gelten `gear_pvp_cap_pct=40`, `gear_crit_cap_pct=25`, `battle_heal_cap_pc
 
 Ausrüstung, Artefakte und Verbesserungen sind nicht für Echtgeld oder Kristalle kaufbar. Shops für Fortschrittsmaterial verwenden Gildenmünzen beziehungsweise Arena-Marken. Ausrüstungsskins bleiben rein kosmetisch (`power_bonus=0`); Preisvorschläge stehen in `cosmetic_products_vorschlag.csv`. Keine Kauf- oder Countdown-Popups nach Niederlagen und keine Shop-Links in Warn- oder Ergebnisbildschirmen.
 
-## 10. Abnahmestand v1.7.2
+## 10. Abnahmestand v1.7.3
 
 - Slots: 10 aktive Einträge, davon 8 Gear und 2 Artefakte; Sharesumme 100 %.
 - E1: acht Gearteile und Artefakt 1; Maximalfaktor 1,114300 ≤ 1,127.
 - E2: Feuer max. 15, Gear max. 14; acht Gearteile und zwei Artefakte; Maximalfaktor 1,143804 ≤ 1,16.
-- Rarität: Meister 1,40, Geschliffen 1,20; Gesamtfaktor-Ratio nach Referenzformel E1 1,0164 und E2 1,0201, jeweils ≤ 1,15.
+- Rarität: Meister 1,38, Geschliffen 1,20; Hauptwertverhältnis Meister/Geschliffen pro Teil bei gleicher Stufe exakt 1,38/1,20 = 1,15. Eine Gesamtfaktor-Ratio wird nicht geprüft.
+- Simulation: versionierter GDD-CSV-Snapshot unter `sim/data/`, Hashmanifest gültig; ein Standardlauf mit Seed 1 weist den Aufstieg spätestens an Tag 10 nach.
 - Sets: 2/4/6; Gesamtwerte unverändert; höchstens 6 benötigte Teile.
 - Freischaltungen und Startgegenstände folgen Abschnitt 1.
 - Finanzen: Verbesserungen nur Gold/Stein/Holz; Umbinden 1,5 Stunden aktueller Epochen-Goldproduktion, 1 Gratisumbinden je Artefakt.

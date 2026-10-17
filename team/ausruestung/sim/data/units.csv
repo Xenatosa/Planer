@@ -1,0 +1,9 @@
+unit_id,name_de,epoch_id,unit_class,unlock_barracks_level,hp,atk,def,move_speed,range,target_priority,cost_food,cost_wood,cost_stone,cost_gold,pop_cost,upkeep_food_per_hour,unlock_campaign_level,special
+unit_club,Keulenträger,epoch_1,infantry,1,220,22,8,1.0,1,nearest,60,15,0,0,1,2,,
+unit_spear,Speerjäger,epoch_1,spear,1,170,20,6,1.0,1.5,cavalry,50,25,0,0,1,2,,first_strike_vs_cavalry
+unit_sling,Steinschleuder,epoch_1,ranged,2,110,26,2,1.0,4,support,45,10,15,0,1,2,e1_camp_02,
+unit_wolfrider,Wolfsreiter,epoch_1,cavalry,3,190,28,5,1.8,1,ranged,90,20,0,10,2,4,e1_camp_05,leap_backline
+unit_rockthrower,Felsenwerfer,epoch_1,siege,4,140,40,2,0.6,5,building,60,40,40,10,2,3,e1_camp_10,aoe_radius_1
+unit_shaman,Schamane,epoch_1,support,3,120,8,3,0.9,3,lowest_hp_ally,60,10,0,15,1,2,e1_camp_03,heal_12_per_sec
+unit_boss_mammoth,Kriegsmammut (Boss),epoch_1,boss,0,2600,70,15,0.7,1,nearest,0,0,0,0,0,0,,enemy_only;trample_aoe;cc_immune
+bld_wall,Gegnerische Mauer,epoch_1,building,0,1380,0,0,0,0,none,0,0,0,0,0,0,,"nur Gegner (L22), HP-Annahme aus battle_buildings.csv (Nr. 301)"

@@ -1,0 +1,16 @@
+node_id,branch,name_de,max_level,min_fire,prereqs,effect_key,effect_per_level,effect_unit,base_time_s,time_growth_x100,base_food,base_wood,base_stone,base_gold,cost_growth_x100,desc_de,unlock_note,critical_path_level,reserve_warning
+rs_e1_beeren,wirtschaft,Beerenkunde,6,1,,prod_food_pct,2,%,10,190,0,30,10,0,145,Nahrungsproduktion +2 %/Stufe,ab Feuer 3 (research_unlock_fire),1,off_on_path
+rs_e1_steinaxt,wirtschaft,Steinaxt,6,1,rs_e1_beeren:1,prod_wood_pct,2,%,20,190,30,0,20,0,145,Holzproduktion +2 %/Stufe,ab Feuer 3 (research_unlock_fire),1,off_on_path
+rs_e1_hebel,wirtschaft,Hebelkunst,6,2,rs_e1_steinaxt:1,prod_stone_pct,2,%,45,190,30,40,0,0,145,Steinproduktion +2 %/Stufe,ab Feuer 3 (research_unlock_fire),1,off_on_path
+rs_e1_muscheln,wirtschaft,Muscheltaucher,6,3,rs_e1_hebel:1,prod_gold_pct,2,%,90,190,40,40,30,0,145,Goldproduktion +2 %/Stufe,,3,off_on_path
+rs_e1_erdgruben,wirtschaft,Erdgruben,5,3,rs_e1_beeren:2,storage_pct,3,%,120,190,30,50,40,0,145,Lagerlimit +3 %/Stufe,,0,on
+rs_e1_raeuchern,wirtschaft,Räucherkammer,5,5,rs_e1_erdgruben:2,winter_penalty_pp,-2,pp,900,180,80,120,80,30,145,Winter-Malus −2 Prozentpunkte/Stufe (−30 % → −20 %),,0,on
+rs_e1_kampfrufe,militaer,Kampfrufe,3,2,,troop_atk_pct,1,%,60,220,40,40,0,10,145,Truppen-ATK +1 %/Stufe,ab Feuer 3 (research_unlock_fire),1,off_on_path
+rs_e1_fellpanzer,militaer,Fellpanzer,2,4,rs_e1_kampfrufe:1,troop_hp_pct,1,%,900,220,60,60,40,20,145,Truppen-HP +1 %/Stufe,,1,off_on_path
+rs_e1_feldkueche,militaer,Feldküche,5,4,rs_e1_fellpanzer:1,upkeep_pct,-3,%,600,180,100,40,20,10,145,Truppen-Unterhalt −3 %/Stufe,,2,off_on_path
+rs_e1_trockenfleisch,militaer,Trockenfleisch,5,6,rs_e1_feldkueche:2,supply_cost_pct,-3,%,1800,170,150,60,40,20,145,Proviant je Mission −3 %/Stufe,,1,off_on_path
+rs_e1_jagdformation,militaer,Jagdformation,1,7,rs_e1_fellpanzer:2,troop_def_pct,1,%,7200,100,200,200,200,80,145,Truppen-DEF +1 %,,0,on
+rs_e1_felsritzung,siedlung,Felsritzungen,5,5,rs_e1_beeren:1,prod_knowledge_pct,3,%,600,180,60,60,60,20,145,Wissensproduktion +3 %/Stufe,,3,off_on_path
+rs_e1_tauschkunde,siedlung,Tauschkunde,3,8,rs_e1_muscheln:3,trade_rate_pct,2,%,3600,160,150,150,150,60,145,Tauschplatz-Kurs +2 %/Stufe,,1,off_on_path
+rs_e1_glutpflege,siedlung,Glutpflege,3,3,rs_e1_felsritzung:1,free_finish_s,60,s,300,200,40,40,40,10,145,Gratis-Abschluss-Schwelle +60 s/Stufe (Basis 180 s),,0,on
+rs_e1_sternkunde,siedlung,Sternkunde,1,9,rs_e1_felsritzung:3;rs_e1_tauschkunde:1;rs_e1_trockenfleisch:1,epoch_ascend_gate,1,flag,14400,100,800,800,800,300,145,Voraussetzung Epochenaufstieg (Deutung des Zeitsplitters),,1,off_on_path

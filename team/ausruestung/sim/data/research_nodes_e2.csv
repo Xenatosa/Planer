@@ -1,0 +1,10 @@
+node_id,epoch,branch,name_de,max_level,prereqs,effect_key,effect_per_level,effect_unit,desc_de
+rs_e2_bewaesserung,epoch_2,wirtschaft,Bewässerungsgräben,5,,prod_food_pct,2,%,Nahrungsproduktion +2 %/Stufe
+rs_e2_bronzesaege,epoch_2,wirtschaft,Bronzesäge,5,rs_e2_bewaesserung:1,prod_wood_pct,2,%,Holzproduktion +2 %/Stufe
+rs_e2_steinmetz,epoch_2,wirtschaft,Steinmetzkunst,3,rs_e2_bronzesaege:1,prod_stone_pct,2,%,Steinproduktion +2 %/Stufe
+rs_e2_flusshandel,epoch_2,wirtschaft,Flusshandel,3,rs_e2_bewaesserung:2,trade_rate_pct,3,%,Tauschplatz-Kurs +3 %/Stufe (hilft dem Gold-Engpass)
+rs_e2_kornkammer,epoch_2,siedlung,Kornkammer,3,rs_e2_bewaesserung:2,storage_pct,3,%,Lagerlimit +3 %/Stufe
+rs_e2_bronzeklingen,epoch_2,militaer,Bronzeklingen,2,rs_e2_bronzesaege:2,troop_atk_pct,1,%,Truppen-ATK +1 %/Stufe
+rs_e2_lederkoller,epoch_2,militaer,Lederkoller,1,rs_e2_bronzeklingen:1,troop_hp_pct,1,%,Truppen-HP +1 %
+rs_e2_bronzeschild,epoch_2,militaer,Bronzeschilde,1,rs_e2_lederkoller:1,troop_def_pct,1,%,Truppen-DEF +1 %
+rs_e2_tontafeln,epoch_2,siedlung,Tontafeln,1,rs_e2_steinmetz:3;rs_e2_flusshandel:3;rs_e2_kornkammer:3;rs_e2_bronzeschild:1,epoch_ascend_gate,1,flag,"Schrift der Flussvölker: Abschluss E2-Baum, vorgesehen als Voraussetzung Aufstieg E3 (offen)"

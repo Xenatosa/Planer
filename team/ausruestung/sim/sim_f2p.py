@@ -1,4 +1,4 @@
-"""Epodarien – F2P-Simulation mit Ausrüstung v1.7.2.
+"""Epodarien – F2P-Simulation mit Ausrüstung v1.7.3.
 python3 sim_f2p.py [seed] [tage]   (Standard: Seed 1, 21 Tage)
 ANNAHMEN (explizit):
 - Sessions: 4/Tag um 08:00, 12:30, 18:00, 22:00 à ~5 min; Install Tag 1 um 18:00 (Tag 1 = 2 Sessions).
@@ -14,7 +14,7 @@ ANNAHMEN (explizit):
 """
 import csv,random,sys,os
 D=os.path.dirname(os.path.abspath(__file__))
-GDD=os.path.abspath(os.path.join(D,'../../gdd'))
+GDD=os.path.join(D,'data')  # versionierter GDD-Snapshot; lauffähig aus jedem Arbeitsverzeichnis
 GEAR_DIR=os.path.abspath(os.path.join(D,'..'))
 GEAR_FILES={'equipment.csv','artifacts.csv','gear_slots.csv','gear_rarities.csv','gear_sets.csv','gear_upgrade_costs.csv','stat_definitions.csv','game_config_ausruestung.csv'}
 def R(n):

@@ -1,0 +1,21 @@
+income_id,source_de,currency_id,amount,period,cap_note
+inc_login,Täglicher Login,cur_gems_free,20,day,
+inc_daily_quests,Tagesaufgaben (alle 5),cur_gems_free,40,day,
+inc_weekly_quests,Wochenaufgaben,cur_gems_free,150,week,
+inc_weekly_ticket,Wochenkiste,cur_summon_ticket,2,week,
+inc_campaign_3star,"Kampagne 3 Sterne (je Level, einmalig)",cur_gems_free,15,once_per_level,
+inc_center_levelup,Häuptlingsfeuer-Stufe (einmalig),cur_gems_free,30,once_per_level,
+inc_login_7day,7-Tage-Startbonus (Tag 7),cur_summon_ticket,10,once,Onboarding
+inc_mark_daily,Tagesaufgaben (Ahnenzeichen),cur_mark_free,30,day,ab M6
+inc_mark_weekly,Wochenaufgaben (Ahnenzeichen),cur_mark_free,100,week,ab M6
+inc_mark_guild,Gilden-Tagesspende (Ahnenzeichen),cur_mark_free,10,day,"ab M4, Gilde nötig"
+inc_mark_arena,Arena: 3 Versuche genutzt (Ahnenzeichen),cur_mark_free,5,day,ab M5
+inc_guild_coin,Gilden-Tagesspende (Stammesmünzen),cur_guild_coin,40,day,ab M4
+inc_forge_daily,Tagesaufgaben (Schmiedemarken),cur_forge_mark,3,day,ab feature_forge (M3.5)
+inc_forge_repeat,Kampagnen-Wiederholung (Schmiedemarken),cur_forge_mark,1,per_battle,max. 10/Tag
+inc_clock_daily,Tagesaufgaben (2 × Glutuhr 15 min),itm_clock_15m,2,day,"v1.3, ab Forschung (Feuer 3)"
+inc_clock_center,Häuptlingsfeuer-Stufe (Glutuhr 15 min),itm_clock_15m,1,once_per_level,v1.3
+inc_clock_weekly,Wochenaufgaben (Glutuhr 1 h),itm_clock_60m,1,week,v1.3
+inc_clock_login7,7-Tage-Startbonus (Glutuhr 1 h),itm_clock_60m,1,once,v1.3
+inc_clock_tutorial,Tutorial-Quests (4 × Glutuhr 5 min),itm_clock_5m,4,once,v1.3
+inc_dice_bag_weekly,"Wochenaufgaben (Würfelbeutel, gratis)",itm_dice_energy,3,week,v1.6.11: Bank je Würfel-Variante deckelt (dice_free_item_bank_cap_*); zählt als Gratis-Energie

@@ -51,7 +51,7 @@ gear_artifact_rebind_free_per_artifact,1,Jede Artefakt-ID hat einmal ein kostenl
 gear_forge_mark_removed,1,"v1.7.2 Finanzen: separate Schmiede-Markenwährung entfernt; Upgrades nur mit Gold, Stein und Holz; Shops nutzen Gildenmünzen/Arena-Marken."
 gear_main_budget_factor_e1,0.127,ref_gear_factor_max_e1 − 1.
 gear_main_budget_max_level_e1,9,E1-Referenz: Feuer 10 − 1.
-gear_main_budget_master_mult,1.40,"Referenz-E1-Meister; Rohmult 1,40. Verhältnis Meister/Geschliffen der Gesamtfaktoren wird separat gegen 1,15 geprüft."
+gear_main_budget_master_mult,1.38,"Referenz-E1-Meister; Rohmult 1,38. Meister/Geschliffen pro Teil = 1,38/1,20 = 1,15."
 gear_main_budget_stat_weights,stat_atk_pct:0.5;stat_hp_pct:0.25;stat_def_pct:0.25,Kampfkraftgewichtung aus der Ausrüstungsformel.
 gear_main_set_budget_mode,reserve_within_gear_share,Gewichtete 2/4/6-Setboni werden vorab aus der 80-%-Gear-Summe reserviert.
 gear_auto_equip,best_equip_hero;best_equip_formation,Beste Anlegen ist für Held und ganze Formation erforderlich.
@@ -59,12 +59,12 @@ gear_bulk_upgrade,all_up_to_gold_limit,Alle verbessern bis Gold- oder Materialli
 gear_compare_arrows,green_upgrade;red_downgrade,Grüne/rote Vergleichspfeile zeigen Nettoänderung.
 gear_inventory_filter,slot;rarity;set;epoch;level;power,Filter und Sortierung nach Macht.
 gear_auto_salvage,gr_common;off_by_default;confirm,"Auto-Zerlegen für Grob, opt-in und mit Bestätigung."
-gear_tier_ratio_max,1.15,"v1.7.2: Grenze für Gesamt-Statfaktoren voll ausgerüsteter Helden (1+B_master)/(1+B_fine); äquivalent (1+B)/(1+B×1,20/1,40). Quelle: Helden-Regel SSR ≤ 1,15 × SR in team/helden/Helden-System_v1.md; validate_v1_7.py prüft E1 und E2."
+gear_tier_ratio_max,1.15,"v1.7.3: Hauptwert Meister/Geschliffen je Teil bei gleicher Stufe <= 1,15; stat_mult 1,38/1,20; validate prüft jedes Teil. Quelle: Helden-Regel SSR <= 1,15 x SR."
 gear_class_affinity_locks,0,"v1.7.2: Affinität sperrt nicht, nur Bonus"
 gear_budget_excludes,crit;ult_cd,"v1.7.2: eigene Deckel Krit ≤ 25 %, Ult-CD ≥ 10 s; in pvp_power 0"
 e2_center_max_level,15,"Stand 17.10.; Quelle team/aufbau/delta-e2-uebergang.csv, +5 Feuerstufen je Epoche; E2-Gear höchstens Stufe 14."
 ref_gear_factor_max_e2,1.16,v1.7.2 GD 17.10.: bindende Obergrenze E2 inkl. zwei Artefakte und E2-Gear bis Stufe 14.
-gear_rarity_mult_master,1.40,"v1.7.2 GD 17.10.: Meister-Rohmultiplikator 1,40; Gesamtfaktor bleibt durch E1-/E2-Deckel begrenzt."
+gear_rarity_mult_master,1.38,"v1.7.3: Meister-Rohmultiplikator 1,38; pro Teil gegen Geschliffen 1,38/1,20 = 1,15."
 gear_main_budget_max_level_e2,14,E2-Referenz: Häuptlingsfeuer max. 15 minus 1.
 gear_start_artifact_1,art_e1_firestone,Fixes Start-Artefakt bei camp_25; l1-Startwert.
 gear_start_artifact_2,art_e2_atk_focus,Fixes Start-Artefakt bei E2; Signaturbonus +5 % bereits innerhalb des 10-%-Artefaktbudgets.

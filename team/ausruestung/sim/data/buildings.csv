@@ -1,0 +1,13 @@
+building_id,name_de,role,max_level,unlock_center_level,unlock_campaign_level,base_cost_food,base_cost_wood,base_cost_stone,base_cost_gold,cost_growth,effect_type,effect_resource_id,base_effect,effect_growth,workers_per_level,start_level
+bld_center,Häuptlingsfeuer,center,10,0,,0,150,100,50,1.6,max_building_level,,1,0,0,1
+bld_hut,Wohnhütte,housing,10,1,,20,60,20,0,1.45,population_cap,res_population,8,1.25,0,1
+bld_gatherer,Sammlerhütte,production,10,1,,0,40,10,0,1.45,production_per_hour,res_food,50,1.25,2,1
+bld_hunter,Jagdlager,production,10,2,e1_camp_03,0,80,40,10,1.45,production_per_hour,res_food,60,1.25,3,0
+bld_woodcutter,Holzfällerlager,production,10,1,,30,20,10,0,1.45,production_per_hour,res_wood,75,1.25,2,1
+bld_quarry,Steinbruch,production,10,1,,40,60,0,0,1.45,production_per_hour,res_stone,45,1.25,2,0
+bld_storage,Vorratshöhle,storage,10,1,,0,80,60,0,1.4,storage_cap,,1000,1.35,0,1
+bld_barracks,Kriegerlager,military,10,1,,60,100,60,0,1.5,army_size_cap,,10,1.3,0,0
+bld_shaman_hut,Schamanenhütte,knowledge,10,3,e1_camp_05,80,80,80,30,1.5,production_per_hour,res_knowledge,10,1.25,2,0
+bld_palisade,Palisade,defense,10,3,e1_camp_06,0,150,100,20,1.45,defense_hp_bonus_pct,,10,1.15,0,0
+bld_shell_beach,Muschelstrand,production,10,1,,20,50,20,0,1.45,production_per_hour,res_gold,20,1.25,1,1
+bld_trader,Tauschplatz,market,5,4,e1_camp_08,50,100,50,0,1.6,trade_rate_pct,,40,1.1,0,0

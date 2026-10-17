@@ -1,0 +1,11 @@
+guild_level,guild_xp_total,member_cap,production_bonus_pct,maneuver_xp_bonus_pct,shop_tier,boss_tier,unlocks
+1,0,20,0,0,1,0,gf_chat;gf_donation;gf_shop;gf_ranking
+2,2000,22,1,0,1,0,
+3,6000,24,1,5,2,1,gf_boss
+4,12000,26,2,5,2,1,
+5,20000,28,2,10,3,2,gf_shop_shards
+6,32000,30,3,10,3,2,
+7,48000,30,3,15,4,3,
+8,70000,30,4,15,4,3,
+9,100000,30,4,20,5,4,
+10,140000,30,5,20,5,4,gf_emblem_gold

@@ -1,0 +1,21 @@
+quest_id,order,condition_type,condition_target,condition_value,reward_food,reward_wood,reward_stone,reward_gold,reward_gems,title_de
+q01,1,building_level,bld_woodcutter,2,150,200,0,0,0,Holzfäller auf Stufe 2
+q02,2,building_level,bld_gatherer,2,200,100,0,0,0,Sammlerhütte auf Stufe 2
+q03,3,building_level,bld_quarry,1,0,200,150,0,0,Steinbruch bauen
+q04,4,building_level,bld_hut,2,150,150,100,0,0,Wohnhütte auf Stufe 2
+q05,5,building_level,bld_barracks,1,200,100,0,50,0,Kriegerlager bauen
+q06,6,army_pop,,4,200,0,0,0,0,4 Krieger ausbilden
+q07,7,campaign_cleared,e1_camp_01,1,0,200,150,0,20,Mission 1 gewinnen
+q08,8,building_level,bld_center,2,0,300,200,50,0,Häuptlingsfeuer auf Stufe 2
+q09,9,building_level,bld_storage,2,300,200,0,0,0,Vorratshöhle auf Stufe 2
+q10,10,campaign_cleared,e1_camp_02,1,300,300,200,50,0,Mission 2 gewinnen
+q11,11,building_level,bld_shell_beach,2,0,200,0,100,0,Muschelstrand auf Stufe 2
+q12,12,building_level,bld_center,3,400,400,300,100,30,Häuptlingsfeuer auf Stufe 3
+q13,13,campaign_cleared,e1_camp_03,1,400,0,0,0,50,Mission 3 gewinnen
+q14,14,building_level,bld_barracks,2,300,200,0,0,0,Kriegerlager auf Stufe 2
+q15,15,campaign_cleared,e1_camp_04,1,0,400,200,50,0,Mission 4 gewinnen
+q16,16,campaign_cleared,e1_camp_05,1,300,500,300,100,30,Mission 5 gewinnen
+q17,17,building_level,bld_shaman_hut,1,0,300,100,0,0,Schamanenhütte bauen
+q18,18,campaign_cleared,e1_camp_06,1,0,300,200,0,0,Mission 6 gewinnen
+q19,19,building_level,bld_center,4,0,0,0,0,50,Häuptlingsfeuer auf Stufe 4
+q20,20,building_level,bld_barracks,4,300,200,100,0,0,Armee verstärken: Kriegerlager auf Stufe 4 (vor dem Olm-Kampf)

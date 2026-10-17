@@ -1,0 +1,5 @@
+Ausrüstung v1.7.3 – F2P-Simulationsprotokoll
+Sim: team/ausruestung/sim/sim_f2p.py; Standardlauf, 21 Tage; Seed 1.
+E2-Aufstieg (Übergang aktiv):
+Seed 1: Tag 9
+Abnahme: Seed 1 steigt spätestens an Tag 10 auf.

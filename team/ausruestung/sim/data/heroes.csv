@@ -1,0 +1,10 @@
+hero_id,name_de,epoch_id,rarity,hero_class,leads_unit_class,preferred_row,formation_id,formation_bonus_de,source,governor_bonus_type,governor_bonus_value,start_owned,base_hp,base_atk,base_def,base_spd,base_crit_pct,lead_bonus_pct,growth_pct_per_level,power_l1,art_ref
+hero_bako,Bako Hüttenbauer,epoch_1,R,builder,siege,back,formation_shieldwall,+15% DEF Frontreihe,start,gov_wood_pct,15,1,720,52,30,0.8,5,8,8,206,e1_her_bako
+hero_gorm,Gorm Felsenfaust,epoch_1,R,warrior,infantry,front,formation_shieldwall,+15% DEF Frontreihe,campaign:e1_camp_01,gov_stone_pct,10,0,945,43,42,0.9,5,8,8,222,e1_her_gorm
+hero_mira,Mira Glutlied,epoch_1,SR,healer,support,back,formation_circle,+5% HP alle,campaign:e1_camp_03,gov_knowledge_pct,10,0,680,33,24,1.0,5,10,8,158,e1_her_mira
+hero_tala,Tala Schleuderauge,epoch_1,SR,marksman,ranged,back,formation_wedge,+12% ATK Hinterreihe,campaign:e1_camp_07,gov_food_pct,8,0,585,83,20,1.0,10,10,8,244,e1_her_tala
+hero_ruka,Ruka Wolfsherz,epoch_1,SSR,assassin,cavalry,front,formation_pincer,+15% Schaden Kavallerie,summon:banner_tutorial,gov_gold_pct,8,0,775,89,24,1.3,15,12,8,280,e1_her_ruka
+hero_olm,Olm Speerwacht,epoch_1,R,warrior,spear,front,formation_shieldwall,+15% DEF Frontreihe,summon:banner_standard,gov_food_pct,5,0,855,45,44,0.9,5,8,8,220,e1_her_olm
+hero_kiko,Kiko Funkenflug,epoch_1,SR,tactician,support,back,formation_wedge,+12% ATK Hinterreihe,summon:banner_standard,gov_knowledge_pct,8,0,725,44,29,1.0,5,10,8,190,e1_her_kiko
+hero_nara,Nara Mammutruferin,epoch_1,SSR,warrior,infantry,front,formation_shieldwall,+15% DEF Frontreihe,summon:banner_featured_nara,gov_food_pct,10,0,1145,54,48,0.9,5,12,8,270,e1_her_nara
+hero_terwish,Terwish,epoch_1,SR,tactician,ranged,back,formation_wedge,+12% ATK Hinterreihe,campaign:e1_camp_12,gov_knowledge_pct,8,0,690,66,24,1.0,5,10,8,225,e1_her_terwish

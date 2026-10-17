@@ -1,0 +1,697 @@
+key,value,notes
+army_cap_without_barracks,6,Pop-Limit ohne Kriegerlager
+early_production_mult,4,Starthilfe: Produktionsfaktor aller Produktionsgebäude ...
+early_production_hours,1,... für diese Stunden ab Kontoerstellung (auch offline)
+winter_cycle_summer_h,3,
+winter_cycle_winter_h,1,
+winter_food_production_mult,0.7,
+offline_max_hours,12,Offline-Ertrag max. (Dev-Annahme übernommen)
+hunger_atk_mult,0.8,ATK-Faktor bei 0 Nahrung
+repeat_loot_pct,30,Beute bei Wiederholung
+base_population,5,
+start_free_gems,50,"Startbestand verdiente Kristalle für neue Konten; vorhandene Spielstände bleiben unverändert"
+battle_tick_ms,1000,1 Tick = 1 s; skills.csv in Ticks
+battle_time_limit_ticks,90,Zeitlimit = Niederlage
+def_factor,5,Schaden x 100/(100+DEF x def_factor)
+epoch_bonus_pct,5,"Truppen/Helden der eigenen Epoche; v1.6.12 Nr. 253: einziger Epochenbonus, ×1,05 multiplikativ NACH allen additiven Boni (auch für Ausrüstung kein Extra-Key)"
+hero_level_cap_epoch_1,20,
+maneuver_food,1000,Trainingsmanöver (Nahrungssenke): Kosten Nahrung
+maneuver_gold,100,... Kosten Gold
+maneuver_hero_xp,100,... ergibt Heldenerfahrung (an einen Helden)
+maneuver_unlock_campaign,e1_camp_11,mit Heldenlevel-Feature
+epoch_ascend_requires,e1_camp_30;bld_center:10;res_knowledge:2000;research:rs_e1_sternkunde,Epochenaufstieg (Wissen wird verbraucht)
+epoch_ascend_troops,upgrade_free,Truppen werden beim Aufstieg kostenlos in die Variante der neuen Epoche überführt
+early_discount_l1_l6,0.4;0.55;0.7;0.8;0.7;0.9,"bereits in building_levels.csv eingerechnet (nur Doku, nicht anwenden)"
+paid_summon_soft_launch_only,true,Bezahlte Beschwörung erst ab Soft Launch (F1)
+gems_consume_order,free_first,verdiente vor gekauften (F6); Abzug je Topf vor jedem Zug anzeigen
+gems_show_both_balances,true,beide Kristallstände dauerhaft sichtbar
+gems_paid_expire,false,
+summon_rates_versioned,true,"Raten serverseitig versioniert, Ziehungen protokolliert"
+heroes_tradeable,false,
+cancel_button_locations,settings;shop,"„Verträge hier kündigen“ ohne Login, Bestätigungsseite + Deep Link Play-Abo"
+ui_shop_on_ranking_screens,false,"keine Shop-Angebote/Links in Ranglisten-, Ergebnis- und Event-Ranglisten-Screens"
+ui_offer_after_defeat,false,keine Kauf-Pop-ups nach Niederlagen
+ui_offer_countdowns,false,keine Countdown-Angebote; Saisonende neutral
+push_quiet_hours,22-7,
+push_shop_links,false,
+push_competition_minors_default,off,unter 18
+age_gate,neutral,"Altersabfrage beim Start, nicht vorbelegt"
+minor_spend_limit_eur,50,"v1.0 Fabian: unter 18, Summe aller Echtgeld-Käufe je Kalendermonat"
+minor_spend_limit_mode,hard,"v1.0: Kauf über Restbetrag wird blockiert, nicht nur gewarnt"
+minor_refund_process,support_google_play_audit,"v1.0 Patch Law: Eltern-Erstattung (BGB §§106ff/110) über Support, Prüfung, Erstattung via Google Play, Rückbuchung Währung/Items, Audit-Log"
+refund_negative_balance,floor_zero_no_block,"Rückbuchung zieht zuerst gekauften Saldo ab, nie unter 0, kein Spielblock, verdiente bleiben; Fehlbetrag verworfen + Audit-Log"
+minor_price_display,eur,U18: Preise immer in €
+minor_countdowns,off,U18: keine Countdowns
+age_change,support_only,Altersangabe nach Erstangabe nur über Support änderbar
+minor_remaining_visible,yes,Restbetrag im Shop und im Kaufdialog sichtbar
+ads_rewarded_only_after_soft_launch,true,nur freiwillige Belohnungsvideos
+ads_max_per_day,3,
+mark_bank_cap,4000,"Ahnenzeichen-Sparkonto (≈ 9,5 Wochen F2P)"
+event_mark_points_cap,35000,max. Punkte aus Ahnenzeichen je Stammeswettstreit (= 3.500 verdiente; v1.6 Spar-Decke)
+ranked_softcap_f,0.25;0.25;0.40;0.60,Arena Pay-Power-Cap je Klasse K1–K4 (Ranking v1.1)
+arena_unlock,epoch_2,Arena ab Epoche 2 (≈ Tag 8–10)
+arena_daily_attempts,3,
+arena_attempt_bank,2,
+arena_tokens_win,10,
+arena_tokens_loss,3,
+arena_tokens_daily_bonus,10,alle 3 Versuche genutzt
+arena_season_days,28,
+guild_unlock,bld_center:6,
+guild_donation_cost_res,1000,
+guild_member_contribution_cap_pct,5,
+guild_max_members,30,
+ui_power_hint_below_pct,100,"v0.7-final: Banner „Armee verstärken“ im Missions-Screen, wenn Kampfkraft < 100 % der Empfehlung (Buttons: Kriegerlager, Heldenlevel, Formation; keine Shop-Links)"
+ruka_tutorial_after_quest,q19,Tutorial-Beschwörung Ruka nach dieser Quest (nicht nach der letzten)
+forge_unlock_feature,feature_forge@e1_camp_14,"v0.8: Schmiede = Tab am Kriegerlager, kein Gebäude, keine Gates; M3.5"
+gear_crit_cap_pct,25,
+ult_cooldown_floor_ticks,10,Set-/Artefakt-Abklingzeit-Boni nie unter 10 Ticks
+gear_dismantle_refund_pct,100,"Gold, Stein UND Holz"
+gear_inventory_slots,200,nie kaufbar; Überlauf in Post
+gear_pvp_cap_pct,40,ATK bzw. HP/DEF aus Ausrüstung+Artefakt zusammen mit Passiv/Formation additiv max. +40 % (PvP)
+battle_heal_cap_pct,40,v0.7 (M2): Gesamtheilung je Seite und Kampf max. 40 % der Start-max-HP dieser Seite (Helden-Skills + Schamanen)
+mission_minutes_ch1,1.5,"v0.7: Zielspieldauer je Mission inkl. UI (Kapitel 1); Sim-Annahme, Dev misst"
+mission_minutes_ch2,2.0,
+mission_minutes_ch3,2.5,
+gear_level_cap_rule,center_level_minus_1,v0.9: Ausrüstungsstufe <= Häuptlingsfeuer-Stufe − 1 (Worst-Case-Schutz Aufstieg <= Tag 10)
+glut_echo_rule,codex_only,"v0.9 Story: früh beschworene Rivalen (Olm/Kiko/Nara) = Glut-Echo; nur Codex-/Tooltip-Satz, keine Banner-Sperre, keine Werte"
+trophy_exchange_per_day,1,v1.4: max. 1 Umtausch Speerwurf-Trophäe/Tag (1 = 1 h Nahrung)
+trophy_expiry_convert,food_box,"v1.1: Rest beim Verfall automatisch als Nahrungskisten (itm_res_food_box_s, 1 h) ins Inventar; Öffnen füllt max. bis Lagerlimit"
+trophy_expiry_convert_max,14,"v1.1: Deckel 14 Kisten je Saisonende (= 11,5k Nahrung < Lager 14,9k an Tag 8+); darüber verfällt, Hinweis 3 Tage vorher"
+norm_gear_rarity,gr_fine,PvP v1.1 A2; Ahnenprüfung/Turnier
+norm_gear_level,9,v1.1: Geschliffen St. 9 (E1-Deckel Feuer − 1; PvP-Vorschlag St. 10 in E1 unerreichbar)
+norm_gear_main_bp,672,"6,72 % = 4 × 1,2 × 1,40"
+norm_gear_set,free_choice,PvP v1.1 A2
+norm_artifact,pvp_normalized_value,"Signatur ×1,05; jedes Artefakt max. 1× je Formation"
+norm_artifact_unique_per_formation,true,PvP v1.1 A2
+norm_epoch_bonus_pct,0,Ahnenprüfung: kein Epochenbonus
+ahnen_trials_pool,28,"v1.1: ahnen_trials.csv, aus Kampagnen-Endwellen L3–L30 auf Pop 40 normiert; 7 je Wettstreit-Woche, 4 Zyklen ohne Wiederholung"
+pvp_class_hero_level_cap,none,v1.1: kein Helden-Deckel je Kampfkraft-Klasse (Heldenanteil 6–29 % ab L20)
+ranking_tie_rule,competition_1224,"v1.5: Gleichstand nach Rest-HP ‰ und Sekunden, danach geteilter Platz; Standard-Wettkampfränge 1,2,2,4; jeder Geteilte volle Belohnung seines Rangs; nie Uhrzeit"
+ranking_tie_first_place,full_reward_each,v1.1: geteilter Platz 1 = volle Belohnung für alle Geteilten
+research_unlock_fire,3,"v1.2 GD: Forschungs-Tab ab Häuptlingsfeuer 3 (sim_first60: sonst 37 statt 46 Upgrades, L9 statt L11)"
+research_slots,1,"v1.2 Forschung: 1 Slot (Tab Schamanenhütte), keine 2. Warteschlange gegen Geld"
+research_first_hour_speed_mult,4,Stunde 1 (Siedlerfeuer) Forschung ×4
+research_free_finish_s,180,"Gratis-Abschluss ≤ 180 s Rest (+60 s je Glutpflege, max. 360)"
+research_power_cap_pct,8,Deckel Truppen-Kampfbonus aus Forschung (E1 real 6)
+norm_research_power_pct,6,Ranglisten/Ahnenprüfung: Forschungsbonus = E1-Maximum für alle
+research_cancel_refund_pct,100,Abbruch erstattet 100 %
+research_reserve_warning,1,"Warnung (keine Sperre), wenn Forschung unter die Kosten der nächsten Feuerstufe drückt; NICHT auf dem Sternkunde-Pfad"
+research_critical_path,rs_e1_beeren:1;rs_e1_steinaxt:1;rs_e1_hebel:1;rs_e1_muscheln:3;rs_e1_felsritzung:3;rs_e1_tauschkunde:1;rs_e1_kampfrufe:1;rs_e1_fellpanzer:1;rs_e1_feldkueche:2;rs_e1_trockenfleisch:1;rs_e1_sternkunde:1,"v1.2: UI markiert „Aufstiegspfad“, ohne Reserve-Warnung (Sim: mit Warnung Aufstieg Tag 12–13)"
+research_gem_skip,none,v1.3 Fabian F2: keine direkte Kristall-Beschleunigung; nur Uhren-Items
+research_clock_items,itm_clock_5m;itm_clock_15m;itm_clock_60m;itm_clock_180m,"v1.3: Uhren nur für Forschung (keine Bauzeiten); verdient und gekauft identisch, verfallen nie"
+offer_limit_text,neutral_remaining_today,"v1.3-p1 Law: nur „heute noch X verfügbar“, nie „nur noch X!“"
+offer_scarcity_styling,none,v1.3-p1 Law: keine rote Markierung/Badges für Limits
+offer_restock_push,off,v1.3-p1 Law: keine Push-Nachricht „Pakete wieder da“
+offer_reset_timer_on_buy,off,v1.3-p1 Law: keine Reset-Uhr am Kaufknopf
+minor_daily_offer_highlight,off,"v1.3-p1 Law: U18 tägliche Echtgeld-Pakete nur im Shop gelistet, nie hervorgehoben"
+refund_clock_items,claw_back_unused,"v1.3-p1 Law: Erstattung bucht gekaufte, ungenutzte Uhren zurück; verbrauchte Zeit wird nicht zurückgedreht; nie negativ"
+refund_gem_clock_path,claw_back_paid_gems_then_unused_clocks,"v1.3-p1: Erstattung Kristallpaket → zuerst gekaufte Kristalle, dann mit gekauften Kristallen gekaufte ungenutzte Uhren; nie negativ, kein Spielblock"
+event_coin_cap_28d,1400,v1.4: max. Festmünzen je 28 Tage (Wettstreit 400 + Weltboss 400 + 2 × Baumeister 300)
+event_coin_points_basis,free_only,v1.4: Festmünzen-Meilensteine im Stammeswettstreit zählen nur Punkte aus verdienten Quellen und Gratis-Versuchen (v1.6.1: ohne gekaufte Fackeln) → Uhren nicht indirekt kaufbar
+mark_bank_overflow,pause_income_no_loss,"v1.4 K-GD8: verdiente Zeichen über 4.000 werden nicht gutgeschrieben (Hinweis „Sparkonto voll“), nichts verfällt"
+worldboss_power_basis,pvp_power_cap40_research_norm,"v1.4 K-GD4: Weltboss-Schaden mit PvP-Kampfkraft (Ausrüstung im 40-%-Deckel, Forschung normiert), Brackets je Klasse"
+tournament_rewards,title_cosmetic_only,"v1.4 K-GD6: Turnier der Zeitalter nur Titel/Kosmetik (Thron-Rahmen), keine Ressourcen/Kristalle"
+ranked_hero_count,4-5,"v1.4 PvP v1.2: gewertete/normierte Modi brauchen 4–5 Helden, hart vor Kampfstart; Σ Pop ≤ 40"
+gdd_binding_version,latest,v1.4 K-GD1: verbindlich ist immer das aktuelle GDD_vX.Y.md im gdd-Ordner; Archiv nie
+free_only_resource_rule,purchase_deducted_all_points,"v1.6: für alle Punkte (Rang und Meilensteine) zählt Ressourcen-Ausgabe nur abzüglich aller per Echtgeld erhaltenen Ressourcen (IAP, Pass, Abo) aus Event-Zeitraum + 7 Tage davor; Server kennt die Gutschriften"
+free_only_scope,event_coin_milestones,v1.6.1: Festmünzen-Meilensteine zählen nur Gratis-Versuche der Ahnenprüfung (Tagesgratis + Quest-Fackeln); gekaufte Fackeln (Kristalle/€) nicht; sonst identisch mit Gesamtpunkten
+ui_event_progress_bars,1_plus_milestone_marker,"v1.6.4: ein Hauptbalken „Punkte“ (Rang/Festmünzen, nur Gratis) + Marker/Zahl „Meilenstein-Punkte“ nur bei Abweichung (ui_trial_milestone_points_label); Key-Name unverändert"
+ui_purchasable_attempts_label,every_contest_screen,"v1.6: Hinweis „Zusätzliche Versuche kaufbar (Tageslimit)“ auf Wettstreit-/Arena-Screens, neutral; keine kaufbaren Punkte; v1.6.2 Wettstreit zusätzlich trial_paid_rank_text; U18 statt Hinweis minor_attempts_hint_text"
+ranking_payer_telemetry,per_bracket,"v1.5 Law K-L1: Platzverteilung nach Zahlerstatus je Bracket, pseudonymisiert"
+reward_table_locked_during_event,true,"v1.5 Law K-L2: Belohnungstabelle vor Beginn sichtbar, keine Änderung während des Events"
+ui_missed_rewards_hint,off,v1.5 Law K-L2: keine „Was du verpasst“-Hinweise
+reward_eur_value_display,off,v1.5 Law K-L4: keine €-Wertangabe von Belohnungen; nicht handelbar/auszahlbar
+ranking_rewards_table,regular,v1.6: Fallback ranking_rewards_fallback.csv ruht (Anlass kaufbare Punkte entfallen); nur noch bei negativer Google-Policy-Antwort
+chat_launch_scope,guild_group_only,"v1.5 Law K-L3: nur Gilden-Gruppenchat, keine Privatnachrichten/Bilder/Sprache"
+chat_contact_link_filter,all_users,v1.5 Law K-L3: Kontaktdaten-/Link-Filter für alle
+chat_report_flow,per_message_and_user_with_reason_appeal,"v1.5 Law K-L3: Melden je Nachricht/Nutzer, Begründung, Widerspruch, Webformular"
+chat_moderation_sla,emergency_1h_standard_24h_appeal_7d,v1.5 Law K-L3: Moderationsprozess; Verantwortung [Fabian 14.0 Nr. 7]
+worldboss_label,progress_counts,v1.5 Law K-L6: 📈 auf jedem Weltboss-Screen; keine Beschwörungsangebote im Weltboss-Kontext
+event_coin_player_text,no_shop_earned_points_only,v1.5 Law K-L7: nie „nie kaufbar“ in Spielertexten; Weg offen erklären
+arena_tickets_free_daily,3,"v1.6 Fabian: Arena-Tickets gratis je Tag (= arena_daily_attempts), Bank 2"
+arena_tickets_buy_daily_limit,3,"v1.6: max. 3 gekaufte Tickets/Tag gesamt (Kristalle + €), Reset 04:00"
+arena_ticket_gem_price,20,Kristalle je Ticket (verdiente zuerst)
+arena_lp_fights_daily_cap,3,"v1.6: Ligapunkte nur aus max. 3 Kämpfen/Tag (+ Bank 2 für verpasste Tage); gekaufte Tickets bringen Marken/Übung, keine zusätzlichen Ligapunkte"
+trial_attempts_free_daily,2,"v1.6: Ahnenprüfung im Stammeswettstreit 2 Gratis-Versuche/Tag, bester zählt"
+trial_attempts_buy_daily_limit,2,v1.6: max. 2 gekaufte Versuche (Prüfungsfackel)/Tag gesamt
+trial_attempt_gem_price,30,Kristalle je Prüfungsfackel
+trial_scoring,best_attempt,bester Versuch des Tages zählt (max. 300)
+worldboss_attempts_purchasable,no,v1.6 GD: Weltboss-Versuche bleiben nicht kaufbar (Law-Begründung K-L6)
+worldboss_attempts_free_daily,3,v1.6.1 GD: Weltboss Kriegsmammut Gratis-Versuche/Tag (GDD 24.3); keine Kaufversuche
+trial_paid_def,crystal_or_iap,v1.6.1 GD: jede gekaufte Prüfungsfackel (Kristalle oder €) gilt als gekauft; Fackeln aus Quests/Gratisquellen gelten als gratis
+trial_consume_order,free_daily;quest_torch;paid_torch,"v1.6.1 GD: Verbrauch zuerst Tagesgratis, dann Quest-Fackeln, dann gekaufte"
+trial_paid_coin_rule,paid_attempts_excluded,v1.6.1 GD: Versuche mit gekauften Fackeln zählen nicht für Festmünzen-Meilensteine
+trial_best_rule,rank_best_free;coins_best_free,v1.6.2 Fabian Variante A: Rang und Kristall-Platzbelohnungen nur aus bestem Gratis-Versuch (Tagesgratis + Quest-Fackeln); Festmünzen = bester Gratis-Versuch; gekaufte Fackeln: Übung + Meilenstein-Fortschritt ohne Festmünzen
+trial_paid_milestone_rule,progress_no_coins,"v1.6.2: gekaufte Versuche zählen für Meilenstein-Punkte (Kristalle/Fragmente/EP), nie für Festmünzen (trial_paid_coin_rule)"
+trial_paid_rank_text,"Gekaufte Versuche zählen nicht für Platz, Platzbelohnungen und Festmünzen. Sie zählen für die übrigen Meilensteine (z. B. Kristalle, Fragmente, EP).","v1.6.3 Law: Spielertext Kaufdialog (Ranking v1.6 A), Beispiele ergänzt"
+trial_contest_screen_text,"Zusätzliche Versuche kaufbar (Tageslimit 2). Für Platz, Platzbelohnungen und Festmünzen zählen nur Gratis-Versuche.","v1.6.3 Law: Pflichtformel Wettstreit-Screens, reiner Text ohne Link (Ranking v1.6 A)"
+ui_trial_milestone_points_label,show_if_differs,"v1.6.2 K-GD30/31: Meilenstein-Leiste zeigt Zahl „Meilenstein-Punkte“ (inkl. gekaufter Versuche) nur, wenn sie von „Punkte“ (Rang/Festmünzen, nur Gratis) abweicht; Hauptbalken = nur Gratis"
+trial_tiebreak_text,Bei Gleichstand entscheiden nur Gratis-Versuche.,v1.6.2 Law v1.4 Nr. 8 (Variante A)
+minor_purchasable_attempts,no,"v1.6.2 K-GD25 (Law v1.4 Nr. 7): U18 kann keine Versuche kaufen (Fackeln, Arena-Tickets; €-Paket und Kristall-Shop)"
+minor_attempts_hint_text,Zusätzliche Versuche können nicht gekauft werden.,"v1.6.3 Law: Hinweis für U18 statt Kaufoption (K-GD25), ohne Altersbezug"
+arena_token_purchase_rule,indirect_via_paid_tickets,"v1.6.1 GD: Arenamarken nie direkt kaufbar; mittelbar über gekaufte Tickets (max. 3/Tag), Sim +25 %; Ziel Zeit bis Wolfszahn Zahler vs. F2P ≤ 25 % Abstand"
+arena_token_gap_target_pct,25,v1.6.1 Telemetrie: max. Abstand Zeit bis Wolfszahn Zahler vs. F2P; Hebel: gekaufte Tickets geben weniger Marken
+purchasable_points,none,v1.6 Fabian: keine direkt kaufbaren Ranglistenpunkte; nur Ausdauer/Items mit Tageslimit
+research_ads,off,v1.2 (F5): keine Glutstunden aus Werbevideos
+research_accel_offers,none,"keine Countdown-/Restzeit-Angebote, kein Shop-Link am Beschleunigen-Knopf; U18 ohne Upsell"
+forge_reserve_warning,1,"v0.9 (Ausrüstung v1.3): Warnung ohne Sperre, wenn ein Schmiede-Upgrade Gold/Holz/Stein unter die Kosten der nächsten Feuer-Stufe drückt"
+marketing_forbidden_claims,kein Pay-to-win;fair für alle;jeder kann Erster werden,"nie in Store, Marketing, Spieltexten (UWG § 5/5a)"
+minor_ads_and_offers,off,"unter 18: keine Werbung (auch keine Belohnungsvideos), keine Kaufangebote/Banner/Pushs, Shop nur auf eigenen Aufruf"
+country_exclusion_console,BE,"Ausschluss über Play Console Länderverfügbarkeit (Release-Checkliste), zusätzlich country_rules"
+ranking_hard_rules,no_cash_prizes;no_entry_fee;no_trading;no_banner_coupling;no_random_rewards,Glücksspiel-/Lootbox-Leitplanken
+dice_start_energy,10,v1.6.4 Würfel-Event: Startenergie bei Eventbeginn (= 10 Würfe)
+dice_energy_per_roll,1,v1.6.4 Energie je Wurf
+dice_regen_per_hour,1,v1.6.4 Gratis-Regeneration Energie je Stunde
+dice_regen_cap,10,v1.6.4 Regeneration stoppt bei diesem Vorrat (Start-/Quest-/Kaufenergie darf darüber liegen)
+dice_quest_energy_daily,10,v1.6.4 Gratis-Energie aus Event-Tagesaufgaben (max. je Tag)
+dice_daily_gift_energy,5,v1.6.4 Gratis-Energie Tagesgeschenk (Login)
+dice_free_item_bank_cap,30,"v1.6.4 v1.6.13 Nr. 305 Balancing-Prüfung v1.6.13b: Bank-Deckel lang 28 → 30 (kurz 24, 4T 26 bleiben) – aktueller Stand | v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 28 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: = max. der Varianten (16)"
+dice_energy_gem_price,10,v1.6.4 Kristalle je gekaufter Energie (Kauf in 5er-Schritten)
+dice_energy_gem_pack,1,v1.6.4 v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: Kristall-Kauf je 1 Energie (Limits 4/3/2 sind keine 5er-Schritte)
+dice_energy_buy_daily_limit,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267: = max. der Varianten-Limits (3)"
+dice_energy_buy_event_limit_short,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 6 → 3 (2×-Sim: F2P Platz 1 min "
+dice_energy_buy_event_limit_4d,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 6 → 2 = Boden (2×: min 32 %, Ø "
+dice_energy_buy_event_limit_long,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 10 → 2 = Boden (2×: min 32 %, Ø"
+dice_paid_energy_rank_rule,all_count,"v1.6.4 v1.6.9 Fabian: gekaufte Energie zählt voll für Rang, Platzbelohnungen und Meilensteine; v1.6.10 Fabian: mit Limit je Tag UND je Event (dice_energy_buy_*); NICHT für Festmünzen/Uhren (K-L7)"
+dice_consume_order,free_regen;free_quest;free_item;paid,v1.6.4 Verbrauch: Regeneration/Start → Quest/Geschenk → gesparte Gratis-Beutel → gekauft
+dice_energy_consume_order,free_first,v1.6.4 v1.6.8 AGB 12.8 Nr. 8: Gratis-Energie wird vor gekaufter verbraucht (entspricht dice_consume_order …;paid); validate prüft
+dice_clock_field_rule,free_rolls_only,v1.6.4 Uhren-Felder zahlen nur bei Gratis-Würfen (K-L7); gekaufter Wurf: nur Punkte
+dice_clock_limit_per_event,3,v1.6.4 max. Uhren (15 min) aus Feldern je Event
+dice_lap_bonus_points,40,v1.6.4 v1.6.7 Brett V2 (vorher 50); Punkte je vollständiger Brettrunde
+dice_coin_rotation_slot,replaces_baumeister_2,v1.6.4 Würfel-Event ersetzt 2. Baumeister-Wochenende im 28-Tage-Plan → event_coin_cap_28d (1400) bleibt
+dice_offer_countdown,off,v1.6.4 keine Countdowns an Kaufangeboten; Eventende nur als Datum
+dice_limit_text,Heute noch {n} verfügbar.,v1.6.4 neutraler Limit-Text (offer_limit_text); keine Verknappungsformeln
+dice_paid_rank_text,Gekaufte Energie zählt auch für Platz und Platzbelohnungen (Tageslimit {daily_limit}). Festmünzen und Uhren gibt es nur aus Gratis-Energie.,"v1.6.4 v1.6.9 Law-Pflichttext; v1.6.10 Law: Wortlaut freigegeben, Limit als Platzhalter {daily_limit} aus event_templates.buy_daily_limit"
+dice_contest_screen_text,"Zusätzliche Energie kaufbar (Tageslimit {daily_limit}, je Event begrenzt). Gekaufte Energie zählt auch für Platz und Platzbelohnungen.","v1.6.4 v1.6.9 Pflichtformel Event-Screen; v1.6.10 Law: Wortlaut freigegeben, doppeltes „Tageslimit 10“ entfernt, Platzhalter {daily_limit}"
+dice_odds_disclosure,all_fields_visible;die_uniform;distribution_in_help;crate_contents_with_odds,v1.6.4 v1.6.5 Law (a): alle Belohnungsfelder sichtbar; Würfel 1–6 gleich wahrscheinlich; Feldverteilung in der Hilfe; Kisteninhalte mit Wahrscheinlichkeit
+dice_help_text,"Der Würfel zeigt 1 bis 6, jede Zahl ist gleich wahrscheinlich (je 1/6). Alle Felder und ihre Belohnungen sind auf dem Brett sichtbar. Feldverteilung (Anteil der Felder) und Kisteninhalte siehe Tabelle. Die Landewahrscheinlichkeit hängt von der Position ab.",v1.6.4 v1.6.5 Law (a): Hilfetext; Tabelle aus dice_board.csv (Anzahl/Anteil/Inhalt)
+dice_iarc_declaration,game_wide_summon_not_dice,v1.6.4 v1.6.8 Law: Würfel-Event allein löst IARC-Zusatz „inkl. zufälliger Objekte“ nicht mehr aus (points_only); Zusatz bleibt spielweit wegen bezahlter Beschwörung nötig
+dice_country_block,BE,"v1.6.4 v1.6.8 Law: Würfel-Event/Energie-Kauf gesperrt in diesen Ländern; Whitelist DE/AT/NL/CH allowed, BE und * blocked (country_rules.dice_event); AT: Lootbox-Rechtsprechung Stand prüfen"
+dice_purchase_fx,none_no_near_miss,v1.6.4 v1.6.5 Law (d): keine Animationen/Effekte rund um den Kauf
+dice_regen_display,value_only,v1.6.4 v1.6.5 aktueller Stand: Energieanzeige nur Wert ohne Timer; Alternative timer_energy_display_only (nie neben Kaufangebot/Kaufdialog; kein Push „Energie voll“ an U18)
+dice_unlock_fire_level,3,v1.6.4 v1.6.5 Würfel-Event ab Feuer-Stufe 3 (Häuptlingsfeuer)
+dice_events_per_28d,1,v1.6.4 v1.6.5 Würfel-Event 1× je 28 Tage (2. Baumeister-Slot); Festmünzen-Summe validate ≤ event_coin_cap_28d
+specials_grant_event_coins,no,v1.6.4 v1.6.5 Sonderaktionen geben keine Festmünzen
+trial_attempts_buy_event_limit,14,v1.6.4 v1.6.5 Prüfungsfackel: max. 14 gekaufte je Stammeswettstreit (daily_and_per_event; = 2/Tag × 7 Tage)
+dice_help_share_label,Anteil der Felder,v1.6.4 v1.6.6 Law: Spaltenbeschriftung field_share_pct in der Hilfe-Tabelle; nie als Landewahrscheinlichkeit
+dice_help_share_note,Die Landewahrscheinlichkeit hängt von der Position ab.,v1.6.4 v1.6.6 Law: Hinweis unter der Hilfe-Tabelle
+dice_purchase_dialog_fields,dice_purchase_dialog_fields_eur|dice_purchase_dialog_fields_gems,v1.6.4 v1.6.6 Law: Kaufdialog Würfel = Text + €-Preis bzw. Kristallpreis mit €-Gegenwert + „Heute noch {n} verfügbar.“; v1.6.7 Law: + Umtausch-Gegenwert vor Kauf | v1.6.11: je Zahlart getrennt (Keys _eur/_gems)
+max_parallel_limited_ranking_events,1,v1.6.4 v1.6.6 Kalender: max. 1 zeitlich begrenztes Ranking-Event gleichzeitig (Arena dauerhaft zusätzlich)
+dice_paid_roll_field_reward,points_only,"v1.6.4 v1.6.7 KRITISCH: gekaufte Würfe bringen nur Punkte/Meilenstein-Fortschritt; Feldbelohnungen (Nahrung; = dice_paid_roll_reward (Ranking-Review, zusammengeführt)"
+dice_free_reward_cap_food_h_event,short:3;4d:6;long:10,v1.6.4 v1.6.7 Deckel Nahrungskisten (h) je Event aus Gratis-Würfen; danach nur Punkte
+dice_free_reward_cap_stone_h_event,short:3;4d:6;long:10,v1.6.4 v1.6.7 Deckel Steinkisten (h) je Event aus Gratis-Würfen
+dice_free_reward_cap_hero_xp_event,short:600;4d:1200;long:2000,v1.6.4 v1.6.7 Deckel Heldenerfahrung je Event aus Gratis-Würfen
+dice_pity_enabled,1,v1.6.4 v1.6.7 sichtbarer Glutzähler (Anti-Frust)
+dice_pity_threshold,5,v1.6.4 v1.6.7 Würfe ohne Highlight (Ahnenfeld oder Runde) bis Bonus
+dice_pity_bonus_points,30,v1.6.4 v1.6.7 Bonuspunkte; zählen wie der auslösende Wurf (v1.6.9: gratis und gekauft für Rang)
+dice_pity_highlight,ancestor;lap,v1.6.4 v1.6.7 Highlights setzen den Glutzähler zurück
+dice_anim_roll_ms,600,v1.6.4 v1.6.7 Review Minigame 3.4: Wurf
+dice_anim_hop_ms_per_field,110,v1.6.4 v1.6.7 Hüpfen je Feld (Ø 3
+dice_anim_land_ms,300,v1.6.4 v1.6.7 Landung
+dice_anim_highlight_ms,600,v1.6.4 v1.6.7 Ahnenfeld-Panel (zusätzlich)
+dice_anim_lap_ms,900,v1.6.4 v1.6.7 Runde (zusätzlich)
+dice_anim_single_max_ms,1500,v1.6.4 v1.6.7 Ziel Einzelwurf ≤ 1
+dice_multi_roll_options,1;5;10,v1.6.4 v1.6.7 Mehrfachwurf; 5/10 gilt je Wurf einzeln für Limits und Gratis/Kauf-Zuordnung
+dice_anim_speed_multi,2.5,v1.6.4 v1.6.7 Tempo-Faktor bei Mehrfachwurf; Überspringen jederzeit
+dice_anim_skip,always,v1.6.4 v1.6.7 Animation jederzeit überspringbar
+dice_reduce_motion,supported,v1.6.4 v1.6.7 reduzierte Bewegung (keine Blitze/Wackler)
+event_min_days_without_start_per_week,2,v1.6.4 v1.6.7 Option A: mind. 2 Tage je Woche ohne neuen Event-Start; lange Events (7 T) dürfen durchlaufen
+dice_paid_roll_reward,points_only,"v1.6.4 v1.6.7 Ranking-Review 3.3 – Alias, muss = dice_paid_roll_field_reward sein (validate)"
+dice_paid_def,crystal_or_iap,v1.6.4 v1.6.7 Ranking: Energie für Gratis- oder Kauf-Kristalle bzw. € = gekauft (wie trial_paid_def)
+dice_board_buy_entry,none,"v1.6.4 v1.6.7 Ranking/Law: Brett-, Ergebnis- und Rang-Screen ohne Kauf-Button/Link, auch bei Energie 0"
+dice_tie_rule,shared_1224_full_reward,"v1.6.4 v1.6.7 Ranking: gleiche Punkte = geteilter Platz (1,2,2,4), volle Belohnung, kein Tie-Break per Uhrzeit/Wurfanzahl"
+dice_bracket_size,30,v1.6.4 v1.6.9 Fabian: kleine Gruppen 30
+dice_bracket_min_size,20,v1.6.4 v1.6.7 Ranking 3.3 [Annahme]: Mindestgröße kleine Server
+dice_bracket_fill_timeout_h,6,"v1.6.4 v1.6.7 Ranking 3.3 [Annahme]: danach Gruppe geschlossen, Rangstufen unverändert"
+event_bracket_power_basis,peak_14d,v1.6.4 v1.6.7 Ranking 2.4: Downgrade-Schutz für Events mit kampfkraft_klasse (Würfel nur Fallback)
+dice_clock_budget_rule,count_in_kgd12,v1.6.4 v1.6.7 Ranking 1.3: 3 × 15 min Uhr-Feld je Event zählen ins K-GD12-Uhrenbudget
+dice_reward_wording,Belohnungen;never:Gewinn|Preis|Jackpot|Glück gehabt,v1.6.4 v1.6.7 Ranking 3.3: Abstand zu Glücksspiel-Sprache
+dice_paid_energy_expiry,convert,"v1.6.4 v1.6.7 Law: gekaufte Energie verfällt zum Eventende nicht, sondern wird umgetauscht; nie lose"
+dice_free_energy_expiry,lose,v1.6.4 v1.6.7 Law: Gratis-Energie darf zum Eventende verfallen
+dice_paid_energy_convert_value,gems:10,v1.6.4 v1.6.8 Law: Umtausch mit Kristallen gekaufter Energie = bezahlter Betrag (dice_energy_gem_price); €-gekaufte Energie: dice_paid_energy_convert_value_eur (v1.6.10)
+dice_paid_energy_convert_text,{convert_text_by_payment},v1.6.4 v1.6.11 Law (2): Verweis – Kaufdialog nimmt je Zahlart dice_paid_energy_convert_text_gems oder _eur
+dice_milestone_purchase_prompt,never,v1.6.4 v1.6.7 Law: kein Kaufhinweis am Meilenstein und bei knapp verfehlter Stufe
+dice_ms_gems_points_basis,none,v1.6.4 v1.6.9: Meilensteine ohne Kristalle (Option free_only entfällt)
+mg_cosmetic_shop_enabled,false,v1.6.4 v1.6.7 Minigame-Entscheidung (aktueller Stand): kein Kosmetik-Shop im Minigame zum Launch (keine €-Skins); liegt in dice_config.csv nur als Sammelquelle → game_config
+mg_cosmetic_shop_minor,hidden,v1.6.4 v1.6.7 Minigame-Entscheidung: für U18 ausgeblendet
+dice_shard_gem_equiv,50,v1.6.4 v1.6.7 Umrechnung 1 Wahl-Fragment ≈ 50 Kristalle (GDD 17) für KrÄq-Prüfungen
+mg_ads_minor_mode,off,v1.6.4 v1.6.7 Minigame-Spec v2.1 / Law: U18 keine Werbe-Versuche in Minigames (fest)
+mg_daily_cap_food_h,2.0,"v1.6.4 v1.6.8 Law bestätigt: Nahrungsdeckel Summe Minigames je Tag 2,0 h (1,0 h sofort + 1 Trophäe; GDD v0.9 Nr. 74)"
+dice_minor_ranking,allowed_pseudonym_opt_out_default_hidden,"v1.6.4 v1.6.8 Law: U18 im Würfel-Ranking mit Rangliste, Pseudonym, Opt-out; standardmäßig unsichtbar wie andere Ranglisten"
+ranking_minor_default_visibility,hidden,v1.6.4 v1.6.8: U18 standardmäßig unsichtbar in öffentlichen Ranglisten (Pseudonym/Opt-out „Unbekannter Herrscher“)
+ranking_opt_out_label,Unbekannter Herrscher,"v1.6.4 v1.6.8 Opt-out-Anzeige in Ranglisten (Profil-Einstellung, rückwirkend)"
+dice_agb_12_8_nr8,convert_rate_gems_paid_eur_best_pack_cap_pot_paid_refund_clawback_free_first_tie_full,"v1.6.4 v1.6.10 AGB 12.8 Nr. 8: Umtausch Kristallkauf = bezahlter Betrag, €-Kauf = Kristallmenge zum gleichen Preis im Shop (nie mehr), Topf gekauft, Rückbuchung nach Erstattung (nie negativ, Rest markiert), free_first, Gleichstand volle Belohnung"
+dice_rank_reward_policy,no_purchasable,"v1.6.4 v1.6.9 Law 1: Platzbelohnungen nur Titel/Rahmen/EP/Kosmetik; keine Kristalle, Fragmente, kaufbare Güter (K-L4 entfällt)"
+dice_minor_bracket,separate,v1.6.4 v1.6.9 Law 2 + Sim: U18 (kein Kauf) in eigenen Gruppen
+dice_bracket_power_rule,classless;join_order,v1.6.4 v1.6.10: wird aus dice_bracket_mode abgeleitet (classless → join_order; power_class → kampfkraft_klasse;peak_14d;join_order)
+dice_rank_purchase_prompt,never,"v1.6.4 v1.6.9 Law 4: kein Kaufhinweis bei Rückstand/Überholtwerden, kein Push „Platz halten“"
+dice_coins_clock_source,free_only,v1.6.4 v1.6.9 Law 5 / K-L7: Festmünzen und Uhren nur aus Gratis-Energie
+dice_free_bank_max,30,"v1.6.4 v1.6.13 Nr. 305 Balancing-Prüfung v1.6.13b: Bank-Deckel lang 28 → 30 (kurz 24, 4T 26 bleiben) – aktueller Stand | v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 28 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1"
+dice_forbidden_claims,nur Gratis;nur erspielbar;nur erspielt;fair;Fairness;nicht kaufbar;fair für alle;Gratisspieler gleich gut;Geld bringt keinen Vorteil;jeder kann Erster werden;%,"v1.6.4 v1.6.9 Law 3; v1.6.10 Law/Ranking v2: + „fair für alle“, „Gratisspieler gleich gut“, keine Prozentzahlen (validate)"
+dice_legal_review,open_before_soft_launch,v1.6.4 v1.6.9 Law 6: anwaltliche Prüfung vor Soft Launch offen
+builder_purchased_resources_count,false,v1.6.4 v1.6.9 Events: gekaufte Ressourcen zählen nicht für Baumeister-Produktionsstunden (kauf_einfluss = nein)
+event_no_purchase_min_per_28d,1,v1.6.4 v1.6.9: mind. 1 Event mit kauf_einfluss = nein je 28-Tage-Fenster (validate)
+dice_energy_buy_daily_limit_short,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 6 → 3 (2×-Sim: F2P Platz 1 min "
+dice_energy_buy_daily_limit_4d,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 6 → 2 = Boden (2×: min 32 %, Ø "
+dice_energy_buy_daily_limit_long,6,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 6 | vorher v1.6.13 Nachtrag Nr. 267 aktueller Stand: Fabian 10 → 2 = Boden (2×: min 32 %, Ø"
+dice_free_item_bank_cap_short,24,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 24 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: Bank-Deckel 16 = 2 Sparzyklen à 8 Beute"
+dice_free_item_bank_cap_4d,26,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 26 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1"
+dice_free_item_bank_cap_long,30,"v1.6.4 v1.6.13 Nr. 305 Balancing-Prüfung v1.6.13b: Bank-Deckel lang 28 → 30 (kurz 24, 4T 26 bleiben) – aktueller Stand | v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 28 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1"
+dice_buy_vs_bank_rule,event_limit_le_bank_minus_active,v1.6.4 v1.6.10 Regel „Kaufen ≈ Sparen“: buy_event_limit ≤ Bank je Variante − dice_active_bank_ref (validate)
+dice_active_bank_ref,12,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 12 | vorher v1.6.10 [Annahme Sim]: gesparte Beutel eines aktiven F2P-Spielers je Event (Prof"
+dice_target_f2p_rank1_share_min,40,"v1.6.4 v1.6.10 Fabian: Ziel-Korridor F2P-Anteil Platz 1 je Variante (Sim/Telemetrie), untere Grenze"
+dice_target_f2p_rank1_share_max,70,v1.6.4 v1.6.10 Fabian: obere Grenze (Umsatz soll hoch bleiben)
+dice_bracket_mode,classless,"v1.6.4 v1.6.10 (Review 4.1, sim_dice): Gruppenbildung power_class | classless; Default classless nach Sim (power_class: oberste Klasse F2P Platz 1/Top 10 unter Korridor)"
+dice_bracket_mode_ab_test,soft_launch_50_50,v1.6.4 v1.6.10: A/B-Test power_class vs. classless im Soft Launch (Zuteilung je Server/Konto 50/50)
+dice_kpi_f2p_top10_per_class_min,35,v1.6.4 v1.6.10 KPI/Auslöser: F2P-Anteil Top 10 je Kampfkraft-Klasse < 35 % → Review
+dice_kpi_f2p_rank1_alert,below_min_or_above_max,v1.6.4 v1.6.10 Telemetrie: F2P Platz 1 je Variante außerhalb dice_target_* → Limits per Remote Config nachjustieren
+dice_revenue_indicator,paid_energy_per_payer_event,"v1.6.4 v1.6.10: Umsatz-Indikator = Ø gekaufte Energie je Zahler und Event (sim_dice, Telemetrie)"
+dice_cosmetic_purchasable,never,"v1.6.4 v1.6.10: Würfel-Platzkosmetik (Rahmen Gold/Silber, Abzeichen, Titel) nie in gem_shop/iap_products (validate)"
+dice_paid_energy_convert_value_eur,gems:2,"v1.6.4 v1.6.11 Law Review_Wuerfel_v1.6.10 (5): €-gekaufte Energie → Kristalle je Energie = min(dice_energy_gem_price, abgerundet(Kristall-je-€-Rate des KLEINSTEN Kristallpakets × €-Preis je Energie)) = gems:7; gen.py rechnet, validate prüft"
+dice_converted_gems_pot,paid,"v1.6.4 v1.6.10 Law (d): umgetauschte Kristalle gelten als gekaufte Kristalle (Erstattung, U18-Limit, BE-Logik, Verbrauchsreihenfolge)"
+dice_convert_refund_rule,claw_back_converted_never_negative_flag_rest,v1.6.4 v1.6.10 Law (d): nach Erstattung werden umgetauschte Kristalle zurückgebucht; Saldo nie negativ; nicht rückbuchbarer Rest wird markiert (Audit)
+dice_rank_eligibility,account_age_days:14|fire_level:6,v1.6.4 v1.6.10 Ranking v2 4.4: Rangliste erst ab Konto-Alter 14 T ODER Feuer-Stufe 6 (Zweitkonten/Downgrading); davor nur Meilensteine
+dice_rank_ineligible_mode,milestones_only,"v1.6.4 v1.6.10: vor dice_rank_eligibility nur Meilensteine, keine Rangliste"
+dice_bracket_class_merge,neighbor_if_lt_min,"v1.6.4 v1.6.10 Ranking v2 5.3: Klassen-Rest unter dice_bracket_min_size wird mit der Nachbarklasse (nächstniedrig, sonst nächsthöher) zusammengelegt"
+dice_bracket_remainder,append_max_49,v1.6.4 v1.6.10: Gruppen-Rest < dice_bracket_min_size an letzte Gruppe anhängen (max. 2 × Größe − 1)
+dice_bracket_small_realm_threshold,150,v1.6.4 v1.6.10 Ranking v2 4.3: Reiche mit weniger Teilnehmern je Event spielen klassenlos (unabhängig von dice_bracket_mode)
+dice_minor_pool,cross_realm,"v1.6.4 v1.6.10 Law: U18-Gruppen reichsübergreifend gepoolt, über Klassen zusammengefasst"
+dice_minor_class_merge,all_classes,v1.6.4 v1.6.10: U18-Gruppen ohne Kampfkraft-Klasse (nur Beitritt)
+dice_minor_bracket_min,15,v1.6.4 v1.6.10 Law (c): Mindestgröße U18-Gruppe; darunter nur Meilensteine ohne Rangliste
+dice_minor_below_min_mode,milestones_only,v1.6.4 v1.6.10 Law: U18 unter dice_minor_bracket_min → keine Rangliste
+dice_minor_age_label_visible,false,v1.6.4 v1.6.10 Law: kein Alterslabel/Hinweis auf U18-Gruppe sichtbar (auch nicht in der Hilfe)
+dice_kpi_rank1_by_payer_status_per_class,on,"v1.6.4 v1.6.10 Telemetrie: Platz 1 nach Zahlerstatus je Klasse (pseudonymisiert, ranking_payer_telemetry)"
+dice_kpi_f2p_rank1_k1_min,60,v1.6.4 v1.6.10 Ranking v2 [Annahme]: Auslöser F2P-Anteil Platz 1 in K1 < 60 % (Downgrading)
+cosmetic_tradeable,false,"v1.6.4 v1.6.10 Law: Platz-Kosmetik nicht übertragbar, nicht handelbar"
+cosmetic_cashout,false,"v1.6.4 v1.6.10 Law (a): Platz-Kosmetik nicht auszahlbar, kein gleichwertiges Gegenstück im Shop (validate)"
+dice_minor_hint_text,Zusätzliche Energie kann nicht gekauft werden.,v1.6.4 v1.6.10 Ranking v2 A4: U18 statt Kaufoption
+dice_help_scoring_text,"Jeder Wurf bringt Punkte, egal ob mit Gratis- oder gekaufter Energie. Gekaufte Energie gibt dir mehr Würfe und damit mehr Punkte; das kann deinen Platz verbessern. Gekaufte Energie ist auf {daily_limit} pro Tag und {event_limit} je Event begrenzt. Gratis-Energie wird immer zuerst verbraucht. Festmünzen und Uhren gibt es nur für Würfe mit Gratis-Energie.",v1.6.4 v1.6.10 Ranking v2 3: Hilfe „Wie wird gewertet?“ (Platzhalter aus event_templates) | v1.6.11 Law (5): „nur für Würfe mit Gratis-Energie“
+dice_help_groups_text_classless,"Du würfelst in einer Gruppe mit {bracket_size} Spielern. Die Gruppe richtet sich danach, wann du zum ersten Mal würfelst.","v1.6.4 v1.6.10 Hilfe Gruppen (dice_bracket_mode classless); kein Alterslabel | v1.6.11 Law (6): echte Gruppengröße, ohne „bis zu“"
+dice_help_groups_text_power_class,"Du würfelst in einer Gruppe mit {bracket_size} Spielern. Gruppen nach Kampfkraft: Es zählt deine höchste Kampfkraft der letzten 14 Tage, danach der Zeitpunkt deines ersten Wurfs.","v1.6.4 v1.6.10 Law (b): Gruppensatz sachlich „Gruppen nach Kampfkraft“ (dice_bracket_mode power_class); kein Alterslabel | v1.6.11 Law (6): echte Gruppengröße, ohne „bis zu“"
+dice_help_bank_text,Würfelbeutel aus Wochenaufgaben kannst du bis zu {bank_cap} Stück sparen und im nächsten Würfel-Event einsetzen.,v1.6.4 v1.6.10 Hilfe Gratis-Beutel ({bank_cap} je Variante) | v1.6.11 Law (10): Herkunft gegen Design geprüft (GDD 25.1 „gesparte Würfelbeutel aus Wochenaufgaben“); Datenquelle f2p_income inc_dice_bag_weekly ergänzt (dice_bank_weekly_quest_bags)
+dice_help_tie_text,"Bei gleicher Punktzahl teilt ihr euch den Platz, und jeder bekommt die volle Belohnung (z. B. 1, 2, 2, 4).",v1.6.4 v1.6.10 Hilfe Gleichstand
+dice_help_eligibility_text,Die Rangliste öffnet ab {min_account_days} Tagen nach Kontoerstellung oder Häuptlingsfeuer Stufe {min_fire_level}. Bis dahin sammelst du Meilensteine.,v1.6.4 v1.6.10 Hilfe Teilnahme Rangliste (dice_rank_eligibility) | v1.6.11 Law (7): Kontoalter statt Spielzeit
+dice_announce_text,Würfel-Event ab {datum}: Gratis-Energie jede Stunde und aus Aufgaben. Zusätzliche Energie ist kaufbar (bis {daily_limit} pro Tag und {event_limit} je Event) und zählt auch für die Rangliste.,v1.6.4 v1.6.10 Ranking v2 3: Ankündigung | v1.6.11 Law (8): + {event_limit}
+dice_text_placeholders,min_account_days;min_fire_level;daily_limit;event_limit;bank_cap;bracket_size;datum;value;n;event_rest;convert_text_by_payment;dice_minor_hint_text,"v1.6.4 v1.6.10: erlaubte Platzhalter in dice_*_text; Werte aus event_templates/game_config (keine Zahlen-Literale, validate)"
+dice_paid_energy_convert_eur_basis,smallest_gem_pack,"v1.6.4 v1.6.11 Law (5): Basis €-Umtauschkurs = kleinstes Kristallpaket (Kristallmenge, die man für denselben Betrag tatsächlich bekäme); vorher bestes Paket (gems:10)"
+dice_paid_energy_convert_text_gems,Nicht genutzte gekaufte Energie wird zum Eventende zum Kaufwert von {value} Kristallen je Energie umgetauscht.,"v1.6.4 v1.6.11 Law (2): Kristallkauf, {value} = dice_paid_energy_convert_value"
+dice_paid_energy_convert_text_eur,Nicht genutzte gekaufte Energie wird zum Eventende in {value} Kristalle je Energie umgetauscht.,"v1.6.4 v1.6.11 Law (2): €-Kauf ohne „Kaufwert“, {value} = dice_paid_energy_convert_value_eur als Zahl vor dem Kauf"
+dice_limit_text_zero,Heute nicht mehr verfügbar.,v1.6.4 v1.6.11 Law (4): statt „Heute noch 0 verfügbar.“
+dice_buy_button_at_zero,disabled,v1.6.4 v1.6.11 Law (4): Kaufknopf bei Tageslimit 0 deaktiviert
+dice_event_rest_text,Im Event noch {event_rest} verfügbar.,v1.6.4 v1.6.11 Law (4): Event-Rest getrennt vom Tageslimit
+dice_announce_text_minor,Würfel-Event ab {datum}: Gratis-Energie jede Stunde und aus Aufgaben.,v1.6.4 v1.6.11 Law (9): U18-Ankündigung ohne Kaufsatz; danach dice_minor_hint_text
+dice_contest_screen_text_minor,{dice_minor_hint_text},"v1.6.4 v1.6.11 Law (9): U18-Event-Screen ohne Kaufsatz, stattdessen dice_minor_hint_text"
+dice_minor_screen_rule,no_purchase_sentence;show_dice_minor_hint_text,"v1.6.4 v1.6.11 Law (9): alle U18-Screens (Ankündigung, Event-Screen, Hilfe) ohne Kaufsatz (validate über dice_text_render.csv)"
+dice_bracket_size_display,actual_group_size,"v1.6.4 v1.6.11 Law (6): {bracket_size} = tatsächliche Größe der Gruppe des Spielers (30, Rest bis 49, U18 ab 15)"
+dice_bank_weekly_quest_bags,3,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 3 | vorher v1.6.11 Law (10): Würfelbeutel aus Wochenaufgaben je Woche (= aufgerundet max. B"
+dice_date_format,"%d.%m., %H:%M Uhr {tz}","v1.6.4 v1.6.11 Law (11): {datum} deutsch mit Uhrzeit und Zeitzone, z. B. „21.10., 10:00 Uhr MESZ“"
+dice_date_timezone,Europe/Berlin,"v1.6.4 v1.6.11 Law (11): Anzeige-Zeitzone (Spieler-Zeitzone, Default Europe/Berlin; Label MEZ/MESZ)"
+dice_text_render_sample_start,2026-10-21T10:00,v1.6.4 v1.6.11: nur Render-Probe für validate (dice_text_render.csv); echtes Datum = Event-Start aus Kalender
+dice_board_share_label,Anteil der Felder,v1.6.4 v1.6.11 Law v1.6.6 offen: Beschriftung Spalte field_share_pct in Hilfe-Tabelle
+dice_purchase_dialog_fields_eur,dice_paid_rank_text;price_eur;dice_paid_energy_convert_text_eur;dice_limit_text;dice_energy_withdrawal_text;purchase_consent_checkbox_text,"v1.6.4 v1.6.11 Law v1.6.6/(2): €-Kaufdialog: €-Preis, Kurs als Zahl, „Heute noch {n} verfügbar.“ | v1.6.12 Law-Review v1.6.11 Nr. 3: + Widerrufstext + eigene Checkbox (purchase_consent_checkbox)"
+dice_purchase_dialog_fields_gems,dice_paid_rank_text;price_gems_with_eur_equivalent;dice_paid_energy_convert_text_gems;dice_limit_text,v1.6.4 v1.6.11 Law v1.6.6: Kristall-Kaufdialog mit €-Gegenwert
+dice_launch_countries,DE;AT;NL;CH;BE,"v1.6.4 v1.6.11 Law v1.6.6: Launch-Länder; validate: * blocked, alle außer dice_country_block allowed"
+dice_help_scoring_text_minor,Jeder Wurf bringt Punkte. Gratis-Energie bekommst du jede Stunde und aus Aufgaben. Festmünzen und Uhren gibt es nur für Würfe mit Gratis-Energie.,v1.6.4 v1.6.11 Law (9): U18-Wertungshilfe ohne Kaufsatz
+dice_energy_withdrawal_text,"Das Würfelenergie-Paket wird direkt nach dem Kauf gutgeschrieben. Verkäufer ist Google Commerce Limited; du kaufst über Google Play. Mit der sofortigen Gutschrift verlierst du dein Widerrufsrecht, wenn du dem vorher ausdrücklich zugestimmt und bestätigt hast, dass du das weißt. Eine Bestätigung erhältst du von Google Play per E-Mail.",v1.6.4 v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: = purchase_withdrawal_text mit {inhalt} = „Die Würfelenergie“ (gen rendert); gilt für den €-Kauf (Kristall-Ausgaben sind kein Play-Kauf)
+dice_bank_cycles_ref_active,1,v1.6.4 v1.6.12 [Annahme Sim]: aktive F2P/Zahler setzen die Bank je Würfel-Event ein (1 Zyklus Beutel)
+dice_bank_cycles_ref_saver,3,"v1.6.4 v1.6.13 Nr. 284 (Fabian über New Bot, Ausgleich Balancing pruefung-v1613): aktueller Stand 3 | vorher v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: realistische Sparannahme 2 Zyklen (Sens"
+dice_sens_payer_share_mult,2,v1.6.4 v1.6.12 Sensitivität Report: Zahleranteil × 2
+dice_sens_weekly_bags,2;3,v1.6.4 v1.6.12 Sensitivität Report: Beutel je Woche
+dice_sens_saver_cycles,2;3;4,v1.6.4 v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: Sensitivität Sparzyklen
+dice_sens_seeds,1;2;3;4;5;6,v1.6.4 v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1: Seeds 1–6
+dice_sens_modes,classless;power_class,v1.6.4 v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1
+dice_eur_pack_amount,2,v1.6.4 v1.6.13 Nachtrag Nr. 267 geprüft: 2 Energie passt (≤ kleinstes Limit 2; kurz 3 = 1 €-Paket + 1 Kristall-Kauf); größere Pakete würden Limits sprengen
+dice_eur_pack_price_eur,0.29,"v1.6.4 v1.6.13 Balancing-Prüfung v1.6.12 Nr. 1 Vorschlag Finanzen: 0,29 € / 2 Energie (≥ Kristallwert 2 × 10 Kr.); Play-Preisstufe prüfen"
+dice_f2p_top1_min_pct_2x,35,v1.6.4 v1.6.13 Nachtrag Fabian-Entscheidung (Nr. 267): Korridor bei 2× Zahleranteil mind. 35 % F2P Platz 1 (normal 40–70 % bleibt)
+dice_buy_limit_floor,2,"v1.6.4 v1.6.13 Nachtrag Fabian-Entscheidung (Nr. 267): Limits werden bei 2× < 35 % schrittweise gesenkt, nicht unter 2"
+dice_sim_group_draw,random,v1.6.4 v1.6.13 Nr. 279: Gruppen per Multinomial-Ziehung (rng.choices) statt fester Rundung; fixed = alt
+crystal_use_scope,items;boosts;event_participation,"v1.6.4 Fabian (GDD 0.2): Zeitkristalle nur für Items, Boosts, Event-Teilnahme (Energie, Ausdauer, Tickets); nie Punkte oder Rang"
+shop_grants_points_or_rank,never,v1.6.4 GDD 0.2: kein Shop-/IAP-Artikel gibt Punkte oder Rang (validate)
+participation_items_limit_rule,daily_and_per_event,"v1.6.4 GDD 0.2: jeder Energie-/Ausdauer-/Ticket-Artikel hat Tageslimit (Reset shop_limit_reset_time) und, wo eventgebunden, ein Event-Limit"
+ranking_event_durations,short:2;4d:4;long:7,v1.6.4 GDD 0.2: Ranking-Events laufen unterschiedlich lang; Platzierung entscheidet die Belohnung
+e2_economy_mode,transition_e1_buildings,"v1.6.10 Wirtschaftscheck W-H1: Mindest-Wirtschaft E2 bis E2-Inhalte (Alpha Q3 2027) vorliegen: E1-Gebäude produzieren weiter, E2-Forschung + Tausch als Senken"
+epoch_ascend_resource_carry_pct,50,v1.6.10 W-H1(a) [Annahme]: Nahrung/Holz/Stein/Gold werden beim Aufstieg zu diesem Anteil übernommen (Wissen wird für den Aufstieg verbraucht)
+epoch_ascend_knowledge_cost,2000,"v1.6.10: Wissen-Verbrauch Aufstieg (= epoch_ascend_requires res_knowledge, validate)"
+e2_storage_cap_mult,1.5,v1.6.10 W-H1 [Annahme]: Lagerlimit-Faktor ab E2 (Kornkammer-Übergang) auf alle Ressourcen
+trade_overflow_enabled,1,"v1.6.10 Gold-Engpass (W-M3) + Lager (W-H1): Tauschplatz tauscht Holz/Stein über der Schwelle automatisch in Gold (Spieler bestätigt, abschaltbar)"
+trade_overflow_threshold_pct,50,v1.6.10: Tausch nur für den Teil über diesem Lager-Anteil
+trade_overflow_daily_cap_res,12000,v1.6.10: max. getauschte Holz+Stein je Tag (Reset 04:00)
+trade_gold_per_res,0.2,v1.6.10 [Annahme]: Gold je Ressource bei 100 % Tauschkurs; effektiv × trade_rate_pct des Tauschplatzes (40–70 %)
+e2_research_levels,24,v1.6.10 Entwurf an Forschung (Platzhalter): Anzahl E2-Forschungsstufen (Baum E2 kommt von Forschung)
+e2_research_total_h,90,v1.6.10 Entwurf an Forschung: Summe reine Forschungszeit E2 (h); Ziel fertig an e2_research_target_done_day trotz Uhrenvorrat
+e2_research_knowledge_total,10000,v1.6.13 Nr. 319 E2-Kosten v2 (vorher 9000): Wissen-Senke E2-Forschung (Summe)
+e2_research_wood_total,32000,v1.6.13 Nr. 319 (vorher 30000): Holz-Senke E2-Forschung (Summe)
+e2_research_stone_total,24000,v1.6.10: Stein-Senke E2-Forschung (Summe)
+e2_research_gold_total,1000,v1.6.13 Nr. 319 Leerlauf-Fix (vorher 2000): Gold-Anteil E2-Forschung (Summe)
+e2_research_unlock,epoch_2,v1.6.10: E2-Forschung ab Aufstieg
+e2_research_target_done_day,19,v1.6.10: Ziel Baum E2 fertig (Roadmap E2 Tag 18–20 [Annahme]); Korridor e2_research_target_window
+e2_research_target_window,18;20,"v1.6.10: zulässiger Bereich Fertig-Tag E2-Baum (F2P aktiv, Sim)"
+clock_free_extra_min_day,45,"v1.6.10 K-GD12-Budget [Annahme aktiver F2P]: Uhren außerhalb Quests (Gilde 2×15 min, Festmünzen ≤ 7,8 h/28 T, Würfel 45 min/28 T, Arena-Shop) Ø min/Tag ab E2"
+clock_kgd12_budget_min_28d,1260,v1.6.10 K-GD12: Obergrenze Gratis-Uhren außerhalb Quests je 28 T (= 45 min/Tag); validate: Summe Quellen ≤ Budget
+clock_daily_reward_if_tree_done,alt_reward,"v1.6.10 W-H2: Tagesaufgaben-Uhren pausieren, wenn kein Forschungsknoten verfügbar; stattdessen clock_daily_alt_reward"
+clock_daily_alt_reward,res_hero_xp:300,"v1.6.10: Ersatz je Tag für 2 × 15 min (EP, keine Kristalle)"
+clock_use_epoch_scope,any,v1.6.10 W-H2: Uhren gelten epochenübergreifend (Law: gekaufte verfallen nie); Senke = E2-Forschung
+clock_iap_requires_research_available,true,"v1.6.10 W-H2: Uhren-IAP und Kristall-Shop-Uhr nur sichtbar, wenn ein Forschungsknoten verfügbar ist"
+clock_shop_requires_research_available,true,"v1.6.10 Shop: Uhren in Arena-/Gilden-/Event-Shop nur sichtbar, wenn ein Forschungsknoten verfügbar ist"
+monetization_frame_mode,two_budgets,v1.6.11 Fabian Variante B: Monetarisierungsrahmen = Kristall-Budget + Fragment-Budget (ersetzt Rahmen-Definition v1.6.10 Nr. 214)
+crystal_budget_max_pct,40,"v1.6.11: Kristalle aus Gratis-LiveOps-Quellen für aktive F2P ≤ 40 % der Basis (Login+Tages+Wochenaufgaben, f2p_income), inkl. Weltboss-Kristalle; Fragmente zählen NICHT hier (validate) | v1.6.12: HARTE Grenze, validate prüft mit Stress-Referenz (+1 Rangband, budget_ref_rank_sw_stress)"
+crystal_budget_sources,sw_ms;sw_rank;arena_season;guild_season;wb_ms;wb_rank;dice,v1.6.11: Bausteine Kristall-Budget (wie REPORT v1.6.10 ohne Fragment-Anteile)
+budget_ref_rank_sw,15,v1.6.11 [Annahme]: Referenzplatz aktiver F2P im Stammeswettstreit (Band 11–25) für validate; Sim rechnet Verteilung
+budget_ref_points_sw_free,20000,v1.6.11 [Annahme Sim]: Gratis-Punkte aktiver F2P im Stammeswettstreit (erreicht ms_sw_4)
+budget_ref_rank_wb,60,v1.6.11 [Annahme] wie WB_RANK_ASSUMED v1.6.10: Weltboss-Schadensrang aktiver F2P (Band 51–100)
+budget_ref_wb_community_pct,100,v1.6.11 [Annahme]: Weltboss-Gemeinschaft erreicht 100 %
+budget_ref_bm_hours,12,v1.6.11 [Annahme]: aktiver F2P erreicht Baumeister-Meilenstein 12 h
+budget_ref_arena_league,gold,v1.6.11 [Annahme] wie v1.6.10: aktiver F2P Arena Gold
+budget_ref_arena_winrate,0.55,v1.6.11 [Annahme] wie arena_sim: Siegquote aktiver F2P (Gold)
+budget_ref_arena_days,26,v1.6.11 [Annahme] wie arena_sim: aktive Arena-Tage je Saison
+budget_ref_guild_bands,4-10;11-50,v1.6.11 [Annahme] wie v1.6.10: Gilde aktiver F2P Mittel aus Band 4–10 und 11–50
+budget_ref_guild_shop_tier_ok,yes,v1.6.11 [Annahme]: Gilde aktiver F2P hat Shop-Stufe für Wahl-Fragmente
+fragment_budget_target_weeks_sr,4;6,"v1.6.11 Fabian: aktiver F2P baut einen SR-Helden in 4–6 Wochen voll aus (Freischalten + alle Sterne) aus der Summe aller Gratis-Fragmentquellen | v1.6.12: Bedeutung offen – FABIAN-FRAGE (Freischaltung+2★? voller Held?); validate prüft dieses Ziel nicht mehr, nur Ausweis der zwei Kennzahlen; bis zur Antwort keine weiteren Kürzungen | ÜBERHOLT durch sr_playable_target_* (Nr. 250, Fabian Option A)"
+fragment_budget_sr_full_cost,125,v1.6.11: = unlock + Sterne eines SR aus event_heroes.csv (team/helden: 40 + 15/20/30/40 = 145); gen.py rechnet | v1.6.11 / v1.6.12: nur Event-SR (145); Standard-SR siehe fragment_choice_full_cost
+fragment_budget_per_28d,140,v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Gesamtgrenze 130 → 140 für +10 Wahl-Fragmente Puffer (Arena-Shop 400 → 340 Marken); validate
+fragment_budget_count_sources,sw_ms;sw_rank;wb_ms;wb_rank;bm_ms;arena_shop;guild_shop;minigame;evh_shop,"v1.6.11: alle Gratis-Fragmentquellen (Wahl + Event-Held); €-Event-Paket zählt nicht (bezahlt), Würfel nie"
+fragment_gem_equiv_report,50,v1.6.11: nur Bericht (KrÄq je Fragment = dice_shard_gem_equiv); Fragmente nicht im Kristall-Budget
+event_hero_enabled,1,"v1.6.11 GDD 28: Event-Helden (nicht beschwörbar; team/helden/event-helden-v1.md, event_heroes.csv) | v1.6.12: „exklusiv“ nur im Sinn „nicht beschwörbar“"
+event_hero_summonable,no,v1.6.11 Law A2: nie in Bannern/Truhen/Echo-Shop/Wahl-Fragmenten (validate)
+event_hero_source,event_fragments_only,v1.6.11: einziger Weg eigene Fragmente frag_<name>
+event_hero_fragment_random,never,"v1.6.11 Law A1: nie aus Zufallsquellen (Kisten, Würfelfelder, Beschwörung), nie Würfel-Event (validate)"
+event_hero_fragment_rank_rule,rank_free_only,"v1.6.11 Law A6: Platzpreise mit Fragmenten (Wahl + evh) nur in Events, deren Rang nicht durch Kauf beeinflusst wird (kauf_einfluss = nein ODER paid_counts_for in rank_free_paid_counts_for)"
+rank_free_paid_counts_for,milestones_no_coins,"v1.6.11: Kauf wirkt nur auf Meilensteine, Rang = bester Gratis-Versuch (Stammeswettstreit trial_best_rule rank_best_free); Law-Review EVH Abschnitt 3"
+event_hero_ms_points_basis,free_only,v1.6.11 Law A7 (bevorzugte Variante): Event-Helden-Meilensteine zählen nur Gratis-Fortschritt
+event_hero_rotation,ehero_hesk;ehero_ulva;ehero_brann;ehero_sefa;ehero_hesk;ehero_ulva;ehero_brann;ehero_sefa,"v1.6.12 Law-Review v1.6.11 Nr. 2: Rundlauf der 4 E1-SR-Helden (Fenster 1–8), jeder Held alle 4 Fenster; ersetzt Hesk/Ulva/Brann ×2 + Sefa nur Fenster 7 (Sefa ohne Wiederkehr, Hesk-Lücke 4 > 3). Aru/Kallia erst mit Epoche 2/3 – dann event_hero_max_return_windows neu prüfen (validate)"
+event_hero_max_return_windows,4,v1.6.12 (ersetzt event_hero_rerun_after_windows = 3): Zusage „Wiederkehr spätestens nach N Fenstern“ = größter Abstand zwischen zwei Auftritten desselben Helden in event_hero_rotation (zyklisch). Bei 4 Helden und 1 Held je Fenster ist 4 das Minimum (3 nur mit ≤ 3 Helden in Rotation); validate prüft jeden Helden
+event_hero_window_weeks,4,v1.6.12: Wochen je Event-Fenster (28 T) für {weeks} im Hilfetext
+event_hero_active_per_window,1,v1.6.11: ein aktiver Event-Held je 28-Tage-Fenster
+event_hero_return_policy_text,"Event-Helden kehren regelmäßig zurück, spätestens nach {n} Event-Fenstern (ca. {weeks} Wochen). Gesammelte Fragmente bleiben erhalten.",v1.6.12 Law-Review v1.6.11 Nr. 2: Kadenz = event_hero_max_return_windows (validate: Rotation hält die Zusage)
+event_hero_shards_expiry,never,v1.6.11 Law A13(e): Fragmente verfallen nie
+event_hero_fragment_overflow,SR:1;SSR:2,"v1.6.11: Fragmente ab 5★ → Echosplitter je Fragment (SR 1, SSR 2), Kurs vorab in der Hilfe"
+event_hero_overflow_text,Fragmente über 5 Sterne werden in {overflow} Echosplitter je Fragment umgewandelt.,v1.6.11 Law A13(e)/A12: Kurs vor dem Kauf/Erhalt
+event_hero_need_text,"{hero}: {unlock} Fragmente zum Freischalten, {total} bis 5 Sterne. Gratis in diesem Event erreichbar: bis {free_max}. 5 Sterne sind nicht in einem Event erreichbar, gratis in etwa {free_runs} Auftritten.","v1.6.12 Law-Review v1.6.11 Nr. 2: Bedarfstext; {free_runs} = event_hero_free_runs_5star (aktiver F2P, Sim/validate); kein Satz „nur mit Kauf“, kein Paket-Hinweis (U18 ohne Paket)"
+event_hero_free_runs_5star,3,v1.6.13: Event-SR 125 (40 + 10/15/25/35) / 43 je Auftritt → 3 Auftritte (validate); Sim prüfen
+event_hero_ms_paid_text,Für Fragment-Meilensteine zählen nur Punkte aus Gratis-Versuchen.,v1.6.11 Law A7: Meilenstein-Basis offen (free_only)
+event_hero_normed_modes,excluded,"v1.6.11 GD: Event-Helden in normierten Modi (Ahnenprüfung, Turnier) ausgeschlossen"
+event_hero_countdown_rule,event_end_exact;minor_off,"v1.6.11 Law A9: Countdown nur = echtes Event-Ende, kein Neustart, U18 ohne Countdown"
+event_hero_minor_offers,off,"v1.6.11 Law A3/A4: keine Pushs/Banner/Kaufhinweise zu Event-Helden an U18; €-Paket ausgeblendet (nicht nur gesperrt), kein Hinweis „Erwachsene erhalten mehr“"
+event_hero_forbidden_claims,kein Pay-to-win;nur erspielbar;nie wieder;nur noch heute;Hol dir jetzt;nur mit Kauf;garantiert,v1.6.11 Law A8/A9/A4 + v1.6.12 („nur mit Kauf“ sachlich falsch; „garantiert“ statt Zusage im Hilfetext): verbotene Claims in event_hero_*_text (validate)
+event_hero_iarc_check,open_before_launch,v1.6.11 Law A5: IARC-Fragebogen bei Einführung prüfen
+event_hero_shop_price,50,v1.6.11: es_evh_shard 1 Fragment = 50 Festmünzen (Events-Rotation v1; Helden-Entwurf 40)
+event_hero_shop_limit_week,5,v1.6.11 angeglichen: max. 5 je Woche UND
+event_hero_shop_limit_window,10,v1.6.11 angeglichen: max. 10 je 28-T-Fenster (= 500 von event_coin_cap_28d Festmünzen)
+event_hero_pack_enabled,true,v1.6.11 Fabian: optionales €-Event-Paket (Law A13 grün-fähig)
+event_hero_pack_product_id,event_hero_pack_10,v1.6.11
+event_hero_pack_price_eur,4.99,"v1.6.11 Vorschlag: 10 Fragmente × 50 KrÄq = 500 Kristalle ≈ gems_450 (4,99 €) → kein günstigerer Kristallwert als im Shop"
+event_hero_pack_fragments,10,"v1.6.11 Vorschlag: = 25 % der SR-Freischaltung, ≈ 7 % des SR-Bedarfs bis 5★"
+event_hero_pack_daily_limit,1,v1.6.11 Law A13(b)
+event_hero_pack_event_limit,1,v1.6.11 Law A13(b): max. 1 je Event-Helden-Auftritt (Fenster)
+event_hero_pack_max_share_of_unlock_pct,25,v1.6.11 Law A13(d): Paket × Event-Limit ≤ 25 % der Freischaltung des schwächsten Bedarfs (SR); Gratisweg bleibt Hauptweg (validate)
+event_hero_pack_minor_listed,no,v1.6.11 Law A3: U18 ausgeblendet
+event_hero_pack_allowed_in_BE,yes,"v1.6.11: kein Zufall, feste Menge → in BE erlaubt (Law Abschnitt 1)"
+event_hero_pack_screens,event_hero_screen,"v1.6.11 Law A13(c): nur Event-Helden-Screen; nie Ranglisten-/Ergebnis-Screens (ui_shop_on_ranking_screens=false), keine Pushs/Pop-ups bei Rückstand/kurz vor Ende"
+event_hero_pack_push,never,v1.6.11 Law A13(c)
+event_hero_pack_dialog_fields,price_eur;event_hero_need_text;event_hero_pack_limit_text;event_hero_overflow_text;event_hero_withdrawal_text;purchase_consent_checkbox_text,"v1.6.11 Law A13(a)/(f): €-Preis vor Kauf, feste Menge, Bedarf + Gratis-Menge, Limit, Umwandlungskurs, Widerruf | v1.6.12: + eigene Checkbox (purchase_consent_checkbox)"
+event_hero_pack_limit_text,Höchstens {pack_limit} Paket je Event.,v1.6.11 Law A13(b)
+event_hero_withdrawal_text,"Das Fragment-Paket wird direkt nach dem Kauf gutgeschrieben. Verkäufer ist Google Commerce Limited; du kaufst über Google Play. Mit der sofortigen Gutschrift verlierst du dein Widerrufsrecht, wenn du dem vorher ausdrücklich zugestimmt und bestätigt hast, dass du das weißt. Eine Bestätigung erhältst du von Google Play per E-Mail.",v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: = purchase_withdrawal_text mit {inhalt} = „Die Fragmente“ (gen rendert)
+ur_fragment_plan,urplus_event_slot,"v1.6.11 UR-Planung (team/helden/ur-helden-v1.md): UR = Aufstieg aus SSR (Ahnenkerne/Echosplitter, keine Fragmente); UR+ = Fragmente aus den Event-Helden-Quellen, die in UR+-Fenstern den Event-Helden ERSETZEN (kein Zusatz, keine neue Währung)"
+ur_fragment_budget_extra_per_28d,0,v1.6.11: UR+ belastet das Fragment-Budget nicht zusätzlich (validate)
+urplus_unlock_fragments,120,v1.6.11 Vorschlag Helden (ur-helden-v1 3.2)
+urplus_star_fragments,40;60;80;100,v1.6.11 Vorschlag Helden
+urplus_unlock_epoch,4,v1.6.11 Vorschlag Helden
+urplus_target_windows,10,v1.6.11 Langfristziel: UR+ 400 Fragmente / ≈ 43 Event-Fragmente je Fenster (aktiver F2P) ≈ 10 UR+-Fenster; Freischaltung (120) nach ≈ 3 Fenstern
+exclusive_word_rule,not_summonable_only,"v1.6.12 Law-Review v1.6.11 Nr. 2 (Anhang Nr. 7, § 5 UWG [Stand prüfen]): „exklusiv“ in Spielertexten und GDD nur zusammen mit „nicht beschwörbar“ im selben Satz/Tabellenzeile; nie „zeitlich exklusiv/einmalig“ (validate)"
+withdrawal_text_by_product,event_hero_pack_10:event_hero_withdrawal_text;dice_energy_10:dice_energy_withdrawal_text;*:purchase_withdrawal_text,"v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: jedes €-IAP (price_eur > 0, sofortige Gutschrift) – inkl. gems_* und arena_tickets_3 – hat Text + Checkbox (*: Default)"
+withdrawal_forbidden_phrases,Mit dem Kauf stimmst du zu;erlischt damit;durch den Kauf stimmst du;mit dem Kauf bestätigst du;Dort stimmst du;Google Play holt die Zustimmung ein,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: keine Tatsachenbehauptung über den ungeprüften Play-Dialog
+withdrawal_required_phrases,Google Commerce;Google Play;ausdrücklich;Widerrufsrecht;E-Mail,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: + „Google Commerce“
+purchase_consent_checkbox,on,"v1.6.12 Law Nr. 3: eigene aktive Checkbox vor dem Kaufknopf (Default on, bis der Play-Dialog real geprüft ist: play_withdrawal_dialog_verified); Kaufknopf erst nach Haken aktiv"
+purchase_consent_checkbox_preselected,no,v1.6.12 Law Nr. 3: nie vorausgewählt (validate)
+purchase_consent_checkbox_text,"Ich möchte, dass {inhalt} sofort bereitgestellt wird, und stimme dem ausdrücklich zu. Mir ist bekannt, dass ich dadurch mein Widerrufsrecht verliere.","v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: Wortlaut Review; nicht vorausgewählt, ohne Haken kein Kauf; ergänzend zu Google (Vertragspartner)"
+purchase_consent_scope,eur_iap_all,"v1.6.12 Nachtrag: alle €-Käufe über Google Play mit sofortiger Gutschrift (auch gems_*, arena_tickets_3); Kristall-AUSGABEN im Spiel sind kein Play-Kauf"
+play_withdrawal_dialog_verified,open,v1.6.12 OFFENER PRÜFPUNKT Dev/QA: Google-Play-Kaufdialog + E-Mail-Beleg real prüfen (Screenshot in Release-Checkliste); erst dann purchase_consent_checkbox ggf. off; Anwalt: Händlerrolle Google klären
+event_hero_iarc_note,Bei Einführung von event_hero_pack_10 wird der IARC-Fragebogen erneut durchgegangen (Law A5); USK/§ 10b JuSchG [Stand prüfen].,v1.6.12 Law-Review v1.6.11 Nr. 4 (IARC grün; A5 offen bis Launch)
+event_task_purchase_rule,no_purchase_acceleration,v1.6.12 Law-Review v1.6.11 Nr. 1(a): keine Event-Aufgabe darf sich durch Kauf schneller erfüllen lassen (event_tasks.csv purchase_accelerable = no; validate)
+rank_any_allowed_guards,purchase_deducted;free_attempts_only;tasks_no_purchase;attempts_not_purchasable,v1.6.12 Law Nr. 1: Rang-Punktquellen mit origin any nur mit Kauf-Abzug/-Ausschluss (event_scoring.purchase_guard); jede neue any-Quelle ohne Guard = Fehler (validate)
+trial_hero_purchase_influence,documented_low,"v1.6.12 Law Nr. 1(b) Bewertung: Ahnenprüfung normiert (Stufe/Ausrüstung/Forschung gleich), Rang = bester Gratis-Versuch; Restfaktor Heldenwahl/Rarität (SSR bis 1,15× SR) kann aus bezahlter Beschwörung stammen → gering (F2P erhält SSR über Gratis-Beschwörungen), offen gelegt im Hilfetext; Fallback Leihaufstellung trial_loan_lineup"
+trial_loan_lineup,off,"v1.6.12: feste Leihaufstellung für die Ahnenprüfung vorbereitet, aus; einschalten, falls Telemetrie/Law Kaufeinfluss über Heldenwahl sieht"
+trial_hero_source_help_text,"In der Ahnenprüfung kämpfen deine eigenen Helden mit gleichen Grundwerten für alle. Seltenere Helden haben etwas höhere Grundwerte. Helden kannst du auch aus Beschwörungen erhalten, die mit gekauften Kristallen bezahlt wurden. Für den Platz zählt nur dein bester Gratis-Versuch.",v1.6.12 Law Nr. 1(b): Offenlegung mittelbarer Kaufeinfluss (Hilfe Stammeswettstreit)
+ur_cost_source,ur_costs.csv,"v1.6.12: UR-Aufstieg/UR+-Kosten aus quellen/balancing/ur_costs.csv (von team/helden); gen.py → game_config ur_ascend_*, validate/Budget lesen"
+crystal_budget_target_pct,36,"v1.6.12 Balancing: Zielwert (≈ 1 Rangband Abstand zur Grenze); validate meldet nur Hinweis, Fehler erst > crystal_budget_max_pct"
+budget_ref_rank_sw_stress,8,v1.6.12: Stress-Referenz Wettstreit Band 4–10 (+1 Band zu budget_ref_rank_sw 15) für die harte 40-%-Prüfung
+fragment_metric_split,event_hero;choice,"v1.6.12 Balancing-Gegencheck Nr. 5: zwei Kennzahlen statt einer (Event-Helden-Fragmente nur für 1 Held je Fenster, Wahl-Fragmente nur Standardhelden)"
+fragment_event_sources,sw_ms;sw_rank;wb_ms;wb_rank;bm_ms;evh_shop,v1.6.12: Bausteine Event-Helden-Fragmente (nur event_hero_shards-Anteile)
+fragment_choice_sources,sw_ms;sw_rank;wb_ms;wb_rank;bm_ms;arena_shop;guild_shop;minigame,v1.6.12: Bausteine Wahl-Fragmente (nur hero_shards_choice-Anteile)
+fragment_choice_full_cost,600,"v1.6.12: Standard-SR voll = 60 Freischaltung + Sterne über Duplikate (1/1/2/2/3 × 60, GDD 7.5) [aktueller Stand]"
+fragment_event_weeks_report,derived,"v1.6.12: Wochen bis voller Event-SR = Fenster bis letzter nötiger Auftritt (Rotation, event_hero_max_return_windows) × event_hero_window_weeks; validate/Sim weisen aus"
+arena_token_split,free;paid,v1.6.12 Law-Bedingung Arena-Shop: getrennte Markenzähler cur_arena_token_free / cur_arena_token_paid (Marken aus gekauften Tickets = paid); Shop zeigt beide getrennt
+arena_shard_payable_with,free_only,v1.6.12 Law: as_shard_choice/as_shard_featured nur mit Marken aus Gratis-Tickets; damit kein mittelbarer Kaufweg zu Fragmenten (Fragment-Budget ohne bezahlte Tickets) – LAW-PRÜFPUNKT
+arena_token_transfer_paid_to_free,never,"v1.6.12 Law: kein Übertrag paid → free, auch nicht bei Erstattung, Umtausch, Saisonende (validate)"
+arena_token_refund_rule,deduct_paid_only;floor_zero,"v1.6.12 Law: Erstattung Ticket-Kauf bucht nur Kauf-Marken zurück, Saldo nie negativ"
+arena_token_season_end_rule,free_stays_free;paid_stays_paid,v1.6.12 Law: Saisonende ohne Umbuchung zwischen den Zählern
+arena_token_exchange_rule,none,v1.6.12 Law: kein Umtausch zwischen Kauf- und Gratis-Marken
+arena_shard_item_text,Nur mit Marken aus Gratis-Tickets erhältlich.,v1.6.12 Law: Pflichtsatz am Fragment-Artikel
+arena_shop_help_text,"Arena-Marken aus Gratis-Tickets und aus gekauften Tickets werden getrennt gezählt. Fragmente gibt es nur für Marken aus Gratis-Tickets. Wird ein Ticket-Kauf erstattet, ziehen wir nur Marken aus gekauften Tickets ab.",v1.6.12 Law: Hilfetext Arena-Shop
+arena_shop_forbidden_phrases,mehr Tickets kaufen;Tickets kaufen;kaufe;jetzt kaufen;Kristalle,v1.6.12 Law: kein Kaufhinweis am Fragment-Artikel (validate)
+agb_draft_arena_tokens,"Arena-Marken aus gekauften Arena-Tickets („Kauf-Marken“) und Arena-Marken aus kostenlosen Arena-Tickets („Gratis-Marken“) werden in getrennten Kontoständen geführt und angezeigt. Helden-Fragmente im Arena-Shop kannst du nur mit Gratis-Marken erwerben. Kauf-Marken werden nie in Gratis-Marken umgewandelt, auch nicht bei Saisonende, Umtausch oder Erstattung. Wird der Kauf von Arena-Tickets erstattet (z. B. über Google Play), ziehen wir die aus diesen Tickets erhaltenen Kauf-Marken ab, soweit sie noch vorhanden sind. Bereits eingelöste Kauf-Marken und die damit erhaltenen Gegenstände bleiben dir erhalten, und dein Kontostand wird nicht negativ. Gratis-Marken sind von einer Erstattung nie betroffen.",v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 2: Ersatzsatz wörtlich aus dem Review (Transparenz § 307 Abs. 1 S. 2 BGB [Stand prüfen]); passt zu floor_zero (eingelöste Kauf-Marken bleiben); Law zieht nach
+event_task_forbidden_progress_sources,paid_energy;paid_torch;paid_ticket;paid_clock;pack;iap;gems_spent;chest_open;summon,v1.6.12 Law: Event-Aufgabe darf keinen Fortschritt aus Kaufquellen haben (event_tasks.progress_sources; validate)
+ur_ascend_cost_echo,600,v1.6.12 Balancing-Entscheid (Gegencheck Nr. 8): 800 → 600 Echosplitter; Alternative ur_ascend_cost_own_fragments
+ur_ascend_cost_own_fragments,120,v1.6.12 Balancing: 160 → 120 eigene Fragmente (Kurs 1:5 bleibt)
+ur_ascend_limit_per_window,1,"v1.6.12 Balancing: max. 1 UR-Aufstieg je 28-T-Fenster (Zahler-Tempo über Deckel, nicht Preis)"
+ur_ascend_gold_days,7,v1.6.12 Balancing: Gold = ur_ascend_gold_days × e3_gold_income_ref_daily; NACH E3-SIM NEU PRÜFEN
+e3_gold_income_ref_daily,7000,"v1.6.12 [Annahme Platzhalter, Gegencheck 8: E3 ≈ 5–10k Gold/Tag]; E3-Wirtschaft fehlt → nach E3-Sim ersetzen"
+echo_budget_per_28d,300,"v1.6.12 Kennzahl Echosplitter-Budget aktiver F2P je 28 T [Annahme: Helden 190–235 + Event-Überschuss]; validate Ausweis, Grenze vorläufig"
+echo_income_ref_active_28d,235,v1.6.12 [Annahme Helden ur-helden-v1]: Echosplitter aus Duplikaten aktiver F2P je 28 T (Obergrenze der Spanne 190–235)
+ssr_event_hero_target_unlock_runs,2,"v1.6.12: Ziel SSR-Event-Held (Aru, Kallia) frei für aktive F2P in 2 Auftritten (validate weist aus)"
+event_hero_star_stats,star_values_csv,v1.6.13 Nachtrag Nr. 271: Werte je Stern aus star_values.csv (alle Seltenheiten gleich)
+agb_arena_rule_terms,arena_token_split:getrennten Kontoständen;arena_shard_payable_with:nur mit Gratis-Marken;arena_token_transfer_paid_to_free:nie in Gratis-Marken umgewandelt;arena_token_season_end_rule:Saisonende;arena_token_exchange_rule:Umtausch;arena_token_refund_rule:soweit sie noch vorhanden sind;arena_token_refund_floor:nicht negativ,v1.6.12 Nachtrag Law-Review v1.6.12: validate – AGB-Satz enthält Begriff je arena_token_*-Regel
+arena_token_consume_order_mixed,free_first,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 1 (Lead-Vorgabe; Law schlug paid_first vor): gemischte Artikel (payable_with free;paid) verbrauchen zuerst Gratis-Marken; Restvorteil GDD 30.4a
+arena_shop_display_fields,token_free_balance;token_paid_balance,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 1: Shop-Kopf zeigt beide Stände (validate)
+arena_token_legacy_currency,cur_arena_token,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 1: Altwährung abgeschaltet (status deprecated in currencies.csv); validate verbietet jede Nutzung in Shops/Einnahmen/Belohnungen
+trial_rarity_stat_factor_max,1.05,"v1.6.13 Balancing-Prüfung v1.6.12 Nr. 4: trial_power_cap = 1,05 × stärkster SR (vorher 1,15; wirkte nur auf Ruka, nicht auf gekaufte Nara); Testfälle Ruka + Nara (validate)"
+trial_rarity_cap_mode,cap_to_factor,"v1.6.12 Nachtrag Law-Review v1.6.12: Daten heroes.csv ergeben roh bis 1,18× (Ruka 288 vs. Tala 244) → in der Ahnenprüfung wird power auf Faktor × SR-Referenz gedeckelt (trial_hero_norm.csv, gen.py); macht den Hilfetext „etwas höhere Grundwerte“ wahr"
+trial_rotation_text_rule,text_before_rotation_change,"v1.6.12 Nachtrag Law-Review v1.6.12 Bonus: Spielertext event_hero_return_policy_text wird VOR jeder Rotationsänderung angepasst; Zusage 4 Fenster gilt nur, solange Aru/Kallia nicht im selben Rundlauf sind (validate schlägt sonst an)"
+purchase_withdrawal_text,"{inhalt} wird direkt nach dem Kauf gutgeschrieben. Verkäufer ist Google Commerce Limited; du kaufst über Google Play. Mit der sofortigen Gutschrift verlierst du dein Widerrufsrecht, wenn du dem vorher ausdrücklich zugestimmt und bestätigt hast, dass du das weißt. Eine Bestätigung erhältst du von Google Play per E-Mail.",v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: Wortlaut Review; Satz „Dort stimmst du … zu“ gestrichen bis play_withdrawal_dialog_verified = yes
+purchase_consent_log_fields,consent_timestamp;product_id,v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 3: „Den Haken mit Zeitstempel und Produkt-ID protokollieren (Nachweis)“ (validate)
+iap_dialog_fields_eur_default,price_eur;withdrawal_text;purchase_consent_checkbox_text,v1.6.12 Nachtrag Law-Review v1.6.12: Kaufdialog-Pflichtfelder für alle €-IAP (gen schreibt iap_products.dialog_fields)
+merchant_of_record,google_commerce_ltd,"v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 4: Google Commerce Ltd. ist merchant of record (DDA 3.4; Play-Nutzungsbedingungen Ziff. 2/3): Belehrung, Bestätigung § 312f, Widerruf/Erstattung bei Google; bei uns Inhalt, Texte, Jugendschutz, Datenschutz, Support, Rückbuchung im Spiel"
+legal_review_206_items,google_role_commission_vs_agency;bgb_327u_recourse;dda_merchant_country_list_eea,"v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 4: für anwaltliche Prüfung (ENTSCHEIDUNGEN Nr. 206/218): Googles genaue Rolle, Reichweite § 327u BGB, EWR-Länderliste DDA [Stand prüfen]"
+release_check_play_purchase_dialog,required,"v1.6.12 Nachtrag Law-Review v1.6.12 Nr. 4: Release-Checkliste – echten Play-Kaufdialog und Bestätigungsmail prüfen (Screenshot + E-Mail-Beleg), Release-Blocker; setzt play_withdrawal_dialog_verified"
+withdrawal_content_names,event_hero_pack_10:Das Fragment-Paket;dice_energy_10:Das Würfelenergie-Paket;gems_*:Das Kristallpaket;arena_tickets_3:Das Ticket-Paket;*:Der gekaufte Inhalt,"v1.6.12 Nachtrag: {inhalt} je Produkt (Singular, passt zu „wird“); Checkbox mit kleinem Anfangsbuchstaben (gen)"
+sr_playable_target_weeks_min,4,v1.6.12 Nachtrag Nr. 250 Fabian Option A: aktive F2P machen in 4–6 Wochen einen SR spielbar stark
+sr_playable_target_weeks_max,6,v1.6.12 Nachtrag Nr. 250 Fabian Option A
+sr_playable_target_stars,3,v1.6.12 Nachtrag Nr. 250 Fabian Option A: „spielbar stark“ = freigeschaltet + etwa 3 Sterne; voller Ausbau dauert Monate
+fragment_choice_star_costs,40;40;40;240;240,v1.6.13 Nachtrag Helden (Nr. 278): 5 Stufen Freischaltung/2★/3★/4★/5★ = 600; gleich für R/SR/SSR; 3★ = 120 (Option A unverändert)
+sr_playable_deviation_accepted,event_sr,"v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Event-SR aus dem 4–6-Wochen-Ziel genommen (Zusatzheld, frei im 1. Fenster); Standard-SR muss das Ziel erfüllen"
+cur_event_coin_expiry,never,v1.6.12 Nr. 256: Festmünzen verfallen nie (GDD regelte es nicht; Deckel event_coin_cap_28d begrenzt den Zufluss)
+trophy_item_id,trophy_mg_speerwurf,v1.6.12 Nr. 257: Speerwurf-Trophäe (alte ID siehe trophy_legacy_id; Kollision mit ev_mammutjagd)
+trophy_legacy_id,itm_event_token_mammut,"v1.6.12 Nr. 257: alte ID, validate verbietet sie"
+forbidden_config_keys,gear_epoch_bonus;event_hero_rerun_after_windows,v1.6.12 Nr. 253: entfernte Keys (validate)
+event_hero_star_fragments_SR,40;10;15;25;35,v1.6.13 Balancing-Prüfung v1.6.12 Nr. 3: Event-SR Freischaltung + Sterne (vorher 15/20/30/40 = 145 → 125); voll nach 3 Auftritten
+event_hero_star_fragments_SSR,60;20;30;45;60,v1.6.13: SSR unverändert (215)
+trial_cap_testcases,hero_ruka;hero_nara,"v1.6.13: beide roh > Deckel, müssen gedeckelt sein"
+star_dup_fragments_stage1_3,40,"v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Duplikat = 40 Fragmente für Stufen 1–3 (1 Kopie = 1 Stern, kein Zahler-Rabatt)"
+star_dup_fragments_stage4_plus,60,v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Duplikat = 60 ab Stufe 4 (wie bisher)
+sr_playable_stress_pct,10,v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: validate rechnet zusätzlich mit −10 % Wahl-Fragmenten
+hero_star_power_max_pct_3,15,"v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Obergrenze Heldenkraft 3★ vs. 1★ +15 % (Config, Helden/PvP bestätigen) – v1.6.13 Nachtrag: von Helden bestätigt (star_values.csv)"
+hero_star_power_max_pct_5,25,v1.6.13 Balancing-Prüfung v1.6.12 Nr. 5: Obergrenze 5★ vs. 1★ +25 % – v1.6.13 Nachtrag: von Helden bestätigt (star_values.csv)
+hero_star_power_status,bestaetigt_helden,v1.6.13 Nachtrag Nr. 271: Helden bestätigt 0/7/15/20/25 % (star_values.csv); PvP-Bestätigung weiter offen
+campaign_time_limit_ticks_by_chapter,1:90;2:120;3:150,v1.6.13 Kampagne v1.1: Zeitlimit je Kapitel (Zieldauer 1.5/2/2.5 min × 60) – aktueller Stand; battle_time_limit_ticks=90 bleibt Default außerhalb der Kampagne
+crystal_budget_target_ref_stress_pct,36.2;39.7,"v1.6.13 Balancing: Sollwerte nach Arena Eisen 230/Gold 300 + Wettstreit 20.000 = 55; validate prüft ±0,05"
+battle_time_limit_ticks_ch1,90,"v1.6.13 Nachtrag Dev Gameplay (Nr. 268): Zeitlimit Kampagne Kapitel 1 (Einzel-Key, gleichwertig zu campaign_time_limit_ticks_by_chapter; validate prüft Gleichheit)"
+battle_time_limit_ticks_ch2,120,v1.6.13 Nachtrag Nr. 268: Kapitel 2
+battle_time_limit_ticks_ch3,150,v1.6.13 Nachtrag Nr. 268: Kapitel 3
+campaign_objective_default,defeat_all,v1.6.13 Nachtrag Nr. 269: Siegbedingung Standard
+campaign_objective_overrides,e1_camp_22:destroy_building:bld_wall,v1.6.13 Nachtrag Nr. 269: L22 Felsenburg – Mauer zerstören (Kampagne: erst danach Hinterreihe erreichbar)
+campaign_wall_hp_rule,wave1_total_hp_x_stat_mult,v1.6.13 Nachtrag Nr. 269 ANNAHME Kampagne (nicht von Kampagne geliefert): Mauer-HP = Summe HP Welle 1 × stat_multiplier × campaign_wall_hp_factor
+campaign_wall_hp_factor,1.0,v1.6.13 Nachtrag Nr. 269 ANNAHME: Faktor auf Mauer-HP (Kampagne/Dev Gameplay bestätigen)
+campaign_wall_def,0,v1.6.13 Nachtrag Nr. 269 ANNAHME: Mauer ohne Verteidigung (Gebäude greifen nicht an)
+star_rarity_factor_scope,base_stats_outside_gear_cap,"v1.6.13 Nachtrag Nr. 274 (PvP bestätigt 0/7/15/20/25): Stern- und Seltenheitsfaktor wirken auf den Basiswert, außerhalb des 4000-bp-Deckels Ausrüstung/Artefakt"
+normalized_star_level,3,v1.6.13 Nachtrag Nr. 275: normierte Modi – alle Helden auf 3★ (+15 %)
+normalized_keep_rarity_factor,yes,v1.6.13 Nachtrag Nr. 275: Seltenheitsfaktor bleibt in normierten Modi
+normalized_exclude_event_heroes,yes,v1.6.13 Nachtrag Nr. 275: Event-Helden in normierten Modi ausgeschlossen
+normalized_featured_lock_days,60,v1.6.13 Nachtrag Nr. 275: Featured-Helden 60 Tage nach Erscheinen gesperrt in normierten Modi
+telemetry_winrate_by_rarity_avg,on,v1.6.13 Nachtrag Nr. 276: Siegquote nach Seltenheitsschnitt der Formation bei gleicher Kampfkraft
+telemetry_winrate_rarity_alarm_pct,55,v1.6.13 Nachtrag Nr. 276: Alarm ab 55 % Siegquote
+normalized_rarity_factor_mult,1.0,v1.6.13 Nachtrag Nr. 276: Multiplikator Seltenheitsfaktor in normierten Modi (Absenkung nach Alarm per Config)
+skill_trigger_scope_default,self,v1.6.13 Nachtrag Nr. 277: Skill-Schema trigger_scope (self/ally)
+skill_max_triggers_default,0,v1.6.13 Nachtrag Nr. 277: Skill-Schema max_triggers je Kampf; 0 = unbegrenzt
+terwish_unlock_source,campaign:e1_camp_12,"v1.6.13 Nr. 314 (pruefung-terwish-sr-v1): Terwish SR über Kampagnen-Belohnung L12 (690/66/24, Macht 225), einsetzbar ab L13; ersetzt 45 Event-Fragmente (Nr. 283 überholt)"
+ssr_vs_best_sr_power_range,1.0;1.05,"v1.6.13 Nachtrag Nr. 283: SSR-Macht L1 im Vergleich zum stärksten SR insgesamt (Standard + Event), Soll 1,00–1,05 (Terwish 253 / Tala 244 = 1,04)"
+arena_stress_league,eisen,v1.6.13 Nachtrag Nr. 281 (Balancing pruefung-v1613 3): Stresstest Wahl-Fragmente eine Liga tiefer (Gold → Eisen)
+arena_stress_winrate,0.45,v1.6.13 Nachtrag Nr. 281 [Annahme]: Siegquote im Stresstest (Referenz 0.55)
+campaign_low_loss_max_units,2,"v1.6.13 Nr. 280/282: verlustarm = ≤ loss_limit_pct ODER ≤ 2 verlorene Einheiten, wenn Armee < loss_limit_abs_when_units_below (= tutorial_loss_max_units aus kampagne_config)"
+campaign_open_levels,e1_camp_07;e1_camp_08,"v1.6.13 Nr. 282: nach Verlustfix 2 mit Heldenmodell (gen_kampagne --sim) weiter NEIN (normal 35/33 %, 2 Einheiten) – offen an Kampagne; GD ändert nichts"
+campaign_watch_levels,e1_camp_16;e1_camp_18;e1_camp_23,"v1.6.13 Nr. 282: ok, aber 21–24 % nahe 25 % – Beobachtung Kampagne"
+loss_limit_abs_when_units_below,10,v1.6.13 Nr. 282 (Fabian/Parent): Absolutregel ≤ 2 Einheiten gilt für Armeen unter 10 Einheiten
+ur_ascend_cost_gold,49000,"v1.6.12 aus ur_costs.csv/budget_config (Gold = ur_ascend_gold_days × e3_gold_income_ref_daily), aktueller Stand"
+ur_ascend_requires,SSR 5★ + Level-Cap der Epoche; ab Epoche 3,"v1.6.12 aus ur_costs.csv/budget_config (Gold = ur_ascend_gold_days × e3_gold_income_ref_daily), aktueller Stand"
+ur_ascend_stat_factor,1.15,"v1.6.12 aus ur_costs.csv/budget_config (Gold = ur_ascend_gold_days × e3_gold_income_ref_daily), aktueller Stand"
+skill_rank_cost_gold_r,2:2000;3:4000;4:8000;5:15000,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv R je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_xp_r,2:500;3:1000;4:1800;5:3000,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv R je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_echo_r,2:0;3:0;4:15;5:30,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv R je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_gold_sr,2:2500;3:5000;4:10000;5:18800,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_xp_sr,2:600;3:1250;4:2250;5:3750,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_echo_sr,2:0;3:0;4:19;5:38,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_gold_ssr,2:3000;3:6000;4:12000;5:22500,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SSR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_xp_ssr,2:750;3:1500;4:2700;5:4500,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SSR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_echo_ssr,2:0;3:0;4:22;5:45,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv SSR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_gold_ur,6:60000,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv UR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_xp_ur,6:10000,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv UR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_cost_echo_ur,6:120,"v1.6.13 Nachtrag Nr. 270: skill_rank_costs.csv UR je Skill (Ult/Passiv getrennt), Rang Ziel:Kosten – aktueller Stand"
+skill_rank_requires,R2:L5/S1;R3:L10/S2;R4:L15/S3;R5:L20/S4;SR2:L5/S1;SR3:L10/S2;SR4:L15/S3;SR5:L20/S4;SSR2:L5/S1;SSR3:L10/S2;SSR4:L15/S3;SSR5:L20/S4,v1.6.13 Nachtrag Nr. 270: Heldenlevel/Stern je Rang
+star_bonus_pct_1,0,"v1.6.13 Nachtrag Nr. 271: star_values.csv (alle Seltenheiten; Duplikate 1); ersetzt alte ×1,4-Formel"
+star_bonus_pct_2,7,"v1.6.13 Nachtrag Nr. 271: star_values.csv (alle Seltenheiten; Duplikate 1); ersetzt alte ×1,4-Formel"
+star_bonus_pct_3,15,"v1.6.13 Nachtrag Nr. 271: star_values.csv (alle Seltenheiten; Duplikate 1); ersetzt alte ×1,4-Formel"
+star_bonus_pct_4,20,"v1.6.13 Nachtrag Nr. 271: star_values.csv (alle Seltenheiten; Duplikate 4); ersetzt alte ×1,4-Formel"
+star_bonus_pct_5,25,"v1.6.13 Nachtrag Nr. 271: star_values.csv (alle Seltenheiten; Duplikate 4); ersetzt alte ×1,4-Formel"
+star_duplicates_to_reach,1;1;1;4;4,v1.6.13 Nachtrag Nr. 271: Duplikate je Sternstufe (star_values.csv)
+research_source,quellen/forschung_v1.1,"v1.6.13 Nr. 286: Forschung v1.1 (E1, Spalten unlock_note/critical_path_level/reserve_warning) + E2 v1 (research_*_e2.csv), aktueller Stand"
+research_e2_tree_source,research_nodes_e2.csv;research_costs_e2.csv,"v1.6.13 Nr. 286: E2-Baum (9 Knoten, 24 Stufen), ersetzt Platzhalter rs_e2; sim_f2p liest ihn"
+research_clock_family,itm_clock_5m;itm_clock_15m;itm_clock_60m;itm_clock_180m,v1.6.13 Nr. 286: Glutuhren ersetzen research_gem_* (research_gem_skip = none)
+research_free_clock_source,f2p_income:inc_clock_*,v1.6.13 Nr. 286: Gratis-Uhren nur über f2p_income inc_clock_* (keine Literale)
+ascend_knowledge_carryover_pct,100,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht geregelt)); GD 14.10.; Rest-Wissen nach 2.000 Verbrauch wird voll übernommen (T8: 1.229) – aktueller Stand
+e2_ascend_grant_gold,250,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: 0); GD 14.10.; Gold-Start E2 (Übertrag T8 nur 10) -> 3 Forschungsstufen sofort – aktueller Stand
+e2_ascend_grant_knowledge,400,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: 0); GD 14.10.; Wissen ist bindend für E2-Forschung (Prüfung Kap. 4) – aktueller Stand
+ascend_granary_keep_level,yes,"v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht geregelt)); GD 14.10.; kein Lagerabbau beim Wechsel, spätere Kornkammer übernimmt >= erreichte Kapazität – aktueller Stand"
+e2_building_l1_gold,0,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht geregelt)); GD 14.10.; erste E2-Gebäude ohne Gold – aktueller Stand
+e2_early_discount,0.4;0.55;0.7;0.8;0.7;0.9,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht geregelt)); GD 14.10.; Frührabatt wie E1 (GDD v1.6.13 Kap. 4) [Annahme Werte] – aktueller Stand
+forge_disassemble_hint,yes,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht vorhanden)); GD 14.10.; Hinweis Zerlegen 100 % zurück am Aufstiegspfad – aktueller Stand
+tribal_feast_buff,production_pct:15;duration_h:2,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (nicht vorhanden)); feature-ideen; Rückfluss < Kosten – aktueller Stand
+e2_palisade_ext_levels,11-15,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (max 10)); GD 14.10.; Holz/Stein-Senke ohne Gold – aktueller Stand
+e2_palisade_ext_cost_growth,1.25,"v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: 1.45); Kosten L11-15 Holz 5.315..12.970, Stein 3.545..8.650; Summe 43.600/29.080; alle <= 25.692 Lager – aktueller Stand"
+e2_storage_ext_levels,11-15,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (max 10)); GD 14.10.; Holz/Stein-Senke ohne Gold – aktueller Stand
+e2_storage_ext_cost_growth,1.4,"v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: 1.4); Kosten L11-15 Holz 2.315..8.900, Stein 1.735..6.670; Summe 25.360/19.005 – aktueller Stand"
+e2_storage_ext_effect_pct_per_level,5,"v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (e 1.35)); [Annahme]; +5 %/Stufe statt x1,35, damit Lager-Gate bleibt (L15 = 32.115) – aktueller Stand"
+e2_target_ascend_day_window,8;10,v1.6.13 Nr. 286 Aufbau-Delta E2-Übergang (alt: (Plan: Woche 1)); GD 14.10. / GDD v1.6.13 Kap. 2/9: Ziel E2 an Tag 8–10 – aktueller Stand
+clock_achievement_once,ACH_KNOW_500:itm_clock_60m:1;ACH_RESEARCH_FIRST:itm_clock_15m:2,"v1.6.13 Nr. 288 Quests v1.6.13: Erfolgs-Uhren einmalig (90 min), zählen ins K-GD12-Budget, nicht zusätzlich zu inc_clock_*"
+clock_tutorial_quests,Q_TUT_012;Q_TUT_015;Q_TUT_018;Q_TUT_019,v1.6.13 Nr. 288: inc_clock_tutorial 4 × 5 min an diesen Tutorial-Quests (nach Forschungs-Freischaltung Feuer 3)
+clock_daily_quest_id,Q_DAILY_LOGIN,v1.6.13 Nr. 288: inc_clock_daily 2 × 15 min über Q_DAILY_LOGIN; bei fertigem Baum clock_daily_alt_reward
+clock_weekly_quest_id,Q_WEEK_CHEST,v1.6.13 Nr. 288: inc_clock_weekly = Wochenkiste 1 × 60 min
+e2_research_binding,gold,"v1.6.13 Nr. 290 Fabian: E2-Forschung offiziell goldgebunden; sim_f2p E2_GOLD_PRIORITY Standard aus (E2-Baum Tag 19,5, Fenster 18–20)"
+clock_nonquest_first_window_min,1170,v1.6.13 Nr. 291 Fabian: Nicht-Quest-Uhren im ersten 28-T-Fenster = clock_kgd12_budget_min_28d − Erfolgs-Uhren (90 min)
+trade_mode,daily_fixed,v1.6.13 Nr. 292 Fabian: Tausch Standard ~trade_daily_res/Tag; overflow = Überlauf-Tausch bis trade_overflow_daily_cap_res (Option)
+campaign_enemy_max_below_curve_pct,25,v1.6.13 Nr. 287 Kampagne v1.3: Gegner höchstens 25 % unter Empfehlung final (1 − gegner_macht_final/empfohlene_macht_final; L23 = 24 %)
+chat_minor_default,blocked_all,"v1.6.13 Nr. 293 Fabian Nachtrag 14.10.: alle Chats für unter 18 komplett gesperrt (nicht nur Gilde), kein Selbst-Aktivieren, neutraler Hinweis ohne Belohnung; Neubewertung nach Launch"
+chat_minor_scope,all_chats,v1.6.13 Nr. 293: U18-Sperre gilt für jeden Chat (Gilde und künftige Kanäle)
+daily_reset_tz,Europe/Berlin,v1.6.13 Nr. 295 Quests: Zeitzone Tages-/Wochen-Reset
+reward_ignore_storage_cap,yes,v1.6.13 Nr. 295 Quests: Quest-Belohnungen dürfen das Lagerlimit überschreiten
+early_production_taper_minutes,60,v1.6.13 Nr. 295: Dauer Starthilfe-Auslauf (Stunde 2)
+early_production_taper_resources,res_wood;res_food,v1.6.13 Nr. 295: Auslauf nur Holz/Nahrung
+achievement_title_pvp_rewards,cosmetic_only,"v1.6.13 Nr. 295: Titel-/PvP-Erfolge nur kosmetisch, keine Uhren/Kristalle (validate)"
+seasonal_quests_owner,events,v1.6.13 Nr. 295: Saisonquests (z. B. Q_WEEK_WINTER) nur im Event-Katalog
+epoch3_ascend_requires,research:rs_e2_tontafeln,v1.6.13 Nr. 294 Forschung Q1: E3-Aufstiegs-Gate (weitere Bedingungen folgen mit E3-Inhalten)
+campaign_fast_path_window_exempt,gear_first,"v1.6.13 Nr. 297 Fabian: „Schmiede zuerst“ (E2-Baum Tag 16,5) bewusster schneller Pfad; e2_research_target_window gilt nur für Normal"
+supply_overrides,10:525,"v1.6.13 Nr. 298 Kampagne v1.4: fester Proviant je Level (L10 Olm 830 → 525), sonst supply_factor × Empfehlung"
+norm_research_power_pct_e2,10,v1.6.13 Nr. 294 Forschung E2 Q2 – aktueller Stand (freigegeben 14.10.2026 via New Bot): Ranglisten/normierte Modi ab Epoche 2 = Forschungs-Kampfbonus E1+E2-Maximum (6+4) für alle
+research_power_cap_pct_e2,12,v1.6.13 Nr. 294 Forschung E2 Q3 – aktueller Stand (freigegeben 14.10.2026 via New Bot): Deckel Truppen-Kampfbonus aus Forschung kumuliert E1+E2 (real 10)
+research_time_mult_offpath,1.0,"v1.6.13 Nr. 294 Forschung E1 F9 – aktueller Stand (freigegeben 14.10.2026 via New Bot): bleibt 1,0; höhere Werte schieben den E2-Baum über Tag 20"
+tribal_feast_daily_limit,8,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: 4); Sim senke-e2: 4/Tag reicht ab T19 nicht (Überlauf 19.212/Tag); 8/Tag → 0 Treffer T9–30 ohne Tausch – aktueller Stand
+tribal_feast_trigger,either,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (implizit both: Holz UND Stein > Schwelle)); GD-Sim: Stein knapp → nur 12 Feste in 21 T; Auslöser Holz ODER Stein ODER Wissen – aktueller Stand
+tribal_feast_trigger_pct,60,"v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (trade_overflow_threshold_pct 50)); Fest erst ab 60 % Lager, schont Forschungsreserve – aktueller Stand"
+ahnen_site_levels,10,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Langzeitsenke E2 (Kandidat aus Roadmap v2) – aktueller Stand
+ahnen_site_cost_growth,1.25,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: 1.25); unverändert (GD 14.10.) – aktueller Stand
+ahnen_site_cost_l1,res_wood:3000;res_stone:2000;res_knowledge:600;res_gold:200,"v1.6.13 Nr. 299 Aufbau senke-e2 (alt: res_gold:1000;res_food:2000 (feature-ideen)); Senke für Holz/Stein/Wissen statt Gold/Nahrung; L10 22.350 H ≤ 25.692 Lager, 4.470 W ≤ 5.138 Wissenslager; Σ 99.760 H / 66.505 S / 19.950 W / 6.650 G – aktueller Stand"
+ahnen_site_trigger_pct,60,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Stufe nur wenn Holz/Stein/Wissen > 60 % Lager – aktueller Stand
+ahnen_site_bonus_cap_pct,10,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (feature-ideen max +10)); Boni klein halten (keine Gegenkopplung) – aktueller Stand
+ahnen_ritual_knowledge,500,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Wissenssenke Tag 10–16 (GD-Sim: dort 4 Wissens-Treffer/Tag) – aktueller Stand
+ahnen_ritual_hero_xp,100,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Gegenwert; mit Helden-Heldenerfahrungs-Budget abstimmen – aktueller Stand
+ahnen_ritual_daily_limit,4,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Sim: 18 Rituale T9–30 genügen – aktueller Stand
+ahnen_ritual_trigger_pct,70,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); nur bei vollem Wissenslager – aktueller Stand
+ahnen_ritual_keep_knowledge,1000,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: (nicht vorhanden)); Reserve für E2-Forschung – aktueller Stand
+e2_storage_hits_target_per_day,<2 Tag 9–30 ohne Tausch,"v1.6.13 Nr. 299 Aufbau senke-e2 (alt: <2 bis Tag 19 (mit Tausch 400)); Sim Seeds 1–4: 0/Tag; E2-Baum Tag 19,5 – aktueller Stand"
+trade_daily_res,400,v1.6.13 Nr. 299 Aufbau senke-e2 (alt: 400); Ziel hält auch bei 0; Tausch bleibt Gold-Ventil – aktueller Stand
+feast_multi_tap,2,v1.6.13 Nr. 299 UI-Button „Fest ×2“: ein Tippen = 2 Stammesfeste (Tageslimit tribal_feast_daily_limit = 8)
+minor_limit_override,hard_block_refer_family_link,"v1.6.13 Nr. 302 (Security D1): harte Sperre über 50 € + neutraler Verweis auf Family Link, bis eine serverprüfbare Elternfreigabe existiert"
+minor_parent_approval_per_purchase,planned_later,"v1.6.13 Nr. 302/310: späteres Ziel; nur mit Bindung an Family-Link-Elternkonto bzw. Play-Kaufgenehmigung, ohne Ausweiskopien; heute inaktiv"
+u18_parent_approved_monthly_cap_eur,,v1.6.13 Nr. 310 Law: Deckel nach Elternfreigabe per Fabian-Entscheid; leer = inaktiv
+shop_limit_reset_time,04:00,"v1.6.13 Nr. 303 (Security D2): Tageslimits Reset 04:00 Europe/Berlin (feste Server-Zeitzone, für alle Konten); Wochenlimits Montag 04:00"
+reset_timezone,Europe/Berlin,"v1.6.13 Nr. 303: feste Server-Zeitzone für alle Resets (nicht kontoabhängig, nicht Weltzeit)"
+daily_reset_local,04:00,v1.6.13 Nr. 295/303: Tages-Reset 04:00 Europe/Berlin (reset_timezone)
+minor_limit_reset,monthly,"v1.6.13 Nr. 303/310: Kalendermonat Europe/Berlin (minor_limit_reset_tz), Wechsel am 1. um 00:00"
+minor_limit_reset_tz,Europe/Berlin,v1.6.13 Nr. 310 Law: U18-Monat = Kalendermonat Europe/Berlin (ersetzt frühere kontoabhängige Regel)
+dice_paid_energy_exception,attempts_not_points_with_daily_limit,"v1.6.13 Nr. 306 (Security D6, Fabian): gekaufte Würfel-Energie zählt für den Rang mit Tageslimit; Kauf von Spielversuchen, nicht von Punkten – bewusste Ausnahme (GDD Kap. 24)"
+minor_consent_age_by_country,DE:16;NL:16;AT:14,"v1.6.13 Nr. 310 Law: Altersgrenze Art. 8 DSGVO je Land [Stand prüfen]; CH abweichend, offen"
+refund_debt_scope,adults_only,"v1.6.13 Nr. 310 Law: refund_debt nur Erwachsene, transparent (Saldo sichtbar, Hinweis vor Kauf) und begrenzt; U18 bzw. Erstattung wegen Minderjährigkeit: Fehlbetrag verworfen"
+refund_debt_cap_adult,pending_fabian,"v1.6.13 Nr. 318 (vorher refund_debt_adult_cap, Nr. 310): Obergrenze refund_debt Erwachsene – Fabian-Entscheid offen; Vorschlag 1000 Kristalle (refund_debt_cap_adult_proposal)"
+refund_debt_cap_adult_proposal,1000,"v1.6.13 Nr. 318: Vorschlag cur_gems 1000, nicht aktiv bis Fabian entscheidet"
+refund_minor_rule,discard_shortfall_no_debt,v1.6.13 Nr. 310 Law: U18/Minderjährigkeits-Erstattung ohne refund_debt (refund_negative_balance = floor_zero_no_block)
+refund_skin_pass_revoke,revoke_refunded_purchase;consumed_no_debt_for_minors,v1.6.13 Nr. 310 Law: Skins/Pass des erstatteten Kaufs entzogen; Verbrauchtes für U18 nie in Schuld; AGB/FAQ-Wortlaut team/law/AGB-FAQ_Skins_Erstattung.md
+agb_faq_skins_refund_ref,team/law/AGB-FAQ_Skins_Erstattung.md,v1.6.13 Nr. 310: verbindlicher AGB/FAQ-Entwurf (vor Veröffentlichung anwaltlich prüfen)
+retention_booking_records_years,8,v1.6.13 Nr. 310 Law: Buchungsbelege 8 Jahre (§ 147 AO / § 257 HGB nach BEG IV) [Stand prüfen]; welche Belege bei Google als MoR liegen: Steuerberater
+retention_purchase_logs,purpose_bound_shorter,v1.6.13 Nr. 310 Law: Kauf-/Spieler-Logs zweckgebunden kürzer; Sperrung nur aufbewahrungspflichtiger Teile
+ranking_points_purchase_text,Ranglistenpunkte sind nicht direkt kaufbar.,v1.6.13 Nr. 310 Law: ersetzt „Punkte nur erspielbar“
+dice_event_short_hint_text,Gekaufte Energie zählt auch für den Platz (Tageslimit).,v1.6.13 Nr. 310 Law: Event-Hinweis Würfel
+sound_sum007_rules,result_reveal_only;never_buy_button;never_purchase_dialog;never_offer_popup;never_push;never_store_ad;no_casino;max_4s_skippable,"v1.6.13 Nr. 311 Law Review_SUM-007: nur Ergebnis-Reveal, nie an Kaufknopf/Kaufdialog/Angebot/Push/Store-Werbung, keine Casino-Anmutung, ≤ 3–4 s, überspringbar"
+telemetry_kpi_dice_saver_cycles,3,"v1.6.13 Nr. 305 Balancing 1613b: Telemetrie-KPI Sparzyklen (Annahme 3), Messung dice_bank_at_event_start; bei 2 Zyklen verfehlen 4T/lang den Korridor"
+arena_token_floor_league,eisen,v1.6.13 Nr. 305 Balancing 1613b: Arena-Fragment-Boden ab Liga Eisen
+arena_fragment_floor_28d,46,v1.6.13 Nr. 305: Arena-Wahl-Fragmente mind. 46/28 T in Liga Eisen (Stress 126 → 132 ≤ 140; Referenz Gold 50 unberührt)
+heropath_supply_mult,0.12,"v1.6.13 Nr. 305/312 Ideen Heldenpfad: Proviant = 0,12 × Empfehlung – Status Idee"
+clock_hoard_cap_h,48,"v1.6.13 Nr. 305: Uhren-Horten-Deckel 48 h Vorrat (vor E3), Überschuss nicht gutgeschrieben"
+tribal_feast_cost,res_wood:1800;res_stone:800;res_food:800;res_knowledge:150,"v1.6.13 Nr. 315: Fest ohne Gold (vorher 100 → 50, Nr. 305); reine Holz/Stein/Nahrung/Wissen-Senke, Gold ist E2-Engpass"
+forge_reserve_warning_scope,next_fire;ascend_reserve,v1.6.13 Nr. 305: Schmiede-Reservewarnung schützt zusätzlich Gold/Stein für Feuer 10 (Aufstiegs-Reserve)
+telemetry_kpi_feasts_per_day,tribal_feast_count_daily,v1.6.13 Nr. 305: Telemetrie-KPI Feste/Tag
+early_production_taper_mult,3,"v1.6.13 Nr. 307 Balancing pruefung-quests-v1613 (Nachrechnung): Starthilfe-Auslauf ×3 (statt ×2) für 60 min, nur Holz/Nahrung"
+ritual_knowledge_cost,500,v1.6.13 Nr. 308 Helden-System Kap. 10: Ahnenritual final
+ritual_hero_xp,100,v1.6.13 Nr. 308
+ritual_daily_max,4,v1.6.13 Nr. 308
+ritual_trigger_pct,70,v1.6.13 Nr. 308
+ritual_scope,heroes_below_level_cap,v1.6.13 Nr. 308: nur wenn ein Held unter dem Level-Cap ist
+ancestor_ritual_enabled,yes,v1.6.13 Nr. 308: Ahnenritual final (Helden-EP-Check erledigt)
+ancestor_ritual_status,final,v1.6.13 Nr. 308
+terwish_rarity,SR,"v1.6.13 Nr. 309 Fabian: Terwish SR, Macht 225, Kampagnen-Belohnung e1_camp_12 „Eisbach“ (Platzhalter); ersetzt SSR 253 / 45 Fragmente"
+terwish_choice_fragment_target,yes,v1.6.13 Nr. 309: Terwish als Ziel für Wahl-Fragmente zulässig
+terwish_star_chest_fragments,ch2:40;ch3:40,"v1.6.13 Nr. 309: Sterntruhen Kap. 2/3 je 40 Terwish-Fragmente, einmalig"
+fragment_budget_once_sources,terwish_star_chest_ch2;terwish_star_chest_ch3,v1.6.13 Nr. 309: einmalige Quellen außerhalb fragment_budget_per_28d (validate trennt einmalig/wiederkehrend)
+fragment_budget_guild_shop_28d,40,"v1.6.13 Nr. 312: Gilden-Shop 10 Wahl-Fragmente/Woche = 40/28 T, in Referenz 136/140 enthalten"
+arrival_path_enabled,false,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_unlock,epoch_ascend:epoch_2,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_days,21,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_tasks_per_day,3,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_missed_days,keep_open,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_task_requires_purchase,never,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_reward_hero_xp_chapters,1-11,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · danach keine HXP"
+arrival_path_reward_hero_xp,400,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_reward_cosmetic_chapters,12-21,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_cosmetic_set,cos_chronik_frame;cos_chronik_title;cos_chronik_fire;cos_chronik_banner;deco_zeitsplitter_stele,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_alt_reward_at_hero_cap,cosmetic_part,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · falls HXP-Kapitel nach Deckel erreicht"
+arrival_path_gold_task_from_chapter,12,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_gold_task_cost,1000,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · ""Splitter schleifen"", Stele-Stufe +1"
+arrival_path_gold_shop_items,5,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_gold_shop_price,6000,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_gold_shop_daily_limit,1,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_gold_shop_currency,res_gold_only,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · nie Kristalle/€"
+arrival_path_gold_reserve_warning,true,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_crystals,0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+arrival_path_fragments,0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_enabled,false,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_unlock,campaign_level:e1_camp_30,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_free_fights_daily,5,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_fights_purchasable,no,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_gold_stake_per_fight,200,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · Kriegskasse"
+heropath_gold_unlock,research_tree_done:e2,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_forge_mark_per_fight,1,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · im Deckel cur_forge_mark 10/Tag"
+heropath_chest_content,hero_xp:1500;gold_hours:0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_chest_alt_reward_at_cap,cos_heropath_banner_part,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_banner_levels,5,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_banner_cost_base,1000,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_banner_cost_mult,1.5,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_banner_daily_limit,1,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_crystals,0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_fragments,0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+heropath_ranked,no,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_enabled,false,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_unlock,guild_level:2,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_tasks_daily,3,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_task_pool,deliver_wood;deliver_stone;deliver_gold;arena_wins;minigame_rounds,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_member_cap_pct,5,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_deliver_daily_cap_per_member,3000,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · Holz/Stein"
+guild_board_gold_daily_cap_per_member,1500,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_gold_unlock,research_tree_done:e2,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_deco_gold_items,deco_guild_totem;deco_guild_fire,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · Gemeinschaftskauf, nur Gold"
+guild_board_resource_rule,purchase_deducted_all_points,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_reward_all_members,guild_coins:30;guild_xp:60,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_shop_limits_unchanged,true,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · validate: keine höheren Shop-Limits"
+guild_board_shop_fragments_max_28d,40,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus · = gs_shard_choice 10/Woche, unverändert"
+guild_board_shop_crystals,0,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_chat_required,no,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+guild_board_push,off_for_minors,"v1.6.13 Nr. 312 Ideen-Modul (ideen-runde2-v2.md) – Status Idee, Standard aus"
+hero_power_rarity_cap,1.15,"v1.6.13 Nr. 313 Kampagne v1.6: höhere Seltenheit ≤ 1,15 × niedrigere je Truppenklasse bei gleicher Sternstufe (relevant ab Terwish 3★)"
+terwish_campaign_available_from,e1_camp_13,"v1.6.13 Nr. 313: Belohnung nach e1_camp_12, einsetzbar ab L13"
+star_chest_levels,e1_camp_20:ch2;e1_camp_30:ch3,"v1.6.13 Nr. 313: Sterntruhen (30/30★) je 40 Terwish-Fragmente, einmalig"
