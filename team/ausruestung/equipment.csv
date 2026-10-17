@@ -1,0 +1,145 @@
+equipment_id,name_de,epoch_id,slot_id,gear_rarity_id,class_affinity,main_stat_id,main_stat_base_pct,set_id,first_source,tradeable,art_ref
+eq_e1_club_weapon_common,Keulen-Waffe (grob),epoch_1,slot_weapon,gr_common,infantry,stat_atk_pct,1.82034600,,campaign:e1_camp_14,no,e1_eq_club_weapon
+eq_e1_club_armor_common,Keulen-Fellrüstung (grob),epoch_1,slot_armor,gr_common,infantry,stat_hp_pct,2.73051900,,campaign:e1_camp_14,no,e1_eq_club_armor
+eq_e1_club_helmet_common,Keulen-Helm (grob),epoch_1,slot_helmet,gr_common,infantry,stat_def_pct,1.82034600,,campaign:e1_camp_16,no,e1_eq_club_helmet
+eq_e1_club_shoulders_common,Keulen-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,infantry,stat_def_pct,1.82034600,,campaign:e1_camp_22,no,e1_eq_club_shoulders
+eq_e1_club_legs_common,Keulen-Beinschienen (grob),epoch_1,slot_legs,gr_common,infantry,stat_hp_pct,2.27543300,,campaign:e1_camp_20,no,e1_eq_club_legs
+eq_e1_club_boots_common,Keulen-Schuhe (grob),epoch_1,slot_boots,gr_common,infantry,stat_hp_pct,1.36526000,,campaign:e1_camp_24,no,e1_eq_club_boots
+eq_e1_club_ring_1_common,Keulen-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,infantry,stat_atk_pct,1.13771600,,campaign:e1_camp_18,no,e1_eq_club_ring_1
+eq_e1_club_ring_2_common,Keulen-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,infantry,stat_atk_pct,1.13771600,,campaign:e1_camp_24,no,e1_eq_club_ring_2
+eq_e1_club_weapon_fine,Keulen-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,infantry,stat_atk_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_club_weapon
+eq_e1_club_armor_fine,Keulen-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,infantry,stat_hp_pct,2.73051900,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_club_armor
+eq_e1_club_helmet_fine,Keulen-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,infantry,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_club_helmet
+eq_e1_club_shoulders_fine,Keulen-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,infantry,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_22,no,e1_eq_club_shoulders
+eq_e1_club_legs_fine,Keulen-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,infantry,stat_hp_pct,2.27543300,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_club_legs
+eq_e1_club_boots_fine,Keulen-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,infantry,stat_hp_pct,1.36526000,set_e1_mammoth,campaign:e1_camp_24,no,e1_eq_club_boots
+eq_e1_club_ring_1_fine,Keulen-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,infantry,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_club_ring_1
+eq_e1_club_ring_2_fine,Keulen-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,infantry,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_24,no,e1_eq_club_ring_2
+eq_e1_club_weapon_master,Keulen-Waffe (meister),epoch_1,slot_weapon,gr_master,infantry,stat_atk_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_weapon
+eq_e1_club_armor_master,Keulen-Fellrüstung (meister),epoch_1,slot_armor,gr_master,infantry,stat_hp_pct,2.73051900,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_armor
+eq_e1_club_helmet_master,Keulen-Helm (meister),epoch_1,slot_helmet,gr_master,infantry,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_helmet
+eq_e1_club_shoulders_master,Keulen-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,infantry,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_shoulders
+eq_e1_club_legs_master,Keulen-Beinschienen (meister),epoch_1,slot_legs,gr_master,infantry,stat_hp_pct,2.27543300,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_legs
+eq_e1_club_boots_master,Keulen-Schuhe (meister),epoch_1,slot_boots,gr_master,infantry,stat_hp_pct,1.36526000,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_boots
+eq_e1_club_ring_1_master,Keulen-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,infantry,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_ring_1
+eq_e1_club_ring_2_master,Keulen-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,infantry,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_club_ring_2
+eq_e1_spear_weapon_common,Speer-Waffe (grob),epoch_1,slot_weapon,gr_common,spear,stat_atk_pct,1.82034600,,campaign:e1_camp_14,no,e1_eq_spear_weapon
+eq_e1_spear_armor_common,Speer-Fellrüstung (grob),epoch_1,slot_armor,gr_common,spear,stat_hp_pct,2.73051900,,campaign:e1_camp_14,no,e1_eq_spear_armor
+eq_e1_spear_helmet_common,Speer-Helm (grob),epoch_1,slot_helmet,gr_common,spear,stat_def_pct,1.82034600,,campaign:e1_camp_16,no,e1_eq_spear_helmet
+eq_e1_spear_shoulders_common,Speer-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,spear,stat_def_pct,1.82034600,,campaign:e1_camp_22,no,e1_eq_spear_shoulders
+eq_e1_spear_legs_common,Speer-Beinschienen (grob),epoch_1,slot_legs,gr_common,spear,stat_hp_pct,2.27543300,,campaign:e1_camp_20,no,e1_eq_spear_legs
+eq_e1_spear_boots_common,Speer-Schuhe (grob),epoch_1,slot_boots,gr_common,spear,stat_hp_pct,1.36526000,,campaign:e1_camp_24,no,e1_eq_spear_boots
+eq_e1_spear_ring_1_common,Speer-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,spear,stat_atk_pct,1.13771600,,campaign:e1_camp_18,no,e1_eq_spear_ring_1
+eq_e1_spear_ring_2_common,Speer-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,spear,stat_atk_pct,1.13771600,,campaign:e1_camp_24,no,e1_eq_spear_ring_2
+eq_e1_spear_weapon_fine,Speer-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,spear,stat_atk_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_spear_weapon
+eq_e1_spear_armor_fine,Speer-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,spear,stat_hp_pct,2.73051900,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_spear_armor
+eq_e1_spear_helmet_fine,Speer-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,spear,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_spear_helmet
+eq_e1_spear_shoulders_fine,Speer-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,spear,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_22,no,e1_eq_spear_shoulders
+eq_e1_spear_legs_fine,Speer-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,spear,stat_hp_pct,2.27543300,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_spear_legs
+eq_e1_spear_boots_fine,Speer-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,spear,stat_hp_pct,1.36526000,set_e1_mammoth,campaign:e1_camp_24,no,e1_eq_spear_boots
+eq_e1_spear_ring_1_fine,Speer-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,spear,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_20,no,e1_eq_spear_ring_1
+eq_e1_spear_ring_2_fine,Speer-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,spear,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_24,no,e1_eq_spear_ring_2
+eq_e1_spear_weapon_master,Speer-Waffe (meister),epoch_1,slot_weapon,gr_master,spear,stat_atk_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_weapon
+eq_e1_spear_armor_master,Speer-Fellrüstung (meister),epoch_1,slot_armor,gr_master,spear,stat_hp_pct,2.73051900,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_armor
+eq_e1_spear_helmet_master,Speer-Helm (meister),epoch_1,slot_helmet,gr_master,spear,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_helmet
+eq_e1_spear_shoulders_master,Speer-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,spear,stat_def_pct,1.82034600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_shoulders
+eq_e1_spear_legs_master,Speer-Beinschienen (meister),epoch_1,slot_legs,gr_master,spear,stat_hp_pct,2.27543300,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_legs
+eq_e1_spear_boots_master,Speer-Schuhe (meister),epoch_1,slot_boots,gr_master,spear,stat_hp_pct,1.36526000,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_boots
+eq_e1_spear_ring_1_master,Speer-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,spear,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_ring_1
+eq_e1_spear_ring_2_master,Speer-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,spear,stat_atk_pct,1.13771600,set_e1_mammoth,campaign:e1_camp_30,no,e1_eq_spear_ring_2
+eq_e1_sling_weapon_common,Schleuder-Waffe (grob),epoch_1,slot_weapon,gr_common,ranged,stat_atk_pct,1.87445900,,campaign:e1_camp_14,no,e1_eq_sling_weapon
+eq_e1_sling_armor_common,Schleuder-Fellrüstung (grob),epoch_1,slot_armor,gr_common,ranged,stat_hp_pct,2.81168800,,campaign:e1_camp_14,no,e1_eq_sling_armor
+eq_e1_sling_helmet_common,Schleuder-Helm (grob),epoch_1,slot_helmet,gr_common,ranged,stat_def_pct,1.87445900,,campaign:e1_camp_16,no,e1_eq_sling_helmet
+eq_e1_sling_shoulders_common,Schleuder-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,ranged,stat_def_pct,1.87445900,,campaign:e1_camp_22,no,e1_eq_sling_shoulders
+eq_e1_sling_legs_common,Schleuder-Beinschienen (grob),epoch_1,slot_legs,gr_common,ranged,stat_hp_pct,2.34307400,,campaign:e1_camp_20,no,e1_eq_sling_legs
+eq_e1_sling_boots_common,Schleuder-Schuhe (grob),epoch_1,slot_boots,gr_common,ranged,stat_hp_pct,1.40584400,,campaign:e1_camp_24,no,e1_eq_sling_boots
+eq_e1_sling_ring_1_common,Schleuder-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,ranged,stat_atk_pct,1.17153700,,campaign:e1_camp_18,no,e1_eq_sling_ring_1
+eq_e1_sling_ring_2_common,Schleuder-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,ranged,stat_atk_pct,1.17153700,,campaign:e1_camp_24,no,e1_eq_sling_ring_2
+eq_e1_sling_weapon_fine,Schleuder-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,ranged,stat_atk_pct,1.87445900,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_sling_weapon
+eq_e1_sling_armor_fine,Schleuder-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,ranged,stat_hp_pct,2.81168800,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_sling_armor
+eq_e1_sling_helmet_fine,Schleuder-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,ranged,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_sling_helmet
+eq_e1_sling_shoulders_fine,Schleuder-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,ranged,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_22,no,e1_eq_sling_shoulders
+eq_e1_sling_legs_fine,Schleuder-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,ranged,stat_hp_pct,2.34307400,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_sling_legs
+eq_e1_sling_boots_fine,Schleuder-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,ranged,stat_hp_pct,1.40584400,set_e1_hunt,campaign:e1_camp_24,no,e1_eq_sling_boots
+eq_e1_sling_ring_1_fine,Schleuder-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,ranged,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_sling_ring_1
+eq_e1_sling_ring_2_fine,Schleuder-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,ranged,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_24,no,e1_eq_sling_ring_2
+eq_e1_sling_weapon_master,Schleuder-Waffe (meister),epoch_1,slot_weapon,gr_master,ranged,stat_atk_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_weapon
+eq_e1_sling_armor_master,Schleuder-Fellrüstung (meister),epoch_1,slot_armor,gr_master,ranged,stat_hp_pct,2.81168800,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_armor
+eq_e1_sling_helmet_master,Schleuder-Helm (meister),epoch_1,slot_helmet,gr_master,ranged,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_helmet
+eq_e1_sling_shoulders_master,Schleuder-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,ranged,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_shoulders
+eq_e1_sling_legs_master,Schleuder-Beinschienen (meister),epoch_1,slot_legs,gr_master,ranged,stat_hp_pct,2.34307400,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_legs
+eq_e1_sling_boots_master,Schleuder-Schuhe (meister),epoch_1,slot_boots,gr_master,ranged,stat_hp_pct,1.40584400,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_boots
+eq_e1_sling_ring_1_master,Schleuder-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,ranged,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_ring_1
+eq_e1_sling_ring_2_master,Schleuder-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,ranged,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_sling_ring_2
+eq_e1_wolf_weapon_common,Wolfsreiter-Waffe (grob),epoch_1,slot_weapon,gr_common,cavalry,stat_atk_pct,1.87445900,,campaign:e1_camp_14,no,e1_eq_wolf_weapon
+eq_e1_wolf_armor_common,Wolfsreiter-Fellrüstung (grob),epoch_1,slot_armor,gr_common,cavalry,stat_hp_pct,2.81168800,,campaign:e1_camp_14,no,e1_eq_wolf_armor
+eq_e1_wolf_helmet_common,Wolfsreiter-Helm (grob),epoch_1,slot_helmet,gr_common,cavalry,stat_def_pct,1.87445900,,campaign:e1_camp_16,no,e1_eq_wolf_helmet
+eq_e1_wolf_shoulders_common,Wolfsreiter-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,cavalry,stat_def_pct,1.87445900,,campaign:e1_camp_22,no,e1_eq_wolf_shoulders
+eq_e1_wolf_legs_common,Wolfsreiter-Beinschienen (grob),epoch_1,slot_legs,gr_common,cavalry,stat_hp_pct,2.34307400,,campaign:e1_camp_20,no,e1_eq_wolf_legs
+eq_e1_wolf_boots_common,Wolfsreiter-Schuhe (grob),epoch_1,slot_boots,gr_common,cavalry,stat_hp_pct,1.40584400,,campaign:e1_camp_24,no,e1_eq_wolf_boots
+eq_e1_wolf_ring_1_common,Wolfsreiter-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,cavalry,stat_atk_pct,1.17153700,,campaign:e1_camp_18,no,e1_eq_wolf_ring_1
+eq_e1_wolf_ring_2_common,Wolfsreiter-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,cavalry,stat_atk_pct,1.17153700,,campaign:e1_camp_24,no,e1_eq_wolf_ring_2
+eq_e1_wolf_weapon_fine,Wolfsreiter-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,cavalry,stat_atk_pct,1.87445900,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_wolf_weapon
+eq_e1_wolf_armor_fine,Wolfsreiter-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,cavalry,stat_hp_pct,2.81168800,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_wolf_armor
+eq_e1_wolf_helmet_fine,Wolfsreiter-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,cavalry,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_wolf_helmet
+eq_e1_wolf_shoulders_fine,Wolfsreiter-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,cavalry,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_22,no,e1_eq_wolf_shoulders
+eq_e1_wolf_legs_fine,Wolfsreiter-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,cavalry,stat_hp_pct,2.34307400,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_wolf_legs
+eq_e1_wolf_boots_fine,Wolfsreiter-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,cavalry,stat_hp_pct,1.40584400,set_e1_hunt,campaign:e1_camp_24,no,e1_eq_wolf_boots
+eq_e1_wolf_ring_1_fine,Wolfsreiter-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,cavalry,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_20,no,e1_eq_wolf_ring_1
+eq_e1_wolf_ring_2_fine,Wolfsreiter-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,cavalry,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_24,no,e1_eq_wolf_ring_2
+eq_e1_wolf_weapon_master,Wolfsreiter-Waffe (meister),epoch_1,slot_weapon,gr_master,cavalry,stat_atk_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_weapon
+eq_e1_wolf_armor_master,Wolfsreiter-Fellrüstung (meister),epoch_1,slot_armor,gr_master,cavalry,stat_hp_pct,2.81168800,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_armor
+eq_e1_wolf_helmet_master,Wolfsreiter-Helm (meister),epoch_1,slot_helmet,gr_master,cavalry,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_helmet
+eq_e1_wolf_shoulders_master,Wolfsreiter-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,cavalry,stat_def_pct,1.87445900,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_shoulders
+eq_e1_wolf_legs_master,Wolfsreiter-Beinschienen (meister),epoch_1,slot_legs,gr_master,cavalry,stat_hp_pct,2.34307400,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_legs
+eq_e1_wolf_boots_master,Wolfsreiter-Schuhe (meister),epoch_1,slot_boots,gr_master,cavalry,stat_hp_pct,1.40584400,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_boots
+eq_e1_wolf_ring_1_master,Wolfsreiter-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,cavalry,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_ring_1
+eq_e1_wolf_ring_2_master,Wolfsreiter-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,cavalry,stat_atk_pct,1.17153700,set_e1_hunt,campaign:e1_camp_30,no,e1_eq_wolf_ring_2
+eq_e1_rock_weapon_common,Felsen-Waffe (grob),epoch_1,slot_weapon,gr_common,siege,stat_atk_pct,2.03679700,,campaign:e1_camp_14,no,e1_eq_rock_weapon
+eq_e1_rock_armor_common,Felsen-Fellrüstung (grob),epoch_1,slot_armor,gr_common,siege,stat_hp_pct,3.05519500,,campaign:e1_camp_14,no,e1_eq_rock_armor
+eq_e1_rock_helmet_common,Felsen-Helm (grob),epoch_1,slot_helmet,gr_common,siege,stat_def_pct,2.03679700,,campaign:e1_camp_16,no,e1_eq_rock_helmet
+eq_e1_rock_shoulders_common,Felsen-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,siege,stat_def_pct,2.03679700,,campaign:e1_camp_22,no,e1_eq_rock_shoulders
+eq_e1_rock_legs_common,Felsen-Beinschienen (grob),epoch_1,slot_legs,gr_common,siege,stat_hp_pct,2.54599600,,campaign:e1_camp_20,no,e1_eq_rock_legs
+eq_e1_rock_boots_common,Felsen-Schuhe (grob),epoch_1,slot_boots,gr_common,siege,stat_hp_pct,1.52759700,,campaign:e1_camp_24,no,e1_eq_rock_boots
+eq_e1_rock_ring_1_common,Felsen-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,siege,stat_atk_pct,1.27299800,,campaign:e1_camp_18,no,e1_eq_rock_ring_1
+eq_e1_rock_ring_2_common,Felsen-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,siege,stat_atk_pct,1.27299800,,campaign:e1_camp_24,no,e1_eq_rock_ring_2
+eq_e1_rock_weapon_fine,Felsen-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,siege,stat_atk_pct,2.03679700,set_e1_fire,campaign:e1_camp_20,no,e1_eq_rock_weapon
+eq_e1_rock_armor_fine,Felsen-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,siege,stat_hp_pct,3.05519500,set_e1_fire,campaign:e1_camp_20,no,e1_eq_rock_armor
+eq_e1_rock_helmet_fine,Felsen-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,siege,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_20,no,e1_eq_rock_helmet
+eq_e1_rock_shoulders_fine,Felsen-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,siege,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_22,no,e1_eq_rock_shoulders
+eq_e1_rock_legs_fine,Felsen-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,siege,stat_hp_pct,2.54599600,set_e1_fire,campaign:e1_camp_20,no,e1_eq_rock_legs
+eq_e1_rock_boots_fine,Felsen-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,siege,stat_hp_pct,1.52759700,set_e1_fire,campaign:e1_camp_24,no,e1_eq_rock_boots
+eq_e1_rock_ring_1_fine,Felsen-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,siege,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_20,no,e1_eq_rock_ring_1
+eq_e1_rock_ring_2_fine,Felsen-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,siege,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_24,no,e1_eq_rock_ring_2
+eq_e1_rock_weapon_master,Felsen-Waffe (meister),epoch_1,slot_weapon,gr_master,siege,stat_atk_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_weapon
+eq_e1_rock_armor_master,Felsen-Fellrüstung (meister),epoch_1,slot_armor,gr_master,siege,stat_hp_pct,3.05519500,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_armor
+eq_e1_rock_helmet_master,Felsen-Helm (meister),epoch_1,slot_helmet,gr_master,siege,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_helmet
+eq_e1_rock_shoulders_master,Felsen-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,siege,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_shoulders
+eq_e1_rock_legs_master,Felsen-Beinschienen (meister),epoch_1,slot_legs,gr_master,siege,stat_hp_pct,2.54599600,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_legs
+eq_e1_rock_boots_master,Felsen-Schuhe (meister),epoch_1,slot_boots,gr_master,siege,stat_hp_pct,1.52759700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_boots
+eq_e1_rock_ring_1_master,Felsen-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,siege,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_ring_1
+eq_e1_rock_ring_2_master,Felsen-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,siege,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_30,no,e1_eq_rock_ring_2
+eq_e1_herb_weapon_common,Kräuter-Waffe (grob),epoch_1,slot_weapon,gr_common,support,stat_atk_pct,2.03679700,,campaign:e1_camp_14,no,e1_eq_herb_weapon
+eq_e1_herb_armor_common,Kräuter-Fellrüstung (grob),epoch_1,slot_armor,gr_common,support,stat_hp_pct,3.05519500,,campaign:e1_camp_14,no,e1_eq_herb_armor
+eq_e1_herb_helmet_common,Kräuter-Helm (grob),epoch_1,slot_helmet,gr_common,support,stat_def_pct,2.03679700,,campaign:e1_camp_16,no,e1_eq_herb_helmet
+eq_e1_herb_shoulders_common,Kräuter-Schulterpanzer (grob),epoch_1,slot_shoulders,gr_common,support,stat_def_pct,2.03679700,,campaign:e1_camp_22,no,e1_eq_herb_shoulders
+eq_e1_herb_legs_common,Kräuter-Beinschienen (grob),epoch_1,slot_legs,gr_common,support,stat_hp_pct,2.54599600,,campaign:e1_camp_20,no,e1_eq_herb_legs
+eq_e1_herb_boots_common,Kräuter-Schuhe (grob),epoch_1,slot_boots,gr_common,support,stat_hp_pct,1.52759700,,campaign:e1_camp_24,no,e1_eq_herb_boots
+eq_e1_herb_ring_1_common,Kräuter-Ring 1 (grob),epoch_1,slot_ring_1,gr_common,support,stat_atk_pct,1.27299800,,campaign:e1_camp_18,no,e1_eq_herb_ring_1
+eq_e1_herb_ring_2_common,Kräuter-Ring 2 (grob),epoch_1,slot_ring_2,gr_common,support,stat_atk_pct,1.27299800,,campaign:e1_camp_24,no,e1_eq_herb_ring_2
+eq_e1_herb_weapon_fine,Kräuter-Waffe (geschliffen),epoch_1,slot_weapon,gr_fine,support,stat_atk_pct,2.03679700,set_e1_fire,campaign:e1_camp_20,no,e1_eq_herb_weapon
+eq_e1_herb_armor_fine,Kräuter-Fellrüstung (geschliffen),epoch_1,slot_armor,gr_fine,support,stat_hp_pct,3.05519500,set_e1_fire,campaign:e1_camp_20,no,e1_eq_herb_armor
+eq_e1_herb_helmet_fine,Kräuter-Helm (geschliffen),epoch_1,slot_helmet,gr_fine,support,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_20,no,e1_eq_herb_helmet
+eq_e1_herb_shoulders_fine,Kräuter-Schulterpanzer (geschliffen),epoch_1,slot_shoulders,gr_fine,support,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_22,no,e1_eq_herb_shoulders
+eq_e1_herb_legs_fine,Kräuter-Beinschienen (geschliffen),epoch_1,slot_legs,gr_fine,support,stat_hp_pct,2.54599600,set_e1_fire,campaign:e1_camp_20,no,e1_eq_herb_legs
+eq_e1_herb_boots_fine,Kräuter-Schuhe (geschliffen),epoch_1,slot_boots,gr_fine,support,stat_hp_pct,1.52759700,set_e1_fire,campaign:e1_camp_24,no,e1_eq_herb_boots
+eq_e1_herb_ring_1_fine,Kräuter-Ring 1 (geschliffen),epoch_1,slot_ring_1,gr_fine,support,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_20,no,e1_eq_herb_ring_1
+eq_e1_herb_ring_2_fine,Kräuter-Ring 2 (geschliffen),epoch_1,slot_ring_2,gr_fine,support,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_24,no,e1_eq_herb_ring_2
+eq_e1_herb_weapon_master,Kräuter-Waffe (meister),epoch_1,slot_weapon,gr_master,support,stat_atk_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_weapon
+eq_e1_herb_armor_master,Kräuter-Fellrüstung (meister),epoch_1,slot_armor,gr_master,support,stat_hp_pct,3.05519500,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_armor
+eq_e1_herb_helmet_master,Kräuter-Helm (meister),epoch_1,slot_helmet,gr_master,support,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_helmet
+eq_e1_herb_shoulders_master,Kräuter-Schulterpanzer (meister),epoch_1,slot_shoulders,gr_master,support,stat_def_pct,2.03679700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_shoulders
+eq_e1_herb_legs_master,Kräuter-Beinschienen (meister),epoch_1,slot_legs,gr_master,support,stat_hp_pct,2.54599600,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_legs
+eq_e1_herb_boots_master,Kräuter-Schuhe (meister),epoch_1,slot_boots,gr_master,support,stat_hp_pct,1.52759700,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_boots
+eq_e1_herb_ring_1_master,Kräuter-Ring 1 (meister),epoch_1,slot_ring_1,gr_master,support,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_ring_1
+eq_e1_herb_ring_2_master,Kräuter-Ring 2 (meister),epoch_1,slot_ring_2,gr_master,support,stat_atk_pct,1.27299800,set_e1_fire,campaign:e1_camp_30,no,e1_eq_herb_ring_2

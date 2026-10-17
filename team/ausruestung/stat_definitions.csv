@@ -1,0 +1,8 @@
+stat_id,name_de,unit,applies_to,calc,pvp_cap_group,notes_de
+stat_hp_pct,Leben %,pct,hero,additiv zu Passiv/Formation/Epoche auf Basis×Levelfaktor,hp_def_40,zählt in PvP-Deckel ≤ +40 % HP/DEF
+stat_atk_pct,Angriff %,pct,hero,wie oben,atk_40,zählt in PvP-Deckel ≤ +40 % ATK
+stat_def_pct,Verteidigung %,pct,hero,wie oben,hp_def_40,
+stat_crit_pct,Krit-Chance,pct_points,hero,additiv zu base_crit_pct,crit,Deckel Krit gesamt 25 % (Annahme)
+stat_lead_pct,Führung,pct_points,"led_block (nur Artefakt art_e1_ancestor_drum, einzige Ausnahme)",additiv zu lead_bonus_pct,atk_40,einzige Block-Wirkung; max +3 Prozentpunkte
+stat_ult_cd_pct,Ult-Abklingzeit,pct,hero,reduziert CD; Ganzzahl ms,cd_floor,Untergrenze CD ≥ 10 s (PvP-Konzept 3.2)
+stat_heal_pct,Heilwirkung,pct,hero (Heilung des Helden-Skills),multipliziert Heilung,heal_cap,unterliegt battle_heal_cap_pct=40

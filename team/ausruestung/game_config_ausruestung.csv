@@ -1,0 +1,61 @@
+key,value,notes
+forge_reserve_warning,1,"v1.3: Warnung ohne Sperre, wenn ein Schmiede-Upgrade Gold, Holz oder Stein unter die Kosten der nächsten Häuptlingsfeuer-Stufe drückt (Reserve-Regel Sim v0.8); Ergänzung zu gdd/game_config.csv"
+gear_level_cap_rule,center_level_minus_1,"v1.4: Ausrüstungsstufe ≤ Häuptlingsfeuer − 1, gilt überall inkl. PvP; Kosten unverändert (GDD Entsch. 73)"
+trophy_exchange_per_day,1,"v1.4: max. 1 Umtausch Mammut-Trophäe/Tag, 1 = 1 h Nahrung, kein Shop (Entsch. 74)"
+norm_gear_rarity,gr_fine,PvP v1.1 A2 (Vorschlag)
+norm_gear_set,free_choice,PvP v1.1 A2
+norm_artifact,pvp_normalized_value,"Signatur ×1,05; jedes Artefakt max. 1× pro Formation"
+norm_artifact_unique_per_formation,true,PvP v1.1 A2
+norm_gear_level,center_level_minus_1,v1.5: Feuer − 1 der jeweiligen Epoche; E1 = 9
+ref_gear_factor_max_e1,1.127,"E1-Gesamtdeckel: 12,7 % Faktorbeitrag über 10 Slot-Budgets."
+ref_gear_factor_max_en,formula,Ab Epoche 2: Epochenbudget wird auf dieselben Shares verteilt; Feuer − 1 begrenzt die Stufe.
+wolf_fang_factor_limit_pct,0.4,"v1.5: Beitrag Wolfszahn zum Ausrüstungsfaktor < 0,4 % bei ≥ 4 Helden (n=4: 0,394 %); geprüft"
+trophy_expiry_convert,1,"v1.5: Rest-Trophäen beim Verfall automatisch in Nahrungskisten (itm_res_food_box_s, je 1 h)"
+trophy_expiry_convert_max,14,v1.5: max. 14 Kisten je Verfall; Rest darüber entfällt
+trophy_expiry_convert_fill_to_cap,1,v1.5: beim Öffnen nur bis zum Lagerlimit auffüllen; Kiste bleibt sonst im Inventar
+epoch_bonus_ref,epoch_bonus_pct,v1.6: Ausrüstung hat KEINEN eigenen Epochenbonus (gear_epoch_bonus entfernt); Epochenbonus nur über gdd game_config epoch_bonus_pct (aktuell 5)
+epoch_bonus_apply_order,multiplicative_after_additive,v1.6: Endwert = Basis × Level × Sterne × (1 + Σ additive % inkl. Ausrüstung/Set/Artefakt/Passiv/Formation) × (1 + epoch_bonus_pct/100)
+gear_stat_per_level_pct,5,Linear +5 % des Basiswerts pro Stufe; E1-Referenz ist Meister St. 9.
+gear_upgrade_cost_growth,1.18,Kostenfaktor je Stufe
+gear_rarity_cost_mult,gr_common:1.0;gr_fine:1.5;gr_master:2.2,Seltenheitsfaktor Kosten
+gear_common_gold_free_levels,1-5,Grob ohne Gold
+gear_common_gold_discount_levels,6-10:30,Grob Gold −30 %
+gear_dismantle_refund_pct,100,"Gold, Stein, Holz"
+gear_inventory_slots,200,nie kaufbar; Überlauf → Post
+artifact_signature_rel_pct,5,"Artefaktwert × 1,05"
+artifact_drum_lead_cap_pp,3,Ahnentrommel inkl. Signatur
+event_item_expiry_days,3,Event-/Saisonende + n Tage; nur unkaufbare Items
+post_overflow_expiry_days,30,"nur verdiente, unkaufbare Inhalte; gekaufte nie"
+item_purchased_never_expire,true,Law
+shop_limit_schema,daily_limit;limit_reset,v1.6: alle Shops (guild/arena/event/gem/iap) mit daily_limit + limit_reset; Reset shop_limit_reset_time (gdd)
+crystal_use_scope_ref,crystal_use_scope,"v1.6 GDD 0.2: Kristalle nur Items/Boosts/Event-Teilnahme, nie Punkte; alles limitiert"
+board_gear_rewards,none,v1.7.2: keine Ausrüstungs- oder Artefaktbelohnungen auf dem Würfelbrett
+gear_unlock_slot_weapon,e1_camp_14,camp_14; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_armor,e1_camp_14,camp_14; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_helmet,e1_camp_16,camp_16; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_legs,e1_camp_20,camp_20; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_ring_1,e1_camp_18,camp_18; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_shoulders,e1_camp_22,camp_22; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_boots,e1_camp_24,camp_24; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_ring_2,e1_camp_24,camp_24; genau 1 passendes Grob-Teil beim Freischalten.
+gear_unlock_slot_artifact_1,e1_camp_25,camp_25; freies fixes Start-Artefakt beim Freischalten.
+gear_unlock_slot_artifact_2,e2_unlock,ab E2; freies fixes Start-Artefakt beim Freischalten.
+gear_stat_budget_mode,share_of_total,"v1.7: Gesamt-Statbudget eines voll ausgerüsteten Helden bleibt wie v1.6 (ref_gear_factor_max_e1 = 1,127); es wird nach stat_budget_share_pct auf 10 Slots (8 Ausrüstung + 2 Artefakte, Summe 100 %) verteilt, damit mehr Slots NICHT mehr Macht bedeuten"
+gear_artifact_binding,signature_bound,Nur Signaturbindung sperrt den Wechsel; übrige Artefakte sind frei tauschbar.
+gear_slot_unlock_grants_item,1,Jede Gear-Slot-Freischaltung gibt 1 passendes Grob-Teil; Artefakt-Slots geben ein fixes Artefakt.
+gear_main_value_mode,derived_from_budget,E1-Maxwert aus stat_budget_share_pct; Setreserve liegt innerhalb der 80 % Gear-Shares.
+gear_qol_required,best_equip_hero;best_equip_formation;upgrade_all;compare_arrows;inventory_filter;auto_salvage,Alle aufgeführten UI-Hilfen sind v1-Pflicht.
+gear_artifact_rebind_cost_mode,gold_production_hours,Kosten = Goldproduktion der aktuellen Epoche × gear_artifact_rebind_cost_hours.
+gear_artifact_rebind_cost_hours,1.5,"Umbinden kostet 1,5 Stunden Goldproduktion der aktuellen Epoche."
+gear_artifact_rebind_free_per_artifact,1,Jede Artefakt-ID hat einmal ein kostenloses Umbinden.
+gear_forge_mark_removed,1,"v1.7.2 Finanzen: separate Schmiede-Markenwährung entfernt; Upgrades nur mit Gold, Stein und Holz; Shops nutzen Gildenmünzen/Arena-Marken."
+gear_main_budget_factor_e1,0.127,ref_gear_factor_max_e1 − 1.
+gear_main_budget_max_level_e1,9,E1-Referenz: Feuer 10 − 1.
+gear_main_budget_master_mult,1.32,Meister/Geschliffen = 1.32/1.20 = 1.10 bei gleicher Stufe.
+gear_main_budget_stat_weights,stat_atk_pct:0.5;stat_hp_pct:0.25;stat_def_pct:0.25,Kampfkraftgewichtung aus der Ausrüstungsformel.
+gear_main_set_budget_mode,reserve_within_gear_share,Gewichtete 2/4/6-Setboni werden vorab aus der 80-%-Gear-Summe reserviert.
+gear_auto_equip,best_equip_hero;best_equip_formation,Beste Anlegen ist für Held und ganze Formation erforderlich.
+gear_bulk_upgrade,all_up_to_gold_limit,Alle verbessern bis Gold- oder Materiallimit; Vorschau der Gesamtkosten erforderlich.
+gear_compare_arrows,green_upgrade;red_downgrade,Grüne/rote Vergleichspfeile zeigen Nettoänderung.
+gear_inventory_filter,slot;rarity;set;epoch;level;power,Filter und Sortierung nach Macht.
+gear_auto_salvage,gr_common;off_by_default;confirm,"Auto-Zerlegen für Grob, opt-in und mit Bestätigung."

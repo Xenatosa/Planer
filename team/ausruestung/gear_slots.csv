@@ -1,0 +1,11 @@
+slot_id,name_de,slot_group,owner,stat_main,stat_budget_share_pct,unlock,unlock_config_key,max_per_hero,binding,ui_position,notes_de
+slot_weapon,Waffe,weapon,hero,stat_atk_pct,16,e1_camp_14,gear_unlock_slot_weapon,1,none,right_1,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_armor,Rüstung,armor,hero,stat_hp_pct,12,e1_camp_14,gear_unlock_slot_armor,1,none,left_3,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_helmet,Helm,armor,hero,stat_def_pct,8,e1_camp_16,gear_unlock_slot_helmet,1,none,left_1,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_shoulders,Schultern,armor,hero,stat_def_pct,8,e1_camp_22,gear_unlock_slot_shoulders,1,none,left_2,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_legs,Beine,armor,hero,stat_hp_pct,10,e1_camp_20,gear_unlock_slot_legs,1,none,left_4,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_boots,Schuhe,armor,hero,stat_hp_pct,6,e1_camp_24,gear_unlock_slot_boots,1,none,left_5,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_ring_1,Ring 1,ring,hero,stat_atk_pct,10,e1_camp_18,gear_unlock_slot_ring_1,1,none,right_2,Ring 1 ist ein eigener Slot; die frühere Talisman-Position entfällt. Freischaltung gibt 1 passendes Grob-Teil.
+slot_ring_2,Ring 2,ring,hero,stat_atk_pct,10,e1_camp_24,gear_unlock_slot_ring_2,1,none,right_3,Jede Slot-Freischaltung gibt 1 passendes Grob-Teil.
+slot_artifact_1,Artefakt 1,artifact,hero,siehe artifacts.csv,10,e1_camp_25,gear_unlock_slot_artifact_1,1,signature_bound,right_4,"Nur Signatur-Artefakte binden; übrige Artefakte sind frei tauschbar. Umbinden: 1,5 h Goldproduktion der aktuellen Epoche; je Artefakt 1× gratis. Freischaltung camp_25 mit garantiertem Start-Artefakt."
+slot_artifact_2,Artefakt 2,artifact,hero,siehe artifacts.csv,10,e2_unlock,gear_unlock_slot_artifact_2,1,signature_bound,right_5,"Nur Signatur-Artefakte binden; übrige Artefakte sind frei tauschbar. Umbinden: 1,5 h Goldproduktion der aktuellen Epoche; je Artefakt 1× gratis. Ab Epoche 2; Freischaltung mit garantiertem Start-Artefakt."

@@ -1,0 +1,4 @@
+product_id,category,name_de,price_eur_gross,contents_de,random_content,power_bonus,time_limited_offer,status
+gear_skin_common,cosmetic,Ausrüstungs-Skin (Grob),2.99,1 Skin für 1 Ausrüstungsteil,no,0,no,GDD v0.9/v1.0 Entsch. 79 (Fabian-Rahmen I2)
+gear_skin_fine,cosmetic,Ausrüstungs-Skin (Geschliffen),3.99,1 Skin für 1 Ausrüstungsteil,no,0,no,GDD Entsch. 79
+gear_skin_master,cosmetic,Ausrüstungs-Skin (Meisterstück),4.99,1 Skin für 1 Ausrüstungsteil,no,0,no,GDD Entsch. 79; kein Set-Bundle; Skins verfallen nie

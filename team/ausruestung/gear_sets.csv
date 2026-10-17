@@ -1,0 +1,4 @@
+set_id,name_de,epoch_id,pieces,bonus_2_stat,bonus_2_value,bonus_2_stat_2,bonus_2_value_2,bonus_4_stat,bonus_4_value,bonus_4_stat_2,bonus_4_value_2,bonus_6_stat,bonus_6_value,bonus_6_stat_2,bonus_6_value_2,notes_de
+set_e1_mammoth,Mammutfell,epoch_1,6,stat_hp_pct,1,stat_def_pct,1,stat_hp_pct,1,stat_def_pct,1,stat_hp_pct,1,stat_def_pct,2,"Infanterie/Speer. Gesamt wie Altbudget: HP +3, DEF +4; über 2/4/6 Teile verteilt."
+set_e1_hunt,Jägerzeichen,epoch_1,6,stat_atk_pct,1,stat_crit_pct,1,stat_atk_pct,1,stat_crit_pct,1,stat_atk_pct,1,stat_crit_pct,1,"Fernkampf/Kavallerie. Gesamt wie Altbudget: ATK +3, Krit +3; über 2/4/6 Teile verteilt."
+set_e1_fire,Ahnenglut,epoch_1,6,stat_def_pct,1,stat_ult_cd_pct,1,stat_def_pct,1,stat_ult_cd_pct,2,stat_def_pct,1,stat_ult_cd_pct,2,"Support/Belagerung. Gesamt wie Altbudget: DEF +3, Ult-CD +5; CD-Untergrenze 10 s."
