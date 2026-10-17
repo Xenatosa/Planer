@@ -1,4 +1,4 @@
 gear_rarity_id,name_de,color_key,stat_mult_pct,max_upgrade_level,set_eligible,obtainable_free,obtainable_purchase,notes_de
 gr_common,Grob,grey,100,10,no,yes,no,Kampagne
 gr_fine,Geschliffen,green,120,15,yes,yes,no,Kampagne/Gilde/Arena
-gr_master,Meisterstück,blue,132,20,yes,yes,no,"E1-Maxbeitrag im Budgetmodell; Meister/Geschliffen = 1,32/1,20 = 1,10 bei gleicher Stufe."
+gr_master,Meisterstück,blue,140,20,yes,yes,no,"v1.7.2 GD 17.10.: Rohmultiplikator 1,40; Gesamtfaktor bleibt durch E1 1,127 und E2 1,16 begrenzt."

@@ -4,9 +4,9 @@ Stand 17.10.2026. Aktive Tabellen: `equipment.csv`, `artifacts.csv`, `gear_slots
 
 ## 0. Grundsätze
 
-- Ausrüstung erweitert Helden um acht sichtbare Gear-Slots und bis zu zwei Artefaktslots. E1 hat Artefakt 1; Artefakt 2 wird erst ab E2 freigeschaltet.
-- Alle Werte, Freischaltungen und Limits bleiben konfigurierbar. Ausrüstung und Artefakte sind nicht für Echtgeld oder Kristalle kaufbar.
-- Das gesamte E1-Budget bleibt auf Faktor 1,127 begrenzt. Mehr Slots verteilen das vorhandene Budget, sie erhöhen es nicht.
+- Acht sichtbare Gear-Slots und bis zu zwei Artefaktslots. E1 hat Artefakt 1; Artefakt 2 wird erst ab E2 freigeschaltet.
+- Werte, Freischaltungen und Limits bleiben konfigurierbar. Ausrüstung und Artefakte sind nicht für Echtgeld oder Kristalle kaufbar.
+- Der E1-Gesamtdeckel ist Faktor 1,127. Die zehn Slot-Shares verteilen dieses Budget; zusätzliche Slots erhöhen es nicht.
 - Es gibt keine separate Schmiedewährung. Ausrüstungsverbesserungen kosten Gold, Stein und Holz.
 
 ## 1. Slots und Freischaltungen
@@ -19,24 +19,26 @@ Stand 17.10.2026. Aktive Tabellen: `equipment.csv`, `artifacts.csv`, `gear_slots
 | camp_20 | Beine | 1 passendes Grob-Teil |
 | camp_22 | Schultern | 1 passendes Grob-Teil |
 | camp_24 | Schuhe, Ring 2 | je 1 passendes Grob-Teil |
-| camp_25 | Artefakt 1 | 1 fixes Start-Artefakt |
-| Epoche 2 | Artefakt 2 | 1 fixes Start-Artefakt |
+| camp_25 | Artefakt 1 | 1 fixes Start-Artefakt (`art_e1_firestone`) |
+| Epoche 2 | Artefakt 2 | 1 fixes Start-Artefakt (`art_e2_atk_focus`) |
 
-Die Gear-Slots sind Waffe, Rüstung, Helm, Schultern, Beine, Schuhe, Ring 1 und Ring 2. Jede aktive Slot-Freischaltung wird über `gear_slots.csv` und den jeweiligen `gear_unlock_slot_*`-Key gesteuert; `gear_slot_unlock_grants_item=1` schaltet die Garantieteile ein.
+Jede Gear-Slot-Freischaltung gibt ein passendes Grob-Teil. Artefakt-Slots geben das konfigurierte feste Start-Artefakt. Die acht Gear-Slots sind Waffe, Rüstung, Helm, Schultern, Beine, Schuhe, Ring 1 und Ring 2.
 
 ## 2. Wertebudget und Seltenheiten
 
-Die Slot-Shares in `gear_slots.csv` summieren sich auf genau 100 %: acht Gear-Slots teilen 80 %, die beiden Artefaktslots je 10 %. Der E1-Referenzdeckel ist `ref_gear_factor_max_e1=1.127`; Hauptwerte werden mit `gear_main_value_mode=derived_from_budget` aus Share, Statgewicht, Rarität und Stufe abgeleitet. Es gibt keinen festen 4-%-Basiswert und keinen 12-%-Deckel je Gegenstand.
+Die Slot-Shares in `gear_slots.csv` summieren sich auf genau 100 %: acht Gear-Slots teilen 80 %, die beiden Artefaktslots je 10 %. Hauptwerte werden über `gear_main_value_mode=derived_from_budget` aus Anteil, Statgewicht, Seltenheit und Stufe abgeleitet. Es gibt keinen festen 4-%-Basiswert und keinen 12-%-Deckel je Gegenstand.
 
-Für die Referenzrechnung gelten E1-Meister Stufe 9, `gear_stat_per_level_pct=5` sowie die Kampfgewichte ATK 0,5 und HP/DEF 0,25. Die gewichteten Setboni werden innerhalb des Gear-Anteils von 80 % reserviert. Formel und klassenspezifische Setreserve stehen in `NOTES_v1.7.md`.
-
-| Seltenheit | Multiplikator | Maximalstufe | Freie Quelle |
+| Seltenheit | Rohmultiplikator | Maximalstufe | Freie Quelle |
 |---|---:|---:|---|
 | Grob | 1,00 | 10 | Kampagne; garantiert beim Gear-Slot-Unlock |
 | Geschliffen | 1,20 | 15 | Kampagne ab camp_20 und Slot-Freischaltung |
-| Meister | 1,32 | 20 | Kampagne ab camp_30 und Slot-Freischaltung |
+| Meister | 1,40 | 20 | Kampagne ab camp_30 und Slot-Freischaltung |
 
-Meister/Geschliffen beträgt bei gleicher Stufe 1,10. Der E1-Held erreicht mit acht maximalen Gearteilen, vollem 6er-Set und einem maximalen Artefakt höchstens Faktor **1,1143**. Das zweite Artefakt nutzt die verbleibenden 10 % erst ab E2.
+Die E1-Referenz ist Meister Stufe 9 (Feuer 10 minus 1); ein voll ausgerüsteter E1-Held erreicht mit acht Gearteilen, aktivem 6er-Set und maximalem Artefakt 1 höchstens Faktor **1,114300**. Der Gesamtdeckel bleibt 1,127. Für E2 gilt `e2_center_max_level=15`, also maximal Gear-Stufe 14. Mit acht Meisterteilen Stufe 14, aktivem 6er-Set und zwei maximalen Artefakten beträgt der höchste CSV-Faktor **1,143804**, unter dem bindenden Deckel `ref_gear_factor_max_e2=1.16`.
+
+Die 1,15-Grenze wird aus der Helden-Fairnessregel **SSR ≤ 1,15 × SR** übernommen (`team/helden/Helden-System_v1.md`). Sie begrenzt hier das Verhältnis der Gesamt-Statfaktoren eines voll ausgerüsteten Meister- und Geschliffen-Helden. Geprüft wird `(1 + B_master) / (1 + B_fine)`; die Rohmultiplikatoren 1,40 und 1,20 werden nicht direkt ins Verhältnis zur Grenze gesetzt. Mit E1-Budget 0,127 und E2-Budget 0,16 liefert die konservative Formel `(1+B)/(1+B×1,20/1,40)` 1,0164 beziehungsweise 1,0201. Die konkrete Rechnung mit festen Set- und Artefaktwerten bleibt darunter.
+
+Formel, Setreserve und Detailwerte stehen in `NOTES_v1.7.md`.
 
 ## 3. Sets und Nebenwerte
 
@@ -48,26 +50,25 @@ Sets sind ab Geschliffen verfügbar und über die acht Gear-Slots verteilt. Alle
 | Jägerzeichen | Fernkampf/Kavallerie | ATK +3, Krit +3 | je Schwelle ATK +1/Krit +1 |
 | Ahnenglut | Support/Belagerung | DEF +3, Ult-CD +5 | 2: DEF +1/CD +1; 4: DEF +1/CD +2; 6: DEF +1/CD +2 |
 
-Der Setfortschritt ist der spürbare Nebenwert für Helm, Schultern und Schuhe. Es gibt keine zufälligen Nebenwerte. Die bestehende Ult-CD-Untergrenze von 10 Sekunden bleibt aktiv.
+Der Setfortschritt ist der spürbare Nebenwert für Helm, Schultern und Schuhe. Es gibt keine zufälligen Nebenwerte. Krit ist auf 25 % gedeckelt; Ult-CD kann nicht unter 10 Sekunden fallen. Beide Werte sind aus dem Gear-Kampfkraftbudget ausgeschlossen.
 
 ## 4. Artefakte und Bindung
 
-Ein Held trägt je einen Artefaktgegenstand pro freigeschaltetem Artefaktslot. `artifacts.csv` hält jeden Wert innerhalb des jeweiligen 10-%-Budgets; ATK/HP/DEF werden nach den Statgewichten bewertet. Signaturwerte sind relativ 5 % und bereits im Maximalbudget berücksichtigt.
+Jeder Artefaktslot nutzt 10 % des Gesamtbudgets. ATK/HP/DEF-Werte berücksichtigen den 5-%-Signaturbonus bereits innerhalb dieses Limits: bei maximaler Stufe höchstens 1,27 gewichtete Faktor-Prozentpunkte je Artefakt. Die Startwerte für E2 sind ATK 1,209524 → 2,419048 sowie HP und DEF 2,419048 → 4,838095. Damit bleibt auch E2 mit zwei Artefakten und Gear bis Stufe 14 unter Faktor 1,16.
 
-Artefakte bleiben frei tauschbar, bis der Signaturbonus auf passender Rolle oder Epoche gebunden wird. Eine Signaturbindung sperrt den Tausch auf einen anderen Helden. Umbinden kostet `gear_artifact_rebind_cost_hours=1.5` Stunden Goldproduktion der aktuellen Epoche (`gear_artifact_rebind_cost_mode=gold_production_hours`). Jedes Artefakt hat `gear_artifact_rebind_free_per_artifact=1` kostenloses Umbinden. Es gibt keine Kristall- oder Echtgeldkosten.
+Artefakte bleiben frei tauschbar, bis der Signaturbonus auf passender Rolle oder Epoche gebunden wird. Danach kostet das Umbinden `gear_artifact_rebind_cost_hours=1.5` Stunden Goldproduktion der aktuellen Epoche. Jedes Artefakt hat ein kostenloses Umbinden. Es gibt keine Kristall- oder Echtgeldkosten.
 
 ## 5. Verbesserung, Aufwertung und Zerlegen
 
 - Jede Stufe kostet ausschließlich Gold, Stein und Holz; Wachstum und Seltenheitskosten stehen in `gear_upgrade_costs.csv`.
 - Verfeinerung Grob → Geschliffen kostet 800 Gold und 600 Stein. Geschliffen → Meister kostet 2.500 Gold und 1.800 Stein; die Stufe bleibt erhalten.
-- Artefaktstufen kosten Gold. Gear-Stufe ist durch `gear_level_cap_rule=center_level_minus_1` begrenzt.
-- Zerlegen erstattet `gear_dismantle_refund_pct=100` Prozent der Gold-, Stein- und Holzkosten. Ein zusätzlicher Markenbonus entfällt.
-- Schmiede-Angebote nutzen vorhandene Gildenmünzen oder Arena-Marken. Tageseinnahmen für Fortschritt laufen über Gold und Materialien.
-- Die Warnung `forge_reserve_warning=1` zeigt den Ressourcenbedarf für das nächste Häuptlingsfeuer, ohne die Schmiede zu sperren.
+- Gear-Stufe ist durch `gear_level_cap_rule=center_level_minus_1` begrenzt: E1 höchstens 9, E2 höchstens 14.
+- Zerlegen erstattet `gear_dismantle_refund_pct=100` Prozent der Gold-, Stein- und Holzkosten.
+- Schmiede-Angebote nutzen vorhandene Gildenmünzen oder Arena-Marken. Die Warnung `forge_reserve_warning=1` zeigt den Bedarf für das nächste Häuptlingsfeuer, ohne die Schmiede zu sperren.
 
 ## 6. Quellen und Inventar
 
-Grobteile kommen aus der Kampagne und den Slot-Garantien. Geschliffene Teile beginnen ab camp_20; Meisterstücke ab camp_30. Artefakte stammen aus den festen Kampagnen-, Event-, Gilden- und Arenaquellen in `artifacts.csv`. Keine Ausrüstung kommt aus kaufbar beschleunigten Ranglisten- oder Stammeswettstreit-Meilensteinen.
+Grobteile kommen aus der Kampagne und den Slot-Garantien. Geschliffene Teile beginnen ab camp_20; Meisterstücke ab camp_30. Die E2-Startartefakte werden beim Freischalten von Slot 2 ausgegeben; weitere Artefakte stammen aus den festen Kampagnen-, Event-, Gilden- und Arenaquellen in `artifacts.csv`. Keine Ausrüstung kommt aus kaufbar beschleunigten Ranglisten- oder Stammeswettstreit-Meilensteinen.
 
 `gear_inventory_slots=200`; Ausrüstungsplätze sind nicht kaufbar. Bei Überlauf geht der Gegenstand in die Post. Ablaufregeln gelten nur für verdiente, unkaufbare Inhalte; gekaufte Inhalte verfallen nicht. Filter, Sortierung und Auto-Zerlegen stehen in `item_system_v1.md` und `gear_qol_spec_v1.md`.
 
@@ -88,9 +89,10 @@ Ausrüstung, Artefakte und Verbesserungen sind nicht für Echtgeld oder Kristall
 ## 10. Abnahmestand v1.7.2
 
 - Slots: 10 aktive Einträge, davon 8 Gear und 2 Artefakte; Sharesumme 100 %.
-- E1: 9 ausgerüstete Einträge verfügbar; Faktor höchstens 1,127, mit dem berechneten Maximalbuild 1,1143.
-- Rarität: Meister/Geschliffen = 1,10 bei gleicher Stufe.
+- E1: acht Gearteile und Artefakt 1; Maximalfaktor 1,114300 ≤ 1,127.
+- E2: Feuer max. 15, Gear max. 14; acht Gearteile und zwei Artefakte; Maximalfaktor 1,143804 ≤ 1,16.
+- Rarität: Meister 1,40, Geschliffen 1,20; Gesamtfaktor-Ratio nach Referenzformel E1 1,0164 und E2 1,0201, jeweils ≤ 1,15.
 - Sets: 2/4/6; Gesamtwerte unverändert; höchstens 6 benötigte Teile.
-- Unlocks und Garantieteile folgen der Tabelle in Abschnitt 1.
-- Finanzen: Rebind 1,5 Stunden aktueller Epochen-Goldproduktion, 1 Gratisumbinden je Artefakt; keine separate Schmiedewährung.
+- Freischaltungen und Startgegenstände folgen Abschnitt 1.
+- Finanzen: Verbesserungen nur Gold/Stein/Holz; Umbinden 1,5 Stunden aktueller Epochen-Goldproduktion, 1 Gratisumbinden je Artefakt.
 - UI-QoL: alle fünf Funktionen sind v1-Pflicht.
