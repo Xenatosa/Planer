@@ -1,21 +1,24 @@
-# Story-Grundlage von Fabian (18.10.2026): Eine begrabene Zukunft
+# Story-Grundlage von Fabian (18.10.2026, Update 12:57): Eine begrabene Zukunft
 
-Verbindlich über `siegel_saga_einordnung_v3.md`. Wortlaut von Fabian.
+Verbindlich über `siegel_saga_einordnung_v3.md`. Wortlaut von Fabian. Ersetzt die erste Fassung von 12:16.
 
-## Die Kernprämisse
-Die Welt, in der der Stamm ums Überleben kämpft, ist nicht unsere prähistorische Vergangenheit, sondern eine ferne, postapokalyptische Zukunft. Die „Urahnen“ waren eine hoch entwickelte Vorläufer-Zivilisation (aus deren Ära auch „Terwishs Ring aus dem Jahr 4750“ stammt), deren Technologie an reine Magie grenzte. Doch ihr ungebremster Fortschritt weckte die Tiefenschwärme – eine parasitäre, alles verschlingende planetare Lebensform, die Energie, Metalle und Mineralien frisst.
+## Die Kernprämisse: Eine begrabene Zukunft
+Die Welt, in der der Stamm ums Überleben kämpft, ist nicht unsere prähistorische Vergangenheit, sondern eine ferne, postapokalyptische Zukunft. Die „Urahnen“ waren eine hoch entwickelte Vorläufer-Zivilisation (aus deren Ära auch „Terwishs Ring aus dem Jahr 4750“ stammt), deren Technologie an reine Magie grenzte. Sie nutzten den Äther – eine leuchtende, flüssige Essenz und die „Seele des Planeten“ – um ihre Gebäude wachsen zu lassen und unerschöpfliche Energie zu erzeugen (Technomagie).
 
-## Das Geheimnis der leeren Oberfläche
-Warum gibt es keine Hochhäuser oder Ruinen auf der Map? Die Oberfläche ist eine absolute Tabula Rasa, aus drei Gründen:
-1. Der große Hunger: Bevor die Urahnen handelten, fraßen die Schwärme die Oberfläche regelrecht kahl. Stahlträger, Beton und Stromnetze wurden verdaut, um ihre Panzer zu härten.
-2. Der Rückbau (Nanotech): Um die gigantische Energie für das globale „Eis-Siegel“ aufzubringen, lösten die Urahnen den Rest ihrer eigenen Städte in Energie und Rohdaten auf. Sie opferten ihre physische Welt für das Überleben des Planeten.
-3. Die eisige Mühle: Jahrtausende der magischen Eiszeit schickten kilometerdicke Gletscher über das Land, die wie gigantisches Schmirgelpapier wirkten. Alles, was noch stand, wurde pulverisiert. Das Startgebiet liegt auf einer hunderte Meter dicken Schicht aus zermahlenem Stein und Erde.
+## Die Tiefenschwärme: Der verschlingende Hunger
+Der maßlose Äther-Konsum der Urahnen weckte die Tiefenschwärme. Diese sind keine hirnlosen Insekten, sondern das aggressive „Immunsystem“ des Planeten – eine parasitäre Urgewalt aus der Tiefe. Sie haben einen zweigeteilten Hunger:
+1. Der Treibstoff: Sie fressen reine Energie (Wärme, Leben und vor allem Äther). Jedes Feuer und jedes magische Ritual des Stammes zieht sie an.
+2. Der Panzer: Um in der physischen Welt zu existieren, konsumieren sie Metalle und Mineralien. Sie fraßen die alten, mit Äther durchtränkten Städte der Urahnen und nutzten den verdauten, extrem harten Schrott, um ihre unzerstörbaren Panzer zu weben.
 
-## Der Stamm
-Der Stamm des Spielers besteht aus den fernen Nachfahren der Überlebenden. Zentrales Dilemma: Ihr Fortschritt (Wärme, Zivilisation) beschleunigt das Schmelzen des Eises. Der Stamm ist jedoch nicht der Verursacher des Untergangs, sondern die einzige Rettung, die das Wissen der Welt neu entdecken muss.
+## Das magische Eis-Siegel und die leere Oberfläche
+Als die Urahnen erkannten, dass die Schwärme unaufhaltsam waren, drückten sie einen globalen Reset-Knopf. Sie opferten ihre Welt und woben aus den Resten ihrer Zivilisation und reiner Magie das Eis-Siegel – einen künstlichen Winter, der den Planeten einfror und den absoluten Stillstand erzwingen sollte. Deshalb gibt es keine Ruinen mehr auf der Oberfläche: Die Schwärme hatten bereits alles kahlgefressen, den Rest lösten die Urahnen für ihr Ritual auf, und kilometerdicke magische Gletscher zermalmten die letzten Spuren zu Staub. Das Startgebiet des Spielers liegt auf einer hunderte Meter dicken Schicht aus zermahlenem Schutt.
+
+## Das zentrale Dilemma
+Der Spieler steuert die ahnungslosen Nachfahren der Überlebenden. Ihr Fortschritt (Wärme, Zivilisation, neue Magie) beschleunigt das Schmelzen des Eises. Doch der Stamm ist nicht der Verursacher des Untergangs, sondern die einzige Rettung: Sie müssen wachsen, um ein neues, besseres Siegel zu erschaffen, bevor die Schwärme den Planeten endgültig verschlingen.
 
 ## Folgen für das Team (New Bot)
 - Keine Ruinen, Hochhäuser oder Tech-Trümmer auf Dorf und Karte (Art Umgebung, Weltkarte).
-- Urahnen = Hochzivilisation der Zukunft; Lore-Bibel §1 und Saga v3 anpassen (Story, Lore).
-- Metallarmut der Welt passt dazu (Schwärme fressen Metalle): Metall erst spät, sparsam.
-- Offen: Fabians Antwort zum Gegenspieler (Fremder oder eigener Bösewicht).
+- Urahnen = Technomagie-Hochzivilisation mit Äther; Lore-Bibel §1 und Saga v3 anpassen (Story, Lore). Äther ist ab jetzt Kern-Lore, nicht erst späte Epoche.
+- Feuer und Rituale ziehen Schwärme an: Grund für Bedrohungs-Events (Dorf-Verteidigung).
+- Metallarmut der Welt (Schwärme fressen Metalle): Metall erst spät, sparsam.
+- Offen: Enthüllungszeitpunkt (Fragen 17 bis 19).
