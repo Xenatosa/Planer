@@ -22,3 +22,7 @@ Der Spieler steuert die ahnungslosen Nachfahren der Überlebenden. Ihr Fortschri
 - Feuer und Rituale ziehen Schwärme an: Grund für Bedrohungs-Events (Dorf-Verteidigung).
 - Metallarmut der Welt (Schwärme fressen Metalle): Metall erst spät, sparsam.
 - Offen: Enthüllungszeitpunkt (Fragen 17 bis 19).
+
+## Figuren (Fabian, 18.10.2026, 12:57)
+- **Der Fremde:** Ein unsterblicher Magier-Wächter der Urahnen („Ein Geketteter“). Er überdauerte Jahrtausende im Kryoschlaf, um das Eis zu bewachen. Er glaubt zunächst, der Stamm würde die Welt zerstören, indem er das Eis schmilzt, erkennt aber später, dass sie die wahren Erben sind.
+- **Terwish (Jahr 4750):** Ein visionärer Urahnen-Magier aus der Vergangenheit. Er entwarf einst das Konzept eines „Lichtsiegels“ (Terwishs Ring) im Orbit, um den Planeten zu heilen, doch die Zeit reichte nicht für die Umsetzung. Sein Wissen ist das ultimative Endziel des Spiels.
