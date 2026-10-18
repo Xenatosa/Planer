@@ -26,3 +26,9 @@ Das wirtschaftliche Ziel ist es, profitabel zu sein, jedoch nicht durch kurzfris
 - Kontinuierlicher, spürbarer Tag-Nacht-Wechsel im Dorf, entkoppelt von der realen Uhrzeit: 1 In-Game-Tag = 1 Stunde Echtzeit (per Config).
 - Wirkt audiovisuell und inhaltlich: Beleuchtung (leuchtende Fenster und Laternen bei Nacht), Soundkulisse (Vögel am Morgen, Grillen bei Nacht), Dorfbewohner mit eigenen Tagesabläufen.
 - Dient der Immersion, nicht dem Zeitdruck: keine extrem kurzen, tageszeitgebundenen Aufgaben (kein FOMO).
+
+## 7. Epochenfarben (Frage 4)
+Fabian überlässt die Hauptfarbe je Epoche dem Team (Art Director entscheidet).
+
+## 8. Helden im Dorf (Frage 5)
+Helden tauchen NICHT im Dorf auf. Sie erscheinen nur in Menüs, Kämpfen, Events und Minigames. Im Dorf laufen nur Dorfbewohner.
