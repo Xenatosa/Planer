@@ -21,3 +21,8 @@ Das wirtschaftliche Ziel ist es, profitabel zu sein, jedoch nicht durch kurzfris
 - Grundstimmung: Das Dorf ist ein gemütlicher, friedlicher Rückzugsort mit entspannter Wohlfühlatmosphäre, der einlädt, sich zurückzulehnen und das Wachstum der Siedlung in Ruhe zu betrachten.
 - Sound und Lebendigkeit: idyllische, beruhigende Hintergrundmusik. Das Dorf soll hörbar leben (arbeitende Dorfbewohner, Naturgeräusche, geschäftiges Treiben). Kein statisches Bild, sondern ein lebendiger Organismus.
 - Kontrast: In speziellen Events und Minigames zieht zeitweise Gefahr von außen auf, und der Spieler verteidigt Dorf und Bewohner aktiv. Dieser Kontrast macht den Frieden erst richtig wertvoll.
+
+## 6. Tag-Nacht-Zyklus (Frage 3)
+- Kontinuierlicher, spürbarer Tag-Nacht-Wechsel im Dorf, entkoppelt von der realen Uhrzeit: 1 In-Game-Tag = 1 Stunde Echtzeit (per Config).
+- Wirkt audiovisuell und inhaltlich: Beleuchtung (leuchtende Fenster und Laternen bei Nacht), Soundkulisse (Vögel am Morgen, Grillen bei Nacht), Dorfbewohner mit eigenen Tagesabläufen.
+- Dient der Immersion, nicht dem Zeitdruck: keine extrem kurzen, tageszeitgebundenen Aufgaben (kein FOMO).
