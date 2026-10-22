@@ -1,0 +1,109 @@
+# Verschiebeprotokoll 22.10.2026 (Quelle -> Ziel, relativ zu team/art). Rückgängig: mv Ziel Quelle
+ui-kit/hud/mock_hud_f5_A.png -> _alt/ui-kit/hud/mock_hud_f5_A.png
+ui-kit/hud/mock_hud_f5_B.png -> _alt/ui-kit/hud/mock_hud_f5_B.png
+ui-kit/hud/v3 -> _alt/ui-kit/hud/v3
+ui-kit/hud/v4 -> _alt/ui-kit/hud/v4
+ui-kit/hud/v5/backup_v75 -> _alt/ui-kit/hud/v5/backup_v75
+ui-kit/hud/v5/raw -> _alt/ui-kit/hud/v5/raw
+ui-kit/menus_v3/v3_2_obsidian_helden_detail.png -> _alt/ui-kit/menus_v3/v3_2_obsidian_helden_detail.png
+ui-kit/menus_v3/menus_v3_kontaktbogen.png -> _alt/ui-kit/menus_v3/menus_v3_kontaktbogen.png
+ui-kit/menus_v1 -> _alt/ui-kit/menus_v1
+ui-kit/dock_v1/dock_B.png -> _alt/ui-kit/dock_v1/dock_B.png
+ui-kit/dock_v1/dock_C.png -> _alt/ui-kit/dock_v1/dock_C.png
+ui-kit/dock_v1/dock_D.png -> _alt/ui-kit/dock_v1/dock_D.png
+ui-kit/dock_v1/dock_E.png -> _alt/ui-kit/dock_v1/dock_E.png
+ui-kit/dock_v1/dock_kontaktbogen.png -> _alt/ui-kit/dock_v1/dock_kontaktbogen.png
+hud_v6 -> _alt/hud_v6
+dorf_e1/dorf_e1_konzept_v1.png -> _alt/dorf_e1/dorf_e1_konzept_v1.png
+dorf_e1/dorf_e1_konzept_v2.jpg -> _alt/dorf_e1/dorf_e1_konzept_v2.jpg
+dorf_e1/dorfkarte_e1_v3.jpg -> _alt/dorf_e1/dorfkarte_e1_v3.jpg
+weltkarte/v2/weltkarte_b1_v3.jpg -> _alt/weltkarte/v2/weltkarte_b1_v3.jpg
+weltkarte/v2/weltkarte_v2_mockup_buch1.png -> _alt/weltkarte/v2/weltkarte_v2_mockup_buch1.png
+weltkarte/v2/weltkarte_v2_mockup_buch1_raw.png -> _alt/weltkarte/v2/weltkarte_v2_mockup_buch1_raw.png
+backup -> _alt/backup
+ui/heroes/_anime_verworfen -> _alt/ui/heroes/_anime_verworfen
+tooltest -> _alt/tooltest
+ui-kit/hud/v5/mock_hud_f5_v5_1_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_1_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_1_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_1_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_2_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_2_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_2_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_2_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_3_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_3_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_3_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_3_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_4_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_4_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_4_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_4_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_5_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_5_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_5_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_5_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_tooltip.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_tooltip.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_frueh.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_frueh.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_spaet.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_spaet.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_tooltip.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_tooltip.png
+ui-kit/hud/v5/mock_hud_f5_v5_C.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_C.png
+ui-kit/hud/v5/mock_hud_f5_v5_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_C_ressourcen.png
+ui-kit/menus_v3/v3_1_comic_armee.png -> _alt/ui-kit/menus_v3/v3_1_comic_armee.png
+ui-kit/menus_v3/v3_1_comic_bauen.png -> _alt/ui-kit/menus_v3/v3_1_comic_bauen.png
+ui-kit/menus_v3/v3_1_comic_helden_detail.png -> _alt/ui-kit/menus_v3/v3_1_comic_helden_detail.png
+ui-kit/menus_v3/v3_3_werkbank_armee.png -> _alt/ui-kit/menus_v3/v3_3_werkbank_armee.png
+ui-kit/menus_v3/v3_3_werkbank_bauen.png -> _alt/ui-kit/menus_v3/v3_3_werkbank_bauen.png
+ui-kit/menus_v3/v3_3_werkbank_helden_detail.png -> _alt/ui-kit/menus_v3/v3_3_werkbank_helden_detail.png
+ui-kit/menus_v3/v3_4_glas_armee.png -> _alt/ui-kit/menus_v3/v3_4_glas_armee.png
+ui-kit/menus_v3/v3_4_glas_bauen.png -> _alt/ui-kit/menus_v3/v3_4_glas_bauen.png
+ui-kit/menus_v3/v3_4_glas_helden_detail.png -> _alt/ui-kit/menus_v3/v3_4_glas_helden_detail.png
+ui-kit/menus_v3/v3_5_sammelkarten_armee.png -> _alt/ui-kit/menus_v3/v3_5_sammelkarten_armee.png
+ui-kit/menus_v3/v3_5_sammelkarten_bauen.png -> _alt/ui-kit/menus_v3/v3_5_sammelkarten_bauen.png
+ui-kit/menus_v3/v3_5_sammelkarten_helden_detail.png -> _alt/ui-kit/menus_v3/v3_5_sammelkarten_helden_detail.png
+# 22.10.2026 Nachtrag: zurückverschoben (Ziel -> ursprünglicher Ort)
+_alt/ui-kit/menus_v1/MENU_TEMPLATE.md -> ui-kit/menus_v1/MENU_TEMPLATE.md (ZURÜCK)
+_alt/ui-kit/hud/v3/HUD_KONZEPT_F5_v3.md -> ui-kit/hud/v3/HUD_KONZEPT_F5_v3.md (ZURÜCK)
+_alt/ui-kit/hud/v3/MOODBOARD_F5.md -> ui-kit/hud/v3/MOODBOARD_F5.md (ZURÜCK)
+# 22.10.2026 Nachtrag 2
+weltkarte/bg_v1 -> _alt/weltkarte/bg_v1
+weltkarte/mockup_v2 -> _alt/weltkarte/mockup_v2
+# 22.10.2026 Nachtrag 3 (nach PR epodarien#150)
+ui-kit/hud/v5/mock_hud_f5_v5_6_C_frueh.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_6_C_frueh.png
+ui-kit/hud/v5/mock_hud_f5_v5_6_C_ressourcen.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_6_C_ressourcen.png
+ui-kit/hud/v5/mock_hud_f5_v5_6_C_spaet.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_6_C_spaet.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_frueh.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_frueh.png
+ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_spaet.png -> _alt/ui-kit/hud/v5/mock_hud_f5_v5_7_C_final_spaet.png
+ui-kit/hud/v5/tooltips_topbar_v5_7.png -> _alt/ui-kit/hud/v5/tooltips_topbar_v5_7.png
+2026-10-22 | team/art/dorf_e1/dorfkarte_e1_v4.jpg -> team/art/_alt/dorf_e1/dorfkarte_e1_v4.jpg | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_dock.png -> team/art/_alt/weltkarte/review/_crops/crop_dock.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_figur_knoten4.png -> team/art/_alt/weltkarte/review/_crops/crop_figur_knoten4.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_gesperrt_5_7.png -> team/art/_alt/weltkarte/review/_crops/crop_gesperrt_5_7.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/kontakt_vorhandene_ui_assets.png -> team/art/_alt/weltkarte/review/_crops/kontakt_vorhandene_ui_assets.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_bruecke.png -> team/art/_alt/weltkarte/review/_crops/crop_bruecke.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_sterne_1_3.png -> team/art/_alt/weltkarte/review/_crops/crop_sterne_1_3.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_truhe_zielscheibe.png -> team/art/_alt/weltkarte/review/_crops/crop_truhe_zielscheibe.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/review/_crops/crop_knoten8_totem.png -> team/art/_alt/weltkarte/review/_crops/crop_knoten8_totem.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/v2/weltkarte_v2_nebel_layer_buch1.png -> team/art/_alt/weltkarte/v2/weltkarte_v2_nebel_layer_buch1.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/v2/weltkarte_b1_v4.jpg -> team/art/_alt/weltkarte/v2/weltkarte_b1_v4.jpg | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/v2/mockup_b1_v1.jpg -> team/art/_alt/weltkarte/v2/mockup_b1_v1.jpg | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/mockup_e1_v1.png -> team/art/_alt/weltkarte/mockup_e1_v1.png | Fabian via New Bot: alle Karten außer New-Bot-Konzept veraltet; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 | team/art/weltkarte/v2/pillow_fix.py -> team/art/_alt/weltkarte/v2/pillow_fix.py | AD: Pillow-Skript für verworfenes Mockup v1; keine Referenz in Xenatosa/epodarien (main e64737d)
+2026-10-22 karten_konzept/dorfplan_e1_schema_vor_sued.png -> _alt (vor Süd-Umbau, nicht verwenden)
+2026-10-22 karten_konzept/karte_e1_schema_vor_sued.png -> _alt (vor Süd-Umbau, nicht verwenden)
+2026-10-22 | team/art/karten_konzept/dorfkarte_massplan_v1.md -> team/art/_alt/dorfkarte_massplan_v1.md | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v1.png -> team/art/_alt/massplan_v1.png | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v1.py -> team/art/_alt/massplan_v1.py | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/dorfkarte_massplan_v2.md -> team/art/_alt/dorfkarte_massplan_v2.md | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v2.png -> team/art/_alt/massplan_v2.png | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v2.py -> team/art/_alt/massplan_v2.py | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/dorfkarte_massplan_v2_1.md -> team/art/_alt/dorfkarte_massplan_v2_1.md | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v2_1.png -> team/art/_alt/massplan_v2_1.png | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/massplan_v2_1.py -> team/art/_alt/massplan_v2_1.py | Fabian via New Bot: ersetzt durch Maßplan v2.2
+2026-10-22 | team/art/karten_konzept/dorfplan_e1_schema.png (Stand vor Westfeld-Regel) -> team/art/_alt/dorfplan_e1_schema_vor_westfeld.png | Backup vor Westfeld-Umbau, nicht verwenden
+2026-10-22 | team/art/karten_konzept/karte_e1_schema.png (Stand vor Westfeld-Regel) -> team/art/_alt/karte_e1_schema_vor_westfeld.png | Backup vor Westfeld-Umbau, nicht verwenden
+2026-10-22 | team/art/karten_konzept/massplan_v2_2.png (Stand vor Pfad-Entfernung) -> team/art/_alt/massplan_v2_2_vor_pfadweg.png | Backup, Fabian: kein Pfad/keine Fußspuren zum Westfeld
+2026-10-22 | team/art/karten_konzept/massplan_v2_2.py (Stand vor Pfad-Entfernung) -> team/art/_alt/massplan_v2_2_vor_pfadweg.py | Backup, Fabian: kein Pfad/keine Fußspuren zum Westfeld
+2026-10-22 | team/art/karten_konzept/dorfkarte_massplan_v2_2.md (Stand vor Pfad-Entfernung) -> team/art/_alt/dorfkarte_massplan_v2_2_vor_pfadweg.md | Backup, Fabian: kein Pfad/keine Fußspuren zum Westfeld
+2026-10-22 | team/art/karten_konzept/dorfplan_e1_schema.png (Stand vor Pfad-Entfernung) -> team/art/_alt/dorfplan_e1_schema_vor_pfadweg.png | Backup, Fabian: kein Pfad/keine Fußspuren zum Westfeld
+2026-10-22 | team/art/karten_konzept/karte_e1_schema.png (Stand vor Pfad-Entfernung) -> team/art/_alt/karte_e1_schema_vor_pfadweg.png | Backup, Fabian: kein Pfad/keine Fußspuren zum Westfeld
+2026-10-22 | team/art/karten_konzept/massplan_v2_2.png (Stand vor Pfosten x −16) -> team/art/_alt/massplan_v2_2_vor_pfosten16.png | Backup, Pfosten nach x −16 m (New Bot)
+2026-10-22 | team/art/karten_konzept/massplan_v2_2.py (Stand vor Pfosten x −16) -> team/art/_alt/massplan_v2_2_vor_pfosten16.py | Backup, Pfosten nach x −16 m (New Bot)
+2026-10-22 | team/art/karten_konzept/dorfkarte_massplan_v2_2.md (Stand vor Pfosten x −16) -> team/art/_alt/dorfkarte_massplan_v2_2_vor_pfosten16.md | Backup, Pfosten nach x −16 m (New Bot)
+2026-10-22 | team/art/ui-kit/menus_v3/rarity_d2/ui_rarity_legendary.png -> team/art/_alt/ui-kit/menus_v3/rarity_d2/ui_rarity_legendary.png | D2 kennt nur R/SR/SSR/UR, Auftrag New Bot
+ui-kit/hud/v5 v5_7 mockups -> zurück aus _alt (22.10.2026, gültig laut Fabian)
+v5_7 wieder nach _alt (Fabian: alt, abgelehnt)
+2026-10-22 | team/art/ui-kit/hud/ -> team/art/_alt/ui-kit/hud/ (komplett) + ui-kit/previews/contact_hud_f5_v5.png -> _alt/ui-kit/ | HUD v5/v5.7 inkl. hud_c_ico_* gestrichen, gültig D2 + Dock A braun (Fabian 22.10.2026)
+2026-10-22 | team/art/ui-kit/previews/contact_hud_f5{,_v3}.png -> team/art/_alt/ui-kit/ | alte HUD-Vorschauen, gestrichen
