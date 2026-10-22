@@ -1,0 +1,1847 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "safe_top": 90,
+ "safe_bottom": 48,
+ "touch_min": 96,
+ "elemente": [
+  {
+   "id": "A1",
+   "name": "Avatar (Portraet)",
+   "x": 28,
+   "y": 98,
+   "w": 128,
+   "h": 128,
+   "sprite": "d2_panel_frame (9-Slice)",
+   "hit": [
+    28,
+    90,
+    128,
+    144
+   ],
+   "grp": "top",
+   "note": "Portraet 104 innen (12 px), antippbar -> Profil"
+  },
+  {
+   "id": "A2",
+   "name": "Level-Badge",
+   "x": 92,
+   "y": 182,
+   "w": 60,
+   "h": 40,
+   "sprite": "d2_badge_stufe",
+   "hit": [
+    92,
+    182,
+    60,
+    40
+   ],
+   "grp": "top",
+   "note": "innen rechts unten 4/4, Lilita 26"
+  },
+  {
+   "id": "R1",
+   "name": "Pill Zeitkristalle",
+   "x": 172,
+   "y": 98,
+   "w": 248,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    172,
+    90,
+    248,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+8/y+8, Zahl Lilita 40 ab x+84 (Platz 152)"
+  },
+  {
+   "id": "R2",
+   "name": "Plus Zeitkristalle -> Shop",
+   "x": 432,
+   "y": 98,
+   "w": 80,
+   "h": 80,
+   "sprite": "d2_btn_plus_pill + d2_ico_plus",
+   "hit": [
+    422,
+    90,
+    100,
+    96
+   ],
+   "grp": "top",
+   "note": "sichtbar 80 (= Pill-Hoehe), Hitbox 100x96 (2 px Luft zu R1 und 10 px zu R3)"
+  },
+  {
+   "id": "R3",
+   "name": "Pill Wissen",
+   "x": 532,
+   "y": 98,
+   "w": 248,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    532,
+    90,
+    248,
+    96
+   ],
+   "grp": "top",
+   "note": ""
+  },
+  {
+   "id": "R4",
+   "name": "Pill Gold (Muscheln)",
+   "x": 800,
+   "y": 98,
+   "w": 248,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    800,
+    90,
+    248,
+    96
+   ],
+   "grp": "top",
+   "note": ""
+  },
+  {
+   "id": "K1",
+   "name": "Knopf Ressourcen (Kiste)",
+   "x": 172,
+   "y": 196,
+   "w": 104,
+   "h": 104,
+   "sprite": "d2_btn_quadrat_normal / _gedrueckt (offen)",
+   "hit": [
+    172,
+    196,
+    104,
+    104
+   ],
+   "grp": "top",
+   "note": "nur Icon d2_ico_kiste 72 bei x+16/y+16, kein Text, kein Pfeil"
+  },
+  {
+   "id": "L0",
+   "name": "Ressourcen-Liste (offen)",
+   "x": 172,
+   "y": 312,
+   "w": 600,
+   "h": 448,
+   "sprite": "d2_dropdown_liste (9-Slice 72)",
+   "hit": [
+    172,
+    312,
+    600,
+    448
+   ],
+   "grp": "liste",
+   "note": "Anker: 12 px unter K1, linke Kante = K1; schliesst per Tipp auf K1 oder Scrim"
+  },
+  {
+   "id": "L0H",
+   "name": "Kopf 'LAGER'",
+   "x": 196,
+   "y": 336,
+   "w": 552,
+   "h": 32,
+   "sprite": "Text Baloo 700 22, Sperrung 3",
+   "hit": [
+    196,
+    336,
+    552,
+    32
+   ],
+   "grp": "liste",
+   "note": "text.muted"
+  },
+  {
+   "id": "L1",
+   "name": "Zeile Holz",
+   "x": 184,
+   "y": 376,
+   "w": 576,
+   "h": 120,
+   "sprite": "Zeile (ganze Zeile antippbar)",
+   "hit": [
+    184,
+    376,
+    576,
+    120
+   ],
+   "grp": "liste",
+   "note": "Tipp -> Gebaeude/Info; Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "L1I",
+   "name": "Icon Holz",
+   "x": 196,
+   "y": 400,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    196,
+    400,
+    72,
+    72
+   ],
+   "grp": "liste",
+   "note": ""
+  },
+  {
+   "id": "L1N",
+   "name": "Name Holz",
+   "x": 284,
+   "y": 394,
+   "w": 240,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    284,
+    394,
+    240,
+    40
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L1B",
+   "name": "Lagerbalken Holz",
+   "x": 284,
+   "y": 450,
+   "w": 240,
+   "h": 22,
+   "sprite": "d2_bar_bg + d2_bar_fill_glut",
+   "hit": [
+    284,
+    450,
+    240,
+    22
+   ],
+   "grp": "liste",
+   "note": "Fuellung = Menge/Lager"
+  },
+  {
+   "id": "L1W",
+   "name": "Menge Holz",
+   "x": 540,
+   "y": 390,
+   "w": 196,
+   "h": 48,
+   "sprite": "Text Lilita 36 rechtsb.",
+   "hit": [
+    540,
+    390,
+    196,
+    48
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L1C",
+   "name": "Lager Holz",
+   "x": 540,
+   "y": 442,
+   "w": 196,
+   "h": 34,
+   "sprite": "Text Baloo 700 22 rechtsb.",
+   "hit": [
+    540,
+    442,
+    196,
+    34
+   ],
+   "grp": "liste",
+   "note": "text.counter, voll = state.missing"
+  },
+  {
+   "id": "L2",
+   "name": "Zeile Stein",
+   "x": 184,
+   "y": 496,
+   "w": 576,
+   "h": 120,
+   "sprite": "Zeile (ganze Zeile antippbar)",
+   "hit": [
+    184,
+    496,
+    576,
+    120
+   ],
+   "grp": "liste",
+   "note": "Tipp -> Gebaeude/Info; Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "L2I",
+   "name": "Icon Stein",
+   "x": 196,
+   "y": 520,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    196,
+    520,
+    72,
+    72
+   ],
+   "grp": "liste",
+   "note": ""
+  },
+  {
+   "id": "L2N",
+   "name": "Name Stein",
+   "x": 284,
+   "y": 514,
+   "w": 240,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    284,
+    514,
+    240,
+    40
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L2B",
+   "name": "Lagerbalken Stein",
+   "x": 284,
+   "y": 570,
+   "w": 240,
+   "h": 22,
+   "sprite": "d2_bar_bg + d2_bar_fill_glut",
+   "hit": [
+    284,
+    570,
+    240,
+    22
+   ],
+   "grp": "liste",
+   "note": "Fuellung = Menge/Lager"
+  },
+  {
+   "id": "L2W",
+   "name": "Menge Stein",
+   "x": 540,
+   "y": 510,
+   "w": 196,
+   "h": 48,
+   "sprite": "Text Lilita 36 rechtsb.",
+   "hit": [
+    540,
+    510,
+    196,
+    48
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L2C",
+   "name": "Lager Stein",
+   "x": 540,
+   "y": 562,
+   "w": 196,
+   "h": 34,
+   "sprite": "Text Baloo 700 22 rechtsb.",
+   "hit": [
+    540,
+    562,
+    196,
+    34
+   ],
+   "grp": "liste",
+   "note": "text.counter, voll = state.missing"
+  },
+  {
+   "id": "L3",
+   "name": "Zeile Nahrung",
+   "x": 184,
+   "y": 616,
+   "w": 576,
+   "h": 120,
+   "sprite": "Zeile (ganze Zeile antippbar)",
+   "hit": [
+    184,
+    616,
+    576,
+    120
+   ],
+   "grp": "liste",
+   "note": "Tipp -> Gebaeude/Info; Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "L3I",
+   "name": "Icon Nahrung",
+   "x": 196,
+   "y": 640,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    196,
+    640,
+    72,
+    72
+   ],
+   "grp": "liste",
+   "note": ""
+  },
+  {
+   "id": "L3N",
+   "name": "Name Nahrung",
+   "x": 284,
+   "y": 634,
+   "w": 240,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    284,
+    634,
+    240,
+    40
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L3B",
+   "name": "Lagerbalken Nahrung",
+   "x": 284,
+   "y": 690,
+   "w": 240,
+   "h": 22,
+   "sprite": "d2_bar_bg + d2_bar_fill_glut",
+   "hit": [
+    284,
+    690,
+    240,
+    22
+   ],
+   "grp": "liste",
+   "note": "Fuellung = Menge/Lager"
+  },
+  {
+   "id": "L3W",
+   "name": "Menge Nahrung",
+   "x": 540,
+   "y": 630,
+   "w": 196,
+   "h": 48,
+   "sprite": "Text Lilita 36 rechtsb.",
+   "hit": [
+    540,
+    630,
+    196,
+    48
+   ],
+   "grp": "liste",
+   "note": "text.main"
+  },
+  {
+   "id": "L3C",
+   "name": "Lager Nahrung",
+   "x": 540,
+   "y": 682,
+   "w": 196,
+   "h": 34,
+   "sprite": "Text Baloo 700 22 rechtsb.",
+   "hit": [
+    540,
+    682,
+    196,
+    34
+   ],
+   "grp": "liste",
+   "note": "text.counter, voll = state.missing"
+  },
+  {
+   "id": "S1",
+   "name": "Seitenknopf Beschwören",
+   "x": 932,
+   "y": 316,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Glut-Ring",
+   "hit": [
+    932,
+    316,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Icon 80; Hitbox inkl. Label 120x152"
+  },
+  {
+   "id": "S1L",
+   "name": "Label Beschwören",
+   "x": 922,
+   "y": 440,
+   "w": 140,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    922,
+    440,
+    140,
+    28
+   ],
+   "grp": "side",
+   "note": ""
+  },
+  {
+   "id": "S1B",
+   "name": "Badge Beschwören",
+   "x": 1000,
+   "y": 320,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    320,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "S2",
+   "name": "Seitenknopf Angebote",
+   "x": 932,
+   "y": 488,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    488,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Shop + Gratis/Login + Abo als Reiter"
+  },
+  {
+   "id": "S2L",
+   "name": "Label Angebote",
+   "x": 932,
+   "y": 612,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    612,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": ""
+  },
+  {
+   "id": "S2B",
+   "name": "Badge Angebote",
+   "x": 1000,
+   "y": 492,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    492,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "S3",
+   "name": "Seitenknopf Pass",
+   "x": 932,
+   "y": 660,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    660,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Haeuptlings-Pfad"
+  },
+  {
+   "id": "S3L",
+   "name": "Label Pass",
+   "x": 932,
+   "y": 784,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    784,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": ""
+  },
+  {
+   "id": "S3B",
+   "name": "Badge Pass",
+   "x": 1000,
+   "y": 664,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    664,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "H1",
+   "name": "Seitenknopf Wettkampf",
+   "x": 28,
+   "y": 488,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    28,
+    488,
+    120,
+    152
+   ],
+   "grp": "sidel",
+   "note": "Hub: Arena, Ranglisten, Ahnenpruefung als Kacheln/Reiter"
+  },
+  {
+   "id": "H1L",
+   "name": "Label Wettkampf",
+   "x": 28,
+   "y": 612,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    28,
+    612,
+    120,
+    28
+   ],
+   "grp": "sidel",
+   "note": ""
+  },
+  {
+   "id": "H1B",
+   "name": "Badge Wettkampf",
+   "x": 96,
+   "y": 492,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    96,
+    492,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "B1",
+   "name": "Seitenknopf Bauen",
+   "x": 932,
+   "y": 1552,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    1552,
+    120,
+    120
+   ],
+   "grp": "side",
+   "note": "v6.1: unten rechts neben Quest-Leiste, Ende 1672 (10 px vor Platte 1682, 4 px vor Freiraum-Linie 1676); Hitbox 120x120; ohne Label (Hammer-Symbol)"
+  },
+  {
+   "id": "B1B",
+   "name": "Badge Bauen",
+   "x": 1000,
+   "y": 1556,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    1556,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "N1",
+   "name": "Mini-Knopf Mail",
+   "x": 848,
+   "y": 196,
+   "w": 96,
+   "h": 96,
+   "sprite": "d2_btn_quadrat_normal (96)",
+   "hit": [
+    848,
+    196,
+    96,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+16/y+16, ohne Label (Symbol eindeutig)"
+  },
+  {
+   "id": "N2",
+   "name": "Mini-Knopf Mehr",
+   "x": 956,
+   "y": 196,
+   "w": 96,
+   "h": 96,
+   "sprite": "d2_btn_quadrat_normal (96) / _gedrueckt (offen)",
+   "hit": [
+    956,
+    196,
+    96,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+16/y+16, ohne Label (Symbol eindeutig)"
+  },
+  {
+   "id": "N1B",
+   "name": "Badge Mail",
+   "x": 900,
+   "y": 200,
+   "w": 40,
+   "h": 34,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    900,
+    200,
+    40,
+    34
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "M0",
+   "name": "Mehr-Menue (offen)",
+   "x": 452,
+   "y": 304,
+   "w": 600,
+   "h": 416,
+   "sprite": "d2_dropdown_liste (9-Slice 72)",
+   "hit": [
+    452,
+    304,
+    600,
+    416
+   ],
+   "grp": "mehr",
+   "note": "Anker: rechte Kante = N2, 12 px darunter; Kopf 'MEHR' Baloo 22"
+  },
+  {
+   "id": "M1",
+   "name": "Kachel Forschung",
+   "x": 476,
+   "y": 368,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    476,
+    368,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle GDD 21"
+  },
+  {
+   "id": "M2",
+   "name": "Kachel Minigames",
+   "x": 620,
+   "y": 368,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    620,
+    368,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle GDD 17"
+  },
+  {
+   "id": "M3",
+   "name": "Kachel Erfolge",
+   "x": 764,
+   "y": 368,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    764,
+    368,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle quest-system-v1"
+  },
+  {
+   "id": "M4",
+   "name": "Kachel Artefakte",
+   "x": 908,
+   "y": 368,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    908,
+    368,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle GDD 18"
+  },
+  {
+   "id": "M5",
+   "name": "Kachel Aufwertung",
+   "x": 476,
+   "y": 544,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    476,
+    544,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle Scaffold general_upgrade"
+  },
+  {
+   "id": "M6",
+   "name": "Kachel Kosmetik",
+   "x": 620,
+   "y": 544,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    620,
+    544,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle ausruestung/cosmetic"
+  },
+  {
+   "id": "M7",
+   "name": "Kachel Einstellungen",
+   "x": 764,
+   "y": 544,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    764,
+    544,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle GDD 19.x Nr. 5"
+  },
+  {
+   "id": "M8",
+   "name": "Kachel Hilfe",
+   "x": 908,
+   "y": 544,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal + Label Baloo 20",
+   "hit": [
+    908,
+    544,
+    120,
+    152
+   ],
+   "grp": "mehr",
+   "note": "Quelle GDD 25.12"
+  },
+  {
+   "id": "V1",
+   "name": "Event-Knopf (eingeklappt)",
+   "x": 28,
+   "y": 316,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal / _gedrueckt (offen)",
+   "hit": [
+    28,
+    316,
+    120,
+    152
+   ],
+   "grp": "event",
+   "note": "Icon 80 (aktuelles Top-Event), Badge = Anzahl laufender Events; Hitbox inkl. Label"
+  },
+  {
+   "id": "V1L",
+   "name": "Label Events",
+   "x": 28,
+   "y": 440,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    28,
+    440,
+    120,
+    28
+   ],
+   "grp": "event",
+   "note": ""
+  },
+  {
+   "id": "V1B",
+   "name": "Badge Anzahl Events",
+   "x": 96,
+   "y": 320,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    96,
+    320,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "W0",
+   "name": "Event-Liste (ausgeklappt)",
+   "x": 28,
+   "y": 480,
+   "w": 440,
+   "h": 572,
+   "sprite": "d2_dropdown_liste (9-Slice 72)",
+   "hit": [
+    28,
+    480,
+    440,
+    572
+   ],
+   "grp": "evliste",
+   "note": "klappt unter V1 auf, linke Kante = V1; scrollt ab 6 Eintraegen (max. Hoehe bis y 1380)"
+  },
+  {
+   "id": "W1",
+   "name": "Eintrag Erntefest",
+   "x": 40,
+   "y": 496,
+   "w": 416,
+   "h": 108,
+   "sprite": "Zeile (antippbar -> Event-Fenster)",
+   "hit": [
+    40,
+    496,
+    416,
+    108
+   ],
+   "grp": "evliste",
+   "note": "Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "W1I",
+   "name": "Icon Erntefest",
+   "x": 52,
+   "y": 514,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    52,
+    514,
+    72,
+    72
+   ],
+   "grp": "evliste",
+   "note": ""
+  },
+  {
+   "id": "W1N",
+   "name": "Name Erntefest",
+   "x": 140,
+   "y": 510,
+   "w": 300,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    140,
+    510,
+    300,
+    40
+   ],
+   "grp": "evliste",
+   "note": "max. 14 Zeichen"
+  },
+  {
+   "id": "W1T",
+   "name": "Restzeit Erntefest",
+   "x": 140,
+   "y": 554,
+   "w": 300,
+   "h": 36,
+   "sprite": "Text Lilita 28 + Uhr-Icon 24",
+   "hit": [
+    140,
+    554,
+    300,
+    36
+   ],
+   "grp": "evliste",
+   "note": "text.counter, < 1 h = glut"
+  },
+  {
+   "id": "W2",
+   "name": "Eintrag Turnier",
+   "x": 40,
+   "y": 604,
+   "w": 416,
+   "h": 108,
+   "sprite": "Zeile (antippbar -> Event-Fenster)",
+   "hit": [
+    40,
+    604,
+    416,
+    108
+   ],
+   "grp": "evliste",
+   "note": "Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "W2I",
+   "name": "Icon Turnier",
+   "x": 52,
+   "y": 622,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    52,
+    622,
+    72,
+    72
+   ],
+   "grp": "evliste",
+   "note": ""
+  },
+  {
+   "id": "W2N",
+   "name": "Name Turnier",
+   "x": 140,
+   "y": 618,
+   "w": 300,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    140,
+    618,
+    300,
+    40
+   ],
+   "grp": "evliste",
+   "note": "max. 14 Zeichen"
+  },
+  {
+   "id": "W2T",
+   "name": "Restzeit Turnier",
+   "x": 140,
+   "y": 662,
+   "w": 300,
+   "h": 36,
+   "sprite": "Text Lilita 28 + Uhr-Icon 24",
+   "hit": [
+    140,
+    662,
+    300,
+    36
+   ],
+   "grp": "evliste",
+   "note": "text.counter, < 1 h = glut"
+  },
+  {
+   "id": "W3",
+   "name": "Eintrag Haendler",
+   "x": 40,
+   "y": 712,
+   "w": 416,
+   "h": 108,
+   "sprite": "Zeile (antippbar -> Event-Fenster)",
+   "hit": [
+    40,
+    712,
+    416,
+    108
+   ],
+   "grp": "evliste",
+   "note": "Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "W3I",
+   "name": "Icon Haendler",
+   "x": 52,
+   "y": 730,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    52,
+    730,
+    72,
+    72
+   ],
+   "grp": "evliste",
+   "note": ""
+  },
+  {
+   "id": "W3N",
+   "name": "Name Haendler",
+   "x": 140,
+   "y": 726,
+   "w": 300,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    140,
+    726,
+    300,
+    40
+   ],
+   "grp": "evliste",
+   "note": "max. 14 Zeichen"
+  },
+  {
+   "id": "W3T",
+   "name": "Restzeit Haendler",
+   "x": 140,
+   "y": 770,
+   "w": 300,
+   "h": 36,
+   "sprite": "Text Lilita 28 + Uhr-Icon 24",
+   "hit": [
+    140,
+    770,
+    300,
+    36
+   ],
+   "grp": "evliste",
+   "note": "text.counter, < 1 h = glut"
+  },
+  {
+   "id": "W4",
+   "name": "Eintrag Bauwoche",
+   "x": 40,
+   "y": 820,
+   "w": 416,
+   "h": 108,
+   "sprite": "Zeile (antippbar -> Event-Fenster)",
+   "hit": [
+    40,
+    820,
+    416,
+    108
+   ],
+   "grp": "evliste",
+   "note": "Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "W4I",
+   "name": "Icon Bauwoche",
+   "x": 52,
+   "y": 838,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    52,
+    838,
+    72,
+    72
+   ],
+   "grp": "evliste",
+   "note": ""
+  },
+  {
+   "id": "W4N",
+   "name": "Name Bauwoche",
+   "x": 140,
+   "y": 834,
+   "w": 300,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    140,
+    834,
+    300,
+    40
+   ],
+   "grp": "evliste",
+   "note": "max. 14 Zeichen"
+  },
+  {
+   "id": "W4T",
+   "name": "Restzeit Bauwoche",
+   "x": 140,
+   "y": 878,
+   "w": 300,
+   "h": 36,
+   "sprite": "Text Lilita 28 + Uhr-Icon 24",
+   "hit": [
+    140,
+    878,
+    300,
+    36
+   ],
+   "grp": "evliste",
+   "note": "text.counter, < 1 h = glut"
+  },
+  {
+   "id": "W5",
+   "name": "Eintrag Gilden-Jagd",
+   "x": 40,
+   "y": 928,
+   "w": 416,
+   "h": 108,
+   "sprite": "Zeile (antippbar -> Event-Fenster)",
+   "hit": [
+    40,
+    928,
+    416,
+    108
+   ],
+   "grp": "evliste",
+   "note": "Trenner d2_dropdown_trenner"
+  },
+  {
+   "id": "W5I",
+   "name": "Icon Gilden-Jagd",
+   "x": 52,
+   "y": 946,
+   "w": 72,
+   "h": 72,
+   "sprite": "Icon neu D2",
+   "hit": [
+    52,
+    946,
+    72,
+    72
+   ],
+   "grp": "evliste",
+   "note": ""
+  },
+  {
+   "id": "W5N",
+   "name": "Name Gilden-Jagd",
+   "x": 140,
+   "y": 942,
+   "w": 300,
+   "h": 40,
+   "sprite": "Text Baloo 800 28",
+   "hit": [
+    140,
+    942,
+    300,
+    40
+   ],
+   "grp": "evliste",
+   "note": "max. 14 Zeichen"
+  },
+  {
+   "id": "W5T",
+   "name": "Restzeit Gilden-Jagd",
+   "x": 140,
+   "y": 986,
+   "w": 300,
+   "h": 36,
+   "sprite": "Text Lilita 28 + Uhr-Icon 24",
+   "hit": [
+    140,
+    986,
+    300,
+    36
+   ],
+   "grp": "evliste",
+   "note": "text.counter, < 1 h = glut"
+  },
+  {
+   "id": "C1",
+   "name": "Chat-Knopf",
+   "x": 28,
+   "y": 1396,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    28,
+    1396,
+    120,
+    120
+   ],
+   "grp": "left",
+   "note": "Icon 80 innen"
+  },
+  {
+   "id": "C2",
+   "name": "Badge Chat (ungelesen)",
+   "x": 96,
+   "y": 1400,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    96,
+    1400,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "Q1",
+   "name": "Quest-Leiste",
+   "x": 28,
+   "y": 1536,
+   "w": 720,
+   "h": 124,
+   "sprite": "d2_panel_frame (9-Slice)",
+   "hit": [
+    28,
+    1536,
+    720,
+    124
+   ],
+   "grp": "left",
+   "note": "ganze Leiste antippbar; Ende 1660 (16 px vor Platten-Oberkante 1682)"
+  },
+  {
+   "id": "Q2",
+   "name": "Quest-Icon",
+   "x": 42,
+   "y": 1550,
+   "w": 96,
+   "h": 96,
+   "sprite": "Icon neu D2",
+   "hit": [
+    42,
+    1550,
+    96,
+    96
+   ],
+   "grp": "left",
+   "note": ">= 70 gefordert, 96 gewaehlt"
+  },
+  {
+   "id": "Q3",
+   "name": "Quest-Text",
+   "x": 152,
+   "y": 1552,
+   "w": 452,
+   "h": 40,
+   "sprite": "Text Lilita 30",
+   "hit": [
+    152,
+    1552,
+    452,
+    40
+   ],
+   "grp": "left",
+   "note": "1 Zeile, Ellipse '...'"
+  },
+  {
+   "id": "Q4",
+   "name": "Quest-Fortschritt",
+   "x": 152,
+   "y": 1608,
+   "w": 452,
+   "h": 22,
+   "sprite": "d2_bar_bg + d2_bar_fill_glut",
+   "hit": [
+    152,
+    1608,
+    452,
+    22
+   ],
+   "grp": "left",
+   "note": ""
+  },
+  {
+   "id": "Q5",
+   "name": "Quest-Zaehler 3/5",
+   "x": 616,
+   "y": 1596,
+   "w": 116,
+   "h": 44,
+   "sprite": "Text Lilita 32",
+   "hit": [
+    616,
+    1596,
+    116,
+    44
+   ],
+   "grp": "left",
+   "note": "rechtsbuendig"
+  },
+  {
+   "id": "D0",
+   "name": "Dock-Hintergrund",
+   "x": 0,
+   "y": 1708,
+   "w": 1080,
+   "h": 212,
+   "sprite": "d2_dock_bg (9-Slice 4/8/4/8)",
+   "hit": [
+    0,
+    1708,
+    1080,
+    212
+   ],
+   "grp": "dock",
+   "note": "bottom-anchored, deckt Gestenzone mit"
+  },
+  {
+   "id": "T1",
+   "name": "Tab Dorf",
+   "x": 0,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    0,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T1P",
+   "name": "Aktive Platte Dorf",
+   "x": 10,
+   "y": 1682,
+   "w": 160,
+   "h": 196,
+   "sprite": "d2_dock_platte_aktiv",
+   "hit": [
+    10,
+    1682,
+    160,
+    196
+   ],
+   "grp": "dock",
+   "note": "Overlay, ragt 26 hoch (v4: 192 breit -> 160)"
+  },
+  {
+   "id": "T1I",
+   "name": "Icon Dorf (aktiv)",
+   "x": 30,
+   "y": 1686,
+   "w": 120,
+   "h": 112,
+   "sprite": "Icon neu D2",
+   "hit": [
+    30,
+    1686,
+    120,
+    112
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T1T",
+   "name": "Label Dorf (aktiv)",
+   "x": 10,
+   "y": 1812,
+   "w": 160,
+   "h": 44,
+   "sprite": "Lilita 34 #FFF3D6",
+   "hit": [
+    10,
+    1812,
+    160,
+    44
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T1S",
+   "name": "Indikator",
+   "x": 60,
+   "y": 1860,
+   "w": 60,
+   "h": 8,
+   "sprite": "d2_dock_indikator",
+   "hit": [
+    60,
+    1860,
+    60,
+    8
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T2",
+   "name": "Tab Helden",
+   "x": 180,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    180,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T2I",
+   "name": "Icon Helden",
+   "x": 222,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    222,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T2T",
+   "name": "Label Helden",
+   "x": 190,
+   "y": 1814,
+   "w": 160,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    190,
+    1814,
+    160,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T3",
+   "name": "Tab Karte",
+   "x": 360,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    360,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T3I",
+   "name": "Icon Karte",
+   "x": 402,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    402,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T3T",
+   "name": "Label Karte",
+   "x": 370,
+   "y": 1814,
+   "w": 160,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    370,
+    1814,
+    160,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T4",
+   "name": "Tab Armee",
+   "x": 540,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    540,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T4I",
+   "name": "Icon Armee",
+   "x": 582,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    582,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T4T",
+   "name": "Label Armee",
+   "x": 550,
+   "y": 1814,
+   "w": 160,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    550,
+    1814,
+    160,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T5",
+   "name": "Tab Gilde",
+   "x": 720,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    720,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T5I",
+   "name": "Icon Gilde",
+   "x": 762,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    762,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T5T",
+   "name": "Label Gilde",
+   "x": 730,
+   "y": 1814,
+   "w": 160,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    730,
+    1814,
+    160,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T6",
+   "name": "Tab Inventar",
+   "x": 900,
+   "y": 1708,
+   "w": 180,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    900,
+    1708,
+    180,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 180x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T6I",
+   "name": "Icon Inventar",
+   "x": 942,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    942,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T6T",
+   "name": "Label Inventar",
+   "x": 910,
+   "y": 1814,
+   "w": 160,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    910,
+    1814,
+    160,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T2B",
+   "name": "Badge Helden",
+   "x": 302,
+   "y": 1716,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    302,
+    1716,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "innen im Tab"
+  },
+  {
+   "id": "T5B",
+   "name": "Badge Gilde",
+   "x": 842,
+   "y": 1716,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    842,
+    1716,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "Spende/Jagd offen"
+  },
+  {
+   "id": "G1",
+   "name": "Gestenleiste (System)",
+   "x": 390,
+   "y": 1896,
+   "w": 300,
+   "h": 10,
+   "sprite": "System",
+   "hit": [
+    390,
+    1896,
+    300,
+    10
+   ],
+   "grp": "sys",
+   "note": "nicht antippbar"
+  }
+ ]
+}
