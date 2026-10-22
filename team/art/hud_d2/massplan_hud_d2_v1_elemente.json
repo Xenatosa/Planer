@@ -1,0 +1,810 @@
+{
+ "canvas": [
+  1080,
+  1920
+ ],
+ "safe_top": 90,
+ "safe_bottom": 48,
+ "touch_min": 96,
+ "elemente": [
+  {
+   "id": "A1",
+   "name": "Avatar (Portraet)",
+   "x": 28,
+   "y": 98,
+   "w": 128,
+   "h": 128,
+   "sprite": "d2_panel_frame (9-Slice)",
+   "hit": [
+    28,
+    90,
+    128,
+    144
+   ],
+   "grp": "top",
+   "note": "Portraet 104 innen (12 px), antippbar -> Profil"
+  },
+  {
+   "id": "A2",
+   "name": "Level-Badge",
+   "x": 92,
+   "y": 182,
+   "w": 60,
+   "h": 40,
+   "sprite": "d2_badge_stufe",
+   "hit": [
+    92,
+    182,
+    60,
+    40
+   ],
+   "grp": "top",
+   "note": "innen rechts unten 4/4, Lilita 26"
+  },
+  {
+   "id": "R1",
+   "name": "Pill Holz",
+   "x": 172,
+   "y": 98,
+   "w": 280,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    172,
+    90,
+    280,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+8/y+8, Zahl Lilita 40 ab x+84"
+  },
+  {
+   "id": "R2",
+   "name": "Pill Stein",
+   "x": 472,
+   "y": 98,
+   "w": 280,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    472,
+    90,
+    280,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+8/y+8, Zahl Lilita 40 ab x+84"
+  },
+  {
+   "id": "R3",
+   "name": "Pill Nahrung",
+   "x": 772,
+   "y": 98,
+   "w": 280,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    772,
+    90,
+    280,
+    96
+   ],
+   "grp": "top",
+   "note": "Icon 64 bei x+8/y+8, Zahl Lilita 40 ab x+84"
+  },
+  {
+   "id": "R4",
+   "name": "Pill Gold",
+   "x": 172,
+   "y": 194,
+   "w": 280,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    172,
+    186,
+    280,
+    96
+   ],
+   "grp": "top",
+   "note": ""
+  },
+  {
+   "id": "R5",
+   "name": "Pill Kristalle",
+   "x": 472,
+   "y": 194,
+   "w": 280,
+   "h": 80,
+   "sprite": "d2_pill_ressource",
+   "hit": [
+    472,
+    186,
+    280,
+    96
+   ],
+   "grp": "top",
+   "note": ""
+  },
+  {
+   "id": "R6",
+   "name": "Plus Kristalle -> Shop",
+   "x": 764,
+   "y": 194,
+   "w": 80,
+   "h": 80,
+   "sprite": "d2_btn_plus_pill + d2_ico_plus",
+   "hit": [
+    754,
+    186,
+    120,
+    96
+   ],
+   "grp": "top",
+   "note": "sichtbar 80 (= Pill-Hoehe), Hitbox 120x96 (beginnt 2 px hinter Kristall-Pill)"
+  },
+  {
+   "id": "S1",
+   "name": "Seitenknopf Events",
+   "x": 932,
+   "y": 316,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    316,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Icon 80 bei x+20/y+20; Hitbox inkl. Label 120x152"
+  },
+  {
+   "id": "S1L",
+   "name": "Label Events",
+   "x": 932,
+   "y": 440,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    440,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": "Text #EADFC6, Kontur 3 px #000"
+  },
+  {
+   "id": "S1B",
+   "name": "Badge Events",
+   "x": 1000,
+   "y": 320,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    320,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "innen rechts oben 4/4"
+  },
+  {
+   "id": "S2",
+   "name": "Seitenknopf Gratis / Login",
+   "x": 932,
+   "y": 488,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    488,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Icon 80 bei x+20/y+20; Hitbox inkl. Label 120x152"
+  },
+  {
+   "id": "S2L",
+   "name": "Label Gratis",
+   "x": 932,
+   "y": 612,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    612,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": "Text #EADFC6, Kontur 3 px #000"
+  },
+  {
+   "id": "S2B",
+   "name": "Badge Gratis",
+   "x": 1000,
+   "y": 492,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    492,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "innen rechts oben 4/4"
+  },
+  {
+   "id": "S3",
+   "name": "Seitenknopf Shop",
+   "x": 932,
+   "y": 660,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    660,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Icon 80 bei x+20/y+20; Hitbox inkl. Label 120x152"
+  },
+  {
+   "id": "S3L",
+   "name": "Label Shop",
+   "x": 932,
+   "y": 784,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    784,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": "Text #EADFC6, Kontur 3 px #000"
+  },
+  {
+   "id": "S4",
+   "name": "Seitenknopf Mail / Mehr",
+   "x": 932,
+   "y": 832,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    932,
+    832,
+    120,
+    152
+   ],
+   "grp": "side",
+   "note": "Icon 80 bei x+20/y+20; Hitbox inkl. Label 120x152"
+  },
+  {
+   "id": "S4L",
+   "name": "Label Mail",
+   "x": 932,
+   "y": 956,
+   "w": 120,
+   "h": 28,
+   "sprite": "Text Baloo 800 22",
+   "hit": [
+    932,
+    956,
+    120,
+    28
+   ],
+   "grp": "side",
+   "note": "Text #EADFC6, Kontur 3 px #000"
+  },
+  {
+   "id": "S4B",
+   "name": "Badge Mail",
+   "x": 1000,
+   "y": 836,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    1000,
+    836,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "innen rechts oben 4/4"
+  },
+  {
+   "id": "V1",
+   "name": "Event-Platzhalter (Banner)",
+   "x": 28,
+   "y": 316,
+   "w": 312,
+   "h": 168,
+   "sprite": "d2_panel_frame_glut",
+   "hit": [
+    28,
+    316,
+    312,
+    168
+   ],
+   "grp": "event",
+   "note": "Icon 96 bei x+16/y+16, 'EVENT' + Countdown Lilita 30 rechts"
+  },
+  {
+   "id": "C1",
+   "name": "Chat-Knopf",
+   "x": 28,
+   "y": 1396,
+   "w": 120,
+   "h": 120,
+   "sprite": "d2_btn_quadrat_normal",
+   "hit": [
+    28,
+    1396,
+    120,
+    120
+   ],
+   "grp": "left",
+   "note": "Icon 80 innen"
+  },
+  {
+   "id": "C2",
+   "name": "Badge Chat (ungelesen)",
+   "x": 96,
+   "y": 1400,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    96,
+    1400,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": ""
+  },
+  {
+   "id": "Q1",
+   "name": "Quest-Leiste",
+   "x": 28,
+   "y": 1536,
+   "w": 720,
+   "h": 124,
+   "sprite": "d2_panel_frame (9-Slice)",
+   "hit": [
+    28,
+    1536,
+    720,
+    124
+   ],
+   "grp": "left",
+   "note": "ganze Leiste antippbar; Ende 1660 (16 px vor Platten-Oberkante 1682)"
+  },
+  {
+   "id": "Q2",
+   "name": "Quest-Icon",
+   "x": 42,
+   "y": 1550,
+   "w": 96,
+   "h": 96,
+   "sprite": "Icon neu D2",
+   "hit": [
+    42,
+    1550,
+    96,
+    96
+   ],
+   "grp": "left",
+   "note": ">= 70 gefordert, 96 gewaehlt"
+  },
+  {
+   "id": "Q3",
+   "name": "Quest-Text",
+   "x": 152,
+   "y": 1552,
+   "w": 452,
+   "h": 40,
+   "sprite": "Text Lilita 30",
+   "hit": [
+    152,
+    1552,
+    452,
+    40
+   ],
+   "grp": "left",
+   "note": "1 Zeile, Ellipse '...'"
+  },
+  {
+   "id": "Q4",
+   "name": "Quest-Fortschritt",
+   "x": 152,
+   "y": 1608,
+   "w": 452,
+   "h": 22,
+   "sprite": "d2_bar_bg + d2_bar_fill_glut",
+   "hit": [
+    152,
+    1608,
+    452,
+    22
+   ],
+   "grp": "left",
+   "note": ""
+  },
+  {
+   "id": "Q5",
+   "name": "Quest-Zaehler 3/5",
+   "x": 616,
+   "y": 1596,
+   "w": 116,
+   "h": 44,
+   "sprite": "Text Lilita 32",
+   "hit": [
+    616,
+    1596,
+    116,
+    44
+   ],
+   "grp": "left",
+   "note": "rechtsbuendig"
+  },
+  {
+   "id": "D0",
+   "name": "Dock-Hintergrund",
+   "x": 0,
+   "y": 1708,
+   "w": 1080,
+   "h": 212,
+   "sprite": "d2_dock_bg (9-Slice 4/8/4/8)",
+   "hit": [
+    0,
+    1708,
+    1080,
+    212
+   ],
+   "grp": "dock",
+   "note": "bottom-anchored, deckt Gestenzone mit"
+  },
+  {
+   "id": "T1",
+   "name": "Tab Dorf",
+   "x": 0,
+   "y": 1708,
+   "w": 216,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    0,
+    1708,
+    216,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 216x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T1P",
+   "name": "Aktive Platte Dorf",
+   "x": 12,
+   "y": 1682,
+   "w": 192,
+   "h": 196,
+   "sprite": "d2_dock_platte_aktiv",
+   "hit": [
+    12,
+    1682,
+    192,
+    196
+   ],
+   "grp": "dock",
+   "note": "Overlay, ragt 26 hoch"
+  },
+  {
+   "id": "T1I",
+   "name": "Icon Dorf (aktiv)",
+   "x": 38,
+   "y": 1686,
+   "w": 140,
+   "h": 124,
+   "sprite": "Icon neu D2",
+   "hit": [
+    38,
+    1686,
+    140,
+    124
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T1T",
+   "name": "Label Dorf (aktiv)",
+   "x": 12,
+   "y": 1812,
+   "w": 192,
+   "h": 44,
+   "sprite": "Lilita 36 #FFF3D6",
+   "hit": [
+    12,
+    1812,
+    192,
+    44
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T1S",
+   "name": "Indikator",
+   "x": 78,
+   "y": 1860,
+   "w": 60,
+   "h": 8,
+   "sprite": "d2_dock_indikator",
+   "hit": [
+    78,
+    1860,
+    60,
+    8
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T2",
+   "name": "Tab Armee",
+   "x": 216,
+   "y": 1708,
+   "w": 216,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    216,
+    1708,
+    216,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 216x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T2I",
+   "name": "Icon Armee",
+   "x": 276,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    276,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T2T",
+   "name": "Label Armee",
+   "x": 228,
+   "y": 1814,
+   "w": 192,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    228,
+    1814,
+    192,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T3",
+   "name": "Tab Bauen",
+   "x": 432,
+   "y": 1708,
+   "w": 216,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    432,
+    1708,
+    216,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 216x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T3I",
+   "name": "Icon Bauen",
+   "x": 492,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    492,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T3T",
+   "name": "Label Bauen",
+   "x": 444,
+   "y": 1814,
+   "w": 192,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    444,
+    1814,
+    192,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T4",
+   "name": "Tab Helden",
+   "x": 648,
+   "y": 1708,
+   "w": 216,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    648,
+    1708,
+    216,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 216x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T4I",
+   "name": "Icon Helden",
+   "x": 708,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    708,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T4T",
+   "name": "Label Helden",
+   "x": 660,
+   "y": 1814,
+   "w": 192,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    660,
+    1814,
+    192,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T5",
+   "name": "Tab Karte",
+   "x": 864,
+   "y": 1708,
+   "w": 216,
+   "h": 164,
+   "sprite": "",
+   "hit": [
+    864,
+    1708,
+    216,
+    164
+   ],
+   "grp": "dock",
+   "note": "Hitbox 216x164 (bis Gestenzone)"
+  },
+  {
+   "id": "T5I",
+   "name": "Icon Karte",
+   "x": 924,
+   "y": 1722,
+   "w": 96,
+   "h": 88,
+   "sprite": "Icon neu D2",
+   "hit": [
+    924,
+    1722,
+    96,
+    88
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T5T",
+   "name": "Label Karte",
+   "x": 876,
+   "y": 1814,
+   "w": 192,
+   "h": 38,
+   "sprite": "Lilita 30 #BFAE8E",
+   "hit": [
+    876,
+    1814,
+    192,
+    38
+   ],
+   "grp": "dock",
+   "note": ""
+  },
+  {
+   "id": "T4B",
+   "name": "Badge Helden",
+   "x": 804,
+   "y": 1716,
+   "w": 48,
+   "h": 38,
+   "sprite": "d2_badge_zaehler",
+   "hit": [
+    804,
+    1716,
+    48,
+    38
+   ],
+   "grp": "badge",
+   "note": "innen im Tab"
+  },
+  {
+   "id": "G1",
+   "name": "Gestenleiste (System)",
+   "x": 390,
+   "y": 1896,
+   "w": 300,
+   "h": 10,
+   "sprite": "System",
+   "hit": [
+    390,
+    1896,
+    300,
+    10
+   ],
+   "grp": "sys",
+   "note": "nicht antippbar"
+  }
+ ]
+}
