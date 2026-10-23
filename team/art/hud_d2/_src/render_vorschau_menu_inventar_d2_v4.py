@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rendere die drei Inventar-v4d-Keyframes aus dem interaktiven HTML."""
+"""Rendere die drei Inventar-v4e-Keyframes aus dem interaktiven HTML."""
 from __future__ import annotations
 
 import shutil

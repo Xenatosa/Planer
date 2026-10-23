@@ -1,4 +1,4 @@
-# Maßplan · Inventar D2 v4b
+# Maßplan · Inventar D2 v4e
 
 Leinwand: **1080 × 1920 px**, Hochformat. Das UI nutzt feste Pixelmaße wie der Beschwören-v16-Mock; Kartenbereich und Suchfeld bleiben im HTML bedienbar.
 
@@ -8,8 +8,8 @@ Leinwand: **1080 × 1920 px**, Hochformat. Das UI nutzt feste Pixelmaße wie der
 | Kopf | x30, y126 · 1020 × 102 | Zurück, Inventar, Schließen; Belegung 28/40 |
 | Kategorien | x30, y244 · 1020 × 126 | fünf gleich große Tabs mit Symbol und Anzahl |
 | Suche / Sortierung | x38, y386 · 1004 × 76 | Suche 708 px, Sortierung 284 px |
-| Kartenraster | x35, y510 · 1010 × 1002 | vier Spalten, Karten 242 × 190 px, fünf Reihen sichtbar, vertikal scrollbar; Icons 60 px |
-| Kapazität | x42, y1544 · 996 × 76 | Belegung 28/40, Glut-Füllstand 70 % |
+| Kartenraster | x35, y510 · 1010 × 920 | fünf Spalten, Karten 194 × 146 px, sechs Reihen (30 Gegenstände) sichtbar, vertikal scrollbar; Icons 48 px; Abstand 8 px |
+| Kapazität | x42, y1500 · 996 × 76 | Belegung 28/40, Glut-Füllstand 70 % |
 | Übersicht | — | Tabs, Suche, Sortierung, Raster und Kapazität; keine feststehende Detailfläche |
 | Detailsheet (modal) | x38, y688 · 1004 × 946 | nur nach Tipp auf Gegenstand; großes Itembild, Werte und typabhängige Aktion; X, Zurück, Außentipp oder Escape schließt |
 | Dock A | x0, y1664 · 1080 × 256 | sechs Bereiche, Inventar aktiv, Home-Leiste |
