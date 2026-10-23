@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Inventar · Obsidian &amp; Glut v4</title>
+<title>Inventar · Obsidian &amp; Glut v4b</title>
 <style>
 @font-face{font-family:Lilita;src:url("../inventar_v4_assets/LilitaOne-Regular.ttf")}
 @font-face{font-family:Baloo;src:url("../inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
@@ -52,14 +52,14 @@ button{cursor:pointer}
 .grid-head{position:absolute;z-index:8;left:50px;top:474px;width:980px;height:25px;display:flex;align-items:center;justify-content:space-between;color:#ebd6b6}
 .grid-head strong{font:19px/1 Lilita;letter-spacing:1.1px}
 .grid-head span{font:18px/1 Baloo;color:#bba889;font-weight:800}
-.collection{position:absolute;z-index:7;left:35px;top:510px;width:1010px;height:500px;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:242px;gap:16px;overflow-y:auto;scrollbar-width:none;padding:0 4px 4px}
+.collection{position:absolute;z-index:7;left:35px;top:510px;width:1010px;height:1020px;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:242px;gap:16px;overflow-y:auto;scrollbar-width:none;padding:0 4px 4px}
 .collection::-webkit-scrollbar{display:none}
 .item-card{position:relative;overflow:hidden;height:242px;padding:12px 16px 10px;border:1.5px solid color-mix(in srgb,var(--grade) 78%,#6c4b31);border-radius:27px;background:linear-gradient(142deg,rgba(48,36,29,.97),rgba(17,14,13,.98) 58%,rgba(30,20,16,.98));box-shadow:0 9px 18px rgba(0,0,0,.44),inset 0 1px 0 rgba(255,245,225,.15),inset 0 0 0 4px rgba(0,0,0,.24);display:grid;grid-template-columns:134px 1fr;align-items:center;text-align:left;transition:transform .16s,box-shadow .16s,border-color .16s}
 .item-card:before{content:"";position:absolute;inset:7px;border:1px solid color-mix(in srgb,var(--grade) 36%,transparent);border-radius:21px;pointer-events:none}
 .item-card:after{content:"";position:absolute;inset:-45% -30%;background:linear-gradient(120deg,transparent 39%,rgba(255,245,218,.075) 49%,transparent 59%);transform:translateX(-40%);pointer-events:none}
 .item-card.selected{border:3px solid #ffb25d;box-shadow:0 0 0 3px rgba(255,126,33,.2),0 0 22px color-mix(in srgb,var(--grade) 45%,transparent),0 10px 22px #0009,inset 0 1px 0 #fff5}
 .item-art{position:relative;width:126px;height:146px;display:grid;place-items:center;border-radius:22px;background:radial-gradient(ellipse, color-mix(in srgb,var(--grade) 22%,transparent),transparent 70%)}
-.item-art img{width:124px;height:124px;object-fit:contain;filter:drop-shadow(0 9px 10px #0009)}
+.item-art img{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 7px 8px #0009)}
 .item-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;height:100%;padding-left:5px}
 .grade{display:inline-flex;align-items:center;min-height:25px;padding:3px 9px 2px;border:1px solid color-mix(in srgb,var(--grade) 58%,transparent);border-radius:12px;background:color-mix(in srgb,var(--grade) 15%,rgba(8,7,7,.72));color:var(--grade);font:14px/1 Lilita;letter-spacing:.45px;white-space:nowrap;text-transform:uppercase}
 .item-name{display:block;max-width:100%;margin-top:8px;color:#fff0d4;font:23px/1.02 Lilita;text-shadow:0 2px 0 #100a07;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -68,7 +68,7 @@ button{cursor:pointer}
 .stack-pill{position:absolute;z-index:3;top:15px;right:14px;min-width:58px;padding:6px 9px 4px;border:1px solid rgba(255,226,184,.28);border-radius:15px;background:rgba(7,6,6,.78);color:#fff0d7;font:19px/1 Lilita;text-align:center;box-shadow:0 3px 8px #0009}
 .mini-progress{width:100%;height:6px;margin-top:7px;border-radius:6px;background:#080706;overflow:hidden;box-shadow:inset 0 1px 2px #000}
 .mini-progress i{display:block;height:100%;background:linear-gradient(90deg,#f16b25,#ffd47e);box-shadow:0 0 8px #ff9a3d}
-.capacity{position:absolute;z-index:8;left:42px;top:1026px;width:996px;height:76px;padding:9px 20px;display:grid;grid-template-columns:235px 1fr 118px;align-items:center;gap:18px;border:1px solid rgba(214,162,101,.42);border-radius:21px;background:linear-gradient(100deg,rgba(21,17,15,.98),rgba(34,22,16,.96),rgba(15,12,11,.98));box-shadow:0 8px 17px #0008,inset 0 1px 0 #fff2}
+.capacity{position:absolute;z-index:8;left:42px;top:1544px;width:996px;height:76px;padding:9px 20px;display:grid;grid-template-columns:235px 1fr 118px;align-items:center;gap:18px;border:1px solid rgba(214,162,101,.42);border-radius:21px;background:linear-gradient(100deg,rgba(21,17,15,.98),rgba(34,22,16,.96),rgba(15,12,11,.98));box-shadow:0 8px 17px #0008,inset 0 1px 0 #fff2}
 .capacity-label{display:flex;align-items:center;gap:12px}
 .capacity-mark{width:40px;height:40px;border:1px solid #d7a769;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#483025,#181210);color:#ffca82;font:23px/1 Lilita}
 .capacity-label div{display:flex;flex-direction:column;line-height:1}
@@ -78,11 +78,14 @@ button{cursor:pointer}
 .capacity-track i{display:block;width:70%;height:100%;border-radius:9px;background:linear-gradient(90deg,#b54d1a,#f98637 68%,#ffd07c);box-shadow:0 0 12px rgba(255,136,48,.55)}
 .capacity-count{text-align:right;color:#fff0d8;font:24px/1 Lilita;white-space:nowrap}
 .capacity-count small{font:16px/1 Baloo;color:#b8a487;font-weight:800}
-.sheet{position:absolute;z-index:12;left:38px;top:1117px;width:1004px;height:514px;padding:22px 28px 24px;border:1.5px solid rgba(228,164,94,.74);border-radius:34px;background:linear-gradient(140deg,rgba(31,23,19,.985),rgba(15,12,11,.99) 62%,rgba(35,21,15,.985));box-shadow:0 19px 45px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,238,212,.24),inset 0 0 0 5px rgba(0,0,0,.36);transition:top .28s cubic-bezier(.2,.75,.2,1),height .28s cubic-bezier(.2,.75,.2,1),background .2s}
+.sheet-backdrop{display:none;position:absolute;z-index:11;inset:0;background:rgba(0,0,0,.64)}
+.sheet-backdrop.open{display:block}
+.sheet{display:none;position:absolute;z-index:12;left:38px;top:688px;width:1004px;height:946px;padding:25px 38px 30px;border:1.5px solid rgba(228,164,94,.74);border-radius:34px;background:linear-gradient(145deg,rgba(35,25,20,.995),rgba(13,11,10,.998) 58%,rgba(41,23,15,.995));box-shadow:0 24px 65px #000c,inset 0 1px 0 rgba(255,238,212,.25),inset 0 0 0 5px rgba(0,0,0,.4)}
+.sheet.open{display:block}
 .sheet:before{content:"";position:absolute;inset:9px;border:1px solid rgba(239,186,124,.21);border-radius:26px;pointer-events:none}
 .sheet-head{position:relative;z-index:1;height:38px;display:flex;align-items:center;justify-content:space-between;color:#c5ad89;font:15px/1 Lilita;letter-spacing:1.2px}
 .sheet-head .handle{position:absolute;left:50%;top:-8px;transform:translateX(-50%);width:66px;height:6px;border-radius:6px;background:linear-gradient(90deg,#70452b,#d89b5f,#70452b);box-shadow:0 1px 8px #0009}
-.sheet-close{border:0;background:transparent;color:#d7bf9b;font:21px/1 Lilita;padding:7px 10px}
+.sheet-close{width:54px;height:54px;border:1px solid rgba(225,177,116,.42);border-radius:17px;background:linear-gradient(145deg,rgba(62,43,31,.95),rgba(19,15,13,.98));box-shadow:inset 0 1px 0 #fff3,0 4px 10px #0008;color:#f5dfbd;font:37px/1 Lilita;padding:0;display:grid;place-items:center}
 .detail-layout{position:relative;z-index:1;height:424px;display:grid;grid-template-columns:248px 1fr;gap:27px;align-items:center}
 .detail-art{width:238px;height:256px;position:relative;display:grid;place-items:center;border:2px solid color-mix(in srgb,var(--detail-grade) 82%,#fff1d0);border-radius:29px;background:radial-gradient(ellipse at 50% 48%,color-mix(in srgb,var(--detail-grade) 31%,transparent),transparent 70%),linear-gradient(145deg,rgba(94,61,37,.8),rgba(18,15,14,.95));box-shadow:0 0 0 5px rgba(0,0,0,.5),0 0 25px color-mix(in srgb,var(--detail-grade) 33%,transparent),inset 0 1px 0 #fff7}
 .detail-art:before{content:"";position:absolute;inset:9px;border:1px solid color-mix(in srgb,var(--detail-grade) 55%,transparent);border-radius:21px}
@@ -101,8 +104,8 @@ button{cursor:pointer}
 .fragment-progress .track{height:9px;margin-top:7px;border-radius:8px;background:#090706;overflow:hidden}
 .fragment-progress .track i{display:block;height:100%;width:15%;border-radius:8px;background:linear-gradient(90deg,#9c63dc,#f2beff);box-shadow:0 0 11px #bf78ff}
 .primary{position:relative;z-index:2;width:min(610px,100%);height:120px;margin-top:2px;border:1.5px solid #ffe0ad;border-radius:21px;background:linear-gradient(180deg,#ffbd67 0%,#f6802d 48%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff7,inset 0 -4px 0 rgba(77,26,7,.35),0 8px 17px #0008,0 0 20px rgba(255,129,39,.22);color:#fff8e9;font:33px/1 Lilita;text-shadow:0 3px 0 #9a3b10;letter-spacing:.4px}
+.primary[hidden]{display:none}
 .primary:active{transform:translateY(2px);filter:brightness(1.08)}
-.sheet.expanded{top:688px;height:946px;padding:25px 38px 30px;background:linear-gradient(145deg,rgba(35,25,20,.995),rgba(13,11,10,.998) 58%,rgba(41,23,15,.995));box-shadow:0 24px 65px #000c,inset 0 1px 0 rgba(255,238,212,.25),inset 0 0 0 5px rgba(0,0,0,.4)}
 .sheet.expanded .sheet-head{height:43px}
 .sheet.expanded .sheet-head .handle{width:82px;height:7px;top:-9px}
 .sheet.expanded .detail-layout{height:838px;grid-template-columns:380px 1fr;gap:38px;align-items:start;padding-top:36px}
@@ -128,8 +131,6 @@ button{cursor:pointer}
 .dock-item i{position:relative;z-index:1;width:60px;height:8px;margin-top:14px;border-radius:8px;background:linear-gradient(90deg,#ef873d,#ffab58);box-shadow:0 0 9px #ff8b3c}
 .home-bar{position:absolute;left:390px;top:231px;width:300px;height:10px;border-radius:8px;background:rgba(255,255,255,.92);box-shadow:0 1px 4px #0007}
 .empty-state{position:absolute;z-index:8;left:130px;top:600px;width:820px;text-align:center;color:#ead8b8;font:28px/1.2 Lilita}
-html[data-screen="detail"] .collection{filter:brightness(.32) saturate(.7)}
-html[data-screen="detail"] .capacity{filter:brightness(.52)}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
 </style>
 </head>
@@ -165,8 +166,9 @@ html[data-screen="detail"] .capacity{filter:brightness(.52)}
   <div class="capacity-track"><i></i></div>
   <div class="capacity-count">28 <small>/ 40</small></div>
 </div>
-<section class="sheet" id="sheet" aria-label="Gegenstandsdetails">
-  <div class="sheet-head"><span class="handle" aria-hidden="true"></span><span>GEGENSTAND IM BLICK</span><button class="sheet-close" id="sheet-close" type="button">Einklappen&nbsp;⌄</button></div>
+<div class="sheet-backdrop" id="sheet-backdrop" aria-hidden="true"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Gegenstandsdetails" aria-hidden="true">
+  <div class="sheet-head"><span class="handle" aria-hidden="true"></span><span>GEGENSTAND IM BLICK</span><button class="sheet-close" id="sheet-close" type="button" aria-label="Details schließen">×</button></div>
   <div class="detail-layout">
     <div class="detail-art"><img id="detail-image" src="../inventar_v4_assets/eq_helm.png" alt="Knochenhelm"></div>
     <div class="detail-copy">
@@ -192,9 +194,9 @@ html[data-screen="detail"] .capacity{filter:brightness(.52)}
 <script>
 const ASSET = '../inventar_v4_assets/';
 const ITEMS = [
-  {id:'holz',name:'Urholz',kind:'ressourcen',image:'holz.png',grade:'grob',gradeLabel:'Grob',amount:'2.400',detail:'Ressource · Bauholz',desc:'Sorgfältig gebündeltes Holz aus dem alten Forst.',stats:['2.400 Stück','Bau & Ausbau'],action:'VERWALTEN'},
-  {id:'stein',name:'Graustein',kind:'ressourcen',image:'stein.png',grade:'grob',gradeLabel:'Grob',amount:'1.100',detail:'Ressource · Stein',desc:'Dichte Felsbrocken für Mauern und Werkstätten.',stats:['1.100 Stück','Bau & Ausbau'],action:'VERWALTEN'},
-  {id:'beute',name:'Jagdbeute',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'8.200',detail:'Ressource · Nahrung',desc:'Frische Vorräte für den nächsten Marsch.',stats:['8.200 Stück','Proviant'],action:'VERWALTEN'},
+  {id:'holz',name:'Urholz',kind:'ressourcen',image:'holz.png',grade:'grob',gradeLabel:'Grob',amount:'2.400',detail:'Ressource · Bauholz',desc:'Sorgfältig gebündeltes Holz aus dem alten Forst.',stats:['2.400 Stück','Bau & Ausbau'],action:'VERWENDEN'},
+  {id:'stein',name:'Graustein',kind:'ressourcen',image:'stein.png',grade:'grob',gradeLabel:'Grob',amount:'1.100',detail:'Ressource · Stein',desc:'Dichte Felsbrocken für Mauern und Werkstätten.',stats:['1.100 Stück','Bau & Ausbau'],action:'VERWENDEN'},
+  {id:'beute',name:'Jagdbeute',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'8.200',detail:'Ressource · Nahrung',desc:'Frische Vorräte für den nächsten Marsch.',stats:['8.200 Stück','Proviant'],action:'VERWENDEN'},
   {id:'glutuhr',name:'Glutuhr',kind:'verbrauch',image:'uhr.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'×3',detail:'Verbrauch · Zeit',desc:'Entfacht die Glut und beschleunigt eine laufende Arbeit.',stats:['3 Stück','Zeitgewinn'],action:'VERWENDEN'},
   {id:'helm',name:'Knochenhelm',kind:'ausruestung',image:'eq_helm.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'St. 4',detail:'Ausrüstung · Kopf',desc:'Mammutknochen und dichtes Fell. Hält Frost und schweren Schlägen stand.',stats:['+42 Leben','+18 Frostschutz'],action:'ANLEGEN'},
   {id:'speer',name:'Steinspeer',kind:'ausruestung',image:'eq_waffe.png',grade:'meister',gradeLabel:'Meisterstück',amount:'St. 3',detail:'Ausrüstung · Waffe',desc:'Geschärfter Obsidiansplitter an festem Eschenholz.',stats:['+31 Angriff','+6 Tempo'],action:'ANLEGEN'},
@@ -208,15 +210,15 @@ const ITEMS = [
   {id:'vorrat',name:'Vorratskiste',kind:'verbrauch',image:'kiste.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'×2',detail:'Verbrauch · Vorräte',desc:'Enthält eine kleine Auswahl an nützlichen Materialien.',stats:['2 Stück','Enthält Ressourcen'],action:'VERWENDEN'},
   {id:'balsam',name:'Frostbalsam',kind:'verbrauch',image:'nahrung.png',grade:'meister',gradeLabel:'Meisterstück',amount:'×4',detail:'Verbrauch · Heilung',desc:'Wärmt den Körper und lindert Kälteschäden.',stats:['4 Stück','Wirkdauer: 30 Min.'],action:'VERWENDEN'},
   {id:'licht',name:'Glutlicht',kind:'verbrauch',image:'uhr.png',grade:'grob',gradeLabel:'Grob',amount:'×6',detail:'Verbrauch · Licht',desc:'Ein tragbares Licht für dunkle Höhlen und Pfade.',stats:['6 Stück','Wirkdauer: 20 Min.'],action:'VERWENDEN'},
-  {id:'knochen',name:'Knochen',kind:'ressourcen',image:'artefakte.png',grade:'grob',gradeLabel:'Grob',amount:'680',detail:'Ressource · Knochen',desc:'Robustes Material aus den eisigen Jagdgründen.',stats:['680 Stück','Handwerk'],action:'VERWALTEN'},
-  {id:'kraeuter',name:'Wilde Kräuter',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'340',detail:'Ressource · Kräuter',desc:'Frische Kräuter für Heilmittel und wärmende Tränke.',stats:['340 Bündel','Alchemie'],action:'VERWALTEN'},
-  {id:'fell',name:'Fellbündel',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'710',detail:'Ressource · Fell',desc:'Weiches Fell für Kleidung und Winterlager.',stats:['710 Stück','Handwerk'],action:'VERWALTEN'},
-  {id:'glutkohle',name:'Glutkohle',kind:'ressourcen',image:'uhr.png',grade:'grob',gradeLabel:'Grob',amount:'520',detail:'Ressource · Kohle',desc:'Lange glimmende Kohle aus dem tiefen Ofen.',stats:['520 Stück','Schmiede'],action:'VERWALTEN'},
-  {id:'lehm',name:'Roter Lehm',kind:'ressourcen',image:'stein.png',grade:'grob',gradeLabel:'Grob',amount:'2.400',detail:'Ressource · Lehm',desc:'Formbarer Lehm für feste Wände und Keramik.',stats:['2.400 Stück','Bau & Ausbau'],action:'VERWALTEN'},
-  {id:'obsidian',name:'Obsidianerz',kind:'ressourcen',image:'stein.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'1.380',detail:'Ressource · Erz',desc:'Dunkles Erz mit scharf glänzenden Kanten.',stats:['1.380 Stück','Schmiede'],action:'VERWALTEN'},
-  {id:'harz',name:'Baumharz',kind:'ressourcen',image:'holz.png',grade:'grob',gradeLabel:'Grob',amount:'365',detail:'Ressource · Harz',desc:'Klebriges Harz zum Abdichten und Flicken.',stats:['365 Stück','Handwerk'],action:'VERWALTEN'},
-  {id:'elfenbein',name:'Mammutelfenbein',kind:'ressourcen',image:'artefakte.png',grade:'meister',gradeLabel:'Meisterstück',amount:'128',detail:'Ressource · Elfenbein',desc:'Seltenes Material für Schmuck und feine Werkzeuge.',stats:['128 Stück','Handwerk'],action:'VERWALTEN'},
-  {id:'eisen',name:'Eisenbrocken',kind:'ressourcen',image:'stein.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'48',detail:'Ressource · Eisen',desc:'Schwere Brocken aus dem nördlichen Stollen.',stats:['48 Stück','Schmiede'],action:'VERWALTEN'},
+  {id:'knochen',name:'Knochen',kind:'ressourcen',image:'artefakte.png',grade:'grob',gradeLabel:'Grob',amount:'680',detail:'Ressource · Knochen',desc:'Robustes Material aus den eisigen Jagdgründen.',stats:['680 Stück','Handwerk'],action:'VERWENDEN'},
+  {id:'kraeuter',name:'Wilde Kräuter',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'340',detail:'Ressource · Kräuter',desc:'Frische Kräuter für Heilmittel und wärmende Tränke.',stats:['340 Bündel','Alchemie'],action:'VERWENDEN'},
+  {id:'fell',name:'Fellbündel',kind:'ressourcen',image:'nahrung.png',grade:'grob',gradeLabel:'Grob',amount:'710',detail:'Ressource · Fell',desc:'Weiches Fell für Kleidung und Winterlager.',stats:['710 Stück','Handwerk'],action:'VERWENDEN'},
+  {id:'glutkohle',name:'Glutkohle',kind:'ressourcen',image:'uhr.png',grade:'grob',gradeLabel:'Grob',amount:'520',detail:'Ressource · Kohle',desc:'Lange glimmende Kohle aus dem tiefen Ofen.',stats:['520 Stück','Schmiede'],action:'VERWENDEN'},
+  {id:'lehm',name:'Roter Lehm',kind:'ressourcen',image:'stein.png',grade:'grob',gradeLabel:'Grob',amount:'2.400',detail:'Ressource · Lehm',desc:'Formbarer Lehm für feste Wände und Keramik.',stats:['2.400 Stück','Bau & Ausbau'],action:'VERWENDEN'},
+  {id:'obsidian',name:'Obsidianerz',kind:'ressourcen',image:'stein.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'1.380',detail:'Ressource · Erz',desc:'Dunkles Erz mit scharf glänzenden Kanten.',stats:['1.380 Stück','Schmiede'],action:'VERWENDEN'},
+  {id:'harz',name:'Baumharz',kind:'ressourcen',image:'holz.png',grade:'grob',gradeLabel:'Grob',amount:'365',detail:'Ressource · Harz',desc:'Klebriges Harz zum Abdichten und Flicken.',stats:['365 Stück','Handwerk'],action:'VERWENDEN'},
+  {id:'elfenbein',name:'Mammutelfenbein',kind:'ressourcen',image:'artefakte.png',grade:'meister',gradeLabel:'Meisterstück',amount:'128',detail:'Ressource · Elfenbein',desc:'Seltenes Material für Schmuck und feine Werkzeuge.',stats:['128 Stück','Handwerk'],action:'VERWENDEN'},
+  {id:'eisen',name:'Eisenbrocken',kind:'ressourcen',image:'stein.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'48',detail:'Ressource · Eisen',desc:'Schwere Brocken aus dem nördlichen Stollen.',stats:['48 Stück','Schmiede'],action:'VERWENDEN'},
   {id:'schurz',name:'Fellschurz',kind:'ausruestung',image:'eq_beine.png',grade:'geschliffen',gradeLabel:'Geschliffen',amount:'St. 2',detail:'Ausrüstung · Beine',desc:'Wärmender Schutz für lange Märsche im Schnee.',stats:['+16 Leben','+12 Frostschutz'],action:'ANLEGEN'},
   {id:'amulett',name:'Ahnenamulett',kind:'ausruestung',image:'eq_artefakt1.png',grade:'artefakt',gradeLabel:'Artefakt',amount:'St. 1',detail:'Ausrüstung · Amulett',desc:'Ein uraltes Zeichen, das seinen Träger stärkt.',stats:['+28 Leben','+9 Angriff'],action:'ANLEGEN'},
   {id:'frostfragment',name:'Frostwachtfragment',kind:'fragmente',image:'artefakte.png',grade:'artefakt',gradeLabel:'Artefakt',amount:'24 / 60',detail:'Fragment · Frostwacht',desc:'Splittert aus dem Siegel der nördlichen Wacht.',stats:['24 gesammelt','Noch 36 bis zur Stufe'],progress:24,total:60,action:'FORTSCHRITT'},
@@ -239,7 +241,7 @@ const CATEGORY_LABELS={alle:'DEINE FUNDE',ressourcen:'RESSOURCEN',ausruestung:'A
 const GRADE={grob:'#b99a72',geschliffen:'#80d785',meister:'#71c9ff',artefakt:'#d69aff'};
 const params=new URLSearchParams(location.search);
 let category='alle',query='',sortMode='Neueste',selectedId='helm';
-const collection=document.getElementById('collection'),sheet=document.getElementById('sheet');
+const collection=document.getElementById('collection'),sheet=document.getElementById('sheet'),backdrop=document.getElementById('sheet-backdrop');
 const search=document.getElementById('search');
 function visibleItems(){
   let items=ITEMS.filter(item=>(category==='alle'||item.kind===category)&&(`${item.name} ${item.detail} ${item.gradeLabel}`).toLocaleLowerCase('de').includes(query.toLocaleLowerCase('de')));
@@ -261,7 +263,7 @@ function draw(){
   collection.querySelectorAll('.item-card').forEach(card=>card.addEventListener('click',()=>selectItem(card.dataset.item,true)));
   const current=items.find(item=>item.id===selectedId);
   if(!current&&items.length){selectedId=items[0].id;updateDetail(ITEMS.find(item=>item.id===selectedId));}
-  else if(!items.length){document.getElementById('sheet').classList.remove('expanded');}
+  else if(!items.length){closeSheet();}
 }
 function updateDetail(item){
   if(!item)return;
@@ -279,11 +281,25 @@ function updateDetail(item){
     document.getElementById('fragment-count').textContent=`${item.progress} / ${item.total}`;
     document.getElementById('fragment-fill').style.width=`${Math.round(item.progress/item.total*100)}%`;
   }
-  document.getElementById('primary-action').textContent=item.action;
+  const action=document.getElementById('primary-action');
+  action.hidden=item.kind==='fragmente';
+  action.textContent=item.action;
+}
+function openSheet(){
+  sheet.classList.add('open','expanded');
+  backdrop.classList.add('open');
+  sheet.setAttribute('aria-hidden','false');
+  document.documentElement.dataset.screen='detail';
+}
+function closeSheet(){
+  sheet.classList.remove('open','expanded');
+  backdrop.classList.remove('open');
+  sheet.setAttribute('aria-hidden','true');
+  delete document.documentElement.dataset.screen;
 }
 function selectItem(id,expand){
   selectedId=id;updateDetail(ITEMS.find(item=>item.id===id));draw();
-  if(expand){sheet.classList.add('expanded');document.documentElement.dataset.screen='detail';}
+  if(expand)openSheet();
 }
 document.querySelectorAll('.category').forEach(tab=>tab.addEventListener('click',()=>{
   category=tab.dataset.category;
@@ -295,16 +311,19 @@ document.getElementById('sort').addEventListener('click',()=>{
   const modes=['Neueste','Seltenheit','Name','Menge'];sortMode=modes[(modes.indexOf(sortMode)+1)%modes.length];
   document.getElementById('sort-label').textContent=sortMode;draw();
 });
-document.getElementById('sheet-close').addEventListener('click',()=>{sheet.classList.remove('expanded');document.documentElement.dataset.screen='default';});
+document.getElementById('sheet-close').addEventListener('click',closeSheet);
+backdrop.addEventListener('click',closeSheet);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&sheet.classList.contains('open'))closeSheet();});
 document.getElementById('primary-action').addEventListener('click',event=>{event.currentTarget.style.filter='brightness(1.14)';setTimeout(()=>event.currentTarget.style.filter='',180);});
-document.querySelector('.head-button[aria-label="Zurück"]').addEventListener('click',()=>{sheet.classList.remove('expanded');document.documentElement.dataset.screen='default';});
-document.querySelector('.head-close').addEventListener('click',()=>{sheet.classList.remove('expanded');document.documentElement.dataset.screen='default';});
+document.querySelector('.head-button[aria-label="Zurück"]').addEventListener('click',closeSheet);
+document.querySelector('.head-close').addEventListener('click',closeSheet);
 const screen=params.get('screen');
 if(screen==='ausruestung')category='ausruestung';
 if(screen==='fragmente')category='fragmente';
-if(screen==='detail'){category='alle';sheet.classList.add('expanded');document.documentElement.dataset.screen='detail';}
+if(screen==='detail')category='alle';
 document.querySelectorAll('.category').forEach(tab=>{const active=tab.dataset.category===category;tab.classList.toggle('active',active);tab.setAttribute('aria-selected',String(active));});
 draw();updateDetail(ITEMS.find(item=>item.id===selectedId));
+if(screen==='detail')openSheet();
 </script>
 </body>
 </html>
