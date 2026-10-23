@@ -358,6 +358,15 @@ html[data-mode="standard"] .card-zone{top:366px}
     forceOpen=true;openCount=cards.length;updateCount();
   });
   draw();
+  var rateParam=params.get('rateup');
+  if(rateParam){
+    rateParam.split(',').forEach(function(key,index){
+      if(index<3 && key) setRateup(index,key);
+    });
+  }
+  if(params.get('picker')==='1'){
+    openPicker(Math.max(0, Math.min(2, parseInt(params.get('slot')||'0',10)||0)));
+  }
 })();
 </script>
 </body>
