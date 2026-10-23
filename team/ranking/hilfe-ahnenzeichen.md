@@ -192,7 +192,7 @@ Alle Belohnungen sind fest und **vor Beginn des Wettstreits vollständig sichtba
 | 2.000 | 30 Zeitkristalle + 500 Heldenerfahrung | 80 |
 | 6.000 | 50 Zeitkristalle + 5 Event-Helden-Fragmente + 800 Heldenerfahrung | 100 |
 | 12.000 | 70 Zeitkristalle + 1.000 Heldenerfahrung | 100 |
-| 20.000 | 75 Zeitkristalle + 5 Event-Helden-Fragmente + 1.500 Heldenerfahrung | 80 |
+| 20.000 | 55 Zeitkristalle + 5 Event-Helden-Fragmente + 1.500 Heldenerfahrung | 80 |
 | 30.000 | Emote „Ahnen“ | 40 |
 | | | **zusammen 400** |
 

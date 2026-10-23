@@ -106,7 +106,7 @@ Für beide Ranglisten ist `hero_shards_choice = 0`. Beim Würfel-Event gibt es k
 | Stammeswettstreit | 2.000 | 30 | 0 | 500 EP |
 | Stammeswettstreit | 6.000 | 50 | 5 | 800 EP |
 | Stammeswettstreit | 12.000 | 70 | 0 | 1.000 EP |
-| Stammeswettstreit | 20.000 (`ms_sw_4`) | 75 | 5 | 1.500 EP |
+| Stammeswettstreit | 20.000 (`ms_sw_4`) | 55 | 5 | 1.500 EP |
 | Stammeswettstreit | 30.000 | 0 | 0 | Emote „Ahnen“ |
 | Weltboss | 25 % | 20 | 0 | 500 EP |
 | Weltboss | 50 % | 0 | 5 | 500 EP |
