@@ -18,6 +18,8 @@
 | Listen-Kopf | 42 | 596 | 996 | 36 | Bereichstitel und Anzahl |
 | Nachrichtenliste | 30 | 640 | 1020 | 1013 | kompakte scrollbare Karten, Dock-Abstand 27 px |
 | Dock A | 0 | 1680 | 1080 | 240 | Dorf · Helden · Karte · Armee · Gilde · Inventar |
+| Modal-Scrim | 0 | 0 | 1080 | 1920 | rgba(4,3,3,.72); dimmt Liste, Kopf, Tabs und Dock |
+| Mail-Detail-Sheet | 38 | 430 | 1004 | 950 | Dialog mit Absender/Zeit, vollem Text, optionaler Belohnung und Aktionen |
 
 ## Nachrichtenkarten
 
@@ -26,7 +28,7 @@
 | System mit Belohnung | 1016 × 205 | Siegel-Emblem 104 × 104 links; rechts Titel, Absender/Zeit, Kurztext, Belohnungs-Chips | UNGELESEN / BELOHNUNG HOLEN oder ANGENOMMEN |
 | System ohne Belohnung | 1016 × 184 | Siegel-Emblem 104 × 104 links; rechts Titel, Metazeile, Kurztext | UNGELESEN oder GELESEN |
 | Spieler-Chat | 1016 × 192 | Avatar 94 × 94 links; rechts Betreff, Kontakt/Zeit und Chatblase | UNGELESEN oder GELESEN |
-| Listenabstand | — | 12 px zwischen Karten; scrollbarer Innenbereich | vier Beispielnachrichten pro Tab |
+| Listenabstand | — | 12 px zwischen Karten; scrollbarer Innenbereich | fünf Beispielnachrichten pro Tab |
 
 Je fünf Nachrichten sind ohne Scrollen sichtbar. Systemkarten nutzen Bronze/Glut, Siegel-Embleme und eingebaute Belohnungszeile. Spielerkarten nutzen kühle Türkis-/Petrolflächen, runde Avatare und Chatblasen. Der Unterschied bleibt auch ohne Lesen der Tab-Titel sichtbar.
 
@@ -36,7 +38,9 @@ Je fünf Nachrichten sind ohne Scrollen sichtbar. Systemkarten nutzen Bronze/Glu
 - **ALLES GELESEN:** markiert beide Postfächer als gelesen und setzt alle System-Belohnungen auf angenommen.
 - **BELOHNUNG HOLEN:** nimmt eine einzelne System-Belohnung an und markiert die Nachricht als gelesen.
 - **LÖSCHEN:** bleibt gesperrt, solange eine Nachricht ungelesen oder eine System-Belohnung offen ist. Bei null ungelesenen Nachrichten und null offenen Belohnungen werden gelesene Nachrichten entfernt.
-- Die drei Renderer-Zustände nutzen `?view=system`, `?view=player` und `?view=read`.
+- **Karte antippen:** öffnet das Detail-Sheet. Systemtexte können mehrere Absätze enthalten; Belohnung und Annahmestatus bleiben im Sheet sichtbar. Spielerpost zeigt den vollständigen Nachrichtentext ohne Belohnungsmodul.
+- **Schließen:** X, „ZURÜCK“, Kopf-Zurück, Escape oder Tipp auf den abgedunkelten Außenbereich; Fokus geht zur geöffneten Karte zurück.
+- Renderer-Zustände: `?view=system`, `?view=player`, `?view=read` und `?view=detail`.
 
 ## Farb- und Typotokens
 
@@ -54,3 +58,4 @@ Je fünf Nachrichten sind ohne Scrollen sichtbar. Systemkarten nutzen Bronze/Glu
 - `vorschau_overlay_mail_d2_v7.png` — System, ungelesene Post + offene Belohnung.
 - `vorschau_overlay_mail_d2_v7_spieler.png` — Spieler-Tab im Chat-Look.
 - `vorschau_overlay_mail_d2_v7_gelesen.png` — Post gelesen, Belohnungen angenommen, Löschen aktiv.
+- `vorschau_overlay_mail_d2_v7_detail.png` — geöffnete System-Mail mit drei lesbaren Absätzen und offener Belohnung.

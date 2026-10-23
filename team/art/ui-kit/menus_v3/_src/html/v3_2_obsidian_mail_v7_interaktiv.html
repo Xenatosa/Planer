@@ -126,6 +126,46 @@ body[data-tab="player"] .player-list{display:flex}
 .empty-state.visible{display:block}
 .toast{position:absolute;z-index:30;left:50%;bottom:275px;transform:translate(-50%,10px);padding:14px 22px;border:1px solid rgba(195,225,144,.72);border-radius:17px;background:linear-gradient(145deg,rgba(41,58,32,.98),rgba(18,27,17,.98));box-shadow:0 8px 22px #000b;color:#e1f4c4;font:20px/1.1 var(--font-title);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .16s,transform .16s}
 .toast.visible{opacity:1;transform:translate(-50%,0)}
+.detail-backdrop{display:none;position:absolute;z-index:23;inset:0;background:rgba(4,3,3,.72)}
+.detail-backdrop.open{display:block}
+.detail-sheet{display:none;position:absolute;z-index:24;left:38px;top:430px;width:1004px;height:950px;padding:27px 34px 29px;border:1.5px solid rgba(228,164,94,.78);border-radius:34px;background:linear-gradient(145deg,rgba(35,25,20,.997),rgba(13,11,10,.999) 58%,rgba(41,23,15,.997));box-shadow:0 24px 65px #000d,inset 0 1px 0 rgba(255,238,212,.25),inset 0 0 0 5px rgba(0,0,0,.4);color:var(--cream)}
+.detail-sheet.open{display:flex;flex-direction:column}
+.detail-sheet:focus{outline:2px solid rgba(255,195,117,.32);outline-offset:3px}
+.detail-sheet:before{content:"";position:absolute;inset:9px;border:1px solid rgba(239,186,124,.21);border-radius:26px;pointer-events:none}
+.detail-topline{position:relative;z-index:1;flex:none;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(205,157,104,.25);color:#c5ad89;font:17px/1 var(--font-title);letter-spacing:1.4px}
+.detail-kicker{display:flex;align-items:center;gap:11px}
+.detail-kicker:before{content:"";width:11px;height:11px;border-radius:50%;background:linear-gradient(145deg,#ffc46c,#ef792a);box-shadow:0 0 12px rgba(255,137,44,.55)}
+.detail-close{width:58px;height:58px;border:1px solid rgba(225,177,116,.5);border-radius:18px;background:linear-gradient(145deg,rgba(62,43,31,.97),rgba(19,15,13,.99));box-shadow:inset 0 1px 0 #fff3,0 4px 10px #0008;color:#f5dfbd;font:39px/1 var(--font-title);padding:0;display:grid;place-items:center}
+.detail-heading{position:relative;z-index:1;flex:none;padding:26px 4px 0}
+.detail-title{margin:0;color:#ffe0b0;font:50px/.98 var(--font-title);letter-spacing:.3px;text-shadow:0 3px 0 #1e0e06,0 0 18px rgba(255,145,57,.24)}
+.detail-meta-row{margin-top:13px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.detail-meta{margin:0;color:#c4a77e;font:19px/1.05 var(--font-title);letter-spacing:.45px}
+.detail-status{padding:6px 12px 4px;border:1px solid rgba(223,146,80,.54);border-radius:14px;background:rgba(112,50,19,.36);color:#ffc174;font:14px/1 var(--font-title);letter-spacing:.5px}
+.detail-status.read{border-color:rgba(164,196,123,.42);background:rgba(63,91,42,.22);color:#c7eaa6}
+.detail-text{position:relative;z-index:1;flex:1;min-height:240px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#806343 rgba(5,4,4,.35);margin-top:24px;padding:25px 29px;border:1px solid rgba(209,163,112,.4);border-radius:23px;background:linear-gradient(145deg,rgba(26,19,16,.98),rgba(16,13,12,.99));box-shadow:inset 0 1px 0 rgba(255,231,197,.09),inset 0 0 0 3px rgba(0,0,0,.23);color:#eadcc4;font:26px/1.38 var(--font-body);font-weight:650}
+.detail-text p{margin:0}
+.detail-text p+p{margin-top:24px}
+.detail-rewards{position:relative;z-index:1;flex:none;margin-top:19px;padding:16px 20px 18px;border:1px solid rgba(222,157,93,.45);border-radius:21px;background:linear-gradient(125deg,rgba(57,36,24,.9),rgba(23,17,14,.96));box-shadow:inset 0 1px 0 rgba(255,237,211,.09)}
+.detail-rewards[hidden]{display:none}
+.detail-rewards-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;color:#f1c38b;font:18px/1 var(--font-title);letter-spacing:1px}
+.detail-rewards-title small{color:#ad9674;font:15px/1 var(--font-body);font-weight:800;letter-spacing:0}
+.detail-reward-chips{display:flex;gap:10px;flex-wrap:wrap}
+.detail-reward{height:52px;padding:5px 15px;display:flex;align-items:center;gap:9px;border:1px solid rgba(231,189,137,.47);border-radius:15px;background:linear-gradient(145deg,rgba(68,47,31,.94),rgba(29,20,15,.97));color:#f0ddbf;font:20px/1 var(--font-title);white-space:nowrap}
+.detail-reward img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
+.detail-footer{position:relative;z-index:1;flex:none;height:94px;margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
+.detail-footer.player-mode{grid-template-columns:1fr}
+.detail-claim{height:94px;border:1.5px solid #ffd49a;border-radius:24px;background:linear-gradient(180deg,#ffbe66 0%,#f6802d 49%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff8,inset 0 -4px 0 rgba(77,26,7,.32),0 8px 17px #0008,0 0 18px rgba(255,129,39,.19);color:#fff8e9;font:32px/1 var(--font-title);letter-spacing:.4px;text-shadow:0 3px 0 #9a3b10}
+.detail-claim:disabled{border-color:#738d58;background:linear-gradient(180deg,#587b45,#2e442d);color:#d9efbd;text-shadow:0 2px 0 #24391c;cursor:default}
+.detail-claim[hidden]{display:none}
+.detail-back{height:94px;border:1.5px solid rgba(220,171,112,.8);border-radius:24px;background:linear-gradient(155deg,rgba(73,52,37,.98),rgba(27,21,17,.99) 60%,rgba(43,29,20,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.24),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009;color:#f7e4c4;font:25px/1 var(--font-title);letter-spacing:.3px}
+.detail-back:active,.detail-close:active{transform:translateY(2px);filter:brightness(1.12)}
+body[data-detail="player"] .detail-sheet{border-color:rgba(91,207,198,.82);background:linear-gradient(145deg,rgba(19,43,44,.998),rgba(11,20,22,.999) 58%,rgba(15,37,39,.998))}
+body[data-detail="player"] .detail-sheet:before{border-color:rgba(119,223,214,.2)}
+body[data-detail="player"] .detail-kicker:before{background:linear-gradient(145deg,#a0fff1,#25bdb8);box-shadow:0 0 12px rgba(75,210,200,.6)}
+body[data-detail="player"] .detail-title{color:#dffdfa;text-shadow:0 3px 0 #0c2526,0 0 18px rgba(68,211,201,.2)}
+body[data-detail="player"] .detail-text{border-color:rgba(80,165,161,.46);background:linear-gradient(145deg,rgba(19,41,42,.98),rgba(13,24,26,.99))}
+body[data-detail="player"] .detail-status{border-color:rgba(88,194,184,.48);background:rgba(23,91,88,.38);color:#b4fff4}
+.head-button:focus-visible,.inbox-tab:focus-visible,.mail-card:focus-visible,.action:focus-visible,.detail-close:focus-visible,.detail-back:focus-visible,.detail-claim:focus-visible{outline:3px solid #ffe0ad;outline-offset:3px}
 .dock{position:absolute;z-index:20;left:0;top:1680px;width:1080px;height:240px;background:center top/1080px 212px no-repeat url("../inventar_v4_assets/dock_bg.png");border-top:1px solid rgba(225,197,159,.18)}
 .dock-item{position:absolute;top:5px;width:180px;height:204px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:#b7a78c}
 .dock-item.active{color:#fff0d0}
@@ -183,17 +223,25 @@ body[data-tab="player"] .player-list{display:flex}
   <div class="dock-item" style="left:900px"><img class="icon" src="../inventar_v4_assets/dock_inventar.png" alt=""><span>Inventar</span></div>
   <div class="home-bar" aria-hidden="true"></div>
 </nav>
+<div class="detail-backdrop" id="detail-backdrop" aria-hidden="true"></div>
+<section class="detail-sheet" id="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-hidden="true" tabindex="-1">
+  <div class="detail-topline"><span class="detail-kicker" id="detail-kicker">SYSTEM · FESTUNGSPOST</span><button class="detail-close" id="detail-close" type="button" aria-label="Nachricht schließen">×</button></div>
+  <div class="detail-heading"><h2 class="detail-title" id="detail-title">Vorräte für die Reise</h2><div class="detail-meta-row"><p class="detail-meta" id="detail-meta">GILDENRAT · HEUTE · 09:12</p><span class="detail-status" id="detail-status">BELOHNUNG OFFEN</span></div></div>
+  <article class="detail-text" id="detail-text" tabindex="0" aria-label="Vollständiger Nachrichtentext"></article>
+  <section class="detail-rewards" id="detail-rewards" aria-label="Nachrichtenbelohnung"><h3 class="detail-rewards-title"><span>BELOHNUNG</span><small>Aus der Festung</small></h3><div class="detail-reward-chips" id="detail-reward-chips"></div></section>
+  <div class="detail-footer" id="detail-footer"><button class="detail-claim" id="detail-claim" type="button">BELOHNUNG HOLEN</button><button class="detail-back" id="detail-back" type="button">‹ &nbsp; ZURÜCK</button></div>
+</section>
 <script>
 const inbox={
   system:[
-    {id:'supply',title:'Vorräte für die Reise',sender:'GILDENRAT',time:'HEUTE · 09:12',body:'Die Grenzwacht ist aufgebrochen. Diese Vorräte stärken deinen nächsten Marsch.',unread:true,reward:[['holz.png','Holz ×250'],['kristall.png','Kristall ×20'],['wissen.png','Wissen ×80']],claimed:false,icon:'seal'},
+    {id:'supply',title:'Vorräte für die Reise',sender:'GILDENRAT',time:'HEUTE · 09:12',body:'Die Grenzwacht ist aufgebrochen. Diese Vorräte stärken deinen nächsten Marsch.',fullText:['Die Grenzwacht hat den alten Pass gesichert. Deine Truppen erreichten den Außenposten noch vor Einbruch der Dunkelheit und fanden die Vorratskisten unversehrt.','Wir teilen die Lieferung mit dir, damit du den nächsten Marsch vorbereiten kannst. Holz und Kristalle stammen aus den Lagerbeständen der Festung; das Wissen haben die Späher aus ihrer Wegkarte mitgebracht.','Öffne die Belohnung, bevor du deine nächste Expedition startest. Der Weg zum Nordpass bleibt bis zum Sonnenaufgang frei.'],unread:true,reward:[['holz.png','Holz ×250'],['kristall.png','Kristall ×20'],['wissen.png','Wissen ×80']],claimed:false,icon:'seal'},
     {id:'eastgate',title:'Wachwechsel am Osttor',sender:'GRENZWACHE',time:'HEUTE · 07:45',body:'Der neue Trupp hat seinen Posten bezogen. Der Weg nach Osten ist wieder frei.',unread:false,reward:[],claimed:true,icon:'shield'},
     {id:'arena',title:'Arena-Saison beendet',sender:'ARENA',time:'GESTERN · 19:20',body:'Rang 42 erreicht. Deine Saisonübersicht wartet in der Arena.',unread:false,reward:[],claimed:true,icon:'crest'},
     {id:'maintenance',title:'Danke für deine Geduld',sender:'FESTUNG',time:'22. OKT · 11:06',body:'Die Wartung ist abgeschlossen. Deine Truppen sind wieder einsatzbereit.',unread:false,reward:[],claimed:true,icon:'scroll'},
     {id:'dispatch',title:'Kurier aus dem Grenzland',sender:'VORPOSTEN',time:'21. OKT · 16:50',body:'Am Flussufer wurden frische Spuren entdeckt. Die Karte ist aktualisiert.',unread:false,reward:[],claimed:true,icon:'crest'}
   ],
   player:[
-    {id:'mira',title:'Treffpunkt am Nordtor',sender:'MIRA · WESTWACHT',time:'HEUTE · 09:08',body:'Ich bin schon am Tor. Bring die Karte mit – der alte Pass ist wieder offen.',unread:true,avatar:'MR',tone:'umber'},
+    {id:'mira',title:'Treffpunkt am Nordtor',sender:'MIRA · WESTWACHT',time:'HEUTE · 09:08',body:'Ich bin schon am Tor. Bring die Karte mit – der alte Pass ist wieder offen.',fullText:['Ich bin schon am Tor. Bring die Karte mit – der alte Pass ist wieder offen. Die Wachen haben einen geheimen Weg unter dem Felsbogen gefunden.','Er führt genau zwischen den beiden Spähtürmen hindurch, ohne dass die Patrouille ihn sehen kann. Ich habe die sicheren Stellen auf der Rückseite der Karte markiert.','Wenn du vor Sonnenuntergang losgehst, können wir die Karawane noch am Fluss einholen. Ich warte beim alten Wegstein auf dich.'],unread:true,avatar:'MR',tone:'umber'},
     {id:'tovan',title:'Der Schmied hat geliefert',sender:'TOVAN · HANDWERKER',time:'HEUTE · 08:41',body:'Dein Schild ist fertig. Die Kante hält jetzt auch einem Ogerhieb stand.',unread:false,avatar:'TV',tone:'violet'},
     {id:'nemi',title:'Karte für den Sümpferpfad',sender:'NEMI · SPÄHERIN',time:'GESTERN · 21:15',body:'Hab die sicheren Stellen markiert. Folge den weißen Steinen, dann bleibst du trocken.',unread:false,avatar:'NM',tone:'olive'},
     {id:'oren',title:'Danke für die Verstärkung',sender:'OREN · KARAWANE',time:'GESTERN · 17:32',body:'Die Händler sind heil angekommen. Beim nächsten Halt geht die erste Runde auf mich.',unread:false,avatar:'OR',tone:''},
@@ -205,6 +253,8 @@ const query=new URLSearchParams(location.search);
 if(query.get('view')==='player')activeTab='player';
 if(query.get('view')==='read'){inbox.system.forEach(m=>{m.unread=false;m.claimed=true});inbox.player.forEach(m=>m.unread=false)}
 const listSystem=document.getElementById('system-list'),listPlayer=document.getElementById('player-list'),toast=document.getElementById('toast');
+const detailSheet=document.getElementById('detail-sheet'),detailBackdrop=document.getElementById('detail-backdrop');
+let selectedMessage=null,lastCardId=null;
 function iconSvg(name){
   const paths={seal:'<path d="M13 22h38v29H13z"/><path d="m15 25 17 14 17-14"/><circle cx="47" cy="18" r="8"/><path d="M47 14v8m-4-4h8"/>',shield:'<path d="M32 9 50 16v14c0 12-7 21-18 26C21 51 14 42 14 30V16l18-7Z"/><path d="m23 32 6 6 12-14"/>',crest:'<path d="M15 13h34v17c0 12-7 21-17 26-10-5-17-14-17-26V13Z"/><path d="M22 23h20M25 31h14M28 39h8"/><path d="m32 13 4 8-4 4-4-4 4-8Z"/>',scroll:'<path d="M18 12h27a7 7 0 0 1 7 7v30H22a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z"/><path d="M23 12v31m8-22h13m-13 8h13m-13 8h9"/><path d="M17 43h33"/>'};
   return '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(paths[name]||paths.seal)+'</svg>';
@@ -242,6 +292,52 @@ function render(){
   document.getElementById('empty-state').classList.toggle('visible',current.length===0);
 }
 function showToast(message){toast.textContent=message;toast.classList.add('visible');window.clearTimeout(showToast.timer);showToast.timer=window.setTimeout(()=>toast.classList.remove('visible'),1800)}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
+function updateDetail(){
+  if(!selectedMessage)return;
+  const system=activeTab==='system'&&inbox.system.some(m=>m.id===selectedMessage.id);
+  const message=(system?inbox.system:inbox.player).find(m=>m.id===selectedMessage.id)||selectedMessage;
+  selectedMessage=message;
+  document.body.dataset.detail=system?'system':'player';
+  document.getElementById('detail-kicker').textContent=system?'SYSTEM · FESTUNGSPOST':'SPIELER · DIREKTE NACHRICHT';
+  document.getElementById('detail-title').textContent=message.title;
+  document.getElementById('detail-meta').textContent=message.sender+'  ·  '+message.time;
+  const status=document.getElementById('detail-status');
+  const rewardOpen=message.reward&&message.reward.length&&!message.claimed;
+  status.classList.toggle('read',!message.unread&&!rewardOpen);
+  status.textContent=message.unread?'UNGELESEN':(message.reward&&message.reward.length?(message.claimed?'ANGENOMMEN':'BELOHNUNG OFFEN'):'GELESEN');
+  document.getElementById('detail-text').innerHTML=(message.fullText||[message.body]).map(paragraph=>'<p>'+escapeHtml(paragraph)+'</p>').join('');
+  const rewards=system&&message.reward&&message.reward.length>0;
+  const rewardPanel=document.getElementById('detail-rewards');
+  rewardPanel.hidden=!rewards;
+  document.getElementById('detail-reward-chips').innerHTML=rewards?message.reward.map(item=>'<span class="detail-reward"><img src="../inventar_v4_assets/'+item[0]+'" alt="">'+escapeHtml(item[1])+'</span>').join(''):'';
+  const footer=document.getElementById('detail-footer'),claim=document.getElementById('detail-claim');
+  footer.classList.toggle('player-mode',!rewards);
+  claim.hidden=!rewards;
+  claim.disabled=Boolean(rewards&&message.claimed);
+  claim.textContent=message.claimed?'✓ BELOHNUNG ANGENOMMEN':'BELOHNUNG HOLEN';
+}
+function openDetail(message){
+  selectedMessage=message;
+  lastCardId=message.id;
+  updateDetail();
+  detailSheet.classList.add('open');
+  detailBackdrop.classList.add('open');
+  detailSheet.setAttribute('aria-hidden','false');
+  detailBackdrop.setAttribute('aria-hidden','false');
+  document.getElementById('detail-text').scrollTop=0;
+  detailSheet.focus();
+}
+function closeDetail(){
+  if(!detailSheet.classList.contains('open'))return;
+  detailSheet.classList.remove('open');
+  detailBackdrop.classList.remove('open');
+  detailSheet.setAttribute('aria-hidden','true');
+  detailBackdrop.setAttribute('aria-hidden','true');
+  delete document.body.dataset.detail;
+  selectedMessage=null;
+  if(lastCardId){const trigger=document.querySelector('[data-message="'+lastCardId+'"]');if(trigger)trigger.focus()}
+}
 document.querySelectorAll('.inbox-tab').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;render()}));
 document.getElementById('read-all').addEventListener('click',()=>{inbox.system.forEach(m=>{m.unread=false;m.claimed=true});inbox.player.forEach(m=>m.unread=false);render();showToast('Alles gelesen · System-Belohnungen angenommen')});
 document.getElementById('delete-all').addEventListener('click',e=>{if(e.currentTarget.disabled)return;inbox.system=[];inbox.player=[];render();showToast('Gelesene Nachrichten entfernt')});
@@ -249,10 +345,21 @@ document.addEventListener('click',e=>{
   const claim=e.target.closest('[data-claim]');
   if(claim){const m=inbox.system.find(item=>item.id===claim.dataset.claim);if(m&&!m.claimed){m.claimed=true;m.unread=false;render();showToast('Belohnung angenommen')}return}
   const card=e.target.closest('[data-message]');
-  if(card){const data=inbox[card.classList.contains('player')?'player':'system'];const m=data.find(item=>item.id===card.dataset.message);if(m&&m.unread){m.unread=false;render()}}
+  if(card){const data=inbox[card.classList.contains('player')?'player':'system'];const m=data.find(item=>item.id===card.dataset.message);if(m){if(m.unread){m.unread=false;render()}openDetail(m)}}
 });
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-message]')){e.preventDefault();e.target.click()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&detailSheet.classList.contains('open'))closeDetail()});
+detailBackdrop.addEventListener('click',closeDetail);
+document.getElementById('detail-close').addEventListener('click',closeDetail);
+document.getElementById('detail-back').addEventListener('click',closeDetail);
+document.querySelector('.head-button[aria-label="Zurück"]').addEventListener('click',closeDetail);
+document.getElementById('detail-claim').addEventListener('click',()=>{
+  if(!selectedMessage||!selectedMessage.reward||selectedMessage.claimed)return;
+  const message=inbox.system.find(m=>m.id===selectedMessage.id);
+  if(message){message.claimed=true;message.unread=false;render();updateDetail();showToast('Belohnung angenommen')}
+});
 render();
+if(query.get('view')==='detail'){const message=inbox.system.find(m=>m.id==='supply');message.unread=false;render();openDetail(message)}
 </script>
 </body>
 </html>

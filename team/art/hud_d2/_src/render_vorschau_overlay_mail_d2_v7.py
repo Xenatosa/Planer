@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the interactive Mail v7 HTML into the three review PNGs."""
+"""Render the interactive Mail v7 HTML into review PNGs."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ SCREENS = (
     ("system", "vorschau_overlay_mail_d2_v7.png"),
     ("player", "vorschau_overlay_mail_d2_v7_spieler.png"),
     ("read", "vorschau_overlay_mail_d2_v7_gelesen.png"),
+    ("detail", "vorschau_overlay_mail_d2_v7_detail.png"),
 )
 
 
@@ -28,9 +29,11 @@ def chrome_binary(explicit: str | None) -> str:
     return candidate
 
 
-def render(chrome: str, output_dir: Path) -> None:
+def render(chrome: str, output_dir: Path, only_view: str | None = None) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     for view, filename in SCREENS:
+        if only_view and view != only_view:
+            continue
         output = output_dir / filename
         url = HTML.resolve().as_uri() + "?view=" + view
         command = [
@@ -60,10 +63,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--chrome", help="Chrome/Chromium-Binary")
     parser.add_argument("--output-dir", type=Path, default=OUT, help="Zielordner für die PNGs")
+    parser.add_argument("--view", choices=[view for view, _ in SCREENS], help="Nur diesen Vorschaustand rendern")
     args = parser.parse_args()
     if not HTML.is_file():
         raise SystemExit(f"HTML nicht gefunden: {HTML}")
-    render(chrome_binary(args.chrome), args.output_dir.resolve())
+    render(chrome_binary(args.chrome), args.output_dir.resolve(), args.view)
 
 
 if __name__ == "__main__":
