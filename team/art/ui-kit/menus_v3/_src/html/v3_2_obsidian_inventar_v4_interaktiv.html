@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Inventar · Obsidian &amp; Glut v4f</title>
+<title>Inventar · Obsidian &amp; Glut v4g</title>
 <style>
 @font-face{font-family:Lilita;src:url("../inventar_v4_assets/LilitaOne-Regular.ttf")}
 @font-face{font-family:Baloo;src:url("../inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
@@ -189,7 +189,7 @@ button{cursor:pointer}
     </div>
     <div class="detail-actions" id="detail-actions">
       <button class="primary" id="primary-action" type="button">ANLEGEN</button>
-      <button class="secondary-action" id="scrap-action" type="button" aria-label="Zerlegen, Rückgabe 12 Schrott für den Shop"><span class="secondary-title">ZERLEGEN</span><span class="scrap-preview" id="scrap-preview">+12 SCHROTT · FÜR DEN SHOP</span></button>
+      <button class="secondary-action" id="scrap-action" type="button" aria-label="Zerlegen, Rückgabe 12 Schrott"><span class="secondary-title">ZERLEGEN</span><span class="scrap-preview" id="scrap-preview">+12 SCHROTT</span></button>
     </div>
     <div class="scrap-toast" id="scrap-toast" role="status" aria-live="polite"></div>
   </div>
@@ -297,7 +297,7 @@ function updateDetail(item){
   const actions=document.getElementById('detail-actions');
   actions.hidden=item.kind==='fragmente';
   action.textContent=item.action;
-  document.getElementById('scrap-action').setAttribute('aria-label',`Zerlegen, Rückgabe 12 Schrott für den Shop: ${item.name}`);
+  document.getElementById('scrap-action').setAttribute('aria-label',`Zerlegen, Rückgabe 12 Schrott: ${item.name}`);
 }
 function openSheet(){
   sheet.classList.add('open','expanded');
@@ -332,7 +332,7 @@ document.getElementById('primary-action').addEventListener('click',event=>{event
 let scrapToastTimer;
 document.getElementById('scrap-action').addEventListener('click',()=>{
   const toast=document.getElementById('scrap-toast');
-  toast.textContent=`Zerlegt · +12 Schrott für den Shop`;
+  toast.textContent=`Zerlegt · +12 Schrott`;
   toast.classList.add('visible');
   clearTimeout(scrapToastTimer);
   scrapToastTimer=setTimeout(()=>toast.classList.remove('visible'),1900);
