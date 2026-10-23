@@ -136,9 +136,14 @@ html[data-mode="standard"] .card-zone{top:366px}
 #picker-search{width:100%;height:56px;padding:0 18px;border:1px solid rgba(214,169,122,.55);border-radius:14px 5px 14px 5px;background:rgba(10,11,13,.92);color:#f2dfc8;font:800 18px/1 Nunito;outline:none;box-sizing:border-box}
 #picker-search::placeholder{color:#9e8f7e}
 .picker-filters{display:flex;gap:8px}
+.picker-classes{display:flex;gap:7px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.pc{flex:0 0 auto;height:40px;padding:0 14px;border:1px solid rgba(205,159,119,.42);border-radius:20px;background:rgba(18,18,20,.88);color:#d8c3aa;font:800 12px/1 Nunito;letter-spacing:.4px;white-space:nowrap}
+.pc.active{border-color:#f1bf8c;background:linear-gradient(180deg,#8a5232,#3d2a22);color:#fff2de}
+.hero-meta .cls{color:#b9a894;font:800 11px/1 Nunito;letter-spacing:.5px;padding:3px 8px;border:1px solid rgba(185,160,132,.35);border-radius:8px;background:rgba(10,11,13,.7)}
+
 .pf{flex:1;height:44px;border:1px solid rgba(205,159,119,.45);border-radius:12px 4px 12px 4px;background:rgba(18,18,20,.88);color:#d8c3aa;font:800 13px/1 Nunito;letter-spacing:.6px}
 .pf.active{border-color:#f1bf8c;background:linear-gradient(180deg,#8a5232,#3d2a22);color:#fff2de}
-.hero-options{display:flex;flex-direction:column;gap:8px;height:980px;overflow-y:auto;text-align:left;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c9956a #1a1716}
+.hero-options{display:flex;flex-direction:column;gap:8px;height:880px;overflow-y:auto;text-align:left;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c9956a #1a1716}
 .hero-option{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid rgba(211,171,136,.39);border-radius:16px 6px 16px 6px;background:linear-gradient(145deg,#343033,#141519);box-shadow:inset 0 1px 0 #fff2;color:inherit;width:100%;box-sizing:border-box;flex:0 0 auto}
 .hero-option img{width:56px;height:56px;object-fit:cover;border:2px solid var(--rarity);border-radius:50%;box-shadow:0 0 10px color-mix(in srgb,var(--rarity) 28%,transparent)}
 .hero-meta{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -187,7 +192,7 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   <div class="picker-panel">
     <button class="picker-close" id="picker-close" type="button" aria-label="Schließen">×</button>
     <h2 id="picker-title">HELD FÜR RATE-UP WÄHLEN</h2>
-    <p>Bei großem Roster: suchen / filtern, Liste scrollt. <b>WÄHLEN</b> füllt den Siegelplatz.</p>
+    <p>Suche · Seltenheit · <b>Klasse</b> (Krieger/Schütze/…). Liste scrollt — <b>WÄHLEN</b> füllt den Slot.</p>
     <div class="picker-tools">
       <input id="picker-search" type="search" placeholder="Held suchen…" autocomplete="off" aria-label="Held suchen">
       <div class="picker-filters" role="tablist" aria-label="Seltenheit">
@@ -195,6 +200,15 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
         <button type="button" class="pf" data-filter="SSR" aria-selected="false">SSR</button>
         <button type="button" class="pf" data-filter="SR" aria-selected="false">SR</button>
         <button type="button" class="pf" data-filter="R" aria-selected="false">R</button>
+      </div>
+      <div class="picker-classes" role="tablist" aria-label="Klasse">
+        <button type="button" class="pc active" data-class="ALL" aria-selected="true">Alle Klassen</button>
+        <button type="button" class="pc" data-class="warrior" aria-selected="false">Krieger</button>
+        <button type="button" class="pc" data-class="marksman" aria-selected="false">Schütze</button>
+        <button type="button" class="pc" data-class="healer" aria-selected="false">Heiler</button>
+        <button type="button" class="pc" data-class="tactician" aria-selected="false">Taktiker</button>
+        <button type="button" class="pc" data-class="assassin" aria-selected="false">Assassine</button>
+        <button type="button" class="pc" data-class="builder" aria-selected="false">Baumeister</button>
       </div>
     </div>
     <div class="hero-options" id="hero-options"></div>
@@ -236,11 +250,19 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
 <script>
 (function(){
   'use strict';
+  var CLASSES=[
+    {id:'warrior',label:'Krieger'},
+    {id:'marksman',label:'Schütze'},
+    {id:'healer',label:'Heiler'},
+    {id:'tactician',label:'Taktiker'},
+    {id:'assassin',label:'Assassine'},
+    {id:'builder',label:'Baumeister'}
+  ];
   var baseHeroes={
-    NARA:{name:'NARA',rarity:'SSR',tone:'#eea363',image:'../../_assets/reveal_v16/nara_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:12,ready:false},
-    OLM:{name:'OLM',rarity:'SR',tone:'#67a9c1',image:'../../_assets/reveal_v16/olm_circle.png',chance:'SR-Pool · 18% Bannerchance',frags:47,ready:false},
-    KIKO:{name:'KIKO',rarity:'R',tone:'#b7a58f',image:'../../_assets/reveal_v16/kiko_circle.png',chance:'R-Pool · 80% Bannerchance',frags:80,ready:true},
-    RUKA:{name:'RUKA',rarity:'SSR',tone:'#eea363',image:'../../_assets/reveal_v16/ruka_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:29,ready:false}
+    NARA:{name:'NARA',rarity:'SSR',cls:'marksman',tone:'#eea363',image:'../../_assets/reveal_v16/nara_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:12,ready:false},
+    OLM:{name:'OLM',rarity:'SR',cls:'warrior',tone:'#67a9c1',image:'../../_assets/reveal_v16/olm_circle.png',chance:'SR-Pool · 18% Bannerchance',frags:47,ready:false},
+    KIKO:{name:'KIKO',rarity:'R',cls:'assassin',tone:'#b7a58f',image:'../../_assets/reveal_v16/kiko_circle.png',chance:'R-Pool · 80% Bannerchance',frags:80,ready:true},
+    RUKA:{name:'RUKA',rarity:'SSR',cls:'tactician',tone:'#eea363',image:'../../_assets/reveal_v16/ruka_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:29,ready:false}
   };
   var rosterNames=['BRAN','TIRA','VORIK','SAEL','MORNA','KAEL','YUNA','DROK','LISSA','THORNE','ARIA','GORN','NIMA','ZAREK','ELEN','FEN','ORIN','SYLA','RAEK','MIRA','JOR','VELA','KORD','NYX','ASHA','RENN','TORA','ULRIC','PIA','WREN','IO','CAL','DEX','QUIN','HALE','IVY','JADE','KYRO','LENA','MAKO','NOVA','OPAL','PRUE','ROAN','SAGE','TESSA','UMA','VEX','WILD','XEN','YARA','ZEKE','ALBA','BO','CIRI','DALE','ECHO','FLINT','GREY','HEX','IRIS','JUNE','KITE','LARK','MOSS','NASH','OTTO','PIP','QUILL'];
   var heroes={};
@@ -251,10 +273,8 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
     var name=rosterNames[i];
     var rar=rarities[i%3];
     var frags=(i*7+11)%81;
-    heroes[name]={name:name,rarity:rar.r,tone:rar.t,image:imgs[i%4],chance:rar.c,frags:frags,ready:frags>=80};
+    heroes[name]={name:name,rarity:rar.r,cls:CLASSES[i%CLASSES.length].id,tone:rar.t,image:imgs[i%4],chance:rar.c,frags:frags,ready:frags>=80};
   }
-  // pad to 80 total including base 4
-  var keys=Object.keys(heroes);
   var n=0;
   while(Object.keys(heroes).length<80){
     n++;
@@ -262,7 +282,11 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
     if(heroes[name]) continue;
     var rar=rarities[n%3];
     var frags=(n*13)%81;
-    heroes[name]={name:name,rarity:rar.r,tone:rar.t,image:imgs[n%4],chance:rar.c,frags:frags,ready:frags>=80};
+    heroes[name]={name:name,rarity:rar.r,cls:CLASSES[n%CLASSES.length].id,tone:rar.t,image:imgs[n%4],chance:rar.c,frags:frags,ready:frags>=80};
+  }
+  function classLabel(id){
+    for(var i=0;i<CLASSES.length;i++){ if(CLASSES[i].id===id) return CLASSES[i].label; }
+    return id;
   }
 
   var featuredTen=[
@@ -372,11 +396,13 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   modeButtons.forEach(function(button){button.addEventListener('click',function(){mode=button.getAttribute('data-mode');forceOpen=false;draw()})});
   pullButtons.forEach(function(button){button.addEventListener('click',function(){pull=button.getAttribute('data-pull');forceOpen=false;draw()})});
   var pickerFilter='ALL';
+  var pickerClass='ALL';
   var pickerQuery='';
   function heroKeysFiltered(){
     return Object.keys(heroes).filter(function(key){
       var h=heroes[key];
       if(pickerFilter!=='ALL' && h.rarity!==pickerFilter) return false;
+      if(pickerClass!=='ALL' && h.cls!==pickerClass) return false;
       if(pickerQuery && h.name.toLowerCase().indexOf(pickerQuery)===-1) return false;
       return true;
     }).sort(function(a,b){
@@ -397,7 +423,7 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
       var fill=Math.min(100, Math.round((hero.frags/80)*100))+'%';
       var btn=hero.ready?'FREI':'WÄHLEN';
       var btnClass=hero.ready?'wahl-btn ready':'wahl-btn';
-      return '<div class="hero-option" style="--rarity:'+hero.tone+'"><img src="'+hero.image+'" alt=""><div class="hero-meta"><div class="row"><strong>'+hero.name+'</strong><span class="rarity">'+hero.rarity+'</span></div><div class="chance">'+hero.chance+'</div><div class="frag-track" style="--fill:'+fill+'"><i></i></div><div class="frag-label">'+hero.frags+' / 80 Fragmente'+(hero.ready?' · BEREIT':'')+'</div></div><button class="'+btnClass+'" type="button" data-hero-choice="'+key+'">'+btn+'</button></div>';
+      return '<div class="hero-option" style="--rarity:'+hero.tone+'"><img src="'+hero.image+'" alt=""><div class="hero-meta"><div class="row"><strong>'+hero.name+'</strong><span class="rarity">'+hero.rarity+'</span><span class="cls">'+classLabel(hero.cls)+'</span></div><div class="chance">'+hero.chance+'</div><div class="frag-track" style="--fill:'+fill+'"><i></i></div><div class="frag-label">'+hero.frags+' / 80 Fragmente'+(hero.ready?' · BEREIT':'')+'</div></div><button class="'+btnClass+'" type="button" data-hero-choice="'+key+'">'+btn+'</button></div>';
     }).join('');
     document.querySelectorAll('[data-hero-choice]').forEach(function(option){
       option.addEventListener('click',function(){setRateup(activeSlot,option.getAttribute('data-hero-choice'));closePicker()});
@@ -409,11 +435,17 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
     picker.setAttribute('aria-hidden','false');
     document.getElementById('picker-title').textContent='HELD FÜR RATE-UP · SLOT '+String(slotIndex+1).padStart(2,'0');
     pickerFilter='ALL';
+    pickerClass='ALL';
     pickerQuery='';
     var search=document.getElementById('picker-search');
     if(search) search.value='';
     document.querySelectorAll('.pf').forEach(function(b){
       var on=b.getAttribute('data-filter')==='ALL';
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-selected',String(on));
+    });
+    document.querySelectorAll('.pc').forEach(function(b){
+      var on=b.getAttribute('data-class')==='ALL';
       b.classList.toggle('active',on);
       b.setAttribute('aria-selected',String(on));
     });
@@ -457,6 +489,17 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
       renderPickerList();
     });
   });
+  document.querySelectorAll('.pc').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      pickerClass=btn.getAttribute('data-class');
+      document.querySelectorAll('.pc').forEach(function(b){
+        var on=b===btn;
+        b.classList.toggle('active',on);
+        b.setAttribute('aria-selected',String(on));
+      });
+      renderPickerList();
+    });
+  });
   document.getElementById('all-open').addEventListener('click',function(){
     var cards=cardsNode.querySelectorAll('.card');
     cards.forEach(function(card){card.classList.add('is-open');card.setAttribute('aria-pressed','true')});
@@ -472,6 +515,11 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   if(params.get('tap')==='1'){document.documentElement.setAttribute('data-show-tap','1');}
   if(params.get('picker')==='1'){
     openPicker(Math.max(0, Math.min(2, parseInt(params.get('slot')||'0',10)||0)));
+    var clsParam=params.get('class');
+    if(clsParam){
+      var btn=document.querySelector('.pc[data-class="'+clsParam+'"]');
+      if(btn) btn.click();
+    }
   }
 })();
 </script>
