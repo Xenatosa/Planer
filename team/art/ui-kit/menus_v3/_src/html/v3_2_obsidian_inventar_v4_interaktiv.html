@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Inventar · Obsidian &amp; Glut v4e</title>
+<title>Inventar · Obsidian &amp; Glut v4f</title>
 <style>
 @font-face{font-family:Lilita;src:url("../inventar_v4_assets/LilitaOne-Regular.ttf")}
 @font-face{font-family:Baloo;src:url("../inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
@@ -106,6 +106,15 @@ button{cursor:pointer}
 .primary{position:relative;z-index:2;width:min(610px,100%);height:120px;margin-top:2px;border:1.5px solid #ffe0ad;border-radius:21px;background:linear-gradient(180deg,#ffbd67 0%,#f6802d 48%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff7,inset 0 -4px 0 rgba(77,26,7,.35),0 8px 17px #0008,0 0 20px rgba(255,129,39,.22);color:#fff8e9;font:33px/1 Lilita;text-shadow:0 3px 0 #9a3b10;letter-spacing:.4px}
 .primary[hidden]{display:none}
 .primary:active{transform:translateY(2px);filter:brightness(1.08)}
+.detail-actions{position:absolute;z-index:3;left:0;bottom:10px;width:100%;height:112px;display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:16px}
+.detail-actions[hidden]{display:none}
+.detail-actions .primary{width:100%;height:112px;margin:0;border-radius:26px;font-size:42px}
+.secondary-action{height:112px;padding:9px 10px;border:1.5px solid rgba(220,171,112,.8);border-radius:24px;background:linear-gradient(155deg,rgba(73,52,37,.98),rgba(27,21,17,.99) 60%,rgba(43,29,20,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.24),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009,0 0 15px rgba(220,150,82,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#f7e4c4}
+.secondary-action:active{transform:translateY(2px);filter:brightness(1.15)}
+.secondary-title{font:28px/1 Lilita;letter-spacing:.3px;text-shadow:0 2px 0 #100a07}
+.scrap-preview{padding:4px 8px 3px;border:1px solid rgba(180,220,126,.45);border-radius:12px;background:rgba(73,104,46,.24);color:#c9ec98;font:16px/1 Lilita;white-space:nowrap}
+.scrap-toast{position:absolute;z-index:5;left:50%;bottom:134px;transform:translateX(-50%) translateY(8px);padding:12px 20px;border:1px solid rgba(195,225,144,.75);border-radius:17px;background:linear-gradient(145deg,rgba(41,58,32,.98),rgba(18,27,17,.98));box-shadow:0 8px 22px #000b;color:#e1f4c4;font:20px/1.1 Lilita;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .16s,transform .16s}
+.scrap-toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}
 .sheet.expanded .sheet-head{height:43px}
 .sheet.expanded .sheet-head .handle{width:82px;height:7px;top:-9px}
 .sheet.expanded .detail-layout{height:838px;grid-template-columns:380px 1fr;gap:38px;align-items:start;padding-top:36px}
@@ -121,7 +130,6 @@ button{cursor:pointer}
 .sheet.expanded .stats{gap:13px;margin-bottom:18px}
 .sheet.expanded .fragment-progress strong{font-size:26px}
 .sheet.expanded .fragment-progress .track{height:13px;margin-top:11px}
-.sheet.expanded .primary{position:absolute;left:0;bottom:10px;width:100%;height:112px;border-radius:26px;font-size:42px}
 .dock{position:absolute;z-index:20;left:0;top:1664px;width:1080px;height:256px;background:center top/1080px 212px no-repeat url("../inventar_v4_assets/dock_bg.png");border-top:1px solid rgba(225,197,159,.18)}
 .dock-item{position:absolute;top:10px;width:180px;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:#b7a78c}
 .dock-item.active{color:#fff0d0}
@@ -178,8 +186,12 @@ button{cursor:pointer}
       <p class="detail-desc" id="detail-desc">Mammutknochen und dichtes Fell. Hält Frost und schweren Schlägen stand.</p>
       <div class="stats" id="detail-stats"><span class="stat good">+42 Leben</span><span class="stat">+18 Frostschutz</span></div>
       <div class="fragment-progress" id="fragment-progress"><strong><span>Fortschritt</span><span id="fragment-count">12 / 80</span></strong><div class="track"><i id="fragment-fill"></i></div></div>
-      <button class="primary" id="primary-action" type="button">ANLEGEN</button>
     </div>
+    <div class="detail-actions" id="detail-actions">
+      <button class="primary" id="primary-action" type="button">ANLEGEN</button>
+      <button class="secondary-action" id="scrap-action" type="button" aria-label="Zerlegen, Rückgabe 12 Schrott für den Shop"><span class="secondary-title">ZERLEGEN</span><span class="scrap-preview" id="scrap-preview">+12 SCHROTT · FÜR DEN SHOP</span></button>
+    </div>
+    <div class="scrap-toast" id="scrap-toast" role="status" aria-live="polite"></div>
   </div>
 </section>
 <nav class="dock" aria-label="Hauptnavigation">
@@ -282,8 +294,10 @@ function updateDetail(item){
     document.getElementById('fragment-fill').style.width=`${Math.round(item.progress/item.total*100)}%`;
   }
   const action=document.getElementById('primary-action');
-  action.hidden=item.kind==='fragmente';
+  const actions=document.getElementById('detail-actions');
+  actions.hidden=item.kind==='fragmente';
   action.textContent=item.action;
+  document.getElementById('scrap-action').setAttribute('aria-label',`Zerlegen, Rückgabe 12 Schrott für den Shop: ${item.name}`);
 }
 function openSheet(){
   sheet.classList.add('open','expanded');
@@ -315,6 +329,14 @@ document.getElementById('sheet-close').addEventListener('click',closeSheet);
 backdrop.addEventListener('click',closeSheet);
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&sheet.classList.contains('open'))closeSheet();});
 document.getElementById('primary-action').addEventListener('click',event=>{event.currentTarget.style.filter='brightness(1.14)';setTimeout(()=>event.currentTarget.style.filter='',180);});
+let scrapToastTimer;
+document.getElementById('scrap-action').addEventListener('click',()=>{
+  const toast=document.getElementById('scrap-toast');
+  toast.textContent=`Zerlegt · +12 Schrott für den Shop`;
+  toast.classList.add('visible');
+  clearTimeout(scrapToastTimer);
+  scrapToastTimer=setTimeout(()=>toast.classList.remove('visible'),1900);
+});
 document.querySelector('.head-button[aria-label="Zurück"]').addEventListener('click',closeSheet);
 document.querySelector('.head-close').addEventListener('click',closeSheet);
 const screen=params.get('screen');
