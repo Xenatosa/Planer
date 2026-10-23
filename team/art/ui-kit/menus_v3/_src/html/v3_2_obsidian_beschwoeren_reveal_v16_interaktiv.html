@@ -131,21 +131,28 @@ html[data-mode="standard"] .card-zone{top:366px}
 .picker-panel h2{margin:0;color:#f5d6b5;font:44px/1 Bangers;letter-spacing:1.7px}
 .picker-panel p{margin:12px 0 24px;color:#bfb09f;font:700 16px/1.3 Nunito;letter-spacing:.4px}
 .picker-close{position:absolute;right:20px;top:19px;width:48px;height:48px;border:1px solid rgba(212,168,128,.43);border-radius:14px 5px 14px 5px;background:#181719;color:#f2d6b7;font:32px/1 Nunito}
-.hero-options{display:flex;flex-direction:column;gap:12px;max-height:980px;overflow:auto;text-align:left}
-.hero-option{display:grid;grid-template-columns:92px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid rgba(211,171,136,.39);border-radius:20px 7px 20px 7px;background:linear-gradient(145deg,#343033,#141519);box-shadow:inset 0 1px 0 #fff2;color:inherit;width:100%}
-.hero-option img{width:78px;height:78px;object-fit:cover;border:3px solid var(--rarity);border-radius:50%;box-shadow:0 0 15px color-mix(in srgb,var(--rarity) 28%,transparent)}
-.hero-meta{display:flex;flex-direction:column;gap:6px;min-width:0}
+.picker-panel{width:920px;padding:28px 32px 22px}
+.picker-tools{display:flex;flex-direction:column;gap:10px;margin:0 0 12px}
+#picker-search{width:100%;height:56px;padding:0 18px;border:1px solid rgba(214,169,122,.55);border-radius:14px 5px 14px 5px;background:rgba(10,11,13,.92);color:#f2dfc8;font:800 18px/1 Nunito;outline:none;box-sizing:border-box}
+#picker-search::placeholder{color:#9e8f7e}
+.picker-filters{display:flex;gap:8px}
+.pf{flex:1;height:44px;border:1px solid rgba(205,159,119,.45);border-radius:12px 4px 12px 4px;background:rgba(18,18,20,.88);color:#d8c3aa;font:800 13px/1 Nunito;letter-spacing:.6px}
+.pf.active{border-color:#f1bf8c;background:linear-gradient(180deg,#8a5232,#3d2a22);color:#fff2de}
+.hero-options{display:flex;flex-direction:column;gap:8px;height:980px;overflow-y:auto;text-align:left;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c9956a #1a1716}
+.hero-option{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid rgba(211,171,136,.39);border-radius:16px 6px 16px 6px;background:linear-gradient(145deg,#343033,#141519);box-shadow:inset 0 1px 0 #fff2;color:inherit;width:100%;box-sizing:border-box;flex:0 0 auto}
+.hero-option img{width:56px;height:56px;object-fit:cover;border:2px solid var(--rarity);border-radius:50%;box-shadow:0 0 10px color-mix(in srgb,var(--rarity) 28%,transparent)}
+.hero-meta{display:flex;flex-direction:column;gap:4px;min-width:0}
 .hero-meta .row{display:flex;align-items:baseline;gap:10px}
-.hero-meta strong{color:#f4e5d2;font:900 22px/1 Nunito;letter-spacing:1px}
-.hero-meta .rarity{color:var(--rarity);font:900 13px/1 Nunito;letter-spacing:1.2px}
-.hero-meta .chance{color:#cbb9a4;font:700 14px/1.25 Nunito}
-.frag-track{position:relative;height:10px;border-radius:6px;background:rgba(8,9,11,.88);border:1px solid rgba(214,169,122,.35);overflow:hidden}
+.hero-meta strong{color:#f4e5d2;font:900 17px/1 Nunito;letter-spacing:1px}
+.hero-meta .rarity{color:var(--rarity);font:900 12px/1 Nunito;letter-spacing:1.2px}
+.hero-meta .chance{color:#cbb9a4;font:700 12px/1.2 Nunito}
+.frag-track{position:relative;height:8px;border-radius:6px;background:rgba(8,9,11,.88);border:1px solid rgba(214,169,122,.35);overflow:hidden}
 .frag-track>i{display:block;height:100%;width:var(--fill);background:linear-gradient(90deg,color-mix(in srgb,var(--rarity) 70%,#fff0),var(--rarity))}
-.frag-label{color:#e8d4bc;font:800 12px/1 Nunito;letter-spacing:.4px}
-.wahl-btn{min-width:168px;height:58px;padding:0 18px;border:1px solid #f1bf8c;border-radius:14px 5px 14px 5px;background:linear-gradient(180deg,#b26a3f,#703f2b 55%,#392a25);color:#fff2de;font:850 16px/1 Nunito;letter-spacing:.4px;box-shadow:inset 0 1px 0 rgba(255,246,231,.4),0 4px 0 #211714}
+.frag-label{color:#e8d4bc;font:800 11px/1 Nunito;letter-spacing:.4px}
+.wahl-btn{min-width:132px;height:48px;padding:0 14px;border:1px solid #f1bf8c;border-radius:14px 5px 14px 5px;background:linear-gradient(180deg,#b26a3f,#703f2b 55%,#392a25);color:#fff2de;font:850 14px/1 Nunito;letter-spacing:.4px;box-shadow:inset 0 1px 0 rgba(255,246,231,.4),0 4px 0 #211714}
 .wahl-btn.ready{border-color:#f0d9a8;background:linear-gradient(180deg,#c98945,#8a5528 55%,#3d2a18)}
-.picker-hint{margin-top:18px;color:#d7c3aa;font:800 14px/1.3 Nunito;letter-spacing:.3px}
-.picker-clear{margin-top:14px;padding:13px 27px;border:1px solid rgba(205,159,119,.54);border-radius:12px 4px 12px 4px;background:rgba(11,12,14,.76);color:#d8c3aa;font:800 14px/1 Nunito;letter-spacing:1px}
+.picker-hint{margin-top:12px;color:#d7c3aa;font:800 13px/1.3 Nunito;letter-spacing:.3px}
+.picker-clear{margin-top:10px;padding:13px 27px;border:1px solid rgba(205,159,119,.54);border-radius:12px 4px 12px 4px;background:rgba(11,12,14,.76);color:#d8c3aa;font:800 14px/1 Nunito;letter-spacing:1px}
 .rate-tap-hint{position:absolute;left:50%;top:248px;transform:translateX(-50%);z-index:11;padding:8px 16px;border:1px dashed rgba(233,170,110,.7);border-radius:12px;background:rgba(12,12,14,.88);color:#f0d6b4;font:800 13px/1 Nunito;letter-spacing:.6px;pointer-events:none;display:none}
 html[data-show-tap='1'] .rate-tap-hint{display:block}
 .rate-slot.has-hero{position:relative;overflow:hidden;border-style:solid;border-color:color-mix(in srgb,var(--rarity) 62%,#d1a173);padding:5px;background:linear-gradient(145deg,#392c26,#111316)}
@@ -180,9 +187,18 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   <div class="picker-panel">
     <button class="picker-close" id="picker-close" type="button" aria-label="Schließen">×</button>
     <h2 id="picker-title">HELD FÜR RATE-UP WÄHLEN</h2>
-    <p>Raten laut GDD · SR/R zeigen Basis-Poolraten. Tippe <b>WÄHLEN</b> — der Held landet im Siegelplatz.</p>
+    <p>Bei großem Roster: suchen / filtern, Liste scrollt. <b>WÄHLEN</b> füllt den Siegelplatz.</p>
+    <div class="picker-tools">
+      <input id="picker-search" type="search" placeholder="Held suchen…" autocomplete="off" aria-label="Held suchen">
+      <div class="picker-filters" role="tablist" aria-label="Seltenheit">
+        <button type="button" class="pf active" data-filter="ALL" aria-selected="true">ALLE <span id="pf-all">80</span></button>
+        <button type="button" class="pf" data-filter="SSR" aria-selected="false">SSR</button>
+        <button type="button" class="pf" data-filter="SR" aria-selected="false">SR</button>
+        <button type="button" class="pf" data-filter="R" aria-selected="false">R</button>
+      </div>
+    </div>
     <div class="hero-options" id="hero-options"></div>
-    <div class="picker-hint">80 Fragmente = Held freischalten · Antippen füllt den Slot</div>
+    <div class="picker-hint"><span id="picker-count">80 Helden</span> · Scrollen · 80 Fragmente = Held freischalten</div>
     <button class="picker-clear" id="picker-clear" type="button">SIEGELPLATZ LEEREN</button>
   </div>
 </div>
@@ -220,12 +236,35 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
 <script>
 (function(){
   'use strict';
-  var heroes={
+  var baseHeroes={
     NARA:{name:'NARA',rarity:'SSR',tone:'#eea363',image:'../../_assets/reveal_v16/nara_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:12,ready:false},
     OLM:{name:'OLM',rarity:'SR',tone:'#67a9c1',image:'../../_assets/reveal_v16/olm_circle.png',chance:'SR-Pool · 18% Bannerchance',frags:47,ready:false},
     KIKO:{name:'KIKO',rarity:'R',tone:'#b7a58f',image:'../../_assets/reveal_v16/kiko_circle.png',chance:'R-Pool · 80% Bannerchance',frags:80,ready:true},
     RUKA:{name:'RUKA',rarity:'SSR',tone:'#eea363',image:'../../_assets/reveal_v16/ruka_circle.png',chance:'50% vom SSR · = 1% je Ziehung',frags:29,ready:false}
   };
+  var rosterNames=['BRAN','TIRA','VORIK','SAEL','MORNA','KAEL','YUNA','DROK','LISSA','THORNE','ARIA','GORN','NIMA','ZAREK','ELEN','FEN','ORIN','SYLA','RAEK','MIRA','JOR','VELA','KORD','NYX','ASHA','RENN','TORA','ULRIC','PIA','WREN','IO','CAL','DEX','QUIN','HALE','IVY','JADE','KYRO','LENA','MAKO','NOVA','OPAL','PRUE','ROAN','SAGE','TESSA','UMA','VEX','WILD','XEN','YARA','ZEKE','ALBA','BO','CIRI','DALE','ECHO','FLINT','GREY','HEX','IRIS','JUNE','KITE','LARK','MOSS','NASH','OTTO','PIP','QUILL'];
+  var heroes={};
+  Object.keys(baseHeroes).forEach(function(k){heroes[k]=baseHeroes[k]});
+  var imgs=['../../_assets/reveal_v16/nara_circle.png','../../_assets/reveal_v16/olm_circle.png','../../_assets/reveal_v16/kiko_circle.png','../../_assets/reveal_v16/ruka_circle.png'];
+  var rarities=[{r:'SSR',t:'#eea363',c:'50% vom SSR · = 1% je Ziehung'},{r:'SR',t:'#67a9c1',c:'SR-Pool · 18% Bannerchance'},{r:'R',t:'#b7a58f',c:'R-Pool · 80% Bannerchance'}];
+  for(var i=0;i<rosterNames.length;i++){
+    var name=rosterNames[i];
+    var rar=rarities[i%3];
+    var frags=(i*7+11)%81;
+    heroes[name]={name:name,rarity:rar.r,tone:rar.t,image:imgs[i%4],chance:rar.c,frags:frags,ready:frags>=80};
+  }
+  // pad to 80 total including base 4
+  var keys=Object.keys(heroes);
+  var n=0;
+  while(Object.keys(heroes).length<80){
+    n++;
+    var name='HELD '+String(n).padStart(2,'0');
+    if(heroes[name]) continue;
+    var rar=rarities[n%3];
+    var frags=(n*13)%81;
+    heroes[name]={name:name,rarity:rar.r,tone:rar.t,image:imgs[n%4],chance:rar.c,frags:frags,ready:frags>=80};
+  }
+
   var featuredTen=[
     {kind:'hero',hero:'NARA'},
     {kind:'fragment',hero:'OLM',amount:5,progress:'12 / 80',fill:'15%'},
@@ -332,22 +371,58 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   }
   modeButtons.forEach(function(button){button.addEventListener('click',function(){mode=button.getAttribute('data-mode');forceOpen=false;draw()})});
   pullButtons.forEach(function(button){button.addEventListener('click',function(){pull=button.getAttribute('data-pull');forceOpen=false;draw()})});
-  function openPicker(slotIndex){
-    activeSlot=slotIndex;
-    picker.classList.add('open');
-    picker.setAttribute('aria-hidden','false');
-    document.getElementById('picker-title').textContent='HELD FÜR RATE-UP · SLOT '+String(slotIndex+1).padStart(2,'0');
-    document.getElementById('hero-options').innerHTML=Object.keys(heroes).map(function(key){
+  var pickerFilter='ALL';
+  var pickerQuery='';
+  function heroKeysFiltered(){
+    return Object.keys(heroes).filter(function(key){
+      var h=heroes[key];
+      if(pickerFilter!=='ALL' && h.rarity!==pickerFilter) return false;
+      if(pickerQuery && h.name.toLowerCase().indexOf(pickerQuery)===-1) return false;
+      return true;
+    }).sort(function(a,b){
+      var order={SSR:0,SR:1,R:2};
+      var d=(order[heroes[a].rarity]-order[heroes[b].rarity]);
+      if(d) return d;
+      return a.localeCompare(b);
+    });
+  }
+  function renderPickerList(){
+    var keys=heroKeysFiltered();
+    var countNode=document.getElementById('picker-count');
+    if(countNode) countNode.textContent=keys.length+' von '+Object.keys(heroes).length+' Helden';
+    var allBadge=document.getElementById('pf-all');
+    if(allBadge) allBadge.textContent=String(Object.keys(heroes).length);
+    document.getElementById('hero-options').innerHTML=keys.map(function(key){
       var hero=heroes[key];
       var fill=Math.min(100, Math.round((hero.frags/80)*100))+'%';
-      var btn=hero.ready?'HELD FREISCHALTEN':'WÄHLEN';
+      var btn=hero.ready?'FREI':'WÄHLEN';
       var btnClass=hero.ready?'wahl-btn ready':'wahl-btn';
       return '<div class="hero-option" style="--rarity:'+hero.tone+'"><img src="'+hero.image+'" alt=""><div class="hero-meta"><div class="row"><strong>'+hero.name+'</strong><span class="rarity">'+hero.rarity+'</span></div><div class="chance">'+hero.chance+'</div><div class="frag-track" style="--fill:'+fill+'"><i></i></div><div class="frag-label">'+hero.frags+' / 80 Fragmente'+(hero.ready?' · BEREIT':'')+'</div></div><button class="'+btnClass+'" type="button" data-hero-choice="'+key+'">'+btn+'</button></div>';
     }).join('');
     document.querySelectorAll('[data-hero-choice]').forEach(function(option){
       option.addEventListener('click',function(){setRateup(activeSlot,option.getAttribute('data-hero-choice'));closePicker()});
     });
-    document.getElementById('picker-close').focus();
+  }
+  function openPicker(slotIndex){
+    activeSlot=slotIndex;
+    picker.classList.add('open');
+    picker.setAttribute('aria-hidden','false');
+    document.getElementById('picker-title').textContent='HELD FÜR RATE-UP · SLOT '+String(slotIndex+1).padStart(2,'0');
+    pickerFilter='ALL';
+    pickerQuery='';
+    var search=document.getElementById('picker-search');
+    if(search) search.value='';
+    document.querySelectorAll('.pf').forEach(function(b){
+      var on=b.getAttribute('data-filter')==='ALL';
+      b.classList.toggle('active',on);
+      b.setAttribute('aria-selected',String(on));
+    });
+    renderPickerList();
+    // show mid-list so scroll is obvious in screenshots
+    var list=document.getElementById('hero-options');
+    if(list) list.scrollTop=220;
+    if(search) search.focus();
+    else document.getElementById('picker-close').focus();
   }
   function closePicker(){picker.classList.remove('open');picker.setAttribute('aria-hidden','true')}
   function setRateup(index,key){
@@ -367,6 +442,21 @@ html[data-show-tap='1'] .rate-tap-hint{display:block}
   rateSlots.forEach(function(slot,index){slot.addEventListener('click',function(){openPicker(index)})});
   document.getElementById('picker-close').addEventListener('click',closePicker);
   document.getElementById('picker-clear').addEventListener('click',function(){setRateup(activeSlot,'');closePicker()});
+  document.getElementById('picker-search').addEventListener('input',function(e){
+    pickerQuery=(e.target.value||'').trim().toLowerCase();
+    renderPickerList();
+  });
+  document.querySelectorAll('.pf').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      pickerFilter=btn.getAttribute('data-filter');
+      document.querySelectorAll('.pf').forEach(function(b){
+        var on=b===btn;
+        b.classList.toggle('active',on);
+        b.setAttribute('aria-selected',String(on));
+      });
+      renderPickerList();
+    });
+  });
   document.getElementById('all-open').addEventListener('click',function(){
     var cards=cardsNode.querySelectorAll('.card');
     cards.forEach(function(card){card.classList.add('is-open');card.setAttribute('aria-pressed','true')});
