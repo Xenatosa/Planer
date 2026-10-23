@@ -13,9 +13,10 @@
 |---|---|---|
 | 1 | Stammeswettstreit- und Weltboss-Platzpreise verwenden `event_hero_shards`; `hero_shards_choice = 0` in den regulären Platzpreisen. | `team/gdd/ranking_rewards.csv` |
 | 2 | Platzbelohnungswerte und Meilensteine in Abschnitt D ergänzt; Würfel-Event bleibt fragmentfrei. | GDD v1.6.13, `ranking_rewards.csv`, `event_milestones.csv` |
-| 3 | Ruhende Law-Fallback-Tabelle ohne Fragmentwerte in der Dokumentation ausgewiesen; CSV unverändert und vor Aktivierung abzugleichen. | GDD 24.5, `ranking_rewards_fallback.csv` |
+| 3 | Ruhende Law-Fallback-Tabelle ohne Fragmentwerte; CSV angeglichen (`hero_shards_choice=0`), weiter ruhend. | GDD 24.5, `ranking_rewards_fallback.csv` |
 | 4 | Law-Wortlaute nach GDD v1.6.3 beibehalten. | bestehender Abschnitt A/B |
 | 5 | K-GD30 geschlossen: Variante A ist in GDD v1.6.13 abgebildet. | GDD 24.4a/24.6 |
+| 6 | Fallback-CSV: `hero_shards_choice` auf 0 gesetzt (GD 23.10.); Docs-Hinweis „nicht aktivierbar“ entfällt. | GD-Datenpunkt, `ranking_rewards_fallback.csv` |
 
 ---
 
@@ -37,7 +38,7 @@
 > **Entschieden durch Fabian am 14.10.2026: Variante A** (Law-Hauptempfehlung, Law-Review v1.4 Nr. 0).
 > Rang, Kristall-Platzbelohnungen und Gleichstand im Stammeswettstreit werden **nur aus Gratis-Versuchen** gewertet (Tages-Gratisversuche und Fackeln aus Quests/Gratisquellen). Gekaufte Fackeln (für Kristalle oder €) bringen **Übung und Meilenstein-Fortschritt** (Zeitkristalle, Event-Helden-Fragmente, Heldenerfahrung, Emote), aber **keine Festmünzen**.
 > **Verworfen:** Status quo (alle Versuche zählen für den Rang) und Variante B (getrennte Wertungen). Die Abwägung steht in v1.5 Abschn. B.
-> **Folgen laut Law v1.4:** Nr. 1 (§ 10b) → 🟢; Nr. 3, 4, 7, 8 je mindestens eine Stufe besser. Die Google-Policy-Anfrage vor M6 bleibt, mit dem Sachverhalt „gekaufte Versuche zählen nur für Meilensteine“. Die Fallback-Tabelle bleibt ruhend; vor Aktivierung muss ihre CSV an den dokumentierten Stand angeglichen werden.
+> **Folgen laut Law v1.4:** Nr. 1 (§ 10b) → 🟢; Nr. 3, 4, 7, 8 je mindestens eine Stufe besser. Die Google-Policy-Anfrage vor M6 bleibt, mit dem Sachverhalt „gekaufte Versuche zählen nur für Meilensteine“. Die Fallback-Tabelle bleibt ruhend (`ranking_rewards_table = regular`); die CSV ist angeglichen (`hero_shards_choice=0`, Kristalle und `event_hero_shards=0`).
 
 **Regeln Ahnenprüfung (ersetzt v1.5 A, Zeilen „Rang“ und „Gleichstand“):**
 | Zweck | gewerteter Versuch je Tag |
@@ -128,4 +129,4 @@ Die folgende Dokumentationsansicht hält Kristalle und Fragmentwerte aus der Fal
 | 11–25 | 0 | 0 | 1.000 | – |
 | 26–50 | 0 | 0 | 600 | – |
 
-**Datenhinweis:** Die CSV bleibt gemäß Arbeitsumfang unverändert. Sie enthält derzeit noch nicht null gesetzte Werte in `hero_shards_choice`; deshalb ist die Fallback-Tabelle nicht aktivierbar, bis der zuständige Datenstand angeglichen ist. `ranking_rewards_table = regular` bleibt maßgeblich.
+**Datenhinweis:** `ranking_rewards_fallback.csv` ist angeglichen: `hero_shards_choice`, Kristalle und `event_hero_shards` sind 0; EP/Kosmetik/Titel unverändert. Die Tabelle bleibt ruhend (`ranking_rewards_table = regular`).
