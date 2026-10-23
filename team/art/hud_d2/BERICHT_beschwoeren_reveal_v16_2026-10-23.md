@@ -19,3 +19,7 @@
 - Bildgenerierung: nicht verwendet. Kosten: **0 $**.
 
 **DONE · 2026-10-23 19:56:44 CEST Europe/Berlin**
+
+## Freigabe Fabian 23.10.2026 ~20:17
+- Reveal v16 + Heldenwahl-Picker (Suche, Seltenheit, Klassen, Scroll) **freigegeben**.
+- Obere Banner-Reiter (Standard/Featured) müssen **später erweiterbar** sein (neue Banner als weitere Tabs).
