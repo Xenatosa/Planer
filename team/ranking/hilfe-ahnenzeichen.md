@@ -146,10 +146,10 @@ War an einem Tag ein **gekaufter** Versuch besser als dein bester Gratis-Versuch
 | Ressourcen (nur eigene) | 2.100 | 1.400 *(Beispiel)* | 1.400 *(Beispiel)* |
 | Ahnenprüfung (bester Gratis-Versuch je Tag) | 7 × 250 = 1.750 *(Beispiel)* | 7 × 243 = 1.701 | 7 × 243 = 1.701 (mit Fackeln 7 × 271 = 1.897) |
 | **Punkte im Balken** (Platz, Festmünzen) | **39.550** | **15.801** | **15.801** |
-| Meilenstein-Punkte (Kristalle, Fragmente, EP) | 39.550 | 15.801 | 15.997 |
+| Meilenstein-Punkte (Kristalle, EP, Emote) | 39.550 | 15.801 | 15.997 |
 | Ausgegeben | 0 € | 0 € | 7 × 0,99 € = 6,93 € (oder 420 Kristalle) |
 
-**Was heißt das?** Sparen bringt im Wettstreit am meisten. Lena und Tom stehen im Balken gleich, ihr Platz hängt nicht an den Fackeln. Toms Fackeln bringen ihm 196 Meilenstein-Punkte mehr. Damit kann er einen Meilenstein früher erreichen. Hier reicht es bei beiden nicht für die 20.000er-Stufe.
+**Was heißt das?** Sparen bringt im Wettstreit am meisten. Lena und Tom stehen im Balken gleich, ihr Platz hängt nicht an den Fackeln. Toms Fackeln bringen ihm 196 Meilenstein-Punkte mehr — das betrifft nur **Zeitkristalle, Heldenerfahrung und Emote**. Der Fragment-Anteil der 6.000er- und 20.000er-Stufe läuft weiter nur über Gratis-Punkte (wie im Tagesbeispiel: Tom 243 für Fragmente). Hier reicht es bei beiden nicht für die 20.000er-Stufe.
 
 ---
 

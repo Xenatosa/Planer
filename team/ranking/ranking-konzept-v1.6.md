@@ -19,6 +19,7 @@
 | 5 | K-GD30 geschlossen: Variante A ist in GDD v1.6.13 abgebildet. | GDD 24.4a/24.6 |
 | 6 | Fallback-CSV: `hero_shards_choice` auf 0 gesetzt (GD 23.10.); Docs-Hinweis „nicht aktivierbar“ entfällt. | GD-Datenpunkt, `ranking_rewards_fallback.csv` |
 | 7 | Event-Helden-Fragment-Meilensteine: Hilfe + Abschn. A an Law A7 / `event_hero_points_basis=free_only` angeglichen (Paid nur Kristalle/EP/Emote). Law-Strings v1.6.3 unberührt. | Kritik M1, GDD 28.4 |
+| 8 | Recheck-Reste S4/S5: Wochen-Beispieltabelle ohne „Fragmente“ in Paid-Zeile; QA-RK-10 mit free_only-Fußnote. | Kritik Recheck 1 |
 
 ---
 
@@ -54,7 +55,7 @@ Bester Versuch jeweils: höchste ‰, bei gleichen ‰ weniger Sekunden (PvP). T
 
 **Mittelbarer Weg (offen nennen, Law K-L7/Nr. 3):** € → (Kristalle →) Fackel → besserer Versuch → **Meilenstein-Kristalle/EP/Emote**. **Nicht** für Event-Helden-Fragment-Meilensteine (A7/`free_only`). Der Weg ist klein (höchstens 300 Punkte/Tag aus der Ahnenprüfung, nur diese Meilensteine, keine Platzbelohnung). Er wird in Hilfe, Kaufdialog und AGB genannt und **nie** als „bringt keinen Vorteil“ beschrieben. Law-Pflichtformeln v1.6.3 bleiben generisch („Fragmente“) und unverändert.
 
-**UI (ersetzt v1.4/v1.5 Balken-Regel):** Ein Balken „Punkte“ = Rang- und Festmünzen-Punkte (nur Gratis-Versuche). Zusätzlich zeigt die Meilenstein-Leiste die Zahl „Meilenstein-Punkte“, aber nur wenn sie abweicht (nach einem gekauften Versuch, der besser war als der beste Gratis-Versuch). Kein Kauf-Button und keine verzögerten Angebote (v1.5 C), QA-Testfälle QA-RK-01 bis 09 gelten weiter. **Neu: QA-RK-10:** Ein gekaufter Versuch ist besser als der beste Gratis-Versuch → Rang, Bracket-Liste und Tie-Break-Werte unverändert; nur die Meilenstein-Punkte steigen; Festmünzen unverändert.
+**UI (ersetzt v1.4/v1.5 Balken-Regel):** Ein Balken „Punkte“ = Rang- und Festmünzen-Punkte (nur Gratis-Versuche). Zusätzlich zeigt die Meilenstein-Leiste die Zahl „Meilenstein-Punkte“, aber nur wenn sie abweicht (nach einem gekauften Versuch, der besser war als der beste Gratis-Versuch). Kein Kauf-Button und keine verzögerten Angebote (v1.5 C), QA-Testfälle QA-RK-01 bis 09 gelten weiter. **Neu: QA-RK-10:** Ein gekaufter Versuch ist besser als der beste Gratis-Versuch → Rang, Bracket-Liste und Tie-Break-Werte unverändert; nur die Meilenstein-Punkte (Kristalle/EP/Emote) steigen; Festmünzen und Event-Helden-Fragment-Meilensteine unverändert (`free_only`).
 
 **Telemetrie (GDD 24.9):** Die Auslöser bleiben (Gewinnquote Spar-Zahler vs. F2P-Sparer, F2P < 30 % der Titel). Erwartung unter Variante A: Die Lücke beim Platz verschwindet weitgehend [Annahme, neue Sim durch GD]. Zusätzlich messen: **Meilenstein-Vorsprung** durch Fackeln (Anteil Spieler, die einen Kristall-/EP-/Emote-Meilenstein nur dank gekaufter Versuche erreichen; Fragment-Meilensteine ausgeschlossen). Weiterhin nur mit Analytics-Einwilligung.
 

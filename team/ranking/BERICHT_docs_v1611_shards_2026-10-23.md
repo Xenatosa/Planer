@@ -21,7 +21,7 @@
 
 ## Übergabe
 
-**Offene Fragen:** keine. GD-Datenpunkt 23.10.: Fallback-CSV angeglichen; `ms_sw_4=55` bestätigt. Kritik M1 (A7/`free_only`) in Hilfe + Konzept A nachgezogen; Law-Strings v1.6.3 unberührt. Abnahme „Wahl-Fragment“ gilt für aktive Hilfe + aktives Konzept; Historie = Altstand. Repo-Spiegel epodarien noch alt (Paket `team/dev/pakete/2026-10-23_ranking_fallback_shards_zero.md`).
+**Offene Fragen:** keine. GD-Datenpunkt 23.10.: Fallback-CSV angeglichen; `ms_sw_4=55` bestätigt. Kritik M1 (A7/`free_only`) in Hilfe + Konzept A nachgezogen; Recheck-Reste S4/S5 geschlossen; Law-Strings v1.6.3 unberührt. Abnahme „Wahl-Fragment“ gilt für aktive Hilfe + aktives Konzept; Historie = Altstand. Repo-Spiegel epodarien noch alt (Paket `team/dev/pakete/2026-10-23_ranking_fallback_shards_zero.md`).
 **Arbeitsstatus:** Ranking-Docs v1.6.11 Shards · `team/ranking/` · bereit zur Prüfung.
 
-DONE 2026-10-23T19:47:14+02:00 (nachgezogen: ms_sw_4=55, Fallback choice=0, M1 A7/free_only @ HEAD aktuell)
+DONE 2026-10-23T19:49:46+02:00 (S4/S5 nach Recheck 1)
