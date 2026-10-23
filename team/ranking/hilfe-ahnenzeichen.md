@@ -1,8 +1,8 @@
 # Hilfe: Ahnenzeichen und der Stammeswettstreit
 
-> **Änderungsprotokoll (23.10.2026):** Platz- und Meilensteinwerte an GDD v1.6.11+ angeglichen. Wettstreit-Platzpreise verwenden `event_hero_shards`; `hero_shards_choice` ist dort 0. Die Law-Texte aus v1.6.3 bleiben unverändert.
-> **Interner Hinweis (vor Veröffentlichung entfernen):** Spielerhilfe, Stand 23.10.2026, **Fabian-Entscheidung Variante A** (Ranking-Konzept v1.6): Rang und Kristall-Platzbelohnungen nur aus Gratis-Versuchen; gekaufte Fackeln bringen Übung und Meilenstein-Fortschritt. Basis GDD v1.6.13 Kap. 24.4a/24.7, PvP-Festlegung 14.10., Law-Review v1.4. Vorstand: `hilfe-ahnenzeichen-v1.5.md`.
-> **Textregeln (Law v1.4):** kein Shop-Link, kein Kauf-Button, keine Kaufaufforderung. Keine Aussagen „kein Pay-to-win“, „fair für alle“, „jeder kann Erster werden“, „Rang nicht kaufbar“, „Geld bringt keinen Vorteil“. Nie „nie kaufbar“ für Fackeln, Festmünzen oder Arenamarken. Den mittelbaren Weg (gekaufte Fackeln → Meilenstein-Belohnungen) immer offen nennen. Keine Sim-Zahlen. Keine €-Wertangabe von Belohnungen.
+> **Änderungsprotokoll (23.10.2026):** Platz- und Meilensteinwerte an GDD v1.6.11+ angeglichen. Wettstreit-Platzpreise verwenden `event_hero_shards`; `hero_shards_choice` ist dort 0. Event-Helden-Fragment-Meilensteine: nur Gratis-Fortschritt (`event_hero_points_basis=free_only` / Law A7). Die Law-Texte aus v1.6.3 bleiben unverändert.
+> **Interner Hinweis (vor Veröffentlichung entfernen):** Spielerhilfe, Stand 23.10.2026, **Fabian-Entscheidung Variante A** (Ranking-Konzept v1.6): Rang und Kristall-Platzbelohnungen nur aus Gratis-Versuchen; gekaufte Fackeln bringen Übung und Meilenstein-Fortschritt bei Zeitkristallen/EP/Emote — **nicht** bei Event-Helden-Fragment-Meilensteinen (`free_only`/A7). Basis GDD v1.6.13 Kap. 24.4a/24.7/28.4, PvP-Festlegung 14.10., Law-Review v1.4. Vorstand: `hilfe-ahnenzeichen-v1.5.md`.
+> **Textregeln (Law v1.4):** kein Shop-Link, kein Kauf-Button, keine Kaufaufforderung. Keine Aussagen „kein Pay-to-win“, „fair für alle“, „jeder kann Erster werden“, „Rang nicht kaufbar“, „Geld bringt keinen Vorteil“. Nie „nie kaufbar“ für Fackeln, Festmünzen oder Arenamarken. Den mittelbaren Weg (gekaufte Fackeln → Meilenstein-Kristalle/EP/Emote; nicht Event-Helden-Fragmente) immer offen nennen. Keine Sim-Zahlen. Keine €-Wertangabe von Belohnungen.
 > **[offen]-Stellen** brauchen eine Klärung durch GD/Dev (Konzept v1.6 Abschn. C).
 
 ---
@@ -13,7 +13,7 @@ Alle 28 Tage findet der **Stammeswettstreit** statt. Er dauert **7 Tage**. Du tr
 
 **Zusätzliche Versuche kaufbar (Tageslimit 2). Für Platz, Platzbelohnungen und Festmünzen zählen nur Gratis-Versuche.**
 
-Kaufen kann man nur **Prüfungsfackeln**, also zusätzliche Versuche in der Ahnenprüfung. Für deinen **Platz** und die **Platzbelohnungen** zählen nur Gratis-Versuche. Gekaufte Versuche sind **Übung**, und sie können dich bei den **Meilensteinen** weiterbringen: Ein besserer gekaufter Versuch kann einen Meilenstein mit Zeitkristallen, Event-Helden-Fragmenten oder Heldenerfahrung früher erreichbar machen. Für **Festmünzen** zählen sie nicht.
+Kaufen kann man nur **Prüfungsfackeln**, also zusätzliche Versuche in der Ahnenprüfung. Für deinen **Platz** und die **Platzbelohnungen** zählen nur Gratis-Versuche. Gekaufte Versuche sind **Übung**, und sie können dich bei manchen **Meilensteinen** weiterbringen: Ein besserer gekaufter Versuch kann einen Meilenstein mit **Zeitkristallen**, **Heldenerfahrung** oder **Emote** früher erreichbar machen. Für **Event-Helden-Fragmente** und **Festmünzen** zählen nur Gratis-Versuche („Für Fragment-Meilensteine zählen nur Punkte aus Gratis-Versuchen.“).
 
 ### So bekommst du Punkte
 
@@ -72,7 +72,8 @@ Die Ahnenprüfung ist ein Kampf mit **gleichen Werten für alle**:
 | **Gratis-Fackeln** (aus Quests und anderen Gratisquellen) | so viele, wie du hast |
 | **Gekaufte Fackeln** (für Kristalle oder €) | **höchstens 2 pro Tag** |
 | Was zählt für Platz und Festmünzen | dein **bester Gratis-Versuch** des Tages |
-| Was zählt für die übrigen Meilensteine | dein **bester Versuch** des Tages, auch ein gekaufter |
+| Was zählt für Meilensteine mit Zeitkristallen, EP, Emote | dein **bester Versuch** des Tages, auch ein gekaufter |
+| Was zählt für Event-Helden-Fragment-Meilensteine | dein **bester Gratis-Versuch** des Tages |
 
 **Gratis oder gekauft?** Fackeln aus Quests und anderen Gratisquellen zählen als **gratis**. Jede Fackel, die du mit Kristallen oder Euro erwirbst, zählt als **gekauft**. Das gilt auch, wenn du die Kristalle selbst erspielt hast.
 
@@ -88,7 +89,8 @@ Eine gekaufte Fackel kostet **30 Zeitkristalle**. Der Shop zeigt dir daneben den
 2. **Punkte = Promille × 3 ÷ 10, abgerundet.** Ein perfekter Sieg (1.000 ‰) bringt 300 Punkte.
 3. Pro Tag zählt **nur ein Versuch**: der mit den **höchsten Promille**. Haben zwei Versuche gleich viele Promille, zählt der mit **weniger Sekunden**. Höchstens **300 Punkte pro Tag** und **2.100 pro Woche**.
    - Für deinen **Platz**, die **Platzbelohnungen** und die **Festmünzen** zählt dein bester **Gratis**-Versuch (Tages-Gratisversuche und Gratis-Fackeln).
-   - Für die **übrigen Meilensteine** (Zeitkristalle, Event-Helden-Fragmente, Heldenerfahrung, Emote) zählt dein bester Versuch insgesamt, also auch ein gekaufter.
+   - Für Meilensteine mit **Zeitkristallen**, **Heldenerfahrung** und **Emote** zählt dein bester Versuch insgesamt, also auch ein gekaufter.
+   - Für Meilensteine mit **Event-Helden-Fragmenten** zählt nur dein bester **Gratis**-Versuch („Für Fragment-Meilensteine zählen nur Punkte aus Gratis-Versuchen.“).
 4. Bei einer Niederlage oder wenn die Zeit (90 Sekunden) abläuft, bringt der Versuch **0 Punkte**.
 
 **Beispiel – Lena spielt nur gratis:**
@@ -102,11 +104,11 @@ Eine gekaufte Fackel kostet **30 Zeitkristalle**. Der Shop zeigt dir daneben den
 - Fackel-Versuch 3: 790 ‰ → 237 Punkte
 - Fackel-Versuch 4: 905 ‰ → 271,5 → **271 Punkte**
 - Für **Platz und Festmünzen** zählt sein bester Gratis-Versuch: **243 Punkte**, genau wie bei Lena.
-- Für die **übrigen Meilensteine** zählen **271 Punkte**, 28 mehr. Hätte Tom in den Fackel-Versuchen nicht besser gespielt, hätte er auch dort nichts dazugewonnen.
+- Für Meilensteine mit **Zeitkristallen, EP und Emote** zählen **271 Punkte**, 28 mehr. Für **Event-Helden-Fragmente** und **Festmünzen** bleiben es **243 Punkte** wie bei Lena. Hätte Tom in den Fackel-Versuchen nicht besser gespielt, hätte er auch bei Kristallen/EP nichts dazugewonnen.
 
 **Beispiel – gleiche Promille:** Mia schafft zweimal 812 ‰, einmal in 64 Sekunden, einmal in 58 Sekunden. Ihr bester Versuch ist der mit **58 Sekunden** (243 Punkte). Die Sekunden zählen für den Gleichstand (siehe unten).
 
-**Was bringen gekaufte Fackeln also?** Mehr Übung mit der Tagesaufstellung und unter Umständen einen Meilenstein früher. Wer übt, kann danach auch im Gratis-Versuch besser spielen. Auf deinen Platz, die Platzbelohnungen, den Gleichstand und die Festmünzen wirken gekaufte Versuche nicht direkt.
+**Was bringen gekaufte Fackeln also?** Mehr Übung mit der Tagesaufstellung und unter Umständen einen Meilenstein mit Zeitkristallen, Heldenerfahrung oder Emote früher. Event-Helden-Fragment-Meilensteine erreichen sie nicht früher. Wer übt, kann danach auch im Gratis-Versuch besser spielen. Auf deinen Platz, die Platzbelohnungen, den Gleichstand, die Festmünzen und die Fragment-Meilensteine wirken gekaufte Versuche nicht direkt.
 
 ---
 
@@ -187,7 +189,7 @@ Alle Belohnungen sind fest und **vor Beginn des Wettstreits vollständig sichtba
 
 **Meilensteine für alle** (unabhängig vom Platz):
 
-| Punkte | Belohnung (nach Meilenstein-Punkten, gekaufte Versuche zählen mit) | Festmünzen (nach Punkten im Balken, nur Gratis-Versuche) |
+| Punkte | Belohnung (Kristalle/EP/Emote: Meilenstein-Punkte inkl. gekaufter Versuche; Event-Helden-Fragmente: nur Gratis-Versuche) | Festmünzen (nach Punkten im Balken, nur Gratis-Versuche) |
 |---|---|---|
 | 2.000 | 30 Zeitkristalle + 500 Heldenerfahrung | 80 |
 | 6.000 | 50 Zeitkristalle + 5 Event-Helden-Fragmente + 800 Heldenerfahrung | 100 |
@@ -196,7 +198,7 @@ Alle Belohnungen sind fest und **vor Beginn des Wettstreits vollständig sichtba
 | 30.000 | Emote „Ahnen“ | 40 |
 | | | **zusammen 400** |
 
-Event-Helden-Fragmente gehören zum aktuell aktiven Event-Helden. Zeitkristalle aus Belohnungen zählen als verdiente Kristalle.
+Event-Helden-Fragmente gehören zum aktuell aktiven Event-Helden. Für Fragment-Meilensteine zählen nur Punkte aus Gratis-Versuchen. Zeitkristalle aus Belohnungen zählen als verdiente Kristalle.
 
 ---
 
@@ -218,7 +220,7 @@ In 28 Tagen sind so höchstens **1.400 Festmünzen** möglich. Im **Event-Shop**
 ## Häufige Fragen
 
 **Kann man im Stammeswettstreit Punkte kaufen?**
-Punkte selbst kann man nicht kaufen. Kaufen kann man zusätzliche Versuche in der Ahnenprüfung (höchstens 2 pro Tag). **Für Platz, Platzbelohnungen und Festmünzen zählen nur Gratis-Versuche.** Gekaufte Versuche zählen nicht für deinen Platz, die Platzbelohnungen und den Gleichstand. Sie zählen aber für die übrigen Meilensteine (z. B. Kristalle, Fragmente, EP): Ein besserer gekaufter Versuch kann dir einen Meilenstein mit Zeitkristallen, Event-Helden-Fragmenten oder Heldenerfahrung früher bringen. Mit Echtgeld gekaufte Ressourcen bringen keine Punkte.
+Punkte selbst kann man nicht kaufen. Kaufen kann man zusätzliche Versuche in der Ahnenprüfung (höchstens 2 pro Tag). **Für Platz, Platzbelohnungen und Festmünzen zählen nur Gratis-Versuche.** Gekaufte Versuche zählen nicht für deinen Platz, die Platzbelohnungen und den Gleichstand. Sie können Meilensteine mit **Zeitkristallen**, **Heldenerfahrung** oder **Emote** früher erreichbar machen. Für **Event-Helden-Fragmente** zählen nur Gratis-Versuche. Mit Echtgeld gekaufte Ressourcen bringen keine Punkte.
 
 **Was passiert, wenn ein Fackel-Kauf erstattet wird?**
 Nicht verbrauchte Fackeln aus diesem Kauf werden entfernt. Deine erzielte Platzierung bleibt bestehen. Nur wenn jemand wiederholt erst spielt und dann erstatten lässt, prüfen Mitarbeiter den Fall. Dann können Belohnungen zurückgebucht werden. Das entscheidet nie ein Automat allein.

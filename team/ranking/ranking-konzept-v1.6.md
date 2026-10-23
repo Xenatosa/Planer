@@ -4,6 +4,7 @@
 **Basis:** `ranking-konzept-v1.5.md` (gilt weiter, soweit hier nichts geändert wird) · **Fabian-Entscheidung vom 14.10.2026: Variante A** · GDD v1.6.13 Kap. 24/28/31 · Law-Review v1.4.
 **Lesart:** Bei Widerspruch gilt **GDD > Fabian-Entscheidung > dieses Delta > v1.5**. GDD v1.6.13 bildet Variante A in den Daten ab; der frühere Auftrag K-GD30 ist damit erledigt. Ältere Versionen bleiben unverändert. **Keine Rechtsberatung.**
 **Spielerhilfe:** `hilfe-ahnenzeichen.md` auf Variante A umgestellt. Vorstand gesichert als `hilfe-ahnenzeichen-v1.5.md`.
+**Gültigkeit:** Aktiv sind nur `ranking-konzept-v1.6.md` und `hilfe-ahnenzeichen.md`. Historische Ranking-Dateien (ältere Konzept-/Hilfe-/Review-Versionen, Paket, Logs) = Altstand, nicht gültig.
 
 ---
 
@@ -17,6 +18,7 @@
 | 4 | Law-Wortlaute nach GDD v1.6.3 beibehalten. | bestehender Abschnitt A/B |
 | 5 | K-GD30 geschlossen: Variante A ist in GDD v1.6.13 abgebildet. | GDD 24.4a/24.6 |
 | 6 | Fallback-CSV: `hero_shards_choice` auf 0 gesetzt (GD 23.10.); Docs-Hinweis „nicht aktivierbar“ entfällt. | GD-Datenpunkt, `ranking_rewards_fallback.csv` |
+| 7 | Event-Helden-Fragment-Meilensteine: Hilfe + Abschn. A an Law A7 / `event_hero_points_basis=free_only` angeglichen (Paid nur Kristalle/EP/Emote). Law-Strings v1.6.3 unberührt. | Kritik M1, GDD 28.4 |
 
 ---
 
@@ -36,24 +38,25 @@
 ## A. Entscheidungsvermerk (ersetzt v1.5 Abschn. B)
 
 > **Entschieden durch Fabian am 14.10.2026: Variante A** (Law-Hauptempfehlung, Law-Review v1.4 Nr. 0).
-> Rang, Kristall-Platzbelohnungen und Gleichstand im Stammeswettstreit werden **nur aus Gratis-Versuchen** gewertet (Tages-Gratisversuche und Fackeln aus Quests/Gratisquellen). Gekaufte Fackeln (für Kristalle oder €) bringen **Übung und Meilenstein-Fortschritt** (Zeitkristalle, Event-Helden-Fragmente, Heldenerfahrung, Emote), aber **keine Festmünzen**.
+> Rang, Kristall-Platzbelohnungen und Gleichstand im Stammeswettstreit werden **nur aus Gratis-Versuchen** gewertet (Tages-Gratisversuche und Fackeln aus Quests/Gratisquellen). Gekaufte Fackeln (für Kristalle oder €) bringen **Übung und Meilenstein-Fortschritt** bei **Zeitkristallen, Heldenerfahrung und Emote**, aber **keine Festmünzen** und **keinen Fortschritt** bei Event-Helden-Fragment-Meilensteinen (`event_hero_points_basis = free_only` / Law A7).
 > **Verworfen:** Status quo (alle Versuche zählen für den Rang) und Variante B (getrennte Wertungen). Die Abwägung steht in v1.5 Abschn. B.
 > **Folgen laut Law v1.4:** Nr. 1 (§ 10b) → 🟢; Nr. 3, 4, 7, 8 je mindestens eine Stufe besser. Die Google-Policy-Anfrage vor M6 bleibt, mit dem Sachverhalt „gekaufte Versuche zählen nur für Meilensteine“. Die Fallback-Tabelle bleibt ruhend (`ranking_rewards_table = regular`); die CSV ist angeglichen (`hero_shards_choice=0`, Kristalle und `event_hero_shards=0`).
 
 **Regeln Ahnenprüfung (ersetzt v1.5 A, Zeilen „Rang“ und „Gleichstand“):**
 | Zweck | gewerteter Versuch je Tag |
 |---|---|
-| **Rang, Platzbelohnungen (Kristalle, Fragmente, EP, Krone, Titel)** | bester **Gratis**-Versuch |
+| **Rang, Platzbelohnungen (Kristalle, Event-Helden-Fragmente, EP, Krone, Titel)** | bester **Gratis**-Versuch |
 | **Gleichstand** | nur beste **Gratis**-Versuche je Tag: Σ ‰ → Σ Sekunden (weniger gewinnt) → geteilter Platz 1, 2, 2, 4 |
 | **Festmünzen-Meilensteine** | bester **Gratis**-Versuch (unverändert `coins_best_free`) |
-| **Übrige Meilensteine** (Kristalle, Event-Helden-Fragmente, EP, Emote) | bester Versuch **insgesamt**, auch gekaufter |
+| **Event-Helden-Fragment-Meilensteine** | bester **Gratis**-Versuch (`event_hero_points_basis = free_only` / Law A7) |
+| **Übrige Meilensteine** (Kristalle, EP, Emote) | bester Versuch **insgesamt**, auch gekaufter |
 Bester Versuch jeweils: höchste ‰, bei gleichen ‰ weniger Sekunden (PvP). Tageslimit gekaufter Fackeln 2, Verbrauch Tagesgratis → Quest-Fackeln → gekaufte, U18 gesperrt (v1.5, unverändert).
 
-**Mittelbarer Weg (offen nennen, Law K-L7/Nr. 3):** € → (Kristalle →) Fackel → besserer Versuch → **Meilenstein-Kristalle/-Fragmente/EP**. Der Weg ist klein (höchstens 300 Punkte/Tag aus der Ahnenprüfung, nur Meilensteine, keine Platzbelohnung). Er wird aber in Hilfe, Kaufdialog und AGB genannt und **nie** als „bringt keinen Vorteil“ beschrieben.
+**Mittelbarer Weg (offen nennen, Law K-L7/Nr. 3):** € → (Kristalle →) Fackel → besserer Versuch → **Meilenstein-Kristalle/EP/Emote**. **Nicht** für Event-Helden-Fragment-Meilensteine (A7/`free_only`). Der Weg ist klein (höchstens 300 Punkte/Tag aus der Ahnenprüfung, nur diese Meilensteine, keine Platzbelohnung). Er wird in Hilfe, Kaufdialog und AGB genannt und **nie** als „bringt keinen Vorteil“ beschrieben. Law-Pflichtformeln v1.6.3 bleiben generisch („Fragmente“) und unverändert.
 
 **UI (ersetzt v1.4/v1.5 Balken-Regel):** Ein Balken „Punkte“ = Rang- und Festmünzen-Punkte (nur Gratis-Versuche). Zusätzlich zeigt die Meilenstein-Leiste die Zahl „Meilenstein-Punkte“, aber nur wenn sie abweicht (nach einem gekauften Versuch, der besser war als der beste Gratis-Versuch). Kein Kauf-Button und keine verzögerten Angebote (v1.5 C), QA-Testfälle QA-RK-01 bis 09 gelten weiter. **Neu: QA-RK-10:** Ein gekaufter Versuch ist besser als der beste Gratis-Versuch → Rang, Bracket-Liste und Tie-Break-Werte unverändert; nur die Meilenstein-Punkte steigen; Festmünzen unverändert.
 
-**Telemetrie (GDD 24.9):** Die Auslöser bleiben (Gewinnquote Spar-Zahler vs. F2P-Sparer, F2P < 30 % der Titel). Erwartung unter Variante A: Die Lücke beim Platz verschwindet weitgehend [Annahme, neue Sim durch GD]. Zusätzlich messen: **Meilenstein-Vorsprung** durch Fackeln (Anteil Spieler, die einen Kristall-Meilenstein nur dank gekaufter Versuche erreichen). Weiterhin nur mit Analytics-Einwilligung.
+**Telemetrie (GDD 24.9):** Die Auslöser bleiben (Gewinnquote Spar-Zahler vs. F2P-Sparer, F2P < 30 % der Titel). Erwartung unter Variante A: Die Lücke beim Platz verschwindet weitgehend [Annahme, neue Sim durch GD]. Zusätzlich messen: **Meilenstein-Vorsprung** durch Fackeln (Anteil Spieler, die einen Kristall-/EP-/Emote-Meilenstein nur dank gekaufter Versuche erreichen; Fragment-Meilensteine ausgeschlossen). Weiterhin nur mit Analytics-Einwilligung.
 
 **Texte (ersetzt v1.5 C Nr. 3):**
 - Pflichtformel auf Wettstreit-Screens (reiner Text, ohne Link): **„Zusätzliche Versuche kaufbar (Tageslimit 2). Für Platz, Platzbelohnungen und Festmünzen zählen nur Gratis-Versuche.“** (`trial_contest_screen_text`, GDD 24.4a)

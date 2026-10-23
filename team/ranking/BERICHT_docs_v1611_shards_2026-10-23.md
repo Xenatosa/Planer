@@ -13,7 +13,7 @@
 
 ## Abnahmechecks
 
-1. **Aktive Dateien:** `rg` findet den alten Fragmentbegriff weder in `hilfe-ahnenzeichen.md` noch in `ranking-konzept-v1.6.md`. Der verlangte folderweite Check trifft zusätzlich historische Ranking-Konzepte v1.1–v1.4, `law-review-v1.2.md`, `review-wuerfel-event-v1.md` und das unveränderte Aufgabenpaket. Die Hilfe-Archive v1.3–v1.5 sowie diese historischen Texte und das Aufgabenpaket blieben unangetastet; dadurch ist das folderweite Soll „nur Hilfe-Archive“ im vorhandenen Bestand nicht erfüllt.
+1. **Aktive Dateien:** `rg` findet den alten Fragmentbegriff weder in `hilfe-ahnenzeichen.md` noch in `ranking-konzept-v1.6.md`. Abnahme-Soll = aktive Hilfe + aktives Konzept. Historische Ranking-Dateien (v1.1–v1.5, Law-/Würfel-Reviews, Paket, Logs) = Altstand, nicht gültig; blieben unangetastet.
 2. **Platzpreise:** Die Hilfetabelle wurde mit `ranking_rewards.csv` abgeglichen. Wettstreit: Kristalle 500/400/300/200/120/60, Event-Helden-Fragmente 15/10/10/6/3/0, EP 2.000/1.500/1.200/800/500/300 und Kosmetik/Titel wie in der CSV. `hero_shards_choice` ist in den regulären Wettstreit- und Weltboss-Platzpreisen 0. Der Würfel-Guard in `team/gdd/validate.py` prüft, dass Meilenstein- und Platzpreise dort keine Fragmente enthalten.
 3. **Ruhender Fallback:** Dokumentationsansicht und CSV: 0 Kristalle, 0 Event-Helden-Fragmente, `hero_shards_choice=0`; EP, Kosmetik und Titel unverändert. GD-Datenpunkt 23.10.: Fallback-CSV angeglichen, Tabelle weiter ruhend (`ranking_rewards_table = regular`).
 4. **Meilensteinwerte:** Weltboss-Kristalle 20/0/20/30; `ms_sw_4` gems_free=55 (GDD 31.2 + `event_milestones.csv`, von Ranking und GD bestätigt).
@@ -21,7 +21,7 @@
 
 ## Übergabe
 
-**Offene Fragen:** keine. GD-Datenpunkt 23.10.: Fallback-CSV angeglichen; `ms_sw_4=55` bestätigt. Repo-Spiegel epodarien noch alt (Paket `team/dev/pakete/2026-10-23_ranking_fallback_shards_zero.md`).
+**Offene Fragen:** keine. GD-Datenpunkt 23.10.: Fallback-CSV angeglichen; `ms_sw_4=55` bestätigt. Kritik M1 (A7/`free_only`) in Hilfe + Konzept A nachgezogen; Law-Strings v1.6.3 unberührt. Abnahme „Wahl-Fragment“ gilt für aktive Hilfe + aktives Konzept; Historie = Altstand. Repo-Spiegel epodarien noch alt (Paket `team/dev/pakete/2026-10-23_ranking_fallback_shards_zero.md`).
 **Arbeitsstatus:** Ranking-Docs v1.6.11 Shards · `team/ranking/` · bereit zur Prüfung.
 
-DONE 2026-10-23T19:39:27+02:00
+DONE 2026-10-23T19:47:14+02:00 (nachgezogen: ms_sw_4=55, Fallback choice=0, M1 A7/free_only @ HEAD aktuell)
