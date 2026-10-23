@@ -22,7 +22,7 @@ Status-Legende:
 | Inventar | Vollbild (Dock) | v2 freigegeben; **v3b Lesbarkeit · in Prüfung** | `bg_menu_inventar_comic_v1.png` unverändert; Vorschau `vorschau_menu_inventar_d2_v3b.png`, Renderer `_src/render_vorschau_menu_inventar_d2_v3b.py`; Inventar-Layout aus v2 |
 | Karte (Weltkarte) | Vollbild (Dock) | Maßplan/Vorschau v1 (Freigabe offen) | `massplan_menu_karte_d2_v1.*`, `vorschau_menu_karte_d2_v1.png` |
 | Ressourcen / Lager-Liste | Overlay-Sheet | **in Prüfung · v2** | Bottom-Sheet auf Chrome v7.3b; `massplan_overlay_ressourcen_d2_v2.*`, `vorschau_overlay_ressourcen_d2_v2.png`; öffnet von Kiste |
-| Mail | Vollbild-Menü | **v7b gültig; v1–v6 verworfen/alt** | `vorschau_overlay_mail_d2_v7.png`, `_spieler.png`, `_gelesen.png`, `_detail.png`; Vollbild-Postfach mit System-Siegelkarten, Spieler-Chatkarten und öffnendem Langtext-Sheet; Alles gelesen nimmt System-Belohnungen an, Löschen nur ohne ungelesene Post/offene Belohnung; HTML `menus_v3/_src/html/v3_2_obsidian_mail_v7_interaktiv.html`, Renderer `_src/render_vorschau_overlay_mail_d2_v7.py`; frühere Mail-PNGs bleiben als Alt-Referenz erhalten |
+| Mail | Vollbild-Menü | **v7c gültig; v1–v6 verworfen/alt** | `vorschau_overlay_mail_d2_v7.png`, `_spieler.png`, `_gelesen.png`, `_detail.png`; Vollbild-Postfach mit System-Siegelkarten, Spieler-Chatkarten und Langtext-Sheet mit Einzel-Löschen; Alles gelesen nimmt System-Belohnungen an, „ALLE GELESENEN LÖSCHEN“ bleibt bis null ungelesene Post/offene Belohnungen gesperrt; HTML `menus_v3/_src/html/v3_2_obsidian_mail_v7_interaktiv.html`, Renderer `_src/render_vorschau_overlay_mail_d2_v7.py`; frühere Mail-PNGs bleiben als Alt-Referenz erhalten |
 | Mehr | Overlay-Sheet / Menü | **in Prüfung · v2** | 2×4 Bildkacheln auf Chrome v7.3b; `massplan_overlay_mehr_d2_v2.*`, `vorschau_overlay_mehr_d2_v2.png` |
 | Shop-Sidebar | Sidebar links | Maßplan/Vorschau v1 (offen) | `vorschau_overlay_shop_sidebar_d2_v1.png` |
 | Events-Sidebar | Sidebar links | Maßplan/Vorschau v1 (offen) | `vorschau_overlay_events_sidebar_d2_v1.png` |
@@ -41,9 +41,9 @@ Für die Lesbarkeitspass-Vorschauen gelten Inventar v3b sowie Helden/Armee/Bauen
 
 ## Mail-Stand 23.10.2026
 
-- **Aktuell:** Mail v7b unter `vorschau_overlay_mail_d2_v7*.png`, interaktives HTML mit Detail-Sheet und Renderer `render_vorschau_overlay_mail_d2_v7.py`.
+- **Aktuell:** Mail v7c unter `vorschau_overlay_mail_d2_v7*.png`, interaktives HTML mit Detail-Sheet, Einzel-Löschen und Renderer `render_vorschau_overlay_mail_d2_v7.py`.
 - **Verworfen/alt:** Mail v1–v6; ihre PNGs bleiben unberührt und dienen nur der Historie, nicht als gültige Layout-Referenz.
-- V7 ist ein eigenständiger Neuaufbau mit Vollbild-Tabs, automatischer System-Belohnungsannahme über „Alles gelesen“ und Löschsperre bis keine ungelesene Post/offenen Belohnungen verbleiben.
+- V7 ist ein eigenständiger Neuaufbau mit Vollbild-Tabs, automatischer System-Belohnungsannahme über „Alles gelesen“ und globaler Löschsperre bis keine ungelesene Post/offenen Belohnungen verbleiben. Das Detail-Sheet löscht auf Einzelaktion genau die geöffnete Mail.
 
 ## Nicht anfassen
 - `_alt/` (überholt, siehe `team/art/GUELTIG.md`)

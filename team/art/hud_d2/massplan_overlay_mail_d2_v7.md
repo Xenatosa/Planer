@@ -14,7 +14,7 @@
 | Ressourcenleiste | 30 | 18 | 1020 | 92 | Kristall, Plus, Wissen, Gold |
 | Kopf | 30 | 128 | 1020 | 112 | Zurück, POSTFACH, ungelesen/offene Belohnungen, Schließen |
 | Tab-Leiste | 30 | 255 | 1020 | 126 | SYSTEM und SPIELER, je 503 × 126, Badge für ungelesen |
-| Aktionen | 30 | 397 | 1020 | 184 | ALLES GELESEN + LÖSCHEN, Gate-Erklärung |
+| Aktionen | 30 | 397 | 1020 | 184 | ALLES GELESEN + ALLE GELESENEN LÖSCHEN, Gate-Erklärung |
 | Listen-Kopf | 42 | 596 | 996 | 36 | Bereichstitel und Anzahl |
 | Nachrichtenliste | 30 | 640 | 1020 | 1013 | kompakte scrollbare Karten, Dock-Abstand 27 px |
 | Dock A | 0 | 1680 | 1080 | 240 | Dorf · Helden · Karte · Armee · Gilde · Inventar |
@@ -37,8 +37,9 @@ Je fünf Nachrichten sind ohne Scrollen sichtbar. Systemkarten nutzen Bronze/Glu
 - **SYSTEM / SPIELER:** wechseln den Listeninhalt; die Zähler zeigen ungelesene Nachrichten des jeweiligen Tabs.
 - **ALLES GELESEN:** markiert beide Postfächer als gelesen und setzt alle System-Belohnungen auf angenommen.
 - **BELOHNUNG HOLEN:** nimmt eine einzelne System-Belohnung an und markiert die Nachricht als gelesen.
-- **LÖSCHEN:** bleibt gesperrt, solange eine Nachricht ungelesen oder eine System-Belohnung offen ist. Bei null ungelesenen Nachrichten und null offenen Belohnungen werden gelesene Nachrichten entfernt.
+- **ALLE GELESENEN LÖSCHEN:** bleibt gesperrt, solange eine Nachricht ungelesen oder eine System-Belohnung offen ist. Bei null ungelesenen Nachrichten und null offenen Belohnungen werden nur gelesene Nachrichten mit angenommenen Belohnungen entfernt.
 - **Karte antippen:** öffnet das Detail-Sheet. Systemtexte können mehrere Absätze enthalten; Belohnung und Annahmestatus bleiben im Sheet sichtbar. Spielerpost zeigt den vollständigen Nachrichtentext ohne Belohnungsmodul.
+- **Detail-LÖSCHEN:** entfernt nur die geöffnete Nachricht und schließt das Sheet; bei Systempost steht es nach „BELOHNUNG HOLEN“, vor „ZURÜCK“.
 - **Schließen:** X, „ZURÜCK“, Kopf-Zurück, Escape oder Tipp auf den abgedunkelten Außenbereich; Fokus geht zur geöffneten Karte zurück.
 - Renderer-Zustände: `?view=system`, `?view=player`, `?view=read` und `?view=detail`.
 

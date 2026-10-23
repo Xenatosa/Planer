@@ -58,6 +58,7 @@ body[data-tab="player"] .tab-art .seal{display:none}
 .action-delete{border:1.5px solid #947350;background:linear-gradient(155deg,#4c3929,#221a15 64%,#302219);box-shadow:inset 0 1px 0 #fff3,0 7px 14px #0008;color:#f0dfc2;text-shadow:0 2px 0 #100a07}
 .action-delete:disabled{border-color:rgba(145,130,109,.4);background:linear-gradient(155deg,rgba(46,42,37,.94),rgba(21,19,17,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 5px 12px #0007;color:#8c8579;text-shadow:none;cursor:not-allowed;opacity:.9}
 .action-delete:not(:disabled){border-color:#df9d61;color:#ffdfb5;box-shadow:inset 0 1px 0 #fff3,0 7px 14px #0008,0 0 14px rgba(241,149,71,.14)}
+#delete-all{gap:9px;font-size:25px;letter-spacing:.25px;white-space:nowrap}
 .action-help{height:28px;margin:8px 5px 0;color:#b5a083;text-align:center;font:16px/1.15 var(--font-body);font-weight:800;letter-spacing:.1px}
 .list-head{position:absolute;z-index:8;left:42px;top:596px;width:996px;height:36px;display:flex;align-items:center;justify-content:space-between}
 .list-head strong{color:#ffe2b5;font:21px/1 var(--font-title);letter-spacing:1.1px}
@@ -152,11 +153,13 @@ body[data-tab="player"] .player-list{display:flex}
 .detail-reward-chips{display:flex;gap:10px;flex-wrap:wrap}
 .detail-reward{height:52px;padding:5px 15px;display:flex;align-items:center;gap:9px;border:1px solid rgba(231,189,137,.47);border-radius:15px;background:linear-gradient(145deg,rgba(68,47,31,.94),rgba(29,20,15,.97));color:#f0ddbf;font:20px/1 var(--font-title);white-space:nowrap}
 .detail-reward img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
-.detail-footer{position:relative;z-index:1;flex:none;height:94px;margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
-.detail-footer.player-mode{grid-template-columns:1fr}
+.detail-footer{position:relative;z-index:1;flex:none;height:94px;margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) 210px 210px;gap:16px}
+.detail-footer.player-mode{grid-template-columns:minmax(0,1fr) 210px}
 .detail-claim{height:94px;border:1.5px solid #ffd49a;border-radius:24px;background:linear-gradient(180deg,#ffbe66 0%,#f6802d 49%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff8,inset 0 -4px 0 rgba(77,26,7,.32),0 8px 17px #0008,0 0 18px rgba(255,129,39,.19);color:#fff8e9;font:32px/1 var(--font-title);letter-spacing:.4px;text-shadow:0 3px 0 #9a3b10}
 .detail-claim:disabled{border-color:#738d58;background:linear-gradient(180deg,#587b45,#2e442d);color:#d9efbd;text-shadow:0 2px 0 #24391c;cursor:default}
 .detail-claim[hidden]{display:none}
+.detail-delete{height:94px;border:1.5px solid rgba(199,133,83,.72);border-radius:24px;background:linear-gradient(155deg,rgba(76,48,31,.98),rgba(30,20,16,.99) 62%,rgba(48,27,18,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.16),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009;color:#e9c9a4;font:27px/1 var(--font-title);letter-spacing:.4px}
+.detail-delete:active{transform:translateY(2px);filter:brightness(1.12)}
 .detail-back{height:94px;border:1.5px solid rgba(220,171,112,.8);border-radius:24px;background:linear-gradient(155deg,rgba(73,52,37,.98),rgba(27,21,17,.99) 60%,rgba(43,29,20,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.24),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009;color:#f7e4c4;font:25px/1 var(--font-title);letter-spacing:.3px}
 .detail-back:active,.detail-close:active{transform:translateY(2px);filter:brightness(1.12)}
 body[data-detail="player"] .detail-sheet{border-color:rgba(91,207,198,.82);background:linear-gradient(145deg,rgba(19,43,44,.998),rgba(11,20,22,.999) 58%,rgba(15,37,39,.998))}
@@ -165,7 +168,7 @@ body[data-detail="player"] .detail-kicker:before{background:linear-gradient(145d
 body[data-detail="player"] .detail-title{color:#dffdfa;text-shadow:0 3px 0 #0c2526,0 0 18px rgba(68,211,201,.2)}
 body[data-detail="player"] .detail-text{border-color:rgba(80,165,161,.46);background:linear-gradient(145deg,rgba(19,41,42,.98),rgba(13,24,26,.99))}
 body[data-detail="player"] .detail-status{border-color:rgba(88,194,184,.48);background:rgba(23,91,88,.38);color:#b4fff4}
-.head-button:focus-visible,.inbox-tab:focus-visible,.mail-card:focus-visible,.action:focus-visible,.detail-close:focus-visible,.detail-back:focus-visible,.detail-claim:focus-visible{outline:3px solid #ffe0ad;outline-offset:3px}
+.head-button:focus-visible,.inbox-tab:focus-visible,.mail-card:focus-visible,.action:focus-visible,.detail-close:focus-visible,.detail-back:focus-visible,.detail-delete:focus-visible,.detail-claim:focus-visible{outline:3px solid #ffe0ad;outline-offset:3px}
 .dock{position:absolute;z-index:20;left:0;top:1680px;width:1080px;height:240px;background:center top/1080px 212px no-repeat url("../inventar_v4_assets/dock_bg.png");border-top:1px solid rgba(225,197,159,.18)}
 .dock-item{position:absolute;top:5px;width:180px;height:204px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:#b7a78c}
 .dock-item.active{color:#fff0d0}
@@ -205,7 +208,7 @@ body[data-detail="player"] .detail-status{border-color:rgba(88,194,184,.48);back
   <div class="action-top"><span id="list-summary">SYSTEMPOST · 4 NACHRICHTEN</span><span>NEUESTE ZUERST</span></div>
   <div class="action-row">
     <button class="action action-primary" id="read-all" type="button"><span class="action-icon">✓</span>ALLES GELESEN</button>
-    <button class="action action-delete" id="delete-all" type="button" disabled><span class="action-icon">×</span>LÖSCHEN</button>
+    <button class="action action-delete" id="delete-all" type="button" disabled><span class="action-icon">×</span>ALLE GELESENEN LÖSCHEN</button>
   </div>
   <div class="action-help" id="action-help">Markiert beide Tabs als gelesen und nimmt offene System-Belohnungen an.</div>
 </section>
@@ -229,7 +232,7 @@ body[data-detail="player"] .detail-status{border-color:rgba(88,194,184,.48);back
   <div class="detail-heading"><h2 class="detail-title" id="detail-title">Vorräte für die Reise</h2><div class="detail-meta-row"><p class="detail-meta" id="detail-meta">GILDENRAT · HEUTE · 09:12</p><span class="detail-status" id="detail-status">BELOHNUNG OFFEN</span></div></div>
   <article class="detail-text" id="detail-text" tabindex="0" aria-label="Vollständiger Nachrichtentext"></article>
   <section class="detail-rewards" id="detail-rewards" aria-label="Nachrichtenbelohnung"><h3 class="detail-rewards-title"><span>BELOHNUNG</span><small>Aus der Festung</small></h3><div class="detail-reward-chips" id="detail-reward-chips"></div></section>
-  <div class="detail-footer" id="detail-footer"><button class="detail-claim" id="detail-claim" type="button">BELOHNUNG HOLEN</button><button class="detail-back" id="detail-back" type="button">‹ &nbsp; ZURÜCK</button></div>
+  <div class="detail-footer" id="detail-footer"><button class="detail-claim" id="detail-claim" type="button">BELOHNUNG HOLEN</button><button class="detail-delete" id="detail-delete" type="button">LÖSCHEN</button><button class="detail-back" id="detail-back" type="button">‹ &nbsp; ZURÜCK</button></div>
 </section>
 <script>
 const inbox={
@@ -340,7 +343,7 @@ function closeDetail(){
 }
 document.querySelectorAll('.inbox-tab').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;render()}));
 document.getElementById('read-all').addEventListener('click',()=>{inbox.system.forEach(m=>{m.unread=false;m.claimed=true});inbox.player.forEach(m=>m.unread=false);render();showToast('Alles gelesen · System-Belohnungen angenommen')});
-document.getElementById('delete-all').addEventListener('click',e=>{if(e.currentTarget.disabled)return;inbox.system=[];inbox.player=[];render();showToast('Gelesene Nachrichten entfernt')});
+document.getElementById('delete-all').addEventListener('click',e=>{if(e.currentTarget.disabled)return;inbox.system=inbox.system.filter(m=>m.unread||(m.reward&&m.reward.length&&!m.claimed));inbox.player=inbox.player.filter(m=>m.unread);render();showToast('Gelesene Nachrichten entfernt')});
 document.addEventListener('click',e=>{
   const claim=e.target.closest('[data-claim]');
   if(claim){const m=inbox.system.find(item=>item.id===claim.dataset.claim);if(m&&!m.claimed){m.claimed=true;m.unread=false;render();showToast('Belohnung angenommen')}return}
@@ -357,6 +360,17 @@ document.getElementById('detail-claim').addEventListener('click',()=>{
   if(!selectedMessage||!selectedMessage.reward||selectedMessage.claimed)return;
   const message=inbox.system.find(m=>m.id===selectedMessage.id);
   if(message){message.claimed=true;message.unread=false;render();updateDetail();showToast('Belohnung angenommen')}
+});
+document.getElementById('detail-delete').addEventListener('click',()=>{
+  if(!selectedMessage)return;
+  const collection=activeTab==='system'?inbox.system:inbox.player;
+  const index=collection.findIndex(m=>m.id===selectedMessage.id);
+  if(index<0)return;
+  collection.splice(index,1);
+  render();
+  closeDetail();
+  document.getElementById('tab-'+activeTab).focus();
+  showToast('Nachricht entfernt');
 });
 render();
 if(query.get('view')==='detail'){const message=inbox.system.find(m=>m.id==='supply');message.unread=false;render();openDetail(message)}
