@@ -273,23 +273,21 @@ def apply_bg_scrim(canvas: Image.Image) -> None:
     for y in range(H):
         if y < int(H * 0.38):
             t = y / max(1, int(H * 0.38) - 1)
-            a = int(178 + (158 - 178) * t)  # .70 → .62
+            a = int(196 + (178 - 196) * t)  # ~.77 → .70
         elif y < int(H * 0.72):
             t = (y - int(H * 0.38)) / max(1, int(H * 0.72) - int(H * 0.38) - 1)
-            a = int(158 + (184 - 158) * t)  # .62 → .72
+            a = int(178 + (200 - 178) * t)  # .70 → .78
         else:
             t = (y - int(H * 0.72)) / max(1, H - int(H * 0.72) - 1)
-            a = int(184 + (230 - 184) * t)  # .72 → .90
+            a = int(200 + (242 - 200) * t)  # .78 → .95
         d.line([(0, y), (W, y)], fill=(7, 8, 10, a))
-    # radial vignette like reveal
     vignette = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     vd = ImageDraw.Draw(vignette, "RGBA")
     cx, cy = W // 2, int(H * 0.48)
     max_r = int((W ** 2 + H ** 2) ** 0.5 * 0.55)
     for r in range(max_r, int(max_r * 0.28), -8):
-        # stronger toward edges
         edge = 1 - (r / max_r)
-        a = int(118 * max(0, edge - 0.35) / 0.65)
+        a = int(150 * max(0, edge - 0.35) / 0.65)
         if a <= 0:
             continue
         vd.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(3, 4, 6, a), width=8)

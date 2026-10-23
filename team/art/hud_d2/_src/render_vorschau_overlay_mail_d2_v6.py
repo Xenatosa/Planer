@@ -82,19 +82,19 @@ def paste(canvas: Image.Image, image: Image.Image, xy: tuple[int, int], size=Non
 
 
 def apply_bg_scrim(canvas: Image.Image) -> None:
-    """Reveal-v16-ähnlich: BG ≥62 % abdunkeln, Szene tritt zurück."""
+    """Reveal-v16-ähnlich; Mail-Szene heller → etwas stärkerer Scrim."""
     scrim = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     d = ImageDraw.Draw(scrim, "RGBA")
     for y in range(H):
         if y < int(H * 0.38):
             t = y / max(1, int(H * 0.38) - 1)
-            a = int(178 + (158 - 178) * t)
+            a = int(208 + (190 - 208) * t)
         elif y < int(H * 0.72):
             t = (y - int(H * 0.38)) / max(1, int(H * 0.72) - int(H * 0.38) - 1)
-            a = int(158 + (184 - 158) * t)
+            a = int(190 + (212 - 190) * t)
         else:
             t = (y - int(H * 0.72)) / max(1, H - int(H * 0.72) - 1)
-            a = int(184 + (230 - 184) * t)
+            a = int(212 + (246 - 212) * t)
         d.line([(0, y), (W, y)], fill=(7, 8, 10, a))
     vignette = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     vd = ImageDraw.Draw(vignette, "RGBA")
@@ -102,7 +102,7 @@ def apply_bg_scrim(canvas: Image.Image) -> None:
     max_r = int((W ** 2 + H ** 2) ** 0.5 * 0.55)
     for r in range(max_r, int(max_r * 0.28), -8):
         edge = 1 - (r / max_r)
-        a = int(118 * max(0, edge - 0.35) / 0.65)
+        a = int(165 * max(0, edge - 0.32) / 0.68)
         if a <= 0:
             continue
         vd.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(3, 4, 6, a), width=8)
