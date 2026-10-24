@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="de" data-tab="system">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Postfach · Obsidian &amp; Glut v7</title>
+<style>
+@font-face{font-family:Lilita;src:url("../inventar_v4_assets/LilitaOne-Regular.ttf")}
+@font-face{font-family:Baloo;src:url("../inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
+:root{--cream:#f7ead2;--muted:#b9a988;--ember:#ff8a2a;--ember-light:#ffc06a;--panel:#17110e;--line:#765638;--teal:#4bd2c8;--green:#a9e586;--font-title:Lilita,system-ui,sans-serif;--font-body:Baloo,system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;overflow:hidden}
+body{position:relative;background:#0a0807;color:var(--cream);font-family:var(--font-body);-webkit-font-smoothing:antialiased;user-select:none}
+button{font:inherit;color:inherit;cursor:pointer}
+.scene{position:absolute;inset:0;background:center/cover no-repeat url("../../_assets/bg_menu_mail_comic_v1.png")}
+.scene:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,4,4,.70),rgba(7,5,5,.72)),radial-gradient(ellipse at 50% 50%,rgba(10,7,6,.16),rgba(0,0,0,.32));pointer-events:none}
+.scene:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 150px 42px rgba(0,0,0,.35);pointer-events:none}
+.ember-wash{position:absolute;z-index:1;inset:0;background:radial-gradient(ellipse at 48% 57%,rgba(255,119,39,.085),transparent 52%);pointer-events:none;transition:background .2s}
+body[data-tab="player"] .ember-wash{background:radial-gradient(ellipse at 52% 46%,rgba(51,201,193,.12),transparent 56%)}
+.topbar{position:absolute;z-index:10;left:30px;top:18px;width:1020px;height:92px;padding:8px 12px;display:grid;grid-template-columns:1fr 66px 1fr 1fr;gap:10px;align-items:center;border:1px solid rgba(199,150,90,.42);border-radius:34px;background:linear-gradient(180deg,rgba(10,9,9,.97),rgba(15,11,10,.97));box-shadow:0 12px 28px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,225,180,.12)}
+.resource{height:68px;display:flex;align-items:center;gap:9px;padding:4px 12px;border:1.5px solid #705b43;border-radius:36px;background:linear-gradient(180deg,rgba(41,32,27,.98),rgba(20,16,14,.99));box-shadow:inset 0 0 0 3px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,231,190,.16)}
+.resource img{width:46px;height:46px;object-fit:contain;filter:drop-shadow(0 3px 5px #0009)}
+.resource b{font:34px/1 var(--font-title);color:#fff1d5;text-shadow:0 3px 0 rgba(0,0,0,.55);white-space:nowrap}
+.plus{position:relative;width:62px;height:62px;border:0;border-radius:50%;background:transparent;filter:drop-shadow(0 4px 6px #0009);padding:0}
+.plus img{width:100%;height:100%;object-fit:contain}
+.plus:after{content:"+";position:absolute;inset:0;display:grid;place-items:center;color:#ffd175;font:44px/1 var(--font-title);text-shadow:0 2px 4px #4b250c}
+.page-head{position:absolute;z-index:9;left:30px;top:128px;width:1020px;height:112px;display:grid;grid-template-columns:88px 1fr 88px;align-items:center}
+.head-button{width:76px;height:76px;border:1.5px solid rgba(208,164,112,.65);border-radius:24px;background:linear-gradient(145deg,rgba(58,43,33,.97),rgba(22,17,15,.99));box-shadow:inset 0 1px 0 #fff3,0 8px 18px #0008;color:#f5dfbd;font:50px/1 var(--font-title);display:grid;place-items:center;padding:0}
+.head-title{text-align:center}
+.head-title h1{margin:0;font:64px/.93 var(--font-title);letter-spacing:1.5px;color:#ffe2b5;text-shadow:0 4px 0 #28150c,0 0 22px rgba(255,145,57,.3)}
+.head-title p{margin:8px 0 0;color:#cbb99c;font:22px/1.05 var(--font-body);letter-spacing:.35px;font-weight:800}
+.head-close{justify-self:end;font-size:46px}
+.tab-rail{position:absolute;z-index:9;left:30px;top:255px;width:1020px;height:126px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.inbox-tab{position:relative;overflow:hidden;height:126px;padding:10px 24px;display:grid;grid-template-columns:84px 1fr 58px;gap:16px;align-items:center;text-align:left;border:1.5px solid rgba(202,157,104,.4);border-radius:26px;background:linear-gradient(145deg,rgba(28,22,19,.97),rgba(13,11,10,.98));box-shadow:0 8px 18px #0006,inset 0 1px 0 rgba(255,237,205,.1);transition:background .18s,border .18s,transform .18s}
+.inbox-tab .tab-art{width:76px;height:76px;position:relative;display:grid;place-items:center;border-radius:24px;border:1px solid rgba(192,156,113,.34);background:radial-gradient(circle,rgba(255,142,52,.12),rgba(8,7,7,.45));color:#d3b58c}
+.tab-art svg{width:48px;height:48px;overflow:visible}
+.inbox-tab .tab-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.inbox-tab strong{font:34px/1 var(--font-title);letter-spacing:.6px;color:#e9dcc4}
+.inbox-tab small{font:18px/1.1 var(--font-body);font-weight:800;color:#a99578}
+.tab-count{width:48px;height:48px;border:1px solid rgba(237,205,158,.3);border-radius:50%;background:rgba(0,0,0,.46);display:grid;place-items:center;color:#ebddc3;font:23px/1 var(--font-title);box-shadow:inset 0 1px 0 #fff2}
+.inbox-tab.active{border:2px solid var(--ember-light);background:linear-gradient(135deg,rgba(104,51,25,.98),rgba(42,23,16,.99));box-shadow:0 0 0 3px rgba(255,135,44,.12),0 10px 23px #0009,inset 0 1px 0 #fff5}
+.inbox-tab.active:after{content:"";position:absolute;left:25px;right:25px;bottom:0;height:5px;border-radius:8px 8px 0 0;background:linear-gradient(90deg,#ff8a2a,#ffc06a);box-shadow:0 0 12px #ff8a2a}
+.inbox-tab.active .tab-art{border-color:#ffad59;background:radial-gradient(circle,rgba(255,151,63,.28),rgba(20,12,9,.5));color:#ffd08a;box-shadow:0 0 18px rgba(255,137,48,.16)}
+.inbox-tab.active strong{color:#fff0d6}
+body[data-tab="player"] .inbox-tab.active{border-color:#71e0d7;background:linear-gradient(135deg,rgba(16,75,75,.99),rgba(12,32,35,.99));box-shadow:0 0 0 3px rgba(57,205,195,.14),0 10px 23px #0009,inset 0 1px 0 #ecffff33}
+body[data-tab="player"] .inbox-tab.active:after{background:linear-gradient(90deg,#25bdb8,#87f1e4);box-shadow:0 0 13px #4bd2c8}
+body[data-tab="player"] .inbox-tab.active .tab-art{border-color:#62d7d0;background:radial-gradient(circle,rgba(58,219,211,.23),rgba(7,19,21,.58));color:#a0fff1;box-shadow:0 0 19px rgba(49,218,211,.18)}
+body[data-tab="player"] .inbox-tab.active strong{color:#e7fffb}
+body[data-tab="player"] .tab-art .seal{display:none}
+.action-panel{position:absolute;z-index:9;left:30px;top:397px;width:1020px;height:184px;padding:15px 18px 12px;border:1.5px solid rgba(207,158,103,.47);border-radius:25px;background:linear-gradient(120deg,rgba(24,18,15,.98),rgba(38,24,17,.96),rgba(15,12,11,.98));box-shadow:0 11px 24px #0008,inset 0 1px 0 #fff2}
+.action-top{height:25px;margin:0 4px 9px;display:flex;align-items:center;justify-content:space-between;color:#e8d2ae;font:17px/1 var(--font-title);letter-spacing:1.1px}
+.action-top span:last-child{color:#a89170;font:15px/1 var(--font-body);font-weight:800;letter-spacing:.25px}
+.action-row{height:80px;display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
+.action{height:80px;display:flex;align-items:center;justify-content:center;gap:12px;border-radius:21px;font:29px/1 var(--font-title);letter-spacing:.5px;transition:transform .14s,filter .14s,opacity .14s}
+.action:active{transform:translateY(2px);filter:brightness(1.1)}
+.action-icon{width:39px;height:39px;display:grid;place-items:center;font:27px/1 var(--font-title)}
+.action-primary{border:1.5px solid #ffd49a;background:linear-gradient(180deg,#ffbe66 0%,#f6802d 49%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff8,inset 0 -4px 0 rgba(77,26,7,.32),0 8px 17px #0008,0 0 18px rgba(255,129,39,.2);color:#fff8e9;text-shadow:0 3px 0 #9a3b10}
+.action-delete{border:1.5px solid #947350;background:linear-gradient(155deg,#4c3929,#221a15 64%,#302219);box-shadow:inset 0 1px 0 #fff3,0 7px 14px #0008;color:#f0dfc2;text-shadow:0 2px 0 #100a07}
+.action-delete:disabled{border-color:rgba(145,130,109,.4);background:linear-gradient(155deg,rgba(46,42,37,.94),rgba(21,19,17,.98));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 5px 12px #0007;color:#8c8579;text-shadow:none;cursor:not-allowed;opacity:.9}
+.action-delete:not(:disabled){border-color:#df9d61;color:#ffdfb5;box-shadow:inset 0 1px 0 #fff3,0 7px 14px #0008,0 0 14px rgba(241,149,71,.14)}
+#delete-all{gap:9px;font-size:25px;letter-spacing:.25px;white-space:nowrap}
+.action-help{height:28px;margin:8px 5px 0;color:#b5a083;text-align:center;font:16px/1.15 var(--font-body);font-weight:800;letter-spacing:.1px}
+.list-head{position:absolute;z-index:8;left:42px;top:596px;width:996px;height:36px;display:flex;align-items:center;justify-content:space-between}
+.list-head strong{color:#ffe2b5;font:21px/1 var(--font-title);letter-spacing:1.1px}
+.list-head span{color:#c1aa87;font:18px/1 var(--font-body);font-weight:800}
+.mail-list{position:absolute;z-index:7;left:30px;top:640px;width:1020px;height:1013px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:none;padding:0 2px 20px}
+.mail-list::-webkit-scrollbar{display:none}
+.mail-card{position:relative;flex:none;overflow:hidden;border:1.5px solid rgba(192,150,101,.54);border-radius:24px;background:linear-gradient(126deg,rgba(45,31,23,.98),rgba(18,14,12,.985) 55%,rgba(28,19,15,.98));box-shadow:0 8px 18px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,238,210,.14);display:grid;grid-template-columns:116px 1fr;gap:15px;padding:16px 20px 15px;transition:border-color .18s,transform .15s,box-shadow .18s}
+.mail-card.system{height:184px}
+.mail-card.system.has-reward{height:205px;border-color:rgba(255,153,70,.76);background:linear-gradient(130deg,rgba(67,39,23,.99),rgba(22,15,12,.99) 55%,rgba(39,23,15,.98));box-shadow:0 10px 21px #0008,inset 0 1px 0 rgba(255,238,210,.2),0 0 18px rgba(255,131,48,.1)}
+.mail-card.system:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:6px;border-radius:0 7px 7px 0;background:#977951}
+.mail-card.system.unread:before{background:linear-gradient(#ffc16d,#ff792a);box-shadow:0 0 12px #fb8534}
+.mail-card.system.unread{border-color:#e39b58}
+.mail-emblem{position:relative;align-self:start;margin-top:3px;width:104px;height:104px;border:1.5px solid #a37b50;border-radius:32px;background:radial-gradient(circle at 50% 44%,rgba(240,147,65,.2),rgba(8,7,7,.65) 72%),linear-gradient(145deg,#39261b,#17110e);box-shadow:inset 0 1px 0 #fff3,0 5px 12px #0007;display:grid;place-items:center;color:#e0ac72}
+.mail-emblem:before{content:"";position:absolute;inset:7px;border:1px solid rgba(226,178,124,.3);border-radius:25px}
+.mail-emblem svg{width:60px;height:60px;filter:drop-shadow(0 4px 3px #0008)}
+.mail-card.unread .mail-emblem{border-color:#ffb15f;color:#ffc879;box-shadow:inset 0 1px 0 #fff4,0 0 18px rgba(255,140,53,.2),0 5px 12px #0007}
+.mail-copy{min-width:0;display:flex;flex-direction:column;align-items:stretch}
+.card-top{height:30px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.mail-title{margin:0;color:#fff0d6;font:29px/1 var(--font-title);letter-spacing:.15px;text-shadow:0 2px 0 #120b08;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status{flex:none;min-height:27px;padding:4px 10px 2px;border:1px solid rgba(201,166,124,.44);border-radius:14px;background:rgba(10,8,7,.58);color:#c8b99d;font:13px/1 var(--font-title);letter-spacing:.35px;white-space:nowrap}
+.status.unread{border-color:#f1a55e;background:rgba(100,48,20,.6);color:#ffd59c}
+.status.open{border-color:#df9250;background:rgba(112,50,19,.42);color:#ffc174}
+.status.claimed{border-color:rgba(155,222,122,.5);background:rgba(48,77,35,.38);color:#c4f2a2}
+.mail-meta{margin:1px 0 7px;color:#bda37f;font:15px/1 var(--font-title);letter-spacing:.8px}
+.mail-body{margin:0;color:#e1d3bb;font:19px/1.16 var(--font-body);font-weight:700;max-width:800px}
+.mail-card.system:not(.has-reward) .mail-body{margin-top:7px}
+.mail-footer{margin-top:14px;min-height:47px;display:flex;align-items:center;gap:9px}
+.reward-chips{min-width:0;display:flex;gap:7px;flex-wrap:nowrap;overflow:hidden}
+.reward-chip{height:42px;padding:4px 10px;display:flex;align-items:center;gap:7px;border:1px solid rgba(231,189,137,.47);border-radius:13px;background:linear-gradient(145deg,rgba(68,47,31,.94),rgba(29,20,15,.97));color:#f0ddbf;font:16px/1 var(--font-title);white-space:nowrap}
+.reward-chip img{width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
+.claim-button{flex:none;height:46px;min-width:170px;margin-left:auto;padding:0 15px;border:1px solid #f3b068;border-radius:16px;background:linear-gradient(180deg,#f6a64d,#b94e1b);box-shadow:inset 0 1px 0 #fff7,0 4px 9px #0007;color:#fff5e2;font:18px/1 var(--font-title);text-shadow:0 2px 0 #732e0c}
+.claim-button:disabled{border-color:#6e8755;background:linear-gradient(180deg,#517140,#293d2b);color:#d9efbd;text-shadow:0 2px 0 #24391c;cursor:default}
+.read-mark{flex:none;margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:#9b8a70;font:14px/1 var(--font-title);letter-spacing:.6px}
+.read-mark:before{content:"✓";width:23px;height:23px;border:1px solid rgba(164,196,123,.35);border-radius:50%;display:grid;place-items:center;color:#c9eaa9;background:rgba(63,91,42,.27);font:14px/1 var(--font-title)}
+.player-list{display:none}
+body[data-tab="player"] .system-list{display:none}
+body[data-tab="player"] .player-list{display:flex}
+.mail-card.player{height:192px;grid-template-columns:111px 1fr;padding:16px 21px 15px;border-color:rgba(74,190,190,.44);background:linear-gradient(125deg,rgba(19,47,48,.97),rgba(16,22,24,.99) 62%,rgba(17,33,35,.98));box-shadow:0 8px 17px #0007,inset 0 1px 0 rgba(216,255,250,.1)}
+.mail-card.player.unread{border-color:#64d0ca;box-shadow:0 0 0 2px rgba(51,204,197,.09),0 9px 18px #0008,inset 0 1px 0 rgba(216,255,250,.14)}
+.mail-card.player:before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:5px;border-radius:0 7px 7px 0;background:rgba(82,157,154,.75)}
+.mail-card.player.unread:before{background:linear-gradient(#88fff1,#25bdb8);box-shadow:0 0 12px rgba(48,223,214,.7)}
+.avatar{position:relative;width:94px;height:94px;margin:6px auto 0;border:2px solid rgba(165,244,234,.72);border-radius:50%;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 28%,rgba(255,250,222,.72) 0 13%,transparent 14%),radial-gradient(ellipse at 50% 104%,rgba(11,29,31,.85) 0 37%,transparent 38%),linear-gradient(145deg,#cf9f6c,#5f918a 55%,#244449);box-shadow:0 4px 12px #0009,inset 0 1px 0 #fff8}
+.avatar:before{content:"";position:absolute;width:31px;height:37px;top:18px;border-radius:48% 48% 45% 45%;background:linear-gradient(90deg,#efcf9b,#fff0cf 54%,#cfa46f);box-shadow:0 -8px 0 -2px #4b3022}
+.avatar:after{content:"";position:absolute;bottom:-10px;width:72px;height:45px;border-radius:50% 50% 0 0;background:linear-gradient(90deg,#1a3338,#f0c587 50%,#23434a);border:1px solid rgba(255,242,207,.36)}
+.avatar span{position:absolute;z-index:2;bottom:4px;padding:2px 7px;border-radius:8px;background:rgba(6,13,15,.75);color:#e4fffa;font:12px/1 var(--font-title);letter-spacing:.4px}
+.avatar .online{position:absolute;z-index:3;right:1px;top:2px;width:17px;height:17px;border:3px solid #132729;border-radius:50%;background:#94e374;box-shadow:0 0 7px #94e374}
+.avatar.umber{background:radial-gradient(circle at 50% 28%,#f6d1a1 0 14%,transparent 15%),radial-gradient(ellipse at 50% 104%,#3b251e 0 37%,transparent 38%),linear-gradient(145deg,#e1ad6a,#b8653f 60%,#52352d)}
+.avatar.umber:before{background:linear-gradient(90deg,#b87942,#f7d19a 55%,#8e512d);box-shadow:0 -9px 0 -1px #41271a}
+.avatar.violet{background:radial-gradient(circle at 50% 28%,#f5d4bd 0 14%,transparent 15%),radial-gradient(ellipse at 50% 104%,#302238 0 37%,transparent 38%),linear-gradient(145deg,#9d7ab8,#5c5a88 58%,#2e394e)}
+.avatar.violet:before{background:linear-gradient(90deg,#53365e,#f6d6bd 53%,#704660);box-shadow:0 -9px 0 -1px #382844}
+.avatar.olive{background:radial-gradient(circle at 50% 28%,#e7c7a1 0 14%,transparent 15%),radial-gradient(ellipse at 50% 104%,#30413b 0 37%,transparent 38%),linear-gradient(145deg,#a7a468,#4e796d 58%,#29464a)}
+.avatar.olive:before{background:linear-gradient(90deg,#785234,#e8c7a1 53%,#9e774b);box-shadow:0 -9px 0 -1px #4b3622}
+.player-copy{min-width:0;display:flex;flex-direction:column}
+.player-copy .mail-title{font-size:26px}
+.player-copy .mail-meta{color:#78c7c0;margin:3px 0 9px}
+.chat-bubble{position:relative;min-height:72px;padding:12px 17px 11px;border:1px solid rgba(80,165,161,.42);border-radius:7px 20px 20px 20px;background:linear-gradient(135deg,rgba(31,63,63,.88),rgba(22,38,41,.94));color:#e0f2e9;font:19px/1.2 var(--font-body);font-weight:700;box-shadow:inset 0 1px 0 rgba(226,255,251,.08)}
+.chat-bubble:before{content:"";position:absolute;left:-9px;top:0;width:17px;height:17px;background:#234544;border-left:1px solid rgba(80,165,161,.42);border-top:1px solid rgba(80,165,161,.42);clip-path:polygon(100% 0,100% 100%,0 0)}
+.player-copy .status{position:absolute;right:20px;top:17px}
+.player-copy .status.unread{border-color:#64d0ca;background:rgba(21,86,85,.58);color:#b4fff4}
+.player-copy .status.read{border-color:rgba(105,172,164,.44);color:#a5c7bc}
+.empty-state{display:none;position:absolute;z-index:8;left:100px;top:830px;width:880px;padding:50px 30px;border:1px solid rgba(221,173,120,.48);border-radius:28px;background:linear-gradient(145deg,rgba(39,27,21,.97),rgba(16,13,12,.98));text-align:center;box-shadow:0 14px 28px #0009}
+.empty-state .empty-icon{width:96px;height:96px;margin:0 auto 20px;border:1px solid #8d6a43;border-radius:31px;display:grid;place-items:center;color:#c29b69;background:radial-gradient(circle,rgba(255,140,47,.14),rgba(0,0,0,.35))}
+.empty-state svg{width:50px;height:50px}
+.empty-state strong{display:block;color:#ffe4bf;font:34px/1.1 var(--font-title)}
+.empty-state p{margin:10px 0 0;color:#bba98e;font:21px/1.2 var(--font-body);font-weight:800}
+.empty-state.visible{display:block}
+.toast{position:absolute;z-index:30;left:50%;bottom:275px;transform:translate(-50%,10px);padding:14px 22px;border:1px solid rgba(195,225,144,.72);border-radius:17px;background:linear-gradient(145deg,rgba(41,58,32,.98),rgba(18,27,17,.98));box-shadow:0 8px 22px #000b;color:#e1f4c4;font:20px/1.1 var(--font-title);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .16s,transform .16s}
+.toast.visible{opacity:1;transform:translate(-50%,0)}
+.detail-backdrop{display:none;position:absolute;z-index:23;inset:0;background:rgba(4,3,3,.72)}
+.detail-backdrop.open{display:block}
+.detail-sheet{display:none;position:absolute;z-index:24;left:38px;top:430px;width:1004px;height:950px;padding:27px 34px 29px;border:1.5px solid rgba(228,164,94,.78);border-radius:34px;background:linear-gradient(145deg,rgba(35,25,20,.997),rgba(13,11,10,.999) 58%,rgba(41,23,15,.997));box-shadow:0 24px 65px #000d,inset 0 1px 0 rgba(255,238,212,.25),inset 0 0 0 5px rgba(0,0,0,.4);color:var(--cream)}
+.detail-sheet.open{display:flex;flex-direction:column}
+.detail-sheet:focus{outline:2px solid rgba(255,195,117,.32);outline-offset:3px}
+.detail-sheet:before{content:"";position:absolute;inset:9px;border:1px solid rgba(239,186,124,.21);border-radius:26px;pointer-events:none}
+.detail-topline{position:relative;z-index:1;flex:none;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(205,157,104,.25);color:#c5ad89;font:17px/1 var(--font-title);letter-spacing:1.4px}
+.detail-kicker{display:flex;align-items:center;gap:11px}
+.detail-kicker:before{content:"";width:11px;height:11px;border-radius:50%;background:linear-gradient(145deg,#ffc46c,#ef792a);box-shadow:0 0 12px rgba(255,137,44,.55)}
+.detail-close{width:58px;height:58px;border:1px solid rgba(225,177,116,.5);border-radius:18px;background:linear-gradient(145deg,rgba(62,43,31,.97),rgba(19,15,13,.99));box-shadow:inset 0 1px 0 #fff3,0 4px 10px #0008;color:#f5dfbd;font:39px/1 var(--font-title);padding:0;display:grid;place-items:center}
+.detail-heading{position:relative;z-index:1;flex:none;padding:26px 4px 0}
+.detail-title{margin:0;color:#ffe0b0;font:50px/.98 var(--font-title);letter-spacing:.3px;text-shadow:0 3px 0 #1e0e06,0 0 18px rgba(255,145,57,.24)}
+.detail-meta-row{margin-top:13px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.detail-meta{margin:0;color:#c4a77e;font:19px/1.05 var(--font-title);letter-spacing:.45px}
+.detail-status{padding:6px 12px 4px;border:1px solid rgba(223,146,80,.54);border-radius:14px;background:rgba(112,50,19,.36);color:#ffc174;font:14px/1 var(--font-title);letter-spacing:.5px}
+.detail-status.read{border-color:rgba(164,196,123,.42);background:rgba(63,91,42,.22);color:#c7eaa6}
+.detail-text{position:relative;z-index:1;flex:1;min-height:240px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#806343 rgba(5,4,4,.35);margin-top:24px;padding:25px 29px;border:1px solid rgba(209,163,112,.4);border-radius:23px;background:linear-gradient(145deg,rgba(26,19,16,.98),rgba(16,13,12,.99));box-shadow:inset 0 1px 0 rgba(255,231,197,.09),inset 0 0 0 3px rgba(0,0,0,.23);color:#eadcc4;font:26px/1.38 var(--font-body);font-weight:650}
+.detail-text p{margin:0}
+.detail-text p+p{margin-top:24px}
+.detail-rewards{position:relative;z-index:1;flex:none;margin-top:19px;padding:16px 20px 18px;border:1px solid rgba(222,157,93,.45);border-radius:21px;background:linear-gradient(125deg,rgba(57,36,24,.9),rgba(23,17,14,.96));box-shadow:inset 0 1px 0 rgba(255,237,211,.09)}
+.detail-rewards[hidden]{display:none}
+.detail-rewards-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;color:#f1c38b;font:18px/1 var(--font-title);letter-spacing:1px}
+.detail-rewards-title small{color:#ad9674;font:15px/1 var(--font-body);font-weight:800;letter-spacing:0}
+.detail-reward-chips{display:flex;gap:10px;flex-wrap:wrap}
+.detail-reward{height:52px;padding:5px 15px;display:flex;align-items:center;gap:9px;border:1px solid rgba(231,189,137,.47);border-radius:15px;background:linear-gradient(145deg,rgba(68,47,31,.94),rgba(29,20,15,.97));color:#f0ddbf;font:20px/1 var(--font-title);white-space:nowrap}
+.detail-reward img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
+.detail-footer{position:relative;z-index:1;flex:none;height:94px;margin-top:18px;display:grid;grid-template-columns:minmax(0,1fr) 210px 210px;gap:16px}
+.detail-footer.player-mode{grid-template-columns:minmax(0,1fr) 210px}
+.detail-claim{height:94px;border:1.5px solid #ffd49a;border-radius:24px;background:linear-gradient(180deg,#ffbe66 0%,#f6802d 49%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff8,inset 0 -4px 0 rgba(77,26,7,.32),0 8px 17px #0008,0 0 18px rgba(255,129,39,.19);color:#fff8e9;font:32px/1 var(--font-title);letter-spacing:.4px;text-shadow:0 3px 0 #9a3b10}
+.detail-claim:disabled{border-color:#738d58;background:linear-gradient(180deg,#587b45,#2e442d);color:#d9efbd;text-shadow:0 2px 0 #24391c;cursor:default}
+.detail-claim[hidden]{display:none}
+.detail-delete{height:94px;border:1.5px solid rgba(199,133,83,.72);border-radius:24px;background:linear-gradient(155deg,rgba(76,48,31,.98),rgba(30,20,16,.99) 62%,rgba(48,27,18,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.16),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009;color:#e9c9a4;font:27px/1 var(--font-title);letter-spacing:.4px}
+.detail-delete:active{transform:translateY(2px);filter:brightness(1.12)}
+.detail-back{height:94px;border:1.5px solid rgba(220,171,112,.8);border-radius:24px;background:linear-gradient(155deg,rgba(73,52,37,.98),rgba(27,21,17,.99) 60%,rgba(43,29,20,.99));box-shadow:inset 0 1px 0 rgba(255,236,207,.24),inset 0 -3px 0 rgba(0,0,0,.4),0 7px 16px #0009;color:#f7e4c4;font:25px/1 var(--font-title);letter-spacing:.3px}
+.detail-back:active,.detail-close:active{transform:translateY(2px);filter:brightness(1.12)}
+body[data-detail="player"] .detail-sheet{border-color:rgba(91,207,198,.82);background:linear-gradient(145deg,rgba(19,43,44,.998),rgba(11,20,22,.999) 58%,rgba(15,37,39,.998))}
+body[data-detail="player"] .detail-sheet:before{border-color:rgba(119,223,214,.2)}
+body[data-detail="player"] .detail-kicker:before{background:linear-gradient(145deg,#a0fff1,#25bdb8);box-shadow:0 0 12px rgba(75,210,200,.6)}
+body[data-detail="player"] .detail-title{color:#dffdfa;text-shadow:0 3px 0 #0c2526,0 0 18px rgba(68,211,201,.2)}
+body[data-detail="player"] .detail-text{border-color:rgba(80,165,161,.46);background:linear-gradient(145deg,rgba(19,41,42,.98),rgba(13,24,26,.99))}
+body[data-detail="player"] .detail-status{border-color:rgba(88,194,184,.48);background:rgba(23,91,88,.38);color:#b4fff4}
+.head-button:focus-visible,.inbox-tab:focus-visible,.mail-card:focus-visible,.action:focus-visible,.detail-close:focus-visible,.detail-back:focus-visible,.detail-delete:focus-visible,.detail-claim:focus-visible{outline:3px solid #ffe0ad;outline-offset:3px}
+.dock{position:absolute;z-index:20;left:0;top:1680px;width:1080px;height:240px;background:center top/1080px 212px no-repeat url("../inventar_v4_assets/dock_bg.png");border-top:1px solid rgba(225,197,159,.18)}
+.dock-item{position:absolute;top:5px;width:180px;height:204px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:#b7a78c}
+.dock-item.active{color:#fff0d0}
+.dock-item .plate{position:absolute;z-index:0;top:-22px;left:2px;width:176px;height:194px;object-fit:fill}
+.dock-item img.icon{position:relative;z-index:1;width:110px;height:105px;margin-top:4px;object-fit:contain;filter:drop-shadow(0 4px 5px #0008)}
+.dock-item span{position:relative;z-index:1;margin-top:1px;font:23px/1 var(--font-title);text-shadow:0 2px 3px #000}
+.dock-item i{position:relative;z-index:1;width:58px;height:7px;margin-top:10px;border-radius:8px;background:linear-gradient(90deg,#ef873d,#ffab58);box-shadow:0 0 9px #ff8b3c}
+.dock-item:not(.active) img.icon{filter:grayscale(1) brightness(.55) drop-shadow(0 3px 4px #0008)}
+.home-bar{position:absolute;left:390px;top:221px;width:300px;height:10px;border-radius:8px;background:rgba(255,255,255,.92);box-shadow:0 1px 4px #0007}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body data-tab="system">
+<div class="scene" aria-hidden="true"></div><div class="ember-wash" aria-hidden="true"></div>
+<div class="topbar" aria-label="Ressourcen">
+  <div class="resource"><img src="../inventar_v4_assets/kristall.png" alt=""><b>250</b></div>
+  <button class="plus" type="button" aria-label="Zeitkristalle erhalten"><img src="../inventar_v4_assets/plus.png" alt=""></button>
+  <div class="resource"><img src="../inventar_v4_assets/wissen.png" alt=""><b>1,2M</b></div>
+  <div class="resource"><img src="../inventar_v4_assets/gold.png" alt=""><b>12,4K</b></div>
+</div>
+<header class="page-head">
+  <button class="head-button" type="button" aria-label="Zurück">‹</button>
+  <div class="head-title"><h1>POSTFACH</h1><p id="headline-sub">2 ungelesen &nbsp;·&nbsp; 1 Belohnung offen</p></div>
+  <button class="head-button head-close" type="button" aria-label="Schließen">×</button>
+</header>
+<nav class="tab-rail" aria-label="Postfachbereiche" role="tablist">
+  <button class="inbox-tab active" id="tab-system" type="button" role="tab" aria-selected="true" data-tab="system">
+    <span class="tab-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M9 18h46v32H9z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="m11 21 21 17 21-17" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 46 27 35m22 11L37 35" stroke="currentColor" stroke-width="2" opacity=".8"/><circle cx="48" cy="15" r="9" fill="#9c4723" stroke="#ffc06a" stroke-width="2"/><path d="M48 10v10m-5-5h10" stroke="#ffe1ad" stroke-width="2" stroke-linecap="round"/></svg></span>
+    <span class="tab-copy"><strong>SYSTEM</strong><small>Post von der Festung</small></span><span class="tab-count" id="count-system">1</span>
+  </button>
+  <button class="inbox-tab" id="tab-player" type="button" role="tab" aria-selected="false" data-tab="player">
+    <span class="tab-art" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M10 14h44a5 5 0 0 1 5 5v25a5 5 0 0 1-5 5H34L20 59v-10h-10a5 5 0 0 1-5-5V19a5 5 0 0 1 5-5Z" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M17 27h30M17 36h20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="49" cy="48" r="10" fill="#176964" stroke="#85eee4" stroke-width="2"/><path d="M45 49c1-4 7-4 8 0m-4-3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="#d6fffa" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+    <span class="tab-copy"><strong>SPIELER</strong><small>Direkte Nachrichten</small></span><span class="tab-count" id="count-player">1</span>
+  </button>
+</nav>
+<section class="action-panel" aria-label="Postfachaktionen">
+  <div class="action-top"><span id="list-summary">SYSTEMPOST · 4 NACHRICHTEN</span><span>NEUESTE ZUERST</span></div>
+  <div class="action-row">
+    <button class="action action-primary" id="read-all" type="button"><span class="action-icon">✓</span>ALLES GELESEN</button>
+    <button class="action action-delete" id="delete-all" type="button" disabled><span class="action-icon">×</span>ALLE GELESENEN LÖSCHEN</button>
+  </div>
+  <div class="action-help" id="action-help">Markiert beide Tabs als gelesen und nimmt offene System-Belohnungen an.</div>
+</section>
+<div class="list-head"><strong id="list-title">EINGANG · SYSTEM</strong><span id="list-count">4 Nachrichten</span></div>
+<main class="mail-list system-list" id="system-list" aria-label="Systemnachrichten"></main>
+<main class="mail-list player-list" id="player-list" aria-label="Spielernachrichten"></main>
+<section class="empty-state" id="empty-state"><div class="empty-icon"><svg viewBox="0 0 64 64" fill="none"><path d="M9 18h46v32H9z" stroke="currentColor" stroke-width="3"/><path d="m11 21 21 17 21-17" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="m16 46 12-11m20 11L36 35" stroke="currentColor" stroke-width="2"/></svg></div><strong>Der Eingang ist leer</strong><p>Neue Post wartet hier, sobald sie eintrifft.</p></section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<nav class="dock" aria-label="Hauptnavigation">
+  <div class="dock-item active" style="left:0"><img class="plate" src="../inventar_v4_assets/dock_aktiv.png" alt=""><img class="icon" src="../inventar_v4_assets/dock_dorf_inaktiv.png" alt=""><span>Dorf</span><i></i></div>
+  <div class="dock-item" style="left:180px"><img class="icon" src="../inventar_v4_assets/dock_helden_inaktiv.png" alt=""><span>Helden</span></div>
+  <div class="dock-item" style="left:360px"><img class="icon" src="../inventar_v4_assets/dock_karte_inaktiv.png" alt=""><span>Karte</span></div>
+  <div class="dock-item" style="left:540px"><img class="icon" src="../inventar_v4_assets/dock_armee_inaktiv.png" alt=""><span>Armee</span></div>
+  <div class="dock-item" style="left:720px"><img class="icon" src="../inventar_v4_assets/dock_gilde_inaktiv.png" alt=""><span>Gilde</span></div>
+  <div class="dock-item" style="left:900px"><img class="icon" src="../inventar_v4_assets/dock_inventar.png" alt=""><span>Inventar</span></div>
+  <div class="home-bar" aria-hidden="true"></div>
+</nav>
+<div class="detail-backdrop" id="detail-backdrop" aria-hidden="true"></div>
+<section class="detail-sheet" id="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-hidden="true" tabindex="-1">
+  <div class="detail-topline"><span class="detail-kicker" id="detail-kicker">SYSTEM · FESTUNGSPOST</span><button class="detail-close" id="detail-close" type="button" aria-label="Nachricht schließen">×</button></div>
+  <div class="detail-heading"><h2 class="detail-title" id="detail-title">Vorräte für die Reise</h2><div class="detail-meta-row"><p class="detail-meta" id="detail-meta">GILDENRAT · HEUTE · 09:12</p><span class="detail-status" id="detail-status">BELOHNUNG OFFEN</span></div></div>
+  <article class="detail-text" id="detail-text" tabindex="0" aria-label="Vollständiger Nachrichtentext"></article>
+  <section class="detail-rewards" id="detail-rewards" aria-label="Nachrichtenbelohnung"><h3 class="detail-rewards-title"><span>BELOHNUNG</span><small>Aus der Festung</small></h3><div class="detail-reward-chips" id="detail-reward-chips"></div></section>
+  <div class="detail-footer" id="detail-footer"><button class="detail-claim" id="detail-claim" type="button">BELOHNUNG HOLEN</button><button class="detail-delete" id="detail-delete" type="button">LÖSCHEN</button><button class="detail-back" id="detail-back" type="button">‹ &nbsp; ZURÜCK</button></div>
+</section>
+<script>
+const inbox={
+  system:[
+    {id:'supply',title:'Vorräte für die Reise',sender:'GILDENRAT',time:'HEUTE · 09:12',body:'Die Grenzwacht ist aufgebrochen. Diese Vorräte stärken deinen nächsten Marsch.',fullText:['Die Grenzwacht hat den alten Pass gesichert. Deine Truppen erreichten den Außenposten noch vor Einbruch der Dunkelheit und fanden die Vorratskisten unversehrt.','Wir teilen die Lieferung mit dir, damit du den nächsten Marsch vorbereiten kannst. Holz und Kristalle stammen aus den Lagerbeständen der Festung; das Wissen haben die Späher aus ihrer Wegkarte mitgebracht.','Öffne die Belohnung, bevor du deine nächste Expedition startest. Der Weg zum Nordpass bleibt bis zum Sonnenaufgang frei.'],unread:true,reward:[['holz.png','Holz ×250'],['kristall.png','Kristall ×20'],['wissen.png','Wissen ×80']],claimed:false,icon:'seal'},
+    {id:'eastgate',title:'Wachwechsel am Osttor',sender:'GRENZWACHE',time:'HEUTE · 07:45',body:'Der neue Trupp hat seinen Posten bezogen. Der Weg nach Osten ist wieder frei.',unread:false,reward:[],claimed:true,icon:'shield'},
+    {id:'arena',title:'Arena-Saison beendet',sender:'ARENA',time:'GESTERN · 19:20',body:'Rang 42 erreicht. Deine Saisonübersicht wartet in der Arena.',unread:false,reward:[],claimed:true,icon:'crest'},
+    {id:'maintenance',title:'Danke für deine Geduld',sender:'FESTUNG',time:'22. OKT · 11:06',body:'Die Wartung ist abgeschlossen. Deine Truppen sind wieder einsatzbereit.',unread:false,reward:[],claimed:true,icon:'scroll'},
+    {id:'dispatch',title:'Kurier aus dem Grenzland',sender:'VORPOSTEN',time:'21. OKT · 16:50',body:'Am Flussufer wurden frische Spuren entdeckt. Die Karte ist aktualisiert.',unread:false,reward:[],claimed:true,icon:'crest'}
+  ],
+  player:[
+    {id:'mira',title:'Treffpunkt am Nordtor',sender:'MIRA · WESTWACHT',time:'HEUTE · 09:08',body:'Ich bin schon am Tor. Bring die Karte mit – der alte Pass ist wieder offen.',fullText:['Ich bin schon am Tor. Bring die Karte mit – der alte Pass ist wieder offen. Die Wachen haben einen geheimen Weg unter dem Felsbogen gefunden.','Er führt genau zwischen den beiden Spähtürmen hindurch, ohne dass die Patrouille ihn sehen kann. Ich habe die sicheren Stellen auf der Rückseite der Karte markiert.','Wenn du vor Sonnenuntergang losgehst, können wir die Karawane noch am Fluss einholen. Ich warte beim alten Wegstein auf dich.'],unread:true,avatar:'MR',tone:'umber'},
+    {id:'tovan',title:'Der Schmied hat geliefert',sender:'TOVAN · HANDWERKER',time:'HEUTE · 08:41',body:'Dein Schild ist fertig. Die Kante hält jetzt auch einem Ogerhieb stand.',unread:false,avatar:'TV',tone:'violet'},
+    {id:'nemi',title:'Karte für den Sümpferpfad',sender:'NEMI · SPÄHERIN',time:'GESTERN · 21:15',body:'Hab die sicheren Stellen markiert. Folge den weißen Steinen, dann bleibst du trocken.',unread:false,avatar:'NM',tone:'olive'},
+    {id:'oren',title:'Danke für die Verstärkung',sender:'OREN · KARAWANE',time:'GESTERN · 17:32',body:'Die Händler sind heil angekommen. Beim nächsten Halt geht die erste Runde auf mich.',unread:false,avatar:'OR',tone:''},
+    {id:'sela',title:'Ein Lied für den Heimweg',sender:'SELA · TAVERNE',time:'21. OKT · 20:04',body:'Die neue Strophe ist fertig. Beim nächsten Lagerfeuer singe ich sie dir vor.',unread:false,avatar:'SL',tone:'umber'}
+  ]
+};
+let activeTab='system';
+const query=new URLSearchParams(location.search);
+if(query.get('view')==='player')activeTab='player';
+if(query.get('view')==='read'){inbox.system.forEach(m=>{m.unread=false;m.claimed=true});inbox.player.forEach(m=>m.unread=false)}
+const listSystem=document.getElementById('system-list'),listPlayer=document.getElementById('player-list'),toast=document.getElementById('toast');
+const detailSheet=document.getElementById('detail-sheet'),detailBackdrop=document.getElementById('detail-backdrop');
+let selectedMessage=null,lastCardId=null;
+function iconSvg(name){
+  const paths={seal:'<path d="M13 22h38v29H13z"/><path d="m15 25 17 14 17-14"/><circle cx="47" cy="18" r="8"/><path d="M47 14v8m-4-4h8"/>',shield:'<path d="M32 9 50 16v14c0 12-7 21-18 26C21 51 14 42 14 30V16l18-7Z"/><path d="m23 32 6 6 12-14"/>',crest:'<path d="M15 13h34v17c0 12-7 21-17 26-10-5-17-14-17-26V13Z"/><path d="M22 23h20M25 31h14M28 39h8"/><path d="m32 13 4 8-4 4-4-4 4-8Z"/>',scroll:'<path d="M18 12h27a7 7 0 0 1 7 7v30H22a6 6 0 0 1-6-6V18a6 6 0 0 1 6-6Z"/><path d="M23 12v31m8-22h13m-13 8h13m-13 8h9"/><path d="M17 43h33"/>'};
+  return '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(paths[name]||paths.seal)+'</svg>';
+}
+function statusFor(m){if(m.unread)return '<span class="status unread">UNGELESEN</span>';if(m.reward&&m.reward.length&&!m.claimed)return '<span class="status open">BELOHNUNG OFFEN</span>';if(m.reward&&m.reward.length&&m.claimed)return '<span class="status claimed">ANGENOMMEN</span>';return '<span class="status read">GELESEN</span>'}
+function renderSystem(){
+  listSystem.innerHTML=inbox.system.map(m=>{
+    const reward=(m.reward||[]).length?'<div class="reward-chips">'+m.reward.map(r=>'<span class="reward-chip"><img src="../inventar_v4_assets/'+r[0]+'" alt="">'+r[1]+'</span>').join('')+'</div>':'';
+    const action=(m.reward&&m.reward.length)?'<button class="claim-button" type="button" data-claim="'+m.id+'" '+(m.claimed?'disabled':'')+'>'+(m.claimed?'✓ ANGENOMMEN':'BELOHNUNG HOLEN')+'</button>':'<span class="read-mark">'+(m.unread?'ZUM LESEN':'GELESEN')+'</span>';
+    return '<article class="mail-card system '+(m.unread?'unread ':'')+((m.reward&&m.reward.length)?'has-reward':'')+'" data-message="'+m.id+'" tabindex="0" role="button" aria-label="'+m.title+' von '+m.sender+'">'+
+      '<div class="mail-emblem" aria-hidden="true">'+iconSvg(m.icon)+'</div><div class="mail-copy"><div class="card-top"><h2 class="mail-title">'+m.title+'</h2>'+statusFor(m)+'</div><div class="mail-meta">'+m.sender+' &nbsp;·&nbsp; '+m.time+'</div><p class="mail-body">'+m.body+'</p><div class="mail-footer">'+reward+action+'</div></div></article>';
+  }).join('');
+}
+function renderPlayer(){
+  listPlayer.innerHTML=inbox.player.map(m=>'<article class="mail-card player '+(m.unread?'unread':'')+'" data-message="'+m.id+'" tabindex="0" role="button" aria-label="Nachricht von '+m.sender+'">'+
+    '<div class="avatar '+m.tone+'"><span>'+m.avatar+'</span><i class="online"></i></div><div class="player-copy"><div class="card-top"><h2 class="mail-title">'+m.title+'</h2>'+statusFor(m)+'</div><div class="mail-meta">'+m.sender+' &nbsp;·&nbsp; '+m.time+'</div><div class="chat-bubble">'+m.body+'</div></div></article>').join('');
+}
+function render(){
+  document.body.dataset.tab=activeTab;
+  document.querySelectorAll('.inbox-tab').forEach(b=>{const on=b.dataset.tab===activeTab;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false')});
+  const unread=inbox.system.concat(inbox.player).filter(m=>m.unread).length;
+  const openRewards=inbox.system.filter(m=>m.reward&&m.reward.length&&!m.claimed).length;
+  const total=inbox.system.length+inbox.player.length;
+  document.getElementById('headline-sub').textContent=unread+' ungelesen  ·  '+openRewards+' Belohnung'+(openRewards===1?'':'en')+' offen';
+  document.getElementById('count-system').textContent=inbox.system.filter(m=>m.unread).length;
+  document.getElementById('count-player').textContent=inbox.player.filter(m=>m.unread).length;
+  const current=inbox[activeTab];
+  document.getElementById('list-summary').textContent=(activeTab==='system'?'SYSTEMPOST':'SPIELERPOST')+' · '+current.length+' NACHRICHTEN';
+  document.getElementById('list-title').textContent='EINGANG · '+(activeTab==='system'?'SYSTEM':'SPIELER');
+  document.getElementById('list-count').textContent=current.length+' '+(current.length===1?'Nachricht':'Nachrichten');
+  const canDelete=unread===0&&openRewards===0;
+  const del=document.getElementById('delete-all');del.disabled=!canDelete;del.setAttribute('aria-disabled',canDelete?'false':'true');
+  document.getElementById('action-help').textContent=canDelete?'Keine offenen Posten – alle Nachrichten können entfernt werden.':'Markiert beide Tabs als gelesen und nimmt offene System-Belohnungen an.';
+  renderSystem();renderPlayer();
+  document.getElementById('empty-state').classList.toggle('visible',current.length===0);
+}
+function showToast(message){toast.textContent=message;toast.classList.add('visible');window.clearTimeout(showToast.timer);showToast.timer=window.setTimeout(()=>toast.classList.remove('visible'),1800)}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
+function updateDetail(){
+  if(!selectedMessage)return;
+  const system=activeTab==='system'&&inbox.system.some(m=>m.id===selectedMessage.id);
+  const message=(system?inbox.system:inbox.player).find(m=>m.id===selectedMessage.id)||selectedMessage;
+  selectedMessage=message;
+  document.body.dataset.detail=system?'system':'player';
+  document.getElementById('detail-kicker').textContent=system?'SYSTEM · FESTUNGSPOST':'SPIELER · DIREKTE NACHRICHT';
+  document.getElementById('detail-title').textContent=message.title;
+  document.getElementById('detail-meta').textContent=message.sender+'  ·  '+message.time;
+  const status=document.getElementById('detail-status');
+  const rewardOpen=message.reward&&message.reward.length&&!message.claimed;
+  status.classList.toggle('read',!message.unread&&!rewardOpen);
+  status.textContent=message.unread?'UNGELESEN':(message.reward&&message.reward.length?(message.claimed?'ANGENOMMEN':'BELOHNUNG OFFEN'):'GELESEN');
+  document.getElementById('detail-text').innerHTML=(message.fullText||[message.body]).map(paragraph=>'<p>'+escapeHtml(paragraph)+'</p>').join('');
+  const rewards=system&&message.reward&&message.reward.length>0;
+  const rewardPanel=document.getElementById('detail-rewards');
+  rewardPanel.hidden=!rewards;
+  document.getElementById('detail-reward-chips').innerHTML=rewards?message.reward.map(item=>'<span class="detail-reward"><img src="../inventar_v4_assets/'+item[0]+'" alt="">'+escapeHtml(item[1])+'</span>').join(''):'';
+  const footer=document.getElementById('detail-footer'),claim=document.getElementById('detail-claim');
+  footer.classList.toggle('player-mode',!rewards);
+  claim.hidden=!rewards;
+  claim.disabled=Boolean(rewards&&message.claimed);
+  claim.textContent=message.claimed?'✓ BELOHNUNG ANGENOMMEN':'BELOHNUNG HOLEN';
+}
+function openDetail(message){
+  selectedMessage=message;
+  lastCardId=message.id;
+  updateDetail();
+  detailSheet.classList.add('open');
+  detailBackdrop.classList.add('open');
+  detailSheet.setAttribute('aria-hidden','false');
+  detailBackdrop.setAttribute('aria-hidden','false');
+  document.getElementById('detail-text').scrollTop=0;
+  detailSheet.focus();
+}
+function closeDetail(){
+  if(!detailSheet.classList.contains('open'))return;
+  detailSheet.classList.remove('open');
+  detailBackdrop.classList.remove('open');
+  detailSheet.setAttribute('aria-hidden','true');
+  detailBackdrop.setAttribute('aria-hidden','true');
+  delete document.body.dataset.detail;
+  selectedMessage=null;
+  if(lastCardId){const trigger=document.querySelector('[data-message="'+lastCardId+'"]');if(trigger)trigger.focus()}
+}
+document.querySelectorAll('.inbox-tab').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;render()}));
+document.getElementById('read-all').addEventListener('click',()=>{inbox.system.forEach(m=>{m.unread=false;m.claimed=true});inbox.player.forEach(m=>m.unread=false);render();showToast('Alles gelesen · System-Belohnungen angenommen')});
+document.getElementById('delete-all').addEventListener('click',e=>{if(e.currentTarget.disabled)return;inbox.system=inbox.system.filter(m=>m.unread||(m.reward&&m.reward.length&&!m.claimed));inbox.player=inbox.player.filter(m=>m.unread);render();showToast('Gelesene Nachrichten entfernt')});
+document.addEventListener('click',e=>{
+  const claim=e.target.closest('[data-claim]');
+  if(claim){const m=inbox.system.find(item=>item.id===claim.dataset.claim);if(m&&!m.claimed){m.claimed=true;m.unread=false;render();showToast('Belohnung angenommen')}return}
+  const card=e.target.closest('[data-message]');
+  if(card){const data=inbox[card.classList.contains('player')?'player':'system'];const m=data.find(item=>item.id===card.dataset.message);if(m){if(m.unread){m.unread=false;render()}openDetail(m)}}
+});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-message]')){e.preventDefault();e.target.click()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&detailSheet.classList.contains('open'))closeDetail()});
+detailBackdrop.addEventListener('click',closeDetail);
+document.getElementById('detail-close').addEventListener('click',closeDetail);
+document.getElementById('detail-back').addEventListener('click',closeDetail);
+document.querySelector('.head-button[aria-label="Zurück"]').addEventListener('click',closeDetail);
+document.getElementById('detail-claim').addEventListener('click',()=>{
+  if(!selectedMessage||!selectedMessage.reward||selectedMessage.claimed)return;
+  const message=inbox.system.find(m=>m.id===selectedMessage.id);
+  if(message){message.claimed=true;message.unread=false;render();updateDetail();showToast('Belohnung angenommen')}
+});
+document.getElementById('detail-delete').addEventListener('click',()=>{
+  if(!selectedMessage)return;
+  const collection=activeTab==='system'?inbox.system:inbox.player;
+  const index=collection.findIndex(m=>m.id===selectedMessage.id);
+  if(index<0)return;
+  collection.splice(index,1);
+  render();
+  closeDetail();
+  document.getElementById('tab-'+activeTab).focus();
+  showToast('Nachricht entfernt');
+});
+render();
+if(query.get('view')==='detail'){const message=inbox.system.find(m=>m.id==='supply');message.unread=false;render();openDetail(message)}
+</script>
+</body>
+</html>
