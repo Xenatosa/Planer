@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Bauen D2 v2 · Obsidian &amp; Glut</title>
+<style>
+@font-face{font-family:Lilita;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/LilitaOne-Regular.ttf")}
+@font-face{font-family:Baloo;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
+:root{--cream:#f7ead2;--muted:#b9a988;--ember:#ff8a2a;--ember-light:#ffc06a;--panel:#171311;--line:#886344;--green:#9be37a;--red:#ff6a5a;--wood:#f2a34b;--stone:#d2d3ca;--food:#ff9c54;--shell:#ffd076}
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;overflow:hidden}
+body{position:relative;background:#090807;color:var(--cream);font-family:Baloo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
+button{font:inherit;color:inherit}
+.scene{position:absolute;z-index:0;inset:0;background:center/100% 100% no-repeat url("../vorschau_hud_d2_v7_3_lvl12.png")}
+.world-scrim{position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(6,5,4,.055) 0%,rgba(6,5,4,.10) 46%,rgba(6,5,4,.16) 100%);pointer-events:none}
+.village{position:absolute;z-index:2;inset:290px 0 220px;pointer-events:none;overflow:hidden}
+.village-structure{position:absolute;display:grid;place-items:center;filter:drop-shadow(0 11px 12px rgba(0,0,0,.55))}
+.village-structure:before{content:"";position:absolute;left:17%;right:17%;bottom:5%;height:15%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,149,54,.26),rgba(5,4,3,0) 72%);filter:blur(7px)}
+.village-structure img{position:relative;width:100%;height:100%;object-fit:contain;opacity:.88}
+.village-structure.hut{left:650px;top:28px;width:275px;height:255px;opacity:.74}
+.village-structure.gatherer{left:210px;top:200px;width:230px;height:222px;opacity:.66}
+.village-structure.quarry{left:790px;top:500px;width:205px;height:190px;opacity:.48}
+.village-structure.woodcutter{left:4px;top:520px;width:220px;height:210px;opacity:.53}
+.dock-scrim{position:absolute;z-index:3;left:0;top:1668px;width:1080px;height:252px;background:linear-gradient(180deg,rgba(5,4,4,.42),rgba(5,4,4,.69));pointer-events:none}
+.shop-panel{position:absolute;z-index:10;left:0;top:1080px;width:1080px;height:638px;padding:12px 20px 10px;border:1px solid rgba(205,143,81,.78);border-bottom:0;border-radius:31px 31px 0 0;background:linear-gradient(155deg,rgba(33,25,20,.985),rgba(13,11,10,.995) 54%,rgba(27,17,12,.99));box-shadow:0 -11px 40px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,227,191,.19),inset 0 0 0 5px rgba(0,0,0,.34);overflow:hidden}
+.shop-panel:before{content:"";position:absolute;inset:7px 7px 0;border:1px solid rgba(233,177,116,.17);border-bottom:0;border-radius:25px 25px 0 0;pointer-events:none}
+.handle{position:absolute;z-index:1;left:50%;top:8px;transform:translateX(-50%);width:62px;height:5px;border-radius:5px;background:linear-gradient(90deg,#70452b,#d89b5f,#70452b);box-shadow:0 1px 9px #000b}
+.shop-head{position:relative;z-index:1;height:29px;display:flex;align-items:center;justify-content:space-between;padding:0 4px;color:#ffdfb0}
+.shop-heading{display:flex;align-items:center;gap:9px;font:24px/1 Lilita;letter-spacing:.45px;text-shadow:0 2px #180d07}
+.shop-heading:before{content:"";display:block;width:7px;height:22px;border-radius:5px;background:linear-gradient(#ffc276,#f36e22);box-shadow:0 0 13px rgba(255,139,43,.45)}
+.category-count{color:#c8b28d;font:16px/1 Baloo;font-weight:800;letter-spacing:.35px}
+.category-count strong{color:#ffe0b0;font:20px/1 Lilita}
+.category-rail{position:relative;z-index:1;height:82px;margin:6px 0 7px;display:flex;justify-content:space-around;align-items:center}
+.category{position:relative;width:126px;height:78px;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:0;cursor:pointer;color:#bca98a}
+.category-orb{position:relative;width:53px;height:53px;border:1px solid rgba(190,145,93,.35);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#49372a,#201713 68%,#100e0d);box-shadow:inset 0 1px 0 #fff2,0 4px 10px #0007;transition:.16s ease}
+.category-orb svg{width:30px;height:30px;stroke:#d6b080;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px #000)}
+.category-name{font:17px/1 Lilita;white-space:nowrap;text-shadow:0 2px 2px #000}
+.category-count-badge{position:absolute;top:1px;right:22px;min-width:21px;height:19px;padding:1px 5px;border:1px solid rgba(255,196,119,.35);border-radius:10px;background:#120d0b;color:#e6c89e;font:13px/16px Lilita;text-align:center;box-shadow:0 2px 5px #0009}
+.category.active{color:#fff0d3}
+.category.active .category-orb{border:2px solid #ffc276;background:radial-gradient(circle at 40% 30%,#a45325,#462418 70%,#21130e);box-shadow:0 0 0 3px rgba(255,140,46,.12),0 0 18px rgba(255,137,42,.36),inset 0 1px 0 #fff8}
+.category.active .category-orb svg{stroke:#fff0d2}
+.cards-viewport{position:relative;z-index:1;width:100%;height:456px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.cards-viewport::-webkit-scrollbar{display:none}
+.cards-track{height:100%;width:max-content;display:flex;align-items:stretch;gap:14px;padding:2px 1px 3px 0}
+.building-card{position:relative;flex:0 0 300px;height:451px;padding:7px 8px 8px;overflow:hidden;border:1.5px solid rgba(161,123,83,.74);border-radius:22px;background:linear-gradient(150deg,rgba(55,40,29,.97),rgba(21,17,15,.99) 52%,rgba(15,13,12,.99));box-shadow:0 7px 15px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,236,208,.13),inset 0 0 0 3px rgba(0,0,0,.24);scroll-snap-align:start}
+.building-card:before{content:"";position:absolute;z-index:0;inset:1px;border-radius:20px;background:radial-gradient(ellipse at 50% 43%,rgba(255,148,55,.055),transparent 59%);pointer-events:none}
+.building-card.buildable{border-color:rgba(199,139,75,.82);box-shadow:0 0 0 1px rgba(255,153,62,.09),0 7px 18px #0009,0 0 20px rgba(255,125,34,.08),inset 0 1px 0 rgba(255,236,208,.16)}
+.building-card.locked{border-color:rgba(125,113,96,.57);background:linear-gradient(150deg,rgba(42,38,33,.98),rgba(17,16,15,.995) 52%,rgba(14,14,13,.99));}
+.art-stage{position:relative;z-index:1;height:300px;display:grid;place-items:center;overflow:hidden;border-radius:16px;background:radial-gradient(ellipse at 50% 74%,rgba(255,125,38,.14),transparent 64%),linear-gradient(180deg,rgba(21,16,13,.20),rgba(10,9,8,.05));}
+.art-stage:before{content:"";position:absolute;z-index:0;left:50%;bottom:39px;transform:translateX(-50%);width:184px;height:230px;background:radial-gradient(ellipse at 50% 85%,rgba(255,148,66,.2),rgba(255,115,37,.075) 42%,rgba(255,110,37,0) 75%);clip-path:polygon(50% 0,100% 100%,0 100%);filter:blur(3px)}
+.plinth{position:absolute;z-index:1;left:50%;bottom:12px;transform:translateX(-50%);width:183px;height:31px;border:1px solid rgba(238,151,76,.78);border-radius:50%;background:radial-gradient(ellipse at 50% 35%,#694024 0%,#322016 48%,#14100e 76%);box-shadow:0 5px 6px #0009,0 0 15px rgba(255,127,40,.33),inset 0 2px 0 rgba(255,194,120,.46)}
+.plinth:after{content:"";position:absolute;left:9%;right:9%;top:35%;height:1px;background:linear-gradient(90deg,transparent,#ffc276,transparent);opacity:.8}
+.art-image{position:absolute;z-index:2;left:50%;bottom:12px;transform:translateX(-50%);width:294px;height:294px;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(0,0,0,.63));}
+.count-badge{position:absolute;z-index:4;top:7px;right:7px;min-width:49px;height:31px;padding:4px 8px 3px;border:1px solid rgba(255,206,145,.57);border-radius:13px;background:linear-gradient(145deg,rgba(13,10,9,.92),rgba(29,18,12,.96));color:#ffedcf;font:17px/1 Lilita;text-align:center;box-shadow:0 3px 8px #0009}
+.building-name{position:relative;z-index:2;height:42px;margin:2px 2px 1px;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#fff0d3;font:25px/1.04 Lilita;text-align:center;text-shadow:0 2px 0 #100905,0 0 11px rgba(255,171,89,.12);white-space:nowrap;letter-spacing:.1px}
+.cost-row{position:relative;z-index:2;height:50px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch}
+.cost-chip{min-width:0;height:49px;padding:3px 6px;display:flex;align-items:center;justify-content:center;gap:5px;border:1px solid rgba(193,148,97,.37);border-radius:12px;background:linear-gradient(145deg,rgba(54,39,29,.9),rgba(20,16,14,.96));box-shadow:inset 0 1px 0 rgba(255,239,215,.07)}
+.cost-chip img{flex:0 0 29px;width:29px;height:29px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
+.cost-chip b{overflow:hidden;color:#f4e7d0;font:21px/1 Lilita;text-overflow:clip;white-space:nowrap}
+.cost-chip.insufficient{border-color:rgba(255,106,90,.78);background:linear-gradient(145deg,rgba(100,39,32,.87),rgba(38,16,14,.97));box-shadow:0 0 11px rgba(255,73,60,.14),inset 0 1px 0 rgba(255,177,147,.12)}
+.cost-chip.insufficient b{color:#ff786a;text-shadow:0 0 8px rgba(255,69,56,.32)}
+.lock-note{position:absolute;z-index:3;left:50%;bottom:21px;transform:translateX(-50%);height:29px;padding:4px 10px 3px;display:flex;align-items:center;gap:6px;border:1px solid rgba(189,172,141,.58);border-radius:13px;background:rgba(18,16,14,.9);color:#e0d0b2;font:15px/1 Lilita;white-space:nowrap;box-shadow:0 2px 8px #000a}
+.lock-note svg{width:15px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.building-card.locked .art-image{filter:grayscale(1) saturate(.3) brightness(.56) drop-shadow(0 5px 5px #0009)}
+.building-card.locked .plinth{border-color:rgba(143,135,120,.52);box-shadow:0 4px 5px #0009,inset 0 2px 0 rgba(208,199,180,.22)}
+.building-card.locked .art-stage:before{background:radial-gradient(ellipse at 50% 85%,rgba(153,148,137,.14),rgba(100,98,91,.06) 45%,transparent 75%)}
+.page-dots{position:relative;z-index:1;height:18px;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px}
+.page-dot{width:8px;height:8px;border:0;border-radius:50%;padding:0;background:#574435;box-shadow:0 1px 3px #000;cursor:pointer}
+.page-dot.active{width:23px;border-radius:7px;background:linear-gradient(90deg,#d45b1d,#ffbc65);box-shadow:0 0 10px rgba(255,125,36,.43)}
+.panel-foot{position:absolute;z-index:1;right:24px;bottom:20px;color:rgba(216,189,154,.45);font:12px/1 Lilita;letter-spacing:1px}
+.place-mode{display:none}
+body[data-screen="place"] .shop-panel{display:none}
+body[data-screen="place"] .dock-scrim{background:linear-gradient(180deg,rgba(5,4,4,.45),rgba(5,4,4,.73))}
+body[data-screen="place"] .world-scrim{background:linear-gradient(180deg,rgba(5,4,4,.06) 0%,rgba(5,4,4,.09) 45%,rgba(5,4,4,.18) 100%)}
+body[data-screen="place"] .place-mode{display:block}
+.placement-glow{position:absolute;z-index:4;left:50%;top:680px;transform:translateX(-50%);width:680px;height:660px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,134,48,.13),rgba(255,134,48,.035) 42%,transparent 72%);filter:blur(13px);pointer-events:none}
+.build-grid{position:absolute;z-index:5;left:280px;top:903px;width:520px;height:320px;overflow:visible}
+.grid-fill{fill:rgba(41,186,82,.10);stroke:#82f49a;stroke-width:3;stroke-linejoin:round}
+.grid-cell{fill:none;stroke:rgba(120,241,145,.46);stroke-width:2}
+.grid-cell.active{fill:rgba(76,224,116,.19);stroke:rgba(165,255,173,.86);stroke-width:2.6}
+.grid-glow{fill:none;stroke:rgba(111,255,143,.55);stroke-width:11}
+.placement-ring{position:absolute;z-index:6;left:50%;top:1046px;transform:translateX(-50%);width:302px;height:80px;border:2px solid rgba(130,255,154,.8);border-radius:50%;box-shadow:0 0 0 6px rgba(67,227,105,.12),0 0 30px rgba(75,246,119,.54),inset 0 0 18px rgba(65,255,112,.22);pointer-events:none}
+.ghost-art{position:absolute;z-index:7;left:50%;top:657px;transform:translateX(-50%);width:482px;height:482px;object-fit:contain;opacity:.56;filter:drop-shadow(0 0 16px rgba(95,255,127,.56)) drop-shadow(0 13px 8px rgba(0,0,0,.7));}
+.placement-tooltip{position:absolute;z-index:9;top:422px;left:50%;transform:translateX(-50%);width:502px;min-height:164px;padding:13px 16px 14px;border:1.5px solid rgba(216,155,91,.88);border-radius:22px;background:linear-gradient(150deg,rgba(36,27,21,.98),rgba(15,13,11,.99));box-shadow:0 12px 32px #000c,inset 0 1px 0 rgba(255,235,208,.2),0 0 24px rgba(255,133,48,.14)}
+.placement-tooltip:after{content:"";position:absolute;left:50%;bottom:-11px;width:20px;height:20px;transform:translateX(-50%) rotate(45deg);border-right:1px solid rgba(216,155,91,.8);border-bottom:1px solid rgba(216,155,91,.8);background:#1b140f}
+.tooltip-head{height:32px;display:flex;align-items:center;justify-content:space-between;color:#ffe0b0;font:23px/1 Lilita;letter-spacing:.25px}
+.tooltip-head small{color:#c4a77d;font:14px/1 Baloo;font-weight:800;letter-spacing:.7px}
+.tooltip-costs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}
+.tooltip-cost{height:58px;display:flex;align-items:center;justify-content:center;gap:4px;border:1px solid rgba(195,151,101,.31);border-radius:12px;background:rgba(10,9,8,.42)}
+.tooltip-cost img{width:32px;height:32px;object-fit:contain;filter:drop-shadow(0 2px 3px #0008)}
+.tooltip-cost b{color:#f4e5ca;font:18px/1 Lilita;white-space:nowrap}
+.placement-actions{position:absolute;z-index:10;left:50%;top:1244px;transform:translateX(-50%);display:flex;align-items:center;gap:23px}
+.action-orb{width:82px;height:82px;border:2px solid rgba(255,231,196,.72);border-radius:50%;display:grid;place-items:center;font:44px/1 Lilita;box-shadow:0 8px 20px #000b,inset 0 2px 0 rgba(255,255,255,.25);text-shadow:0 2px 3px #0008}
+.action-orb.confirm{background:linear-gradient(160deg,#91d65c,#368d39 66%,#235726);color:#f7ffe9;box-shadow:0 0 0 4px rgba(112,242,113,.14),0 0 22px rgba(90,244,103,.26),0 8px 20px #000b,inset 0 2px 0 #fff7}
+.action-orb.cancel{background:linear-gradient(160deg,#583a2c,#261a16 66%,#14100e);color:#ffd9bd;border-color:rgba(222,159,117,.66)}
+.placement-hint{position:absolute;z-index:8;left:50%;top:1357px;transform:translateX(-50%);height:37px;padding:6px 15px 5px;border:1px solid rgba(120,234,138,.44);border-radius:18px;background:rgba(18,44,22,.6);color:#b8f0ac;font:17px/1 Lilita;letter-spacing:.8px;text-shadow:0 1px 3px #000}
+body[data-screen="place"] .village{opacity:.9}
+</style>
+</head>
+<body data-screen="shop">
+<div class="scene" aria-hidden="true"></div>
+<div class="world-scrim" aria-hidden="true"></div>
+<div class="village" aria-hidden="true">
+  <div class="village-structure hut"><img data-building="hut4" alt=""></div>
+  <div class="village-structure gatherer"><img data-building="gatherer4" alt=""></div>
+  <div class="village-structure quarry"><img data-building="quarry4" alt=""></div>
+  <div class="village-structure woodcutter"><img data-building="woodcutter4" alt=""></div>
+</div>
+<div class="dock-scrim" aria-hidden="true"></div>
+
+<main class="shop-panel" aria-label="Bau-Shop">
+  <div class="handle" aria-hidden="true"></div>
+  <header class="shop-head">
+    <strong class="shop-heading">BAUEN</strong>
+    <span class="category-count"><strong id="category-total">9</strong> GEBÄUDE</span>
+  </header>
+  <nav class="category-rail" aria-label="Gebäudekategorien" id="category-rail"></nav>
+  <section class="cards-viewport" aria-label="Gebäude zum Bauen"><div class="cards-track" id="cards-track"></div></section>
+  <div class="page-dots" id="page-dots" aria-label="Position in der Gebäudereihe"></div>
+  <div class="panel-foot" aria-hidden="true">OBSIDIAN &amp; GLUT</div>
+</main>
+
+<div class="place-mode" aria-label="Gebäude platzieren">
+  <div class="placement-glow" aria-hidden="true"></div>
+  <svg class="build-grid" viewBox="0 0 520 320" aria-hidden="true">
+    <polygon class="grid-fill" points="260,4 516,160 260,316 4,160"/>
+    <path class="grid-glow" d="M260 4 516 160 260 316 4 160Z"/>
+    <path class="grid-cell" d="M196 43 452 199M132 82 388 238M68 121 324 277M324 43 68 199M388 82 132 238M452 121 196 277"/>
+    <path class="grid-cell active" d="M260 82 388 160 260 238 132 160Z"/>
+    <path class="grid-cell" d="M228 62 356 140M196 82 324 160M164 101 292 179M292 62 164 140M324 82 196 160M356 101 228 179"/>
+  </svg>
+  <div class="placement-ring" aria-hidden="true"></div>
+  <img class="ghost-art" data-building="center" alt="Halbtransparenter Stammesfeuer-Bauplatz">
+  <section class="placement-tooltip" aria-label="Baukosten Stammesfeuer">
+    <header class="tooltip-head"><strong id="placement-name">STAMMESFEUER</strong><small>BAUKOSTEN</small></header>
+    <div class="tooltip-costs" id="tooltip-costs"></div>
+  </section>
+  <div class="placement-actions" aria-label="Platzierung bestätigen oder abbrechen">
+    <button class="action-orb confirm" type="button" aria-label="Bauen bestätigen">✓</button>
+    <button class="action-orb cancel" type="button" aria-label="Abbrechen">×</button>
+  </div>
+  <div class="placement-hint">BAUPLATZ GÜLTIG</div>
+</div>
+
+<script>
+const ASSET = "../../gebaeude_neu_b/";
+const RES = "../../ui-kit/menus_v3/_src/inventar_v4_assets/";
+const buildingsById = {
+  woodcutter:{file:"e1_bld_woodcutter_bp01.png",box:[141,96,929,915]},
+  center:{file:"e1_bld_center_bp01.png",box:[377,271,670,777]},
+  center4:{file:"e1_bld_center_bp04.png",box:[171,78,862,920]},
+  shell:{file:"e1_bld_shell_beach_bp01.png",box:[287,429,736,880]},
+  shell4:{file:"e1_bld_shell_beach_bp04.png",box:[234,311,790,871]},
+  hut:{file:"e1_bld_hut_bp01.png",box:[131,171,905,891]},
+  hut4:{file:"e1_bld_hut_bp04.png",box:[119,127,926,889]},
+  storage:{file:"e1_bld_storage_bp01.png",box:[129,153,909,872]},
+  storage4:{file:"e1_bld_storage_bp04.png",box:[112,118,937,900]},
+  quarry:{file:"e1_bld_quarry_bp01.png",box:[155,126,882,852]},
+  quarry4:{file:"e1_bld_quarry_bp04.png",box:[151,117,880,867]},
+  hunter:{file:"e1_bld_hunter_bp01.png",box:[163,115,871,861]},
+  hunter4:{file:"e1_bld_hunter_bp04.png",box:[113,84,923,846]},
+  trader:{file:"e1_bld_trader_bp01.png",box:[181,101,863,925]},
+  gatherer:{file:"e1_bld_gatherer_bp01.png",box:[123,120,925,891]},
+  gatherer4:{file:"e1_bld_gatherer_bp04.png",box:[118,81,941,897]},
+  barracks:{file:"e1_bld_barracks_bp01.png",box:[223,146,959,851]},
+  barracks4:{file:"e1_bld_barracks_bp04.png",box:[142,78,971,847]},
+  palisade:{file:"e1_bld_palisade_bp01.png",box:[177,136,882,894]},
+  palisade4:{file:"e1_bld_palisade_bp04.png",box:[171,135,878,896]},
+  shaman:{file:"e1_bld_shaman_hut_bp01.png",box:[129,154,915,896]},
+  shaman4:{file:"e1_bld_shaman_hut_bp04.png",box:[121,113,939,890]},
+  woodcutter4:{file:"e1_bld_woodcutter_bp04.png",box:[137,99,905,910]}
+};
+const resources={
+  wood:{icon:RES+"holz.png",color:"var(--wood)",name:"Holz"},
+  stone:{icon:RES+"stein.png",color:"var(--stone)",name:"Stein"},
+  food:{icon:RES+"nahrung.png",color:"var(--food)",name:"Nahrung"},
+  shells:{icon:RES+"gold.png",color:"var(--shell)",name:"Muscheln"}
+};
+const catalog=[
+  {id:"woodcutter",category:"economy",name:"Holzfällerlager",art:"woodcutter",count:"1/3",costs:[["wood",1250],["stone",760]]},
+  {id:"tribe-fire",category:"economy",name:"Stammesfeuer",art:"center4",count:"0/1",costs:[["wood",2100],["stone",1800]],allCosts:[["wood",2100],["stone",1800],["food",900],["shells",500]]},
+  {id:"shell-gatherer",category:"economy",name:"Muschelsammler",art:"shell4",count:"0/2",costs:[["wood",680],["shells",130]]},
+  {id:"hut",category:"economy",name:"Wohnhütte",art:"hut",count:"2/5",costs:[["wood",420],["food",250]]},
+  {id:"storage",category:"economy",name:"Lagerhaus",art:"storage4",count:"1/4",costs:[["wood",900],["stone",420]]},
+  {id:"quarry",category:"economy",name:"Steinbruch",art:"quarry",count:"0/2",costs:[["wood",3100],["stone",9250]]},
+  {id:"hunter",category:"economy",name:"Jägerlager",art:"hunter",count:"1/3",costs:[["wood",760],["food",240]]},
+  {id:"trader",category:"economy",name:"Handelsposten",art:"trader",count:"0/1",locked:"RATHAUS 3",costs:[["wood",1250],["stone",640]]},
+  {id:"gatherer",category:"economy",name:"Sammlerlager",art:"gatherer",count:"0/2",locked:"RATHAUS 3",costs:[["wood",580],["food",180]]},
+  {id:"spear-watch",category:"military",name:"Speerwache",art:"barracks",count:"0/3",costs:[["wood",820],["stone",360]]},
+  {id:"trap-camp",category:"military",name:"Fallenlager",art:"hunter4",count:"0/2",costs:[["wood",1050],["food",320]]},
+  {id:"tracker-hut",category:"military",name:"Spurenhütte",art:"hut4",count:"1/3",costs:[["wood",920],["stone",280]]},
+  {id:"watch-fire",category:"military",name:"Wachtfeuer",art:"center4",count:"0/2",costs:[["wood",1200],["stone",850]]},
+  {id:"bone-wall",category:"military",name:"Knochenwall",art:"palisade4",count:"0/4",locked:"RATHAUS 3",costs:[["wood",2600],["stone",1800]]},
+  {id:"war-hut",category:"military",name:"Kriegerzelt",art:"barracks4",count:"0/2",locked:"RATHAUS 3",costs:[["wood",3200],["food",1100]]},
+  {id:"hunter-chief",category:"military",name:"Jägerbund",art:"hunter",count:"0/1",costs:[["wood",1850],["stone",740]]},
+  {id:"mark-hut",category:"research",name:"Schamanenhütte",art:"shaman",count:"0/1",costs:[["wood",1350],["food",550]]},
+  {id:"ancestor-circle",category:"research",name:"Ahnenkreis",art:"center4",count:"0/1",costs:[["stone",1800],["shells",240]]},
+  {id:"knowledge-stone",category:"research",name:"Wissensplatz",art:"gatherer4",count:"0/1",costs:[["stone",2300],["food",620]]},
+  {id:"cave-paint",category:"research",name:"Felszeichen",art:"shaman4",count:"0/1",locked:"RATHAUS 3",costs:[["wood",2100],["shells",480]]},
+  {id:"shell-path",category:"decor",name:"Muschelpfad",art:"shell4",count:"0/3",costs:[["shells",160],["stone",90]]},
+  {id:"bone-arch",category:"decor",name:"Knochenbogen",art:"palisade",count:"0/1",costs:[["wood",470],["stone",180]]},
+  {id:"ancestor-pole",category:"decor",name:"Ahnentotem",art:"shaman4",count:"0/2",costs:[["wood",520],["shells",120]]},
+  {id:"ember-stone",category:"decor",name:"Glutstein",art:"quarry4",count:"0/3",costs:[["stone",360],["shells",90]]},
+  {id:"hide-banner",category:"decor",name:"Fellbanner",art:"gatherer4",count:"0/2",costs:[["wood",640],["food",180]]}
+];
+const categories=[
+  {id:"economy",name:"Wirtschaft",icon:'<svg viewBox="0 0 32 32"><path d="M4 15 16 5l12 10M7 14v13h18V14M13 27v-8h6v8"/></svg>'},
+  {id:"military",name:"Militär",icon:'<svg viewBox="0 0 32 32"><path d="m8 5 18 18M24 5 6 23M7 5l4 1 2 4-4 4-4-2-1-4ZM25 19l3 4-2 4-5-1-2-4 3-3Z"/><path d="m13 15 4 4"/></svg>'},
+  {id:"research",name:"Forschung",icon:'<svg viewBox="0 0 32 32"><path d="M16 3v7M16 22v7M3 16h7M22 16h7M6.8 6.8l5 5M20.2 20.2l5 5M25.2 6.8l-5 5M11.8 20.2l-5 5"/><circle cx="16" cy="16" r="4"/></svg>'},
+  {id:"decor",name:"Deko",icon:'<svg viewBox="0 0 32 32"><path d="M16 4c-3 4-3 8 0 12 3-4 3-8 0-12ZM28 16c-4-3-8-3-12 0 4 3 8 3 12 0ZM16 28c3-4 3-8 0-12-3 4-3 8 0 12ZM4 16c4 3 8 3 12 0-4-3-8-3-12 0Z"/><circle cx="16" cy="16" r="2.4"/></svg>'}
+];
+const counts={economy:9,military:7,research:4,decor:5};
+const resourcesAtHand={wood:12480,stone:8215,food:14900,shells:3270};
+const rail=document.getElementById("category-rail");
+const track=document.getElementById("cards-track");
+const viewport=document.querySelector(".cards-viewport");
+const dots=document.getElementById("page-dots");
+let activeCategory="economy";
+let activePage=0;
+let normalizedImages={};
+let imagePromises={};
+let selectedBuilding=catalog.find(item=>item.id==="tribe-fire");
+
+function format(n){return n.toLocaleString("de-DE");}
+function lockIcon(){return '<svg viewBox="0 0 20 22" aria-hidden="true"><path d="M5 9V6a5 5 0 0 1 10 0v3M3 9h14v11H3zM10 13v3"/></svg>';}
+function makeNormalizedImage(id){
+  if(normalizedImages[id]) return Promise.resolve(normalizedImages[id]);
+  if(imagePromises[id]) return imagePromises[id];
+  const spec=buildingsById[id];
+  imagePromises[id]=new Promise((resolve,reject)=>{
+    const source=new Image();
+    source.onload=()=>{
+      const [x1,y1,x2,y2]=spec.box;
+      const cropW=x2-x1,cropH=y2-y1;
+      const canvas=document.createElement("canvas");
+      canvas.width=512;canvas.height=512;
+      const ctx=canvas.getContext("2d");
+      const scale=Math.min(448/cropW,448/cropH);
+      const width=cropW*scale,height=cropH*scale;
+      ctx.drawImage(source,x1,y1,cropW,cropH,(512-width)/2,512-25-height,width,height);
+      try{normalizedImages[id]=canvas.toDataURL("image/png");resolve(normalizedImages[id]);}
+      catch(e){reject(e);}
+    };
+    source.onerror=()=>reject(new Error("Gebäudeabbildung fehlt: "+spec.file));
+    source.src=ASSET+spec.file;
+  });
+  return imagePromises[id];
+}
+function setBuildingImage(img,id){
+  makeNormalizedImage(id).then(src=>{img.src=src;});
+}
+function drawCategories(){
+  rail.innerHTML="";
+  categories.forEach(cat=>{
+    const button=document.createElement("button");
+    button.className="category"+(cat.id===activeCategory?" active":"");
+    button.type="button";
+    button.setAttribute("aria-label",cat.name+", "+counts[cat.id]+" Gebäude");
+    button.innerHTML='<span class="category-orb">'+cat.icon+'</span><span class="category-name">'+cat.name+'</span><small class="category-count-badge">'+counts[cat.id]+'</small>';
+    button.addEventListener("click",()=>selectCategory(cat.id));
+    rail.appendChild(button);
+  });
+  document.querySelector("#category-total").textContent=counts[activeCategory];
+}
+function costChip([resourceId,amount]){
+  const resource=resources[resourceId];
+  const missing=amount>resourcesAtHand[resourceId];
+  return '<div class="cost-chip'+(missing?" insufficient":"")+'" title="'+resource.name+": "+format(amount)+'"><img src="'+resource.icon+'" alt=""><b'+(missing?' style="color:var(--red)"':"")+'>'+format(amount)+'</b></div>';
+}
+function drawCards(){
+  const entries=catalog.filter(item=>item.category===activeCategory);
+  track.innerHTML="";
+  entries.forEach(item=>{
+    const card=document.createElement("article");
+    card.className="building-card "+(item.locked?"locked":"buildable");
+    const lockNote=item.locked?'<div class="lock-note">'+lockIcon()+item.locked+'</div>':"";
+    card.innerHTML='<div class="art-stage"><span class="plinth"></span><img class="art-image" data-building="'+item.art+'" alt="'+item.name+'"><span class="count-badge">'+item.count+'</span>'+lockNote+'</div><div class="building-name">'+item.name+'</div><div class="cost-row">'+item.costs.slice(0,2).map(costChip).join("")+'</div>';
+    setBuildingImage(card.querySelector(".art-image"),item.art);
+    if(item.locked){card.setAttribute("aria-label",item.name+", gesperrt, "+item.locked);}
+    else {card.setAttribute("aria-label",item.name+", Kosten "+item.costs.map(([r,n])=>resources[r].name+" "+format(n)).join(", "));}
+    card.addEventListener("click",()=>{
+      if(item.locked||item.costs.some(([resourceId,amount])=>amount>resourcesAtHand[resourceId])) return;
+      selectedBuilding=item;
+      document.body.dataset.screen="place";
+      drawTooltip(item);
+    });
+    track.appendChild(card);
+  });
+  drawDots(entries.length);
+  viewport.scrollLeft=0;
+}
+function drawDots(length){
+  const visible=viewport.clientWidth;
+  const maxScroll=Math.max(0,track.scrollWidth-visible);
+  const pageCount=Math.max(1,Math.ceil(track.scrollWidth/visible));
+  dots.innerHTML="";
+  for(let i=0;i<pageCount;i++){
+    const dot=document.createElement("button");dot.type="button";dot.className="page-dot"+(i===activePage?" active":"");dot.setAttribute("aria-label","Seite "+(i+1)+" von "+pageCount);
+    dot.addEventListener("click",()=>{viewport.scrollTo({left:pageCount===1?0:maxScroll*i/(pageCount-1),behavior:"smooth"});});
+    dots.appendChild(dot);
+  }
+}
+function selectCategory(id){
+  activeCategory=id;activePage=0;drawCategories();drawCards();
+}
+viewport.addEventListener("scroll",()=>{
+  const maxScroll=Math.max(0,viewport.scrollWidth-viewport.clientWidth);
+  const next=maxScroll===0?0:Math.round((viewport.scrollLeft/maxScroll)*(dots.children.length-1));
+  if(next!==activePage){activePage=next;const buttons=[...dots.children];buttons.forEach((dot,i)=>dot.classList.toggle("active",i===activePage));}
+});
+function drawTooltip(item=selectedBuilding){
+  document.getElementById("placement-name").textContent=item.name.toLocaleUpperCase("de-DE");
+  const art=document.querySelector(".ghost-art");
+  art.dataset.building=item.art;
+  art.alt="Halbtransparenter "+item.name+"-Bauplatz";
+  setBuildingImage(art,item.art);
+  const costs=item.allCosts||item.costs;
+  const costList=document.getElementById("tooltip-costs");
+  costList.style.gridTemplateColumns="repeat("+costs.length+",1fr)";
+  costList.innerHTML=costs.map(([id,amount])=>'<div class="tooltip-cost" title="'+resources[id].name+" "+format(amount)+'"><img src="'+resources[id].icon+'" alt=""><b>'+format(amount)+'</b></div>').join("");
+}
+document.querySelector(".action-orb.cancel").addEventListener("click",()=>{document.body.dataset.screen="shop";});
+document.querySelector(".action-orb.confirm").addEventListener("click",()=>{
+  const [current,maximum]=selectedBuilding.count.split("/").map(Number);
+  if(current<maximum) selectedBuilding.count=(current+1)+"/"+maximum;
+  document.body.dataset.screen="shop";
+  drawCards();
+});
+const screen=new URLSearchParams(location.search).get("screen")==="place"?"place":"shop";
+document.body.dataset.screen=screen;
+if(screen==="shop"){drawCategories();drawCards();}
+drawTooltip(selectedBuilding);
+document.querySelectorAll("[data-building]").forEach(img=>setBuildingImage(img,img.dataset.building));
+Promise.all([...document.querySelectorAll("[data-building]")].map(img=>makeNormalizedImage(img.dataset.building))).then(()=>document.fonts.ready).then(()=>{window.renderReady=true;}).catch(error=>{document.body.dataset.renderError=error.message;console.error(error);});
+</script>
+</body>
+</html>
