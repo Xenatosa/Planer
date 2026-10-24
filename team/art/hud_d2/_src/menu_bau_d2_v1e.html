@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>BAU-MENÜ D2 v1e · Obsidian &amp; Glut</title>
+<style>
+@font-face{font-family:Lilita;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/LilitaOne-Regular.ttf")}
+@font-face{font-family:Baloo;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
+:root{--cream:#f7ead2;--muted:#b9a988;--chip:#d6c7a6;--ember:#ff8a2a;--ember-hi:#ffc06a;--panel:#171311;--line:#7a664e;--green:#9be37a;--red:#ff6a5a;--brown:#2a1206}
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;overflow:hidden}
+body{position:relative;background:#0a0807;color:var(--cream);font-family:Baloo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
+button{font:inherit;color:inherit}
+.scene{position:absolute;z-index:0;inset:0;background:center/100% 100% no-repeat url("../vorschau_hud_d2_v7_3_lvl12.png")}
+.screen-scrim{position:absolute;z-index:5;inset:0;background:linear-gradient(to bottom,rgba(4,7,10,.659) 0 67.7%,rgba(4,7,10,.412) 100%);pointer-events:none}
+.build-panel{position:absolute;z-index:10;left:14px;top:304px;width:1052px;height:1360px;padding:13px;border:2px solid rgba(201,138,74,.86);border-radius:30px;background:linear-gradient(145deg,rgba(31,23,19,.99),rgba(12,10,9,.995) 58%,rgba(28,17,12,.99));box-shadow:0 16px 42px #000a,inset 0 1px 0 rgba(255,233,196,.2),inset 0 0 0 5px rgba(0,0,0,.38)}
+.build-panel:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,186,124,.19);border-radius:23px;pointer-events:none}
+.panel-header{position:relative;z-index:1;height:87px;display:grid;grid-template-columns:82px 1fr 82px;align-items:center;padding:0 9px}
+.panel-head-button{width:66px;height:66px;border:1px solid rgba(208,164,112,.63);border-radius:21px;background:linear-gradient(145deg,rgba(58,43,33,.96),rgba(22,17,15,.98));box-shadow:inset 0 1px 0 #fff3,0 6px 14px #0008;color:#f5dfbd;font:43px/1 Lilita;display:grid;place-items:center}
+.panel-head-button.close{justify-self:end;font-size:39px}
+.panel-title{text-align:center}
+.panel-title h2{margin:0;color:#ffe2b5;font:52px/.92 Lilita;letter-spacing:1.1px;text-shadow:0 4px 0 #28150c,0 0 18px rgba(255,145,57,.34)}
+.panel-title p{margin:6px 0 0;color:#c6b392;font:20px/1 Baloo;font-weight:800;letter-spacing:.3px}
+.category-rail{position:relative;z-index:1;height:91px;margin:2px 8px 12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 70px;gap:9px}
+.category{position:relative;border:1px solid rgba(207,163,110,.36);border-radius:20px;background:linear-gradient(150deg,rgba(34,27,23,.98),rgba(13,11,10,.98));box-shadow:0 6px 15px #0005,inset 0 1px 0 rgba(255,237,205,.08);display:flex;align-items:center;justify-content:center;gap:8px;color:#d6c6a8}
+.category.active{border:2px solid #ffc276;background:linear-gradient(155deg,rgba(113,55,27,.98),rgba(43,25,17,.99));box-shadow:0 0 0 3px rgba(255,135,44,.13),0 0 20px rgba(255,119,36,.18),inset 0 1px 0 #fff5;color:#fff0d5}
+.category span{font:25px/1 Lilita;white-space:nowrap}
+.category small{position:absolute;top:6px;right:8px;min-width:27px;height:22px;padding:1px 5px;border-radius:12px;background:rgba(0,0,0,.52);color:#d8c4a5;font:14px/20px Baloo;font-weight:800;text-align:center}
+.category .mini-mark{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(145deg,#573824,#1b1310);border:1px solid rgba(221,168,107,.42);color:#ffc174;font:20px/1 Lilita}
+.category.add{font:39px/1 Lilita;color:#ffca82;border-color:rgba(207,163,110,.5)}
+.building-list{position:relative;z-index:1;height:1138px;display:flex;flex-direction:column;gap:8px}
+.building-card{position:relative;height:278px;min-height:278px;padding:8px;border:1.5px solid rgba(137,108,77,.72);border-radius:18px;background:linear-gradient(105deg,rgba(48,37,29,.98),rgba(21,17,15,.99) 28%,rgba(16,13,12,.99));box-shadow:0 6px 12px #0007,inset 0 1px 0 rgba(255,245,225,.12),inset 0 0 0 3px rgba(0,0,0,.28);display:grid;grid-template-columns:230px 1fr;gap:14px;overflow:hidden}
+.building-card:before{content:"";position:absolute;left:240px;top:15px;bottom:15px;width:1px;background:linear-gradient(180deg,transparent,rgba(203,153,99,.34),transparent)}
+.art-well{position:relative;z-index:1;width:230px;height:260px;border-radius:14px;background:radial-gradient(ellipse at 52% 66%,rgba(220,112,43,.17),transparent 67%),linear-gradient(145deg,rgba(60,44,32,.82),rgba(17,14,12,.9));border:1px solid rgba(186,139,88,.25);display:grid;place-items:center}
+.art-well img{width:218px;height:248px;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(0,0,0,.66))}
+.card-copy{position:relative;z-index:1;min-width:0;padding:4px 5px 2px 1px;display:grid;grid-template-rows:50px 33px 20px 76px 48px;align-content:center}
+.card-head{display:flex;align-items:center;gap:12px;min-width:0}
+.building-name{max-width:470px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff0d4;font:37px/1 Lilita;text-shadow:0 2px 0 #100a07}
+.level-pill{flex:none;padding:6px 11px 4px;border:1px solid rgba(218,176,119,.45);border-radius:12px;background:rgba(9,8,7,.62);color:#f1d7ae;font:18px/1 Lilita;letter-spacing:.35px;white-space:nowrap}
+.building-type{color:#b8a487;font:19px/1 Baloo;font-weight:800;letter-spacing:.4px}
+.cost-label{color:#a99577;font:16px/1 Baloo;font-weight:800;letter-spacing:1.3px}
+.cost-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:center}
+.cost{height:66px;min-width:0;padding:3px 8px;display:flex;align-items:center;gap:8px;border:1px solid rgba(197,155,102,.24);border-radius:13px;background:linear-gradient(145deg,rgba(49,37,28,.75),rgba(19,15,13,.88))}
+.cost img{flex:none;width:43px;height:43px;object-fit:contain;filter:drop-shadow(0 2px 4px #0009)}
+.cost-copy{min-width:0;display:flex;flex-direction:column;line-height:.98}
+.cost-copy small{color:#a99577;font:14px/1 Baloo;font-weight:800;white-space:nowrap}
+.cost-copy b{margin-top:3px;color:#f3e7cf;font:27px/1 Lilita;white-space:nowrap}
+.cost.missing{border-color:rgba(255,106,90,.62);background:linear-gradient(145deg,rgba(88,34,29,.58),rgba(37,16,14,.88))}
+.cost.missing .cost-copy b{color:#ff7a6b;text-shadow:0 0 9px rgba(255,65,56,.24)}
+.card-foot{display:flex;align-items:center;gap:11px;min-width:0}
+.status{margin-left:auto;max-width:500px;min-height:36px;padding:7px 14px 5px;border:1px solid rgba(155,227,122,.42);border-radius:12px;background:rgba(67,98,43,.22);color:var(--green);font:18px/1 Lilita;letter-spacing:.4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.status.missing{border-color:rgba(255,106,90,.62);background:rgba(116,36,30,.28);color:#ff7a6b}
+.status.locked{border-color:rgba(159,143,117,.45);background:rgba(57,49,39,.35);color:#cfbea0}
+.status.limit{border-color:rgba(255,177,90,.53);background:rgba(111,60,27,.28);color:#ffc276}
+.status .lock{display:inline-block;vertical-align:-4px;width:17px;height:18px;margin-right:6px}
+.detail-dim{display:none;position:absolute;z-index:20;inset:0;background:rgba(0,0,0,.4)}
+.detail-sheet{display:none;position:absolute;z-index:30;left:14px;top:660px;width:1052px;height:988px;padding:19px 22px 20px;border:2px solid rgba(201,138,74,.92);border-radius:32px;background:linear-gradient(145deg,rgba(35,25,20,.995),rgba(13,11,10,.998) 58%,rgba(35,20,14,.995));box-shadow:0 24px 65px #000d,inset 0 1px 0 rgba(255,238,212,.25),inset 0 0 0 5px rgba(0,0,0,.4)}
+.detail-sheet:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,186,124,.2);border-radius:25px;pointer-events:none}
+.sheet-handle{position:absolute;z-index:1;left:50%;top:13px;transform:translateX(-50%);width:82px;height:7px;border-radius:7px;background:linear-gradient(90deg,#70452b,#d89b5f,#70452b);box-shadow:0 1px 8px #0009}
+.sheet-head{position:relative;z-index:1;height:62px;padding:3px 8px 0;display:flex;align-items:center;justify-content:space-between;color:#c5ad89;font:17px/1 Lilita;letter-spacing:1.1px}
+.sheet-head strong{color:#d7bd96}
+.sheet-close{width:57px;height:57px;border:1px solid rgba(225,177,116,.42);border-radius:18px;background:linear-gradient(145deg,rgba(62,43,31,.95),rgba(19,15,13,.98));box-shadow:inset 0 1px 0 #fff3,0 4px 10px #0008;color:#f5dfbd;font:39px/1 Lilita;padding:0;display:grid;place-items:center}
+.detail-hero{position:relative;z-index:1;height:395px;display:grid;grid-template-columns:382px 1fr;gap:25px;align-items:center;padding:2px 10px 0}
+.detail-art{width:374px;height:365px;position:relative;display:grid;place-items:center;border:2px solid rgba(228,164,94,.78);border-radius:28px;background:radial-gradient(ellipse at 50% 60%,rgba(234,118,42,.25),transparent 67%),linear-gradient(145deg,rgba(94,61,37,.75),rgba(18,15,14,.96));box-shadow:0 0 0 5px rgba(0,0,0,.5),0 0 25px rgba(219,114,45,.21),inset 0 1px 0 #fff5}
+.detail-art:before{content:"";position:absolute;inset:9px;border:1px solid rgba(225,164,98,.34);border-radius:20px}
+.detail-art img{position:relative;z-index:1;width:347px;height:344px;object-fit:contain;filter:drop-shadow(0 13px 13px #000b)}
+.detail-copy{height:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;padding:0 6px}
+.detail-eyebrow{color:#bf9b70;font:18px/1 Lilita;letter-spacing:1.4px}
+.detail-name{margin:10px 0 10px;color:#ffe0b0;font:48px/.98 Lilita;text-shadow:0 3px 0 #1e0e06,0 0 16px rgba(255,166,82,.18)}
+.detail-level{padding:7px 13px 5px;border:1px solid rgba(255,174,95,.5);border-radius:14px;background:rgba(113,63,32,.2);color:#ffcf8e;font:20px/1 Lilita;letter-spacing:.4px}
+.detail-desc{max-width:580px;margin:16px 0 0;color:#d6c6a9;font:24px/1.18 Baloo;font-weight:700}
+.stats{position:relative;z-index:1;height:150px;margin:9px 10px 0;padding:14px 16px;border:1px solid rgba(202,154,99,.4);border-radius:17px;background:linear-gradient(100deg,rgba(29,22,18,.97),rgba(40,26,19,.95),rgba(18,15,13,.97));display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat{min-width:0;padding:10px 16px;border:1px solid rgba(213,164,102,.25);border-radius:13px;background:rgba(9,8,7,.47);display:flex;flex-direction:column;justify-content:center}
+.stat small{color:#b59b76;font:16px/1 Baloo;font-weight:800;letter-spacing:1.2px}
+.stat strong{margin-top:7px;color:#f5e3c3;font:31px/1 Lilita;white-space:nowrap}
+.stat strong em{color:#8fe078;font-style:normal}
+.detail-costs{position:relative;z-index:1;height:145px;margin:12px 10px 0;padding:11px 16px 12px;border:1px solid rgba(202,154,99,.4);border-radius:17px;background:linear-gradient(110deg,rgba(29,22,18,.97),rgba(20,16,14,.98));}
+.detail-cost-head{display:flex;align-items:center;justify-content:space-between;color:#e4c99d;font:19px/1 Lilita;letter-spacing:1px}
+.detail-cost-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.detail-cost{height:70px;padding:5px 11px;display:flex;align-items:center;gap:8px;border:1px solid rgba(197,155,102,.26);border-radius:13px;background:linear-gradient(145deg,rgba(49,37,28,.75),rgba(19,15,13,.88))}
+.detail-cost img{width:51px;height:51px;object-fit:contain;filter:drop-shadow(0 2px 4px #0009)}
+.detail-cost div{display:flex;flex-direction:column;line-height:.95}
+.detail-cost small{color:#a99577;font:15px/1 Baloo;font-weight:800}
+.detail-cost b{margin-top:5px;color:#fff0d4;font:27px/1 Lilita}
+.detail-actions{position:relative;z-index:1;height:145px;margin:15px 10px 0;display:grid;grid-template-columns:1fr;align-items:center}
+.primary-action{height:133px;width:100%;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:13px}
+.primary-action{border:1.5px solid #ffe0ad;background:linear-gradient(180deg,#ffbd67 0%,#f6802d 48%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff7,inset 0 -4px 0 rgba(77,26,7,.35),0 8px 17px #0008,0 0 20px rgba(255,129,39,.22);color:#fff8e9;text-shadow:0 3px 0 #9a3b10}
+.primary-action b{font:42px/1 Lilita;letter-spacing:.6px}
+.primary-action .action-copy{display:flex;flex-direction:column;align-items:center}
+body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{display:block}
+/* v1e: v1c-Einzelspalte, kompaktere Zeilen und ein echter Scrollbereich. */
+.category-rail{height:77px;margin:2px 8px 8px}
+.category span{font-size:22px}
+.category .mini-mark{width:27px;height:27px;font-size:18px}
+.category.add{font-size:34px}
+.filter-row{position:relative;z-index:1;height:43px;margin:0 8px 9px;padding:0 12px;border:1px solid rgba(207,163,110,.31);border-radius:13px;background:linear-gradient(100deg,rgba(35,27,22,.92),rgba(14,12,11,.95));display:flex;align-items:center;justify-content:space-between;color:#cdbb9b}
+.filter-chip{height:30px;padding:4px 10px;border:1px solid rgba(255,177,90,.46);border-radius:9px;background:rgba(109,58,27,.27);color:#ffc276;font:15px/1 Lilita;letter-spacing:.2px;display:flex;align-items:center;gap:7px}
+.filter-chip i{font-style:normal;font-size:17px;line-height:1}
+.filter-count{display:flex;align-items:baseline;gap:5px;font:17px/1 Lilita;color:#ffe0b0}
+.filter-count small{font:14px/1 Baloo;font-weight:800;color:#b9a988}
+.building-list{height:1084px;gap:8px;padding-right:8px;overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(192,145,91,.58) rgba(7,6,5,.55)}
+.building-list::-webkit-scrollbar{width:6px}
+.building-list::-webkit-scrollbar-track{border-radius:6px;background:rgba(7,6,5,.5)}
+.building-list::-webkit-scrollbar-thumb{border:1px solid rgba(15,11,9,.7);border-radius:6px;background:rgba(192,145,91,.58)}
+.building-card{height:170px;min-height:170px;padding:7px;grid-template-columns:164px 1fr;gap:12px;border-radius:16px}
+.building-card:before{left:172px;top:12px;bottom:12px}
+.art-well{width:157px;height:154px;border-radius:12px}
+.art-well img{width:146px;height:146px;filter:drop-shadow(0 6px 5px rgba(0,0,0,.66))}
+.art-well img.small-art{transform:scale(1.55)}
+.art-well img.shore-art{transform:scale(1.68)}
+.card-copy{padding:0 5px;grid-template-rows:31px 21px 50px;row-gap:3px;align-content:center}
+.card-head{height:31px;gap:8px}
+.building-name{max-width:340px;font-size:27px}
+.level-pill{padding:5px 8px 3px;border-radius:9px;font-size:14px}
+.building-type{font-size:15px;letter-spacing:.25px}
+.cost-row{gap:6px}
+.cost{height:48px;padding:2px 6px;gap:6px;border-radius:10px}
+.cost img{width:33px;height:33px}
+.cost-copy small{font-size:10px}
+.cost-copy b{margin-top:2px;font-size:21px}
+.status{max-width:238px;min-height:27px;padding:5px 9px 3px;border-radius:9px;font-size:14px;letter-spacing:.15px}
+.status .lock{width:13px;height:14px;margin-right:3px;vertical-align:-3px}
+.building-list .building-card{flex:0 0 170px}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body data-screen="liste">
+<div class="scene" aria-hidden="true"></div>
+<div class="screen-scrim" aria-hidden="true"></div>
+<main class="build-panel">
+  <header class="panel-header">
+    <button class="panel-head-button" type="button" aria-label="Zurück">‹</button>
+    <div class="panel-title"><h2>BAU-MENÜ</h2><p>Gebäude &nbsp;·&nbsp; Bauplätze 2/3</p></div>
+    <button class="panel-head-button close" type="button" aria-label="Schließen">×</button>
+  </header>
+  <nav class="category-rail" aria-label="Gebäudekategorien">
+    <button class="category active" type="button" data-category="wirtschaft"><i class="mini-mark">⌂</i><span>Wirtschaft</span><small>9</small></button>
+    <button class="category" type="button" data-category="militaer"><i class="mini-mark">⚔</i><span>Militär</span><small>9</small></button>
+    <button class="category" type="button" data-category="forschung"><i class="mini-mark">✦</i><span>Forschung</span><small>3</small></button>
+    <button class="category" type="button" data-category="deko"><i class="mini-mark">❖</i><span>Deko</span><small>4</small></button>
+    <button class="category add" type="button" aria-label="Weitere Kategorien">+</button>
+  </nav>
+  <div class="filter-row" aria-label="Listenfilter und Anzahl">
+    <span class="filter-chip"><i>☷</i>Baubar zuerst</span>
+    <span class="filter-count"><b>7 von 9</b><small>Gebäude</small></span>
+  </div>
+  <section class="building-list" aria-label="Wirtschaftsgebäude"></section>
+</main>
+<div class="detail-dim" aria-hidden="true"></div>
+<section class="detail-sheet" role="dialog" aria-modal="true" aria-label="Holzfällerlager aufwerten">
+  <div class="sheet-handle" aria-hidden="true"></div>
+  <header class="sheet-head"><strong>WIRTSCHAFT&nbsp; · &nbsp;GEBÄUDEDETAIL</strong><button class="sheet-close" type="button" aria-label="Schließen">×</button></header>
+  <div class="detail-hero">
+    <div class="detail-art"><img src="../../gebaeude_neu_b/e1_bld_woodcutter_bp04.png" alt="Holzfällerlager"></div>
+    <div class="detail-copy">
+      <div class="detail-eyebrow">HOLZPRODUKTION</div>
+      <h1 class="detail-name">Holzfällerlager</h1>
+      <span class="detail-level">STUFE 2&nbsp; → &nbsp;STUFE 3</span>
+      <p class="detail-desc">Das Holzfällerlager versorgt dein Dorf mit Bauholz aus den nahen Wäldern.</p>
+    </div>
+  </div>
+  <section class="stats" aria-label="Werte nächste Stufe">
+    <div class="stat"><small>HOLZPRODUKTION / STD.</small><strong>420&nbsp; → &nbsp;<em>560</em></strong></div>
+    <div class="stat"><small>LAGERKAPAZITÄT</small><strong>8.000&nbsp; → &nbsp;<em>10.500</em></strong></div>
+  </section>
+  <section class="detail-costs" aria-label="Baukosten">
+    <div class="detail-cost-head">BAUKOSTEN</div>
+    <div class="detail-cost-row">
+      <div class="detail-cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/holz.png" alt=""><div><small>HOLZ</small><b>1.250</b></div></div>
+      <div class="detail-cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/stein.png" alt=""><div><small>STEIN</small><b>760</b></div></div>
+      <div class="detail-cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/nahrung.png" alt=""><div><small>NAHRUNG</small><b>500</b></div></div>
+      <div class="detail-cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/gold.png" alt=""><div><small>MUSCHELN</small><b>340</b></div></div>
+    </div>
+  </section>
+  <footer class="detail-actions">
+    <button class="primary-action" type="button"><span class="action-copy"><b>AUSBAUEN</b></span></button>
+  </footer>
+</section>
+<script>
+const params = new URLSearchParams(location.search);
+const screen = params.get("screen");
+const category = screen === "military_scroll" ? "militaer" : (params.get("category") || "wirtschaft");
+document.body.dataset.screen = screen === "detail" ? "detail" : "liste";
+const resourceRoot = "../../ui-kit/menus_v3/_src/inventar_v4_assets/";
+const buildings = {
+  wirtschaft: [
+    {name:"Holzfällerlager", art:"woodcutter", level:2, info:"HOLZPRODUKTION · 1/3 PLÄTZE", cost:[420,160,210,120], status:"BAUBAR", state:""},
+    {name:"Sammlerhütte", art:"gatherer", level:1, info:"BEEREN & WURZELN · NAHRUNG", cost:[580,240,180,90], status:"BAUBAR", state:""},
+    {name:"Wohnhütte", art:"hut", level:1, info:"FELLHÜTTE · 2/5 PLÄTZE", cost:[420,120,250,80], status:"BAUBAR", state:""},
+    {name:"Jagdlager", art:"hunter", level:1, info:"JAGD · FLEISCH & FELLE", cost:[760,280,240,110], status:"BAUBAR", state:""},
+    {name:"Muschelstrand", art:"shell_beach", level:1, info:"UFERFUND · MUSCHELN", cost:[680,120,250,130], status:"BAUBAR", state:"", shore:true},
+    {name:"Steinbruch", art:"quarry", level:1, info:"STEINPRODUKTION · 1/2 PLÄTZE", cost:[3100,2450,300,210], status:"ZU WENIG RESSOURCEN", state:"missing", short:[0,1]},
+    {name:"Vorratshöhle", art:"storage", level:1, info:"LAGER · HOLZ & NAHRUNG", cost:[900,420,560,160], status:"BAUBAR", state:""},
+    {name:"Tauschplatz", art:"trader", level:1, info:"TAUSCHHANDEL · MUSCHELN", cost:[1250,640,390,260], status:"HÄUPTLINGSFEUER STUFE 4", state:"locked"},
+    {name:"Häuptlingsfeuer", art:"center", level:1, info:"STAMMESZENTRUM · BEREITS ERRICHTET", cost:[0,0,0,0], status:"BEREITS ERRICHTET", state:"limit"}
+  ],
+  militaer: [
+    {name:"Kriegerlager", art:"barracks", level:1, info:"KEULE & SPEER · AUSBILDUNG", cost:[1100,520,450,180], status:"BAUBAR", state:""},
+    {name:"Palisadenwall", art:"palisade", level:1, info:"HOLZVERTEIDIGUNG · 0/8 SEGMENTE", cost:[850,180,220,80], status:"BAUBAR", state:""},
+    {name:"Speerwacht", art:"hunter", level:1, info:"WACHE · SPEERTRÄGER", cost:[920,260,310,100], status:"BAUBAR", state:""},
+    {name:"Schildplatz", art:"barracks", level:1, info:"KÄMPFERÜBUNG · SCHILD", cost:[1250,480,500,190], status:"BAUBAR", state:""},
+    {name:"Wachtfeuer", art:"center", level:1, info:"LAGERWACHE · FEUERSTELLE", cost:[780,360,240,120], status:"BAUBAR", state:""},
+    {name:"Knochenwall", art:"palisade", level:1, info:"LAGERGRENZE · 0/6 SEGMENTE", cost:[1380,720,340,150], status:"BAUBAR", state:""},
+    {name:"Jägerwacht", art:"hunter", level:1, info:"SPÄHER · LAGERSCHUTZ", cost:[980,320,280,130], status:"ZU WENIG RESSOURCEN", state:"missing", short:[0]},
+    {name:"Ahnenwacht", art:"shaman_hut", level:1, info:"SCHUTZSEGEN · SCHAMANE", cost:[1500,680,460,240], status:"BAUBAR", state:""},
+    {name:"Steinschleuderplatz", art:"quarry", level:1, info:"FERNKAMPF · STEINWERFER", cost:[1850,1280,520,260], status:"HÄUPTLINGSFEUER STUFE 4", state:"locked"}
+  ],
+  forschung: [
+    {name:"Schamanenhütte", art:"shaman_hut", level:1, info:"ZEICHEN DER AHNEN · WISSEN", cost:[920,360,280,140], status:"BAUBAR", state:""},
+    {name:"Zeichenhöhle", art:"storage", level:1, info:"HÖHLENMALEREI · WISSEN", cost:[1180,620,350,190], status:"BAUBAR", state:""},
+    {name:"Ahnenfeuer", art:"center", level:1, info:"STAMMESWEISHEIT · FORSCHUNG", cost:[1740,980,560,320], status:"HÄUPTLINGSFEUER STUFE 3", state:"locked"}
+  ],
+  deko: [
+    {name:"Muschelkreis", art:"shell_beach", level:1, info:"UFERDEKOR · MUSCHELN", cost:[240,80,120,45], status:"BAUBAR", state:"", shore:true},
+    {name:"Totemplatz", art:"shaman_hut", level:1, info:"AHNENZEICHEN · STAMM", cost:[460,220,180,90], status:"BAUBAR", state:""},
+    {name:"Fellhüttentor", art:"hut", level:1, info:"LAGEREINGANG · FELL & HOLZ", cost:[380,100,140,60], status:"BAUBAR", state:""},
+    {name:"Feuerstelle", art:"center", level:1, info:"LAGERFEUER · DEKOR", cost:[320,120,180,55], status:"BAUBAR", state:""}
+  ]
+};
+const names = {wirtschaft:"Wirtschaft",militaer:"Militär",forschung:"Forschung",deko:"Deko"};
+const list = document.querySelector(".building-list");
+list.setAttribute("aria-label", `${names[category]}sgebäude`);
+document.querySelectorAll(".category[data-category]").forEach(tab => tab.classList.toggle("active", tab.dataset.category === category));
+document.querySelector(".filter-count b").textContent = `${Math.min(7, buildings[category].length)} von ${buildings[category].length}`;
+list.innerHTML = buildings[category].map(item => {
+  const resource = ["holz.png","stein.png","nahrung.png","gold.png"];
+  const labels = ["HOLZ","STEIN","NAHRUNG","MUSCHELN"];
+  const costs = item.cost.map((value, i) => `<div class="cost${item.short?.includes(i) ? " missing" : ""}"><img src="${resourceRoot}${resource[i]}" alt=""><div class="cost-copy"><small>${labels[i]}</small><b>${value.toLocaleString("de-DE")}</b></div></div>`).join("");
+  const artClass = `${item.art === "center" ? "small-art" : ""}${item.art === "shell_beach" ? " shore-art" : ""}`;
+  const state = item.state ? ` ${item.state}` : "";
+  return `<article class="building-card"><div class="art-well"><img class="${artClass.trim()}" src="../../gebaeude_neu_b/e1_bld_${item.art}_bp01.png" alt="${item.name}"></div><div class="card-copy"><div class="card-head"><strong class="building-name">${item.name}</strong><span class="level-pill">STUFE ${item.level}</span><span class="status${state}">${item.status}</span></div><div class="building-type">${item.info}</div><div class="cost-row">${costs}</div></div></article>`;
+}).join("");
+if (screen === "military_scroll") list.scrollTop = 405;
+</script>
+</body>
+</html>
