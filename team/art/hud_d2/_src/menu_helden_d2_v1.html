@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Helden-Fenster D2 v1 · Obsidian &amp; Glut</title>
+<style>
+@font-face{font-family:Lilita;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/LilitaOne-Regular.ttf")}
+@font-face{font-family:Baloo;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
+:root{--cream:#f7ead2;--muted:#b9a988;--chip:#d6c7a6;--ember:#ff8a2a;--ember-hi:#ffc06a;--panel:#171311;--line:#7a664e;--green:#9be37a;--red:#ff6a5a;--brown:#2a1206;--ssr:#ff9d42;--sr:#4aa8ff;--r:#a9a296}
+*{box-sizing:border-box}
+html,body{width:1080px;height:1920px;margin:0;overflow:hidden}
+body{position:relative;background:#0a0807;color:var(--cream);font-family:Baloo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+.scene{position:absolute;z-index:0;inset:0;background:center/100% 100% no-repeat url("../vorschau_hud_d2_v7_3_lvl12.png")}
+.screen-scrim{position:absolute;z-index:5;inset:0;background:linear-gradient(to bottom,rgba(4,7,10,.659) 0 67.7%,rgba(4,7,10,.412) 100%);pointer-events:none}
+.window{position:absolute;z-index:10;left:14px;top:304px;width:1052px;height:1360px;padding:13px;border:2px solid rgba(201,138,74,.9);border-radius:30px;background:linear-gradient(145deg,rgba(31,23,19,.99),rgba(12,10,9,.997) 58%,rgba(28,17,12,.99));box-shadow:0 16px 42px #000b,inset 0 1px 0 rgba(255,233,196,.2),inset 0 0 0 5px rgba(0,0,0,.38);display:flex;flex-direction:column;overflow:hidden}
+.window:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,186,124,.19);border-radius:23px;pointer-events:none}
+.panel-header{position:relative;z-index:1;height:79px;min-height:79px;display:grid;grid-template-columns:76px 1fr 76px;align-items:center;padding:0 9px}
+.panel-head-button{width:60px;height:60px;border:1px solid rgba(208,164,112,.63);border-radius:19px;background:linear-gradient(145deg,rgba(58,43,33,.96),rgba(22,17,15,.98));box-shadow:inset 0 1px 0 #fff3,0 6px 14px #0008;color:#f5dfbd;font:40px/1 Lilita;display:grid;place-items:center;padding:0}
+.panel-head-button.close{justify-self:end;font-size:37px}
+.panel-title{text-align:center}
+.panel-title h1{margin:0;color:#ffe2b5;font:48px/.92 Lilita;letter-spacing:1.2px;text-shadow:0 4px 0 #28150c,0 0 18px rgba(255,145,57,.34)}
+.panel-title p{margin:6px 0 0;color:#c6b392;font:19px/1 Baloo;font-weight:800;letter-spacing:.3px}
+.roster-controls{position:relative;z-index:1;flex:none;margin:1px 8px 8px;display:flex;flex-direction:column;gap:7px}
+.search-field{height:51px;display:grid;grid-template-columns:48px 1fr 44px;align-items:center;padding:0 11px 0 16px;border:1px solid rgba(207,163,110,.42);border-radius:14px;background:linear-gradient(100deg,rgba(11,9,8,.94),rgba(24,18,15,.96));box-shadow:inset 0 1px 0 rgba(255,237,205,.06)}
+.search-field svg{width:25px;height:25px;stroke:#d2b68f;fill:none;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
+.search-field input{min-width:0;height:100%;border:0;outline:0;background:transparent;color:#f3e7cf;font:22px/1 Baloo;font-weight:700}
+.search-field input::placeholder{color:#a99678;opacity:1}
+.clear-search{width:34px;height:34px;border:1px solid rgba(207,163,110,.36);border-radius:10px;background:rgba(28,21,17,.8);color:#c9ad87;font:23px/1 Lilita;display:grid;place-items:center;padding:0}
+.rarity-filters{height:43px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rarity-filter{height:43px;border:1px solid rgba(207,163,110,.38);border-radius:12px;background:linear-gradient(145deg,rgba(33,26,22,.96),rgba(14,12,11,.98));color:#d3c3a7;font:20px/1 Lilita;letter-spacing:.4px;box-shadow:0 4px 11px #0005,inset 0 1px 0 rgba(255,237,205,.05)}
+.rarity-filter.active{border:1.5px solid #ffc276;background:linear-gradient(155deg,rgba(113,55,27,.97),rgba(43,25,17,.99));box-shadow:0 0 0 2px rgba(255,135,44,.13),0 0 17px rgba(255,119,36,.15),inset 0 1px 0 #fff4;color:#fff0d5}
+.class-filters{height:40px;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden}
+.class-filter{height:36px;padding:0 14px;border:1px solid rgba(207,163,110,.39);border-radius:12px;background:linear-gradient(145deg,rgba(32,25,21,.96),rgba(14,12,11,.98));color:#d6c6a8;font:17px/1 Baloo;font-weight:800;letter-spacing:.15px}
+.class-filter.active{border-color:#ffc276;background:linear-gradient(155deg,rgba(113,55,27,.88),rgba(43,25,17,.94));color:#ffdda9;box-shadow:0 0 12px rgba(255,119,36,.13)}
+.sort-row{height:35px;display:flex;align-items:center;gap:8px;color:#b9a988}
+.sort-label{margin-right:2px;font:14px/1 Baloo;font-weight:800;letter-spacing:1px;color:#9f8a6c}
+.sort-option{height:31px;padding:0 12px;border:1px solid rgba(207,163,110,.28);border-radius:10px;background:rgba(15,12,10,.62);color:#cbbb9d;font:16px/1 Lilita}
+.sort-option.active{border-color:rgba(255,177,90,.58);background:rgba(109,58,27,.3);color:#ffc276}
+.roster-count{margin-left:auto;color:#ffe0b0;font:22px/1 Lilita;white-space:nowrap}
+.roster-count small{color:#b9a988;font:15px/1 Baloo;font-weight:800;margin-left:4px}
+.roster-list{position:relative;z-index:1;min-height:0;flex:1;overflow-x:hidden;overflow-y:auto;padding:0 8px 220px 0;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:rgba(192,145,91,.58) rgba(7,6,5,.55)}
+.roster-list::-webkit-scrollbar{width:6px}
+.roster-list::-webkit-scrollbar-track{border-radius:6px;background:rgba(7,6,5,.5)}
+.roster-list::-webkit-scrollbar-thumb{border:1px solid rgba(15,11,9,.7);border-radius:6px;background:rgba(192,145,91,.58)}
+.hero-row{position:relative;flex:0 0 148px;min-height:148px;padding:8px 12px;border:1.5px solid rgba(137,108,77,.72);border-radius:16px;background:linear-gradient(105deg,rgba(48,37,29,.98),rgba(21,17,15,.99) 28%,rgba(16,13,12,.99));box-shadow:0 6px 12px #0007,inset 0 1px 0 rgba(255,245,225,.12),inset 0 0 0 3px rgba(0,0,0,.28);display:grid;grid-template-columns:128px minmax(0,1fr) 208px;gap:12px;overflow:hidden;text-align:left}
+.hero-row:before{content:"";position:absolute;left:145px;top:12px;bottom:12px;width:1px;background:linear-gradient(180deg,transparent,rgba(203,153,99,.34),transparent)}
+.hero-row.locked{filter:saturate(.55) brightness(.78);background:linear-gradient(105deg,rgba(36,31,27,.9),rgba(18,16,14,.97) 32%,rgba(14,12,11,.98));border-color:rgba(122,102,78,.7)}
+.portrait-frame{position:relative;z-index:1;width:120px;height:128px;align-self:center;border:3px solid var(--rarity-color);border-radius:16px;background:linear-gradient(145deg,rgba(56,42,32,.94),rgba(11,9,8,.98));box-shadow:0 0 0 3px rgba(0,0,0,.52),0 0 13px color-mix(in srgb,var(--rarity-color) 22%,transparent),inset 0 1px 0 #fff3;display:grid;place-items:center;overflow:visible}
+.portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 24%;border-radius:12px;filter:drop-shadow(0 5px 5px #0009)}
+.rarity-ssr{--rarity-color:#ff9d42}.rarity-sr{--rarity-color:#4aa8ff}.rarity-r{--rarity-color:#a9a296}
+.rarity-tag{position:absolute;right:7px;top:7px;min-width:42px;height:25px;padding:3px 8px 2px;border:1px solid color-mix(in srgb,var(--rarity-color) 72%,#231914);border-radius:8px;background:rgba(9,8,7,.88);color:var(--rarity-color);font:16px/1 Lilita;text-align:center;letter-spacing:.4px}
+.upgrade-dot{position:absolute;right:-7px;top:-7px;width:18px;height:18px;border:3px solid #28150e;border-radius:50%;background:#f04437;box-shadow:0 0 8px rgba(255,65,55,.38)}
+.hero-row-copy{position:relative;z-index:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:1px 2px}
+.hero-row-heading{display:flex;align-items:center;gap:9px;min-width:0}
+.hero-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff0d4;font:30px/1 Lilita;text-shadow:0 2px 0 #100a07}
+.rarity-inline{flex:none;padding:4px 8px 3px;border:1px solid color-mix(in srgb,var(--rarity-color) 63%,#231914);border-radius:8px;background:rgba(8,7,6,.72);color:var(--rarity-color);font:15px/1 Lilita;letter-spacing:.5px}
+.hero-class-line{display:flex;align-items:center;gap:7px;color:#d1c0a2;font:18px/1 Baloo;font-weight:800}
+.class-icon{width:26px;height:26px;flex:none;color:#ffbd76;filter:drop-shadow(0 2px 2px #0008)}
+.hero-row-meta{display:flex;align-items:center;gap:13px;color:#c3b293;font:16px/1 Lilita;white-space:nowrap}
+.stars{color:#ffb15a;letter-spacing:1px;font:17px/1 Lilita}
+.stars .empty{color:#716149}
+.hero-fragments{height:24px;display:flex;align-items:center;gap:8px;color:#d6c7a6;font:16px/1 Baloo;font-weight:800;white-space:nowrap}
+.fragment-track{width:128px;height:9px;border:1px solid rgba(180,144,97,.46);border-radius:8px;background:#0b0908;overflow:hidden}
+.fragment-fill{height:100%;width:0;background:linear-gradient(90deg,#b57bff,#e7d4ff);box-shadow:0 0 8px rgba(181,123,255,.34)}
+.hero-row-stats{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:8px;text-align:right}
+.power-label{color:#a99577;font:13px/1 Baloo;font-weight:800;letter-spacing:1px}
+.power-value{color:#ffdda9;font:34px/1 Lilita;text-shadow:0 2px 0 #1b0e07}
+.level-pill{padding:6px 10px 4px;border:1px solid rgba(218,176,119,.42);border-radius:10px;background:rgba(9,8,7,.62);color:#f1d7ae;font:16px/1 Lilita;letter-spacing:.2px;white-space:nowrap}
+.no-results{height:120px;border:1px solid rgba(137,108,77,.52);border-radius:14px;background:rgba(16,13,12,.8);display:grid;place-items:center;color:#c3b293;font:22px/1 Baloo;font-weight:800}
+
+.detail-window{display:none}
+body[data-screen="detail"] .list-window{display:none}
+body[data-screen="detail"] .detail-window{display:flex}
+.detail-header .panel-title h1{font-size:40px}
+.detail-content{position:relative;z-index:1;flex:1;min-height:0;padding:1px 5px 0;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.detail-overview{height:292px;flex:none;display:grid;grid-template-columns:386px minmax(0,1fr);gap:20px;align-items:center;padding:8px 10px;border:1px solid rgba(202,154,99,.4);border-radius:20px;background:linear-gradient(110deg,rgba(29,22,18,.97),rgba(20,16,14,.98));box-shadow:inset 0 1px 0 rgba(255,245,225,.08)}
+.detail-stage{position:relative;width:360px;height:268px;display:grid;place-items:center;border:1px solid rgba(186,139,88,.28);border-radius:16px;background:linear-gradient(145deg,rgba(48,37,29,.7),rgba(14,12,11,.82));overflow:hidden}
+.detail-stage:after{content:"";position:absolute;left:54px;right:54px;bottom:12px;height:22px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.74),rgba(0,0,0,0) 70%)}
+.detail-stage img{position:relative;z-index:1;width:334px;height:252px;object-fit:contain;filter:drop-shadow(0 11px 9px rgba(0,0,0,.62))}
+.detail-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:0 12px 0 0}
+.detail-kicker{color:#bf9b70;font:17px/1 Lilita;letter-spacing:1.5px}
+.detail-name{margin:9px 0 10px;color:#ffe0b0;font:47px/.98 Lilita;text-shadow:0 3px 0 #1e0e06,0 0 16px rgba(255,166,82,.18)}
+.detail-chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 10px}
+.detail-chip{min-height:36px;padding:7px 12px 5px;border:1px solid rgba(207,163,110,.45);border-radius:13px;background:rgba(9,8,7,.54);color:#e0cfaf;font:17px/1 Baloo;font-weight:800;white-space:nowrap}
+.detail-chip.rarity-ssr{border-color:#ffaf5c;background:linear-gradient(155deg,rgba(113,55,27,.82),rgba(43,25,17,.94));color:#ffd9a8}
+.detail-power{height:52px;min-width:216px;padding:8px 14px;border:1px solid rgba(255,177,90,.42);border-radius:13px;background:linear-gradient(100deg,rgba(113,55,27,.35),rgba(16,12,10,.8));display:flex;align-items:center;justify-content:space-between;gap:16px}
+.detail-power span{color:#b9a988;font:14px/1 Baloo;font-weight:800;letter-spacing:1.5px}
+.detail-power strong{color:#ffd9a8;font:31px/1 Lilita}
+.section-panel{position:relative;flex:none;padding:11px 14px;border:1px solid rgba(202,154,99,.38);border-radius:17px;background:linear-gradient(100deg,rgba(29,22,18,.97),rgba(20,16,14,.98));box-shadow:inset 0 1px 0 rgba(255,245,225,.04)}
+.section-heading{height:25px;margin:0 0 7px;color:#d8bd91;font:18px/1 Lilita;letter-spacing:1.2px}
+.stats-panel{height:104px}
+.stats-grid{height:50px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat-card{min-width:0;padding:4px 14px;border:1px solid rgba(213,164,102,.24);border-radius:11px;background:rgba(9,8,7,.46);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stat-card span{color:#b59b76;font:16px/1 Baloo;font-weight:800;letter-spacing:.4px}
+.stat-card strong{color:#f5e3c3;font:27px/1 Lilita;white-space:nowrap}
+.skills-panel{height:212px}
+.skill-list{display:flex;flex-direction:column;gap:7px}
+.skill-card{min-height:78px;padding:7px 10px;border:1px solid rgba(213,164,102,.25);border-radius:12px;background:linear-gradient(105deg,rgba(42,31,24,.86),rgba(12,10,9,.74));display:grid;grid-template-columns:46px minmax(0,1fr);gap:11px;align-items:center}
+.skill-emblem{width:43px;height:43px;border:1px solid rgba(223,168,104,.45);border-radius:12px;background:linear-gradient(145deg,rgba(75,48,31,.85),rgba(17,13,11,.95));display:grid;place-items:center;color:#ffbd76}
+.skill-emblem svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.skill-copy{min-width:0;display:grid;grid-template-columns:128px minmax(0,1fr);gap:10px;align-items:center}
+.skill-copy>span{min-width:0}
+.skill-type{color:#a99577;font:13px/1 Baloo;font-weight:800;letter-spacing:1px}
+.skill-name{display:block;color:#ffe4bb;font:20px/1 Lilita;white-space:nowrap}
+.skill-description{min-width:0;color:#d6c6a9;font:19px/1.12 Baloo;font-weight:700}
+.gear-panel{height:372px;padding:10px 14px}
+.gear-panel .section-heading{margin-bottom:4px}
+.gear-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,1fr);column-gap:8px;row-gap:3px;height:321px;justify-items:center}
+.gear-entry{width:140px;height:158px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.gear-slot{position:relative;width:140px;height:136px;flex:none;border:2px solid #8a7656;border-radius:22px;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.065),rgba(0,0,0,.64));box-shadow:inset 0 0 20px rgba(0,0,0,.78),inset 0 0 0 5px rgba(0,0,0,.43);display:grid;place-items:center}
+.gear-slot img{width:83px;height:83px;object-fit:contain;opacity:.38;filter:drop-shadow(0 4px 4px #0008)}
+.gear-plus{position:absolute;right:6px;bottom:5px;width:32px;height:32px;border:1px solid rgba(255,177,90,.56);border-radius:10px;background:linear-gradient(145deg,#573824,#1b1310);color:#ffd27a;font:25px/1 Lilita;display:grid;place-items:center}
+.gear-label{width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#e6d8b8;font:18px/1 Lilita;text-shadow:0 2px 0 #000}
+.detail-actions{height:120px;flex:none;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+.detail-action{height:120px;border-radius:22px;display:flex;align-items:center;justify-content:center;gap:11px;font:34px/1 Lilita;letter-spacing:.7px}
+.detail-action.primary{border:1.5px solid #ffe0ad;background:linear-gradient(180deg,#ffbd67 0%,#f6802d 48%,#c24a19 100%);box-shadow:inset 0 2px 0 #fff7,inset 0 -4px 0 rgba(77,26,7,.35),0 8px 17px #0008,0 0 20px rgba(255,129,39,.22);color:#fff8e9;text-shadow:0 3px 0 #9a3b10}
+.detail-action.secondary{border:1.5px solid rgba(211,161,103,.58);background:linear-gradient(145deg,rgba(61,45,34,.98),rgba(22,17,15,.99));box-shadow:inset 0 2px 0 rgba(255,236,204,.12),0 6px 14px #0008;color:#f3e7cf;text-shadow:0 2px 0 #000}
+.detail-action:disabled{filter:grayscale(.8) brightness(.72)}
+.button-mark{width:26px;height:26px;display:grid;place-items:center;color:#fff0d5}
+.button-mark svg{width:25px;height:25px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body data-screen="list">
+<div class="scene" aria-hidden="true"></div>
+<div class="screen-scrim" aria-hidden="true"></div>
+<main class="window list-window" aria-label="Heldenliste">
+  <header class="panel-header">
+    <button class="panel-head-button" type="button" aria-label="Zurück">‹</button>
+    <div class="panel-title"><h1>HELDEN</h1><p>Roster &nbsp;·&nbsp; Steinzeit</p></div>
+    <button class="panel-head-button close" type="button" aria-label="Schließen">×</button>
+  </header>
+  <section class="roster-controls" aria-label="Helden suchen und filtern">
+    <label class="search-field"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13.5" cy="13.5" r="8.5"></circle><path d="m20 20 7 7"></path></svg><input id="hero-search" type="search" placeholder="Heldenname suchen…" autocomplete="off"><button class="clear-search" type="button" aria-label="Suche leeren">×</button></label>
+    <div class="rarity-filters" role="group" aria-label="Seltenheit">
+      <button class="rarity-filter active" data-rarity="all">Alle</button><button class="rarity-filter" data-rarity="SSR">SSR</button><button class="rarity-filter" data-rarity="SR">SR</button><button class="rarity-filter" data-rarity="R">R</button>
+    </div>
+    <div class="class-filters" role="group" aria-label="Klasse">
+      <button class="class-filter active" data-class="all">Alle Klassen</button><button class="class-filter" data-class="warrior">Krieger</button><button class="class-filter" data-class="marksman">Schütze</button><button class="class-filter" data-class="healer">Heiler</button><button class="class-filter" data-class="tactician">Taktiker</button><button class="class-filter" data-class="assassin">Assassine</button><button class="class-filter" data-class="builder">Baumeister</button>
+    </div>
+    <div class="sort-row" role="group" aria-label="Sortierung">
+      <span class="sort-label">SORTIEREN</span><button class="sort-option active" data-sort="power">Stärke</button><button class="sort-option" data-sort="level">Stufe</button><button class="sort-option" data-sort="rarity">Seltenheit</button>
+      <span id="roster-count" class="roster-count">12 von 80<small>Helden</small></span>
+    </div>
+  </section>
+  <section id="roster-list" class="roster-list" aria-label="Helden, Zeile für Zeile"></section>
+</main>
+
+<main class="window detail-window" aria-label="Helden-Detail">
+  <header class="panel-header detail-header">
+    <button id="detail-back" class="panel-head-button" type="button" aria-label="Zurück zur Heldenliste">‹</button>
+    <div class="panel-title"><h1>HELDEN-DETAIL</h1><p>Steinzeit &nbsp;·&nbsp; Heldendaten</p></div>
+    <button id="detail-close" class="panel-head-button close" type="button" aria-label="Schließen">×</button>
+  </header>
+  <div id="detail-content" class="detail-content"></div>
+</main>
+<script>
+const ASSET = "../../ui-kit/menus_v3/_src/inventar_v4_assets/";
+const CLASS_NAMES = {builder:"Baumeister",warrior:"Krieger",healer:"Heiler",marksman:"Schütze",assassin:"Assassine",tactician:"Taktiker"};
+const RARITY_ORDER = {SSR:0,SR:1,R:2};
+const HEROES = [
+  {id:"ruka",name:"Ruka Wolfsherz",rarity:"SSR",klass:"assassin",power:280,art:"hero_ruka_portrait_alpha.png",owned:true,level:1,stars:1,upgrade:true,hp:800,atk:92,def:24,ultimate:"Rudeljagd",ultimateText:"Sprung auf die Hinterreihe, 250 % ATK, 2 s Betäubung",passive:"Rudelinstinkt",passiveText:"Kavallerie +15 % Tempo, +10 % ATK",fullbody:"hero_ruka_fullbody_alpha_v4.png"},
+  {id:"nara",name:"Nara Mammutruferin",rarity:"SSR",klass:"warrior",power:270,art:"hero_nara_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:1145,atk:54,def:48,ultimate:"Mammutruf",ultimateText:"Mammut-Ansturm: 200 % ATK an der gegnerischen Frontreihe, 1,5 s Rückstoß",passive:"Herdenführerin",passiveText:"Infanterie +12 % HP, +5 % ATK"},
+  {id:"tala",name:"Tala Schleuderauge",rarity:"SR",klass:"marksman",power:244,art:"hero_tala_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:585,atk:83,def:20,ultimate:"Steinhagel",ultimateText:"Flächenschaden 180 % ATK in Zielzone, Ziele 3 s -20 % Tempo",passive:"Adlerauge",passiveText:"Fernkämpfer +1 Reichweite"},
+  {id:"gorm",name:"Gorm Felsenfaust",rarity:"R",klass:"warrior",power:222,art:"hero_gorm_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:945,atk:43,def:42,ultimate:"Felsbrocken-Wall",ultimateText:"Spott 4 s; Frontreihe erleidet -30 % Schaden",passive:"Dickschädel",passiveText:"Geführte Infanterie +10 % HP"},
+  {id:"olm",name:"Olm Speerwacht",rarity:"R",klass:"warrior",power:220,art:"hero_olm_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:855,atk:45,def:44,ultimate:"Speerwand",ultimateText:"Speerträger 5 s +40 % DEF, +25 % Schaden gegen Kavallerie",passive:"Wachsam",passiveText:"Speer +10 % ATK gegen Kavallerie"},
+  {id:"bako",name:"Bako Hüttenbauer",rarity:"R",klass:"builder",power:206,art:"hero_bako_portrait_alpha.png",owned:true,level:1,stars:1,upgrade:true,hp:720,atk:52,def:30,ultimate:"Brecheisen",ultimateText:"Nächster Felswurf seines Blocks: +100 % Gebäudeschaden und 150 % ATK Flächenschaden",passive:"Baumeister",passiveText:"Als Gouverneur zusätzlich -5 % Baukosten; im Kampf Belagerung +10 % DEF"},
+  {id:"kiko",name:"Kiko Funkenflug",rarity:"SR",klass:"tactician",power:190,art:"hero_kiko_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:725,atk:44,def:29,ultimate:"Funkentanz",ultimateText:"Alle Verbündeten +20 % ATK für 6 s",passive:"Glutfunke",passiveText:"Unterstützung +10 % Tempo; Kampfstart: Ult-Abklingzeit aller Helden -10 %"},
+  {id:"mira",name:"Mira Glutlied",rarity:"SR",klass:"healer",power:158,art:"hero_mira_portrait_alpha.png",owned:false,level:1,stars:1,fragments:0,hp:680,atk:33,def:24,ultimate:"Ahnenfeuer",ultimateText:"Heilt alle Verbündeten um 12 % max. HP (+5 % je Skillstufe) und entfernt 1 negativen Effekt",passive:"Kräuterkunde",passiveText:"Schamanen (Unterstützung) heilen +10 %"}
+];
+const CLASS_ICONS = {
+  warrior:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 25 24 8M18 7l7-2-2 7M5 18l9 9M7 14l11 11M4 11l4-4 6 6-4 4z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  marksman:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 4c12 4 12 20 0 24M23 4 9 16l14 12M23 16h5m-3-3 3 3-3 3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  healer:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4v24M4 16h24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
+  tactician:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="m19 13-2 7-4 2 2-7 4-2ZM16 4v4M28 16h-4M16 28v-4M4 16h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+  assassin:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="m7 5 5 2 5 12-4 4L7 5ZM25 5l-5 2-5 12 4 4 6-18ZM10 24l-4 4M22 24l4 4" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  builder:'<svg class="class-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="m6 25 12-12M17 5l4 4 5-5 2 2-5 5 4 4-4 4-4-4-4 4-5-5 4-4-4-4zM4 27l2 2 3-3-2-2z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+const RARITY_CLASS = {SSR:"rarity-ssr",SR:"rarity-sr",R:"rarity-r"};
+let rarityFilter="all", classFilter="all", sortBy="power", searchText="", selectedHero=HEROES[0];
+const listNode=document.getElementById("roster-list");
+const countNode=document.getElementById("roster-count");
+function starMarkup(count){return `<span class="stars">${"★".repeat(count||0)}<span class="empty">${"☆".repeat(5-(count||0))}</span></span>`}
+function createHeroRow(hero){
+  const row=document.createElement("button");
+  row.type="button";row.className=`hero-row ${hero.owned?"owned":"locked"} ${RARITY_CLASS[hero.rarity]}`;
+  row.setAttribute("aria-label",`${hero.name}, ${hero.rarity}, ${CLASS_NAMES[hero.klass]}`);
+  const portrait=document.createElement("span");portrait.className=`portrait-frame ${RARITY_CLASS[hero.rarity]}`;
+  portrait.innerHTML=`<img src="../../heroes/${hero.art}" alt=""><span class="rarity-tag">${hero.rarity}</span>${hero.upgrade?'<span class="upgrade-dot" aria-label="Aufwertbar"></span>':""}`;
+  const copy=document.createElement("span");copy.className="hero-row-copy";
+  const state=hero.owned?`<span class="hero-row-meta"><span>ST. ${hero.level}</span>${starMarkup(hero.stars)}<span>MACHT ${hero.power}</span></span>`:`<span class="hero-row-meta"><span>ST. ${hero.level}</span>${starMarkup(hero.stars)}</span><span class="hero-fragments"><span class="fragment-track"><span class="fragment-fill"></span></span><span>${hero.fragments}/40 Fragmente</span></span>`;
+  copy.innerHTML=`<span class="hero-row-heading"><span class="hero-name">${hero.name}</span><span class="rarity-inline ${RARITY_CLASS[hero.rarity]}">${hero.rarity}</span></span><span class="hero-class-line">${CLASS_ICONS[hero.klass]}<span>${CLASS_NAMES[hero.klass]}</span></span>${state}`;
+  const stats=document.createElement("span");stats.className="hero-row-stats";
+  stats.innerHTML=`<span class="power-label">KAMPFKRAFT</span><span class="power-value">${hero.power}</span><span class="level-pill">${hero.owned?`STUFE ${hero.level}`:"FRAGMENTE"}</span>`;
+  row.append(portrait,copy,stats);row.addEventListener("click",()=>openDetail(hero));return row;
+}
+function visibleHeroes(){
+  const filtered=HEROES.filter(h=>(rarityFilter==="all"||h.rarity===rarityFilter)&&(classFilter==="all"||h.klass===classFilter)&&h.name.toLocaleLowerCase("de").includes(searchText.toLocaleLowerCase("de")));
+  const sorters={power:(a,b)=>b.power-a.power,level:(a,b)=>(b.level||0)-(a.level||0)||b.power-a.power,rarity:(a,b)=>RARITY_ORDER[a.rarity]-RARITY_ORDER[b.rarity]||b.power-a.power};
+  return filtered.sort(sorters[sortBy]);
+}
+function renderRoster(initial=false){
+  const heroes=visibleHeroes();listNode.replaceChildren();
+  if(!heroes.length){const empty=document.createElement("div");empty.className="no-results";empty.textContent="Keine Helden gefunden";listNode.append(empty)}
+  heroes.forEach(h=>listNode.append(createHeroRow(h)));
+  if(!initial)countNode.innerHTML=`${heroes.length} von 80<small>Helden</small>`;
+}
+function skillIcon(kind){
+  return kind==="ultimate"?'<svg viewBox="0 0 32 32" aria-hidden="true"><path d="m18 3-10 15h8l-2 11 11-16h-8l1-10Z"/></svg>':'<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 27s-11-6-11-14a6 6 0 0 1 11-3 6 6 0 0 1 11 3c0 8-11 14-11 14Z"/><path d="m10 16 4 3 3-5 3 2"/></svg>';
+}
+function renderDetail(hero){
+  const art=hero.fullbody||hero.art;
+  const artClass=hero.fullbody?"fullbody":"portrait-detail";
+  const details=document.getElementById("detail-content");
+  const gear=[
+    ["Helm","eq_helm.png"],["Schultern","eq_schultern.png"],["Waffe","eq_waffe.png"],["Rüstung","eq_ruestung.png"],["Beine","eq_beine.png"],
+    ["Schuhe","eq_schuhe.png"],["Ring I","eq_ring.png"],["Ring II","eq_ring.png"],["Artefakt I","eq_artefakt1.png"],["Artefakt II","eq_artefakt1.png"]
+  ];
+  details.innerHTML=`
+    <section class="detail-overview" aria-label="${hero.name}">
+      <div class="detail-stage"><img class="${artClass}" src="../../heroes/${art}" alt="${hero.name}"></div>
+      <div class="detail-copy"><span class="detail-kicker">EPOCHE I &nbsp;·&nbsp; STEINZEIT</span><h2 class="detail-name">${hero.name}</h2>
+        <div class="detail-chips"><span class="detail-chip ${RARITY_CLASS[hero.rarity]}">${hero.rarity}</span><span class="detail-chip">${CLASS_NAMES[hero.klass]}</span><span class="detail-chip">St. ${hero.level||1}/20</span>${starMarkup(hero.stars||1)}</div>
+        <div class="detail-power"><span>KAMPFKRAFT</span><strong>${hero.power}</strong></div>
+      </div>
+    </section>
+    <section class="section-panel stats-panel" aria-label="Werte"><h3 class="section-heading">WERTE</h3><div class="stats-grid">
+      <div class="stat-card"><span>LP</span><strong>${hero.hp.toLocaleString("de-DE")}</strong></div><div class="stat-card"><span>ATK</span><strong>${hero.atk}</strong></div><div class="stat-card"><span>DEF</span><strong>${hero.def}</strong></div>
+    </div></section>
+    <section class="section-panel skills-panel" aria-label="Fähigkeiten"><h3 class="section-heading">FÄHIGKEITEN</h3><div class="skill-list">
+      <div class="skill-card"><span class="skill-emblem">${skillIcon("ultimate")}</span><div class="skill-copy"><span><span class="skill-type">ULTIMATE</span><span class="skill-name">${hero.ultimate}</span></span><span class="skill-description">${hero.ultimateText}</span></div></div>
+      <div class="skill-card"><span class="skill-emblem">${skillIcon("passive")}</span><div class="skill-copy"><span><span class="skill-type">PASSIV</span><span class="skill-name">${hero.passive}</span></span><span class="skill-description">${hero.passiveText}</span></div></div>
+    </div></section>
+    <section class="section-panel gear-panel" aria-label="Ausrüstungsplätze"><h3 class="section-heading">AUSRÜSTUNGSPLÄTZE</h3><div class="gear-grid">${gear.map(([label,icon])=>`<div class="gear-entry"><div class="gear-slot"><img src="${ASSET}${icon}" alt=""><span class="gear-plus">+</span></div><span class="gear-label">${label}</span></div>`).join("")}</div></section>
+    <footer class="detail-actions"><button class="detail-action primary" type="button" ${hero.owned?"":"disabled"}><span class="button-mark"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 4v20M4 14h20M7 7l14 14M21 7 7 21"/></svg></span>AUFWERTEN</button><button class="detail-action secondary" type="button" ${hero.owned?"":"disabled"}><span class="button-mark"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M4 6h20v16H4zM8 10h12M8 14h7M8 18h5"/></svg></span>AUSRÜSTEN</button></footer>`;
+}
+function openDetail(hero){selectedHero=hero;renderDetail(hero);document.body.dataset.screen="detail"}
+function openList(){document.body.dataset.screen="list"}
+document.querySelectorAll(".rarity-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".rarity-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");rarityFilter=b.dataset.rarity;renderRoster()}));
+document.querySelectorAll(".class-filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".class-filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");classFilter=b.dataset.class;renderRoster()}));
+document.querySelectorAll(".sort-option").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".sort-option").forEach(x=>x.classList.remove("active"));b.classList.add("active");sortBy=b.dataset.sort;renderRoster()}));
+document.getElementById("hero-search").addEventListener("input",e=>{searchText=e.target.value;renderRoster()});
+document.querySelector(".clear-search").addEventListener("click",()=>{document.getElementById("hero-search").value="";searchText="";renderRoster()});
+document.getElementById("detail-back").addEventListener("click",openList);document.getElementById("detail-close").addEventListener("click",openList);
+document.querySelector(".list-window .panel-head-button").addEventListener("click",openList);document.querySelector(".list-window .panel-head-button.close").addEventListener("click",openList);
+renderRoster(true);renderDetail(selectedHero);
+const screen=new URLSearchParams(location.search).get("screen");document.body.dataset.screen=screen==="detail"?"detail":"list";
+</script>
+</body>
+</html>
