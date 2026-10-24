@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rendere das BAU-MENÜ D2 v1 als Liste und Gebäudedetail."""
+"""Rendere das BAU-MENÜ D2 v1b als Liste und Gebäudedetail."""
 from __future__ import annotations
 
 import shutil
@@ -10,13 +10,13 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 HUD = HERE.parent
-HTML = HERE / "menu_bau_d2_v1.html"
+HTML = HERE / "menu_bau_d2_v1b.html"
 OUT = HUD
 W, H = 1080, 1920
 
 SCREENS = {
-    "liste": "vorschau_menu_bau_d2_v1.png",
-    "detail": "vorschau_menu_bau_d2_v1_detail.png",
+    "liste": "vorschau_menu_bau_d2_v1b.png",
+    "detail": "vorschau_menu_bau_d2_v1b_detail.png",
 }
 
 
@@ -28,12 +28,12 @@ def main() -> None:
         raise SystemExit(f"HTML fehlt: {HTML}")
     buildings = HUD.parent / "gebaeude_neu_b"
     required = [
-        buildings / "e1_bld_waldhuette_2.png",
-        buildings / "e1_bld_steinbruch_1.png",
-        buildings / "e1_bld_bauernhof_1.png",
-        buildings / "e1_bld_fischerhuette_1.png",
-        HUD.parent / "ui-kit/menus_v3/_src/inventar_v4_assets/bg_inventar.jpg",
-        HUD.parent / "ui-kit/menus_v3/_src/inventar_v4_assets/dock_bg.png",
+        buildings / "e1_bld_woodcutter_bp01.png",
+        buildings / "e1_bld_woodcutter_bp04.png",
+        buildings / "e1_bld_quarry_bp01.png",
+        buildings / "e1_bld_gatherer_bp01.png",
+        buildings / "e1_bld_hunter_bp01.png",
+        HUD / "vorschau_hud_d2_v7_3_lvl12.png",
     ]
     missing = [str(path) for path in required if not path.is_file()]
     if missing:

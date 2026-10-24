@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=1080, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>BAU-MENÜ · Obsidian &amp; Glut</title>
+<title>BAU-MENÜ D2 v1b · Obsidian &amp; Glut</title>
 <style>
 @font-face{font-family:Lilita;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/LilitaOne-Regular.ttf")}
 @font-face{font-family:Baloo;src:url("../../ui-kit/menus_v3/_src/inventar_v4_assets/Baloo2-Variable.ttf");font-weight:400 800}
@@ -12,35 +12,9 @@
 html,body{width:1080px;height:1920px;margin:0;overflow:hidden}
 body{position:relative;background:#0a0807;color:var(--cream);font-family:Baloo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;user-select:none}
 button{font:inherit;color:inherit}
-.scene{position:absolute;z-index:0;inset:0;background:center/cover no-repeat url("../../ui-kit/menus_v3/_src/inventar_v4_assets/bg_inventar.jpg")}
-.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,5,.26),rgba(8,6,5,.45) 54%,rgba(5,4,4,.7))}
-.topbar{position:absolute;z-index:1;left:38px;top:16px;width:1004px;height:100px;padding:8px 12px;display:grid;grid-template-columns:280px 72px 280px 280px;gap:8px;align-items:center;border:1px solid rgba(199,150,90,.42);border-radius:36px;background:linear-gradient(180deg,rgba(10,9,9,.96),rgba(15,11,10,.94));box-shadow:0 12px 28px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,225,180,.12)}
-.resource{height:76px;display:flex;align-items:center;gap:10px;padding:5px 14px;border:1.5px solid #705b43;border-radius:40px;background:linear-gradient(180deg,rgba(41,32,27,.98),rgba(20,16,14,.99));box-shadow:inset 0 0 0 3px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,231,190,.18)}
-.resource img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 3px 5px #0009)}
-.resource b{font:36px/1 Lilita;color:#fff1d5;text-shadow:0 3px 0 rgba(0,0,0,.55)}
-.plus{position:relative;width:70px;height:70px;border:0;border-radius:50%;background:transparent;filter:drop-shadow(0 4px 6px #0009)}
-.plus img{width:100%;height:100%;object-fit:contain}
-.plus:after{content:"+";position:absolute;inset:0;display:grid;place-items:center;color:#ffd175;font:48px/1 Lilita;text-shadow:0 2px 4px #4b250c}
-.page-head{position:absolute;z-index:1;left:30px;top:126px;width:1020px;height:102px;display:grid;grid-template-columns:88px 1fr 88px;align-items:center}
-.head-button{width:78px;height:78px;border:1.5px solid rgba(208,164,112,.65);border-radius:25px;background:linear-gradient(145deg,rgba(58,43,33,.96),rgba(22,17,15,.98));box-shadow:inset 0 1px 0 #fff3,0 8px 18px #0008;color:#f5dfbd;font:52px/1 Lilita;display:grid;place-items:center}
-.head-close{justify-self:end;font-size:47px}
-.head-title{text-align:center}
-.head-title h1{margin:0;font:58px/.94 Lilita;letter-spacing:1.3px;color:#ffe2b5;text-shadow:0 4px 0 #28150c,0 0 22px rgba(255,145,57,.36)}
-.head-title p{margin:8px 0 0;color:#cbb99c;font:20px/1.05 Baloo;letter-spacing:.5px;font-weight:800}
-.under-hud{position:absolute;z-index:1;left:42px;top:244px;width:996px;height:110px;padding:18px 24px;border:1px solid rgba(220,169,106,.42);border-radius:24px;background:linear-gradient(140deg,rgba(26,20,16,.94),rgba(10,9,8,.96));display:flex;align-items:center;justify-content:space-between}
-.under-hud strong{font:25px/1 Lilita;color:#edddbf;letter-spacing:.5px}
-.under-hud span{font:22px/1 Baloo;font-weight:800;color:#c5af8c}
-.under-hud b{color:#ffd292}
-.dock{position:absolute;z-index:2;left:0;top:1664px;width:1080px;height:256px;background:center top/1080px 212px no-repeat url("../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_bg.png");border-top:1px solid rgba(225,197,159,.18)}
-.dock-item{position:absolute;top:10px;width:180px;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;color:#b7a78c}
-.dock-item.active{color:#fff0d0}
-.dock-item .plate{position:absolute;z-index:0;top:-22px;left:2px;width:176px;height:210px;object-fit:fill}
-.dock-item img.icon{position:relative;z-index:1;width:120px;height:112px;margin-top:7px;object-fit:contain;filter:drop-shadow(0 4px 5px #0008)}
-.dock-item span{position:relative;z-index:1;margin-top:2px;font:25px/1 Lilita;text-shadow:0 2px 3px #000}
-.dock-item i{position:relative;z-index:1;width:60px;height:8px;margin-top:14px;border-radius:8px;background:linear-gradient(90deg,#ef873d,#ffab58);box-shadow:0 0 9px #ff8b3c}
-.home-bar{position:absolute;left:390px;top:231px;width:300px;height:10px;border-radius:8px;background:rgba(255,255,255,.92);box-shadow:0 1px 4px #0007}
-.screen-scrim{position:absolute;z-index:5;inset:0;background:rgba(5,4,4,.68);pointer-events:none}
-.build-panel{position:absolute;z-index:10;left:14px;top:250px;width:1052px;height:1398px;padding:17px;border:2px solid rgba(201,138,74,.86);border-radius:30px;background:linear-gradient(145deg,rgba(31,23,19,.99),rgba(12,10,9,.995) 58%,rgba(28,17,12,.99));box-shadow:0 16px 42px #000a,inset 0 1px 0 rgba(255,233,196,.2),inset 0 0 0 5px rgba(0,0,0,.38)}
+.scene{position:absolute;z-index:0;inset:0;background:center/100% 100% no-repeat url("../vorschau_hud_d2_v7_3_lvl12.png")}
+.screen-scrim{position:absolute;z-index:5;inset:0;background:linear-gradient(to bottom,rgba(4,7,10,.659) 0 67.7%,rgba(4,7,10,.412) 100%);pointer-events:none}
+.build-panel{position:absolute;z-index:10;left:14px;top:304px;width:1052px;height:1360px;padding:13px;border:2px solid rgba(201,138,74,.86);border-radius:30px;background:linear-gradient(145deg,rgba(31,23,19,.99),rgba(12,10,9,.995) 58%,rgba(28,17,12,.99));box-shadow:0 16px 42px #000a,inset 0 1px 0 rgba(255,233,196,.2),inset 0 0 0 5px rgba(0,0,0,.38)}
 .build-panel:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,186,124,.19);border-radius:23px;pointer-events:none}
 .panel-header{position:relative;z-index:1;height:87px;display:grid;grid-template-columns:82px 1fr 82px;align-items:center;padding:0 9px}
 .panel-head-button{width:66px;height:66px;border:1px solid rgba(208,164,112,.63);border-radius:21px;background:linear-gradient(145deg,rgba(58,43,33,.96),rgba(22,17,15,.98));box-shadow:inset 0 1px 0 #fff3,0 6px 14px #0008;color:#f5dfbd;font:43px/1 Lilita;display:grid;place-items:center}
@@ -55,11 +29,11 @@ button{font:inherit;color:inherit}
 .category small{position:absolute;top:6px;right:8px;min-width:27px;height:22px;padding:1px 5px;border-radius:12px;background:rgba(0,0,0,.52);color:#d8c4a5;font:14px/20px Baloo;font-weight:800;text-align:center}
 .category .mini-mark{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:linear-gradient(145deg,#573824,#1b1310);border:1px solid rgba(221,168,107,.42);color:#ffc174;font:20px/1 Lilita}
 .category.add{font:39px/1 Lilita;color:#ffca82;border-color:rgba(207,163,110,.5)}
-.building-list{position:relative;z-index:1;height:989px;display:flex;flex-direction:column;gap:9px}
-.building-card{position:relative;height:240px;min-height:240px;padding:11px;border:1.5px solid rgba(137,108,77,.72);border-radius:18px;background:linear-gradient(105deg,rgba(48,37,29,.98),rgba(21,17,15,.99) 28%,rgba(16,13,12,.99));box-shadow:0 6px 12px #0007,inset 0 1px 0 rgba(255,245,225,.12),inset 0 0 0 3px rgba(0,0,0,.28);display:grid;grid-template-columns:205px 1fr;gap:14px;overflow:hidden}
+.building-list{position:relative;z-index:1;height:987px;display:flex;flex-direction:column;gap:9px}
+.building-card{position:relative;height:230px;min-height:230px;padding:8px;border:1.5px solid rgba(137,108,77,.72);border-radius:18px;background:linear-gradient(105deg,rgba(48,37,29,.98),rgba(21,17,15,.99) 28%,rgba(16,13,12,.99));box-shadow:0 6px 12px #0007,inset 0 1px 0 rgba(255,245,225,.12),inset 0 0 0 3px rgba(0,0,0,.28);display:grid;grid-template-columns:205px 1fr;gap:14px;overflow:hidden}
 .building-card:before{content:"";position:absolute;left:215px;top:15px;bottom:15px;width:1px;background:linear-gradient(180deg,transparent,rgba(203,153,99,.34),transparent)}
-.art-well{position:relative;z-index:1;width:205px;height:214px;border-radius:14px;background:radial-gradient(ellipse at 52% 66%,rgba(220,112,43,.17),transparent 67%),linear-gradient(145deg,rgba(60,44,32,.82),rgba(17,14,12,.9));border:1px solid rgba(186,139,88,.25);display:grid;place-items:center}
-.art-well img{width:193px;height:202px;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(0,0,0,.66))}
+.art-well{position:relative;z-index:1;width:205px;height:212px;border-radius:14px;background:radial-gradient(ellipse at 52% 66%,rgba(220,112,43,.17),transparent 67%),linear-gradient(145deg,rgba(60,44,32,.82),rgba(17,14,12,.9));border:1px solid rgba(186,139,88,.25);display:grid;place-items:center}
+.art-well img{width:193px;height:200px;object-fit:contain;filter:drop-shadow(0 8px 7px rgba(0,0,0,.66))}
 .card-copy{position:relative;z-index:1;min-width:0;padding:4px 5px 2px 1px;display:grid;grid-template-rows:44px 28px 18px 58px 36px;align-content:start}
 .card-head{display:flex;align-items:center;gap:12px;min-width:0}
 .building-name{max-width:470px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff0d4;font:34px/1 Lilita;text-shadow:0 2px 0 #100a07}
@@ -141,30 +115,6 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
 </head>
 <body data-screen="liste">
 <div class="scene" aria-hidden="true"></div>
-<div class="topbar" aria-label="Ressourcen">
-  <div class="resource"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/holz.png" alt=""><b>2.480</b></div>
-  <button class="plus" type="button" aria-label="Ressourcen erhalten"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/plus.png" alt=""></button>
-  <div class="resource"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/stein.png" alt=""><b>1.120</b></div>
-  <div class="resource"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/gold.png" alt=""><b>3.270</b></div>
-</div>
-<header class="page-head">
-  <button class="head-button" type="button" aria-label="Zurück">‹</button>
-  <div class="head-title"><h1>DORF</h1><p>Deine Siedlung am Nordhang</p></div>
-  <button class="head-button head-close" type="button" aria-label="Schließen">×</button>
-</header>
-<section class="under-hud" aria-label="Dorfstatus">
-  <strong>DEIN DORF</strong>
-  <span>Wirtschaft im Aufbau <b>·</b> Bauplätze <b>2/3</b></span>
-</section>
-<nav class="dock" aria-label="Hauptnavigation">
-  <div class="dock-item active" style="left:0"><img class="plate" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_aktiv.png" alt=""><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_dorf_inaktiv.png" alt=""><span>Dorf</span><i></i></div>
-  <div class="dock-item" style="left:180px"><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_helden_inaktiv.png" alt=""><span>Helden</span></div>
-  <div class="dock-item" style="left:360px"><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_karte_inaktiv.png" alt=""><span>Karte</span></div>
-  <div class="dock-item" style="left:540px"><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_armee_inaktiv.png" alt=""><span>Armee</span></div>
-  <div class="dock-item" style="left:720px"><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_gilde_inaktiv.png" alt=""><span>Gilde</span></div>
-  <div class="dock-item" style="left:900px"><img class="icon" src="../../ui-kit/menus_v3/_src/inventar_v4_assets/dock_inventar.png" alt=""><span>Inventar</span></div>
-  <div class="home-bar" aria-hidden="true"></div>
-</nav>
 <div class="screen-scrim" aria-hidden="true"></div>
 <main class="build-panel">
   <header class="panel-header">
@@ -181,9 +131,9 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
   </nav>
   <section class="building-list" aria-label="Wirtschaftsgebäude">
     <article class="building-card">
-      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_waldhuette_2.png" alt="Waldhütte"></div>
+      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_woodcutter_bp01.png" alt="Holzfällerlager"></div>
       <div class="card-copy">
-        <div class="card-head"><strong class="building-name">Waldhütte</strong><span class="level-pill">STUFE 2</span></div>
+        <div class="card-head"><strong class="building-name">Holzfällerlager</strong><span class="level-pill">STUFE 2</span></div>
         <div class="building-type">HOLZPRODUKTION&nbsp; · &nbsp;1/3 GEBÄUDE</div>
         <div class="cost-label">BAUKOSTEN</div>
         <div class="cost-row">
@@ -196,7 +146,7 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
       </div>
     </article>
     <article class="building-card">
-      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_steinbruch_1.png" alt="Steinbruch"></div>
+      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_quarry_bp01.png" alt="Steinbruch"></div>
       <div class="card-copy">
         <div class="card-head"><strong class="building-name">Steinbruch</strong><span class="level-pill">STUFE 1</span></div>
         <div class="building-type">STEINPRODUKTION&nbsp; · &nbsp;1/2 GEBÄUDE</div>
@@ -211,10 +161,10 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
       </div>
     </article>
     <article class="building-card">
-      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_bauernhof_1.png" alt="Bauernhof"></div>
+      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_gatherer_bp01.png" alt="Sammlerlager"></div>
       <div class="card-copy">
-        <div class="card-head"><strong class="building-name">Bauernhof</strong><span class="level-pill">STUFE 1</span></div>
-        <div class="building-type">NAHRUNGSPRODUKTION&nbsp; · &nbsp;0/2 GEBÄUDE</div>
+        <div class="card-head"><strong class="building-name">Sammlerlager</strong><span class="level-pill">STUFE 1</span></div>
+        <div class="building-type">BEEREN &amp; NAHRUNG&nbsp; · &nbsp;0/2 GEBÄUDE</div>
         <div class="cost-label">BAUKOSTEN</div>
         <div class="cost-row">
           <div class="cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/holz.png" alt=""><div class="cost-copy"><small>HOLZ</small><b>580</b></div></div>
@@ -226,10 +176,10 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
       </div>
     </article>
     <article class="building-card">
-      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_fischerhuette_1.png" alt="Fischerhütte"></div>
+      <div class="art-well"><img src="../../gebaeude_neu_b/e1_bld_hunter_bp01.png" alt="Jägerlager"></div>
       <div class="card-copy">
-        <div class="card-head"><strong class="building-name">Fischerhütte</strong><span class="level-pill">STUFE 1</span></div>
-        <div class="building-type">FISCH &nbsp;·&nbsp; NAHRUNG&nbsp; · &nbsp;2/3 BAUPLÄTZE</div>
+        <div class="card-head"><strong class="building-name">Jägerlager</strong><span class="level-pill">STUFE 1</span></div>
+        <div class="building-type">JAGD &nbsp;·&nbsp; NAHRUNG&nbsp; · &nbsp;2/3 BAUPLÄTZE</div>
         <div class="cost-label">BAUKOSTEN</div>
         <div class="cost-row">
           <div class="cost"><img src="../../ui-kit/menus_v3/_src/inventar_v4_assets/holz.png" alt=""><div class="cost-copy"><small>HOLZ</small><b>760</b></div></div>
@@ -244,7 +194,7 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
   <section class="build-queue" aria-label="Bauschlange">
     <div class="queue-label"><small>BAUMEISTER</small><strong>1/2 BELEGT</strong></div>
     <div class="queue-slot">
-      <div class="queue-slot-top"><span>Waldhütte</span><b>08:42</b></div>
+      <div class="queue-slot-top"><span>Holzfällerlager</span><b>08:42</b></div>
       <small>Baumeister 1 &nbsp;·&nbsp; im Bau</small>
       <div class="queue-progress"><i></i></div>
     </div>
@@ -252,16 +202,16 @@ body[data-screen="detail"] .detail-dim,body[data-screen="detail"] .detail-sheet{
   </section>
 </main>
 <div class="detail-dim" aria-hidden="true"></div>
-<section class="detail-sheet" role="dialog" aria-modal="true" aria-label="Waldhütte aufwerten">
+<section class="detail-sheet" role="dialog" aria-modal="true" aria-label="Holzfällerlager aufwerten">
   <div class="sheet-handle" aria-hidden="true"></div>
   <header class="sheet-head"><strong>WIRTSCHAFT&nbsp; · &nbsp;GEBÄUDEDETAIL</strong><button class="sheet-close" type="button" aria-label="Schließen">×</button></header>
   <div class="detail-hero">
-    <div class="detail-art"><img src="../../gebaeude_neu_b/e1_bld_waldhuette_2.png" alt="Waldhütte"></div>
+    <div class="detail-art"><img src="../../gebaeude_neu_b/e1_bld_woodcutter_bp04.png" alt="Holzfällerlager"></div>
     <div class="detail-copy">
       <div class="detail-eyebrow">HOLZPRODUKTION</div>
-      <h1 class="detail-name">Waldhütte</h1>
+      <h1 class="detail-name">Holzfällerlager</h1>
       <span class="detail-level">STUFE 2&nbsp; → &nbsp;STUFE 3</span>
-      <p class="detail-desc">Die Waldhütte versorgt dein Dorf mit Balken und Bauholz aus den umliegenden Hainen.</p>
+      <p class="detail-desc">Das Holzfällerlager versorgt dein Dorf mit Bauholz aus den nahen Wäldern.</p>
     </div>
   </div>
   <section class="stats" aria-label="Werte nächste Stufe">
