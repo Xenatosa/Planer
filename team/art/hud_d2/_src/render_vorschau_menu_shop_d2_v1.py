@@ -377,7 +377,7 @@ def draw_modal_overlay(base: Image.Image) -> None:
     base.alpha_composite(overlay)
 
 
-def draw_purchase_modal(base: Image.Image) -> None:
+def draw_purchase_modal(base: Image.Image, price: str = "1,99 €") -> None:
     x, y, width, height = 94, 382, 892, 1190
     rounded_gradient(base, (x, y, width, height), (34, 25, 20), (12, 10, 9), 30,
                      outline=(221, 154, 82, 250), outline_width=3)
@@ -415,7 +415,7 @@ def draw_purchase_modal(base: Image.Image) -> None:
     d = ImageDraw.Draw(base, "RGBA")
     d.text((x + 52, y + 391), "PREIS", font=font(FONT_BALOO, 20, 800),
            fill=(185, 169, 136, 255))
-    d.text((x + width - 51, y + 374), "1,99 €", font=font(FONT_LILITA, 46),
+    d.text((x + width - 51, y + 374), price, font=font(FONT_LILITA, 46),
            fill=(255, 218, 160, 255), anchor="ra")
     d.text((x + 52, y + 419), "Google Play · Direktkauf",
            font=font(FONT_BALOO, 18, 700), fill=(147, 131, 106, 255))
@@ -458,7 +458,7 @@ def draw_purchase_modal(base: Image.Image) -> None:
     d.text((x + 108, y + 943), "Zustimmung für diesen Kauf", font=font(FONT_BALOO, 18, 700),
            fill=(147, 131, 106, 255))
 
-    draw_button(base, (x + 28, y + 1023, 530, 78), "ZU GOOGLE PLAY · 1,99 €",
+    draw_button(base, (x + 28, y + 1023, 530, 78), f"ZU GOOGLE PLAY · {price}",
                 font(FONT_LILITA, 27))
     rounded_gradient(base, (x + 576, y + 1023, 260, 78),
                      (38, 30, 25), (17, 14, 12), 18,
