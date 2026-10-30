@@ -1,305 +1,307 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Dorfmap-Grundgeruest Zelle (eine CSV-Zeile)",
-  "type": "object",
-  "required": [
-    "cx",
-    "cy",
-    "px_x",
-    "px_y",
-    "untergrund",
-    "begehbar",
-    "bebaubar",
-    "untergrund_quelle",
-    "klippe_hoehe_quelle",
-    "bauzone_plan",
-    "bebaubar_erweitert",
-    "ebene",
-    "ebene_hoeher"
-  ],
-  "properties": {
-    "cx": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "cy": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "px_x": {
-      "type": "integer",
-      "description": "linke obere Ecke in c20-px"
-    },
-    "px_y": {
-      "type": "integer"
-    },
-    "untergrund": {
-      "enum": [
-        "SCHNEE",
-        "KLIPPE_WAND",
-        "KLIPPE_KANTE",
-        "WALD",
-        "WASSER_EIS",
-        "FELS",
-        "SCHATTEN",
-        "BODEN",
-        "SAND",
-        "UNBEKANNT"
-      ],
-      "description": "t31u: nur Gelaendeklassen; HOF/FEUER/WEG/BRUECKE/FELS_KLIPPE/FELS_WALD sind seit t9u/t10u ueberholt (Overlay-CSV)"
-    },
-    "wasser_eis": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "schnee": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "senke_bb4": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "h4_ext": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "frei_e2": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "begehbar": {
-      "enum": [
-        0,
-        1
-      ]
-    },
-    "bebaubar": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "senke_becken & begehbar & Untergrund in {SCHNEE,BODEN,SAND} & keine Hindernis-Maske & Abstand Wand >= BAU_ABST_WAND_M & Wasser >= BAU_ABST_WASSER_M (je 2 m [A])"
-    },
-    "klippe": {
-      "enum": [
-        "",
-        "KANTE",
-        "WAND"
-      ],
-      "description": "KANTE=obere Wandkante, WAND=Wandzelle [R]"
-    },
-    "skin_slot": {
-      "type": "string",
-      "pattern": "^ug_[a-z_]+$",
-      "description": "Verweis auf material_slot / Skin-Tabelle"
-    },
-    "hoehe_m": {
-      "type": [
-        "number",
-        "string"
-      ],
-      "description": "Meter über Bezugsniveau BEZUG_M; Senke=Bezug [A], Nordklippen-Oberkante=Bezug+8,6 [R] (leer = keine Quelle)"
-    },
-    "neigung_grad": {
-      "type": [
-        "number",
-        "string"
-      ],
-      "description": "Grad aus Gradient von hoehe_m [R] (leer = keine Quelle)"
-    },
-    "klippe_hoehe_m": {
-      "type": [
-        "number",
-        "string"
-      ],
-      "description": "nur Nordwand: (190+240)/2/25 [R], ohne Projektionskorrektur [A] (leer = keine Quelle)"
-    },
-    "fluss_id": {
-      "enum": [
-        "",
-        "BACH_NORD",
-        "BACH_SUED",
-        "SEE",
-        "WASSER_FARBE"
-      ]
-    },
-    "fliess_richtung": {
-      "enum": [
-        "",
-        "N",
-        "NO",
-        "O",
-        "SO",
-        "S",
-        "SW",
-        "W",
-        "NW"
-      ],
-      "description": "aus Bachpolylinie frei_e2.py [S], Nord→See→Süd"
-    },
-    "fluss_breite_m": {
-      "type": [
-        "number",
-        "string"
-      ],
-      "description": "2×Uferabstand auf Mittellinie von bach_schutz [R] (leer = keine Quelle)"
-    },
-    "wasser_tiefe_m": {
-      "type": [
-        "number",
-        "string"
-      ],
-      "description": "immer leer, keine Quelle (leer = keine Quelle)"
-    },
-    "ufer": {
-      "enum": [
-        0,
-        1
-      ],
-      "description": "begehbar, an Wasser angrenzend"
-    },
-    "begehbar_3d": {
-      "enum": [
-        0,
-        1
-      ],
-      "description": "begehbar ∧ neigung_grad≤30 [A]; ohne Neigung = begehbar; Furt=1"
-    },
-    "untergrund_quelle": {
-      "enum": [
-        "FARBE",
-        "FILTER",
-        "KEINE",
-        "MASKE",
-        "OVERRIDE",
-        "RAND"
-      ],
-      "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; FILTER=[A] Glaettung/Nachbarklasse; OVERRIDE=[S] Sichtpruefung (overrides_*.csv); KEINE=UNBEKANNT"
-    },
-    "klippe_hoehe_quelle": {
-      "enum": [
-        "",
-        "R",
-        "A"
-      ],
-      "description": "R = Nordwand 8,6 m gerechnet (Band 7,6-9,6); A = Krater 7,7 / Suedgrat 7,6 / Ostgrat 6,7 / sonstige 8,6 m, aus Felslaufweite relativ zur Nordwand geschaetzt"
-    },
-    "bauzone_bestand": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "alte Bauzonen-Fenstergrenze (BB4 & frei_e2), nur Bestand, t12u"
-    },
-    "senke_becken": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "Senke zwischen Nordwand, Kraterwand, Ostgrat, Suedgrat; Grenzen NW (x=136) und NO teils [A]"
-    },
-    "bauzone_plan": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "[S/A] Zelle >=50 % in Planmaske BB4_plan_v2_25pxm.npy (Wege-&-Deko t25u, BB4 + A18 1 m Rand)"
-    },
-    "bebaubar_erweitert": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "t29u [A]: bebaubar ODER (begehbar & Untergrund in {SCHNEE,BODEN,SAND} & keine Hindernis-Maske & Abstand Wand/Wasser je >= 2 m [A], ohne Bedingung senke_becken; nur zusammenhaengende Flaechen >= 16 Zellen [A]). In der Senke gilt unveraendert bebaubar (Ausnahme Senke). Ersetzt bebaubar/bauzone_plan NICHT; Entscheidung Bauzone offen."
-    },
-    "ebene": {
-      "type": "string",
-      "enum": [
-        "SENKE",
-        "PLATEAU_NORD",
-        "OSTPLATEAU",
-        "KRATER",
-        "TAL_SUED",
-        "WEST",
-        "WAND"
-      ],
-      "description": "t30u Hoehenebene der Zelle [A]: SENKE=senke_becken; PLATEAU_NORD/OSTPLATEAU/TAL_SUED aus hoehe_m-Stufen; KRATER=vom Kraterwall umschlossene Flaeche im Fenster cx71-136/cy92-204; WAND=KLIPPE_WAND/KANTE; WEST=Rest auf Bezugshoehe. Hoehen sind Annahmen."
-    },
-    "ebene_hoeher": {
-      "type": "integer",
-      "enum": [
-        0,
-        1
-      ],
-      "description": "t30u 1 = Zelle liegt auf einer hoeheren Ebene als die Senke (PLATEAU_NORD, OSTPLATEAU) [A]"
-    },
-    "hindernis_id": {
-      "type": "integer",
-      "description": "Index+1 in hindernisse_c20_v2.json bzw. Gelaende-Hindernis, 0 = keins [S/R]"
-    },
-    "hindernis_art": {
-      "enum": [
-        "",
-        "GELAENDE",
-        "MASKE"
-      ],
-      "description": "MASKE=hindernisse_c20_v2 [S]; GELAENDE=nicht begehbare Gelaendeklasse [R]"
-    },
-    "wand_name": {
-      "enum": [
-        "",
-        "Nord",
-        "Krater",
-        "Suedgrat",
-        "Ostgrat"
-      ],
-      "description": "Wandfenster aus WAND_H bzw. Nordband [A]"
-    },
-    "hoehe_quelle": {
-      "enum": [
-        "A",
-        "R"
-      ],
-      "description": "Marker zu hoehe_m"
-    },
-    "deko_kapazitaet": {
-      "type": "number",
-      "description": "Dekoplaetze je m2 (0,44 auf begehbaren Zellen, sonst 0) [R]"
-    },
-    "deko_baum_ok": {
-      "enum": [
-        0,
-        1
-      ],
-      "description": "Baum-Deko erlaubt [A]"
-    },
-    "deko_fels_ok": {
-      "enum": [
-        0,
-        1
-      ],
-      "description": "Fels-Deko erlaubt (begehbar) [A]"
-    },
-    "flaeche_m2": {
-      "type": "number",
-      "description": "Zellflaeche in m2 (Z=25: 1,0; Z=50: 4,0) [R]"
-    }
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Dorfmap-Grundgeruest Zelle (eine CSV-Zeile)",
+ "type": "object",
+ "required": [
+  "cx",
+  "cy",
+  "px_x",
+  "px_y",
+  "untergrund",
+  "begehbar",
+  "bebaubar",
+  "untergrund_quelle",
+  "klippe_hoehe_quelle",
+  "bauzone_plan",
+  "bebaubar_erweitert",
+  "ebene",
+  "ebene_hoeher"
+ ],
+ "properties": {
+  "cx": {
+   "type": "integer",
+   "minimum": 0
   },
-  "overlay_getrennt": "Plaetze/Wege/Hoefe/Feuer/Bruecken liegen im Overlay (raster_c20_z25_overlay_plaetze_wege.png, Spalten zone/weg/platz). 99 Plaetze unveraendert."
+  "cy": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "px_x": {
+   "type": "integer",
+   "description": "linke obere Ecke in c20-px"
+  },
+  "px_y": {
+   "type": "integer"
+  },
+  "untergrund": {
+   "enum": [
+    "SCHNEE",
+    "KLIPPE_WAND",
+    "KLIPPE_KANTE",
+    "WALD",
+    "WASSER_EIS",
+    "FELS",
+    "SCHATTEN",
+    "BODEN",
+    "SAND",
+    "UNBEKANNT"
+   ],
+   "description": "t31u: nur Gelaendeklassen; HOF/FEUER/WEG/BRUECKE/FELS_KLIPPE/FELS_WALD sind seit t9u/t10u ueberholt (Overlay-CSV)"
+  },
+  "wasser_eis": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "schnee": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "senke_bb4": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "h4_ext": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "frei_e2": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "begehbar": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "bebaubar": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "senke_becken & begehbar & Untergrund in {SCHNEE,BODEN,SAND} & keine Hindernis-Maske & Abstand Wand >= BAU_ABST_WAND_M & Wasser >= BAU_ABST_WASSER_M (je 2 m [A])"
+  },
+  "klippe": {
+   "enum": [
+    "",
+    "KANTE",
+    "WAND"
+   ],
+   "description": "KANTE=obere Wandkante, WAND=Wandzelle [R]"
+  },
+  "skin_slot": {
+   "type": "string",
+   "pattern": "^ug_[a-z_]+$",
+   "description": "Verweis auf material_slot / Skin-Tabelle"
+  },
+  "hoehe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "Meter über Bezugsniveau BEZUG_M; Senke=Bezug [A], Nordklippen-Oberkante=Bezug+8,6 [R] (leer = keine Quelle) | t34u: HANG = Laplace-Interpolation zwischen festen Stufen [A]"
+  },
+  "neigung_grad": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "Grad aus Gradient von hoehe_m [R] (leer = keine Quelle)"
+  },
+  "klippe_hoehe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "nur Nordwand: (190+240)/2/25 [R], ohne Projektionskorrektur [A] (leer = keine Quelle)"
+  },
+  "fluss_id": {
+   "enum": [
+    "",
+    "BACH_NORD",
+    "BACH_SUED",
+    "SEE",
+    "WASSER_FARBE"
+   ]
+  },
+  "fliess_richtung": {
+   "enum": [
+    "",
+    "N",
+    "NO",
+    "O",
+    "SO",
+    "S",
+    "SW",
+    "W",
+    "NW"
+   ],
+   "description": "aus Bachpolylinie frei_e2.py [S], Nord→See→Süd"
+  },
+  "fluss_breite_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "2×Uferabstand auf Mittellinie von bach_schutz [R] (leer = keine Quelle)"
+  },
+  "wasser_tiefe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "immer leer, keine Quelle (leer = keine Quelle)"
+  },
+  "ufer": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "begehbar, an Wasser angrenzend"
+  },
+  "begehbar_3d": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "begehbar ∧ neigung_grad≤30 [A]; ohne Neigung = begehbar; Furt=1"
+  },
+  "untergrund_quelle": {
+   "enum": [
+    "FARBE",
+    "FILTER",
+    "KEINE",
+    "MASKE",
+    "OVERRIDE",
+    "RAND"
+   ],
+   "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; FILTER=[A] Glaettung/Nachbarklasse; OVERRIDE=[S] Sichtpruefung (overrides_*.csv); KEINE=UNBEKANNT"
+  },
+  "klippe_hoehe_quelle": {
+   "enum": [
+    "",
+    "R",
+    "A"
+   ],
+   "description": "R = Nordwand 8,6 m gerechnet (Band 7,6-9,6); A = Krater 7,7 / Suedgrat 7,6 / Ostgrat 6,7 / sonstige 8,6 m, aus Felslaufweite relativ zur Nordwand geschaetzt"
+  },
+  "bauzone_bestand": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "alte Bauzonen-Fenstergrenze (BB4 & frei_e2), nur Bestand, t12u"
+  },
+  "senke_becken": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "Senke zwischen Nordwand, Kraterwand, Ostgrat, Suedgrat; Grenzen NW (x=136) und NO teils [A]"
+  },
+  "bauzone_plan": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "[S/A] Zelle >=50 % in Planmaske BB4_plan_v2_25pxm.npy (Wege-&-Deko t25u, BB4 + A18 1 m Rand)"
+  },
+  "bebaubar_erweitert": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "t29u [A]: bebaubar ODER (begehbar & Untergrund in {SCHNEE,BODEN,SAND} & keine Hindernis-Maske & Abstand Wand/Wasser je >= 2 m [A], ohne Bedingung senke_becken; nur zusammenhaengende Flaechen >= 16 Zellen [A]). In der Senke gilt unveraendert bebaubar (Ausnahme Senke). Ersetzt bebaubar/bauzone_plan NICHT; Entscheidung Bauzone offen."
+  },
+  "ebene": {
+   "type": "string",
+   "enum": [
+    "SENKE",
+    "PLATEAU_NORD",
+    "OSTPLATEAU",
+    "KRATER",
+    "GIPFEL",
+    "TAL_SUED",
+    "HANG",
+    "SIMS",
+    "WAND"
+   ],
+   "description": "t34u Hoehenebene [A], nach Waenden statt Fenstern: SENKE=senke_becken plus angrenzende freie Flaeche mit Hoehe |h|<=0,5 m; PLATEAU_NORD=alle freien Flaechen noerdlich der Nordwand ohne Verbindung zur grossen Flaeche; OSTPLATEAU=oestlich der Ostgratwand (+6,7) plus angrenzend +-0,5 m; TAL_SUED=suedlich Suedgrat bzw. im West-Tal suedlich vom Flusswasser ab cy252 (-7,6) plus angrenzend; KRATER=vom Kraterwall umschlossen (0); GIPFEL=Schneekuppe noerdlich des Kraters (+7,6); HANG=freie Flaeche ohne Wand zwischen den Stufen, Hoehe glatt interpoliert (Laplace); SIMS=kleine von Wand umschlossene Flaeche, Hoehe=Mittel der Umgebung; WAND=KLIPPE_WAND/KANTE. Alle Hoehen Annahmen."
+  },
+  "ebene_hoeher": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "t30u 1 = Zelle liegt auf einer hoeheren Ebene als die Senke (PLATEAU_NORD, OSTPLATEAU) [A] | t34u: 1 fuer PLATEAU_NORD, OSTPLATEAU, GIPFEL"
+  },
+  "hindernis_id": {
+   "type": "integer",
+   "description": "Index+1 in hindernisse_c20_v2.json bzw. Gelaende-Hindernis, 0 = keins [S/R]"
+  },
+  "hindernis_art": {
+   "enum": [
+    "",
+    "GELAENDE",
+    "MASKE"
+   ],
+   "description": "MASKE=hindernisse_c20_v2 [S]; GELAENDE=nicht begehbare Gelaendeklasse [R]"
+  },
+  "wand_name": {
+   "enum": [
+    "",
+    "Nord",
+    "Krater",
+    "Suedgrat",
+    "Ostgrat"
+   ],
+   "description": "Wandfenster aus WAND_H bzw. Nordband [A]"
+  },
+  "hoehe_quelle": {
+   "enum": [
+    "A",
+    "R"
+   ],
+   "description": "Marker zu hoehe_m"
+  },
+  "deko_kapazitaet": {
+   "type": "number",
+   "description": "Dekoplaetze je m2 (0,44 auf begehbaren Zellen, sonst 0) [R]"
+  },
+  "deko_baum_ok": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "Baum-Deko erlaubt [A]"
+  },
+  "deko_fels_ok": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "Fels-Deko erlaubt (begehbar) [A]"
+  },
+  "flaeche_m2": {
+   "type": "number",
+   "description": "Zellflaeche in m2 (Z=25: 1,0; Z=50: 4,0) [R]"
+  }
+ },
+ "overlay_getrennt": "Plaetze/Wege/Hoefe/Feuer/Bruecken liegen im Overlay (raster_c20_z25_overlay_plaetze_wege.png, Spalten zone/weg/platz). 99 Plaetze unveraendert."
 }

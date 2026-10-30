@@ -238,9 +238,19 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
 ## t31u Talboden Süd, z50-Regel, Datentyp-Fehler
 - **TAL_SUED-Regel [S/F]:** Der Südgrat beginnt in c20 bei cx 81. Westlich davon gibt es keine Gratwand. Der Block bei cx 26–55 / cy 223–247 steht frei, das Gelände fällt dort sanft zum Fluss ab (Sicht `pruefung/t31u_talsued_a.png`). Deshalb gilt westlich von cx 81 jetzt **WEST (Bezugshöhe) [A]** statt TAL_SUED. Vorher war cx 26–55 TAL_SUED, das war nicht belegt.
 - Schlucht cx 246–249: Ein Bach läuft durch den Grat, und der Talboden ist in c20 durchgehend (`pruefung/t31u_talsued_b.png`). Lücken von höchstens 8 Spalten werden mit der tieferen Startzeile der Nachbarn geschlossen [S].
-- Rand cx 329–335 liegt außerhalb des Grat-Fensters und bleibt WEST [A]. Offen.
+- Rand cx 329–335: seit t34u TAL_SUED (Schleife bis Kartenrand).
 - z25 je Ebene [R]: SENKE 31 265, WEST 29 842, WAND 18 752, TAL_SUED 14 110, PLATEAU_NORD 4 005, OSTPLATEAU 2 014, KRATER 1 820.
 - bebaubar_erweitert je Ebene z25 [R]: SENKE 27 140, WEST 17 501, TAL_SUED 5 501, PLATEAU_NORD 2 759, KRATER 1 187, OSTPLATEAU 321.
 - **z50-Regel [F]:** Eine z50-Zelle übernimmt eine z25-Override-Regel, wenn mindestens 2 ihrer 4 z25-Zellen sie tragen. Regeln nach FELS (Gipfel, Findling) gelten schon ab 1 von 4, weil nicht begehbar die sicherere Seite ist. Das betrifft 159 z50-Zellen.
 - **Fehler behoben:** `untergrund_quelle` wurde als „OVERRI“ abgeschnitten (Datentyp zu kurz), `wand_name` als „Krat/Sued/Ostg“. Jetzt stehen dort OVERRIDE bzw. Krater/Suedgrat/Ostgrat. schema_zelle.json passt jetzt zu den 39 CSV-Spalten, alle Enum-Werte sind geprüft [R].
 - Overrides t31u: Zeilen 425–427 (Sandbank-Ränder SCHNEE→SAND, 9 Zellen) [S].
+
+## t34u Ebenen nach Waenden [A]
+- `ebene` ∈ SENKE, PLATEAU_NORD, OSTPLATEAU, KRATER, GIPFEL, TAL_SUED, HANG, SIMS, WAND. WEST entfaellt (war Rest auf 0 m, falsch).
+- Freie Zellen (keine Wand) werden in 4er-Zusammenhangsteile zerlegt. Getrennt von der grossen Flaeche und noerdlich cy 40: PLATEAU_NORD (+8,6). Im Kraterwall: KRATER (0); Schneekuppe noerdlich: GIPFEL (+7,7). Andere kleine umschlossene Flaechen: SIMS (Mittel der Umgebung).
+- Grosse Flaeche: feste Stufen SENKE (senke_becken, 0), TAL_SUED (suedlich Suedgrat bis Kartenrand; westlich cx 81 ab erstem Wasser cy ≥ 252; −7,6), OSTPLATEAU (+6,7). Dazwischen Laplace-Hoehe. Zellen innerhalb 0,5 m einer Stufe und mit ihr verbunden tragen deren Namen, sonst HANG.
+- `ebene_hoeher`=1 fuer PLATEAU_NORD, OSTPLATEAU, GIPFEL.
+- z25 [R]: SENKE 33 395, HANG 21 148, TAL_SUED 19 234, WAND 18 752, PLATEAU_NORD 5 049, OSTPLATEAU 2 365, KRATER 1 604, GIPFEL 160, SIMS 101.
+- z50 [R]: SENKE 8 426, HANG 4 928, TAL_SUED 4 888, WAND 5 367, PLATEAU_NORD 971, OSTPLATEAU 493, KRATER 379, GIPFEL 33, SIMS 51.
+- bebaubar_erweitert je Ebene z25 [R]: SENKE 28 269, HANG 13 719, TAL_SUED 7 718, PLATEAU_NORD 3 162, KRATER 1 180, OSTPLATEAU 361.
+- begehbar, bebaubar, bebaubar_erweitert unveraendert (z25 62 391 / 27 140 / 54 409; z50 15 245 / 7 240 / 15 056).

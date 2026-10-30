@@ -253,7 +253,7 @@ for x in range(nx):                     # Nordplateau: oberhalb der obersten Nor
 _h,(a_,b_,c_,d_)=WAND_H['Suedgrat']
 SG_X0=81*25//Z   # t31u: Suedgrat beginnt in c20 bei cx81; der Block cx26-55/cy223-247 steht frei (Sicht pruefung/t31u_talsued_a.png) [S]
 _sg={}
-for x in range(max(a_,SG_X0),c_+1):     # Suedvorland: unterhalb der untersten Gratwand, Grat faellt nach Sueden ab [A]
+for x in range(max(a_,SG_X0),nx):   # t34u: bis Kartenrand (vorher Fenster bis cx328, Rand cx329-335 fehlte)     # Suedvorland: unterhalb der untersten Gratwand, Grat faellt nach Sueden ab [A]
     yy=np.nonzero(_wk[b_:d_+1,x])[0]
     if len(yy): _sg[x]=b_+yy.max()+1
 _xs=sorted(_sg)
@@ -266,15 +266,68 @@ for y in range(b_,d_+1):                # Ostplateau: rechts der aeussersten Ost
     xx=np.nonzero(_wk[y,a_:c_+1])[0]
     if len(xx): hoehe[y,a_+xx.max()+1:]=BEZUG+_h
 hoehe[senke&~wasser]=BEZUG
-# t29u/t30u: ebene je Zelle aus Hoehenstufen + Lage [A]; Waende/Wasser bekommen die Ebene ihrer Umgebung nicht (leer bei Wand)
-ebene=np.full((ny,nx),'WEST',dtype='U12')
-ebene[hoehe==BEZUG+KL_M]='PLATEAU_NORD'; ebene[np.isclose(hoehe,BEZUG+WAND_H['Ostgrat'][0])&(hoehe!=BEZUG+KL_M)]='OSTPLATEAU'; ebene[hoehe==BEZUG-WAND_H['Suedgrat'][0]]='TAL_SUED'
-_ka,_kb,_kc,_kd=WAND_H['Krater'][1]; _fr=~np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])&~basin; _bx=np.zeros((ny,nx),bool); _bx[_kb:_kd+1,_ka:_kc+1]=True
-n_,l_,st_,_=cv2.connectedComponentsWithStats((_fr&_bx).astype(np.uint8),4)
-_ki=[i for i in range(1,n_) if st_[i,0]>_ka and st_[i,0]+st_[i,2]-1<_kc]  # Komponente beruehrt weder West- noch Ostrand des Kraterfensters = vom Kraterwall umschlossen [A]
-ebene[np.isin(l_,_ki)&(ebene=='WEST')]='KRATER'
-ebene[basin]='SENKE'; ebene[np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])]='WAND'
-ebene_hoeher=np.isin(ebene,['PLATEAU_NORD','OSTPLATEAU']).astype(int)
+# t34u: West-Tal ohne Grat: Flussebene Sued (Wasser ab cy252 und alles suedlich) liegt auf Talhoehe wie oestlich cx81 [A]
+_hs=WAND_H['Suedgrat'][0]; _y252=_q(252)
+for x in range(0,SG_X0):
+    yy=np.nonzero(wasser[_y252:,x])[0]
+    if len(yy): hoehe[_y252+yy.min():,x]=BEZUG-_hs
+# t34u: Ebenen nach Waenden statt nach Fenstern [A].
+# Feste Stufen: Senke (senke_becken), Nordplateau (alle freien Flaechen noerdlich der Nordwand), Ostplateau, Tal Sued, Krater.
+# Freie Flaechen ohne Wand dazwischen (vorher WEST = 0 m) bekommen eine glatte Hoehe (Laplace) zwischen den festen Stufen = HANG.
+_fr=~_wk
+n_,l_=cv2.connectedComponents(_fr.astype(np.uint8),connectivity=4)
+_big=l_==l_[_q(120),_q(230)]
+ebene=np.full((ny,nx),'HANG',dtype='U12'); fix=np.zeros((ny,nx),bool)
+# Nordplateau: Komponenten ohne Verbindung zur grossen Flaeche, ganz im Nordband
+for i in range(1,n_):
+    m=l_==i
+    if i==l_[_q(120),_q(230)]: continue
+    ys,xs=np.nonzero(m)
+    if ys.max()<_q(40): ebene[m]='PLATEAU_NORD'; hoehe[m]=BEZUG+KL_M; fix|=m
+# Krater: vom Kraterwall umschlossene Komponenten; die Gipfelmulde (Komponente mit Mittelpunkt cx<_q(100)... ) siehe unten
+_ka,_kb,_kc,_kd=WAND_H['Krater'][1]
+for i in range(1,n_):
+    m=l_==i
+    if fix[m].any() or i==l_[_q(120),_q(230)]: continue
+    ys,xs=np.nonzero(m)
+    if xs.min()>=_ka and xs.max()<=_kc and ys.min()>=_kb and ys.max()<=_kd:
+        if ys.max()<_q(124) and xs.mean()<_q(120): ebene[m]='GIPFEL'; hoehe[m]=BEZUG+WAND_H['Krater'][0]   # Schneekuppe noerdlich des Kraters, liegt ueber dem Kraterboden (Sicht t34u) [A]
+        else: ebene[m]='KRATER'; hoehe[m]=BEZUG
+        fix|=m
+# kleine eingeschlossene Flaechen in Waenden (Simse) [A]: Hoehe = Mittel der angrenzenden Stufen, spaeter
+_sims=_fr&~_big&~fix
+ebene[_sims]='SIMS'
+# grosse Flaeche: feste Stufen
+_t=_big&np.isclose(hoehe,BEZUG-_hs); ebene[_t]='TAL_SUED'; fix|=_t
+_o=_big&np.isclose(hoehe,BEZUG+WAND_H['Ostgrat'][0]); ebene[_o]='OSTPLATEAU'; fix|=_o
+_s=_big&basin; ebene[_s]='SENKE'; hoehe[_s]=BEZUG; fix|=_s
+# Laplace fuer den Rest der grossen Flaeche (Waende = kein Fluss) [A]
+_u=_big&~fix; hoehe[_u]=BEZUG-_hs/2
+for _it in range(6000):
+    hp=np.pad(hoehe,1,mode='edge'); mp=np.pad(_big,1)
+    acc=np.zeros((ny,nx)); cnt=np.zeros((ny,nx))
+    for dy,dx in ((0,1),(2,1),(1,0),(1,2)):
+        nm=mp[dy:dy+ny,dx:dx+nx]; acc+=np.where(nm,hp[dy:dy+ny,dx:dx+nx],0); cnt+=nm
+    nh=np.where(cnt>0,acc/np.maximum(cnt,1),hoehe)
+    if np.abs(nh[_u]-hoehe[_u]).max()<1e-4: break
+    hoehe[_u]=nh[_u]
+hoehe=np.round(hoehe,2)
+# Rest: nahe einer Stufe (<=0,5 m) zaehlt zur Stufe, sonst HANG [A]
+def _an(r,name):                       # nur Teile, die an die feste Stufe angrenzen (keine Inseln mitten im Hang)
+    nn,ll=cv2.connectedComponents((r|(ebene==name)&fix).astype(np.uint8),connectivity=4)
+    ok=np.unique(ll[(ebene==name)&fix]); return r&np.isin(ll,ok[ok>0])
+_r0=_an(_u&(np.abs(hoehe-BEZUG)<=0.5),'SENKE')
+_r1=_an(_u&(np.abs(hoehe-(BEZUG-_hs))<=0.5),'TAL_SUED')
+_r2=_an(_u&(np.abs(hoehe-(BEZUG+WAND_H['Ostgrat'][0]))<=0.5),'OSTPLATEAU')
+ebene[_r0]='SENKE'; ebene[_r1]='TAL_SUED'; ebene[_r2]='OSTPLATEAU'
+# Simse: Mittel der Nachbarstufen ueber die Wand (Ring 3 Zellen) [A]
+n2,l2=cv2.connectedComponents(_sims.astype(np.uint8),connectivity=4)
+for i in range(1,n2):
+    m=l2==i; ring=(cv2.dilate(m.astype(np.uint8),np.ones((9,9),np.uint8))>0)&_fr&~_sims
+    hoehe[m]=round(float(hoehe[ring].mean()),2) if ring.any() else BEZUG
+ebene[_wk]='WAND'
+hq[ebene=='HANG']='A'
+ebene_hoeher=np.isin(ebene,['PLATEAU_NORD','OSTPLATEAU','GIPFEL']).astype(int)
 klippe_h=np.where(_wk,KL_M,np.nan); wand_name=np.where(_wk&nord,'Nord','').astype('U10')
 for _n,(_h,(_a,_b,_c,_d)) in WAND_H.items():
     _m=np.zeros((ny,nx),bool); _m[_b:_d+1,_a:_c+1]=True; _m&=_wk&~nord; klippe_h[_m]=_h; wand_name[_m]=_n

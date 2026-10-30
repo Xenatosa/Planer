@@ -192,3 +192,10 @@
   - nördlich der Nordwand
   - am Ostrand
   - In c20 ist das oft Hang- oder Kantenfläche. Die Höhe dort ist nicht belegt.
+
+## t34u Genaue Pruefung Ebenen und Felder
+- Angesehen (selbst): Ebenen-Quadranten NW/NO/SW/SO bei 6 px/Zelle mit Grenzlinien und 8er-Gitter ueber c20; Untergrund-Quadranten ebenso; Vorher- und Nachher-Bild ganz; 6 3D-Renders.
+- NICHT angesehen: einzelne 16×16-Zellen-Kacheln aller Bereiche; neigung_grad nicht bildlich geprueft (nur Regel); z50 nur per Skript.
+- Gefunden: 30 058 z25-Zellen mit falscher ebene (F1–F10, Liste `pruefung/t34u_fehlerliste.csv`). Ursache systematisch: Fenster-/Rest-Regel. Behoben im Skript (Wand-Zusammenhang + Laplace).
+- Regelpruefung `pruef_konsistenz_t34u.py` [R]: begehbar, bebaubar ⊂ senke_becken, bebaubar ⊂ erweitert, WAND ⇔ Klippe, wasser_eis, Stufenhoehen, ebene_hoeher: 0 Verstoesse in z25 und z50. Schema-Enums: 0 Verstoesse.
+- Untergrund: kein Fehler bewiesen; Verdachtsstellen B6–B8 offen.

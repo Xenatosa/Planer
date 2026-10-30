@@ -2,7 +2,7 @@ import csv,numpy as np,collections
 from PIL import Image,ImageDraw,ImageFont
 R=list(csv.DictReader(open('raster_c20_z25_zellen.csv')))
 assert len(R)==336*303
-P={'SENKE':(255,200,0),'WEST':(0,170,255),'WAND':(150,75,0),'TAL_SUED':(170,0,255),'PLATEAU_NORD':(255,40,40),'OSTPLATEAU':(0,200,60),'KRATER':(255,120,200)}
+P={'SENKE':(255,200,0),'HANG':(0,170,255),'WAND':(150,75,0),'TAL_SUED':(170,0,255),'PLATEAU_NORD':(255,40,40),'OSTPLATEAU':(0,200,60),'KRATER':(255,120,200),'GIPFEL':(255,255,255),'SIMS':(0,0,0)}
 names=list(P);lab=np.full((303,336),-1)
 for r in R:
     e=r['ebene']; assert e in P,(r['cx'],r['cy'],e); lab[int(r['cy']),int(r['cx'])]=names.index(e)
@@ -23,12 +23,12 @@ bad=(d!=lab).sum(); print('abweichend',bad)
 full=((( (out.astype(float)-(1-A)*g)/A)[:,:,None,:]-pal[None,None])**2).sum(-1).argmin(-1)
 print('pixel abweichend',(full!=lab.repeat(S,0).repeat(S,1)).sum())
 cnt=collections.Counter(r['ebene'] for r in R)
-W=out.shape[1];leg=Image.new('RGB',(W,330),'white');dr=ImageDraw.Draw(leg)
+W=out.shape[1];leg=Image.new('RGB',(W,450),'white');dr=ImageDraw.Draw(leg)
 f=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',26)
-dr.text((20,10),f'Ebenen z25 – alle {sum(cnt.values())} Zellen (Feld ebene, t33u). Grund: c20 grau',fill='black',font=f)
+dr.text((20,10),f'Ebenen z25 – alle {sum(cnt.values())} Zellen (Feld ebene, t34u). Grund: c20 grau',fill='black',font=f)
 for i,n in enumerate(names):
     x=20+(i%4)*330;y=70+(i//4)*120
     dr.rectangle((x,y,x+60,y+60),fill=P[n],outline='black',width=2)
     dr.text((x+70,y),n,fill='black',font=f);dr.text((x+70,y+34),f'{cnt[n]} Zellen',fill='black',font=f)
-img=Image.new('RGB',(W,out.shape[0]+330));img.paste(Image.fromarray(out),(0,0));img.paste(leg,(0,out.shape[0]))
-img.save('pruefung/t33u_ebenen_vollstaendig.png');print(cnt,img.size)
+img=Image.new('RGB',(W,out.shape[0]+450));img.paste(Image.fromarray(out),(0,0));img.paste(leg,(0,out.shape[0]))
+img.save('pruefung/t34u_nachher_ebenen.png');print(cnt,img.size)

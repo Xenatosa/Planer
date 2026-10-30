@@ -13,7 +13,9 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
   - `hindernis_id` und `hindernis_art` [S]
 - **Ebenen [A]:**
   - SENKE: Talkessel, Bezug 0 m
-  - WEST: 0 m
+  - HANG (t34u): freie Flaeche ohne Wand zwischen den Stufen, Hoehe glatt interpoliert −7,1 bis +6,2 m
+  - GIPFEL (t34u): Schneekuppe noerdlich des Kraters, +7,7 m
+  - SIMS (t34u): kleine von Wand umschlossene Flaechen, Hoehe aus Umgebung
   - PLATEAU_NORD: +8,6 m
   - OSTPLATEAU: +6,7 m
   - TAL_SUED: −7,6 m
@@ -23,7 +25,7 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 - **bebaubar oder bebaubar_erweitert:**
   - `bebaubar`: nur im Talkessel (senke_becken) und mindestens 2 m von Wand und Wasser entfernt. z25 hat 27 140 Zellen, z50 hat 7 240 [R].
   - `bebaubar_erweitert`: dieselben Regeln, aber auf allen Ebenen. z25 hat 54 409 Zellen, z50 hat 15 056 [R].
-  - Je Ebene in z25 [R]: SENKE 27 140, WEST 17 501, TAL_SUED 5 501, PLATEAU_NORD 2 759, KRATER 1 187, OSTPLATEAU 321.
+  - Je Ebene in z25 [R]: SENKE 28 269, HANG 13 719, TAL_SUED 7 718, PLATEAU_NORD 3 162, KRATER 1 180, OSTPLATEAU 361, GIPFEL 0, SIMS 0 (t34u).
   - Ob Bauen außerhalb des Kessels erlaubt ist, entscheidet Fabian. Das ist noch offen [F fehlt].
 - **Plätze:** 355 Plätze bis E100 [S].
   - Mindestens 95 % auf bebaubar: 149 Plätze [R].
@@ -38,7 +40,7 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
   - Plätze und Wege stehen in der Overlay-CSV.
 - **Art Director:**
   - `ebene` und `wand_name` zeigen, wo Höhenstufen gemalt werden müssen.
-  - `pruefung/t33u_ebenen_vollstaendig.png` zeigt die Ebenen im Überblick.
+  - `pruefung/t34u_nachher_ebenen.png` zeigt die Ebenen im Überblick.
   - Die Karte selbst bleibt unverändert.
 
 ## Was offen ist
@@ -51,5 +53,11 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
    - 3 SCHNEE-Zellen am Gipfel in z50.
    - Kleine Sandbänke sind in z50 nur teilweise SAND. Beides ist begehbar.
    - Findling #17 und #1–#9 sind nur Befund.
-   - Der Rand bei cx 329–335 ist als WEST eingetragen [A].
+   - Der Rand bei cx 329–335 ist seit t34u TAL_SUED (behoben).
 7. Es gibt noch keine Nachricht an andere Bots. Dafür fehlt Fabians Go.
+
+## t34u
+- Ebenen neu nach Waenden: Fehlerliste `pruefung/t34u_fehlerliste.csv` (F1–F10 behoben, B1–B8 offen).
+- Vorher/Nachher: `pruefung/t34u_vorher_fehler.png`, `pruefung/t34u_nachher_ebenen.png`.
+- Regelpruefung aller Zellen: `pruef_konsistenz_t34u.py` (0 Verstoesse z25/z50).
+- 3D-Modell: `modell3d/` (OBJ + Renders, Hoehen [A]).
