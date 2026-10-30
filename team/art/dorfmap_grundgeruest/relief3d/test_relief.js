@@ -6,10 +6,10 @@ const p=await b.newPage({viewport:{width:1280,height:800}});const fehler=[];
 p.on('pageerror',e=>fehler.push('pageerror '+e.message));p.on('console',m=>{if(m.type()=='error')fehler.push('console '+m.text())});
 await p.goto('file://'+path.resolve(HTML));await p.waitForFunction(()=>window.__test&&window.__test.bereit,null,{timeout:180000});
 const shot=async(n,f)=>{await p.evaluate(f);await p.waitForTimeout(1500);await p.screenshot({path:OUT+'/'+n+'_'+SUF+'.png',timeout:600000});};
-for(const v of ['schraeg','nordwand','krater','suedwand','oben'])for(const m of MODI)await shot(`${v}_${m}`,new Function(`__test.setModus('${m}');__test.setView('${v}')`));
+for(const v of (E.VIEWS||'schraeg,nordwand,krater,suedwand,oben,dorf').split(','))for(const m of MODI)await shot(`${v}_${m}`,new Function(`__test.setModus('${m}');__test.setView('${v}')`));
 for(const m of MODI){await shot(`boden_wand_${m}`,new Function(`__test.setModus('${m}');__test.amWand()`));
  await shot(`totale_auge_${m}`,new Function(`__test.setModus('${m}');__test.boden(253,110,0,0.03)`));}
-if(E.KURZ){console.log(JSON.stringify({fehler,dreiecke:await p.evaluate(()=>window.__dreiecke)}));await b.close();return;}
+if(E.KURZ){console.log(JSON.stringify({fehler,dreiecke:await p.evaluate(()=>window.__dreiecke),info:await p.evaluate(()=>window.__info&&__info())}));await b.close();return;}
 const hoehen=await p.evaluate(()=>{const w=__test.wandfuss;__test.setModus('neu');const n=[__test.H(w.x,w.z-1.5),__test.H(w.x,w.z+0.5)];__test.setModus('alt');const a=[__test.H(w.x,w.z-6),__test.H(w.x,w.z+0.5)];return{neu_oben_unten:n,alt_6m_noerdlich_unten:a};});
 await p.evaluate(()=>{__test.setModus('neu');__test.setView('nordwand')});await p.waitForTimeout(800);
 const k1=await p.evaluate(()=>{const w=__test.wandfuss;return __test.klickWelt(w.x,__test.H(w.x,w.z)+6,w.z-0.02)});

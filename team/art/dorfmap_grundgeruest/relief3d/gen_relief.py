@@ -146,13 +146,17 @@ b64=lambda a:base64.b64encode(np.ascontiguousarray(a,np.float32).tobytes()).deco
 from PIL import Image
 up=lambda M,s=1.5:nd.map_coordinates(nd.gaussian_filter(np.kron(M.astype(float),np.ones((RS,RS))),s*RS),[vj-0.5,vi-0.5],order=1,mode='nearest')
 nz=lambda s,sd:(lambda a:a/a.std())(nd.gaussian_filter(np.random.default_rng(sd).standard_normal((GY,GX)),s))
-MAT={'SCHNEE':(0.86,0.89,0.93),'WALD':(0.78,0.82,0.80),'FELS':(0.62,0.60,0.58),'BODEN':(0.60,0.52,0.43),'SAND':(0.80,0.74,0.62),'WASSER_EIS':(0.55,0.58,0.56)}
+MAT={'SCHNEE':(0.88,0.91,0.95),'WALD':(0.70,0.74,0.69),'FELS':(0.52,0.49,0.46),'BODEN':(0.47,0.37,0.27),'SAND':(0.78,0.69,0.53),'WASSER_EIS':(0.66,0.76,0.82)}
 gew={k:up(ug2==k)*(1+0.35*nz(4,i))**2 for i,k in enumerate(MAT)}
-gew['GEROELL']=up(fuss|steil,1.0)*0.9*(1+0.4*nz(2,11)).clip(0);MAT['GEROELL']=(0.66,0.64,0.61)
-gew['NASS']=np.clip(up(wa,1.0)-0.05,0,1)*0.6;MAT['NASS']=(0.50,0.55,0.58)
+gew['MOOS']=up(ug2=='WALD',3.0)*np.clip(nz(3,31),0,None)*0.8;MAT['MOOS']=(0.36,0.42,0.27)   # Moos/Nadelstreu am Waldrand [A]
+gew['ERDE2']=up(np.isin(ug2,['BODEN','FELS']),2.0)*np.clip(nz(2,33)-0.6,0,None)*0.7;MAT['ERDE2']=(0.38,0.30,0.22)
+gew['GEROELL']=up(fuss|steil,1.0)*0.9*(1+0.4*nz(2,11)).clip(0);MAT['GEROELL']=(0.55,0.53,0.50)
+gew['NASS']=np.clip(up(wa,1.0)-0.05,0,1)*0.6;MAT['NASS']=(0.40,0.45,0.48)
 S=sum(gew.values())+1e-6;col=sum(np.array(MAT[k])[None,None,:]*(gew[k]/S)[...,None] for k in gew)
 c20=np.asarray(Image.open('../_alt/modell3d_t36u/textur_c20_8px.jpg').convert('RGB').resize((GX,GY),Image.BILINEAR)).astype(float)/255
 c20=np.stack([nd.gaussian_filter(c20[...,c],6) for c in range(3)],-1);ton=c20/np.maximum(c20.mean(-1,keepdims=True),1e-3)
+gzv,gxv=np.gradient(G);weh=np.clip(0.5+0.8*nz(10,41)+0.6*np.tanh(gzv*3),0,1);sn=gew['SCHNEE']/S
+col=col*(1-sn*0.10*weh)[...,None]+(sn*0.10*weh)[...,None]*np.array([0.70,0.80,0.95])
 col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
 VC=(np.clip(col,0,1)*255).astype(np.uint8)
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
