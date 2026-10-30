@@ -1,0 +1,20 @@
+{
+ "fehler": [],
+ "klick_mitte": {
+  "art": "zelle",
+  "zell_id": "50904",
+  "untergrund": "SCHNEE",
+  "felder": 44
+ },
+ "klick_gebaeude": {
+  "art": "gebaeude",
+  "id": "bld_kas_siege",
+  "typ": "FUNKTION:Kaserne",
+  "x": 252.91,
+  "z": 142.15,
+  "b": 11.7,
+  "t": 15.3,
+  "h": 7,
+  "y": 0
+ }
+}
