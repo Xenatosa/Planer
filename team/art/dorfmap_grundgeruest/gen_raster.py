@@ -63,7 +63,7 @@ farb[f_schn>=0.3]='SCHNEE'; farb[f_sand>=0.35]='SAND'
 farb[(f_schn<0.5)&(f_fels>=0.03)]='FELS_KLIPPE'; farb[(f_schn<0.5)&(f_wald>=0.15)]='WALD'
 farb[f_wass>=0.35]='WASSER_EIS'
 ug=np.full((ny,nx),'BODEN',dtype='U12')
-quelle=np.full((ny,nx),'MASKE',dtype='U6')
+quelle=np.full((ny,nx),'MASKE',dtype='U8')
 ug[rand]='GESPERRT'; ug[schnee]='SCHNEE'; ug[fz]='FELS_WALD'; ug[wasser]='WASSER_EIS'; ug[hof]='HOF'; ug[feuer]='FEUER'
 ug[weg!='']='WEG'; ug[bruecke]='BRUECKE'
 ohne=(ug=='GESPERRT'); ug[ohne]=farb[ohne]; quelle[ohne]=np.where(farb[ohne]=='UNBEKANNT','KEINE','FARBE')
@@ -166,7 +166,7 @@ if Z==25 and os.path.exists(_op):
     for _r in csv.DictReader(open(_op)):
         _s=(slice(int(_r['cy0']),int(_r['cy1'])+1),slice(int(_r['cx0']),int(_r['cx1'])+1)); _u=ug[_s]==_r['von']
         ug[_s][_u]=_r['nach']; quelle[_s][_u]='OVERRIDE'; ovr[_s]|=_u; ovr12_n+=int(_u.sum())
-elif Z==50 and os.path.exists(_op):   # t30u: z25-Overrides auf z50 uebertragen: z50-Zelle nur wenn >=2 ihrer 4 z25-Zellen dieselbe Regel tragen [R]
+elif Z==50 and os.path.exists(_op):   # t30u/t31u: z25-Overrides auf z50: z50-Zelle wenn >=2 ihrer 4 z25-Zellen dieselbe Regel tragen; Regel ->FELS schon ab 1 (sicherer: nicht begehbar) [F]
     _V=np.full((304,336),'',dtype='U12'); _N=_V.copy()
     for _r in csv.DictReader(open(_op)):
         _s=(slice(int(_r['cy0']),int(_r['cy1'])+1),slice(int(_r['cx0']),int(_r['cx1'])+1)); _V[_s]=_r['von']; _N[_s]=_r['nach']
@@ -176,7 +176,7 @@ elif Z==50 and os.path.exists(_op):   # t30u: z25-Overrides auf z50 uebertragen:
             _k,_c=np.unique(_K[_y,_x],return_counts=True); _m=(_k!='>')
             if _m.any():
                 _kk=_k[_m][_c[_m].argmax()]
-                if _c[_m].max()>=2 and ug[_y,_x]==_kk.split('>')[0]: ug[_y,_x]=_kk.split('>')[1]; quelle[_y,_x]='OVERRIDE'; ovr[_y,_x]=True; ovr12_n+=1
+                if _c[_m].max()>=(1 if _kk.endswith('>FELS') else 2) and ug[_y,_x]==_kk.split('>')[0]: ug[_y,_x]=_kk.split('>')[1]; quelle[_y,_x]='OVERRIDE'; ovr[_y,_x]=True; ovr12_n+=1
 # t12u: Suedwald-Band (suedlich des Flusses, y>=SW_Y): Stamm-Wand/Fels -> WALD, Luecken <=4 Zellen schliessen (5x5-Closing) [A]
 SW_Y=int(276*25/Z); _band=np.zeros((ny,nx),bool); _band[SW_Y:]=True
 _c=_band&np.isin(ug,['KLIPPE_WAND','FELS'])&~ovr; ug[_c]='WALD'; suedwald_n=int(_c.sum())
@@ -251,9 +251,16 @@ for x in range(nx):                     # Nordplateau: oberhalb der obersten Nor
     yy=np.nonzero(_wk[:NB,x])[0]
     if len(yy): hoehe[:yy.min(),x]=BEZUG+KL_M
 _h,(a_,b_,c_,d_)=WAND_H['Suedgrat']
-for x in range(a_,c_+1):                # Suedvorland: unterhalb der untersten Gratwand, Grat faellt nach Sueden ab [A]
+SG_X0=81*25//Z   # t31u: Suedgrat beginnt in c20 bei cx81; der Block cx26-55/cy223-247 steht frei (Sicht pruefung/t31u_talsued_a.png) [S]
+_sg={}
+for x in range(max(a_,SG_X0),c_+1):     # Suedvorland: unterhalb der untersten Gratwand, Grat faellt nach Sueden ab [A]
     yy=np.nonzero(_wk[b_:d_+1,x])[0]
-    if len(yy): hoehe[b_+yy.max()+1:,x]=BEZUG-_h
+    if len(yy): _sg[x]=b_+yy.max()+1
+_xs=sorted(_sg)
+for _l,_r in zip(_xs,_xs[1:]):          # t31u: Schlucht-Luecken <=8 Spalten im Grat (cx246-249, Bach durch den Grat, Talboden durchgehend in c20) [S]
+    if 1<_r-_l<=9:
+        for x in range(_l+1,_r): _sg[x]=max(_sg[_l],_sg[_r])
+for x,_y0 in _sg.items(): hoehe[_y0:,x]=BEZUG-_h
 _h,(a_,b_,c_,d_)=WAND_H['Ostgrat']
 for y in range(b_,d_+1):                # Ostplateau: rechts der aeussersten Ostwand liegt hoeher (Wand zeigt nach Westen) [A]
     xx=np.nonzero(_wk[y,a_:c_+1])[0]
@@ -268,7 +275,7 @@ _ki=[i for i in range(1,n_) if st_[i,0]>_ka and st_[i,0]+st_[i,2]-1<_kc]  # Komp
 ebene[np.isin(l_,_ki)&(ebene=='WEST')]='KRATER'
 ebene[basin]='SENKE'; ebene[np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])]='WAND'
 ebene_hoeher=np.isin(ebene,['PLATEAU_NORD','OSTPLATEAU']).astype(int)
-klippe_h=np.where(_wk,KL_M,np.nan); wand_name=np.where(_wk&nord,'Nord','')
+klippe_h=np.where(_wk,KL_M,np.nan); wand_name=np.where(_wk&nord,'Nord','').astype('U10')
 for _n,(_h,(_a,_b,_c,_d)) in WAND_H.items():
     _m=np.zeros((ny,nx),bool); _m[_b:_d+1,_a:_c+1]=True; _m&=_wk&~nord; klippe_h[_m]=_h; wand_name[_m]=_n
 klippe_quelle=np.where(np.isnan(klippe_h),'',np.where(nord,'R','A'))

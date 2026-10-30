@@ -18,24 +18,10 @@ Rastergröße: ceil(8400/25)×ceil(7560/25) = **336×303 Zellen** [R]; die letzt
 ## 3 Ebenen und Eigenschaftsfelder (je Zelle, CSV-Spalten, Schema `schema_zelle.json`)
 Eine Zelle wird gesetzt, wenn mindestens 50 % ihrer px in der Maske liegen. Ausnahme Wege und Brücke: dort reichen 30 %, damit schmale Wege nicht wegfallen [A].
 
-| Feld | Werte | Quelle |
-|---|---|---|
-| untergrund | BODEN, UNBEKANNT, SAND, WALD, FELS_KLIPPE, SCHNEE, FELS_WALD, WASSER_EIS, HOF, FEUER, WEG, BRUECKE | aus den Masken unten abgeleitet, Vorrang von links nach rechts steigend [A] |
-| zone | A–E | layout_e1_v9/ebenen/10_zonenboden_*_maske.png [S] |
-| platz | nr (99 Plätze) | zonen_c20_v9.json `plaetze[].poly` [S] |
-| weg_id / weg_klasse | G001…, haus_A11 … / GASSE, ANBINDUNG, HAUSWEG | 20_wege_*_maske.png [S]; Breiten 2,4/1,8/1,2 „m“ stehen in v9 noch auf der 30-px-Basis, das sind real 2,9/2,2/1,4 m [R] |
-| hindernis | Index in hindernisse_c20_v2.json (Schneehügel, Eisriss, Moos) | slots_c20/hindernisse_c20_v2.npz [S]; deckt nur das Fenster der Bauzone ab |
-| wasser_eis | 0/1 | arbeit/bach_schutz.npy [S]. **Wasser und Eis lassen sich per Farbe nicht trennen** [S PLAN_LOOK_SYSTEM_v1]; das Feld bedeutet „Bach/See inkl. Schutzband“ [A] |
-| schnee | 0/1 | arbeit/F4.npy [S] |
-| senke_bb4 | 0/1 | arbeit/BB4.npy (Senke/Bauzone) [S] |
-| h4_ext | 0/1 | arbeit/H4_ext.npy [S]; Bedeutung nicht dokumentiert [A] |
-| frei_e2 | 0/1 | slots_c20/mp/frei_e2.npy (ohne Fels, Wald, Wasser, Schluchtpfad) [S] |
-| begehbar | 0/1 | [R]: nicht KLIPPE_WAND, KLIPPE_KANTE, FELS, WASSER_EIS, FELS_WALD, UNBEKANNT oder Hindernis (GESPERRT gibt es nicht mehr); WEG und BRUECKE sind immer begehbar |
-| bebaubar | 0/1 | [R]: senke_bb4 ∧ frei_e2 ∧ ¬Wasser ∧ ¬Fels ∧ ¬Hindernis ∧ ¬Weg ∧ ¬Brücke ∧ ¬Feuer |
-| klippe | KANTE/leer | Übergang von BB4 zu Fels/Rand [R aus Masken]. Grob, weil die Klippenmaske grob ist [S] |
-| skin_slot | ug_<untergrund> | Brücke zum Skin-System (Abschnitt 5) |
+**Stand t31u:** Die gültige Spaltenliste (39 Spalten) mit Werten und Markern steht in `schema_zelle.json`. Die Tabelle aus t3u (zone, platz, weg_id, hindernis, furt, alte Klassen FELS_KLIPPE/FELS_WALD/HOF/WEG) ist überholt und liegt in `_alt/SPEC_t30u.md`. Zone, Platz, Weg, Furt stehen seit t9u in der Overlay-CSV (§2d).
 
-Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454, BODEN 9 040, FELS_WALD 5 999, WEG 2 825, WASSER_EIS 1 214, HOF 430, FEUER 271, BRUECKE 20. Davon begehbar 32 414 und bebaubar 19 931.
+Zählung bei 25 px [R, raster_c20_z25_meta.json, t31u]: SCHNEE 59 807, KLIPPE_WAND 17 574, WALD 11 217, WASSER_EIS 6 695, FELS 2 123, SCHATTEN 1 772, KLIPPE_KANTE 1 178, BODEN 896, SAND 546. Begehbar 62 391, bebaubar 27 140, bebaubar_erweitert 54 409, bauzone_plan 31 893, senke_becken 31 325.
+z50 [R]: begehbar 15 245, bebaubar 7 240, bebaubar_erweitert 15 056.
 
 ## 2a Abdeckung der ganzen Karte (Fabian t5u)
 Das Raster deckt alle 336×303 = 101 808 Zellen ab (8400×7560 px, letzte Zeile 10 px). Jede Zelle hat einen Untergrund und eine `untergrund_quelle`.
@@ -89,7 +75,7 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 
 | Feld | Herleitung | Marker |
 |---|---|---|
-| hoehe_m | Senke (BB4 ohne Wasser) = `BEZUG_M` (Standard 0). Nordklippen-Kante = Bezug + 8,6 m. Sonst leer: Hochflächen, Schneefelder im Westen und Rand | Senke flach [A]; 8,6 [R] |
+| hoehe_m | Senke = `BEZUG_M` (0). Stufen [A] siehe §2d und Feld `ebene` (t30u/t31u): Nordplateau +8,6, Ostplateau +6,7, Tal Süd −7,6, sonst 0 | Senke flach [A]; 8,6 [R] |
 | klippe_hoehe_m | nur Nordwand (obere 25 % der Karte [A]): (190+240)/2 px / 25 = 8,6 m | Maße [S], Rechnung [R], ohne Verkürzung [A] |
 | neigung_grad | atan(Δhoehe/Zellmaß), nur wo hoehe_m bekannt ist. Senke 0°, Klippenkante steil | [R] |
 | fluss_id | BACH_NORD, SEE, BACH_SUED aus bach_schutz, zugeordnet über die Bachpolylinie in slots_c20/mp/frei_e2.py | Maske [S], Zuordnung [R] |
@@ -210,7 +196,7 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 
 - Deko-Kapazität: 0,44 je m² [R] aus Mindestabstand 1,5 m (BERICHT_NETZ_E1 §9.2).
 - Restfehler und Prüfmethode: siehe PRUEFPROTOKOLL.md.
-- z50: nur Meta und PNG, keine CSV.
+- z50: Meta, PNG und CSV (`raster_c20_z50_zellen.csv`, gleiche Spalten) [Stand t31u].
 
 ## bebaubar (t12u)
 `senke_becken`: je Zeile rechts der Kraterwand (ohne Kraterwand: x ≥ 136 [A]) bis links der Ostgratwand, unter der Nordwand, ueber dem Suedgrat; Opening 9×9 kappt Paesse; Zusammenhangskomponente am Seed (230,120).
@@ -233,7 +219,7 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
   - Ausnahme Senke: in der Senke bleibt die bestehende Regel `bebaubar` (keine Änderung).
   - `bebaubar` und `bauzone_plan` bleiben unverändert. Fabian hat die Bauzone nicht entschieden.
   - Höhenstufe ist nicht geprüft: Plateaus über der Nordwand und der Kraterboden zählen mit [A].
-  - z25: 54 416 Zellen (bebaubar 27 142) [R]. z50: 15 091 (bebaubar 7 233) [R].
+  - Stand t29u: z25 54 416 (bebaubar 27 142), z50 15 091 (bebaubar 7 233) [R]. Aktuell t31u: z25 54 409 (27 140), z50 15 056 (7 240) [R].
 - Overrides t29u in `overrides_t12u.csv` (Zeilen 31–420), nur z25:
   - 57× SCHNEE→SAND am Rand der Sandbänke im Südfluss (Sandpixel-Anteil ≥ 0,50 [S]);
   - 63× WASSER_EIS→SCHNEE für Eisschollen im Südfluss (Weißanteil min RGB > 225 ≥ 0,60, y 258–285, x < 312 [A]);
@@ -245,7 +231,16 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
 
 - **Fakt [F]:** Die Senke-Grenze und `bebaubar` bleiben wie sie sind. Bei x=136 und im Nordosten gibt es **keine Gelaendegrenze** (Sicht t29u_rand_x136.png, t29u_rand_nordost.png). Mehr Bauflaeche gibt es nur ueber `bebaubar_erweitert`.
 - **Neues Feld `ebene`** [A]: SENKE, PLATEAU_NORD, OSTPLATEAU, KRATER, TAL_SUED, WEST, WAND. Abgeleitet aus den `hoehe_m`-Stufen (alle [A]) und dem Kraterfenster cx71-136/cy92-204. `ebene_hoeher`=1 fuer PLATEAU_NORD und OSTPLATEAU. Das Kraterinnere liegt auf Bezugshoehe [A].
-- z25-Zellen je Ebene [R]: SENKE 31265, WEST 28293, WAND 18752, TAL_SUED 15659, PLATEAU_NORD 4005, OSTPLATEAU 2014, KRATER 1820.
-- bebaubar_erweitert je Ebene [R]: SENKE 27140, WEST 16849, TAL_SUED 6158, PLATEAU_NORD 2759, KRATER 1187, OSTPLATEAU 321.
-- Bekannte Luecke [A]: TAL_SUED hat Spalten-Luecken (etwa cx 0-15, 35-50, 150-152), dort fehlt die Suedgrat-Wand im Hoehenmodell; diese Zellen stehen auf WEST. Sicht pruefung/t30u_ebenen.png.
-- **z50:** Die z25-Overrides gelten jetzt auch fuer z50. Eine z50-Zelle wird nur geaendert, wenn mindestens 2 ihrer 4 z25-Zellen dieselbe Regel haben und die Klasse passt [R]. Damit gilt das auch fuer 150 z50-Zellen, darunter der Schneegipfel → FELS.
+- Zahlen je Ebene: siehe t31u.
+- (t30u, ueberholt durch t31u) Luecken-Befund TAL_SUED: siehe t31u.
+- **z50:** Die z25-Overrides gelten auch fuer z50 (Regel siehe t31u).
+
+## t31u Talboden Süd, z50-Regel, Datentyp-Fehler
+- **TAL_SUED-Regel [S/F]:** Der Südgrat beginnt in c20 bei cx 81. Westlich davon gibt es keine Gratwand. Der Block bei cx 26–55 / cy 223–247 steht frei, das Gelände fällt dort sanft zum Fluss ab (Sicht `pruefung/t31u_talsued_a.png`). Deshalb gilt westlich von cx 81 jetzt **WEST (Bezugshöhe) [A]** statt TAL_SUED. Vorher war cx 26–55 TAL_SUED, das war nicht belegt.
+- Schlucht cx 246–249: Ein Bach läuft durch den Grat, und der Talboden ist in c20 durchgehend (`pruefung/t31u_talsued_b.png`). Lücken von höchstens 8 Spalten werden mit der tieferen Startzeile der Nachbarn geschlossen [S].
+- Rand cx 329–335 liegt außerhalb des Grat-Fensters und bleibt WEST [A]. Offen.
+- z25 je Ebene [R]: SENKE 31 265, WEST 29 842, WAND 18 752, TAL_SUED 14 110, PLATEAU_NORD 4 005, OSTPLATEAU 2 014, KRATER 1 820.
+- bebaubar_erweitert je Ebene z25 [R]: SENKE 27 140, WEST 17 501, TAL_SUED 5 501, PLATEAU_NORD 2 759, KRATER 1 187, OSTPLATEAU 321.
+- **z50-Regel [F]:** Eine z50-Zelle übernimmt eine z25-Override-Regel, wenn mindestens 2 ihrer 4 z25-Zellen sie tragen. Regeln nach FELS (Gipfel, Findling) gelten schon ab 1 von 4, weil nicht begehbar die sicherere Seite ist. Das betrifft 159 z50-Zellen.
+- **Fehler behoben:** `untergrund_quelle` wurde als „OVERRI“ abgeschnitten (Datentyp zu kurz), `wand_name` als „Krat/Sued/Ostg“. Jetzt stehen dort OVERRIDE bzw. Krater/Suedgrat/Ostgrat. schema_zelle.json passt jetzt zu den 39 CSV-Spalten, alle Enum-Werte sind geprüft [R].
+- Overrides t31u: Zeilen 425–427 (Sandbank-Ränder SCHNEE→SAND, 9 Zellen) [S].

@@ -24,7 +24,7 @@
  "glaettung_zellen": 7746,
  "boden_zu_schnee": 8280,
  "wasser_t12u": 1609,
- "ovr12_n": 1278,
+ "ovr12_n": 1287,
  "suedwald_n": 1952,
  "wald_aus_wand": 585,
  "overrides_zellen": 1288,
@@ -91,9 +91,9 @@
   "FELS": 2123,
   "KLIPPE_KANTE": 1178,
   "KLIPPE_WAND": 17574,
-  "SAND": 537,
+  "SAND": 546,
   "SCHATTEN": 1772,
-  "SCHNEE": 59816,
+  "SCHNEE": 59807,
   "WALD": 11217,
   "WASSER_EIS": 6695
  },
@@ -105,18 +105,18 @@
   "OSTPLATEAU": 321,
   "PLATEAU_NORD": 2759,
   "SENKE": 27140,
-  "TAL_SUED": 6158,
+  "TAL_SUED": 5501,
   "WAND": 0,
-  "WEST": 16844
+  "WEST": 17501
  },
  "ebene_zellen": {
   "KRATER": 1820,
   "OSTPLATEAU": 2014,
   "PLATEAU_NORD": 4005,
   "SENKE": 31265,
-  "TAL_SUED": 15659,
+  "TAL_SUED": 14110,
   "WAND": 18752,
-  "WEST": 28293
+  "WEST": 29842
  },
  "bauzone_bestand": 23123,
  "bauzone_plan": 31893,

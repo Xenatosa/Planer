@@ -141,3 +141,31 @@
 - Linie cx 190-195 / cy 40-100: Das ist ein **zugefrorener Bach** (hellblaue Eisfuellung, doppelte Ufer), kein Weg. Er ist 1 Zelle breit als WASSER_EIS erfasst und passt (pruefung/t30u_linie_cx190.png).
 - z50 hat jetzt Overrides (150 Zellen) [R].
 - Ungeprueft: ob die z50-Uebernahme an Sandbank-Raendern zu viel oder zu wenig aendert. Die z50-Zellen wurden nicht einzeln angesehen.
+
+## t31u Pruefung
+- **TAL_SUED:** Die echten Luecken waren cx 0–25, 56–80 und 246–249. Die Angabe „35–50, 150–152“ aus t30u war falsch abgelesen. Alles in c20 angesehen (pruefung/t31u_talsued_a.png, t31u_talsued_b.png):
+  - Westlich von cx 81 gibt es keine Gratwand. Der Block cx 26–55 ist frei stehend. Darum gilt dort WEST [A]; vorher war TAL_SUED an cx 26–55 nicht belegt.
+  - Die Schlucht cx 246–249 ist geschlossen [S].
+  - Ergebnis: pruefung/t31u_ebenen.png, selbst angesehen.
+  - Offen: Rand cx 329–335.
+- **z50-Stichproben** (pruefung/t31u_z50_gipfel.png, t31u_z50_sand_w.png, t31u_z50_sand_m.png, t31u_z50_sand_o.png):
+  - Gipfel: Im Umriss liegen 96 WAND, 31 FELS, 17 KANTE und 3 SCHNEE [R]. Die 3 SCHNEE-Zellen sind offen.
+  - Sandbänke: Grob richtig. Kleine Bänke sind in z50 teils SCHNEE (zu wenig SAND); beides ist begehbar. Ungeprüft: sand_o habe ich nur erzeugt, nicht einzeln angesehen.
+  - Neue Regel: FELS-Regeln gelten ab 1 von 4 z25-Zellen.
+- **z50 bebaubar 7 233 → 7 240, erklärt [R]:**
+  - +7 Zellen (cx 63–68, cy 22–23): Override 3 (toter Baumstamm KLIPPE_WAND→WALD) gilt jetzt auch in z50. Dadurch liegt die Nordwand-Grenze von senke_becken dort 1–2 Zellen höher, so wie in z25.
+  - +1 Zelle (63,49): Overrides 29/30 (X069-Weg FELS→SCHNEE).
+  - −1 Zelle (160,26): Findling 421 → FELS.
+- **Findlinge 4x** (pruefung/t31u_findling_4x_0.png und _1.png):
+  - #1–#9: flache Erdflecken mit Kontur, keine Blockform. Bleibt SCHNEE (beides begehbar), nur Befund.
+  - #10 und #12: Rand einer Bodenflaeche. Befund, keine Änderung.
+  - #15, #16, #18: dunkler Saum der Sandbank, belegt → SAND (Overrides 425–427).
+  - #17: Saum diagonal durch die Zelle, unsicher, bleibt.
+- **BODEN-Streifen cx 207–210 / cy 295–301:** In c20 ist das freier graugrüner Waldboden mit Schneebällen, kein Stamm und kein Pfad. BODEN passt, keine Änderung.
+- **Konsistenz:**
+  - SPEC §3: Die alte Spaltentabelle und die Zaehlung waren überholt und sind ersetzt (Vorfassung _alt/SPEC_t30u.md). Die Angabe „z50 ohne CSV“ war falsch und ist korrigiert.
+  - schema_zelle.json: 6 Overlay-Felder entfernt, 8 fehlende Felder ergänzt. Enums passen zu den Daten.
+  - Datentyp-Fehler behoben: OVERRI→OVERRIDE, Krat/Sued/Ostg → volle Namen.
+  - BAUPLAN_E100.md: §5 auf bebaubar_erweitert aktualisiert, dazu Fels 1, Wald unter Wegen 164, Kapazitaet 27 452 (Vorfassung _alt/BAUPLAN_E100_t26u.md).
+  - Ältere Abschnitte im PRUEFPROTOKOLL sind Verlauf und behalten ihre damaligen Zahlen.
+- Ungeprüft: Die Zahlen in _alt/ habe ich nicht geprüft. Die Zahlen in älteren pruefung/t1x-Bildern sind nicht neu erzeugt.

@@ -35,52 +35,18 @@
     },
     "untergrund": {
       "enum": [
-        "BODEN",
-        "UNBEKANNT",
-        "SAND",
-        "WALD",
-        "FELS_KLIPPE",
         "SCHNEE",
-        "FELS_WALD",
-        "WASSER_EIS",
-        "HOF",
-        "FEUER",
-        "WEG",
-        "BRUECKE",
         "KLIPPE_WAND",
         "KLIPPE_KANTE",
+        "WALD",
+        "WASSER_EIS",
         "FELS",
-        "SCHATTEN"
-      ]
-    },
-    "zone": {
-      "enum": [
-        "",
-        "A",
-        "B",
-        "C",
-        "D",
-        "E"
-      ]
-    },
-    "platz": {
-      "type": "string",
-      "description": "nr aus zonen_c20_v9.json, leer = kein Platz"
-    },
-    "weg_id": {
-      "type": "string"
-    },
-    "weg_klasse": {
-      "enum": [
-        "",
-        "GASSE",
-        "ANBINDUNG",
-        "HAUSWEG"
-      ]
-    },
-    "hindernis": {
-      "type": "integer",
-      "description": "Index+1 in hindernisse_c20_v2.json, 0 = keins"
+        "SCHATTEN",
+        "BODEN",
+        "SAND",
+        "UNBEKANNT"
+      ],
+      "description": "t31u: nur Gelaendeklassen; HOF/FEUER/WEG/BRUECKE/FELS_KLIPPE/FELS_WALD sind seit t9u/t10u ueberholt (Overlay-CSV)"
     },
     "wasser_eis": {
       "enum": [
@@ -129,9 +95,10 @@
     "klippe": {
       "enum": [
         "",
-        "KANTE"
+        "KANTE",
+        "WAND"
       ],
-      "description": "Übergang Senke→Fels/Rand [R aus Masken]"
+      "description": "KANTE=obere Wandkante, WAND=Wandzelle [R]"
     },
     "skin_slot": {
       "type": "string",
@@ -203,13 +170,6 @@
       ],
       "description": "begehbar, an Wasser angrenzend"
     },
-    "furt": {
-      "enum": [
-        0,
-        1
-      ],
-      "description": "Weg quert Wasser ohne Brücke"
-    },
     "begehbar_3d": {
       "enum": [
         0,
@@ -226,7 +186,7 @@
         "OVERRIDE",
         "RAND"
       ],
-      "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; KEINE=UNBEKANNT"
+      "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; FILTER=[A] Glaettung/Nachbarklasse; OVERRIDE=[S] Sichtpruefung (overrides_*.csv); KEINE=UNBEKANNT"
     },
     "klippe_hoehe_quelle": {
       "enum": [
@@ -288,6 +248,57 @@
         1
       ],
       "description": "t30u 1 = Zelle liegt auf einer hoeheren Ebene als die Senke (PLATEAU_NORD, OSTPLATEAU) [A]"
+    },
+    "hindernis_id": {
+      "type": "integer",
+      "description": "Index+1 in hindernisse_c20_v2.json bzw. Gelaende-Hindernis, 0 = keins [S/R]"
+    },
+    "hindernis_art": {
+      "enum": [
+        "",
+        "GELAENDE",
+        "MASKE"
+      ],
+      "description": "MASKE=hindernisse_c20_v2 [S]; GELAENDE=nicht begehbare Gelaendeklasse [R]"
+    },
+    "wand_name": {
+      "enum": [
+        "",
+        "Nord",
+        "Krater",
+        "Suedgrat",
+        "Ostgrat"
+      ],
+      "description": "Wandfenster aus WAND_H bzw. Nordband [A]"
+    },
+    "hoehe_quelle": {
+      "enum": [
+        "A",
+        "R"
+      ],
+      "description": "Marker zu hoehe_m"
+    },
+    "deko_kapazitaet": {
+      "type": "number",
+      "description": "Dekoplaetze je m2 (0,44 auf begehbaren Zellen, sonst 0) [R]"
+    },
+    "deko_baum_ok": {
+      "enum": [
+        0,
+        1
+      ],
+      "description": "Baum-Deko erlaubt [A]"
+    },
+    "deko_fels_ok": {
+      "enum": [
+        0,
+        1
+      ],
+      "description": "Fels-Deko erlaubt (begehbar) [A]"
+    },
+    "flaeche_m2": {
+      "type": "number",
+      "description": "Zellflaeche in m2 (Z=25: 1,0; Z=50: 4,0) [R]"
     }
   },
   "overlay_getrennt": "Plaetze/Wege/Hoefe/Feuer/Bruecken liegen im Overlay (raster_c20_z25_overlay_plaetze_wege.png, Spalten zone/weg/platz). 99 Plaetze unveraendert."

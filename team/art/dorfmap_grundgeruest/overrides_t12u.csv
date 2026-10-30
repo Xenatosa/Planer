@@ -423,3 +423,6 @@ nr,cx0,cy0,cx1,cy1,von,nach,marker,begruendung
 422,10,223,11,223,SCHNEE,FELS,S,"t30u Findling (runder Block, dunkle Kontur, Schatten); Sicht pruefung/t30u_findling_treffer.png #11"
 423,14,229,14,230,SCHNEE,FELS,S,"t30u Findling (runder Block, dunkle Kontur, Schatten); Sicht pruefung/t30u_findling_treffer.png #13"
 424,9,242,9,242,SCHNEE,FELS,S,"t30u Findling mit Schneekappe; Sicht pruefung/t30u_findling_treffer.png #14"
+425,135,261,139,261,SCHNEE,SAND,S,"t31u Sandbank-Rand (dunkler Sandsaum) gehoert zur Sandbank; Sicht pruefung/t31u_findling_4x_1.png #15"
+426,131,262,133,262,SCHNEE,SAND,S,"t31u Sandbank-Rand (dunkler Sandsaum) gehoert zur Sandbank; Sicht pruefung/t31u_findling_4x_1.png #16"
+427,201,266,201,266,SCHNEE,SAND,S,"t31u Sandbank-Rand (dunkler Sandsaum) gehoert zur Sandbank; Sicht pruefung/t31u_findling_4x_1.png #18"
