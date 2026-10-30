@@ -25,35 +25,52 @@ H[rest]=Hk[rest]
 Hboden=H.copy()
 tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
 H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
-# --- Ecken: Mittel der Nachbarn mit |dH|<=SPRUNG (glatte Flaechen, senkrechte Wand bei Sprung)
-P=np.pad(H,1,mode='edge');C=np.zeros((NY,NX,4),np.float32)       # Ecken: 0=(x0,z0) 1=(x1,z0) 2=(x1,z1) 3=(x0,z1)
-for k,(ox,oz) in enumerate([(0,0),(1,0),(1,1),(0,1)]):
-    s=np.zeros((NY,NX));n=np.zeros((NY,NX))
-    for dx in (ox-1,ox):
-        for dz in (oz-1,oz):
-            q=P[1+dz:1+dz+NY,1+dx:1+dx+NX];m=np.abs(q-H)<=SPRUNG;s+=np.where(m,q,0);n+=m
-    C[...,k]=s/n
-# --- Kanten mit Sprung -> Wandflaechen; Kennzahlen je Zelle
-fallx=C[:,:-1,[1,2]]-C[:,1:,[0,3]]   # links minus rechts
-fallz=C[:-1,:,[3,2]]-C[1:,:,[0,1]]   # oben(nord) minus unten(sued)
-kh=np.zeros((NY,NX));oben=np.zeros((NY,NX),bool);fuss=np.zeros((NY,NX),bool)
-def reg(d,a,b):
-    m=np.abs(d).max(-1);w=m>SPRUNG;hi=d.mean(-1)>0
-    np.maximum.at(kh,a,np.where(w,m,0));np.maximum.at(kh,b,np.where(w,m,0))
-    oben[a]|=w&hi;fuss[a]|=w&~hi;oben[b]|=w&~hi;fuss[b]|=w&hi
-yy,xx=np.mgrid[0:NY,0:NX-1];reg(fallx,(yy,xx),(yy,xx+1))
-yy,xx=np.mgrid[0:NY-1,0:NX];reg(fallz,(yy,xx),(yy+1,xx))
-gx=((C[...,1]+C[...,2])-(C[...,0]+C[...,3]))/2;gz=((C[...,2]+C[...,3])-(C[...,0]+C[...,1]))/2
-neig=np.degrees(np.arctan(np.hypot(gx,gz)))
+# --- t42u: glattes Hoehenfeld G auf 0,5-m-Gitter (keine 1-m-Treppen). Waende = steile, leicht unregelmaessige Flaechen [A]
+RS=2;GX,GY=NX*RS+1,NY*RS+1;WANDWINKEL=55.0
+Hn=np.kron(H,np.ones((RS,RS)))                                     # Proben in Zellmitte-Unterteilung
+J=np.zeros((NY,NX),bool);J[:,1:]|=np.abs(np.diff(H,axis=1))>SPRUNG;J[:,:-1]|=np.abs(np.diff(H,axis=1))>SPRUNG
+J[1:,:]|=np.abs(np.diff(H,axis=0))>SPRUNG;J[:-1,:]|=np.abs(np.diff(H,axis=0))>SPRUNG
+wz=nd.gaussian_filter(np.kron(nd.binary_dilation(J,iterations=3),np.ones((RS,RS))).astype(float),2)
+rs=np.random.default_rng(42);noi=nd.gaussian_filter(rs.standard_normal(Hn.shape),3);noi/=noi.std()
+Hs=nd.gaussian_filter(Hn,3)                                        # sigma 1,5 m [A]
+lo=nd.minimum_filter(Hn,15);hi=nd.maximum_filter(Hn,15);Rg=hi-lo
+t=np.clip(((Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.12*noi)*6+0.5,0,1);t=t*t*(3-2*t)
+Gs=lo+Rg*t;Gs=np.where(Rg>SPRUNG,Gs,Hs)
+Gsamp=Hs*(1-wz)+Gs*wz
+vj,vi=np.mgrid[0:GY,0:GX].astype(float)
+G=nd.map_coordinates(Gsamp,[vj-0.5,vi-0.5],order=1,mode='nearest').astype(np.float32)
+wm=np.kron(wa,np.ones((RS,RS))).astype(float);Wn=np.kron(np.nan_to_num(Wsp),np.ones((RS,RS)))
+lev=nd.gaussian_filter(Wn*wm,2)/np.maximum(nd.gaussian_filter(wm,2),1e-6)
+wmask=nd.map_coordinates(nd.gaussian_filter(wm,1),[vj-0.5,vi-0.5],order=1,mode='nearest')>0.5
+WV=np.where(wmask,np.maximum(nd.map_coordinates(lev,[vj-0.5,vi-0.5],order=1,mode='nearest'),G+0.05),-999).astype(np.float32)
+# Dreiecke je Teilquadrat (a=oben links,b=oben rechts,c=unten links,d=unten rechts): (a,c,d) und (a,d,b) – gleich im Viewer
+def tri_steil(G):
+    a=G[:-1,:-1];b=G[:-1,1:];c=G[1:,:-1];d=G[1:,1:];s=1/RS
+    def ny(dx1,dy1,dz1,dx2,dy2,dz2):
+        n=np.stack([dy1*dz2-dz1*dy2,dz1*dx2-dx1*dz2,dx1*dy2-dy1*dx2]);return np.abs(n[1])/np.linalg.norm(n,axis=0)
+    z0=np.zeros_like(a)
+    n1=ny(z0,c-a,z0+s,z0+s,d-a,z0+s);n2=ny(z0+s,d-a,z0+s,z0+s,b-a,z0)
+    return np.degrees(np.arccos(np.clip(n1,0,1))),np.degrees(np.arccos(np.clip(n2,0,1)))
+W1,W2=tri_steil(G);Wq=np.maximum(W1,W2)                           # Neigung je Teilquadrat
+neig=Wq.reshape(NY,RS,NX,RS).max((1,3))
+steil=neig>WANDWINKEL
+Hz=sum(G[dy:dy+GY-1:RS,dx:dx+GX-1:RS][:NY,:NX] for dy in range(3) for dx in range(3))/9    # Zellmittel 3x3 Punkte
+Gmax=nd.maximum_filter(np.maximum.reduceat(np.maximum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+Gmin=nd.minimum_filter(np.minimum.reduceat(np.minimum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+nb=nd.binary_dilation(steil,structure=np.ones((3,3)))&~steil
+mid=(Gmax+Gmin)/2
+oben=nb&(Hz>=mid);fuss=nb&(Hz<mid)
+kh=np.where(steil|nb,Gmax-Gmin,0.0)
+C=np.stack([G[0:-1:RS,0:-1:RS][:NY,:NX],G[0:-1:RS,RS::RS][:NY,:NX],G[RS::RS,RS::RS][:NY,:NX],G[RS::RS,0:-1:RS][:NY,:NX]],-1)
 # --- neuer Untergrund: Bandzellen sind jetzt Oberflaeche der oberen Ebene [F]
 ug2=ug.copy();ug2[wand]='SCHNEE';ug2[wand&(wn=='Krater')]='FELS';ug2[ug=='SCHATTEN']='SCHNEE'
 ug2[wa]='WASSER_EIS'
 b3d_alt=A('begehbar_3d')=='1'
 b3d=(neig<=35)&(b3d_alt|wand)&~(wa&(fl=='SEE'))
 ebene2=eb.copy();ebene2[wand]=np.where(wn[wand]=='Nord','PLATEAU_NORD',np.where(wn[wand]=='Ostgrat','OSTPLATEAU',np.where(wn[wand]=='Krater','KRATERRAND','SENKE')))
-kl=np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS',''))
-neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t41u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
- 'skin_slot':np.char.add('ug_',np.char.lower(ug2.astype(str))),'hoehe_m':np.round(H,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t41u'),
+kl=np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS','')))
+neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t42u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
+ 'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),'hoehe_m':np.round(Hz,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t42u_glatt'),
  'neigung_grad':np.round(neig,1),'klippe_hoehe_m':np.round(kh,1),'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u','') ,
  'wasser_tiefe_m':np.where(wa,tiefe,0).astype(str),'begehbar_3d':b3d.astype(int)}
 extra={'boden_hoehe_m':np.round(Hboden,2),'wasserspiegel_m':np.where(wa,np.round(np.nan_to_num(Wsp),2).astype(str),''),
@@ -65,31 +82,18 @@ with open('zellen_relief.csv','w',newline='') as f:
     w=csv.writer(f);w.writerow(outcols)
     for y in range(NY):
         for x in range(NX):w.writerow([F[c][y,x] for c in outcols])
-# --- Mesh (gleicher Algorithmus wie Viewer) fuer GLB/OBJ
-V=[];T=[];VW=[];TW=[]
-for y in range(NY):
-    for x in range(NX):
-        c=C[y,x];b=len(V);V+= [(x,c[0],y),(x+1,c[1],y),(x+1,c[2],y+1),(x,c[3],y+1)];T+=[(b,b+3,b+2),(b,b+2,b+1)]
-def wq(p):b=len(VW);VW.extend(p);TW.extend([(b,b+1,b+2),(b,b+2,b+3)])
-for y in range(NY):
-    for x in range(NX-1):
-        a=C[y,x];c=C[y,x+1]
-        if max(abs(a[1]-c[0]),abs(a[2]-c[3]))>0.01:wq([(x+1,a[1],y),(x+1,a[2],y+1),(x+1,c[3],y+1),(x+1,c[0],y)])
-for y in range(NY-1):
-    for x in range(NX):
-        a=C[y,x];c=C[y+1,x]
-        if max(abs(a[3]-c[0]),abs(a[2]-c[1]))>0.01:wq([(x,a[3],y+1),(x+1,a[2],y+1),(x+1,c[1],y+1),(x,c[0],y+1)])
+# --- Mesh (gleiche Dreiecke + gleiche Wandregel wie Viewer) -> GLB mit "boden" (UV = c20-Draufsicht) und "waende"
 import trimesh
+V=np.stack([vi.ravel()/RS,G.ravel(),vj.ravel()/RS],1);UV=np.stack([vi.ravel()/RS/NX,1-vj.ravel()/RS/NY],1)
+I=(np.arange(GY-1)[:,None]*GX+np.arange(GX-1)[None,:]);a=I;b=I+1;c=I+GX;d=I+GX+1
+T1=np.stack([a,c,d],-1);T2=np.stack([a,d,b],-1)
+TT=np.concatenate([T1.reshape(-1,3),T2.reshape(-1,3)]);ST=np.concatenate([W1.ravel(),W2.ravel()])>WANDWINKEL
 sc=trimesh.Scene()
-sc.add_geometry(trimesh.Trimesh(np.array(V),np.array(T),process=False),'boden')
-sc.add_geometry(trimesh.Trimesh(np.array(VW),np.array(TW),process=False),'waende')
-sc.export('dorfmap_relief_z25.glb')
-with open('dorfmap_relief_z25.obj','w') as f:
-    f.write('# t41u Relief, 1 Einheit=1 m, x=cx, y=hoch, z=cy\no boden\n');f.writelines(f'v {a} {b:.2f} {c}\n' for a,b,c in V)
-    f.writelines(f'f {a+1} {b+1} {c+1}\n' for a,b,c in T);o=len(V);f.write('o waende\n')
-    f.writelines(f'v {a} {b:.2f} {c}\n' for a,b,c in VW);f.writelines(f'f {a+1+o} {b+1+o} {c+1+o}\n' for a,b,c in TW)
+sc.add_geometry(trimesh.Trimesh(V,TT[~ST][:,::-1],process=False,visual=trimesh.visual.TextureVisuals(uv=UV)),'boden')
+sc.add_geometry(trimesh.Trimesh(V,TT[ST][:,::-1],process=False),'waende')
+sc.export('dorfmap_relief_z25.glb');TW=TT[ST]
 # --- Objekte (Groessen wie t39u, nur auf neues Relief)
-hc=lambda x,y:float(C[min(int(y),NY-1),min(int(x),NX-1)].mean())
+hc=lambda x,y:float(nd.map_coordinates(G,[[y*RS],[x*RS]],order=1,mode='nearest')[0])
 OV=list(csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')))
 weg=np.zeros((NY,NX),bool);br=np.zeros((NY,NX),bool);deko=np.zeros((NY,NX),bool)
 for o in OV:
@@ -101,7 +105,7 @@ for p in Pl:
     q=np.array([[(x+200)*1.2,(y+40)*1.2] for x,y in p['poly']]);x0,y0=q.min(0);x1,y1=q.max(0)
     ix=slice(max(0,int(x0)),min(NX,int(np.ceil(x1))));iy=slice(max(0,int(y0)),min(NY,int(np.ceil(y1))));belegt[iy,ix]=1
     t=p['typ'];k='FUNKTION' if t.startswith('FUNKTION') else t
-    g=float(np.median(Hboden[iy,ix])) if Hboden[iy,ix].size else 0
+    gg=G[iy.start*RS:iy.stop*RS+1,ix.start*RS:ix.stop*RS+1];g=float(np.median(gg)) if gg.size else 0
     haeuser.append({'id':p['id'],'typ':t,'x':round((x0+x1)/2,2),'z':round((y0+y1)/2,2),'b':round(x1-x0,2),'t':round(y1-y0,2),'h':HH[k],'y':round(g,2)})
 baeume=[];felsen=[];steine=[]
 for y in range(NY):
@@ -128,13 +132,13 @@ for c in outcols:
     u,idx=np.unique(F[c].astype(str).ravel(),return_inverse=True);dt=np.uint8 if len(u)<256 else np.uint16 if len(u)<65536 else np.uint32
     spalten[c]={'w':u.tolist(),'t':dt.__name__,'i':base64.b64encode(idx.astype(dt).tobytes()).decode()}
 b64=lambda a:base64.b64encode(np.ascontiguousarray(a,np.float32).tobytes()).decode()
-D={'nx':NX,'ny':NY,'C':b64(C),'W':b64(np.nan_to_num(Wsp,nan=-999)),'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
+D={'nx':NX,'ny':NY,'G':b64(G),'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH}
 open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=False).encode(),9))
 Z={k:len(D[k]) for k in ['haeuser','baeume','felsen','findlinge','steine','bruecken','wege']}
-Z.update(wandflaechen_quads=len(TW)//2,wand_kanten_ueber_2_5m=int((np.abs(fallx).max(-1)>SPRUNG).sum()+(np.abs(fallz).max(-1)>SPRUNG).sum()),
+Z.update(wand_dreiecke=int(len(TW)),boden_dreiecke=int((~ST).sum()),zellen_wand_steil=int(steil.sum()),
  zellen_wand_oben=int(oben.sum()),zellen_wand_fuss=int(fuss.sum()),hoehe_min=float(H.min()),hoehe_max=float(H.max()),wandfuss=D['wandfuss'],
- klippe_hoehe_median_je_wand={w:float(np.median(kh[(wn==w)&oben])) if ((wn==w)&oben).any() else None for w in WANDH},
+ klippe_hoehe_median_je_wand={w:round(float(np.median(kh[steil&nd.binary_dilation(wn==w,iterations=3)])),2) for w in WANDH},
  bandzellen_umgedeutet=int(wand.sum()),begehbar_3d=int(b3d.sum()))
 json.dump(Z,open('relief_zaehlung.json','w'),indent=1,ensure_ascii=False);print(json.dumps(Z,ensure_ascii=False))

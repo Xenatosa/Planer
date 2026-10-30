@@ -53,32 +53,31 @@ const ALT=new THREE.Group();sc.add(ALT);let HA;
  const q=[];for(let j=0;j<NY;j++)for(let i=0;i<NX;i++)if(WA[j*NX+i]){const a=j*W+i,v=[[i,j,a],[i,j+1,a+W],[i+1,j+1,a+W+1],[i+1,j,a+1]].map(([x,z,k])=>[x,Eo[k],z]);q.push(...v[0],...v[1],...v[2],...v[0],...v[2],...v[3]);}
  const wg=new THREE.Group();wg.userData.ebene='wasser';wg.add(new THREE.Mesh(geo(q),new THREE.MeshPhongMaterial({color:0x4a8ec0,transparent:true,opacity:0.65,shininess:80,side:THREE.DoubleSide})));ALT.add(wg);
  objekte(DA,HA,ALT,menschPos);}
-// ---------- NEU (Relief t41u) ----------
-const NEU=new THREE.Group();sc.add(NEU);const C=f32(DN.C),WS=f32(DN.W),UG=spaltenLesen({reihenfolge:['untergrund'],spalten:{untergrund:DN.ug}}).untergrund;
-const HN=(x,z)=>{x=Math.min(Math.max(x,0),NX-0.001);z=Math.min(Math.max(z,0),NY-0.001);const i=x|0,j=z|0,fx=x-i,fz=z-j,k=(j*NX+i)*4;
- return C[k]*(1-fx)*(1-fz)+C[k+1]*fx*(1-fz)+C[k+2]*fx*fz+C[k+3]*(1-fx)*fz;};
-{const FARBE={SCHNEE:[0.93,0.95,0.98],WALD:[0.74,0.80,0.76],WASSER_EIS:[0.42,0.50,0.55],FELS:[0.55,0.51,0.47],BODEN:[0.54,0.44,0.34],SAND:[0.80,0.72,0.56]};
- const p=[],col=[],ix=[];let n=0;
- for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const k=(j*NX+i)*4,u=UG.w[UG.i[j*NX+i]],f=FARBE[u]||[1,0,1],r=0.96+0.04*Math.sin(i*12.9898+j*78.233);
-  p.push(i,C[k],j,i+1,C[k+1],j,i+1,C[k+2],j+1,i,C[k+3],j+1);for(let q=0;q<4;q++)col.push(f[0]*r,f[1]*r,f[2]*r);ix.push(n,n+3,n+2,n,n+2,n+1);n+=4;}
- const m=new THREE.Mesh(geo(p,ix,null,col),new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide}));m.receiveShadow=m.castShadow=true;m.userData.boden=1;
+// ---------- NEU (Relief t42u: glattes 0,5-m-Hoehenfeld, c20-Draufsicht als Bodentextur, Waende mit Wandtextur) ----------
+const NEU=new THREE.Group();sc.add(NEU);const G=f32(DN.G),WV=f32(DN.WV),RS=DN.rs,GX=NX*RS+1,GY=NY*RS+1,COSW=Math.cos(DN.wandwinkel*Math.PI/180);
+const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,0),GY-1.001);const i=x|0,j=z|0,fx=x-i,fz=z-j,k=j*GX+i;
+ return G[k]*(1-fx)*(1-fz)+G[k+1]*fx*(1-fz)+G[k+GX]*(1-fx)*fz+G[k+GX+1]*fx*fz;};
+{const p=new Float32Array(GX*GY*3),uv=new Float32Array(GX*GY*2);for(let j=0;j<GY;j++)for(let i=0;i<GX;i++){const k=j*GX+i;p.set([i/RS,G[k],j/RS],k*3);uv.set([i/RS/NX,1-j/RS/NY],k*2);}
+ const bi=[],wp=[],wu=[];const V=k=>[p[k*3],p[k*3+1],p[k*3+2]];
+ const tri=(a,b,c)=>{const A=V(a),B=V(b),C2=V(c),u=[B[0]-A[0],B[1]-A[1],B[2]-A[2]],v=[C2[0]-A[0],C2[1]-A[1],C2[2]-A[2]];
+  const n=[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],l=Math.hypot(...n);
+  if(Math.abs(n[1])/l>=COSW-1e-7){bi.push(a,b,c);return;}
+  const ax=Math.abs(n[0])>Math.abs(n[2]);for(const P of[A,B,C2]){wp.push(...P);wu.push((ax?P[2]:P[0])/4,P[1]/8);}};
+ for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;tri(a,c,d);tri(a,d,b);}
+ const gb=new THREE.BufferGeometry();gb.setAttribute('position',new THREE.BufferAttribute(p,3));gb.setAttribute('uv',new THREE.BufferAttribute(uv,2));gb.setIndex(bi);gb.computeVertexNormals();
+ const m=new THREE.Mesh(gb,new THREE.MeshLambertMaterial({map:ladeTex(window.RTEX),side:THREE.DoubleSide}));m.receiveShadow=m.castShadow=true;m.userData.boden=1;
  const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);NEU.add(g);
- // senkrechte Flaechen an jedem Hoehensprung; >sprung = Felswand mit Wandtextur, sonst Boeschung
- const wp=[],wu=[],bp=[];const quad=(a,b,c,d,L)=>{const hoch=Math.max(Math.abs(a[1]-d[1]),Math.abs(b[1]-c[1]));
-  if(hoch>DN.sprung){wp.push(...a,...b,...c,...a,...c,...d);const s=a[0]+a[2],t=1/8;wu.push(s/4,a[1]*t,(s+1)/4,b[1]*t,(s+1)/4,c[1]*t,s/4,a[1]*t,(s+1)/4,c[1]*t,s/4,d[1]*t);}
-  else if(hoch>0.01)bp.push(...a,...b,...c,...a,...c,...d);};
- for(let j=0;j<NY;j++)for(let i=0;i<NX-1;i++){const a=(j*NX+i)*4,c=a+4;quad([i+1,C[a+1],j],[i+1,C[a+2],j+1],[i+1,C[c+3],j+1],[i+1,C[c],j]);}
- for(let j=0;j<NY-1;j++)for(let i=0;i<NX;i++){const a=(j*NX+i)*4,c=a+NX*4;quad([i,C[a+3],j+1],[i+1,C[a+2],j+1],[i+1,C[c+1],j+1],[i,C[c],j+1]);}
  const wt=ladeTex(window.WANDTEX);wt.wrapS=wt.wrapT=THREE.RepeatWrapping;
  const wm=new THREE.Mesh(geo(wp,null,wu),new THREE.MeshLambertMaterial({map:wt,side:THREE.DoubleSide}));wm.castShadow=wm.receiveShadow=true;wm.name='felswand';wm.userData.boden=1;g.add(wm);
- const bm=new THREE.Mesh(geo(bp),new THREE.MeshLambertMaterial({color:0xb8c2cc,side:THREE.DoubleSide}));bm.receiveShadow=true;bm.userData.boden=1;g.add(bm);
- sockel((i,j)=>HN(Math.min(i,NX-0.001),Math.min(j,NY-0.001)),-30,g);
- const q=[];for(let j=0;j<NY;j++)for(let i=0;i<NX;i++){const w=WS[j*NX+i];if(w>-900)q.push(i,w,j,i,w,j+1,i+1,w,j+1,i,w,j,i+1,w,j+1,i+1,w,j);}
- const wg=new THREE.Group();wg.userData.ebene='wasser';wg.add(new THREE.Mesh(geo(q),new THREE.MeshPhongMaterial({color:0x4a8ec0,transparent:true,opacity:0.7,shininess:80,side:THREE.DoubleSide})));NEU.add(wg);
+ window.__dreiecke={boden:bi.length/3,wand:wp.length/9};
+ sockel((i,j)=>HN(i,j),-30,g);
+ const q=[];const wv=(i,j)=>WV[j*GX+i];for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=wv(i,j),b=wv(i+1,j),c=wv(i,j+1),d=wv(i+1,j+1);
+  if(a>-900&&b>-900&&c>-900&&d>-900)q.push(i/RS,a,j/RS,i/RS,c,(j+1)/RS,(i+1)/RS,d,(j+1)/RS,i/RS,a,j/RS,(i+1)/RS,d,(j+1)/RS,(i+1)/RS,b,j/RS);}
+ const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(geo(q),new THREE.MeshPhongMaterial({color:0x4a8ec0,transparent:true,opacity:0.7,shininess:80,side:THREE.DoubleSide}));wmesh.receiveShadow=true;wg.add(wmesh);NEU.add(wg);
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
-const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t41u)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
+const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t42u)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
 document.querySelectorAll('[data-l]').forEach(c=>c.onchange=ebSicht);

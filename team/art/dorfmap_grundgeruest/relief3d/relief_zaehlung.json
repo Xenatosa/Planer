@@ -6,10 +6,11 @@
  "steine": 336,
  "bruecken": 20,
  "wege": 2839,
- "wandflaechen_quads": 3016,
- "wand_kanten_ueber_2_5m": 2882,
- "zellen_wand_oben": 1970,
- "zellen_wand_fuss": 1988,
+ "wand_dreiecke": 24724,
+ "boden_dreiecke": 789740,
+ "zellen_wand_steil": 4650,
+ "zellen_wand_oben": 2586,
+ "zellen_wand_fuss": 2538,
  "hoehe_min": -17.5,
  "hoehe_max": 14.0,
  "wandfuss": {
@@ -19,11 +20,11 @@
   "zelle": 9998
  },
  "klippe_hoehe_median_je_wand": {
-  "Nord": 14.0,
-  "Suedgrat": 14.094736576080322,
-  "Krater": 11.0,
-  "Ostgrat": 12.0
+  "Nord": 15.45,
+  "Suedgrat": 15.01,
+  "Krater": 11.2,
+  "Ostgrat": 11.99
  },
  "bandzellen_umgedeutet": 18752,
- "begehbar_3d": 77633
+ "begehbar_3d": 75151
 }
