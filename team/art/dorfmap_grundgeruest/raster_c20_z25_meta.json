@@ -28,5 +28,27 @@
  "begehbar": 32414,
  "bebaubar": 19931,
  "plaetze": 99,
- "hinweis": "hoehe_stufe/klippe leer: keine Hoehenkarte vorhanden [A]"
+ "bezug_m": 0.0,
+ "klippe_nord_m": 8.6,
+ "neigung_max_3d": 30.0,
+ "dreid": {
+  "achse_z": "oben, Meter",
+  "einheit": "m",
+  "ppu": 256,
+  "unity_pro_m": 0.09765625,
+  "px_pro_m": 25
+ },
+ "zellen_mit_hoehe": 32391,
+ "fluss_zellen": {
+  "BACH_NORD": 175,
+  "BACH_SUED": 222,
+  "SEE": 817
+ },
+ "fluss_breite_m_median": {
+  "BACH_NORD": 2.0,
+  "BACH_SUED": 2.48
+ },
+ "furt": 0,
+ "ufer": 510,
+ "hinweis": "hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle."
 }

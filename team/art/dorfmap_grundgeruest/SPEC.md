@@ -32,11 +32,41 @@ Eine Zelle wird gesetzt, wenn mindestens 50 % ihrer px in der Maske liegen. Ausn
 | frei_e2 | 0/1 | slots_c20/mp/frei_e2.npy (ohne Fels, Wald, Wasser, Schluchtpfad) [S] |
 | begehbar | 0/1 | [R]: nicht GESPERRT, WASSER_EIS, FELS_WALD oder Hindernis; WEG und BRUECKE sind immer begehbar |
 | bebaubar | 0/1 | [R]: senke_bb4 ∧ frei_e2 ∧ ¬Wasser ∧ ¬Fels ∧ ¬Hindernis ∧ ¬Weg ∧ ¬Brücke ∧ ¬Feuer |
-| hoehe_stufe | leer | **Es gibt keine Höhenkarte** [S AD_ANTWORT]; der Wert muss von Hand gesetzt werden [A] |
-| klippe | leer | Die Klippenmaske ist nur grob [S]; Kanten werden von Hand gesetzt [A] |
+| klippe | KANTE/leer | Übergang von BB4 zu Fels/Rand [R aus Masken]. Grob, weil die Klippenmaske grob ist [S] |
 | skin_slot | ug_<untergrund> | Brücke zum Skin-System (Abschnitt 5) |
 
 Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454, BODEN 9 040, FELS_WALD 5 999, WEG 2 825, WASSER_EIS 1 214, HOF 430, FEUER 271, BRUECKE 20. Davon begehbar 32 414 und bebaubar 19 931.
+
+## 3a Höhe, Flüsse, 3D (Fabian t4u)
+Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie trägt. Alles andere bleibt leer.
+
+| Feld | Herleitung | Marker |
+|---|---|---|
+| hoehe_m | Senke (BB4 ohne Wasser) = `BEZUG_M` (Standard 0). Nordklippen-Kante = Bezug + 8,6 m. Sonst leer: Hochflächen, Schneefelder im Westen und Rand | Senke flach [A]; 8,6 [R] |
+| klippe_hoehe_m | nur Nordwand (obere 25 % der Karte [A]): (190+240)/2 px / 25 = 8,6 m | Maße [S], Rechnung [R], ohne Verkürzung [A] |
+| neigung_grad | atan(Δhoehe/Zellmaß), nur wo hoehe_m bekannt ist. Senke 0°, Klippenkante steil | [R] |
+| fluss_id | BACH_NORD, SEE, BACH_SUED aus bach_schutz, zugeordnet über die Bachpolylinie in slots_c20/mp/frei_e2.py | Maske [S], Zuordnung [R] |
+| fliess_richtung | 8 Richtungen entlang der Polylinie: Nord → See → Süd | Polylinie [S], Richtung [R] |
+| fluss_breite_m | 2 × Uferabstand auf der Mittellinie (Skelett) von bach_schutz. Median Nord 2,0 m, Süd 2,5 m | [R] |
+| wasser_tiefe_m | leer | keine Quelle |
+| ufer / furt | Ufer: begehbare Nachbarzelle von Wasser (510 Zellen). Furt: Weg quert Wasser ohne Brücke (0 Zellen, Querungen nur über Brücken) | [R] |
+| begehbar_3d | begehbar ∧ neigung ≤ 30°. Furt gilt als begehbar | Schwelle [A] |
+
+**Widerspruch Bachbreite:** Laut Maßgrundlage ist der Bach Süd 185–250 px breit, also 7,4–10 m [R]. Die Maske bach_schutz ergibt nur ≈ 2,5 m.
+- Vermutlich trägt die Maske nur das Rinnsal oder Schutzband und nicht das ganze Bachbett [A].
+- Das Raster nimmt den Maskenwert. Für ein 3D-Bachbett sollte die Breite 7,4–10 m aus der Maßgrundlage genommen werden.
+
+**3D-Konvention:**
+- Achsen: X nach Osten = cx, Y nach Süden = cy (Bild), Z nach oben in Metern.
+- 1 m = 25 px; Unity-Einheit = px/256 (PPU 256), also 1 m = 0,0977 Einheiten [R].
+- Weltposition = (cx·Z/256, −cy·Z/256, hoehe_m·25/256).
+- Leere Höhen bedeuten: nicht begehbar, solange niemand eine Höhe setzt.
+
+**Lücken:**
+- Höhe der Hochflächen und des Rands
+- Höhe der übrigen Kanten (Süd, West), Höhe des Sees und Wassertiefe
+- echte Projektionsverkürzung der Klippe
+- Gefälle innerhalb der Senke
 
 ## 4 Schnittstellen
 - **Wege-/Deko-System** (team/art/wege_deko_system):
@@ -80,7 +110,7 @@ Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454
    - Neue Standorte kommen nur hinzu, bestehende bleiben.
    - `epochen_variante` = "fest_c20": Der Parameter bleibt erhalten, wird aber nicht genutzt.
 2. **Zellmaß: Standard gewählt [A]:** 25 px = 1 m. Die Alternativen 50 px und 12,5 px bleiben über den Parameter `ZELLE_PX` möglich.
-3. **Höhe/Klippe: Standard gewählt [A]:** Die Felder bleiben leer, bis jemand sie von Hand setzt. Eine Höhenkarte gibt es nicht.
+3. **Höhe/Klippe: erweitert (t4u):** Höhe, Klippe, Fluss und 3D stehen in §3a. Was keine Quelle hat, bleibt leer.
 4. **Wasser/Eis: Standard gewählt [A]:** Beides bleibt ein gemeinsames Feld `wasser_eis`. Die Unterscheidung macht der Skin.
 5. **Wegbreiten: Standard gewählt [A]:** Die v9-Angaben (Meter auf 30-px-Basis) bleiben, mit Umrechnungsfaktor 1,2 auf echte Meter (25 px/m).
 
@@ -88,4 +118,5 @@ Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454
 - `gen_raster.py`: Generator, liest nur, schreibt nur in diesen Ordner.
 - `raster_c20_z25_zellen.csv` (101 808 Zeilen) und `raster_c20_z25_meta.json`.
 - `schema_zelle.json`
+- `raster_c20_z25_hoehe_fluss.png`: Höhen-/Fluss-Ansicht.
 - `raster_c20_z25_vorschau.png`: Flachfarben plus Legende, schraffiert = bebaubar. Dazu `raster_c20_z50_*`.

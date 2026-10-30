@@ -1,15 +1,205 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Dorfmap-Grundgeruest Zelle (eine CSV-Zeile)","type":"object",
- "required":["cx","cy","px_x","px_y","untergrund","begehbar","bebaubar"],
- "properties":{
-  "cx":{"type":"integer","minimum":0},"cy":{"type":"integer","minimum":0},
-  "px_x":{"type":"integer","description":"linke obere Ecke in c20-px"},"px_y":{"type":"integer"},
-  "untergrund":{"enum":["BODEN","GESPERRT","SCHNEE","FELS_WALD","WASSER_EIS","HOF","FEUER","WEG","BRUECKE"]},
-  "zone":{"enum":["","A","B","C","D","E"]},
-  "platz":{"type":"string","description":"nr aus zonen_c20_v9.json, leer = kein Platz"},
-  "weg_id":{"type":"string"},"weg_klasse":{"enum":["","GASSE","ANBINDUNG","HAUSWEG"]},
-  "hindernis":{"type":"integer","description":"Index+1 in hindernisse_c20_v2.json, 0 = keins"},
-  "wasser_eis":{"enum":[0,1]},"schnee":{"enum":[0,1]},"senke_bb4":{"enum":[0,1]},"h4_ext":{"enum":[0,1]},"frei_e2":{"enum":[0,1]},
-  "begehbar":{"enum":[0,1]},"bebaubar":{"enum":[0,1]},
-  "hoehe_stufe":{"type":["integer","string"],"description":"leer: keine Hoehenkarte vorhanden, spaeter von Hand"},
-  "klippe":{"type":["string"],"description":"leer oder N/O/S/W-Kante, spaeter von Hand"},
-  "skin_slot":{"type":"string","pattern":"^ug_[a-z_]+$","description":"Verweis auf material_slot / Skin-Tabelle"}}}
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Dorfmap-Grundgeruest Zelle (eine CSV-Zeile)",
+ "type": "object",
+ "required": [
+  "cx",
+  "cy",
+  "px_x",
+  "px_y",
+  "untergrund",
+  "begehbar",
+  "bebaubar"
+ ],
+ "properties": {
+  "cx": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "cy": {
+   "type": "integer",
+   "minimum": 0
+  },
+  "px_x": {
+   "type": "integer",
+   "description": "linke obere Ecke in c20-px"
+  },
+  "px_y": {
+   "type": "integer"
+  },
+  "untergrund": {
+   "enum": [
+    "BODEN",
+    "GESPERRT",
+    "SCHNEE",
+    "FELS_WALD",
+    "WASSER_EIS",
+    "HOF",
+    "FEUER",
+    "WEG",
+    "BRUECKE"
+   ]
+  },
+  "zone": {
+   "enum": [
+    "",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+   ]
+  },
+  "platz": {
+   "type": "string",
+   "description": "nr aus zonen_c20_v9.json, leer = kein Platz"
+  },
+  "weg_id": {
+   "type": "string"
+  },
+  "weg_klasse": {
+   "enum": [
+    "",
+    "GASSE",
+    "ANBINDUNG",
+    "HAUSWEG"
+   ]
+  },
+  "hindernis": {
+   "type": "integer",
+   "description": "Index+1 in hindernisse_c20_v2.json, 0 = keins"
+  },
+  "wasser_eis": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "schnee": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "senke_bb4": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "h4_ext": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "frei_e2": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "begehbar": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "bebaubar": {
+   "enum": [
+    0,
+    1
+   ]
+  },
+  "klippe": {
+   "enum": [
+    "",
+    "KANTE"
+   ],
+   "description": "Übergang Senke→Fels/Rand [R aus Masken]"
+  },
+  "skin_slot": {
+   "type": "string",
+   "pattern": "^ug_[a-z_]+$",
+   "description": "Verweis auf material_slot / Skin-Tabelle"
+  },
+  "hoehe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "Meter über Bezugsniveau BEZUG_M; Senke=Bezug [A], Nordklippen-Oberkante=Bezug+8,6 [R] (leer = keine Quelle)"
+  },
+  "neigung_grad": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "Grad aus Gradient von hoehe_m [R] (leer = keine Quelle)"
+  },
+  "klippe_hoehe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "nur Nordwand: (190+240)/2/25 [R], ohne Projektionskorrektur [A] (leer = keine Quelle)"
+  },
+  "fluss_id": {
+   "enum": [
+    "",
+    "BACH_NORD",
+    "BACH_SUED",
+    "SEE"
+   ]
+  },
+  "fliess_richtung": {
+   "enum": [
+    "",
+    "N",
+    "NO",
+    "O",
+    "SO",
+    "S",
+    "SW",
+    "W",
+    "NW"
+   ],
+   "description": "aus Bachpolylinie frei_e2.py [S], Nord→See→Süd"
+  },
+  "fluss_breite_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "2×Uferabstand auf Mittellinie von bach_schutz [R] (leer = keine Quelle)"
+  },
+  "wasser_tiefe_m": {
+   "type": [
+    "number",
+    "string"
+   ],
+   "description": "immer leer, keine Quelle (leer = keine Quelle)"
+  },
+  "ufer": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "begehbar, an Wasser angrenzend"
+  },
+  "furt": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "Weg quert Wasser ohne Brücke"
+  },
+  "begehbar_3d": {
+   "enum": [
+    0,
+    1
+   ],
+   "description": "begehbar ∧ neigung_grad≤30 [A]; ohne Neigung = begehbar; Furt=1"
+  }
+ }
+}

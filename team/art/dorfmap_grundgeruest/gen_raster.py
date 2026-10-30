@@ -51,16 +51,62 @@ ug[rand]='GESPERRT'; ug[schnee]='SCHNEE'; ug[fz]='FELS_WALD'; ug[wasser]='WASSER
 ug[weg!='']='WEG'; ug[bruecke]='BRUECKE'
 begehbar=~((ug=='GESPERRT')|(ug=='WASSER_EIS')|(ug=='FELS_WALD')|(hind>0))|(ug=='WEG')|(ug=='BRUECKE')
 bebaubar=senke&fe2&~wasser&~fz&(hind==0)&(weg=='')&~bruecke&~feuer
+
+# ---- 3D/Hoehe/Fluss (t4u) ----
+from skimage.morphology import skeletonize
+BEZUG=float(os.environ.get('BEZUG_M','0'))          # Bezugsniveau = Senkenboden [A]
+KL_PX=(190,240)                                       # Klippenwand Nord [S MASSGRUNDLAGE], Verkuerzung unbekannt
+KL_M=round(sum(KL_PX)/2/PXM,1)                        # 8.6 m [R], ohne Projektionskorrektur [A]
+hoehe=np.full((ny,nx),np.nan)
+hoehe[senke&~wasser]=BEZUG                            # Senke als flach angenommen [A]
+rand_out=(ug=='GESPERRT')|(ug=='FELS_WALD')
+nb=cv2.dilate(senke.astype(np.uint8),np.ones((3,3),np.uint8))>0
+kl_kante=rand_out&nb                                  # Uebergang Senke->Fels/Rand = Klippenkante [R aus Masken]
+nord=np.zeros((ny,nx),bool); nord[:int(ny*0.25),:]=True   # Nordwand: obere 25 % der Karte [A]
+klippe_h=np.full((ny,nx),np.nan); klippe_h[kl_kante&nord]=KL_M
+hoehe[kl_kante&nord]=BEZUG+KL_M                       # Oberkante Nordwand [R]
+gy,gx=np.gradient(np.nan_to_num(hoehe,nan=np.nan))
+nei=np.degrees(np.arctan(np.hypot(gx,gy)/(Z/PXM)))    # [R] nur wo Nachbarn bekannt
+klippe=np.where(kl_kante,'KANTE','')
+# Fluss: Mittellinie aus bach_schutz, Richtung aus Bachpolylinie frei_e2.py [S]
+wm=A['bach_schutz'][::5,::5].astype(np.uint8)
+dt=cv2.distanceTransform(wm,cv2.DIST_L2,5)*5          # px
+sk=skeletonize(wm>0)
+POLY={'BACH_NORD':[(-34,-12),(-36,0),(-39,15),(-44,40),(-49,60),(-52,80),(-54,92)],'BACH_SUED':[(-52,112),(-40,122),(-25,130),(-15,140)]}
+P={k:np.array([((x+200)*30,(y+40)*30) for x,y in v],float) for k,v in POLY.items()}
+SEE=(np.array([(-60+200)*30,(102+40)*30]),17*30)
+fluss=np.zeros((ny,nx),'U10'); rich=np.zeros((ny,nx),'U2'); breite=np.full((ny,nx),np.nan)
+D8=['O','SO','S','SW','W','NW','N','NO']
+for cy,cx in zip(*np.nonzero(wasser)):
+    p=np.array([cx*Z+Z/2,cy*Z+Z/2])
+    if np.hypot(*(p-SEE[0]))<=SEE[1]: fluss[cy,cx]='SEE'; continue
+    best=None
+    for k,L in P.items():
+        for a,b in zip(L[:-1],L[1:]):
+            t=np.clip(np.dot(p-a,b-a)/np.dot(b-a,b-a),0,1); d=np.hypot(*(p-(a+t*(b-a))))
+            if best is None or d<best[0]: best=(d,k,b-a)
+    fluss[cy,cx]=best[1]; v=best[2]; ang=np.degrees(np.arctan2(v[1],v[0]))%360; rich[cy,cx]=D8[int((ang+22.5)//45)%8]
+for k in ['BACH_NORD','BACH_SUED','SEE']:
+    pass
+# Breite je Zelle: 2*max. Abstand zum Ufer auf Mittellinie im Zellblock [R]
+bw=np.zeros((ny*Z//5+Z,nx*Z//5+Z)); skd=np.where(sk,dt*2,0); bw[:skd.shape[0],:skd.shape[1]]=skd
+f=Z//5; bwg=bw[:ny*f,:nx*f].reshape(ny,f,nx,f).max((1,3)); breite[(bwg>0)&wasser]=bwg[(bwg>0)&wasser]/PXM
+tiefe=np.full((ny,nx),np.nan)                         # keine Quelle -> leer
+ufer=(cv2.dilate(wasser.astype(np.uint8),np.ones((3,3),np.uint8))>0)&~wasser&begehbar
+furt=wasser&(weg!='')&~bruecke                        # Weg quert Wasser ohne Bruecke [R]
+MAXN=30.0                                             # begehbar_3d bis 30 Grad [A]
+b3=np.where(np.isnan(nei),begehbar,(nei<=MAXN)&begehbar)|furt
+fmt=lambda v: '' if np.isnan(v) else round(float(v),2)
 o=f'raster_c20_z{Z}'
 with open(o+'_zellen.csv','w',newline='') as f:
-    w=csv.writer(f); w.writerow(['cx','cy','px_x','px_y','untergrund','zone','platz','weg_id','weg_klasse','hindernis','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','hoehe_stufe','klippe','skin_slot'])
+    w=csv.writer(f); w.writerow(['cx','cy','px_x','px_y','untergrund','zone','platz','weg_id','weg_klasse','hindernis','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','klippe','skin_slot','hoehe_m','neigung_grad','klippe_hoehe_m','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','furt','begehbar_3d'])
     for y in range(ny):
         for x in range(nx):
-            w.writerow([x,y,x*Z,y*Z,ug[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),'', '', 'ug_'+ug[y,x].lower()])
+            w.writerow([x,y,x*Z,y*Z,ug[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),klippe[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),fmt(nei[y,x]),fmt(klippe_h[y,x]),fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(furt[y,x]),int(b3[y,x])])
 st={k:int(v) for k,v in zip(*np.unique(ug,return_counts=True))}
 json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',
   zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),plaetze=len(ids),
-  hinweis='hoehe_stufe/klippe leer: keine Hoehenkarte vorhanden [A]'),open(o+'_meta.json','w'),ensure_ascii=False,indent=1)
+  bezug_m=BEZUG,klippe_nord_m=KL_M,neigung_max_3d=MAXN,dreid=dict(achse_z='oben, Meter',einheit='m',ppu=256,unity_pro_m=PXM/256,px_pro_m=PXM),zellen_mit_hoehe=int((~np.isnan(hoehe)).sum()),fluss_zellen={k:int((fluss==k).sum()) for k in ['BACH_NORD','BACH_SUED','SEE']},fluss_breite_m_median={k:(round(float(np.nanmedian(breite[fluss==k])),2) if np.any(~np.isnan(breite[fluss==k])) else None) for k in ['BACH_NORD','BACH_SUED']},furt=int(furt.sum()),ufer=int(ufer.sum()),hinweis='hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle.'),open(o+'_meta.json','w'),ensure_ascii=False,indent=1)
 COL={'BODEN':(196,170,120),'GESPERRT':(150,150,150),'SCHNEE':(235,240,245),'FELS_WALD':(90,90,90),'WASSER_EIS':(60,120,220),'HOF':(220,190,90),'FEUER':(230,60,30),'WEG':(150,100,50),'BRUECKE':(130,60,160)}
 img=np.zeros((ny,nx,3),np.uint8)
 for k,c in COL.items(): img[ug==k]=c
@@ -75,3 +121,22 @@ y=20; d.text((im.width+15,y),f'c20, Zelle {Z}px = {Z/PXM:g} m',fill='black',font
 for k,c in items: d.rectangle([im.width+15,y,im.width+40,y+20],fill=c,outline='black'); d.text((im.width+50,y),k,fill='black',font=ft); y+=30
 d.text((im.width+15,y),'schwarz schraffiert = bebaubar',fill='black',font=ft)
 L.save(o+'_vorschau.png'); print(json.dumps(st),begehbar.sum(),bebaubar.sum(),nx,ny)
+
+# Hoehen-/Fluss-Ansicht
+v=np.full((ny,nx,3),200,np.uint8); v[np.isnan(hoehe)]=(170,170,170)
+v[hoehe==BEZUG]=(120,200,120); v[~np.isnan(klippe_h)]=(120,60,20); v[(klippe=='KANTE')&np.isnan(klippe_h)]=(200,140,90)
+FC={'BACH_NORD':(30,90,230),'BACH_SUED':(0,170,220),'SEE':(20,40,140)}
+for k,c in FC.items(): v[fluss==k]=c
+v[ufer]=(240,220,120); v[furt]=(255,0,0)
+im=Image.fromarray(v).resize((nx*s,ny*s),Image.NEAREST); d0=ImageDraw.Draw(im)
+DV={'O':(1,0),'SO':(1,1),'S':(0,1),'SW':(-1,1),'W':(-1,0),'NW':(-1,-1),'N':(0,-1),'NO':(1,-1)}
+for cy,cx in zip(*np.nonzero(rich!='')):
+    if (cy+cx)%6: continue
+    dx,dy=DV[rich[cy,cx]]; x0,y0=cx*s+1,cy*s+1; d0.line([x0,y0,x0+dx*6,y0+dy*6],fill='white')
+L=Image.new('RGB',(im.width+360,max(im.height,600)),'white'); L.paste(im,(0,0)); d=ImageDraw.Draw(L); y=20
+d.text((im.width+15,y),f'Hoehe/Fluss, Zelle {Z}px',fill='black',font=ft); y+=30
+for k,c in [(f'Senke hoehe_m={BEZUG:g} [A]',(120,200,120)),(f'Nordklippe {KL_M} m [R]',(120,60,20)),('Kante ohne Hoehe',(200,140,90)),('hoehe leer (keine Quelle)',(170,170,170)),('BACH_NORD',FC['BACH_NORD']),('BACH_SUED',FC['BACH_SUED']),('SEE',FC['SEE']),('Ufer (flach begehbar)',(240,220,120)),('Furt',(255,0,0))]:
+    d.rectangle([im.width+15,y,im.width+40,y+20],fill=c,outline='black'); d.text((im.width+50,y),k,fill='black',font=ft); y+=30
+d.text((im.width+15,y),'weisse Striche = Fliessrichtung',fill='black',font=ft)
+L.save(o+'_hoehe_fluss.png')
+print(json.load(open(o+'_meta.json')))
