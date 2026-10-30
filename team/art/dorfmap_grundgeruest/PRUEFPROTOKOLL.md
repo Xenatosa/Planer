@@ -26,3 +26,23 @@
 7. **Fehlerquote:** 5 von 12 Kacheln haben sichtbare Fehlklassen (Punkte 1–3). Die Zellquote ist nicht ausgezählt.
 
 **Ergebnis: nicht fertig.** Die Punkte 1–4 müssen vor einer Freigabe behoben werden.
+
+## t12u (30.10.2026)
+**Geaendert**
+- Teich NW + gefrorener Westbach = WASSER_EIS [S] (Farbdetektor G−R≥10, B−R≥18; Unterlauf/Verbindung als Linie nach c20 in `override_wasser_t12u.png`). begehbar=0 auf Wasser (Bruecken ausgenommen, wie bisher).
+- Nordbach-Luecke y 37–71 ergaenzt [S].
+- Fehl-Klippen → FELS/WALD: `overrides_t12u.csv` (5 Rechtecke, Blockfeld, Felsgruppe, Findling, tote Baeume) [S].
+- Verschneiter Suedwald: dunkle Kronenumrisse (V<150, H 95–140, 3×3-Mittel ≥0,04 [A]) im Suedband → WALD, Closing. WALD 10 127 → 11 459 Zellen [R].
+- Vorschau ohne Schraffur/Streifen; bebaubar in `raster_c20_z25_bebaubar.png`.
+- bebaubar neu aus Gelaende (siehe SPEC), `bauzone_bestand` = alte Grenze. bebaubar 27 140, Bestand 23 123, ausserhalb Bestand 4 887 Zellen [R].
+
+**Kachelpruefung r4: 182 Kacheln à 24×24, alle angesehen (Seitenvergleich c20 | Raster)**
+- ok: 172.
+- Mangel: K3_11, K4_11, K5_11, K0_11 (SCHATTEN-Flecken auf Flusseis statt WASSER_EIS); K1_0–K4_0 (frostige Buesche/Felshaufen als WALD, Klasse unsicher); K13_12 (helle Schneebaeume teils SCHNEE).
+- Fehlerquote: je Kachel 10/182 mit Mangel (5,5 %) [R]. Zellgenau NICHT auszaehlbar (kein Referenzraster); geschaetzt < 1 % der Zellen [A].
+
+**Restfehler**
+1. SCHATTEN im Flusseis (Sueden), ca. 100–200 Zellen [A].
+2. NW-Rand der Senke: senkrechte Grenze x=136 (offenes Gelaende, keine Wand) [A].
+3. NO-Ecke: Ostgrenze ohne Wand = Kartenrand [A].
+4. Buesche K1_0–K4_0: WALD oder FELS offen.

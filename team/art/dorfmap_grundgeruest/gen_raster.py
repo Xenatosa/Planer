@@ -55,7 +55,7 @@ def _fr(b): return b.reshape(ny,Z,nx,Z).mean((1,3))
 _H,_S,_V=[_hsv[...,i].astype(np.int16) for i in range(3)]; del _hsv
 f_wald=_fr(((_V<110)&(_H>=35)&(_H<=110))|(_V<70)); f_fels=_fr((_S>70)&((_H<25)|(_H>165))&(_V<200))
 f_sand=_fr((_H>=12)&(_H<=28)&(_S>50)&(_S<=140)&(_V>=170)); f_wass=_fr((_H>=88)&(_H<=112)&(_S>=55)&(_V>=110)); f_schn=_fr((_S<45)&(_V>=185))
-f_dark=_fr((_V<150)&(((_H>=128))|(_H<25))); f_tree=_fr((_V<170)&(_H>=80)&(_H<128)&(_S>=40)); f_shade=_fr((_H>=100)&(_H<=135)&(_S>=15)&(_S<100)&(_V>=120)&(_V<215))
+f_dark=_fr((_V<150)&(((_H>=128))|(_H<25))); f_navy=_fr((_V<150)&(_H>=95)&(_H<=140)); f_tree=_fr((_V<170)&(_H>=80)&(_H<128)&(_S>=40)); f_shade=_fr((_H>=100)&(_H<=135)&(_S>=15)&(_S<100)&(_V>=120)&(_V<215))
 f_edge=_fr(cv2.Canny(_V.astype(np.uint8),60,140)>0)
 del _H,_S,_V
 farb=np.full((ny,nx),'UNBEKANNT',dtype='U12')
@@ -158,18 +158,59 @@ for i in range(1,n_):
     x,y,w_,h_=st_[i,:4]; sl=(slice(max(0,y-2),y+h_+2),slice(max(0,x-2),x+w_+2)); c=l_[sl]==i
     r=(cv2.dilate(c.astype(np.uint8),np.ones((5,5),np.uint8))>0)&~c
     if r.sum() and _wd[sl][r].mean()>=0.4: ug[sl][c]='WALD'; wald_aus_wand+=int(c.sum())
+# t12u: Sichtpruefungs-Overrides (Klasse von->nach in Rechteck) [S]
+ovr12_n=0
+_op=os.path.join(os.path.dirname(os.path.abspath(__file__)),'overrides_t12u.csv')
+if Z==25 and os.path.exists(_op):
+    for _r in csv.DictReader(open(_op)):
+        _s=(slice(int(_r['cy0']),int(_r['cy1'])+1),slice(int(_r['cx0']),int(_r['cx1'])+1)); _u=ug[_s]==_r['von']
+        ug[_s][_u]=_r['nach']; quelle[_s][_u]='OVERRIDE'; ovr[_s]|=_u; ovr12_n+=int(_u.sum())
+# t12u: Suedwald-Band (suedlich des Flusses, y>=SW_Y): Stamm-Wand/Fels -> WALD, Luecken <=4 Zellen schliessen (5x5-Closing) [A]
+SW_Y=int(276*25/Z); _band=np.zeros((ny,nx),bool); _band[SW_Y:]=True
+_c=_band&np.isin(ug,['KLIPPE_WAND','FELS'])&~ovr; ug[_c]='WALD'; suedwald_n=int(_c.sum())
+_wd=cv2.morphologyEx((ug=='WALD').astype(np.uint8),cv2.MORPH_CLOSE,np.ones((5,5),np.uint8))>0
+_nv=cv2.blur(f_navy.astype(np.float32),(3,3))>=0.04   # verschneite Baumkronen: dunkle Umrisslinien [A]
+_wd|=_nv
+_c=_band&_wd&np.isin(ug,['SCHNEE','SCHATTEN'])&~ovr; ug[_c]='WALD'; quelle[_c]='FILTER'; suedwald_n+=int(_c.sum())
 # kleine Wandinseln = FELS; KANTE = Wandzelle mit Nicht-Wand im Norden, nur zusammenhaengende Kanten >=3 [A]
 n_,l_,st_,_=cv2.connectedComponentsWithStats((ug=='KLIPPE_WAND').astype(np.uint8),8)
 ug[np.isin(l_,np.nonzero(st_[:,4]<30)[0][1:])]='FELS'
 _wa=ug=='KLIPPE_WAND'; _no=np.zeros_like(_wa); _no[1:]=~_wa[:-1]; _k=_wa&_no
 n_,l_,st_,_=cv2.connectedComponentsWithStats(_k.astype(np.uint8),8); _k&=~np.isin(l_,np.nonzero(st_[:,4]<3)[0][1:]); ug[_k]='KLIPPE_KANTE'
+# t12u: Rest-UNBEKANNT -> haeufigste Nachbarklasse im 5x5-Fenster (ohne UNBEKANNT) [A]
+for _y,_x in zip(*np.nonzero(ug=='UNBEKANNT')):
+    _n=ug[max(0,_y-2):_y+3,max(0,_x-2):_x+3].ravel(); _n=_n[_n!='UNBEKANNT']
+    if len(_n): _v,_k=np.unique(_n,return_counts=True); ug[_y,_x]=_v[_k.argmax()]; quelle[_y,_x]='FILTER'
 unb_nach=int((ug=='UNBEKANNT').sum())
+# t12u: Teich NW + gefrorener Bach westlich Krater aus c20-Farbe (G-R>=10, B-R>=18, Zellanteil>=0,4, 2 groesste Komponenten, Loecher gefuellt) + Unterlauf als Linie aus Bild [S/A]
+wasser_t12u=0
+_wp=os.path.join(os.path.dirname(os.path.abspath(__file__)),'override_wasser_t12u.png')
+if os.path.exists(_wp):
+    _wm=cv2.imread(_wp,0).astype(np.float32)/255
+    if _wm.shape!=(ny,nx): _wm=cv2.resize(_wm,(nx,ny),interpolation=cv2.INTER_AREA)
+    _wm=(_wm>=0.5)&~np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])
+    wasser_t12u=int((_wm&(ug!='WASSER_EIS')).sum()); ug[_wm]='WASSER_EIS'; quelle[_wm]='OVERRIDE'
 wasser=(ug=='WASSER_EIS')
 # (4) Hindernis ueber ganze Karte: Masken-ID (Fenster) + Gelaende (Wald/Fels/Klippe) [R aus Klasse]
 hind_gel=np.isin(ug,['WALD','FELS','KLIPPE_WAND','KLIPPE_KANTE'])
 hind_art=np.where(hind>0,'MASKE',np.where(hind_gel,'GELAENDE',''))
 begehbar=~(np.isin(ug,['UNBEKANNT','WALD','KLIPPE_WAND','KLIPPE_KANTE','FELS','WASSER_EIS'])|(hind>0))
-bebaubar=senke&fe2&begehbar&~wasser
+# t12u: bebaubar aus dem Gelaende: Senke zwischen den Waenden [A-Grenzen], ohne Wand/Wasser/Fels/Schatten/Wald, Mindestabstand Parameter [A]
+bauzone_bestand=senke&fe2                                   # alte Fenstergrenze (BB4 & frei_e2), nur als Feld erhalten
+BAU_ABST_WAND_M=float(os.environ.get('BAU_ABST_WAND_M','2')); BAU_ABST_WASSER_M=float(os.environ.get('BAU_ABST_WASSER_M','2'))
+_q=lambda v:int(round(v*25/Z)); _wall=np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])
+basin=np.zeros((ny,nx),bool); KR_X_OST=_q(136)
+for y in range(_q(20),_q(257)):
+    xs=np.nonzero(_wall[y,_q(71):_q(161)])[0]; xl=_q(71)+xs.max()+1 if len(xs) else KR_X_OST   # rechts der Kraterwand, sonst Krater-Ostkante [A]
+    xs=np.nonzero(_wall[y,_q(270):])[0]; xr=_q(270)+xs.min() if len(xs) else nx            # links der Ostgratwand
+    basin[y,xl:xr]=True
+for x in range(nx):
+    ys=np.nonzero(_wall[:_q(76),x])[0]; basin[:ys.max()+1 if len(ys) else 0,x]=False                   # unter der Nordwand
+    ys=np.nonzero(_wall[_q(205):_q(257),x])[0]; basin[_q(205)+ys.min() if len(ys) else _q(257):,x]=False  # ueber dem Suedgrat
+basin=cv2.morphologyEx(basin.astype(np.uint8),cv2.MORPH_OPEN,np.ones((max(3,_q(9)),)*2,np.uint8))>0  # schmale Auslaeufer (Paesse) kappen [A]
+n_,l_=cv2.connectedComponents(basin.astype(np.uint8),connectivity=4); basin=l_==l_[_q(120),_q(230)]
+_dw=cv2.distanceTransform((~_wall).astype(np.uint8),cv2.DIST_L2,5)*Z/PXM; _dq=cv2.distanceTransform((~wasser).astype(np.uint8),cv2.DIST_L2,5)*Z/PXM
+bebaubar=basin&begehbar&np.isin(ug,['SCHNEE','BODEN','SAND'])&(_dw>=BAU_ABST_WAND_M)&(_dq>=BAU_ABST_WASSER_M)&(hind==0)
 # (5) Deko-Kapazitaet aus Massgrundlage (BERICHT_NETZ_E1 9.2: Mindestabstand 1,5 m, Footprint-Rand 0,5 m) [R]
 DEKO_ABST=1.5; deko_kap=np.where(begehbar&~np.isin(ug,['SCHATTEN']) | (ug=='SCHATTEN')&begehbar, round((Z/PXM)**2/DEKO_ABST**2,2),0.0)
 deko_baum=begehbar&np.isin(ug,['BODEN','SCHNEE','SCHATTEN'])&~bebaubar          # Baum nur ausserhalb Bauzone [A]
@@ -233,12 +274,12 @@ MAXN=30.0
 b3=(nei<=MAXN)&begehbar
 fmt=lambda v: '' if np.isnan(v) else round(float(v),2)
 o=f'raster_c20_z{Z}'
-SP=['cx','cy','px_x','px_y','untergrund','untergrund_quelle','hindernis_id','hindernis_art','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','klippe','wand_name','skin_slot','hoehe_m','hoehe_quelle','neigung_grad','klippe_hoehe_m','klippe_hoehe_quelle','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','begehbar_3d','deko_kapazitaet','deko_baum_ok','deko_fels_ok','flaeche_m2']
+SP=['cx','cy','px_x','px_y','untergrund','untergrund_quelle','hindernis_id','hindernis_art','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','bauzone_bestand','senke_becken','klippe','wand_name','skin_slot','hoehe_m','hoehe_quelle','neigung_grad','klippe_hoehe_m','klippe_hoehe_quelle','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','begehbar_3d','deko_kapazitaet','deko_baum_ok','deko_fels_ok','flaeche_m2']
 with open(o+'_zellen.csv','w',newline='') as f:
     w=csv.writer(f); w.writerow(SP)
     for y in range(ny):
         for x in range(nx):
-            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],int(hind[y,x]),hind_art[y,x],int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),klippe[y,x],wand_name[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),hq[y,x],fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(b3[y,x]),deko_kap[y,x],int(deko_baum[y,x]),int(deko_fels[y,x]),(Z/PXM)**2])
+            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],int(hind[y,x]),hind_art[y,x],int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),int(bauzone_bestand[y,x]),int(basin[y,x]),klippe[y,x],wand_name[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),hq[y,x],fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(b3[y,x]),deko_kap[y,x],int(deko_baum[y,x]),int(deko_fels[y,x]),(Z/PXM)**2])
 # ---- Overlay-Layer Plaetze/Wege (abschaltbar, t10u) ----
 DP=[]
 for fn in sorted(glob.glob(R+'zonen_c20/modulsystem_e1/karten/e1/dekoplaetze/*.json')):
@@ -256,11 +297,11 @@ with open(o+'_overlay_plaetze_wege.csv','w',newline='') as f:
 st={k:int(v) for k,v in zip(*np.unique(ug,return_counts=True))}
 json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',
   layer={'gelaende':o+'_zellen.csv','overlay_plaetze_wege':o+'_overlay_plaetze_wege.csv'},
-  unbekannt_vorher=unb_vor,unbekannt_nachher=unb_nach,unbekannt_filter=unb_filter,glaettung_zellen=glatt_n,boden_zu_schnee=boden_zu_schnee,wald_aus_wand=wald_aus_wand,overrides_zellen=ovr_n,schatten_statt_wasser=schatten_wasser,zaehlung_vor_t9u=stat_vor,
+  unbekannt_vorher=unb_vor,unbekannt_nachher=unb_nach,unbekannt_filter=unb_filter,glaettung_zellen=glatt_n,boden_zu_schnee=boden_zu_schnee,wasser_t12u=wasser_t12u,ovr12_n=ovr12_n,suedwald_n=suedwald_n,wald_aus_wand=wald_aus_wand,overrides_zellen=ovr_n,schatten_statt_wasser=schatten_wasser,zaehlung_vor_t9u=stat_vor,
   wand_hoehe_m={'Nord':[KL_M,'R'],**{k:[v[0],'A'] for k,v in WAND_H.items()},'sonstige':[KL_M,'A']},wand_hoehe_herleitung='Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar',klippe_nord_band_m=[7.6,9.6],
   hoehe_stufen_m={'Senke':BEZUG,'Nordplateau':BEZUG+KL_M,'Ostplateau':BEZUG+WAND_H['Ostgrat'][0],'Suedvorland':BEZUG-WAND_H['Suedgrat'][0],'Rest':BEZUG},
   quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','FILTER','KEINE']},
-  zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),hindernis_maske=int((hind>0).sum()),hindernis_gelaende=int((hind_art=='GELAENDE').sum()),plaetze=len(ids),dekoplaetze_netz=len(DP),
+  zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),bauzone_bestand=int(bauzone_bestand.sum()),senke_becken=int(basin.sum()),bebaubar_param=dict(abstand_wand_m=BAU_ABST_WAND_M,abstand_wasser_m=BAU_ABST_WASSER_M,marker='A'),bebaubar_ausserhalb_bestand=int((bebaubar&~bauzone_bestand).sum()),hindernis_maske=int((hind>0).sum()),hindernis_gelaende=int((hind_art=='GELAENDE').sum()),plaetze=len(ids),dekoplaetze_netz=len(DP),
   groessenbezug=dict(px_pro_m=PXM,zelle_m=Z/PXM,zelle_m2=(Z/PXM)**2,unity_pro_m=PXM/256,ppu=256,nordwand_m=KL_M,deko_mindestabstand_m=DEKO_ABST,deko_footprint_rand_m=0.5,quelle='MASSGRUNDLAGE 25 px/m [F]; BERICHT_NETZ_E1 9.2'),
   bezug_m=BEZUG,neigung_max_3d=MAXN,dreid=dict(achse_z='oben, Meter',einheit='m',ppu=256,unity_pro_m=PXM/256,px_pro_m=PXM),
   fluss_zellen={k:int((fluss==k).sum()) for k in ['BACH_NORD','BACH_SUED','SEE','WASSER_FARBE']},fluss_breite_m_median={k:(round(float(np.nanmedian(breite[fluss==k])),2) if np.any(~np.isnan(breite[fluss==k])) else None) for k in ['BACH_NORD','BACH_SUED']},ufer=int(ufer.sum()),
@@ -278,9 +319,14 @@ def legende(a,items,titel,fn,extra=()):
 img=np.zeros((ny,nx,3),np.uint8)
 for k,c in COL.items(): img[ug==k]=c
 a=np.asarray(Image.fromarray(img).resize((nx*s,ny*s),Image.NEAREST)).copy()
-bb=np.repeat(np.repeat(bebaubar,s,0),s,1); a[bb&((np.indices(bb.shape).sum(0)%6)<1)]=(0,0,0)
-hm=np.repeat(np.repeat(hind>0,s,0),s,1); a[hm&((np.indices(hm.shape)[0]%3)==0)]=(255,120,0)
-legende(a,list(COL.items())+[('Hindernis Maske (orange Streifen)',(255,120,0))],f'Gelaende c20, Zelle {Z}px = {Z/PXM:g} m',o+'_vorschau.png',['schwarz schraffiert = bebaubar (Gelaende)','ohne Plaetze/Wege (siehe Overlay)'])
+legende(a,list(COL.items()),f'Gelaende c20, Zelle {Z}px = {Z/PXM:g} m',o+'_vorschau.png',['nur Untergrundfarben, keine Schraffur','bebaubar: eigene Vorschau _bebaubar.png','Plaetze/Wege: _overlay_plaetze_wege.png'])
+# Bebaubar-Vorschau (t12u): Gelaende blass, bebaubar gruen halbtransparent, Bauzone-Bestand Umriss, Hindernis-Maske orange
+bv=(img*0.5+255*0.5).astype(np.float32); bv[bebaubar]=bv[bebaubar]*0.45+np.array([0,170,60])*0.55; bv[hind>0]=bv[hind>0]*0.5+np.array([255,120,0])*0.5
+bv=np.asarray(Image.fromarray(bv.astype(np.uint8)).resize((nx*s,ny*s),Image.NEAREST)).copy()
+_cn,_=cv2.findContours(np.repeat(np.repeat(bauzone_bestand,s,0),s,1).astype(np.uint8),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE); cv2.drawContours(bv,_cn,-1,(0,0,0),1)
+_cn,_=cv2.findContours(np.repeat(np.repeat(basin,s,0),s,1).astype(np.uint8),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE); cv2.drawContours(bv,_cn,-1,(200,0,200),1)
+st['bebaubar']=int(bebaubar.sum()); st['bauzone_bestand']=int(bauzone_bestand.sum()); st['senke_becken']=int(basin.sum())
+legende(bv,[('bebaubar',(0,170,60)),('Hindernis Maske',(255,120,0)),('bauzone_bestand (Umriss schwarz)',(0,0,0)),('senke_becken (Umriss violett)',(200,0,200))],f'Bebaubar aus Gelaende, Abstand Wand {BAU_ABST_WAND_M:g} m / Wasser {BAU_ABST_WASSER_M:g} m [A]',o+'_bebaubar.png',[f"bebaubar {int(bebaubar.sum())} Zellen",f"davon ausserhalb Bestand {int((bebaubar&~bauzone_bestand).sum())}"])
 # Overlay-Vorschau
 ov=(img*0.45+255*0.55).astype(np.uint8)
 for m_,c in [(zone!='',(230,230,170)),(platz>0,(80,190,90)),(weg!='',(150,100,50)),(hof,(220,190,90)),(feuer,(230,60,30)),(bruecke,(130,60,160)),(dp_n>0,(255,0,120))]: ov[m_]=c

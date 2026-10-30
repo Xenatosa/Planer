@@ -211,3 +211,9 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 - Deko-Kapazität: 0,44 je m² [R] aus Mindestabstand 1,5 m (BERICHT_NETZ_E1 §9.2).
 - Restfehler und Prüfmethode: siehe PRUEFPROTOKOLL.md.
 - z50: nur Meta und PNG, keine CSV.
+
+## bebaubar (t12u)
+`senke_becken`: je Zeile rechts der Kraterwand (ohne Kraterwand: x ≥ 136 [A]) bis links der Ostgratwand, unter der Nordwand, ueber dem Suedgrat; Opening 9×9 kappt Paesse; Zusammenhangskomponente am Seed (230,120).
+`bebaubar = senke_becken & begehbar & Untergrund ∈ {SCHNEE,BODEN,SAND} & hindernis==0 & Abstand Wand ≥ BAU_ABST_WAND_M & Abstand Wasser ≥ BAU_ABST_WASSER_M` (Default je 2 m [A], per Umgebungsvariable).
+`bauzone_bestand` = alte Grenze BB4 & frei_e2. Plaetze unveraendert.
+Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtransparent, Bestand schwarz, Becken violett.

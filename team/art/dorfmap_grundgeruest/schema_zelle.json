@@ -115,10 +115,12 @@
    ]
   },
   "bebaubar": {
+   "type": "integer",
    "enum": [
     0,
     1
-   ]
+   ],
+   "description": "senke_becken & begehbar & Untergrund in {SCHNEE,BODEN,SAND} & keine Hindernis-Maske & Abstand Wand >= BAU_ABST_WAND_M & Wasser >= BAU_ABST_WASSER_M (je 2 m [A])"
   },
   "klippe": {
    "enum": [
@@ -213,9 +215,12 @@
   },
   "untergrund_quelle": {
    "enum": [
-    "MASKE",
     "FARBE",
-    "KEINE"
+    "FILTER",
+    "KEINE",
+    "MASKE",
+    "OVERRIDE",
+    "RAND"
    ],
    "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; KEINE=UNBEKANNT"
   },
@@ -226,6 +231,23 @@
     "A"
    ],
    "description": "R = Nordwand 8,6 m gerechnet (Band 7,6-9,6); A = Krater 7,7 / Suedgrat 7,6 / Ostgrat 6,7 / sonstige 8,6 m, aus Felslaufweite relativ zur Nordwand geschaetzt"
+  },
+  "bauzone_bestand": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "alte Bauzonen-Fenstergrenze (BB4 & frei_e2), nur Bestand, t12u"
+  },
+  "senke_becken": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "Senke zwischen Nordwand, Kraterwand, Ostgrat, Suedgrat; Grenzen NW (x=136) und NO teils [A]"
   }
- }
+ },
+ "overlay_getrennt": "Plaetze/Wege/Hoefe/Feuer/Bruecken liegen im Overlay (raster_c20_z25_overlay_plaetze_wege.png, Spalten zone/weg/platz). 99 Plaetze unveraendert."
 }
