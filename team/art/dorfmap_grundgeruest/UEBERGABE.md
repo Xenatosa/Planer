@@ -60,4 +60,4 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 - Ebenen neu nach Waenden: Fehlerliste `pruefung/t34u_fehlerliste.csv` (F1–F10 behoben, B1–B8 offen).
 - Vorher/Nachher: `pruefung/t34u_vorher_fehler.png`, `pruefung/t34u_nachher_ebenen.png`.
 - Regelpruefung aller Zellen: `pruef_konsistenz_t34u.py` (0 Verstoesse z25/z50).
-- 3D-Modell: `modell3d/` (OBJ + Renders, Hoehen [A]).
+- 3D-Modell: `modell3d/` (t36u, GLB+OBJ, Sidecar, Abweichungen [F], BRAUCHE.md).

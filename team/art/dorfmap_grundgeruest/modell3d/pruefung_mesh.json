@@ -1,0 +1,60 @@
+{
+ "gruppen": {
+  "FELS": {
+   "zellen": 2123,
+   "dreiecke": 4246
+  },
+  "KLIPPE_WAND": {
+   "zellen": 17574,
+   "dreiecke": 35148
+  },
+  "SCHNEE": {
+   "zellen": 59807,
+   "dreiecke": 119614
+  },
+  "WASSER_EIS": {
+   "zellen": 6695,
+   "dreiecke": 13390
+  },
+  "SCHATTEN": {
+   "zellen": 1772,
+   "dreiecke": 3544
+  },
+  "KLIPPE_KANTE": {
+   "zellen": 1178,
+   "dreiecke": 2356
+  },
+  "WALD": {
+   "zellen": 11217,
+   "dreiecke": 22434
+  },
+  "BODEN": {
+   "zellen": 896,
+   "dreiecke": 1792
+  },
+  "SAND": {
+   "zellen": 546,
+   "dreiecke": 1092
+  },
+  "WASSER_OBERFLAECHE": {
+   "zellen": 6695,
+   "dreiecke": 13390
+  },
+  "SOCKEL": {
+   "zellen": 2556,
+   "dreiecke": 3834
+  }
+ },
+ "dreiecke_gesamt": 220840,
+ "geschlossen_wasserdicht_ohne_wasser": true,
+ "volumen_m3": 1278270,
+ "euler": 2,
+ "flips_oberflaeche": 0,
+ "entartete_dreiecke": 0,
+ "max_steigung_freiflaeche_grad": 54.3,
+ "spitzen_eckpunkt_0.3m_ueber_oder_unter_allen_8_nachbarn": 0,
+ "hoehe_min_max_m": [
+  -8.7,
+  8.6
+ ]
+}

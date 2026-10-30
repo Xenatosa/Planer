@@ -1,0 +1,11 @@
+{
+ "sidecar_fehlt": 0,
+ "sidecar_feld_abw": 0,
+ "glb_zelle_fehlt": 0,
+ "glb_zelle_doppelt": 0,
+ "glb_gruppe_falsch": 0,
+ "glb_ecke_ausserhalb_zelle": 0,
+ "uv1_falsch": 0,
+ "zellen_raster": 101808,
+ "summe_abweichungen": 0
+}
