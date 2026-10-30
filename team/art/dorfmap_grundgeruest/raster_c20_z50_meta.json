@@ -14,10 +14,35 @@
  ],
  "epoche": "E1",
  "epochen_variante": "fest_c20",
+ "layer": {
+  "gelaende": "raster_c20_z50_zellen.csv",
+  "overlay_plaetze_wege": "raster_c20_z50_overlay_plaetze_wege.csv"
+ },
  "unbekannt_vorher": 3272,
- "unbekannt_nachher": 353,
- "schatten_statt_wasser": 13,
+ "unbekannt_nachher": 161,
+ "unbekannt_filter": 14,
+ "glaettung_zellen": 2269,
+ "boden_zu_schnee": 2022,
+ "wald_aus_wand": 173,
  "overrides_zellen": 0,
+ "schatten_statt_wasser": 13,
+ "zaehlung_vor_t9u": {
+  "BODEN": 2288,
+  "BRUECKE": 6,
+  "FELS": 441,
+  "FELS_WALD": 1526,
+  "FEUER": 65,
+  "HOF": 90,
+  "KLIPPE_KANTE": 538,
+  "KLIPPE_WAND": 3482,
+  "SAND": 113,
+  "SCHATTEN": 558,
+  "SCHNEE": 12271,
+  "UNBEKANNT": 353,
+  "WALD": 1787,
+  "WASSER_EIS": 1190,
+  "WEG": 828
+ },
  "wand_hoehe_m": {
   "Nord": [
    8.6,
@@ -45,33 +70,49 @@
   7.6,
   9.6
  ],
+ "hoehe_stufen_m": {
+  "Senke": 0.0,
+  "Nordplateau": 8.6,
+  "Ostplateau": 6.7,
+  "Suedvorland": -7.6,
+  "Rest": 0.0
+ },
  "quelle_anteil": {
-  "MASKE": 39.8,
-  "FARBE": 58.9,
-  "KEINE": 1.4
+  "MASKE": 27.3,
+  "FARBE": 70.6,
+  "FILTER": 0.1,
+  "KEINE": 1.3
  },
  "zaehlung_untergrund": {
-  "BODEN": 2288,
-  "BRUECKE": 6,
-  "FELS": 441,
-  "FELS_WALD": 1526,
-  "FEUER": 65,
-  "HOF": 90,
-  "KLIPPE_KANTE": 538,
-  "KLIPPE_WAND": 3482,
-  "SAND": 113,
-  "SCHATTEN": 558,
-  "SCHNEE": 12271,
-  "UNBEKANNT": 353,
-  "WALD": 1787,
-  "WASSER_EIS": 1190,
-  "WEG": 828
+  "BODEN": 91,
+  "FELS": 111,
+  "KLIPPE_KANTE": 428,
+  "KLIPPE_WAND": 4941,
+  "SAND": 57,
+  "SCHATTEN": 257,
+  "SCHNEE": 15980,
+  "UNBEKANNT": 161,
+  "WALD": 2389,
+  "WASSER_EIS": 1121
  },
- "begehbar": 16085,
- "bebaubar": 4866,
+ "begehbar": 16254,
+ "bebaubar": 5764,
+ "hindernis_maske": 164,
+ "hindernis_gelaende": 7836,
  "plaetze": 99,
+ "dekoplaetze_netz": 627,
+ "groessenbezug": {
+  "px_pro_m": 25,
+  "zelle_m": 2.0,
+  "zelle_m2": 4.0,
+  "unity_pro_m": 0.09765625,
+  "ppu": 256,
+  "nordwand_m": 8.6,
+  "deko_mindestabstand_m": 1.5,
+  "deko_footprint_rand_m": 0.5,
+  "quelle": "MASSGRUNDLAGE 25 px/m [F]; BERICHT_NETZ_E1 9.2"
+ },
  "bezug_m": 0.0,
- "klippe_nord_m": 8.6,
  "neigung_max_3d": 30.0,
  "dreid": {
   "achse_z": "oben, Meter",
@@ -80,17 +121,20 @@
   "unity_pro_m": 0.09765625,
   "px_pro_m": 25
  },
- "zellen_mit_hoehe": 8187,
  "fluss_zellen": {
   "BACH_NORD": 44,
-  "BACH_SUED": 56,
-  "SEE": 205
+  "BACH_SUED": 73,
+  "SEE": 205,
+  "WASSER_FARBE": 799
  },
  "fluss_breite_m_median": {
   "BACH_NORD": 2.08,
   "BACH_SUED": 2.64
  },
- "furt": 0,
- "ufer": 1127,
- "hinweis": "hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle."
+ "ufer": 814,
+ "luecken": [
+  "wasser_tiefe_m leer: keine Quelle",
+  "hoehe_m ausserhalb Senke nur Stufen [A], keine Hoehenkarte",
+  "Kraterinneres auf Bezug [A]"
+ ]
 }

@@ -194,3 +194,20 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
   - Sonstige Wände (außerhalb dieser Fenster): 8,6 m [A]
   - Die Schattenlänge war nicht verwertbar (Median 5–15 px, Schatten verschmilzt mit Schnee) und geht nicht ein.
   - Die Fenster je Wand stehen in gen_raster.py (WAND_H) und in der Meta (`wand_hoehe_m`).
+
+## §2d Layer-Trennung und Prüfung (t9u/t10u/t11u)
+- Die Gelände-CSV `raster_c20_z25_zellen.csv` enthält nur Gelände-Spalten. Zone, Platz, Weg, Hof, Feuer, Brücke, Furt, Bauplatz und die Dekoplätze des Netzes stehen in `raster_c20_z25_overlay_plaetze_wege.csv` (Vorschau `_overlay_plaetze_wege.png`).
+- Unter früheren Weg-, Hof-, Feuer- und Brückenzellen wurde das Gelände per Farbe neu gesetzt.
+- Glättung: Mehrheitsfilter, Inselfilter, BODEN→SCHNEE, Stämme→WALD, Randzeile. Zahlen siehe `meta.json`.
+- Höhenstufen [A]:
+
+  | Bereich | Höhe |
+  |---|---|
+  | Nordplateau | +8,6 [R] |
+  | Ostplateau | +6,7 |
+  | Südvorland | −7,6 |
+  | Senke und Rest | 0 |
+
+- Deko-Kapazität: 0,44 je m² [R] aus Mindestabstand 1,5 m (BERICHT_NETZ_E1 §9.2).
+- Restfehler und Prüfmethode: siehe PRUEFPROTOKOLL.md.
+- z50: nur Meta und PNG, keine CSV.
