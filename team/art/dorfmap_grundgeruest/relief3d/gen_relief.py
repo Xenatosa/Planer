@@ -22,6 +22,9 @@ for _ in range(60):
     d=nd.grey_dilation(Hk,size=3);neu=rest&~K&(d>-1e8);Hk[neu]=d[neu];K|=neu
     if not (rest&~K).any():break
 H[rest]=Hk[rest]
+sg=wand&(wn=='Suedgrat');topf=nd.maximum_filter(np.where(sg&(H>-15),H,-1e9),size=31);dsg=nd.distance_transform_edt(~sg)
+ziel=((eb=='TAL_SUED')&(dsg<=15)|(sg&(H<=-15.9)))&(topf>-1e8)
+H[ziel]=np.minimum(H[ziel],-16-0.8+np.minimum(0,topf[ziel])*(1-dsg[ziel]/15))   # [R] 16 m Wand, Auslauf 15 m [A]
 Hboden=H.copy()
 tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
 H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
@@ -69,8 +72,8 @@ b3d_alt=A('begehbar_3d')=='1'
 b3d=(neig<=35)&(b3d_alt|wand)&~(wa&(fl=='SEE'))
 ebene2=eb.copy();ebene2[wand]=np.where(wn[wand]=='Nord','PLATEAU_NORD',np.where(wn[wand]=='Ostgrat','OSTPLATEAU',np.where(wn[wand]=='Krater','KRATERRAND','SENKE')))
 kl=np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS','')))
-neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t42u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
- 'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),'hoehe_m':np.round(Hz,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t42u_glatt'),
+neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t43u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
+ 'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),'hoehe_m':np.round(Hz,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t43u'),
  'neigung_grad':np.round(neig,1),'klippe_hoehe_m':np.round(kh,1),'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u','') ,
  'wasser_tiefe_m':np.where(wa,tiefe,0).astype(str),'begehbar_3d':b3d.astype(int)}
 extra={'boden_hoehe_m':np.round(Hboden,2),'wasserspiegel_m':np.where(wa,np.round(np.nan_to_num(Wsp),2).astype(str),''),
@@ -107,14 +110,21 @@ for p in Pl:
     t=p['typ'];k='FUNKTION' if t.startswith('FUNKTION') else t
     gg=G[iy.start*RS:iy.stop*RS+1,ix.start*RS:ix.stop*RS+1];g=float(np.median(gg)) if gg.size else 0
     haeuser.append({'id':p['id'],'typ':t,'x':round((x0+x1)/2,2),'z':round((y0+y1)/2,2),'b':round(x1-x0,2),'t':round(y1-y0,2),'h':HH[k],'y':round(g,2)})
-baeume=[];felsen=[];steine=[]
+# t43u: Objekte in Gruppen (Dichte aus weichem Rauschen), Groessen-/Drehvarianz, Kraterrand duenner, Geroell am Wandfuss [A]
+rs2=np.random.default_rng(43);dich=nd.gaussian_filter(rs2.standard_normal((NY,NX)),4);dich/=dich.std()
+baeume=[];felsen=[];steine=[];geroell=[]
 for y in range(NY):
     for x in range(NX):
-        if belegt[y,x] or weg[y,x]:continue
-        if ug2[y,x]=='WALD' and x%3==0 and y%3==0:
-            X,Z=min(x+rng(x,y,1)*2.4,NX-0.5),min(y+rng(x,y,2)*2.4,NY-0.5);baeume.append([round(X,2),round(hc(X,Z),2),round(Z,2),round(6+4*rng(x,y,3),1)])
-        if ug2[y,x]=='FELS' and x%3==1 and y%3==1:felsen.append([x+.5,round(hc(x,y),2),y+.5,round(.8+1.4*rng(x,y,4),2),round(rng(x,y,5)*6.28,2)])
-        if deko[y,x] and not wa[y,x]:steine.append([x+.5,round(hc(x,y),2),y+.5,.6,round(rng(x,y,6)*6.28,2)])
+        if belegt[y,x] or weg[y,x] or steil[y,x]:continue
+        u=rs2.random(5)
+        if ug2[y,x]=='WALD' and u[0]<0.22*np.clip(0.6+0.8*dich[y,x],0,1.6):
+            X,Z=min(x+u[1],NX-0.5),min(y+u[2],NY-0.5);baeume.append([round(X,2),round(hc(X,Z),2),round(Z,2),round(5+6*u[3]**1.5,1),round(u[4]*6.28,2),round(rs2.random(),2)])
+        if ug2[y,x]=='FELS' and u[0]<(0.05 if wn[y,x]=='Krater' else 0.09)*np.clip(0.5+dich[y,x],0,2):
+            s=0.5+1.6*u[3]**2;X,Z=x+u[1],y+u[2];felsen.append([round(X,2),round(hc(X,Z)-0.25*s,2),round(Z,2),round(s,2),round(u[4]*6.28,2)])
+        if deko[y,x] and not wa[y,x] and u[0]<0.5:X,Z=x+u[1],y+u[2];steine.append([round(X,2),round(hc(X,Z)-0.1,2),round(Z,2),round(0.3+0.5*u[3],2),round(u[4]*6.28,2)])
+        if fuss[y,x] and not wa[y,x] and u[0]<0.6:
+            for _ in range(1+int(u[3]*3)):
+                v=rs2.random(4);s=0.2+0.6*v[2]**2;X,Z=x+v[0],y+v[1];geroell.append([round(X,2),round(hc(X,Z)-0.2*s,2),round(Z,2),round(s,2),round(v[3]*6.28,2)])
 lab,n=nd.label(ha=='MASKE');findlinge=[]
 for i,s in enumerate(nd.find_objects(lab)):
     m=lab[s]==i+1;cy,cx=nd.center_of_mass(m);a=int(m.sum());X,Z=s[1].start+cx+.5,s[0].start+cy+.5
@@ -132,7 +142,21 @@ for c in outcols:
     u,idx=np.unique(F[c].astype(str).ravel(),return_inverse=True);dt=np.uint8 if len(u)<256 else np.uint16 if len(u)<65536 else np.uint32
     spalten[c]={'w':u.tolist(),'t':dt.__name__,'i':base64.b64encode(idx.astype(dt).tobytes()).decode()}
 b64=lambda a:base64.b64encode(np.ascontiguousarray(a,np.float32).tobytes()).decode()
-D={'nx':NX,'ny':NY,'G':b64(G),'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
+# t43u: Bodenfarbe je Vertex aus Zelleigenschaften (Splat-Gewichte, weich), c20 nur als schwache Toenung (12 %) [A]
+from PIL import Image
+up=lambda M,s=1.5:nd.map_coordinates(nd.gaussian_filter(np.kron(M.astype(float),np.ones((RS,RS))),s*RS),[vj-0.5,vi-0.5],order=1,mode='nearest')
+nz=lambda s,sd:(lambda a:a/a.std())(nd.gaussian_filter(np.random.default_rng(sd).standard_normal((GY,GX)),s))
+MAT={'SCHNEE':(0.86,0.89,0.93),'WALD':(0.78,0.82,0.80),'FELS':(0.62,0.60,0.58),'BODEN':(0.60,0.52,0.43),'SAND':(0.80,0.74,0.62),'WASSER_EIS':(0.55,0.58,0.56)}
+gew={k:up(ug2==k)*(1+0.35*nz(4,i))**2 for i,k in enumerate(MAT)}
+gew['GEROELL']=up(fuss|steil,1.0)*0.9*(1+0.4*nz(2,11)).clip(0);MAT['GEROELL']=(0.66,0.64,0.61)
+gew['NASS']=np.clip(up(wa,1.0)-0.05,0,1)*0.6;MAT['NASS']=(0.50,0.55,0.58)
+S=sum(gew.values())+1e-6;col=sum(np.array(MAT[k])[None,None,:]*(gew[k]/S)[...,None] for k in gew)
+c20=np.asarray(Image.open('../_alt/modell3d_t36u/textur_c20_8px.jpg').convert('RGB').resize((GX,GY),Image.BILINEAR)).astype(float)/255
+c20=np.stack([nd.gaussian_filter(c20[...,c],6) for c in range(3)],-1);ton=c20/np.maximum(c20.mean(-1,keepdims=True),1e-3)
+col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
+VC=(np.clip(col,0,1)*255).astype(np.uint8)
+WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
+D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH}
 open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=False).encode(),9))

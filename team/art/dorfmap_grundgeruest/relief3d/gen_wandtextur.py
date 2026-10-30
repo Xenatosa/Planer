@@ -1,17 +1,18 @@
-# Platzhalter-Felswandtextur (prozedural, kachelbar), 1 Kachel = 4 m breit x 8 m hoch [A]
-import numpy as np,random
-from PIL import Image,ImageDraw,ImageFilter
-random.seed(4);W,H=256,512
-a=np.random.default_rng(4).normal(0,1,(H//8,W//8));a=np.kron(a,np.ones((8,8)))
-im=Image.fromarray(np.clip(128+a*10,0,255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(6)).convert('RGB')
-px=np.array(im).astype(float)/128;base=np.array([120,98,82])
-im=Image.fromarray(np.clip(px*base,0,255).astype(np.uint8));d=ImageDraw.Draw(im)
-x=0
-while x<W:                                  # senkrechte Pfeiler
-    w=random.randint(30,60);d.line([(x,0),(x+random.randint(-6,6),H)],fill=(55,42,36),width=3)
-    for _ in range(3):
-        y=random.randint(0,H);d.line([(x,y),(x+w,y+random.randint(-15,15))],fill=(70,55,46),width=2)
-    x+=w
-for _ in range(25):
-    x,y=random.randint(0,W),random.randint(0,H);d.polygon([(x,y),(x+20,y+8),(x+6,y+30)],fill=(150,128,110))
-im.save('wand_textur.png');print(im.size)
+# t43u: prozedurale, kachelbare Texturen [A]. wand_textur.png = Fels-Schichtung + Risse (Graustufen-Albedo, 1 Kachel = 6 m),
+# detail_textur.png = feines Bodenrauschen (1 Kachel = 4 m). Farbe kommt im Viewer aus Material-Gewichten.
+import numpy as np,scipy.ndimage as nd
+from PIL import Image
+r=np.random.default_rng(4);N=512
+def fbm(n,okt,seed):
+    g=np.random.default_rng(seed);o=np.zeros((n,n))
+    for k in range(okt):s=n/(2**(k+2));o+=nd.gaussian_filter(g.standard_normal((n,n)),s,mode='wrap')*(0.55**k)*s**0.9
+    return (o-o.mean())/o.std()
+y=np.arange(N)[:,None]/N;x=np.arange(N)[None,:]/N
+w=fbm(N,5,1);band=np.sin((y*9+0.15*w)*2*np.pi)+0.5*np.sin((y*23+0.04*w)*2*np.pi)   # Schichten (kachelbar)
+risse=np.abs(fbm(N,4,2));risse=np.exp(-risse*6)                                     # Risse = Nulllinien
+vert=np.abs(np.sin((x*4+0.15*fbm(N,4,3))*np.pi));vert=np.exp(-vert*5)*(fbm(N,2,8)>0.2)
+A=0.62+0.045*band+0.10*fbm(N,6,5)-0.28*risse*(0.5+0.5*(fbm(N,3,6)>0))-0.12*vert+0.05*nd.gaussian_filter(vert,6,mode="wrap")
+Image.fromarray((np.clip(A,0,1)*255).astype(np.uint8)).save('wand_textur.png')
+D=0.5+0.5*np.tanh(0.6*fbm(256,6,9))
+Image.fromarray((np.clip(0.75+0.25*D,0,1)*255).astype(np.uint8)).save('detail_textur.png')
+print('ok')

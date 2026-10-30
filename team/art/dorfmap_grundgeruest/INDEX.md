@@ -18,7 +18,7 @@
 - `pruefung/t34u_fehlerliste.csv`: Fehler F1–F10 (behoben), Befunde B1–B8 (offen)
 - `pruef_konsistenz_t34u.py`: Regelpruefung aller Zellen
 - `ANFORDERUNGEN_3D_WELTKARTE.md`: Anforderungen echte 3D-Karte (Kamera frei drehbar [F])
-- `relief3d/index.html` (t42u, geglättet + c20-Textur; t41u in `_alt/relief3d_t41u/`): NEUES 3D-Relief (echte Wände, Plateaus, Flussbett, Sockel), NEU/ALT-Schalter, Bodensicht 1,8 m. Raster: relief3d/zellen_relief.csv. Plan: relief3d/NEUAUFBAU_PLAN.md
+- `relief3d (t43u: Material aus Zelleigenschaften, triplanar Fels, Gruppen-Objekte; Vorstand _alt/relief3d_t42u, _alt/relief3d_t41u) 
 - Alt: `_alt/modell3d_t36u/` (t36u-Modell + welt3d t39u), `_alt/WELT3D_PLAN_t39u.md`, `_alt/modell3d_t34u/`
 - `pruefung/t29u_kacheln_r5_*` und `pruefung/t30u_kacheln_r5_*`: Kachelbögen über die ganze Karte (ersetzen kacheln_r4/r5)
 - Belege t31u: `pruefung/t31u_talsued_a/b.png`, `t31u_findling_4x_0/1.png`, `t31u_z50_gipfel.png`, `t31u_z50_sand_w/m/o.png`

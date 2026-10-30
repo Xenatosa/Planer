@@ -25,3 +25,8 @@
 - Wandhöhe im Modell (max−min G im 5×5-Fenster an steilen Zellen, Median) [R]: Nord 15,45, Suedgrat 15,0, Krater 11,2, Ostgrat 12,0 m. Nord inkl. Hang am Fuß; Suedgrat 1 m unter Messung 16 (Bandhöhe per Nachbar-Ausbreitung).
 - Zellen: hoehe_m = Mittel 3×3 G-Punkte, ecke_* = G, klippe WAND/WAND_OBEN/WAND_FUSS, skin_slot wand_fels bei WAND. Abgleich pruefung/abgleich_t42u.json: 0 Abweichungen.
 - OBJ entfällt (nur GLB); alter Stand: ../_alt/relief3d_t41u/.
+
+## t43u
+- Suedgrat [R]: Talboden TAL_SUED/untere Bandzellen bis 15 Zellen vom Band um bis zu 16,8 m unter Oberkante abgesenkt, Median klippe_hoehe 16,04 m. 11150 Zellen (Reihen 218–276) mit neuen Hoehenwerten, sonst unveraendert. pruefe_t42u: 0 Abweichungen.
+- Bodenfarbe: Material-Gewichte (untergrund, Nass am Wasser, Geroell am Wandfuss) je Vertex, c20 nur 12 % Toenung [A]. Fels per Neigung (smoothstep 0,42–0,74 cos) triplanar [A].
+- Bekannte Maengel: Waende wirken noch wie gestempelt (Textur gleichmaessig), Schneeboden flach/eintoenig, Wege-Overlay sehr blass, Haeuser/Baeume sind Platzhalter, Kamera "Am Nordwand-Fuss" hat einen Felsen direkt vor der Linse.
