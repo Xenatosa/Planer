@@ -2,10 +2,10 @@
 import json,csv,numpy as np,cv2,collections
 Q='/workspace/handygame-plan/team/art/wege_deko_system/umrechnung_25pxm/'
 NX,NY=336,303; rd=lambda: csv.DictReader(open('raster_c20_z25_zellen.csv'))
-F={k:np.zeros((NY,NX),object) for k in ['ug']}; A={k:np.zeros((NY,NX),bool) for k in ['beg','beb','bzb','bzp','wasser','wand','hind']}; KAP=np.zeros((NY,NX))
+F={k:np.zeros((NY,NX),object) for k in ['ug']}; A={k:np.zeros((NY,NX),bool) for k in ['beg','beb','bex','bzb','bzp','wasser','wand','hind']}; KAP=np.zeros((NY,NX))
 for r in rd():
   x,y=int(r['cx']),int(r['cy']); F['ug'][y,x]=r['untergrund']
-  A['beg'][y,x]=r['begehbar']=='1'; A['beb'][y,x]=r['bebaubar']=='1'; A['bzb'][y,x]=r['bauzone_bestand']=='1'; A['bzp'][y,x]=r['bauzone_plan']=='1'
+  A['beg'][y,x]=r['begehbar']=='1'; A['beb'][y,x]=r['bebaubar']=='1'; A['bex'][y,x]=r.get('bebaubar_erweitert')=='1'; A['bzb'][y,x]=r['bauzone_bestand']=='1'; A['bzp'][y,x]=r['bauzone_plan']=='1'
   A['wasser'][y,x]=r['untergrund']=='WASSER_EIS'; A['wand'][y,x]=r['klippe']=='WAND'; A['hind'][y,x]=r['hindernis_id']!='0'; KAP[y,x]=float(r['deko_kapazitaet'] or 0)
 UG=F['ug']; c=lambda m:(240+m[0],48+m[1])   # m_echt -> Zelle (px/25)
 def kat(x,y):
@@ -25,7 +25,7 @@ rows=[];wald_slot=[];sl=np.zeros((NY,NX),int)
 for s in S:
   z=zellen(s['poly']); ys,xs=np.nonzero(z); k=collections.Counter(kat(x,y) for x,y in zip(xs,ys)); n=len(xs) or 1
   sl[z]=np.where(sl[z]==0,1,sl[z]); s['z']=z
-  rows.append(dict(slot_id=s['id'],epoche=s['ep'],groesse=s['slot'],zellen=len(xs),anteil_bebaubar=round(k['BEBAUBAR']/n,3),anteil_bauzone_plan=round(A['bzp'][z].mean() if len(xs) else 0,3),
+  rows.append(dict(slot_id=s['id'],epoche=s['ep'],groesse=s['slot'],zellen=len(xs),anteil_bebaubar=round(k['BEBAUBAR']/n,3),anteil_bebaubar_erweitert=round(A['bex'][z].mean() if len(xs) else 0,3),anteil_bauzone_plan=round(A['bzp'][z].mean() if len(xs) else 0,3),
     wand=k['WAND'],wasser_eis=k['WASSER_EIS'],schatten=k['SCHATTEN'],wald=k['WALD'],fels=k['FELS'],hindernis=k['HINDERNIS'],begehbar_nicht_bebaubar=k['BEGEHBAR_NICHT_BEBAUBAR'],sonst=sum(v for kk,v in k.items() if kk.startswith('SONST'))))
   for x,y in zip(xs,ys):
     if UG[y,x]=='WALD': wald_slot.append((s['id'],'slot',x,y))
@@ -89,7 +89,7 @@ u2=lambda x,y:'ausserhalb BB4-Planmaske (Gelaende frei, Planmaske kleiner)'
 k1=konf(A['bzp']&~A['beb'],u1); k2=konf(A['beb']&~A['bzp'],u2)
 for nm,L in [('bauzone_plan_nicht_bebaubar',k1),('bebaubar_nicht_bauzone_plan',k2)]:
   w=csv.DictWriter(open(o+nm+'.csv','w'),fieldnames=['cx','cy','ug','ursache']); w.writeheader(); w.writerows(L)
-R=dict(slots=len(S),slots_innen95=sum(r['anteil_bebaubar']>=0.95 for r in rows),anteil_bebaubar_mittel=round(np.mean([r['anteil_bebaubar'] for r in rows]),3),
+R=dict(slots=len(S),slots_innen95=sum(r['anteil_bebaubar']>=0.95 for r in rows),slots_innen95_erweitert=sum(r['anteil_bebaubar_erweitert']>=0.95 for r in rows),anteil_bebaubar_mittel=round(np.mean([r['anteil_bebaubar'] for r in rows]),3),
  slots_mit=dict(wand=sum(r['wand']>0 for r in rows),wasser=sum(r['wasser_eis']>0 for r in rows),schatten=sum(r['schatten']>0 for r in rows),wald=sum(r['wald']>0 for r in rows),fels=sum(r['fels']>0 for r in rows),hindernis=sum(r['hindernis']>0 for r in rows)),
  zellen_slots=dict(wand=sum(r['wand'] for r in rows),wasser=sum(r['wasser_eis'] for r in rows),schatten=sum(r['schatten'] for r in rows),wald=sum(r['wald'] for r in rows)),
  bruecken=len(br),bruecke_mitte_wasser=sum(b['mitte_wasser'] for b in br),bruecke_beide_enden_begehbar=sum(b['ende_a_begehbar'] and b['ende_b_begehbar'] for b in br),
@@ -98,3 +98,14 @@ R=dict(slots=len(S),slots_innen95=sum(r['anteil_bebaubar']>=0.95 for r in rows),
  wald_zellen_slots=len(set((x,y) for _,_,x,y in wald_slot)),wald_zellen_wege=len(set((x,y) for _,_,x,y in wald_weg)),slots_mit_wald_ids=len(set(a for a,_,_,_ in wald_slot)),wege_mit_wald=len(set(a for a,_,_,_ in wald_weg)),
  bzp_nicht_beb=len(k1),bzp_nicht_beb_ursache=dict(collections.Counter(k['ursache'] for k in k1)),beb_nicht_bzp=len(k2),je_epoche=sumE)
 json.dump(R,open(o+'zusammenfassung.json','w'),indent=1,ensure_ascii=False,default=int); print(json.dumps(R,ensure_ascii=False,default=int))
+
+# t29u: Vorschau bebaubar_erweitert (gruen=bebaubar, gelb=nur erweitert), Slots rot wenn <95 % erweitert [R]
+im=np.full((NY,NX,3),235,np.uint8); im[A['beg']]=(215,225,215); im[A['wasser']]=(220,160,60); im[A['wand']]=(40,40,40); im[UG=='WALD']=(30,90,30); im[UG=='FELS']=(110,110,150)
+im[A['bex']&~A['beb']]=(0,200,255); im[A['beb']]=(70,170,70); im=cv2.resize(im,(NX*SC,NY*SC),interpolation=cv2.INTER_NEAREST); je={}
+for Ep in (16,40,70,100):
+  je[Ep]=sum(1 for s,r in zip(S,rows) if s['ep']<=Ep and r['anteil_bebaubar_erweitert']<0.95)
+for s,r in zip(S,rows):
+  ok=r['anteil_bebaubar_erweitert']>=0.95; p=np.round(np.array([c(q) for q in s['poly']])*SC).astype(np.int32); cv2.polylines(im,[p],True,(255,255,255) if ok else (0,0,255),1 if ok else 2)
+cv2.rectangle(im,(0,0),(NX*SC,28),(0,0,0),-1); cv2.putText(im,f"t29u E100: {sum(r['anteil_bebaubar_erweitert']>=0.95 for r in rows)}/{len(rows)} Slots >=95% bebaubar_erweitert. gruen=bebaubar, gelb=nur erweitert, rot=Slot <95%",(8,20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
+cv2.imwrite('pruefung/t29u_bebaubar_erweitert_E100.png',im)
+R['je_epoche_nicht_innen_erweitert']=je; json.dump(R,open(o+'zusammenfassung.json','w'),indent=1,ensure_ascii=False,default=int); print('erw',R['slots_innen95_erweitert'],je)

@@ -24,7 +24,7 @@
  "glaettung_zellen": 7746,
  "boden_zu_schnee": 8280,
  "wasser_t12u": 1609,
- "ovr12_n": 886,
+ "ovr12_n": 1271,
  "suedwald_n": 1952,
  "wald_aus_wand": 585,
  "overrides_zellen": 1288,
@@ -82,23 +82,24 @@
  },
  "quelle_anteil": {
   "MASKE": 27.5,
-  "FARBE": 65.3,
+  "FARBE": 64.9,
   "FILTER": 2.2,
   "KEINE": 2.1
  },
  "zaehlung_untergrund": {
   "BODEN": 896,
-  "FELS": 1846,
+  "FELS": 2116,
   "KLIPPE_KANTE": 1178,
   "KLIPPE_WAND": 17574,
-  "SAND": 483,
-  "SCHATTEN": 1781,
-  "SCHNEE": 60067,
-  "WALD": 11227,
-  "WASSER_EIS": 6756
+  "SAND": 537,
+  "SCHATTEN": 1772,
+  "SCHNEE": 59823,
+  "WALD": 11217,
+  "WASSER_EIS": 6695
  },
- "begehbar": 62597,
+ "begehbar": 62398,
  "bebaubar": 27142,
+ "bebaubar_erweitert": 54416,
  "bauzone_bestand": 23123,
  "bauzone_plan": 31893,
  "senke_becken": 31325,
@@ -109,7 +110,7 @@
  },
  "bebaubar_ausserhalb_bestand": 4889,
  "hindernis_maske": 792,
- "hindernis_gelaende": 31663,
+ "hindernis_gelaende": 31923,
  "plaetze": 99,
  "dekoplaetze_netz": 627,
  "groessenbezug": {
@@ -136,13 +137,13 @@
   "BACH_NORD": 1689,
   "BACH_SUED": 891,
   "SEE": 821,
-  "WASSER_FARBE": 3355
+  "WASSER_FARBE": 3294
  },
  "fluss_breite_m_median": {
   "BACH_NORD": 2.0,
   "BACH_SUED": 2.48
  },
- "ufer": 2846,
+ "ufer": 2902,
  "luecken": [
   "wasser_tiefe_m leer: keine Quelle",
   "hoehe_m ausserhalb Senke nur Stufen [A], keine Hoehenkarte",

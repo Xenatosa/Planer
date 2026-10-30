@@ -227,3 +227,16 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
 - `BAUPLAN_E100.md`: neu auf Plan v4b (Wege-&-Deko-Bot t25u). Vorfassung `_alt/BAUPLAN_E100_t16u.md`.
 - Neues Zellfeld `bauzone_plan` (0/1): Zelle ≥50 % in `wege_deko_system/umrechnung_25pxm/bauzone/BB4_plan_v2_25pxm.npy` [S/A]. Nur gelesen.
 - `gen_overlay_e100.py` → `pruefung/t26u_*`: Overlay E16/E40/E70/E100 (PNG), Slots gegen Gelände, Brücken, Deko, Wald unter Slots/Wegen, Konflikte bauzone_plan↔bebaubar (beide Richtungen, mit Ursache), Zusammenfassung JSON. Slots, Brücken, Deko nur im Overlay; Gelände bleibt nackt.
+
+## t29u bebaubar_erweitert und Restfehler
+- Neues Zellfeld `bebaubar_erweitert` (0/1) [A]: `bebaubar | (begehbar & Untergrund ∈ {SCHNEE,BODEN,SAND} & hindernis==0 & Abstand Wand ≥ 2 m & Abstand Wasser ≥ 2 m)`, **ohne** die Bedingung `senke_becken`; nur 4-zusammenhängende Flächen ≥ 16 Zellen (kleinster Slot 4×4 m) [A].
+  - Ausnahme Senke: in der Senke bleibt die bestehende Regel `bebaubar` (keine Änderung).
+  - `bebaubar` und `bauzone_plan` bleiben unverändert. Fabian hat die Bauzone nicht entschieden.
+  - Höhenstufe ist nicht geprüft: Plateaus über der Nordwand und der Kraterboden zählen mit [A].
+  - z25: 54 416 Zellen (bebaubar 27 142) [R]. z50: 15 091 (bebaubar 7 233) [R].
+- Overrides t29u in `overrides_t12u.csv` (Zeilen 31–420), nur z25:
+  - 57× SCHNEE→SAND am Rand der Sandbänke im Südfluss (Sandpixel-Anteil ≥ 0,50 [S]);
+  - 63× WASSER_EIS→SCHNEE für Eisschollen im Südfluss (Weißanteil min RGB > 225 ≥ 0,60, y 258–285, x < 312 [A]);
+  - 270× Schneegipfel westlich der Senke (Umriss c20) → FELS [S].
+- `gen_overlay_e100.py` schreibt zusätzlich `anteil_bebaubar_erweitert` je Slot und `pruefung/t29u_bebaubar_erweitert_E100.png`.
+- Die Splitter-Prüfliste schreibt gen_raster.py nach /tmp (`unb_split1/2_z25.npy`). Prüfbilder: `pruefung/t29u_*`.

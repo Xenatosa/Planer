@@ -1,13 +1,14 @@
 {
  "slots": 355,
  "slots_innen95": 149,
+ "slots_innen95_erweitert": 317,
  "anteil_bebaubar_mittel": 0.442,
  "slots_mit": {
   "wand": 0,
   "wasser": 1,
   "schatten": 0,
   "wald": 12,
-  "fels": 0,
+  "fels": 1,
   "hindernis": 2
  },
  "zellen_slots": {
@@ -49,7 +50,7 @@
    "380"
   ]
  },
- "kapazitaet_summe": 27542.7,
+ "kapazitaet_summe": 27455.1,
  "wald_zellen_slots": 31,
  "wald_zellen_wege": 164,
  "slots_mit_wald_ids": 12,
@@ -83,5 +84,11 @@
    "slots": 355,
    "nicht_innen": 206
   }
+ },
+ "je_epoche_nicht_innen_erweitert": {
+  "16": 5,
+  "40": 16,
+  "70": 23,
+  "100": 38
  }
 }

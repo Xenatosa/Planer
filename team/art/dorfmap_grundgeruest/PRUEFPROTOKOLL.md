@@ -86,3 +86,45 @@
 - Fabian: X084 bekommt Treppe/Steg über den Höhenunterschied; Gelände unverändert (Wand bleibt KLIPPE_WAND).
 - Overlay/Daten: `pruefung/t26u_bruecken.csv` Spalte `wegtyp` = 'Treppe/Steg (Hoehe)', `hoehenunterschied_m` = 8,6 [R] aus `klippe_hoehe_m` der Wandzellen am Weg (Wand Nord, alle 8,6; oben hoehe_m 8,6 [A], unten 0,0 [A]). Übrige 16: 'Bruecke (Wasser)'. Overlay-Kreis blau.
 - Alternativen b/c waren keine eigenen Dateien → nichts nach `_alt/` verschoben.
+
+## t29u bebaubar_erweitert und Restfehler (30.10.2026)
+**bebaubar_erweitert** (neu, Regel in SPEC.md, [A]):
+- Zellen z25: 54 416 [R]. bebaubar bleibt bei 27 142, bauzone_plan bei 31 893 (unverändert).
+- Slots ≥ 95 %: 149/355 bei bebaubar → **317/355 bei bebaubar_erweitert** [R].
+- Nicht innen (bebaubar → erweitert) [R]: E16 12→5, E40 54→16, E70 130→23, E100 206→38.
+- Vorschau: `pruefung/t29u_bebaubar_erweitert_E100.png`.
+
+**Geprüft und korrigiert** (Overrides in z25, Quelle je Zeile):
+- **Sandbänke Südfluss:** Die Randzellen waren SCHNEE. 57 Zellen → SAND [S].
+  - Sandpixel-Anteil ≥ 0,50, im Bild geprüft: `t29u_zoom_sand.png`.
+- **Eisschollen Südfluss:** Sie waren WASSER_EIS. 63 Zellen → SCHNEE [A].
+  - Bild: `t29u_fluss_schollen.png`.
+  - Die Wasserfall-Gischt bei x ≥ 312 ist ausgenommen.
+  - Schollenzellen sind jetzt begehbar. Bebaubar sind sie nicht (2 m Abstand zum Wasser).
+- **Schneegipfel westlich der Senke** (cx 90–122, cy 92–120): Die Flanken waren SCHNEE und damit begehbar und erweitert bebaubar. 270 Zellen → FELS [S].
+  - Bilder: `t29u_zoom_gipfel.png`, `t29u_kacheln_r5_1_1.png`.
+- **Klassen z25 vorher → nachher:**
+  - SAND 483→537, FELS 1 846→2 116, SCHNEE 60 067→59 823;
+  - WASSER_EIS 6 756→6 695, WALD 11 227→11 217, SCHATTEN 1 781→1 772;
+  - begehbar 62 597→62 398 [R].
+
+**Geprüft, ohne Korrektur:**
+- **UNBEKANNT-Splitter:** 197 Zellen in 27 Gruppen, vom Filter an die Nachbarn vergeben. Jede Gruppe im c20-Ausschnitt angesehen: `t29u_splitter_c20.png`.
+  - Es sind fast nur Übergangszellen (Felskante/Schnee, Ufer, Baumschatten). Die Zuordnung ist plausibel [A].
+  - Eine einzelne richtige Klasse ist nicht belegbar, darum gibt es keine Overrides.
+  - Ausnahme: Die Sandinsel S23 ist mit der Sandkorrektur erledigt.
+- **Westgrenze x=136** (`t29u_rand_x136.png`):
+  - In c20 gibt es dort keine Wand und keine Kante. Offener Schnee läuft bis x≈100 weiter. Die Grenze von senke_becken ist also keine Geländegrenze [S].
+  - senke_becken und bebaubar habe ich nicht geändert (Bauzone offen). bebaubar_erweitert schließt die Fläche an.
+- **NO-Ecke** (`t29u_rand_nordost.png`):
+  - Die Senke endet senkrecht bei x≈320 (cy 37–72) im offenen Schnee. In c20 geht der Schnee bis zum Kartenrand weiter. Auch das ist keine Geländegrenze [S].
+  - Nicht geändert. In bebaubar_erweitert ist die Fläche enthalten.
+- **Kachelbögen r5_0–2** (y 0–215): neu aus dem aktuellen Raster, `t29u_kacheln_r5_{0,1,2}_{0..3}.png`. Alle 126 Kacheln angesehen.
+  - Gefunden und korrigiert: der Schneegipfel (siehe oben).
+
+**Weiter offen (nicht behoben, nicht belegbar korrigiert):**
+1. **Findlinge mit Schneehaube** zählen als SCHNEE, z. B. cx 24–48/cy 144–168 und mehrere in der Senke. Sie sind begehbar und bebaubar_erweitert, obwohl sie Hindernisse sind. Ein Pixel-Detektor ist nicht zuverlässig (Schneehaube weiß, Flanke braun wie Klippe).
+2. **Schmaler Strich cx 190–195/cy 40–100** (Nordbach oder Spur) ist 1–2 Zellen WASSER_EIS. Nicht entschieden, ob Bach oder Spur.
+3. **Höhenstufe in bebaubar_erweitert:** Plateau über der Nordwand, Kraterboden und Ostplateau zählen ohne Höhenprüfung [A].
+4. **z50 hat keine Overrides.** Dort ist der Gipfel weiter SCHNEE.
+5. **Kachelbögen r5_3/r5_4** (y ≥ 216): in t29u nicht erneut angesehen.
