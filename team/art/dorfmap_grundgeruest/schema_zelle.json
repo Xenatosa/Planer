@@ -1,0 +1,15 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Dorfmap-Grundgeruest Zelle (eine CSV-Zeile)","type":"object",
+ "required":["cx","cy","px_x","px_y","untergrund","begehbar","bebaubar"],
+ "properties":{
+  "cx":{"type":"integer","minimum":0},"cy":{"type":"integer","minimum":0},
+  "px_x":{"type":"integer","description":"linke obere Ecke in c20-px"},"px_y":{"type":"integer"},
+  "untergrund":{"enum":["BODEN","GESPERRT","SCHNEE","FELS_WALD","WASSER_EIS","HOF","FEUER","WEG","BRUECKE"]},
+  "zone":{"enum":["","A","B","C","D","E"]},
+  "platz":{"type":"string","description":"nr aus zonen_c20_v9.json, leer = kein Platz"},
+  "weg_id":{"type":"string"},"weg_klasse":{"enum":["","GASSE","ANBINDUNG","HAUSWEG"]},
+  "hindernis":{"type":"integer","description":"Index+1 in hindernisse_c20_v2.json, 0 = keins"},
+  "wasser_eis":{"enum":[0,1]},"schnee":{"enum":[0,1]},"senke_bb4":{"enum":[0,1]},"h4_ext":{"enum":[0,1]},"frei_e2":{"enum":[0,1]},
+  "begehbar":{"enum":[0,1]},"bebaubar":{"enum":[0,1]},
+  "hoehe_stufe":{"type":["integer","string"],"description":"leer: keine Hoehenkarte vorhanden, spaeter von Hand"},
+  "klippe":{"type":["string"],"description":"leer oder N/O/S/W-Kante, spaeter von Hand"},
+  "skin_slot":{"type":"string","pattern":"^ug_[a-z_]+$","description":"Verweis auf material_slot / Skin-Tabelle"}}}

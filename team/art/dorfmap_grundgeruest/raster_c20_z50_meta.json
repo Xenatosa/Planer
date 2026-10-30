@@ -1,0 +1,32 @@
+{
+ "karte": "KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png",
+ "karte_md5": "d916c6ace52352d7fcf4ef13591cb5c0",
+ "karte_px": [
+  8400,
+  7560
+ ],
+ "px_pro_m": 25,
+ "zelle_px": 50,
+ "zelle_m": 2.0,
+ "raster": [
+  168,
+  152
+ ],
+ "epoche": "E1",
+ "epochen_variante": null,
+ "zaehlung_untergrund": {
+  "BODEN": 2288,
+  "BRUECKE": 6,
+  "FELS_WALD": 1526,
+  "FEUER": 65,
+  "GESPERRT": 15382,
+  "HOF": 90,
+  "SCHNEE": 5046,
+  "WASSER_EIS": 305,
+  "WEG": 828
+ },
+ "begehbar": 8189,
+ "bebaubar": 4866,
+ "plaetze": 99,
+ "hinweis": "hoehe_stufe/klippe leer: keine Hoehenkarte vorhanden [A]"
+}
