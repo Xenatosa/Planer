@@ -240,3 +240,12 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
   - 270× Schneegipfel westlich der Senke (Umriss c20) → FELS [S].
 - `gen_overlay_e100.py` schreibt zusätzlich `anteil_bebaubar_erweitert` je Slot und `pruefung/t29u_bebaubar_erweitert_E100.png`.
 - Die Splitter-Prüfliste schreibt gen_raster.py nach /tmp (`unb_split1/2_z25.npy`). Prüfbilder: `pruefung/t29u_*`.
+
+## t30u Ebenen, Findlinge, z50-Overrides
+
+- **Fakt [F]:** Die Senke-Grenze und `bebaubar` bleiben wie sie sind. Bei x=136 und im Nordosten gibt es **keine Gelaendegrenze** (Sicht t29u_rand_x136.png, t29u_rand_nordost.png). Mehr Bauflaeche gibt es nur ueber `bebaubar_erweitert`.
+- **Neues Feld `ebene`** [A]: SENKE, PLATEAU_NORD, OSTPLATEAU, KRATER, TAL_SUED, WEST, WAND. Abgeleitet aus den `hoehe_m`-Stufen (alle [A]) und dem Kraterfenster cx71-136/cy92-204. `ebene_hoeher`=1 fuer PLATEAU_NORD und OSTPLATEAU. Das Kraterinnere liegt auf Bezugshoehe [A].
+- z25-Zellen je Ebene [R]: SENKE 31265, WEST 28293, WAND 18752, TAL_SUED 15659, PLATEAU_NORD 4005, OSTPLATEAU 2014, KRATER 1820.
+- bebaubar_erweitert je Ebene [R]: SENKE 27140, WEST 16849, TAL_SUED 6158, PLATEAU_NORD 2759, KRATER 1187, OSTPLATEAU 321.
+- Bekannte Luecke [A]: TAL_SUED hat Spalten-Luecken (etwa cx 0-15, 35-50, 150-152), dort fehlt die Suedgrat-Wand im Hoehenmodell; diese Zellen stehen auf WEST. Sicht pruefung/t30u_ebenen.png.
+- **z50:** Die z25-Overrides gelten jetzt auch fuer z50. Eine z50-Zelle wird nur geaendert, wenn mindestens 2 ihrer 4 z25-Zellen dieselbe Regel haben und die Klasse passt [R]. Damit gilt das auch fuer 150 z50-Zellen, darunter der Schneegipfel → FELS.

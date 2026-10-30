@@ -419,3 +419,7 @@ nr,cx0,cy0,cx1,cy1,von,nach,marker,begruendung
 418,96,119,96,119,SCHNEE,FELS,S,"t29u Schneegipfel westlich der Senke (Umriss c20 px 2610,2290 | 2310,2600 | 2250,3000 | 3037,3000 | 2962,2725 | 2775,2450): Gipfelflanke, nicht begehbar; Sicht pruefung/t29u_zoom_gipfel.png"
 419,97,119,97,119,SCHNEE,FELS,S,"t29u Schneegipfel westlich der Senke (Umriss c20 px 2610,2290 | 2310,2600 | 2250,3000 | 3037,3000 | 2962,2725 | 2775,2450): Gipfelflanke, nicht begehbar; Sicht pruefung/t29u_zoom_gipfel.png"
 420,98,119,98,119,SCHNEE,FELS,S,"t29u Schneegipfel westlich der Senke (Umriss c20 px 2610,2290 | 2310,2600 | 2250,3000 | 3037,3000 | 2962,2725 | 2775,2450): Gipfelflanke, nicht begehbar; Sicht pruefung/t29u_zoom_gipfel.png"
+421,320,52,320,53,SCHNEE,FELS,S,"t30u Findling mit Schneekappe (brauner Rand + dunkle Kontur + Schlagschatten); Sicht pruefung/t30u_findling_treffer.png #0"
+422,10,223,11,223,SCHNEE,FELS,S,"t30u Findling (runder Block, dunkle Kontur, Schatten); Sicht pruefung/t30u_findling_treffer.png #11"
+423,14,229,14,230,SCHNEE,FELS,S,"t30u Findling (runder Block, dunkle Kontur, Schatten); Sicht pruefung/t30u_findling_treffer.png #13"
+424,9,242,9,242,SCHNEE,FELS,S,"t30u Findling mit Schneekappe; Sicht pruefung/t30u_findling_treffer.png #14"

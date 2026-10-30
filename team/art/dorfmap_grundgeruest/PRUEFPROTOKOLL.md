@@ -128,3 +128,16 @@
 3. **Höhenstufe in bebaubar_erweitert:** Plateau über der Nordwand, Kraterboden und Ostplateau zählen ohne Höhenprüfung [A].
 4. **z50 hat keine Overrides.** Dort ist der Gipfel weiter SCHNEE.
 5. **Kachelbögen r5_3/r5_4** (y ≥ 216): in t29u nicht erneut angesehen.
+
+## t30u Pruefung
+
+- Senke-Grenze und `bebaubar` sind unveraendert. Es gibt keine Gelaendegrenze bei x=136 und im Nordosten [F]. Die Ausnahme sind 2 Zellen durch einen Findling (siehe unten).
+- Ebenen-Bild: pruefung/t30u_ebenen.png, selbst angesehen. Plateau Nord, Ostplateau, Krater und Senke liegen plausibel. Bei TAL_SUED gibt es Spalten-Luecken [A], offen.
+- Findling-Detektor: brauner Anteil >15 % in SCHNEE-Zellen, nicht neben Waenden. 19 Treffer, alle im Bild angesehen (pruefung/t30u_findling_treffer.png):
+  - **4 belegt → FELS-Override (Zeilen 421-424, 7 Zellen)** [S]: #0 cx320/cy52-53, #11 cx10-11/cy223, #13 cx14/cy229-230, #14 cx9/cy242.
+  - Unsicher, nur dokumentiert: #1-#9 sind flache braune Flecken (Erde oder Moos? keine Blockform). #10 ist Bodenrand. #12 und #15-#18 sind Sandbank-Raender (vielleicht SAND statt SCHNEE).
+  - Nicht erfasst: viele kleine Steine unter Zellgroesse (z. B. cx 0-24/cy 216-240 und cx 168-216/cy 240-264). Sie bleiben SCHNEE [A].
+- Kachelblaetter r5_3 und r5_4 (y ≥ 216) angesehen: pruefung/t30u_kacheln_r5_3_{0..3}.png und r5_4_{0,1}.png. Fluss, Sandbaenke und Suedwald passen grob. Auffaellig: Bei cx 207-210/cy 295-301 steht ein BODEN-Streifen im Wald (Baumstamm oder Pfad?), unklar, nicht geaendert.
+- Linie cx 190-195 / cy 40-100: Das ist ein **zugefrorener Bach** (hellblaue Eisfuellung, doppelte Ufer), kein Weg. Er ist 1 Zelle breit als WASSER_EIS erfasst und passt (pruefung/t30u_linie_cx190.png).
+- z50 hat jetzt Overrides (150 Zellen) [R].
+- Ungeprueft: ob die z50-Uebernahme an Sandbank-Raendern zu viel oder zu wenig aendert. Die z50-Zellen wurden nicht einzeln angesehen.
