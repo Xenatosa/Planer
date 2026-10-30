@@ -82,8 +82,8 @@
  },
  "quelle_anteil": {
   "MASKE": 27.2,
-  "FARBE": 66.7,
-  "FILTER": 3.0,
+  "FARBE": 66.5,
+  "FILTER": 3.1,
   "KEINE": 0.6
  },
  "zaehlung_untergrund": {
@@ -92,12 +92,12 @@
   "KLIPPE_KANTE": 428,
   "KLIPPE_WAND": 4994,
   "SAND": 57,
-  "SCHATTEN": 209,
+  "SCHATTEN": 170,
   "SCHNEE": 15081,
   "WALD": 2970,
-  "WASSER_EIS": 1595
+  "WASSER_EIS": 1634
  },
- "begehbar": 15307,
+ "begehbar": 15268,
  "bebaubar": 7233,
  "bauzone_bestand": 5777,
  "senke_becken": 7892,
@@ -133,7 +133,7 @@
  },
  "fluss_zellen": {
   "BACH_NORD": 428,
-  "BACH_SUED": 163,
+  "BACH_SUED": 202,
   "SEE": 205,
   "WASSER_FARBE": 799
  },
@@ -141,7 +141,7 @@
   "BACH_NORD": 2.08,
   "BACH_SUED": 2.64
  },
- "ufer": 1264,
+ "ufer": 1245,
  "luecken": [
   "wasser_tiefe_m leer: keine Quelle",
   "hoehe_m ausserhalb Senke nur Stufen [A], keine Hoehenkarte",

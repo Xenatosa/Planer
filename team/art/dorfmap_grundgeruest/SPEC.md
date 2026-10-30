@@ -217,3 +217,8 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 `bebaubar = senke_becken & begehbar & Untergrund ∈ {SCHNEE,BODEN,SAND} & hindernis==0 & Abstand Wand ≥ BAU_ABST_WAND_M & Abstand Wasser ≥ BAU_ABST_WASSER_M` (Default je 2 m [A], per Umgebungsvariable).
 `bauzone_bestand` = alte Grenze BB4 & frei_e2. Plaetze unveraendert.
 Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtransparent, Bestand schwarz, Becken violett.
+
+## t16u Dateien
+- `pruef_plaetze_quellen.py`: prüft die Plätze WACHSTUM E16 / AUSBAU E40 (`pruefung/quelle_plaetze_wachstum_ausbau_planm.json`, Plan-m) gegen bebaubar. Ergebnisse: `pruefung/t16u_*`.
+- `gen_bauzone_befund.py`: schreibt `overlay_plaetze_erweiterung.json/.csv/.png`. Das ist nur ein Befund, wo die Bauzone nicht reicht; es sind keine eigenen Standorte.
+- `BAUPLAN_E100.md`: neu. Ältere Fassungen liegen in `_alt/` (BAUPLAN_E100_t14u.md, BAUPLAN_ABGLEICH.md, gen_bauplan_e100.py, bauplan_e100_bedarf.json, alte overlay_plaetze_erweiterung.*).

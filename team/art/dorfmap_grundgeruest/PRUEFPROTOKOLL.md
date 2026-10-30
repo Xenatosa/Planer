@@ -56,3 +56,14 @@
   - Die Westgrenze x=136 und die Nordost-Ecke bleiben [A].
   - Die Kachelbögen r5_0–2 habe ich nur grob angesehen.
   - z50 ist nicht neu erzeugt und zeigt noch den Stand von t13u.
+
+## t16u
+- **Quellplätze (Plan-m ×1,2 umgerechnet):**
+  - E16: 118/140 innerhalb bebaubar.
+  - E40: 119/233.
+  - Fehlstellen liegen fast nur außerhalb der Senke auf freiem Schnee (96 von 114 bei E40 ≥95 % frei).
+- **Bilder angesehen:** t16u_plaetze_E16/E40, overlay_plaetze_erweiterung, z50-Vorschau (neu erzeugt).
+- **Restfehler:**
+  - Die Polygone sind aus ausbau.py exportiert (Quelle unverändert, Lauf in /tmp). Die Rasterung geht über fillPoly mit Zellmittelpunkt, Randzellen ±1.
+  - Die Schwelle 95 % ist [A].
+  - Die Kapazität in §4 ist grob (8-m-Raster).
