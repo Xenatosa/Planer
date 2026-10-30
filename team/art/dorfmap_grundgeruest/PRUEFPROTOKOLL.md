@@ -62,7 +62,7 @@
   - E16: 118/140 innerhalb bebaubar.
   - E40: 119/233.
   - Fehlstellen liegen fast nur außerhalb der Senke auf freiem Schnee (96 von 114 bei E40 ≥95 % frei).
-- **Bilder angesehen:** t16u_plaetze_E16/E40, overlay_plaetze_erweiterung, z50-Vorschau (neu erzeugt).
+- **Bilder angesehen:** _alt/pruefung/t16u_plaetze_E16/E40 (ersetzt durch t26u_overlay_E*), overlay_plaetze_erweiterung, z50-Vorschau (neu erzeugt).
 - **Restfehler:**
   - Die Polygone sind aus ausbau.py exportiert (Quelle unverändert, Lauf in /tmp). Die Rasterung geht über fillPoly mit Zellmittelpunkt, Randzellen ±1.
   - Die Schwelle 95 % ist [A].
@@ -132,7 +132,7 @@
 ## t30u Pruefung
 
 - Senke-Grenze und `bebaubar` sind unveraendert. Es gibt keine Gelaendegrenze bei x=136 und im Nordosten [F]. Die Ausnahme sind 2 Zellen durch einen Findling (siehe unten).
-- Ebenen-Bild: pruefung/t30u_ebenen.png, selbst angesehen. Plateau Nord, Ostplateau, Krater und Senke liegen plausibel. Bei TAL_SUED gibt es Spalten-Luecken [A], offen.
+- Ebenen-Bild: _alt/pruefung/t30u_ebenen.png (ersetzt durch pruefung/t31u_ebenen.png), selbst angesehen. Plateau Nord, Ostplateau, Krater und Senke liegen plausibel. Bei TAL_SUED gibt es Spalten-Luecken [A], offen.
 - Findling-Detektor: brauner Anteil >15 % in SCHNEE-Zellen, nicht neben Waenden. 19 Treffer, alle im Bild angesehen (pruefung/t30u_findling_treffer.png):
   - **4 belegt → FELS-Override (Zeilen 421-424, 7 Zellen)** [S]: #0 cx320/cy52-53, #11 cx10-11/cy223, #13 cx14/cy229-230, #14 cx9/cy242.
   - Unsicher, nur dokumentiert: #1-#9 sind flache braune Flecken (Erde oder Moos? keine Blockform). #10 ist Bodenrand. #12 und #15-#18 sind Sandbank-Raender (vielleicht SAND statt SCHNEE).
@@ -169,3 +169,12 @@
   - BAUPLAN_E100.md: §5 auf bebaubar_erweitert aktualisiert, dazu Fels 1, Wald unter Wegen 164, Kapazitaet 27 452 (Vorfassung _alt/BAUPLAN_E100_t26u.md).
   - Ältere Abschnitte im PRUEFPROTOKOLL sind Verlauf und behalten ihre damaligen Zahlen.
 - Ungeprüft: Die Zahlen in _alt/ habe ich nicht geprüft. Die Zahlen in älteren pruefung/t1x-Bildern sind nicht neu erzeugt.
+
+## t32u
+- Das Bild pruefung/t31u_z50_sand_o.png habe ich selbst angesehen:
+  - Der Fluss und der Wald im Süden liegen richtig.
+  - Die mittlere und die linke Sandbank sind in z50 nur zur Hälfte SAND, der Rest ist SCHNEE. Auch die Sandzunge unten links ist nur teilweise SAND.
+  - Der Grund ist die 2-von-4-Regel bei kleinen Flächen. Beides ist begehbar, deshalb keine Korrektur. Das bleibt als Befund [F].
+- Diese Dateien habe ich mit git mv nach _alt/pruefung/ verschoben: kacheln_r4_*, kacheln_r5_* (ersetzt durch t29u/t30u-Kacheln), t30u_ebenen.png (ersetzt durch t31u) und t16u_plaetze_E16/E40.png (ersetzt durch t26u_overlay).
+- Die t16u-CSV und -JSON bleiben im Ordner, weil gen_bauzone_befund.py sie als Eingabe liest.
+- Neu: INDEX.md und UEBERGABE.md.
