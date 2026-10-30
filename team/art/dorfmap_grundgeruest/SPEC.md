@@ -20,7 +20,7 @@ Eine Zelle wird gesetzt, wenn mindestens 50 % ihrer px in der Maske liegen. Ausn
 
 | Feld | Werte | Quelle |
 |---|---|---|
-| untergrund | BODEN, GESPERRT, SCHNEE, FELS_WALD, WASSER_EIS, HOF, FEUER, WEG, BRUECKE | aus den Masken unten abgeleitet, Vorrang von links nach rechts steigend [A] |
+| untergrund | BODEN, UNBEKANNT, SAND, WALD, FELS_KLIPPE, SCHNEE, FELS_WALD, WASSER_EIS, HOF, FEUER, WEG, BRUECKE | aus den Masken unten abgeleitet, Vorrang von links nach rechts steigend [A] |
 | zone | A–E | layout_e1_v9/ebenen/10_zonenboden_*_maske.png [S] |
 | platz | nr (99 Plätze) | zonen_c20_v9.json `plaetze[].poly` [S] |
 | weg_id / weg_klasse | G001…, haus_A11 … / GASSE, ANBINDUNG, HAUSWEG | 20_wege_*_maske.png [S]; Breiten 2,4/1,8/1,2 „m“ stehen in v9 noch auf der 30-px-Basis, das sind real 2,9/2,2/1,4 m [R] |
@@ -36,6 +36,53 @@ Eine Zelle wird gesetzt, wenn mindestens 50 % ihrer px in der Maske liegen. Ausn
 | skin_slot | ug_<untergrund> | Brücke zum Skin-System (Abschnitt 5) |
 
 Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454, BODEN 9 040, FELS_WALD 5 999, WEG 2 825, WASSER_EIS 1 214, HOF 430, FEUER 271, BRUECKE 20. Davon begehbar 32 414 und bebaubar 19 931.
+
+## 2a Abdeckung der ganzen Karte (Fabian t5u)
+Das Raster deckt alle 336×303 = 101 808 Zellen ab (8400×7560 px, letzte Zeile 10 px). Jede Zelle hat einen Untergrund und eine `untergrund_quelle`.
+
+**Befund vorher (bis Commit a57c4c3):** 61 555 Zellen (60,5 %) standen ohne Daten als GESPERRT da. Dazu gehörten:
+- Westrand mit Wald und Teich
+- Krater
+- Plateau und Klippe im Norden
+- Ostwald
+- Südgrat
+- Südfluss mit Sandbänken
+- Südwald
+
+**Ursachen:**
+1. Die Masken BB4, F4 und frei_e2 decken nur die Senke bzw. das Becken ab. BB4 hat die bbox x 1642–8359 und y 631–6071 px [S BB4.json]. Die gerade Kante im Westen ist diese Maskengrenze, kein Gelände.
+2. Die Hindernisse (hindernisse_c20_v2) gibt es nur im Fenster x 3900–8100 und y 540–3060 px [S npz X0/Y0, 420×252 Zellen à 10 px].
+3. Für die Kartenteile außerhalb der Senke gab es bisher keine Masken.
+
+**Behoben [R]:** Zellen ohne Maske bekommen jetzt eine Farbklasse aus der Original-c20, gezählt in HSV-Anteilen je Zelle (Code in `gen_raster.py`). Die Klassen:
+
+| Klasse | Regel |
+|---|---|
+| SCHNEE | ≥ 30 % hell und ungesättigt |
+| SAND | ≥ 35 % beige |
+| FELS_KLIPPE | ≥ 3 % braun und < 50 % Schnee |
+| WALD | ≥ 15 % dunkel oder grün |
+| WASSER_EIS | ≥ 35 % blau-türkis |
+
+Die Schwellen sind gesetzt [A]. Ich habe sie durch Vergleich mit der Karte geprüft, aber nicht gemessen.
+
+**Abdeckung jetzt:**
+
+| Quelle | Anteil |
+|---|---|
+| MASKE [S] | 39,5 % |
+| FARBE [R] | 46,3 % |
+| KEINE (UNBEKANNT, in der Vorschau magenta) | 14,1 % = 14 398 Zellen |
+
+**Rest UNBEKANNT:**
+- Das sind vor allem Klippenwände und deren Schattenseiten (Nordwand, Krater, Südgrat, Ostgrat). Dort mischen sich Fels, Schatten und Schnee, sodass keine Farbklasse eindeutig ist.
+- Diese Zellen sind nicht begehbar. Sie sollen von Hand oder mit einer echten Klippenmaske nachgezogen werden.
+
+**Risiko [A]:** Blaue Schatten am Fuß der Nordklippe können als WASSER_EIS erkannt werden. Wasser aus der Farbe trägt `fluss_id` WASSER_FARBE, ohne Richtung und ohne Höhe.
+
+**Vergleichsbilder:**
+- `raster_c20_z25_vergleich.png`: Original links, Raster rechts
+- `raster_c20_z25_overlay.png`: 50 % überblendet
 
 ## 3a Höhe, Flüsse, 3D (Fabian t4u)
 Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie trägt. Alles andere bleibt leer.

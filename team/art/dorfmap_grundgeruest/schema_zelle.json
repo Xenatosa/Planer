@@ -9,7 +9,8 @@
   "px_y",
   "untergrund",
   "begehbar",
-  "bebaubar"
+  "bebaubar",
+  "untergrund_quelle"
  ],
  "properties": {
   "cx": {
@@ -30,7 +31,10 @@
   "untergrund": {
    "enum": [
     "BODEN",
-    "GESPERRT",
+    "UNBEKANNT",
+    "SAND",
+    "WALD",
+    "FELS_KLIPPE",
     "SCHNEE",
     "FELS_WALD",
     "WASSER_EIS",
@@ -149,7 +153,8 @@
     "",
     "BACH_NORD",
     "BACH_SUED",
-    "SEE"
+    "SEE",
+    "WASSER_FARBE"
    ]
   },
   "fliess_richtung": {
@@ -200,6 +205,14 @@
     1
    ],
    "description": "begehbar ∧ neigung_grad≤30 [A]; ohne Neigung = begehbar; Furt=1"
+  },
+  "untergrund_quelle": {
+   "enum": [
+    "MASKE",
+    "FARBE",
+    "KEINE"
+   ],
+   "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; KEINE=UNBEKANNT"
   }
  }
 }
