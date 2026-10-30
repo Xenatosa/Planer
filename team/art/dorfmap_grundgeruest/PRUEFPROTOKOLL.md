@@ -132,7 +132,7 @@
 ## t30u Pruefung
 
 - Senke-Grenze und `bebaubar` sind unveraendert. Es gibt keine Gelaendegrenze bei x=136 und im Nordosten [F]. Die Ausnahme sind 2 Zellen durch einen Findling (siehe unten).
-- Ebenen-Bild: _alt/pruefung/t30u_ebenen.png (ersetzt durch pruefung/t31u_ebenen.png), selbst angesehen. Plateau Nord, Ostplateau, Krater und Senke liegen plausibel. Bei TAL_SUED gibt es Spalten-Luecken [A], offen.
+- Ebenen-Bild: _alt/pruefung/t30u_ebenen.png (ersetzt durch pruefung/t33u_ebenen_vollstaendig.png), selbst angesehen. Plateau Nord, Ostplateau, Krater und Senke liegen plausibel. Bei TAL_SUED gibt es Spalten-Luecken [A], offen.
 - Findling-Detektor: brauner Anteil >15 % in SCHNEE-Zellen, nicht neben Waenden. 19 Treffer, alle im Bild angesehen (pruefung/t30u_findling_treffer.png):
   - **4 belegt → FELS-Override (Zeilen 421-424, 7 Zellen)** [S]: #0 cx320/cy52-53, #11 cx10-11/cy223, #13 cx14/cy229-230, #14 cx9/cy242.
   - Unsicher, nur dokumentiert: #1-#9 sind flache braune Flecken (Erde oder Moos? keine Blockform). #10 ist Bodenrand. #12 und #15-#18 sind Sandbank-Raender (vielleicht SAND statt SCHNEE).
@@ -146,7 +146,7 @@
 - **TAL_SUED:** Die echten Luecken waren cx 0–25, 56–80 und 246–249. Die Angabe „35–50, 150–152“ aus t30u war falsch abgelesen. Alles in c20 angesehen (pruefung/t31u_talsued_a.png, t31u_talsued_b.png):
   - Westlich von cx 81 gibt es keine Gratwand. Der Block cx 26–55 ist frei stehend. Darum gilt dort WEST [A]; vorher war TAL_SUED an cx 26–55 nicht belegt.
   - Die Schlucht cx 246–249 ist geschlossen [S].
-  - Ergebnis: pruefung/t31u_ebenen.png, selbst angesehen.
+  - Ergebnis: _alt/pruefung/t31u_ebenen.png (ersetzt durch pruefung/t33u_ebenen_vollstaendig.png), selbst angesehen.
   - Offen: Rand cx 329–335.
 - **z50-Stichproben** (pruefung/t31u_z50_gipfel.png, t31u_z50_sand_w.png, t31u_z50_sand_m.png, t31u_z50_sand_o.png):
   - Gipfel: Im Umriss liegen 96 WAND, 31 FELS, 17 KANTE und 3 SCHNEE [R]. Die 3 SCHNEE-Zellen sind offen.
@@ -178,3 +178,17 @@
 - Diese Dateien habe ich mit git mv nach _alt/pruefung/ verschoben: kacheln_r4_*, kacheln_r5_* (ersetzt durch t29u/t30u-Kacheln), t30u_ebenen.png (ersetzt durch t31u) und t16u_plaetze_E16/E40.png (ersetzt durch t26u_overlay).
 - Die t16u-CSV und -JSON bleiben im Ordner, weil gen_bauzone_befund.py sie als Eingabe liest.
 - Neu: INDEX.md und UEBERGABE.md.
+
+## t33u Ebenen-Bild vollständig
+- Skriptprüfung [R]: Alle 101 808 z25-Zellen haben eine Ebene, keine ist leer. SENKE 31 265, WEST 29 842, WAND 18 752, TAL_SUED 14 110, PLATEAU_NORD 4 005, OSTPLATEAU 2 014, KRATER 1 820.
+- Das alte Bild hatte Lücken, weil WEST und WAND dort nicht eingefärbt waren. In den Daten fehlte nichts.
+- Neues Bild: pruefung/t33u_ebenen_vollstaendig.png, erzeugt mit gen_ebenen_bild.py.
+  - 4 px je Zelle, Farbe deckend zu 70 % über c20 in Grau.
+  - Die Legende zeigt Name, Farbe und Zellzahl.
+- Abgleich Pixel zu Zelle [R]: Für alle 1 629 312 Pixel habe ich die Farbe zurückgerechnet und mit `ebene` verglichen. 0 Abweichungen.
+- Selbst angesehen. Befund [A], noch offen: An mehreren Stellen ist schmaler Rand als WEST eingetragen, also auf Bezugshöhe:
+  - zwischen Kessel und Wänden
+  - im Kraterring
+  - nördlich der Nordwand
+  - am Ostrand
+  - In c20 ist das oft Hang- oder Kantenfläche. Die Höhe dort ist nicht belegt.

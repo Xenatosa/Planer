@@ -38,7 +38,7 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
   - Plätze und Wege stehen in der Overlay-CSV.
 - **Art Director:**
   - `ebene` und `wand_name` zeigen, wo Höhenstufen gemalt werden müssen.
-  - `pruefung/t31u_ebenen.png` zeigt die Ebenen im Überblick.
+  - `pruefung/t33u_ebenen_vollstaendig.png` zeigt die Ebenen im Überblick.
   - Die Karte selbst bleibt unverändert.
 
 ## Was offen ist

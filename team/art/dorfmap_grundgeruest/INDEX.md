@@ -13,7 +13,7 @@
 - `raster_c20_z25_vorschau.png`, `_bebaubar.png`, `_overlay.png`, `_vergleich.png`, `_hoehe_fluss.png`, `_overlay_plaetze_wege.png` (jeweils auch für z50)
 - `pruefung/t26u_overlay_E16/E40/E70/E100.png`: Plätze je Epoche
 - `pruefung/t29u_bebaubar_erweitert_E100.png`
-- `pruefung/t31u_ebenen.png`: Ebenen (ersetzt t30u_ebenen)
+- `pruefung/t33u_ebenen_vollstaendig.png`: alle 101 808 Zellen in Ebenenfarbe mit Legende (ersetzt t31u/t30u_ebenen, Skript gen_ebenen_bild.py)
 - `pruefung/t29u_kacheln_r5_*` und `pruefung/t30u_kacheln_r5_*`: Kachelbögen über die ganze Karte (ersetzen kacheln_r4/r5)
 - Belege t31u: `pruefung/t31u_talsued_a/b.png`, `t31u_findling_4x_0/1.png`, `t31u_z50_gipfel.png`, `t31u_z50_sand_w/m/o.png`
 - Belege t29u/t30u: `t29u_zoom_*`, `t29u_rand_*`, `t29u_splitter_c20.png`, `t29u_fluss_schollen.png`, `t30u_findling_treffer.png`, `t30u_linie_cx190.png`
