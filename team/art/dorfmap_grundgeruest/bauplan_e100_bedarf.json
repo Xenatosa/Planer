@@ -1,0 +1,164 @@
+{
+ "quelle": "team/gdd/uebernahme_2026-10-28/GEBAEUDE_SLOTS_GUELTIG.md §1/§3; groessen_25_slots.csv",
+ "slots": [
+  {
+   "id": "bld_gatherer",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_hunter",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_woodcutter",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_workplace",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_shell_beach",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_fiber",
+   "ab": 3,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_clay",
+   "ab": 4,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_charcoal",
+   "ab": 5,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_metal",
+   "ab": 8,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_storage",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_barracks",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_kas_spear",
+   "ab": 2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_kas_ranged",
+   "ab": 3,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_kas_beast",
+   "ab": 4,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_kas_siege",
+   "ab": 5,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_kas_drum",
+   "ab": 6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_center",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_trader",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_palisade",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_arena",
+   "ab": 2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_relic_shrine",
+   "ab": 2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_expedition",
+   "ab": 7,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_hut",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_drawing_rock",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_guild",
+   "ab": 1,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+"
+  },
+  {
+   "id": "bld_glassworks",
+   "ab": 17,
+   "mass_analog": "bld_fiber",
+   "marker": "S Oeffnung, A Mass analog bld_fiber"
+  },
+  {
+   "id": "bld_saltworks",
+   "ab": 21,
+   "mass_analog": "bld_clay",
+   "marker": "S Oeffnung, A Mass analog bld_clay"
+  },
+  {
+   "id": "bld_pigment",
+   "ab": 24,
+   "mass_analog": "bld_drawing_rock",
+   "marker": "S Oeffnung, A Mass analog bld_drawing_rock"
+  },
+  {
+   "id": "bld_modules",
+   "ab": 51,
+   "mass_analog": "bld_metal",
+   "marker": "S Oeffnung, A Mass analog bld_metal"
+  },
+  {
+   "id": "bld_ether_distillery",
+   "ab": 53,
+   "mass_analog": "bld_charcoal",
+   "marker": "S Oeffnung, A Mass analog bld_charcoal"
+  }
+ ],
+ "deko_haeuser_max": 18,
+ "deko_haus_mass": "9.6x7.2",
+ "flur_deko_e100": 52,
+ "hinweis": "deko_haeuser_max 18 = Deckel 13d [A]; flur_deko 2+E/2 bei E100 = 52 [A Hochrechnung]; Anbau-Deko am Slot, kein eigener Platz"
+}

@@ -1,0 +1,100 @@
+id,art,ab_epoche,platz_w_m,platz_h_m,marker,bestand_platz,neu_cx0,neu_cy0,neu_cx1,neu_cy1,ring,dist_feuer_m
+bld_gatherer,FUNKTION,1,9.6,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,266,68,275,77,1,21.0
+bld_hunter,FUNKTION,1,9.6,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",C04,,,,,,
+bld_woodcutter,FUNKTION,1,9.6,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",B08,,,,,,
+bld_workplace,FUNKTION,1,9.6,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,231,109,240,118,1,38.9
+bld_shell_beach,FUNKTION,1,7.2,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",A19,,,,,,
+bld_fiber,FUNKTION,3,12.0,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,246,213,257,222,4,140.0
+bld_clay,FUNKTION,4,9.6,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",C08,,,,,,
+bld_charcoal,FUNKTION,5,9.6,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",A07,,,,,,
+bld_metal,FUNKTION,8,9.6,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,259,110,268,119,1,39.4
+bld_storage,FUNKTION,1,12.0,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,151,186,162,195,4,146.8
+bld_barracks,FUNKTION,1,19.0,8.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,201,83,208,101,2,47.9
+bld_kas_spear,FUNKTION,2,15.0,9.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,190,196,204,204,4,133.6
+bld_kas_ranged,FUNKTION,3,15.0,8.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,169,187,183,194,4,135.2
+bld_kas_beast,FUNKTION,4,13.0,11.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,141,147,151,159,4,128.6
+bld_kas_siege,FUNKTION,5,15.0,11.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,262,53,276,63,1,27.1
+bld_kas_drum,FUNKTION,6,7.2,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",,234,211,241,218,4,137.6
+bld_center,FUNKTION,1,17.0,17.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,216,51,232,67,1,32.0
+bld_trader,FUNKTION,1,12.0,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,194,211,205,220,4,147.0
+bld_arena,FUNKTION,2,20.0,20.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,215,85,234,104,1,30.8
+bld_relic_shrine,FUNKTION,2,11.0,11.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,263,95,273,105,1,28.8
+bld_expedition,FUNKTION,7,7.2,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",,141,174,148,181,4,145.5
+bld_hut,FUNKTION,1,12.0,9.6,"S Oeffnung, A Mass E12-E16 fuer E17+",,,,,,,
+bld_drawing_rock,FUNKTION,1,7.2,7.2,"S Oeffnung, A Mass E12-E16 fuer E17+",,,,,,,
+bld_guild,FUNKTION,1,17.0,9.0,"S Oeffnung, A Mass E12-E16 fuer E17+",,242,95,258,103,1,21.5
+bld_glassworks,FUNKTION,17,12.0,9.6,"S Oeffnung, A Mass analog bld_fiber",,,,,,,
+bld_saltworks,FUNKTION,21,9.6,7.2,"S Oeffnung, A Mass analog bld_clay",D13,,,,,,
+bld_pigment,FUNKTION,24,7.2,7.2,"S Oeffnung, A Mass analog bld_drawing_rock",,,,,,,
+bld_modules,FUNKTION,51,9.6,9.6,"S Oeffnung, A Mass analog bld_metal",,202,59,211,68,2,45.8
+bld_ether_distillery,FUNKTION,53,9.6,7.2,"S Oeffnung, A Mass analog bld_charcoal",,204,45,211,54,2,51.0
+deko_haus_01,DEKO_HAUS,,9.6,7.2,A,,142,127,151,134,3,116.4
+deko_haus_02,DEKO_HAUS,,9.6,7.2,A,,131,93,138,102,3,117.3
+deko_haus_03,DEKO_HAUS,,9.6,7.2,A,,132,107,139,116,3,119.6
+deko_haus_04,DEKO_HAUS,,9.6,7.2,A,,262,211,271,218,4,138.0
+deko_haus_05,DEKO_HAUS,,9.6,7.2,A,,290,204,297,213,4,138.0
+deko_haus_06,DEKO_HAUS,,9.6,7.2,A,,276,210,285,217,4,139.4
+deko_haus_07,DEKO_HAUS,,9.6,7.2,A,,182,210,189,219,4,151.5
+deko_haus_08,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_09,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_10,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_11,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_12,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_13,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_14,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_15,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_16,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_17,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+deko_haus_18,DEKO_HAUS,,9.6,7.2,A,,,,,,,
+flur_deko_01,DEKO_FLUR,,3,3,A,C06,,,,,,
+flur_deko_02,DEKO_FLUR,,3,3,A,B19,,,,,,
+flur_deko_03,DEKO_FLUR,,3,3,A,B22,,,,,,
+flur_deko_04,DEKO_FLUR,,3,3,A,B23,,,,,,
+flur_deko_05,DEKO_FLUR,,3,3,A,B14,,,,,,
+flur_deko_06,DEKO_FLUR,,3,3,A,B25,,,,,,
+flur_deko_07,DEKO_FLUR,,3,3,A,B02,,,,,,
+flur_deko_08,DEKO_FLUR,,3,3,A,B03D,,,,,,
+flur_deko_09,DEKO_FLUR,,3,3,A,B10,,,,,,
+flur_deko_10,DEKO_FLUR,,3,3,A,D07,,,,,,
+flur_deko_11,DEKO_FLUR,,3,3,A,D03,,,,,,
+flur_deko_12,DEKO_FLUR,,3,3,A,B05D,,,,,,
+flur_deko_13,DEKO_FLUR,,3,3,A,B06,,,,,,
+flur_deko_14,DEKO_FLUR,,3,3,A,B07D,,,,,,
+flur_deko_15,DEKO_FLUR,,3,3,A,A21,,,,,,
+flur_deko_16,DEKO_FLUR,,3,3,A,A23D,,,,,,
+flur_deko_17,DEKO_FLUR,,3,3,A,A12,,,,,,
+flur_deko_18,DEKO_FLUR,,3,3,A,A11,,,,,,
+flur_deko_19,DEKO_FLUR,,3,3,A,A14,,,,,,
+flur_deko_20,DEKO_FLUR,,3,3,A,B01,,,,,,
+flur_deko_21,DEKO_FLUR,,3,3,A,D14,,,,,,
+flur_deko_22,DEKO_FLUR,,3,3,A,B34,,,,,,
+flur_deko_23,DEKO_FLUR,,3,3,A,B35,,,,,,
+flur_deko_24,DEKO_FLUR,,3,3,A,B37,,,,,,
+flur_deko_25,DEKO_FLUR,,3,3,A,B26,,,,,,
+flur_deko_26,DEKO_FLUR,,3,3,A,B30,,,,,,
+flur_deko_27,DEKO_FLUR,,3,3,A,B31,,,,,,
+flur_deko_28,DEKO_FLUR,,3,3,A,B32,,,,,,
+flur_deko_29,DEKO_FLUR,,3,3,A,A06,,,,,,
+flur_deko_30,DEKO_FLUR,,3,3,A,A02,,,,,,
+flur_deko_31,DEKO_FLUR,,3,3,A,A04,,,,,,
+flur_deko_32,DEKO_FLUR,,3,3,A,A03,,,,,,
+flur_deko_33,DEKO_FLUR,,3,3,A,E01,,,,,,
+flur_deko_34,DEKO_FLUR,,3,3,A,D01,,,,,,
+flur_deko_35,DEKO_FLUR,,3,3,A,D04,,,,,,
+flur_deko_36,DEKO_FLUR,,3,3,A,D05,,,,,,
+flur_deko_37,DEKO_FLUR,,3,3,A,D11,,,,,,
+flur_deko_38,DEKO_FLUR,,3,3,A,C09,,,,,,
+flur_deko_39,DEKO_FLUR,,3,3,A,D12,,,,,,
+flur_deko_40,DEKO_FLUR,,3,3,A,B12D,,,,,,
+flur_deko_41,DEKO_FLUR,,3,3,A,A22,,,,,,
+flur_deko_42,DEKO_FLUR,,3,3,A,A18,,,,,,
+flur_deko_43,DEKO_FLUR,,3,3,A,E04D,,,,,,
+flur_deko_44,DEKO_FLUR,,3,3,A,E03D,,,,,,
+flur_deko_45,DEKO_FLUR,,3,3,A,C07D,,,,,,
+flur_deko_46,DEKO_FLUR,,3,3,A,C10D,,,,,,
+flur_deko_47,DEKO_FLUR,,3,3,A,B04D,,,,,,
+flur_deko_48,DEKO_FLUR,,3,3,A,D15D,,,,,,
+flur_deko_49,DEKO_FLUR,,3,3,A,B09D,,,,,,
+flur_deko_50,DEKO_FLUR,,3,3,A,A15D,,,,,,
+flur_deko_51,DEKO_FLUR,,3,3,A,A20D,,,,,,
+flur_deko_52,DEKO_FLUR,,3,3,A,A24D,,,,,,

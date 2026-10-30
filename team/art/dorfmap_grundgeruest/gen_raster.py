@@ -190,6 +190,10 @@ if os.path.exists(_wp):
     if _wm.shape!=(ny,nx): _wm=cv2.resize(_wm,(nx,ny),interpolation=cv2.INTER_AREA)
     _wm=(_wm>=0.5)&~np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])
     wasser_t12u=int((_wm&(ug!='WASSER_EIS')).sum()); ug[_wm]='WASSER_EIS'; quelle[_wm]='OVERRIDE'
+# t14u: SCHATTEN-Flecken auf dem Flusseis Sued (Sichtpruefung sa1/sa2): Komponenten im Band y>=262 mit Wasserkontakt -> WASSER_EIS
+_sb=(ug=='SCHATTEN'); _sb[:int(262*25/Z)]=False; _n,_l=cv2.connectedComponents(_sb.astype(np.uint8),connectivity=8)
+_wn=cv2.dilate((ug=='WASSER_EIS').astype(np.uint8),np.ones((3,3),np.uint8))>0
+_ids=np.unique(_l[_sb&_wn]); _m=np.isin(_l,_ids[_ids>0])&_sb; ug[_m]='WASSER_EIS'; quelle[_m]='FILTER'; eis_schatten_n=int(_m.sum())
 wasser=(ug=='WASSER_EIS')
 # (4) Hindernis ueber ganze Karte: Masken-ID (Fenster) + Gelaende (Wald/Fels/Klippe) [R aus Klasse]
 hind_gel=np.isin(ug,['WALD','FELS','KLIPPE_WAND','KLIPPE_KANTE'])

@@ -4,3 +4,6 @@ nr,cx0,cy0,cx1,cy1,von,nach,marker,begruendung
 3,123,45,127,55,KLIPPE_WAND,WALD,S,toter Baumstamm ueber Felsgruppe - Sichtpruefung c20
 4,24,189,34,200,WALD,FELS,S,Findling (grosser Felsbrocken) - Sichtpruefung c20
 5,24,200,34,214,KLIPPE_WAND,WALD,S,toter Baum - Sichtpruefung c20
+6,0,0,26,26,WALD,FELS,S,t14u Blockfeld NW-Rand (sb1)
+7,30,5,62,16,WALD,FELS,S,t14u dunkler Felshaufen K1_0/K2_0 (sb1)
+8,78,5,105,16,WALD,FELS,S,t14u dunkler Felshaufen K3_0/K4_0 (sb2)

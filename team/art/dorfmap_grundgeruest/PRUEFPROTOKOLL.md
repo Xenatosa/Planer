@@ -2,8 +2,8 @@
 
 ## Methode
 - Vergleich c20-Ausschnitt (links) gegen Klassenbild (rechts), Nearest-Neighbour vergrößert.
-- Stichprobenraster: 12 Kacheln mit je 56×56 Zellen (≈ 37 600 Zellen ≈ 37 % der Karte [R]), Gitter über Nord, Mitte, Süd, West und Ost inklusive Randzeilen und Randspalten (`pruef_raster_1.png`, `pruef_raster_2.png`).
-- Gezielte Ausschnitte: Senke, Westwald, Südwald und Fluss, Ostgrat, Nordwand (`pruef_randausschnitte.png`).
+- Stichprobenraster: 12 Kacheln mit je 56×56 Zellen (≈ 37 600 Zellen ≈ 37 % der Karte [R]), Gitter über Nord, Mitte, Süd, West und Ost inklusive Randzeilen und Randspalten (`_alt/pruef_raster_1.png`, `_alt/pruef_raster_2.png`).
+- Gezielte Ausschnitte: Senke, Westwald, Südwald und Fluss, Ostgrat, Nordwand (`_alt/pruef_randausschnitte.png` (überholt, ersetzt durch `pruefung/kacheln_r5_*.png`)).
 - Bewertet wird je Kachel und Region nach Augenschein. Zellgenaues Auszählen ist **nicht** erfolgt.
 
 ## Gefundene und behobene Fehler
@@ -46,3 +46,13 @@
 2. NW-Rand der Senke: senkrechte Grenze x=136 (offenes Gelaende, keine Wand) [A].
 3. NO-Ecke: Ostgrenze ohne Wand = Kartenrand [A].
 4. Buesche K1_0–K4_0: WALD oder FELS offen.
+
+## t14u
+- **Flusseis K0_11, K3_11, K4_11, K5_11:** Die SCHATTEN-Flecken, die am Eis liegen, werden jetzt per Filter zu WASSER_EIS. Der echte Wandschatten oben bleibt. Vorher/Nachher: `pruefung/t14u_flusseis_*`.
+- **K1_0–K4_0:** Die Felshaufen und das Blockfeld werden per Override (Zeilen 6–8) zu FELS. Einzelne Kiefern bleiben WALD. Belege: `pruefung/t14u_felshaufen_*`.
+- **K13_12:** Die Schneelücken zwischen den Bäumen sind echt, deshalb keine Änderung (`pruefung/t14u_K13_12_schneebaeume.png`).
+- **Restfehler:**
+  - Eisschollen im Fluss sind als SCHNEE klassiert [A].
+  - Die Westgrenze x=136 und die Nordost-Ecke bleiben [A].
+  - Die Kachelbögen r5_0–2 habe ich nur grob angesehen.
+  - z50 ist nicht neu erzeugt und zeigt noch den Stand von t13u.
