@@ -222,3 +222,8 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
 - `pruef_plaetze_quellen.py`: prüft die Plätze WACHSTUM E16 / AUSBAU E40 (`pruefung/quelle_plaetze_wachstum_ausbau_planm.json`, Plan-m) gegen bebaubar. Ergebnisse: `pruefung/t16u_*`.
 - `gen_bauzone_befund.py`: schreibt `overlay_plaetze_erweiterung.json/.csv/.png`. Das ist nur ein Befund, wo die Bauzone nicht reicht; es sind keine eigenen Standorte.
 - `BAUPLAN_E100.md`: neu. Ältere Fassungen liegen in `_alt/` (BAUPLAN_E100_t14u.md, BAUPLAN_ABGLEICH.md, gen_bauplan_e100.py, bauplan_e100_bedarf.json, alte overlay_plaetze_erweiterung.*).
+
+## t26u Dateien
+- `BAUPLAN_E100.md`: neu auf Plan v4b (Wege-&-Deko-Bot t25u). Vorfassung `_alt/BAUPLAN_E100_t16u.md`.
+- Neues Zellfeld `bauzone_plan` (0/1): Zelle ≥50 % in `wege_deko_system/umrechnung_25pxm/bauzone/BB4_plan_v2_25pxm.npy` [S/A]. Nur gelesen.
+- `gen_overlay_e100.py` → `pruefung/t26u_*`: Overlay E16/E40/E70/E100 (PNG), Slots gegen Gelände, Brücken, Deko, Wald unter Slots/Wegen, Konflikte bauzone_plan↔bebaubar (beide Richtungen, mit Ursache), Zusammenfassung JSON. Slots, Brücken, Deko nur im Overlay; Gelände bleibt nackt.

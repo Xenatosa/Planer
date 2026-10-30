@@ -201,6 +201,8 @@ hind_art=np.where(hind>0,'MASKE',np.where(hind_gel,'GELAENDE',''))
 begehbar=~(np.isin(ug,['UNBEKANNT','WALD','KLIPPE_WAND','KLIPPE_KANTE','FELS','WASSER_EIS'])|(hind>0))
 # t12u: bebaubar aus dem Gelaende: Senke zwischen den Waenden [A-Grenzen], ohne Wand/Wasser/Fels/Schatten/Wald, Mindestabstand Parameter [A]
 bauzone_bestand=senke&fe2                                   # alte Fenstergrenze (BB4 & frei_e2), nur als Feld erhalten
+BZP_NPY='/workspace/handygame-plan/team/art/wege_deko_system/umrechnung_25pxm/bauzone/BB4_plan_v2_25pxm.npy'  # [S] Planmaske Wege/Deko t25u (BB4 + A18 1 m Rand), nur gelesen
+bauzone_plan=zell(np.load(BZP_NPY)[:H,:W].astype(np.float32))  # Zelle >=50 % in Planmaske [A]
 BAU_ABST_WAND_M=float(os.environ.get('BAU_ABST_WAND_M','2')); BAU_ABST_WASSER_M=float(os.environ.get('BAU_ABST_WASSER_M','2'))
 _q=lambda v:int(round(v*25/Z)); _wall=np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])
 basin=np.zeros((ny,nx),bool); KR_X_OST=_q(136)
@@ -278,12 +280,12 @@ MAXN=30.0
 b3=(nei<=MAXN)&begehbar
 fmt=lambda v: '' if np.isnan(v) else round(float(v),2)
 o=f'raster_c20_z{Z}'
-SP=['cx','cy','px_x','px_y','untergrund','untergrund_quelle','hindernis_id','hindernis_art','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','bauzone_bestand','senke_becken','klippe','wand_name','skin_slot','hoehe_m','hoehe_quelle','neigung_grad','klippe_hoehe_m','klippe_hoehe_quelle','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','begehbar_3d','deko_kapazitaet','deko_baum_ok','deko_fels_ok','flaeche_m2']
+SP=['cx','cy','px_x','px_y','untergrund','untergrund_quelle','hindernis_id','hindernis_art','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','bauzone_bestand','bauzone_plan','senke_becken','klippe','wand_name','skin_slot','hoehe_m','hoehe_quelle','neigung_grad','klippe_hoehe_m','klippe_hoehe_quelle','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','begehbar_3d','deko_kapazitaet','deko_baum_ok','deko_fels_ok','flaeche_m2']
 with open(o+'_zellen.csv','w',newline='') as f:
     w=csv.writer(f); w.writerow(SP)
     for y in range(ny):
         for x in range(nx):
-            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],int(hind[y,x]),hind_art[y,x],int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),int(bauzone_bestand[y,x]),int(basin[y,x]),klippe[y,x],wand_name[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),hq[y,x],fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(b3[y,x]),deko_kap[y,x],int(deko_baum[y,x]),int(deko_fels[y,x]),(Z/PXM)**2])
+            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],int(hind[y,x]),hind_art[y,x],int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),int(bauzone_bestand[y,x]),int(bauzone_plan[y,x]),int(basin[y,x]),klippe[y,x],wand_name[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),hq[y,x],fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(b3[y,x]),deko_kap[y,x],int(deko_baum[y,x]),int(deko_fels[y,x]),(Z/PXM)**2])
 # ---- Overlay-Layer Plaetze/Wege (abschaltbar, t10u) ----
 DP=[]
 for fn in sorted(glob.glob(R+'zonen_c20/modulsystem_e1/karten/e1/dekoplaetze/*.json')):
@@ -305,7 +307,7 @@ json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md
   wand_hoehe_m={'Nord':[KL_M,'R'],**{k:[v[0],'A'] for k,v in WAND_H.items()},'sonstige':[KL_M,'A']},wand_hoehe_herleitung='Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar',klippe_nord_band_m=[7.6,9.6],
   hoehe_stufen_m={'Senke':BEZUG,'Nordplateau':BEZUG+KL_M,'Ostplateau':BEZUG+WAND_H['Ostgrat'][0],'Suedvorland':BEZUG-WAND_H['Suedgrat'][0],'Rest':BEZUG},
   quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','FILTER','KEINE']},
-  zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),bauzone_bestand=int(bauzone_bestand.sum()),senke_becken=int(basin.sum()),bebaubar_param=dict(abstand_wand_m=BAU_ABST_WAND_M,abstand_wasser_m=BAU_ABST_WASSER_M,marker='A'),bebaubar_ausserhalb_bestand=int((bebaubar&~bauzone_bestand).sum()),hindernis_maske=int((hind>0).sum()),hindernis_gelaende=int((hind_art=='GELAENDE').sum()),plaetze=len(ids),dekoplaetze_netz=len(DP),
+  zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),bauzone_bestand=int(bauzone_bestand.sum()),bauzone_plan=int(bauzone_plan.sum()),senke_becken=int(basin.sum()),bebaubar_param=dict(abstand_wand_m=BAU_ABST_WAND_M,abstand_wasser_m=BAU_ABST_WASSER_M,marker='A'),bebaubar_ausserhalb_bestand=int((bebaubar&~bauzone_bestand).sum()),hindernis_maske=int((hind>0).sum()),hindernis_gelaende=int((hind_art=='GELAENDE').sum()),plaetze=len(ids),dekoplaetze_netz=len(DP),
   groessenbezug=dict(px_pro_m=PXM,zelle_m=Z/PXM,zelle_m2=(Z/PXM)**2,unity_pro_m=PXM/256,ppu=256,nordwand_m=KL_M,deko_mindestabstand_m=DEKO_ABST,deko_footprint_rand_m=0.5,quelle='MASSGRUNDLAGE 25 px/m [F]; BERICHT_NETZ_E1 9.2'),
   bezug_m=BEZUG,neigung_max_3d=MAXN,dreid=dict(achse_z='oben, Meter',einheit='m',ppu=256,unity_pro_m=PXM/256,px_pro_m=PXM),
   fluss_zellen={k:int((fluss==k).sum()) for k in ['BACH_NORD','BACH_SUED','SEE','WASSER_FARBE']},fluss_breite_m_median={k:(round(float(np.nanmedian(breite[fluss==k])),2) if np.any(~np.isnan(breite[fluss==k])) else None) for k in ['BACH_NORD','BACH_SUED']},ufer=int(ufer.sum()),

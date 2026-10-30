@@ -67,3 +67,10 @@
   - Die Polygone sind aus ausbau.py exportiert (Quelle unverändert, Lauf in /tmp). Die Rasterung geht über fillPoly mit Zellmittelpunkt, Randzellen ±1.
   - Die Schwelle 95 % ist [A].
   - Die Kapazität in §4 ist grob (8-m-Raster).
+
+## t26u
+- Quelle v4b nachgezählt: 355/213/103/23/15/1, 17 Brücken 49,2 m, 1.429 Deko (629 Ort + 800 gerechnet), deko_limit-Formel — stimmt [R].
+- bauzone_plan: 31.893 Zellen; bebaubar 27.140. In Planmaske, nicht bebaubar: 5.386 (5.166 Abstand/außerhalb senke_becken, 112 Wasser, 98 Hindernis, 3 Wand, 3 Fels, 2 Schatten, 1 Wald, 1 nicht begehbar). Bebaubar, nicht in Planmaske: 633.
+- Slots ≥95 % bebaubar 149/355; Brücken-Mitte auf Wasser 3/17; X069/X084 über KLIPPE_WAND; Deko 0 auf Wand/Wasser.
+- Bilder E16/E40/E70/E100 selbst angesehen; Gelände-PNGs z25/z50 unverändert (nur CSV/Meta wegen neuem Feld).
+- Restfehler: Brücken <1 m unter Zellauflösung; Wegbreite 2 Zellen [A].

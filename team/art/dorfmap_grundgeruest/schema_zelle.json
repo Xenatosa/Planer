@@ -11,7 +11,8 @@
   "begehbar",
   "bebaubar",
   "untergrund_quelle",
-  "klippe_hoehe_quelle"
+  "klippe_hoehe_quelle",
+  "bauzone_plan"
  ],
  "properties": {
   "cx": {
@@ -247,6 +248,14 @@
     1
    ],
    "description": "Senke zwischen Nordwand, Kraterwand, Ostgrat, Suedgrat; Grenzen NW (x=136) und NO teils [A]"
+  },
+  "bauzone_plan": {
+   "type": "integer",
+   "enum": [
+    0,
+    1
+   ],
+   "description": "[S/A] Zelle >=50 % in Planmaske BB4_plan_v2_25pxm.npy (Wege-&-Deko t25u, BB4 + A18 1 m Rand)"
   }
  },
  "overlay_getrennt": "Plaetze/Wege/Hoefe/Feuer/Bruecken liegen im Overlay (raster_c20_z25_overlay_plaetze_wege.png, Spalten zone/weg/platz). 99 Plaetze unveraendert."

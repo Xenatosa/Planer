@@ -1,0 +1,87 @@
+{
+ "slots": 355,
+ "slots_innen95": 149,
+ "anteil_bebaubar_mittel": 0.442,
+ "slots_mit": {
+  "wand": 0,
+  "wasser": 1,
+  "schatten": 0,
+  "wald": 12,
+  "fels": 0,
+  "hindernis": 2
+ },
+ "zellen_slots": {
+  "wand": 0,
+  "wasser": 1,
+  "schatten": 0,
+  "wald": 31
+ },
+ "bruecken": 17,
+ "bruecke_mitte_wasser": 3,
+ "bruecke_beide_enden_begehbar": 15,
+ "deko_netz": 629,
+ "deko_auf_wand": 0,
+ "deko_auf_wasser": 0,
+ "deko_kap0": 6,
+ "deko_ug": {
+  "SCHNEE": 625,
+  "BODEN": 4
+ },
+ "deko_soll": {
+  "1": [
+   "629",
+   "7"
+  ],
+  "16": [
+   "711",
+   "73"
+  ],
+  "40": [
+   "926",
+   "161"
+  ],
+  "70": [
+   "1189",
+   "270"
+  ],
+  "100": [
+   "1429",
+   "380"
+  ]
+ },
+ "kapazitaet_summe": 27537.0,
+ "wald_zellen_slots": 31,
+ "wald_zellen_wege": 169,
+ "slots_mit_wald_ids": 12,
+ "wege_mit_wald": 18,
+ "bzp_nicht_beb": 5386,
+ "bzp_nicht_beb_ursache": {
+  "HINDERNIS": 98,
+  "Abstand Wand/Wasser <2 m oder ausserhalb senke_becken": 5166,
+  "WAND": 3,
+  "WASSER_EIS": 112,
+  "WALD": 1,
+  "FELS": 3,
+  "nicht begehbar": 1,
+  "SCHATTEN": 2
+ },
+ "beb_nicht_bzp": 633,
+ "je_epoche": {
+  "16": {
+   "slots": 142,
+   "nicht_innen": 12
+  },
+  "40": {
+   "slots": 203,
+   "nicht_innen": 54
+  },
+  "70": {
+   "slots": 279,
+   "nicht_innen": 130
+  },
+  "100": {
+   "slots": 355,
+   "nicht_innen": 206
+  }
+ }
+}

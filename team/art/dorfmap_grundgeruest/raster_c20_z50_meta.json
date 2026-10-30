@@ -100,6 +100,7 @@
  "begehbar": 15268,
  "bebaubar": 7233,
  "bauzone_bestand": 5777,
+ "bauzone_plan": 7955,
  "senke_becken": 7892,
  "bebaubar_param": {
   "abstand_wand_m": 2.0,
