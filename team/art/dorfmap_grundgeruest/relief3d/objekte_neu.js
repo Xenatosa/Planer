@@ -46,7 +46,8 @@ function haus(B,h,id){const b=h.b*0.9,t=h.t*0.9,platz=h.typ=='Quartiersplatz',x=
  B.box(x-b/2-0.1,y-1.0,z-t/2-0.1,x+b/2+0.1,y+sock,z+t/2+0.1,lin(0x6d6a64).multiplyScalar(0.9+0.2*hash(id,2)),id);   // Steinsockel, in Hang eingelassen
  B.box(x-b/2,y+sock,z-t/2,x+b/2,y+wh,z+t/2,wcol,id);
  if(!holz&&!turm){const fw=lin(0x5a3a24);for(const s of[-1,1]){B.box(x-b/2-0.02,y+sock,z+s*t/2-0.14,x+b/2+0.02,y+sock+0.18,z+s*t/2+0.14,fw,id);B.box(x-b/2-0.02,y+wh-0.2,z+s*t/2-0.14,x+b/2+0.02,y+wh,z+s*t/2+0.14,fw,id);
-   B.box(x+s*b/2-0.14,y+sock,z-t/2-0.02,x+s*b/2+0.14,y+wh,z+t/2+0.02,fw,id);}}   // Fachwerk-Ecken/Balken
+}
+  for(const sx of[-1,1])for(const sz of[-1,1])B.box(x+sx*b/2-0.16,y+sock,z+sz*t/2-0.16,x+sx*b/2+0.16,y+wh,z+sz*t/2+0.16,fw,id);}   // Fachwerk-Ecken/Balken
  // Fenster und Tuer: dunkles Glas mit hellem Rahmen, leicht vorgesetzt
  const fen=lin(0x223038),rah=lin(0xe8e0cc),tur=lin(0x4b2e1c);const L=lang?b:t,Q=lang?t:b;
  const setz=(u,v,w,hgt,seite,col,tiefe=0.06)=>{const s=seite*Q/2;const pts=lang?[x+u-w/2,z+s,x+u+w/2]:[x+s,z+u-w/2,z+u+w/2];
@@ -73,5 +74,6 @@ export function objekteNeu(D,H,G,grp){
  inst(kiefer(1),D.baeume.filter((b,n)=>(n%5)==4),tf,'baeume',fc);
  const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);o.position.set(x,y,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
  const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[])];FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
- const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hm=new THREE.Mesh(B.geo(),mat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);
+ const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
+ const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);
  return B.p.length/9;}

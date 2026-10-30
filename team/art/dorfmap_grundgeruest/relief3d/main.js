@@ -84,7 +84,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    vec3 tr=texture2D(tW,vWP.zy/9.).rgb*w.x+texture2D(tW,vWP.xy/9.).rgb*w.z+texture2D(tW,vWP.xz/9.).rgb*w.y;
    vec3 tr2=texture2D(tW,vWP.zy/23.+.37).rgb*w.x+texture2D(tW,vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;
    float d=texture2D(tD,vWP.xz/4.).r*0.6+texture2D(tD,vWP.xz/23.).r*0.4,gD=texture2D(tD,vWP.xz/61.+.2).r;
-   diffuseColor.rgb*=(0.70+0.34*d)*(0.92+0.16*gD);
+   diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
    float st=1.-smoothstep(0.40,0.72,abs(N.y)+0.10*(d-0.8));
    vec3 tx=mix(tr,tr2,0.35);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.05,0.98,0.92)*mix(0.85,1.25,gD)*1.15;
