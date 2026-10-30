@@ -186,7 +186,7 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 
 - 43 Bereiche der Prüfliste als vergrößerte c20-Ausschnitte (mit 200 px Rand) angesehen. Die Entscheidungen stehen in `overrides_c20_z25.csv` (Zellbereich, Klasse, Marker, Begründung). gen_raster.py wendet sie nach der Automatik an, nur auf UNBEKANNT-Zellen und nur bei 25 px.
 - 42 Bereiche gesetzt (1 288 Zellen), 1 Bereich bleibt offen (Eis/Schnee-Rand, cx 222–224/cy 267–272). UNBEKANNT 2 477 → 1 189 (2,4 % → 1,2 %) [R]. Der Rest sind Splitter unter 10 Zellen.
-- Gesetzte Klassen: BODEN 6 (Absatz auf der Nordwand, Wiese), SCHATTEN 10, WASSER_EIS 7, KLIPPE_WAND 7, FELS 5, SAND 5, SCHNEE 4, WALD 2, KLIPPE_KANTE 1. Davon 25 [R] und 17 [A].
+- Gesetzte Klassen: BODEN 6 (Absatz auf der Nordwand, Wiese), SCHATTEN 9, WASSER_EIS 6, KLIPPE_WAND 6, FELS 4, SAND 4, SCHNEE 4, WALD 2, KLIPPE_KANTE 1. Davon 25 [R] und 17 [A].
 - Wandhöhen [A]: Gemessen wird der Median der senkrechten Felslaufweite in c20 (Fels-Pixel V<190, S≥25, H≥128 oder H<25, Close 9×9, Läufe ≥ 60 px, jede 10. Spalte). Daraus h = 8,6 m × px / 163 px (Nordwand-Median = 8,6 m [R]):
   - Krater: 145 px → 7,7 m
   - Südgrat: 144 px → 7,6 m
