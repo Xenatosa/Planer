@@ -81,3 +81,8 @@
 - **X084 (22,4 m): Wand korrekt [S].** Original zeigt senkrechte Felswand mit gefrorenem Wasserfall (Eisfall) in einer Spalte; der Weg führt die Wand hinab. Kein begehbarer Boden, kein ebenes Wasser. Keine Änderung. Brücke unpassend; nötig wäre Treppe/Steg über Höhensprung oder anderer Weg.
 - Abhängige Dateien neu: z25 (Overrides nur z25), z50, `pruefung/t26u_*`. Zahlen danach: Slots ≥95 % bebaubar weiter 149/355; Wald unter Wegen 169→164 Zellen; bebaubar ohne Planmaske 633→635.
 - Gelände sonst unverändert. Bauzone-Erweiterung für die 206 Slots bleibt offen (keine Wahl von Fabian).
+
+## t28u X084 Treppe/Steg [F]
+- Fabian: X084 bekommt Treppe/Steg über den Höhenunterschied; Gelände unverändert (Wand bleibt KLIPPE_WAND).
+- Overlay/Daten: `pruefung/t26u_bruecken.csv` Spalte `wegtyp` = 'Treppe/Steg (Hoehe)', `hoehenunterschied_m` = 8,6 [R] aus `klippe_hoehe_m` der Wandzellen am Weg (Wand Nord, alle 8,6; oben hoehe_m 8,6 [A], unten 0,0 [A]). Übrige 16: 'Bruecke (Wasser)'. Overlay-Kreis blau.
+- Alternativen b/c waren keine eigenen Dateien → nichts nach `_alt/` verschoben.

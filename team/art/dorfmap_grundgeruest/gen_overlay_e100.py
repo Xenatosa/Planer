@@ -49,7 +49,9 @@ for r in csv.DictReader(open(Q+'e100/liste_bruecken_e100_v4b.csv'),delimiter=';'
       if UG[y,x]!='WASSER_EIS': return x,y,UG[y,x],bool(A['beg'][y,x])
     return None
   la,lb=land(np.array(a),-1),land(np.array(b),1); mx,my=int((a[0]+b[0])/2),int((a[1]+b[1])/2)
-  br.append(dict(id=r['slot_id'],epoche=r['schicht_epoche'],laenge_m=r['bruecke_m'],mitte_zelle=f'{mx},{my}',mitte_ug=UG[my,mx],mitte_wasser=UG[my,mx]=='WASSER_EIS',
+  TS={'X084':('Treppe/Steg (Hoehe)','8.6','R: klippe_hoehe_m der Wandzellen (Wand Nord) am Weg; oben hoehe_m 8.6 [A], unten 0.0 [A]; Entscheidung [F] t28u')}  # Gelaende bleibt unveraendert
+  wt,hh,hq=TS.get(r['slot_id'],('Bruecke (Wasser)','',''))
+  br.append(dict(wegtyp=wt,hoehenunterschied_m=hh,hoehe_quelle=hq,id=r['slot_id'],epoche=r['schicht_epoche'],laenge_m=r['bruecke_m'],mitte_zelle=f'{mx},{my}',mitte_ug=UG[my,mx],mitte_wasser=UG[my,mx]=='WASSER_EIS',
     ende_a=f'{la[0]},{la[1]} {la[2]}' if la else '-',ende_a_begehbar=la[3] if la else False,ende_b=f'{lb[0]},{lb[1]} {lb[2]}' if lb else '-',ende_b_begehbar=lb[3] if lb else False))
 # Deko
 dk=[]
@@ -75,9 +77,9 @@ for Ep in (16,40,70,100):
     p=np.round(np.array([c(q) for q in s['poly']])*SC).astype(np.int32); cv2.polylines(im,[p],True,(255,255,255) if ok else (0,0,255),2 if not ok else 1)
     if s.get('weg') and len(s['weg'])>1: cv2.polylines(im,[np.round(np.array([c(q) for q in s['weg']])*SC).astype(np.int32)],False,(0,200,255),1)
   for b in br:
-    if int(b['epoche'])<=Ep: x,y=map(int,b['mitte_zelle'].split(',')); cv2.circle(im,(x*SC,y*SC),6,(0,255,255),2)
+    if int(b['epoche'])<=Ep: x,y=map(int,b['mitte_zelle'].split(',')); cv2.circle(im,(x*SC,y*SC),6,(0,255,255) if b['wegtyp'].startswith('Bruecke') else (255,0,0),2)
   n=sum(1 for s in S if s['ep']<=Ep); sumE[Ep]=dict(slots=n,nicht_innen=aus)
-  for i,t in enumerate([f'E{Ep}: {n} Slots, {aus} nicht >=95% bebaubar (rot). Overlay, Gelaende nackt. Magenta=bauzone_plan, gelb=Bruecke']):
+  for i,t in enumerate([f'E{Ep}: {n} Slots, {aus} nicht >=95% bebaubar (rot). Overlay, Gelaende nackt. Magenta=bauzone_plan, gelb=Bruecke, blau=Treppe/Steg']):
     cv2.rectangle(im,(0,0),(NX*SC,28),(0,0,0),-1); cv2.putText(im,t,(8,20),cv2.FONT_HERSHEY_SIMPLEX,0.55,(255,255,255),1)
   cv2.imwrite(o+f'overlay_E{Ep}.png',im)
 # bauzone_plan Konflikte

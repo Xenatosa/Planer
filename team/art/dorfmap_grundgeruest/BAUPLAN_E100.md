@@ -32,7 +32,7 @@ Marker: [S] gemessen/Quelle · [R] gerechnet · [A] Annahme · [F] Fabian.
 
 ## 4 Offene Entscheidungen
 1. **Schneezonen (206 Slots außerhalb bebaubar).** a) bauzone_plan um die Schneezonen erweitern (+13.290 m² laut Quelle): Plan bleibt, Raster-Regel `bebaubar` braucht dann eine Ausnahme für senke_becken. b) Slots in die heutige Fläche verdichten: weniger als 355 Slots. c) Schneezonen erst ab E41 freigeben: E16/E40 fast sauber, Rest später.
-2. **X084 über Klippe** (t27u geprüft: Wand mit Eisfall korrekt [S]; X069 war Fehlklassifikation, korrigiert, Landweg ohne Brücke). a) Treppe/Steg über Höhensprung (neuer Typ, Art nötig). b) Slot X084 anders anbinden oder verlegen. c) streichen (−1 Slot).
+2. **X084 über Klippe — entschieden [F t28u]:** Treppe/Steg über den Höhenunterschied, 8,6 m [R] (klippe_hoehe_m der Wandzellen, Wand Nord). Gelände bleibt unverändert. Alternativen (anders anbinden, streichen) verworfen. X069 war Fehlklassifikation, korrigiert (t27u).
 3. **Dekoplätze ohne Ort (800).** a) Wege-Bot setzt Positionen in Schritt 2–5. b) Zahl als reine Kapazität führen, keine Plätze. 
 4. **„0 ohne Weg“ vs. 32 ohne Polylinie.** a) gilt als „liegt direkt am Weg“, nur dokumentieren. b) fehlende Stichwege nachziehen.
 
