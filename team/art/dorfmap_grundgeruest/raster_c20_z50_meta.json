@@ -13,7 +13,7 @@
   152
  ],
  "epoche": "E1",
- "epochen_variante": null,
+ "epochen_variante": "fest_c20",
  "zaehlung_untergrund": {
   "BODEN": 2288,
   "BRUECKE": 6,

@@ -13,7 +13,7 @@
   303
  ],
  "epoche": "E1",
- "epochen_variante": null,
+ "epochen_variante": "fest_c20",
  "zaehlung_untergrund": {
   "BODEN": 9040,
   "BRUECKE": 20,

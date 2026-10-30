@@ -52,7 +52,7 @@ Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454
 - Jede Zelle trägt nur Eigenschaften, keinen Look. `skin_slot` verweist auf einen material_slot. Ein Skin ist eine Tabelle {skin_slot → Textur/Farbe} pro Look, Saison oder Epoche [A].
 - Der Raster-Inhalt bleibt dabei gleich, nur die Tabelle wechselt (Regel „Karte gleich, Look ändert sich“, Fabian 30.10.).
 - Neue Details (z. B. Spuren, Eisschollen) kommen als zusätzliche Spalte oder Ebene dazu, ohne bestehende Felder zu ändern.
-- Für eine eigene Epochen-Karte gibt es den Meta-Parameter `epochen_variante` (null = c20/E1).
+- `epochen_variante` = "fest_c20": eine feste Einzelkarte für alle Epochen [F 30.10.]. Neue Standorte kommen als zusätzliche Plätze dazu.
 
 ## 6 Bestand: vorhanden / fehlt
 **Vorhanden** [S]:
@@ -74,26 +74,15 @@ Zählung bei 25 px [R, raster_c20_z25_meta.json]: GESPERRT 61 555, SCHNEE 20 454
 - GUELTIG.md nennt c20 noch nicht, und die Dateinamen tragen noch „NICHT_FREIGEGEBEN“.
 - Die Platz-Meter in v9 stehen noch auf der 30-px-Basis.
 
-## 7 Offene Entscheidungen
-1. **Epochen: eigene Karte (26.10.) oder gleiche Karte mit anderem Look (30.10.)?**
-   - a) Eine Karte, nur Skins: Das Raster bleibt fest, das ist am einfachsten.
-   - b) Eigene, größere Karte je Epoche: Je Karte läuft der Generator mit `epochen_variante`, die Felder bleiben gleich.
-   - c) Mischform: c20 bleibt der Kern, später kommen Randflächen als zusätzliche Zellen dazu (das Raster wächst nach außen, cx/cy werden verschoben).
-2. **Zellmaß:**
-   - a) 25 px = 1 m: fein genug für kleine Felsen und Hauswege, 102 k Zellen.
-   - b) 50 px = 2 m: leichter, aber Hauswege (≈1,4 m) und kleine Felsen gehen verloren.
-   - c) 12,5 px = 0,5 m: genau für Türen und Figuren, aber 4× Datenmenge.
-3. **Höhe und Klippe:**
-   - a) Von Hand in Stufen 0–3 setzen, ohne Kosten, Aufwand etwa 1 Tag.
-   - b) Aus der Schattierung der Karte schätzen: ungenau, muss als [A] markiert werden.
-   - c) Erst einmal weglassen: Das Spiel nutzt nur begehbar/bebaubar.
-4. **Wasser gegen Eis:**
-   - a) Bleibt ein gemeinsames Feld, die Unterscheidung macht der Skin.
-   - b) Wasser und Eis von Hand trennen (Bach offen gegen See gefroren).
-   - c) Dem Bach-Polygon (frei_e2.py) die Eigenschaft „fließend“ geben, dem See „gefroren“.
-5. **Weg-Meter auf 25 px/m umstellen:**
-   - a) Die Breiten in v9 neu in Metern angeben, Masken bleiben gleich.
-   - b) Die alte Angabe (30-px-Meter) mit Umrechnungsfaktor 1,2 behalten.
+## 7 Entscheidungen
+1. **Epochen: ENTSCHIEDEN [F Fabian 30.10.2026, t3u]**
+   - Für alle Epochen gilt dieselbe Karte, nur der Look wechselt.
+   - Neue Standorte kommen nur hinzu, bestehende bleiben.
+   - `epochen_variante` = "fest_c20": Der Parameter bleibt erhalten, wird aber nicht genutzt.
+2. **Zellmaß: Standard gewählt [A]:** 25 px = 1 m. Die Alternativen 50 px und 12,5 px bleiben über den Parameter `ZELLE_PX` möglich.
+3. **Höhe/Klippe: Standard gewählt [A]:** Die Felder bleiben leer, bis jemand sie von Hand setzt. Eine Höhenkarte gibt es nicht.
+4. **Wasser/Eis: Standard gewählt [A]:** Beides bleibt ein gemeinsames Feld `wasser_eis`. Die Unterscheidung macht der Skin.
+5. **Wegbreiten: Standard gewählt [A]:** Die v9-Angaben (Meter auf 30-px-Basis) bleiben, mit Umrechnungsfaktor 1,2 auf echte Meter (25 px/m).
 
 ## Dateien
 - `gen_raster.py`: Generator, liest nur, schreibt nur in diesen Ordner.

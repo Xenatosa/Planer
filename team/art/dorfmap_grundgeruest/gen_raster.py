@@ -58,7 +58,7 @@ with open(o+'_zellen.csv','w',newline='') as f:
         for x in range(nx):
             w.writerow([x,y,x*Z,y*Z,ug[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),'', '', 'ug_'+ug[y,x].lower()])
 st={k:int(v) for k,v in zip(*np.unique(ug,return_counts=True))}
-json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante=None,
+json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',
   zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),plaetze=len(ids),
   hinweis='hoehe_stufe/klippe leer: keine Hoehenkarte vorhanden [A]'),open(o+'_meta.json','w'),ensure_ascii=False,indent=1)
 COL={'BODEN':(196,170,120),'GESPERRT':(150,150,150),'SCHNEE':(235,240,245),'FELS_WALD':(90,90,90),'WASSER_EIS':(60,120,220),'HOF':(220,190,90),'FEUER':(230,60,30),'WEG':(150,100,50),'BRUECKE':(130,60,160)}
