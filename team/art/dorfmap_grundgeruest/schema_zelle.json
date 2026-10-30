@@ -10,7 +10,8 @@
   "untergrund",
   "begehbar",
   "bebaubar",
-  "untergrund_quelle"
+  "untergrund_quelle",
+  "klippe_hoehe_quelle"
  ],
  "properties": {
   "cx": {
@@ -41,7 +42,11 @@
     "HOF",
     "FEUER",
     "WEG",
-    "BRUECKE"
+    "BRUECKE",
+    "KLIPPE_WAND",
+    "KLIPPE_KANTE",
+    "FELS",
+    "SCHATTEN"
    ]
   },
   "zone": {
@@ -213,6 +218,14 @@
     "KEINE"
    ],
    "description": "MASKE=[S] Masken; FARBE=[R] Farbklasse aus c20; KEINE=UNBEKANNT"
+  },
+  "klippe_hoehe_quelle": {
+   "enum": [
+    "",
+    "R",
+    "A"
+   ],
+   "description": "R = Nordwand gerechnet (7,6-9,6 m, Mitte 8,6); A = andere Wand, Wert angenommen"
   }
  }
 }

@@ -55,6 +55,8 @@ def _fr(b): return b.reshape(ny,Z,nx,Z).mean((1,3))
 _H,_S,_V=[_hsv[...,i].astype(np.int16) for i in range(3)]; del _hsv
 f_wald=_fr(((_V<110)&(_H>=35)&(_H<=110))|(_V<70)); f_fels=_fr((_S>70)&((_H<25)|(_H>165))&(_V<200))
 f_sand=_fr((_H>=12)&(_H<=28)&(_S>50)&(_S<=140)&(_V>=170)); f_wass=_fr((_H>=88)&(_H<=112)&(_S>=55)&(_V>=110)); f_schn=_fr((_S<45)&(_V>=185))
+f_dark=_fr((_V<150)&(((_H>=128))|(_H<25))); f_tree=_fr((_V<170)&(_H>=80)&(_H<128)&(_S>=40)); f_shade=_fr((_H>=100)&(_H<=135)&(_S>=15)&(_S<100)&(_V>=120)&(_V<215))
+f_edge=_fr(cv2.Canny(_V.astype(np.uint8),60,140)>0)
 del _H,_S,_V
 farb=np.full((ny,nx),'UNBEKANNT',dtype='U12')
 farb[f_schn>=0.3]='SCHNEE'; farb[f_sand>=0.35]='SAND'
@@ -65,8 +67,41 @@ quelle=np.full((ny,nx),'MASKE',dtype='U6')
 ug[rand]='GESPERRT'; ug[schnee]='SCHNEE'; ug[fz]='FELS_WALD'; ug[wasser]='WASSER_EIS'; ug[hof]='HOF'; ug[feuer]='FEUER'
 ug[weg!='']='WEG'; ug[bruecke]='BRUECKE'
 ohne=(ug=='GESPERRT'); ug[ohne]=farb[ohne]; quelle[ohne]=np.where(farb[ohne]=='UNBEKANNT','KEINE','FARBE')
-wasser=wasser|(ug=='WASSER_EIS')
-begehbar=~((ug=='UNBEKANNT')|(ug=='WALD')|(ug=='FELS_KLIPPE')|(ug=='WASSER_EIS')|(ug=='FELS_WALD')|(hind>0))|(ug=='WEG')|(ug=='BRUECKE')
+# ---- Klippenmaske per Bildanalyse (t6u) [R], Schwellen [A] ----
+unb_vor=int((ug=='UNBEKANNT').sum())
+fz_=ohne
+baum=fz_&(ug!='WASSER_EIS')&(f_tree>=0.20)&(f_tree>f_dark)
+wand=fz_&(ug!='WASSER_EIS')&~baum&(((f_dark>=0.12)&(f_edge>=0.04))|((f_fels>=0.03)&(f_schn<0.5)))
+ug[baum]='WALD'
+schat=fz_&~wand&~baum&(f_shade>=0.35)&(f_edge<0.06)
+ug[wand]='KLIPPE_WAND'; ug[schat]='SCHATTEN'
+# Wasser aus Farbe, das eigentlich Schatten ist: Komponenten, die ueberwiegend an Wand grenzen und klein/kompakt sind
+_w=(fz_&(ug=='WASSER_EIS')).astype(np.uint8); _n,_l,_st,_=cv2.connectedComponentsWithStats(_w,8)
+_wd=cv2.dilate((ug=='KLIPPE_WAND').astype(np.uint8),np.ones((3,3),np.uint8))>0
+schatten_wasser=0
+for i in range(1,_n):
+    c=_l==i; rand=(cv2.dilate(c.astype(np.uint8),np.ones((3,3),np.uint8))>0)&~c
+    if _st[i,4]<1500 and max(_st[i,2],_st[i,3])>=2.5*min(_st[i,2],_st[i,3]) and (_wd&rand).sum()/max(1,rand.sum())>=0.5 and f_shade[c].mean()>=0.2:
+        ug[c]='SCHATTEN'; schatten_wasser+=int(c.sum())
+# Mehrheitsfilter 3x3 nur auf Farbzellen; Kleinstflecken (<4 Zellen) gehen an die Nachbarmehrheit
+KL=['SCHNEE','SAND','WALD','KLIPPE_WAND','SCHATTEN','WASSER_EIS','UNBEKANNT']
+for _ in range(2):
+    cnt=np.stack([cv2.filter2D((ug==k).astype(np.float32),-1,np.ones((3,3),np.float32),borderType=cv2.BORDER_REFLECT) for k in KL],-1)
+    maj=np.array(KL)[cnt.argmax(-1)]; stark=cnt.max(-1)>=5
+    for k in KL:
+        n_,l_,st_,_=cv2.connectedComponentsWithStats(((ug==k)&fz_).astype(np.uint8),8)
+        klein=np.isin(l_,np.nonzero(st_[:,4]<4)[0][1:]) if n_>1 else np.zeros_like(fz_)
+        sel=klein&stark&fz_; ug[sel]=maj[sel]
+    sel=fz_&(ug=='UNBEKANNT')&stark&(maj!='UNBEKANNT'); ug[sel]=maj[sel]
+# FELS = kleine isolierte Wandkomponenten; KANTE = Wandzelle mit Nicht-Wand im Norden (Krone, Draufsicht von Sueden) [A]
+_n,_l,_st,_=cv2.connectedComponentsWithStats((ug=='KLIPPE_WAND').astype(np.uint8),8)
+ug[np.isin(_l,np.nonzero(_st[:,4]<30)[0][1:])&(ug=='KLIPPE_WAND')]='FELS'
+_wa=ug=='KLIPPE_WAND'; _no=np.zeros_like(_wa); _no[1:]=~_wa[:-1]&(ug[:-1]!='UNBEKANNT')
+ug[_wa&_no]='KLIPPE_KANTE'
+quelle[fz_&(ug!='UNBEKANNT')]='FARBE'; quelle[fz_&(ug=='UNBEKANNT')]='KEINE'
+unb_nach=int((ug=='UNBEKANNT').sum())
+wasser=(wasser&(ug!='SCHATTEN'))|(ug=='WASSER_EIS')
+begehbar=~((ug=='UNBEKANNT')|(ug=='WALD')|(ug=='FELS_KLIPPE')|(ug=='KLIPPE_WAND')|(ug=='KLIPPE_KANTE')|(ug=='FELS')|(ug=='WASSER_EIS')|(ug=='FELS_WALD')|(hind>0))|(ug=='WEG')|(ug=='BRUECKE')
 bebaubar=senke&fe2&~wasser&~fz&(hind==0)&(weg=='')&~bruecke&~feuer
 
 # ---- 3D/Hoehe/Fluss (t4u) ----
@@ -78,13 +113,15 @@ hoehe=np.full((ny,nx),np.nan)
 hoehe[senke&~wasser]=BEZUG                            # Senke als flach angenommen [A]
 rand_out=(ug=='FELS_KLIPPE')|(ug=='FELS_WALD')|(ug=='WALD')|(ug=='UNBEKANNT')
 nb=cv2.dilate(senke.astype(np.uint8),np.ones((3,3),np.uint8))>0
-kl_kante=rand_out&nb                                  # Uebergang Senke->Fels/Rand = Klippenkante [R aus Masken]
+kl_kante=(rand_out&nb)|(ug=='KLIPPE_KANTE')                                  # Uebergang Senke->Fels/Rand = Klippenkante [R aus Masken]
 nord=np.zeros((ny,nx),bool); nord[:int(ny*0.25),:]=True   # Nordwand: obere 25 % der Karte [A]
-klippe_h=np.full((ny,nx),np.nan); klippe_h[kl_kante&nord]=KL_M
+klippe_h=np.full((ny,nx),np.nan); _wk=(ug=='KLIPPE_WAND')|(ug=='KLIPPE_KANTE')
+klippe_h[(kl_kante|_wk)&nord]=KL_M; klippe_h[_wk&~nord]=KL_M   # nord [R], andere Waende gleicher Wert [A]
+klippe_quelle=np.where(np.isnan(klippe_h),'',np.where(nord,'R','A'))
 hoehe[kl_kante&nord]=BEZUG+KL_M                       # Oberkante Nordwand [R]
 gy,gx=np.gradient(np.nan_to_num(hoehe,nan=np.nan))
 nei=np.degrees(np.arctan(np.hypot(gx,gy)/(Z/PXM)))    # [R] nur wo Nachbarn bekannt
-klippe=np.where(kl_kante,'KANTE','')
+klippe=np.where(kl_kante,'KANTE',np.where(ug=='KLIPPE_WAND','WAND',''))
 # Fluss: Mittellinie aus bach_schutz, Richtung aus Bachpolylinie frei_e2.py [S]
 wm=A['bach_schutz'][::5,::5].astype(np.uint8)
 dt=cv2.distanceTransform(wm,cv2.DIST_L2,5)*5          # px
@@ -92,7 +129,7 @@ sk=skeletonize(wm>0)
 POLY={'BACH_NORD':[(-34,-12),(-36,0),(-39,15),(-44,40),(-49,60),(-52,80),(-54,92)],'BACH_SUED':[(-52,112),(-40,122),(-25,130),(-15,140)]}
 P={k:np.array([((x+200)*30,(y+40)*30) for x,y in v],float) for k,v in POLY.items()}
 SEE=(np.array([(-60+200)*30,(102+40)*30]),17*30)
-fluss=np.zeros((ny,nx),'U10'); rich=np.zeros((ny,nx),'U2'); breite=np.full((ny,nx),np.nan)
+fluss=np.zeros((ny,nx),'U12'); rich=np.zeros((ny,nx),'U2'); breite=np.full((ny,nx),np.nan)
 D8=['O','SO','S','SW','W','NW','N','NO']
 for cy,cx in zip(*np.nonzero(wasser)):
     p=np.array([cx*Z+Z/2,cy*Z+Z/2])
@@ -117,15 +154,15 @@ b3=np.where(np.isnan(nei),begehbar,(nei<=MAXN)&begehbar)|furt
 fmt=lambda v: '' if np.isnan(v) else round(float(v),2)
 o=f'raster_c20_z{Z}'
 with open(o+'_zellen.csv','w',newline='') as f:
-    w=csv.writer(f); w.writerow(['cx','cy','px_x','px_y','untergrund','untergrund_quelle','zone','platz','weg_id','weg_klasse','hindernis','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','klippe','skin_slot','hoehe_m','neigung_grad','klippe_hoehe_m','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','furt','begehbar_3d'])
+    w=csv.writer(f); w.writerow(['cx','cy','px_x','px_y','untergrund','untergrund_quelle','zone','platz','weg_id','weg_klasse','hindernis','wasser_eis','schnee','senke_bb4','h4_ext','frei_e2','begehbar','bebaubar','klippe','skin_slot','hoehe_m','neigung_grad','klippe_hoehe_m','klippe_hoehe_quelle','fluss_id','fliess_richtung','fluss_breite_m','wasser_tiefe_m','ufer','furt','begehbar_3d'])
     for y in range(ny):
         for x in range(nx):
-            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),klippe[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),fmt(nei[y,x]),fmt(klippe_h[y,x]),fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(furt[y,x]),int(b3[y,x])])
+            w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),klippe[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(furt[y,x]),int(b3[y,x])])
 st={k:int(v) for k,v in zip(*np.unique(ug,return_counts=True))}
-json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','KEINE']},
+json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',unbekannt_vorher=unb_vor,unbekannt_nachher=unb_nach,schatten_statt_wasser=schatten_wasser,klippe_nord_band_m=[7.6,9.6],quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','KEINE']},
   zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),plaetze=len(ids),
   bezug_m=BEZUG,klippe_nord_m=KL_M,neigung_max_3d=MAXN,dreid=dict(achse_z='oben, Meter',einheit='m',ppu=256,unity_pro_m=PXM/256,px_pro_m=PXM),zellen_mit_hoehe=int((~np.isnan(hoehe)).sum()),fluss_zellen={k:int((fluss==k).sum()) for k in ['BACH_NORD','BACH_SUED','SEE']},fluss_breite_m_median={k:(round(float(np.nanmedian(breite[fluss==k])),2) if np.any(~np.isnan(breite[fluss==k])) else None) for k in ['BACH_NORD','BACH_SUED']},furt=int(furt.sum()),ufer=int(ufer.sum()),hinweis='hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle.'),open(o+'_meta.json','w'),ensure_ascii=False,indent=1)
-COL={'BODEN':(196,170,120),'UNBEKANNT':(255,0,255),'SAND':(225,200,140),'WALD':(30,90,40),'FELS_KLIPPE':(130,70,30),'SCHNEE':(235,240,245),'FELS_WALD':(90,90,90),'WASSER_EIS':(60,120,220),'HOF':(220,190,90),'FEUER':(230,60,30),'WEG':(150,100,50),'BRUECKE':(130,60,160)}
+COL={'BODEN':(196,170,120),'UNBEKANNT':(255,0,255),'SAND':(225,200,140),'WALD':(20,110,50),'FELS_KLIPPE':(130,70,30),'KLIPPE_WAND':(110,60,25),'KLIPPE_KANTE':(255,230,0),'FELS':(160,140,120),'SCHATTEN':(150,160,200),'SCHNEE':(235,240,245),'FELS_WALD':(90,90,90),'WASSER_EIS':(60,120,220),'HOF':(220,190,90),'FEUER':(230,60,30),'WEG':(150,100,50),'BRUECKE':(130,60,160)}
 img=np.zeros((ny,nx,3),np.uint8)
 for k,c in COL.items(): img[ug==k]=c
 img[(platz>0)&(ug!='WEG')]=(80,190,90); img[hind>0]=(255,140,0)
@@ -142,7 +179,7 @@ L.save(o+'_vorschau.png'); print(json.dumps(st),begehbar.sum(),bebaubar.sum(),nx
 
 # Hoehen-/Fluss-Ansicht
 v=np.full((ny,nx,3),200,np.uint8); v[np.isnan(hoehe)]=(170,170,170)
-v[hoehe==BEZUG]=(120,200,120); v[~np.isnan(klippe_h)]=(120,60,20); v[(klippe=='KANTE')&np.isnan(klippe_h)]=(200,140,90)
+v[hoehe==BEZUG]=(120,200,120); v[klippe_quelle=='A']=(190,120,170); v[klippe_quelle=='R']=(120,60,20); v[(klippe=='KANTE')&np.isnan(klippe_h)]=(200,140,90)
 FC={'BACH_NORD':(30,90,230),'BACH_SUED':(0,170,220),'SEE':(20,40,140)}
 for k,c in FC.items(): v[fluss==k]=c
 v[ufer]=(240,220,120); v[furt]=(255,0,0)
@@ -153,7 +190,7 @@ for cy,cx in zip(*np.nonzero(rich!='')):
     dx,dy=DV[rich[cy,cx]]; x0,y0=cx*s+1,cy*s+1; d0.line([x0,y0,x0+dx*6,y0+dy*6],fill='white')
 L=Image.new('RGB',(im.width+360,max(im.height,600)),'white'); L.paste(im,(0,0)); d=ImageDraw.Draw(L); y=20
 d.text((im.width+15,y),f'Hoehe/Fluss, Zelle {Z}px',fill='black',font=ft); y+=30
-for k,c in [(f'Senke hoehe_m={BEZUG:g} [A]',(120,200,120)),(f'Nordklippe {KL_M} m [R]',(120,60,20)),('Kante ohne Hoehe',(200,140,90)),('hoehe leer (keine Quelle)',(170,170,170)),('BACH_NORD',FC['BACH_NORD']),('BACH_SUED',FC['BACH_SUED']),('SEE',FC['SEE']),('Ufer (flach begehbar)',(240,220,120)),('Furt',(255,0,0))]:
+for k,c in [(f'Senke hoehe_m={BEZUG:g} [A]',(120,200,120)),(f'Nordklippe {KL_M} m [R]',(120,60,20)),(f'andere Wand {KL_M} m [A]',(190,120,170)),('Kante ohne Hoehe',(200,140,90)),('hoehe leer (keine Quelle)',(170,170,170)),('BACH_NORD',FC['BACH_NORD']),('BACH_SUED',FC['BACH_SUED']),('SEE',FC['SEE']),('Ufer (flach begehbar)',(240,220,120)),('Furt',(255,0,0))]:
     d.rectangle([im.width+15,y,im.width+40,y+20],fill=c,outline='black'); d.text((im.width+50,y),k,fill='black',font=ft); y+=30
 d.text((im.width+15,y),'weisse Striche = Fliessrichtung',fill='black',font=ft)
 L.save(o+'_hoehe_fluss.png')
@@ -163,3 +200,10 @@ _o=Image.open(R+'KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png').convert('RGB
 _v=Image.open(o+'_vorschau.png').crop((0,0,nx*3,ny*3))
 Image.blend(_o,_v,0.5).save(o+'_overlay.png')
 _n=Image.new('RGB',(nx*6+10,ny*3),'white'); _n.paste(_o,(0,0)); _n.paste(_v,(nx*3+10,0)); _n.save(o+'_vergleich.png')
+
+_u=(ug=='UNBEKANNT').astype(np.uint8); _n,_l,_st,_=cv2.connectedComponentsWithStats(_u,8)
+with open(o+'_unbekannt_pruefliste.csv','w',newline='') as f:
+    w=csv.writer(f); w.writerow(['nr','cx0','cy0','cx1','cy1','zellen','px_x0','px_y0','px_x1','px_y1'])
+    for i in np.argsort(-_st[1:,4])+1:
+        x,y,ww,hh,a=_st[i]
+        if a>=10: w.writerow([i,x,y,x+ww-1,y+hh-1,a,x*Z,y*Z,(x+ww)*Z,(y+hh)*Z])

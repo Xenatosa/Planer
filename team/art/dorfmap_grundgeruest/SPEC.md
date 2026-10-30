@@ -30,7 +30,7 @@ Eine Zelle wird gesetzt, wenn mindestens 50 % ihrer px in der Maske liegen. Ausn
 | senke_bb4 | 0/1 | arbeit/BB4.npy (Senke/Bauzone) [S] |
 | h4_ext | 0/1 | arbeit/H4_ext.npy [S]; Bedeutung nicht dokumentiert [A] |
 | frei_e2 | 0/1 | slots_c20/mp/frei_e2.npy (ohne Fels, Wald, Wasser, Schluchtpfad) [S] |
-| begehbar | 0/1 | [R]: nicht GESPERRT, WASSER_EIS, FELS_WALD oder Hindernis; WEG und BRUECKE sind immer begehbar |
+| begehbar | 0/1 | [R]: nicht KLIPPE_WAND, KLIPPE_KANTE, FELS, WASSER_EIS, FELS_WALD, UNBEKANNT oder Hindernis (GESPERRT gibt es nicht mehr); WEG und BRUECKE sind immer begehbar |
 | bebaubar | 0/1 | [R]: senke_bb4 ∧ frei_e2 ∧ ¬Wasser ∧ ¬Fels ∧ ¬Hindernis ∧ ¬Weg ∧ ¬Brücke ∧ ¬Feuer |
 | klippe | KANTE/leer | Übergang von BB4 zu Fels/Rand [R aus Masken]. Grob, weil die Klippenmaske grob ist [S] |
 | skin_slot | ug_<untergrund> | Brücke zum Skin-System (Abschnitt 5) |
@@ -167,3 +167,17 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
 - `schema_zelle.json`
 - `raster_c20_z25_hoehe_fluss.png`: Höhen-/Fluss-Ansicht.
 - `raster_c20_z25_vorschau.png`: Flachfarben plus Legende, schraffiert = bebaubar. Dazu `raster_c20_z50_*`.
+
+
+## §2b Klippenmaske aus Bildanalyse (t6u)
+
+- Ersetzt die meisten UNBEKANNT-Zellen: **14 398 → 2 477 (14,1 % → 2,4 %)** [R].
+- Methode je Zelle (25×25 px aus c20, HSV, OpenCV-Skala H 0–179):
+  - Wald: Anteil dunkler blaugrüner Pixel (V<170, H 80–127, S≥40) ≥ 0,20 und größer als Anteil Wand-dunkel → WALD. Gemessen: Wald H≈113 [S].
+  - KLIPPE_WAND: Anteil dunkel-violett/braun (V<150, H≥128 oder H<25) ≥ 0,12 und Canny-Kanten (60/140) ≥ 0,04, oder Fels-Brauntöne ≥ 0,03 bei wenig Schnee. Gemessen: Wände H≈146–148 [S].
+  - FELS: Wand-Komponenten < 30 Zellen [A].
+  - KLIPPE_KANTE: Wandzelle, deren nördlicher Nachbar weder Wand noch UNBEKANNT ist (Draufsicht von Süden) [A].
+  - SCHATTEN: blaugrau (H 100–135, S 15–100, V 120–215) ≥ 0,35, wenig Kanten. Zusätzlich werden kleine längliche „Wasser“-Flecken (< 1500 Zellen, Seitenverhältnis ≥ 2,5, ≥ 50 % Rand an Wand, f_shade ≥ 0,2) zu SCHATTEN: 42 Zellen [R]. Runde Teiche bleiben Wasser.
+  - Mehrheitsfilter 3×3, 2 Durchläufe, nur auf Farbzellen: Inseln < 4 Zellen und UNBEKANNT mit ≥ 5 gleichen Nachbarn gehen an die Mehrheit [A].
+- klippe_hoehe_m: Nordwand (obere 25 % der Karte [A]) 8,6 m [R, Band 7,6–9,6]; alle anderen Wände 8,6 m nur [A] (Spalte `klippe_hoehe_quelle`).
+- Rest-UNBEKANNT (magenta) mit Zellbereichen: `raster_c20_z25_unbekannt_pruefliste.csv` (43 Komponenten ≥ 10 Zellen, größte: cx 77–115/cy 16–27 am Nordwandfuß).

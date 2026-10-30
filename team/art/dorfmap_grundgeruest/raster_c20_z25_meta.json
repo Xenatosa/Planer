@@ -14,26 +14,36 @@
  ],
  "epoche": "E1",
  "epochen_variante": "fest_c20",
+ "unbekannt_vorher": 14398,
+ "unbekannt_nachher": 2477,
+ "schatten_statt_wasser": 42,
+ "klippe_nord_band_m": [
+  7.6,
+  9.6
+ ],
  "quelle_anteil": {
   "MASKE": 39.5,
-  "FARBE": 46.3,
-  "KEINE": 14.1
+  "FARBE": 58.0,
+  "KEINE": 2.4
  },
  "zaehlung_untergrund": {
   "BODEN": 9040,
   "BRUECKE": 20,
-  "FELS_KLIPPE": 2207,
+  "FELS": 1385,
   "FELS_WALD": 5999,
   "FEUER": 271,
   "HOF": 430,
-  "SAND": 454,
-  "SCHNEE": 52494,
-  "UNBEKANNT": 14398,
-  "WALD": 7736,
-  "WASSER_EIS": 5934,
+  "KLIPPE_KANTE": 1473,
+  "KLIPPE_WAND": 12782,
+  "SAND": 445,
+  "SCHATTEN": 3146,
+  "SCHNEE": 49286,
+  "UNBEKANNT": 2477,
+  "WALD": 7188,
+  "WASSER_EIS": 5041,
   "WEG": 2825
  },
- "begehbar": 64908,
+ "begehbar": 64837,
  "bebaubar": 19931,
  "plaetze": 99,
  "bezug_m": 0.0,
@@ -46,7 +56,7 @@
   "unity_pro_m": 0.09765625,
   "px_pro_m": 25
  },
- "zellen_mit_hoehe": 32081,
+ "zellen_mit_hoehe": 32467,
  "fluss_zellen": {
   "BACH_NORD": 175,
   "BACH_SUED": 222,
@@ -57,6 +67,6 @@
   "BACH_SUED": 2.48
  },
  "furt": 0,
- "ufer": 3758,
+ "ufer": 3530,
  "hinweis": "hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle."
 }
