@@ -39770,7 +39770,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 120,118,3000,2950,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,118,3025,2950,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 122,118,3050,2950,SCHATTEN,FARBE,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schatten,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-123,118,3075,2950,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
+123,118,3075,2950,SCHNEE,FARBE,0,,0,0,0,0,0,1,1,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,0,1,1.0
 124,118,3100,2950,SCHNEE,FARBE,0,,0,0,0,0,0,1,1,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,0,1,1.0
 125,118,3125,2950,SCHNEE,FARBE,0,,0,0,0,0,0,1,1,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,0,1,1.0
 126,118,3150,2950,SCHNEE,FARBE,0,,0,0,0,0,0,1,1,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,0,1,1.0
@@ -40105,8 +40105,8 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 119,119,2975,2975,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 120,119,3000,2975,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,119,3025,2975,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
-122,119,3050,2975,KLIPPE_WAND,KEINE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-123,119,3075,2975,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
+122,119,3050,2975,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
+123,119,3075,2975,SCHNEE,FARBE,0,,0,0,0,0,0,1,1,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,0,1,1.0
 124,119,3100,2975,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 125,119,3125,2975,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 126,119,3150,2975,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -40441,7 +40441,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 119,120,2975,3000,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 120,120,3000,3000,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,120,3025,3000,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
-122,120,3050,3000,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+122,120,3050,3000,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 123,120,3075,3000,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 124,120,3100,3000,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 125,120,3125,3000,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -40777,8 +40777,8 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 119,121,2975,3025,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 120,121,3000,3025,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,121,3025,3025,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-122,121,3050,3025,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
-123,121,3075,3025,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+122,121,3050,3025,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+123,121,3075,3025,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,121,3100,3025,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 125,121,3125,3025,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 126,121,3150,3025,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -41114,7 +41114,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 120,122,3000,3050,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,122,3025,3050,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 122,122,3050,3050,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-123,122,3075,3050,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+123,122,3075,3050,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,122,3100,3050,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 125,122,3125,3050,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 126,122,3150,3050,FELS,KEINE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -41786,7 +41786,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 120,124,3000,3100,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,124,3025,3100,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 122,124,3050,3100,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-123,124,3075,3100,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+123,124,3075,3100,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,124,3100,3100,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 125,124,3125,3100,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 126,124,3150,3100,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -42461,7 +42461,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 123,126,3075,3150,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 124,126,3100,3150,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 125,126,3125,3150,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
-126,126,3150,3150,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+126,126,3150,3150,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 127,126,3175,3150,SCHATTEN,FARBE,0,,0,0,0,0,0,1,0,0,0,1,,,ug_schatten,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 128,126,3200,3150,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 129,126,3225,3150,WALD,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,1,,,ug_wald,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
@@ -44477,7 +44477,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 123,132,3075,3300,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,132,3100,3300,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 125,132,3125,3300,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-126,132,3150,3300,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+126,132,3150,3300,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 127,132,3175,3300,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 128,132,3200,3300,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 129,132,3225,3300,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
@@ -44813,7 +44813,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 123,133,3075,3325,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,133,3100,3325,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 125,133,3125,3325,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-126,133,3150,3325,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+126,133,3150,3325,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 127,133,3175,3325,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 128,133,3200,3325,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 129,133,3225,3325,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
@@ -45149,7 +45149,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 123,134,3075,3350,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,134,3100,3350,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 125,134,3125,3350,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-126,134,3150,3350,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+126,134,3150,3350,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 127,134,3175,3350,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 128,134,3200,3350,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 129,134,3225,3350,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
@@ -45817,8 +45817,8 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 119,136,2975,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 120,136,3000,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,136,3025,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-122,136,3050,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-123,136,3075,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+122,136,3050,3400,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
+123,136,3075,3400,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 124,136,3100,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 125,136,3125,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 126,136,3150,3400,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
@@ -48502,7 +48502,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 116,144,2900,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 117,144,2925,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 118,144,2950,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-119,144,2975,3600,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+119,144,2975,3600,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 120,144,3000,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 121,144,3025,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 122,144,3050,3600,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
@@ -48837,9 +48837,9 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 115,145,2875,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 116,145,2900,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 117,145,2925,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-118,145,2950,3625,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-119,145,2975,3625,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-120,145,3000,3625,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+118,145,2950,3625,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+119,145,2975,3625,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+120,145,3000,3625,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
 121,145,3025,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 122,145,3050,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 123,145,3075,3625,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
@@ -49174,8 +49174,8 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 116,146,2900,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 117,146,2925,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 118,146,2950,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-119,146,2975,3650,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-120,146,3000,3650,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+119,146,2975,3650,FELS,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,,,ug_fels,0.0,A,0.0,,,,,,,0,0,0.0,0,0,1.0
+120,146,3000,3650,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 121,146,3025,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 122,146,3050,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 123,146,3075,3650,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
@@ -49510,8 +49510,8 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 116,147,2900,3675,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 117,147,2925,3675,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 118,147,2950,3675,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-119,147,2975,3675,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
-120,147,3000,3675,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+119,147,2975,3675,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
+120,147,3000,3675,SCHNEE,OVERRI,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 121,147,3025,3675,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 122,147,3050,3675,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 123,147,3075,3675,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
@@ -49847,7 +49847,7 @@ cx,cy,px_x,px_y,untergrund,untergrund_quelle,hindernis_id,hindernis_art,wasser_e
 117,148,2925,3700,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 118,148,2950,3700,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
 119,148,2975,3700,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0
-120,148,3000,3700,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
+120,148,3000,3700,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 121,148,3025,3700,KLIPPE_WAND,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,WAND,Krat,ug_klippe_wand,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 122,148,3050,3700,KLIPPE_KANTE,FARBE,0,GELAENDE,0,0,0,0,0,0,0,0,0,0,KANTE,Krat,ug_klippe_kante,0.0,A,90.0,7.7,A,,,,,0,0,0.0,0,0,1.0
 123,148,3075,3700,SCHNEE,FARBE,0,,0,0,0,0,0,1,0,0,0,0,,,ug_schnee,0.0,A,0.0,,,,,,,0,1,0.44,1,1,1.0

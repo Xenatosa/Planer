@@ -7,3 +7,25 @@ nr,cx0,cy0,cx1,cy1,von,nach,marker,begruendung
 6,0,0,26,26,WALD,FELS,S,t14u Blockfeld NW-Rand (sb1)
 7,30,5,62,16,WALD,FELS,S,t14u dunkler Felshaufen K1_0/K2_0 (sb1)
 8,78,5,105,16,WALD,FELS,S,t14u dunkler Felshaufen K3_0/K4_0 (sb2)
+9,119,147,119,147,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 2975,3675
+10,120,147,120,147,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3000,3675
+11,120,146,120,146,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3000,3650
+12,122,136,122,136,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.82>=0.80 [A]) - Sichtpruefung c20 px 3050,3400
+13,123,136,123,136,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3075,3400
+14,123,135,123,135,KLIPPE_KANTE,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3075,3375
+15,124,135,124,135,KLIPPE_KANTE,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.83>=0.80 [A]) - Sichtpruefung c20 px 3100,3375
+16,126,133,126,133,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3150,3325
+17,126,132,126,132,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3150,3300
+18,128,130,128,130,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.88>=0.80 [A]) - Sichtpruefung c20 px 3200,3250
+19,126,126,126,126,WALD,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.97>=0.80 [A]) - Sichtpruefung c20 px 3150,3150
+20,124,126,124,126,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3100,3150
+21,123,126,123,126,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3075,3150
+22,123,125,123,125,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.88>=0.80 [A]) - Sichtpruefung c20 px 3075,3125
+23,123,124,123,124,WALD,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.81>=0.80 [A]) - Sichtpruefung c20 px 3075,3100
+24,123,122,123,122,WALD,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.97>=0.80 [A]) - Sichtpruefung c20 px 3075,3050
+25,123,121,123,121,WALD,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.84>=0.80 [A]) - Sichtpruefung c20 px 3075,3025
+26,122,120,122,120,WALD,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.96>=0.80 [A]) - Sichtpruefung c20 px 3050,3000
+27,122,119,122,119,KLIPPE_WAND,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.88>=0.80 [A]) - Sichtpruefung c20 px 3050,2975
+28,125,100,125,100,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 1.00>=0.80 [A]) - Sichtpruefung c20 px 3125,2500
+29,126,99,126,99,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.97>=0.80 [A]) - Sichtpruefung c20 px 3150,2475
+30,127,99,127,99,FELS,SCHNEE,S,t27u X069-Weg: Zelle offener Schnee (Schneeanteil 0.85>=0.80 [A]) - Sichtpruefung c20 px 3175,2475

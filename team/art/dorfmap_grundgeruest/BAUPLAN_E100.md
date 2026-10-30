@@ -27,11 +27,14 @@ Marker: [S] gemessen/Quelle · [R] gerechnet · [A] Annahme · [F] Fabian.
 - Ursache der Fehlzellen fast nur „begehbar, nicht bebaubar“ (6.336 von 11.471 Slotzellen): Schnee außerhalb senke_becken/Wandabstand, wie in der Quelle („Schneezonen außerhalb BB4“, 151 Slots).
 - Slots auf Wand 0 · Wasser 1 (X103, 1 Zelle) · Schatten 0 · Fels 0 · Hindernis 2 (A18 9 Zellen, X033 6) · Wald 12 Slots / 31 Zellen [R].
 - Wald unter Wegen: 18 Wege, 169 Zellen (Weg 2 Zellen breit [A]). Quelle meldet 66 Slots / 99 Wege „Wald/ungeprüft“ nach ausbau-Maske; im Raster sind es nur 12/18 WALD — die übrigen sind dort „ungeprüft“, nicht Wald.
-- Brücken: Mitte auf WASSER_EIS nur **3/17** (X045, X047, X135). 12 Brücken mit 0,4–0,8 m liegen im Raster ganz auf SCHNEE (0,4-m-Maske der Quelle feiner als 1-m-Zelle). **X069 (11,6 m) und X084 (22,4 m) queren KLIPPE_WAND, nicht Wasser**; Enden dort nicht beide begehbar. Liste `t26u_bruecken.csv`.
+- Brücken: Mitte auf WASSER_EIS nur **3/17** (X045, X047, X135). 12 Brücken mit 0,4–0,8 m liegen im Raster ganz auf SCHNEE (0,4-m-Maske der Quelle feiner als 1-m-Zelle). **X069 (11,6 m) und X084 (22,4 m) queren KLIPPE_WAND, nicht Wasser** (t27u: X069 war Fehlklassifikation → Schnee korrigiert; X084 Wand mit Eisfall korrekt); Enden dort nicht beide begehbar. Liste `t26u_bruecken.csv`.
 - Deko (629 mit Position): 0 auf Wand, 0 auf Wasser; 625 SCHNEE, 4 BODEN; 6 auf Zellen mit deko_kapazitaet 0. Summe Kapazitätsfeld 27.537 ≫ deko_limit 380 → Limit passt in das Feld. Die 800 gerechneten Plätze sind nicht prüfbar (kein Ort).
 
 ## 4 Offene Entscheidungen
 1. **Schneezonen (206 Slots außerhalb bebaubar).** a) bauzone_plan um die Schneezonen erweitern (+13.290 m² laut Quelle): Plan bleibt, Raster-Regel `bebaubar` braucht dann eine Ausnahme für senke_becken. b) Slots in die heutige Fläche verdichten: weniger als 355 Slots. c) Schneezonen erst ab E41 freigeben: E16/E40 fast sauber, Rest später.
-2. **X069/X084 über Klippe.** a) als Steg/Treppe über Wand werten (neuer Typ, Art nötig). b) Slots verlegen oder streichen (−2 Slots). c) Wand dort im Raster prüfen lassen (falls Klassifizierung falsch).
+2. **X084 über Klippe** (t27u geprüft: Wand mit Eisfall korrekt [S]; X069 war Fehlklassifikation, korrigiert, Landweg ohne Brücke). a) Treppe/Steg über Höhensprung (neuer Typ, Art nötig). b) Slot X084 anders anbinden oder verlegen. c) streichen (−1 Slot).
 3. **Dekoplätze ohne Ort (800).** a) Wege-Bot setzt Positionen in Schritt 2–5. b) Zahl als reine Kapazität führen, keine Plätze. 
 4. **„0 ohne Weg“ vs. 32 ohne Polylinie.** a) gilt als „liegt direkt am Weg“, nur dokumentieren. b) fehlende Stichwege nachziehen.
+
+## 5 Befund Bauzone (offen)
+- 206 von 355 Slots liegen nicht zu ≥95 % auf bebaubar (Schneezonen außerhalb senke_becken). Keine Erweiterung vorgenommen; Entscheidung §4.1 offen.

@@ -74,3 +74,10 @@
 - Slots ≥95 % bebaubar 149/355; Brücken-Mitte auf Wasser 3/17; X069/X084 über KLIPPE_WAND; Deko 0 auf Wand/Wasser.
 - Bilder E16/E40/E70/E100 selbst angesehen; Gelände-PNGs z25/z50 unverändert (nur CSV/Meta wegen neuem Feld).
 - Restfehler: Brücken <1 m unter Zellauflösung; Wegbreite 2 Zellen [A].
+
+## t27u Brücken X069/X084 gegen Original c20
+- Methode: Weg-Polylinie (v4b) auf c20-Pixel gelegt, Zellen entlang Weg gelistet, Schneeanteil je Zelle aus Pixelfarbe (B≥R−5, B>140, geringe Sättigung) [A], Sichtprüfung in 1,4–1,6× Ausschnitten. Bild: `pruefung/t27u_bruecken_X069_X084_original_raster.png`.
+- **X069 (11,6 m): Fehlklassifikation belegt [S].** Original zeigt offenen Schnee zwischen Felsbrocken, einem Busch und einer flachen Felsrippe; kein Wasser, keine Wand. Raster hatte Brocken/Busch-Ränder als KLIPPE_WAND/KANTE/WALD/FELS über den Schnee gezogen. Korrektur: 22 Einzel-Overrides (nr 9–30, `overrides_t12u.csv`) → SCHNEE, nur Zellen am Weg mit Schneeanteil ≥0,80. Rest: 17 Wegzellen bleiben Kante/Wand/Wald/Fels (Weg streift Brockenecken; Kanten werden aus Wandrand neu abgeleitet) → X069 ist ein Landweg, keine Brücke nötig; Wege-Bot sollte Linie um ≈0,5 m von den Brocken weg legen.
+- **X084 (22,4 m): Wand korrekt [S].** Original zeigt senkrechte Felswand mit gefrorenem Wasserfall (Eisfall) in einer Spalte; der Weg führt die Wand hinab. Kein begehbarer Boden, kein ebenes Wasser. Keine Änderung. Brücke unpassend; nötig wäre Treppe/Steg über Höhensprung oder anderer Weg.
+- Abhängige Dateien neu: z25 (Overrides nur z25), z50, `pruefung/t26u_*`. Zahlen danach: Slots ≥95 % bebaubar weiter 149/355; Wald unter Wegen 169→164 Zellen; bebaubar ohne Planmaske 633→635.
+- Gelände sonst unverändert. Bauzone-Erweiterung für die 206 Slots bleibt offen (keine Wahl von Fabian).

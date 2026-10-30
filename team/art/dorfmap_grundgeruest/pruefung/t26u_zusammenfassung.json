@@ -49,9 +49,9 @@
    "380"
   ]
  },
- "kapazitaet_summe": 27537.0,
+ "kapazitaet_summe": 27542.7,
  "wald_zellen_slots": 31,
- "wald_zellen_wege": 169,
+ "wald_zellen_wege": 164,
  "slots_mit_wald_ids": 12,
  "wege_mit_wald": 18,
  "bzp_nicht_beb": 5386,
@@ -65,7 +65,7 @@
   "nicht begehbar": 1,
   "SCHATTEN": 2
  },
- "beb_nicht_bzp": 633,
+ "beb_nicht_bzp": 635,
  "je_epoche": {
   "16": {
    "slots": 142,
