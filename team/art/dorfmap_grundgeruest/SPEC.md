@@ -254,3 +254,8 @@ Vorschau `_vorschau.png` zeigt nur Gelaendefarben; `_bebaubar.png` gruen halbtra
 - z50 [R]: SENKE 8 426, HANG 4 928, TAL_SUED 4 888, WAND 5 367, PLATEAU_NORD 971, OSTPLATEAU 493, KRATER 379, GIPFEL 33, SIMS 51.
 - bebaubar_erweitert je Ebene z25 [R]: SENKE 28 269, HANG 13 719, TAL_SUED 7 718, PLATEAU_NORD 3 162, KRATER 1 180, OSTPLATEAU 361.
 - begehbar, bebaubar, bebaubar_erweitert unveraendert (z25 62 391 / 27 140 / 54 409; z50 15 245 / 7 240 / 15 056).
+
+## Kamera frei drehbar [F]
+- Fabian (t32u): Die Spielkamera lässt sich frei in jeden Blickwinkel drehen [F].
+- Folge: Gelände braucht echte Höhen, Wandtexturen, einen Sockel am Kartenrand, Wasserflächen und Normalen. Sprites und Gebäude brauchen Rückseiten.
+- Details und offene Fragen: `ANFORDERUNGEN_3D_WELTKARTE.md`.
