@@ -15,8 +15,32 @@
  "epoche": "E1",
  "epochen_variante": "fest_c20",
  "unbekannt_vorher": 14398,
- "unbekannt_nachher": 2477,
+ "unbekannt_nachher": 1189,
  "schatten_statt_wasser": 42,
+ "overrides_zellen": 1288,
+ "wand_hoehe_m": {
+  "Nord": [
+   8.6,
+   "R"
+  ],
+  "Krater": [
+   7.7,
+   "A"
+  ],
+  "Suedgrat": [
+   7.6,
+   "A"
+  ],
+  "Ostgrat": [
+   6.7,
+   "A"
+  ],
+  "sonstige": [
+   8.6,
+   "A"
+  ]
+ },
+ "wand_hoehe_herleitung": "Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar",
  "klippe_nord_band_m": [
   7.6,
   9.6
@@ -27,23 +51,23 @@
   "KEINE": 2.4
  },
  "zaehlung_untergrund": {
-  "BODEN": 9040,
+  "BODEN": 9504,
   "BRUECKE": 20,
-  "FELS": 1385,
+  "FELS": 1608,
   "FELS_WALD": 5999,
   "FEUER": 271,
   "HOF": 430,
-  "KLIPPE_KANTE": 1473,
-  "KLIPPE_WAND": 12782,
-  "SAND": 445,
-  "SCHATTEN": 3146,
-  "SCHNEE": 49286,
-  "UNBEKANNT": 2477,
-  "WALD": 7188,
-  "WASSER_EIS": 5041,
+  "KLIPPE_KANTE": 1483,
+  "KLIPPE_WAND": 12925,
+  "SAND": 499,
+  "SCHATTEN": 3347,
+  "SCHNEE": 49360,
+  "UNBEKANNT": 1189,
+  "WALD": 7209,
+  "WASSER_EIS": 5139,
   "WEG": 2825
  },
- "begehbar": 64837,
+ "begehbar": 65630,
  "bebaubar": 19931,
  "plaetze": 99,
  "bezug_m": 0.0,
@@ -56,10 +80,10 @@
   "unity_pro_m": 0.09765625,
   "px_pro_m": 25
  },
- "zellen_mit_hoehe": 32467,
+ "zellen_mit_hoehe": 32454,
  "fluss_zellen": {
-  "BACH_NORD": 175,
-  "BACH_SUED": 222,
+  "BACH_NORD": 238,
+  "BACH_SUED": 257,
   "SEE": 817
  },
  "fluss_breite_m_median": {
@@ -67,6 +91,6 @@
   "BACH_SUED": 2.48
  },
  "furt": 0,
- "ufer": 3530,
+ "ufer": 3750,
  "hinweis": "hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle."
 }

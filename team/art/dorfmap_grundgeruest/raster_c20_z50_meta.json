@@ -17,6 +17,30 @@
  "unbekannt_vorher": 3272,
  "unbekannt_nachher": 353,
  "schatten_statt_wasser": 13,
+ "overrides_zellen": 0,
+ "wand_hoehe_m": {
+  "Nord": [
+   8.6,
+   "R"
+  ],
+  "Krater": [
+   7.7,
+   "A"
+  ],
+  "Suedgrat": [
+   7.6,
+   "A"
+  ],
+  "Ostgrat": [
+   6.7,
+   "A"
+  ],
+  "sonstige": [
+   8.6,
+   "A"
+  ]
+ },
+ "wand_hoehe_herleitung": "Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar",
  "klippe_nord_band_m": [
   7.6,
   9.6

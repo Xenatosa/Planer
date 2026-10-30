@@ -179,5 +179,18 @@ Eine Höhenkarte gibt es nicht [S]. Werte stehen nur dort, wo eine Quelle sie tr
   - KLIPPE_KANTE: Wandzelle, deren nördlicher Nachbar weder Wand noch UNBEKANNT ist (Draufsicht von Süden) [A].
   - SCHATTEN: blaugrau (H 100–135, S 15–100, V 120–215) ≥ 0,35, wenig Kanten. Zusätzlich werden kleine längliche „Wasser“-Flecken (< 1500 Zellen, Seitenverhältnis ≥ 2,5, ≥ 50 % Rand an Wand, f_shade ≥ 0,2) zu SCHATTEN: 42 Zellen [R]. Runde Teiche bleiben Wasser.
   - Mehrheitsfilter 3×3, 2 Durchläufe, nur auf Farbzellen: Inseln < 4 Zellen und UNBEKANNT mit ≥ 5 gleichen Nachbarn gehen an die Mehrheit [A].
-- klippe_hoehe_m: Nordwand (obere 25 % der Karte [A]) 8,6 m [R, Band 7,6–9,6]; alle anderen Wände 8,6 m nur [A] (Spalte `klippe_hoehe_quelle`).
+- klippe_hoehe_m: siehe §2c.
 - Rest-UNBEKANNT (magenta) mit Zellbereichen: `raster_c20_z25_unbekannt_pruefliste.csv` (43 Komponenten ≥ 10 Zellen, größte: cx 77–115/cy 16–27 am Nordwandfuß).
+
+## §2c Sichtprüfung und Wandhöhen (t7u)
+
+- 43 Bereiche der Prüfliste als vergrößerte c20-Ausschnitte (mit 200 px Rand) angesehen. Die Entscheidungen stehen in `overrides_c20_z25.csv` (Zellbereich, Klasse, Marker, Begründung). gen_raster.py wendet sie nach der Automatik an, nur auf UNBEKANNT-Zellen und nur bei 25 px.
+- 42 Bereiche gesetzt (1 288 Zellen), 1 Bereich bleibt offen (Eis/Schnee-Rand, cx 222–224/cy 267–272). UNBEKANNT 2 477 → 1 189 (2,4 % → 1,2 %) [R]. Der Rest sind Splitter unter 10 Zellen.
+- Gesetzte Klassen: BODEN 6 (Absatz auf der Nordwand, Wiese), SCHATTEN 10, WASSER_EIS 7, KLIPPE_WAND 7, FELS 5, SAND 5, SCHNEE 4, WALD 2, KLIPPE_KANTE 1. Davon 25 [R] und 17 [A].
+- Wandhöhen [A]: Gemessen wird der Median der senkrechten Felslaufweite in c20 (Fels-Pixel V<190, S≥25, H≥128 oder H<25, Close 9×9, Läufe ≥ 60 px, jede 10. Spalte). Daraus h = 8,6 m × px / 163 px (Nordwand-Median = 8,6 m [R]):
+  - Krater: 145 px → 7,7 m
+  - Südgrat: 144 px → 7,6 m
+  - Ostgrat: 127 px → 6,7 m
+  - Sonstige Wände (außerhalb dieser Fenster): 8,6 m [A]
+  - Die Schattenlänge war nicht verwertbar (Median 5–15 px, Schatten verschmilzt mit Schnee) und geht nicht ein.
+  - Die Fenster je Wand stehen in gen_raster.py (WAND_H) und in der Meta (`wand_hoehe_m`).

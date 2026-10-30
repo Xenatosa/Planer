@@ -99,6 +99,12 @@ ug[np.isin(_l,np.nonzero(_st[:,4]<30)[0][1:])&(ug=='KLIPPE_WAND')]='FELS'
 _wa=ug=='KLIPPE_WAND'; _no=np.zeros_like(_wa); _no[1:]=~_wa[:-1]&(ug[:-1]!='UNBEKANNT')
 ug[_wa&_no]='KLIPPE_KANTE'
 quelle[fz_&(ug!='UNBEKANNT')]='FARBE'; quelle[fz_&(ug=='UNBEKANNT')]='KEINE'
+# Overrides nach Sichtpruefung (t7u), nur auf UNBEKANNT-Zellen im Bereich
+ovr_n=0
+if Z==25 and os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)),'overrides_c20_z25.csv')):
+    for _r in csv.DictReader(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'overrides_c20_z25.csv'))):
+        _s=(slice(int(_r['cy0']),int(_r['cy1'])+1),slice(int(_r['cx0']),int(_r['cx1'])+1)); _u=ug[_s]=='UNBEKANNT'
+        ug[_s][_u]=_r['klasse']; ovr_n+=int(_u.sum())
 unb_nach=int((ug=='UNBEKANNT').sum())
 wasser=(wasser&(ug!='SCHATTEN'))|(ug=='WASSER_EIS')
 begehbar=~((ug=='UNBEKANNT')|(ug=='WALD')|(ug=='FELS_KLIPPE')|(ug=='KLIPPE_WAND')|(ug=='KLIPPE_KANTE')|(ug=='FELS')|(ug=='WASSER_EIS')|(ug=='FELS_WALD')|(hind>0))|(ug=='WEG')|(ug=='BRUECKE')
@@ -116,7 +122,12 @@ nb=cv2.dilate(senke.astype(np.uint8),np.ones((3,3),np.uint8))>0
 kl_kante=(rand_out&nb)|(ug=='KLIPPE_KANTE')                                  # Uebergang Senke->Fels/Rand = Klippenkante [R aus Masken]
 nord=np.zeros((ny,nx),bool); nord[:int(ny*0.25),:]=True   # Nordwand: obere 25 % der Karte [A]
 klippe_h=np.full((ny,nx),np.nan); _wk=(ug=='KLIPPE_WAND')|(ug=='KLIPPE_KANTE')
-klippe_h[(kl_kante|_wk)&nord]=KL_M; klippe_h[_wk&~nord]=KL_M   # nord [R], andere Waende gleicher Wert [A]
+klippe_h[(kl_kante|_wk)&nord]=KL_M
+# andere Waende [A]: Median senkrechte Felslaufweite in c20 relativ zur Nordwand (163 px = KL_M), t7u-Messung
+WAND_H={'Krater':(round(KL_M*145/163,1),(71,92,136,204)),'Suedgrat':(round(KL_M*144/163,1),(0,211,328,252)),'Ostgrat':(round(KL_M*127/163,1),(274,72,328,198))}
+klippe_h[_wk&~nord]=KL_M; wand_name=np.where(nord&(_wk|kl_kante),'Nord','')
+for _n,(_h,(_a,_b,_c,_d)) in WAND_H.items():
+    _m=np.zeros((ny,nx),bool); _m[_b:_d+1,_a:_c+1]=True; _m&=_wk&~nord; klippe_h[_m]=_h; wand_name[_m]=_n
 klippe_quelle=np.where(np.isnan(klippe_h),'',np.where(nord,'R','A'))
 hoehe[kl_kante&nord]=BEZUG+KL_M                       # Oberkante Nordwand [R]
 gy,gx=np.gradient(np.nan_to_num(hoehe,nan=np.nan))
@@ -159,7 +170,7 @@ with open(o+'_zellen.csv','w',newline='') as f:
         for x in range(nx):
             w.writerow([x,y,x*Z,y*Z,ug[y,x],quelle[y,x],zone[y,x],ids[platz[y,x]-1]['nr'] if platz[y,x] else '',weg[y,x],weg_kl[y,x],int(hind[y,x]),int(wasser[y,x]),int(schnee[y,x]),int(senke[y,x]),int(h4[y,x]),int(fe2[y,x]),int(begehbar[y,x]),int(bebaubar[y,x]),klippe[y,x],'ug_'+ug[y,x].lower(),fmt(hoehe[y,x]),fmt(nei[y,x]),fmt(klippe_h[y,x]),klippe_quelle[y,x],fluss[y,x],rich[y,x],fmt(breite[y,x]),'',int(ufer[y,x]),int(furt[y,x]),int(b3[y,x])])
 st={k:int(v) for k,v in zip(*np.unique(ug,return_counts=True))}
-json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',unbekannt_vorher=unb_vor,unbekannt_nachher=unb_nach,schatten_statt_wasser=schatten_wasser,klippe_nord_band_m=[7.6,9.6],quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','KEINE']},
+json.dump(dict(karte='KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png',karte_md5='d916c6ace52352d7fcf4ef13591cb5c0',karte_px=[W,H],px_pro_m=PXM,zelle_px=Z,zelle_m=Z/PXM,raster=[nx,ny],epoche='E1',epochen_variante='fest_c20',unbekannt_vorher=unb_vor,unbekannt_nachher=unb_nach,schatten_statt_wasser=schatten_wasser,overrides_zellen=ovr_n,wand_hoehe_m={'Nord':[KL_M,'R'],**{k:[v[0],'A'] for k,v in WAND_H.items()},'sonstige':[KL_M,'A']},wand_hoehe_herleitung='Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar',klippe_nord_band_m=[7.6,9.6],quelle_anteil={k:round(float((quelle==k).mean()*100),1) for k in ['MASKE','FARBE','KEINE']},
   zaehlung_untergrund=st,begehbar=int(begehbar.sum()),bebaubar=int(bebaubar.sum()),plaetze=len(ids),
   bezug_m=BEZUG,klippe_nord_m=KL_M,neigung_max_3d=MAXN,dreid=dict(achse_z='oben, Meter',einheit='m',ppu=256,unity_pro_m=PXM/256,px_pro_m=PXM),zellen_mit_hoehe=int((~np.isnan(hoehe)).sum()),fluss_zellen={k:int((fluss==k).sum()) for k in ['BACH_NORD','BACH_SUED','SEE']},fluss_breite_m_median={k:(round(float(np.nanmedian(breite[fluss==k])),2) if np.any(~np.isnan(breite[fluss==k])) else None) for k in ['BACH_NORD','BACH_SUED']},furt=int(furt.sum()),ufer=int(ufer.sum()),hinweis='hoehe_m nur Senke (Bezug) + Nordklippe; Rest leer, keine Hoehenkarte. wasser_tiefe_m leer, keine Quelle.'),open(o+'_meta.json','w'),ensure_ascii=False,indent=1)
 COL={'BODEN':(196,170,120),'UNBEKANNT':(255,0,255),'SAND':(225,200,140),'WALD':(20,110,50),'FELS_KLIPPE':(130,70,30),'KLIPPE_WAND':(110,60,25),'KLIPPE_KANTE':(255,230,0),'FELS':(160,140,120),'SCHATTEN':(150,160,200),'SCHNEE':(235,240,245),'FELS_WALD':(90,90,90),'WASSER_EIS':(60,120,220),'HOF':(220,190,90),'FEUER':(230,60,30),'WEG':(150,100,50),'BRUECKE':(130,60,160)}
@@ -190,7 +201,7 @@ for cy,cx in zip(*np.nonzero(rich!='')):
     dx,dy=DV[rich[cy,cx]]; x0,y0=cx*s+1,cy*s+1; d0.line([x0,y0,x0+dx*6,y0+dy*6],fill='white')
 L=Image.new('RGB',(im.width+360,max(im.height,600)),'white'); L.paste(im,(0,0)); d=ImageDraw.Draw(L); y=20
 d.text((im.width+15,y),f'Hoehe/Fluss, Zelle {Z}px',fill='black',font=ft); y+=30
-for k,c in [(f'Senke hoehe_m={BEZUG:g} [A]',(120,200,120)),(f'Nordklippe {KL_M} m [R]',(120,60,20)),(f'andere Wand {KL_M} m [A]',(190,120,170)),('Kante ohne Hoehe',(200,140,90)),('hoehe leer (keine Quelle)',(170,170,170)),('BACH_NORD',FC['BACH_NORD']),('BACH_SUED',FC['BACH_SUED']),('SEE',FC['SEE']),('Ufer (flach begehbar)',(240,220,120)),('Furt',(255,0,0))]:
+for k,c in [(f'Senke hoehe_m={BEZUG:g} [A]',(120,200,120)),(f'Nordklippe {KL_M} m [R]',(120,60,20)),(f'andere Waende {WAND_H["Ostgrat"][0]}-{WAND_H["Krater"][0]} m [A]',(190,120,170)),('Kante ohne Hoehe',(200,140,90)),('hoehe leer (keine Quelle)',(170,170,170)),('BACH_NORD',FC['BACH_NORD']),('BACH_SUED',FC['BACH_SUED']),('SEE',FC['SEE']),('Ufer (flach begehbar)',(240,220,120)),('Furt',(255,0,0))]:
     d.rectangle([im.width+15,y,im.width+40,y+20],fill=c,outline='black'); d.text((im.width+50,y),k,fill='black',font=ft); y+=30
 d.text((im.width+15,y),'weisse Striche = Fliessrichtung',fill='black',font=ft)
 L.save(o+'_hoehe_fluss.png')

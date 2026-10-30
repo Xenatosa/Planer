@@ -1,0 +1,43 @@
+nr,cx0,cy0,cx1,cy1,klasse,marker,begruendung
+42,77,16,115,27,BODEN,A,"brauner Absatz oben auf der Nordwand, wie Pfad/Erde"
+384,99,220,114,246,FELS,A,braunes Felsplateau mit Schneeresten auf dem Suedgrat
+47,39,20,63,31,BODEN,A,brauner Absatz oben auf der Nordwand
+44,18,18,37,27,BODEN,A,brauner Absatz oben auf der Nordwand
+147,120,106,131,117,SCHATTEN,R,"blauer Schlagschatten der Felswand, Schnee darunter"
+320,107,195,123,204,KLIPPE_WAND,A,"Wandfuss Suedgrat, Uebergang zu Schnee"
+154,99,111,107,119,FELS,A,Fels unter Schneegrat am Krater
+31,233,10,236,21,KLIPPE_WAND,R,senkrechte Felswand mit Eiszapfen
+101,118,46,123,51,SCHNEE,R,heller Schnee
+139,0,98,7,103,SCHATTEN,R,Schatten von Buschwerk auf Schnee
+241,47,151,55,161,WASSER_EIS,R,gefrorener Bach mit Eisrissen
+483,35,260,46,261,SAND,A,Sandbank am Eisrand
+298,84,186,90,195,KLIPPE_WAND,R,Felsrippe am Krater
+350,304,207,311,212,SCHNEE,R,Schnee unter Fels
+58,67,22,74,27,BODEN,A,brauner Absatz oben auf der Nordwand
+34,158,12,164,16,KLIPPE_WAND,R,Felswand mit Hoehlennische
+338,64,202,71,212,WASSER_EIS,R,gefrorener Bachlauf
+514,4,266,14,273,WASSER_EIS,R,Eisflaeche
+60,0,25,5,30,BODEN,A,brauner Absatz oben auf der Nordwand
+442,112,243,118,249,KLIPPE_WAND,R,Felswand Suedgrat
+270,62,166,66,173,WASSER_EIS,A,Bachrand Eis/Schnee
+88,85,42,95,44,SCHNEE,R,Schnee am Wandfuss mit Steinen
+140,27,99,33,103,SCHATTEN,R,Baumschatten auf Schnee
+223,78,143,81,148,KLIPPE_WAND,R,Felsrippe Krater
+258,23,158,28,163,SCHATTEN,R,Schatten eines Felsblocks
+149,2,109,5,114,SCHATTEN,A,Schatten zwischen Bueschen
+124,0,81,5,85,SCHATTEN,A,Schatten zwischen Bueschen
+468,116,254,122,258,SCHATTEN,R,Schatten am Wandfuss Suedgrat
+498,210,262,214,266,SCHNEE,R,Schneewehe
+137,41,97,44,102,SCHATTEN,R,Schattenstreifen auf Schnee
+92,22,44,30,50,WASSER_EIS,R,gefrorener Teich NW
+100,15,47,19,54,WASSER_EIS,R,gefrorener Teich NW
+542,96,274,105,275,SAND,R,Sandbank
+533,87,270,94,274,SAND,R,Sandbank
+455,125,248,131,250,FELS,A,Felsbrocken am Wandfuss
+528,107,269,115,273,SAND,R,Sandbank
+562,125,287,129,291,WALD,A,Baumschatten im Wald
+586,207,295,210,301,BODEN,A,Wiese mit Bueschen
+397,99,225,102,229,FELS,A,Schneestreifen auf Felsplateau Suedgrat
+230,91,147,94,152,KLIPPE_KANTE,A,Fels/Schnee-Kante am Krater
+130,2,91,6,94,SCHATTEN,R,Buschschatten auf Schnee
+580,322,290,326,292,WALD,R,Nadelwald
