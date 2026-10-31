@@ -29,3 +29,12 @@
 - Parameter: 8 Felsen, Ico-Sphere Subdiv 5, Radius 0.6, Zufalls-Skalierung; Displace VORONOI Staerke 0.16 (Scale 0.55-0.85) + CLOUDS 0.10 (Scale 0.25); Decimate 0.08 (~408 Dreiecke/Fels); Achsen y<->z getauscht, Dreiecks-Reihenfolge umgedreht (sonst Innenseite sichtbar).
 - Ausgabe `blender/fels_meshes.json` -> `gen_relief.py` bettet ein. Desktop nutzt Blender-Form, Handy (?lod=1) Ikosaeder.
 - GLB: `dorfmap_relief_z25.glb` (Boden + Waende mit Vertexfarben), Start: `python3 -m http.server 8000`, dann `http://localhost:8000/index.html?glb=1`. Ohne Server: `index.html` direkt (Einzeldatei).
+
+## t54u – Wände mit Kontur statt Blockhaufen (Stand Runde B, Commit 87e88c8)
+- Grobprofil breiter: mittlere Wandneigung 58,7° grob / 58,6° fein [S]. Sprünge Nord 14,09 / Süd 16,15 / Krater 11,09 / Ost 12,0 m [S].
+- Feinrelief: Schichtbänder (Absätze ~2,4 m), Rinnen/Rippen, Tropfen-Erosion, Schnee auf Absätzen und in Rinnen, 5 Felstöne (grau/ocker/dunkel/hell) [A].
+- Ufer: flaches Wasser am Rand durchsichtig, Kiesbänke und dunkle Uferlinie in den Bodenfarben [A].
+- Rampen am Krater: rampennahe Zellen jetzt im Feinband, Relief dort weich auf 0 → kein glatter grauer Streifen mehr [A].
+- Blender-Versuch (blender/wandband_t54u.py, Displace + Voxel-Remesh): wirkt knetig/blasig statt geschichtet, 2,3× Dreiecke, Rand passt nicht nahtlos an das Gelände → nicht übernommen. Bilder: test/t54u/blender_vs_feinrelief_B.jpg.
+- Runde C (Voronoi-Klüfte, seitlicher Versatz) verworfen: schwarze Löcher/Schatten im Bild (test/t54u/verworfen_rundeC_schwarze_loecher.png), Code liegt nicht im Repo.
+- Prüfung: Zellabgleich summe 0, Wasser größte Komponente 4808 Zellen, Handy 1.075.230 Dreiecke [S].
