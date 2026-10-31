@@ -13,7 +13,7 @@ class Bau{constructor(){this.p=[];this.c=[];this.f=[];}
 // ---- Baeume ----
 function fichte(var_){const B=new Bau(),r=s=>hash(var_*7.1,s);const stamm=lin(0x4a3322);
  B.box(-0.05,0,-0.05,0.05,0.35,0.05,stamm);const lagen=5+Math.floor(r(1)*2);
- for(let k=0;k<lagen;k++){const t=k/lagen,y0=0.18+t*0.70,hh=0.30-0.08*t,R=(0.40-0.30*t)*(0.9+0.2*r(k+3)),n=9;
+ for(let k=0;k<lagen;k++){const t=k/lagen,y0=0.18+t*0.70,hh=0.30-0.08*t,R=(0.40-0.30*t)*(0.9+0.2*r(k+3)),n=(window.__lod||1)>1?6:9;
   const gr=lin(0x2e5238).lerp(lin(0x46663f),r(k+11)),sn=lin(0xe9eef4);
   const top=[0,y0+hh,0];for(let i=0;i<n;i++){const a0=i/n*6.283+k,a1=(i+1)/n*6.283+k,rr=i=>R*(i%2?0.78:1.0);
    const A=[Math.cos(a0)*rr(i),y0-0.04*(i%2),Math.sin(a0)*rr(i)],C=[Math.cos(a1)*rr(i+1),y0-0.04*((i+1)%2),Math.sin(a1)*rr(i+1)];
@@ -52,7 +52,7 @@ function block(var_,det,nr){const fm=window.__FM&&window.__FM[nr];let g;if(fm&&d
   else if(ny<-0.25)c=c.map(q=>q*0.62);
   for(let k=0;k<3;k++)col.push(...c);}
  ng.setAttribute('color',new THREE.Float32BufferAttribute(col,3));return ng;}
-function fels(var_){const g=new THREE.IcosahedronGeometry(0.55,2),P=g.attributes.position;
+function fels(var_){const g=new THREE.IcosahedronGeometry(0.55,(window.__lod||1)>1?1:2),P=g.attributes.position;
  for(let i=0;i<P.count;i++){const v=new THREE.Vector3().fromBufferAttribute(P,i),n=v.clone().normalize();
   let f=1+0.22*Math.sin(n.x*3.1+var_)*Math.cos(n.z*2.7-var_*2)+0.12*Math.sin(n.y*6+n.x*5+var_*3);
   if(n.dot(new THREE.Vector3(Math.cos(var_*5),0.3,Math.sin(var_*5)).normalize())>0.55)f*=0.82;   // Bruchflaeche
@@ -128,7 +128,8 @@ export function objekteNeu(D,H,G,grp){
   BV.forEach((g,v)=>inst(g,L.filter((e,n)=>n%8==v),bf,'felsen',bc));window.__felsbloecke=L.length;}
  if(D.gras&&D.gras.length){const lod=window.__lod||1,L=D.gras.filter((e,n)=>lod==1||n%3==0),gm=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
   const m=new THREE.InstancedMesh(buschel(),gm,L.length),o=new THREE.Object3D();L.forEach(([x,y,z,h,r],n)=>{o.position.set(x,y-0.05,z);o.rotation.set(0,r,0);o.scale.set(h*1.4,h,h*1.4);o.updateMatrix();m.setMatrixAt(n,o.matrix)});m.receiveShadow=true;(G.felsen||grp('felsen')).add(m);}
- const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[])];FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
+ const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[]).filter((e,n)=>(window.__lod||1)==1||n%3==0)];   // t53u: Handy ein Drittel Geroell [A]
+FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
  GL=new Bau();KAM=[];const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
  const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);grp('gebaeude').add(zaeune(D,H));
  const gm=new THREE.Mesh(GL.geo(),new THREE.MeshBasicMaterial({vertexColors:true}));gm.material.color.setScalar(0.85);grp('gebaeude').add(gm);   // Fensterlicht [A]
