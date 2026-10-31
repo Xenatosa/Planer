@@ -124,7 +124,7 @@ export function objekteNeu(D,H,G,grp){
  const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);h=Math.min(h,2.6);o.position.set(x,y-0.22*h,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
  {const lod=window.__lod||1,BV=[1.1,2.6,4.2,5.9,7.3,8.8,10.4,12.1].map((v,n)=>(window.__FM=D.felsmesh,block(v,lod==1?2:1,n))),L=(D.felsbloecke||[]).filter((e,n)=>lod==1||n%2==0);
   const bf=(o,[x,y,z,sx,sy,sz,r,t])=>{o.position.set(x,y,z);o.rotation.set(t*0.5,r+t*0.6,-t*0.35);o.scale.set(sx*(lod==1?1:1.3),sy,sz);};
-  const bc=(c,e)=>{const t=hash(e[0]*3,e[2]*3);const u=hash(e[1]*5,e[0]*7);c.setRGB(0.62+0.30*t,0.58+0.26*t*u+0.04,0.52+0.20*(1-t));};
+  const bc=(c,e)=>{const t=hash(e[0]*3,e[2]*3);const u=hash(e[1]*5,e[0]*7);c.setRGB(0.60+0.26*t,0.58+0.22*t+0.03*u,0.53+0.16*t);};
   BV.forEach((g,v)=>inst(g,L.filter((e,n)=>n%8==v),bf,'felsen',bc));window.__felsbloecke=L.length;}
  if(D.gras&&D.gras.length){const lod=window.__lod||1,L=D.gras.filter((e,n)=>lod==1||n%3==0),gm=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
   const m=new THREE.InstancedMesh(buschel(),gm,L.length),o=new THREE.Object3D();L.forEach(([x,y,z,h,r],n)=>{o.position.set(x,y-0.05,z);o.rotation.set(0,r,0);o.scale.set(h*1.4,h,h*1.4);o.updateMatrix();m.setMatrixAt(n,o.matrix)});m.receiveShadow=true;(G.felsen||grp('felsen')).add(m);}

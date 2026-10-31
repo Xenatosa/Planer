@@ -14,11 +14,11 @@ const ren=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});r
 ren.setSize(innerWidth,innerHeight);ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFShadowMap;ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.0;document.body.appendChild(ren.domElement);
 const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c.height=256;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#5d8fc9');g.addColorStop(0.55,'#a9c6e4');g.addColorStop(1,'#dfe8ef');x.fillStyle=g;x.fillRect(0,0,2,256);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;sc.background=t;}sc.fog=new THREE.FogExp2(0xc9d8e6,0.0007);   // t43u leichter Dunst [A]
 {const N=360,R=[1500,1900],pos=[],col=[],idx=[];   // t48u: ferne Bergketten im Dunst (2 Reihen, Schneekappen) [A]
- for(let r=0;r<2;r++){const b=pos.length/3;for(let i=0;i<=N;i++){const a=i/N*Math.PI*2,n=Math.sin(a*7+r*2)*0.5+Math.sin(a*19+r)*0.3+Math.sin(a*43)*0.2,h=(r?260:150)+(r?200:120)*Math.abs(n)+30*Math.sin(a*97);
-  const x=168+Math.cos(a)*R[r],z=151+Math.sin(a)*R[r];pos.push(x,-40,z,x,h,z,x,h*0.72,z);const f=r?[0.80,0.84,0.89]:[0.68,0.73,0.80],w=r?[0.92,0.94,0.97]:[0.86,0.89,0.94];col.push(...f,...w,...f.map((c,k)=>c*0.5+w[k]*0.5));
+ for(let r=0;r<2;r++){const b=pos.length/3;for(let i=0;i<=N;i++){const a=i/N*Math.PI*2,n=Math.sin(a*7+r*2)*0.5+Math.sin(a*19+r)*0.3+Math.sin(a*43)*0.2,h=(r?170:95)+(r?130:80)*Math.abs(n)+18*Math.sin(a*97);
+  const x=168+Math.cos(a)*R[r],z=151+Math.sin(a)*R[r];pos.push(x,-40,z,x,h,z,x,h*0.72,z);const f=r?[0.70,0.76,0.84]:[0.58,0.65,0.74],w=r?[0.86,0.90,0.95]:[0.82,0.87,0.93],hz=[0.87,0.91,0.94];col.push(...hz,...w,...f);   // Fuss geht in Horizontdunst ueber [A]
   if(i<N){const k=b+i*3;idx.push(k,k+3,k+2,k+2,k+3,k+5,k+2,k+5,k+1,k+1,k+5,k+4);}}}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.setIndex(idx);
- const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false}));m.name='ferneBerge';sc.add(m);}
+ const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false,toneMapped:false}));m.name='ferneBerge';sc.add(m);}
 const cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,3000);
 const oc=new OrbitControls(cam,ren.domElement);oc.enableDamping=true;oc.maxPolarAngle=Math.PI;oc.screenSpacePanning=true;
 sc.add(new THREE.HemisphereLight(0xc2d8f2,0xa39c8e,1.2));
