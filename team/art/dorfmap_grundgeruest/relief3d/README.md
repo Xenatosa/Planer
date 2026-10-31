@@ -68,3 +68,10 @@
 - Stelle t58u per Bildabgleich gefunden: Ansicht silh_nord (E), Treffer 0,996; Ort ca. x=186, z=37 (Nordwand-Bereich). Vorher/Nachher: test/t54u/spitze_t58u_vorher_nachher.jpg. [S]
 - Prüfungen: summe 0, Zelldateien byte-gleich, Sprünge 14.09/16.15/11.09/12.0 m, Neigung 59.9° fein, Wasser 4808, Handy 1 107 294 Dreiecke; Platzierung 0 Bäume steil nachher (pruefung/platzierung_t59u.json). [S]
 - Bilder: test/t54u/*_rundeG_g.jpg (11), *_clayG_g.jpg (grau inkl. Nord und Silhouette Nord).
+
+## Runde H (Basis G 5488f57) – schärfer, Felszahn t58u
+- Grate geschärft: Unscharf-Maske nur auf Rücken (FH−gauss3, begrenzt 1,2 m, ×0,4), Pfeiler ×1,05 (G: 1,3).
+- Felszahn bei x≈186, z≈37: Grat entlang Hangrichtung, lineares Querprofil (klare Kante), Fuß breiter, 4,5 m; von Nadel-Dämpfung ausgenommen.
+- Thermik-Grenzwinkel 66° (G: 71°), damit Neigung unter 60 bleibt.
+- Werte [S]: Neigung 59,9°, Summe 0, Dateien unverändert, Sprünge 14,09/16,15/11,09/12,0, Fluss 4808, Handy 1.107.294 Dreiecke, Bäume/Felsen auf steil 0.
+- Bilder: test/t54u/*_clayH_h.jpg, *_rundeH_h.jpg, vgl_E_G_H_grau_mit_referenz.jpg, spitze_t58u_E_G_H.jpg.
