@@ -72,9 +72,15 @@ function haus(B,h,id){const b=h.b*0.9,t=h.t*0.9,platz=h.typ=='Quartiersplatz',x=
  for(const s of[-1,1]){const qa=s*(Q/2+ov),ys=Y-ov*dh/(Q/2),n=Math.max(4,Math.round(Math.hypot(Q/2+ov,dh)/0.42));
   const yq=q=>Y+dh-(Y+dh-ys)*Math.abs(q)/Math.abs(qa);
   for(let k=0;k<n;k++){const qA=qa*(1-k/n),qB=qa*(1-(k+1)/n),dy=0.05;const c=dachc.clone().multiplyScalar(0.82+0.3*hash(k+id,id*0.3));
-   const A=P(l0,qA,yq(qA)-dy),Bp=P(l1,qA,yq(qA)-dy),C=P(l1,qB,yq(qB)),D=P(l0,qB,yq(qB));if(s<0)B.quad(A,D,C,Bp,c,id);else B.quad(A,Bp,C,D,c,id);}
-  const qq=qa*cf,e=0.14,A2=P(l0+0.06,qq,yq(qq)+e),B2=P(l1-0.06,qq,yq(qq)+e),C2=P(l1-0.06,0,Y+dh+e),D2=P(l0+0.06,0,Y+dh+e);if(s<0)B.quad(A2,D2,C2,B2,sn,id);else B.quad(A2,B2,C2,D2,sn,id);
-  const A3=P(l0+0.06,qq,yq(qq)),B3=P(l1-0.06,qq,yq(qq));if(s<0)B.quad(A3,A2,B2,B3,sn,id);else B.quad(A3,B3,B2,A2,sn,id);}   // Schneekante
+   const nl=Math.max(2,Math.round((l1-l0)/1.3));for(let m=0;m<nl;m++){const la=l0+(l1-l0)*m/nl,lb=l0+(l1-l0)*(m+1)/nl,cc=c.clone().multiplyScalar(0.88+0.24*hash(k*7+m+id,m*1.7+s));   // Schindelfelder [A]
+    const A=P(la,qA,yq(qA)-dy),Bp=P(lb,qA,yq(qA)-dy),C=P(lb,qB,yq(qB)),D=P(la,qB,yq(qB));if(s<0)B.quad(A,D,C,Bp,cc,id);else B.quad(A,Bp,C,D,cc,id);}}
+  {const fa=lin(0x3a2618),ed=0.24;const E1=P(l0,qa,ys-0.06),E2=P(l1,qa,ys-0.06),E3=P(l1,qa,ys-0.06-ed),E4=P(l0,qa,ys-0.06-ed);B.quad(E1,E2,E3,E4,fa,id);B.quad(E1,E4,E3,E2,fa,id);   // Traufbrett
+   for(const l of[l0,l1]){const V1=P(l,qa,ys-0.04),V2=P(l,0,Y+dh-0.02),V3=P(l,0,Y+dh-0.02-ed),V4=P(l,qa,ys-0.04-ed);B.quad(V1,V2,V3,V4,fa,id);B.quad(V1,V4,V3,V2,fa,id);}}   // Ortgang
+  const nsg=Math.max(3,Math.round((l1-l0)/1.1)),e=0.14,cmK=m=>Math.min(0.97,Math.max(0.3,cf+(hash(id*2.3+m,s*5.1+m)-0.5)*0.32)),emK=m=>e*(0.75+0.5*hash(m,id+s));
+  for(let m=0;m<nsg;m++){const la=l0+0.06+(l1-l0-0.12)*m/nsg,lb=l0+0.06+(l1-l0-0.12)*(m+1)/nsg,qa2=qa*cmK(m),qb2=qa*cmK(m+1),ea=emK(m),eb=emK(m+1);   // Schneekante als stetige Wellenlinie [A]
+   const sr=sn.clone().multiplyScalar(1.0),se=sn.clone().multiplyScalar(0.93).lerp(lin(0xc8d4e6),0.25);   // Traufe kuehler, First heller
+   const A2=P(la,qa2,yq(qa2)+ea),B2=P(lb,qb2,yq(qb2)+eb),C2=P(lb,0,Y+dh+e),D2=P(la,0,Y+dh+e);if(s<0){B.tri(A2,D2,C2,se,id);B.tri(A2,C2,B2,sr,id);}else{B.tri(A2,B2,C2,se,id);B.tri(A2,C2,D2,sr,id);}
+   const A3=P(la,qa2,yq(qa2)),B3=P(lb,qb2,yq(qb2));if(s<0)B.quad(A3,A2,B2,B3,se,id);else B.quad(A3,B3,B2,A2,se,id);}}
  for(const l of[-L/2,L/2]){const a=P(l,-Q/2,Y),c=P(l,Q/2,Y),d=P(l,0,Y+dh);const gc=holz?wcol.clone().multiplyScalar(0.85):wcol;B.tri(a,d,c,gc,id);B.tri(a,c,d,gc,id);}   // Giebel
  // Anbau (Schuppen) an einer Giebelseite, Holzstapel an der Rueckseite
  if(!turm&&r(6)<0.45){const al=1.3+0.6*r(7),ah=Math.min(wh*0.75,2.4),sg=r(8)<0.5?1:-1,l=sg*L/2;
@@ -82,7 +88,7 @@ function haus(B,h,id){const b=h.b*0.9,t=h.t*0.9,platz=h.typ=='Quartiersplatz',x=
   const ra=P(l,-Q*0.38,y+ah+0.55),rb=P(l,Q*0.38,y+ah+0.55),rc=P(l+sg*(al+0.25),Q*0.38,y+ah-0.05),rd=P(l+sg*(al+0.25),-Q*0.38,y+ah-0.05);
   const up=p=>[p[0],p[1]+0.1,p[2]];if(sg>0^lang){B.quad(ra,rb,rc,rd,dachc,id);B.quad(up(ra),up(rb),up(rc),up(rd),sn,id);}else{B.quad(ra,rd,rc,rb,dachc,id);B.quad(up(ra),up(rd),up(rc),up(rb),sn,id);}}
  if(r(19)<0.55){const u=(r(20)-0.5)*L*0.4,wl=1.6+r(21);fl(u,0,wl,1.0,-1,lin(0x8a6440),0.6);fl(u,1.0,wl,0.1,-1,sn,0.6);}
- const ks=r(22)-0.5;if(true){const cl=ks*L*0.5,cq=Q*0.2*(r(23)<0.5?1:-1),[cx,,cz]=P(cl,cq,0);B.box(cx-0.3,Y,cz-0.3,cx+0.3,Y+dh+0.9,cz+0.3,lin(0x6a625a),id);B.box(cx-0.34,Y+dh+0.9,cz-0.34,cx+0.34,Y+dh+1.04,cz+0.34,sn,id);if(r(24)<0.6)KAM.push([cx,Y+dh+1.1,cz]);}B.flip=false;}
+ const ks=r(22)-0.5;if(true){const cl=ks*L*0.5,cq=Q*0.2*(r(23)<0.5?1:-1),[cx,,cz]=P(cl,cq,0);B.box(cx-0.3,Y,cz-0.3,cx+0.3,Y+dh+0.75,cz+0.3,lin(0x6a625a).multiplyScalar(0.85+0.3*r(25)),id);B.box(cx-0.34,Y+dh+0.75,cz-0.34,cx+0.34,Y+dh+0.9,cz+0.34,lin(0x3e3832),id);B.box(cx-0.34,Y+dh+0.9,cz-0.34,cx+0.34,Y+dh+1.04,cz+0.34,sn,id);if(r(24)<0.6)KAM.push([cx,Y+dh+1.1,cz]);}B.flip=false;}
 export function objekteNeu(D,H,G,grp){
  const mat=new THREE.MeshLambertMaterial({vertexColors:true});
  const inst=(geo,L,fn,gn,farbe)=>{const m=new THREE.InstancedMesh(geo,mat,L.length),o=new THREE.Object3D(),c=new THREE.Color();L.forEach((e,n)=>{fn(o,e,n);o.updateMatrix();m.setMatrixAt(n,o.matrix);if(farbe){farbe(c,e,n);m.setColorAt(n,c);}});m.castShadow=m.receiveShadow=true;(G[gn]||grp(gn)).add(m);return m;};
@@ -93,7 +99,7 @@ export function objekteNeu(D,H,G,grp){
  const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);h=Math.min(h,2.6);o.position.set(x,y-0.22*h,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
  const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[])];FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
  GL=new Bau();KAM=[];const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
- const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);
+ const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);grp('gebaeude').add(zaeune(D,H));
  const gm=new THREE.Mesh(GL.geo(),new THREE.MeshBasicMaterial({vertexColors:true}));gm.material.color.setScalar(0.85);grp('gebaeude').add(gm);   // Fensterlicht [A]
  {const cv=document.createElement('canvas');cv.width=cv.height=64;const g=cv.getContext('2d'),rg=g.createRadialGradient(32,32,0,32,32,32);rg.addColorStop(0,'rgba(255,255,255,0.9)');rg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=rg;g.fillRect(0,0,64,64);
   const NP=5,pos=new Float32Array(KAM.length*NP*3),pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
@@ -101,3 +107,22 @@ export function objekteNeu(D,H,G,grp){
   pm.onBeforeRender=()=>{const t=performance.now()/1000;KAM.forEach(([cx,cy,cz],k)=>{for(let n=0;n<NP;n++){const f=((t*0.25+n/NP+hash(k,1))%1),o=(k*NP+n)*3;pos[o]=cx+f*f*3.5+Math.sin(t+n+k)*0.25;pos[o+1]=cy+f*5.5;pos[o+2]=cz+f*1.2;}});pg.attributes.position.needsUpdate=true;};
   grp('gebaeude').add(pm);}   // Kaminrauch, Wind nach Osten [A]
  return (B.p.length+GL.p.length)/9;}
+
+// t44u r9: Zaeune nur wo rechnerisch frei (keine Nachbarhaeuser, keine Wegzellen, kein Steilhang, kein Wasser) [A]
+export function zaeune(D,HN,grpFn){const B=new Bau(),W=new Set(D.wege.map(([x,y])=>y*1e4+x)),HS=D.haeuser;let nS=0,nV=0;
+ const frei=(px,pz,self)=>{if(px<1||pz<1||px>D.nx-1||pz>D.ny-1)return false;if(W.has(Math.floor(pz)*1e4+Math.floor(px)))return false;
+  for(let o=0;o<HS.length;o++){const h=HS[o];if(h.typ=='Quartiersplatz'&&o!=self){if(Math.abs(px-h.x)<h.b/2+0.8&&Math.abs(pz-h.z)<h.t/2+0.8)return false;continue;}
+   const m=o==self?0.4:0.9;if(Math.abs(px-h.x)<h.b*0.45+m+(o==self?0:0)&&Math.abs(pz-h.z)<h.t*0.45+m)return false;}return true;};
+ const holz=lin(0x5a3e28);
+ HS.forEach((h,id)=>{if(h.typ=='Quartiersplatz'||h.typ=='Turmhaus'||hash(id*3.3,7.7)>0.4)return;const ab=1.8,hb=h.b*0.45+ab,ht=h.t*0.45+ab;
+  const ec=[[h.x-hb,h.z-ht],[h.x+hb,h.z-ht],[h.x+hb,h.z+ht],[h.x-hb,h.z+ht]];
+  for(let sgi=0;sgi<4;sgi++){if(sgi==2)continue;   // Vorderseite (Tuer) offen
+   const [ax,az]=ec[sgi],[bx2,bz]=ec[(sgi+1)%4],len=Math.hypot(bx2-ax,bz-az),n=Math.max(1,Math.round(len/1.8));
+   for(let k=0;k<n;k++){nV++;const f0=k/n,f1=(k+1)/n,x0=ax+(bx2-ax)*f0,z0=az+(bz-az)*f0,x1=ax+(bx2-ax)*f1,z1=az+(bz-az)*f1;
+    const y0=HN(x0,z0),y1=HN(x1,z1),ym=HN((x0+x1)/2,(z0+z1)/2);
+    if(Math.abs(y0-h.y)>1.2||Math.abs(y1-h.y)>1.2||Math.abs(y0-y1)>0.5||Math.abs(ym-(y0+y1)/2)>0.25)continue;
+    if(!frei(x0,z0,id)||!frei(x1,z1,id)||!frei((x0+x1)/2,(z0+z1)/2,id))continue;nS++;
+    const c=holz.clone().multiplyScalar(0.8+0.4*hash(x0,z0));B.box(x0-0.06,y0-0.2,z0-0.06,x0+0.06,y0+1.0,z0+0.06,c,-1);B.box(x0-0.06,y0+1.0,z0-0.06,x0+0.06,y0+1.08,z0+0.06,lin(0xeef2f7),-1);
+    for(const hh of[0.4,0.8]){const dx=x1-x0,dz=z1-z0,L=Math.hypot(dx,dz),nx=-dz/L*0.025,nz=dx/L*0.025;
+     const a=[x0+nx,y0+hh,z0+nz],b=[x1+nx,y1+hh,z1+nz],a2=[x0+nx,y0+hh+0.09,z0+nz],b2=[x1+nx,y1+hh+0.09,z1+nz];B.quad(a,b,b2,a2,c,-1);B.quad(a,a2,b2,b,c,-1);}}}});
+ const m=new THREE.Mesh(B.geo(),new THREE.MeshLambertMaterial({vertexColors:true}));m.castShadow=m.receiveShadow=true;m.userData.zaun={segmente:nS,geprueft:nV};window.__zaun=m.userData.zaun;return m;}

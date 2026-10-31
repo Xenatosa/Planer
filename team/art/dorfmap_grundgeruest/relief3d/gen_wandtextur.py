@@ -22,7 +22,7 @@ for px,py in P:
             d=np.hypot((X-px-ox)*1.0,(Y-py-oy)*0.7);m=d<d1;d2=np.where(m,d1,np.minimum(d2,d));d1=np.where(m,d,d1)
 kluft=np.exp(-(d2-d1)*N/7.0)*(0.4+0.6*(fbm(N,4,6)>0))*(fbm(N,3,5)>-0.3)
 bl=np.zeros((N,N));lab=np.argmin(np.stack([np.hypot(((X-px+0.5)%1-0.5),((Y-py+0.5)%1-0.5)*0.7) for px,py in P]),0);bl=r.random(38)[lab]
-h=0.55+0.13*(ton-0.5)+0.08*(bl-0.5)+0.09*fbm(N,6,3)-0.20*kluft-0.07*kante+0.10*np.clip(fbm(N,5,9),0,None)
+h=0.55+0.18*(ton-0.5)+0.06*(bl-0.5)+0.11*fbm(N,6,3)-0.07*kluft*(fbm(N,2,11)>0.1)-0.05*kante*(0.5+np.clip(fbm(N,3,13)+0.5,0,1))+0.10*np.clip(fbm(N,5,9),0,None)
 warm=0.5+0.5*np.tanh(fbm(N,3,11))
 R=h*(0.98+0.10*warm);G=h*(0.96+0.03*warm);B=h*(0.95-0.07*warm)
 Image.fromarray((np.clip(np.stack([R,G,B],-1),0,1)*255).astype(np.uint8)).save('wand_textur.png')

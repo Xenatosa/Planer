@@ -167,6 +167,7 @@ open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=
 Z={k:len(D[k]) for k in ['haeuser','baeume','felsen','findlinge','steine','bruecken','wege']}
 Z.update(wand_dreiecke=int(len(TW)),boden_dreiecke=int((~ST).sum()),zellen_wand_steil=int(steil.sum()),
  zellen_wand_oben=int(oben.sum()),zellen_wand_fuss=int(fuss.sum()),hoehe_min=float(H.min()),hoehe_max=float(H.max()),wandfuss=D['wandfuss'],
+ klippe_hoehe_median_3x3_je_wand={w:round(float(np.median((nd.maximum_filter(Hz,3)-nd.minimum_filter(Hz,3))[steil&nd.binary_dilation(wn==w,iterations=3)])),2) for w in WANDH},   # t44u: nur Abbruch, ohne Hang am Fuss
  klippe_hoehe_median_je_wand={w:round(float(np.median(kh[steil&nd.binary_dilation(wn==w,iterations=3)])),2) for w in WANDH},
  bandzellen_umgedeutet=int(wand.sum()),begehbar_3d=int(b3d.sum()))
 json.dump(Z,open('relief_zaehlung.json','w'),indent=1,ensure_ascii=False);print(json.dumps(Z,ensure_ascii=False))

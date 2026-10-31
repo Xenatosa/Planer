@@ -19,6 +19,12 @@
   "h": 14.0,
   "zelle": 9997
  },
+ "klippe_hoehe_median_3x3_je_wand": {
+  "Nord": 13.5,
+  "Suedgrat": 11.36,
+  "Krater": 10.21,
+  "Ostgrat": 9.87
+ },
  "klippe_hoehe_median_je_wand": {
   "Nord": 15.45,
   "Suedgrat": 16.04,
