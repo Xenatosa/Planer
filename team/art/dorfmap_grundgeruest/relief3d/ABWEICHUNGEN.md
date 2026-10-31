@@ -82,3 +82,5 @@
 - [A] J3: Objekte, die im Wasser standen, wurden verschoben oder entfernt: Bäume 28/2, Felsen 2/0, Steine 649/101, Geröll 9/0. In relief_zaehlung.json stehen dadurch bewusst neue Zahlen: baeume 1969→1967, steine 1133→1032. Zellwerte, CSV und grobe glb sind byte-gleich.
 - [A] J4: Kein Weg-Overlay wurde verschoben. VB ist das Klippenband und kein Weg.
 - [S] J5: Der Fluss kreuzt weiter zwei Wasserscheiden (Strang 13, wie schon in Runde I). Gemessen mit Becken als Senken gibt es 0 Bergauf-Stellen. 22 Becken haben keinen Randabfluss (Endseen). Es gibt Stufen bis 3,54 m (Wasserfälle).
+- [S] J6 Raycast (Viewer-Oberfläche): 0 Objekte schweben (>0,3 m). Versunken (>0,5 m): 2 Bäume und 1 Geröll, maximal 0,57 m. Im Wasser stehen 2 Bäume (5–20 cm tief, offen), 144 Steine und 3 Geröll (Bett-/Uferkiesel, ≤0,3 m überflutet).
+- [A] J7: Mit 7b19ec9 sind versehentlich zwei __pycache__-.pyc-Dateien eingecheckt. Sie sind harmlos und nicht gelöscht (Regel: nichts löschen).
