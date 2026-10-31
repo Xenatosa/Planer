@@ -421,6 +421,21 @@ _ed=nd.gaussian_filter(_sf,7);_cz=_wf*np.clip((_tl0-0.62)/0.3,0,1)*np.clip(_ed*2
 _pk=np.clip(1-np.abs(_ff(9,201))/1.6,0,1)**3;_pk2=np.clip(1-np.abs(_ff(4,202))/1.6,0,1)**3
 _TW=_cz*(4.2*_pk*(0.6+0.6*np.clip(_voff,0,1))+1.6*_pk2+0.8*np.clip(_RB,0,None))
 FD=FD+_TW
+# Runde F: Pfeiler + Kare in Falllinie (grosse Skala, ~14 m Abstand), Gipfelpyramiden mit Facetten und Saetteln am Grat [A]
+_pf=np.sin(2*np.pi*(_sco/14.0+0.35*_ff(40,211)));_pf=np.sign(_pf)*np.abs(_pf)**0.5
+FD=FD+_wf*_sf*_bell**0.5*_gm*1.0*_pf                                                    # Pfeiler (+) / Kar-Rinne (-), seitlich wirksam ueber Steigung
+_kar=_wf*np.clip((_tl0-0.55)/0.35,0,1)*np.clip(-_pf,0,1)*np.clip(_ed*2,0,1);FD=FD-2.2*_kar   # Kare: Mulden an der Oberkante zwischen Pfeilern
+_cq=np.argwhere((_cz>0.55)&(_pf>0.6));_rp=np.random.default_rng(212);_PY=[]
+if len(_cq):
+    _rp.shuffle(_cq);_kt=[]
+    for q in _cq:
+        if all(abs(q[0]-k[0])+abs(q[1]-k[1])>150 for k in _kt):_kt.append(q)
+    for q in _kt[:60]:
+        r=_rp.uniform(28,44);h=_rp.uniform(4.5,8.0);a0=_rp.uniform(0,np.pi/2)
+        y0,y1,x0,x1=max(0,int(q[0]-r)),min(FB.shape[0],int(q[0]+r)+1),max(0,int(q[1]-r)),min(FB.shape[1],int(q[1]+r)+1)
+        dy,dx=_fy[y0:y1,x0:x1]-q[0],_fx[y0:y1,x0:x1]-q[1]
+        d=np.maximum(np.abs(dx*np.cos(a0)+dy*np.sin(a0)),np.abs(-dx*np.sin(a0)+dy*np.cos(a0)))*0.75+0.25*np.hypot(dx,dy)   # 4 Facetten, Kanten scharf
+        FD[y0:y1,x0:x1]+=_wf[y0:y1,x0:x1]*h*np.clip(1-d/r,0,1)**1.3;_PY.append((float(q[1]/FS),float(q[0]/FS),round(h,1)))
 FH=FB+FD
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
@@ -436,11 +451,14 @@ for _k in range(70):
     np.add.at(FH,(_iy,_ix),_d-_e);_sed+=_e-_d;_wat*=0.98;_p=np.where(_ok[:,None],_pn,_p)
 _ER=nd.gaussian_filter(FH-(FB+FD),1.5)                                                                                    # <0 = Abtrag (Rinne)
 _fe=_vin&(_wf>0)                                                  # thermische Glaettung (Grenzwinkel 62 Grad)
-_tl=np.tan(np.radians(74))/FS
+_tl=np.tan(np.radians(71))/FS
 for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
 FH=np.where(_vin,FH,FB)
+# Runde F: Schneebaender als Geometrie auf Absaetzen (flach in steiler Umgebung): 0,1-0,3 m Polster [A]
+_fs3=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_ab=np.clip((38-_fs3)/12,0,1)*np.clip((nd.gaussian_filter(_fs3,6)-35)/15,0,1)
+FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
 # t57u: Schutthalde am Fuss als echte Kegel (nur unten, glatt) [A]
 _fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff(14,203)*0.3;FH=np.where(_vin,np.maximum(FH,FH*(1-_fz2)+np.maximum(FH,_sh)*_fz2),FB)
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
