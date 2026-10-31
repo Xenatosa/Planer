@@ -113,6 +113,15 @@ Gs=lo+Rg*np.clip(0.8*t+band+0.2*apron/0.3,0,1);Gs=np.where(Rg>SPRUNG,Gs,Hs)
 Gsamp=Hs*(1-wz)+Gs*wz
 vj,vi=np.mgrid[0:GY,0:GX].astype(float)
 G=nd.map_coordinates(Gsamp,[vj-0.5,vi-0.5],order=1,mode='nearest').astype(np.float32)
+# t50u: thermische Erosion nur im Wandfuss (Schutthalden, Rinnen); Plateaus/Talboden/Wasser fix [A]
+_fm=nd.map_coordinates(((t<0.15)&(Rg>SPRUNG)).astype(float),[vj-0.5,vi-0.5],order=1)>0.5
+_fm&=~(nd.map_coordinates(nd.binary_dilation(np.kron(wa,np.ones((RS,RS))),iterations=3).astype(float),[vj-0.5,vi-0.5],order=0)>0.5)
+TAL=np.tan(np.radians(34))/RS;Ge=G.astype(np.float64)
+for _ in range(15):
+    for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
+        Nb=np.roll(Ge,sh,axis=ax);ok=_fm&np.roll(_fm,sh,axis=ax);ex=np.where(ok,np.clip(Ge-Nb-TAL,0,None)*0.2,0)
+        Ge-=ex;Ge+=np.roll(ex,-sh,axis=ax)
+G=Ge.astype(np.float32)
 wm=np.kron(wa,np.ones((RS,RS))).astype(float);Wn=np.kron(np.nan_to_num(Wsp),np.ones((RS,RS)))
 lev=nd.gaussian_filter(Wn*wm,2)/np.maximum(nd.gaussian_filter(wm,2),1e-6)
 wmask=nd.map_coordinates(nd.gaussian_filter(wm,1),[vj-0.5,vi-0.5],order=1,mode='nearest')>0.5
