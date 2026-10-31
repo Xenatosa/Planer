@@ -476,6 +476,40 @@ _vcf=np.stack([nd.map_coordinates(VC.reshape(GY,GX,3)[...,c].astype(float),[_gy.
 FW={'fs':FS,'band':base64.b64encode(np.flatnonzero(BAND.ravel()).astype(np.uint32).tobytes()).decode(),'vid':base64.b64encode(_vid.tobytes()).decode(),
     'h':base64.b64encode(FH.ravel()[_vid].astype(np.float32).tobytes()).decode(),'c':base64.b64encode(np.clip(_vcf,0,255).astype(np.uint8).tobytes()).decode(),
     't':base64.b64encode(np.clip(_tint.reshape(-1,3)[_vid]*128,0,255).astype(np.uint8).tobytes()).decode(),'s':base64.b64encode(np.clip(_snow.ravel()[_vid]*255,0,255).astype(np.uint8).tobytes()).decode()}
+# Runde F: Ueberhaenge/Felsnasen als zusaetzliche Fels-Meshes (Hoehenfeld kann nicht ueberhaengen) [A]
+def _ico(n):
+    t=(1+5**.5)/2;V=[(-1,t,0),(1,t,0),(-1,-t,0),(1,-t,0),(0,-1,t),(0,1,t),(0,-1,-t),(0,1,-t),(t,0,-1),(t,0,1),(-t,0,-1),(-t,0,1)]
+    F=[(0,11,5),(0,5,1),(0,1,7),(0,7,10),(0,10,11),(1,5,9),(5,11,4),(11,10,2),(10,7,6),(7,1,8),(3,9,4),(3,4,2),(3,2,6),(3,6,8),(3,8,9),(4,9,5),(2,4,11),(6,2,10),(8,6,7),(9,8,1)]
+    V=[np.array(v,float)/np.linalg.norm(v) for v in V]
+    for _ in range(n):
+        C={};F2=[]
+        def mid(a,b):
+            k=(min(a,b),max(a,b))
+            if k not in C:m=V[a]+V[b];V.append(m/np.linalg.norm(m));C[k]=len(V)-1
+            return C[k]
+        for a,b,c in F:ab,bc,ca=mid(a,b),mid(b,c),mid(c,a);F2+=[(a,ab,ca),(b,bc,ab),(c,ca,bc),(ab,bc,ca)]
+        F=F2
+    return np.array(V),np.array(F)
+_IV,_IF=_ico(2)
+_gyF,_gxF=np.gradient(nd.gaussian_filter(FH,3),1/FS)
+_ovk=_vin&(_wf>0.85)&(_sf>0.7)&(_tl0>0.68)&(_tl0<0.9)&(np.hypot(_gyF,_gxF)>1.4)
+_oc=np.argwhere(_ovk);_ro=np.random.default_rng(611);_ro.shuffle(_oc);_OP=[];_OI=[];_ON=0;_sel=[]
+def _hat(x,z):return nd.map_coordinates(FH,[np.clip(z*FS,0,FYn-1),np.clip(x*FS,0,FXn-1)],order=1)
+for q in _oc:
+    if len(_sel)>=36:break
+    if any((q[0]-s[0])**2+(q[1]-s[1])**2<70**2 for s in _sel):continue
+    _sel.append(q);gy,gx=_gyF[q[0],q[1]],_gxF[q[0],q[1]];g=np.hypot(gx,gy);nx_,nz_=-gx/g,-gy/g   # bergab
+    L=_ro.uniform(1.6,2.6);W=_ro.uniform(2.4,4.0);Hh=_ro.uniform(1.0,1.8);out=_ro.uniform(0.5,0.9)*L
+    ph=_ro.uniform(0,6.3,(3,3));fr=_ro.uniform(1.5,3.5,3)
+    v=_IV.copy();nz=sum(0.18/(k+1)*np.sin(fr[k]*(k+1)*(v@np.array([np.cos(ph[k,0]),np.sin(ph[k,1]),np.cos(ph[k,2])]))+ph[k,0]) for k in range(3))
+    v=v*(1+nz)[:,None];v[:,1]=np.where(v[:,1]<0,v[:,1]*0.45,v[:,1])                                   # flache Unterseite = Nase
+    x0,z0=q[1]/FS+nx_*out,q[0]/FS+nz_*out;y0=FH[q[0],q[1]]-0.35
+    X=x0+v[:,0]*L*nx_-v[:,2]*W*nz_;Z=z0+v[:,0]*L*nz_+v[:,2]*W*nx_;Y=y0+v[:,1]*Hh
+    ht=_hat(X,Z);Y=np.where(ht>y0,np.minimum(Y,ht+0.08),Y)                                              # hinten/oben ins Gelaende einbetten, kein Spalt
+    _OP.append(np.stack([X,Y,Z],1));_OI.append(_IF+_ON);_ON+=len(v)
+if _OP:
+    FW['ov']=base64.b64encode(np.concatenate(_OP).astype(np.float32).tobytes()).decode();FW['ovi']=base64.b64encode(np.concatenate(_OI).astype(np.uint32).tobytes()).decode()
+print('ueberhaenge',len(_sel),'dreiecke',sum(len(i) for i in _OI))
 _fsl=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))))
 FW_MESS={'band_zellen':int(BAND.sum()),'dreiecke_voll':int(BAND.sum()*FS*FS*2),'neigung_steilband_mittel':round(float(_fsl[_vin&(_sf>0.5)].mean()),1),
  'neigung_p10_p90':[round(float(np.percentile(_fsl[_vin&(_sf>0.5)],q)),1) for q in (10,90)],'versatz_max_m':round(float(FD.max()),2),'neigung_grob_mittel':round(float(np.degrees(np.arctan(np.hypot(*np.gradient(FB,1/FS))))[_vin&(_sf>0.5)].mean()),1)}
