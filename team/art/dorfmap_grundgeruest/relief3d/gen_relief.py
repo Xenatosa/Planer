@@ -583,6 +583,26 @@ from fluss_k import spiegel_monoton
 WV,G_ANZ,MONO_T63U=spiegel_monoton(WV,G_ANZ,_VBc);print('spiegel_t63u',MONO_T63U)
 from fluss_k import gefaelle_flach
 WV,G_ANZ,FLACH_T63U=gefaelle_flach(WV,G_ANZ);print('flach_t63u',FLACH_T63U)   # t63u: Suedfluss leichtes Gefaelle [A]   # t63u Runde K: streng fallend, Becken flach, Stufen <= ~1 m [A]
+def stummel_runden(WV,GA):   # t64u K9: Suedfluss-Stichgraben x64-68 z252-263 war kastenfoermig (gerader Kanal, 0,35 m Kastenprofil, gerade abgeschnittener Kopf) -> Kopf verjuengt, Breite schwankt, U-Profil, Spiegel faellt zur Muendung [A]
+    WV=WV.copy();GA=GA.copy();j0,j1,i0,i1=500,527,132,152
+    J,I=np.mgrid[j0:j1,i0:i1];w0=WV[j0:j1,i0:i1]>-900;w0[J>=523]=False
+    jj,ii=J[w0].astype(float),I[w0].astype(float);A=np.polyfit(jj,ii,1)   # Mittellinie i=A0*j+A1
+    t=(J-jj.min())/(jj.max()-jj.min());lat=np.abs(I-(A[0]*J+A[1])-1.3*np.sin(t*5.5)*np.clip(t*3,0,1)*np.clip((1-t)*4,0,1))/np.sqrt(1+A[0]**2)   # leichte Kruemmung, Muendung unveraendert
+    lv=np.polyfit(jj,WV[j0:j1,i0:i1][w0],1);LV=np.minimum(lv[0]*J+lv[1],lv[0]*jj.min()+lv[1])
+    hw=0.4+2.3*np.clip(t/0.45,0,1)**0.6*(1+0.16*np.sin(t*9.0)+0.08*np.sin(t*23.0))
+    w1=(lat<hw)&(J<523)&(J>=jj.min()-1)
+    rem=w0&~w1;add=w1&~w0;st={'entfernt':int(rem.sum()),'neu':int(add.sum())}
+    sw=WV[j0:j1,i0:i1];sg=GA[j0:j1,i0:i1]
+    sw[rem]=-999;sw[w1]=LV[w1]
+    rel=np.clip(lat/np.maximum(hw,0.5),0,1.5)
+    bed=LV-0.05-0.32*np.clip(1-rel**2,0,1)*np.clip(t/0.3,0.25,1)
+    sg[w1]=np.minimum(sg[w1],bed[w1]) if False else bed[w1]
+    ring=(~w1)&(lat<hw+3.0)&(J<525)&(J>=jj.min()-6)
+    bank=LV+0.05+0.12*np.clip(lat-hw,0,3)
+    sg[ring]=np.where(sg[ring]<bank[ring],bank[ring],sg[ring])
+    st['spiegel_kopf']=round(float(LV.max()),3);st['spiegel_muendung']=round(float(LV[w1].min()),3)
+    return WV,GA,st
+WV,G_ANZ,STUMMEL_T64U=stummel_runden(WV,G_ANZ);print('stummel_t64u',STUMMEL_T64U)
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
