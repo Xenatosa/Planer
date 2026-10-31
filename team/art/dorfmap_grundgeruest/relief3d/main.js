@@ -156,8 +156,9 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   DN.wegMesh=new THREE.Mesh(wg,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));DN.wegMesh.receiveShadow=true;}
  sockel((i,j)=>{const k=Math.min(j*RS,GY-1)*GX+Math.min(i*RS,GX-1);return p[k*3+1];},-34,g);
  {const wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1),ok=k=>WV[k]>-900;const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,t=ok(k)?Math.min(1,Math.max(0,(WV[k]-G[k])/1.5)):0;
-   wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const rim=ok(k)&&!(ok(k+1)&&ok(k-1)&&ok(k+GX)&&ok(k-GX)),e=1-Math.min(1,t*4),q=(n=>ok(n)?Math.abs(WV[n]-WV[k]):0),fo=ok(k)?Math.min(1,Math.max(0,(q(k+1)+q(k-1)+q(k+GX)+q(k-GX)-0.9)*0.7)):0;   // t48u: Schaum/Wasserfall an Stufen [A]
-   wc.push((0.06+0.5*e*e)*(1-fo)+0.70*fo,(0.16+0.48*e*e)*(1-fo)+0.76*fo,(0.21+0.45*e*e)*(1-fo)+0.80*fo,ok(k)?(rim?0.0:Math.max(0.14+0.76*Math.pow(Math.min(1,t*1.15),0.8),0.55*fo)):0);};}   // Runde D: weniger Ufer-Schaum [A]
+   wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const rim=ok(k)&&!(ok(k+1)&&ok(k-1)&&ok(k+GX)&&ok(k-GX)),e=1-Math.min(1,t*4),q=(n=>ok(n)?Math.abs(WV[n]-WV[k]):0),fo0=ok(k)?Math.min(1,Math.max(0,(q(k+1)+q(k-1)+q(k+GX)+q(k-GX)-0.9)*0.7)):0,fo=Math.min(fo0,0.3);   // Runde E: Schaum gedeckelt [A]
+     // t48u: Schaum/Wasserfall an Stufen [A]
+   wc.push((0.06+0.5*e*e)*(1-fo)+0.70*fo,(0.16+0.48*e*e)*(1-fo)+0.76*fo,(0.21+0.45*e*e)*(1-fo)+0.80*fo,ok(k)?(rim?0.0:Math.max(0.14+0.76*Math.pow(Math.min(1,t*1.15),0.8),0.35*fo)):0);};}   // Runde D: weniger Ufer-Schaum [A]
 return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am Rand [A]   // flach hell/klar, tief dunkler [A]
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(ok(a)||ok(b)||ok(c)||ok(d))wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
   const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));g2.setIndex(wi);g2.computeVertexNormals();

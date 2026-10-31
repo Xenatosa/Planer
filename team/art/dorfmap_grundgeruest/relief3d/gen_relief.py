@@ -377,7 +377,7 @@ sc.export('dorfmap_relief_z25.glb')
 FS=4;FXn,FYn=NX*FS+1,NY*FS+1
 _rkd=cKDTree(np.concatenate([p for p,_ in RAMPPROF]));_cc=np.stack(np.meshgrid(np.arange(NX)+0.5,np.arange(NY)+0.5),-1).reshape(-1,2)
 _nahr=(_rkd.query(_cc,distance_upper_bound=4.5)[0]<9).reshape(NY,NX)
-BAND=nd.binary_dilation(steil|oben|fuss,iterations=1)&~nd.binary_dilation(wa,iterations=1)&~belegt   # t54u-C: Rampennaehe jetzt im Band (FD dort weich auf 0) statt glatter grauer Streifen
+BAND=nd.binary_dilation(steil|oben|fuss,iterations=3)&~nd.binary_dilation(wa,iterations=1)&~belegt   # Runde E: Band breiter (3 statt 1) [A]   # t54u-C: Rampennaehe jetzt im Band (FD dort weich auf 0) statt glatter grauer Streifen
 BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
 _fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
 _i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
@@ -411,10 +411,11 @@ _rdq=np.full(FB.shape,99.0);_qq=np.argwhere(_vin);_rdq[_qq[:,0],_qq[:,1]]=_rkd.q
 _wr=np.clip((np.minimum(_rdq,8)-1.6)/3.0,0,1);_wr=_wr*_wr*(3-2*_wr);_wf=_wf*_wr
 # Runde D: Oberkante seitlich verspringen – Warp der Feinbasis im Band (Vorspruenge/Buchten bis ~2,5 m); Zellwerte bleiben unberuehrt [A]
 _fjj,_fii=np.mgrid[0:FB.shape[0],0:FB.shape[1]].astype(float);_rq=lambda sg,sd:(lambda n:n/n.std())(nd.gaussian_filter(np.random.default_rng(sd).standard_normal(FB.shape),sg))
-_wa=_wf*np.clip(nd.distance_transform_edt(_vin)/14.0,0,1)
-FB=np.where(_vin,nd.map_coordinates(FB,[_fjj+_wa*(7*_rq(28,91)+3*_rq(9,92)),_fii+_wa*(7*_rq(28,93)+3*_rq(9,94))],order=1,mode='nearest'),FB)
+_wa=_wf*np.clip(nd.distance_transform_edt(_vin)/24.0,0,1);_wa=_wa*_wa*(3-2*_wa)   # Runde E: weicher, weiter [A]
+FB=np.where(_vin,nd.map_coordinates(FB,[_fjj+_wa*(14*_rq(40,91)+6*_rq(12,92)+2.5*_rq(4,95)),_fii+_wa*(14*_rq(40,93)+6*_rq(12,94)+2.5*_rq(4,96))],order=1,mode='nearest'),FB)
 _qy,_qx=np.gradient(nd.gaussian_filter(FB,3),1/FS);_gm=np.clip(np.hypot(_qx,_qy),0.4,2.0)   # Runde D: eigene Namen (Runde C ueberschrieb _gy/_gx -> Farbe 0 = schwarz) [A]   # seitlicher Versatz: dh=dx*Steigung [A]
-FD=_wf*_sf*(1.4*_ter+_gm*(_rib*(0.5+0.9*_bell)+1.0*(_R-0.5)+_bell**0.6*(1.2*_voff-0.45*_kl)))+_wf*(1-_sf)*0.5*(_R**2)
+_RB=(np.abs(np.clip(_nt(_sco/2.6+300,FB/9.0,400)/1.6,-1,1))**0.7-0.55)*2.2   # Runde E: Grossrippen/-rinnen in Falllinie [A]
+FD=_wf*_sf*(1.4*_ter+_gm*(_RB*(0.4+0.8*_bell)+_rib*(0.5+0.9*_bell)+1.0*(_R-0.5)+_bell**0.6*(1.2*_voff-0.45*_kl)))+_wf*(1-_sf)*0.5*(_R**2)
 FH=FB+FD
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
