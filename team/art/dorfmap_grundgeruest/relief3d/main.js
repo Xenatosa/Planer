@@ -108,6 +108,10 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   for(let k=0;k<GX*GY;k++){const i=k%GX,j=(k/GX)|0,dr=Math.min(i,j,GX-1-i,GY-1-j);if(dr>10||VB[k])continue;let s2=0,n=0;
    for(let dj=-4;dj<=4;dj++)for(let di=-4;di<=4;di++){const ii=Math.min(Math.max(i+di,0),GX-1),jj=Math.min(Math.max(j+dj,0),GY-1);s2+=G[jj*GX+ii];n++;}
    const w=(1-dr/10.5)*Math.min(1,rng(k)/1.5+0.0);q[k*3+1]=G[k]*(1-w)+w*Math.min(G[k],s2/n)*1+w*0;}
+  // t64u: umgeklappte Grobdreiecke (19 bei LS1) -> Verschiebung ihrer Ecken zuruecknehmen [A]
+  {let nf=0;for(let it=0;it<4;it++){let c=0;for(let n=0;n<bi.length;n+=3){const A=bi[n]*3,B=bi[n+1]*3,C=bi[n+2]*3;
+    const o0=(p[B]-p[A])*(p[C+2]-p[A+2])-(p[B+2]-p[A+2])*(p[C]-p[A]),o1=(q[B]-q[A])*(q[C+2]-q[A+2])-(q[B+2]-q[A+2])*(q[C]-q[A]);
+    if(o0*o1<=0){for(const V of[A,B,C]){q[V]=p[V];q[V+2]=p[V+2];}c++;}}if(it==0)nf=c;if(!c)break;}window.__umgeklappt=nf;}
   p.set(q);}
  const gb=new THREE.BufferGeometry();gb.setAttribute('position',new THREE.BufferAttribute(p,3));gb.setAttribute('color',new THREE.BufferAttribute(cl,3));gb.setIndex(bi);gb.computeVertexNormals();
  const wt=ladeTex(window.WANDTEX),dt=ladeTex(window.RTEX);for(const t of[wt,dt]){t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.NoColorSpace;}
