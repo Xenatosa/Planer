@@ -52,3 +52,9 @@
 - Final (Runde 11) [S]: Desktop 1280x800 2,08 Mio Dreiecke / 20 Draws (Haeuser 163 696); Handy 390x844 ?lod=1 1,47 Mio / 21 Draws (vorher e6111b1: 1,36 Mio / 20) -> +8 %, +1 Draw (Zaun-Mesh).
 - Wandhoehen [R]: Zellsprung Nord 14,0 m; Median 5x5 Nord 15,45 / Suedgrat 16,04 / Krater 11,20 / Ostgrat 11,99 m (unveraendert, Messmethode s.o.).
 - Restmaengel final: Kerbe am Flussaustritt hinten noch V-foermig gerade geschnitten; Wandoberkante aus der Naehe noch leicht gezackt; Dachschnee flaechig hellgrau ohne Struktur; Schnee-Schatten weiterhin weich; Hauswaende glatt (keine Putztextur).
+
+## t47u/t48u Runde 1 (31.10.2026)
+- Fluss: 4 Lücken aus c20 geschlossen (x213 y9–18, x219 y229–238, x74 y263–265, x323–327 y268); Hauptfluss jetzt 1 Zusammenhang (6005 Zellen) [S]. wasser_eis/fluss_id/untergrund konsistent (0 Abweichungen) [S]. 7-m-Stufe bei x220 y227 zu Stromschnellen verteilt, größter Spiegelsprung jetzt 1,8 m/Zelle [S].
+- Felsform: mehrskaliges Rauschen (Rippen/Runsen), Simse, Schuttfuß [A]. Wirkung im Bild noch gering.
+- Krater: Flanken geböscht [A]; noch kein Zugang, noch zu gleichmäßig.
+- Offen: Rampen/Serpentinen, 0,25-m-Gitter/Detailnormalen, Felsblöcke statt Wandflächen, fleckiger Schnee mit Gras (Maßstab: referenz/fabian_beispiel_t48u.jpg).
