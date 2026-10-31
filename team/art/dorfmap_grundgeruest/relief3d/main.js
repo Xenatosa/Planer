@@ -123,14 +123,15 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    vec3 N=normalize(vWN);vec3 w=pow(abs(N),vec3(4.));w/=w.x+w.y+w.z;
    vec3 tr=texture2D(tW,vWP.zy/9.).rgb*w.x+texture2D(tW,vWP.xy/9.).rgb*w.z+texture2D(tW,vWP.xz/9.).rgb*w.y;
    vec3 tr2=texture2D(tW,vWP.zy/23.+.37).rgb*w.x+texture2D(tW,vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;
-   float d=texture2D(tD,vWP.xz/4.).r*0.6+texture2D(tD,vWP.xz/23.).r*0.4,gD=texture2D(tD,vWP.xz/61.+.2).r;
+   #define TD3(s,o) (texture2D(tD,vWP.zy/(s)+(o)).r*w.x+texture2D(tD,vWP.xy/(s)+(o)).r*w.z+texture2D(tD,vWP.xz/(s)+(o)).r*w.y)
+   float d=TD3(4.,0.)*0.6+TD3(23.,0.)*0.4,gD=TD3(61.,.2);   // t64u K9: Boden-Detail triplanar statt nur xz -> keine senkrechten Streifen/gestreckte Wandtextur [A]
    diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
-   {float f=texture2D(tD,vWP.xz/1.4+.37).r,L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
+   {float f=TD3(1.4,.37),L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
    float st=1.-smoothstep(0.40,0.72,abs(N.y)+0.10*(d-0.8));
    vec3 tx=mix(tr,tr2,0.35);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.0,1.0,1.0)*mix(0.80,1.25,gD)*1.15;
    float sn=smoothstep(0.48,0.62,abs(N.y)+0.18*(r-0.5));   // Schnee auf Simsen/Kanten [A]
-   {float g2=texture2D(tD,vWP.xz/97.+vec2(.1,vWP.y/60.)).r;fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
+   {float g2=TD3(97.,.1);fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
     float ms=smoothstep(.30,.48,abs(N.y)+0.15*(r-0.5))*(1.-sn)*smoothstep(.45,.6,gD);fels=mix(fels,vec3(.16,.20,.11),ms*.55);}   // Moos auf Absaetzen [A]
    #ifdef FWM
    fels*=vFT*2.;fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // Runde D: grauer [A]
