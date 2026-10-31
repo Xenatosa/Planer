@@ -53,8 +53,14 @@ for _ in range(3):
     zone=nd.binary_dilation(st,iterations=8)&wa
     if not zone.any():break
     sm=nd.gaussian_filter(np.where(wa,H,0),3)/np.maximum(nd.gaussian_filter(wa.astype(float),3),1e-6);H[zone]=sm[zone]
+# t53u R2: Kraterring als Bergkranz: Gipfel/Kerben 3-10 Zellen hinter der Kraterkante (Wandsprung selbst bleibt) [A]
+_kd_=nd.distance_transform_edt(~(wand&(wn=='Krater')))
+_kr=(~wand)&(_kd_>=2)&(_kd_<=11)&(H>=9)&~wa&(eb!='KRATER')
+_gn=nd.gaussian_filter(np.random.default_rng(57).standard_normal((NY,NX)),2.2);_gn/=_gn.std();_gr=1-np.abs(np.clip(_gn/1.6,-1,1))
+_fall=np.clip((_kd_-2)/2,0,1)*np.clip((11-_kd_)/5,0,1)
+H[_kr]+=(3.2*_gr**2-0.6)[_kr]*_fall[_kr]
 # t47u/t48u: natuerliche Abstiegsrampen schraeg an den Waenden (Gelaende, nicht Overlay); Zellwerte folgen aus G [A]
-RAMPWEGE=[]
+RAMPWEGE=[];RAMPPROF=[]
 def _rampen():
     Pl0=json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40'];hm=np.zeros((NY,NX),bool)
     for p in Pl0:
@@ -65,6 +71,7 @@ def _rampen():
     for w,anz in (('Nord',3),('Suedgrat',3),('Krater',4),('Ostgrat',2)):
         cand=np.argwhere(top&(wn==w));r=np.random.default_rng(len(w));r.shuffle(cand);gew=[]
         for y,x in cand[:400]:
+            if min(np.hypot(x-155,y-12),np.hypot(x-125,y-126))<32:continue   # t53u: dort Serpentine X084/X069
             dn=-np.array([gx[y,x],gy[y,x]]);l=np.hypot(*dn)
             if l<1e-3:continue
             dn/=l
@@ -74,13 +81,14 @@ def _rampen():
                 for s_ in range(6,90):
                     X,Y=int(round(x+d[0]*s_)),int(round(y+d[1]*s_))
                     if not(2<=X<NX-2 and 2<=Y<NY-2) or hm[Y,X]:break
-                    if s_>8 and Ht-H[Y,X]>=5 and s_*0.34>=Ht-H[Y,X]:L=s_;break        # Rampe (~19 Grad) trifft Gelaende
+                    if s_>8 and Ht-H[Y,X]>=5 and s_*0.30>=Ht-H[Y,X]:L=s_;break        # Rampe (~17 Grad, t53u) trifft Gelaende
                 if L and L>=12 and all(np.hypot(x-a,y-b)>25 for a,b,_ ,_ in gew):gew.append((x,y,d,L))
                 if len(gew)>=anz:break
             if len(gew)>=anz:break
         for x,y,d,L in gew:
             Ht=H[y,x];He=H[int(round(y+d[1]*L)),int(round(x+d[0]*L))]
             RAMPWEGE.append([[round(float(x+0.5+d[0]*s_),2),round(float(y+0.5+d[1]*s_),2)] for s_ in np.arange(-1,L+1.01,1.0)])   # Overlay-Pfad (getrennt) [A]
+            RAMPPROF.append((np.array([[x+0.5+d[0]*s_,y+0.5+d[1]*s_] for s_ in np.linspace(0,L,L*4+1)]),np.linspace(Ht,He,L*4+1)))
             for k in range(L*3+1):
                 s_=k/3;cx,cy=x+d[0]*s_,y+d[1]*s_;hp=Ht+(He-Ht)*s_/L
                 ys,xs=slice(max(0,int(cy)-5),int(cy)+6),slice(max(0,int(cx)-5),int(cx)+6)
@@ -90,9 +98,37 @@ def _rampen():
             log.append((w,int(x),int(y),int(L),round(float(Ht),1),round(float(He),1)))
     return log
 RAMPEN=_rampen();print('rampen',RAMPEN)
+# t53u R3: Serpentinen (Gelaende, <=17 Grad, Spitzkehren) wo der Overlay-Plan Treppe/Abstieg ueber die Wand braucht: X084 (Wand Nord), X069 (Krater) [A]
+SERPENTINEN=[]
+def _serp(name,A_,B_,n=4,sg=1):
+    A_=np.array(A_,float)+0.5;B_=np.array(B_,float)+0.5;Ht=float(H[int(A_[1]),int(A_[0])]);He=float(H[int(B_[1]),int(B_[0])])
+    ax=B_-A_;d=np.hypot(*ax);pe=sg*np.array([-ax[1],ax[0]])/d;soll=abs(Ht-He)/np.tan(np.radians(16.5));s_=np.linspace(0,1,1200)
+    for W in np.arange(0,14,0.1):
+        P=A_[None]+s_[:,None]*ax[None]+pe[None]*(W*(2/np.pi)*np.arcsin(np.sin(np.pi*n*s_)))[:,None]
+        L=np.r_[0,np.cumsum(np.hypot(*np.diff(P,axis=0).T))]
+        if L[-1]>=soll:break
+    hp=Ht+(He-Ht)*L/L[-1];yy,xx=np.mgrid[0:NY,0:NX]
+    for (cx,cy),h in zip(P[::3],hp[::3]):
+        ys,xs=slice(max(0,int(cy)-5),int(cy)+6),slice(max(0,int(cx)-5),int(cx)+6)
+        rr=np.hypot(xx[ys,xs]+0.5-cx,yy[ys,xs]+0.5-cy);sub=H[ys,xs];kern=(rr<=1.8)&~wa[ys,xs];sub[kern]=h;wand[ys,xs][kern]=False
+    RAMPPROF.append((P,hp));RAMPWEGE.append([[round(float(a),2),round(float(b),2)] for a,b in P[::20]]+[[round(float(P[-1,0]),2),round(float(P[-1,1]),2)]])
+    SERPENTINEN.append((name,round(Ht,1),round(He,1),round(float(L[-1]),1),round(float(np.degrees(np.arctan(abs(Ht-He)/L[-1]))),1),round(float(W),1)))
+_serp('X084',(148,2),(156,37),n=3,sg=1);_serp('X069',(127,133),(122,119),n=3)
+print('serpentinen',SERPENTINEN)
 Hboden=H.copy()
-tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
-H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
+# t53u R4: Flussbett eingeschnitten: Tiefe nach Abstand zum Ufer, Kiesbaenke, Uferboeschung + Sandufer [A]
+_dw=nd.distance_transform_edt(wa);_kb=nd.gaussian_filter(np.random.default_rng(54).standard_normal((NY,NX)),2.5);_kb/=_kb.std()
+tiefe=np.where(fl=='SEE',3.0,np.clip(0.45+0.6*_dw,0.45,2.4));kies=wa&(fl!='SEE')&(_kb>0.9)&(_dw>=1.5)
+tiefe=np.where(kies,np.minimum(tiefe,0.5),tiefe)
+Wsp=np.where(wa,Hboden-0.3,np.nan)
+_do,_ix=nd.distance_transform_edt(~wa,return_indices=True);_wl=(Hboden-0.3)[_ix[0],_ix[1]]
+_hm4=np.zeros((NY,NX),bool)
+for p in json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40']:
+    q=np.array([[(x+200)*1.2,(y+40)*1.2] for x,y in p['poly']]);x0,y0=q.min(0);x1,y1=q.max(0);_hm4[max(0,int(y0)):int(np.ceil(y1)),max(0,int(x0)):int(np.ceil(x1))]=1
+_ub=(~wa)&(_do<=5)&~wand&~nd.binary_dilation(_hm4,iterations=2)&(H>_wl)&(H-_wl<4)
+_sand=0.15+np.where(_kb>0,0.12,0.42)*(_do-0.5)                         # flaches Sandufer (~7 Grad) oder Boeschung (~23 Grad)
+H[_ub]=np.minimum(H[_ub],(_wl+_sand)[_ub]);Hboden[_ub]=H[_ub]
+H[wa]-=tiefe[wa]
 # --- t42u: glattes Hoehenfeld G auf 0,5-m-Gitter (keine 1-m-Treppen). Waende = steile, leicht unregelmaessige Flaechen [A]
 RS=2;GX,GY=NX*RS+1,NY*RS+1;WANDWINKEL=55.0
 Hn=np.kron(H,np.ones((RS,RS)))                                     # Proben in Zellmitte-Unterteilung
@@ -106,9 +142,14 @@ lo=nd.minimum_filter(Hn,15);hi=nd.maximum_filter(Hn,15);Rg=hi-lo
 def _fbm(sig,seed):
     r=np.random.default_rng(seed);n=nd.gaussian_filter(r.standard_normal(Hn.shape),sig);return n/n.std()
 nf=0.55*_fbm(10,7)+0.30*_fbm(4,8)+0.15*noi
-u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.16*nf
+# t53u R1: domain-warped ridged fBm -> Felsrippen/Runsen (verschieben die Wandlinie), variable Steilheit, Simse [A]
+_jj0,_ii0=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]].astype(float)
+_wy=_jj0+7*_fbm(14,31);_wx=_ii0+7*_fbm(14,32)
+_rw=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_fbm(sg,sd),[_wy,_wx],order=1,mode='reflect')/2.2,-1,1))) for a,sg,sd in ((0.55,7,33),(0.30,3.5,34),(0.15,1.8,35)))
+RIB=(_rw-_rw.mean())/_rw.std()                                       # >0 Rippe, <0 Runse
+u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
-steil_k=6*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
+steil_k=(3.2+5.5*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
 # t48u R5: Kraterring mit radialen Felsrippen + 4 Scharten; uebrige Waende mit Grat-Rauschen (ridged). Ober-/Unterkante fix (sin(pi t)) [A]
 _kc=np.argwhere(wand&(wn=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
@@ -116,17 +157,20 @@ _rib=np.sin(_ang*13+1.6*_fbm(14,21));_rib=np.sign(_rib)*np.abs(_rib)**0.6
 _sch=np.clip((np.abs(np.sin(_ang*2+0.7))-0.93)/0.07,0,1)
 _rid=1-2*np.abs(np.clip(_fbm(5,22)/2.5,-1,1))
 t=np.clip(t+np.sin(np.pi*t)*(krz*(0.20*_rib-0.45*_sch)+(1-krz)*0.10*(_rid-0.5)),0,1)
-band=0.06*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)           # Simse/Baender in der Wand
-tw=np.clip(u*2.2+0.5,0,1);apron=np.clip(tw,0,0.3)                    # Schuttkegel am Fuss
+_ns=4+np.round(2*np.clip(0.5+0.4*_fbm(20,37),0,1));_tq=np.floor(t*_ns)/_ns;_fr=t*_ns-np.floor(t*_ns)
+_led=(_fbm(9,38)>0.0)*(1-krz)
+t=np.clip(t*(1-0.55*_led)+0.55*_led*(_tq+np.clip((_fr-0.55)/0.45,0,1)/_ns),0,1)   # Simse: flache Absaetze + steile Stufen
+band=0.04*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)           # Simse/Baender in der Wand
+tw=np.clip(u*1.5+0.62,0,1);apron=np.clip(tw,0,0.3)                    # Schuttkegel am Fuss
 Gs=lo+Rg*np.clip(0.8*t+band+0.2*apron/0.3,0,1);Gs=np.where(Rg>SPRUNG,Gs,Hs)
 Gsamp=Hs*(1-wz)+Gs*wz
 vj,vi=np.mgrid[0:GY,0:GX].astype(float)
 G=nd.map_coordinates(Gsamp,[vj-0.5,vi-0.5],order=1,mode='nearest').astype(np.float32)
 # t50u: thermische Erosion nur im Wandfuss (Schutthalden, Rinnen); Plateaus/Talboden/Wasser fix [A]
-_fm=nd.map_coordinates(((t<0.15)&(Rg>SPRUNG)).astype(float),[vj-0.5,vi-0.5],order=1)>0.5
+_fm=nd.map_coordinates(((t<0.22)&(Rg>SPRUNG)).astype(float),[vj-0.5,vi-0.5],order=1)>0.5
 _fm&=~(nd.map_coordinates(nd.binary_dilation(np.kron(wa,np.ones((RS,RS))),iterations=3).astype(float),[vj-0.5,vi-0.5],order=0)>0.5)
 TAL=np.tan(np.radians(34))/RS;Ge=G.astype(np.float64)
-for _ in range(15):
+for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(Ge,sh,axis=ax);ok=_fm&np.roll(_fm,sh,axis=ax);ex=np.where(ok,np.clip(Ge-Nb-TAL,0,None)*0.2,0)
         Ge-=ex;Ge+=np.roll(ex,-sh,axis=ax)
@@ -150,6 +194,18 @@ for _y,_x in _st:
 Ge=_G0+np.clip(nd.gaussian_filter(Ge-_G0,0.6),-0.8,0.8)
 print('hydro_erosion_m',round(float(np.abs(Ge-_G0).max()),2),round(float(np.abs(Ge-_G0)[_hm].mean()),3))
 G=Ge.astype(np.float32)
+# t53u R2/R3: Rampen + Serpentinen nach Erosion exakt ins Gitter (Kern 1,6 m eben laengs, Rand weich bis 3,6 m) [A]
+from scipy.spatial import cKDTree
+_PP=np.concatenate([p for p,_ in RAMPPROF]);_HH=np.concatenate([h for _,h in RAMPPROF]);_kd=cKDTree(_PP)
+_vx=np.stack([vi.ravel()/RS,vj.ravel()/RS],1);_r,_k=_kd.query(_vx,distance_upper_bound=3.6);_ok=np.isfinite(_r)
+_wv=nd.map_coordinates(np.kron(wa,np.ones((RS,RS))).astype(float),[vj-0.5,vi-0.5],order=0,mode='nearest').ravel()>0.5
+_ok&=~_wv;_w=np.clip((3.6-_r[_ok])/2.0,0,1);_g=G.ravel().astype(float);_g[_ok]=_g[_ok]*(1-_w)+_HH[_k[_ok]]*_w;G=_g.reshape(G.shape).astype(np.float32)
+RAMP_STEIL=[]
+for p,h in RAMPPROF:
+    gp=nd.map_coordinates(G,[p[:,1]*RS,p[:,0]*RS],order=1);L=np.r_[0,np.cumsum(np.hypot(*np.diff(p,axis=0).T))]
+    i=np.searchsorted(L,np.arange(0,L[-1],2.0));sl=np.degrees(np.arctan(np.abs(np.diff(gp[i]))/2.0)) if len(i)>1 else [0]
+    RAMP_STEIL.append(round(float(np.max(sl)),1))
+print('rampen_max_grad_je_2m',RAMP_STEIL)
 wm=np.kron(wa,np.ones((RS,RS))).astype(float);Wn=np.kron(np.nan_to_num(Wsp),np.ones((RS,RS)))
 lev=nd.gaussian_filter(Wn*wm,2)/np.maximum(nd.gaussian_filter(wm,2),1e-6)
 wmask=nd.map_coordinates(nd.gaussian_filter(wm,1),[vj-0.5,vi-0.5],order=1,mode='nearest')>0.5
@@ -183,7 +239,7 @@ kl=np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS','')
 neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t43u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
  'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),'hoehe_m':np.round(Hz,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t43u'),
  'neigung_grad':np.round(neig,1),'klippe_hoehe_m':np.round(kh,1),'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u','') ,
- 'wasser_tiefe_m':np.where(wa,tiefe,0).astype(str),'begehbar_3d':b3d.astype(int),'wasser_eis':wa.astype(int).astype(str),'fluss_id':fl}
+ 'wasser_tiefe_m':np.where(wa,np.round(tiefe,2),0).astype(str),'begehbar_3d':b3d.astype(int),'wasser_eis':wa.astype(int).astype(str),'fluss_id':fl}
 extra={'boden_hoehe_m':np.round(Hboden,2),'wasserspiegel_m':np.where(wa,np.round(np.nan_to_num(Wsp),2).astype(str),''),
  'ecke_nw_m':np.round(C[...,0],2),'ecke_no_m':np.round(C[...,1],2),'ecke_so_m':np.round(C[...,2],2),'ecke_sw_m':np.round(C[...,3],2),
  'ebene_c20':eb,'untergrund_c20':ug}
@@ -255,6 +311,16 @@ for y,x in np.argwhere(steil&~wa):
     gr=0.45 if u[6]<0.3 else (1.0 if u[6]<0.85 else 1.45)   # t48u R5: Groessenmix klein/mittel/gross [A]
     sx=gr*(2.0+3.8*u[3]**1.3);sy=gr*(1.2+3.0*u[4]**1.5);sz=gr*(1.3+1.6*u[5])
     felsbloecke.append([round(X+0.35*nx_,2),round(Y-0.25*sy,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
+# t53u R1: Ueberhaenge = flache Blender-Felsplatten an der Wandkrone, 1-2 m ueber die Kante talwaerts auskragend [A]
+UEBERHANG=0;_ohr=np.random.default_rng(531);_kr2=oben&nd.binary_dilation(steil,iterations=1)&~wa&~belegt&~weg
+for y,x in np.argwhere(_kr2):
+    u=_ohr.random(6)
+    if u[0]>0.16 or kh[y,x]<6:continue
+    nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l
+    X,Z=x+0.5,y+0.5;Y=float(Gmax[y,x]) if False else hc(X,Z);ko=1.0+1.0*u[1]
+    sx=3.0+3.5*u[2];sy=0.9+0.9*u[3];sz=2.2+1.8*u[4]
+    felsbloecke.append([round(X+ko*nx_,2),round(Y-0.45*sy,2),round(Z+ko*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[5]-0.5,2)]);UEBERHANG+=1
+print('ueberhaenge',UEBERHANG)
 lab,n=nd.label(ha=='MASKE');findlinge=[]
 for i,s in enumerate(nd.find_objects(lab)):
     m=lab[s]==i+1;cy,cx=nd.center_of_mass(m);a=int(m.sum());X,Z=s[1].start+cx+.5,s[0].start+cy+.5
