@@ -416,6 +416,11 @@ FB=np.where(_vin,nd.map_coordinates(FB,[_fjj+_wa*(14*_rq(40,91)+6*_rq(12,92)+2.5
 _qy,_qx=np.gradient(nd.gaussian_filter(FB,3),1/FS);_gm=np.clip(np.hypot(_qx,_qy),0.4,2.0)   # Runde D: eigene Namen (Runde C ueberschrieb _gy/_gx -> Farbe 0 = schwarz) [A]   # seitlicher Versatz: dh=dx*Steigung [A]
 _RB=(np.abs(np.clip(_nt(_sco/2.6+300,FB/9.0,400)/1.6,-1,1))**0.7-0.55)*2.2   # Runde E: Grossrippen/-rinnen in Falllinie [A]
 FD=_wf*_sf*(1.4*_ter+_gm*(_RB*(0.4+0.8*_bell)+_rib*(0.5+0.9*_bell)+1.0*(_R-0.5)+_bell**0.6*(1.2*_voff-0.45*_kl)))+_wf*(1-_sf)*0.5*(_R**2)
+# t57u: Grat mit Tuermen/Felsnasen an der Oberkante (echte Geometrie), laeuft weich in die Flaeche aus [A]
+_ed=nd.gaussian_filter(_sf,7);_cz=_wf*np.clip((_tl0-0.62)/0.3,0,1)*np.clip(_ed*2.2,0,1)
+_pk=np.clip(1-np.abs(_ff(9,201))/1.6,0,1)**3;_pk2=np.clip(1-np.abs(_ff(4,202))/1.6,0,1)**3
+_TW=_cz*(4.2*_pk*(0.6+0.6*np.clip(_voff,0,1))+1.6*_pk2+0.8*np.clip(_RB,0,None))
+FD=FD+_TW
 FH=FB+FD
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
@@ -436,6 +441,8 @@ for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
 FH=np.where(_vin,FH,FB)
+# t57u: Schutthalde am Fuss als echte Kegel (nur unten, glatt) [A]
+_fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff(14,203)*0.3;FH=np.where(_vin,np.maximum(FH,FH*(1-_fz2)+np.maximum(FH,_sh)*_fz2),FB)
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]

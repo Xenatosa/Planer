@@ -145,6 +145,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.BufferAttribute(fp,3));fg.setAttribute('color',new THREE.BufferAttribute(fcl,3));if(FW.t){fg.setAttribute('ftint',new THREE.BufferAttribute(new Float32Array(new Uint8Array(b2(FW.t))).map(v=>v/256),3));fg.setAttribute('fsnow',new THREE.BufferAttribute(new Float32Array(new Uint8Array(b2(FW.s))).map(v=>v/255),1));}fg.setIndex(fi);fg.computeVertexNormals();
   fwMesh=new THREE.Mesh(fg,matF);fwMesh.receiveShadow=fwMesh.castShadow=true;fwMesh.userData.boden=1;window.__fw={dreiecke:fi.length/3,lod:S};window.__fwm=fwMesh;}
  const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);if(fwMesh)g.add(fwMesh);NEU.add(g);
+ if(/[?&]clay=1/.test(location.search)){const CL=new THREE.MeshLambertMaterial({color:0x9c9c9c,side:THREE.DoubleSide});m.material=CL;if(fwMesh)fwMesh.material=CL;window.__clay=1;}   // t55u: Formbeweis einfarbig grau, ohne Textur/Vertexfarben/Bump [A]
  if(/[?&]glb=1/.test(location.search)&&location.protocol.startsWith('http')){   // t48u R5: GLB-Pfad (lokaler Server), sonst Single-File-Daten [A]
   new GLTFLoader().load('dorfmap_relief_z25.glb',gl=>{const mat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});gl.scene.traverse(o=>{if(o.isMesh){o.material=mat;o.receiveShadow=true;o.castShadow=true;}});
    g.visible=false;const gg=new THREE.Group();gg.userData.ebene='gelaende';gg.add(gl.scene);NEU.add(gg);window.__glb={ok:true,meshes:gl.scene.children.length};},undefined,e=>{window.__glb={ok:false,fehler:String(e)};});}
@@ -175,11 +176,12 @@ let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()
 const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t43u)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
+if(/[?&]clay=1/.test(location.search)){document.querySelectorAll('[data-l]').forEach(c=>{if(c.dataset.l!='gelaende')c.checked=false;});ebSicht();setTimeout(ebSicht,3000);}   // t55u: nur Gelaende-Form [A]
 document.querySelectorAll('[data-l]').forEach(c=>c.onchange=ebSicht);
 const licht=()=>{const az=$('az').value*Math.PI/180,el=$('el').value*Math.PI/180;sun.position.set(NX/2+400*Math.cos(el)*Math.sin(az),400*Math.sin(el),NY/2-400*Math.cos(el)*Math.cos(az));sun.intensity=$('st').value/50;};
 ['az','el','st'].forEach(i=>$(i).oninput=licht);licht();
 const V={schraeg:[[NX/2,260,NY+170],[NX/2,0,NY/2]],oben:[[NX/2,520,NY/2+0.1],[NX/2,0,NY/2]],unten:[[NX/2,-260,NY/2+180],[NX/2,-14,NY/2]],rand:[[-40,30,NY+40],[40,-5,NY-40]],rueck:[[NX+120,120,-120],[NX/2,0,NY/2]],nord:[[NX/2,90,-150],[NX/2,0,NY/2]],
- nordwand:[[WF.x+10,40,WF.z+90],[WF.x,6,WF.z-5]],krater:[[160,70,230],[108,4,150]],suedwand:[[170,40,300],[170,-8,225]],sued:[[70,45,330],[75,-16,240]],fluss_ost:[[250,25,265],[219,-12,226]],dorf:[[DN.start.x+22,14,DN.start.z+26],[DN.start.x,1,DN.start.z]]};
+ nordwand:[[WF.x+10,40,WF.z+90],[WF.x,6,WF.z-5]],krater:[[160,70,230],[108,4,150]],suedwand:[[170,40,300],[170,-8,225]],sued:[[70,45,330],[75,-16,240]],fluss_ost:[[250,25,265],[219,-12,226]],silh_sued:[[95,-4,236],[200,6,228]],silh_nord:[[WF.x-70,16,WF.z+4],[WF.x+40,20,WF.z]],dorf:[[DN.start.x+22,14,DN.start.z+26],[DN.start.x,1,DN.start.z]]};
 let geh=false,yaw=0,pitch=0;const setView=n=>{geh=false;oc.enabled=true;const [p,t]=V[n];cam.position.set(...p);oc.target.set(...t);oc.update();};
 const boden=(x,z,yw,pt=0)=>{geh=true;oc.enabled=false;yaw=yw;pitch=pt;cam.position.set(x,Hf()(x,z)+1.7,z);cam.rotation.set(pitch,yaw,0,'YXZ');};
 const V2={totale_auge:[DN.start.x,DN.start.z+30,0,0.06]};V.totale_auge=null;
