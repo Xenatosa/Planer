@@ -58,3 +58,8 @@
 - Felsform: mehrskaliges Rauschen (Rippen/Runsen), Simse, Schuttfuß [A]. Wirkung im Bild noch gering.
 - Krater: Flanken geböscht [A]; noch kein Zugang, noch zu gleichmäßig.
 - Offen: Rampen/Serpentinen, 0,25-m-Gitter/Detailnormalen, Felsblöcke statt Wandflächen, fleckiger Schnee mit Gras (Maßstab: referenz/fabian_beispiel_t48u.jpg).
+
+## t48u Runde 3/4 (eb3c248)
+- Neu: Ufersteine, Baumgruppen an Klippenkanten, Trockengras-Büschel (instanziert), Kraterkrone nur fleckig Fels, Schaum an Wasserstufen, ferne Berge heller/dunstiger.
+- [S] pruefe_t42u summe 0. [S] Desktop 2.474.980 Dreiecke / 26 Draws. Handy nicht neu gemessen.
+- Offen/ehrlich: Felsblöcke wirken noch kastig (Quader, zu einheitlich), Bäume im Schatten fast schwarz, Rampen kaum sichtbar, Kraterring noch ohne klare Rippen/Scharten, kein GLB-Export, keine Detail-Normalmap. opensimplex per pip blockiert (PEP 668) → eigenes numpy-fBm; Blender nicht verfügbar.
