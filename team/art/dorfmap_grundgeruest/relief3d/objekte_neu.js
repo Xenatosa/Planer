@@ -27,6 +27,10 @@ function kiefer(var_){const B=new Bau(),r=s=>hash(var_*3.3,s);const stamm=lin(0x
    const pts=[0,1,2].map(j=>[cx+P.getX(i+j)*R,cy+P.getY(i+j)*R*0.45,cz+P.getZ(i+j)*R]);B.tri(pts[0],pts[1],pts[2],col);}}
  return B.geo();}
 // ---- Felsen: verformter Ikosaeder, Schnee oben, Flechten ----
+function buschel(){const pos=[],col=[];for(let k=0;k<7;k++){const a=k/7*6.283+0.4*Math.sin(k*3),l=0.25+0.12*Math.sin(k*5),h=0.7+0.3*Math.cos(k*2),w=0.045;   // t48u: Trockengras-Bueschel [A]
+  const bx=Math.cos(a)*0.05,bz=Math.sin(a)*0.05,tx=Math.cos(a)*l,tz=Math.sin(a)*l,px=-Math.sin(a)*w,pz=Math.cos(a)*w;
+  pos.push(bx-px,0,bz-pz,bx+px,0,bz+pz,tx,h,tz);const c=[0.55+0.05*Math.sin(k),0.48,0.30];col.push(...c.map(q=>q*0.7),...c.map(q=>q*0.7),...c);}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.computeVertexNormals();return g;}
 function block(var_){const g=new THREE.BoxGeometry(1,1,1,2,2,2),P=g.attributes.position;   // t48u: geschichteter Felsblock, Bruchkanten [A]
  for(let i=0;i<P.count;i++){let x=P.getX(i),y=P.getY(i),z=P.getZ(i);const k=Math.abs(x)+Math.abs(y)+Math.abs(z);
   if(k>1.2){const f=0.80+0.12*hash(Math.round(x*7+var_*3),Math.round(y*7+z*5));x*=f;z*=f;if(y>0)y*=0.88+0.1*hash(i,var_);}
@@ -110,6 +114,8 @@ export function objekteNeu(D,H,G,grp){
   const bf=(o,[x,y,z,sx,sy,sz,r,t])=>{o.position.set(x,y,z);o.rotation.set(t*0.5,r+t*0.6,-t*0.35);o.scale.set(sx*(lod==1?1:1.3),sy,sz);};
   const bc=(c,e)=>{const t=hash(e[0]*3,e[2]*3);c.setRGB(0.66+0.3*t,0.64+0.26*t,0.60+0.22*(1-t));};
   BV.forEach((g,v)=>inst(g,L.filter((e,n)=>n%4==v),bf,'felsen',bc));window.__felsbloecke=L.length;}
+ if(D.gras&&D.gras.length){const lod=window.__lod||1,L=D.gras.filter((e,n)=>lod==1||n%3==0),gm=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});
+  const m=new THREE.InstancedMesh(buschel(),gm,L.length),o=new THREE.Object3D();L.forEach(([x,y,z,h,r],n)=>{o.position.set(x,y-0.05,z);o.rotation.set(0,r,0);o.scale.set(h*1.4,h,h*1.4);o.updateMatrix();m.setMatrixAt(n,o.matrix)});m.receiveShadow=true;(G.felsen||grp('felsen')).add(m);}
  const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[])];FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
  GL=new Bau();KAM=[];const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
  const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);grp('gebaeude').add(zaeune(D,H));

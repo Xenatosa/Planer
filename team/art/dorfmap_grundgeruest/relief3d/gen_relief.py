@@ -146,7 +146,7 @@ oben=nb&(Hz>=mid);fuss=nb&(Hz<mid)
 kh=np.where(steil|nb,Gmax-Gmin,0.0)
 C=np.stack([G[0:-1:RS,0:-1:RS][:NY,:NX],G[0:-1:RS,RS::RS][:NY,:NX],G[RS::RS,RS::RS][:NY,:NX],G[RS::RS,0:-1:RS][:NY,:NX]],-1)
 # --- neuer Untergrund: Bandzellen sind jetzt Oberflaeche der oberen Ebene [F]
-ug2=ug.copy();ug2[wand]='SCHNEE';ug2[wand&(wn=='Krater')]='FELS';ug2[ug=='SCHATTEN']='SCHNEE'
+ug2=ug.copy();ug2[wand]='SCHNEE';ug2[wand&(wn=='Krater')&(nd.gaussian_filter(np.random.default_rng(5).standard_normal((NY,NX)),3)>0.25)]='FELS';ug2[ug=='SCHATTEN']='SCHNEE'
 ug2[wa]='WASSER_EIS'
 b3d_alt=A('begehbar_3d')=='1'
 b3d=(neig<=35)&(b3d_alt|wand)&~(wa&(fl=='SEE'))
@@ -205,6 +205,18 @@ for y in range(NY):
         if fuss[y,x] and not wa[y,x] and u[0]<0.6:
             for _ in range(1+int(u[3]*3)):
                 v=rs2.random(4);s=0.2+0.6*v[2]**2;X,Z=x+v[0],y+v[1];geroell.append([round(X,2),round(hc(X,Z)-0.2*s,2),round(Z,2),round(s,2),round(v[3]*6.28,2)])
+# t48u: Ufersteine, Baumgruppen an Klippenkanten, Trockengras-Bueschel [A]
+ufr=nd.binary_dilation(wa,iterations=1)&~wa&~belegt&~steil;kante=nd.binary_dilation(steil,iterations=4)&~nd.binary_dilation(steil,iterations=1)&~belegt&~wa&~weg
+hoch=nd.maximum_filter(Hz,7)-Hz<1.0;gras=[];r48=np.random.default_rng(481);grp_=nd.gaussian_filter(r48.standard_normal((NY,NX)),2.5);grp_/=grp_.std()
+for y,x in np.argwhere(ufr):
+    u=r48.random(4)
+    if u[0]<0.45:X,Z=x+u[1],y+u[2];s=0.25+0.7*u[3]**2;steine.append([round(X,2),round(hc(X,Z)-0.15*s,2),round(Z,2),round(s,2),round(u[0]*14,2)])
+for y,x in np.argwhere(kante&hoch&(grp_>0.6)):
+    u=r48.random(6)
+    if u[0]<0.55:X,Z=x+u[1],y+u[2];baeume.append([round(X,2),round(hc(X,Z),2),round(Z,2),round(5+7*u[3]**1.3,1),round(u[4]*6.28,2),round(u[5],2)])
+for y,x in np.argwhere((ug2=='SCHNEE')&~belegt&~weg&~steil&~wa):
+    u=r48.random(5)
+    if u[0]<0.10*np.clip(grp_[y,x]+0.6,0,2):X,Z=x+u[1],y+u[2];gras.append([round(X,2),round(hc(X,Z),2),round(Z,2),round(0.35+0.5*u[3],2),round(u[4]*6.28,2)])
 # t48u: Felsbloecke/Felsplatten entlang aller Wandbaender (eigene Meshes, Instancing) [A]
 gzy,gzx=np.gradient(Hz);bl_r=np.random.default_rng(48);felsbloecke=[]
 for y,x in np.argwhere(steil&~wa):
@@ -252,7 +264,7 @@ col=col*(1-sn*0.10*weh)[...,None]+(sn*0.10*weh)[...,None]*np.array([0.70,0.80,0.
 col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
 VC=(np.clip(col,0,1)*255).astype(np.uint8)
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
-D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
+D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH}
 open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=False).encode(),9))
