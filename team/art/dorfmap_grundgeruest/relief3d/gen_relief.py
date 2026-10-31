@@ -424,7 +424,7 @@ _TW=_cz*(4.2*_pk*(0.6+0.6*np.clip(_voff,0,1))+1.6*_pk2+0.8*np.clip(_RB,0,None))
 FD=FD+_TW
 # Runde F: Pfeiler + Kare in Falllinie (grosse Skala, ~14 m Abstand), Gipfelpyramiden mit Facetten und Saetteln am Grat [A]
 _pf=np.sin(2*np.pi*(_sco/14.0+0.35*_ff(40,211)));_pf=np.sign(_pf)*np.abs(_pf)**0.5
-FD=FD+_wf*_sf*_bell**0.5*_gm*1.3*_pf                                                    # Pfeiler (+) / Kar-Rinne (-), seitlich wirksam ueber Steigung
+FD=FD+_wf*_sf*_bell**0.5*_gm*1.05*_pf                                                    # Pfeiler (+) / Kar-Rinne (-), seitlich wirksam ueber Steigung
 _kar=_wf*np.clip((_tl0-0.55)/0.35,0,1)*np.clip(-_pf,0,1)*np.clip(_ed*2,0,1);FD=FD-2.8*_kar   # Kare: Mulden an der Oberkante zwischen Pfeilern
 _cq=np.argwhere((_cz>0.55)&(_pf>0.6));_rp=np.random.default_rng(212);_PY=[]
 if len(_cq):
@@ -452,14 +452,23 @@ for _k in range(70):
     np.add.at(FH,(_iy,_ix),_d-_e);_sed+=_e-_d;_wat*=0.98;_p=np.where(_ok[:,None],_pn,_p)
 _ER=nd.gaussian_filter(FH-(FB+FD),1.5)                                                                                    # <0 = Abtrag (Rinne)
 _fe=_vin&(_wf>0)                                                  # thermische Glaettung (Grenzwinkel 62 Grad)
-_tl=np.tan(np.radians(71))/FS
+_tl=np.tan(np.radians(66))/FS
 for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
 FH=np.where(_vin,FH,FB)
+# Runde H: Grate schaerfen (Unscharf-Maske nur auf Ruecken, begrenzt) + Felszahn t58u bei x~186 z~37 [A]
+_g3=nd.gaussian_filter(FH,3);_rk=np.clip(FH-_g3,0,1.2);FH=np.where(_vin,FH+_wf*_sf*0.4*nd.gaussian_filter(_rk,0.7),FB)
+_zx,_zy=186*FS,37*FS;_zw=np.zeros_like(FH);_ys,_xs=slice(_zy-60,_zy+60),slice(_zx-60,_zx+60)
+_gzy,_gzx=np.gradient(nd.gaussian_filter(FB,6));_ang=np.arctan2(_gzy[_zy,_zx],_gzx[_zy,_zx])
+_dy,_dx=_fy[_ys,_xs]-_zy,_fx[_ys,_xs]-_zx;_al=_dx*np.cos(_ang)+_dy*np.sin(_ang);_qu=-_dx*np.sin(_ang)+_dy*np.cos(_ang)
+_pl=np.clip(1-np.abs(_al)/34,0,1);_pl=_pl*_pl*(3-2*_pl);_pq=np.clip(1-np.abs(_qu)/(9+4*np.clip(-_al/34,0,1)),0,1)   # Querprofil linear = klare Gratkante, Fuss breiter
+_zw[_ys,_xs]=_pl*_pq**1.1*(1+0.12*np.sin(_al/3.1))
+FH=np.where(_vin,FH+_wf*4.5*_zw,FB);_zm=nd.gaussian_filter((_zw>0.02).astype(float),3)
+
 # Politur t58u: Nadelspitzen/Zacken abrunden (lokale Ueberhoehung gegen Umgebung daempfen) [A]
 for _ in range(2):
-    _g4=nd.gaussian_filter(FH,4);_nad=_wf*np.clip((FH-_g4-0.9)/1.5,0,1);FH=np.where(_vin,FH*(1-0.45*_nad)+nd.gaussian_filter(FH,1.8)*0.45*_nad,FB)
+    _g4=nd.gaussian_filter(FH,4);_nad=_wf*(1-_zm)*np.clip((FH-_g4-1.1)/1.5,0,1);FH=np.where(_vin,FH*(1-0.45*_nad)+nd.gaussian_filter(FH,1.8)*0.45*_nad,FB)
 # Runde G: Gesimse = steile Kante unter leicht vorgezogener Oberkante, sparsam (Rauschmaske) [A]
 _gs=_wf*_sf*np.clip(1-np.abs(_tl0-0.86)/0.06,0,1)*np.clip(_ff(25,231)-0.2,0,1)
 FH=np.where(_vin,FH+0.9*nd.gaussian_filter(_gs,1.0),FB)
