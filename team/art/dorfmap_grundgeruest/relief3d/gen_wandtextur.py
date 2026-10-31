@@ -11,7 +11,7 @@ def fbm(n,okt,seed,p=0.55):
 r=np.random.default_rng(7);y=np.arange(N)[:,None]/N;x=np.arange(N)[None,:]/N
 # Schichten: Grenzen bei zufaelligen Hoehen, mit Verwerfung
 gr=np.sort(r.random(11));dick=np.diff(np.r_[gr,gr[0]+1])
-yy=(y+0.035*fbm(N,4,1)+0.02*np.sin(x*2*np.pi*2))%1
+yy=(y+0.02*fbm(N,4,1)+0.012*x)%1
 idx=np.searchsorted(gr,yy)%len(gr);ton=r.random(len(gr))[idx]
 grenz=np.min(np.abs(yy[...,None]-np.r_[gr,gr+1,gr-1][None,None,:]),-1);kante=np.exp(-grenz*N/2.5)
 # Kluftbloecke: Voronoi mit Punkten (kachelbar)
@@ -22,7 +22,7 @@ for px,py in P:
             d=np.hypot((X-px-ox)*1.0,(Y-py-oy)*0.7);m=d<d1;d2=np.where(m,d1,np.minimum(d2,d));d1=np.where(m,d,d1)
 kluft=np.exp(-(d2-d1)*N/7.0)*(0.4+0.6*(fbm(N,4,6)>0))*(fbm(N,3,5)>-0.3)
 bl=np.zeros((N,N));lab=np.argmin(np.stack([np.hypot(((X-px+0.5)%1-0.5),((Y-py+0.5)%1-0.5)*0.7) for px,py in P]),0);bl=r.random(38)[lab]
-h=0.55+0.13*(ton-0.5)+0.08*(bl-0.5)+0.09*fbm(N,6,3)-0.17*kluft-0.16*kante+0.10*np.clip(fbm(N,5,9),0,None)
+h=0.55+0.13*(ton-0.5)+0.08*(bl-0.5)+0.09*fbm(N,6,3)-0.20*kluft-0.07*kante+0.10*np.clip(fbm(N,5,9),0,None)
 warm=0.5+0.5*np.tanh(fbm(N,3,11))
 R=h*(0.98+0.10*warm);G=h*(0.96+0.03*warm);B=h*(0.95-0.07*warm)
 Image.fromarray((np.clip(np.stack([R,G,B],-1),0,1)*255).astype(np.uint8)).save('wand_textur.png')

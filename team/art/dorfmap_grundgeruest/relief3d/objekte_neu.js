@@ -4,11 +4,11 @@ const hash=(a,b)=>{const v=Math.sin(a*12.9898+b*78.233)*43758.5453;return v-Math
 const lin=h=>new THREE.Color(h);   // Color(hex) ist sRGB -> intern linear
 // nicht-indizierte Dreiecke mit Farbe -> flache Normalen
 class Bau{constructor(){this.p=[];this.c=[];this.f=[];}
- tri(a,b,c,col,id=-1){this.p.push(...a,...b,...c);for(let i=0;i<3;i++)this.c.push(col.r,col.g,col.b);this.f.push(id);}
+ tri(a,b,c,col,id=-1){if(this.flip)[b,c]=[c,b];this.p.push(...a,...b,...c);for(let i=0;i<3;i++)this.c.push(col.r,col.g,col.b);this.f.push(id);}
  quad(a,b,c,d,col,id){this.tri(a,b,c,col,id);this.tri(a,c,d,col,id);}
- box(x0,y0,z0,x1,y1,z1,col,id,ohneBoden=true){const P=(x,y,z)=>[x,y,z];
+ box(x0,y0,z0,x1,y1,z1,col,id,ohneBoden=true){const fl0=this.flip;this.flip=false;const P=(x,y,z)=>[x,y,z];
   const v=[P(x0,y0,z0),P(x1,y0,z0),P(x1,y0,z1),P(x0,y0,z1),P(x0,y1,z0),P(x1,y1,z0),P(x1,y1,z1),P(x0,y1,z1)];
-  const F=[[0,4,5,1],[1,5,6,2],[2,6,7,3],[3,7,4,0],[4,7,6,5]];if(!ohneBoden)F.push([0,1,2,3]);for(const [a,b,c,d] of F)this.quad(v[a],v[b],v[c],v[d],col,id);}
+  const F=[[0,4,5,1],[1,5,6,2],[2,6,7,3],[3,7,4,0],[4,7,6,5]];if(!ohneBoden)F.push([0,1,2,3]);for(const [a,b,c,d] of F)this.quad(v[a],v[b],v[c],v[d],col,id);this.flip=fl0;}
  geo(){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(this.p,3));g.setAttribute('color',new THREE.Float32BufferAttribute(this.c,3));g.computeVertexNormals();return g;}}
 // ---- Baeume ----
 function fichte(var_){const B=new Bau(),r=s=>hash(var_*7.1,s);const stamm=lin(0x4a3322);
@@ -39,32 +39,50 @@ function fels(var_){const g=new THREE.IcosahedronGeometry(0.55,2),P=g.attributes
 // ---- Haeuser ----
 const WAND={Hütte:[0x7a5a3c,0x6e4f34],Standard:[0xd8cdb6,0xcfc2a6],schmal:[0xcbbfa5,0xb9ab8e],Turmhaus:[0x9c968c,0x8d877e],kompakt:[0xd2c4a8,0xc7b796],
  Doppelhaus:[0xd6c9ae,0xc9bb9c],Eckhaus:[0xcfc0a2,0xc2b393],'FUNKTION:Ressource':[0x8a6a48,0x7a5d40],'FUNKTION:Kaserne':[0x8f8a80,0x847f76],'FUNKTION:Spezial':[0xa49c8e,0x958e80],'FUNKTION:Starthaus':[0xc9a878,0xbd9c6c]};
+let GL=null,KAM=[];   // Fenster mit Licht (unbeleuchtet) und Kaminpositionen fuer Rauch
+const DACHF={Hütte:0x4a3424,'FUNKTION:Ressource':0x4f3826,Turmhaus:0x4a4a4e,'FUNKTION:Kaserne':0x45474b,'FUNKTION:Spezial':0x5a3a2c};
+const LADEN=[0x3d5a3a,0x6e2f24,0x34506a,0x5a4a32];
 function haus(B,h,id){const b=h.b*0.9,t=h.t*0.9,platz=h.typ=='Quartiersplatz',x=h.x,z=h.z,y=h.y,lang=b>=t;
  if(platz){B.box(x-b/2,y-0.3,z-t/2,x+b/2,y+0.12,z+t/2,lin(0x9a948a),id);return;}
- const turm=h.typ=='Turmhaus',holz=h.typ=='Hütte'||h.typ=='FUNKTION:Ressource';const wc=WAND[h.typ]||WAND.Standard,wcol=lin(wc[0]).lerp(lin(wc[1]),hash(id,1));
- const wh=Math.max(2.4,turm?h.h*0.85:h.h*0.62),sock=0.6;
- B.box(x-b/2-0.1,y-1.0,z-t/2-0.1,x+b/2+0.1,y+sock,z+t/2+0.1,lin(0x6d6a64).multiplyScalar(0.9+0.2*hash(id,2)),id);   // Steinsockel, in Hang eingelassen
- B.box(x-b/2,y+sock,z-t/2,x+b/2,y+wh,z+t/2,wcol,id);
- if(!holz&&!turm){const fw=lin(0x5a3a24);for(const s of[-1,1]){B.box(x-b/2-0.02,y+sock,z+s*t/2-0.14,x+b/2+0.02,y+sock+0.18,z+s*t/2+0.14,fw,id);B.box(x-b/2-0.02,y+wh-0.2,z+s*t/2-0.14,x+b/2+0.02,y+wh,z+s*t/2+0.14,fw,id);
-}
-  for(const sx of[-1,1])for(const sz of[-1,1])B.box(x+sx*b/2-0.16,y+sock,z+sz*t/2-0.16,x+sx*b/2+0.16,y+wh,z+sz*t/2+0.16,fw,id);}   // Fachwerk-Ecken/Balken
- // Fenster und Tuer: dunkles Glas mit hellem Rahmen, leicht vorgesetzt
- const fen=lin(0x223038),rah=lin(0xe8e0cc),tur=lin(0x4b2e1c);const L=lang?b:t,Q=lang?t:b;
- const setz=(u,v,w,hgt,seite,col,tiefe=0.06)=>{const s=seite*Q/2;const pts=lang?[x+u-w/2,z+s,x+u+w/2]:[x+s,z+u-w/2,z+u+w/2];
-  if(lang)B.box(pts[0],y+v,z+s-(seite>0?0:tiefe),pts[2],y+v+hgt,z+s+(seite>0?tiefe:0),col,id);else B.box(x+s-(seite>0?0:tiefe),y+v,pts[1],x+s+(seite>0?tiefe:0),y+v+hgt,pts[2],col,id);};
- const nF=Math.max(1,Math.floor((L-1.5)/2.2)),etagen=Math.max(1,Math.floor((wh-sock)/2.4));
- for(const seite of[-1,1])for(let e=0;e<etagen;e++)for(let i=0;i<nF;i++){const u=-L/2+(i+0.5)*L/nF;if(e==0&&seite==1&&i==Math.floor(nF/2))continue;
-  setz(u,sock+0.9+e*2.4,0.95,1.05,seite,rah,0.07);setz(u,sock+0.98+e*2.4,0.75,0.88,seite,fen,0.09);}
- setz((nF%2?0:L/(2*nF)),sock,1.1,2.0,1,tur,0.08);setz((nF%2?0:L/(2*nF)),sock+2.0,1.3,0.15,1,rah,0.1);
- // Satteldach mit Ueberstand + Schneehaube; First entlang der langen Seite
- const ov=0.45,dh=turm?Math.min(b,t)*0.9:Math.min(b,t)*0.55,dach=lin(holz?0x4a3424:0x5b3326).lerp(lin(0x3c3a38),hash(id,3)*0.6),sn=lin(0xeef2f7);
- const Y=y+wh,P=(l,q,yy)=>lang?[x+l,yy,z+q]:[x+q,yy,z+l];const l0=-L/2-ov,l1=L/2+ov,q0=-Q/2-ov,q1=Q/2+ov,ys=Y-ov*dh/(Q/2);
- for(const [qa,qb] of[[q0,0],[q1,0]]){const A=P(l0,qa,ys),Bp=P(l1,qa,ys),C=P(l1,qb,Y+dh),D=P(l0,qb,Y+dh);
-  const k=qa<0;if(k){B.quad(A,D,C,Bp,dach,id);}else{B.quad(A,Bp,C,D,dach,id);}
-  const yq=q=>Y+dh-(Y+dh-ys)*Math.abs(q)/Math.abs(qa)+0.16,qq=qa*0.86;const A2=P(l0+0.08,qq,yq(qq)),B2=P(l1-0.08,qq,yq(qq)),C2=P(l1-0.08,0,Y+dh+0.16),D2=P(l0+0.08,0,Y+dh+0.16);   // Schneehaube [A]
-  if(k)B.quad(A2,D2,C2,B2,sn,id);else B.quad(A2,B2,C2,D2,sn,id);}
- for(const l of[-L/2,L/2]){const a=P(l,-Q/2,Y),c=P(l,Q/2,Y),d=P(l,0,Y+dh);B.tri(a,d,c,wcol,id);B.tri(a,c,d,wcol,id);}   // Giebel
- const ks=hash(id,4)-0.5;if(!platz){const cx=lang?x+ks*L*0.5:x+Q*0.2,cz=lang?z+Q*0.2:z+ks*L*0.5;B.box(cx-0.3,Y,cz-0.3,cx+0.3,Y+dh+0.9,cz+0.3,lin(0x6a625a),id);B.box(cx-0.33,Y+dh+0.9,cz-0.33,cx+0.33,Y+dh+1.05,cz+0.33,sn,id);}}
+ B.flip=!lang;   // P() spiegelt bei b<t die Achsen -> Wicklung umdrehen
+ const r=k=>hash(id*1.37+k*0.71,k*3.1+id*0.013);
+ const turm=h.typ=='Turmhaus',holz=h.typ=='Hütte'||h.typ=='FUNKTION:Ressource';const wc=WAND[h.typ]||WAND.Standard,wcol=lin(wc[0]).lerp(lin(wc[1]),r(1));
+ wcol.offsetHSL((r(9)-0.5)*0.03,(r(10)-0.5)*0.10,(r(11)-0.5)*0.07);   // keine identischen Nachbarn [A]
+ const L=lang?b:t,Q=lang?t:b,P=(l,q,yy)=>lang?[x+l,yy,z+q]:[x+q,yy,z+l];
+ const bx=(l0,l1,q0,q1,y0,y1,col)=>{const a=P(l0,q0,0),c=P(l1,q1,0);B.box(Math.min(a[0],c[0]),y0,Math.min(a[2],c[2]),Math.max(a[0],c[0]),y1,Math.max(a[2],c[2]),col,id);};
+ const wh=Math.max(2.5,turm?h.h*0.85:h.h*(0.52+0.14*r(2))),sock=0.45+0.3*r(12),sn=lin(0xeef2f7);
+ bx(-L/2-0.1,L/2+0.1,-Q/2-0.1,Q/2+0.1,y-1.0,y+sock,lin(0x6d6a64).multiplyScalar(0.85+0.25*r(13)));   // Steinsockel
+ bx(-L/2,L/2,-Q/2,Q/2,y+sock,y+wh,wcol);
+ const fw=lin(0x4e3220).multiplyScalar(0.85+0.3*r(14));
+ if(holz){for(let yy=y+sock+0.3;yy<y+wh-0.1;yy+=0.34)bx(-L/2-0.03,L/2+0.03,-Q/2-0.03,Q/2+0.03,yy,yy+0.05,wcol.clone().multiplyScalar(0.62));}   // Blockbohlen-Fugen
+ else if(!turm){for(const s of[-1,1]){bx(-L/2-0.02,L/2+0.02,s*Q/2-0.12,s*Q/2+0.12,y+sock,y+sock+0.16,fw);bx(-L/2-0.02,L/2+0.02,s*Q/2-0.12,s*Q/2+0.12,y+wh-0.18,y+wh,fw);}
+  for(const sl of[-1,1])for(const sq of[-1,1])bx(sl*L/2-0.14,sl*L/2+0.14,sq*Q/2-0.14,sq*Q/2+0.14,y+sock,y+wh,fw);}
+ // Fenster: Rahmen, Glas (warm beleuchtet oder dunkel), Laeden, Schnee auf Sims
+ const rah=lin(0xe2d9c4),tur=lin(0x4b2e1c).multiplyScalar(0.8+0.4*r(15)),lad=lin(LADEN[Math.floor(r(16)*4)]),mitL=!turm&&r(17)<0.7;
+ const nF=Math.max(1,Math.floor((L-1.5)/2.3)),etagen=Math.max(1,Math.floor((wh-sock)/2.4)),tm=nF%2?0:L/(2*nF);
+ const fl=(u,v,w,hh,s,col,d,bau=B)=>{const q=s*Q/2,a=P(u-w/2,q,0),c=P(u+w/2,q+s*d,0);bau.box(Math.min(a[0],c[0]),y+v,Math.min(a[2],c[2]),Math.max(a[0],c[0]),y+v+hh,Math.max(a[2],c[2]),col,id);};
+ for(const s of[-1,1])for(let e=0;e<etagen;e++)for(let i=0;i<nF;i++){const u=-L/2+(i+0.5)*L/nF;if(e==0&&s==1&&Math.abs(u-tm)<0.6)continue;const v=sock+0.85+e*2.4;
+  fl(u,v,0.95,1.1,s,rah,0.06);const an=r(30+i+e*7+s*3)<0.55;fl(u,v+0.08,0.75,0.94,s,an?lin(0xffc070):lin(0x2a3644),0.08,an?GL:B);
+  fl(u,v-0.06,1.05,0.07,s,sn,0.2);if(mitL){fl(u-0.68,v,0.36,1.1,s,lad,0.1);fl(u+0.68,v,0.36,1.1,s,lad,0.1);}}
+ fl(tm,sock,1.1,2.0,1,tur,0.08);fl(tm,sock+2.0,1.3,0.12,1,rah,0.1);
+ // Vordach ueber der Tuer mit Schnee
+ const dachc=lin(DACHF[h.typ]||0x5b3326).lerp(lin(0x3c3a38),r(3)*0.6);fl(tm,sock+2.3,1.9,0.12,1,dachc,0.95);fl(tm,sock+2.42,1.8,0.1,1,sn,0.9);
+ // Satteldach in Schindelreihen + Schneehaube mit wechselnder Bedeckung
+ const ov=0.45,dh=turm?Math.min(b,t)*0.9:Math.min(b,t)*(0.40+0.28*r(4)),Y=y+wh,l0=-L/2-ov,l1=L/2+ov,cf=0.5+0.4*r(5);
+ for(const s of[-1,1]){const qa=s*(Q/2+ov),ys=Y-ov*dh/(Q/2),n=Math.max(4,Math.round(Math.hypot(Q/2+ov,dh)/0.42));
+  const yq=q=>Y+dh-(Y+dh-ys)*Math.abs(q)/Math.abs(qa);
+  for(let k=0;k<n;k++){const qA=qa*(1-k/n),qB=qa*(1-(k+1)/n),dy=0.05;const c=dachc.clone().multiplyScalar(0.82+0.3*hash(k+id,id*0.3));
+   const A=P(l0,qA,yq(qA)-dy),Bp=P(l1,qA,yq(qA)-dy),C=P(l1,qB,yq(qB)),D=P(l0,qB,yq(qB));if(s<0)B.quad(A,D,C,Bp,c,id);else B.quad(A,Bp,C,D,c,id);}
+  const qq=qa*cf,e=0.14,A2=P(l0+0.06,qq,yq(qq)+e),B2=P(l1-0.06,qq,yq(qq)+e),C2=P(l1-0.06,0,Y+dh+e),D2=P(l0+0.06,0,Y+dh+e);if(s<0)B.quad(A2,D2,C2,B2,sn,id);else B.quad(A2,B2,C2,D2,sn,id);
+  const A3=P(l0+0.06,qq,yq(qq)),B3=P(l1-0.06,qq,yq(qq));if(s<0)B.quad(A3,A2,B2,B3,sn,id);else B.quad(A3,B3,B2,A2,sn,id);}   // Schneekante
+ for(const l of[-L/2,L/2]){const a=P(l,-Q/2,Y),c=P(l,Q/2,Y),d=P(l,0,Y+dh);const gc=holz?wcol.clone().multiplyScalar(0.85):wcol;B.tri(a,d,c,gc,id);B.tri(a,c,d,gc,id);}   // Giebel
+ // Anbau (Schuppen) an einer Giebelseite, Holzstapel an der Rueckseite
+ if(!turm&&r(6)<0.45){const al=1.3+0.6*r(7),ah=Math.min(wh*0.75,2.4),sg=r(8)<0.5?1:-1,l=sg*L/2;
+  bx(Math.min(l,l+sg*al),Math.max(l,l+sg*al),-Q*0.32,Q*0.32,y,y+ah,lin(0x6e5038).multiplyScalar(0.85+0.3*r(18)));
+  const ra=P(l,-Q*0.38,y+ah+0.55),rb=P(l,Q*0.38,y+ah+0.55),rc=P(l+sg*(al+0.25),Q*0.38,y+ah-0.05),rd=P(l+sg*(al+0.25),-Q*0.38,y+ah-0.05);
+  const up=p=>[p[0],p[1]+0.1,p[2]];if(sg>0^lang){B.quad(ra,rb,rc,rd,dachc,id);B.quad(up(ra),up(rb),up(rc),up(rd),sn,id);}else{B.quad(ra,rd,rc,rb,dachc,id);B.quad(up(ra),up(rd),up(rc),up(rb),sn,id);}}
+ if(r(19)<0.55){const u=(r(20)-0.5)*L*0.4,wl=1.6+r(21);fl(u,0,wl,1.0,-1,lin(0x8a6440),0.6);fl(u,1.0,wl,0.1,-1,sn,0.6);}
+ const ks=r(22)-0.5;if(true){const cl=ks*L*0.5,cq=Q*0.2*(r(23)<0.5?1:-1),[cx,,cz]=P(cl,cq,0);B.box(cx-0.3,Y,cz-0.3,cx+0.3,Y+dh+0.9,cz+0.3,lin(0x6a625a),id);B.box(cx-0.34,Y+dh+0.9,cz-0.34,cx+0.34,Y+dh+1.04,cz+0.34,sn,id);if(r(24)<0.6)KAM.push([cx,Y+dh+1.1,cz]);}B.flip=false;}
 export function objekteNeu(D,H,G,grp){
  const mat=new THREE.MeshLambertMaterial({vertexColors:true});
  const inst=(geo,L,fn,gn,farbe)=>{const m=new THREE.InstancedMesh(geo,mat,L.length),o=new THREE.Object3D(),c=new THREE.Color();L.forEach((e,n)=>{fn(o,e,n);o.updateMatrix();m.setMatrixAt(n,o.matrix);if(farbe){farbe(c,e,n);m.setColorAt(n,c);}});m.castShadow=m.receiveShadow=true;(G[gn]||grp(gn)).add(m);return m;};
@@ -72,8 +90,14 @@ export function objekteNeu(D,H,G,grp){
  const fc=(c,b)=>{const t=b[5]??hash(b[0],b[2]);c.setRGB(0.85+0.15*t,0.9+0.1*t,0.85+0.15*(1-t));};
  for(let v=0;v<VAR;v++){inst(fichte(v),D.baeume.filter((b,n)=>(n%5)!=4&&n%VAR==v),tf,'baeume',fc);}
  inst(kiefer(1),D.baeume.filter((b,n)=>(n%5)==4),tf,'baeume',fc);
- const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);o.position.set(x,y,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
+ const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);h=Math.min(h,2.6);o.position.set(x,y-0.22*h,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
  const alle=[...D.felsen,...D.findlinge,...D.steine,...(D.geroell||[])];FV.forEach((g,v)=>inst(g,alle.filter((e,n)=>n%3==v),ff,'felsen'));
- const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
+ GL=new Bau();KAM=[];const B=new Bau();D.haeuser.forEach((h,i)=>haus(B,h,i));const hmat=new THREE.MeshLambertMaterial({vertexColors:true});hmat.onBeforeCompile=sh=>{sh.fragmentShader=sh.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vColor.rgb*0.22;');};   // Aufhellung Schattenseite [A]
  const hm=new THREE.Mesh(B.geo(),hmat);hm.castShadow=hm.receiveShadow=true;hm.userData.hausFlaechen=B.f;hm.userData.haeuser=D.haeuser;grp('gebaeude').add(hm);
- return B.p.length/9;}
+ const gm=new THREE.Mesh(GL.geo(),new THREE.MeshBasicMaterial({vertexColors:true}));gm.material.color.setScalar(0.85);grp('gebaeude').add(gm);   // Fensterlicht [A]
+ {const cv=document.createElement('canvas');cv.width=cv.height=64;const g=cv.getContext('2d'),rg=g.createRadialGradient(32,32,0,32,32,32);rg.addColorStop(0,'rgba(255,255,255,0.9)');rg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=rg;g.fillRect(0,0,64,64);
+  const NP=5,pos=new Float32Array(KAM.length*NP*3),pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const pm=new THREE.Points(pg,new THREE.PointsMaterial({map:new THREE.CanvasTexture(cv),size:2.6,transparent:true,opacity:0.32,depthWrite:false,color:0xd9dde2}));pm.frustumCulled=false;
+  pm.onBeforeRender=()=>{const t=performance.now()/1000;KAM.forEach(([cx,cy,cz],k)=>{for(let n=0;n<NP;n++){const f=((t*0.25+n/NP+hash(k,1))%1),o=(k*NP+n)*3;pos[o]=cx+f*f*3.5+Math.sin(t+n+k)*0.25;pos[o+1]=cy+f*5.5;pos[o+2]=cz+f*1.2;}});pg.attributes.position.needsUpdate=true;};
+  grp('gebaeude').add(pm);}   // Kaminrauch, Wind nach Osten [A]
+ return (B.p.length+GL.p.length)/9;}

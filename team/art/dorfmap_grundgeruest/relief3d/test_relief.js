@@ -6,7 +6,7 @@ const p=await b.newPage({viewport:{width:1280,height:800}});const fehler=[];
 p.on('pageerror',e=>fehler.push('pageerror '+e.message));p.on('console',m=>{if(m.type()=='error')fehler.push('console '+m.text())});
 await p.goto('file://'+path.resolve(HTML));await p.waitForFunction(()=>window.__test&&window.__test.bereit,null,{timeout:180000});
 const shot=async(n,f)=>{await p.evaluate(f);await p.waitForTimeout(1500);await p.screenshot({path:OUT+'/'+n+'_'+SUF+'.png',timeout:600000});};
-for(const v of (E.VIEWS||'schraeg,nordwand,krater,suedwand,oben,dorf').split(','))for(const m of MODI)await shot(`${v}_${m}`,new Function(`__test.setModus('${m}');__test.setView('${v}')`));
+for(const v of (E.VIEWS||'schraeg,nordwand,krater,suedwand,oben,unten,rand,rueck,dorf').split(','))for(const m of MODI)await shot(`${v}_${m}`,new Function(`__test.setModus('${m}');__test.setView('${v}')`));
 for(const m of MODI){await shot(`boden_wand_${m}`,new Function(`__test.setModus('${m}');__test.amWand()`));
  await shot(`totale_auge_${m}`,new Function(`__test.setModus('${m}');__test.boden(253,110,0,0.03)`));}
 if(E.KURZ){console.log(JSON.stringify({fehler,dreiecke:await p.evaluate(()=>window.__dreiecke),info:await p.evaluate(()=>window.__info&&__info())}));await b.close();return;}

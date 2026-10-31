@@ -85,6 +85,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    vec3 tr2=texture2D(tW,vWP.zy/23.+.37).rgb*w.x+texture2D(tW,vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;
    float d=texture2D(tD,vWP.xz/4.).r*0.6+texture2D(tD,vWP.xz/23.).r*0.4,gD=texture2D(tD,vWP.xz/61.+.2).r;
    diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
+   {float f=texture2D(tD,vWP.xz/1.4+.37).r,L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
    float st=1.-smoothstep(0.40,0.72,abs(N.y)+0.10*(d-0.8));
    vec3 tx=mix(tr,tr2,0.35);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.05,0.98,0.92)*mix(0.85,1.25,gD)*1.15;
@@ -95,7 +96,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
  const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);NEU.add(g);
  window.__dreiecke={boden:bi.length/3-nw,wand:nw};
  // Wege-Overlay: weicher Rand ueber Vertex-Alpha
- {const A=u8(DN.WEGA),wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1);const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,h=hash(i,j);wp.push(i/RS,G[k]+0.05,j/RS);wc.push(0.16+0.04*h,0.11+0.03*h,0.065+0.02*h,Math.min(1,A[k]/255*1.15));}return map[k];};
+ {const A=u8(DN.WEGA),wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1);const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,h=hash(i,j);wp.push(i/RS,G[k]+0.05,j/RS);{const a=A[k]/255,e=a*a;wc.push(0.62-0.30*e+0.04*h,0.58-0.30*e+0.03*h,0.54-0.30*e+0.02*h,Math.min(0.85,Math.pow(a,1.4)*0.95));}}return map[k];};
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(A[a]|A[b]|A[c]|A[d])wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
   const wg=new THREE.BufferGeometry();wg.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));wg.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));wg.setIndex(wi);wg.computeVertexNormals();
   DN.wegMesh=new THREE.Mesh(wg,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));DN.wegMesh.receiveShadow=true;}
@@ -104,7 +105,8 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const e=1-Math.min(1,t*4);wc.push(0.06+0.5*e*e,0.16+0.48*e*e,0.21+0.45*e*e,ok(k)?0.55+0.35*Math.max(t,e*e):0);};}return map[k];};   // flach hell/klar, tief dunkler [A]
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(ok(a)||ok(b)||ok(c)||ok(d))wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
   const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));g2.setIndex(wi);g2.computeVertexNormals();
-  const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(g2,new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,depthWrite:false,shininess:90,specular:0x667788,side:THREE.DoubleSide}));wmesh.receiveShadow=true;wg.add(wmesh);NEU.add(wg);}
+  const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(g2,new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,depthWrite:false,shininess:90,specular:0x667788,side:THREE.DoubleSide}));wmesh.receiveShadow=true;const wu={value:0};window.__wu=wu;wmesh.material.onBeforeCompile=sh=>{sh.uniforms.uT=wu;sh.vertexShader='varying vec3 vWQ;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n vWQ=(modelMatrix*vec4(transformed,1.)).xyz;');
+  sh.fragmentShader='uniform float uT;varying vec3 vWQ;\n'+sh.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\n {float s=sin(vWQ.x*.31+vWQ.z*.11-uT*.9)*sin(vWQ.z*.47-vWQ.x*.05+uT*.6)+.5*sin(vWQ.x*1.3-vWQ.z*.9-uT*1.7);diffuseColor.rgb*=1.+.07*s;diffuseColor.rgb+=vec3(.025,.03,.035)*max(0.,s-.6);}');};wg.add(wmesh);NEU.add(wg);}
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
@@ -114,12 +116,14 @@ const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].for
 document.querySelectorAll('[data-l]').forEach(c=>c.onchange=ebSicht);
 const licht=()=>{const az=$('az').value*Math.PI/180,el=$('el').value*Math.PI/180;sun.position.set(NX/2+400*Math.cos(el)*Math.sin(az),400*Math.sin(el),NY/2-400*Math.cos(el)*Math.cos(az));sun.intensity=$('st').value/50;};
 ['az','el','st'].forEach(i=>$(i).oninput=licht);licht();
-const V={schraeg:[[NX/2,260,NY+170],[NX/2,0,NY/2]],oben:[[NX/2,520,NY/2+0.1],[NX/2,0,NY/2]],unten:[[NX/2,-260,NY/2+180],[NX/2,-14,NY/2]],nord:[[NX/2,90,-150],[NX/2,0,NY/2]],
+const V={schraeg:[[NX/2,260,NY+170],[NX/2,0,NY/2]],oben:[[NX/2,520,NY/2+0.1],[NX/2,0,NY/2]],unten:[[NX/2,-260,NY/2+180],[NX/2,-14,NY/2]],rand:[[-40,30,NY+40],[40,-5,NY-40]],rueck:[[NX+120,120,-120],[NX/2,0,NY/2]],nord:[[NX/2,90,-150],[NX/2,0,NY/2]],
  nordwand:[[WF.x+10,40,WF.z+90],[WF.x,6,WF.z-5]],krater:[[160,70,230],[108,4,150]],suedwand:[[170,40,300],[170,-8,225]],dorf:[[DN.start.x+22,14,DN.start.z+26],[DN.start.x,1,DN.start.z]]};
 let geh=false,yaw=0,pitch=0;const setView=n=>{geh=false;oc.enabled=true;const [p,t]=V[n];cam.position.set(...p);oc.target.set(...t);oc.update();};
 const boden=(x,z,yw,pt=0)=>{geh=true;oc.enabled=false;yaw=yw;pitch=pt;cam.position.set(x,Hf()(x,z)+1.7,z);cam.rotation.set(pitch,yaw,0,'YXZ');};
 const V2={totale_auge:[DN.start.x,DN.start.z+30,0,0.06]};V.totale_auge=null;
-const amWand=()=>boden(WF.x+3,WF.z+15,0.12,0.3);
+const amWand=()=>{let best=[WF.x+4,WF.z+22],bs=-1e9;for(let dz=14;dz<=34;dz+=2)for(let dx=-12;dx<=12;dx+=2){const cx=WF.x+dx,cz=WF.z+dz;let s=-Math.abs(dz-20)*0.3-Math.abs(dx)*0.2;
+  for(const h of DN.haeuser){const r=Math.max(h.b,h.t)/2+2;for(let k=0;k<=10;k++){const px=cx+(WF.x-cx)*k/10,pz=cz+(WF.z-cz)*k/10;if(Math.hypot(h.x-px,h.z-pz)<r+(k==0?4:0))s-=100;}}
+  if(s>bs){bs=s;best=[cx,cz];}}const [cx,cz]=best;boden(cx,cz,Math.atan2(-(WF.x-cx),-(WF.z-cz)),0.32);};   // freie Sichtlinie zur Wand [A]
 $('reset').onclick=()=>setView('schraeg');$('vunten').onclick=()=>setView('unten');$('voben').onclick=()=>setView('oben');$('vwand').onclick=amWand;
 $('gehen').onclick=()=>{if(geh)setView('schraeg');else boden(DN.start.x+6,DN.start.z+8,0);};
 setView('schraeg');
@@ -144,6 +148,6 @@ setModus('neu');
 let t0=performance.now();window.__info=()=>({dreiecke_gerendert:ren.info.render.triangles,draws:ren.info.render.calls,haus_dreiecke:window.__hausDreiecke});ren.setAnimationLoop(()=>{const t=performance.now(),dt=Math.min(0.1,(t-t0)/1000);t0=t;
  if(geh){const v=(keys.shift?12:4)*dt,f=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),r=new THREE.Vector3(-f.z,0,f.x);
   if(keys.w)cam.position.addScaledVector(f,v);if(keys.s)cam.position.addScaledVector(f,-v);if(keys.d)cam.position.addScaledVector(r,v);if(keys.a)cam.position.addScaledVector(r,-v);
-  cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;cam.rotation.set(pitch,yaw,0,'YXZ');}else oc.update();ren.render(sc,cam);});
+  cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;cam.rotation.set(pitch,yaw,0,'YXZ');}else oc.update();if(window.__wu)window.__wu.value=t/1000;ren.render(sc,cam);});
 onresize=()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);};
 $('lade').remove();})().catch(e=>{document.body.insertAdjacentHTML('beforeend','<pre style="color:red">'+e.stack+'</pre>');throw e;});
