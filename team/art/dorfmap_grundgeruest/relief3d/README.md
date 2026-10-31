@@ -61,3 +61,10 @@
 - t59u Platzierung: Bäume/Felsen/Findlinge/Steine/Geröll/Gras im Feinband auf Feinhöhe gesetzt, aus steilen Stellen und unter Nasen bis 3 m weggerückt. Zählung in `pruefung/platzierung_t59u.json` (z. B. Bäume vorher 245 steil/Nase, 254 versunken, 34 schwebend → nachher 0 steil/Nase). [S]
 - Prüfungen: summe 0, Zelldateien byte-gleich, Sprünge 14.09/16.15/11.09/12.0 m, Neigung 58.8° fein / 47.7° grob, Wasser 4808, Handy 1 118 814 Dreiecke. [S]
 - Bilder: test/t54u/*_r72.jpg (11 Ansichten), *_r73.jpg (grau), vgl_E_F_mit_referenz.jpg.
+
+## Runde G
+- Felsnasen-Meshes abgeschaltet (sahen wie Platten/Ringe aus); Code bleibt, nur mit `OV=1`. Stattdessen Gesimse im Höhenfeld (steile Kante unter der Oberkante, ~0,9 m, per Rauschmaske sparsam). [A]
+- Etwas markanter: Pfeiler 1,0→1,3, Kare 2,2→2,8, Nadel-Dämpfung erst ab 0,9 m Überhöhung (statt 0,5). [A]
+- Stelle t58u per Bildabgleich gefunden: Ansicht silh_nord (E), Treffer 0,996; Ort ca. x=186, z=37 (Nordwand-Bereich). Vorher/Nachher: test/t54u/spitze_t58u_vorher_nachher.jpg. [S]
+- Prüfungen: summe 0, Zelldateien byte-gleich, Sprünge 14.09/16.15/11.09/12.0 m, Neigung 59.9° fein, Wasser 4808, Handy 1 107 294 Dreiecke; Platzierung 0 Bäume steil nachher (pruefung/platzierung_t59u.json). [S]
+- Bilder: test/t54u/*_rundeG_g.jpg (11), *_clayG_g.jpg (grau inkl. Nord und Silhouette Nord).
