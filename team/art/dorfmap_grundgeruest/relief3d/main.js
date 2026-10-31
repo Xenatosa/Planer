@@ -28,7 +28,9 @@ function sockel(Hrand,tief,root){const sp2=[],si=[],rand=[];for(let i=0;i<=NX;i+
    c=mix(c,vec3(.22,.17,.13),smoothstep(-4.,-.5,vSP.y)*.0);c*=.85+.3*fract(sin(floor(y/3.1)*12.9)*437.);
    diffuseColor.rgb=pow(c,vec3(2.2))*2.6;}`);};
  root.add(new THREE.Mesh(geo(sp2,si),sm));
- const bo=new THREE.Mesh(new THREE.PlaneGeometry(NX,NY),new THREE.MeshBasicMaterial({color:0x4a4440,side:THREE.DoubleSide}));bo.rotation.x=Math.PI/2;bo.position.set(NX/2,tief,NY/2);root.add(bo);
+ const bo=new THREE.Mesh(new THREE.PlaneGeometry(NX,NY),(()=>{const bm=new THREE.MeshBasicMaterial({color:0xffffff,side:THREE.DoubleSide});bm.onBeforeCompile=sh=>{sh.vertexShader='varying vec3 vBP;\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvBP=(modelMatrix*vec4(transformed,1.)).xyz;');sh.fragmentShader='varying vec3 vBP;\n'+sh.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+ {vec2 q=vBP.xz;float f=q.x*.6+q.y*.8+9.*sin(q.x*.021)+5.*sin(q.y*.033+1.)+1.5*sin(q.x*.11+q.y*.07);float b=fract(f/7.),k=fract(sin(floor(f/7.)*12.9)*437.);
+  vec3 c=mix(vec3(.24,.22,.20),vec3(.36,.33,.29),.5+.5*k);c=mix(c,vec3(.44,.40,.35),step(.86,b)*.6);c*=.88+.12*fract(f/1.3);diffuseColor.rgb=c;}`);};return bm;})());bo.rotation.x=Math.PI/2;bo.position.set(NX/2,tief,NY/2);root.add(bo);
  }
 // gemeinsame Objekte (Wege, Bruecken, Baeume, Felsen, Haeuser, Mensch) – Groessen [A] wie t39u
 function objekte(D,H,root,mensch){const G={};const grp=n=>{G[n]=new THREE.Group();G[n].userData.ebene=n;root.add(G[n]);return G[n]};

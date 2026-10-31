@@ -76,10 +76,10 @@ function haus(B,h,id){const b=h.b*0.9,t=h.t*0.9,platz=h.typ=='Quartiersplatz',x=
     const A=P(la,qA,yq(qA)-dy),Bp=P(lb,qA,yq(qA)-dy),C=P(lb,qB,yq(qB)),D=P(la,qB,yq(qB));if(s<0)B.quad(A,D,C,Bp,cc,id);else B.quad(A,Bp,C,D,cc,id);}}
   {const fa=lin(0x3a2618),ed=0.24;const E1=P(l0,qa,ys-0.06),E2=P(l1,qa,ys-0.06),E3=P(l1,qa,ys-0.06-ed),E4=P(l0,qa,ys-0.06-ed);B.quad(E1,E2,E3,E4,fa,id);B.quad(E1,E4,E3,E2,fa,id);   // Traufbrett
    for(const l of[l0,l1]){const V1=P(l,qa,ys-0.04),V2=P(l,0,Y+dh-0.02),V3=P(l,0,Y+dh-0.02-ed),V4=P(l,qa,ys-0.04-ed);B.quad(V1,V2,V3,V4,fa,id);B.quad(V1,V4,V3,V2,fa,id);}}   // Ortgang
-  const nsg=Math.max(3,Math.round((l1-l0)/1.1)),e=0.14,cmK=m=>Math.min(0.97,Math.max(0.3,cf+(hash(id*2.3+m,s*5.1+m)-0.5)*0.32)),emK=m=>e*(0.75+0.5*hash(m,id+s));
+  const nsg=Math.max(3,Math.round((l1-l0)/0.7)),e=0.14,cmK=m=>Math.min(0.97,Math.max(0.3,cf+(Math.sin(m*0.9+id)*0.6+hash(id*2.3+m,s*5.1+m)-0.5)*0.14)),emK=m=>e*(0.75+0.5*hash(m,id+s));
   for(let m=0;m<nsg;m++){const la=l0+0.06+(l1-l0-0.12)*m/nsg,lb=l0+0.06+(l1-l0-0.12)*(m+1)/nsg,qa2=qa*cmK(m),qb2=qa*cmK(m+1),ea=emK(m),eb=emK(m+1);   // Schneekante als stetige Wellenlinie [A]
-   const sr=sn.clone().multiplyScalar(1.0),se=sn.clone().multiplyScalar(0.93).lerp(lin(0xc8d4e6),0.25);   // Traufe kuehler, First heller
-   const A2=P(la,qa2,yq(qa2)+ea),B2=P(lb,qb2,yq(qb2)+eb),C2=P(lb,0,Y+dh+e),D2=P(la,0,Y+dh+e);if(s<0){B.tri(A2,D2,C2,se,id);B.tri(A2,C2,B2,sr,id);}else{B.tri(A2,B2,C2,se,id);B.tri(A2,C2,D2,sr,id);}
+   const sr=sn.clone().multiplyScalar(0.97+0.04*hash(id,s)),se=sn.clone().multiplyScalar(0.93).lerp(lin(0xc8d4e6),0.25);   // Traufe kuehler, First heller
+   const A2=P(la,qa2,yq(qa2)+ea),B2=P(lb,qb2,yq(qb2)+eb),C2=P(lb,0,Y+dh+e),D2=P(la,0,Y+dh+e);if(s<0){B.quad(A2,D2,C2,B2,sr,id);}else{B.quad(A2,B2,C2,D2,sr,id);}
    const A3=P(la,qa2,yq(qa2)),B3=P(lb,qb2,yq(qb2));if(s<0)B.quad(A3,A2,B2,B3,se,id);else B.quad(A3,B3,B2,A2,se,id);}}
  for(const l of[-L/2,L/2]){const a=P(l,-Q/2,Y),c=P(l,Q/2,Y),d=P(l,0,Y+dh);const gc=holz?wcol.clone().multiplyScalar(0.85):wcol;B.tri(a,d,c,gc,id);B.tri(a,c,d,gc,id);}   // Giebel
  // Anbau (Schuppen) an einer Giebelseite, Holzstapel an der Rueckseite

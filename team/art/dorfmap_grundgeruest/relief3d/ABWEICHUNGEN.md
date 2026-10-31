@@ -42,3 +42,10 @@
 - Sockel-Boden -34 m statt -30 m (tiefste Stelle -29,9 m flimmerte durch) [R].
 - Leistung [S]: Desktop 1280x800 1,97 Mio Dreiecke / 19 Draws (Haeuser 80 234); Handy 390x844 ?lod=1 1,36 Mio / 20 Draws.
 - Bekannte Restmaengel: Wand-Oberkante treppig (0,5-m-Raster), Wandtextur aus der Naehe netzartig, Haeuser von nahem noch kantig, keine Zaeune, Schnee-Schatten unscharf.
+
+## t44u Runden 9-10
+- Zellen/Hoehen unveraendert, pruefe_t42u summe 0 [R]. Glaettung der Abbruchkante und Verrundung der Randkerbe nur im Anzeigenetz (x/z bzw. Absenkung am Kartenrand <=5 m), nicht in G/Zellwerten [A].
+- Wandhoehe Messmethode [R]: Soll 14/16/11/12 m = Hoehensprung der Wand selbst. Wandfuss-Zelle Nord (253,29): Sprung zur Nachbarzelle exakt 14,0 m [R]. Der Median 15,45 m (max-min G im 5x5-Zellfenster) nimmt den Hang am Fuss/Kopf mit und ist darum ein Obermass; ein 3x3-Fenster auf Zellmitteln (klippe_hoehe_median_3x3_je_wand) liefert Nord 13,5 / Suedgrat 11,36 / Krater 10,21 / Ostgrat 9,87 m und unterschaetzt durch die Mittelung. Massgeblich ist der Zellsprung; beide Mediane nur Kontrolle [A].
+- Zaeune [R]: 1480 Segmente geprueft, 1101 gebaut; Regel [A]: Abstand 1,8 m ums Haus, Tuerseite offen, kein Segment auf Wegzelle, nicht naeher als 0,9 m an anderem Haus/Platz, Hoehenunterschied <0,5 m, Abweichung zu Hausboden <1,2 m.
+- Schatten [A]: bias -0,0003, normalBias 0,12, radius 1,6, Frustum +-238 m.
+- Sockelseiten/Unterseite: Gesteinsschichten per Shader (Dicke 3,1 m und 0,8 m, gewellt) [A].
