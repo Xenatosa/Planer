@@ -75,3 +75,10 @@
 - R6 [S]: Handy ?lod=1 (390x844) 1 163 663 Dreiecke gerendert (vorher 1 871 723), 32 Draws. Felsen Ikosaeder Detail 1, Fichten 6 statt 9 Zweige, 1/3 Geroell. Messung `test_budget.js`.
 - R5: Fernberge Hoehenfeld-Ring R 120-2600 m, 4 Oktaven gerundet, grauer Fels; blauer Ring war die Luecke zwischen Kartenrand und Ring-Innenkante (R0 420) -> geschlossen. Ring wird ausgeblendet, wenn Kamera unter -30 m (Ansicht unten).
 - Offen: R1 Klippen-Silhouetten/Ueberhaenge, R2 Kraterring-Zugaenge, R3 Serpentinen als Terrain-Rampen, R4 Flussbett/Ufer. Nicht bearbeitet.
+
+## Runde J (t62u) – Wasserlauf
+- [A] J1: Der Wasserlauf ist neu gelegt, als Kaskaden im Talboden (fluss_t62u.fluss_kaskade). Wasser am Hang und am Wandfuss des Klippenbandes VB wurde Land. Ein Verbindungskanal (Dijkstra, Bett 0,35 m) hält den Fluss durchgehend. Tiefster Schnitt 1,26 m (Runde I: 8,9 m).
+- [A] J2: Zwei kleine Hangwasser-Stücke (21 und 32 Ecken) sind weggefallen.
+- [A] J3: Objekte, die im Wasser standen, wurden verschoben oder entfernt: Bäume 28/2, Felsen 2/0, Steine 649/101, Geröll 9/0. In relief_zaehlung.json stehen dadurch bewusst neue Zahlen: baeume 1969→1967, steine 1133→1032. Zellwerte, CSV und grobe glb sind byte-gleich.
+- [A] J4: Kein Weg-Overlay wurde verschoben. VB ist das Klippenband und kein Weg.
+- [S] J5: Der Fluss kreuzt weiter zwei Wasserscheiden (Strang 13, wie schon in Runde I). Gemessen mit Becken als Senken gibt es 0 Bergauf-Stellen. 22 Becken haben keinen Randabfluss (Endseen). Es gibt Stufen bis 3,54 m (Wasserfälle).

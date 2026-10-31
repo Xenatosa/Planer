@@ -563,7 +563,23 @@ from fluss_t61u import fluss_monoton
 _VBc=np.zeros((GY,GX),bool)
 for _dj in range(RS+1):
     for _di in range(RS+1):_VBc[_dj:_dj+NY*RS:RS,_di:_di+NX*RS:RS]|=BAND
+if os.environ.get('FDUMP'):np.savez_compressed(os.environ['FDUMP'],WV=WV,G=G,VB=_VBc,LEV=LEV_ROH)
 WV_ALT=WV.copy();WV,G_ANZ,FLUSS_T61U=fluss_monoton(WV,G,_VBc,LEV_ROH);print('fluss_t61u',FLUSS_T61U)
+from fluss_t62u import ufer_glaetten,fluss_kaskade
+WV,G_ANZ,KASK_T62U=fluss_kaskade(WV_ALT,G,_VBc);print('kaskade_t62u',KASK_T62U)   # t62u ersetzt den t61u-Spiegel (6-9 m Grabung) [A]
+WV,G_ANZ,UFER_T62U=ufer_glaetten(WV,G,G_ANZ,_VBc);print('ufer_t62u',UFER_T62U)
+def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
+    dG=G_ANZ.astype(float)-G;st={}
+    for nm,L in(('baeume',baeume),('felsen',felsen),('findlinge',findlinge),('steine',steine),('geroell',geroell)):
+        neu=[];v=0;w=0
+        for o in L:
+            j,i=o[2]*RS,o[0]*RS;d=float(nd.map_coordinates(dG,[[j],[i]],order=1,mode='nearest')[0]);wv=float(nd.map_coordinates(WV,[[j],[i]],order=0,mode='nearest')[0])
+            if abs(d)>0.01:o=list(o);o[1]=round(o[1]+d,3);v+=1
+            if wv>-900 and wv>o[1]+0.15*(o[3] if nm!='baeume' else 1):w+=1;continue
+            neu.append(o)
+        L[:]=neu;st[nm]={'verschoben':v,'im_wasser_entfernt':w}
+    return st
+OBJ_T62U=_anz_objekte();print('objekte_t62u',OBJ_T62U)
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
