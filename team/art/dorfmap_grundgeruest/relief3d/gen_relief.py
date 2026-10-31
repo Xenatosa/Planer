@@ -603,6 +603,16 @@ def stummel_runden(WV,GA):   # t64u K9: Suedfluss-Stichgraben x64-68 z252-263 wa
     st['spiegel_kopf']=round(float(LV.max()),3);st['spiegel_muendung']=round(float(LV[w1].min()),3)
     return WV,GA,st
 WV,G_ANZ,STUMMEL_T64U=stummel_runden(WV,G_ANZ);print('stummel_t64u',STUMMEL_T64U)
+def schlucht_breiter(WV,GA):   # t64u K9: Schluchtwasser x210-227 z229-245 nur 1-1,5 m Streifen -> bis 2 Zellen in flachen Schluchtboden ausdehnen (Spiegel = kleinster Nachbarspiegel, nie hoeher) [A]
+    WV=WV.copy();GA=GA.copy();j0,j1,i0,i1=458,492,425,465;n=0
+    for it in range(2):
+        sw=WV[j0:j1,i0:i1];sg=GA[j0:j1,i0:i1];w=sw>-900
+        nmin=-nd.grey_erosion(np.where(w,-sw,-1e9),size=3)   # dummy
+        lo=nd.minimum_filter(np.where(w,sw,1e9),size=3)
+        cand=(~w)&(lo<1e8)&(sg<lo+0.6)
+        sw[cand]=lo[cand];sg[cand]=np.minimum(sg[cand],lo[cand]-0.12);n+=int(cand.sum())
+    return WV,GA,{'neu_wasser':n}
+WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT_T64U)
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
