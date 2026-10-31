@@ -100,7 +100,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(A[a]|A[b]|A[c]|A[d])wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
   const wg=new THREE.BufferGeometry();wg.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));wg.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));wg.setIndex(wi);wg.computeVertexNormals();
   DN.wegMesh=new THREE.Mesh(wg,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));DN.wegMesh.receiveShadow=true;}
- sockel((i,j)=>HN(i,j),-30,g);
+ sockel((i,j)=>HN(i,j),-34,g);   // Boden unter tiefster Stelle (-29,9 m), sonst Flimmern
  {const wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1),ok=k=>WV[k]>-900;const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,t=ok(k)?Math.min(1,Math.max(0,(WV[k]-G[k])/1.5)):0;
    wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const e=1-Math.min(1,t*4);wc.push(0.06+0.5*e*e,0.16+0.48*e*e,0.21+0.45*e*e,ok(k)?0.55+0.35*Math.max(t,e*e):0);};}return map[k];};   // flach hell/klar, tief dunkler [A]
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(ok(a)||ok(b)||ok(c)||ok(d))wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}

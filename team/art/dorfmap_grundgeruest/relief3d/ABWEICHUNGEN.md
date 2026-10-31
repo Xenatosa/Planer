@@ -30,3 +30,15 @@
 - Suedgrat [R]: Talboden TAL_SUED/untere Bandzellen bis 15 Zellen vom Band um bis zu 16,8 m unter Oberkante abgesenkt, Median klippe_hoehe 16,04 m. 11150 Zellen (Reihen 218–276) mit neuen Hoehenwerten, sonst unveraendert. pruefe_t42u: 0 Abweichungen.
 - Bodenfarbe: Material-Gewichte (untergrund, Nass am Wasser, Geroell am Wandfuss) je Vertex, c20 nur 12 % Toenung [A]. Fels per Neigung (smoothstep 0,42–0,74 cos) triplanar [A].
 - Bekannte Maengel: Waende wirken noch wie gestempelt (Textur gleichmaessig), Schneeboden flach/eintoenig, Wege-Overlay sehr blass, Haeuser/Baeume sind Platzhalter, Kamera "Am Nordwand-Fuss" hat einen Felsen direkt vor der Linse.
+
+
+## t44u (Schoenheitsrunden 1-8)
+- Zellen/Hoehen unveraendert: pruefe_t42u summe 0 nach jeder Runde [R]. Gelaende-Mesh ohne Gebaeude/Plaetze/Wege; Wege = eigenes Overlay-Mesh, Haeuser = eigene Ebene "gebaeude" [R].
+- Wandhoehen-Median neu gemessen (max-min G im 5x5-Fenster an steilen Zellen) [R]: Nord 15,45 / Suedgrat 16,04 / Krater 11,20 / Ostgrat 11,99 m. Soll 14/16/11/12 [R]; Nord +1,45 m, weil das Messfenster den Hang am Fuss mitnimmt (seit t42u bekannt).
+- Baeume 1470 seit t43u (dbc41ea) in allen Commits; die Zahl 1482 stammte aus einem nicht eingecheckten Zwischenlauf in t44u Runde 1, nicht aus einem Commit [R].
+- Haeuser: Masse, Dachneigung (0,40-0,68 x Breite), Wandhoehe (0,52-0,66 x h), Anbau (45 %), Holzstapel (55 %), Laeden (70 %), beleuchtete Fenster (55 %), Rauch (60 % der Kamine), Wind nach Osten [A].
+- Felsen-Groesse auf 2,6 begrenzt und 22 % eingesenkt (keine schwebenden/dunklen Unterseiten) [A].
+- Kamera "Am Nordwand-Fuss" sucht automatisch einen Punkt mit freier Sicht 14-34 m vor der Wand [A].
+- Sockel-Boden -34 m statt -30 m (tiefste Stelle -29,9 m flimmerte durch) [R].
+- Leistung [S]: Desktop 1280x800 1,97 Mio Dreiecke / 19 Draws (Haeuser 80 234); Handy 390x844 ?lod=1 1,36 Mio / 20 Draws.
+- Bekannte Restmaengel: Wand-Oberkante treppig (0,5-m-Raster), Wandtextur aus der Naehe netzartig, Haeuser von nahem noch kantig, keine Zaeune, Schnee-Schatten unscharf.
