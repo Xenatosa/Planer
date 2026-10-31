@@ -87,7 +87,7 @@ const ALT=new THREE.Group();sc.add(ALT);let HA;
  const wg=new THREE.Group();wg.userData.ebene='wasser';wg.add(new THREE.Mesh(geo(q),new THREE.MeshPhongMaterial({color:0x4a8ec0,transparent:true,opacity:0.65,shininess:80,side:THREE.DoubleSide})));ALT.add(wg);
  objekte(DA,HA,ALT,menschPos);}
 // ---------- NEU (Relief t42u: glattes 0,5-m-Hoehenfeld, c20-Draufsicht als Bodentextur, Waende mit Wandtextur) ----------
-const NEU=new THREE.Group();sc.add(NEU);const G=f32(DN.G),WV=f32(DN.WV),RS=DN.rs,GX=NX*RS+1,GY=NY*RS+1,COSW=Math.cos(DN.wandwinkel*Math.PI/180);
+const NEU=new THREE.Group();sc.add(NEU);const G=f32(DN.GB||DN.G),WV=f32(DN.WV),RS=DN.rs,GX=NX*RS+1,GY=NY*RS+1,COSW=Math.cos(DN.wandwinkel*Math.PI/180);
 const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,0),GY-1.001);const i=x|0,j=z|0,fx=x-i,fz=z-j,k=j*GX+i;
  return G[k]*(1-fx)*(1-fz)+G[k+1]*fx*(1-fz)+G[k+GX]*(1-fx)*fz+G[k+GX+1]*fx*fz;};
 {const p=new Float32Array(GX*GY*3),VC=u8(DN.VC),cl=new Float32Array(GX*GY*3);for(let k=0;k<GX*GY;k++){const i=k%GX,j=(k/GX)|0;p.set([i/RS,G[k],j/RS],k*3);for(let c=0;c<3;c++)cl[k*3+c]=Math.pow(VC[k*3+c]/255,2.2);}
@@ -141,6 +141,10 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
  let fwMesh=null;if(FW){const b2=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)).buffer,FS=FW.fs,FX=NX*FS+1,vid=new Uint32Array(b2(FW.vid)),fh=new Float32Array(b2(FW.h)),fc=new Uint8Array(b2(FW.c)),S=FS/(LS==1?1:2)>=1?(LS==1?1:2):1;
   const map=new Int32Array(FX*(NY*FS+1)).fill(-1);vid.forEach((k,n)=>map[k]=n);const fp=new Float32Array(vid.length*3),fcl=new Float32Array(vid.length*3);
   vid.forEach((k,n)=>{fp[n*3]=(k%FX)/FS;fp[n*3+1]=fh[n];fp[n*3+2]=((k/FX)|0)/FS;for(let c=0;c<3;c++)fcl[n*3+c]=Math.pow(fc[n*3+c]/255,2.2);});
+  // t61u: Handy-LOD (Grobnetz 1 m) – Feinband-Randpunkte in Kantenmitte auf die Grobkante legen, sonst Spalt bis 0,5 m [A]
+  if(LS==2){const H=FS/2,bz=(x,y)=>x>=0&&y>=0&&x<NX&&y<NY&&BANDZ[y*NX+x];vid.forEach((k,n)=>{const fx=k%FX,fy=(k/FX)|0,x=(fx/FS)|0,y=(fy/FS)|0;
+   if(fy%FS==0&&fx%FS==H){if(!(bz(x,y-1)&&bz(x,y))){const a=(fy/FS*RS)*GX+x*RS;fp[n*3+1]=(G[a]+G[a+RS])/2;}}
+   else if(fx%FS==0&&fy%FS==H){if(!(bz(x-1,y)&&bz(x,y))){const a=(y*RS)*GX+fx/FS*RS;fp[n*3+1]=(G[a]+G[a+RS*GX])/2;}}});}
   const fi=[];for(let z=0;z<NX*NY;z++){if(!BANDZ[z])continue;const x=z%NX,y=(z/NX)|0;for(let dj=0;dj<FS;dj+=S)for(let di=0;di<FS;di+=S){const a=map[(y*FS+dj)*FX+x*FS+di],b=map[(y*FS+dj)*FX+x*FS+di+S],c=map[(y*FS+dj+S)*FX+x*FS+di],d=map[(y*FS+dj+S)*FX+x*FS+di+S];fi.push(a,c,d,a,d,b);}}
   const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.BufferAttribute(fp,3));fg.setAttribute('color',new THREE.BufferAttribute(fcl,3));if(FW.t){fg.setAttribute('ftint',new THREE.BufferAttribute(new Float32Array(new Uint8Array(b2(FW.t))).map(v=>v/256),3));fg.setAttribute('fsnow',new THREE.BufferAttribute(new Float32Array(new Uint8Array(b2(FW.s))).map(v=>v/255),1));}fg.setIndex(fi);fg.computeVertexNormals();
   fwMesh=new THREE.Mesh(fg,matF);fwMesh.receiveShadow=fwMesh.castShadow=true;fwMesh.userData.boden=1;window.__fw={dreiecke:fi.length/3,lod:S};window.__fwm=fwMesh;}
@@ -207,7 +211,7 @@ function klick(sx,sy){rc.setFromCamera(new THREE.Vector2(sx/innerWidth*2-1,-sy/i
   const cx=Math.min(NX-1,Math.max(0,Math.floor(pt.x))),cy=Math.min(NY-1,Math.max(0,Math.floor(pt.z)));const z=zelle(cx,cy);res={art:(h.object.name=='felswand'||(modus=='neu'&&Math.abs(n.y)<COSW))?'felswand':'zelle',...z};
   mk.position.set(cx+0.5,Hf()(cx+0.5,cy+0.5)+0.15,cy+0.5);mk.visible=true;txt=(res.art=='felswand'?'<b>Felswand</b> an ':'')+'<b>Zelle '+z.zell_id+'</b> ('+modus+')\n'+Object.entries(z).map(([k,v])=>k+': '+v).join('\n');}
  $('info').innerHTML=txt;window.__letzterKlick=res;return res;}
-window.__test={setView:n=>V2[n]?boden(...V2[n]):setView(n),boden,amWand,setModus,klick,start:DN.start,wandfuss:WF,haus0:DN.haeuser.find(h=>h.typ.startsWith('FUNKTION:Kaserne')),
+window.__test={setView:n=>V2[n]?boden(...V2[n]):setView(n),kam:(p,t)=>{V.__k=[p,t];setView('__k')},boden,amWand,setModus,klick,start:DN.start,wandfuss:WF,haus0:DN.haeuser.find(h=>h.typ.startsWith('FUNKTION:Kaserne')),
  klickWelt:(x,y,z)=>{const v=new THREE.Vector3(x,y,z).project(cam);return klick((v.x+1)/2*innerWidth,(1-v.y)/2*innerHeight);},H:(x,z)=>Hf()(x,z),bereit:true};
 setModus('neu');
 let t0=performance.now();window.__szene=sc;window.__info=()=>({dreiecke_gerendert:ren.info.render.triangles,draws:ren.info.render.calls,haus_dreiecke:window.__hausDreiecke,zaun:window.__zaun});ren.setAnimationLoop(()=>{const t=performance.now(),dt=Math.min(0.1,(t-t0)/1000);t0=t;
