@@ -95,3 +95,12 @@
 - [A] K6: Die Startpunkte der Erosion sind eingefroren (erosion_start_t63u.npy). Ohne das hätte sich die ganze Karte um etwa 0,1 m verschoben.
 - [S] K7: Südfluss: Die flache Endstrecke (1257 Wasser-Ecken, Weg 652 Ecken ≈ 326 m) hat jetzt ein durchgehendes leichtes Gefälle von −17,64 auf −18,20 m (0,56 m, etwa 0,17 %). Geändert wurden nur die Anzeige-Felder WV/GB auf Wasser-Ecken (fluss_k.gefaelle_flach). Das Bett wurde an 374 Ecken um bis zu 0,1 m unter den Spiegel gelegt. Zellwerte sind unverändert (zellen_relief.csv byte-gleich, t42u 0). Bergauf weiter 0.
 - [A] K8: __pycache__ ist aus git genommen (git rm --cached) und steht in .gitignore. Löst J7.
+
+## K9 – Ansichten t63u (13 Textur + 13 Clay, einzeln, 1280×800) [S]
+Jede Ansicht einzeln angesehen. Keine Löcher, kein Baum im Wasser gesehen, der Fluss ist in oben/schraeg durchgehend. OFFEN:
+- sued (Tex): Ein Stück vom Südfluss hat gerade Kanten und sieht kastenförmig aus. Die helle quadratische Fläche gab es schon vorher. Im Clay sieht man an der Stelle eckige Stufenkanten.
+- fluss_ost: In der Schlucht ist das Wasser nur ein dünner dunkler Streifen. Die Wandtextur ist gestreckt, wirkt verpixelt.
+- suedwand/boden_wand (Clay): Senkrechte Streifen an den steilen Wänden (Netz gestreckt). Unten im Bild gerade Terrassenkanten.
+- oben (Clay): Der Ostrand der Karte ist leicht gewellt und nicht gerade.
+- In allen Bildern ist das Bedien-Panel der App zu sehen (Screenshot vom Viewer, kein Sammelbogen). Eine Version ohne UI ist nicht gerendert.
+Nichts davon behoben.
