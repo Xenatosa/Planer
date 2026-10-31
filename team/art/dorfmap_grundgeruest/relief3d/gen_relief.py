@@ -25,6 +25,33 @@ H[rest]=Hk[rest]
 sg=wand&(wn=='Suedgrat');topf=nd.maximum_filter(np.where(sg&(H>-15),H,-1e9),size=31);dsg=nd.distance_transform_edt(~sg)
 ziel=((eb=='TAL_SUED')&(dsg<=15)|(sg&(H<=-15.9)))&(topf>-1e8)
 H[ziel]=np.minimum(H[ziel],-16-0.8*(1-dsg[ziel]/15))   # t46u: Fuss nie unter Talboden -16,8 (vorher Graeben bis -25,8 m wo Gratoberkante tief lag) [A]
+# --- t47u: Flusslücken schliessen (c20: Wasser endet an Wandbaendern / 2-9 Zellen Luecken) [A]
+def _flussluecken():
+    lab,n=nd.label(wa,np.ones((3,3)));big=[i for i in range(1,n+1) if (lab==i).sum()>=30];log=[]
+    for k,i in enumerate(big):
+        di,ind=nd.distance_transform_edt(lab!=i,return_indices=True)
+        for j in big[k+1:]:
+            m=lab==j;dmin=di[m].min()
+            if dmin<1.5 or dmin>12:continue
+            yb,xb=[v[m][np.argmin(di[m])] for v in np.nonzero(np.ones_like(m))] if False else np.argwhere(m)[np.argmin(di[m])]
+            ya,xa=ind[0][yb,xb],ind[1][yb,xb];ha_,hb_=H[ya,xa],H[yb,xb];L=int(max(abs(yb-ya),abs(xb-xa)))+1
+            for t in np.linspace(0,1,L*2):
+                y=int(round(ya+t*(yb-ya)));x=int(round(xa+t*(xb-xa)))
+                for dy in (-1,0,1):
+                    for dx in (-1,0,1):
+                        yy,xx=y+dy,x+dx
+                        if 0<=yy<NY and 0<=xx<NX and not wa[yy,xx]:
+                            wa[yy,xx]=True;fl[yy,xx]=fl[ya,xa];H[yy,xx]=ha_+t*(hb_-ha_);wand[yy,xx]=False;ug[yy,xx]='WASSER_EIS'
+            log.append(((int(xa),int(ya)),(int(xb),int(yb)),round(float(dmin),1),round(float(ha_),1),round(float(hb_),1)))
+    return log
+FLUSSLUECKEN=_flussluecken();print('flussluecken',FLUSSLUECKEN)
+# t47u: Stufen im Wasserspiegel >1 m/Zelle zu Stromschnellen verteilen [A]
+for _ in range(3):
+    Hw=np.where(wa,H,np.nan);st=np.zeros_like(wa)
+    st[1:]|=np.abs(np.diff(Hw,axis=0))>0.9;st[:-1]|=np.abs(np.diff(Hw,axis=0))>0.9;st[:,1:]|=np.abs(np.diff(Hw,axis=1))>0.9;st[:,:-1]|=np.abs(np.diff(Hw,axis=1))>0.9
+    zone=nd.binary_dilation(st,iterations=8)&wa
+    if not zone.any():break
+    sm=nd.gaussian_filter(np.where(wa,H,0),3)/np.maximum(nd.gaussian_filter(wa.astype(float),3),1e-6);H[zone]=sm[zone]
 Hboden=H.copy()
 tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
 H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
@@ -75,7 +102,7 @@ kl=np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS','')
 neu={'untergrund':ug2,'untergrund_quelle':np.where(ug2!=ug,'relief_t43u',A('untergrund_quelle')),'ebene':ebene2,'klippe':kl,
  'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),'hoehe_m':np.round(Hz,2),'hoehe_quelle':np.full((NY,NX),'R_relief_t43u'),
  'neigung_grad':np.round(neig,1),'klippe_hoehe_m':np.round(kh,1),'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u','') ,
- 'wasser_tiefe_m':np.where(wa,tiefe,0).astype(str),'begehbar_3d':b3d.astype(int)}
+ 'wasser_tiefe_m':np.where(wa,tiefe,0).astype(str),'begehbar_3d':b3d.astype(int),'wasser_eis':wa.astype(int).astype(str),'fluss_id':fl}
 extra={'boden_hoehe_m':np.round(Hboden,2),'wasserspiegel_m':np.where(wa,np.round(np.nan_to_num(Wsp),2).astype(str),''),
  'ecke_nw_m':np.round(C[...,0],2),'ecke_no_m':np.round(C[...,1],2),'ecke_so_m':np.round(C[...,2],2),'ecke_sw_m':np.round(C[...,3],2),
  'ebene_c20':eb,'untergrund_c20':ug}
