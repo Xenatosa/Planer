@@ -7,7 +7,7 @@
 
 ## Stand t44u Runden 9-10
 - Glattere Abbruchkanten (nur Netz), Wandtextur mit weniger Fugen, Moos/Grossfarbe, Schindelfelder, Traufbretter, ungleichmaessiger Dachschnee, Zaeune mit Kollisionspruefung, schaerfere Schatten, Sockel mit Gesteinsschichten.
-- Vergleich vorher (e6111b1) / nachher: `test/t44u_r9/`.
+- Vergleich vorher (e6111b1) / nachher final: `test/t44u_r10/vergleich_*.png`.
 
 ## Stand t44u
 - Oeffnen: `index.html` (Ansichten Reset/Oben/Unten/Am Nordwand-Fuss/Gehen; `?lod=1` fuer Handy).

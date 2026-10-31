@@ -49,3 +49,6 @@
 - Zaeune [R]: 1480 Segmente geprueft, 1101 gebaut; Regel [A]: Abstand 1,8 m ums Haus, Tuerseite offen, kein Segment auf Wegzelle, nicht naeher als 0,9 m an anderem Haus/Platz, Hoehenunterschied <0,5 m, Abweichung zu Hausboden <1,2 m.
 - Schatten [A]: bias -0,0003, normalBias 0,12, radius 1,6, Frustum +-238 m.
 - Sockelseiten/Unterseite: Gesteinsschichten per Shader (Dicke 3,1 m und 0,8 m, gewellt) [A].
+- Final (Runde 11) [S]: Desktop 1280x800 2,08 Mio Dreiecke / 20 Draws (Haeuser 163 696); Handy 390x844 ?lod=1 1,47 Mio / 21 Draws (vorher e6111b1: 1,36 Mio / 20) -> +8 %, +1 Draw (Zaun-Mesh).
+- Wandhoehen [R]: Zellsprung Nord 14,0 m; Median 5x5 Nord 15,45 / Suedgrat 16,04 / Krater 11,20 / Ostgrat 11,99 m (unveraendert, Messmethode s.o.).
+- Restmaengel final: Kerbe am Flussaustritt hinten noch V-foermig gerade geschnitten; Wandoberkante aus der Naehe noch leicht gezackt; Dachschnee flaechig hellgrau ohne Struktur; Schnee-Schatten weiterhin weich; Hauswaende glatt (keine Putztextur).

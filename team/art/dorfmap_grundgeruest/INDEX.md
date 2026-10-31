@@ -18,7 +18,7 @@
 - `pruefung/t34u_fehlerliste.csv`: Fehler F1–F10 (behoben), Befunde B1–B8 (offen)
 - `pruef_konsistenz_t34u.py`: Regelpruefung aller Zellen
 - `ANFORDERUNGEN_3D_WELTKARTE.md`: Anforderungen echte 3D-Karte (Kamera frei drehbar [F])
-- `relief3d (t44u r9-10: Zaeune, Schindeln, Gesteinsschichten, Vergleich test/t44u_r9/; t44u: echte 3D-Haeuser/Baeume/Felsen, Fensterlicht, Rauch, Wasserstroemung, Wege als festgetretener Schnee, Vergleiche test/t44u/; t43u: Material aus Zelleigenschaften, triplanar Fels, Gruppen-Objekte; Vorstand _alt/relief3d_t42u, _alt/relief3d_t41u) 
+- `relief3d (t44u r9-10: Zaeune, Schindeln, Gesteinsschichten, Vergleich test/t44u_r10/; t44u: echte 3D-Haeuser/Baeume/Felsen, Fensterlicht, Rauch, Wasserstroemung, Wege als festgetretener Schnee, Vergleiche test/t44u/; t43u: Material aus Zelleigenschaften, triplanar Fels, Gruppen-Objekte; Vorstand _alt/relief3d_t42u, _alt/relief3d_t41u) 
 - Alt: `_alt/modell3d_t36u/` (t36u-Modell + welt3d t39u), `_alt/WELT3D_PLAN_t39u.md`, `_alt/modell3d_t34u/`
 - `pruefung/t29u_kacheln_r5_*` und `pruefung/t30u_kacheln_r5_*`: Kachelbögen über die ganze Karte (ersetzen kacheln_r4/r5)
 - Belege t31u: `pruefung/t31u_talsued_a/b.png`, `t31u_findling_4x_0/1.png`, `t31u_z50_gipfel.png`, `t31u_z50_sand_w/m/o.png`
