@@ -13,15 +13,15 @@ const DN=await gz(window.NEU_GZ),DA=await gz(window.ALT_GZ),NX=DN.nx,NY=DN.ny;
 const ren=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));
 ren.setSize(innerWidth,innerHeight);ren.shadowMap.enabled=true;ren.shadowMap.type=THREE.PCFShadowMap;ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.0;document.body.appendChild(ren.domElement);
 const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c.height=256;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#5d8fc9');g.addColorStop(0.55,'#a9c6e4');g.addColorStop(1,'#dfe8ef');x.fillStyle=g;x.fillRect(0,0,2,256);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;sc.background=t;}sc.fog=new THREE.FogExp2(0xc9d8e6,0.0007);   // t43u leichter Dunst [A]
-{const NA=300,NR=24,R0=420,R1=2600,pos=[],col=[],idx=[],H=[];   // t53u: ferne Berge als echtes Hoehenfeld-Ring (Volumen, Grate, Taeler) statt Papierband [A]
+{const NA=360,NR=30,R0=120,R1=2600,pos=[],col=[],idx=[],H=[];   // t53u: ferne Berge als echtes Hoehenfeld-Ring (Volumen, Grate, Taeler) statt Papierband [A]
  const rn=(a,b)=>{const v=Math.sin(a*12.9898+b*78.233)*43758.5453;return v-Math.floor(v);},vn=(x,y)=>{const i=Math.floor(x),j=Math.floor(y),fx=x-i,fy=y-j,u=fx*fx*(3-2*fx),w=fy*fy*(3-2*fy);return (rn(i,j)*(1-u)+rn(i+1,j)*u)*(1-w)+(rn(i,j+1)*(1-u)+rn(i+1,j+1)*u)*w;};
- const rid=(x,y)=>{let s=0,am=1,f=1;for(let o=0;o<5;o++){const v=1-Math.abs(vn(x*f,y*f)*2-1);s+=v*v*am;am*=0.5;f*=2.03;}return s;};
+ const rid=(x,y)=>{let s=0,am=1,f=1;for(let o=0;o<4;o++){const v=1-Math.abs(vn(x*f,y*f)*2-1);s+=Math.pow(v,1.4+o*0.4)*am;am*=0.5;f*=2.03;}return s;};
  for(let j=0;j<=NR;j++)for(let i=0;i<=NA;i++){const a=i/NA*Math.PI*2,t=j/NR,R=R0+(R1-R0)*t,ii=i%NA,px=Math.cos(a)*R/170,py=Math.sin(a)*R/170;
-  const tt=Math.max(0,(t-0.33)/0.67),env=Math.pow(Math.sin(Math.PI*Math.min(1,tt*1.1)),0.9),h=-40+env*(30+200*rid(px+3,py+7)*(0.5+0.7*vn(a*3,1)));H.push(h);pos.push(168+Math.cos(a)*R,h,151+Math.sin(a)*R);}
+  const tt=Math.max(0,(t-0.30)/0.70),env=Math.pow(Math.sin(Math.PI*Math.min(1,tt*1.1)),0.9),h=-40+env*(25+150*rid(px*0.8+3,py*0.8+7)*(0.45+0.8*vn(a*2.2,1)));H.push(h);pos.push(168+Math.cos(a)*R,h,151+Math.sin(a)*R);}
  const W=NA+1;for(let j=0;j<=NR;j++)for(let i=0;i<=NA;i++){const k=j*W+i,hl=H[j*W+Math.max(i-1,0)],hr=H[j*W+Math.min(i+1,NA)],hi=H[Math.max(j-1,0)*W+i],ho=H[Math.min(j+1,NR)*W+i];
   const a=i/NA*Math.PI*2,R=R0+(R1-R0)*j/NR,da=R*2*Math.PI/NA,dr=(R1-R0)/NR,gx=(hr-hl)/(2*da),gr=(ho-hi)/(2*dr),sl=Math.hypot(gx,gr);
   const ta=[-Math.sin(a),Math.cos(a)],ra=[Math.cos(a),Math.sin(a)],nx=-(gx*ta[0]+gr*ra[0]),nz=-(gx*ta[1]+gr*ra[1]),nl=Math.hypot(nx,1,nz),lit=Math.max(0,(nx*0.55+1*0.6+nz*0.35)/nl/0.9);
-  const sn=Math.min(1,Math.max(0,(H[k]-120)/50))*Math.min(1,Math.max(0,1.3-sl*2.2));const fe=[0.40,0.41,0.45],wi=[0.93,0.95,0.98];
+  const sn=Math.min(1,Math.max(0,(H[k]-105)/45))*Math.min(1,Math.max(0,1.2-sl*2.6));const fe=[0.36,0.35,0.36],wi=[0.86,0.88,0.91];
   let c=[0,1,2].map(q=>(fe[q]*(1-sn)+wi[q]*sn)*(0.55+0.55*lit));const hz=[0.80,0.86,0.92],d=0.18+0.45*j/NR+0.25*Math.max(0,1-(H[k]+40)/120);c=c.map((v,q)=>v*(1-Math.min(1,d))+hz[q]*Math.min(1,d));col.push(...c);
   if(i<NA&&j<NR)idx.push(k,k+W,k+1,k+1,k+W,k+W+1);}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.setIndex(idx);
