@@ -25,7 +25,7 @@ for _ in range(60):
 H[rest]=Hk[rest]
 sg=wand&(wn=='Suedgrat');topf=nd.maximum_filter(np.where(sg&(H>-15),H,-1e9),size=31);dsg=nd.distance_transform_edt(~sg)
 ziel=((eb=='TAL_SUED')&(dsg<=15)|(sg&(H<=-15.9)))&(topf>-1e8)
-H[ziel]=np.minimum(H[ziel],-16-0.8*(1-dsg[ziel]/15))   # t46u: Fuss nie unter Talboden -16,8 (vorher Graeben bis -25,8 m wo Gratoberkante tief lag) [A]
+H[ziel]=np.minimum(H[ziel],-16-0.15*(1-dsg[ziel]/15))   # t46u: Fuss nie unter Talboden -16,8 (vorher Graeben bis -25,8 m wo Gratoberkante tief lag) [A]
 # --- t47u: Flusslücken schliessen (c20: Wasser endet an Wandbaendern / 2-9 Zellen Luecken) [A]
 def _flussluecken():
     lab,n=nd.label(wa,np.ones((3,3)));big=[i for i in range(1,n+1) if (lab==i).sum()>=30];log=[]
@@ -58,7 +58,11 @@ _kd_=nd.distance_transform_edt(~(wand&(wn=='Krater')))
 _kr=(~wand)&(_kd_>=2)&(_kd_<=11)&(H>=9)&~wa&(eb!='KRATER')
 _gn=nd.gaussian_filter(np.random.default_rng(57).standard_normal((NY,NX)),2.2);_gn/=_gn.std();_gr=1-np.abs(np.clip(_gn/1.6,-1,1))
 _fall=np.clip((_kd_-2)/2,0,1)*np.clip((11-_kd_)/5,0,1)
-H[_kr]+=(3.2*_gr**2-0.6)[_kr]*_fall[_kr]
+H[_kr]+=(1.1*_gr**2-0.3)[_kr]*_fall[_kr]   # t54u-B: flacher, Kratersprung ~11 m
+# t54u-B: Kraterfuss: Senke direkt unter der Kraterwand auf ~0 m anheben, nach innen weich auslaufen -> Sprung Fuss-Krone ~11 m [A]
+_kf=(~wand)&(_kd_<=24)&(H<1.0)&np.isin(eb,['HANG','SENKE','KRATER'])
+_kw=np.clip((_kd_-11)/13,0,1);_kw=_kw*_kw*(3-2*_kw)
+H[_kf]=(np.minimum(H,0.0)*_kw+np.minimum(H,1.0)*0)[_kf]+np.where(H>0,H,0)[_kf]
 # t47u/t48u: natuerliche Abstiegsrampen schraeg an den Waenden (Gelaende, nicht Overlay); Zellwerte folgen aus G [A]
 RAMPWEGE=[];RAMPPROF=[]
 def _rampen():
@@ -136,8 +140,8 @@ J=np.zeros((NY,NX),bool);J[:,1:]|=np.abs(np.diff(H,axis=1))>SPRUNG;J[:,:-1]|=np.
 J[1:,:]|=np.abs(np.diff(H,axis=0))>SPRUNG;J[:-1,:]|=np.abs(np.diff(H,axis=0))>SPRUNG
 wz=nd.gaussian_filter(np.kron(nd.binary_dilation(J,iterations=3),np.ones((RS,RS))).astype(float),2)
 rs=np.random.default_rng(42);noi=nd.gaussian_filter(rs.standard_normal(Hn.shape),3);noi/=noi.std()
-Hs=nd.gaussian_filter(Hn,3)                                        # sigma 1,5 m [A]
-lo=nd.minimum_filter(Hn,15);hi=nd.maximum_filter(Hn,15);Rg=hi-lo
+Hs=nd.gaussian_filter(Hn,4.5)                                        # sigma 1,5 m [A]
+lo=nd.minimum_filter(Hn,21);hi=nd.maximum_filter(Hn,21);Rg=hi-lo
 # t47u: mehrskalige Felsform – Rippen/Runsen (grob+mittel+fein), Baender/Simse, Schuttfuss [A]
 def _fbm(sig,seed):
     r=np.random.default_rng(seed);n=nd.gaussian_filter(r.standard_normal(Hn.shape),sig);return n/n.std()
@@ -149,7 +153,7 @@ _rw=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_fbm(sg,sd),[_wy,_wx],order=1,mod
 RIB=(_rw-_rw.mean())/_rw.std()                                       # >0 Rippe, <0 Runse
 u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
-steil_k=(1.3+2.4*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
+steil_k=(1.0+1.6*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
 # t48u R5: Kraterring mit radialen Felsrippen + 4 Scharten; uebrige Waende mit Grat-Rauschen (ridged). Ober-/Unterkante fix (sin(pi t)) [A]
 _kc=np.argwhere(wand&(wn=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
@@ -357,6 +361,11 @@ c20=np.stack([nd.gaussian_filter(c20[...,c],6) for c in range(3)],-1);ton=c20/np
 gzv,gxv=np.gradient(G);weh=np.clip(0.5+0.8*nz(10,41)+0.6*np.tanh(gzv*3),0,1);sn=gew['SCHNEE']/S
 col=col*(1-sn*0.10*weh)[...,None]+(sn*0.10*weh)[...,None]*np.array([0.70,0.80,0.95])
 col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
+# t54u-C: klare Uferlinie (nasser dunkler Saum direkt am Wasser) + Kies/Flussgrund hell sichtbar unter flachem Wasser [A]
+_wu=up(wa,0.6);_ul=np.clip(1-np.abs(_wu-0.35)/0.25,0,1)*(1-up(wand,0.6))
+col=col*(1-0.75*_ul[...,None])+0.75*_ul[...,None]*np.array([0.30,0.29,0.27])
+_kg=np.clip(up(kies,0.5)*1.4,0,1)*np.clip((_wu-0.5)*3,0,1);col=col*(1-_kg[...,None])+_kg[...,None]*np.array([0.62,0.58,0.52])
+_fg=np.clip((_wu-0.6)*3,0,1)*(1-_kg);col=col*(1-0.7*_fg[...,None])+0.7*_fg[...,None]*np.array([0.42,0.40,0.36])
 VC=(np.clip(col,0,1)*255).astype(np.uint8)
 # t48u R5: GLB neu mit Vertexfarben (boden+waende), fuer GLTFLoader-Pfad im Viewer (?glb=1 ueber lokalen Server) [A]
 _vc=np.concatenate([VC.reshape(-1,3),np.full((VC.reshape(-1,3).shape[0],1),255,np.uint8)],1)
@@ -368,7 +377,7 @@ sc.export('dorfmap_relief_z25.glb')
 FS=4;FXn,FYn=NX*FS+1,NY*FS+1
 _rkd=cKDTree(np.concatenate([p for p,_ in RAMPPROF]));_cc=np.stack(np.meshgrid(np.arange(NX)+0.5,np.arange(NY)+0.5),-1).reshape(-1,2)
 _nahr=(_rkd.query(_cc,distance_upper_bound=4.5)[0]<9).reshape(NY,NX)
-BAND=nd.binary_dilation(steil|oben|fuss,iterations=1)&~nd.binary_dilation(wa,iterations=1)&~belegt&~_nahr
+BAND=nd.binary_dilation(steil|oben|fuss,iterations=1)&~nd.binary_dilation(wa,iterations=1)&~belegt   # t54u-C: Rampennaehe jetzt im Band (FD dort weich auf 0) statt glatter grauer Streifen
 BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
 _fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
 _i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
@@ -383,26 +392,59 @@ _wy=_fy+16*_ff(30,61);_wx=_fx+16*_ff(30,62)
 _R=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_ff(sg,sd),[_wy,_wx],order=1,mode='reflect')/2.0,-1,1))) for a,sg,sd in ((0.5,18,63),(0.3,8,64),(0.2,3.5,65)))
 _R=(_R-_R.min())/(_R.max()-_R.min())
 _sgy,_sgx=np.gradient(FB,1/FS);_sl=np.degrees(np.arctan(np.hypot(_sgx,_sgy)));_sf=np.clip((nd.gaussian_filter(_sl,3)-20)/35,0,1)
-_ph=(FB+1.8*_ff(40,66)+0.6*_ff(10,67))/2.6;_fr=_ph-np.floor(_ph);_st=np.clip((_fr-0.15)/0.7,0,1)**2   # Schichtung: Baender/Absaetze
-FD=_wf*(_sf*(2.4*_R**1.6+0.9*_st+0.25)+(1-_sf)*(0.9*_R**2))
+# t54u-C: Wandform = Schichtbaender (Terrassen/Absaetze) + Rinnen/Rippen in Falllinie + ridged fBm + hydraulische & thermische Erosion [A]
+_fbs=nd.gaussian_filter(FB,6);_gyy,_gxx=np.gradient(_fbs,1/FS);_gm=np.hypot(_gxx,_gyy)+1e-6;_tx,_ty=-_gyy/_gm,_gxx/_gm      # Tangente (Hoehenlinie)
+_xm,_ym=_fx/FS,_fy/FS;_sco=(_xm*_tx+_ym*_ty)+3.0*_ff(60,71)                                                            # Konturkoordinate [m]
+_lo=nd.minimum_filter(FB,41);_hi=nd.maximum_filter(FB,41);_tl0=np.clip((FB-_lo)/np.maximum(_hi-_lo,1),0,1);_bell=np.sin(np.pi*_tl0)
+_NT=np.random.default_rng(72).standard_normal((512,512));_NT=nd.gaussian_filter(_NT,3,mode='wrap');_NT/=_NT.std()
+def _nt(a,b,o=0.0):return nd.map_coordinates(_NT,[np.mod(b+o,512),np.mod(a,512)],order=1,mode='grid-wrap')
+_g1=_nt(_sco/0.7,FB/2.5+_ff(30,73)*2,0);_g2=_nt(_sco/0.3+100,FB/1.2,200)
+_rib=(np.abs(np.clip(_g1/2,-1,1))**0.6-0.55)*1.3+(np.abs(np.clip(_g2/2,-1,1))**0.7-0.55)*0.45                         # scharfe Rinnen, runde Rippen
+_T=2.4+0.6*_ff(50,74);_Lc=(FB+1.3*_ff(35,75)+0.5*_ff(8,76))/_T;_lk=np.floor(_Lc);_lf=_Lc-_lk
+_pr=np.clip((_lf-0.55)/0.45,0,1);_pr=_pr*_pr*(3-2*_pr);_ter=(_pr-_lf)*_T*0.75                                          # Absatz flach, Stufe steil
+_rdq=np.full(FB.shape,99.0);_qq=np.argwhere(_vin);_rdq[_qq[:,0],_qq[:,1]]=_rkd.query(_qq[:,::-1]/FS,distance_upper_bound=8)[0]
+_wr=np.clip((np.minimum(_rdq,8)-1.6)/3.0,0,1);_wr=_wr*_wr*(3-2*_wr);_wf=_wf*_wr
+FD=_wf*_sf*(1.25*_ter+_rib*(0.9+1.7*_bell)+1.5*(_R-0.5))+_wf*(1-_sf)*0.5*(_R**2)
 FH=FB+FD
-_fe=_vin&(_wf>0)                                                  # thermische Glaettung gegen Zacken (Grenzwinkel 72 Grad)
-_tl=np.tan(np.radians(72))/FS
-for _ in range(12):
+# hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
+_hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
+_p=_cand[_hr2.integers(0,len(_cand),_ND)].astype(float)+_hr2.random((_ND,2));_v=np.zeros((_ND,2));_sed=np.zeros(_ND);_wat=np.ones(_ND)
+for _k in range(70):
+    _iy=np.clip(_p[:,0].astype(int),1,FYn-2);_ix=np.clip(_p[:,1].astype(int),1,FXn-2)
+    _dy=(FH[_iy+1,_ix]-FH[_iy-1,_ix])/2;_dx=(FH[_iy,_ix+1]-FH[_iy,_ix-1])/2
+    _v=0.3*_v-0.7*np.stack([_dy,_dx],1);_vn=np.linalg.norm(_v,axis=1)+1e-9;_v/=_vn[:,None]
+    _pn=_p+_v;_jy=np.clip(_pn[:,0].astype(int),1,FYn-2);_jx=np.clip(_pn[:,1].astype(int),1,FXn-2)
+    _ok=_vin[_jy,_jx]&_vin[_iy,_ix];_dh=FH[_jy,_jx]-FH[_iy,_ix]
+    _cap=np.maximum(-_dh,0.01)*_wat*0.9;_e=np.where(_sed<_cap,np.minimum((_cap-_sed)*0.25,0.05),0);_d=np.where(_sed>=_cap,(_sed-_cap)*0.3,0)
+    _d=np.where(_dh>0,np.minimum(_sed,_dh),_d);_e=np.where(_ok,_e,0);_d=np.where(_ok,_d,_sed)
+    np.add.at(FH,(_iy,_ix),_d-_e);_sed+=_e-_d;_wat*=0.98;_p=np.where(_ok[:,None],_pn,_p)
+_ER=nd.gaussian_filter(FH-(FB+FD),1.5)                                                                                    # <0 = Abtrag (Rinne)
+_fe=_vin&(_wf>0)                                                  # thermische Glaettung (Grenzwinkel 62 Grad)
+_tl=np.tan(np.radians(62))/FS
+for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
-FH=np.maximum(FH,FB);FH=np.where(_vin,FH,FB)
-_ap=nd.gaussian_filter(FH,8)-0.15;FH=np.where(_vin,np.maximum(FH,_wf*_ap+(1-_wf)*FH),FB)   # t54u-A: Schuttfuss/Kehlen fuellen -> flachere Fuesse
+FH=np.where(_vin,FH,FB)
+_ap=nd.gaussian_filter(FH,8)-0.15;FH=np.where(_vin,np.maximum(FH,_wf*_ap+(1-_wf)*FH),FB)   # Schuttfuss/Kehlen fuellen
+# Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
+_PAL=np.array([[1.0,1.0,1.04],[1.18,1.02,0.78],[0.62,0.62,0.68],[1.12,1.10,1.08],[0.92,0.86,0.78]])
+_li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),5)).astype(int);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]
+_tint*=np.where(_rib<-0.25,0.85,1.0)[...,None]                                                                          # dunkle Rinnen
+_fsl2=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_lap=nd.laplace(nd.gaussian_filter(FH,2))
+_snow=np.clip((42-_fsl2)/8,0,1)+np.clip(_lap*4-0.2,0,0.5)*np.clip((62-_fsl2)/12,0,1)
+_snow=np.clip(nd.gaussian_filter(_snow,0.6)*_wf*_sf,0,1)
 _fv=np.argwhere(_qb.any() and np.ones(1,bool))  # Platzhalter
 _used=np.zeros((FYn,FXn),bool);_used[:-1,:-1]|=_qb;_used[1:,:-1]|=_qb;_used[:-1,1:]|=_qb;_used[1:,1:]|=_qb
 _vid=np.flatnonzero(_used.ravel()).astype(np.uint32)
 _vcf=np.stack([nd.map_coordinates(VC.reshape(GY,GX,3)[...,c].astype(float),[_gy.ravel()[_vid],_gx.ravel()[_vid]],order=1) for c in range(3)],1)
 FW={'fs':FS,'band':base64.b64encode(np.flatnonzero(BAND.ravel()).astype(np.uint32).tobytes()).decode(),'vid':base64.b64encode(_vid.tobytes()).decode(),
-    'h':base64.b64encode(FH.ravel()[_vid].astype(np.float32).tobytes()).decode(),'c':base64.b64encode(np.clip(_vcf,0,255).astype(np.uint8).tobytes()).decode()}
+    'h':base64.b64encode(FH.ravel()[_vid].astype(np.float32).tobytes()).decode(),'c':base64.b64encode(np.clip(_vcf,0,255).astype(np.uint8).tobytes()).decode(),
+    't':base64.b64encode(np.clip(_tint.reshape(-1,3)[_vid]*128,0,255).astype(np.uint8).tobytes()).decode(),'s':base64.b64encode(np.clip(_snow.ravel()[_vid]*255,0,255).astype(np.uint8).tobytes()).decode()}
 _fsl=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))))
 FW_MESS={'band_zellen':int(BAND.sum()),'dreiecke_voll':int(BAND.sum()*FS*FS*2),'neigung_steilband_mittel':round(float(_fsl[_vin&(_sf>0.5)].mean()),1),
- 'neigung_p10_p90':[round(float(np.percentile(_fsl[_vin&(_sf>0.5)],q)),1) for q in (10,90)],'versatz_max_m':round(float(FD.max()),2)}
+ 'neigung_p10_p90':[round(float(np.percentile(_fsl[_vin&(_sf>0.5)],q)),1) for q in (10,90)],'versatz_max_m':round(float(FD.max()),2),'neigung_grob_mittel':round(float(np.degrees(np.arctan(np.hypot(*np.gradient(FB,1/FS))))[_vin&(_sf>0.5)].mean()),1)}
 print('feinrelief',FW_MESS)
+if os.environ.get('FW_NPZ'):np.savez_compressed(os.environ['FW_NPZ'],FH=FH.astype(np.float32),FB=FB.astype(np.float32),vin=_vin,tint=_tint.astype(np.float32),snow=_snow.astype(np.float32))   # t54u: Blender-Versuch [A]
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
 D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,

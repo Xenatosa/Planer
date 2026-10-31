@@ -8,6 +8,10 @@ d=nd.maximum_filter(H,21)-nd.minimum_filter(H,21);out={'sprung_median_m':{}}
 for w in ('Nord','Suedgrat','Krater','Ostgrat'):
     m=(wn==w)&(kl!='')&(kl!='0')&(kl!='False');out['sprung_median_m'][w]=round(float(np.median(d[m])),2) if m.any() else None
 wa=np.isin(we,['1','True','WASSER_EIS'])|((fl!='')&(fl!='0'))
+# t54u: zusaetzlich Sprung Fuss->Krone ohne Flussbett/Seegrund (Wassertiefe zaehlt nicht als Wand) [A]
+Hw=np.where(wa,np.nan,H);dw=nd.maximum_filter(np.nan_to_num(Hw,nan=-1e9),21)-(-nd.maximum_filter(np.nan_to_num(-Hw,nan=-1e9),21));out['sprung_median_ohne_wasser_m']={}
+for w in ('Nord','Suedgrat','Krater','Ostgrat'):
+    m=(wn==w)&(kl!='')&(kl!='0')&(kl!='False');out['sprung_median_ohne_wasser_m'][w]=round(float(np.median(dw[m])),2) if m.any() else None
 lab,n=nd.label(wa);sz=np.bincount(lab.ravel())[1:];out['wasser_komponenten_ge30']=int((sz>=30).sum());out['groesste_komponente_zellen']=int(sz.max())
 print(json.dumps(out,ensure_ascii=False))
 # je fluss_id: Anzahl zusammenhaengender Teile (8er-Nachbarschaft); 1 = durchgaengig
