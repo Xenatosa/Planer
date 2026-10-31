@@ -35,6 +35,7 @@ Object.assign(sun.shadow.camera,{left:-238,right:238,top:238,bottom:-238,near:1,
 const ladeTex=u=>{const t=new THREE.TextureLoader().load(u);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;};
 const geo=(p,ix,uv,col)=>{const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));if(uv)g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));if(col)g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));if(ix)g.setIndex(ix);g.computeVertexNormals();return g;};
 function sockel(Hrand,tief,root,st=1){const sp2=[],si=[],rand=[];for(let i=0;i<=NX*st;i++)rand.push([i/st,0]);for(let j=1;j<=NY*st;j++)rand.push([NX,j/st]);for(let i=NX*st-1;i>=0;i--)rand.push([i/st,NY]);for(let j=NY*st-1;j>=0;j--)rand.push([0,j/st]);   // t64u: st = Stuetzen je Meter
+ window.__sockelTop=rand.map(([i,j])=>[i,Hrand(i,j),j]);   // t64u: fuer Randmessung
  rand.forEach(([i,j],n)=>{sp2.push(i,Hrand(i,j),j,i,tief,j);if(n)si.push(2*n-2,2*n-1,2*n,2*n,2*n-1,2*n+1);});
  const sm=new THREE.MeshLambertMaterial({color:0xffffff,side:THREE.DoubleSide});sm.onBeforeCompile=sh=>{sh.vertexShader='varying vec3 vSP;\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\nvSP=(modelMatrix*vec4(transformed,1.)).xyz;');
   sh.fragmentShader='varying vec3 vSP;\n'+sh.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
@@ -178,7 +179,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   add(gb.attributes.position.array,gb.index.array);if(fwMesh)add(fwMesh.geometry.attributes.position.array,fwMesh.geometry.index.array);
   const HR=(x,z)=>{const sd=z<1e-4?'n':z>NY-1e-4?'s':x<1e-4?'w':'o',t=Math.round((sd=='n'||sd=='s'?x:z)*ST);if(RK.has(sd+t))return RK.get(sd+t);
    let a=t,b=t;while(!RK.has(sd+a)&&t-a<64)a--;while(!RK.has(sd+b)&&b-t<64)b++;const ya=RK.get(sd+a),yb=RK.get(sd+b);if(ya===undefined)return yb;if(yb===undefined)return ya;return ya+(yb-ya)*(t-a)/(b-a);};
-  window.__randpunkte=RK.size;sockel(HR,-34,g,4);}
+  window.__randpunkte=RK.size;window.__RK=[...RK];sockel(HR,-34,g,4);}
  {const wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1),ok=k=>WV[k]>-900;const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,t=ok(k)?Math.min(1,Math.max(0,(WV[k]-G[k])/1.5)):0;
    wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const rim=ok(k)&&!(ok(k+1)&&ok(k-1)&&ok(k+GX)&&ok(k-GX)),e=1-Math.min(1,t*4),q=(n=>ok(n)?Math.abs(WV[n]-WV[k]):0),fo0=ok(k)?Math.min(1,Math.max(0,(q(k+1)+q(k-1)+q(k+GX)+q(k-GX)-0.9)*0.7)):0,fo=Math.min(fo0,0.3);   // Runde E: Schaum gedeckelt [A]
      // t48u: Schaum/Wasserfall an Stufen [A]

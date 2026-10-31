@@ -37,5 +37,76 @@
   "g_max": 14.47,
   "unter_sockel_-34": 0,
   "nan": 0
+ },
+ "randschlitz_viewer_t64u": {
+  "LS1": {
+   "nord": {
+    "gelaende_punkte": 673,
+    "sockel_punkte": 1346,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "sued": {
+    "gelaende_punkte": 673,
+    "sockel_punkte": 1345,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "west": {
+    "gelaende_punkte": 643,
+    "sockel_punkte": 1214,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "ost": {
+    "gelaende_punkte": 665,
+    "sockel_punkte": 1213,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   }
+  },
+  "LS2": {
+   "nord": {
+    "gelaende_punkte": 337,
+    "sockel_punkte": 1346,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "sued": {
+    "gelaende_punkte": 337,
+    "sockel_punkte": 1345,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "west": {
+    "gelaende_punkte": 321,
+    "sockel_punkte": 1214,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   },
+   "ost": {
+    "gelaende_punkte": 332,
+    "sockel_punkte": 1213,
+    "min_m": 0,
+    "max_m": 0,
+    "punkte_gt_2cm": 0,
+    "max_bei": null
+   }
+  },
+  "methode": "test_rand_t64u.js: Gelaende-Randvertices (gb+Feinband) vs Sockel-Oberkante, beidseitig linear interpoliert"
  }
 }
