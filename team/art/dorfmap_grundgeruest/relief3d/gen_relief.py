@@ -63,13 +63,21 @@ H[_kr]+=(1.1*_gr**2-0.3)[_kr]*_fall[_kr]   # t54u-B: flacher, Kratersprung ~11 m
 _kf=(~wand)&(_kd_<=24)&(H<1.0)&np.isin(eb,['HANG','SENKE','KRATER'])
 _kw=np.clip((_kd_-11)/13,0,1);_kw=_kw*_kw*(3-2*_kw)
 H[_kf]=(np.minimum(H,0.0)*_kw+np.minimum(H,1.0)*0)[_kf]+np.where(H>0,H,0)[_kf]
+# t63u Runde K [F] (Fabian t62u/Runde K): Strang 13 (Westarm) im Tal neu, Spiegel monoton fallend, alter Arm -> Land (fluss_k.py)
+from fluss_k import fluss_k
+_bel=np.zeros((NY,NX),bool)
+for _p in json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40']:
+    _q=np.array([[(x+200)*1.2,(y+40)*1.2] for x,y in _p['poly']]);_x0,_y0=_q.min(0);_x1,_y1=_q.max(0);_bel[max(0,int(_y0)):int(np.ceil(_y1)),max(0,int(_x0)):int(np.ceil(_x1))]=True
+H_VOR_K=H.copy();WA_VOR_K=wa.copy();FL_VOR_K=fl.copy();UG_VOR_K=ug.copy()
+H,wa,fl,ug,_VY,_VX,FLUSS_K_NEU,FLUSS_K_ALT,FLUSS_K_KURVE,FLUSS_K_W,FLUSS_K=fluss_k(H,wa,fl,ug,wand,_kd_,_bel);print('fluss_k',FLUSS_K)
+WN_VOR_K=wn.copy();eb=eb[_VY,_VX];wn=wn[_VY,_VX];ha=ha[_VY,_VX];_A0=A;A=lambda k:_A0(k) if k in('zell_id','cx','cy','px_x','px_y','flaeche_m2') else _A0(k)[_VY,_VX]   # Lage-Spalten bleiben, Inhalte folgen der Vorlage-Zelle
 # t47u/t48u: natuerliche Abstiegsrampen schraeg an den Waenden (Gelaende, nicht Overlay); Zellwerte folgen aus G [A]
 RAMPWEGE=[];RAMPPROF=[]
 def _rampen():
     Pl0=json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40'];hm=np.zeros((NY,NX),bool)
     for p in Pl0:
         q=np.array([[(x+200)*1.2,(y+40)*1.2] for x,y in p['poly']]);x0,y0=q.min(0);x1,y1=q.max(0);hm[max(0,int(y0)):int(np.ceil(y1)),max(0,int(x0)):int(np.ceil(x1))]=1
-    hm=nd.binary_dilation(hm,iterations=3)|nd.binary_dilation(wa,iterations=2)
+    hm=nd.binary_dilation(hm,iterations=3)|nd.binary_dilation(wa|WA_VOR_K,iterations=2)   # t63u: alter Arm bleibt Sperre -> Rampen wie Runde J (keine Nebenwirkung der Flussverlegung)
     Hsm=nd.gaussian_filter(H,4);gy,gx=np.gradient(Hsm);top=wand&(nd.minimum_filter(H,9)<H-6);log=[]
     yy,xx=np.mgrid[0:NY,0:NX]
     for w,anz in (('Nord',3),('Suedgrat',3),('Krater',4),('Ostgrat',2)):
@@ -156,7 +164,7 @@ krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations
 steil_k=(1.0+1.6*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
 # t48u R5: Kraterring mit radialen Felsrippen + 4 Scharten; uebrige Waende mit Grat-Rauschen (ridged). Ober-/Unterkante fix (sin(pi t)) [A]
-_kc=np.argwhere(wand&(wn=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
+_kc=np.argwhere(wand&(WN_VOR_K=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
 _rib=np.sin(_ang*13+1.6*_fbm(14,21));_rib=np.sign(_rib)*np.abs(_rib)**0.6
 _sch=np.clip((np.abs(np.sin(_ang*2+0.7))-0.93)/0.07,0,1)
 _rid=1-2*np.abs(np.clip(_fbm(5,22)/2.5,-1,1))
@@ -182,6 +190,9 @@ for _ in range(30):
 _hm=nd.map_coordinates(((t>0.05)&(t<0.95)&(Rg>SPRUNG)).astype(float),[vj-0.5,vi-0.5],order=1)>0.5
 _hm&=~(nd.map_coordinates(nd.binary_dilation(np.kron(wa,np.ones((RS,RS))),iterations=3).astype(float),[vj-0.5,vi-0.5],order=0)>0.5)
 _G0=Ge.copy();_hr=np.random.default_rng(77);_st=np.argwhere(_hm);_st=_st[_hr.integers(0,len(_st),min(30000,len(_st)))]
+_EF='erosion_start_t63u.npy'   # t63u: Tropfen-Startpunkte aus Runde J (ohne Flussverlegung) eingefroren -> Erosion ausserhalb des Westarms unveraendert [A]
+if os.path.exists(_EF):_st=np.load(_EF).astype(int)
+else:np.save(_EF,_st.astype(np.int16))
 _gy,_gx=np.gradient(Ge)
 for _y,_x in _st:
     y,x=float(_y),float(_x);sed=0.0;v=1.0
@@ -568,14 +579,21 @@ WV_ALT=WV.copy();WV,G_ANZ,FLUSS_T61U=fluss_monoton(WV,G,_VBc,LEV_ROH);print('flu
 from fluss_t62u import ufer_glaetten,fluss_kaskade
 WV,G_ANZ,KASK_T62U=fluss_kaskade(WV_ALT,G,_VBc);print('kaskade_t62u',KASK_T62U)   # t62u ersetzt den t61u-Spiegel (6-9 m Grabung) [A]
 WV,G_ANZ,UFER_T62U=ufer_glaetten(WV,G,G_ANZ,_VBc);print('ufer_t62u',UFER_T62U)
+from fluss_k import spiegel_monoton
+WV,G_ANZ,MONO_T63U=spiegel_monoton(WV,G_ANZ,_VBc);print('spiegel_t63u',MONO_T63U)   # t63u Runde K: streng fallend, Becken flach, Stufen <= ~1 m [A]
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
+    _WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
     for nm,L in(('baeume',baeume),('felsen',felsen),('findlinge',findlinge),('steine',steine),('geroell',geroell)):
         neu=[];v=0;w=0
         for o in L:
             j,i=o[2]*RS,o[0]*RS;d=float(nd.map_coordinates(dG,[[j],[i]],order=1,mode='nearest')[0]);wv=float(nd.map_coordinates(WV,[[j],[i]],order=0,mode='nearest')[0])
             if abs(d)>0.01:o=list(o);o[1]=round(o[1]+d,3);v+=1
             if wv>-900 and wv>o[1]+0.15*(o[3] if nm!='baeume' else 1):w+=1;continue
+            if nm=='baeume':                       # t63u Runde K: kein Baum am Wasserrand (1 m Umkreis) oder auf Hang >45 Grad (Anzeige-Gelaende) [A]
+                wn_=float(nd.map_coordinates(_WVMX,[[j],[i]],order=0,mode='nearest')[0]);sl_=float(nd.map_coordinates(_SLMX,[[j],[i]],order=0,mode='nearest')[0])
+                if wn_>o[1]-0.3:st['baum_wasserrand_entfernt']=st.get('baum_wasserrand_entfernt',0)+1;continue
+                if sl_>45:st['baum_steil_entfernt']=st.get('baum_steil_entfernt',0)+1;continue
             neu.append(o)
         L[:]=neu;st[nm]={'verschoben':v,'im_wasser_entfernt':w}
     return st
