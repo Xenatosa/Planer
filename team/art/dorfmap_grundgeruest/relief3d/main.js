@@ -137,7 +137,7 @@ document.querySelectorAll('[data-l]').forEach(c=>c.onchange=ebSicht);
 const licht=()=>{const az=$('az').value*Math.PI/180,el=$('el').value*Math.PI/180;sun.position.set(NX/2+400*Math.cos(el)*Math.sin(az),400*Math.sin(el),NY/2-400*Math.cos(el)*Math.cos(az));sun.intensity=$('st').value/50;};
 ['az','el','st'].forEach(i=>$(i).oninput=licht);licht();
 const V={schraeg:[[NX/2,260,NY+170],[NX/2,0,NY/2]],oben:[[NX/2,520,NY/2+0.1],[NX/2,0,NY/2]],unten:[[NX/2,-260,NY/2+180],[NX/2,-14,NY/2]],rand:[[-40,30,NY+40],[40,-5,NY-40]],rueck:[[NX+120,120,-120],[NX/2,0,NY/2]],nord:[[NX/2,90,-150],[NX/2,0,NY/2]],
- nordwand:[[WF.x+10,40,WF.z+90],[WF.x,6,WF.z-5]],krater:[[160,70,230],[108,4,150]],suedwand:[[170,40,300],[170,-8,225]],dorf:[[DN.start.x+22,14,DN.start.z+26],[DN.start.x,1,DN.start.z]]};
+ nordwand:[[WF.x+10,40,WF.z+90],[WF.x,6,WF.z-5]],krater:[[160,70,230],[108,4,150]],suedwand:[[170,40,300],[170,-8,225]],sued:[[70,45,330],[75,-16,240]],dorf:[[DN.start.x+22,14,DN.start.z+26],[DN.start.x,1,DN.start.z]]};
 let geh=false,yaw=0,pitch=0;const setView=n=>{geh=false;oc.enabled=true;const [p,t]=V[n];cam.position.set(...p);oc.target.set(...t);oc.update();};
 const boden=(x,z,yw,pt=0)=>{geh=true;oc.enabled=false;yaw=yw;pitch=pt;cam.position.set(x,Hf()(x,z)+1.7,z);cam.rotation.set(pitch,yaw,0,'YXZ');};
 const V2={totale_auge:[DN.start.x,DN.start.z+30,0,0.06]};V.totale_auge=null;
