@@ -400,11 +400,21 @@ _NT=np.random.default_rng(72).standard_normal((512,512));_NT=nd.gaussian_filter(
 def _nt(a,b,o=0.0):return nd.map_coordinates(_NT,[np.mod(b+o,512),np.mod(a,512)],order=1,mode='grid-wrap')
 _g1=_nt(_sco/0.7,FB/2.5+_ff(30,73)*2,0);_g2=_nt(_sco/0.3+100,FB/1.2,200)
 _rib=(np.abs(np.clip(_g1/2,-1,1))**0.6-0.55)*1.3+(np.abs(np.clip(_g2/2,-1,1))**0.7-0.55)*0.45                         # scharfe Rinnen, runde Rippen
-_T=2.4+0.6*_ff(50,74);_Lc=(FB+1.3*_ff(35,75)+0.5*_ff(8,76))/_T;_lk=np.floor(_Lc);_lf=_Lc-_lk
+# Voronoi-Pfeiler (Kluefte): jede Zelle ~5 m eigener Versatz + eigene Schichtphase, schmale Kluft an den Grenzen [A]
+_vr=np.random.default_rng(80);_npf=int(FXn*FYn/(20*20));_vp=np.stack([_vr.random(_npf)*FYn,_vr.random(_npf)*FXn],1)
+_vq=np.stack([_fy.ravel()+6*_ff(25,81).ravel(),_fx.ravel()+6*_ff(25,82).ravel()],1);_vd,_vi=cKDTree(_vp).query(_vq,k=2)
+_vi=_vi[:,0].reshape(FB.shape);_kl=np.clip(1-(_vd[:,1]-_vd[:,0]).reshape(FB.shape)/3.0,0,1)**2
+_voff=(_vr.random(_npf)*2-1)[_vi];_vph=_vr.random(_npf)[_vi]
+_T=2.6+0.6*_ff(50,74);_Lc=(FB+1.0*_ff(35,75)+0.4*_ff(8,76))/_T+0.45*_vph;_lk=np.floor(_Lc);_lf=_Lc-_lk
 _pr=np.clip((_lf-0.55)/0.45,0,1);_pr=_pr*_pr*(3-2*_pr);_ter=(_pr-_lf)*_T*0.75                                          # Absatz flach, Stufe steil
 _rdq=np.full(FB.shape,99.0);_qq=np.argwhere(_vin);_rdq[_qq[:,0],_qq[:,1]]=_rkd.query(_qq[:,::-1]/FS,distance_upper_bound=8)[0]
 _wr=np.clip((np.minimum(_rdq,8)-1.6)/3.0,0,1);_wr=_wr*_wr*(3-2*_wr);_wf=_wf*_wr
-FD=_wf*_sf*(1.25*_ter+_rib*(0.9+1.7*_bell)+1.5*(_R-0.5))+_wf*(1-_sf)*0.5*(_R**2)
+# Runde D: Oberkante seitlich verspringen – Warp der Feinbasis im Band (Vorspruenge/Buchten bis ~2,5 m); Zellwerte bleiben unberuehrt [A]
+_fjj,_fii=np.mgrid[0:FB.shape[0],0:FB.shape[1]].astype(float);_rq=lambda sg,sd:(lambda n:n/n.std())(nd.gaussian_filter(np.random.default_rng(sd).standard_normal(FB.shape),sg))
+_wa=_wf*np.clip(nd.distance_transform_edt(_vin)/14.0,0,1)
+FB=np.where(_vin,nd.map_coordinates(FB,[_fjj+_wa*(7*_rq(28,91)+3*_rq(9,92)),_fii+_wa*(7*_rq(28,93)+3*_rq(9,94))],order=1,mode='nearest'),FB)
+_qy,_qx=np.gradient(nd.gaussian_filter(FB,3),1/FS);_gm=np.clip(np.hypot(_qx,_qy),0.4,2.0)   # Runde D: eigene Namen (Runde C ueberschrieb _gy/_gx -> Farbe 0 = schwarz) [A]   # seitlicher Versatz: dh=dx*Steigung [A]
+FD=_wf*_sf*(1.4*_ter+_gm*(_rib*(0.5+0.9*_bell)+1.0*(_R-0.5)+_bell**0.6*(1.2*_voff-0.45*_kl)))+_wf*(1-_sf)*0.5*(_R**2)
 FH=FB+FD
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
@@ -420,18 +430,18 @@ for _k in range(70):
     np.add.at(FH,(_iy,_ix),_d-_e);_sed+=_e-_d;_wat*=0.98;_p=np.where(_ok[:,None],_pn,_p)
 _ER=nd.gaussian_filter(FH-(FB+FD),1.5)                                                                                    # <0 = Abtrag (Rinne)
 _fe=_vin&(_wf>0)                                                  # thermische Glaettung (Grenzwinkel 62 Grad)
-_tl=np.tan(np.radians(62))/FS
+_tl=np.tan(np.radians(74))/FS
 for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
 FH=np.where(_vin,FH,FB)
-_ap=nd.gaussian_filter(FH,8)-0.15;FH=np.where(_vin,np.maximum(FH,_wf*_ap+(1-_wf)*FH),FB)   # Schuttfuss/Kehlen fuellen
+_ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
-_PAL=np.array([[1.0,1.0,1.04],[1.18,1.02,0.78],[0.62,0.62,0.68],[1.12,1.10,1.08],[0.92,0.86,0.78]])
-_li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),5)).astype(int);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]
+_PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]
+_li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),4)).astype(int);_li=np.where(_ff(30,78)>1.3,4,_li);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]
 _tint*=np.where(_rib<-0.25,0.85,1.0)[...,None]                                                                          # dunkle Rinnen
 _fsl2=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_lap=nd.laplace(nd.gaussian_filter(FH,2))
-_snow=np.clip((42-_fsl2)/8,0,1)+np.clip(_lap*4-0.2,0,0.5)*np.clip((62-_fsl2)/12,0,1)
+_snow=np.clip((42-_fsl2)/8,0,1)+np.clip(_lap*4-0.2,0,0.5)*np.clip((62-_fsl2)/12,0,1)+0.8*np.clip(-_rib-0.35,0,1)*np.clip((66-_fsl2)/14,0,1)   # Runde D: Schnee in Rinnen [A]
 _snow=np.clip(nd.gaussian_filter(_snow,0.6)*_wf*_sf,0,1)
 _fv=np.argwhere(_qb.any() and np.ones(1,bool))  # Platzhalter
 _used=np.zeros((FYn,FXn),bool);_used[:-1,:-1]|=_qb;_used[1:,:-1]|=_qb;_used[:-1,1:]|=_qb;_used[1:,1:]|=_qb
