@@ -24,7 +24,7 @@ for _ in range(60):
 H[rest]=Hk[rest]
 sg=wand&(wn=='Suedgrat');topf=nd.maximum_filter(np.where(sg&(H>-15),H,-1e9),size=31);dsg=nd.distance_transform_edt(~sg)
 ziel=((eb=='TAL_SUED')&(dsg<=15)|(sg&(H<=-15.9)))&(topf>-1e8)
-H[ziel]=np.minimum(H[ziel],-16-0.8+np.minimum(0,topf[ziel])*(1-dsg[ziel]/15))   # [R] 16 m Wand, Auslauf 15 m [A]
+H[ziel]=np.minimum(H[ziel],-16-0.8*(1-dsg[ziel]/15))   # t46u: Fuss nie unter Talboden -16,8 (vorher Graeben bis -25,8 m wo Gratoberkante tief lag) [A]
 Hboden=H.copy()
 tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
 H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
