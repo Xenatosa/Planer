@@ -1,0 +1,11 @@
+{
+ "ls2_handy_lod1_390x844_dreiecke_gerendert": 1099919,
+ "ls1_1280x800_totale_auge_textur_gerendert": 2461247,
+ "ls1_1280x800_totale_auge_clay_gerendert": 1372908,
+ "ls1_boden_wand_dreiecke": {
+  "boden": 645366,
+  "wand": 5418
+ },
+ "t42u_summe": 0,
+ "commit_basis": "438e4f1"
+}
