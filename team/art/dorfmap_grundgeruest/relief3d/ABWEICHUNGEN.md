@@ -70,3 +70,8 @@
 - [S] Headless: alle 11 Kameras gerendert, fehler [] (Teil 3 geloggt; Teile 1+2 schrieben alle Bilder, hingen danach beim Beenden -> abgebrochen, kein Log).
 - [S] Desktop 3 563 681 Dreiecke / 31 Draws; Handy ?lod=1 390x844 1 860 203 / 32 Draws; GLB ?glb=1 laedt (2 Meshes, 2.3 s).
 - Abweichung zum Beispielbild: weiterhin stilisiert/low-poly (kantige Felsen, einfache Baeume), kein Foto-Realismus; Fernberge wirken wie gezackte Papierkulisse.
+
+## t53u Gelaendeform
+- R6 [S]: Handy ?lod=1 (390x844) 1 163 663 Dreiecke gerendert (vorher 1 871 723), 32 Draws. Felsen Ikosaeder Detail 1, Fichten 6 statt 9 Zweige, 1/3 Geroell. Messung `test_budget.js`.
+- R5: Fernberge Hoehenfeld-Ring R 120-2600 m, 4 Oktaven gerundet, grauer Fels; blauer Ring war die Luecke zwischen Kartenrand und Ring-Innenkante (R0 420) -> geschlossen. Ring wird ausgeblendet, wenn Kamera unter -30 m (Ansicht unten).
+- Offen: R1 Klippen-Silhouetten/Ueberhaenge, R2 Kraterring-Zugaenge, R3 Serpentinen als Terrain-Rampen, R4 Flussbett/Ufer. Nicht bearbeitet.

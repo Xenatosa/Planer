@@ -25,7 +25,7 @@ const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c
   let c=[0,1,2].map(q=>(fe[q]*(1-sn)+wi[q]*sn)*(0.55+0.55*lit));const hz=[0.80,0.86,0.92],d=0.18+0.45*j/NR+0.25*Math.max(0,1-(H[k]+40)/120);c=c.map((v,q)=>v*(1-Math.min(1,d))+hz[q]*Math.min(1,d));col.push(...c);
   if(i<NA&&j<NR)idx.push(k,k+W,k+1,k+1,k+W,k+W+1);}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.setIndex(idx);
- const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false,toneMapped:false}));m.name='ferneBerge';sc.add(m);}
+ const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false,toneMapped:false}));m.name='ferneBerge';window.__fb=m;sc.add(m);}
 const cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,3000);
 const oc=new OrbitControls(cam,ren.domElement);oc.enableDamping=true;oc.maxPolarAngle=Math.PI;oc.screenSpacePanning=true;
 sc.add(new THREE.HemisphereLight(0xc2d8f2,0xa39c8e,1.2));
@@ -195,6 +195,6 @@ setModus('neu');
 let t0=performance.now();window.__szene=sc;window.__info=()=>({dreiecke_gerendert:ren.info.render.triangles,draws:ren.info.render.calls,haus_dreiecke:window.__hausDreiecke,zaun:window.__zaun});ren.setAnimationLoop(()=>{const t=performance.now(),dt=Math.min(0.1,(t-t0)/1000);t0=t;
  if(geh){const v=(keys.shift?12:4)*dt,f=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw)),r=new THREE.Vector3(-f.z,0,f.x);
   if(keys.w)cam.position.addScaledVector(f,v);if(keys.s)cam.position.addScaledVector(f,-v);if(keys.d)cam.position.addScaledVector(r,v);if(keys.a)cam.position.addScaledVector(r,-v);
-  cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;cam.rotation.set(pitch,yaw,0,'YXZ');}else oc.update();if(window.__wu)window.__wu.value=t/1000;ren.render(sc,cam);});
+  cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;cam.rotation.set(pitch,yaw,0,'YXZ');}else oc.update();if(window.__wu)window.__wu.value=t/1000;(window.__fb&&(__fb.visible=cam.position.y>-30)),ren.render(sc,cam);});
 onresize=()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);};
 $('lade').remove();})().catch(e=>{document.body.insertAdjacentHTML('beforeend','<pre style="color:red">'+e.stack+'</pre>');throw e;});
