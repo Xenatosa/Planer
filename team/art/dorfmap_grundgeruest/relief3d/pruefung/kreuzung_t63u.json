@@ -1,0 +1,34 @@
+{
+ "neues_wasser_vertices": 5381,
+ "kreuzung_neues_wasser": {
+  "wegzellen": 0,
+  "rampen_serpentinen_punkte": 0,
+  "haeuser_grundriss_achsparallel": 0,
+  "overlay_bauplatz": 0,
+  "overlay_platz": 0,
+  "overlay_weg": 0,
+  "overlay_bruecke": 0,
+  "overlay_furt": 0
+ },
+ "wasser_gesamt_runde_J": {
+  "wegzellen": 0,
+  "rampen_serpentinen_punkte": 0,
+  "haeuser_grundriss_achsparallel": 9,
+  "overlay_bauplatz": 0,
+  "overlay_platz": 0,
+  "overlay_weg": 0,
+  "overlay_bruecke": 0,
+  "overlay_furt": 0
+ },
+ "wasser_gesamt_runde_K": {
+  "wegzellen": 0,
+  "rampen_serpentinen_punkte": 0,
+  "haeuser_grundriss_achsparallel": 1,
+  "overlay_bauplatz": 0,
+  "overlay_platz": 0,
+  "overlay_weg": 0,
+  "overlay_bruecke": 0,
+  "overlay_furt": 0
+ },
+ "hinweis": "Overlay (c20) deckt nur x>=141 ab; der Westarm liegt bei x<100 -> dort keine Overlay-Wege/Bauplaetze. Wegzellen = relief_daten wege (Zellraster), Haus-Grundriss ohne Drehung (grob, eher zu viel)."
+}

@@ -1,0 +1,101 @@
+{
+ "stuecke_ge200": 4,
+ "bergauf_summe": 16044,
+ "bergauf_pfad_summe": 255,
+ "stufen_gt_1m_ausserhalb_schlucht": 0,
+ "stufen_gt_1m_schlucht": 36,
+ "je_stueck": [
+  {
+   "nr": 2,
+   "ecken": 361,
+   "auslass": "rand",
+   "auslass_xz": [
+    216.5,
+    0.0
+   ],
+   "quelle_xz": [
+    213.0,
+    31.0
+   ],
+   "laenge_m": 32.4,
+   "spiegel_quelle": 13.66,
+   "spiegel_auslass": 13.62,
+   "bergauf_entlang_pfad_gt_2cm": 4,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 347,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 0,
+   "stufe_max_ausserhalb_schlucht_m": 0.09,
+   "stufe_max_m": 0.09,
+   "stufen_gt_0_3m": 0
+  },
+  {
+   "nr": 11,
+   "ecken": 1191,
+   "auslass": "endsee",
+   "auslass_xz": [
+    24.5,
+    50.0
+   ],
+   "quelle_xz": [
+    38.5,
+    51.5
+   ],
+   "laenge_m": 19.2,
+   "spiegel_quelle": -7.76,
+   "spiegel_auslass": -9.94,
+   "bergauf_entlang_pfad_gt_2cm": 0,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 265,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 0,
+   "stufe_max_ausserhalb_schlucht_m": 0.23,
+   "stufe_max_m": 0.23,
+   "stufen_gt_0_3m": 0
+  },
+  {
+   "nr": 12,
+   "ecken": 3975,
+   "auslass": "endsee",
+   "auslass_xz": [
+    166.5,
+    167.5
+   ],
+   "quelle_xz": [
+    198.0,
+    42.0
+   ],
+   "laenge_m": 142.0,
+   "spiegel_quelle": -0.29,
+   "spiegel_auslass": -3.0,
+   "bergauf_entlang_pfad_gt_2cm": 14,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 925,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 0,
+   "stufe_max_ausserhalb_schlucht_m": 0.63,
+   "stufe_max_m": 0.75,
+   "stufen_gt_0_3m": 31
+  },
+  {
+   "nr": 13,
+   "ecken": 17410,
+   "auslass": "rand",
+   "auslass_xz": [
+    336.0,
+    281.5
+   ],
+   "quelle_xz": [
+    72.0,
+    46.0
+   ],
+   "laenge_m": 556.1,
+   "spiegel_quelle": -6.09,
+   "spiegel_auslass": -17.17,
+   "bergauf_entlang_pfad_gt_2cm": 237,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 14507,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 36,
+   "stufe_max_ausserhalb_schlucht_m": 0.64,
+   "stufe_max_m": 3.54,
+   "stufen_gt_0_3m": 160
+  }
+ ]
+}

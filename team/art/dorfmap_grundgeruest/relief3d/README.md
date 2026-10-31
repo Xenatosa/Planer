@@ -83,3 +83,5 @@
 
 ## Runde J (t62u)
 Der Fluss läuft jetzt als flache Kaskaden im Talboden, nicht mehr am Hang und nicht am Wandfuß. Steile Neupunkte über 60° an Land: 103 (Runde I 271). Tiefster Schnitt 1,26 m (Runde I 8,9 m). Der Fluss ist durchgehend. Mit Becken als Senken gibt es 0 Bergauf-Stellen. Bilder liegen in test/t62u, Prüfungen in pruefung/*_t62u.json. Wege sind unverändert.
+## Runde K (t63u)
+Der Westarm fließt jetzt im Tal um die Hügel herum (fluss_k.py). Der Wasserspiegel fällt überall, bergauf 0. Stufen über 1 m gibt es nur in der Schlucht-Rinne (max 3,31 m). Neue Kreuzungen mit Wegen oder Häusern: 0. Bilder liegen in test/t63u (draufsicht_vorher_nachher, laengsprofil_k, nah_fluss_k, ansichten_*), Prüfungen in pruefung/*_t63u.json.
