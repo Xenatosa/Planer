@@ -45,3 +45,11 @@
 - Fels grauer (Palette grau/dunkelgrau, Ocker selten, Shader entsättigt), Schnee in Rinnen, Ufer-Schaum reduziert.
 - Prüfungen [S]: Zellabgleich 0, Sprünge 14,09/16,15/11,09/12,0 m, Neigung 55,8° fein / 51,6° grob, größte Wasserkomponente 4808, Handy 1.075.230 Dreiecke.
 - Bilder: test/t54u/*_rundeD_r66.png, vgl_*_B_D.jpg.
+
+### t54u Runde E (+ t55u Geometrie, t57u Referenzen)
+- Wandband im Feinrelief breiter (Dilation 3 statt 1), stärkerer seitlicher Warp (bis ~5 m), Großrippen/-rinnen in Falllinie, Grat-Türme/Felsnasen an der Oberkante, Schutthalden am Fuß – alles als echte Vertex-Höhen (FD/FH), nicht Shading.
+- Formbeweis: `?clay=1` = einfarbig grau, ohne Textur/Vertexfarben/Bump, nur Gelände sichtbar. Silhouetten-Ansichten `silh_sued`, `silh_nord`.
+- Grenzen: Höhenfeld → keine echten Überhänge möglich. Feine Rillen kommen weiter zusätzlich aus Bump/Textur (Platzhalter).
+- Wasserfall-Fuß: Schaum gedeckelt (max 0,3).
+- Prüfungen [S]: Zellabgleich 0; zellen_relief.csv, glb, relief_zaehlung.json, abgleich_t42u.json per git diff unverändert; Sprünge 14,09/16,15/11,09/12,0 m; Neigung 57,4° fein / 46,9° grob; Wasser 4808; Handy 1.107.294 Dreiecke.
+- Bilder: *_rundeE_r70.png, *_clay*.png, vgl_D_E_teil1/2.jpg, vgl_ton_E_mit_referenz.jpg.
