@@ -613,6 +613,13 @@ def schlucht_breiter(WV,GA):   # t64u K9: Schluchtwasser x210-227 z229-245 nur 1
         sw[cand]=lo[cand];sg[cand]=np.minimum(sg[cand],lo[cand]-0.12);n+=int(cand.sum())
     return WV,GA,{'neu_wasser':n}
 WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT_T64U)
+def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
+    C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
+    gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
+    m=((sl<0.35)&(WEGA.reshape(GA.shape)<20)&(nd.distance_transform_edt(WV<=-900)>3)).astype(float);m=nd.gaussian_filter(m,1.0)
+    N=C*(1-m[...,None])+B*m[...,None];out=np.clip(np.round(N),0,255).astype(np.uint8)
+    return out.reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3),'farbaenderung_mittel':round(float(np.abs(N-C).mean()),2)}
+VC,VCW_T64U=vc_weich(VC,G_ANZ,WV,WEGA);print('vcweich_t64u',VCW_T64U)
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
