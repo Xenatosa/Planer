@@ -104,3 +104,11 @@ Jede Ansicht einzeln angesehen. Keine Löcher, kein Baum im Wasser gesehen, der 
 - oben (Clay): Der Ostrand der Karte ist leicht gewellt und nicht gerade.
 - In allen Bildern ist das Bedien-Panel der App zu sehen (Screenshot vom Viewer, kein Sammelbogen). Eine Version ohne UI ist nicht gerendert.
 Nichts davon behoben.
+
+## Runde L (t64u) – Löcher Gebirge/Boden (Zwischenstand)
+- 26478 offene Innenkanten (LS1) / 13239 (LS2) = 4413 Bandrand-Zellseiten ×6 bzw. ×3: T-Stöße, Spalt 0,000 m [S]; Schürze (−0,35 m) darunter gegen Raster-Funkeln [A].
+- Randschlitze Gelände↔Sockel (Stützen nur 1/m): vorher West −0,586…+0,686 m (72 Punkte >2 cm), Ost −0,54…+0,392 m (126), Nord −0,277…+0,132 m (16), Süd 0 [S]; Sockel folgt jetzt exakter Randlinie, Spalt 0 per Konstruktion [A]. West vorher/nachher sichtbar behoben, Ost/Nord optisch kein Unterschied.
+- 19 umgeklappte Grobdreiecke (LS1, z. B. x158,7 z18,6) → 0 [S]; optisch kaum sichtbar.
+- Bodenstufen >20 cm im Flachen: 554 Kanten [S]; gesichtete Stichproben = Wege/Hausplattformen/Ufer (gewollt), keine Terrassen gefunden.
+- Dreiecke Handy ?lod=1: 1 100 235 [S]; Zellabgleich Summe 0; CSV/glb unverändert.
+- Offen: K9 (Südfluss-Kasten, Schluchtwasser/Wandtextur, Südwand-Streifen, Ostrand), 13+13 Ansichten, Felsring-Nahsuche.
