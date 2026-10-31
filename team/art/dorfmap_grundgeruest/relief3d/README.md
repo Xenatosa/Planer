@@ -38,3 +38,10 @@
 - Blender-Versuch (blender/wandband_t54u.py, Displace + Voxel-Remesh): wirkt knetig/blasig statt geschichtet, 2,3× Dreiecke, Rand passt nicht nahtlos an das Gelände → nicht übernommen. Bilder: test/t54u/blender_vs_feinrelief_B.jpg.
 - Runde C (Voronoi-Klüfte, seitlicher Versatz) verworfen: schwarze Löcher/Schatten im Bild (test/t54u/verworfen_rundeC_schwarze_loecher.png), Code liegt nicht im Repo.
 - Prüfung: Zellabgleich summe 0, Wasser größte Komponente 4808 Zellen, Handy 1.075.230 Dreiecke [S].
+
+### t54u Runde D
+- Ursache der schwarzen Flecken aus Runde C: kein Schatten/Bump-Problem, sondern ein Namenskonflikt (`_gy/_gx` überschrieben) → Vertexfarben außerhalb des Gitters = 0 (schwarz). Behoben.
+- Seitlicher Warp der Feinbasis im Wandband (Vorsprünge/Buchten bis ~2,5 m). Ein Warp im Grobgitter wurde verworfen, weil er zellen_relief.csv verändert hätte (Zellwerte bleiben fix).
+- Fels grauer (Palette grau/dunkelgrau, Ocker selten, Shader entsättigt), Schnee in Rinnen, Ufer-Schaum reduziert.
+- Prüfungen [S]: Zellabgleich 0, Sprünge 14,09/16,15/11,09/12,0 m, Neigung 55,8° fein / 51,6° grob, größte Wasserkomponente 4808, Handy 1.075.230 Dreiecke.
+- Bilder: test/t54u/*_rundeD_r66.png, vgl_*_B_D.jpg.
