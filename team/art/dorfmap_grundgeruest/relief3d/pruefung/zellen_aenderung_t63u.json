@@ -1,19 +1,19 @@
 {
- "geaendert_zellen": 9674,
+ "geaendert_zellen": 7390,
  "wasser_zu_land": 1273,
  "land_zu_wasser": 1416,
- "nur_hoehe": 6985,
- "geaendert_ausserhalb_westgebiet_x<110_y<262": 1740,
- "davon_ueber_0_5m": 21,
+ "nur_hoehe": 4701,
+ "geaendert_ausserhalb_westgebiet_x<110_y<262": 102,
+ "davon_ueber_0_5m": 20,
  "bbox_x": [
   0,
-  335
+  85
  ],
  "bbox_y": [
-  17,
+  36,
   267
  ],
- "delta_max_hoch_m": 5.19,
+ "delta_max_hoch_m": 5.21,
  "delta_max_tief_m": -2.7299999999999986,
  "kreuzung_neues_wasser": {
   "weg": 0,

@@ -124,3 +124,27 @@ def spiegel_monoton(WV,Gv,VB,tief=0.30,runden=4,sig=1.5):
     Gv[bett]=(WV-tief)[bett]
     weg=M&VB&(Gv>WV-0.02);WV[weg]=-999;st['am_wandband_entfernt']=int(weg.sum())
     return WV.astype(np.float32),Gv.astype(np.float32),st
+
+def gefaelle_flach(WV,Gv,lo=-18.4,hi=-17.6,fall=0.6,bett=0.10):
+    """t63u: flache Endstrecke (Spiegel ~-18 m) bekommt durchgehend leichtes Gefaelle zum Kartenrand.
+    Nur Anzeige-Felder WV/Gv auf Wasser-Ecken, keine Zellwerte. [A]"""
+    import collections
+    WV=WV.astype(float).copy();Gv=Gv.astype(float).copy();GY,GX=WV.shape
+    M=(WV>-900)&(WV>=lo)&(WV<=hi);lab,n=nd.label(M,np.ones((3,3)))
+    if n==0:return WV,Gv,{'ecken':0}
+    k=np.bincount(lab.ravel())[1:].argmax()+1;K=lab==k
+    zz,xx=np.where(K);rand=K&((np.arange(GX)[None,:]==GX-1)|(np.arange(GY)[:,None]==GY-1))
+    if not rand.any():rand=K&(np.arange(GX)[None,:]==xx.max())
+    D=np.full(WV.shape,-1);q=collections.deque()
+    for z,x in zip(*np.where(rand)):D[z,x]=0;q.append((z,x))
+    while q:
+        z,x=q.popleft()
+        for dz in(-1,0,1):
+            for dx in(-1,0,1):
+                a,b=z+dz,x+dx
+                if 0<=a<GY and 0<=b<GX and K[a,b] and D[a,b]<0:D[a,b]=D[z,x]+1;q.append((a,b))
+    dm=D.max();t=np.where(K&(D>=0),D/dm,0.0)
+    WV0=WV.copy();WV[K]=WV0[K].max()-fall*(1-t[K])   # Spiegel: oben bleibt, zum Rand hin bis fall tiefer, streng ueber Weglaenge
+    WV[K]=np.minimum(WV[K],WV0[K])               # nie anheben
+    tief=K&(Gv>WV-bett);Gv[tief]=WV[tief]-bett
+    return WV,Gv,{'ecken':int(K.sum()),'weg_ecken':int(dm),'spiegel_min':round(float(WV[K].min()),2),'spiegel_max':round(float(WV[K].max()),2),'bett_tiefer':int(tief.sum())}

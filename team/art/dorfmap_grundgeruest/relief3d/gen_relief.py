@@ -580,16 +580,19 @@ from fluss_t62u import ufer_glaetten,fluss_kaskade
 WV,G_ANZ,KASK_T62U=fluss_kaskade(WV_ALT,G,_VBc);print('kaskade_t62u',KASK_T62U)   # t62u ersetzt den t61u-Spiegel (6-9 m Grabung) [A]
 WV,G_ANZ,UFER_T62U=ufer_glaetten(WV,G,G_ANZ,_VBc);print('ufer_t62u',UFER_T62U)
 from fluss_k import spiegel_monoton
-WV,G_ANZ,MONO_T63U=spiegel_monoton(WV,G_ANZ,_VBc);print('spiegel_t63u',MONO_T63U)   # t63u Runde K: streng fallend, Becken flach, Stufen <= ~1 m [A]
+WV,G_ANZ,MONO_T63U=spiegel_monoton(WV,G_ANZ,_VBc);print('spiegel_t63u',MONO_T63U)
+from fluss_k import gefaelle_flach
+WV,G_ANZ,FLACH_T63U=gefaelle_flach(WV,G_ANZ);print('flach_t63u',FLACH_T63U)   # t63u: Suedfluss leichtes Gefaelle [A]   # t63u Runde K: streng fallend, Becken flach, Stufen <= ~1 m [A]
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
-    _WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
+    _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),3);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
     for nm,L in(('baeume',baeume),('felsen',felsen),('findlinge',findlinge),('steine',steine),('geroell',geroell)):
         neu=[];v=0;w=0
         for o in L:
             j,i=o[2]*RS,o[0]*RS;d=float(nd.map_coordinates(dG,[[j],[i]],order=1,mode='nearest')[0]);wv=float(nd.map_coordinates(WV,[[j],[i]],order=0,mode='nearest')[0])
             if abs(d)>0.01:o=list(o);o[1]=round(o[1]+d,3);v+=1
             if wv>-900 and wv>o[1]+0.15*(o[3] if nm!='baeume' else 1):w+=1;continue
+            if nm!='baeume' and float(nd.map_coordinates(_WVM3,[[j],[i]],order=0,mode='nearest')[0])>o[1]:st['stein_wasser3_entfernt_t63u']=st.get('stein_wasser3_entfernt_t63u',0)+1;continue   # t63u: kein Stein unter Wasserspiegel (3x3-Ecken, wie Raycast) [A]
             if nm=='baeume':                       # t63u Runde K: kein Baum am Wasserrand (1 m Umkreis) oder auf Hang >45 Grad (Anzeige-Gelaende) [A]
                 wn_=float(nd.map_coordinates(_WVMX,[[j],[i]],order=0,mode='nearest')[0]);sl_=float(nd.map_coordinates(_SLMX,[[j],[i]],order=0,mode='nearest')[0])
                 if wn_>o[1]-0.3:st['baum_wasserrand_entfernt']=st.get('baum_wasserrand_entfernt',0)+1;continue

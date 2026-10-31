@@ -88,14 +88,14 @@
    ],
    "laenge_m": 616.7,
    "spiegel_quelle": -7.22,
-   "spiegel_auslass": -17.93,
+   "spiegel_auslass": -18.2,
    "bergauf_entlang_pfad_gt_2cm": 0,
    "bergauf_ueber_wasserscheide_ecken_gt_2cm": 0,
    "stufen_gt_1m_ausserhalb_schlucht": 0,
    "stufen_gt_1m_in_schlucht_wandband": 18,
-   "stufe_max_ausserhalb_schlucht_m": 0.77,
+   "stufe_max_ausserhalb_schlucht_m": 0.93,
    "stufe_max_m": 3.31,
-   "stufen_gt_0_3m": 1346
+   "stufen_gt_0_3m": 1488
   }
  ]
 }
