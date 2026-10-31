@@ -63,3 +63,10 @@
 - Neu: Ufersteine, Baumgruppen an Klippenkanten, Trockengras-Büschel (instanziert), Kraterkrone nur fleckig Fels, Schaum an Wasserstufen, ferne Berge heller/dunstiger.
 - [S] pruefe_t42u summe 0. [S] Desktop 2.474.980 Dreiecke / 26 Draws. Handy nicht neu gemessen.
 - Offen/ehrlich: Felsblöcke wirken noch kastig (Quader, zu einheitlich), Bäume im Schatten fast schwarz, Rampen kaum sichtbar, Kraterring noch ohne klare Rippen/Scharten, kein GLB-Export, keine Detail-Normalmap. opensimplex per pip blockiert (PEP 668) → eigenes numpy-fBm; Blender nicht verfügbar.
+
+## t48u Abschluss (R5-R8 + Endpruefung)
+- [S] pruefe_t42u summe 0. Wandhoehen-Feld 14/16/11/12 m; Fenster-Median (pruefe_final_t48u.py) Nord 14.0, Suedgrat 16.8, Krater 14.0 (Fenster-Methode ueberhoeht), Ost 12.0.
+- [S] Wasser alle IDs 8er-Nachbarschaft: Hauptstueck 6005 Zellen zusammenhaengend; 28 kleine Reststuecke (groesstes 383). Einzelne fluss_id sind zerstueckelt (BACH_SUED 58 Teile), haengen aber ueber andere IDs zusammen.
+- [S] Headless: alle 11 Kameras gerendert, fehler [] (Teil 3 geloggt; Teile 1+2 schrieben alle Bilder, hingen danach beim Beenden -> abgebrochen, kein Log).
+- [S] Desktop 3 563 681 Dreiecke / 31 Draws; Handy ?lod=1 390x844 1 860 203 / 32 Draws; GLB ?glb=1 laedt (2 Meshes, 2.3 s).
+- Abweichung zum Beispielbild: weiterhin stilisiert/low-poly (kantige Felsen, einfache Baeume), kein Foto-Realismus; Fernberge wirken wie gezackte Papierkulisse.

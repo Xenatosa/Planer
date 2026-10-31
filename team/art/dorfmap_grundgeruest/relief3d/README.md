@@ -23,3 +23,9 @@
 - Handy-LOD: `?lod=1` oder automatisch auf Handy.
 - Felsformen: `blender/fels_meshes.py` (headless Blender 4.2.3 portable aus download.blender.org, `/tmp/blender-4.2.3-linux-x64/blender -b --python blender/fels_meshes.py`) -> `blender/fels_meshes.json`, wird in die Daten eingebettet.
 - Hoehenfeld: fBm-Felsform, Kraterrippen/Scharten, thermische Erosion (Wandfuss), hydraulische Tropfen-Erosion (Wandzone, max 0,8 m); Zellwerte unveraendert (Pruefung summe 0).
+
+### Blender-Workflow (t48u)
+- Version: Blender 4.2.3 portable (Linux x64, download.blender.org), headless: `/tmp/blender-4.2.3-linux-x64/blender -b --python blender/fels_meshes.py`
+- Parameter: 8 Felsen, Ico-Sphere Subdiv 5, Radius 0.6, Zufalls-Skalierung; Displace VORONOI Staerke 0.16 (Scale 0.55-0.85) + CLOUDS 0.10 (Scale 0.25); Decimate 0.08 (~408 Dreiecke/Fels); Achsen y<->z getauscht, Dreiecks-Reihenfolge umgedreht (sonst Innenseite sichtbar).
+- Ausgabe `blender/fels_meshes.json` -> `gen_relief.py` bettet ein. Desktop nutzt Blender-Form, Handy (?lod=1) Ikosaeder.
+- GLB: `dorfmap_relief_z25.glb` (Boden + Waende mit Vertexfarben), Start: `python3 -m http.server 8000`, dann `http://localhost:8000/index.html?glb=1`. Ohne Server: `index.html` direkt (Einzeldatei).
