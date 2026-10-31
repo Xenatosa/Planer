@@ -1,20 +1,20 @@
 {
  "baeume": {
-  "schwebend_vor": 34,
-  "versunken_vor": 254,
-  "steil_oder_nase_vor": 245,
+  "schwebend_vor": 33,
+  "versunken_vor": 243,
+  "steil_oder_nase_vor": 253,
   "steil_oder_nase_nach": 0
  },
  "felsen": {
   "schwebend_vor": 2,
   "versunken_vor": 11,
-  "steil_oder_nase_vor": 4,
+  "steil_oder_nase_vor": 5,
   "steil_oder_nase_nach": 0
  },
  "findlinge": {
-  "schwebend_vor": 4,
+  "schwebend_vor": 5,
   "versunken_vor": 16,
-  "steil_oder_nase_vor": 14,
+  "steil_oder_nase_vor": 13,
   "steil_oder_nase_nach": 0
  },
  "steine": {
@@ -24,15 +24,15 @@
   "steil_oder_nase_nach": 0
  },
  "geroell": {
-  "schwebend_vor": 99,
-  "versunken_vor": 532,
-  "steil_oder_nase_vor": 318,
-  "steil_oder_nase_nach": 1
+  "schwebend_vor": 101,
+  "versunken_vor": 531,
+  "steil_oder_nase_vor": 300,
+  "steil_oder_nase_nach": 0
  },
  "gras": {
-  "schwebend_vor": 91,
-  "versunken_vor": 400,
-  "steil_oder_nase_vor": 408,
+  "schwebend_vor": 96,
+  "versunken_vor": 394,
+  "steil_oder_nase_vor": 414,
   "steil_oder_nase_nach": 0
  }
 }

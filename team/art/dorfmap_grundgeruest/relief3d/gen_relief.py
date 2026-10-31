@@ -424,8 +424,8 @@ _TW=_cz*(4.2*_pk*(0.6+0.6*np.clip(_voff,0,1))+1.6*_pk2+0.8*np.clip(_RB,0,None))
 FD=FD+_TW
 # Runde F: Pfeiler + Kare in Falllinie (grosse Skala, ~14 m Abstand), Gipfelpyramiden mit Facetten und Saetteln am Grat [A]
 _pf=np.sin(2*np.pi*(_sco/14.0+0.35*_ff(40,211)));_pf=np.sign(_pf)*np.abs(_pf)**0.5
-FD=FD+_wf*_sf*_bell**0.5*_gm*1.0*_pf                                                    # Pfeiler (+) / Kar-Rinne (-), seitlich wirksam ueber Steigung
-_kar=_wf*np.clip((_tl0-0.55)/0.35,0,1)*np.clip(-_pf,0,1)*np.clip(_ed*2,0,1);FD=FD-2.2*_kar   # Kare: Mulden an der Oberkante zwischen Pfeilern
+FD=FD+_wf*_sf*_bell**0.5*_gm*1.3*_pf                                                    # Pfeiler (+) / Kar-Rinne (-), seitlich wirksam ueber Steigung
+_kar=_wf*np.clip((_tl0-0.55)/0.35,0,1)*np.clip(-_pf,0,1)*np.clip(_ed*2,0,1);FD=FD-2.8*_kar   # Kare: Mulden an der Oberkante zwischen Pfeilern
 _cq=np.argwhere((_cz>0.55)&(_pf>0.6));_rp=np.random.default_rng(212);_PY=[]
 if len(_cq):
     _rp.shuffle(_cq);_kt=[]
@@ -459,7 +459,10 @@ for _ in range(30):
 FH=np.where(_vin,FH,FB)
 # Politur t58u: Nadelspitzen/Zacken abrunden (lokale Ueberhoehung gegen Umgebung daempfen) [A]
 for _ in range(2):
-    _g4=nd.gaussian_filter(FH,4);_nad=_wf*np.clip((FH-_g4-0.5)/1.5,0,1);FH=np.where(_vin,FH*(1-0.6*_nad)+nd.gaussian_filter(FH,1.8)*0.6*_nad,FB)
+    _g4=nd.gaussian_filter(FH,4);_nad=_wf*np.clip((FH-_g4-0.9)/1.5,0,1);FH=np.where(_vin,FH*(1-0.45*_nad)+nd.gaussian_filter(FH,1.8)*0.45*_nad,FB)
+# Runde G: Gesimse = steile Kante unter leicht vorgezogener Oberkante, sparsam (Rauschmaske) [A]
+_gs=_wf*_sf*np.clip(1-np.abs(_tl0-0.86)/0.06,0,1)*np.clip(_ff(25,231)-0.2,0,1)
+FH=np.where(_vin,FH+0.9*nd.gaussian_filter(_gs,1.0),FB)
 # Runde F: Schneebaender als Geometrie auf Absaetzen (flach in steiler Umgebung): 0,1-0,3 m Polster [A]
 _fs3=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_ab=np.clip((38-_fs3)/12,0,1)*np.clip((nd.gaussian_filter(_fs3,6)-35)/15,0,1)
 FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
@@ -511,7 +514,7 @@ for q in _oc:
     X=x0+v[:,0]*L*nx_-v[:,2]*W*nz_;Z=z0+v[:,0]*L*nz_+v[:,2]*W*nx_;Y=y0+v[:,1]*Hh
     ht=_hat(X,Z);Y=np.where(ht>y0,np.minimum(Y,ht+0.08),Y);Y=np.where(v[:,1]>0,np.minimum(Y,np.maximum(np.minimum(ht+0.08,y0+0.45),y0)),Y)   # Politur: Oberseite buendig mit Kante, keine Kissen                                              # hinten/oben ins Gelaende einbetten, kein Spalt
     _OP.append(np.stack([X,Y,Z],1));_OI.append(_IF+_ON);_ON+=len(v)
-if _OP:
+if _OP and os.environ.get('OV')=='1':   # Runde G: Nasen-Meshes aus (sahen wie Platten aus), Ueberhang-Wirkung per Gesims im Hoehenfeld [A]
     FW['ov']=base64.b64encode(np.concatenate(_OP).astype(np.float32).tobytes()).decode();FW['ovi']=base64.b64encode(np.concatenate(_OI).astype(np.uint32).tobytes()).decode()
 print('ueberhaenge',len(_sel),'dreiecke',sum(len(i) for i in _OI))
 _fsl=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))))
@@ -521,7 +524,7 @@ print('feinrelief',FW_MESS)
 if os.environ.get('FW_NPZ'):np.savez_compressed(os.environ['FW_NPZ'],FH=FH.astype(np.float32),FB=FB.astype(np.float32),vin=_vin,tint=_tint.astype(np.float32),snow=_snow.astype(np.float32))   # t54u: Blender-Versuch [A]
 # t59u: Baeume/Felsen/Findlinge/Steine/Geroell/Gras an neue Feinform anpassen (auf Boden, nicht im Fels, nicht schwebend) [A]
 _fsP=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_vinP=_vin&(_wf>0.02)
-_ovc=[(float(p[:,0].mean()),float(p[:,2].mean()),float(np.ptp(p[:,0])/2+np.ptp(p[:,2])/2)/2+0.5) for p in _OP]
+_ovc=[(float(p[:,0].mean()),float(p[:,2].mean()),float(np.ptp(p[:,0])/2+np.ptp(p[:,2])/2)/2+0.5) for p in _OP] if os.environ.get('OV')=='1' else []
 PASS={}
 for _k,_lim in (('baeume',35),('felsen',60),('findlinge',45),('steine',50),('geroell',55),('gras',40)):
     _L=locals().get(_k);vor=[0,0,0];nach=[0,0,0]
