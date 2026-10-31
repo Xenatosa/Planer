@@ -610,9 +610,10 @@ def schlucht_breiter(WV,GA):   # t64u K9: Schluchtwasser x210-227 z229-245 nur 1
         nmin=-nd.grey_erosion(np.where(w,-sw,-1e9),size=3)   # dummy
         lo=nd.minimum_filter(np.where(w,sw,1e9),size=3)
         cand=(~w)&(lo<1e8)&(sg<lo+0.6)
-        sw[cand]=lo[cand];sg[cand]=np.minimum(sg[cand],lo[cand]-0.12);n+=int(cand.sum())
+        sw[cand]=lo[cand];cg=cand&~_VBc[j0:j1,i0:i1];sg[cg]=np.minimum(sg[cg],lo[cg]-0.12);n+=int(cand.sum())   # t64u Le: Boden nicht an Feinband-Ecken absenken (sonst Spalt 0,33 m bei 216/240) [S]
     return WV,GA,{'neu_wasser':n}
 WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT_T64U)
+_wu=(WV>-900)&(WV<G_ANZ);WV=np.where(_wu,np.float32(-999.0),WV).astype(WV.dtype);SCHLUCHT_T64U['wv_unter_boden_entfernt']=int(_wu.sum());print('wv_unter_t64u',int(_wu.sum()))   # t64u Le: verdeckte Wasserecken (Spiegel unter Boden) raus [S]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
