@@ -53,3 +53,11 @@
 - Wasserfall-Fuß: Schaum gedeckelt (max 0,3).
 - Prüfungen [S]: Zellabgleich 0; zellen_relief.csv, glb, relief_zaehlung.json, abgleich_t42u.json per git diff unverändert; Sprünge 14,09/16,15/11,09/12,0 m; Neigung 57,4° fein / 46,9° grob; Wasser 4808; Handy 1.107.294 Dreiecke.
 - Bilder: *_rundeE_r70.png, *_clay*.png, vgl_D_E_teil1/2.jpg, vgl_ton_E_mit_referenz.jpg.
+
+## Runde F (t57u/t58u/t59u)
+- Feinband: Pfeiler (Rippe 14 Feinpunkte), Kare unter dem Grat, bis 60 Gipfelpyramiden (jetzt weiche Spitze/weicher Fuß), Schneepolster 0,2–0,3 m als Geometrie auf Absätzen. [A]
+- Politur t58u: Feinband-Basis leicht geglättet (Treppen aus Grobgitter weg), Nadelspitzen gegen Umgebung gedämpft, thermischer Grenzwinkel 71°. [A]
+- 36 Felsnasen/Überhänge als Zusatz-Mesh `FW.ov/ovi` (11 520 Dreiecke), hinten und oben ins Gelände eingebettet, Clay-Modus grau. Wirken noch eher wie flache Platten. [A]
+- t59u Platzierung: Bäume/Felsen/Findlinge/Steine/Geröll/Gras im Feinband auf Feinhöhe gesetzt, aus steilen Stellen und unter Nasen bis 3 m weggerückt. Zählung in `pruefung/platzierung_t59u.json` (z. B. Bäume vorher 245 steil/Nase, 254 versunken, 34 schwebend → nachher 0 steil/Nase). [S]
+- Prüfungen: summe 0, Zelldateien byte-gleich, Sprünge 14.09/16.15/11.09/12.0 m, Neigung 58.8° fein / 47.7° grob, Wasser 4808, Handy 1 118 814 Dreiecke. [S]
+- Bilder: test/t54u/*_r72.jpg (11 Ansichten), *_r73.jpg (grau), vgl_E_F_mit_referenz.jpg.
