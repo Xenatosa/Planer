@@ -149,7 +149,7 @@ _rw=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_fbm(sg,sd),[_wy,_wx],order=1,mod
 RIB=(_rw-_rw.mean())/_rw.std()                                       # >0 Rippe, <0 Runse
 u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
-steil_k=(3.2+5.5*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
+steil_k=(1.3+2.4*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
 # t48u R5: Kraterring mit radialen Felsrippen + 4 Scharten; uebrige Waende mit Grat-Rauschen (ridged). Ober-/Unterkante fix (sin(pi t)) [A]
 _kc=np.argwhere(wand&(wn=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
@@ -197,9 +197,9 @@ G=Ge.astype(np.float32)
 # t53u R2/R3: Rampen + Serpentinen nach Erosion exakt ins Gitter (Kern 1,6 m eben laengs, Rand weich bis 3,6 m) [A]
 from scipy.spatial import cKDTree
 _PP=np.concatenate([p for p,_ in RAMPPROF]);_HH=np.concatenate([h for _,h in RAMPPROF]);_kd=cKDTree(_PP)
-_vx=np.stack([vi.ravel()/RS,vj.ravel()/RS],1);_r,_k=_kd.query(_vx,distance_upper_bound=3.6);_ok=np.isfinite(_r)
+_vx=np.stack([vi.ravel()/RS,vj.ravel()/RS],1);_r,_k=_kd.query(_vx,distance_upper_bound=7.0);_ok=np.isfinite(_r)
 _wv=nd.map_coordinates(np.kron(wa,np.ones((RS,RS))).astype(float),[vj-0.5,vi-0.5],order=0,mode='nearest').ravel()>0.5
-_ok&=~_wv;_w=np.clip((3.6-_r[_ok])/2.0,0,1);_g=G.ravel().astype(float);_g[_ok]=_g[_ok]*(1-_w)+_HH[_k[_ok]]*_w;G=_g.reshape(G.shape).astype(np.float32)
+_ok&=~_wv;_w=np.clip((7.0-_r[_ok])/5.4,0,1);_w=_w*_w*(3-2*_w);_g=G.ravel().astype(float);_g[_ok]=_g[_ok]*(1-_w)+_HH[_k[_ok]]*_w;G=_g.reshape(G.shape).astype(np.float32)
 RAMP_STEIL=[]
 for p,h in RAMPPROF:
     gp=nd.map_coordinates(G,[p[:,1]*RS,p[:,0]*RS],order=1);L=np.r_[0,np.cumsum(np.hypot(*np.diff(p,axis=0).T))]
@@ -286,7 +286,7 @@ for y in range(NY):
         if ug2[y,x]=='FELS' and u[0]<(0.05 if wn[y,x]=='Krater' else 0.09)*np.clip(0.5+dich[y,x],0,2):
             s=0.5+1.6*u[3]**2;X,Z=x+u[1],y+u[2];felsen.append([round(X,2),round(hc(X,Z)-0.25*s,2),round(Z,2),round(s,2),round(u[4]*6.28,2)])
         if deko[y,x] and not wa[y,x] and u[0]<0.5:X,Z=x+u[1],y+u[2];steine.append([round(X,2),round(hc(X,Z)-0.1,2),round(Z,2),round(0.3+0.5*u[3],2),round(u[4]*6.28,2)])
-        if fuss[y,x] and not wa[y,x] and u[0]<0.6:
+        if fuss[y,x] and not wa[y,x] and u[0]<0.18:
             for _ in range(1+int(u[3]*3)):
                 v=rs2.random(4);s=0.2+0.6*v[2]**2;X,Z=x+v[0],y+v[1];geroell.append([round(X,2),round(hc(X,Z)-0.2*s,2),round(Z,2),round(s,2),round(v[3]*6.28,2)])
 # t48u: Ufersteine, Baumgruppen an Klippenkanten, Trockengras-Bueschel [A]
@@ -305,7 +305,7 @@ for y,x in np.argwhere((ug2=='SCHNEE')&~belegt&~weg&~steil&~wa):
 gzy,gzx=np.gradient(Hz);bl_r=np.random.default_rng(48);felsbloecke=[]
 for y,x in np.argwhere(steil&~wa):
     u=bl_r.random(7)
-    if u[0]>0.55:continue
+    if True:continue   # t54u: keine Blockinstanzen mehr als Wandform (Fels = Feinrelief FW) [A]
     nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l   # Blick talwaerts
     X,Z=x+0.5+0.6*(u[1]-0.5),y+0.5+0.6*(u[2]-0.5);Y=hc(X,Z)
     gr=0.45 if u[6]<0.3 else (1.0 if u[6]<0.85 else 1.45)   # t48u R5: Groessenmix klein/mittel/gross [A]
@@ -315,7 +315,7 @@ for y,x in np.argwhere(steil&~wa):
 UEBERHANG=0;_ohr=np.random.default_rng(531);_kr2=oben&nd.binary_dilation(steil,iterations=1)&~wa&~belegt&~weg&~nd.binary_dilation(wa,iterations=4)
 for y,x in np.argwhere(_kr2):
     u=_ohr.random(6)
-    if u[0]>0.16 or kh[y,x]<6:continue
+    if True:continue   # t54u: Ueberhang-Platten entfernt (Blockhaufen-Eindruck)
     nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l
     X,Z=x+0.5,y+0.5;Y=float(Gmax[y,x]) if False else hc(X,Z);ko=1.0+1.0*u[1]
     sx=3.0+3.5*u[2];sy=0.9+0.9*u[3];sz=2.2+1.8*u[4]
@@ -364,10 +364,49 @@ sc=trimesh.Scene()
 sc.add_geometry(trimesh.Trimesh(V,TT[~ST][:,::-1],process=False,vertex_colors=_vc),'boden')
 sc.add_geometry(trimesh.Trimesh(V,TT[ST][:,::-1],process=False,vertex_colors=_vc),'waende')
 sc.export('dorfmap_relief_z25.glb')
+# t54u: Feinrelief der Wandbaender (0,25 m) als zusammenhaengende Felsform; nur Anzeige, Zellwerte bleiben aus G [A]
+FS=4;FXn,FYn=NX*FS+1,NY*FS+1
+_rkd=cKDTree(np.concatenate([p for p,_ in RAMPPROF]));_cc=np.stack(np.meshgrid(np.arange(NX)+0.5,np.arange(NY)+0.5),-1).reshape(-1,2)
+_nahr=(_rkd.query(_cc,distance_upper_bound=4.5)[0]<9).reshape(NY,NX)
+BAND=nd.binary_dilation(steil|oben|fuss,iterations=1)&~nd.binary_dilation(wa,iterations=1)&~belegt&~_nahr
+BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
+_fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
+_i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
+_A=G[_j,_i];_B=G[_j,_i+1];_C=G[_j+1,_i];_D=G[_j+1,_i+1]
+FB=np.where(_az>=_ax,_A+_az*(_C-_A)+_ax*(_D-_C),_A+_ax*(_B-_A)+_az*(_D-_B))       # exakt die G-Dreiecke
+_qb=np.kron(BAND,np.ones((FS,FS),bool));_qp=np.pad(_qb,1)
+_vin=_qp[:-1,:-1]&_qp[:-1,1:]&_qp[1:,:-1]&_qp[1:,1:]                                   # Vertex innen (alle 4 Quads im Band)
+_wf=nd.distance_transform_edt(_vin)/10.0;_wf=np.clip(_wf,0,1);_wf=_wf*_wf*(3-2*_wf)
+def _ff(sig,seed):
+    r=np.random.default_rng(seed);n=nd.gaussian_filter(r.standard_normal((FYn,FXn)).astype(np.float32),sig);return n/n.std()
+_wy=_fy+16*_ff(30,61);_wx=_fx+16*_ff(30,62)
+_R=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_ff(sg,sd),[_wy,_wx],order=1,mode='reflect')/2.0,-1,1))) for a,sg,sd in ((0.5,18,63),(0.3,8,64),(0.2,3.5,65)))
+_R=(_R-_R.min())/(_R.max()-_R.min())
+_sgy,_sgx=np.gradient(FB,1/FS);_sl=np.degrees(np.arctan(np.hypot(_sgx,_sgy)));_sf=np.clip((nd.gaussian_filter(_sl,3)-20)/35,0,1)
+_ph=(FB+1.8*_ff(40,66)+0.6*_ff(10,67))/2.6;_fr=_ph-np.floor(_ph);_st=np.clip((_fr-0.15)/0.7,0,1)**2   # Schichtung: Baender/Absaetze
+FD=_wf*(_sf*(2.4*_R**1.6+0.9*_st+0.25)+(1-_sf)*(0.9*_R**2))
+FH=FB+FD
+_fe=_vin&(_wf>0)                                                  # thermische Glaettung gegen Zacken (Grenzwinkel 72 Grad)
+_tl=np.tan(np.radians(72))/FS
+for _ in range(12):
+    for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
+        Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
+FH=np.maximum(FH,FB);FH=np.where(_vin,FH,FB)
+_ap=nd.gaussian_filter(FH,8)-0.15;FH=np.where(_vin,np.maximum(FH,_wf*_ap+(1-_wf)*FH),FB)   # t54u-A: Schuttfuss/Kehlen fuellen -> flachere Fuesse
+_fv=np.argwhere(_qb.any() and np.ones(1,bool))  # Platzhalter
+_used=np.zeros((FYn,FXn),bool);_used[:-1,:-1]|=_qb;_used[1:,:-1]|=_qb;_used[:-1,1:]|=_qb;_used[1:,1:]|=_qb
+_vid=np.flatnonzero(_used.ravel()).astype(np.uint32)
+_vcf=np.stack([nd.map_coordinates(VC.reshape(GY,GX,3)[...,c].astype(float),[_gy.ravel()[_vid],_gx.ravel()[_vid]],order=1) for c in range(3)],1)
+FW={'fs':FS,'band':base64.b64encode(np.flatnonzero(BAND.ravel()).astype(np.uint32).tobytes()).decode(),'vid':base64.b64encode(_vid.tobytes()).decode(),
+    'h':base64.b64encode(FH.ravel()[_vid].astype(np.float32).tobytes()).decode(),'c':base64.b64encode(np.clip(_vcf,0,255).astype(np.uint8).tobytes()).decode()}
+_fsl=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))))
+FW_MESS={'band_zellen':int(BAND.sum()),'dreiecke_voll':int(BAND.sum()*FS*FS*2),'neigung_steilband_mittel':round(float(_fsl[_vin&(_sf>0.5)].mean()),1),
+ 'neigung_p10_p90':[round(float(np.percentile(_fsl[_vin&(_sf>0.5)],q)),1) for q in (10,90)],'versatz_max_m':round(float(FD.max()),2)}
+print('feinrelief',FW_MESS)
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
 D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
- 'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH}
+ 'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
 open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=False).encode(),9))
 Z={k:len(D[k]) for k in ['haeuser','baeume','felsen','findlinge','steine','bruecken','wege']}
 Z.update(wand_dreiecke=int(len(TW)),boden_dreiecke=int((~ST).sum()),zellen_wand_steil=int(steil.sum()),

@@ -95,14 +95,16 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
  const bi=[];let nw=0;const tri=(a,b,c)=>{bi.push(a,b,c);const A=a*3,B=b*3,C=c*3,ux=p[B]-p[A],uy=p[B+1]-p[A+1],uz=p[B+2]-p[A+2],vx=p[C]-p[A],vy=p[C+1]-p[A+1],vz=p[C+2]-p[A+2];
   const nx=uy*vz-uz*vy,ny=uz*vx-ux*vz,nz=ux*vy-uy*vx;if(Math.abs(ny)/Math.hypot(nx,ny,nz)<COSW-1e-7)nw++;};
  const LS=(Math.min(innerWidth,innerHeight)<700||/lod=1/.test(location.search))?2:1;window.__lod=LS;   // LOD Handy [A]
- for(let j=0;j<GY-LS;j+=LS)for(let i=0;i<GX-LS;i+=LS){const a=j*GX+i,b=a+LS,c=a+GX*LS,d=c+LS;tri(a,c,d);tri(a,d,b);}
+ const FW=DN.FW,BANDZ=new Uint8Array(NX*NY);if(FW)for(const z of new Uint32Array(Uint8Array.from(atob(FW.band),c=>c.charCodeAt(0)).buffer))BANDZ[z]=1;   // t54u Feinrelief-Band
+ const VB=new Uint8Array(GX*GY);for(let z=0;z<NX*NY;z++)if(BANDZ[z]){const x=z%NX,y=(z/NX)|0;for(let dj=0;dj<=RS;dj++)for(let di=0;di<=RS;di++)VB[(y*RS+dj)*GX+x*RS+di]=1;}
+ for(let j=0;j<GY-LS;j+=LS)for(let i=0;i<GX-LS;i+=LS){if(BANDZ[((j/RS)|0)*NX+((i/RS)|0)])continue;const a=j*GX+i,b=a+LS,c=a+GX*LS,d=c+LS;tri(a,c,d);tri(a,d,b);}
  {// t44u r9: Abbruchkante glaetten (nur Netz, nicht Zellwerte): Kantenpunkte in x/z zum Mittel gleich hoher Nachbarn ziehen [A]
   const q=p.slice(),rng=k=>{let a=1e9,b=-1e9;const i=k%GX,j=(k/GX)|0;for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GX||jj>=GY)continue;const g=G[jj*GX+ii];a=Math.min(a,g);b=Math.max(b,g);}return b-a;};
-  for(let k=0;k<GX*GY;k++){if(rng(k)<1.5)continue;const i=k%GX,j=(k/GX)|0;let sx=0,sz=0,n=0;
+  for(let k=0;k<GX*GY;k++){if(VB[k]||rng(k)<1.5)continue;const i=k%GX,j=(k/GX)|0;let sx=0,sz=0,n=0;
    for(let dj=-2;dj<=2;dj++)for(let di=-2;di<=2;di++){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GX||jj>=GY)continue;const kk=jj*GX+ii;if(Math.abs(G[kk]-G[k])<0.6){sx+=p[kk*3];sz+=p[kk*3+2];n++;}}
    if(n>2&&i>0&&j>0&&i<GX-1&&j<GY-1){q[k*3]=p[k*3]*0.4+0.6*sx/n;q[k*3+2]=p[k*3+2]*0.4+0.6*sz/n;}}
   // Kartenrand: tiefe Kerben (Flussaustritt) weich verrunden, nur Netz [A]
-  for(let k=0;k<GX*GY;k++){const i=k%GX,j=(k/GX)|0,dr=Math.min(i,j,GX-1-i,GY-1-j);if(dr>10)continue;let s2=0,n=0;
+  for(let k=0;k<GX*GY;k++){const i=k%GX,j=(k/GX)|0,dr=Math.min(i,j,GX-1-i,GY-1-j);if(dr>10||VB[k])continue;let s2=0,n=0;
    for(let dj=-4;dj<=4;dj++)for(let di=-4;di<=4;di++){const ii=Math.min(Math.max(i+di,0),GX-1),jj=Math.min(Math.max(j+dj,0),GY-1);s2+=G[jj*GX+ii];n++;}
    const w=(1-dr/10.5)*Math.min(1,rng(k)/1.5+0.0);q[k*3+1]=G[k]*(1-w)+w*Math.min(G[k],s2/n)*1+w*0;}
   p.set(q);}
@@ -131,7 +133,13 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
     vec3 dpx=dFdx(-vViewPosition),dpy=dFdy(-vViewPosition);vec3 r1=cross(dpy,normal),r2=cross(normal,dpx);float det=dot(dpx,r1);
     vec3 grd=sign(det)*(dFdx(hb)*r1+dFdy(hb)*r2)*(0.6+1.4*(1.-abs(N2.y)));normal=normalize(abs(det)*normal-grd);}`);};
  const m=new THREE.Mesh(gb,mat);m.receiveShadow=m.castShadow=true;m.userData.boden=1;
- const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);NEU.add(g);
+ let fwMesh=null;if(FW){const b2=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)).buffer,FS=FW.fs,FX=NX*FS+1,vid=new Uint32Array(b2(FW.vid)),fh=new Float32Array(b2(FW.h)),fc=new Uint8Array(b2(FW.c)),S=FS/(LS==1?1:2)>=1?(LS==1?1:2):1;
+  const map=new Int32Array(FX*(NY*FS+1)).fill(-1);vid.forEach((k,n)=>map[k]=n);const fp=new Float32Array(vid.length*3),fcl=new Float32Array(vid.length*3);
+  vid.forEach((k,n)=>{fp[n*3]=(k%FX)/FS;fp[n*3+1]=fh[n];fp[n*3+2]=((k/FX)|0)/FS;for(let c=0;c<3;c++)fcl[n*3+c]=Math.pow(fc[n*3+c]/255,2.2);});
+  const fi=[];for(let z=0;z<NX*NY;z++){if(!BANDZ[z])continue;const x=z%NX,y=(z/NX)|0;for(let dj=0;dj<FS;dj+=S)for(let di=0;di<FS;di+=S){const a=map[(y*FS+dj)*FX+x*FS+di],b=map[(y*FS+dj)*FX+x*FS+di+S],c=map[(y*FS+dj+S)*FX+x*FS+di],d=map[(y*FS+dj+S)*FX+x*FS+di+S];fi.push(a,c,d,a,d,b);}}
+  const fg=new THREE.BufferGeometry();fg.setAttribute('position',new THREE.BufferAttribute(fp,3));fg.setAttribute('color',new THREE.BufferAttribute(fcl,3));fg.setIndex(fi);fg.computeVertexNormals();
+  fwMesh=new THREE.Mesh(fg,mat);fwMesh.receiveShadow=fwMesh.castShadow=true;fwMesh.userData.boden=1;window.__fw={dreiecke:fi.length/3,lod:S};}
+ const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);if(fwMesh)g.add(fwMesh);NEU.add(g);
  if(/[?&]glb=1/.test(location.search)&&location.protocol.startsWith('http')){   // t48u R5: GLB-Pfad (lokaler Server), sonst Single-File-Daten [A]
   new GLTFLoader().load('dorfmap_relief_z25.glb',gl=>{const mat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});gl.scene.traverse(o=>{if(o.isMesh){o.material=mat;o.receiveShadow=true;o.castShadow=true;}});
    g.visible=false;const gg=new THREE.Group();gg.userData.ebene='gelaende';gg.add(gl.scene);NEU.add(gg);window.__glb={ok:true,meshes:gl.scene.children.length};},undefined,e=>{window.__glb={ok:false,fehler:String(e)};});}
