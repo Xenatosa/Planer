@@ -64,8 +64,17 @@ wz=nd.gaussian_filter(np.kron(nd.binary_dilation(J,iterations=3),np.ones((RS,RS)
 rs=np.random.default_rng(42);noi=nd.gaussian_filter(rs.standard_normal(Hn.shape),3);noi/=noi.std()
 Hs=nd.gaussian_filter(Hn,3)                                        # sigma 1,5 m [A]
 lo=nd.minimum_filter(Hn,15);hi=nd.maximum_filter(Hn,15);Rg=hi-lo
-t=np.clip(((Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.12*noi)*6+0.5,0,1);t=t*t*(3-2*t)
-Gs=lo+Rg*t;Gs=np.where(Rg>SPRUNG,Gs,Hs)
+# t47u: mehrskalige Felsform – Rippen/Runsen (grob+mittel+fein), Baender/Simse, Schuttfuss [A]
+def _fbm(sig,seed):
+    r=np.random.default_rng(seed);n=nd.gaussian_filter(r.standard_normal(Hn.shape),sig);return n/n.std()
+nf=0.55*_fbm(10,7)+0.30*_fbm(4,8)+0.15*noi
+u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.16*nf
+krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
+steil_k=6*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
+t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
+band=0.06*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)           # Simse/Baender in der Wand
+tw=np.clip(u*2.2+0.5,0,1);apron=np.clip(tw,0,0.3)                    # Schuttkegel am Fuss
+Gs=lo+Rg*np.clip(0.8*t+band+0.2*apron/0.3,0,1);Gs=np.where(Rg>SPRUNG,Gs,Hs)
 Gsamp=Hs*(1-wz)+Gs*wz
 vj,vi=np.mgrid[0:GY,0:GX].astype(float)
 G=nd.map_coordinates(Gsamp,[vj-0.5,vi-0.5],order=1,mode='nearest').astype(np.float32)
