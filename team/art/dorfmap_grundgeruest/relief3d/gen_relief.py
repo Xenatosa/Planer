@@ -107,6 +107,12 @@ u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.16*nf
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
 steil_k=6*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
+# t48u R5: Kraterring mit radialen Felsrippen + 4 Scharten; uebrige Waende mit Grat-Rauschen (ridged). Ober-/Unterkante fix (sin(pi t)) [A]
+_kc=np.argwhere(wand&(wn=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]];_ang=np.arctan2(_jj-_kc[0],_ii-_kc[1])
+_rib=np.sin(_ang*13+1.6*_fbm(14,21));_rib=np.sign(_rib)*np.abs(_rib)**0.6
+_sch=np.clip((np.abs(np.sin(_ang*2+0.7))-0.93)/0.07,0,1)
+_rid=1-2*np.abs(np.clip(_fbm(5,22)/2.5,-1,1))
+t=np.clip(t+np.sin(np.pi*t)*(krz*(0.20*_rib-0.45*_sch)+(1-krz)*0.10*(_rid-0.5)),0,1)
 band=0.06*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)           # Simse/Baender in der Wand
 tw=np.clip(u*2.2+0.5,0,1);apron=np.clip(tw,0,0.3)                    # Schuttkegel am Fuss
 Gs=lo+Rg*np.clip(0.8*t+band+0.2*apron/0.3,0,1);Gs=np.where(Rg>SPRUNG,Gs,Hs)
@@ -121,6 +127,25 @@ for _ in range(15):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(Ge,sh,axis=ax);ok=_fm&np.roll(_fm,sh,axis=ax);ex=np.where(ok,np.clip(Ge-Nb-TAL,0,None)*0.2,0)
         Ge-=ex;Ge+=np.roll(ex,-sh,axis=ax)
+# t48u R5: hydraulische Erosion (Tropfen-Modell), nur Wandzone ohne Wasser, Abtrag/Ablage je Punkt max 0,8 m [A]
+_hm=nd.map_coordinates(((t>0.05)&(t<0.95)&(Rg>SPRUNG)).astype(float),[vj-0.5,vi-0.5],order=1)>0.5
+_hm&=~(nd.map_coordinates(nd.binary_dilation(np.kron(wa,np.ones((RS,RS))),iterations=3).astype(float),[vj-0.5,vi-0.5],order=0)>0.5)
+_G0=Ge.copy();_hr=np.random.default_rng(77);_st=np.argwhere(_hm);_st=_st[_hr.integers(0,len(_st),min(30000,len(_st)))]
+_gy,_gx=np.gradient(Ge)
+for _y,_x in _st:
+    y,x=float(_y),float(_x);sed=0.0;v=1.0
+    for _k in range(24):
+        iy,ix=int(y),int(x)
+        if not(0<iy<GY-1 and 0<ix<GX-1) or not _hm[iy,ix]:break
+        dy,dx=-_gy[iy,ix],-_gx[iy,ix];l=np.hypot(dx,dy)
+        if l<1e-4:break
+        ny_,nx_=y+dy/l*0.7,x+dx/l*0.7;h0=Ge[iy,ix];h1=Ge[int(ny_),int(nx_)];dh=h0-h1
+        cap=max(dh,0.01)*v*0.5
+        if sed>cap or dh<0:dep=min(sed,max(-dh,0)) if dh<0 else (sed-cap)*0.3;Ge[iy,ix]+=dep;sed-=dep
+        else:er=min((cap-sed)*0.3,dh*0.5);Ge[iy,ix]-=er;sed+=er
+        v=np.sqrt(max(v*v+dh*0.5,0.01));y,x=ny_,nx_
+Ge=_G0+np.clip(nd.gaussian_filter(Ge-_G0,0.6),-0.8,0.8)
+print('hydro_erosion_m',round(float(np.abs(Ge-_G0).max()),2),round(float(np.abs(Ge-_G0)[_hm].mean()),3))
 G=Ge.astype(np.float32)
 wm=np.kron(wa,np.ones((RS,RS))).astype(float);Wn=np.kron(np.nan_to_num(Wsp),np.ones((RS,RS)))
 lev=nd.gaussian_filter(Wn*wm,2)/np.maximum(nd.gaussian_filter(wm,2),1e-6)
@@ -224,7 +249,8 @@ for y,x in np.argwhere(steil&~wa):
     if u[0]>0.42:continue
     nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l   # Blick talwaerts
     X,Z=x+0.5+0.6*(u[1]-0.5),y+0.5+0.6*(u[2]-0.5);Y=hc(X,Z)
-    sx=2.0+3.8*u[3]**1.3;sy=1.2+3.0*u[4]**1.5;sz=1.3+1.6*u[5]
+    gr=0.45 if u[6]<0.3 else (1.0 if u[6]<0.85 else 1.45)   # t48u R5: Groessenmix klein/mittel/gross [A]
+    sx=gr*(2.0+3.8*u[3]**1.3);sy=gr*(1.2+3.0*u[4]**1.5);sz=gr*(1.3+1.6*u[5])
     felsbloecke.append([round(X+0.35*nx_,2),round(Y,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
 lab,n=nd.label(ha=='MASKE');findlinge=[]
 for i,s in enumerate(nd.find_objects(lab)):

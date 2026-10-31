@@ -20,7 +20,7 @@ const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c
  const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false}));m.name='ferneBerge';sc.add(m);}
 const cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,3000);
 const oc=new OrbitControls(cam,ren.domElement);oc.enableDamping=true;oc.maxPolarAngle=Math.PI;oc.screenSpacePanning=true;
-sc.add(new THREE.HemisphereLight(0xb8d2f0,0x8c7a62,1.0));
+sc.add(new THREE.HemisphereLight(0xc2d8f2,0xa39c8e,1.2));
 const sun=new THREE.DirectionalLight(0xfff0d8,1.6);sun.castShadow=true;sun.shadow.bias=-0.0003;sun.shadow.normalBias=0.12;sun.shadow.mapSize.set(4096,4096);sun.shadow.radius=1.6;
 Object.assign(sun.shadow.camera,{left:-238,right:238,top:238,bottom:-238,near:1,far:900});sun.target.position.set(NX/2,0,NY/2);sc.add(sun,sun.target);
 const ladeTex=u=>{const t=new THREE.TextureLoader().load(u);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;};
