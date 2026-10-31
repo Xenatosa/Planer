@@ -31,11 +31,12 @@ function buschel(){const pos=[],col=[];for(let k=0;k<7;k++){const a=k/7*6.283+0.
   const bx=Math.cos(a)*0.05,bz=Math.sin(a)*0.05,tx=Math.cos(a)*l,tz=Math.sin(a)*l,px=-Math.sin(a)*w,pz=Math.cos(a)*w;
   pos.push(bx-px,0,bz-pz,bx+px,0,bz+pz,tx,h,tz);const c=[0.55+0.05*Math.sin(k),0.48,0.30];col.push(...c.map(q=>q*0.7),...c.map(q=>q*0.7),...c);}
  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));g.computeVertexNormals();return g;}
-function block(var_,det){const g=new THREE.IcosahedronGeometry(0.6,det),P=g.attributes.position;   // t48u R5: unregelmaessiger Fels: Schichten, Bruch, Neigung, Ueberhang [A]
+function block(var_,det,nr){const fm=window.__FM&&window.__FM[nr];let g;if(fm&&det>1){g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(fm.p,3));g.setIndex(fm.i);}else g=new THREE.IcosahedronGeometry(0.6,det);const P=g.attributes.position,bl=!!(fm&&det>1);   // Blender-Grundform (Desktop), Ikosaeder (Handy) [A]
+   // t48u R5: unregelmaessiger Fels: Schichten, Bruch, Neigung, Ueberhang [A]
  const sd=k=>hash(Math.round(var_*97)+k,k*13+7),ov=(sd(1)-0.3)*0.5,lean=(sd(2)-0.5)*0.5,nl=3+Math.floor(sd(3)*4),bp=new THREE.Vector3(sd(4)-0.5,sd(5)*0.8,sd(6)-0.5).normalize(),bd=0.18+0.25*sd(7);
  for(let i=0;i<P.count;i++){const v=new THREE.Vector3().fromBufferAttribute(P,i),n=v.clone().normalize();
   let r=1+0.18*Math.sin(n.x*4.1+var_)*Math.cos(n.z*3.3-var_*2)+0.09*Math.sin(n.y*9+n.x*7+var_*3)+0.05*Math.sin(n.z*17+n.y*11);
-  v.copy(n).multiplyScalar(0.6*r);
+  if(bl)v.multiplyScalar(1+0.4*(r-1));else v.copy(n).multiplyScalar(0.6*r);
   const L=(v.y+0.6)/1.2*nl,li=Math.floor(L),fr=L-li;   // Schichtung: jede Lage leicht versetzt + Stufenkante
   const off=0.07*(hash(li,var_*5)-0.5);v.x+=off;v.z+=off*0.6;const sh=1-0.10*Math.max(0,fr-0.75)/0.25;v.x*=sh;v.z*=sh;
   v.y=(li+Math.min(1,fr*1.15))/nl*1.2-0.6;
@@ -121,7 +122,7 @@ export function objekteNeu(D,H,G,grp){
  for(let v=0;v<VAR;v++){inst(fichte(v),D.baeume.filter((b,n)=>(n%5)!=4&&n%VAR==v),tf,'baeume',fc);}
  inst(kiefer(1),D.baeume.filter((b,n)=>(n%5)==4),tf,'baeume',fc);
  const FV=[fels(1),fels(2.3),fels(3.7)];const ff=(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);h=Math.min(h,2.6);o.position.set(x,y-0.22*h,z);o.rotation.set((a-0.5)*0.6,r,(b-0.5)*0.6);o.scale.set(h*(0.8+0.5*a),h*(0.55+0.5*b),h*(0.8+0.5*b));};
- {const lod=window.__lod||1,BV=[1.1,2.6,4.2,5.9,7.3,8.8,10.4,12.1].map(v=>block(v,lod==1?2:1)),L=(D.felsbloecke||[]).filter((e,n)=>lod==1||n%2==0);
+ {const lod=window.__lod||1,BV=[1.1,2.6,4.2,5.9,7.3,8.8,10.4,12.1].map((v,n)=>(window.__FM=D.felsmesh,block(v,lod==1?2:1,n))),L=(D.felsbloecke||[]).filter((e,n)=>lod==1||n%2==0);
   const bf=(o,[x,y,z,sx,sy,sz,r,t])=>{o.position.set(x,y,z);o.rotation.set(t*0.5,r+t*0.6,-t*0.35);o.scale.set(sx*(lod==1?1:1.3),sy,sz);};
   const bc=(c,e)=>{const t=hash(e[0]*3,e[2]*3);const u=hash(e[1]*5,e[0]*7);c.setRGB(0.80+0.35*t,0.78+0.30*t*u+0.05,0.74+0.28*(1-t));};
   BV.forEach((g,v)=>inst(g,L.filter((e,n)=>n%8==v),bf,'felsen',bc));window.__felsbloecke=L.length;}

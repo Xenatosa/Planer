@@ -1,3 +1,4 @@
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 // t41u Viewer: NEU = echtes Relief (gen_relief.py), ALT = t39u-Welt. Alle Objekte PLATZHALTER.
 import * as THREE from 'three';
 import {objekteNeu} from './objekte_neu.js';
@@ -117,9 +118,16 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    {float g2=texture2D(tD,vWP.xz/97.+vec2(.1,vWP.y/60.)).r;fels*=mix(vec3(.88,.92,1.0),vec3(1.10,1.0,.86),g2);   // grossraeumige Farbe [A]
     float ms=smoothstep(.30,.48,abs(N.y)+0.15*(r-0.5))*(1.-sn)*smoothstep(.45,.6,gD);fels=mix(fels,vec3(.16,.20,.11),ms*.55);}   // Moos auf Absaetzen [A]
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
-   diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`);};
+   diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',`#include <normal_fragment_maps>
+   {vec3 N2=normalize(vWN);vec3 w2=pow(abs(N2),vec3(4.));w2/=w2.x+w2.y+w2.z;   // t48u R5: Detail-Bump (triplanar) gegen "verpixelt" [A]
+    float hb=(texture2D(tW,vWP.zy/3.).r*w2.x+texture2D(tW,vWP.xy/3.).r*w2.z+texture2D(tD,vWP.xz/1.7).r*w2.y)*0.7+(texture2D(tW,vWP.zy/9.).r*w2.x+texture2D(tW,vWP.xy/9.).r*w2.z+texture2D(tD,vWP.xz/6.).r*w2.y)*0.3;
+    vec3 dpx=dFdx(-vViewPosition),dpy=dFdy(-vViewPosition);vec3 r1=cross(dpy,normal),r2=cross(normal,dpx);float det=dot(dpx,r1);
+    vec3 grd=sign(det)*(dFdx(hb)*r1+dFdy(hb)*r2)*(0.6+1.4*(1.-abs(N2.y)));normal=normalize(abs(det)*normal-grd);}`);};
  const m=new THREE.Mesh(gb,mat);m.receiveShadow=m.castShadow=true;m.userData.boden=1;
  const g=new THREE.Group();g.userData.ebene='gelaende';g.add(m);NEU.add(g);
+ if(/[?&]glb=1/.test(location.search)&&location.protocol.startsWith('http')){   // t48u R5: GLB-Pfad (lokaler Server), sonst Single-File-Daten [A]
+  new GLTFLoader().load('dorfmap_relief_z25.glb',gl=>{const mat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});gl.scene.traverse(o=>{if(o.isMesh){o.material=mat;o.receiveShadow=true;o.castShadow=true;}});
+   g.visible=false;const gg=new THREE.Group();gg.userData.ebene='gelaende';gg.add(gl.scene);NEU.add(gg);window.__glb={ok:true,meshes:gl.scene.children.length};},undefined,e=>{window.__glb={ok:false,fehler:String(e)};});}
  window.__dreiecke={boden:bi.length/3-nw,wand:nw};
  // Wege-Overlay: weicher Rand ueber Vertex-Alpha
  {const A=u8(DN.WEGA),wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1);const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,h=hash(i,j);wp.push(i/RS,G[k]+0.05,j/RS);{const a=A[k]/255,e=a*a;wc.push(0.62-0.30*e+0.04*h,0.58-0.30*e+0.03*h,0.54-0.30*e+0.02*h,Math.min(0.85,Math.pow(a,1.4)*0.95));}}return map[k];};
@@ -134,6 +142,11 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));g2.setIndex(wi);g2.computeVertexNormals();
   const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(g2,new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,depthWrite:false,shininess:90,specular:0x667788,side:THREE.DoubleSide}));wmesh.receiveShadow=true;const wu={value:0};window.__wu=wu;wmesh.material.onBeforeCompile=sh=>{sh.uniforms.uT=wu;sh.vertexShader='varying vec3 vWQ;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n vWQ=(modelMatrix*vec4(transformed,1.)).xyz;');
   sh.fragmentShader='uniform float uT;varying vec3 vWQ;\n'+sh.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\n {float s=sin(vWQ.x*.31+vWQ.z*.11-uT*.9)*sin(vWQ.z*.47-vWQ.x*.05+uT*.6)+.5*sin(vWQ.x*1.3-vWQ.z*.9-uT*1.7);diffuseColor.rgb*=1.+.07*s;diffuseColor.rgb+=vec3(.025,.03,.035)*max(0.,s-.6);}');};wg.add(wmesh);NEU.add(wg);}
+ {const hG=(x,z)=>{const fi=Math.min(GX-2,Math.max(0,x*RS)),fj=Math.min(GY-2,Math.max(0,z*RS)),i=fi|0,j=fj|0,a=fi-i,b=fj-j,k=j*GX+i;return G[k]*(1-a)*(1-b)+G[k+1]*a*(1-b)+G[k+GX]*(1-a)*b+G[k+GX+1]*a*b;};   // t48u R5: Rampen-Pfade als Overlay (Ebene wege) [A]
+  const p=[],ix=[];for(const L of(DN.rampenwege||[])){for(let n=0;n<L.length;n++){const[a0,b0]=L[Math.max(0,n-1)],[a1,b1]=L[Math.min(L.length-1,n+1)],dx=a1-a0,dz=b1-b0,l=Math.hypot(dx,dz)||1,ox=-dz/l*0.8,oz=dx/l*0.8,[x,z]=L[n];
+    const o=p.length/3;p.push(x+ox,hG(x+ox,z+oz)+0.10,z+oz,x-ox,hG(x-ox,z-oz)+0.10,z-oz);if(n)ix.push(o-2,o-1,o,o-1,o+1,o);}}
+  if(p.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setIndex(ix);g.computeVertexNormals();
+   const me=new THREE.Mesh(g,new THREE.MeshLambertMaterial({color:0x9a8a72,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2}));me.receiveShadow=true;const gr=new THREE.Group();gr.userData.ebene='wege';gr.add(me);NEU.add(gr);window.__rampenwege=(DN.rampenwege||[]).length;}}
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
