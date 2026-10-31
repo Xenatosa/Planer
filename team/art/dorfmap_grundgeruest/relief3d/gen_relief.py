@@ -249,12 +249,12 @@ for y,x in np.argwhere((ug2=='SCHNEE')&~belegt&~weg&~steil&~wa):
 gzy,gzx=np.gradient(Hz);bl_r=np.random.default_rng(48);felsbloecke=[]
 for y,x in np.argwhere(steil&~wa):
     u=bl_r.random(7)
-    if u[0]>0.42:continue
+    if u[0]>0.55:continue
     nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l   # Blick talwaerts
     X,Z=x+0.5+0.6*(u[1]-0.5),y+0.5+0.6*(u[2]-0.5);Y=hc(X,Z)
     gr=0.45 if u[6]<0.3 else (1.0 if u[6]<0.85 else 1.45)   # t48u R5: Groessenmix klein/mittel/gross [A]
     sx=gr*(2.0+3.8*u[3]**1.3);sy=gr*(1.2+3.0*u[4]**1.5);sz=gr*(1.3+1.6*u[5])
-    felsbloecke.append([round(X+0.35*nx_,2),round(Y,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
+    felsbloecke.append([round(X+0.35*nx_,2),round(Y-0.25*sy,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
 lab,n=nd.label(ha=='MASKE');findlinge=[]
 for i,s in enumerate(nd.find_objects(lab)):
     m=lab[s]==i+1;cy,cx=nd.center_of_mass(m);a=int(m.sum());X,Z=s[1].start+cx+.5,s[0].start+cy+.5

@@ -14,3 +14,12 @@
 - Neue Objekte in `objekte_neu.js` (Fichten, Kiefern, Felsen, Haeuser mit Schindeln, Laeden, Fensterlicht, Vordach, Anbau, Holzstapel, Kaminrauch).
 - Test: `KURZ=1 MODI=neu NODE_PATH=/tmp/w3/node_modules node test_relief.js` -> Ansichten schraeg, nordwand, krater, suedwand, oben, unten, rand, rueck, dorf, boden_wand, totale_auge.
 - Vergleich vorher (t43u) / nachher: `test/t44u/vergleich_*.png`. Zwischenstaende: `_alt/t44u_zwischenstand/`.
+
+## Stand t47u/t48u (Runden 1-6+)
+- Bauen: `python3 gen_relief.py && python3 baue_html.py` -> `index.html` (eine Datei, offline per Doppelklick).
+- Pruefen: `python3 pruefung/pruefe_t42u.py` (muss `summe 0` geben).
+- Rendern aller 11 Kameras (3 parallele Teil-Laeufe, kein Timeout am Ende): `SUF=r7 OUT=/tmp/r7 sh rendere_alle.sh`; eine Ansicht: `NODE_PATH=/tmp/w3/node_modules node test_einzelansicht.js index.html out.png`.
+- GLB-Pfad: `python3 -m http.server 8000` in diesem Ordner, dann `http://localhost:8000/index.html?glb=1` -> Gelaende kommt per GLTFLoader aus `dorfmap_relief_z25.glb` (mit Vertexfarben). Ohne Server / ohne `?glb=1` nutzt der Viewer die eingebetteten Daten (Single-File-Fallback).
+- Handy-LOD: `?lod=1` oder automatisch auf Handy.
+- Felsformen: `blender/fels_meshes.py` (headless Blender 4.2.3 portable aus download.blender.org, `/tmp/blender-4.2.3-linux-x64/blender -b --python blender/fels_meshes.py`) -> `blender/fels_meshes.json`, wird in die Daten eingebettet.
+- Hoehenfeld: fBm-Felsform, Kraterrippen/Scharten, thermische Erosion (Wandfuss), hydraulische Tropfen-Erosion (Wandzone, max 0,8 m); Zellwerte unveraendert (Pruefung summe 0).
