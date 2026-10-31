@@ -413,6 +413,7 @@ _wr=np.clip((np.minimum(_rdq,8)-1.6)/3.0,0,1);_wr=_wr*_wr*(3-2*_wr);_wf=_wf*_wr
 _fjj,_fii=np.mgrid[0:FB.shape[0],0:FB.shape[1]].astype(float);_rq=lambda sg,sd:(lambda n:n/n.std())(nd.gaussian_filter(np.random.default_rng(sd).standard_normal(FB.shape),sg))
 _wa=_wf*np.clip(nd.distance_transform_edt(_vin)/24.0,0,1);_wa=_wa*_wa*(3-2*_wa)   # Runde E: weicher, weiter [A]
 FB=np.where(_vin,nd.map_coordinates(FB,[_fjj+_wa*(14*_rq(40,91)+6*_rq(12,92)+2.5*_rq(4,95)),_fii+_wa*(14*_rq(40,93)+6*_rq(12,94)+2.5*_rq(4,96))],order=1,mode='nearest'),FB)
+FB=np.where(_vin,FB*(1-_wf)+nd.gaussian_filter(FB,1.6)*_wf,FB)   # Politur t58u: Gitter-/Treppenartefakte aus bilinearem Grobgitter glaetten (nur Feinband) [A]
 _qy,_qx=np.gradient(nd.gaussian_filter(FB,3),1/FS);_gm=np.clip(np.hypot(_qx,_qy),0.4,2.0)   # Runde D: eigene Namen (Runde C ueberschrieb _gy/_gx -> Farbe 0 = schwarz) [A]   # seitlicher Versatz: dh=dx*Steigung [A]
 _RB=(np.abs(np.clip(_nt(_sco/2.6+300,FB/9.0,400)/1.6,-1,1))**0.7-0.55)*2.2   # Runde E: Grossrippen/-rinnen in Falllinie [A]
 FD=_wf*_sf*(1.4*_ter+_gm*(_RB*(0.4+0.8*_bell)+_rib*(0.5+0.9*_bell)+1.0*(_R-0.5)+_bell**0.6*(1.2*_voff-0.45*_kl)))+_wf*(1-_sf)*0.5*(_R**2)
@@ -435,7 +436,7 @@ if len(_cq):
         y0,y1,x0,x1=max(0,int(q[0]-r)),min(FB.shape[0],int(q[0]+r)+1),max(0,int(q[1]-r)),min(FB.shape[1],int(q[1]+r)+1)
         dy,dx=_fy[y0:y1,x0:x1]-q[0],_fx[y0:y1,x0:x1]-q[1]
         d=np.maximum(np.abs(dx*np.cos(a0)+dy*np.sin(a0)),np.abs(-dx*np.sin(a0)+dy*np.cos(a0)))*0.75+0.25*np.hypot(dx,dy)   # 4 Facetten, Kanten scharf
-        FD[y0:y1,x0:x1]+=_wf[y0:y1,x0:x1]*h*np.clip(1-d/r,0,1)**1.3;_PY.append((float(q[1]/FS),float(q[0]/FS),round(h,1)))
+        FD[y0:y1,x0:x1]+=_wf[y0:y1,x0:x1]*h*(lambda p:p*p*(3-2*p))(np.clip(1-d/r,0,1))**0.8;_PY.append((float(q[1]/FS),float(q[0]/FS),round(h,1)))
 FH=FB+FD
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
@@ -456,6 +457,9 @@ for _ in range(30):
     for ax,sh in ((0,1),(0,-1),(1,1),(1,-1)):
         Nb=np.roll(FH,sh,axis=ax);ex=np.where(_fe&np.roll(_fe,sh,axis=ax),np.clip(FH-Nb-_tl,0,None)*0.25,0);FH-=ex;FH+=np.roll(ex,-sh,axis=ax)
 FH=np.where(_vin,FH,FB)
+# Politur t58u: Nadelspitzen/Zacken abrunden (lokale Ueberhoehung gegen Umgebung daempfen) [A]
+for _ in range(2):
+    _g4=nd.gaussian_filter(FH,4);_nad=_wf*np.clip((FH-_g4-0.5)/1.5,0,1);FH=np.where(_vin,FH*(1-0.6*_nad)+nd.gaussian_filter(FH,1.8)*0.6*_nad,FB)
 # Runde F: Schneebaender als Geometrie auf Absaetzen (flach in steiler Umgebung): 0,1-0,3 m Polster [A]
 _fs3=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_ab=np.clip((38-_fs3)/12,0,1)*np.clip((nd.gaussian_filter(_fs3,6)-35)/15,0,1)
 FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
@@ -505,7 +509,7 @@ for q in _oc:
     v=v*(1+nz)[:,None];v[:,1]=np.where(v[:,1]<0,v[:,1]*0.45,v[:,1])                                   # flache Unterseite = Nase
     x0,z0=q[1]/FS+nx_*out,q[0]/FS+nz_*out;y0=FH[q[0],q[1]]-0.35
     X=x0+v[:,0]*L*nx_-v[:,2]*W*nz_;Z=z0+v[:,0]*L*nz_+v[:,2]*W*nx_;Y=y0+v[:,1]*Hh
-    ht=_hat(X,Z);Y=np.where(ht>y0,np.minimum(Y,ht+0.08),Y)                                              # hinten/oben ins Gelaende einbetten, kein Spalt
+    ht=_hat(X,Z);Y=np.where(ht>y0,np.minimum(Y,ht+0.08),Y);Y=np.where(v[:,1]>0,np.minimum(Y,np.maximum(np.minimum(ht+0.08,y0+0.45),y0)),Y)   # Politur: Oberseite buendig mit Kante, keine Kissen                                              # hinten/oben ins Gelaende einbetten, kein Spalt
     _OP.append(np.stack([X,Y,Z],1));_OI.append(_IF+_ON);_ON+=len(v)
 if _OP:
     FW['ov']=base64.b64encode(np.concatenate(_OP).astype(np.float32).tobytes()).decode();FW['ovi']=base64.b64encode(np.concatenate(_OI).astype(np.uint32).tobytes()).decode()
@@ -515,6 +519,31 @@ FW_MESS={'band_zellen':int(BAND.sum()),'dreiecke_voll':int(BAND.sum()*FS*FS*2),'
  'neigung_p10_p90':[round(float(np.percentile(_fsl[_vin&(_sf>0.5)],q)),1) for q in (10,90)],'versatz_max_m':round(float(FD.max()),2),'neigung_grob_mittel':round(float(np.degrees(np.arctan(np.hypot(*np.gradient(FB,1/FS))))[_vin&(_sf>0.5)].mean()),1)}
 print('feinrelief',FW_MESS)
 if os.environ.get('FW_NPZ'):np.savez_compressed(os.environ['FW_NPZ'],FH=FH.astype(np.float32),FB=FB.astype(np.float32),vin=_vin,tint=_tint.astype(np.float32),snow=_snow.astype(np.float32))   # t54u: Blender-Versuch [A]
+# t59u: Baeume/Felsen/Findlinge/Steine/Geroell/Gras an neue Feinform anpassen (auf Boden, nicht im Fels, nicht schwebend) [A]
+_fsP=np.degrees(np.arctan(np.hypot(*np.gradient(FH,1/FS))));_vinP=_vin&(_wf>0.02)
+_ovc=[(float(p[:,0].mean()),float(p[:,2].mean()),float(np.ptp(p[:,0])/2+np.ptp(p[:,2])/2)/2+0.5) for p in _OP]
+PASS={}
+for _k,_lim in (('baeume',35),('felsen',60),('findlinge',45),('steine',50),('geroell',55),('gras',40)):
+    _L=locals().get(_k);vor=[0,0,0];nach=[0,0,0]
+    if not _L:continue
+    for o in _L:
+        fx_,fz_=o[0]*FS,o[2]*FS;iy,ix=int(round(fz_)),int(round(fx_))
+        if not(0<=iy<FYn and 0<=ix<FXn) or not _vinP[iy,ix]:continue
+        h=float(nd.map_coordinates(FH,[[fz_],[fx_]],order=1)[0]);ov=any((o[0]-a)**2+(o[2]-b)**2<r*r for a,b,r in _ovc)
+        vor[0]+=o[1]>h+0.25;vor[1]+=o[1]<h-0.25;vor[2]+=(_fsP[iy,ix]>_lim)or ov
+        if _fsP[iy,ix]>_lim or ov:      # auf naechste flache Feinstelle (<=3 m) ausserhalb der Nasen ruecken
+            y0_,x0_=max(iy-12,0),max(ix-12,0);w=_fsP[y0_:iy+13,x0_:ix+13];ok=(w<=_lim)&_vinP[y0_:iy+13,x0_:ix+13]
+            if ok.any():
+                c=np.argwhere(ok);c=c[np.argsort((c[:,0]+y0_-iy)**2+(c[:,1]+x0_-ix)**2)]
+                for cc in c:
+                    nx2,nz2=(cc[1]+x0_)/FS,(cc[0]+y0_)/FS
+                    if not any((nx2-a)**2+(nz2-b)**2<r*r for a,b,r in _ovc):o[0],o[2]=round(nx2,2),round(nz2,2);break
+            fx_,fz_=o[0]*FS,o[2]*FS;iy,ix=int(round(fz_)),int(round(fx_))
+        o[1]=round(float(nd.map_coordinates(FH,[[fz_],[fx_]],order=1)[0]),2)
+        nach[2]+=(_fsP[min(iy,FYn-1),min(ix,FXn-1)]>_lim) or any((o[0]-a)**2+(o[2]-b)**2<r*r for a,b,r in _ovc)
+    PASS[_k]={'schwebend_vor':int(vor[0]),'versunken_vor':int(vor[1]),'steil_oder_nase_vor':int(vor[2]),'steil_oder_nase_nach':int(nach[2])}
+print('platzierung',json.dumps(PASS))
+json.dump(PASS,open('pruefung/platzierung_t59u.json','w'),indent=1)
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
 D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
