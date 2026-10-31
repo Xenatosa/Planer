@@ -585,14 +585,21 @@ from fluss_k import gefaelle_flach
 WV,G_ANZ,FLACH_T63U=gefaelle_flach(WV,G_ANZ);print('flach_t63u',FLACH_T63U)   # t63u: Suedfluss leichtes Gefaelle [A]   # t63u Runde K: streng fallend, Becken flach, Stufen <= ~1 m [A]
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
-    _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),3);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
+    _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
+    _WOK=WV>-900;_WS=np.where(_WOK,WV,G_ANZ+0.02)
+    def _wflaeche(i,j):                     # t63u: Wasserflaeche genau wie main.js (Dreiecke a,c,d / a,d,b; trockene Ecken G+0,02), -999 wenn keine Wasserzelle
+        i0=min(max(int(np.floor(i)),0),_WS.shape[1]-2);j0=min(max(int(np.floor(j)),0),_WS.shape[0]-2);u=i-i0;v=j-j0
+        if not _WOK[j0:j0+2,i0:i0+2].any():return -999.0
+        A,B,C,Dd=_WS[j0,i0],_WS[j0,i0+1],_WS[j0+1,i0],_WS[j0+1,i0+1]
+        h=A+(Dd-C)*u+(C-A)*v if v>=u else A+(B-A)*u+(Dd-B)*v
+        return float(h)
     for nm,L in(('baeume',baeume),('felsen',felsen),('findlinge',findlinge),('steine',steine),('geroell',geroell)):
         neu=[];v=0;w=0
         for o in L:
             j,i=o[2]*RS,o[0]*RS;d=float(nd.map_coordinates(dG,[[j],[i]],order=1,mode='nearest')[0]);wv=float(nd.map_coordinates(WV,[[j],[i]],order=0,mode='nearest')[0])
             if abs(d)>0.01:o=list(o);o[1]=round(o[1]+d,3);v+=1
             if wv>-900 and wv>o[1]+0.15*(o[3] if nm!='baeume' else 1):w+=1;continue
-            if nm!='baeume' and float(nd.map_coordinates(_WVM3,[[j],[i]],order=0,mode='nearest')[0])>o[1]:st['stein_wasser3_entfernt_t63u']=st.get('stein_wasser3_entfernt_t63u',0)+1;continue   # t63u: kein Stein unter Wasserspiegel (3x3-Ecken, wie Raycast) [A]
+            if nm!='baeume' and (float(nd.map_coordinates(_WVM3,[[j],[i]],order=0,mode='nearest')[0])>o[1] or _wflaeche(i,j)>o[1]):st['stein_wasser3_entfernt_t63u']=st.get('stein_wasser3_entfernt_t63u',0)+1;continue   # t63u: kein Stein unter Wasserspiegel (5x5-Ecken: Wasserdreiecke reichen bis an Nachbarecken, wie Raycast) [A]
             if nm=='baeume':                       # t63u Runde K: kein Baum am Wasserrand (1 m Umkreis) oder auf Hang >45 Grad (Anzeige-Gelaende) [A]
                 wn_=float(nd.map_coordinates(_WVMX,[[j],[i]],order=0,mode='nearest')[0]);sl_=float(nd.map_coordinates(_SLMX,[[j],[i]],order=0,mode='nearest')[0])
                 if wn_>o[1]-0.3:st['baum_wasserrand_entfernt']=st.get('baum_wasserrand_entfernt',0)+1;continue

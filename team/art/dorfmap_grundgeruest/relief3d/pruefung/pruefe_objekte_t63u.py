@@ -1,11 +1,11 @@
-# t63u: im_wasser = Wasserspiegel (3x3-Ecken) ueber Objektfuss, gleiche Regel wie Raycast-Auswertung
+# t63u: im_wasser = Wasserspiegel (5x5-Ecken) ueber Objektfuss, gleiche Regel wie Raycast-Auswertung
 # t62u: Baeume/Felsen/Findlinge/Steine/Geroell gegen das ANGEZEIGTE Gelaende (GB) pruefen [S]
 import json,gzip,base64,sys,numpy as np,scipy.ndimage as nd
 D=json.load(gzip.open(sys.argv[1] if len(sys.argv)>1 else 'relief_daten.json.gz'));NX,NY,RS=D['nx'],D['ny'],D['rs'];GX,GY=NX*RS+1,NY*RS+1
 f=lambda k:np.frombuffer(base64.b64decode(D[k]),np.float32).reshape(GY,GX).astype(float)
 import os;G=f(os.environ.get('FELD') or (D.get('GB') and 'GB' or 'G'));WV=f('WV');gy,gx=np.gradient(G,1/RS);SL=np.degrees(np.arctan(np.hypot(gx,gy)))
 W=WV>-900;GMX=nd.maximum_filter(G,3);GMN=nd.minimum_filter(G,3);Wn=nd.binary_dilation(W,iterations=1)
-WM3=nd.maximum_filter(WV,3)
+WM3=nd.maximum_filter(WV,5)
 def at(A,x,z,o=1):return nd.map_coordinates(A,[[z*RS],[x*RS]],order=o,mode='nearest')[0]
 R={}
 for k,unten in(('baeume',0.3),('felsen',0),('findlinge',0),('steine',0),('geroell',0)):
