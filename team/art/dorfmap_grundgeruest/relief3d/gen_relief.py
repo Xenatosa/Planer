@@ -312,7 +312,7 @@ for y,x in np.argwhere(steil&~wa):
     sx=gr*(2.0+3.8*u[3]**1.3);sy=gr*(1.2+3.0*u[4]**1.5);sz=gr*(1.3+1.6*u[5])
     felsbloecke.append([round(X+0.35*nx_,2),round(Y-0.25*sy,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
 # t53u R1: Ueberhaenge = flache Blender-Felsplatten an der Wandkrone, 1-2 m ueber die Kante talwaerts auskragend [A]
-UEBERHANG=0;_ohr=np.random.default_rng(531);_kr2=oben&nd.binary_dilation(steil,iterations=1)&~wa&~belegt&~weg
+UEBERHANG=0;_ohr=np.random.default_rng(531);_kr2=oben&nd.binary_dilation(steil,iterations=1)&~wa&~belegt&~weg&~nd.binary_dilation(wa,iterations=4)
 for y,x in np.argwhere(_kr2):
     u=_ohr.random(6)
     if u[0]>0.16 or kh[y,x]<6:continue
