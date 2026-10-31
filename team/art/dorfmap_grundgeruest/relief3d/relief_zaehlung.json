@@ -1,36 +1,36 @@
 {
  "haeuser": 233,
- "baeume": 1424,
- "felsen": 134,
+ "baeume": 1479,
+ "felsen": 143,
  "findlinge": 40,
- "steine": 166,
+ "steine": 178,
  "bruecken": 20,
  "wege": 2839,
- "wand_dreiecke": 32630,
- "boden_dreiecke": 781834,
- "zellen_wand_steil": 5613,
- "zellen_wand_oben": 2428,
- "zellen_wand_fuss": 2439,
+ "wand_dreiecke": 38154,
+ "boden_dreiecke": 776310,
+ "zellen_wand_steil": 6596,
+ "zellen_wand_oben": 2804,
+ "zellen_wand_fuss": 2638,
  "hoehe_min": -18.246666666666666,
  "hoehe_max": 14.0,
  "wandfuss": {
-  "x": 254.5,
+  "x": 235.5,
   "z": 29.5,
   "h": 14.0,
-  "zelle": 9998
+  "zelle": 9979
  },
  "klippe_hoehe_median_3x3_je_wand": {
-  "Nord": 12.46,
-  "Suedgrat": 9.11,
-  "Krater": 7.8,
-  "Ostgrat": 9.04
+  "Nord": 10.98,
+  "Suedgrat": 7.66,
+  "Krater": 7.04,
+  "Ostgrat": 8.2
  },
  "klippe_hoehe_median_je_wand": {
-  "Nord": 15.24,
-  "Suedgrat": 16.03,
-  "Krater": 11.0,
+  "Nord": 14.15,
+  "Suedgrat": 13.0,
+  "Krater": 10.99,
   "Ostgrat": 11.98
  },
- "bandzellen_umgedeutet": 18734,
- "begehbar_3d": 73986
+ "bandzellen_umgedeutet": 17461,
+ "begehbar_3d": 72222
 }

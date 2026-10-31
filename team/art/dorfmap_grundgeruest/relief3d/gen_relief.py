@@ -52,6 +52,41 @@ for _ in range(3):
     zone=nd.binary_dilation(st,iterations=8)&wa
     if not zone.any():break
     sm=nd.gaussian_filter(np.where(wa,H,0),3)/np.maximum(nd.gaussian_filter(wa.astype(float),3),1e-6);H[zone]=sm[zone]
+# t47u/t48u: natuerliche Abstiegsrampen schraeg an den Waenden (Gelaende, nicht Overlay); Zellwerte folgen aus G [A]
+def _rampen():
+    Pl0=json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40'];hm=np.zeros((NY,NX),bool)
+    for p in Pl0:
+        q=np.array([[(x+200)*1.2,(y+40)*1.2] for x,y in p['poly']]);x0,y0=q.min(0);x1,y1=q.max(0);hm[max(0,int(y0)):int(np.ceil(y1)),max(0,int(x0)):int(np.ceil(x1))]=1
+    hm=nd.binary_dilation(hm,iterations=3)|nd.binary_dilation(wa,iterations=2)
+    Hsm=nd.gaussian_filter(H,4);gy,gx=np.gradient(Hsm);top=wand&(nd.minimum_filter(H,9)<H-6);log=[]
+    yy,xx=np.mgrid[0:NY,0:NX]
+    for w,anz in (('Nord',3),('Suedgrat',3),('Krater',4),('Ostgrat',2)):
+        cand=np.argwhere(top&(wn==w));r=np.random.default_rng(len(w));r.shuffle(cand);gew=[]
+        for y,x in cand[:400]:
+            dn=-np.array([gx[y,x],gy[y,x]]);l=np.hypot(*dn)
+            if l<1e-3:continue
+            dn/=l
+            for sg in (1,-1):
+                tg=np.array([-dn[1],dn[0]])*sg;d=dn*0.45+tg*0.89;d/=np.hypot(*d)
+                Ht=H[y,x];L=None
+                for s_ in range(6,90):
+                    X,Y=int(round(x+d[0]*s_)),int(round(y+d[1]*s_))
+                    if not(2<=X<NX-2 and 2<=Y<NY-2) or hm[Y,X]:break
+                    if s_>8 and Ht-H[Y,X]>=5 and s_*0.34>=Ht-H[Y,X]:L=s_;break        # Rampe (~19 Grad) trifft Gelaende
+                if L and L>=12 and all(np.hypot(x-a,y-b)>25 for a,b,_ ,_ in gew):gew.append((x,y,d,L))
+                if len(gew)>=anz:break
+            if len(gew)>=anz:break
+        for x,y,d,L in gew:
+            Ht=H[y,x];He=H[int(round(y+d[1]*L)),int(round(x+d[0]*L))]
+            for k in range(L*3+1):
+                s_=k/3;cx,cy=x+d[0]*s_,y+d[1]*s_;hp=Ht+(He-Ht)*s_/L
+                ys,xs=slice(max(0,int(cy)-5),int(cy)+6),slice(max(0,int(cx)-5),int(cx)+6)
+                rr=np.hypot(xx[ys,xs]+0.5-cx,yy[ys,xs]+0.5-cy);sub=H[ys,xs]
+                kern=rr<=1.8;sub[kern]=hp;wand[ys,xs][kern]=False
+                rand=(rr>1.8)&(rr<5);fill=hp-(rr-1.8)*1.1;sub[rand]=np.where(sub[rand]<fill[rand],fill[rand],sub[rand])
+            log.append((w,int(x),int(y),int(L),round(float(Ht),1),round(float(He),1)))
+    return log
+RAMPEN=_rampen();print('rampen',RAMPEN)
 Hboden=H.copy()
 tiefe=np.where(fl=='SEE',3.0,1.5)                                      # [A]
 H[wa]-=tiefe[wa];Wsp=np.where(wa,Hboden-0.3,np.nan)
@@ -161,6 +196,15 @@ for y in range(NY):
         if fuss[y,x] and not wa[y,x] and u[0]<0.6:
             for _ in range(1+int(u[3]*3)):
                 v=rs2.random(4);s=0.2+0.6*v[2]**2;X,Z=x+v[0],y+v[1];geroell.append([round(X,2),round(hc(X,Z)-0.2*s,2),round(Z,2),round(s,2),round(v[3]*6.28,2)])
+# t48u: Felsbloecke/Felsplatten entlang aller Wandbaender (eigene Meshes, Instancing) [A]
+gzy,gzx=np.gradient(Hz);bl_r=np.random.default_rng(48);felsbloecke=[]
+for y,x in np.argwhere(steil&~wa):
+    u=bl_r.random(7)
+    if u[0]>0.42:continue
+    nx_,nz_=-gzx[y,x],-gzy[y,x];l=np.hypot(nx_,nz_)+1e-6;nx_/=l;nz_/=l   # Blick talwaerts
+    X,Z=x+0.5+0.6*(u[1]-0.5),y+0.5+0.6*(u[2]-0.5);Y=hc(X,Z)
+    sx=2.0+3.8*u[3]**1.3;sy=1.2+3.0*u[4]**1.5;sz=1.3+1.6*u[5]
+    felsbloecke.append([round(X+0.35*nx_,2),round(Y,2),round(Z+0.35*nz_,2),round(sx,2),round(sy,2),round(sz,2),round(float(np.arctan2(nx_,nz_)),3),round(u[6]-0.5,2)])
 lab,n=nd.label(ha=='MASKE');findlinge=[]
 for i,s in enumerate(nd.find_objects(lab)):
     m=lab[s]==i+1;cy,cx=nd.center_of_mass(m);a=int(m.sum());X,Z=s[1].start+cx+.5,s[0].start+cy+.5
@@ -187,6 +231,9 @@ gew={k:up(ug2==k)*(1+0.35*nz(4,i))**2 for i,k in enumerate(MAT)}
 gew['MOOS']=up(ug2=='WALD',3.0)*np.clip(nz(3,31),0,None)*0.8;MAT['MOOS']=(0.36,0.42,0.27)   # Moos/Nadelstreu am Waldrand [A]
 gew['ERDE2']=up(np.isin(ug2,['BODEN','FELS']),2.0)*np.clip(nz(2,33)-0.6,0,None)*0.7;MAT['ERDE2']=(0.38,0.30,0.22)
 gew['GEROELL']=up(fuss|steil,1.0)*0.9*(1+0.4*nz(2,11)).clip(0);MAT['GEROELL']=(0.55,0.53,0.50)
+_gn=0.6*nz(6,51)+0.4*nz(1.5,52);_sl=np.hypot(*np.gradient(G))*RS   # t48u: fleckiger Schnee – Trockengras/Moos schaut durch, mehr an Kuppen/Hangkanten [A]
+gew['GRAS']=up(ug2=='SCHNEE')*np.clip(_gn-0.75+0.5*np.clip(_sl-0.3,0,1),0,None)*2.8;MAT['GRAS']=(0.50,0.47,0.31)
+gew['MOOS2']=up(ug2=='SCHNEE')*np.clip(nz(2.5,53)-1.3,0,None)*gew['GRAS'].clip(0,1)*3;MAT['MOOS2']=(0.30,0.36,0.24)
 gew['NASS']=np.clip(up(wa,1.0)-0.05,0,1)*0.6;MAT['NASS']=(0.40,0.45,0.48)
 S=sum(gew.values())+1e-6;col=sum(np.array(MAT[k])[None,None,:]*(gew[k]/S)[...,None] for k in gew)
 c20=np.asarray(Image.open('../_alt/modell3d_t36u/textur_c20_8px.jpg').convert('RGB').resize((GX,GY),Image.BILINEAR)).astype(float)/255
@@ -196,7 +243,7 @@ col=col*(1-sn*0.10*weh)[...,None]+(sn*0.10*weh)[...,None]*np.array([0.70,0.80,0.
 col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
 VC=(np.clip(col,0,1)*255).astype(np.uint8)
 WEGA=(np.clip(up(weg,0.6)*1.6,0,1)*255).astype(np.uint8)
-D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
+D={'nx':NX,'ny':NY,'G':b64(G),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH}
 open('relief_daten.json.gz','wb').write(gzip.compress(json.dumps(D,ensure_ascii=False).encode(),9))
