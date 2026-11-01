@@ -256,3 +256,8 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 - t42u summe 0; Spalt 0,0 m; bergauf_pfad 0 (bergauf_summe 3922); Raycast schwebend 0/0/0/0/0 (Punktliste neu, alte hatte 574 statt 567 Steine); Budget summe 1,138 M (gerendert lod1 1,376 M); Ladezeit median 8,2 s (8,8/7,8/8,2).
 - Export /workspace/dorfmap_3d_runde_O9.html.
 - Offen: K2 Haarlinien Ostrand, fluss_7 Eckigkeit (Ufer-Terrassen), wand_288_144 Schattenkeil, wand_48_168 Rillen.
+
+## O10 L1 Dreiecksbudget
+- Gemessen per WebGL-Hook (test_gl_l1.js, lod=1, 390x844, Ansicht schraeg), 1 Frame: vorher Bildpass 1.375.862 Dreiecke. Ursache des Unterschieds zu 1,138 M: Wasser (222.218) und 2 kleine Meshes (16.392 Wege-Wasser/Overlay) sind transparent+DoubleSide -> three.js zeichnet sie zweimal (Rueckseite, dann Vorderseite). Baeume/Steine/Schuerzen/Overlay sind NICHT die Ursache.
+- Fix: forceSinglePass:true an den 3 transparenten DoubleSide-Materialien. Nachher Bildpass 1.137.252 (< 1,3 M). Wasser-Render vorher/nachher (endsee_rand, fluss_7) optisch gleich.
+- Ehrlich dazu: der Wassertiefen-Pass (Rendertarget, halbe Aufloesung) zeichnet zusaetzlich 792.424 Dreiecke je Frame; die GPU verarbeitet also ~1,93 M Dreiecke/Frame. renderer.info zeigt nur den letzten Pass (Bild). Schatten: kein Einfluss (Zahl mit nosh=1 gleich).
