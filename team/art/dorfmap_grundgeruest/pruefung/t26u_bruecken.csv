@@ -1,0 +1,18 @@
+wegtyp,hoehenunterschied_m,hoehe_quelle,id,epoche,laenge_m,mitte_zelle,mitte_ug,mitte_wasser,ende_a,ende_a_begehbar,ende_b,ende_b_begehbar
+Bruecke (Wasser),,,X040,15,0.8,"213,196",SCHNEE,False,"213,196 SCHNEE",True,"213,196 SCHNEE",True
+Bruecke (Wasser),,,X045,17,3.6,"188,191",WASSER_EIS,True,"186,192 SCHNEE",True,"190,188 SCHNEE",True
+Bruecke (Wasser),,,X047,18,3.6,"221,210",WASSER_EIS,True,"222,211 SCHNEE",True,"220,208 SCHNEE",True
+Bruecke (Wasser),,,X053,20,0.8,"187,194",SCHNEE,False,"187,194 SCHNEE",True,"187,194 SCHNEE",True
+Bruecke (Wasser),,,X069,26,11.6,"125,126",WALD,False,"127,132 KLIPPE_WAND",False,"122,119 SCHNEE",True
+Treppe/Steg (Hoehe),8.6,"R: klippe_hoehe_m der Wandzellen (Wand Nord) am Weg; oben hoehe_m 8.6 [A], unten 0.0 [A]; Entscheidung [F] t28u",X084,32,22.4,"155,12",KLIPPE_WAND,False,"148,1 SCHATTEN",True,"162,24 SCHNEE",False
+Bruecke (Wasser),,,X086,33,0.8,"175,212",SCHNEE,False,"175,212 SCHNEE",True,"175,212 SCHNEE",True
+Bruecke (Wasser),,,X112,43,0.8,"142,215",SCHNEE,False,"142,215 SCHNEE",True,"142,215 SCHNEE",True
+Bruecke (Wasser),,,X120,47,0.4,"72,51",SCHNEE,False,"72,51 SCHNEE",True,"72,51 SCHNEE",True
+Bruecke (Wasser),,,X122,47,0.4,"68,59",SCHNEE,False,"68,59 SCHNEE",True,"68,59 SCHNEE",True
+Bruecke (Wasser),,,X126,49,0.4,"171,249",SCHNEE,False,"171,249 SCHNEE",True,"171,249 SCHNEE",True
+Bruecke (Wasser),,,X135,53,1.6,"283,266",WASSER_EIS,True,"282,268 SCHNEE",True,"283,258 SCHNEE",True
+Bruecke (Wasser),,,X155,61,0.4,"63,125",SCHNEE,False,"63,125 SCHNEE",True,"63,125 SCHNEE",True
+Bruecke (Wasser),,,X160,62,0.4,"204,283",SCHNEE,False,"204,283 SCHNEE",True,"204,283 SCHNEE",True
+Bruecke (Wasser),,,X217,85,0.4,"60,222",SCHNEE,False,"60,222 SCHNEE",True,"60,222 SCHNEE",True
+Bruecke (Wasser),,,X234,92,0.4,"30,221",SCHNEE,False,"30,221 SCHNEE",True,"30,221 SCHNEE",True
+Bruecke (Wasser),,,X237,93,0.4,"22,222",SCHNEE,False,"22,222 SCHNEE",True,"22,222 SCHNEE",True

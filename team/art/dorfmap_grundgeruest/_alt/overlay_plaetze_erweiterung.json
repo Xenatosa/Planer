@@ -1,0 +1,1127 @@
+{
+ "abstand_m": 4,
+ "abstand_gross_m": 6,
+ "bedarf": 99,
+ "in_bestand": 58,
+ "neu": 26,
+ "nicht_platzierbar": 15,
+ "flaeche_frei_zellen": 19277,
+ "flaeche_bedarf_neu_m2": 4143.3,
+ "bestand_frei_nach_abgleich": 41,
+ "plaetze": [
+  {
+   "id": "bld_gatherer",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 9.6,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 266,
+    "cy0": 68,
+    "cx1": 275,
+    "cy1": 77,
+    "dist_feuer_m": 21.0,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_hunter",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": "C04"
+  },
+  {
+   "id": "bld_woodcutter",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": "B08"
+  },
+  {
+   "id": "bld_workplace",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 9.6,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 231,
+    "cy0": 109,
+    "cx1": 240,
+    "cy1": 118,
+    "dist_feuer_m": 38.9,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_shell_beach",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 7.2,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": "A19"
+  },
+  {
+   "id": "bld_fiber",
+   "art": "FUNKTION",
+   "ab": 3,
+   "w": 12.0,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 246,
+    "cy0": 213,
+    "cx1": 257,
+    "cy1": 222,
+    "dist_feuer_m": 140.0,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_clay",
+   "art": "FUNKTION",
+   "ab": 4,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": "C08"
+  },
+  {
+   "id": "bld_charcoal",
+   "art": "FUNKTION",
+   "ab": 5,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": "A07"
+  },
+  {
+   "id": "bld_metal",
+   "art": "FUNKTION",
+   "ab": 8,
+   "w": 9.6,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 259,
+    "cy0": 110,
+    "cx1": 268,
+    "cy1": 119,
+    "dist_feuer_m": 39.4,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_storage",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 12.0,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 151,
+    "cy0": 186,
+    "cx1": 162,
+    "cy1": 195,
+    "dist_feuer_m": 146.8,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_barracks",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 19.0,
+   "h": 8.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 201,
+    "cy0": 83,
+    "cx1": 208,
+    "cy1": 101,
+    "dist_feuer_m": 47.9,
+    "ring": 2
+   }
+  },
+  {
+   "id": "bld_kas_spear",
+   "art": "FUNKTION",
+   "ab": 2,
+   "w": 15.0,
+   "h": 9.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 190,
+    "cy0": 196,
+    "cx1": 204,
+    "cy1": 204,
+    "dist_feuer_m": 133.6,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_kas_ranged",
+   "art": "FUNKTION",
+   "ab": 3,
+   "w": 15.0,
+   "h": 8.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 169,
+    "cy0": 187,
+    "cx1": 183,
+    "cy1": 194,
+    "dist_feuer_m": 135.2,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_kas_beast",
+   "art": "FUNKTION",
+   "ab": 4,
+   "w": 13.0,
+   "h": 11.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 141,
+    "cy0": 147,
+    "cx1": 151,
+    "cy1": 159,
+    "dist_feuer_m": 128.6,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_kas_siege",
+   "art": "FUNKTION",
+   "ab": 5,
+   "w": 15.0,
+   "h": 11.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 262,
+    "cy0": 53,
+    "cx1": 276,
+    "cy1": 63,
+    "dist_feuer_m": 27.1,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_kas_drum",
+   "art": "FUNKTION",
+   "ab": 6,
+   "w": 7.2,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 234,
+    "cy0": 211,
+    "cx1": 241,
+    "cy1": 218,
+    "dist_feuer_m": 137.6,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_center",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 17.0,
+   "h": 17.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 216,
+    "cy0": 51,
+    "cx1": 232,
+    "cy1": 67,
+    "dist_feuer_m": 32.0,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_trader",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 12.0,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 194,
+    "cy0": 211,
+    "cx1": 205,
+    "cy1": 220,
+    "dist_feuer_m": 147.0,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_arena",
+   "art": "FUNKTION",
+   "ab": 2,
+   "w": 20.0,
+   "h": 20.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 215,
+    "cy0": 85,
+    "cx1": 234,
+    "cy1": 104,
+    "dist_feuer_m": 30.8,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_relic_shrine",
+   "art": "FUNKTION",
+   "ab": 2,
+   "w": 11.0,
+   "h": 11.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 263,
+    "cy0": 95,
+    "cx1": 273,
+    "cy1": 105,
+    "dist_feuer_m": 28.8,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_expedition",
+   "art": "FUNKTION",
+   "ab": 7,
+   "w": 7.2,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 141,
+    "cy0": 174,
+    "cx1": 148,
+    "cy1": 181,
+    "dist_feuer_m": 145.5,
+    "ring": 4
+   }
+  },
+  {
+   "id": "bld_hut",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 12.0,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "bld_drawing_rock",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 7.2,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "bld_guild",
+   "art": "FUNKTION",
+   "ab": 1,
+   "w": 17.0,
+   "h": 9.0,
+   "marker": "S Oeffnung, A Mass E12-E16 fuer E17+",
+   "bestand": null,
+   "neu": {
+    "cx0": 242,
+    "cy0": 95,
+    "cx1": 258,
+    "cy1": 103,
+    "dist_feuer_m": 21.5,
+    "ring": 1
+   }
+  },
+  {
+   "id": "bld_glassworks",
+   "art": "FUNKTION",
+   "ab": 17,
+   "w": 12.0,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass analog bld_fiber",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "bld_saltworks",
+   "art": "FUNKTION",
+   "ab": 21,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass analog bld_clay",
+   "bestand": "D13"
+  },
+  {
+   "id": "bld_pigment",
+   "art": "FUNKTION",
+   "ab": 24,
+   "w": 7.2,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass analog bld_drawing_rock",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "bld_modules",
+   "art": "FUNKTION",
+   "ab": 51,
+   "w": 9.6,
+   "h": 9.6,
+   "marker": "S Oeffnung, A Mass analog bld_metal",
+   "bestand": null,
+   "neu": {
+    "cx0": 202,
+    "cy0": 59,
+    "cx1": 211,
+    "cy1": 68,
+    "dist_feuer_m": 45.8,
+    "ring": 2
+   }
+  },
+  {
+   "id": "bld_ether_distillery",
+   "art": "FUNKTION",
+   "ab": 53,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "S Oeffnung, A Mass analog bld_charcoal",
+   "bestand": null,
+   "neu": {
+    "cx0": 204,
+    "cy0": 45,
+    "cx1": 211,
+    "cy1": 54,
+    "dist_feuer_m": 51.0,
+    "ring": 2
+   }
+  },
+  {
+   "id": "deko_haus_01",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 142,
+    "cy0": 127,
+    "cx1": 151,
+    "cy1": 134,
+    "dist_feuer_m": 116.4,
+    "ring": 3
+   }
+  },
+  {
+   "id": "deko_haus_02",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 131,
+    "cy0": 93,
+    "cx1": 138,
+    "cy1": 102,
+    "dist_feuer_m": 117.3,
+    "ring": 3
+   }
+  },
+  {
+   "id": "deko_haus_03",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 132,
+    "cy0": 107,
+    "cx1": 139,
+    "cy1": 116,
+    "dist_feuer_m": 119.6,
+    "ring": 3
+   }
+  },
+  {
+   "id": "deko_haus_04",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 262,
+    "cy0": 211,
+    "cx1": 271,
+    "cy1": 218,
+    "dist_feuer_m": 138.0,
+    "ring": 4
+   }
+  },
+  {
+   "id": "deko_haus_05",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 290,
+    "cy0": 204,
+    "cx1": 297,
+    "cy1": 213,
+    "dist_feuer_m": 138.0,
+    "ring": 4
+   }
+  },
+  {
+   "id": "deko_haus_06",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 276,
+    "cy0": 210,
+    "cx1": 285,
+    "cy1": 217,
+    "dist_feuer_m": 139.4,
+    "ring": 4
+   }
+  },
+  {
+   "id": "deko_haus_07",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": {
+    "cx0": 182,
+    "cy0": 210,
+    "cx1": 189,
+    "cy1": 219,
+    "dist_feuer_m": 151.5,
+    "ring": 4
+   }
+  },
+  {
+   "id": "deko_haus_08",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_09",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_10",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_11",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_12",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_13",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_14",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_15",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_16",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_17",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "deko_haus_18",
+   "art": "DEKO_HAUS",
+   "ab": null,
+   "w": 9.6,
+   "h": 7.2,
+   "marker": "A",
+   "bestand": null,
+   "neu": null
+  },
+  {
+   "id": "flur_deko_01",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "C06"
+  },
+  {
+   "id": "flur_deko_02",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B19"
+  },
+  {
+   "id": "flur_deko_03",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B22"
+  },
+  {
+   "id": "flur_deko_04",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B23"
+  },
+  {
+   "id": "flur_deko_05",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B14"
+  },
+  {
+   "id": "flur_deko_06",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B25"
+  },
+  {
+   "id": "flur_deko_07",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B02"
+  },
+  {
+   "id": "flur_deko_08",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B03D"
+  },
+  {
+   "id": "flur_deko_09",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B10"
+  },
+  {
+   "id": "flur_deko_10",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D07"
+  },
+  {
+   "id": "flur_deko_11",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D03"
+  },
+  {
+   "id": "flur_deko_12",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B05D"
+  },
+  {
+   "id": "flur_deko_13",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B06"
+  },
+  {
+   "id": "flur_deko_14",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B07D"
+  },
+  {
+   "id": "flur_deko_15",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A21"
+  },
+  {
+   "id": "flur_deko_16",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A23D"
+  },
+  {
+   "id": "flur_deko_17",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A12"
+  },
+  {
+   "id": "flur_deko_18",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A11"
+  },
+  {
+   "id": "flur_deko_19",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A14"
+  },
+  {
+   "id": "flur_deko_20",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B01"
+  },
+  {
+   "id": "flur_deko_21",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D14"
+  },
+  {
+   "id": "flur_deko_22",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B34"
+  },
+  {
+   "id": "flur_deko_23",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B35"
+  },
+  {
+   "id": "flur_deko_24",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B37"
+  },
+  {
+   "id": "flur_deko_25",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B26"
+  },
+  {
+   "id": "flur_deko_26",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B30"
+  },
+  {
+   "id": "flur_deko_27",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B31"
+  },
+  {
+   "id": "flur_deko_28",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B32"
+  },
+  {
+   "id": "flur_deko_29",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A06"
+  },
+  {
+   "id": "flur_deko_30",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A02"
+  },
+  {
+   "id": "flur_deko_31",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A04"
+  },
+  {
+   "id": "flur_deko_32",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A03"
+  },
+  {
+   "id": "flur_deko_33",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "E01"
+  },
+  {
+   "id": "flur_deko_34",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D01"
+  },
+  {
+   "id": "flur_deko_35",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D04"
+  },
+  {
+   "id": "flur_deko_36",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D05"
+  },
+  {
+   "id": "flur_deko_37",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D11"
+  },
+  {
+   "id": "flur_deko_38",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "C09"
+  },
+  {
+   "id": "flur_deko_39",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D12"
+  },
+  {
+   "id": "flur_deko_40",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B12D"
+  },
+  {
+   "id": "flur_deko_41",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A22"
+  },
+  {
+   "id": "flur_deko_42",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A18"
+  },
+  {
+   "id": "flur_deko_43",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "E04D"
+  },
+  {
+   "id": "flur_deko_44",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "E03D"
+  },
+  {
+   "id": "flur_deko_45",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "C07D"
+  },
+  {
+   "id": "flur_deko_46",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "C10D"
+  },
+  {
+   "id": "flur_deko_47",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B04D"
+  },
+  {
+   "id": "flur_deko_48",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "D15D"
+  },
+  {
+   "id": "flur_deko_49",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "B09D"
+  },
+  {
+   "id": "flur_deko_50",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A15D"
+  },
+  {
+   "id": "flur_deko_51",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A20D"
+  },
+  {
+   "id": "flur_deko_52",
+   "art": "DEKO_FLUR",
+   "ab": null,
+   "w": 3,
+   "h": 3,
+   "marker": "A",
+   "bestand": "A24D"
+  }
+ ]
+}

@@ -1,0 +1,137 @@
+stand,id,typ,epoche,cx,cy,gebiet,befund,anteil_gelaende_frei,loesung
+E16,13,schmal,,262,34,Nordost-Rand,Abstand(Wand/Wasser 2 m),0.889,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E16,23,Standard,,195,103,Senke-Rand,Abstand(Wand/Wasser 2 m),1.0,Bauzone erweitern
+E16,27,Standard,,317,70,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E16,41,Standard,,324,40,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E16,48,schmal,,333,51,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E16,88,Standard,,127,85,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,95,schmal,,120,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,99,Doppelhaus,,113,78,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,101,schmal,,109,68,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,102,schmal,,106,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,104,Standard,,105,58,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,105,Doppelhaus,,99,78,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,106,schmal,,98,52,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,107,Standard,,94,89,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,108,schmal,,89,81,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,109,schmal,,88,61,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,110,schmal,,88,96,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,111,schmal,,88,51,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,112,Standard,,83,71,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,113,Standard,,83,88,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E16,114,schmal,,80,105,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E16,115,schmal,,77,95,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,13,schmal,,262,34,Nordost-Rand,Abstand(Wand/Wasser 2 m),0.889,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,23,Standard,,195,103,Senke-Rand,Abstand(Wand/Wasser 2 m),1.0,Bauzone erweitern
+E40,27,Standard,,317,70,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E40,34,kompakt,,317,47,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E40,41,Standard,,324,40,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E40,48,schmal,,333,51,Nordost-Rand,ausserhalb_senke,1.0,Bauzone erweitern
+E40,88,Standard,,128,84,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,95,schmal,,120,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,99,Doppelhaus,,114,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,101,schmal,,109,67,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,102,schmal,,106,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,104,Standard,,105,58,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,105,Doppelhaus,,99,79,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,106,schmal,,98,52,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,107,Standard,,94,90,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,108,schmal,,89,81,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,109,schmal,,88,61,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,110,schmal,,88,96,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,111,schmal,,88,51,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,112,Standard,,84,71,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,113,Standard,,83,88,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,114,schmal,,79,105,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,115,schmal,,77,95,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N0,Hütte,24,114,90,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N3,Hütte,24,109,48,Nordwest-Ebene,ausserhalb_senke,0.944,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N4,Hütte,24,106,89,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N5,Hütte,24,115,149,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N6,Hütte,24,115,159,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N7,Hütte,24,250,237,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N8,Hütte,24,112,171,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N9,Hütte,24,97,145,West-Tal,ausserhalb_senke,0.667,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N10,Hütte,24,300,239,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N11,Hütte,24,238,249,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N12,Hütte,24,100,166,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N13,Hütte,24,85,5,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N14,Hütte,24,127,211,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N15,Hütte,24,70,53,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N16,Hütte,24,298,255,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N17,Hütte,24,77,9,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N18,Hütte,24,166,245,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N19,Hütte,24,63,61,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N20,Hütte,24,111,207,West-Tal,ausserhalb_senke,0.806,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N21,Hütte,24,321,255,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N22,Hütte,24,53,76,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N23,Hütte,24,273,274,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N24,Hütte,24,54,108,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N25,Hütte,24,60,138,West-Tal,ausserhalb_senke,0.972,Bauzone erweitern
+E40,N26,kompakt,24,48,91,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N27,Hütte,24,57,17,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N28,Hütte,24,47,54,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N29,Hütte,24,252,282,Sued (Flussband),ausserhalb_senke,0.917,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N30,Hütte,24,144,253,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N31,Hütte,24,57,147,West-Tal,ausserhalb_senke,0.806,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N32,Hütte,24,46,108,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N33,Hütte,24,42,81,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N34,Hütte,24,45,46,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N35,Hütte,24,42,67,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N36,Hütte,24,241,287,Sued (Flussband),ausserhalb_senke,0.611,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N37,Hütte,32,43,117,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N38,Hütte,32,45,125,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N39,Hütte,32,48,16,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N40,Hütte,32,136,256,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N41,Hütte,32,169,274,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N42,Hütte,32,48,145,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N43,Hütte,32,190,283,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N44,Hütte,32,35,60,Nordwest-Ebene,ausserhalb_senke,0.944,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N45,Hütte,32,34,83,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N46,Hütte,32,45,7,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N47,Hütte,32,36,124,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N48,Hütte,32,45,154,West-Tal,ausserhalb_senke,0.889,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N49,Hütte,32,305,292,Sued (Flussband),ausserhalb_senke,0.722,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N50,Hütte,32,77,217,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N51,Hütte,32,151,277,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N52,Hütte,32,328,287,Sued (Flussband),ausserhalb_senke,0.833,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N53,Hütte,32,27,63,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N54,Hütte,32,42,167,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N55,Hütte,32,63,207,West-Tal,ausserhalb_senke,0.75,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N56,Hütte,32,76,226,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N57,Hütte,32,35,160,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N58,Hütte,32,42,183,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N59,Hütte,32,67,223,Sued (Flussband),ausserhalb_senke,0.5,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N60,Hütte,32,34,168,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N61,Hütte,32,132,282,Sued (Flussband),ausserhalb_senke,0.972,Bauzone erweitern
+E40,N62,Hütte,32,42,191,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N63,Hütte,32,34,177,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N64,Hütte,32,51,209,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N65,Hütte,32,11,67,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N66,Hütte,32,78,245,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N67,kompakt,32,66,232,Sued (Flussband),ausserhalb_senke,0.625,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N68,Hütte,32,9,90,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N69,Hütte,40,91,261,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N70,Hütte,40,49,217,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N71,Hütte,40,82,256,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N72,Hütte,40,5,59,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N73,Hütte,40,16,154,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N74,Hütte,40,65,240,Sued (Flussband),ausserhalb_senke,0.528,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N75,Hütte,40,70,249,Sued (Flussband),ausserhalb_senke,0.556,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N76,Hütte,40,41,214,West-Tal,ausserhalb_senke,1.0,Bauzone erweitern
+E40,N77,Hütte,40,61,249,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N78,Hütte,40,33,216,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N79,Hütte,40,53,250,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N80,Hütte,40,24,217,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N81,Hütte,40,83,285,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N82,Hütte,40,27,226,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N83,Hütte,40,71,283,Sued (Flussband),ausserhalb_senke,0.639,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N84,Hütte,40,52,275,Sued (Flussband),ausserhalb_senke,0.75,Bauzone erweitern + Platz kleiner/verschieben (Wald/Eis/Wand im Platz)
+E40,N85,Hütte,40,21,238,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N86,Hütte,40,29,250,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N87,Hütte,40,21,246,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N88,Hütte,40,12,246,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N89,Hütte,40,27,279,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,N90,Hütte,40,4,261,Sued (Flussband),ausserhalb_senke,1.0,Bauzone erweitern
+E40,Q0,Quartiersplatz,24,31,73,Nordwest-Ebene,ausserhalb_senke,1.0,Bauzone erweitern
+E40,Q1,Quartiersplatz,40,38,280,Sued (Flussband),ausserhalb_senke,0.975,Bauzone erweitern

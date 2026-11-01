@@ -1,0 +1,182 @@
+# Relief t41u – Messungen, Annahmen, Abweichungen
+
+## Messungen [S]/[R]
+- Wandhöhe = Bandbreite px / 25 [R]: Nord 14 m, Suedgrat 16 m, Krater 11 m, Ostgrat 12 m (vorher 8,6/7,6/7,7/6,7 m).
+- Sichtbarer Fels Nordwand ca. 230 px [S], Band 350 px → Perspektivfaktor k ≈ 1,5 [R].
+- See 38×35 Zellen → Boden fast von oben gezeichnet; Spanne 9 m (k=1) bis 22 m (67°) [R]. Gewählt: Mitte [A].
+- Details: pruefung/klippen_messung_t40u.csv.
+
+## Annahmen [A]
+- HANG/SIMS skaliert: positiv ×1,7, negativ ×16/7,6.
+- Kraterboden 1 m, Gipfel 14 m, Flussbett 1,5 m, See 3 m tief, Wasserspiegel Boden −0,3 m.
+- Sprung > 2,5 m = Felswand, kleiner = Böschung. Sockel bis −30 m.
+- Suedgrat + unbenannte Bänder: Höhe per Nachbar-Propagation (Median Suedgrat 14,1 statt gemessen 16).
+
+## Abweichungen von c20 [F]
+- Wand steht am Bandfuß; Bandzellen gehören zur oberen Ebene (18752 Zellen umgedeutet).
+- Krater-Außenhang senkrecht.
+- Zellraster sichtbar: 1-m-Treppen im Grundriss, Wasser als flache Stufen, keine Überhänge.
+- E40: 112 Stellen außerhalb der Senke (alter Hinweis, nicht korrigiert).
+
+## t42u – Glättung + c20-Textur
+- Höhenfeld G auf 0,5-m-Gitter (673×607 Punkte) [R]: Hänge Gauß σ 1,5 m [A]; an Sprüngen > 2,5 m steile Wand per Smoothstep, Kontur mit Rauschen ±~0,4 m [A].
+- Dreieck steiler 55° = Wand (Wandtextur 4×8 m, Box-Projektion), sonst Boden mit c20-Draufsicht [A].
+- Bodentextur textur_relief_t42u.jpg: c20 (8 px/Zelle), gemaltes Wandband + Schatten (20524 Zellen) mit Farbe der eigenen Ebene aufgefüllt (unscharf) [A]. c20 unverändert.
+- Wandhöhe im Modell (max−min G im 5×5-Fenster an steilen Zellen, Median) [R]: Nord 15,45, Suedgrat 15,0, Krater 11,2, Ostgrat 12,0 m. Nord inkl. Hang am Fuß; Suedgrat 1 m unter Messung 16 (Bandhöhe per Nachbar-Ausbreitung).
+- Zellen: hoehe_m = Mittel 3×3 G-Punkte, ecke_* = G, klippe WAND/WAND_OBEN/WAND_FUSS, skin_slot wand_fels bei WAND. Abgleich pruefung/abgleich_t42u.json: 0 Abweichungen.
+- OBJ entfällt (nur GLB); alter Stand: ../_alt/relief3d_t41u/.
+
+## t43u
+- Suedgrat [R]: Talboden TAL_SUED/untere Bandzellen bis 15 Zellen vom Band um bis zu 16,8 m unter Oberkante abgesenkt, Median klippe_hoehe 16,04 m. 11150 Zellen (Reihen 218–276) mit neuen Hoehenwerten, sonst unveraendert. pruefe_t42u: 0 Abweichungen.
+- Bodenfarbe: Material-Gewichte (untergrund, Nass am Wasser, Geroell am Wandfuss) je Vertex, c20 nur 12 % Toenung [A]. Fels per Neigung (smoothstep 0,42–0,74 cos) triplanar [A].
+- Bekannte Maengel: Waende wirken noch wie gestempelt (Textur gleichmaessig), Schneeboden flach/eintoenig, Wege-Overlay sehr blass, Haeuser/Baeume sind Platzhalter, Kamera "Am Nordwand-Fuss" hat einen Felsen direkt vor der Linse.
+
+
+## t44u (Schoenheitsrunden 1-8)
+- Zellen/Hoehen unveraendert: pruefe_t42u summe 0 nach jeder Runde [R]. Gelaende-Mesh ohne Gebaeude/Plaetze/Wege; Wege = eigenes Overlay-Mesh, Haeuser = eigene Ebene "gebaeude" [R].
+- Wandhoehen-Median neu gemessen (max-min G im 5x5-Fenster an steilen Zellen) [R]: Nord 15,45 / Suedgrat 16,04 / Krater 11,20 / Ostgrat 11,99 m. Soll 14/16/11/12 [R]; Nord +1,45 m, weil das Messfenster den Hang am Fuss mitnimmt (seit t42u bekannt).
+- Baeume 1470 seit t43u (dbc41ea) in allen Commits; die Zahl 1482 stammte aus einem nicht eingecheckten Zwischenlauf in t44u Runde 1, nicht aus einem Commit [R].
+- Haeuser: Masse, Dachneigung (0,40-0,68 x Breite), Wandhoehe (0,52-0,66 x h), Anbau (45 %), Holzstapel (55 %), Laeden (70 %), beleuchtete Fenster (55 %), Rauch (60 % der Kamine), Wind nach Osten [A].
+- Felsen-Groesse auf 2,6 begrenzt und 22 % eingesenkt (keine schwebenden/dunklen Unterseiten) [A].
+- Kamera "Am Nordwand-Fuss" sucht automatisch einen Punkt mit freier Sicht 14-34 m vor der Wand [A].
+- Sockel-Boden -34 m statt -30 m (tiefste Stelle -29,9 m flimmerte durch) [R].
+- Leistung [S]: Desktop 1280x800 1,97 Mio Dreiecke / 19 Draws (Haeuser 80 234); Handy 390x844 ?lod=1 1,36 Mio / 20 Draws.
+- Bekannte Restmaengel: Wand-Oberkante treppig (0,5-m-Raster), Wandtextur aus der Naehe netzartig, Haeuser von nahem noch kantig, keine Zaeune, Schnee-Schatten unscharf.
+
+## t44u Runden 9-10
+- Zellen/Hoehen unveraendert, pruefe_t42u summe 0 [R]. Glaettung der Abbruchkante und Verrundung der Randkerbe nur im Anzeigenetz (x/z bzw. Absenkung am Kartenrand <=5 m), nicht in G/Zellwerten [A].
+- Wandhoehe Messmethode [R]: Soll 14/16/11/12 m = Hoehensprung der Wand selbst. Wandfuss-Zelle Nord (253,29): Sprung zur Nachbarzelle exakt 14,0 m [R]. Der Median 15,45 m (max-min G im 5x5-Zellfenster) nimmt den Hang am Fuss/Kopf mit und ist darum ein Obermass; ein 3x3-Fenster auf Zellmitteln (klippe_hoehe_median_3x3_je_wand) liefert Nord 13,5 / Suedgrat 11,36 / Krater 10,21 / Ostgrat 9,87 m und unterschaetzt durch die Mittelung. Massgeblich ist der Zellsprung; beide Mediane nur Kontrolle [A].
+- Zaeune [R]: 1480 Segmente geprueft, 1101 gebaut; Regel [A]: Abstand 1,8 m ums Haus, Tuerseite offen, kein Segment auf Wegzelle, nicht naeher als 0,9 m an anderem Haus/Platz, Hoehenunterschied <0,5 m, Abweichung zu Hausboden <1,2 m.
+- Schatten [A]: bias -0,0003, normalBias 0,12, radius 1,6, Frustum +-238 m.
+- Sockelseiten/Unterseite: Gesteinsschichten per Shader (Dicke 3,1 m und 0,8 m, gewellt) [A].
+- Final (Runde 11) [S]: Desktop 1280x800 2,08 Mio Dreiecke / 20 Draws (Haeuser 163 696); Handy 390x844 ?lod=1 1,47 Mio / 21 Draws (vorher e6111b1: 1,36 Mio / 20) -> +8 %, +1 Draw (Zaun-Mesh).
+- Wandhoehen [R]: Zellsprung Nord 14,0 m; Median 5x5 Nord 15,45 / Suedgrat 16,04 / Krater 11,20 / Ostgrat 11,99 m (unveraendert, Messmethode s.o.).
+- Restmaengel final: Kerbe am Flussaustritt hinten noch V-foermig gerade geschnitten; Wandoberkante aus der Naehe noch leicht gezackt; Dachschnee flaechig hellgrau ohne Struktur; Schnee-Schatten weiterhin weich; Hauswaende glatt (keine Putztextur).
+
+## t47u/t48u Runde 1 (31.10.2026)
+- Fluss: 4 Lücken aus c20 geschlossen (x213 y9–18, x219 y229–238, x74 y263–265, x323–327 y268); Hauptfluss jetzt 1 Zusammenhang (6005 Zellen) [S]. wasser_eis/fluss_id/untergrund konsistent (0 Abweichungen) [S]. 7-m-Stufe bei x220 y227 zu Stromschnellen verteilt, größter Spiegelsprung jetzt 1,8 m/Zelle [S].
+- Felsform: mehrskaliges Rauschen (Rippen/Runsen), Simse, Schuttfuß [A]. Wirkung im Bild noch gering.
+- Krater: Flanken geböscht [A]; noch kein Zugang, noch zu gleichmäßig.
+- Offen: Rampen/Serpentinen, 0,25-m-Gitter/Detailnormalen, Felsblöcke statt Wandflächen, fleckiger Schnee mit Gras (Maßstab: referenz/fabian_beispiel_t48u.jpg).
+
+## t48u Runde 3/4 (eb3c248)
+- Neu: Ufersteine, Baumgruppen an Klippenkanten, Trockengras-Büschel (instanziert), Kraterkrone nur fleckig Fels, Schaum an Wasserstufen, ferne Berge heller/dunstiger.
+- [S] pruefe_t42u summe 0. [S] Desktop 2.474.980 Dreiecke / 26 Draws. Handy nicht neu gemessen.
+- Offen/ehrlich: Felsblöcke wirken noch kastig (Quader, zu einheitlich), Bäume im Schatten fast schwarz, Rampen kaum sichtbar, Kraterring noch ohne klare Rippen/Scharten, kein GLB-Export, keine Detail-Normalmap. opensimplex per pip blockiert (PEP 668) → eigenes numpy-fBm; Blender nicht verfügbar.
+
+## t48u Abschluss (R5-R8 + Endpruefung)
+- [S] pruefe_t42u summe 0. Wandhoehen-Feld 14/16/11/12 m; Fenster-Median (pruefe_final_t48u.py) Nord 14.0, Suedgrat 16.8, Krater 14.0 (Fenster-Methode ueberhoeht), Ost 12.0.
+- [S] Wasser alle IDs 8er-Nachbarschaft: Hauptstueck 6005 Zellen zusammenhaengend; 28 kleine Reststuecke (groesstes 383). Einzelne fluss_id sind zerstueckelt (BACH_SUED 58 Teile), haengen aber ueber andere IDs zusammen.
+- [S] Headless: alle 11 Kameras gerendert, fehler [] (Teil 3 geloggt; Teile 1+2 schrieben alle Bilder, hingen danach beim Beenden -> abgebrochen, kein Log).
+- [S] Desktop 3 563 681 Dreiecke / 31 Draws; Handy ?lod=1 390x844 1 860 203 / 32 Draws; GLB ?glb=1 laedt (2 Meshes, 2.3 s).
+- Abweichung zum Beispielbild: weiterhin stilisiert/low-poly (kantige Felsen, einfache Baeume), kein Foto-Realismus; Fernberge wirken wie gezackte Papierkulisse.
+
+## t53u Gelaendeform
+- R6 [S]: Handy ?lod=1 (390x844) 1 163 663 Dreiecke gerendert (vorher 1 871 723), 32 Draws. Felsen Ikosaeder Detail 1, Fichten 6 statt 9 Zweige, 1/3 Geroell. Messung `test_budget.js`.
+- R5: Fernberge Hoehenfeld-Ring R 120-2600 m, 4 Oktaven gerundet, grauer Fels; blauer Ring war die Luecke zwischen Kartenrand und Ring-Innenkante (R0 420) -> geschlossen. Ring wird ausgeblendet, wenn Kamera unter -30 m (Ansicht unten).
+- Offen: R1 Klippen-Silhouetten/Ueberhaenge, R2 Kraterring-Zugaenge, R3 Serpentinen als Terrain-Rampen, R4 Flussbett/Ufer. Nicht bearbeitet.
+
+## Runde J (t62u) – Wasserlauf
+- [A] J1: Der Wasserlauf ist neu gelegt, als Kaskaden im Talboden (fluss_t62u.fluss_kaskade). Wasser am Hang und am Wandfuss des Klippenbandes VB wurde Land. Ein Verbindungskanal (Dijkstra, Bett 0,35 m) hält den Fluss durchgehend. Tiefster Schnitt 1,26 m (Runde I: 8,9 m).
+- [A] J2: Zwei kleine Hangwasser-Stücke (21 und 32 Ecken) sind weggefallen.
+- [A] J3: Objekte, die im Wasser standen, wurden verschoben oder entfernt: Bäume 28/2, Felsen 2/0, Steine 649/101, Geröll 9/0. In relief_zaehlung.json stehen dadurch bewusst neue Zahlen: baeume 1969→1967, steine 1133→1032. Zellwerte, CSV und grobe glb sind byte-gleich.
+- [A] J4: Kein Weg-Overlay wurde verschoben. VB ist das Klippenband und kein Weg.
+- [S] J5: Der Fluss kreuzt weiter zwei Wasserscheiden (Strang 13, wie schon in Runde I). Gemessen mit Becken als Senken gibt es 0 Bergauf-Stellen. 22 Becken haben keinen Randabfluss (Endseen). Es gibt Stufen bis 3,54 m (Wasserfälle).
+- [S] J6 Raycast (Viewer-Oberfläche): 0 Objekte schweben (>0,3 m). Versunken (>0,5 m): 2 Bäume und 1 Geröll, maximal 0,57 m. Im Wasser stehen 2 Bäume (5–20 cm tief, offen), 144 Steine und 3 Geröll (Bett-/Uferkiesel, ≤0,3 m überflutet).
+- [A] J7: Mit 7b19ec9 sind versehentlich zwei __pycache__-.pyc-Dateien eingecheckt. Sie sind harmlos und nicht gelöscht (Regel: nichts löschen).
+## Runde K (t63u) – Westarm um die Hügel
+- [F] K0: Fabian hat entschieden (t62u): Der Fluss soll im Tal um die Hügel herum fließen. Basis ist 18f24ac. Der alte Stand liegt in git, gelöscht wurde nichts.
+- [S] K1: Strang 13 (Westarm, etwa (72,46)→(264,260)) läuft neu durch das westliche Tal (fluss_k.py). Talweg 253 Zellen, Flusslänge 286 m, tiefster Schnitt 1,47 m. 1273 alte Wasserzellen wurden Land (SCHNEE 1223, WALD 50), 1416 Zellen wurden neu Wasser, 47 blieben Wasser. Insgesamt haben sich 7390 Zellen geändert, davon 4701 nur in der Höhe (+5,21/−2,73 m). Bbox x 0–85, y 36–267. Außerhalb des Westbereichs sind es 102 Zellen, alle an der Mündung (y≈262–267). Liste: pruefung/zellen_aenderung_t63u.csv.
+- [S] K2: Der Wasserspiegel fällt jetzt überall monoton (spiegel_monoton). Bergauf-Stellen: 0 (Runde J 16044). Stufen über 1 m gibt es nur in der Schlucht-Rinne über die Südgrat-Wand (x 210–220, z 220–227): 18 Stück, maximal 3,31 m. Außerhalb davon ist die größte Stufe 0,77 m. Für die Rinne wurde der Spiegel um bis zu 6,15 m abgesenkt, und zwar nur dort.
+- [S] K3: Kreuzungen mit dem neuen Wasser: Wege 0, Rampen 0, Häuser 0, Overlay-Plätze/Wege/Brücken/Furten 0. Darum sind keine Marker nötig (pruefung/kreuzung_t63u.json). Hausflächen, die Wasser berühren: 1 (Runde J 9). Das ist N44 Hütte am bestehenden Endsee (Stück 11).
+- [S] K4: Objekte. Bäume entfernt: 30 an Hängen über 45°, 10 am Wasserrand, 1 im Wasser. Bäume gesamt 1967→1873. Steine: 1066→881. Neu entfernt werden alle Steine, deren Fuß unter der sichtbaren Wasserfläche liegt. Diese Fläche wird genau wie in main.js berechnet: Dreiecke a,c,d / a,d,b, trockene Ecken G+0,02, dazu 5×5-Ecken-Maximum. Das waren 189 im Build-Log. Raycast (pruefung/strahl_t63u.json, Viewer): im Wasser 0 bei allen Objektarten. Bäume schweben 0 und sind 0 versunken. Steine schweben >0,3 m: 2 (max 0,35 m). Felsen versunken >0,5 m: 2 (max 0,52 m), Geröll: 3 (max 0,79 m). Gitterprüfung pruefung/objekte_t63u.json mit derselben Regel: im Wasser 0. Ihre Spalten schwebend/versunken messen gegen das 1-m-Zellfenster und nicht gegen die Viewer-Fläche. Sie sind darum gröber (Bäume 127 schwebend) und nicht mit dem Raycast vergleichbar. Maßgeblich ist der Raycast.
+- [S] K4b: Klärung zu den „167 Steinen im Wasser“ aus der ersten Auswertung (7305b74). Davon war ein Teil echt: Steine unter dem Rand-Dreieck, wo Wasser- und Landecken gemischt sind (die alte Regel prüfte nur die nächste Ecke). Ein Teil waren Messfehler: Treffer auf dem unsichtbaren Uferrand (Alpha 0, G+0,02). Das ist jetzt behoben. Es bleiben 6 Uferrand-Treffer ohne sichtbares Wasser.
+- [S] K5: Mesh-Lücke 0 (LS1/LS2), wv_unter_gelaende 0. t42u-Abgleich summe=0 gegen den aktuellen Stand. Handy ?lod=1 neu gemessen: 1 074 915 Dreiecke (<1,3 M). Der alte Wert 1 089 795 war der Stand vor dem Entfernen der Steine. zellen_relief.csv gegen 18f24ac neu gezählt: 7390 Zellen. JSON und CSV sind neu erzeugt. Die 9674 in 7305b74 waren eine veraltete JSON aus einem Build vor dem Einfrieren der Erosions-Startpunkte.
+- [A] K6: Die Startpunkte der Erosion sind eingefroren (erosion_start_t63u.npy). Ohne das hätte sich die ganze Karte um etwa 0,1 m verschoben.
+- [S] K7: Südfluss: Die flache Endstrecke (1257 Wasser-Ecken, Weg 652 Ecken ≈ 326 m) hat jetzt ein durchgehendes leichtes Gefälle von −17,64 auf −18,20 m (0,56 m, etwa 0,17 %). Geändert wurden nur die Anzeige-Felder WV/GB auf Wasser-Ecken (fluss_k.gefaelle_flach). Das Bett wurde an 374 Ecken um bis zu 0,1 m unter den Spiegel gelegt. Zellwerte sind unverändert (zellen_relief.csv byte-gleich, t42u 0). Bergauf weiter 0.
+- [A] K8: __pycache__ ist aus git genommen (git rm --cached) und steht in .gitignore. Löst J7.
+
+## K9 – Ansichten t63u (13 Textur + 13 Clay, einzeln, 1280×800) [S]
+Jede Ansicht einzeln angesehen. Keine Löcher, kein Baum im Wasser gesehen, der Fluss ist in oben/schraeg durchgehend. OFFEN:
+- sued (Tex): Ein Stück vom Südfluss hat gerade Kanten und sieht kastenförmig aus. Die helle quadratische Fläche gab es schon vorher. Im Clay sieht man an der Stelle eckige Stufenkanten.
+- fluss_ost: In der Schlucht ist das Wasser nur ein dünner dunkler Streifen. Die Wandtextur ist gestreckt, wirkt verpixelt.
+- suedwand/boden_wand (Clay): Senkrechte Streifen an den steilen Wänden (Netz gestreckt). Unten im Bild gerade Terrassenkanten.
+- oben (Clay): Der Ostrand der Karte ist leicht gewellt und nicht gerade.
+- In allen Bildern ist das Bedien-Panel der App zu sehen (Screenshot vom Viewer, kein Sammelbogen). Eine Version ohne UI ist nicht gerendert.
+Nichts davon behoben.
+
+## Runde L (t64u) – Löcher Gebirge/Boden
+- 26478 offene Innenkanten (LS1) / 13239 (LS2) = 4413 Bandrand-Zellseiten ×6 bzw. ×3: T-Stöße, Spalt 0,000 m [S]; Schürze (−0,35 m) darunter gegen Raster-Funkeln [A].
+- Randschlitze Gelände↔Sockel (Stützen nur 1/m): vorher West −0,586…+0,686 m (72 Punkte >2 cm), Ost −0,54…+0,392 m (126), Nord −0,277…+0,132 m (16), Süd 0 [S]; Sockel folgt jetzt exakter Randlinie, Spalt 0 per Konstruktion [A]. West vorher/nachher sichtbar behoben, Ost/Nord optisch kein Unterschied.
+- 19 umgeklappte Grobdreiecke (LS1, z. B. x158,7 z18,6) → 0 [S]; optisch kaum sichtbar.
+- Bodenstufen >20 cm im Flachen: 554 Kanten [S]; gesichtete Stichproben = Wege/Hausplattformen/Ufer (gewollt), keine Terrassen gefunden.
+- Dreiecke Handy ?lod=1: 1 100 235 [S]; Zellabgleich Summe 0; CSV/glb unverändert.
+- Randschlitz im Viewer (test_rand_t64u.js): LS1 673/673/643/665, LS2 337/337/321/332 Randpunkte N/S/W/O, alle 0,0000 m, 0 Punkte >2 cm [S] (pruefung/mesh_t64u.json). Schürze-Nahaufnahme test/t64u/nah_schuerze_{sued,ost}_t64u.jpg: kein Funkeln sichtbar [S, gesichtet].
+- K9 Südfluss-Stummel: Mittellinie, Verjüngung, U-Profil, Spiegel −16,459→−16,631 m; 23 Wasserpunkte weg, 9 neu [S]. Bilder k9_stummel*.
+- K9 Schluchtwasser: 100 Wasserpunkte mehr (2 Ausdehnungen) [S]; Boden an Feinband-Ecken nicht abgesenkt, sonst Spalt 0,33 m bei (216|240) [S, behoben]. 13 verdeckte Wasserecken entfernt, Wasser unter Gelände 0 [S].
+- K9 Streifen Südwand/boden_wand: triplanares Bodendetail, sichtbar weniger, aber Felswand zeigt in boden_wand und Nahbildern weiter senkrechte Streifung [gesichtet] – offen.
+- K9 Ostrand: bewusst offen. Geländerand liegt exakt auf x=336, Spalt 0 [S]; die sichtbare Welle sind die gewollten Sockel-Schichtwellen (Shader, Amplitude 2,2). Glättungsversuch verschlechterte Krümmung rms 0,129→0,144 [S] und wurde zurückgenommen.
+- Boden: Vertexfarben im Flachland weich (sigma 1,2; Anteil 0,699; mittlere Farbänderung 3,46) [S]; 4 Stellen vorher/nachher test/t64u/boden_flachM_{A..D}_weich_*, Flecken weicher, keine Rauten [gesichtet].
+- Lochsuche: 29 Nahkameras Kraterrand (14) + Felskante Ost/Nord (15), LS1 1120×700 und LS2 640×400 ?lod=1, Magenta-Hintergrund nur Gelände: durchscheinend 0 px, eingeschlossen 0, schwarz 0 px [S] (pruefung/loch_t64u.json, test/t64u/loch/).
+- Mesh Ende: Spalt max 0,0 m LS1/LS2, umgeklappt 0, NaN 0, nicht-manifold 0 [S] (pruefung/mesh_t64u_ende.json).
+- Längsprofil Ende: 4 Stücke, bergauf 0, Stufen >1 m außerhalb Schlucht 0, in Schlucht 18 [S].
+- Objekt-Raycast gegen Viewer-Netz (3837 Objekte): 6 Ausreißer [S] – Baum (80,1|174,9) 0,71 m versunken (Kraterhang), Steine (276,1|267,1) und (308,0|273,5) 0,33/0,35 m schwebend (Süd-Ufer), Geröll (149,4|31,2) 0,52 m, (271,2|116,2) 0,79 m, (271,3|116,6) 0,53 m versunken (Felskante). Ursache: Feinband-Netz weicht dort vom 0,5-m-Raster ab, an dem die Objekte gesetzt werden [A]. Nicht behoben (offen, klein).
+- Budget: Handy ?lod=1 1 099 919 Dreiecke [S] (<1,3 Mio); LS1 1280×800 totale_auge 2 461 247 (Textur) / 1 372 908 (Clay) [S]. Zellabgleich t42u Summe 0 [S]; CSV/glb unverändert.
+- 13 Textur- + 13 Clay-Ansichten test/t64u/ansicht_*_{tex,clay}_t64u.jpg, alle gesichtet. Auffällig: boden_wand Felsstreifen (s.o.); sued: helles rechteckiges Feld am Fluss (Weg-/Platzfläche, nicht untersucht); oben/clay: Ostrand leicht wellig (Sockelwellen, s.o.).
+
+## Runde M (t65u) – Zellen, Bäume, Fluss
+- Objekte: Browser-Raycast (pruefung/objekte_voll_t65u.json) alle Typen schwebend>0,15 m 0, versunken 0, im Wasser 0, Hang>45° 0, Baum über Haus 0 [S]. Alte Ausreißer: 2 Steine entfernt, Rest ≤0,11 m [S].
+- Bäume 1873 -> 1577 [F]: 60 Überlappung, 266 zu dicht (vor Runde M 55 Paare <0,1 m, Mindestabstand 0,0), 30 an gültigen Nachbarpunkten wieder gesetzt (bodenrichtig). Walddichte: 154 Waldzellen à 10 m, Verlust im Mittel 16,8 %, 28 Zellen >30 %, 3 Zellen >50 % (120|130, 130|30, 160|230) [S] (pruefung/wald_dichte_t65u.json). Felsen 95->94, Findlinge 40->35, Steine 872->803, Geröll 956->856 [F].
+- Zellen [F]: a_baum_ok 2102->0; 4 Wasser-Restzellen trocken; 111 Vertexfarben geglättet. Offen: d_vertex>60 168, b_bebaubar_hang 1223 (Plan fremdes Team), b_spiegel_unter_bett 323 (c20-Altwerte).
+- Wasser [F]: See/Fluss-Lücke 4,24 m zu (34 Vertices), Stummel 1,5 m (19), 4 Mulden ≤2 cm an Quelle gehoben, Tümpel West eben -9,45 (932 Punkte, 123 trocken). Hauptfluss Quelle->Ostrand 211 m, bergauf_pfad 0 [S]. See = gewollte Senke (bergauf_summe 3969 nur Seepunkte).
+- Helles Rechteck Ansicht sued = Quartiersplatz Q1 (38,8|280,4, 10×10 m, E40). Nur Farbe 0xb0a48c->0x8f8a82, fällt nicht mehr auf [gesichtet].
+- Wandstreifen boden_wand: Shader-Textur gedreht/gemischt, ohne Formänderung; in boden_wand tex/clay keine starken Streifen mehr sichtbar, feine Linien bleiben [gesichtet].
+- Messung: Handy 1 053 275 Dreiecke [S], Mesh-Spalt LS1/LS2 0 [S], t42u Summe 0 [S].
+- Offen: 12 der ersten 25 Nahkameras lagen in Wand/Haus/Baum, als _v2 von oben neu; Kamera-Namen krater_* zeigen Dorf statt Krater (Koordinaten falsch, Krater nur in Ansichten geprüft). Walddichte-Lücken in 3 Zellen nur teilweise aufgefüllt. Vorher/Nachher-Draufsicht Wald nicht gerendert.
+- Nachtrag M2c: 3 Waldzellen >50 % Verlust aufgefüllt auf ≥70 % der Vorher-Zahl (120|130 17->12, 130|30 5->4, 160|230 12->9), +13 Bäume, gesamt 1590 [F]; Plätze geprüft: kein Haus/Rampe/Brücke, Hang ≤40°, kein Wasser, Abstand ≥1 m. Danach 0 Zellen >50 % Verlust, 25 Zellen >30 %, Mittel 16 % [S]. Raycast neu: alle Typen 0/0/0 [S]. Draufsicht vorher (595215f) / nachher: test/t65u/wald/ [gesichtet, keine Lücke mehr].
+- Krater: 7 Nahbilder mit richtigen Koordinaten (Kraterwand-Zellen, Mitte 103|155), test/t65u/krater/ [gesichtet]: keine Löcher, keine schwebenden Objekte; die alten krater_*-Kameras lagen bei 250|100 (falsch).
+- Brauner Balken Ansicht sued = Rampenweg 5 (135|231 -> 100|269), flacher Overlay-Streifen auf dem Gelände, liegt auf dem Boden [gesichtet, test/t65u/nah/rampe5_*]. Kein Fehler.
+- Endmessung: Handy 1 054 929 Dreiecke, Spalt 0, bergauf_pfad 0, t42u Summe 0 [S].
+
+## ABWEICHUNGEN Runde O (t67u)
+- [F] 73 Randzellen: Fluss-Arme zum Kartenrand geöffnet (rand_oeffnen), Höhe weicht von c20 ab.
+- [F] 9 Zellen: Senken-/Trichter-Ausgleich, weicht von c20 ab.
+- [F] O8: +1 Zeile in zellen_relief.csv geändert (Nadel-Kappung nadel_kappen, grob_entspitzen 2. Durchgang, 22+20 Punkte, max 2,66 m).
+- [A] 13 grobe Spitzen >1,5 m (u. a. 158|18 6,1 m, 131|160 7,2 m) liegen auf Eckpunkten am Feinband-Rand; Absenken würde Spalt öffnen -> offen.
+- [A] Prüfer meldet 6 Ecken "bergauf" bei x 2,5–5 / z 253,5: West-Arm fällt 3 cm/Ecke zum Westrand; Prüfer kennt nur Ostausgang. Kein echter Bergauf-Fluss.
+- [A] Kraterrand-Clay-Nähte: unverändert auch mit ?nosn=1 (Normalen-Glättung nicht schuld), Ursache offen.
+- [A] Rampen: jetzt per Raycast auf Gelände gelegt, weiche Ränder (Alpha), dunkler, leicht geschwungen (main.js).
+- [S] Endmessung: Spalt 0, t42u Summe 0, Raycast 0/0/0, Nadeln >1,5 m 3 (vorher 8), Spitzen 9, Senken >2 m 0, >0,8 m 2, Wege-Objekte 0, Handy 1 035 213 Dreiecke, 25 Draws.
+- [S] Blinde Flussenden laut Zähler 5: 223,5|219,5, 216|244, 13,5|253, 2|276, 321|276 (2|276/321|276 liegen am Rand = enden am Rand).
+
+## Runde O9 – zellen_relief.csv (Nebenprodukt, nicht committet)
+- Der Build schreibt zellen_relief.csv als Sidecar neu. Nach O9 Schritt 2 (Kegel 321|205, 268|25 abgesenkt) aendern sich 63 Zeilen, NUR Spalte `boden_anzeige_m` (abgeleitete Anzeigehoehe, gesenkt um bis zu ~1.9 m) [R].
+- Zell-Sollwerte (hoehe_m, Typ, Wand, Slot, ID) unveraendert; pruefe_t42u: summe 0 [R].
+- Datei per Regel nicht committet, per git checkout zurueckgesetzt; Diff liegt in /workspace/t65/zellen_diff_o9.txt. Naechster Build erzeugt sie wieder.
+
+## Runde O9 – Endmessung und Kosmetik (01.11.)
+- Shader: Schnee-/Felsgrenze mit Rauschen (nur Farbe). Wasser-Alpha per weicher Maske. Geometrie unveraendert.
+- Ufer-Treppen fluss_7/fluss_9 bleiben: sitzen in der Ufer-Schattierung des Gelaendes, nicht in der Wasserkante. Mit Farbe allein nicht loesbar.
+- wand_0_24: obere Zahnreihe weich; Restzacken unten rechts schwaecher, aber sichtbar.
+- Raycast nach der letzten Aenderung nicht gemessen: test_strahl_t62u.js wartete 2x 300 s auf __test.bereit (Timeout). Die Aenderung betrifft nur Shader, keine Geometrie; Objekt-Hoehen sollten gleich sein [A].
+- Endmessung [S]: Spalt 0, t42u 0, Dreiecke 1 055 021, Fehlerzaehler unveraendert (spitzen 7, senken_0_8m 5, enge_grate 259, objekte_auf_wegen 0).
+## Runde O5 (01.11.)
+- fluss_7: Zahnreihen oben und Mitte-links bleiben; Quelle = innere Wasserzellen (hide=winnen macht sie weg) [S]. Platten nur weicher. Ursache der Zaehne innerhalb dieser Zellen nicht gefunden [A].
+- fluss_9: Treppen am linken (und rechten) Ufer bleiben.
+- fluss_3: Wasser ruhig, aber linkes Ufer oben mit grossen Saegezacken in der Schnee-Gelaendekante (nicht Wasser).
+- wand_0_24: senkrechte Sandstreifen unten rechts bleiben (Schritt D nicht bearbeitet).
+- rampe_4: dunkles gerades Band quer ueber Hang, wirkt nicht im Gelaende eingebettet. rampe_13: Gabelung mit weissem Riss/Spalt zwischen den Rampenarmen.
+- Darstellungs-Spiegel: 859 Nachbarpaare (sichtbar) mit Gefaelle gegen Daten, max 0,10 m (Skript /workspace/t65/spiegel_bergauf_o5.py); Daten/Laengsprofil unveraendert (bergauf_pfad 0).
+
+## Runde O7 – [F] Uferformung (01.11.)
+- [F] Bett/Ufer im Generator weich geformt (gen_relief.py `ufer_profil`, aus mit Env UFER_ALT=1): Tiefe per smoothstep ueber Abstand zur Wasserkante, B=2,5 m, max 1,0 m tief, Land max ~35° (tan 0,70) zur Kante. Nur ausserhalb Feinband/Wege. 10 614 Bett-Ecken, 3 617 Land-Ecken; Land max +0,5 / -1,0 m.
+- [R] zellen_relief.csv: nur Anzeige-Spalten geaendert (boden_anzeige_m 6 939 Zeilen, wasserspiegel_anzeige_m 2). Zellwerte (Wasser, Typ, Eigenschaften) gleich; t42u 0.
+- [A] Vorher-Ursache (I1): fluss_t62u.py Z.13 (Ufertiefe 0,06+0,25*di), fluss_k.py Z.123/124/149 (Bett = WV-tief je Zelle), ufer_weich (Land >= Nachbar-WV+0,03) -> senkrechte Stufe an der Zellgrenze.
+- [S] wneu (Konturwasser) ist jetzt Standard; alt mit ?wneu=0.
+- [A] Offen: fluss_7 Achsen-Stufen bleiben. Sie liegen IM Wasser (Bloecke konstanter Tiefe 0,04 vs 0,47 m, z. T. negative Tiefe), nicht am Ufer. 2. Versuch (Tiefe im Nassbereich glaetten) nicht gemacht.
+
+## Runde O8
+- Feinband-Naht (_bandnaht_j1): Bandrandpunkte an Grobgitterlinien auf G_ANZ gesetzt (3 Punkte, max 0,59 m) -> Spalt 0. Der Spalt 0,28 m bestand schon ab 5c1c575/e3e67ad (keine Regression).
+- Bett-Glaettung (bett_glatt, Gauss 2,5 m, min 5 cm Tiefe): 20471 Vertices; Wasserspiegel unveraendert. Treppen bei fluss_7 bleiben (Umriss der Nasszellenmaske, ohne Zellaenderung nicht loesbar).
+- Offen: gepunktete Haarlinien am Bandrand (rand_ost_80/265, wand_264_24), Keile wand_288_144, Rillen wand_48_168.
+- O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.

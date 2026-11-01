@@ -1,0 +1,20 @@
+material,skin_slot,zell_eigenschaften,zellen,flaechenanteil_pct,sichtbar,platzhalter,kachel_m_A,aufloesung_px_A,uv_weg
+Fels-Wand,wand_fels; ug_klippe_wand; ug_klippe_kante,klippe=WAND|neigung>wandwinkel 55 Grad; untergrund KLIPPE_WAND/KANTE,6420,6.31,"Nordwand, Suedgrat, Kraterring, Ostgrat",wand_textur.png 512px triplanar (main.js /9 und /23 m) + Vertexfarbe,9,1024,Triplanar Weltkoordinaten
+Fels (Boden),ug_fels,"untergrund FELS, flach (Median 1.2 Grad)",1954,1.92,"Plateau Nord, Gipfel, Hang","Splat-Vertexfarbe FELS (0.52,0.49,0.46) + detail_textur.png",4,1024,Triplanar / XZ
+Fels-Block / Geroell-Objekte,"(kein Slot) D.felsbloecke 2919, geroell 3093, steine 1151","deko_fels_ok, WAND_FUSS",0,,"Wandfuesse, Krater","Vertexfarbe objekte_neu.js block(), Blender-Formen blender/fels_meshes.json",2,512,Triplanar Objektkoordinaten [A]
+Schnee,ug_schnee,untergrund SCHNEE,74529,73.21,ueberall,Splat SCHNEE + Wind-Toenung + detail_textur.png,4,1024,XZ-Projektion
+Festgetretener Schnee / Weg,"(Overlay, kein Slot) D.wege 2839, rampenwege 12",Overlay Wege (nicht im Gelaende),0,,"Dorfwege, Rampen",Lambert 0x9a8a72 / WEGA-Vertexfarbe,2,512,Band-UV entlang Weg [A]
+Erde,ug_boden,untergrund BODEN,809,0.79,"Plateau Nord, Senke",Splat BODEN + ERDE2,3,512,XZ
+Gras/Moos (Waldboden),ug_wald,untergrund WALD,10953,10.76,"Tal Sued, Hang, Ostplateau",Splat WALD/MOOS/GRAS/MOOS2; Grasbueschel D.gras 4011 Vertexfarbe,3,512,XZ
+Sand,ug_sand,untergrund SAND,546,0.54,Tal Sued (Ufer),Splat SAND,3,512,XZ
+Kies/Geroell (Boden),"(Splat GEROELL, kein Slot)",klippe=WAND_FUSS,2856,2.81,Wandfuesse,Splat GEROELL,2,512,XZ
+Eis / Wasser,ug_wasser_eis,"wasser_eis=1, fluss_id, ufer",6597,6.48,"Fluss, Baeche, See","Phong Vertexfarbe transparent (main.js), Schaum ueber Vertexfarbe",6,512,XZ + Fliessrichtung [A]
+"Fluss-/Seeboden, Ufer nass","(Splat NASS, kein Slot)",ufer=1,2902,2.85,Ufer,Splat NASS,3,512,XZ
+Dach-Schindel,haus_<typ> (main.js Klick-Info),Haeuser 233,0,,Dorf,Vertexfarbe Schindelreihen + Schneehaube,1,512,"Kachel-UV TEXCOORD_1 [A, fehlt noch]"
+Hauswand Putz/Holz/Blockbohle,haus_<typ>,Haeuser 233,0,,Dorf,"Vertexfarben (Putz-, Holz-, Blockbohlen-Toene)",1,512,"Kachel-UV TEXCOORD_1 [A, fehlt]"
+Fachwerk,haus_<typ>,-,0,,nicht vorhanden,keiner (nicht modelliert) [F],1,512,Kachel-UV [A]
+Sockel,haus_<typ>,-,0,,Hausfuesse,Vertexfarbe Steinsockel 0x6d6a64,1,512,Kachel-UV [A]
+Baumrinde,(kein Slot) D.baeume 2000,deko_baum_ok,0,,Wald,Vertexfarbe 0x4a3322 / 0x6b4a33,1,256,Zylinder-UV [A]
+Nadeln,(kein Slot),deko_baum_ok,0,,Wald,"Vertexfarbe 0x2e5238-0x46663f, Kiefer 0x3c5e40, Schnee 0xe9eef4",1,512,Alpha-Karte Zweig [A]
+"Zaun / Holz (Bruecken, Holzstapel)",(kein Slot) D.bruecken 20,"frei, kein Steilhang",0,,"Dorf, Bruecken",Vertexfarbe 0x5a3e28 / Lambert 0x7a5230,1,256,Kachel-UV [A]
+Rauch,(kein Slot),Kamine,0,,Dorf,CanvasTexture Punktwolke (objekte_neu.js),-,128,Billboard

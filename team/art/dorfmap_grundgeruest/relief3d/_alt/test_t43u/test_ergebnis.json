@@ -1,0 +1,28 @@
+{
+ "fehler": [],
+ "dreiecke": {
+  "boden": 782726,
+  "wand": 31738
+ },
+ "hoehen": {
+  "neu_oben_unten": [
+   13.996078491210938,
+   0.005113579332828522
+  ],
+  "alt_6m_noerdlich_unten": [
+   1.8550668358802795,
+   0
+  ]
+ },
+ "klick_wand": {
+  "art": "felswand",
+  "zell_id": "9661",
+  "klippe": "WAND",
+  "klippe_hoehe_m": "14.0",
+  "felder": 49
+ },
+ "klick_gebaeude": {
+  "art": "gebaeude",
+  "id": "bld_kas_siege"
+ }
+}
