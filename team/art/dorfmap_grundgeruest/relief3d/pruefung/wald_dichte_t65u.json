@@ -1,0 +1,36 @@
+{
+ "baeume_vorher": 1873,
+ "baeume_jetzt": 1577,
+ "waldzellen_10m": 154,
+ "dichte_verlust_mittel": 0.168,
+ "zellen_verlust_gt_50": [
+  [
+   120,
+   130,
+   17,
+   6
+  ],
+  [
+   130,
+   30,
+   5,
+   1
+  ],
+  [
+   160,
+   230,
+   12,
+   5
+  ]
+ ],
+ "zellen_verlust_gt_30": 28,
+ "nn_vorher": {
+  "min": 0.0,
+  "doppelte_lt_0_1m": 55,
+  "median": 1.06
+ },
+ "nn_jetzt": {
+  "min": 0.53,
+  "median": 1.33
+ }
+}

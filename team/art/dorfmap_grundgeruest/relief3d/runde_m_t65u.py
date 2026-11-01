@@ -55,7 +55,7 @@ def objekte(L5,GA,WV,OV,haeuser,rampen,bruecken,NX,NY):
         if not WOK[max(0,j0-1):j0+3,max(0,i0-1):i0+3].any():return -999.0
         return float(WS[max(0,j0-1):j0+3,max(0,i0-1):i0+3].max())
     for nm,L in L5.items():
-        neu=[];c={'n_vorher':len(L),'hoehe_neu':0,'abgesenkt':0,'wasser':0,'steil':0,'ueberlapp':0,'abstand':0}
+        neu=[];rej=[];c={'n_vorher':len(L),'hoehe_neu':0,'abgesenkt':0,'wasser':0,'steil':0,'ueberlapp':0,'abstand':0}
         for o in L:
             o=list(o);x,z,h=o[0],o[2],o[3];g0=tri(GA,x,z)
             gb=float(nd.map_coordinates(GA,[[z*2],[x*2]],order=1,mode='nearest')[0]);off=o[1]-gb if nm!='baeume' else 0.0
@@ -75,15 +75,39 @@ def objekte(L5,GA,WV,OV,haeuser,rampen,bruecken,NX,NY):
             if nm=='baeume':
                 cx,cz=int(min(NX-1,x)),int(min(NY-1,z))
                 if sper[max(0,cz-0):cz+1,max(0,cx):cx+1].any() or any(abs(x-hh['x'])<hh['b']/2+1 and abs(z-hh['z'])<hh['t']/2+1 for hh in haeuser) \
-                   or any(np.hypot(x-p[0],z-p[1])<1.5 for w in rampen for p in w) or any(np.hypot(x-b[0],z-b[2])<2.5 for b in bruecken):c['ueberlapp']+=1;continue
+                   or any(np.hypot(x-p[0],z-p[1])<1.5 for w in rampen for p in w) or any(np.hypot(x-b[0],z-b[2])<2.5 for b in bruecken):c['ueberlapp']+=1;rej.append(o);continue
             neu.append(o)
         if nm=='baeume':
-            neu.sort(key=lambda o:-o[3]);from scipy.spatial import cKDTree;P=np.array([[o[0],o[2]] for o in neu]);T=cKDTree(P);weg=np.zeros(len(neu),bool)
+            neu.sort(key=lambda o:-o[3]);NEU0=list(neu);from scipy.spatial import cKDTree;P=np.array([[o[0],o[2]] for o in neu]);T=cKDTree(P);weg=np.zeros(len(neu),bool)
             for k,o in enumerate(neu):
                 if weg[k]:continue
                 for m in T.query_ball_point(P[k],0.05*(o[3]+12)):
                     if m>k and not weg[m] and np.hypot(*(P[m]-P[k]))<0.05*(o[3]+neu[m][3]):weg[m]=True
             c['abstand']=int(weg.sum());neu=[o for k,o in enumerate(neu) if not weg[k]]
+            # t65u M2b: Nachsetzen – entfernte Baeume, deren naechster Nachbar >=1,5 m weg ist (sonst Waldluecke), an gueltige Nachbarposition (0-2,2 m) setzen [A]
+            rej+=[o for k,o in enumerate(NEU0) if weg[k]];rej.sort(key=lambda o:-o[3]);nach=0
+            def frei(x,z,h):
+                if not(0<=x<NX-0.01 and 0<=z<NY-0.01):return False
+                if sper[int(z),int(x)] or any(abs(x-hh['x'])<hh['b']/2+1 and abs(z-hh['z'])<hh['t']/2+1 for hh in haeuser) or any(np.hypot(x-p[0],z-p[1])<1.5 for w in rampen for p in w) or any(np.hypot(x-b[0],z-b[2])<2.5 for b in bruecken):return False
+                if SL[min(int(round(z*2)),GA.shape[0]-1),min(int(round(x*2)),GA.shape[1]-1)]>40:return False
+                g=tri(GA,x,z)
+                if wsp(x,z)>g-0.3+0.05+0.3:return False
+                for q in neu:
+                    if abs(q[0]-x)<2.5 and abs(q[2]-z)<2.5 and np.hypot(q[0]-x,q[2]-z)<max(1.0,0.05*(h+q[3])):return False
+                return True
+            for o in rej:
+                gb=float(nd.map_coordinates(GA,[[o[2]*2],[o[0]*2]],order=1,mode='nearest')[0])
+                if o[1]-gb>1.0:continue
+                if min([np.hypot(q[0]-o[0],q[2]-o[2]) for q in neu if abs(q[0]-o[0])<3 and abs(q[2]-o[2])<3] or [9])<1.5:continue
+                for r_ in (0,1.0,1.5,2.2):
+                    ok=None
+                    for a_ in np.linspace(0,2*np.pi,8,endpoint=False):
+                        x,z=o[0]+r_*np.cos(a_),o[2]+r_*np.sin(a_)
+                        if frei(x,z,o[3]):ok=(x,z);break
+                        if r_==0:break
+                    if ok:break
+                if ok:q=list(o);q[0]=round(ok[0],3);q[2]=round(ok[1],3);q[1]=round(tri(GA,*ok),3);neu.append(q);nach+=1
+            c['nachgesetzt']=nach
         c['n_nachher']=len(neu);L[:]=neu;st[nm]=c
     return st
 def csv_nachlauf(pfad,WV,GA,NX,NY):

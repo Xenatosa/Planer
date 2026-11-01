@@ -58,7 +58,8 @@
    "ueberlapp": 60,
    "abstand": 266,
    "wandnetz_behalten": 94,
-   "n_nachher": 1547
+   "nachgesetzt": 30,
+   "n_nachher": 1577
   },
   "felsen": {
    "n_vorher": 95,
