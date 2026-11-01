@@ -18,3 +18,29 @@ def rand_oeffnen(WV,GA,maxd=10,minpkt=200):
         if c:st['seiten'][['West','Nord','Ost','Sued'][side]]=c
         WV=np.rot90(w,-side).copy();GA=np.rot90(g,-side).copy();st['zeilen']+=c
     return WV,GA,st
+
+def frei_maske(OV,rampen,bruecken,wege,NX,NY,fs=4):
+    """Sperrflaeche (Weg/Rampe/Bruecke/Bauplatz/Platz/Hof) auf 0,25-m-Raster; Rueckgabe Abstand [m] zur Sperrflaeche [A]"""
+    M=np.zeros((NY*fs,NX*fs),bool)
+    def zel(cx,cy):M[int(cy)*fs:int(cy)*fs+fs,int(cx)*fs:int(cx)*fs+fs]=True
+    for o in OV:
+        if o['weg_id'] or o['bauplatz']=='1' or o['platz'] or o['hof']=='1' or o['bruecke']=='1':zel(o['cx'],o['cy'])
+    for c in wege:zel(c[0],c[1])
+    for b in bruecken:zel(b[0],b[2])
+    for pl in rampen:
+        for a,b in zip(pl[:-1],pl[1:]):
+            for t in np.linspace(0,1,12):
+                x=a[0]+(b[0]-a[0])*t;z=a[1]+(b[1]-a[1])*t;j,i=int(z*fs),int(x*fs)
+                M[max(0,j-2):j+3,max(0,i-2):i+3]=True   # Rampenachse +-0,5 m
+    return nd.distance_transform_edt(~M)/fs
+def wege_frei(L5,DIST,rand=1.5,fs=4):
+    st={}
+    for nm,L in L5.items():
+        neu=[];n=0
+        for o in L:
+            r=0.5*o[3] if nm=='baeume' else 0.5*o[3]
+            j=min(int(o[2]*fs),DIST.shape[0]-1);i=min(int(o[0]*fs),DIST.shape[1]-1)
+            if DIST[j,i]<rand+r:n+=1;continue
+            neu.append(o)
+        L[:]=neu;st[nm]=n
+    return st
