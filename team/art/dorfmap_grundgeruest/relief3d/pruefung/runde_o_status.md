@@ -176,3 +176,7 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 
 ## Runde O5 E2
 - Tiefenmaske/Hoehentextur aus 880fa1d entfernt, alte Alpha-Maske (vWM) wieder aktiv. softwater-Pass standardmaessig aus (?softwater=1). E1 V1 (Absenken flacher Ecken) bleibt, weil Platten sichtbar weicher.
+
+## Runde O5 E3 (Endmessung trotz nicht sauberer Ufer)
+- Bilder /workspace/t65/o5g wand_0_24_g, rampe_4_g, rampe_13_g, fluss_3_g angesehen; Befunde in ABWEICHUNGEN.md.
+- [S] Spalt 0, t42u Summe 0, bergauf_pfad_summe 0, Raycast (W=1024 H=640 NOUI=1, bereit nach 332 s): alle Klassen 0 schwebend/0 versunken/0 im Wasser, Handy-Budget 1 047 817 Dreiecke.

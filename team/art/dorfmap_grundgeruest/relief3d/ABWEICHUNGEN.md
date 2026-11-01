@@ -160,3 +160,10 @@ Nichts davon behoben.
 - wand_0_24: obere Zahnreihe weich; Restzacken unten rechts schwaecher, aber sichtbar.
 - Raycast nach der letzten Aenderung nicht gemessen: test_strahl_t62u.js wartete 2x 300 s auf __test.bereit (Timeout). Die Aenderung betrifft nur Shader, keine Geometrie; Objekt-Hoehen sollten gleich sein [A].
 - Endmessung [S]: Spalt 0, t42u 0, Dreiecke 1 055 021, Fehlerzaehler unveraendert (spitzen 7, senken_0_8m 5, enge_grate 259, objekte_auf_wegen 0).
+## Runde O5 (01.11.)
+- fluss_7: Zahnreihen oben und Mitte-links bleiben; Quelle = innere Wasserzellen (hide=winnen macht sie weg) [S]. Platten nur weicher. Ursache der Zaehne innerhalb dieser Zellen nicht gefunden [A].
+- fluss_9: Treppen am linken (und rechten) Ufer bleiben.
+- fluss_3: Wasser ruhig, aber linkes Ufer oben mit grossen Saegezacken in der Schnee-Gelaendekante (nicht Wasser).
+- wand_0_24: senkrechte Sandstreifen unten rechts bleiben (Schritt D nicht bearbeitet).
+- rampe_4: dunkles gerades Band quer ueber Hang, wirkt nicht im Gelaende eingebettet. rampe_13: Gabelung mit weissem Riss/Spalt zwischen den Rampenarmen.
+- Darstellungs-Spiegel: 859 Nachbarpaare (sichtbar) mit Gefaelle gegen Daten, max 0,10 m (Skript /workspace/t65/spiegel_bergauf_o5.py); Daten/Laengsprofil unveraendert (bergauf_pfad 0).
