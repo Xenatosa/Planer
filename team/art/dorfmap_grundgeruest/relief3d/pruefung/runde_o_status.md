@@ -142,3 +142,10 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - F1: Schalter ?lod=0 erzwingt Desktop-Netz. Headless-Lauf (W=1024 H=640, Wartezeit 600 s) laedt NICHT fertig (Timeout, kein Bild /workspace/t65/o4n). Desktop-LOD daher NICHT geprueft [S].
 - F2: Tiefenmaske je Pixel im Wasser-Shader (Bodenhoehe GL als Float-Textur, bilinear per texelFetch, alpha*=smoothstep(0,0.35,Tiefe+Noise)), Eckhoehen unveraendert. Bilder /workspace/t65/o4o fluss_7_o, fluss_9_o angesehen: Zaehne, Platten und Treppen links bei fluss_9 praktisch UNVERAENDERT -> wirkt nicht.
 - Vermutung [A]: der sichtbare Boden ist das Feinnetz fwMesh (eigene Hoehen fh), nicht G/GL; die Maske misst gegen die falsche Bodenhoehe. Naechster Versuch: Bodentextur aus fwMesh-Hoehen bauen.
+
+## Runde O5 Schritt 1: weiche Wasserkante aus Szenentiefe (Schalter ?softwater=0 aus)
+- Tiefenpass: Szene ohne Wassernetz mit colorWrite=false in WebGLRenderTarget+DepthTexture (Handy/lod=1: halbe Aufloesung). Wasser-Shader: Bodenpunkt entlang Sehstrahl, senkrechte Tiefe, alpha=smoothstep(0,0.30,Tiefe), Uferaufhellung nahe 0.
+- Kosten [A]: ein zusaetzlicher Geometrie-Durchlauf (Dreiecke pro Bild etwa x2 im Vertex-Teil, Fragment billig). Budget-Skript nicht gelaufen.
+- Bilder /workspace/t65/o5b fluss_7_b, fluss_9_b (Handy-LOD, 640 px) angesehen: Zaehne, Platten, Treppen UNVERAENDERT -> wirkt nicht.
+- Offen [A]: nicht geprueft, ob der Shader-Zweig ueberhaupt greift (kein Debug-Bild). Moeglich auch: die Zaehne sind nicht die Alpha-Kante, sondern andere Teile der Ebene 'wasser' (z. B. ALT-Wassergruppe Zeile 89 oder Uferschaum-Vertexfarbe). Naechster billiger Test: Debug-Farbe Tiefe=rot.
+- softwater=0 vs Standard und lod=1 vs Standard nicht gerendert (keine Wirkung, Zeit gespart).
