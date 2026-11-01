@@ -72,3 +72,11 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Bilder o9h/o9i [S]: 321|205 Kegel weg (flache Dreiecks-Schattierung bleibt -> Schritt 3 Normalen), 93|100 glatt, 158|18/161|22 ok. 268|25: flache Wandplatten am Kliffrand sichtbar -> Schritt 3 (Waende).
 - Messung [R]: Spalt 0, t42u 0, spitzen 7, nadeln 0, senken>0,8 5 (max 1,7), grate 259, stufe_bandrand 0, blinde Enden 0.
 - Kameras 67|42/210|37 von oben: nur dunkle Wand, keine Auffaelligkeit [S]; Ost 283 Texturbild steht in Baeumen/Haus -> neue Kamera von aussen folgt.
+
+## O9 Schritt 3 (Naehte Clay)
+- Ursache Kraterrand-Naehte: Normalen-Sprung an der Feinband-Grenze. Grob- und Feinnetz rechnen Normalen getrennt (je nur aus eigenen Dreiecken) -> gleiche Position, andere Schattierung -> gerade/polygonale Linien entlang der Bandgrenze. Keine Vertexduplikat-/Material-Naht (Positionen identisch, Spalt 0).
+- Fix main.js: Randnormalen beider Netze = Gradient des Grobnetzes (gN9), im Feinband 0,75 m weich eingeblendet. Rein Schattierung, Positionen unveraendert.
+- Bilder o9k (vorher) / o9l (nachher) [S]: krater_1 gerade Kanten weg, krater_2 Polygon-Umriss weg, krater_0/3 sauber; 268|25 flache Wandplatten weg (gleiche Ursache); wand_0_24 Zacken am Wandfuss weg.
+- b4h5b: alte Kamera steckt im Fels; neue b4h5b_o/_o2 (o9m) zeigen keine Nahtlinie [S].
+- Versuch Schuerzen-Normalen kopieren (o9m) gab feine dunkle Linien -> verworfen.
+- Ost 283: neue Kamera ost_283_aussen (o9mtex, von ausserhalb des Kartenrands): Wasser laeuft weich in Rinne bis Rand, kein Baum vor Linse [S].
