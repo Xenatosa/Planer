@@ -221,3 +221,6 @@ Bilder: pruefung/o8/o8j3_s*.png, o8j3c.png
 - Fehlerzaehler (FW_NPZ): pruefung/fehler_o8.json – spitzen 7, nadeln 0, senken_0_8m 5, senken_2m 0, enge_grate 259, stufe_bandrand 0, Objekte auf Wegen 0, flussenden_blind 0.
 - Rampen am Wasser (90 Punkte): dy -0,02 m, liegen auf. Bruecken (20 Zellen): Deck 0,31-0,51 m ueber Boden (Soll +0,3), keine ueber nassen Vertices.
 - Raycast nach J2 erneut: schwebend 0/0/0/0/0.
+
+## O8 J5 Endmessung
+Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausserhalb Schlucht 0; Raycast schwebend 0; index.html 15,5 MB, relief_daten 8,0 MB. Ladezeit nicht neu gemessen.

@@ -174,3 +174,8 @@ Nichts davon behoben.
 - [A] Vorher-Ursache (I1): fluss_t62u.py Z.13 (Ufertiefe 0,06+0,25*di), fluss_k.py Z.123/124/149 (Bett = WV-tief je Zelle), ufer_weich (Land >= Nachbar-WV+0,03) -> senkrechte Stufe an der Zellgrenze.
 - [S] wneu (Konturwasser) ist jetzt Standard; alt mit ?wneu=0.
 - [A] Offen: fluss_7 Achsen-Stufen bleiben. Sie liegen IM Wasser (Bloecke konstanter Tiefe 0,04 vs 0,47 m, z. T. negative Tiefe), nicht am Ufer. 2. Versuch (Tiefe im Nassbereich glaetten) nicht gemacht.
+
+## Runde O8
+- Feinband-Naht (_bandnaht_j1): Bandrandpunkte an Grobgitterlinien auf G_ANZ gesetzt (3 Punkte, max 0,59 m) -> Spalt 0. Der Spalt 0,28 m bestand schon ab 5c1c575/e3e67ad (keine Regression).
+- Bett-Glaettung (bett_glatt, Gauss 2,5 m, min 5 cm Tiefe): 20471 Vertices; Wasserspiegel unveraendert. Treppen bei fluss_7 bleiben (Umriss der Nasszellenmaske, ohne Zellaenderung nicht loesbar).
+- Offen: gepunktete Haarlinien am Bandrand (rand_ost_80/265, wand_264_24), Keile wand_288_144, Rillen wand_48_168.

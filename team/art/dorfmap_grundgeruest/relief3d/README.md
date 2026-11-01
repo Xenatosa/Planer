@@ -96,3 +96,5 @@ Runde O (t67u): Flüsse zum Rand geöffnet, Nadeln gekappt (8->3 >1,5 m), grobe 
 Runde O5 (01.11.): Wasser-Diagnose mit ?hide=winnen,wrand: Uferzaehne/Platten fluss_7 kommen von INNEREN Wasserzellen [S]. Darstellung: flache Ecken (<0,12 m) weich unter den Boden gesenkt -> Platten weicher; Zaehne fluss_7 und Treppen fluss_9 bleiben (2 Versuche, nicht sauber). Szenentiefen-Pass nur mit ?softwater=1 (Standard aus), Tiefenmaske 880fa1d entfernt. Endmessung [S]: Spalt 0, t42u 0, bergauf_pfad 0, Raycast 0/0/0, Handy 1 047 817 Dreiecke. HTML /workspace/dorfmap_3d_runde_O5.html.
 
 Runde O7 (01.11.): Flussbett im Generator weich geformt (`ufer_profil`, smoothstep B=2,5 m, ≤35°), Zellwerte unveraendert, ?wneu Standard. Messung [S]: t42u 0, bergauf_pfad 0, Spalt wie Basis (0,28 m an 6 Kanten bei 108|46, schon vorher), Raycast 1 Baum + 7 Steine schwebend, 0 im Wasser, ~1,137 M Dreiecke, Ladezeit 8,2 s. fluss_7-Stufen bleiben (im Wasser). HTML /workspace/dorfmap_3d_runde_O7.html.
+
+Runde O8: Spalt 0, Raycast schwebend 0, Bett geglaettet; Details pruefung/runde_o_status.md, Bilder pruefung/o8/.
