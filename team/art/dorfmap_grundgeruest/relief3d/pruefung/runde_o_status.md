@@ -95,3 +95,4 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - O9 S5 Fixes Stapel 1 (main.js): Rampenrand an Kanten geklemmt+ausgeblendet (>0,5 m quer), Rampenenden ueber 2 m weich ausgeblendet -> wand_312_168 "Brett" weich [S o9v].
 - wand_48_120 "helles Rechteck" = Hauswand im Anschnitt, kein Gelaendefehler [S].
 - wand_0_24 Zahnreihe: 2 Shader-Versuche (Flaechennormale, Feinschnee) ohne Wirkung [S o9w/o9u] -> zurueckgenommen; offen, Ton-Bild abwarten.
+- S5: Textur-Boegen 0-27 alle angesehen [S]. Clay-Gegenprobe wand_0_24/fluss_7/fluss_9: Geometrie glatt, Zaehne/Treppen nur Farbe/Wasserrand (offen, kosmetisch). Clay-Kette laeuft (8/121).
