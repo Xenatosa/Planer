@@ -137,3 +137,14 @@ Nichts davon behoben.
 - Krater: 7 Nahbilder mit richtigen Koordinaten (Kraterwand-Zellen, Mitte 103|155), test/t65u/krater/ [gesichtet]: keine Löcher, keine schwebenden Objekte; die alten krater_*-Kameras lagen bei 250|100 (falsch).
 - Brauner Balken Ansicht sued = Rampenweg 5 (135|231 -> 100|269), flacher Overlay-Streifen auf dem Gelände, liegt auf dem Boden [gesichtet, test/t65u/nah/rampe5_*]. Kein Fehler.
 - Endmessung: Handy 1 054 929 Dreiecke, Spalt 0, bergauf_pfad 0, t42u Summe 0 [S].
+
+## ABWEICHUNGEN Runde O (t67u)
+- [F] 73 Randzellen: Fluss-Arme zum Kartenrand geöffnet (rand_oeffnen), Höhe weicht von c20 ab.
+- [F] 9 Zellen: Senken-/Trichter-Ausgleich, weicht von c20 ab.
+- [F] O8: +1 Zeile in zellen_relief.csv geändert (Nadel-Kappung nadel_kappen, grob_entspitzen 2. Durchgang, 22+20 Punkte, max 2,66 m).
+- [A] 13 grobe Spitzen >1,5 m (u. a. 158|18 6,1 m, 131|160 7,2 m) liegen auf Eckpunkten am Feinband-Rand; Absenken würde Spalt öffnen -> offen.
+- [A] Prüfer meldet 6 Ecken "bergauf" bei x 2,5–5 / z 253,5: West-Arm fällt 3 cm/Ecke zum Westrand; Prüfer kennt nur Ostausgang. Kein echter Bergauf-Fluss.
+- [A] Kraterrand-Clay-Nähte: unverändert auch mit ?nosn=1 (Normalen-Glättung nicht schuld), Ursache offen.
+- [A] Rampen: jetzt per Raycast auf Gelände gelegt, weiche Ränder (Alpha), dunkler, leicht geschwungen (main.js).
+- [S] Endmessung: Spalt 0, t42u Summe 0, Raycast 0/0/0, Nadeln >1,5 m 3 (vorher 8), Spitzen 9, Senken >2 m 0, >0,8 m 2, Wege-Objekte 0, Handy 1 035 213 Dreiecke, 25 Draws.
+- [S] Blinde Flussenden laut Zähler 5: 223,5|219,5, 216|244, 13,5|253, 2|276, 321|276 (2|276/321|276 liegen am Rand = enden am Rand).

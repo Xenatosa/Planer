@@ -39,3 +39,9 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - grob_entspitzen auch am Wasser (Boden >= Wasser+0,3 m): 20 Punkte, max 2,66 m. Rest: 13 Grobpunkte > 1,5 m an Feinband-Ecken (z. B. 158|18 6,1 m, 131|160 7,2 m) -- dort teilt das Grobnetz Ecken mit dem Feinband, Absenken würde einen Spalt reißen. Offen [S].
 - Krater-Clay-Nähte: Test ?nosn=1 sieht gleich aus -> Ursache NICHT Normalen-Glättung. Offen.
 - Wandbänder auf "zu glatt" geprüft (wand_*_tex O7): Felsflächen mit Kontur und Textur, keine weitere Flächenglättung gemacht.
+
+## O8 Stapel 3 (Ränder/Flussenden/Rampen)
+- Ränder nord 177/217, ost 80/195/265: Wasser läuft in Kerbe bis Rand [S]. west_276: eckiger Wasserblock mit harter Kante [S] offen. ost_283, fe1 (Baum), fe2 (Hausdach) verdeckt -> nicht beurteilbar.
+- fe3 Wasser am Rand, fe4 Teich [S].
+- b4h5b: dünne Nahtlinie in Felswand (Feinband-Rand) [S] offen.
+- Rampen o8d (rampe_1/2_nah): dunkler, folgt Gelände, geschwungen, kein Lineal-Streifen mehr [S]. rampe_5/12_nah und 6–13 nicht angesehen.
