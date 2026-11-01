@@ -97,3 +97,4 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - wand_0_24 Zahnreihe: 2 Shader-Versuche (Flaechennormale, Feinschnee) ohne Wirkung [S o9w/o9u] -> zurueckgenommen; offen, Ton-Bild abwarten.
 - S5: Textur-Boegen 0-27 alle angesehen [S]. Clay-Gegenprobe wand_0_24/fluss_7/fluss_9: Geometrie glatt, Zaehne/Treppen nur Farbe/Wasserrand (offen, kosmetisch). Clay-Kette laeuft (8/121).
 - S5 (13:15): .gitignore in test/t67u korrigiert (Muster o9z/ relativ). Clay alle 30 Boegen verkleinert (6 je Bild) gesichtet [S], Einzelsicht folgt. Rampen 2/13 mit aktuellem index.html neu (o9r2) angesehen [S].
+- S5 Clay: alle 34 Clay-Boegen (121+15 Bilder) einzeln in voller Groesse angesehen [S]. Keine Loecher/Risse/Schweber. Rest: Haarlinien-Schatten, Waschbrett an Steilhaengen (offen). Liste: /workspace/t65/defekte_o9z.md
