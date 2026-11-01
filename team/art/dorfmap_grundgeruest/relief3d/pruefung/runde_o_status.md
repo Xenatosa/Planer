@@ -207,3 +207,11 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - gen_relief.py `bett_glatt` (aus mit BETT_ALT=1): Bett-Tiefe im Wasser = Gauss 2,5 m ueber nasse Ecken, min 5 cm, Ufer-smoothstep bleibt, Aenderung max 0,5 m. 20 471 Ecken, max +0,46/-0,45 m. Nasse Ecken mit Tiefe <0 bzw. <5 cm: vorher 0, nachher 0 (die "negativen Tiefen" aus O7 waren Viewer-Werte __hSurf vs WE, nicht Daten) [S].
 - WV unveraendert; Spalt 0/0, t42u 0, bergauf_pfad 0.
 - fluss_7 vorher/nachher (pruefung/o8/f7_vn.png): praktisch gleich, Stufen bleiben. Clay (f7_cl.png) zeigt: die Stufen sind der Umriss der nassen Zellen (Treppen-Kontur der Wassermaske), nicht das Bett [S]. Mit Zellwerten unveraendert nicht weiter loesbar ohne Wasser-/Ufer-Darstellung ueber die Zellmaske hinaus. 2. Versuch -> dokumentiert, weiter.
+
+## O8 J3 (Defektliste, Kameras)
+- fluss_4: dunkle eckige Flaeche nach J2 weicher; Rest = Tiefenfarbe des Wassers, keine Geometriekante (clay glatt). OK.
+- rand_ost_80 / rand_ost_265 / wand_264_24: duenne gepunktete Linien sichtbar, auch im Clay. Hoehen dort stetig (Bandrand ~x 326, Spalt 0). Versuch 1: Schuerzen-Normalen vom Quellvertex -> keine Aenderung. Versuch 2: Schuerze 0,08 statt 0,35 m -> keine Aenderung. Beide zurueckgenommen. OFFEN, Ursache unbekannt.
+- wand_264_24 Saegezahn: nicht mehr deutlich sichtbar. wand_288_144: Keile am Wandfuss weiterhin sichtbar (clay). OFFEN, nicht angefasst (keine Versuche mehr im Budget).
+- Kameras fluss_8/rand_8/rand_9/rand_ost_283 versetzt (_neu): nicht mehr im Baum. rand_8_neu/rand_9_neu zeigen im Clay den Kartenrand/Aussenflaeche.
+- Neu: tuempel_west (gut), see_senke (Blick durch Daecher verdeckt, Kamera ungeschickt), see_mitte (Kratersee gut, im Clay feine Zackenlinien am unteren Bildrand).
+Bilder: pruefung/o8/o8j3_s*.png, o8j3c.png
