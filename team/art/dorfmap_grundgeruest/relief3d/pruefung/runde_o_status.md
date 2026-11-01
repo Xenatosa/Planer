@@ -168,3 +168,11 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Darstellung: nasse Ecken mit Tiefe <0,12 m weich (smoothstep, 2x Gauss) bis Boden-0,15 m abgesenkt.
 - fluss_7: Platten fast weg, Zahnreihen oben und Mitte-links bleiben. fluss_9: Treppen links/rechts bleiben. Nicht sauber.
 - Spiegel-Bergauf-Zahl (/workspace/t65/spiegel_bergauf_o5.py, Nachbarpaare deren Darstellungs-Gefaelle dem Daten-Gefaelle widerspricht, >1 cm): WR 428 Paare (max 0,09 m); WD sichtbarer Teil (ueber Boden) 859 Paare (max 0,10 m). Kein Paar >0,10 m im sichtbaren Wasser [S].
+
+## Runde O5 E1 Versuch 2 (Bilder /workspace/t65/o5f fluss_7_f, fluss_9_f angesehen)
+- Handy-LOD: Wasserhoehen der ungeraden Ecken wie Boden aus geraden Ecken interpoliert (gleiche 1-m-Ebenen).
+- Ergebnis: praktisch gleich wie Versuch 1. Zaehne fluss_7 oben/Mitte-links und Treppen fluss_9 bleiben. NICHT SAUBER nach zwei Versuchen -> laut Auftrag dokumentiert, weiter mit E2/E3.
+- V2 nur noch mit ?wlod=1 aktiv (ohne Wirkung).
+
+## Runde O5 E2
+- Tiefenmaske/Hoehentextur aus 880fa1d entfernt, alte Alpha-Maske (vWM) wieder aktiv. softwater-Pass standardmaessig aus (?softwater=1). E1 V1 (Absenken flacher Ecken) bleibt, weil Platten sichtbar weicher.
