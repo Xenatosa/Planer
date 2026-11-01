@@ -118,3 +118,26 @@ def grob_spitzen_alle(G,schw=1.0,k=0.15):
     ziel=md+0.4+np.maximum(e-0.4,0)*k
     neu=np.where(zone&(ziel<g),ziel,g)
     return neu.astype(G.dtype),{'spitzen':int(nd.label(kern)[1]),'punkte':int((neu<g).sum()),'abtrag_max_m':round(float((g-neu).max()),2)}
+
+def kegel_breit(G,maske=None,schw=1.1,frei=0.6,k=0.3,mf=9):
+    """t67u O9b: breitere Kegel (gegen 9er-Median) stauchen; maske=True wo erlaubt [A]"""
+    g=G.astype(float);md=nd.median_filter(g,mf);e=g-md
+    kern=(e>schw)&(g>=nd.maximum_filter(g,5))
+    if maske is not None:kern&=maske
+    zone=nd.binary_dilation(kern,iterations=3)&(e>frei)
+    if maske is not None:zone&=maske
+    ziel=md+frei+(e-frei)*k
+    neu=np.where(zone&(ziel<g),ziel,g)
+    neu=np.where(zone,0.5*neu+0.5*nd.gaussian_filter(neu,1.0),neu);neu=np.minimum(neu,g) if True else neu
+    return neu.astype(G.dtype),{'kegel':int(nd.label(kern)[1]),'punkte':int((neu<g-1e-3).sum()),'abtrag_max_m':round(float((g-neu).max()),2)}
+
+def zacken_fein(FH,vin,schw=0.8,_r=2):
+    """t67u O9b: kleine Zackenspitzen im Feinband (lok. Max 5x5, >0,9 m ueber 9er-Median) an Gauss annaehern, nur absenken [A]"""
+    f=FH.astype(float);md=nd.median_filter(f,9);e=f-md
+    kern=vin&(e>schw)&(f>=nd.maximum_filter(f,5))
+    zone=nd.binary_dilation(kern,iterations=3)&vin&(e>0.3)
+    w=np.clip(nd.gaussian_filter(zone.astype(float),1.0)*1.8,0,1)*zone*np.clip((nd.distance_transform_edt(vin)-1)/5,0,1)
+    neu=np.minimum(f,f*(1-w)+np.minimum(nd.gaussian_filter(f,2.0),md+0.3+np.maximum(e-0.3,0)*0.4)*w)
+    if _r>1:
+        n2,s2=zacken_fein(neu,vin,schw,_r-1);return n2,{'zacken':int(nd.label(kern)[1]),'punkte':int((n2<f-1e-3).sum()),'abtrag_max_m':round(float((f-n2).max()),2),'rest':s2['zacken']}
+    return neu.astype(FH.dtype),{'zacken':int(nd.label(kern)[1]),'punkte':int((neu<f-1e-3).sum()),'abtrag_max_m':round(float((f-neu).max()),2)}

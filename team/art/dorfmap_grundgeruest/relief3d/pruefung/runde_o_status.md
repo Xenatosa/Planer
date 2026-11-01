@@ -65,3 +65,10 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
   Nadel 314|36 = Felsgrat, natürlich. Nadel 93|100 = kleine Dreifachzacke auf Felskuppe, OFFEN. Nadel 67|42 Kamera unbrauchbar.
   Senke 110|113 = Mulde auf Felskuppe, wirkt natürlich. Senke 210|37 Kamera steckt in Fels, OFFEN.
 - Enge Grate: noch keine Stichprobe. OFFEN.
+
+## O9 Schritt 2b (Kegel/Zacken)
+- Ursache 321|205 + 268|25: Kegel breiter als 5er-Median, direkt am Feinband-Rand (Bandnachbar, deshalb von grob_entspitzen ausgelassen). Fix: kegel_breit (9er-Median) auf G VOR dem Feinband-Bau, nur wo nicht Band-Inneres -> Fein folgt, kein Spalt. 5 Kegel/58 Punkte, max 2,78 m [R].
+- 93|100 Dreifachzacke: Feinnetz-Rest (FH), Fix zacken_fein (2 Durchgaenge, Rand-Rampe 5 Zellen, nur absenken): 13 Zacken/344 Punkte [R].
+- Bilder o9h/o9i [S]: 321|205 Kegel weg (flache Dreiecks-Schattierung bleibt -> Schritt 3 Normalen), 93|100 glatt, 158|18/161|22 ok. 268|25: flache Wandplatten am Kliffrand sichtbar -> Schritt 3 (Waende).
+- Messung [R]: Spalt 0, t42u 0, spitzen 7, nadeln 0, senken>0,8 5 (max 1,7), grate 259, stufe_bandrand 0, blinde Enden 0.
+- Kameras 67|42/210|37 von oben: nur dunkle Wand, keine Auffaelligkeit [S]; Ost 283 Texturbild steht in Baeumen/Haus -> neue Kamera von aussen folgt.

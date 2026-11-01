@@ -394,6 +394,7 @@ BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
 _fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
 _i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
 import runde_o_t67u as RO;G_SP_T67U,GSP9_T67U=RO.grob_spitzen_alle(G);print('grobspitzen9_t67u',GSP9_T67U)   # t67u O9: Grobspitzen auch an Feinband-Ecken, Grob+Fein gemeinsam (nur Anzeige) [A]
+_jj,_ii=np.mgrid[0:G.shape[0],0:G.shape[1]];_cy=np.clip(_jj//RS,0,BAND.shape[0]-1);_cx=np.clip(_ii//RS,0,BAND.shape[1]-1);_cy2=np.clip((_jj-1)//RS,0,BAND.shape[0]-1);_cx2=np.clip((_ii-1)//RS,0,BAND.shape[1]-1);_mk=~(BAND[_cy,_cx]&BAND[_cy2,_cx]&BAND[_cy,_cx2]&BAND[_cy2,_cx2]);G_SP_T67U,KB_T67U=RO.kegel_breit(G_SP_T67U,_mk);print('kegelbreit_t67u',KB_T67U)   # t67u O9b: breite Kegel ausserhalb Feinband-Inneres, vor FB-Bau -> kein Spalt [A]
 _A=G_SP_T67U[_j,_i];_B=G_SP_T67U[_j,_i+1];_C=G_SP_T67U[_j+1,_i];_D=G_SP_T67U[_j+1,_i+1]
 FB=np.where(_az>=_ax,_A+_az*(_C-_A)+_ax*(_D-_C),_A+_ax*(_B-_A)+_az*(_D-_B))       # exakt die G-Dreiecke
 _FB0_T67U=FB.copy()   # t67u O5: exakte Grobform fuer Bandrand-Uebergang [A]
@@ -494,6 +495,7 @@ _fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
 import runde_o_t67u as RO;FH,BR_T67U=RO.bandrand_weich(FH,_FB0_T67U,_vin);print('bandrand_t67u',BR_T67U)   # t67u O5: keine Rechteck-Stufen am Feinbandrand [A]
 import runde_o_t67u as RO;FH,ENTSP_T67U=RO.entspitzen(FH,FB,_vin);FH=np.where(_vin,FH,FB);FH,NK_T67U=RO.nadel_kappen(FH,_vin);print('entspitzen_t67u',ENTSP_T67U,NK_T67U)   # t67u Runde O3: keine Nadeln/Trichter [A]
+FH,ZF_T67U=RO.zacken_fein(FH,_vin);FH=np.where(_vin,FH,FB);print('zackenfein_t67u',ZF_T67U)   # t67u O9b: Restzacken Feinband [A]
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]
 _li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),4)).astype(int);_li=np.where(_ff(30,78)>1.3,4,_li);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]
