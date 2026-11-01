@@ -158,3 +158,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
   -> Ursache = INNERE Wasserzellen von wmesh, nicht der Rand.
 - Vermutung D3 [A]: innere Zellen mit Spiegel nur knapp ueber Boden (gen setzt WV>=G+0,05) und Spiegelstufen zwischen See/Fluss (WR-Klemme WV-0,25..+0,1 erhaelt die Stufen). Shader-Masken (880fa1d, a265266) aenderten nichts -> ungeprueft, ob der Patch greift.
 - D4 teilweise: Szenentiefen-Pass jetzt standardmaessig AUS (?softwater=1 an), kein Zusatzpass mehr. Pixel-Tiefenmaske aus 880fa1d noch drin (billig, aber ohne Wirkung).
+
+## Runde O5 D3 Test 1 (Bild /workspace/t65/o5d/fluss_7_d.png angesehen)
+- Nur Darstellung: Spiegelglaettung 16 statt 8 Durchgaenge, Klemme WV-0,6..+0,3 statt -0,25..+0,1.
+- Ergebnis: blaue Platten/Mittelstreifen deutlich weicher (Kanten verschwimmen), Zahnreihen oben und mitte-links UNVERAENDERT. Nicht sauber.
+- Risiko [A]: Darstellungs-Spiegel kann lokal bis 0,3 m ueber/0,6 m unter Datenwert liegen; Bergauf-Pruefung des Darstellungsspiegels nicht gemacht (Daten unveraendert, Laengsprofil unberuehrt).
