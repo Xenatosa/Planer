@@ -267,3 +267,7 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 - Fix 1 gen_relief `messergrate_fein` (1-Ecken-Grate/-Kerben >0,3 m, auch diagonal, halbe Hoehe zum Nachbarmittel, 6.277 Ecken): echte Falten 397 -> 158, an rand_ost_80 3 -> 0. Haarlinien danach noch sichtbar -> nicht die Hauptursache.
 - Ursache: Tiefen-Konkurrenz an der Naht Feinband/Grobnetz (Feinband-Rand und Schuerze liegen fast tiefengleich auf dem Grobnetz, einzelne Pixel der dunklen Schuerze/Kante gewinnen). Gegenprobe: polygonOffset -1/-2 (Feinband nach vorn) -> Linien deutlich STAERKER.
 - Fix 2 main.js: matF.polygonOffset +1/+2 (Feinband minimal nach hinten): Linien an rand_ost_80, rand_ost_265, wand_264_24 im Textur-Render weg (/workspace/t65/l2q.png). Gegenkontrolle fluss_4, wand_288_144, wand_48_168 ohne neue Fehler (/workspace/t65/l2c.png).
+
+## O10 L3 fluss_7 Eckigkeit
+- ufer_profil: Abstaende si/so jetzt aus geglaettetem signiertem Distanzfeld (Versuch 1 Gauss 1,5 Ecken, Versuch 2 Gauss 4 Ecken = 2 m; Stand: 4). bett_ecken 8.595 -> 13.252, land_ecken 2.643 -> 3.005. bergauf_pfad 0, bergauf_summe 3922 unveraendert.
+- Render fluss_7 Clay+Textur vorher/nachher (/workspace/t65/l3s.png, l3t.png): KEIN sichtbarer Unterschied. Die eckige Form liegt also nicht im Uferprofil (fluss_7 ist nicht im Feinband). Wahrscheinlich Bettform aus G/Anzeige-Netz bzw. Wasserkoerper-Rand selbst. Nach 2 Versuchen: NICHT behoben, dokumentiert.

@@ -659,6 +659,7 @@ _fp8=np.ones((3,3),bool);_fp8[1,1]=0;_wnb=nd.minimum_filter(np.where(WV>-900,WV,
 def ufer_profil(GA,WV,B=2.5,DM=1.0,TAN=0.70):   # O7 I2 [F]: Bett/Ufer glatt statt zellweise (letzte nasse Ecke 0,3-0,4 m tief, Land daneben ueber Spiegel = senkrechte Stufe). Nur Anzeige-Hoehen; WV/Zellen unveraendert. Signierter Abstand zur Kante (Kante = Mitte zw. nasser und trockener Ecke), Bett-Tiefe = DM*smoothstep(s/B) (nur anheben), Land <= Spiegel+0,02+0,7*s (35 Grad, nur absenken). Nicht im Feinband/Wegen [A]
     w=WV>-900;G0=GA.astype(float);h=1.0/RS
     si=(nd.distance_transform_edt(w)-0.5)*h;so=(nd.distance_transform_edt(~w)-0.5)*h
+    if not os.environ.get('UFERPROFIL_ALT'):_sd=nd.gaussian_filter(si-so,4.0);si=np.where(w,np.maximum(_sd,0.25*h),si);so=np.where(~w,np.maximum(-_sd,0.25*h),so)   # O10 L3 [F]: Abstand aus geglaettetem signiertem Distanzfeld -> keine Zell-Terrassen am Ufer [A]
     _,(iy,ix)=nd.distance_transform_edt(~w,return_indices=True);wvn=WV[iy,ix].astype(float)
     frei=_mk&~nd.binary_dilation(_VBc,iterations=2)&(WEGA.reshape(GA.shape)<20)
     t=np.clip(si/B,0,1);sm=t*t*(3-2*t);bett=w&frei&(si<B)
