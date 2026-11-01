@@ -149,3 +149,12 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Bilder /workspace/t65/o5b fluss_7_b, fluss_9_b (Handy-LOD, 640 px) angesehen: Zaehne, Platten, Treppen UNVERAENDERT -> wirkt nicht.
 - Offen [A]: nicht geprueft, ob der Shader-Zweig ueberhaupt greift (kein Debug-Bild). Moeglich auch: die Zaehne sind nicht die Alpha-Kante, sondern andere Teile der Ebene 'wasser' (z. B. ALT-Wassergruppe Zeile 89 oder Uferschaum-Vertexfarbe). Naechster billiger Test: Debug-Farbe Tiefe=rot.
 - softwater=0 vs Standard und lod=1 vs Standard nicht gerendert (keine Wirkung, Zeit gespart).
+
+## Runde O5 Diagnose D1/D2
+- D1 [S]: Ebene 'wasser' hat nur 2 Gruppen: ALT-Wasser (main.js ~Z.93, nur im Modus 'alt' sichtbar, hier unsichtbar) und das NEU-Wassernetz wmesh (~Z.201). Kein eigener Uferschaum/Eis/Flussband-Mesh (Schaum = Vertexfarbe in wmesh). Neuer Schalter ?hide=winnen,wrand teilt wmesh: winnen = Zellen mit 4 nassen Ecken, wrand = Randzellen.
+- D2 [S] Bilder /workspace/t65/o5c_wrand/fluss_7_wrand.png und o5c_winnen/fluss_7_winnen.png angesehen:
+  - hide=wrand: Zaehne, Platten, Mittelstreifen bleiben (nur Randsaum fehlt, dafuer kleine Stufen links).
+  - hide=winnen: Zaehne, blaue Platten, Mittelstreifen WEG; Boden glatt, nur kleine Randsaum-Kerben links unten.
+  -> Ursache = INNERE Wasserzellen von wmesh, nicht der Rand.
+- Vermutung D3 [A]: innere Zellen mit Spiegel nur knapp ueber Boden (gen setzt WV>=G+0,05) und Spiegelstufen zwischen See/Fluss (WR-Klemme WV-0,25..+0,1 erhaelt die Stufen). Shader-Masken (880fa1d, a265266) aenderten nichts -> ungeprueft, ob der Patch greift.
+- D4 teilweise: Szenentiefen-Pass jetzt standardmaessig AUS (?softwater=1 an), kein Zusatzpass mehr. Pixel-Tiefenmaske aus 880fa1d noch drin (billig, aber ohne Wirkung).
