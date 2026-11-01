@@ -393,7 +393,8 @@ BAND=nd.binary_dilation(steil|oben|fuss,iterations=3)&~nd.binary_dilation(wa,ite
 BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
 _fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
 _i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
-_A=G[_j,_i];_B=G[_j,_i+1];_C=G[_j+1,_i];_D=G[_j+1,_i+1]
+import runde_o_t67u as RO;G_SP_T67U,GSP9_T67U=RO.grob_spitzen_alle(G);print('grobspitzen9_t67u',GSP9_T67U)   # t67u O9: Grobspitzen auch an Feinband-Ecken, Grob+Fein gemeinsam (nur Anzeige) [A]
+_A=G_SP_T67U[_j,_i];_B=G_SP_T67U[_j,_i+1];_C=G_SP_T67U[_j+1,_i];_D=G_SP_T67U[_j+1,_i+1]
 FB=np.where(_az>=_ax,_A+_az*(_C-_A)+_ax*(_D-_C),_A+_ax*(_B-_A)+_az*(_D-_B))       # exakt die G-Dreiecke
 _FB0_T67U=FB.copy()   # t67u O5: exakte Grobform fuer Bandrand-Uebergang [A]
 _qb=np.kron(BAND,np.ones((FS,FS),bool));_qp=np.pad(_qb,1)
@@ -619,7 +620,7 @@ WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT
 _wu=(WV>-900)&(WV<G_ANZ);WV=np.where(_wu,np.float32(-999.0),WV).astype(WV.dtype);SCHLUCHT_T64U['wv_unter_boden_entfernt']=int(_wu.sum());print('wv_unter_t64u',int(_wu.sum()))   # t64u Le: verdeckte Wasserecken (Spiegel unter Boden) raus [S]
 import runde_m_t65u as RM;WV,G_ANZ,LUECKE_T65U=RM.fluss_luecken(WV,G_ANZ,_VBc);print('luecke_t65u',LUECKE_T65U);WV,LUECKE_T65U['tuempel']=RM.tuempel_eben(WV,G_ANZ);WV,LUECKE_T65U['mulden']=RM.mini_senken(WV);print('mulden_t65u',LUECKE_T65U['tuempel'],LUECKE_T65U['mulden'])   # t65u Runde M3: Fluss lueckenlos bis Auslass [S]
 import runde_o_t67u as RO;WV,G_ANZ,RAND_T67U=RO.rand_oeffnen(WV,G_ANZ);print('rand_t67u',RAND_T67U)   # t67u Runde O: Flussarme bis Kartenrand offen [A]
-G_ANZ,GSP_T67U=RO.grob_entspitzen(G_ANZ,WV,BAND,RS);print('grobspitzen_t67u',GSP_T67U)   # t67u O7: Nadeln im Grobnetz ausserhalb Feinband [F] [A]
+G_ANZ=(G_ANZ+np.where(WV>-900,0,G_SP_T67U-G)).astype(G_ANZ.dtype);G_ANZ,GSP_T67U=RO.grob_entspitzen(G_ANZ,WV,BAND,RS);print('grobspitzen_t67u',GSP_T67U)   # t67u O7: Nadeln im Grobnetz ausserhalb Feinband [F] [A]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)

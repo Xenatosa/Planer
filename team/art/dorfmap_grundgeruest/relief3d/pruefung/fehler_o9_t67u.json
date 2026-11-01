@@ -1,10 +1,10 @@
 {
- "spitzen": 9,
+ "spitzen": 11,
  "nadeln_1_5m": 3,
- "senken_0_8m": 2,
+ "senken_0_8m": 3,
  "senken_2m": 0,
- "senke_max_m": 1.72,
- "enge_grate": 272,
+ "senke_max_m": 1.7,
+ "enge_grate": 249,
  "stufe_bandrand": 0,
  "nadel_orte_xz": [
   [

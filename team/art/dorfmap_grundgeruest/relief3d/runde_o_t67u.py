@@ -109,3 +109,12 @@ def nadel_kappen(FH,vin,schw=1.2,k=0.3):
     ziel=np.where(e>schw,med+schw+(e-schw)*k,FH);w=nd.gaussian_filter(zone.astype(float),1.0)*rampe
     neu=FH*(1-w)+np.minimum(FH,ziel)*w
     return neu,{'nadeln':int(nd.label(kern)[1]),'abtrag_max_m':round(float((FH-neu).max()),2)}
+
+def grob_spitzen_alle(G,schw=1.0,k=0.15):
+    """t67u O9: Einzelspitzen im Grobgitter (lok. Max 3x3, >1,5 m ueber 5er-Median) samt Nachbarn stauchen; wirkt auf Grob- und Feinnetz gleich -> kein Spalt [A]"""
+    g=G.astype(float);md=nd.median_filter(g,5);e=g-md
+    kern=(e>schw)&(g>=nd.maximum_filter(g,3))
+    zone=nd.binary_dilation(kern,iterations=2)&(e>0.4)
+    ziel=md+0.4+np.maximum(e-0.4,0)*k
+    neu=np.where(zone&(ziel<g),ziel,g)
+    return neu.astype(G.dtype),{'spitzen':int(nd.label(kern)[1]),'punkte':int((neu<g).sum()),'abtrag_max_m':round(float((g-neu).max()),2)}

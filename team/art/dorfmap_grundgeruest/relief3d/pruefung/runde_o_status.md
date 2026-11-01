@@ -57,3 +57,11 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
   - 321|276: Streifen -18,17 hängt am Ostausgang -18,20 -> Ausgang selbst.
   - Prüfer korrigiert: Ende blind nur ohne anstiegsfreien Wasserweg zum Rand. Jetzt 0 blinde Enden [S].
 - Längsprofil-Prüfer: alle Randausgänge (auch West) als Auslass, Quelle nur aus randentwässernden Ecken. bergauf_pfad 6 -> 0 [S]. 3970 Ecken = Endsee-Becken x151–210/z42–194 (bis 2,73 m unter Überlauf) [A], getrennt als endsee_ecken gezählt.
+
+## O9 Schritt 2 (Teilstand, Spitzen)
+- grob_spitzen_alle (runde_o_t67u.py) auf G vor Feinband-Bau + in G_ANZ mitgeführt: 31 Spitzen/208 Punkte gestaucht, max 5,82 m. Spalt 0, t42u 0 [R].
+- Fehlerzähler [R]: spitzen 11 (vorher 9 – neue lokale Maxima im Feinband), nadeln 3, senken>0,8 m 3 (max 1,7), enge Grate 249 (vorher 272).
+- Angesehen [S] (o9d/e/f/g, clay): 158|18 + 161|22 deutlich besser (158|18 eine Facettenkante bleibt); 321|205 + 268|25 kleine Kegel/Facetten OFFEN.
+  Nadel 314|36 = Felsgrat, natürlich. Nadel 93|100 = kleine Dreifachzacke auf Felskuppe, OFFEN. Nadel 67|42 Kamera unbrauchbar.
+  Senke 110|113 = Mulde auf Felskuppe, wirkt natürlich. Senke 210|37 Kamera steckt in Fels, OFFEN.
+- Enge Grate: noch keine Stichprobe. OFFEN.
