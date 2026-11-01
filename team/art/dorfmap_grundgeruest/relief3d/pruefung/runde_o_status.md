@@ -215,3 +215,9 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Kameras fluss_8/rand_8/rand_9/rand_ost_283 versetzt (_neu): nicht mehr im Baum. rand_8_neu/rand_9_neu zeigen im Clay den Kartenrand/Aussenflaeche.
 - Neu: tuempel_west (gut), see_senke (Blick durch Daecher verdeckt, Kamera ungeschickt), see_mitte (Kratersee gut, im Clay feine Zackenlinien am unteren Bildrand).
 Bilder: pruefung/o8/o8j3_s*.png, o8j3c.png
+
+## O8 J4
+- 40 Stichproben im Clay gerendert (pruefung/o8/o8s_0..2.png). Gelaende meist glatt. Auffaellig: wand_48_168 feine waagrechte Rillen (Terrassenstreifen), Haarlinien wie J3 bei wand_264_24. Keine Loecher, keine Zacken-Ausreisser.
+- Fehlerzaehler (FW_NPZ): pruefung/fehler_o8.json – spitzen 7, nadeln 0, senken_0_8m 5, senken_2m 0, enge_grate 259, stufe_bandrand 0, Objekte auf Wegen 0, flussenden_blind 0.
+- Rampen am Wasser (90 Punkte): dy -0,02 m, liegen auf. Bruecken (20 Zellen): Deck 0,31-0,51 m ueber Boden (Soll +0,3), keine ueber nassen Vertices.
+- Raycast nach J2 erneut: schwebend 0/0/0/0/0.
