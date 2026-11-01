@@ -103,3 +103,15 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
   - Wasserrand: weiche Maske (gewichtete 5x5-Unschaerfe der Wasserzellen, Alpha per smoothstep im Fragment-Shader). fluss_7/fluss_9 neu angesehen [S]: kaum sichtbarer Unterschied. Die Treppen am linken Ufer von fluss_9 und die Saegezaehne an fluss_7 sitzen in der Ufer-Schattierung des Gelaendes, nicht in der Wasserkante -> mit Farbe allein NICHT behoben (offen, braeuchte Ufer-Geometrie-Glaettung).
 - Aufgabe 3: rampe_2/rampe_13 mit aktuellem HTML neu (o9n) angesehen [S]: rampe_2 liegt am Hang auf, laeuft steil; rampe_13 Gabel = Kehre, liegt auf, nicht lineal-gerade. Kein Schweben gesehen.
 - S6 Endmessung nach 3bc9d35 [S]: Spalt (Viewer) 0,0; t42u Summe 0; Fehlerzaehler spitzen 7, nadeln_1_5m 0, senken_0_8m 5, senken_2m 0, senke_max 1,7, enge_grate 259, stufe_bandrand 0, objekte_auf_wegen alle 0, wasser_ohne_randweg 5485, flussenden_blind 0; Budget 1 055 021 Dreiecke. Raycast: NICHT gemessen (2 Laeufe, Timeout 300 s beim Laden). Label "Runde O" steht schon. HTML kopiert nach /workspace/dorfmap_3d_runde_O.html.
+
+### O9 Nachlauf (01.11., ab e3e67ad)
+- N1 Raycast laeuft wieder [S]: test_strahl_t62u.js hat jetzt W/H/TO aus der Umgebung und loggt Seitenfehler. Mit W=1024 H=640 NOUI=1 war die Seite nach 158 s bereit (vorher 1280x800, 2x Timeout 300 s). Keine Seitenfehler, kein paralleles Chromium, Speicher 7 GB frei, Platte 17 GB frei. Ursache vermutlich die groessere Software-Render-Flaeche [A].
+- N1 Ergebnis [S]: Raycast ist NICHT 0/0/0. baeume 17 schwebend / 129 versunken, felsen 1/3, findlinge 2/0, steine 10/0, geroell 54/96 (>0,15 m), im Wasser 0. Ursache: Objekthoehen kommen aus dem Raycast-Cache pruefung/strahl_hoehe_t65u.json (Runde M); das O9-Gelaende ist seitdem geaendert. Der letzte "Raycast 0" galt also nicht mehr. Fix folgt (Cache neu aus Raycast, neu bauen, nachmessen).
+- N2 wasser_ohne_randweg 5485 aufgeschluesselt [S] (pruefung/wasser_ohne_randweg_aufschluesselung_o9.py), 15 stehende Gewaesser:
+  - Endsee x151-211/z42-195: 3969 (gewollte Senke).
+  - Tuempel West x11-33/z39-57 eben -9,45: 932 (seit Runde M gewollt eben), dazu 2 kleine Becken daneben 89 + 47.
+  - 8 Eisflaechen Nord-Plateau (z 4-14, Spiegel ~13,6, WASSER_FARBE): 395, alle dicht.
+  - 2 Pfuetzen Sued (z 208-212, senke_becken=1): 31 + 21, dicht.
+  - 1 einzelner Wasserpunkt x4,5/z273: echter Rest -> wird entfernt.
+  - Ueberlauf-Test (Bodennachbar tiefer als Spiegel -5 cm): nur Tuempel West, 5 Punkte, max 14 cm.
+  - Fazit: Der Zaehler zaehlt jedes stehende Gewaesser. Ausser dem Einzelpunkt (und 5 Randpunkten am Tuempel) kein Flussfehler.
