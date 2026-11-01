@@ -133,3 +133,7 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - nowa (Wasser aus): Platten, mittlere Zahnreihe, Treppenschatten, Zickzackband WEG, Boden glatt (angesehen) -> Ursache = Wassernetz [S].
 - clay: kein Wasser, Boden-Form hat nur leichte Kerben oben (angesehen).
 - Zusatz [S]: Renderer mit H=640 laeuft im Handy-LOD (1-m-Boden), Wasser im 0,5-m-Raster. WV wird in gen auf mind. G+0,05 gesetzt -> duenner Wasserfilm in Zellform ueber Schnee.
+
+## Runde O4 Schritt B Versuch 1 (Bilder /workspace/t65/o4m, angesehen)
+- Wasser-Alpha erst ab 7 cm Tiefe (statt -3 cm): fluss_7 NICHT besser (Platten/Zaehne bleiben, Sand liegt frei mit blauen Kanten), fluss_9 Treppen links unveraendert. Zurueckgenommen.
+- Schluss [A]: Die Kanten kommen nicht vom Alpha-Schwellwert, sondern von der Wassernetz-Geometrie (Vertex-Hoehen/Dreiecke im 0,5-m-Raster ueber 1-m-Boden). Naechster Weg: Tiefenmaske je Pixel im Shader (Bodenhoehe als Textur) - noch nicht gebaut.
