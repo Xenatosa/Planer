@@ -88,3 +88,4 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 ## O9 Schritt 2 Rest – Senken/Grate angesehen (o9s, Ton) [S]
 - 5 Senken: natuerliche Mulden/Tuempel, kein Fix.
 - 12 Grate: meist echte Felsgrate. Offen: spitzer Zahn 105|47 und 225|228, Rautenmuster 54|162.
+- zellen_relief.csv geklaert: Nebenprodukt (nur boden_anzeige_m, 63 Zellen), checkout, ABWEICHUNGEN, t42u 0

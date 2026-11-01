@@ -148,3 +148,8 @@ Nichts davon behoben.
 - [A] Rampen: jetzt per Raycast auf Gelände gelegt, weiche Ränder (Alpha), dunkler, leicht geschwungen (main.js).
 - [S] Endmessung: Spalt 0, t42u Summe 0, Raycast 0/0/0, Nadeln >1,5 m 3 (vorher 8), Spitzen 9, Senken >2 m 0, >0,8 m 2, Wege-Objekte 0, Handy 1 035 213 Dreiecke, 25 Draws.
 - [S] Blinde Flussenden laut Zähler 5: 223,5|219,5, 216|244, 13,5|253, 2|276, 321|276 (2|276/321|276 liegen am Rand = enden am Rand).
+
+## Runde O9 – zellen_relief.csv (Nebenprodukt, nicht committet)
+- Der Build schreibt zellen_relief.csv als Sidecar neu. Nach O9 Schritt 2 (Kegel 321|205, 268|25 abgesenkt) aendern sich 63 Zeilen, NUR Spalte `boden_anzeige_m` (abgeleitete Anzeigehoehe, gesenkt um bis zu ~1.9 m) [R].
+- Zell-Sollwerte (hoehe_m, Typ, Wand, Slot, ID) unveraendert; pruefe_t42u: summe 0 [R].
+- Datei per Regel nicht committet, per git checkout zurueckgesetzt; Diff liegt in /workspace/t65/zellen_diff_o9.txt. Naechster Build erzeugt sie wieder.
