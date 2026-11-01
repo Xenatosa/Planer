@@ -127,3 +127,9 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Saegezaehne Ufer fluss_9/fluss_7: NICHT behoben. Feinband-Glaettung wirkungslos (Ufer liegt im Grobnetz) [S]; Spiegel-Glaettung verkleinert Zaehne, erzeugt aber Bergauf-Fluss (31) bzw. ist zu invasiv -> verworfen. Alpha-Rand (Tiefe) ohne sichtbare Wirkung.
 - fluss_7 heller Keil / Treppenschatten und wand_0_24 Sandstreifen: nicht behoben, nicht neu untersucht.
 - Endmessung: Spalt 0, t42u 0, Raycast 0/0/0 alle Typen, Budget 1 047 817 Dreiecke; Fehlerzaehler: spitzen 7, senken_0_8m 5, enge_grate 259, wasser_ohne_randweg 5484, sonst 0.
+
+## Runde O4 Schritt A (fluss_7, Ebenen-Schalter, Bilder /workspace/t65/o4a)
+- base, noramp, noov, nobump, nosh: Platten + Zahnreihen unveraendert sichtbar (angesehen).
+- nowa (Wasser aus): Platten, mittlere Zahnreihe, Treppenschatten, Zickzackband WEG, Boden glatt (angesehen) -> Ursache = Wassernetz [S].
+- clay: kein Wasser, Boden-Form hat nur leichte Kerben oben (angesehen).
+- Zusatz [S]: Renderer mit H=640 laeuft im Handy-LOD (1-m-Boden), Wasser im 0,5-m-Raster. WV wird in gen auf mind. G+0,05 gesetzt -> duenner Wasserfilm in Zellform ueber Schnee.
