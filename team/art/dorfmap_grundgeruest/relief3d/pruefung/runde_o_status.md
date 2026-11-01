@@ -245,3 +245,14 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 - Neu: Diagnose `?dbgmat=farbe|nrm|wire` (rot Grobnetz, grün Feinband, blau Overlay), dazu ?hide=wrand,winnen, ?noov=1, ?nowa=1, ?lod=0 angesehen (t65/k2, k2d, k2_sheet.png).
 - Befund: Linien sind dunkle, gepunktete Pixelreihen (Rasterfunken), sowohl genau auf der Grenze Feinband/Grobnetz als auch im Innern des Feinbands entlang von Rücken. Auch mit Normalen-Material und bei lod 0/1 und 2 sichtbar, nicht mit Overlay/Wasser/Schatten des Feinbands verbunden; im einfarbigen Doppelseiten-Material nicht sichtbar. Ohne Schürze werden die Grenzlinien schwächer, die Innenlinien bleiben.
 - Versuche (alle ohne sichtbare Wirkung, zurückgenommen): (1) Schürzen-Ecken erben Normale der Oberkante, (2) waagrechter Kragen 0,3 m unter das Grobnetz, (3) 1-m-Rissfüller unter Feinband (stach durch, schwarz). Nach 3 Versuchen dokumentiert. Vermutung: T-Stöße/Faltdreiecke im Feinband selbst; nächster Schritt wäre eine Kantenzählung je Feinband-Dreieck (offene Kanten innen, Rückseiten-Dreiecke).
+
+## O9 K3 (Keile/Rillen/Endsee-Rand)
+- wand_288_144: Feinhoehen geprueft. Keine 1-Ecken-Kerbe; die "Keile" sind eine echte ~1 m breite Rinne plus scharfe Schattenkante am Feinbandrand (Band endet bei x~301 auf 12,0 m). Neu `keile_fein` (1-Ecken-breite Kerben/Grate >0,6 m auf 40 %): 111 Ecken kartenweit, an wand_288_144 keine Aenderung, Render vorher/nachher gleich. NICHT behoben.
+- wand_48_168 Rillen: in Clay feine waagrechte Streifen, wahrscheinlich Felsschicht-Terrassen (gewollt, `_lk`). Nicht veraendert, NICHT behoben (2 Versuche-Regel: 1 Versuch, dann nach Abwaegung belassen).
+- Endsee-Rand: angesehen (Clay+Textur), natuerlich, nur kleine Kerben, kein Geometriefehler -> unveraendert.
+## O9 K4 Durchgang
+- Kamera see_senke neu: [22,6,104] -> [34.4,-8.8,116.5] (vorher hinter Dach), pruefung/o8/cams_o8_j3.json.
+- Fehlerzaehler pruefung/fehler_o9.json: spitzen 6 (O8: 7), nadeln 0, senken>0,8m 4 (5), >2m 0, enge_grate 259, stufe_bandrand 0, Objekte auf Wegen 0, flussenden_blind 0.
+- t42u summe 0; Spalt 0,0 m; bergauf_pfad 0 (bergauf_summe 3922); Raycast schwebend 0/0/0/0/0 (Punktliste neu, alte hatte 574 statt 567 Steine); Budget summe 1,138 M (gerendert lod1 1,376 M); Ladezeit median 8,2 s (8,8/7,8/8,2).
+- Export /workspace/dorfmap_3d_runde_O9.html.
+- Offen: K2 Haarlinien Ostrand, fluss_7 Eckigkeit (Ufer-Terrassen), wand_288_144 Schattenkeil, wand_48_168 Rillen.

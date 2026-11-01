@@ -179,3 +179,4 @@ Nichts davon behoben.
 - Feinband-Naht (_bandnaht_j1): Bandrandpunkte an Grobgitterlinien auf G_ANZ gesetzt (3 Punkte, max 0,59 m) -> Spalt 0. Der Spalt 0,28 m bestand schon ab 5c1c575/e3e67ad (keine Regression).
 - Bett-Glaettung (bett_glatt, Gauss 2,5 m, min 5 cm Tiefe): 20471 Vertices; Wasserspiegel unveraendert. Treppen bei fluss_7 bleiben (Umriss der Nasszellenmaske, ohne Zellaenderung nicht loesbar).
 - Offen: gepunktete Haarlinien am Bandrand (rand_ost_80/265, wand_264_24), Keile wand_288_144, Rillen wand_48_168.
+- O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.

@@ -498,6 +498,15 @@ _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.wh
 import runde_o_t67u as RO;FH,BR_T67U=RO.bandrand_weich(FH,_FB0_T67U,_vin);print('bandrand_t67u',BR_T67U)   # t67u O5: keine Rechteck-Stufen am Feinbandrand [A]
 import runde_o_t67u as RO;FH,ENTSP_T67U=RO.entspitzen(FH,FB,_vin);FH=np.where(_vin,FH,FB);FH,NK_T67U=RO.nadel_kappen(FH,_vin);print('entspitzen_t67u',ENTSP_T67U,NK_T67U)   # t67u Runde O3: keine Nadeln/Trichter [A]
 FH,ZF_T67U=RO.zacken_fein(FH,_vin);FH=np.where(_vin,FH,FB);print('zackenfein_t67u',ZF_T67U)   # t67u O9b: Restzacken Feinband [A]
+def keile_fein(FH,vin,T=0.6,K=0.4):   # O9 K3 [F]: 1-Ecken-breite Kerben/Grate (0,25 m breit, >0,6 m tief) quer zur Wand = Keile -> auf 40 % Tiefe, 2 Ecken breit; breitere Rinnen/Rippen bleiben [A]
+    n=0;F=FH.copy()
+    for it in range(3):
+        for ax in (0,1):
+            a=np.roll(F,1,ax);b=np.roll(F,-1,ax);m=(a+b)/2;lo=np.minimum(a,b);hi=np.maximum(a,b)
+            k=vin&((F<lo-T)|(F>hi+T));k[0]=k[-1]=k[:,0]=k[:,-1]=False
+            F=np.where(k,m+K*(F-m),F);n+=int(k.sum())
+    return F,n
+FH,KF_O9=keile_fein(FH,_vin);FH=np.where(_vin,FH,FB);print('keile_o9',KF_O9)
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]
 _li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),4)).astype(int);_li=np.where(_ff(30,78)>1.3,4,_li);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]

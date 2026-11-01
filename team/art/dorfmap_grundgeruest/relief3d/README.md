@@ -98,3 +98,4 @@ Runde O5 (01.11.): Wasser-Diagnose mit ?hide=winnen,wrand: Uferzaehne/Platten fl
 Runde O7 (01.11.): Flussbett im Generator weich geformt (`ufer_profil`, smoothstep B=2,5 m, ≤35°), Zellwerte unveraendert, ?wneu Standard. Messung [S]: t42u 0, bergauf_pfad 0, Spalt wie Basis (0,28 m an 6 Kanten bei 108|46, schon vorher), Raycast 1 Baum + 7 Steine schwebend, 0 im Wasser, ~1,137 M Dreiecke, Ladezeit 8,2 s. fluss_7-Stufen bleiben (im Wasser). HTML /workspace/dorfmap_3d_runde_O7.html.
 
 Runde O8: Spalt 0, Raycast schwebend 0, Bett geglaettet; Details pruefung/runde_o_status.md, Bilder pruefung/o8/.
+- O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.
