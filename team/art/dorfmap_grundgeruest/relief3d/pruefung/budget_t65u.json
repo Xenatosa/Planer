@@ -3,7 +3,7 @@
  "gelaende": 354254,
  "wasser": 57312,
  "wege": 62944,
- "baeume": 201230,
+ "baeume": 202884,
  "felsen": 106561,
  "inst_533": [
   80,
@@ -55,9 +55,9 @@
  ],
  "gebaeude": 192293.33333333334,
  "mensch": 272,
- "summe": 996466.3333333334,
+ "summe": 998120.3333333334,
  "info": {
-  "dreiecke_gerendert": 1053275,
+  "dreiecke_gerendert": 1054929,
   "draws": 24,
   "haus_dreiecke": 163696,
   "zaun": {

@@ -27,3 +27,6 @@ Raycast, 20+ Nahbilder, Kachelraster, helles Rechteck Süd, Wandstreifen, 13+13 
 
 ## Stand Ende Runde M
 Alles erledigt bis auf: Wald-Vorher/Nachher-Draufsicht nicht gerendert, krater_*-Nahkameras falsch platziert, 3 Waldzellen >50 % Verlust. Raycast 0/0/0, Handy 1 053 275, Spalt 0, bergauf_pfad 0, t42u 0. Q1 Farbe gedämpft. Details ABWEICHUNGEN.md.
+
+## Nachtrag M2c
+Waldzellen aufgefüllt (+13, 1590), Raycast 0/0/0, Krater 7 Nahbilder ok, Balken sued = Rampenweg 5 (ok), Handy 1 054 929, Spalt 0, bergauf 0, t42u 0. Offen: feine Linien in Felswand.

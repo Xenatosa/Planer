@@ -133,3 +133,7 @@ Nichts davon behoben.
 - Wandstreifen boden_wand: Shader-Textur gedreht/gemischt, ohne Formänderung; in boden_wand tex/clay keine starken Streifen mehr sichtbar, feine Linien bleiben [gesichtet].
 - Messung: Handy 1 053 275 Dreiecke [S], Mesh-Spalt LS1/LS2 0 [S], t42u Summe 0 [S].
 - Offen: 12 der ersten 25 Nahkameras lagen in Wand/Haus/Baum, als _v2 von oben neu; Kamera-Namen krater_* zeigen Dorf statt Krater (Koordinaten falsch, Krater nur in Ansichten geprüft). Walddichte-Lücken in 3 Zellen nur teilweise aufgefüllt. Vorher/Nachher-Draufsicht Wald nicht gerendert.
+- Nachtrag M2c: 3 Waldzellen >50 % Verlust aufgefüllt auf ≥70 % der Vorher-Zahl (120|130 17->12, 130|30 5->4, 160|230 12->9), +13 Bäume, gesamt 1590 [F]; Plätze geprüft: kein Haus/Rampe/Brücke, Hang ≤40°, kein Wasser, Abstand ≥1 m. Danach 0 Zellen >50 % Verlust, 25 Zellen >30 %, Mittel 16 % [S]. Raycast neu: alle Typen 0/0/0 [S]. Draufsicht vorher (595215f) / nachher: test/t65u/wald/ [gesichtet, keine Lücke mehr].
+- Krater: 7 Nahbilder mit richtigen Koordinaten (Kraterwand-Zellen, Mitte 103|155), test/t65u/krater/ [gesichtet]: keine Löcher, keine schwebenden Objekte; die alten krater_*-Kameras lagen bei 250|100 (falsch).
+- Brauner Balken Ansicht sued = Rampenweg 5 (135|231 -> 100|269), flacher Overlay-Streifen auf dem Gelände, liegt auf dem Boden [gesichtet, test/t65u/nah/rampe5_*]. Kein Fehler.
+- Endmessung: Handy 1 054 929 Dreiecke, Spalt 0, bergauf_pfad 0, t42u Summe 0 [S].
