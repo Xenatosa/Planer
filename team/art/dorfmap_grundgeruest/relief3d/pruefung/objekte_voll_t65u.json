@@ -27,18 +27,18 @@
   "hang_gt_45": 0
  },
  "steine": {
-  "n": 809,
-  "schwebend_gt_0_15": 0,
-  "versunken_gt_0_15": 0,
-  "im_wasser": 6,
-  "hang_gt_45": 0
- },
- "geroell": {
-  "n": 859,
+  "n": 803,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
-  "hang_gt_45": 3
+  "hang_gt_45": 0
+ },
+ "geroell": {
+  "n": 856,
+  "schwebend_gt_0_15": 0,
+  "versunken_gt_0_15": 0,
+  "im_wasser": 0,
+  "hang_gt_45": 0
  },
  "alte_ausreisser": {
   "baeume 80.1|174.9": [
