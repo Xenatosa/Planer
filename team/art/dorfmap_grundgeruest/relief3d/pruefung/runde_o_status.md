@@ -137,3 +137,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 ## Runde O4 Schritt B Versuch 1 (Bilder /workspace/t65/o4m, angesehen)
 - Wasser-Alpha erst ab 7 cm Tiefe (statt -3 cm): fluss_7 NICHT besser (Platten/Zaehne bleiben, Sand liegt frei mit blauen Kanten), fluss_9 Treppen links unveraendert. Zurueckgenommen.
 - Schluss [A]: Die Kanten kommen nicht vom Alpha-Schwellwert, sondern von der Wassernetz-Geometrie (Vertex-Hoehen/Dreiecke im 0,5-m-Raster ueber 1-m-Boden). Naechster Weg: Tiefenmaske je Pixel im Shader (Bodenhoehe als Textur) - noch nicht gebaut.
+
+## Runde O4 F1/F2 (Stand nach diesem Commit)
+- F1: Schalter ?lod=0 erzwingt Desktop-Netz. Headless-Lauf (W=1024 H=640, Wartezeit 600 s) laedt NICHT fertig (Timeout, kein Bild /workspace/t65/o4n). Desktop-LOD daher NICHT geprueft [S].
+- F2: Tiefenmaske je Pixel im Wasser-Shader (Bodenhoehe GL als Float-Textur, bilinear per texelFetch, alpha*=smoothstep(0,0.35,Tiefe+Noise)), Eckhoehen unveraendert. Bilder /workspace/t65/o4o fluss_7_o, fluss_9_o angesehen: Zaehne, Platten und Treppen links bei fluss_9 praktisch UNVERAENDERT -> wirkt nicht.
+- Vermutung [A]: der sichtbare Boden ist das Feinnetz fwMesh (eigene Hoehen fh), nicht G/GL; die Maske misst gegen die falsche Bodenhoehe. Naechster Versuch: Bodentextur aus fwMesh-Hoehen bauen.
