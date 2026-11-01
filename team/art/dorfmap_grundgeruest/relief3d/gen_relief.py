@@ -623,6 +623,7 @@ _wu=(WV>-900)&(WV<G_ANZ);WV=np.where(_wu,np.float32(-999.0),WV).astype(WV.dtype)
 import runde_m_t65u as RM;WV,G_ANZ,LUECKE_T65U=RM.fluss_luecken(WV,G_ANZ,_VBc);print('luecke_t65u',LUECKE_T65U);WV,LUECKE_T65U['tuempel']=RM.tuempel_eben(WV,G_ANZ);WV,LUECKE_T65U['mulden']=RM.mini_senken(WV);print('mulden_t65u',LUECKE_T65U['tuempel'],LUECKE_T65U['mulden'])   # t65u Runde M3: Fluss lueckenlos bis Auslass [S]
 import runde_o_t67u as RO;WV,G_ANZ,RAND_T67U=RO.rand_oeffnen(WV,G_ANZ);print('rand_t67u',RAND_T67U)   # t67u Runde O: Flussarme bis Kartenrand offen [A]
 G_ANZ=(G_ANZ+np.where(WV>-900,0,G_SP_T67U-G)).astype(G_ANZ.dtype);G_ANZ,GSP_T67U=RO.grob_entspitzen(G_ANZ,WV,BAND,RS);print('grobspitzen_t67u',GSP_T67U)   # t67u O7: Nadeln im Grobnetz ausserhalb Feinband [F] [A]
+_m5=nd.median_filter(G_ANZ,5);_fp=np.ones((3,3),bool);_fp[1,1]=0;_nb=nd.maximum_filter(G_ANZ,footprint=_fp);_zs=(G_ANZ-_m5>1.5)&(G_ANZ-_nb>0.5)&_mk;G_ANZ=np.where(_zs,np.maximum(_nb,_m5+0.5),G_ANZ).astype(G_ANZ.dtype);print('einzelzahn_t67u',int(_zs.sum()))   # t67u O9: Einzelzaehne Grobnetz (105|47) [F] [A]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
