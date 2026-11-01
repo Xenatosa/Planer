@@ -195,3 +195,10 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - I1/I2 erledigt (ee77b88). I3: t42u 0, bergauf 0, Spalt wie Basis, Raycast 1 Baum/7 Steine schwebend, 0 im Wasser, 1,137 M, 8,2 s. Nicht gemessen: Fehlerzaehler (braucht FW_NPZ), Rampen/Bruecken am Wasser einzeln.
 - I4 angesehen: 29 Fluss-/Randkameras (Textur), 37 von 40 Stichproben-Kameras nur Textur (Render-Lauf brach ab, Clay fehlt). Endsee/Tuempel West keine eigene Kamera.
 - Mangelliste: fluss_7 Achsen-Stufen im Wasser; fluss_4 dunkle eckige Wasserflaeche; rand_ost_80 duenne dunkle Linie am Hang; rand_ost_265 punktierte Linie im Hang; wand_264_24 Saegezahn-Kante; wand_288_144 Keile; nicht beurteilbar (Kamera in Baeumen): fluss_8, rand_8, rand_9, rand_ost_283.
+
+## O8 J1 (01.11.)
+- Spalt 0,28 m (6 Kanten, 108|46, LS1) war KEINE Regression durch ufer_profil: gleich bei 5c1c575 und e3e67ad nachgeneriert [S]. Fruehere "Spalt 0" bezogen sich offenbar auf LS2 bzw. aeltere Daten [A].
+- Ursache: G_ANZ wird nach dem Feinband-Export (FW) noch geaendert (u. a. Einzelzahn 105|47) -> Feinband-Randpunkt 108,5|46 6,32 m vs Grobnetz 5,73 m.
+- Fix: gen_relief.py `_bandnaht_j1` setzt Feinband-Randpunkte auf das Grobnetz (17 839 Randpunkte, 3 geaendert, max 0,59 m). Aus mit NAHT_ALT=1.
+- Objekthoehen neu per Raycast aufgenommen (2 867), neu generiert: schwebend 0/0/0/0/0 (vorher 1 Baum 320,4|278,0 + 7 Steine) [S].
+- Spalt LS1 0, LS2 0; t42u 0; bergauf_pfad 0.

@@ -690,6 +690,16 @@ OBJ_T62U=_anz_objekte();print('objekte_t62u',OBJ_T62U)
 OBJ_T65U=RM.objekte({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},G_ANZ,WV,OV,haeuser,RAMPWEGE,bruecken,NX,NY);print('objekte_t65u',OBJ_T65U)   # t65u Runde M2 [S]
 _DFREI=RO.frei_maske(OV,RAMPWEGE,bruecken,wege,NX,NY);WEGFREI_T67U=RO.wege_frei({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},_DFREI);print('wegfrei_t67u',WEGFREI_T67U)   # t67u Runde O2: 1,5 m + Kronen-/Objektradius frei neben allen Wegen/Rampen/Bruecken/Plaetzen [A]
 _,STRAHL_T65U=RM.strahl_hoehe({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell});print('strahl_t65u',STRAHL_T65U)   # t65u M2: Hoehe = Viewer-Raycast [S]
+def _bandnaht_j1():   # O8 J1: Feinband-Randpunkte = Grobnetz (G_ANZ wurde nach FW noch geaendert) [S]
+    fy=_vid//FXn;fx=_vid%FXn;BP=np.pad(BAND,1);x=fx//FS;y=fy//FS
+    b=lambda xx,yy:BP[np.clip(yy,-1,NY)+1,np.clip(xx,-1,NX)+1]
+    hz=(fy%FS==0)&~(b(x,y-1)&b(x,y)&b(x-(fx%FS==0),y-1)&b(x-(fx%FS==0),y))
+    vt=(fx%FS==0)&~(b(x-1,y)&b(x,y)&b(x-1,y-(fy%FS==0))&b(x,y-(fy%FS==0)))
+    m=hz|vt;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()
+    gi=nd.map_coordinates(G_ANZ.reshape(GY,GX).astype(float),[fy[m]/FS*RS,fx[m]/FS*RS],order=1,mode='nearest')
+    d=np.abs(h[m]-gi);h[m]=gi;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return {'punkte':int(m.sum()),'geaendert_gt_1mm':int((d>1e-3).sum()),'max_m':round(float(d.max()),3)}
+if not os.environ.get('NAHT_ALT'):print('bandnaht_j1',_bandnaht_j1())
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
