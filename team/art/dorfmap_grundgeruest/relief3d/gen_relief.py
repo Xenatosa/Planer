@@ -637,6 +637,18 @@ def ufer_weich(GA,WV):   # O9 Nachlauf: Ufer-Treppen glaetten. Nur Boden-Hoehen 
     d=G1-G0;return G1.astype(GA.dtype),{'ecken':int(k.sum()),'max_aenderung_m':round(float(np.abs(d).max()),3),'mittel_m':round(float(np.abs(d[k]).mean()),3)}
 G_ANZ,UFER_O9=ufer_weich(G_ANZ,WV);print('ufer_o9',UFER_O9)
 _fp8=np.ones((3,3),bool);_fp8[1,1]=0;_wnb=nd.minimum_filter(np.where(WV>-900,WV,1e9),footprint=_fp8);_ein=(WV>-900)&(_wnb<1e8)&(WV<_wnb-0.01)&(nd.maximum_filter(np.where(WV>-900,WV,-1e9),footprint=_fp8)<WV+5);_ein&=(_wnb-WV<=0.1);WV=np.where(_ein,_wnb,WV).astype(WV.dtype);print('wasser_einzelsenken_o9',int(_ein.sum()))   # O9: einzelne Wasser-Senkenpunkte (Endstummel) auf Nachbarspiegel heben [S]
+def ufer_profil(GA,WV,B=2.5,DM=1.0,TAN=0.70):   # O7 I2 [F]: Bett/Ufer glatt statt zellweise (letzte nasse Ecke 0,3-0,4 m tief, Land daneben ueber Spiegel = senkrechte Stufe). Nur Anzeige-Hoehen; WV/Zellen unveraendert. Signierter Abstand zur Kante (Kante = Mitte zw. nasser und trockener Ecke), Bett-Tiefe = DM*smoothstep(s/B) (nur anheben), Land <= Spiegel+0,02+0,7*s (35 Grad, nur absenken). Nicht im Feinband/Wegen [A]
+    w=WV>-900;G0=GA.astype(float);h=1.0/RS
+    si=(nd.distance_transform_edt(w)-0.5)*h;so=(nd.distance_transform_edt(~w)-0.5)*h
+    _,(iy,ix)=nd.distance_transform_edt(~w,return_indices=True);wvn=WV[iy,ix].astype(float)
+    frei=_mk&~nd.binary_dilation(_VBc,iterations=2)&(WEGA.reshape(GA.shape)<20)
+    t=np.clip(si/B,0,1);sm=t*t*(3-2*t);bett=w&frei&(si<B)
+    G1=np.where(bett,np.maximum(G0,WV-np.maximum(DM*sm,0.03)),G0)
+    land=(~w)&frei&(so<B*1.5)
+    G1=np.where(land,np.maximum(np.minimum(G1,wvn+0.02+TAN*so),np.minimum(G1,wvn+0.02)),G1)
+    G1=np.where(land,np.maximum(G1,G0-1.0),G1)   # Fels/Wand: hoechstens 1 m absenken, dort steiler erlaubt
+    d=G1-G0;return G1.astype(GA.dtype),{'bett_ecken':int((bett&(d>0.005)).sum()),'land_ecken':int((land&(d<-0.005)).sum()),'max_anhebung_m':round(float(d.max()),2),'max_absenkung_m':round(float(-d.min()),2)}
+if not os.environ.get('UFER_ALT'):G_ANZ,UFER_O7=ufer_profil(G_ANZ,WV);print('ufer_o7',UFER_O7)
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
