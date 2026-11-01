@@ -153,3 +153,10 @@ Nichts davon behoben.
 - Der Build schreibt zellen_relief.csv als Sidecar neu. Nach O9 Schritt 2 (Kegel 321|205, 268|25 abgesenkt) aendern sich 63 Zeilen, NUR Spalte `boden_anzeige_m` (abgeleitete Anzeigehoehe, gesenkt um bis zu ~1.9 m) [R].
 - Zell-Sollwerte (hoehe_m, Typ, Wand, Slot, ID) unveraendert; pruefe_t42u: summe 0 [R].
 - Datei per Regel nicht committet, per git checkout zurueckgesetzt; Diff liegt in /workspace/t65/zellen_diff_o9.txt. Naechster Build erzeugt sie wieder.
+
+## Runde O9 – Endmessung und Kosmetik (01.11.)
+- Shader: Schnee-/Felsgrenze mit Rauschen (nur Farbe). Wasser-Alpha per weicher Maske. Geometrie unveraendert.
+- Ufer-Treppen fluss_7/fluss_9 bleiben: sitzen in der Ufer-Schattierung des Gelaendes, nicht in der Wasserkante. Mit Farbe allein nicht loesbar.
+- wand_0_24: obere Zahnreihe weich; Restzacken unten rechts schwaecher, aber sichtbar.
+- Raycast nach der letzten Aenderung nicht gemessen: test_strahl_t62u.js wartete 2x 300 s auf __test.bereit (Timeout). Die Aenderung betrifft nur Shader, keine Geometrie; Objekt-Hoehen sollten gleich sein [A].
+- Endmessung [S]: Spalt 0, t42u 0, Dreiecke 1 055 021, Fehlerzaehler unveraendert (spitzen 7, senken_0_8m 5, enge_grate 259, objekte_auf_wegen 0).

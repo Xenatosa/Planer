@@ -22,6 +22,7 @@
 - `relief3d` Runde K (t63u): Westarm im Tal neu verlegt, Spiegel monoton, Zellliste pruefung/zellen_aenderung_t63u.csv, Bilder test/t63u/
 - `relief3d` Runde L (t64u): Randschlitze 0, K9-Fixes, Boden weich, Lochsuche 0, Handy 1 099 919 Dreiecke; Bilder test/t64u/, offen: Ostrand (bewusst), Felsstreifen, 6 Objekt-Ausreisser
 - `relief3d` Runde M (t65u): Raycast aller Objekte 0 schwebend/0 versunken/0 im Wasser [S]; Bäume 1873->1590 [F] (60 Überlappung, 266 Abstand/Doppelte; vorher 55 Baumpaare <0,1 m; 30 an Lücken nachgesetzt); Tümpel West eben -9,45 [F]; See/Fluss-Lücke zu [F]; Q1-Platz Farbe gedämpft; Handy 1 054 929 Dreiecke [S]; Mesh-Spalt 0, bergauf_pfad 0, t42u Summe 0 [S]. Bilder test/t65u/ (13+13 Ansichten, 34 Nahbilder, Kachelraster tex+clay 4x4).
+- `relief3d` Runde O (t67u, O9): Flüsse zum Rand offen, Rampen im Gelände, Schneegrenze verrauscht, weicher Wasserrand (Shader); Spalt 0, t42u 0, Handy 1 055 021 Dreiecke [S]; Raycast O9 nicht neu gemessen (Timeout); offen: Uferstufen fluss_7/9, Restzacken wand_0_24; Stand pruefung/runde_o_status.md, HTML /workspace/dorfmap_3d_runde_O.html
 - Alt: `_alt/modell3d_t36u/` (t36u-Modell + welt3d t39u), `_alt/WELT3D_PLAN_t39u.md`, `_alt/modell3d_t34u/`
 - `pruefung/t29u_kacheln_r5_*` und `pruefung/t30u_kacheln_r5_*`: Kachelbögen über die ganze Karte (ersetzen kacheln_r4/r5)
 - Belege t31u: `pruefung/t31u_talsued_a/b.png`, `t31u_findling_4x_0/1.png`, `t31u_z50_gipfel.png`, `t31u_z50_sand_w/m/o.png`
