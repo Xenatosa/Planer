@@ -122,13 +122,13 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   sh.fragmentShader='uniform sampler2D tW;uniform sampler2D tD;varying vec3 vWP;varying vec3 vWN;'+(FWM?'\n#define FWM 1\nvarying vec3 vFT;varying float vFS;':'')+'\n'+sh.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
    vec3 N=normalize(vWN);vec3 w=pow(abs(N),vec3(4.));w/=w.x+w.y+w.z;
    vec3 tr=texture2D(tW,vWP.zy/9.).rgb*w.x+texture2D(tW,vWP.xy/9.).rgb*w.z+texture2D(tW,vWP.xz/9.).rgb*w.y;
-   vec3 tr2=texture2D(tW,vWP.zy/23.+.37).rgb*w.x+texture2D(tW,vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;
+   mat2 RT=mat2(.8,.6,-.6,.8);vec3 tr2=texture2D(tW,RT*vWP.zy/23.+.37).rgb*w.x+texture2D(tW,RT*vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;   // t65u M4: zweite Wandprobe um 37 Grad gedreht -> waagrechte Schichtstreifen gebrochen, Form unveraendert [A]
    #define TD3(s,o) (texture2D(tD,vWP.zy/(s)+(o)).r*w.x+texture2D(tD,vWP.xy/(s)+(o)).r*w.z+texture2D(tD,vWP.xz/(s)+(o)).r*w.y)
    float d=TD3(4.,0.)*0.6+TD3(23.,0.)*0.4,gD=TD3(61.,.2);   // t64u K9: Boden-Detail triplanar statt nur xz -> keine senkrechten Streifen/gestreckte Wandtextur [A]
    diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
    {float f=TD3(1.4,.37),L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
    float st=1.-smoothstep(0.40,0.72,abs(N.y)+0.10*(d-0.8));
-   vec3 tx=mix(tr,tr2,0.35);float r=dot(tx,vec3(0.33));
+   vec3 tx=mix(tr,tr2,0.5);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.0,1.0,1.0)*mix(0.80,1.25,gD)*1.15;
    float sn=smoothstep(0.48,0.62,abs(N.y)+0.18*(r-0.5));   // Schnee auf Simsen/Kanten [A]
    {float g2=TD3(97.,.1);fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
@@ -140,7 +140,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
    diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',/[?&]nobump=1/.test(location.search)?'#include <normal_fragment_maps>':`#include <normal_fragment_maps>
    {vec3 N2=normalize(vWN);vec3 w2=pow(abs(N2),vec3(4.));w2/=w2.x+w2.y+w2.z;   // t48u R5: Detail-Bump (triplanar) gegen "verpixelt" [A]
-    float hb=(texture2D(tW,vWP.zy/3.).r*w2.x+texture2D(tW,vWP.xy/3.).r*w2.z+texture2D(tD,vWP.xz/1.7).r*w2.y)*0.7+(texture2D(tW,vWP.zy/9.).r*w2.x+texture2D(tW,vWP.xy/9.).r*w2.z+texture2D(tD,vWP.xz/6.).r*w2.y)*0.3;
+    float hb=((texture2D(tW,vWP.zy/3.).r*.5+texture2D(tD,vWP.zy/2.3).r*.5)*w2.x+(texture2D(tW,vWP.xy/3.).r*.5+texture2D(tD,vWP.xy/2.3).r*.5)*w2.z+texture2D(tD,vWP.xz/1.7).r*w2.y)*0.7+(texture2D(tW,vWP.zy/9.).r*w2.x+texture2D(tW,vWP.xy/9.).r*w2.z+texture2D(tD,vWP.xz/6.).r*w2.y)*0.3;
     vec3 dpx=dFdx(-vViewPosition),dpy=dFdy(-vViewPosition);vec3 r1=cross(dpy,normal),r2=cross(normal,dpx);float det=dot(dpx,r1);
     vec3 grd=sign(det)*(dFdx(hb)*r1+dFdy(hb)*r2)*(0.6+1.4*(1.-abs(N2.y)));normal=normalize(abs(det)*normal-grd);}`);};
  mat.onBeforeCompile=_pat(0);matF.onBeforeCompile=_pat(1);
@@ -198,7 +198,7 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
-const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t64u, Runde L)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
+const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t65u, Runde M)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
 if(/[?&]clay=1/.test(location.search)){document.querySelectorAll('[data-l]').forEach(c=>{if(c.dataset.l!='gelaende')c.checked=false;});ebSicht();setTimeout(ebSicht,3000);}   // t55u: nur Gelaende-Form [A]

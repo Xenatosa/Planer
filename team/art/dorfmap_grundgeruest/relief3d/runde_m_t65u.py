@@ -60,6 +60,7 @@ def objekte(L5,GA,WV,OV,haeuser,rampen,bruecken,NX,NY):
             o=list(o);x,z,h=o[0],o[2],o[3];g0=tri(GA,x,z)
             gb=float(nd.map_coordinates(GA,[[z*2],[x*2]],order=1,mode='nearest')[0]);off=o[1]-gb if nm!='baeume' else 0.0
             if nm=='baeume':off=min(0.0,o[1]-gb)
+            if o[1]-gb>1.0:c['wandnetz_behalten']=c.get('wandnetz_behalten',0)+1;neu.append(o);continue   # steht auf verschobenem Wand-/Feinband-Netz (Raycast-Hoehe), GA-Gitter gilt dort nicht
             y=round(g0+off,3)
             if abs(y-o[1])>0.005:c['hoehe_neu']+=1
             r=FUSS_R.get(nm,0.62*h);gs=[tri(GA,min(NX-0.01,max(0,x+r*a)),min(NY-0.01,max(0,z+r*b))) for a,b in ring]
@@ -122,3 +123,18 @@ def tuempel_eben(WV,GA):
     WV=WV.copy();lab,_=nd.label(WV>-900,np.ones((3,3)));w_=np.where(lab[78:122,20:80]>0,WV[78:122,20:80],99);jj,ii=np.unravel_index(w_.argmin(),w_.shape);k=lab[78+jj,20+ii];s=np.s_[:,:];sw=WV;sg=GA;p=(lab==k)&(WV<-8.95);L=-9.45;assert k>0 and (lab==k).sum()<2000,(lab==k).sum()
     nass=p&(sg<L-0.03);tro=p&~nass;sw[nass]=L;sw[tro]=-999.0
     return WV,{'eben_auf':L,'punkte':int(nass.sum()),'trocken':int(tro.sum())}
+def strahl_hoehe(L5,pfad='pruefung/strahl_hoehe_t65u.json'):
+    """Hoehe aus Browser-Raycast gegen das echte Viewer-Netz (test_strahl_t62u.js), weil Feinband/Wandnetz Vertices verschiebt und das GA-Gitter dort bis 1,3 m abweicht.
+    Baeume: y=Treffer+0,3 (Fuss auf Boden); Steine/Felsen: Versatz zum Treffer auf [-0,25h, 0] begrenzt (kein Schweben, Einbettung wie gewollt) [S]"""
+    import json,os
+    if not os.path.exists(pfad):return L5,{'datei':'fehlt'}
+    H=json.load(open(pfad));st={}
+    for nm,L in L5.items():
+        c=0;h_=H.get(nm,{});rr={k for n_,k in H.get('raus',[]) if n_==nm};n0=len(L);L[:]=[o for o in L if f"{o[0]:.3f}|{o[2]:.3f}" not in rr];st[nm+'_raus']=n0-len(L)
+        for o in L:
+            g=h_.get(f"{o[0]:.3f}|{o[2]:.3f}")
+            if g is None:continue
+            y=g+0.3 if nm=='baeume' else g+min(0.0,max(-0.25*o[3],o[1]-g))
+            if abs(y-o[1])>0.005:o[1]=round(y,3);c+=1
+        st[nm]=c
+    return L5,st

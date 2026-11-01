@@ -649,6 +649,7 @@ def _anz_objekte():                                    # t62u: Objekte der Anzei
     return st
 OBJ_T62U=_anz_objekte();print('objekte_t62u',OBJ_T62U)
 OBJ_T65U=RM.objekte({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},G_ANZ,WV,OV,haeuser,RAMPWEGE,bruecken,NX,NY);print('objekte_t65u',OBJ_T65U)   # t65u Runde M2 [S]
+_,STRAHL_T65U=RM.strahl_hoehe({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell});print('strahl_t65u',STRAHL_T65U)   # t65u M2: Hoehe = Viewer-Raycast [S]
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
