@@ -506,7 +506,15 @@ def keile_fein(FH,vin,T=0.6,K=0.4):   # O9 K3 [F]: 1-Ecken-breite Kerben/Grate (
             k=vin&((F<lo-T)|(F>hi+T));k[0]=k[-1]=k[:,0]=k[:,-1]=False
             F=np.where(k,m+K*(F-m),F);n+=int(k.sum())
     return F,n
-FH,KF_O9=keile_fein(FH,_vin);FH=np.where(_vin,FH,FB);print('keile_o9',KF_O9)
+def messergrate_fein(FH,vin,T=0.3,K=0.5):   # O10 L2 [F]: 1-Ecken-Messergrate/-kerben (beidseitig >0,3 m auf 0,25 m, auch diagonal) erzeugen Faltdreiecke (Nachbarnormalen gegenlaeufig) = dunkle Haarlinien -> Hoehe zur Haelfte Richtung Nachbarmittel [A]
+    n=0;F=FH.copy()
+    for it in range(3):
+        for sh in ((1,0),(0,1),(1,1),(1,-1)):
+            a=np.roll(F,sh,(0,1));b=np.roll(F,(-sh[0],-sh[1]),(0,1));m=(a+b)/2;lo=np.minimum(a,b);hi=np.maximum(a,b)
+            k=vin&((F<lo-T)|(F>hi+T));k[0]=k[-1]=k[:,0]=k[:,-1]=False
+            F=np.where(k,m+K*(F-m),F);n+=int(k.sum())
+    return F,n
+FH,KF_O9=keile_fein(FH,_vin);FH,KF_O10=messergrate_fein(FH,_vin);print('messergrate_o10',KF_O10);FH=np.where(_vin,FH,FB);print('keile_o9',KF_O9)
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]
 _li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),4)).astype(int);_li=np.where(_ff(30,78)>1.3,4,_li);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]
