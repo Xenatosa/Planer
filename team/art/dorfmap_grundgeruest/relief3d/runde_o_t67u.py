@@ -80,5 +80,18 @@ def grob_entspitzen(GA,WV,BAND,RS,frei=0.8,k=0.3):
     cy2=np.clip((jj-1)//RS,0,NY-1);cx2=np.clip((ii-1)//RS,0,NX-1)
     frei_m=~(bz[cy,cx]|bz[cy2,cx]|bz[cy,cx2]|bz[cy2,cx2])&~nd.binary_dilation(WV>-900,iterations=3)
     sel=frei_m&(e>frei);neu=np.where(sel,md+frei+(e-frei)*k,g)
+    # O8: Nadeln auch am Wasser (nicht Bandnachbar), Boden bleibt >= Wasser+0.3 [A]
+    wmx=nd.maximum_filter(np.where(WV>-900,WV,-999.0),7)
+    sel2=~(bz[cy,cx]|bz[cy2,cx]|bz[cy,cx2]|bz[cy2,cx2])&~sel&(WV<=-900)&(e>1.2)
+    n2=np.maximum(md+1.2+(e-1.2)*k,wmx+0.3);sel2&=n2<g;neu=np.where(sel2,n2,neu)
     GA[:]=neu.astype(GA.dtype)
-    return GA,{'punkte':int(sel.sum()),'abtrag_max_m':round(float((g-neu).max()),2)}
+    return GA,{'punkte':int(sel.sum()),'punkte_wasser':int(sel2.sum()),'abtrag_max_m':round(float((g-neu).max()),2)}
+
+def nadel_kappen(FH,vin,schw=1.2,k=0.3):
+    """t67u O8: letzte Einzelnadeln (>1,2 m ueber 11er-Median) weich kappen, nur Nadelumgebung (r=3), nicht am Bandrand [A]"""
+    FH=FH.astype(float).copy();med=nd.median_filter(FH,11);mx=nd.maximum_filter(FH,7);e=FH-med
+    dist=nd.distance_transform_edt(vin);inn=vin&(dist>=3);rampe=np.clip((dist-1)/3,0,1)
+    kern=inn&(FH>=mx)&(e>schw);zone=nd.binary_dilation(kern,iterations=3)&inn
+    ziel=np.where(e>schw,med+schw+(e-schw)*k,FH);w=nd.gaussian_filter(zone.astype(float),1.0)*rampe
+    neu=FH*(1-w)+np.minimum(FH,ziel)*w
+    return neu,{'nadeln':int(nd.label(kern)[1]),'abtrag_max_m':round(float((FH-neu).max()),2)}
