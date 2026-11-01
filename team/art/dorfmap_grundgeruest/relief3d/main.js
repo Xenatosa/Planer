@@ -67,7 +67,7 @@ function objekte(D,H,root,mensch){const G={};const grp=n=>{G[n]=new THREE.Group(
   g.computeVertexNormals();g.translate(0,0.3,0);const N=g.attributes.normal;for(let i=0;i<P.count;i++){const sn=N.getY(i)>0.5?1:0,v=0.42+0.12*hash(i,3);col.push(...(sn?[0.92,0.94,0.97]:[v,v*0.97,v*0.93]));}
   g.setAttribute('color',new THREE.Float32BufferAttribute(col,3));const mat=new THREE.MeshLambertMaterial({vertexColors:true,flatShading:true});
   for(const L of[D.felsen,D.findlinge,D.steine,D.geroell||[]])inst(g,mat,L,(o,[x,y,z,h,r])=>{const a=hash(x,z),b=hash(z,x);o.position.set(x,y,z);o.rotation.set((a-0.5)*0.5,r,(b-0.5)*0.5);o.scale.set(h*(0.8+0.5*a),h*(0.6+0.5*b),h*(0.8+0.5*b))},'felsen');}
- {const hmat=new THREE.MeshLambertMaterial({color:0xd9c7a8}),fmat=new THREE.MeshLambertMaterial({color:0xc98a4a}),dmat=new THREE.MeshLambertMaterial({color:0x8a3b2e}),pmat=new THREE.MeshLambertMaterial({color:0xb0a48c});
+ {const hmat=new THREE.MeshLambertMaterial({color:0xd9c7a8}),fmat=new THREE.MeshLambertMaterial({color:0xc98a4a}),dmat=new THREE.MeshLambertMaterial({color:0x8a3b2e}),pmat=new THREE.MeshLambertMaterial({color:0x8f8a82});
   const roof=geo([-.5,0,-.5,.5,0,-.5,0,1,-.5, -.5,0,.5,0,1,.5,.5,0,.5, -.5,0,-.5,0,1,-.5,0,1,.5, -.5,0,-.5,0,1,.5,-.5,0,.5, .5,0,-.5,.5,0,.5,0,1,.5, .5,0,-.5,0,1,.5,0,1,-.5]);
   grp('gebaeude');const box=new THREE.BoxGeometry(1,1,1).translate(0,0.5,0);
   D.haeuser.forEach(h=>{const platz=h.typ=='Quartiersplatz',m=new THREE.Mesh(box,platz?pmat:h.typ.startsWith('FUNKTION')?fmat:hmat);const wh=platz?h.h:h.h*0.7;
