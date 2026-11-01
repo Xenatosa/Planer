@@ -14,6 +14,8 @@ for k in range(1,n+1):
     if sz<200:continue
     e=m&ed;o=tuple(np.argwhere(e)[np.argmin(WV[e])]) if e.any() else tuple(np.argwhere(m)[np.argmin(WV[m])]);art='rand' if e.any() else 'endsee'
     S=np.full(M.shape,np.inf);P=-np.ones(M.shape+(2,),int);L=np.zeros(M.shape);S[o]=WV[o];h=[(WV[o],0.0,o)]
+    for oo in (map(tuple,np.argwhere(e)) if e.any() else []):S[oo]=WV[oo];h.append((WV[oo],0.0,oo))   # t67u P1: alle Randausgaenge (auch West-Arm) als Auslass [A]
+    heapq.heapify(h)
     while h:
         s,l,(y,x)=heapq.heappop(h)
         if s>S[y,x]:continue
@@ -23,8 +25,8 @@ for k in range(1,n+1):
                 if (dy or dx) and 0<=yy<GY and 0<=xx<GX and m[yy,xx]:
                     v=max(WV[yy,xx],s)
                     if v<S[yy,xx]:S[yy,xx]=v;P[yy,xx]=(y,x);L[yy,xx]=l+np.hypot(dy,dx)/RS;heapq.heappush(h,(v,L[yy,xx],(yy,xx)))
-    q=tuple(np.argwhere(m)[np.argmax(np.where(m,L,-1)[m])]);pfad=[q]
-    while pfad[-1]!=o and P[pfad[-1]][0]>=0:pfad.append(tuple(P[pfad[-1]]))
+    ab=m&(S-WV<=0.02);ab=ab if ab.any() else m;q=tuple(np.argwhere(ab)[np.argmax(np.where(ab,L,-1)[ab])]);pfad=[q]   # t67u P1: Quelle nur aus randentwaessernden Ecken; Endsee-Becken (Stau) separat gezaehlt [A]
+    while S[pfad[-1]]>WV[pfad[-1]]-1 and not e[pfad[-1]] and P[pfad[-1]][0]>=0:pfad.append(tuple(P[pfad[-1]]))
     pf=np.array(pfad);w=WV[pf[:,0],pf[:,1]];g=G[pf[:,0],pf[:,1]];d=L[pf[:,0],pf[:,1]];dz=w[:-1]-w[1:]   # dz>0 = faellt
     st=STEIL[pf[:-1,0],pf[:-1,1]]
     # Stufen im ganzen Stueck (Fliessbaum-Kanten)
@@ -33,7 +35,7 @@ for k in range(1,n+1):
        'spiegel_quelle':round(float(w[0]),2),'spiegel_auslass':round(float(w[-1]),2),'bergauf_entlang_pfad_gt_2cm':int((dz<-0.02).sum()),
        'bergauf_ueber_wasserscheide_ecken_gt_2cm':int((np.where(m,S-WV,0)>0.02).sum()),
        'stufen_gt_1m_ausserhalb_schlucht':int(((sd>1.0)&~sst).sum()),'stufen_gt_1m_in_schlucht_wandband':int(((sd>1.0)&sst).sum()),
-       'stufe_max_ausserhalb_schlucht_m':round(float(sd[~sst].max()) if (~sst).any() else 0,2),'stufe_max_m':round(float(sd.max()),2),'stufen_gt_0_3m':int((sd>0.3).sum())}
+       'stufe_max_ausserhalb_schlucht_m':round(float(sd[~sst].max()) if (~sst).any() else 0,2),'stufe_max_m':round(float(sd.max()),2),'stufen_gt_0_3m':int((sd>0.3).sum()),'endsee_ecken':int((m&(S-WV>0.02)).sum())}
     R.append(r);c=cm(len(R)%20)
     ax.plot(d[0]-d,w,color=c,lw=1.6,label=f"Stueck {k} ({sz} Ecken) Quelle x{q[1]/RS:.0f} z{q[0]/RS:.0f} -> {art} x{o[1]/RS:.0f} z{o[0]/RS:.0f}")
     ax.plot(d[0]-d,g,color=c,lw=0.6,ls=':')

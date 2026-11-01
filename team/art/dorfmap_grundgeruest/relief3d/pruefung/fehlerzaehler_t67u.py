@@ -35,10 +35,23 @@ if len(sys.argv)>3:
     sk=skeletonize(w);nb=nd.convolve(sk.astype(int),np.ones((3,3)),mode='constant')-1
     ends=np.argwhere(sk&(nb==1));lab,_=nd.label(w,np.ones((3,3)));gr=np.bincount(lab.ravel())
     br=nd.distance_transform_edt(w)
+    # t67u P1: Ende nur blind, wenn kein Wasserweg ohne Anstieg (>1 cm) zu einem Randausgang fuehrt (Flut vom Rand bergauf) [A]
+    import heapq
+    ok=np.zeros(w.shape,bool);H=[]
+    for j,i in np.argwhere(w):
+        if min(j,i,606-j,672-i)==0:ok[j,i]=True;heapq.heappush(H,(float(WV[j,i]),j,i))
+    while H:
+        h,j,i=heapq.heappop(H)
+        for dj in(-1,0,1):
+            for di in(-1,0,1):
+                a,b2=j+dj,i+di
+                if 0<=a<607 and 0<=b2<673 and w[a,b2] and not ok[a,b2] and WV[a,b2]>=WV[j,i]-0.01:ok[a,b2]=True;heapq.heappush(H,(float(WV[a,b2]),a,b2))
+    R['wasser_ohne_randweg']=int((w&~ok).sum())
     fe=[]
     for j,i in ends:
         if min(j,i,606-j,672-i)<=2:continue
-        if gr[lab[j,i]]<200:continue   # Tuempel/See
+        if gr[lab[j,i]]<200:continue
+        if ok[j,i]:continue   # fliesst ohne Anstieg zum Rand   # Tuempel/See
         win=WV[max(0,j-6):j+7,max(0,i-6):i+7];ww=win[win>-900]
         if WV[j,i]>ww.mean()-0.01:continue   # Quelle (oberes Ende), kein Austritt
         fe.append([i/2,j/2,round(float(WV[j,i]),2)])

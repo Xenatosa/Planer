@@ -45,3 +45,15 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - fe3 Wasser am Rand, fe4 Teich [S].
 - b4h5b: dünne Nahtlinie in Felswand (Feinband-Rand) [S] offen.
 - Rampen o8d (rampe_1/2_nah): dunkler, folgt Gelände, geschwungen, kein Lineal-Streifen mehr [S]. rampe_5/12_nah und 6–13 nicht angesehen.
+
+## O9 Schritt 1 (Flussenden, Ränder, Prüfer)
+- West 276: Zeilen-Lineal-Ufer -> Ufer um geöffnete Arme weich (Gauss 2 Zellen), Wasser folgt Ufer (kerbe()). Bild o9/rand_west_276__o9b, west_276_oben__o9b, rand_west_247__o9b, fe3__o9b: weiche Kerbe bis Rand, kein Block [S]. Erster Versuch (U-Profil je Spalte, o9a) gab Glaskasten-Grube -> verworfen.
+- Neue Kameras ohne Baum/Dach: fe1_neu, fe2_neu, ost_283_neu (o9a) und fe0–4_oben (o9c). fe1_neu: flache Wasserfläche, frei sichtbar. fe2_neu: Rinne neben Haus, sichtbar. ost_283_neu: trotz neuer Kamera wieder Baum davor -> nicht beurteilbar (offen).
+- 5 blinde Enden einzeln (Wasserhöhen-Auszug):
+  - 223,5|219,5: Skelett-Ende an Stufe, Nachbarecke 2 cm tiefer -> fließt weiter, kein Ende.
+  - 216|244: flache Fläche -17,25, hängt flach an -17,26/-17,30 -> Teil des Unterlauf-Sees.
+  - 13,5|253: flacher Seitenzipfel -17,93, flach verbunden (979 Ecken) bis Ostrand x 336 -> Bucht, kein Ende.
+  - 1,5|276: liegt am Westrand (1,5 m), Prüfer-Toleranz war 1 m -> Artefakt.
+  - 321|276: Streifen -18,17 hängt am Ostausgang -18,20 -> Ausgang selbst.
+  - Prüfer korrigiert: Ende blind nur ohne anstiegsfreien Wasserweg zum Rand. Jetzt 0 blinde Enden [S].
+- Längsprofil-Prüfer: alle Randausgänge (auch West) als Auslass, Quelle nur aus randentwässernden Ecken. bergauf_pfad 6 -> 0 [S]. 3970 Ecken = Endsee-Becken x151–210/z42–194 (bis 2,73 m unter Überlauf) [A], getrennt als endsee_ecken gezählt.

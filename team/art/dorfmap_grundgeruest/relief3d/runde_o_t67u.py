@@ -1,11 +1,23 @@
 # t67u Runde O: Fluesse offen bis zum Kartenrand (alle 4 Seiten) [A]
 import numpy as np,scipy.ndimage as nd
+def kerbe(w,g,g0,O,maxd):
+    # t67u P1: Ufer weich statt Zeilen-Lineal: Boden um geoeffnete Arme glaetten, Wasser folgt dem Ufer [A]
+    if not O.any():return
+    R=nd.binary_dilation(O,iterations=5);R[:,maxd+6:]=False
+    wt=nd.gaussian_filter(R.astype(float),1.5)*R
+    gs=nd.gaussian_filter(g.astype(float),2.0)
+    g[:]=np.where(R,g*(1-wt)+gs*wt,g)
+    di=nd.distance_transform_edt(O)
+    lvl=np.where(O,w,-999.0)
+    tief=O&(di>=2);g[tief]=np.minimum(g[tief],lvl[tief]-0.12-0.05*np.minimum(di[tief]-2,4))
+    weg=O&(g>=lvl-0.02);w[weg]=-999.0
+
 def rand_oeffnen(WV,GA,maxd=10,minpkt=200):
     WV=WV.copy();GA=GA.copy();st={'zeilen':0,'punkte':0,'seiten':{}}
     lab,n=nd.label(WV>-900,np.ones((3,3)));gr=np.bincount(lab.ravel());
     big=np.isin(lab,[k for k in range(1,n+1) if gr[k]>=minpkt])
     for side in range(4):
-        w=np.rot90(WV,side).copy();g=np.rot90(GA,side).copy();lb=np.rot90(lab,side);b=np.rot90(big,side)&~np.isin(lb,np.unique(lb[:,0][lb[:,0]>0]));c=0   # nur Arme, deren Strang diesen Rand noch nicht erreicht
+        w=np.rot90(WV,side).copy();g=np.rot90(GA,side).copy();lb=np.rot90(lab,side);g0=g.copy();O=np.zeros(w.shape,bool);b=np.rot90(big,side)&~np.isin(lb,np.unique(lb[:,0][lb[:,0]>0]));c=0   # nur Arme, deren Strang diesen Rand noch nicht erreicht
         for j in range(w.shape[0]):
             row=b[j,:maxd+1]
             if row[0] or not row.any():continue
@@ -13,8 +25,9 @@ def rand_oeffnen(WV,GA,maxd=10,minpkt=200):
             # nur wenn der Arm zum Rand zeigt: Wasser auch weiter innen in dieser Zeile
             if not b[j,i0:i0+6].all():continue
             for i in range(i0):
-                d=i0-i;w[j,i]=w[j,i0]-0.03*d;g[j,i]=min(g[j,i],g[j,i0]-0.03*d)
+                d=i0-i;w[j,i]=w[j,i0]-0.03*d;g[j,i]=min(g[j,i],g[j,i0]-0.03*d);O[j,i]=True
             c+=1;st['punkte']+=i0
+        kerbe(w,g,g0,O,maxd)   # t67u P1: weiche Kerbe statt eckigem Wasserblock [A]
         if c:st['seiten'][['West','Nord','Ost','Sued'][side]]=c
         WV=np.rot90(w,-side).copy();GA=np.rot90(g,-side).copy();st['zeilen']+=c
     return WV,GA,st
