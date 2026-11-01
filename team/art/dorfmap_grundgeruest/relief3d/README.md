@@ -85,3 +85,6 @@
 Der Fluss läuft jetzt als flache Kaskaden im Talboden, nicht mehr am Hang und nicht am Wandfuß. Steile Neupunkte über 60° an Land: 103 (Runde I 271). Tiefster Schnitt 1,26 m (Runde I 8,9 m). Der Fluss ist durchgehend. Mit Becken als Senken gibt es 0 Bergauf-Stellen. Bilder liegen in test/t62u, Prüfungen in pruefung/*_t62u.json. Wege sind unverändert.
 ## Runde K (t63u)
 Der Westarm fließt jetzt im Tal um die Hügel herum (fluss_k.py). Der Wasserspiegel fällt überall, bergauf 0. Stufen über 1 m gibt es nur in der Schlucht-Rinne (max 3,31 m). Neue Kreuzungen mit Wegen oder Häusern: 0. Bilder liegen in test/t63u (draufsicht_vorher_nachher, laengsprofil_k, nah_fluss_k, ansichten_*), Prüfungen in pruefung/*_t63u.json.
+
+## Runde L (t64u)
+Randschlitze 0 m (Viewer, LS1/LS2), K9-Fixes (Südfluss-Stummel, Schluchtwasser, Südwand-Streifen gemindert), Flachland-Farben weich, Lochsuche 29 Nahkameras: 0 Löcher. Mesh-Spalt 0, bergauf 0, Handy 1 099 919 Dreiecke, t42u Summe 0. Offen: Ostrand (bewusst, Sockelwellen), Felswand-Streifen, 6 Objekt-Ausreißer bis 0,79 m. Details ABWEICHUNGEN.md, Bilder test/t64u/, Prüfungen pruefung/*_t64u*.json. Lochsuche: `LOCH=1 CAMS="$(cat pruefung/loch_kameras_t64u.json)" node test_loch_t64u.js`.

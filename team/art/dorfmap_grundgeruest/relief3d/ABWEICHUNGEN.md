@@ -105,10 +105,21 @@ Jede Ansicht einzeln angesehen. Keine Löcher, kein Baum im Wasser gesehen, der 
 - In allen Bildern ist das Bedien-Panel der App zu sehen (Screenshot vom Viewer, kein Sammelbogen). Eine Version ohne UI ist nicht gerendert.
 Nichts davon behoben.
 
-## Runde L (t64u) – Löcher Gebirge/Boden (Zwischenstand)
+## Runde L (t64u) – Löcher Gebirge/Boden
 - 26478 offene Innenkanten (LS1) / 13239 (LS2) = 4413 Bandrand-Zellseiten ×6 bzw. ×3: T-Stöße, Spalt 0,000 m [S]; Schürze (−0,35 m) darunter gegen Raster-Funkeln [A].
 - Randschlitze Gelände↔Sockel (Stützen nur 1/m): vorher West −0,586…+0,686 m (72 Punkte >2 cm), Ost −0,54…+0,392 m (126), Nord −0,277…+0,132 m (16), Süd 0 [S]; Sockel folgt jetzt exakter Randlinie, Spalt 0 per Konstruktion [A]. West vorher/nachher sichtbar behoben, Ost/Nord optisch kein Unterschied.
 - 19 umgeklappte Grobdreiecke (LS1, z. B. x158,7 z18,6) → 0 [S]; optisch kaum sichtbar.
 - Bodenstufen >20 cm im Flachen: 554 Kanten [S]; gesichtete Stichproben = Wege/Hausplattformen/Ufer (gewollt), keine Terrassen gefunden.
 - Dreiecke Handy ?lod=1: 1 100 235 [S]; Zellabgleich Summe 0; CSV/glb unverändert.
-- Offen: K9 (Südfluss-Kasten, Schluchtwasser/Wandtextur, Südwand-Streifen, Ostrand), 13+13 Ansichten, Felsring-Nahsuche.
+- Randschlitz im Viewer (test_rand_t64u.js): LS1 673/673/643/665, LS2 337/337/321/332 Randpunkte N/S/W/O, alle 0,0000 m, 0 Punkte >2 cm [S] (pruefung/mesh_t64u.json). Schürze-Nahaufnahme test/t64u/nah_schuerze_{sued,ost}_t64u.jpg: kein Funkeln sichtbar [S, gesichtet].
+- K9 Südfluss-Stummel: Mittellinie, Verjüngung, U-Profil, Spiegel −16,459→−16,631 m; 23 Wasserpunkte weg, 9 neu [S]. Bilder k9_stummel*.
+- K9 Schluchtwasser: 100 Wasserpunkte mehr (2 Ausdehnungen) [S]; Boden an Feinband-Ecken nicht abgesenkt, sonst Spalt 0,33 m bei (216|240) [S, behoben]. 13 verdeckte Wasserecken entfernt, Wasser unter Gelände 0 [S].
+- K9 Streifen Südwand/boden_wand: triplanares Bodendetail, sichtbar weniger, aber Felswand zeigt in boden_wand und Nahbildern weiter senkrechte Streifung [gesichtet] – offen.
+- K9 Ostrand: bewusst offen. Geländerand liegt exakt auf x=336, Spalt 0 [S]; die sichtbare Welle sind die gewollten Sockel-Schichtwellen (Shader, Amplitude 2,2). Glättungsversuch verschlechterte Krümmung rms 0,129→0,144 [S] und wurde zurückgenommen.
+- Boden: Vertexfarben im Flachland weich (sigma 1,2; Anteil 0,699; mittlere Farbänderung 3,46) [S]; 4 Stellen vorher/nachher test/t64u/boden_flachM_{A..D}_weich_*, Flecken weicher, keine Rauten [gesichtet].
+- Lochsuche: 29 Nahkameras Kraterrand (14) + Felskante Ost/Nord (15), LS1 1120×700 und LS2 640×400 ?lod=1, Magenta-Hintergrund nur Gelände: durchscheinend 0 px, eingeschlossen 0, schwarz 0 px [S] (pruefung/loch_t64u.json, test/t64u/loch/).
+- Mesh Ende: Spalt max 0,0 m LS1/LS2, umgeklappt 0, NaN 0, nicht-manifold 0 [S] (pruefung/mesh_t64u_ende.json).
+- Längsprofil Ende: 4 Stücke, bergauf 0, Stufen >1 m außerhalb Schlucht 0, in Schlucht 18 [S].
+- Objekt-Raycast gegen Viewer-Netz (3837 Objekte): 6 Ausreißer [S] – Baum (80,1|174,9) 0,71 m versunken (Kraterhang), Steine (276,1|267,1) und (308,0|273,5) 0,33/0,35 m schwebend (Süd-Ufer), Geröll (149,4|31,2) 0,52 m, (271,2|116,2) 0,79 m, (271,3|116,6) 0,53 m versunken (Felskante). Ursache: Feinband-Netz weicht dort vom 0,5-m-Raster ab, an dem die Objekte gesetzt werden [A]. Nicht behoben (offen, klein).
+- Budget: Handy ?lod=1 1 099 919 Dreiecke [S] (<1,3 Mio); LS1 1280×800 totale_auge 2 461 247 (Textur) / 1 372 908 (Clay) [S]. Zellabgleich t42u Summe 0 [S]; CSV/glb unverändert.
+- 13 Textur- + 13 Clay-Ansichten test/t64u/ansicht_*_{tex,clay}_t64u.jpg, alle gesichtet. Auffällig: boden_wand Felsstreifen (s.o.); sued: helles rechteckiges Feld am Fluss (Weg-/Platzfläche, nicht untersucht); oben/clay: Ostrand leicht wellig (Sockelwellen, s.o.).

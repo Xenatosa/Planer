@@ -198,7 +198,7 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
-const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t43u)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
+const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t64u, Runde L)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
 if(/[?&]clay=1/.test(location.search)){document.querySelectorAll('[data-l]').forEach(c=>{if(c.dataset.l!='gelaende')c.checked=false;});ebSicht();setTimeout(ebSicht,3000);}   // t55u: nur Gelaende-Form [A]
