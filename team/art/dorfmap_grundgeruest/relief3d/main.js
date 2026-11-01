@@ -127,15 +127,16 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    float d=TD3(4.,0.)*0.6+TD3(23.,0.)*0.4,gD=TD3(61.,.2);   // t64u K9: Boden-Detail triplanar statt nur xz -> keine senkrechten Streifen/gestreckte Wandtextur [A]
    diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
    {float f=TD3(1.4,.37),L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
-   float st=1.-smoothstep(0.40,0.72,abs(N.y)+0.10*(d-0.8));
+   float nzS=TD3(3.3,.53)*.6+TD3(11.,.29)*.4;   // O9: Rauschen gegen Dreieckszaehne an Schnee-/Felsgrenze, nur Farbe [A]
+   float st=1.-smoothstep(0.32,0.80,abs(N.y)+0.10*(d-0.8)+0.30*(nzS-0.5));
    vec3 tx=mix(tr,tr2,0.5);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.0,1.0,1.0)*mix(0.80,1.25,gD)*1.15;
-   float sn=smoothstep(0.48,0.62,abs(N.y)+0.18*(r-0.5));   // Schnee auf Simsen/Kanten [A]
+   float sn=smoothstep(0.44,0.66,abs(N.y)+0.18*(r-0.5)+0.20*(nzS-0.5));   // Schnee auf Simsen/Kanten [A]
    {float g2=TD3(97.,.1);fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
     float ms=smoothstep(.30,.48,abs(N.y)+0.15*(r-0.5))*(1.-sn)*smoothstep(.45,.6,gD);fels=mix(fels,vec3(.16,.20,.11),ms*.55);}   // Moos auf Absaetzen [A]
    #ifdef FWM
    fels*=vFT*2.;fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // Runde D: grauer [A]
-   sn=max(sn,vFS);st=max(st,smoothstep(.05,.3,vFS)*0.0+st);
+   sn=max(sn,smoothstep(0.1,0.9,vFS+0.55*(nzS-0.5)));st=max(st,smoothstep(.05,.3,vFS)*0.0+st);
    #endif
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
    diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',/[?&]nobump=1/.test(location.search)?'#include <normal_fragment_maps>':`#include <normal_fragment_maps>
@@ -181,15 +182,16 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
   const HR=(x,z)=>{const sd=z<1e-4?'n':z>NY-1e-4?'s':x<1e-4?'w':'o',t=Math.round((sd=='n'||sd=='s'?x:z)*ST);if(RK.has(sd+t))return RK.get(sd+t);
    let a=t,b=t;while(!RK.has(sd+a)&&t-a<64)a--;while(!RK.has(sd+b)&&b-t<64)b++;const ya=RK.get(sd+a),yb=RK.get(sd+b);if(ya===undefined)return yb;if(yb===undefined)return ya;return ya+(yb-ya)*(t-a)/(b-a);};
   window.__randpunkte=RK.size;window.__RK=[...RK];sockel(HR,-34,g,4);}
- {const wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1),ok=k=>WV[k]>-900;const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,t=ok(k)?Math.min(1,Math.max(0,(WV[k]-G[k])/1.5)):0;
+ {const wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1),ok=k=>WV[k]>-900;const wm=new Float32Array(GX*GY);{const m0=new Float32Array(GX*GY);for(let k=0;k<GX*GY;k++)m0[k]=ok(k)?1:0;for(let j=0;j<GY;j++)for(let i=0;i<GX;i++){let s=0,c=0;for(let dj=-2;dj<=2;dj++)for(let di=-2;di<=2;di++){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GX||jj>=GY)continue;const wt=3-Math.max(Math.abs(di),Math.abs(dj));s+=m0[jj*GX+ii]*wt;c+=wt;}wm[j*GX+i]=s/c;}}const wmA=[];   // O9: weiche Wasserrand-Maske (Isolinie statt Zellraster-Treppe) [A]
+ const vx=k=>{if(map[k]<0){map[k]=wp.length/3;wmA.push(wm[k]);const i=k%GX,j=(k/GX)|0,t=ok(k)?Math.min(1,Math.max(0,(WV[k]-G[k])/1.5)):0;
    wp.push(i/RS,ok(k)?WV[k]:G[k]+0.02,j/RS);{const rim=ok(k)&&!(ok(k+1)&&ok(k-1)&&ok(k+GX)&&ok(k-GX)),e=1-Math.min(1,t*4),q=(n=>ok(n)?Math.abs(WV[n]-WV[k]):0),fo0=ok(k)?Math.min(1,Math.max(0,(q(k+1)+q(k-1)+q(k+GX)+q(k-GX)-0.9)*0.7)):0,fo=Math.min(fo0,0.3);   // Runde E: Schaum gedeckelt [A]
      // t48u: Schaum/Wasserfall an Stufen [A]
-   wc.push((0.06+0.5*e*e)*(1-fo)+0.70*fo,(0.16+0.48*e*e)*(1-fo)+0.76*fo,(0.21+0.45*e*e)*(1-fo)+0.80*fo,ok(k)?(rim?0.0:Math.max(0.14+0.76*Math.pow(Math.min(1,t*1.15),0.8),0.35*fo)):0);};}   // Runde D: weniger Ufer-Schaum [A]
+   wc.push((0.06+0.5*e*e)*(1-fo)+0.70*fo,(0.16+0.48*e*e)*(1-fo)+0.76*fo,(0.21+0.45*e*e)*(1-fo)+0.80*fo,Math.max(0.14+0.76*Math.pow(Math.min(1,t*1.15),0.8),0.35*fo));};}   // Runde D: weniger Ufer-Schaum [A]
 return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am Rand [A]   // flach hell/klar, tief dunkler [A]
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(ok(a)||ok(b)||ok(c)||ok(d))wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
-  const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));g2.setIndex(wi);g2.computeVertexNormals();
-  const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(g2,new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,depthWrite:false,shininess:90,specular:0x667788,side:THREE.DoubleSide}));wmesh.receiveShadow=true;const wu={value:0};window.__wu=wu;wmesh.material.onBeforeCompile=sh=>{sh.uniforms.uT=wu;sh.vertexShader='varying vec3 vWQ;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n vWQ=(modelMatrix*vec4(transformed,1.)).xyz;');
-  sh.fragmentShader='uniform float uT;varying vec3 vWQ;\n'+sh.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\n {float s=sin(vWQ.x*.31+vWQ.z*.11-uT*.9)*sin(vWQ.z*.47-vWQ.x*.05+uT*.6)+.5*sin(vWQ.x*1.3-vWQ.z*.9-uT*1.7);diffuseColor.rgb*=1.+.07*s;diffuseColor.rgb+=vec3(.025,.03,.035)*max(0.,s-.6);}');};wg.add(wmesh);if(/[?&]nowa=1/.test(location.search))wg.visible=false;NEU.add(wg);}
+  const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));g2.setAttribute('wmask',new THREE.Float32BufferAttribute(wmA,1));g2.setIndex(wi);g2.computeVertexNormals();
+  const wg=new THREE.Group();wg.userData.ebene='wasser';const wmesh=new THREE.Mesh(g2,new THREE.MeshPhongMaterial({vertexColors:true,transparent:true,depthWrite:false,shininess:90,specular:0x667788,side:THREE.DoubleSide}));wmesh.receiveShadow=true;const wu={value:0};window.__wu=wu;wmesh.material.onBeforeCompile=sh=>{sh.uniforms.uT=wu;sh.vertexShader='attribute float wmask;varying float vWM;varying vec3 vWQ;\n'+sh.vertexShader.replace('#include <project_vertex>','#include <project_vertex>\n vWQ=(modelMatrix*vec4(transformed,1.)).xyz;vWM=wmask;');
+  sh.fragmentShader='uniform float uT;varying float vWM;varying vec3 vWQ;\n'+sh.fragmentShader.replace('#include <color_fragment>','#include <color_fragment>\n {float nr=sin(vWQ.x*2.1+vWQ.z*1.3)*sin(vWQ.z*2.7-vWQ.x*.8);diffuseColor.a*=smoothstep(.50,.72,vWM+.05*nr);}\n {float s=sin(vWQ.x*.31+vWQ.z*.11-uT*.9)*sin(vWQ.z*.47-vWQ.x*.05+uT*.6)+.5*sin(vWQ.x*1.3-vWQ.z*.9-uT*1.7);diffuseColor.rgb*=1.+.07*s;diffuseColor.rgb+=vec3(.025,.03,.035)*max(0.,s-.6);}');};wg.add(wmesh);if(/[?&]nowa=1/.test(location.search))wg.visible=false;NEU.add(wg);}
  {const hG=(x,z)=>{const fi=Math.min(GX-2,Math.max(0,x*RS)),fj=Math.min(GY-2,Math.max(0,z*RS)),i=fi|0,j=fj|0,a=fi-i,b=fj-j,k=j*GX+i;return G[k]*(1-a)*(1-b)+G[k+1]*a*(1-b)+G[k+GX]*(1-a)*b+G[k+GX+1]*a*b;};   // t48u R5: Rampen-Pfade als Overlay (Ebene wege) [A]
   // t67u O8: Rampen folgen der sichtbaren Oberflaeche (Strahl auf Grob+Feinnetz), 5 Querpunkte, Raender blenden aus, leicht geschwungen [A]
   const BM=(window.__bodenMeshes||[]);NEU.updateMatrixWorld(true);const rcR=new THREE.Raycaster(),vR=new THREE.Vector3(),dn=new THREE.Vector3(0,-1,0);
