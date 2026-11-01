@@ -163,3 +163,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Nur Darstellung: Spiegelglaettung 16 statt 8 Durchgaenge, Klemme WV-0,6..+0,3 statt -0,25..+0,1.
 - Ergebnis: blaue Platten/Mittelstreifen deutlich weicher (Kanten verschwimmen), Zahnreihen oben und mitte-links UNVERAENDERT. Nicht sauber.
 - Risiko [A]: Darstellungs-Spiegel kann lokal bis 0,3 m ueber/0,6 m unter Datenwert liegen; Bergauf-Pruefung des Darstellungsspiegels nicht gemacht (Daten unveraendert, Laengsprofil unberuehrt).
+
+## Runde O5 E1 Versuch 1 (Bilder /workspace/t65/o5e fluss_7_e, fluss_9_e angesehen)
+- Darstellung: nasse Ecken mit Tiefe <0,12 m weich (smoothstep, 2x Gauss) bis Boden-0,15 m abgesenkt.
+- fluss_7: Platten fast weg, Zahnreihen oben und Mitte-links bleiben. fluss_9: Treppen links/rechts bleiben. Nicht sauber.
+- Spiegel-Bergauf-Zahl (/workspace/t65/spiegel_bergauf_o5.py, Nachbarpaare deren Darstellungs-Gefaelle dem Daten-Gefaelle widerspricht, >1 cm): WR 428 Paare (max 0,09 m); WD sichtbarer Teil (ueber Boden) 859 Paare (max 0,10 m). Kein Paar >0,10 m im sichtbaren Wasser [S].
