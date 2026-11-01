@@ -167,3 +167,10 @@ Nichts davon behoben.
 - wand_0_24: senkrechte Sandstreifen unten rechts bleiben (Schritt D nicht bearbeitet).
 - rampe_4: dunkles gerades Band quer ueber Hang, wirkt nicht im Gelaende eingebettet. rampe_13: Gabelung mit weissem Riss/Spalt zwischen den Rampenarmen.
 - Darstellungs-Spiegel: 859 Nachbarpaare (sichtbar) mit Gefaelle gegen Daten, max 0,10 m (Skript /workspace/t65/spiegel_bergauf_o5.py); Daten/Laengsprofil unveraendert (bergauf_pfad 0).
+
+## Runde O7 – [F] Uferformung (01.11.)
+- [F] Bett/Ufer im Generator weich geformt (gen_relief.py `ufer_profil`, aus mit Env UFER_ALT=1): Tiefe per smoothstep ueber Abstand zur Wasserkante, B=2,5 m, max 1,0 m tief, Land max ~35° (tan 0,70) zur Kante. Nur ausserhalb Feinband/Wege. 10 614 Bett-Ecken, 3 617 Land-Ecken; Land max +0,5 / -1,0 m.
+- [R] zellen_relief.csv: nur Anzeige-Spalten geaendert (boden_anzeige_m 6 939 Zeilen, wasserspiegel_anzeige_m 2). Zellwerte (Wasser, Typ, Eigenschaften) gleich; t42u 0.
+- [A] Vorher-Ursache (I1): fluss_t62u.py Z.13 (Ufertiefe 0,06+0,25*di), fluss_k.py Z.123/124/149 (Bett = WV-tief je Zelle), ufer_weich (Land >= Nachbar-WV+0,03) -> senkrechte Stufe an der Zellgrenze.
+- [S] wneu (Konturwasser) ist jetzt Standard; alt mit ?wneu=0.
+- [A] Offen: fluss_7 Achsen-Stufen bleiben. Sie liegen IM Wasser (Bloecke konstanter Tiefe 0,04 vs 0,47 m, z. T. negative Tiefe), nicht am Ufer. 2. Versuch (Tiefe im Nassbereich glaetten) nicht gemacht.

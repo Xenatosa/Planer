@@ -190,3 +190,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Ursache: seit e30690b (O8b) Rampenhöhen per Raycaster gegen das komplette Bodennetz (Millionen Dreiecke, ohne Beschleunigung), seit O9 S4 3x dichter. Blockiert den Hauptthread minutenlang (headless: >5 min statt 4 s). Kein JS-Fehler, kein fehlender Download.
 - Fix: gleiche Höhe (höchster Treffer von oben) über Raster-Buckets (2 m), Ladezeit headless 4,3 s. Abweichung Rampe zu Strahl-Boden 0,00 m (Messung chk.js).
 - Robust: Ladestufen im Ladebildschirm, Fehler/unhandled rejections sichtbar, Hinweis nach 60 s, WebGL-/DecompressionStream-Prüfung, Tiefentextur nur mit ?softwater=1.
+
+## O7 I1–I5 (01.11.)
+- I1/I2 erledigt (ee77b88). I3: t42u 0, bergauf 0, Spalt wie Basis, Raycast 1 Baum/7 Steine schwebend, 0 im Wasser, 1,137 M, 8,2 s. Nicht gemessen: Fehlerzaehler (braucht FW_NPZ), Rampen/Bruecken am Wasser einzeln.
+- I4 angesehen: 29 Fluss-/Randkameras (Textur), 37 von 40 Stichproben-Kameras nur Textur (Render-Lauf brach ab, Clay fehlt). Endsee/Tuempel West keine eigene Kamera.
+- Mangelliste: fluss_7 Achsen-Stufen im Wasser; fluss_4 dunkle eckige Wasserflaeche; rand_ost_80 duenne dunkle Linie am Hang; rand_ost_265 punktierte Linie im Hang; wand_264_24 Saegezahn-Kante; wand_288_144 Keile; nicht beurteilbar (Kamera in Baeumen): fluss_8, rand_8, rand_9, rand_ost_283.

@@ -34,3 +34,4 @@
 - `pruefung/t16u_plaetze_gegen_bebaubar.csv/.json` sind Eingabe für `gen_bauzone_befund.py`.
 
 - Runde O5 (01.11.): Wasser-Diagnose, Endmessung, HTML /workspace/dorfmap_3d_runde_O5.html; Status relief3d/pruefung/runde_o_status.md
+- Runde O7 (01.11.): Uferformung im Generator (ufer_profil), HTML /workspace/dorfmap_3d_runde_O7.html; Status relief3d/pruefung/runde_o_status.md
