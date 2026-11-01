@@ -195,9 +195,10 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
   const BM=(window.__bodenMeshes||[]);NEU.updateMatrixWorld(true);const rcR=new THREE.Raycaster(),vR=new THREE.Vector3(),dn=new THREE.Vector3(0,-1,0);
   const hS=(x,z)=>{vR.set(x,0,z);NEU.localToWorld(vR);rcR.set(new THREE.Vector3(vR.x,500,vR.z),dn);const h=rcR.intersectObjects(BM,false);if(h.length){const q=NEU.worldToLocal(h[0].point.clone());return q.y;}return hG(x,z);};
   const p=[],ix=[],cR=[],QO=[-1.15,-0.7,0,0.7,1.15],QA=[0,1,1,1,0],QH=[0.02,0.06,0.07,0.06,0.02];let wi=0;
-  for(const L of(DN.rampenwege||[])){wi++;for(let n=0;n<L.length;n++){const[a0,b0]=L[Math.max(0,n-1)],[a1,b1]=L[Math.min(L.length-1,n+1)],dx=a1-a0,dz=b1-b0,l=Math.hypot(dx,dz)||1,nx=-dz/l,nz=dx/l,[x0,z0]=L[n];
-    const end=Math.min(n,L.length-1-n),sw=(0.32*Math.sin(n*0.21+wi*1.7)+0.15*Math.sin(n*0.57+wi))*Math.min(1,end/4),x=x0+nx*sw,z=z0+nz*sw;const o=p.length/3;
-    for(let q=0;q<5;q++){const px=x+nx*QO[q],pz=z+nz*QO[q];p.push(px,hS(px,pz)+QH[q],pz);const v=0.94+0.06*Math.sin(n*1.3+q);cR.push(0.25*v,0.19*v,0.12*v,QA[q]);}
+  for(const L0 of(DN.rampenwege||[])){wi++;const L=[];for(let m=0;m<L0.length;m++){L.push(L0[m]);if(m<L0.length-1)for(const f of[1/3,2/3])L.push([L0[m][0]+(L0[m+1][0]-L0[m][0])*f,L0[m][1]+(L0[m+1][1]-L0[m][1])*f]);}   // t67u O9 S4: Rampe 3x dichter -> folgt Feinrelief statt zu ueberbruecken [A]
+   for(let n=0;n<L.length;n++){const[a0,b0]=L[Math.max(0,n-1)],[a1,b1]=L[Math.min(L.length-1,n+1)],dx=a1-a0,dz=b1-b0,l=Math.hypot(dx,dz)||1,nx=-dz/l,nz=dx/l,[x0,z0]=L[n];
+    const n3=n/3,end=Math.min(n3,(L.length-1-n)/3),sw=(0.32*Math.sin(n3*0.21+wi*1.7)+0.15*Math.sin(n3*0.57+wi))*Math.min(1,end/4),x=x0+nx*sw,z=z0+nz*sw;const o=p.length/3;
+    for(let q=0;q<5;q++){const px=x+nx*QO[q],pz=z+nz*QO[q];p.push(px,hS(px,pz)+QH[q],pz);const v=0.94+0.06*Math.sin(n/3*1.3+q);cR.push(0.25*v,0.19*v,0.12*v,QA[q]);}
     if(n)for(let q=0;q<4;q++){const A=o-5+q,B=o+q;ix.push(A,A+1,B,A+1,B+1,B);}}}
   if(p.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('color',new THREE.Float32BufferAttribute(cR,4));g.setIndex(ix);g.computeVertexNormals();
    const me=new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,side:THREE.DoubleSide,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));me.receiveShadow=true;me.renderOrder=2;const gr=new THREE.Group();gr.userData.ebene='wege';gr.add(me);NEU.add(gr);window.__rampenwege=(DN.rampenwege||[]).length;}}

@@ -80,3 +80,11 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - b4h5b: alte Kamera steckt im Fels; neue b4h5b_o/_o2 (o9m) zeigen keine Nahtlinie [S].
 - Versuch Schuerzen-Normalen kopieren (o9m) gab feine dunkle Linien -> verworfen.
 - Ost 283: neue Kamera ost_283_aussen (o9mtex, von ausserhalb des Kartenrands): Wasser laeuft weich in Rinne bis Rand, kein Baum vor Linse [S].
+
+## O9 Schritt 4 – Rampen (erledigt)
+- 28 Nahkameras (cams_o9r) gerendert, rampe_12 rendert fehlerfrei -> alter Ausfall nicht reproduzierbar [S].
+- Nachgemessen [R]: Rampenband ueberbrueckte Feinrelief (1 m Abtastung), schweben max 1.42 m (rampe_9), Rampen 2/7/9/12/13 betroffen.
+- Fix main.js: Rampenlinie 3x verdichtet -> schweben max 0.50 m, Stellen >0.15 m: 85 -> 41 (Rest: Querrichtung an Felskanten) [R]. Neu gerendert o9t, angesehen [S]: liegt auf, Gabel rampe_13 geschlossen.
+## O9 Schritt 2 Rest – Senken/Grate angesehen (o9s, Ton) [S]
+- 5 Senken: natuerliche Mulden/Tuempel, kein Fix.
+- 12 Grate: meist echte Felsgrate. Offen: spitzer Zahn 105|47 und 225|228, Rautenmuster 54|162.
