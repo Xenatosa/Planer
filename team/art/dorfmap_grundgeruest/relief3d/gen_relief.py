@@ -615,6 +615,7 @@ def schlucht_breiter(WV,GA):   # t64u K9: Schluchtwasser x210-227 z229-245 nur 1
 WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT_T64U)
 _wu=(WV>-900)&(WV<G_ANZ);WV=np.where(_wu,np.float32(-999.0),WV).astype(WV.dtype);SCHLUCHT_T64U['wv_unter_boden_entfernt']=int(_wu.sum());print('wv_unter_t64u',int(_wu.sum()))   # t64u Le: verdeckte Wasserecken (Spiegel unter Boden) raus [S]
 import runde_m_t65u as RM;WV,G_ANZ,LUECKE_T65U=RM.fluss_luecken(WV,G_ANZ,_VBc);print('luecke_t65u',LUECKE_T65U);WV,LUECKE_T65U['tuempel']=RM.tuempel_eben(WV,G_ANZ);WV,LUECKE_T65U['mulden']=RM.mini_senken(WV);print('mulden_t65u',LUECKE_T65U['tuempel'],LUECKE_T65U['mulden'])   # t65u Runde M3: Fluss lueckenlos bis Auslass [S]
+import runde_o_t67u as RO;WV,G_ANZ,RAND_T67U=RO.rand_oeffnen(WV,G_ANZ);print('rand_t67u',RAND_T67U)   # t67u Runde O: Flussarme bis Kartenrand offen [A]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
