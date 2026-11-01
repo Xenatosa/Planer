@@ -108,6 +108,20 @@ def objekte(L5,GA,WV,OV,haeuser,rampen,bruecken,NX,NY):
                     if ok:break
                 if ok:q=list(o);q[0]=round(ok[0],3);q[2]=round(ok[1],3);q[1]=round(tri(GA,*ok),3);neu.append(q);nach+=1
             c['nachgesetzt']=nach
+            # t65u M2c: Waldzellen mit >50 % Verlust (wald_dichte_t65u) auf >=70 % der Vorher-Zahl auffuellen, gueltige Plaetze im 0,5-m-Raster [A]
+            zf=0;zinfo={}
+            for zx,zz,vor in ((120,130,17),(130,30,5),(160,230,12)):
+                inz=lambda q:zx<=q[0]<zx+10 and zz<=q[2]<zz+10
+                ziel=int(np.ceil(0.7*vor));ist=sum(1 for q in neu if inz(q));vorl=[o for o in rej if inz(o)] or [q for q in neu if inz(q)]
+                if not vorl:continue
+                kand=[(zx+0.25+0.5*i,zz+0.25+0.5*j) for i in range(20) for j in range(20)]
+                rng=np.random.default_rng(zx*1000+zz);rng.shuffle(kand);k=0
+                for x,z in kand:
+                    if ist>=ziel:break
+                    o=vorl[k%len(vorl)]
+                    if frei(x,z,o[3]):q=list(o);q[0]=round(x,3);q[2]=round(z,3);q[1]=round(tri(GA,x,z),3);neu.append(q);ist+=1;zf+=1;k+=1
+                zinfo[f'{zx}|{zz}']=[vor,ist]
+            c['zone_aufgefuellt']=zf;c['zonen']=zinfo
         c['n_nachher']=len(neu);L[:]=neu;st[nm]=c
     return st
 def csv_nachlauf(pfad,WV,GA,NX,NY):

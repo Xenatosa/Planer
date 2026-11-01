@@ -1,13 +1,13 @@
 {
  "baeume": {
-  "n": 1577,
+  "n": 1590,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0,
   "abstand_naechster_m": {
    "min": 0.53,
-   "p10": 0.88,
+   "p10": 0.89,
    "median": 1.33
   },
   "ueber_haus": 0

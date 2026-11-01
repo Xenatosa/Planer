@@ -59,7 +59,22 @@
    "abstand": 266,
    "wandnetz_behalten": 94,
    "nachgesetzt": 30,
-   "n_nachher": 1577
+   "zone_aufgefuellt": 13,
+   "zonen": {
+    "120|130": [
+     17,
+     12
+    ],
+    "130|30": [
+     5,
+     4
+    ],
+    "160|230": [
+     12,
+     9
+    ]
+   },
+   "n_nachher": 1590
   },
   "felsen": {
    "n_vorher": 95,
