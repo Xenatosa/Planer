@@ -180,3 +180,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 ## Runde O5 E3 (Endmessung trotz nicht sauberer Ufer)
 - Bilder /workspace/t65/o5g wand_0_24_g, rampe_4_g, rampe_13_g, fluss_3_g angesehen; Befunde in ABWEICHUNGEN.md.
 - [S] Spalt 0, t42u Summe 0, bergauf_pfad_summe 0, Raycast (W=1024 H=640 NOUI=1, bereit nach 332 s): alle Klassen 0 schwebend/0 versunken/0 im Wasser, Handy-Budget 1 047 817 Dreiecke.
+
+## O6 G1 – Wassernetz geometrisch an Tiefe=0 clippen
+- Umgesetzt [A]: Marching-Triangles je Wasserdreieck, Schnittpunkte exakt auf Boden (Höhe = Spiegel − Tiefe, linear auf Kante). Schalter `?clip=1` (Standard aus).
+- Gesehen [S]: o6a/fluss_7_a.png, o6a/fluss_9_a.png. Zähne am linken Ufer fluss_7 und Stufen fluss_9 **bleiben**. Zusätzlich harte hellblaue Platten (fluss_7 rechts unten) – schlechter als O5.
+- Folgerung [A]: Die Zähne sitzen nicht in der Wasser-Schnittlinie; vermutlich Boden/Schnee-Grenze im Grobnetz (gleiches Muster wie G4). Deshalb Clip nur als Schalter, Standard unverändert O5.
