@@ -115,3 +115,9 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
   - 1 einzelner Wasserpunkt x4,5/z273: echter Rest -> wird entfernt.
   - Ueberlauf-Test (Bodennachbar tiefer als Spiegel -5 cm): nur Tuempel West, 5 Punkte, max 14 cm.
   - Fazit: Der Zaehler zaehlt jedes stehende Gewaesser. Ausser dem Einzelpunkt (und 5 Randpunkten am Tuempel) kein Flussfehler.
+
+### N3 Ufer + Raycast (O9 Nachlauf)
+- gen_relief.py: ufer_weich (Ufer-Hoehen bis 2 m vom Wasser, max 0,54 m, Mittel 0,08 m [S]), Einzelsenken-Hebung (4 Ecken [S]), vc_ufer_weich (Uferfarbe bis 3 m vom Wasser weichgezeichnet, 13,2 % der Ecken [S]).
+- Ursache der Ufer-Treppen: die Uferfarbe folgte dem 1-m-Zellraster [A, Bildvergleich fluss_9_u gegen fluss_9_v]. Rechtes Ufer fluss_9: dunkle Streifen weg (angesehen). Linkes Ufer: Saegezaehne an der Wasserkante bleiben sichtbar (angesehen, NICHT behoben; Wasserkanten-Mesh, offen).
+- Raycast-Cache strahl_hoehe_t65u.json aus neuem Lauf aufgefrischt; Raycast danach 0/0/0 in allen 5 Arten [S].
+- wasser_ohne_randweg 5484 [S]: 14 stehende Gewaesser, alle gewollt (siehe N2).

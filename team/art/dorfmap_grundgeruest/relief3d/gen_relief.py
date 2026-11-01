@@ -624,6 +624,19 @@ import runde_m_t65u as RM;WV,G_ANZ,LUECKE_T65U=RM.fluss_luecken(WV,G_ANZ,_VBc);p
 import runde_o_t67u as RO;WV,G_ANZ,RAND_T67U=RO.rand_oeffnen(WV,G_ANZ);print('rand_t67u',RAND_T67U)   # t67u Runde O: Flussarme bis Kartenrand offen [A]
 G_ANZ=(G_ANZ+np.where(WV>-900,0,G_SP_T67U-G)).astype(G_ANZ.dtype);G_ANZ,GSP_T67U=RO.grob_entspitzen(G_ANZ,WV,BAND,RS);print('grobspitzen_t67u',GSP_T67U)   # t67u O7: Nadeln im Grobnetz ausserhalb Feinband [F] [A]
 _m5=nd.median_filter(G_ANZ,5);_fp=np.ones((3,3),bool);_fp[1,1]=0;_nb=nd.maximum_filter(G_ANZ,footprint=_fp);_zs=(G_ANZ-_m5>1.5)&(G_ANZ-_nb>0.5)&_mk;G_ANZ=np.where(_zs,np.maximum(_nb,_m5+0.5),G_ANZ).astype(G_ANZ.dtype);print('einzelzahn_t67u',int(_zs.sum()))   # t67u O9: Einzelzaehne Grobnetz (105|47) [F] [A]
+def ufer_weich(GA,WV):   # O9 Nachlauf: Ufer-Treppen glaetten. Nur Boden-Hoehen an Land-Ecken bis 2 m vom Wasser, nicht im Feinband/an Feinband-Ecken/Wegen; Ufer bleibt ueber dem Spiegel [A]
+    w=WV>-900;G0=GA.astype(float)
+    i1=np.where(w,0,1);ds=nd.distance_transform_edt(i1)
+    k=(~w)&(ds<=4)&_mk&~nd.binary_dilation(~_mk,iterations=2)&~nd.binary_dilation(_VBc,iterations=2)&(WEGA.reshape(GA.shape)<20)
+    gw=np.clip(1.0-(ds-1)/4.0,0,1)*k
+    wvm=nd.maximum_filter(np.where(w,WV,-1e9),3)   # hoechster Nachbar-Spiegel
+    G1=G0.copy()
+    for _ in range(4):
+        B=nd.gaussian_filter(G1,1.0);G1=np.where(k,np.clip(G1+(B-G1)*gw,G0-0.4,G0+0.4),G1)
+        G1=np.where(k&(wvm>-1e8),np.maximum(G1,wvm+0.03),G1)
+    d=G1-G0;return G1.astype(GA.dtype),{'ecken':int(k.sum()),'max_aenderung_m':round(float(np.abs(d).max()),3),'mittel_m':round(float(np.abs(d[k]).mean()),3)}
+G_ANZ,UFER_O9=ufer_weich(G_ANZ,WV);print('ufer_o9',UFER_O9)
+_fp8=np.ones((3,3),bool);_fp8[1,1]=0;_wnb=nd.minimum_filter(np.where(WV>-900,WV,1e9),footprint=_fp8);_ein=(WV>-900)&(_wnb<1e8)&(WV<_wnb-0.01)&(nd.maximum_filter(np.where(WV>-900,WV,-1e9),footprint=_fp8)<WV+5);_ein&=(_wnb-WV<=0.1);WV=np.where(_ein,_wnb,WV).astype(WV.dtype);print('wasser_einzelsenken_o9',int(_ein.sum()))   # O9: einzelne Wasser-Senkenpunkte (Endstummel) auf Nachbarspiegel heben [S]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
@@ -632,6 +645,11 @@ def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland w
     return out.reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3),'farbaenderung_mittel':round(float(np.abs(N-C).mean()),2)}
 VC,VCW_T64U=vc_weich(VC,G_ANZ,WV,WEGA);print('vcweich_t64u',VCW_T64U)
 VC,VCF_T65U=RM.vc_flecken(VC,G_ANZ,WV);print('vcflecken_t65u',VCF_T65U)   # t65u Runde M1d [S]
+def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1-m-Zellraster (Treppen/Saegezaehne am Wasser). Weichzeichnen bis 3 m vom Wasser, nicht auf Wegen [A]
+    C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.6) for k in range(3)],-1)
+    ds=nd.distance_transform_edt(WV<=-900);m=((ds<=6)&(WEGA.reshape(GA.shape)<20)).astype(float);m=nd.gaussian_filter(m,1.0)
+    N=C*(1-m[...,None])+B*m[...,None];return np.clip(np.round(N),0,255).astype(np.uint8).reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3)}
+VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)

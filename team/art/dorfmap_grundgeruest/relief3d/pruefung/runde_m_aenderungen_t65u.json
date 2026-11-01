@@ -46,12 +46,12 @@
   }
  },
  "vertexfarben": {
-  "vertexfarben_geglaettet": 108
+  "vertexfarben_geglaettet": 111
  },
  "objekte": {
   "baeume": {
    "n_vorher": 1872,
-   "hoehe_neu": 325,
+   "hoehe_neu": 324,
    "abgesenkt": 0,
    "wasser": 0,
    "steil": 0,
@@ -99,14 +99,14 @@
    "n_nachher": 35
   },
   "steine": {
-   "n_vorher": 866,
-   "hoehe_neu": 72,
-   "abgesenkt": 51,
-   "wasser": 25,
-   "steil": 37,
+   "n_vorher": 753,
+   "hoehe_neu": 65,
+   "abgesenkt": 29,
+   "wasser": 19,
+   "steil": 23,
    "ueberlapp": 0,
    "abstand": 0,
-   "n_nachher": 804
+   "n_nachher": 711
   },
   "geroell": {
    "n_vorher": 956,

@@ -1,6 +1,6 @@
 {
  "baeume": {
-  "n": 1465,
+  "n": 1451,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
@@ -8,12 +8,12 @@
   "abstand_naechster_m": {
    "min": 0.53,
    "p10": 0.89,
-   "median": 1.32
+   "median": 1.34
   },
   "ueber_haus": 0
  },
  "felsen": {
-  "n": 92,
+  "n": 91,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
@@ -27,22 +27,22 @@
   "hang_gt_45": 0
  },
  "steine": {
-  "n": 672,
+  "n": 583,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0
  },
  "geroell": {
-  "n": 723,
+  "n": 718,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
-  "hang_gt_45": 1
+  "hang_gt_45": 3
  },
  "alte_ausreisser": {
   "baeume 80.1|174.9": [
-   0.0
+   -0.0
   ],
   "steine 276.1|267.1": "entfernt",
   "steine 308.0|273.5": "entfernt",
