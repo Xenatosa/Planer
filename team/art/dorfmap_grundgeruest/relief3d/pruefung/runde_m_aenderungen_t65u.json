@@ -46,7 +46,7 @@
   }
  },
  "vertexfarben": {
-  "vertexfarben_geglaettet": 116
+  "vertexfarben_geglaettet": 119
  },
  "objekte": {
   "baeume": {
@@ -99,14 +99,14 @@
    "n_nachher": 35
   },
   "steine": {
-   "n_vorher": 736,
-   "hoehe_neu": 67,
-   "abgesenkt": 13,
+   "n_vorher": 730,
+   "hoehe_neu": 63,
+   "abgesenkt": 14,
    "wasser": 20,
-   "steil": 14,
+   "steil": 15,
    "ueberlapp": 0,
    "abstand": 0,
-   "n_nachher": 702
+   "n_nachher": 695
   },
   "geroell": {
    "n_vorher": 956,

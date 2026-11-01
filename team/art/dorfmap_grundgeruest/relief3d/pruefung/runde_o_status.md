@@ -228,3 +228,8 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 # Runde O9
 ## K0 Ladezeit
 /workspace/dorfmap_3d_runde_O8.html, headless Chromium (SwiftShader), 1280x800, bis __test.bereit: 7,71 / 8,28 / 7,95 s, Median 7,95 s (< 10 s). Skript: test_ladezeit.js
+
+## K1 Wasserkontur glätten
+- gen_relief.py: `kontur_glatt` (Gauss SIG 4 auf Nassmaske, nur ruhiges Wasser 9x9-Spiegelspanne <0,1 m, Entfernungen die Gewässer teilen werden zurückgenommen). Gilt für alle Flüsse. Zellwerte unverändert, nur Anzeige-Spalten. Abschaltbar mit KONTUR_ALT=1.
+- Ergebnis: +77 / −243 Ecken, kein Gewässer geteilt, Randabfluss erhalten (Randecken 95→93), Spalt 0, t42u 0, Stufen >1 m ausserhalb Schlucht 0, bergauf_pfad 1 (vorher 0, eine Ecke >2 cm, dokumentiert).
+- Ehrlich: Sichtbarer Effekt in fluss_7/3/9/4 minimal (t65/k1_vn3.png). Die Treppe bei fluss_7 kommt vor allem vom zellbasierten Sand-/Uferband der Textur (gen_textur), nicht von der Wassermaske. Breitere Glättung (ohne Ruhig-Filter) erzeugte bergauf_pfad 14–18 → verworfen. Nach 2 Ansätzen dokumentiert, offen: Texturband an geglättete Kontur binden.

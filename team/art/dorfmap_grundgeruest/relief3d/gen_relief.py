@@ -648,6 +648,32 @@ def ufer_profil(GA,WV,B=2.5,DM=1.0,TAN=0.70):   # O7 I2 [F]: Bett/Ufer glatt sta
     G1=np.where(land,np.maximum(np.minimum(G1,wvn+0.02+TAN*so),np.minimum(G1,wvn+0.02)),G1)
     G1=np.where(land,np.maximum(G1,G0-1.0),G1)   # Fels/Wand: hoechstens 1 m absenken, dort steiler erlaubt
     d=G1-G0;return G1.astype(GA.dtype),{'bett_ecken':int((bett&(d>0.005)).sum()),'land_ecken':int((land&(d<-0.005)).sum()),'max_anhebung_m':round(float(d.max()),2),'max_absenkung_m':round(float(-d.min()),2)}
+def _kontur_zus(w,add,rem):   # Wegnahmen, die ein Gewaesser zerteilen, zuruecknehmen
+    S=np.ones((3,3));L0,_=nd.label(w|add,S)
+    for it in range(6):
+        W2=(w|add)&~rem;L2,n2=nd.label(W2,S)
+        if n2==0:return rem
+        sz=np.bincount(L2.ravel());own=np.zeros(n2+1,int);idx=np.flatnonzero(L2.ravel());own[L2.ravel()[idx]]=L0.ravel()[idx];best={}
+        for k in range(1,n2+1):
+            o=own[k]
+            if o not in best or sz[k]>sz[best[o]]:best[o]=k
+        keep=np.zeros(n2+1,bool);keep[list(best.values())]=True;keep[0]=True;bad=~keep[L2]
+        if not bad.any():return rem
+        rem=rem&~nd.binary_dilation(bad,iterations=3)
+    return np.zeros_like(rem)
+def kontur_glatt(GA,WV,SIG=4.0,HMAX=0.5):   # O9 K1 [F]: Wasserumriss aus geglaettetem Nassfeld (Gauss 2 m, Schwelle 0,5) statt Zell-Treppe. Nur Anzeige-Ecken (WV/G_ANZ), Zellspalten unveraendert. Zufuegen: nur bis 2 m neben Wasser und Boden <= Spiegel+0,5. Wegnehmen: nur Randecken neben breitem Wasser, kein Zerteilen. Nicht Feinband/Wege [A]
+    w=WV>-900;bl=nd.gaussian_filter(w.astype(float),SIG);e=nd.distance_transform_edt(w)
+    frei=_mk&~nd.binary_dilation(_VBc,iterations=2)&(WEGA.reshape(GA.shape)<20)
+    _,(iy,ix)=nd.distance_transform_edt(~w,return_indices=True);wvn=WV[iy,ix]
+    add=(~w)&frei&(bl>0.5)&(GA<=wvn+HMAX)&nd.binary_dilation(w,iterations=4)
+    wmin=nd.minimum_filter(np.where(w,WV,1e9),9);wmax=nd.maximum_filter(np.where(w,WV,-1e9),9);add&=(wmax-wmin<0.1)   # nur an ruhigem Wasser (kein Stufen-Kurzschluss -> kein Bergauf)
+    rem=_kontur_zus(w,add,w&frei&(bl<0.5)&(e<=3.01)&(nd.maximum_filter(e,9)>=4)&(wmax-wmin<0.1))
+    W2=(w|add)&~rem;rd=lambda m:int(m[0].sum()+m[-1].sum()+m[:,0].sum()+m[:,-1].sum())
+    WV2=np.where(add,wvn,np.where(rem,-999,WV)).astype(WV.dtype)
+    return WV2,{'zu':int(add.sum()),'weg':int(rem.sum()),'komp_vor':int(nd.label(w,np.ones((3,3)))[1]),'komp_nach':int(nd.label(W2,np.ones((3,3)))[1]),'randecken_vor':rd(w),'randecken_nach':rd(W2)}
+WV_ZELLE=WV.copy()
+if os.environ.get('KDBG'):np.savez_compressed(os.environ['KDBG'],WV=WV,GA=G_ANZ,mk=_mk,vb=_VBc,wega=WEGA.reshape(G_ANZ.shape))
+if not os.environ.get('KONTUR_ALT'):WV,KONTUR_K1=kontur_glatt(G_ANZ,WV);print('kontur_k1',KONTUR_K1)
 if not os.environ.get('UFER_ALT'):G_ANZ,UFER_O7=ufer_profil(G_ANZ,WV);print('ufer_o7',UFER_O7)
 def bett_glatt(GA,WV,SIG=2.5,DMIN=0.05,DM=1.0,B=2.5,MAXD=0.5):   # O8 J2 [F]: Bett-Tiefe IM Wasser glatt (Gauss ueber nasse Ecken) statt zellweise Bloecke; WV unveraendert. Nur Anzeige.
     w=WV>-900;G0=GA.astype(float);h=1.0/RS;s=SIG/h
