@@ -1,40 +1,40 @@
 {
  "baeume": {
-  "n": 1590,
+  "n": 1468,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0,
   "abstand_naechster_m": {
    "min": 0.53,
-   "p10": 0.89,
+   "p10": 0.88,
    "median": 1.33
   },
   "ueber_haus": 0
  },
  "felsen": {
-  "n": 94,
+  "n": 92,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0
  },
  "findlinge": {
-  "n": 35,
+  "n": 33,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0
  },
  "steine": {
-  "n": 803,
+  "n": 671,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0
  },
  "geroell": {
-  "n": 856,
+  "n": 721,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
@@ -46,16 +46,9 @@
   ],
   "steine 276.1|267.1": "entfernt",
   "steine 308.0|273.5": "entfernt",
-  "geroell 149.4|31.2": [
-   -0.08
-  ],
-  "geroell 271.2|116.2": [
-   -0.1
-  ],
-  "geroell 271.3|116.6": [
-   -0.11,
-   -0.11
-  ]
+  "geroell 149.4|31.2": "entfernt",
+  "geroell 271.2|116.2": "entfernt",
+  "geroell 271.3|116.6": "entfernt"
  },
  "orte": {
   "baeume": [],
