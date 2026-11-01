@@ -226,15 +226,20 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
     const poly=[];for(let e=0;e<3;e++){const u=T[e],v=T[(e+1)%3];if(w[e])poly.push(pv(u));if(w[e]!=w[(e+1)%3])poly.push(cut(u,v));}for(let e=1;e+1<poly.length;e++)I.push(poly[0],poly[e],poly[e+1]);}
    CP=P;CC=C;CM=M;CI=I;}
   if(/[?&]wneu=1/.test(location.search)&&!/[?&]clip=1/.test(location.search)){/* O6 G1 V3: Wassernetz neu als Konturflaeche gegen den GEZEICHNETEN Boden (Grob+Feinband), 0,25-m-Subzellen, Marching-Triangles, Randpunkte auf Boden+1 cm, Rand-Alpha 0..25 cm Tiefe [A] */
+   /* O7 H2: Spiegel ausserhalb der Nassmaske glatt fortsetzen (naechster nasser Wert, dann Relaxation mit festen nassen Zellen ~2-3 m) -> Kante = physischer Schnitt Spiegel/gezeichneter Boden statt Zellmaske [A] */
+   const RX=Math.round(4*RS),WE=new Float32Array(GX*GY).fill(-1e9),dist=new Int16Array(GX*GY).fill(-1);{let q=[];for(let k=0;k<GX*GY;k++)if(ok(k)){WE[k]=WR[k];dist[k]=0;q.push(k);}
+    for(let r=1;r<=RX;r++){const nq=[];for(const k of q){const i=k%GX,j=(k/GX)|0;for(const[di,dj]of[[1,0],[-1,0],[0,1],[0,-1]]){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GX||jj>=GY)continue;const n=jj*GX+ii;if(dist[n]>=0)continue;dist[n]=r;let s=0,c=0;for(const[ei,ej]of[[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]]){const m=(jj+ej)*GX+ii+ei;if(m>=0&&m<GX*GY&&dist[m]>=0&&dist[m]<r){s+=WE[m];c++;}}WE[n]=s/c;nq.push(n);}}q=nq;}
+    const L=[];for(let k=0;k<GX*GY;k++)if(dist[k]>0)L.push(k);for(let it=0;it<Math.round(3*RS*RS*2);it++){for(const k of L){let s=0,c=0;for(const n of[k+1,k-1,k+GX,k-GX]){if(n>=0&&n<GX*GY&&dist[n]>=0){s+=WE[n];c++;}}if(c)WE[k]=s/c;}}}
+   window.__wdbg={GX,GY,RS,WE,dist};
    const hB=window.__hSurf,SUB=Math.max(1,Math.round(4/RS)),st=1/(RS*SUB);
-   const wS=(x,z)=>{const fi=Math.min(GX-1.001,Math.max(0,x*RS)),fj=Math.min(GY-1.001,Math.max(0,z*RS)),i=fi|0,j=fj|0,a=fi-i,b=fj-j;let s=0,c=0;for(const[k,w]of[[j*GX+i,(1-a)*(1-b)],[j*GX+i+1,a*(1-b)],[(j+1)*GX+i,(1-a)*b],[(j+1)*GX+i+1,a*b]])if(ok(k)&&w>1e-6){s+=WR[k]*w;c+=w;}if(c>0)return s/c;let s2=0,c2=0;for(let dj=-1;dj<=2;dj++)for(let di=-1;di<=2;di++){const ii=i+di,jj=j+dj;if(ii<0||jj<0||ii>=GX||jj>=GY)continue;const k=jj*GX+ii;if(ok(k)){s2+=WR[k];c2++;}}return c2?s2/c2:-1e9;};
+   const wS=(x,z)=>{const fi=Math.min(GX-1.001,Math.max(0,x*RS)),fj=Math.min(GY-1.001,Math.max(0,z*RS)),i=fi|0,j=fj|0,a=fi-i,b=fj-j,k=j*GX+i;const v=[WE[k],WE[k+1],WE[k+GX],WE[k+GX+1]];if(v.some(t=>t<-1e8))return -1e9;return v[0]*(1-a)*(1-b)+v[1]*a*(1-b)+v[2]*(1-a)*b+v[3]*a*b;};
    const P=[],C=[],M=[],I=[],VM=new Map();const col=(d,a)=>{const t=Math.min(1,Math.max(0,d/1.5)),e=1-Math.min(1,t*4);C.push(0.06+0.5*e*e,0.16+0.48*e*e,0.21+0.45*e*e,(0.14+0.76*Math.pow(Math.min(1,t*1.15),0.8))*a);M.push(1.2);};
    const pt=(gx,gz)=>{const key=gx*100003+gz;let v=VM.get(key);if(v!==undefined)return v;const x=gx*st,z=gz*st,b=hB(x,z),w=wS(x,z),d=w-b;v={x,z,b,w,d,i:-1};VM.set(key,v);return v;};
-   const pv=v=>{if(v.i<0){v.i=P.length/3;P.push(v.x,v.w,v.z);col(v.d,Math.min(1,v.d/0.25));}return v.i;};
+   const pv=v=>{if(v.i<0){v.i=P.length/3;P.push(v.x,v.w,v.z);col(v.d,Math.min(1,v.d/0.20));}return v.i;};
    const cut=(u,v)=>{const t=u.d/(u.d-v.d),x=u.x+(v.x-u.x)*t,z=u.z+(v.z-u.z)*t;P.push(x,hB(x,z)+0.01,z);col(0,0);return P.length/3-1;};
    const EC=new Map(),cutC=(u,v)=>{const k=u.i<v.i?u.x+','+u.z+'|'+v.x+','+v.z:v.x+','+v.z+'|'+u.x+','+u.z;const kk=(u.x<v.x||(u.x==v.x&&u.z<v.z))?u.x+','+u.z+'|'+v.x+','+v.z:v.x+','+v.z+'|'+u.x+','+u.z;let r=EC.get(kk);if(r===undefined){r=cut(u,v);EC.set(kk,r);}return r;};
    const tri=T=>{const w=T.map(v=>v.d>0);const n=w[0]+w[1]+w[2];if(n==0)return;if(n==3){I.push(pv(T[0]),pv(T[1]),pv(T[2]));return;}const poly=[];for(let e=0;e<3;e++){const u=T[e],v=T[(e+1)%3];if(w[e])poly.push(pv(u));if(w[e]!=w[(e+1)%3])poly.push(cutC(u,v));}for(let e=1;e+1<poly.length;e++)I.push(poly[0],poly[e],poly[e+1]);};
-   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i;if(!(ok(a)||ok(a+1)||ok(a+GX)||ok(a+GX+1)))continue;
+   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i;if(dist[a]<0||dist[a+1]<0||dist[a+GX]<0||dist[a+GX+1]<0)continue;
     for(let sj=0;sj<SUB;sj++)for(let si=0;si<SUB;si++){const gx=i*SUB+si,gz=j*SUB+sj,A=pt(gx,gz),B=pt(gx+1,gz),Cc=pt(gx,gz+1),D=pt(gx+1,gz+1);tri([A,Cc,D]);tri([A,D,B]);}}
    CP=P;CC=C;CM=M;CI=I;window.__wneu={verts:P.length/3,tris:I.length/3,sub:SUB};}
   const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(CP,3));g2.setAttribute('color',new THREE.Float32BufferAttribute(CC,4));g2.setAttribute('wmask',new THREE.Float32BufferAttribute(CM,1));g2.setIndex(CI);g2.computeVertexNormals();
