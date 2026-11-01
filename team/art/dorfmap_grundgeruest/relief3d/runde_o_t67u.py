@@ -45,7 +45,7 @@ def wege_frei(L5,DIST,rand=1.5,fs=4):
         L[:]=neu;st[nm]=n
     return st
 
-def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25):
+def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25,grat=(21,1.0,0.35)):
     """t67u O3: Nadelspitzen weich gegen Nachbarmedian (2,75 m) stauchen, isolierte Senken bis 0,5 m unter Ueberlaufhoehe fuellen (relativ zur Grobform -> Krater bleibt) [A]"""
     from skimage.morphology import reconstruction
     FH=FH.copy();st={}
@@ -53,6 +53,9 @@ def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25):
     for n in range(it):
         md=nd.median_filter(FH,11);e=FH-md;ne=np.where(e>frei,frei+(e-frei)*k,e)
         dlt=nd.gaussian_filter(np.where(inn,ne-e,0),0.8);FH=FH+dlt*inn;st['abtrag_max_m_%d'%n]=round(float(-dlt.min()),2)
+    if grat:   # O6: Saegezahn-Grate gegen 5-m-Median weich stauchen [A]
+        w_,f_,k_=grat;md=nd.median_filter(FH,w_);e=FH-md;ne=np.where(e>f_,f_+(e-f_)*k_,e)
+        dlt=nd.gaussian_filter(np.where(inn,ne-e,0),1.2);FH=FH+dlt*inn;st['grat_abtrag_max_m']=round(float(-dlt.min()),2)
     def fu(A):
         s=A.copy();s[1:-1,1:-1]=A.max();return reconstruction(s,A,method='erosion')
     dep=(fu(FH)-FH)-(fu(FB)-FB);add=np.clip(dep-0.5,0,None)*inn

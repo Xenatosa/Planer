@@ -1,0 +1,52 @@
+{
+ "spitzen": 16,
+ "nadeln_1_5m": 8,
+ "senken_0_8m": 2,
+ "senken_2m": 0,
+ "senke_max_m": 1.91,
+ "enge_grate": 775,
+ "stufe_bandrand": 0,
+ "nadel_orte_xz": [
+  [
+   326.0,
+   32.0,
+   2.21
+  ]
+ ],
+ "senke_orte_xz": [],
+ "objekte_auf_wegen": {
+  "baeume": 0,
+  "felsen": 0,
+  "findlinge": 0,
+  "steine": 0,
+  "geroell": 0
+ },
+ "flussenden_blind": 5,
+ "flussenden_orte_xz": [
+  [
+   223.5,
+   219.5,
+   -1.94
+  ],
+  [
+   216.0,
+   244.0,
+   -17.25
+  ],
+  [
+   13.5,
+   253.0,
+   -17.93
+  ],
+  [
+   2.0,
+   276.0,
+   -16.79
+  ],
+  [
+   321.0,
+   276.0,
+   -18.17
+  ]
+ ]
+}

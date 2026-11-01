@@ -1,8 +1,8 @@
 {
  "baeume": {
-  "schwebend_vor": 50,
+  "schwebend_vor": 51,
   "versunken_vor": 207,
-  "steil_oder_nase_vor": 244,
+  "steil_oder_nase_vor": 242,
   "steil_oder_nase_nach": 0
  },
  "felsen": {
@@ -26,13 +26,13 @@
  "geroell": {
   "schwebend_vor": 121,
   "versunken_vor": 563,
-  "steil_oder_nase_vor": 311,
+  "steil_oder_nase_vor": 308,
   "steil_oder_nase_nach": 0
  },
  "gras": {
-  "schwebend_vor": 100,
+  "schwebend_vor": 101,
   "versunken_vor": 338,
-  "steil_oder_nase_vor": 370,
+  "steil_oder_nase_vor": 363,
   "steil_oder_nase_nach": 2
  }
 }
