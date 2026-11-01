@@ -56,6 +56,9 @@ def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25,grat=(21,1.0,0.35)):
     if grat:   # O6: Saegezahn-Grate gegen 5-m-Median weich stauchen [A]
         w_,f_,k_=grat;md=nd.median_filter(FH,w_);e=FH-md;ne=np.where(e>f_,f_+(e-f_)*k_,e)
         dlt=nd.gaussian_filter(np.where(inn,ne-e,0),1.2);FH=FH+dlt*inn;st['grat_abtrag_max_m']=round(float(-dlt.min()),2)
+        for _ in range(2):   # O7: konvexe Kanten (Gratsaegezahn) runden: Laplace-gewichtete Glaettung [A]
+            g=nd.gaussian_filter(FH,2.0);lap=g-FH;wq=np.clip(-lap/0.6,0,1)*inn;FH=FH+wq*0.8*lap
+        st['grat_rund_max_m']=round(float(-(wq*0.8*lap).min()),2)
     def fu(A):
         s=A.copy();s[1:-1,1:-1]=A.max();return reconstruction(s,A,method='erosion')
     dep=(fu(FH)-FH)-(fu(FB)-FB);add=np.clip(dep-0.5,0,None)*inn
@@ -68,3 +71,14 @@ def bandrand_weich(FH,FB0,vin,breite=8):
     rb=vin&~nd.binary_erosion(vin);v=float(np.abs(FH-FB0)[rb].max()) if rb.any() else 0
     FH2=np.where(vin,FB0+w*(FH-FB0),FH)
     return FH2,{'stufe_max_vorher_m':round(v,2),'stufe_max_nachher_m':round(float(np.abs(FH2-FB0)[rb].max()),2),'punkte':int((vin&(w<1)).sum())}
+
+def grob_entspitzen(GA,WV,BAND,RS,frei=0.8,k=0.3):
+    """t67u O7: Einzelspitzen im Anzeige-Grobnetz (nicht Feinband, nicht Wasser, nicht Bandnachbar) gegen 5er-Median stauchen [A]"""
+    GA=GA.copy();g=GA.astype(float);md=nd.median_filter(g,5);e=g-md
+    bz=nd.binary_dilation(BAND,iterations=1);NY,NX=BAND.shape
+    jj,ii=np.mgrid[0:GA.shape[0],0:GA.shape[1]];cy=np.clip(jj//RS,0,NY-1);cx=np.clip(ii//RS,0,NX-1)
+    cy2=np.clip((jj-1)//RS,0,NY-1);cx2=np.clip((ii-1)//RS,0,NX-1)
+    frei_m=~(bz[cy,cx]|bz[cy2,cx]|bz[cy,cx2]|bz[cy2,cx2])&~nd.binary_dilation(WV>-900,iterations=3)
+    sel=frei_m&(e>frei);neu=np.where(sel,md+frei+(e-frei)*k,g)
+    GA[:]=neu.astype(GA.dtype)
+    return GA,{'punkte':int(sel.sum()),'abtrag_max_m':round(float((g-neu).max()),2)}

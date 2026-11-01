@@ -1,14 +1,14 @@
 {
  "baeume": {
-  "n": 1474,
+  "n": 1465,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
   "hang_gt_45": 0,
   "abstand_naechster_m": {
    "min": 0.53,
-   "p10": 0.87,
-   "median": 1.33
+   "p10": 0.89,
+   "median": 1.32
   },
   "ueber_haus": 0
  },
@@ -34,7 +34,7 @@
   "hang_gt_45": 0
  },
  "geroell": {
-  "n": 722,
+  "n": 723,
   "schwebend_gt_0_15": 0,
   "versunken_gt_0_15": 0,
   "im_wasser": 0,
