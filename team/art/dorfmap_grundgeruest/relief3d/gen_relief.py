@@ -614,6 +614,7 @@ def schlucht_breiter(WV,GA):   # t64u K9: Schluchtwasser x210-227 z229-245 nur 1
     return WV,GA,{'neu_wasser':n}
 WV,G_ANZ,SCHLUCHT_T64U=schlucht_breiter(WV,G_ANZ);print('schlucht_t64u',SCHLUCHT_T64U)
 _wu=(WV>-900)&(WV<G_ANZ);WV=np.where(_wu,np.float32(-999.0),WV).astype(WV.dtype);SCHLUCHT_T64U['wv_unter_boden_entfernt']=int(_wu.sum());print('wv_unter_t64u',int(_wu.sum()))   # t64u Le: verdeckte Wasserecken (Spiegel unter Boden) raus [S]
+import runde_m_t65u as RM;WV,G_ANZ,LUECKE_T65U=RM.fluss_luecken(WV,G_ANZ,_VBc);print('luecke_t65u',LUECKE_T65U);WV,LUECKE_T65U['tuempel']=RM.tuempel_eben(WV,G_ANZ);WV,LUECKE_T65U['mulden']=RM.mini_senken(WV);print('mulden_t65u',LUECKE_T65U['tuempel'],LUECKE_T65U['mulden'])   # t65u Runde M3: Fluss lueckenlos bis Auslass [S]
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)
@@ -621,6 +622,7 @@ def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland w
     N=C*(1-m[...,None])+B*m[...,None];out=np.clip(np.round(N),0,255).astype(np.uint8)
     return out.reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3),'farbaenderung_mittel':round(float(np.abs(N-C).mean()),2)}
 VC,VCW_T64U=vc_weich(VC,G_ANZ,WV,WEGA);print('vcweich_t64u',VCW_T64U)
+VC,VCF_T65U=RM.vc_flecken(VC,G_ANZ,WV);print('vcflecken_t65u',VCF_T65U)   # t65u Runde M1d [S]
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
@@ -646,6 +648,7 @@ def _anz_objekte():                                    # t62u: Objekte der Anzei
         L[:]=neu;st[nm]={'verschoben':v,'im_wasser_entfernt':w}
     return st
 OBJ_T62U=_anz_objekte();print('objekte_t62u',OBJ_T62U)
+OBJ_T65U=RM.objekte({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},G_ANZ,WV,OV,haeuser,RAMPWEGE,bruecken,NX,NY);print('objekte_t65u',OBJ_T65U)   # t65u Runde M2 [S]
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
@@ -658,3 +661,5 @@ Z.update(wand_dreiecke=int(len(TW)),boden_dreiecke=int((~ST).sum()),zellen_wand_
  klippe_hoehe_median_je_wand={w:round(float(np.median(kh[steil&nd.binary_dilation(wn==w,iterations=3)])),2) for w in WANDH},
  bandzellen_umgedeutet=int(wand.sum()),begehbar_3d=int(b3d.sum()))
 json.dump(Z,open('relief_zaehlung.json','w'),indent=1,ensure_ascii=False);print(json.dumps(Z,ensure_ascii=False))
+CSV_T65U,CSV_T65U_ORTE=RM.csv_nachlauf('zellen_relief.csv',WV,G_ANZ,NX,NY);print('csv_t65u',CSV_T65U)   # t65u Runde M1 [S]
+json.dump({'fluss_luecken':LUECKE_T65U,'vertexfarben':VCF_T65U,'objekte':OBJ_T65U,'csv':CSV_T65U,'csv_orte':CSV_T65U_ORTE},open('pruefung/runde_m_aenderungen_t65u.json','w'),indent=1,ensure_ascii=False)
