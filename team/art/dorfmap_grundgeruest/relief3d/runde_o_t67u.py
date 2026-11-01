@@ -82,8 +82,9 @@ def grob_entspitzen(GA,WV,BAND,RS,frei=0.8,k=0.3):
     sel=frei_m&(e>frei);neu=np.where(sel,md+frei+(e-frei)*k,g)
     # O8: Nadeln auch am Wasser (nicht Bandnachbar), Boden bleibt >= Wasser+0.3 [A]
     wmx=nd.maximum_filter(np.where(WV>-900,WV,-999.0),7)
-    sel2=~(bz[cy,cx]|bz[cy2,cx]|bz[cy,cx2]|bz[cy2,cx2])&~sel&(WV<=-900)&(e>1.2)
-    n2=np.maximum(md+1.2+(e-1.2)*k,wmx+0.3);sel2&=n2<g;neu=np.where(sel2,n2,neu)
+    bb=BAND;sel2=~(bb[cy,cx]|bb[cy2,cx]|bb[cy,cx2]|bb[cy2,cx2])&~sel&(WV<=-900)&(e>1.0)&(g>=nd.maximum_filter(g,3))
+    sel2=nd.binary_dilation(sel2,iterations=1)&~(bb[cy,cx]|bb[cy2,cx]|bb[cy,cx2]|bb[cy2,cx2])&(WV<=-900)&(e>0.6)
+    n2=np.maximum(md+0.6+np.maximum(e-0.6,0)*k,wmx+0.3);sel2&=n2<g;neu=np.where(sel2,n2,neu)
     GA[:]=neu.astype(GA.dtype)
     return GA,{'punkte':int(sel.sum()),'punkte_wasser':int(sel2.sum()),'abtrag_max_m':round(float((g-neu).max()),2)}
 
