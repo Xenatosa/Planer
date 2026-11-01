@@ -8,8 +8,14 @@ const gz=async s=>{const b=Uint8Array.from(atob(s),c=>c.charCodeAt(0));return JS
 const f32=s=>new Float32Array(Uint8Array.from(atob(s),c=>c.charCodeAt(0)).buffer),u8=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 const hash=(a,b)=>{const v=Math.sin(a*12.9898+b*78.233)*43758.5453;return v-Math.floor(v);};
 const spaltenLesen=D=>{const sp={};for(const c of D.reihenfolge){const k=D.spalten[c],r=u8(k.i);sp[c]={w:k.w,i:k.t=='uint8'?r:k.t=='uint16'?new Uint16Array(r.buffer):new Uint32Array(r.buffer)};}return sp;};
+const zeigeFehler=e=>{const l=$('lade');const t='Fehler beim Laden: '+(e&&e.message||e)+'\n\n'+(e&&e.stack||'')+'\n\nBitte diese Meldung an das Team schicken. Browser: '+navigator.userAgent;if(l){l.style.cssText+=';white-space:pre-wrap;color:#a00;font:13px monospace;padding:20px;overflow:auto;background:#fff;z-index:99';l.textContent=t;}else document.body.insertAdjacentHTML('beforeend','<pre style="color:red;position:absolute;inset:0;background:#fff;z-index:99;white-space:pre-wrap">'+t.replace(/</g,'&lt;')+'</pre>');};
+addEventListener('error',ev=>{if($('lade'))zeigeFehler(ev.error||ev.message);});addEventListener('unhandledrejection',ev=>{if($('lade'))zeigeFehler(ev.reason);});
+let __st='',__t0=performance.now();const stufe=async t=>{__st=t;const l=$('lade');if(l)l.textContent='Lade Welt … '+t+' ('+((performance.now()-__t0)/1000).toFixed(1)+' s)';await new Promise(r=>setTimeout(r,0));};/* O5b: Fortschritt sichtbar, Browser kann zwischen Stufen zeichnen */
+window.__ladeWD=setTimeout(()=>{const l=$('lade');if(l&&!/Fehler/.test(l.textContent))l.textContent+='\nDas dauert ungewöhnlich lange (über 60 s) bei Schritt: '+__st;},60000);
+if(typeof DecompressionStream==='undefined')setTimeout(()=>zeigeFehler(new Error('Browser zu alt: DecompressionStream fehlt (Chrome/Brave/Edge ab 80, Firefox ab 113, Safari ab 16.4).')),0);
 (async()=>{
-const DN=await gz(window.NEU_GZ),DA=await gz(window.ALT_GZ),NX=DN.nx,NY=DN.ny;
+await stufe('Daten entpacken …');const DN=await gz(window.NEU_GZ),DA=await gz(window.ALT_GZ),NX=DN.nx,NY=DN.ny;
+await stufe('Grafik (WebGL) starten …');{const tc=document.createElement('canvas');if(!(tc.getContext('webgl2')||tc.getContext('webgl')))throw new Error('WebGL ist in diesem Browser nicht verfügbar (Hardwarebeschleunigung aus oder blockiert).');}
 const ren=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));
 ren.setSize(innerWidth,innerHeight);ren.shadowMap.enabled=!/[?&]nosh=1/.test(location.search);ren.shadowMap.type=THREE.PCFShadowMap;ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.0;document.body.appendChild(ren.domElement);
 const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c.height=256;const x=c.getContext('2d'),g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#5d8fc9');g.addColorStop(0.55,'#a9c6e4');g.addColorStop(1,'#dfe8ef');x.fillStyle=g;x.fillRect(0,0,2,256);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;sc.background=t;}sc.fog=new THREE.FogExp2(0xc9d8e6,0.0007);window.__sc=sc;window.__loch=()=>{sc.background=new THREE.Color(1,0,1);sc.fog=null;sc.traverse(o=>{if(!(o.isMesh||o.isLine||o.isPoints||o.isSprite))return;let e='';for(let q=o;q;q=q.parent)if(q.userData&&q.userData.ebene){e=q.userData.ebene;break}o.visible=(e=='gelaende')&&!o.isInstancedMesh;});};   // t64u Lochsuche-Hook [A]
@@ -29,8 +35,8 @@ const sc=new THREE.Scene();{const c=document.createElement('canvas');c.width=2;c
  const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,fog:false,toneMapped:false}));m.name='ferneBerge';window.__fb=m;sc.add(m);}
 const cam=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,0.1,3000);
 const SWON=/[?&]softwater=1/.test(location.search),SWH=(Math.min(innerWidth,innerHeight)<700||/lod=1/.test(location.search))?0.5:1;/* O5: Handy halbe Aufloesung Tiefenpass [A] */
-const swRT=new THREE.WebGLRenderTarget(4,4,{depthTexture:new THREE.DepthTexture(4,4,THREE.UnsignedIntType)});swRT.depthTexture.minFilter=swRT.depthTexture.magFilter=THREE.NearestFilter;
-window.__swU={d:{value:swRT.depthTexture},r:{value:new THREE.Vector2(1,1)},on:{value:SWON?1:0}};const swM=new THREE.MeshBasicMaterial({colorWrite:false});
+const swRT=SWON?new THREE.WebGLRenderTarget(4,4,{depthTexture:new THREE.DepthTexture(4,4,THREE.UnsignedIntType)}):null;if(swRT)swRT.depthTexture.minFilter=swRT.depthTexture.magFilter=THREE.NearestFilter;/* O5b: Tiefentextur nur mit ?softwater=1 */
+window.__swU={d:{value:swRT?swRT.depthTexture:(()=>{const t=new THREE.DataTexture(new Uint8Array([255,255,255,255]),1,1);t.needsUpdate=true;return t;})()},r:{value:new THREE.Vector2(1,1)},on:{value:SWON?1:0}};const swM=new THREE.MeshBasicMaterial({colorWrite:false});
 function swPass(){if(!SWON||!window.__wmesh)return;const v=new THREE.Vector2();ren.getDrawingBufferSize(v);const w=Math.max(1,Math.round(v.x*SWH)),h=Math.max(1,Math.round(v.y*SWH));if(swRT.width!=w||swRT.height!=h)swRT.setSize(w,h);window.__swU.r.value.set(v.x,v.y);const wv=window.__wmesh.visible;window.__wmesh.visible=false;sc.overrideMaterial=swM;ren.setRenderTarget(swRT);ren.render(sc,cam);ren.setRenderTarget(null);sc.overrideMaterial=null;window.__wmesh.visible=wv;}
 const oc=new OrbitControls(cam,ren.domElement);oc.enableDamping=true;oc.maxPolarAngle=Math.PI;oc.screenSpacePanning=true;
 sc.add(new THREE.HemisphereLight(0xc2d8f2,0xa39c8e,1.2));
@@ -93,7 +99,7 @@ const ALT=new THREE.Group();sc.add(ALT);let HA;
  const wg=new THREE.Group();wg.userData.ebene='wasser';wg.add(new THREE.Mesh(geo(q),new THREE.MeshPhongMaterial({color:0x4a8ec0,transparent:true,opacity:0.65,shininess:80,side:THREE.DoubleSide})));ALT.add(wg);
  objekte(DA,HA,ALT,menschPos);}
 // ---------- NEU (Relief t42u: glattes 0,5-m-Hoehenfeld, c20-Draufsicht als Bodentextur, Waende mit Wandtextur) ----------
-const NEU=new THREE.Group();sc.add(NEU);const G=f32(DN.GB||DN.G),WV=f32(DN.WV),RS=DN.rs,GX=NX*RS+1,GY=NY*RS+1,COSW=Math.cos(DN.wandwinkel*Math.PI/180);const gH9=(x,z)=>{const u=Math.min(Math.max(x*RS,0),GX-1.001),v=Math.min(Math.max(z*RS,0),GY-1.001),i=Math.floor(u),j=Math.floor(v),fu=u-i,fv=v-j,a=G[j*GX+i],b=G[j*GX+i+1],c=G[(j+1)*GX+i],d=G[(j+1)*GX+i+1];return (a*(1-fu)+b*fu)*(1-fv)+(c*(1-fu)+d*fu)*fv;},gN9=(x,z)=>{const e=0.5/RS,hx=(gH9(x+e,z)-gH9(x-e,z))/(2*e),hz=(gH9(x,z+e)-gH9(x,z-e))/(2*e),l=Math.hypot(hx,1,hz);return [-hx/l,1/l,-hz/l];};   // t67u O9 S3 [A]
+await stufe('Gelände bauen …');const NEU=new THREE.Group();sc.add(NEU);const G=f32(DN.GB||DN.G),WV=f32(DN.WV),RS=DN.rs,GX=NX*RS+1,GY=NY*RS+1,COSW=Math.cos(DN.wandwinkel*Math.PI/180);const gH9=(x,z)=>{const u=Math.min(Math.max(x*RS,0),GX-1.001),v=Math.min(Math.max(z*RS,0),GY-1.001),i=Math.floor(u),j=Math.floor(v),fu=u-i,fv=v-j,a=G[j*GX+i],b=G[j*GX+i+1],c=G[(j+1)*GX+i],d=G[(j+1)*GX+i+1];return (a*(1-fu)+b*fu)*(1-fv)+(c*(1-fu)+d*fu)*fv;},gN9=(x,z)=>{const e=0.5/RS,hx=(gH9(x+e,z)-gH9(x-e,z))/(2*e),hz=(gH9(x,z+e)-gH9(x,z-e))/(2*e),l=Math.hypot(hx,1,hz);return [-hx/l,1/l,-hz/l];};   // t67u O9 S3 [A]
 const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,0),GY-1.001);const i=x|0,j=z|0,fx=x-i,fz=z-j,k=j*GX+i;
  return G[k]*(1-fx)*(1-fz)+G[k+1]*fx*(1-fz)+G[k+GX]*(1-fx)*fz+G[k+GX+1]*fx*fz;};
 {const p=new Float32Array(GX*GY*3),VC=u8(DN.VC),cl=new Float32Array(GX*GY*3);for(let k=0;k<GX*GY;k++){const i=k%GX,j=(k/GX)|0;p.set([i/RS,G[k],j/RS],k*3);for(let c=0;c<3;c++)cl[k*3+c]=Math.pow(VC[k*3+c]/255,2.2);}
@@ -212,7 +218,16 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
  {const hG=(x,z)=>{const fi=Math.min(GX-2,Math.max(0,x*RS)),fj=Math.min(GY-2,Math.max(0,z*RS)),i=fi|0,j=fj|0,a=fi-i,b=fj-j,k=j*GX+i;return G[k]*(1-a)*(1-b)+G[k+1]*a*(1-b)+G[k+GX]*(1-a)*b+G[k+GX+1]*a*b;};   // t48u R5: Rampen-Pfade als Overlay (Ebene wege) [A]
   // t67u O8: Rampen folgen der sichtbaren Oberflaeche (Strahl auf Grob+Feinnetz), 5 Querpunkte, Raender blenden aus, leicht geschwungen [A]
   const BM=(window.__bodenMeshes||[]);NEU.updateMatrixWorld(true);const rcR=new THREE.Raycaster(),vR=new THREE.Vector3(),dn=new THREE.Vector3(0,-1,0);
-  const hS=(x,z)=>{vR.set(x,0,z);NEU.localToWorld(vR);rcR.set(new THREE.Vector3(vR.x,500,vR.z),dn);const h=rcR.intersectObjects(BM,false);if(h.length){const q=NEU.worldToLocal(h[0].point.clone());return q.y;}return hG(x,z);};
+  /* O5b: Rampenhoehe per Raster-Buckets statt Raycaster gegen Millionen Dreiecke (das blockierte den Ladevorgang minutenlang -> 'Lade Welt' haengt). Gleiches Ergebnis: hoechster Treffer von oben [A] */
+  const BK=2,BX=Math.ceil(NX/BK)+1,BY=Math.ceil(NY/BK)+1,BKT=Array.from({length:BX*BY},()=>[]),TRI=[];
+  for(const me of BM){const P=me.geometry.attributes.position.array,I=me.geometry.index?me.geometry.index.array:null,n=I?I.length:P.length/3;
+   for(let t=0;t<n;t+=3){const a=I?I[t]:t,b=I?I[t+1]:t+1,c=I?I[t+2]:t+2;const id=TRI.length;TRI.push(P,a,b,c);
+    const x0=Math.min(P[a*3],P[b*3],P[c*3]),x1=Math.max(P[a*3],P[b*3],P[c*3]),z0=Math.min(P[a*3+2],P[b*3+2],P[c*3+2]),z1=Math.max(P[a*3+2],P[b*3+2],P[c*3+2]);
+    for(let bj=Math.max(0,Math.floor(z0/BK));bj<=Math.min(BY-1,Math.floor(z1/BK));bj++)for(let bi=Math.max(0,Math.floor(x0/BK));bi<=Math.min(BX-1,Math.floor(x1/BK));bi++)BKT[bj*BX+bi].push(id);}}
+  const hS=(x,z)=>{const bi=Math.floor(x/BK),bj=Math.floor(z/BK);if(bi<0||bj<0||bi>=BX||bj>=BY)return hG(x,z);let best=-Infinity;
+   for(const id of BKT[bj*BX+bi]){const P=TRI[id],a=TRI[id+1]*3,b=TRI[id+2]*3,c=TRI[id+3]*3;const ax=P[a],az=P[a+2],bx=P[b]-ax,bz=P[b+2]-az,cx=P[c]-ax,cz=P[c+2]-az,d=bx*cz-bz*cx;if(Math.abs(d)<1e-12)continue;
+    const px=x-ax,pz=z-az,u=(px*cz-pz*cx)/d,v=(bx*pz-bz*px)/d;if(u<-1e-6||v<-1e-6||u+v>1+1e-6)continue;const y=P[a+1]+u*(P[b+1]-P[a+1])+v*(P[c+1]-P[a+1]);if(y>best)best=y;}
+   return best>-Infinity?best:hG(x,z);};
   const p=[],ix=[],cR=[],QO=[-1.15,-0.7,0,0.7,1.15],QA=[0,1,1,1,0],QH=[0.02,0.06,0.07,0.06,0.02];let wi=0;
   for(const L0 of(DN.rampenwege||[])){wi++;const L=[];for(let m=0;m<L0.length;m++){L.push(L0[m]);if(m<L0.length-1)for(const f of[1/3,2/3])L.push([L0[m][0]+(L0[m+1][0]-L0[m][0])*f,L0[m][1]+(L0[m+1][1]-L0[m][1])*f]);}   // t67u O9 S4: Rampe 3x dichter -> folgt Feinrelief statt zu ueberbruecken [A]
    for(let n=0;n<L.length;n++){const[a0,b0]=L[Math.max(0,n-1)],[a1,b1]=L[Math.min(L.length-1,n+1)],dx=a1-a0,dz=b1-b0,l=Math.hypot(dx,dz)||1,nx=-dz/l,nz=dx/l,[x0,z0]=L[n];
@@ -266,4 +281,4 @@ let t0=performance.now();window.__szene=sc;window.__info=()=>({dreiecke_gerender
   if(keys.w)cam.position.addScaledVector(f,v);if(keys.s)cam.position.addScaledVector(f,-v);if(keys.d)cam.position.addScaledVector(r,v);if(keys.a)cam.position.addScaledVector(r,-v);
   cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;cam.rotation.set(pitch,yaw,0,'YXZ');}else oc.update();if(window.__wu)window.__wu.value=t/1000;(window.__fb&&(__fb.visible=cam.position.y>-30)),swPass(),ren.render(sc,cam);});
 onresize=()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();ren.setSize(innerWidth,innerHeight);};
-$('lade').remove();})().catch(e=>{document.body.insertAdjacentHTML('beforeend','<pre style="color:red">'+e.stack+'</pre>');throw e;});
+await stufe('Erstes Bild zeichnen …');clearTimeout(window.__ladeWD);$('lade').remove();})().catch(e=>{zeigeFehler(e);throw e;});

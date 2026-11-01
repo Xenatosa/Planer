@@ -185,3 +185,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Umgesetzt [A]: Marching-Triangles je Wasserdreieck, Schnittpunkte exakt auf Boden (Höhe = Spiegel − Tiefe, linear auf Kante). Schalter `?clip=1` (Standard aus).
 - Gesehen [S]: o6a/fluss_7_a.png, o6a/fluss_9_a.png. Zähne am linken Ufer fluss_7 und Stufen fluss_9 **bleiben**. Zusätzlich harte hellblaue Platten (fluss_7 rechts unten) – schlechter als O5.
 - Folgerung [A]: Die Zähne sitzen nicht in der Wasser-Schnittlinie; vermutlich Boden/Schnee-Grenze im Grobnetz (gleiches Muster wie G4). Deshalb Clip nur als Schalter, Standard unverändert O5.
+
+## O5b Ladehänger (Brave/IE „Lade Welt …“)
+- Ursache: seit e30690b (O8b) Rampenhöhen per Raycaster gegen das komplette Bodennetz (Millionen Dreiecke, ohne Beschleunigung), seit O9 S4 3x dichter. Blockiert den Hauptthread minutenlang (headless: >5 min statt 4 s). Kein JS-Fehler, kein fehlender Download.
+- Fix: gleiche Höhe (höchster Treffer von oben) über Raster-Buckets (2 m), Ladezeit headless 4,3 s. Abweichung Rampe zu Strahl-Boden 0,00 m (Messung chk.js).
+- Robust: Ladestufen im Ladebildschirm, Fehler/unhandled rejections sichtbar, Hinweis nach 60 s, WebGL-/DecompressionStream-Prüfung, Tiefentextur nur mit ?softwater=1.
