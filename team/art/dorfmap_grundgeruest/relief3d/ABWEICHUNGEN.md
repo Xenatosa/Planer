@@ -123,3 +123,13 @@ Nichts davon behoben.
 - Objekt-Raycast gegen Viewer-Netz (3837 Objekte): 6 Ausreißer [S] – Baum (80,1|174,9) 0,71 m versunken (Kraterhang), Steine (276,1|267,1) und (308,0|273,5) 0,33/0,35 m schwebend (Süd-Ufer), Geröll (149,4|31,2) 0,52 m, (271,2|116,2) 0,79 m, (271,3|116,6) 0,53 m versunken (Felskante). Ursache: Feinband-Netz weicht dort vom 0,5-m-Raster ab, an dem die Objekte gesetzt werden [A]. Nicht behoben (offen, klein).
 - Budget: Handy ?lod=1 1 099 919 Dreiecke [S] (<1,3 Mio); LS1 1280×800 totale_auge 2 461 247 (Textur) / 1 372 908 (Clay) [S]. Zellabgleich t42u Summe 0 [S]; CSV/glb unverändert.
 - 13 Textur- + 13 Clay-Ansichten test/t64u/ansicht_*_{tex,clay}_t64u.jpg, alle gesichtet. Auffällig: boden_wand Felsstreifen (s.o.); sued: helles rechteckiges Feld am Fluss (Weg-/Platzfläche, nicht untersucht); oben/clay: Ostrand leicht wellig (Sockelwellen, s.o.).
+
+## Runde M (t65u) – Zellen, Bäume, Fluss
+- Objekte: Browser-Raycast (pruefung/objekte_voll_t65u.json) alle Typen schwebend>0,15 m 0, versunken 0, im Wasser 0, Hang>45° 0, Baum über Haus 0 [S]. Alte Ausreißer: 2 Steine entfernt, Rest ≤0,11 m [S].
+- Bäume 1873 -> 1577 [F]: 60 Überlappung, 266 zu dicht (vor Runde M 55 Paare <0,1 m, Mindestabstand 0,0), 30 an gültigen Nachbarpunkten wieder gesetzt (bodenrichtig). Walddichte: 154 Waldzellen à 10 m, Verlust im Mittel 16,8 %, 28 Zellen >30 %, 3 Zellen >50 % (120|130, 130|30, 160|230) [S] (pruefung/wald_dichte_t65u.json). Felsen 95->94, Findlinge 40->35, Steine 872->803, Geröll 956->856 [F].
+- Zellen [F]: a_baum_ok 2102->0; 4 Wasser-Restzellen trocken; 111 Vertexfarben geglättet. Offen: d_vertex>60 168, b_bebaubar_hang 1223 (Plan fremdes Team), b_spiegel_unter_bett 323 (c20-Altwerte).
+- Wasser [F]: See/Fluss-Lücke 4,24 m zu (34 Vertices), Stummel 1,5 m (19), 4 Mulden ≤2 cm an Quelle gehoben, Tümpel West eben -9,45 (932 Punkte, 123 trocken). Hauptfluss Quelle->Ostrand 211 m, bergauf_pfad 0 [S]. See = gewollte Senke (bergauf_summe 3969 nur Seepunkte).
+- Helles Rechteck Ansicht sued = Quartiersplatz Q1 (38,8|280,4, 10×10 m, E40). Nur Farbe 0xb0a48c->0x8f8a82, fällt nicht mehr auf [gesichtet].
+- Wandstreifen boden_wand: Shader-Textur gedreht/gemischt, ohne Formänderung; in boden_wand tex/clay keine starken Streifen mehr sichtbar, feine Linien bleiben [gesichtet].
+- Messung: Handy 1 053 275 Dreiecke [S], Mesh-Spalt LS1/LS2 0 [S], t42u Summe 0 [S].
+- Offen: 12 der ersten 25 Nahkameras lagen in Wand/Haus/Baum, als _v2 von oben neu; Kamera-Namen krater_* zeigen Dorf statt Krater (Koordinaten falsch, Krater nur in Ansichten geprüft). Walddichte-Lücken in 3 Zellen nur teilweise aufgefüllt. Vorher/Nachher-Draufsicht Wald nicht gerendert.

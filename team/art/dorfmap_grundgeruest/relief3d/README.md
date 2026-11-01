@@ -88,3 +88,5 @@ Der Westarm fließt jetzt im Tal um die Hügel herum (fluss_k.py). Der Wasserspi
 
 ## Runde L (t64u)
 Randschlitze 0 m (Viewer, LS1/LS2), K9-Fixes (Südfluss-Stummel, Schluchtwasser, Südwand-Streifen gemindert), Flachland-Farben weich, Lochsuche 29 Nahkameras: 0 Löcher. Mesh-Spalt 0, bergauf 0, Handy 1 099 919 Dreiecke, t42u Summe 0. Offen: Ostrand (bewusst, Sockelwellen), Felswand-Streifen, 6 Objekt-Ausreißer bis 0,79 m. Details ABWEICHUNGEN.md, Bilder test/t64u/, Prüfungen pruefung/*_t64u*.json. Lochsuche: `LOCH=1 CAMS="$(cat pruefung/loch_kameras_t64u.json)" node test_loch_t64u.js`.
+
+Runde M (t65u): Raycast aller Objekte 0 schwebend/0 versunken/0 im Wasser [S]; Bäume 1873->1577 [F] (60 Überlappung, 266 Abstand/Doppelte; vorher 55 Baumpaare <0,1 m; 30 an Lücken nachgesetzt); Tümpel West eben -9,45 [F]; See/Fluss-Lücke zu [F]; Q1-Platz Farbe gedämpft; Handy 1 053 275 Dreiecke [S]; Mesh-Spalt 0, bergauf_pfad 0, t42u Summe 0 [S]. Bilder test/t65u/ (13+13 Ansichten, 34 Nahbilder, Kachelraster tex+clay 4x4).

@@ -24,3 +24,6 @@ Bäume 1873->1547, Felsen 95->92, Findlinge 40->30, Steine 871->809, Geröll 956
 
 ## Offen
 Raycast, 20+ Nahbilder, Kachelraster, helles Rechteck Süd, Wandstreifen, 13+13 Ansichten, Doku.
+
+## Stand Ende Runde M
+Alles erledigt bis auf: Wald-Vorher/Nachher-Draufsicht nicht gerendert, krater_*-Nahkameras falsch platziert, 3 Waldzellen >50 % Verlust. Raycast 0/0/0, Handy 1 053 275, Spalt 0, bergauf_pfad 0, t42u 0. Q1 Farbe gedämpft. Details ABWEICHUNGEN.md.
