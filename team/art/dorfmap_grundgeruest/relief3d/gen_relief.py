@@ -649,6 +649,20 @@ def ufer_profil(GA,WV,B=2.5,DM=1.0,TAN=0.70):   # O7 I2 [F]: Bett/Ufer glatt sta
     G1=np.where(land,np.maximum(G1,G0-1.0),G1)   # Fels/Wand: hoechstens 1 m absenken, dort steiler erlaubt
     d=G1-G0;return G1.astype(GA.dtype),{'bett_ecken':int((bett&(d>0.005)).sum()),'land_ecken':int((land&(d<-0.005)).sum()),'max_anhebung_m':round(float(d.max()),2),'max_absenkung_m':round(float(-d.min()),2)}
 if not os.environ.get('UFER_ALT'):G_ANZ,UFER_O7=ufer_profil(G_ANZ,WV);print('ufer_o7',UFER_O7)
+def bett_glatt(GA,WV,SIG=2.5,DMIN=0.05,DM=1.0,B=2.5,MAXD=0.5):   # O8 J2 [F]: Bett-Tiefe IM Wasser glatt (Gauss ueber nasse Ecken) statt zellweise Bloecke; WV unveraendert. Nur Anzeige.
+    w=WV>-900;G0=GA.astype(float);h=1.0/RS;s=SIG/h
+    frei=_mk&~nd.binary_dilation(_VBc,iterations=2)&(WEGA.reshape(GA.shape)<20)
+    D=np.where(w,WV-G0,0.0);Dc=np.clip(D,0,None)
+    Ds=nd.gaussian_filter(Dc*w,s)/np.maximum(nd.gaussian_filter(w.astype(float),s),1e-6)
+    si=(nd.distance_transform_edt(w)-0.5)*h;t=np.clip(si/B,0,1);sm=t*t*(3-2*t)
+    Dt=np.maximum(np.minimum(Ds,np.where(si<B,np.maximum(DM*sm,Ds*sm),Ds)),DMIN)
+    Dt=np.clip(Dt,D-MAXD,D+MAXD);Dt=np.maximum(Dt,DMIN)
+    m=w&frei;G1=np.where(m,WV-Dt,G0)
+    neg=w&~m&(G1>WV-DMIN)&~nd.binary_dilation(_VBc,iterations=1)   # nasse Ecken mit Tiefe<5 cm ausserhalb frei (nicht am Feinband)
+    G1=np.where(neg,WV-DMIN,G1)
+    d=G1-G0;Dn=np.where(w,WV-G1,9)
+    return G1.astype(GA.dtype),{'ecken':int((m&(np.abs(d)>0.005)).sum()),'neg_fix':int(neg.sum()),'max_hoch':round(float(d.max()),2),'max_tief':round(float(-d.min()),2),'tiefe_lt0_rest':int((w&(Dn<0)).sum()),'tiefe_lt5cm_rest':int((w&(Dn<0.049)).sum()),'tiefe_lt0_vorher':int((w&(D<0)).sum())}
+if not os.environ.get('BETT_ALT'):G_ANZ,BETT_J2=bett_glatt(G_ANZ,WV);print('bett_j2',BETT_J2)
 def vc_weich(VC,GA,WV,WEGA):   # t64u Runde L Boden: Vertexfarben im Flachland weichzeichnen (sigma 1,2 Ecken = 0,6 m) gegen blockige Gras/Erde/Schnee-Flecken; nicht an Wegen, Ufern, Hangkanten [A]
     C=VC.reshape(GA.shape+(3,)).astype(float);B=np.stack([nd.gaussian_filter(C[...,k],1.2) for k in range(3)],-1)
     gy,gx=np.gradient(GA.astype(float),0.5);sl=np.hypot(gx,gy)

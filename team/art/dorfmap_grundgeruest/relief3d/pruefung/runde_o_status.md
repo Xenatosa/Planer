@@ -202,3 +202,8 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Fix: gen_relief.py `_bandnaht_j1` setzt Feinband-Randpunkte auf das Grobnetz (17 839 Randpunkte, 3 geaendert, max 0,59 m). Aus mit NAHT_ALT=1.
 - Objekthoehen neu per Raycast aufgenommen (2 867), neu generiert: schwebend 0/0/0/0/0 (vorher 1 Baum 320,4|278,0 + 7 Steine) [S].
 - Spalt LS1 0, LS2 0; t42u 0; bergauf_pfad 0.
+
+## O8 J2 (01.11.)
+- gen_relief.py `bett_glatt` (aus mit BETT_ALT=1): Bett-Tiefe im Wasser = Gauss 2,5 m ueber nasse Ecken, min 5 cm, Ufer-smoothstep bleibt, Aenderung max 0,5 m. 20 471 Ecken, max +0,46/-0,45 m. Nasse Ecken mit Tiefe <0 bzw. <5 cm: vorher 0, nachher 0 (die "negativen Tiefen" aus O7 waren Viewer-Werte __hSurf vs WE, nicht Daten) [S].
+- WV unveraendert; Spalt 0/0, t42u 0, bergauf_pfad 0.
+- fluss_7 vorher/nachher (pruefung/o8/f7_vn.png): praktisch gleich, Stufen bleiben. Clay (f7_cl.png) zeigt: die Stufen sind der Umriss der nassen Zellen (Treppen-Kontur der Wassermaske), nicht das Bett [S]. Mit Zellwerten unveraendert nicht weiter loesbar ohne Wasser-/Ufer-Darstellung ueber die Zellmaske hinaus. 2. Versuch -> dokumentiert, weiter.
