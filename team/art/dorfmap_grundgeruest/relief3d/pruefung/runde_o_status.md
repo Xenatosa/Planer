@@ -121,3 +121,9 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - Ursache der Ufer-Treppen: die Uferfarbe folgte dem 1-m-Zellraster [A, Bildvergleich fluss_9_u gegen fluss_9_v]. Rechtes Ufer fluss_9: dunkle Streifen weg (angesehen). Linkes Ufer: Saegezaehne an der Wasserkante bleiben sichtbar (angesehen, NICHT behoben; Wasserkanten-Mesh, offen).
 - Raycast-Cache strahl_hoehe_t65u.json aus neuem Lauf aufgefrischt; Raycast danach 0/0/0 in allen 5 Arten [S].
 - wasser_ohne_randweg 5484 [S]: 14 stehende Gewaesser, alle gewollt (siehe N2).
+
+## Runde O3 (Stand 01.11.)
+- Schnee-Kaestchen: Ursache NICHT Eckfarben (VC weich, hf-Mittel 1,41) [S], sondern Detail-Bump dFdx/dFdy + 1,7-m-Kachel [A, per ?nobump=1 bestaetigt]. Fix: Kachel 5,1 m, Bump auf flachen Flaechen 0,22 statt 0,6. Angesehen an 6 Kameras (fluss_7/9, gipfel_3, krater_1, rampe_4, rand_2): Kaestchen weg.
+- Saegezaehne Ufer fluss_9/fluss_7: NICHT behoben. Feinband-Glaettung wirkungslos (Ufer liegt im Grobnetz) [S]; Spiegel-Glaettung verkleinert Zaehne, erzeugt aber Bergauf-Fluss (31) bzw. ist zu invasiv -> verworfen. Alpha-Rand (Tiefe) ohne sichtbare Wirkung.
+- fluss_7 heller Keil / Treppenschatten und wand_0_24 Sandstreifen: nicht behoben, nicht neu untersucht.
+- Endmessung: Spalt 0, t42u 0, Raycast 0/0/0 alle Typen, Budget 1 047 817 Dreiecke; Fehlerzaehler: spitzen 7, senken_0_8m 5, enge_grate 259, wasser_ohne_randweg 5484, sonst 0.

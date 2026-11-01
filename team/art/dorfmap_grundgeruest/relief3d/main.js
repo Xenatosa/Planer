@@ -141,9 +141,9 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
    diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',/[?&]nobump=1/.test(location.search)?'#include <normal_fragment_maps>':`#include <normal_fragment_maps>
    {vec3 N2=normalize(vWN);vec3 w2=pow(abs(N2),vec3(4.));w2/=w2.x+w2.y+w2.z;   // t48u R5: Detail-Bump (triplanar) gegen "verpixelt" [A]
-    float hb=((texture2D(tD,vWP.zy/3.1+.21).r*.5+texture2D(tD,vWP.zy/2.3).r*.5)*w2.x+(texture2D(tD,vWP.xy/3.1+.21).r*.5+texture2D(tD,vWP.xy/2.3).r*.5)*w2.z+texture2D(tD,vWP.xz/1.7).r*w2.y)*0.7+(texture2D(tD,vWP.zy/9.).r*w2.x+texture2D(tD,vWP.xy/9.).r*w2.z+texture2D(tD,vWP.xz/6.).r*w2.y)*0.3;
+    float hb=((texture2D(tD,vWP.zy/3.1+.21).r*.5+texture2D(tD,vWP.zy/2.3).r*.5)*w2.x+(texture2D(tD,vWP.xy/3.1+.21).r*.5+texture2D(tD,vWP.xy/2.3).r*.5)*w2.z+texture2D(tD,vWP.xz/5.1).r*w2.y)*0.7+(texture2D(tD,vWP.zy/9.).r*w2.x+texture2D(tD,vWP.xy/9.).r*w2.z+texture2D(tD,vWP.xz/6.).r*w2.y)*0.3;
     vec3 dpx=dFdx(-vViewPosition),dpy=dFdy(-vViewPosition);vec3 r1=cross(dpy,normal),r2=cross(normal,dpx);float det=dot(dpx,r1);
-    vec3 grd=sign(det)*(dFdx(hb)*r1+dFdy(hb)*r2)*(0.6+1.4*(1.-abs(N2.y)));normal=normalize(abs(det)*normal-grd);}`);};
+    vec3 grd=sign(det)*(dFdx(hb)*r1+dFdy(hb)*r2)*(0.22+1.78*(1.-abs(N2.y)));/* O3: Boden-Bump grober+schwaecher, sonst 2x2-Pixel-Kaestchen im Schnee (dFdx/dFdy) [A] */normal=normalize(abs(det)*normal-grd);}`);};
  mat.onBeforeCompile=_pat(0);matF.onBeforeCompile=_pat(1);
  const m=new THREE.Mesh(gb,mat);m.receiveShadow=m.castShadow=true;m.userData.boden=1;
  let fwMesh=null;if(FW){const b2=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0)).buffer,FS=FW.fs,FX=NX*FS+1,vid=new Uint32Array(b2(FW.vid)),fh=new Float32Array(b2(FW.h)),fc=new Uint8Array(b2(FW.c)),S=FS/(LS==1?1:2)>=1?(LS==1?1:2):1;
