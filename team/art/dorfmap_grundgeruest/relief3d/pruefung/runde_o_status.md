@@ -233,3 +233,10 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 - gen_relief.py: `kontur_glatt` (Gauss SIG 4 auf Nassmaske, nur ruhiges Wasser 9x9-Spiegelspanne <0,1 m, Entfernungen die Gewässer teilen werden zurückgenommen). Gilt für alle Flüsse. Zellwerte unverändert, nur Anzeige-Spalten. Abschaltbar mit KONTUR_ALT=1.
 - Ergebnis: +77 / −243 Ecken, kein Gewässer geteilt, Randabfluss erhalten (Randecken 95→93), Spalt 0, t42u 0, Stufen >1 m ausserhalb Schlucht 0, bergauf_pfad 1 (vorher 0, eine Ecke >2 cm, dokumentiert).
 - Ehrlich: Sichtbarer Effekt in fluss_7/3/9/4 minimal (t65/k1_vn3.png). Die Treppe bei fluss_7 kommt vor allem vom zellbasierten Sand-/Uferband der Textur (gen_textur), nicht von der Wassermaske. Breitere Glättung (ohne Ruhig-Filter) erzeugte bergauf_pfad 14–18 → verworfen. Nach 2 Ansätzen dokumentiert, offen: Texturband an geglättete Kontur binden.
+
+## K1b Uferfarbe an Kontur, Aufwärtspunkt, Wasserkörper
+- Uferband (dunkler Saum, Kies, Flussgrund) aus geglättetem Ecken-Nassfeld (Gauss 0,6 m der finalen Wasserkontur) statt Zellmaske (`ufer_farbe`, abschaltbar UFERFARBE_ALT=1).
+- Aufwärtspunkt geklärt: Stück 2, Nordrand (Ecke 25/429, +3,5 cm). Ursache: K1 nahm die Rinnen-Ecken der 13,40-m-Auslassspalte weg, der Pfad lief dann über 13,44. Fix: Ecken tiefer als ein nasser Nachbar (>2 cm) werden nicht weggenommen → bergauf_pfad 0.
+- 18→19 geklärt: kein Tümpel, eine einzelne zugefügte Ecke (Zelle ~x325,y272) ohne Altwasser-Anschluss. Fix: solche Einzelstücke verworfen → 18→18.
+- Neu: zu 76 / weg 229, Randecken 95→93, Spalt 0, t42u 0, Stufen >1 m ausserhalb Schlucht 0, bergauf_pfad 0. zellen_relief.csv nur Anzeigespalten geändert.
+- Angesehen (t65/k1b_vn.png, k1b/tuempel_west_n.png): Uferfarbe minimal weicher. Die eckige Kante bei fluss_7 bleibt: Clay zeigt, dass sie Geometrie ist (Bett-/Uferterrassen aus ufer_profil, zellgebunden), nicht Farbe. Nicht behoben (2 Ansätze verbraucht). Wasser auf Land: im Textur-Render nicht gesehen; Tümpel West zeigt vorne eine leicht pixelige Wasserkante (0,5-m-Ecken-Alpha).

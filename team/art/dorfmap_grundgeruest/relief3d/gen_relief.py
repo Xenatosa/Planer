@@ -374,11 +374,13 @@ gzv,gxv=np.gradient(G);weh=np.clip(0.5+0.8*nz(10,41)+0.6*np.tanh(gzv*3),0,1);sn=
 col=col*(1-sn*0.10*weh)[...,None]+(sn*0.10*weh)[...,None]*np.array([0.70,0.80,0.95])
 col=col*(1+0.12*(ton-1))*(1+0.05*nz(1.5,21))[...,None]
 # t54u-C: klare Uferlinie (nasser dunkler Saum direkt am Wasser) + Kies/Flussgrund hell sichtbar unter flachem Wasser [A]
-_wu=up(wa,0.6);_ul=np.clip(1-np.abs(_wu-0.35)/0.25,0,1)*(1-up(wand,0.6))
-col=col*(1-0.75*_ul[...,None])+0.75*_ul[...,None]*np.array([0.30,0.29,0.27])
-_kg=np.clip(up(kies,0.5)*1.4,0,1)*np.clip((_wu-0.5)*3,0,1);col=col*(1-_kg[...,None])+_kg[...,None]*np.array([0.62,0.58,0.52])
-_fg=np.clip((_wu-0.6)*3,0,1)*(1-_kg);col=col*(1-0.7*_fg[...,None])+0.7*_fg[...,None]*np.array([0.42,0.40,0.36])
-VC=(np.clip(col,0,1)*255).astype(np.uint8)
+def ufer_farbe(col,_wu):
+    _ul=np.clip(1-np.abs(_wu-0.35)/0.25,0,1)*(1-up(wand,0.6))
+    col=col*(1-0.75*_ul[...,None])+0.75*_ul[...,None]*np.array([0.30,0.29,0.27])
+    _kg=np.clip(up(kies,0.5)*1.4,0,1)*np.clip((_wu-0.5)*3,0,1);col=col*(1-_kg[...,None])+_kg[...,None]*np.array([0.62,0.58,0.52])
+    _fg=np.clip((_wu-0.6)*3,0,1)*(1-_kg);return col*(1-0.7*_fg[...,None])+0.7*_fg[...,None]*np.array([0.42,0.40,0.36])
+COL_BASIS=col.copy();WU_ZELLE=up(wa,0.6)
+VC=(np.clip(ufer_farbe(col,WU_ZELLE),0,1)*255).astype(np.uint8)
 # t48u R5: GLB neu mit Vertexfarben (boden+waende), fuer GLTFLoader-Pfad im Viewer (?glb=1 ueber lokalen Server) [A]
 _vc=np.concatenate([VC.reshape(-1,3),np.full((VC.reshape(-1,3).shape[0],1),255,np.uint8)],1)
 sc=trimesh.Scene()
@@ -667,13 +669,17 @@ def kontur_glatt(GA,WV,SIG=4.0,HMAX=0.5):   # O9 K1 [F]: Wasserumriss aus geglae
     _,(iy,ix)=nd.distance_transform_edt(~w,return_indices=True);wvn=WV[iy,ix]
     add=(~w)&frei&(bl>0.5)&(GA<=wvn+HMAX)&nd.binary_dilation(w,iterations=4)
     wmin=nd.minimum_filter(np.where(w,WV,1e9),9);wmax=nd.maximum_filter(np.where(w,WV,-1e9),9);add&=(wmax-wmin<0.1)   # nur an ruhigem Wasser (kein Stufen-Kurzschluss -> kein Bergauf)
-    rem=_kontur_zus(w,add,w&frei&(bl<0.5)&(e<=3.01)&(nd.maximum_filter(e,9)>=4)&(wmax-wmin<0.1))
-    W2=(w|add)&~rem;rd=lambda m:int(m[0].sum()+m[-1].sum()+m[:,0].sum()+m[:,-1].sum())
+    rem=_kontur_zus(w,add,w&frei&(bl<0.5)&(e<=3.01)&(nd.maximum_filter(e,9)>=4)&(wmax-wmin<0.1)&~(nd.maximum_filter(np.where(w,WV,-1e9),3)>WV+0.02))   # K1b: Rinnen-Ecken (tiefer als Nachbar) bleiben -> kein Bergauf-Umweg
+    W2=(w|add)&~rem;_L,_n=nd.label(W2,np.ones((3,3)));_ok=np.zeros(_n+1,bool);_ok[np.unique(_L[w&W2])]=True;_ok[0]=True;add&=_ok[_L];W2=(w|add)&~rem   # K1b: neue Einzelecken ohne Altwasser verwerfen
+    rd=lambda m:int(m[0].sum()+m[-1].sum()+m[:,0].sum()+m[:,-1].sum())
     WV2=np.where(add,wvn,np.where(rem,-999,WV)).astype(WV.dtype)
     return WV2,{'zu':int(add.sum()),'weg':int(rem.sum()),'komp_vor':int(nd.label(w,np.ones((3,3)))[1]),'komp_nach':int(nd.label(W2,np.ones((3,3)))[1]),'randecken_vor':rd(w),'randecken_nach':rd(W2)}
 WV_ZELLE=WV.copy()
 if os.environ.get('KDBG'):np.savez_compressed(os.environ['KDBG'],WV=WV,GA=G_ANZ,mk=_mk,vb=_VBc,wega=WEGA.reshape(G_ANZ.shape))
 if not os.environ.get('KONTUR_ALT'):WV,KONTUR_K1=kontur_glatt(G_ANZ,WV);print('kontur_k1',KONTUR_K1)
+if not os.environ.get('KONTUR_ALT') and not os.environ.get('UFERFARBE_ALT'):   # O9 K1b [F]: Uferband/Saum/Kies aus geglaetteter Wasserkontur (Ecken-Nassfeld) statt Zellmaske
+    _wk=nd.gaussian_filter((WV>-900).astype(float),1.2);_wu=_wk
+    VC=(np.clip(ufer_farbe(COL_BASIS,_wu),0,1)*255).astype(np.uint8);print('uferfarbe_k1b',float(np.abs(_wu-WU_ZELLE).mean()))
 if not os.environ.get('UFER_ALT'):G_ANZ,UFER_O7=ufer_profil(G_ANZ,WV);print('ufer_o7',UFER_O7)
 def bett_glatt(GA,WV,SIG=2.5,DMIN=0.05,DM=1.0,B=2.5,MAXD=0.5):   # O8 J2 [F]: Bett-Tiefe IM Wasser glatt (Gauss ueber nasse Ecken) statt zellweise Bloecke; WV unveraendert. Nur Anzeige.
     w=WV>-900;G0=GA.astype(float);h=1.0/RS;s=SIG/h
