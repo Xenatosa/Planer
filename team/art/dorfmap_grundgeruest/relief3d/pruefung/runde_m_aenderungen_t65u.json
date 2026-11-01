@@ -50,16 +50,16 @@
  },
  "objekte": {
   "baeume": {
-   "n_vorher": 1872,
-   "hoehe_neu": 375,
+   "n_vorher": 1871,
+   "hoehe_neu": 371,
    "abgesenkt": 0,
    "wasser": 0,
    "steil": 0,
    "ueberlapp": 60,
-   "abstand": 266,
-   "wandnetz_behalten": 94,
+   "abstand": 265,
+   "wandnetz_behalten": 97,
    "nachgesetzt": 30,
-   "zone_aufgefuellt": 13,
+   "zone_aufgefuellt": 15,
    "zonen": {
     "120|130": [
      17,
@@ -74,11 +74,11 @@
      9
     ]
    },
-   "n_nachher": 1589
+   "n_nachher": 1591
   },
   "felsen": {
    "n_vorher": 95,
-   "hoehe_neu": 2,
+   "hoehe_neu": 1,
    "abgesenkt": 4,
    "wasser": 0,
    "steil": 1,
@@ -110,14 +110,14 @@
   },
   "geroell": {
    "n_vorher": 956,
-   "hoehe_neu": 125,
-   "abgesenkt": 197,
+   "hoehe_neu": 127,
+   "abgesenkt": 200,
    "wasser": 0,
-   "steil": 97,
+   "steil": 95,
    "ueberlapp": 0,
    "abstand": 0,
-   "wandnetz_behalten": 411,
-   "n_nachher": 859
+   "wandnetz_behalten": 410,
+   "n_nachher": 861
   }
  },
  "csv": {

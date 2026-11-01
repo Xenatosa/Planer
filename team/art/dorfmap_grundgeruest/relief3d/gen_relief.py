@@ -490,6 +490,7 @@ FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
 # t57u: Schutthalde am Fuss als echte Kegel (nur unten, glatt) [A]
 _fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff(14,203)*0.3;FH=np.where(_vin,np.maximum(FH,FH*(1-_fz2)+np.maximum(FH,_sh)*_fz2),FB)
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
+import runde_o_t67u as RO;FH,ENTSP_T67U=RO.entspitzen(FH,FB,_vin);FH=np.where(_vin,FH,FB);print('entspitzen_t67u',ENTSP_T67U)   # t67u Runde O3: keine Nadeln/Trichter [A]
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]
 _li=(np.mod(_lk*7+np.floor(2*_ff(80,77)),4)).astype(int);_li=np.where(_ff(30,78)>1.3,4,_li);_tint=_PAL[_li]*(0.92+0.08*_ff(6,79))[...,None]

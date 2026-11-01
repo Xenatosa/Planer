@@ -44,3 +44,17 @@ def wege_frei(L5,DIST,rand=1.5,fs=4):
             neu.append(o)
         L[:]=neu;st[nm]=n
     return st
+
+def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25):
+    """t67u O3: Nadelspitzen weich gegen Nachbarmedian (2,75 m) stauchen, isolierte Senken bis 0,5 m unter Ueberlaufhoehe fuellen (relativ zur Grobform -> Krater bleibt) [A]"""
+    from skimage.morphology import reconstruction
+    FH=FH.copy();st={}
+    inn=nd.gaussian_filter(vin.astype(float),2)>0.98
+    for n in range(it):
+        md=nd.median_filter(FH,11);e=FH-md;ne=np.where(e>frei,frei+(e-frei)*k,e)
+        dlt=nd.gaussian_filter(np.where(inn,ne-e,0),0.8);FH=FH+dlt*inn;st['abtrag_max_m_%d'%n]=round(float(-dlt.min()),2)
+    def fu(A):
+        s=A.copy();s[1:-1,1:-1]=A.max();return reconstruction(s,A,method='erosion')
+    dep=(fu(FH)-FH)-(fu(FB)-FB);add=np.clip(dep-0.5,0,None)*inn
+    add=np.maximum(add,nd.gaussian_filter(add,1.0));FH=FH+add;st['senke_gefuellt_max_m']=round(float(add.max()),2);st['senke_punkte']=int((add>0.05).sum())
+    return FH,st
