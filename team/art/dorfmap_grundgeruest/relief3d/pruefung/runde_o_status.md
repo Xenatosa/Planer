@@ -224,3 +224,7 @@ Bilder: pruefung/o8/o8j3_s*.png, o8j3c.png
 
 ## O8 J5 Endmessung
 Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausserhalb Schlucht 0; Raycast schwebend 0; index.html 15,5 MB, relief_daten 8,0 MB. Ladezeit nicht neu gemessen.
+
+# Runde O9
+## K0 Ladezeit
+/workspace/dorfmap_3d_runde_O8.html, headless Chromium (SwiftShader), 1280x800, bis __test.bereit: 7,71 / 8,28 / 7,95 s, Median 7,95 s (< 10 s). Skript: test_ladezeit.js
