@@ -395,6 +395,7 @@ _fy,_fx=np.mgrid[0:FYn,0:FXn].astype(float);_gx=_fx/FS*RS;_gy=_fy/FS*RS
 _i=np.minimum(_gx.astype(int),GX-2);_j=np.minimum(_gy.astype(int),GY-2);_ax=_gx-_i;_az=_gy-_j
 _A=G[_j,_i];_B=G[_j,_i+1];_C=G[_j+1,_i];_D=G[_j+1,_i+1]
 FB=np.where(_az>=_ax,_A+_az*(_C-_A)+_ax*(_D-_C),_A+_ax*(_B-_A)+_az*(_D-_B))       # exakt die G-Dreiecke
+_FB0_T67U=FB.copy()   # t67u O5: exakte Grobform fuer Bandrand-Uebergang [A]
 _qb=np.kron(BAND,np.ones((FS,FS),bool));_qp=np.pad(_qb,1)
 _vin=_qp[:-1,:-1]&_qp[:-1,1:]&_qp[1:,:-1]&_qp[1:,1:]                                   # Vertex innen (alle 4 Quads im Band)
 _wf=nd.distance_transform_edt(_vin)/10.0;_wf=np.clip(_wf,0,1);_wf=_wf*_wf*(3-2*_wf)
@@ -490,6 +491,7 @@ FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
 # t57u: Schutthalde am Fuss als echte Kegel (nur unten, glatt) [A]
 _fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff(14,203)*0.3;FH=np.where(_vin,np.maximum(FH,FH*(1-_fz2)+np.maximum(FH,_sh)*_fz2),FB)
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
+import runde_o_t67u as RO;FH,BR_T67U=RO.bandrand_weich(FH,_FB0_T67U,_vin);print('bandrand_t67u',BR_T67U)   # t67u O5: keine Rechteck-Stufen am Feinbandrand [A]
 import runde_o_t67u as RO;FH,ENTSP_T67U=RO.entspitzen(FH,FB,_vin);FH=np.where(_vin,FH,FB);print('entspitzen_t67u',ENTSP_T67U)   # t67u Runde O3: keine Nadeln/Trichter [A]
 # Felsfarben je Schicht (grau/ocker/dunkel/hell) + Schnee auf Absaetzen und in Rinnen [A]
 _PAL=np.array([[0.96,0.98,1.04],[0.70,0.71,0.77],[1.10,1.10,1.13],[0.84,0.85,0.90],[1.08,0.98,0.84]])   # Runde D: grau/dunkelgrau, ocker sparsam (Index 4, selten) [A]

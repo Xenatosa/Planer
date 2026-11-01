@@ -58,3 +58,10 @@ def entspitzen(FH,FB,vin,it=3,frei=0.4,k=0.25):
     dep=(fu(FH)-FH)-(fu(FB)-FB);add=np.clip(dep-0.5,0,None)*inn
     add=np.maximum(add,nd.gaussian_filter(add,1.0));FH=FH+add;st['senke_gefuellt_max_m']=round(float(add.max()),2);st['senke_punkte']=int((add>0.05).sum())
     return FH,st
+
+def bandrand_weich(FH,FB0,vin,breite=8):
+    """t67u O5: im Feinband innerhalb 'breite' Feinpunkten (2 m) vom Rand weich auf die exakte Grobform ueberblenden -> keine sichtbaren Rechteck-Stufen [A]"""
+    d=nd.distance_transform_edt(vin);w=np.clip((d-1)/breite,0,1);w=w*w*(3-2*w)
+    rb=vin&~nd.binary_erosion(vin);v=float(np.abs(FH-FB0)[rb].max()) if rb.any() else 0
+    FH2=np.where(vin,FB0+w*(FH-FB0),FH)
+    return FH2,{'stufe_max_vorher_m':round(v,2),'stufe_max_nachher_m':round(float(np.abs(FH2-FB0)[rb].max()),2),'punkte':int((vin&(w<1)).sum())}
