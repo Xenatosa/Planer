@@ -92,3 +92,6 @@ Laplace-Rundung konvexer Kanten: enge Grate 775 -> 272, Spitzen 16 -> 13 [S]. Gr
 - O9 Reste: Einzelzahn-Klemme Grobnetz (gen_relief nach grob_entspitzen): 1 Zahn (105|47) [R]. 225|228 = Felskante an Wand (-10,9 m), 0,9 m, natuerlich -> belassen. 54|162 Rautenmuster = Dreiecksschattierung eines 0,6-m-Buckels im Grobnetz lod2, kosmetisch, belassen. Spalt viewer 0 [R]
 - Untracked Bilder: o8/o9/sicht_o7 committet (Beleg), o9z per test/t67u/.gitignore
 - O9 S5 laeuft: Vollrender o9z (Kette /workspace/t65/kette_o9y.sh, Log r_o9y_kette.log), Defektliste /workspace/t65/defekte_o9z.md; Textur-Boegen 0-17 angesehen (75/121)
+- O9 S5 Fixes Stapel 1 (main.js): Rampenrand an Kanten geklemmt+ausgeblendet (>0,5 m quer), Rampenenden ueber 2 m weich ausgeblendet -> wand_312_168 "Brett" weich [S o9v].
+- wand_48_120 "helles Rechteck" = Hauswand im Anschnitt, kein Gelaendefehler [S].
+- wand_0_24 Zahnreihe: 2 Shader-Versuche (Flaechennormale, Feinschnee) ohne Wirkung [S o9w/o9u] -> zurueckgenommen; offen, Ton-Bild abwarten.
