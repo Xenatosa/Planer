@@ -67,13 +67,14 @@ def fluss_tiefer(G_ANZ,WV,WEGA,bruecken,FW,NX,NY,RS,D=0.6,B=3.0):
     Boeschung an Land weich auf B m. Wege/Rampen und Bruecken-Enden (4 m) ausgenommen (weich). Feinband folgt derselben Absenkung."""
     GY,GX=G_ANZ.shape;nass=WV>-900;vj,vi=np.mgrid[0:GY,0:GX]/RS
     dL=nd.distance_transform_edt(~nass)/RS;dW=nd.distance_transform_edt(nass)/RS
-    schutz=(WEGA.reshape(GY,GX)>40).astype(float)
-    for b in bruecken:schutz=np.maximum(schutz,(np.hypot(vi-b[0],vj-b[2])<4).astype(float))
-    schutz=np.clip(nd.gaussian_filter(schutz,1.5)*1.5,0,1)
+    # Versuch 2: Wege nicht mehr hart ausgenommen (gab 0,6-m-Stufe am Ufer, B2-Bild n2). Nur Bruecken: weicher Uebergang
+    # 4..10 m, gilt fuer Wasser UND Land (Spiegel, Bett, Boeschung zusammen) -> keine Kante.
+    db=np.full((GY,GX),1e9)
+    for b in bruecken:db=np.minimum(db,np.hypot(vi-b[0],vj-b[2]))
+    t=np.clip((db-4)/6,0,1);frei=t*t*(3-2*t)
     s=np.clip(1-dL/B,0,1);s=s*s*(3-2*s)
-    delta=np.where(nass,-(D+np.minimum(0.5,0.25*dW)),-D*s*(1-schutz))
-    delta=np.where(nass,delta,nd.gaussian_filter(delta,0.7)*(~nass)) if False else delta
-    G2=G_ANZ.astype(float)+delta;WV2=np.where(nass,WV-D,WV)
+    delta=np.where(nass,-(D+np.minimum(0.5,0.25*dW)),-D*s)*frei
+    G2=G_ANZ.astype(float)+delta;WV2=np.where(nass,WV-D*frei,WV)
     FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FX;fx=vid%FX
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)+nd.map_coordinates(delta,[fy/FS*RS,fx/FS*RS],order=1)
     FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()

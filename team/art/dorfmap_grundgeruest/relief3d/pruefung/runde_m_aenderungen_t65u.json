@@ -99,14 +99,14 @@
    "n_nachher": 33
   },
   "steine": {
-   "n_vorher": 859,
-   "hoehe_neu": 113,
-   "abgesenkt": 81,
-   "wasser": 17,
-   "steil": 44,
+   "n_vorher": 847,
+   "hoehe_neu": 110,
+   "abgesenkt": 79,
+   "wasser": 18,
+   "steil": 43,
    "ueberlapp": 0,
    "abstand": 0,
-   "n_nachher": 798
+   "n_nachher": 786
   },
   "geroell": {
    "n_vorher": 956,
