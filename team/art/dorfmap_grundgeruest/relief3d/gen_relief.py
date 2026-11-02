@@ -728,6 +728,11 @@ def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1
     N=C*(1-m[...,None])+B*m[...,None];return np.clip(np.round(N),0,255).astype(np.uint8).reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3)}
 VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
 import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS);RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
+import os as _o18os
+if not _o18os.environ.get('O18_AUS'):   # Runde O18 [F t83u/t85u/t86u/t87u]: Wasser ohne Fluss raus, Senken gefuellt, Spitzen/Zacken gerundet -- nur Anzeige [A]
+    import runde_o18 as R18;G_ANZ,VC,WV,R18_W,O18_W=R18.wasser_raus(G_ANZ,VC,WV,fl,wa,RS);O18_W['feinband']=R16.feinband(FW,G_ANZ,VC,R18_W,NX,RS);G_ANZ,O18_G=R18.gelaende(G_ANZ,WV,WEGA,RS);O18_F=R18.feinband(FW,G_ANZ,WV,WEGA,NX,NY,RS);G_ANZ,WV,O18_T=R18.fluss_tiefer(G_ANZ,WV,WEGA,bruecken,FW,NX,NY,RS);print('o18_fluss',O18_T);print('o18_wasser',{k:v for k,v in O18_W.items() if k!='liste'});print('o18_gelaende',O18_G);print('o18_feinband',O18_F)
+    import json as _j18;_j18.dump({'wasser':O18_W,'gelaende':O18_G,'feinband':O18_F,'fluss':O18_T},open('pruefung/o18/aenderungen_o18.json','w'),indent=1)
+
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)

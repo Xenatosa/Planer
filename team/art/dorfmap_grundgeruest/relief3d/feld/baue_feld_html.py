@@ -65,7 +65,7 @@ CSS='''body{margin:0;overflow:hidden;font:15px sans-serif;background:#cfdbe6;tou
 #versteckt,#info,#modus{display:none}'''
 def html(D,F):
     gzd=gzip.compress(json.dumps(D,separators=(',',':')).encode(),9,mtime=0)
-    ban=f"Feld {F['name']} · x {F['x0']}–{F['x1']} m, z {F['z0']}–{F['z1']} m (+{RAND:g} m Rand, abgedunkelt) · Commit {COMMIT} · Relief t67u Runde O17 · Handy-LOD (lod=1)"
+    ban=f"Feld {F['name']} · x {F['x0']}–{F['x1']} m, z {F['z0']}–{F['z1']} m (+{RAND:g} m Rand, abgedunkelt) · Commit {COMMIT} · Relief t67u Runde O18 · Handy-LOD (lod=1)"
     return f'''<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Epodarien Dorf 3D – Feld {F['name']}</title><style>{CSS}</style></head><body>
 <div id="lade">Lade Feld {F['name']} …</div><div id="lab">{F['name']}</div><div id="ban">{ban}</div>
