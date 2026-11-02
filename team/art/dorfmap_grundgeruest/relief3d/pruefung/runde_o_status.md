@@ -418,3 +418,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Regression: t42u 0, Spalt 0 (4 Raender), bergauf_pfad 0, stufe_bandrand 0 (direkt), Raycast nach Cache 0 schwebend / max 1,1 m Findling, Budget lod1 1,13 M, Ladezeit 11,1 s (Median, gemessen waehrend 2 Render-Jobs liefen, daher nicht sauber).
 - Export /workspace/dorfmap_3d_runde_O18.html; Felder /workspace/dorfmap_felder_3d (56 + reihe_1..7.zip).
 - Offen: Feinband bis zum Wandfuss erweitern; Gelaende-Rundung ohne Band; Textur-Uebergaenge (Shadermasken A1/A2/B2/E1); G1-Block; Steinpfad D1/F1 (UEBERGABE.md); Kegel am Nordrand C2; F6-Restzacken.
+
+## O18c – Abschluss (Commit-Basis 24c67ab)
+- Neu: Shader-Masken weich (?maske=alt = O17), Grau-Angleich jetzt Grob+Fein (keine senkrechte Farbkante am Bandrand); gipfel_rund (grob, max 2 m) + fein_gipfel (max 1,5 m).
+- Regression: t42u 0; Spalt 0 (alle Raender); bergauf_gt_2cm 0 (Wasser-Stufen >30 cm: 1304, max 2,72 m, Kaskaden); stufe_bandrand 0 (bandrand_t83u; fehlerzaehler_t67u meldet 1086, misst FW-Dump vor Naht – nicht vergleichbar); Raycast nach Cache: 0 schwebend, 0 ohne Treffer, Geroell 7 versunken (max 0,81 m); Budget lod1 1.135.009 Dreiecke; Ladezeit Median 7,49 s (10,6/7,49/7,40, keine Jobs parallel).
+- Zacken >0,25 m vor->nach: fein unten 1424->76, oben 272->50; grob unten 312->30, oben 145->17. Grob-Steilquads >6: 190->0, >3: 702->65. Tabelle 56 Felder: pruefung/o18/felder_56_messung.md.
+- Bilder (pruefung/o18/bilder/o18c_nach_clay, o18c_nach_tex, je 22): angesehen Ton A1_wand A2_nah B1_wand B2_nah C1_wand C2_nah D1_wand E1_wand F1_schraeg G1_wand G1_schraeg H1_wand; Textur A1_wand A2_nah B2_nah C2_nah D1_wand E1_wand F1_wand G1_schraeg. Nicht angesehen: restliche 10 Ton- und 14 Texturbilder; Vorher-Textur nur A1/B1/C1; die 12 Zusatzstellen nicht gerendert (Job abgebrochen).
+- Offen: C2-Kegel Zahnkante am Grat (vermutlich Wand-Mesh, nicht Gelaende); G1-Gipfel noch spitz-pyramidal; B2 gerader Knick im Hang; E1-Nordrand: trockene Rinne bis Kartenrand (171–182|0, bis -9,6 m) – bestand schon vor O18; A1 braune Flaeche mit harter Kante am Kartenrand; H2 Kartenrandpunkt.
+- F1-Steinpfad: overlayseitig (rampenwege[1] endet blind 2 Zellen vor Nordwand 227|36), siehe UEBERGABE.md.
+- Exporte: /workspace/dorfmap_3d_runde_O18.html, /workspace/dorfmap_felder_3d/ (56 HTML + reihe_1..7.zip, Banner Commit 24c67ab).
