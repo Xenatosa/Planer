@@ -105,3 +105,21 @@ def entstacheln(G_ANZ,FW,NX,NY,RS,thr=0.25,it=6):
         nf+=int(M.sum());F=np.where(M,nd.median_filter(F,3,mode='nearest'),F)
     FW['h']=base64.b64encode(F.ravel()[vid].astype(np.float32).tobytes()).decode()
     return G.astype(G_ANZ.dtype),{'grob_ersetzt':ng,'fein_ersetzt':nf,'thr_m':thr}
+
+def grob_wand_glatt(G_ANZ,FW,WV,WEGA,NX,NY,RS,it=3):
+    """O18 [F A1 B1 E1 D1 H1 F1 'Dreiecke in den Boden']: Ursache = Wandteile ausserhalb des Feinbands (Band endet mitten
+    in der Wand, darunter 0,5-m-Grobnetz mit Steigung >1,5..6). Dessen Hoehenrauschen + Diagonal-Triangulierung gibt
+    Saegezaehne am Wandfuss. Fix: sichtbare steile Grobecken (Steigung>1,2) zum Gauss-Mittel (sig 1 Ecke = 0,5 m) ziehen,
+    weich gewichtet, 3 Durchgaenge; Wasser/Wege ausgenommen. Bandrand folgt spaeter per bandnaht_j1 (deckungsgleich)."""
+    GY,GX=G_ANZ.shape;G=G_ANZ.astype(float)
+    B=np.zeros(NX*NY,bool);B[np.frombuffer(base64.b64decode(FW['band']),np.uint32)]=True;B=B.reshape(NY,NX)
+    Bp=np.pad(B,1,constant_values=True);gj,gi=np.mgrid[0:GY,0:GX]//RS
+    sicht=~(Bp[gj,gi]&Bp[gj+1,gi]&Bp[gj,gi+1]&Bp[gj+1,gi+1])
+    fest=nd.binary_dilation((WV>-900)|(WEGA.reshape(GY,GX)>40),iterations=2)
+    n=0
+    for _ in range(it):
+        gy,gx=np.gradient(G);s=np.hypot(gx,gy)*RS
+        w=np.clip((s-1.2)/1.0,0,1)*sicht*(~fest);w=nd.gaussian_filter(w,0.7)*(~fest)
+        n=max(n,int((w>0.05).sum()))
+        G=G*(1-0.8*w)+nd.gaussian_filter(G,1.0)*0.8*w
+    return G.astype(G_ANZ.dtype),{'ecken':n,'max_aenderung_m':round(float(np.abs(G-G_ANZ).max()),2)}
