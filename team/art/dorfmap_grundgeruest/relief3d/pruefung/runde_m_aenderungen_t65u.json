@@ -51,7 +51,7 @@
  "objekte": {
   "baeume": {
    "n_vorher": 1829,
-   "hoehe_neu": 296,
+   "hoehe_neu": 297,
    "abgesenkt": 0,
    "wasser": 0,
    "steil": 0,
@@ -100,24 +100,24 @@
   },
   "steine": {
    "n_vorher": 849,
-   "hoehe_neu": 110,
-   "abgesenkt": 74,
+   "hoehe_neu": 108,
+   "abgesenkt": 80,
    "wasser": 16,
-   "steil": 48,
+   "steil": 44,
    "ueberlapp": 0,
    "abstand": 0,
-   "n_nachher": 785
+   "n_nachher": 789
   },
   "geroell": {
    "n_vorher": 956,
    "hoehe_neu": 123,
    "abgesenkt": 274,
    "wasser": 0,
-   "steil": 114,
+   "steil": 107,
    "ueberlapp": 0,
    "abstand": 0,
    "wandnetz_behalten": 337,
-   "n_nachher": 842
+   "n_nachher": 849
   }
  },
  "csv": {

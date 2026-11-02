@@ -271,7 +271,7 @@ def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
         FW['c']=base64.b64encode(np.clip(np.round(c),0,255).astype(np.uint8).tobytes()).decode()
     return {'punkte':int((w>0.05).sum()),'fein':int(k.sum())}
 
-def haus_sockel_feld(haeuser,WV,GY,GX,RS,rand=1.0,aus=2.5,tief=0.12):
+def haus_sockel_feld(haeuser,WV,GY,GX,RS,rand=0.6,aus=3.0,tief=-0.40):
     """O18d [F B2 Haus mit freiliegendem Sockel am Bach]: Haus-y = Median des Quell-G; Anzeige-Gelaende lag talseitig bis >1 m
     darunter. Mindesthoehe-Feld: unter Grundriss(+rand m) = y-tief, faellt ueber 'aus' m linear (1:1,2) ab. Nur anheben, nie Wasser."""
     M=np.full((GY,GX),-1e9)
@@ -282,7 +282,7 @@ def haus_sockel_feld(haeuser,WV,GY,GX,RS,rand=1.0,aus=2.5,tief=0.12):
         r=int((max(h['b'],h['t'])/2+rand+aus+1)*RS)+1;ci,cj=int(h['x']*RS),int(h['z']*RS)
         sl=(slice(max(0,cj-r),min(GY,cj+r)),slice(max(0,ci-r),min(GX,ci+r)))
         dx=np.maximum(np.maximum(x0-xx[sl],xx[sl]-x1),0);dz=np.maximum(np.maximum(z0-yy[sl],yy[sl]-z1),0);d=np.hypot(dx,dz)
-        v=np.where(d<=rand,h['y']-tief,h['y']-tief-(d-rand)*1.2);v=np.where(d<=rand+aus,v,-1e9);M[sl]=np.maximum(M[sl],v)
+        v=np.where(d<=rand,h['y']-tief,h['y']-tief-(d-rand)*1.0);v=np.where(d<=rand+aus,v,-1e9);M[sl]=np.maximum(M[sl],v)  # O18d-2: Sockel-Oberkante y+0.45..0.75 -> Gelaende y+0.40 am Haus
     M[np.asarray(WV).reshape(GY,GX)>-900]=-1e9
     return M
 
@@ -295,3 +295,48 @@ def haus_sockel_fein(FW,M,NX,RS):
     m=nd.map_coordinates(M,[(vid//FX)/FS*RS,(vid%FX)/FS*RS],order=1,mode='nearest');k=m>h+0.02
     h2=np.maximum(h,np.where(m>-1e8,m,-1e9));FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return {'punkte':int(k.sum()),'max_m':round(float((h2-h).max()),2)}
+
+def fein_entzacken(FW,NX,NY,thr_rand=0.3,thr_innen=0.45):
+    """O18d [F H2 Zacken am Kartenrandpunkt]: Feinband-Punktausreisser -> Median der 3x3-Nachbarn. Am Kartenrand (<=3 Feinzellen)
+    jede Abweichung >thr_rand (Randspalte hatte 9,5/10/6 neben 8,4), innen nur Nadeln/Loecher (alle 4 Richtungen gleiches Vorzeichen)."""
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    A=np.full((FY+2,FX+2),np.nan);r,c=vid.astype(np.int64)//FX+1,vid.astype(np.int64)%FX+1;A[r,c]=h;n=0
+    for _ in range(3):
+        N=np.stack([A[r+dy,c+dx] for dy in(-1,0,1) for dx in(-1,0,1) if dy or dx]);med=np.nanmedian(N,0)
+        dd=[A[r,c+1]+A[r,c-1]-2*A[r,c],A[r+1,c]+A[r-1,c]-2*A[r,c],A[r+1,c+1]+A[r-1,c-1]-2*A[r,c],A[r+1,c-1]+A[r-1,c+1]-2*A[r,c]]
+        dd=np.nan_to_num(np.array(dd));nad=(np.min(dd,0)>thr_innen)|(np.max(dd,0)<-thr_innen)
+        rand=(r<=4)|(c<=4)|(r>=FY-3)|(c>=FX-3);dev=np.abs(A[r,c]-med)
+        k=((rand&(dev>thr_rand))|nad)&np.isfinite(med)
+        if not k.any():break
+        A[r[k],c[k]]=med[k];n+=int(k.sum())
+    FW['h']=base64.b64encode(A[r,c].astype(np.float32).tobytes()).decode();return {'ersetzt':n}
+
+def ufer_weich(FW,G_ANZ,WV,NX,NY,RS,sig=1.2,d0=0.5,d1=4.0):
+    """O18d [F B2 gerader Hangknick / Boeschung zum Bach abgeschnitten]: Uferzone (d0..d1 m von Wasser) Gauss-geglaettet
+    (normierte Faltung, Fein- und Grobnetz), Wasserbett selbst bleibt -> gerade Knicklinie am Bachrand wird gerundet."""
+    GY,GX=NY*RS+1,NX*RS+1;W=np.asarray(WV).reshape(GY,GX)>-900
+    dW=nd.distance_transform_edt(~W)/RS
+    G=np.asarray(G_ANZ,float).reshape(GY,GX);w=np.clip(np.minimum((dW-d0)/0.5,(d1-dW)/1.5),0,1)
+    Gs=nd.gaussian_filter(G,sig*RS);G2=G+np.clip(Gs-G,-0.6,0.6)*w
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    A=np.zeros(FY*FX);Mk=np.zeros(FY*FX);A[vid]=h;Mk[vid]=1;A=A.reshape(FY,FX);Mk=Mk.reshape(FY,FX)
+    s=sig*FS;As=nd.gaussian_filter(A,s);Ms=nd.gaussian_filter(Mk,s);r,c=vid//FX,vid%FX
+    ok=Ms[r,c]>0.6;hs=np.where(ok,As[r,c]/np.maximum(Ms[r,c],1e-6),h)
+    wf=nd.map_coordinates(w,[r/FS*RS,c/FS*RS],order=1,mode='nearest');h2=h+np.clip(hs-h,-0.6,0.6)*wf
+    FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return G2.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'grob_max':round(float(np.abs(G2-G).max()),2),'fein_max':round(float(np.abs(h2-h).max()),2)}
+
+def ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS,s=0.9,zone=5.0):
+    """O18d [F B2 Hangknick + abgeschnittene Boeschung]: Ufer hatte senkrechte 2-m-Stufe (-9,0 -> -7,1 in 0,5 m). Hangneigung zum
+    Wasser auf s (m/m) begrenzt, nur Absenken der Oberkante, nur Land <=zone m vom Wasser. Grob + Fein; Haus-Sockel danach erneut."""
+    GY,GX=NY*RS+1,NX*RS+1;W=np.asarray(WV).reshape(GY,GX)>-900;dW=nd.distance_transform_edt(~W)/RS;Z=(dW<zone)&~W
+    fp=np.array([[0,1,0],[1,1,1],[0,1,0]],bool)
+    G=np.asarray(G_ANZ,float).reshape(GY,GX).copy();G0=G.copy()
+    for _ in range(int(zone*RS)+2):G=np.where(Z,np.minimum(G,nd.minimum_filter(G,footprint=fp)+s/RS),G)
+    G=np.maximum(G,G0-1.5)  # Schluchtwaende nicht abtragen
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).astype(np.int64);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    yy,xx=np.mgrid[0:FY,0:FX];A=nd.map_coordinates(G0,[yy/FS*RS,xx/FS*RS],order=1,mode='nearest').ravel();A[vid]=h;A=A.reshape(FY,FX)
+    ZF=nd.map_coordinates(Z.astype(float),[yy/FS*RS,xx/FS*RS],order=1,mode='nearest')>0.5;A0=A.copy()
+    for _ in range(int(zone*FS)+2):A=np.where(ZF,np.minimum(A,nd.minimum_filter(A,footprint=fp)+s/FS),A)
+    h2=np.maximum(A.ravel()[vid],h-1.5);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return G.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'grob_max':round(float((G0-G).max()),2),'grob_n':int((G0-G>0.05).sum()),'fein_max':round(float((h-h2).max()),2)}
