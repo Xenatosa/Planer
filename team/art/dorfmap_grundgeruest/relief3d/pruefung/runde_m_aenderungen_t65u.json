@@ -101,23 +101,23 @@
   "steine": {
    "n_vorher": 847,
    "hoehe_neu": 110,
-   "abgesenkt": 77,
+   "abgesenkt": 78,
    "wasser": 17,
-   "steil": 42,
+   "steil": 47,
    "ueberlapp": 0,
    "abstand": 0,
-   "n_nachher": 788
+   "n_nachher": 783
   },
   "geroell": {
    "n_vorher": 956,
-   "hoehe_neu": 135,
+   "hoehe_neu": 137,
    "abgesenkt": 273,
    "wasser": 0,
-   "steil": 123,
+   "steil": 127,
    "ueberlapp": 0,
    "abstand": 0,
    "wandnetz_behalten": 337,
-   "n_nachher": 833
+   "n_nachher": 829
   }
  },
  "csv": {
