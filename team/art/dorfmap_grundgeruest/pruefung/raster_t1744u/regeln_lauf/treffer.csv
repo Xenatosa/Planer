@@ -1,0 +1,2753 @@
+regel,feld,cx,cy,x_m,z_m,messwert,info
+R01,F1,227,36,227.07,36.98,5.0,Rampe 1 Ende fern von Weg/begehbar (m)
+R01,D6,135,230,135.18,230.76,3.162,Rampe 5 Ende fern von Weg/begehbar (m)
+R03,G1,273,7,273.5,7.5,1.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,G1,271,8,271.5,8.5,1.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,F1,212,29,212.5,29.5,1.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,F1,211,28,211.5,28.5,1.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,F2,230,43,230.5,43.5,1.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,F1,215,5,215.5,5.5,3.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,A2,30,60,30.5,60.5,3.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,F1,214,26,214.5,26.5,5.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,E3,189,89,189.48,89.9,286.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,A2,22,47,22.3,47.98,380.0,BACH_NORD: abgetrenntes Stueck (Zellen)
+R03,B3,64,95,64.23,95.14,0.0,BACH_NORD: erreicht keinen Kartenrand
+R03,E1,189,38,189.5,38.5,2.0,BACH_NORD: offenes Ende im Feld
+R03,F2,230,43,230.5,43.5,0.0,BACH_NORD: offenes Ende im Feld
+R03,A2,29,60,29.5,60.5,1.0,BACH_NORD: offenes Ende im Feld
+R03,A2,30,60,30.5,60.5,2.0,BACH_NORD: offenes Ende im Feld
+R03,F5,213,195,213.5,195.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F5,214,196,214.5,196.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F6,215,245,215.5,245.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D5,142,210,142.5,210.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,276,254,276.5,254.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,266,253,266.5,253.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F6,219,253,219.5,253.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F6,216,247,216.5,247.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,279,256,279.5,256.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F6,223,256,223.5,256.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D6,156,257,156.5,257.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,284,259,284.5,259.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B6,57,259,57.5,259.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,259,258,259.5,258.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D6,155,258,155.5,258.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G6,280,257,280.5,257.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,144,263,144.5,263.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B7,50,261,50.5,261.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,176,261,176.5,261.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,148,262,148.5,262.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,18,263,18.5,263.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E6,178,259,178.5,259.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,166,260,166.5,260.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,218,260,218.5,260.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,137,265,137.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,217,265,217.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,H7,302,265,302.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B7,79,265,79.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,183,264,183.5,264.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,17,264,17.5,264.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,G7,293,263,293.5,263.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,174,263,174.5,263.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,242,270,242.5,270.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,212,270,212.5,270.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,120,269,120.5,269.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,195,269,195.5,269.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,191,267,191.5,267.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,158,267,158.5,267.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,12,267,12.5,267.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,123,266,123.5,266.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,H7,315,265,315.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,251,265,251.5,265.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,216,267,216.5,267.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,248,267,248.5,267.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,207,278,207.5,278.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,100,281,100.5,281.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,115,277,115.5,277.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,4,275,4.5,275.5,1.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,148,265,148.0,265.5,2.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,14,266,14.0,266.5,2.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,198,270,198.0,270.5,2.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,H7,331,272,331.17,272.83,3.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,H7,298,264,298.5,264.5,3.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F6,215,242,215.5,242.5,3.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,146,264,146.5,264.0,4.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,142,264,142.0,264.5,4.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,16,266,16.5,266.0,4.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E7,205,271,205.9,271.7,5.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,239,272,239.1,272.1,5.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,234,272,234.5,272.0,6.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,14,272,14.33,272.67,6.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B6,53,259,53.21,259.93,7.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,229,272,229.5,272.07,7.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,20,268,20.5,268.83,9.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D7,128,265,128.17,265.94,9.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,A7,8,271,8.29,271.21,14.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F7,223,270,223.79,270.86,14.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B6,72,258,72.81,258.5,39.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,B7,57,264,57.01,264.57,41.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,84,272,84.25,272.45,56.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,C7,105,277,105.07,277.77,67.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,E5,195,191,195.6,191.14,83.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,F5,217,215,217.41,215.58,141.0,BACH_SUED: abgetrenntes Stueck (Zellen)
+R03,D1,140,4,140.5,4.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,272,7,272.5,7.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,256,8,256.5,8.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,255,9,255.5,9.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H1,300,7,300.5,7.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,273,6,273.5,6.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,257,7,257.5,7.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,233,11,233.5,11.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,269,26,269.5,26.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,273,26,273.5,26.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,211,35,211.5,35.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H1,318,36,318.5,36.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,232,12,232.5,12.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,268,25,268.5,25.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F2,226,46,226.5,46.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F2,227,45,227.5,45.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F5,218,211,218.5,211.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F6,223,216,223.5,216.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E5,174,211,174.5,211.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,321,205,321.5,205.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,C7,108,281,108.5,281.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,A7,15,273,15.5,273.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F6,217,218,217.5,218.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F6,216,220,216.5,220.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,330,203,330.5,203.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,331,197,331.5,197.5,1.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F6,215,223,215.5,223.0,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F6,212,222,212.0,222.5,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,C7,107,282,107.0,282.5,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E5,173,210,173.5,210.0,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,C1,121,20,121.0,20.5,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,215,27,215.5,27.0,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,A7,21,270,21.0,270.5,2.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E5,174,207,174.5,207.5,3.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,271,27,271.5,27.5,3.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,260,6,260.0,6.5,4.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,322,203,322.9,203.7,5.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,213,34,213.1,34.3,5.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,272,10,272.67,10.17,6.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,328,205,328.33,205.5,6.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E7,179,273,179.5,273.5,7.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,D5,142,211,142.93,211.21,7.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,236,9,236.07,9.36,7.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,D1,159,18,159.75,18.38,8.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,G1,276,5,276.0,5.62,8.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E1,177,1,177.12,1.25,8.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H1,312,11,312.83,11.83,9.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,227,12,227.9,12.1,10.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F2,231,43,231.5,43.0,10.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E5,168,210,168.0,210.5,10.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H1,322,34,322.59,34.5,11.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H1,297,6,297.83,6.25,12.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E1,193,8,193.88,8.81,13.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H2,333,81,333.25,81.06,16.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,E1,180,6,180.97,6.44,17.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,H5,334,195,334.59,195.41,23.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,A5,24,206,24.88,206.47,34.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,D1,131,13,131.71,13.83,48.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,F1,213,14,213.84,14.54,85.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,C7,93,279,93.4,279.29,137.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R03,B7,44,267,44.05,267.48,476.0,WASSER_FARBE: abgetrenntes Stueck (Zellen)
+R04,E1,168,21,168.5,21.5,3.956,Spitze (m gegen Median 2.5 m)
+R04,D1,148,23,148.0,23.5,2.43,Spitze (m gegen Median 2.5 m)
+R04,D1,162,23,162.0,23.0,2.179,Spitze (m gegen Median 2.5 m)
+R04,E1,181,28,181.0,28.0,2.5,Spitze (m gegen Median 2.5 m)
+R04,D1,151,29,151.5,29.0,2.386,Spitze (m gegen Median 2.5 m)
+R04,G1,265,30,265.0,30.0,2.471,Spitze (m gegen Median 2.5 m)
+R04,D1,150,29,150.5,29.5,2.969,Spitze (m gegen Median 2.5 m)
+R04,D1,150,30,150.0,30.0,3.316,Spitze (m gegen Median 2.5 m)
+R04,D1,153,30,153.5,30.0,2.063,Spitze (m gegen Median 2.5 m)
+R04,G1,284,30,284.0,30.0,2.352,Spitze (m gegen Median 2.5 m)
+R04,D1,154,30,154.0,30.5,2.212,Spitze (m gegen Median 2.5 m)
+R04,D1,154,31,154.5,31.0,2.481,Spitze (m gegen Median 2.5 m)
+R04,D1,155,31,155.0,31.5,2.37,Spitze (m gegen Median 2.5 m)
+R04,H1,326,33,326.0,33.5,2.122,Spitze (m gegen Median 2.5 m)
+R04,D1,145,34,145.5,34.0,3.346,Spitze (m gegen Median 2.5 m)
+R04,G1,291,35,291.0,35.0,4.727,Spitze (m gegen Median 2.5 m)
+R04,H1,335,34,335.0,34.0,2.26,Spitze (m gegen Median 2.5 m)
+R04,D1,145,34,145.0,34.5,2.602,Spitze (m gegen Median 2.5 m)
+R04,A1,19,36,19.0,36.5,4.26,Spitze (m gegen Median 2.5 m)
+R04,E1,207,36,207.5,36.5,3.433,Spitze (m gegen Median 2.5 m)
+R04,H1,317,37,317.5,37.0,3.106,Spitze (m gegen Median 2.5 m)
+R04,A1,33,39,33.5,39.0,8.317,Spitze (m gegen Median 2.5 m)
+R04,D1,127,36,127.0,36.5,2.383,Spitze (m gegen Median 2.5 m)
+R04,H1,305,36,305.5,36.5,2.086,Spitze (m gegen Median 2.5 m)
+R04,F1,211,37,211.5,37.0,2.065,Spitze (m gegen Median 2.5 m)
+R04,C1,121,38,121.0,38.0,3.541,Spitze (m gegen Median 2.5 m)
+R04,E1,188,39,188.0,39.5,3.418,Spitze (m gegen Median 2.5 m)
+R04,A1,23,39,23.5,39.0,6.078,Spitze (m gegen Median 2.5 m)
+R04,F1,215,38,215.5,38.5,2.545,Spitze (m gegen Median 2.5 m)
+R04,A1,6,40,6.5,40.0,2.12,Spitze (m gegen Median 2.5 m)
+R04,A1,41,42,41.0,42.5,7.315,Spitze (m gegen Median 2.5 m)
+R04,A2,3,46,3.5,46.0,4.993,Spitze (m gegen Median 2.5 m)
+R04,B2,64,43,64.5,43.0,2.629,Spitze (m gegen Median 2.5 m)
+R04,B2,78,44,78.5,44.5,5.905,Spitze (m gegen Median 2.5 m)
+R04,B1,81,42,81.0,42.5,2.047,Spitze (m gegen Median 2.5 m)
+R04,B2,83,43,83.0,43.5,3.808,Spitze (m gegen Median 2.5 m)
+R04,F1,226,42,226.0,42.5,2.321,Spitze (m gegen Median 2.5 m)
+R04,B2,72,43,72.5,43.5,3.307,Spitze (m gegen Median 2.5 m)
+R04,B2,60,45,60.5,45.0,7.538,Spitze (m gegen Median 2.5 m)
+R04,C2,97,45,97.5,45.5,3.522,Spitze (m gegen Median 2.5 m)
+R04,B2,54,46,54.5,46.0,6.013,Spitze (m gegen Median 2.5 m)
+R04,B2,73,44,73.5,44.5,2.496,Spitze (m gegen Median 2.5 m)
+R04,F2,219,45,219.0,45.0,2.056,Spitze (m gegen Median 2.5 m)
+R04,C2,113,47,113.0,47.0,3.666,Spitze (m gegen Median 2.5 m)
+R04,F2,225,46,225.5,46.0,2.835,Spitze (m gegen Median 2.5 m)
+R04,F2,227,47,227.0,47.0,2.815,Spitze (m gegen Median 2.5 m)
+R04,F2,224,47,224.0,47.0,2.179,Spitze (m gegen Median 2.5 m)
+R04,C2,105,48,105.0,48.0,3.161,Spitze (m gegen Median 2.5 m)
+R04,H2,322,73,322.0,73.5,2.231,Spitze (m gegen Median 2.5 m)
+R04,H2,322,74,322.5,74.0,2.23,Spitze (m gegen Median 2.5 m)
+R04,H2,317,78,317.5,78.0,4.009,Spitze (m gegen Median 2.5 m)
+R04,H3,311,87,311.5,87.5,3.925,Spitze (m gegen Median 2.5 m)
+R04,H3,301,89,301.0,89.5,4.109,Spitze (m gegen Median 2.5 m)
+R04,H3,295,90,295.0,90.5,2.926,Spitze (m gegen Median 2.5 m)
+R04,D3,128,96,128.5,96.5,6.815,Spitze (m gegen Median 2.5 m)
+R04,C3,96,97,96.0,97.0,2.644,Spitze (m gegen Median 2.5 m)
+R04,C3,102,101,102.0,101.0,5.198,Spitze (m gegen Median 2.5 m)
+R04,C3,112,98,112.0,98.0,5.082,Spitze (m gegen Median 2.5 m)
+R04,G3,284,98,284.0,98.0,2.405,Spitze (m gegen Median 2.5 m)
+R04,G3,292,99,292.0,99.0,2.328,Spitze (m gegen Median 2.5 m)
+R04,G3,280,101,280.5,101.0,2.022,Spitze (m gegen Median 2.5 m)
+R04,G3,291,101,291.5,101.0,2.072,Spitze (m gegen Median 2.5 m)
+R04,G3,285,102,285.5,102.5,2.579,Spitze (m gegen Median 2.5 m)
+R04,C3,114,104,114.0,104.5,2.574,Spitze (m gegen Median 2.5 m)
+R04,C3,106,106,106.0,106.0,3.388,Spitze (m gegen Median 2.5 m)
+R04,C3,97,106,97.0,106.0,2.78,Spitze (m gegen Median 2.5 m)
+R04,C3,119,109,119.0,109.5,5.765,Spitze (m gegen Median 2.5 m)
+R04,B3,67,112,67.5,112.5,2.222,Spitze (m gegen Median 2.5 m)
+R04,G3,273,112,273.0,112.5,2.897,Spitze (m gegen Median 2.5 m)
+R04,C3,101,114,101.0,114.5,2.39,Spitze (m gegen Median 2.5 m)
+R04,C3,115,117,115.5,117.5,2.784,Spitze (m gegen Median 2.5 m)
+R04,C3,89,120,89.5,120.0,2.493,Spitze (m gegen Median 2.5 m)
+R04,C3,84,122,84.0,122.0,3.796,Spitze (m gegen Median 2.5 m)
+R04,C3,116,122,116.0,122.0,2.058,Spitze (m gegen Median 2.5 m)
+R04,C3,118,122,118.0,122.5,2.349,Spitze (m gegen Median 2.5 m)
+R04,C3,98,123,98.5,123.5,2.278,Spitze (m gegen Median 2.5 m)
+R04,G4,270,132,270.5,132.0,4.506,Spitze (m gegen Median 2.5 m)
+R04,C4,113,130,113.0,130.5,2.104,Spitze (m gegen Median 2.5 m)
+R04,D4,126,131,126.0,131.5,2.777,Spitze (m gegen Median 2.5 m)
+R04,B4,81,132,81.5,132.0,2.159,Spitze (m gegen Median 2.5 m)
+R04,C4,125,132,125.0,132.0,2.993,Spitze (m gegen Median 2.5 m)
+R04,C4,124,132,124.0,132.5,2.464,Spitze (m gegen Median 2.5 m)
+R04,C4,105,134,105.0,134.5,2.761,Spitze (m gegen Median 2.5 m)
+R04,C4,123,133,123.5,133.0,2.104,Spitze (m gegen Median 2.5 m)
+R04,C4,123,134,123.0,134.5,2.066,Spitze (m gegen Median 2.5 m)
+R04,C4,122,135,122.5,135.5,2.003,Spitze (m gegen Median 2.5 m)
+R04,G4,277,139,277.0,139.0,2.542,Spitze (m gegen Median 2.5 m)
+R04,D4,137,141,137.0,141.5,3.747,Spitze (m gegen Median 2.5 m)
+R04,B4,74,144,74.5,144.5,2.494,Spitze (m gegen Median 2.5 m)
+R04,C4,122,147,122.0,147.5,3.607,Spitze (m gegen Median 2.5 m)
+R04,C4,124,155,124.0,155.5,2.561,Spitze (m gegen Median 2.5 m)
+R04,B4,71,157,71.5,157.5,3.667,Spitze (m gegen Median 2.5 m)
+R04,G4,287,159,287.5,159.5,3.611,Spitze (m gegen Median 2.5 m)
+R04,B4,69,161,69.0,161.5,2.448,Spitze (m gegen Median 2.5 m)
+R04,C4,116,166,116.5,166.0,4.18,Spitze (m gegen Median 2.5 m)
+R04,H4,296,166,296.5,166.5,4.695,Spitze (m gegen Median 2.5 m)
+R04,B4,64,167,64.5,167.0,4.527,Spitze (m gegen Median 2.5 m)
+R04,B4,69,167,69.5,167.5,3.33,Spitze (m gegen Median 2.5 m)
+R04,H4,296,169,296.5,169.5,2.574,Spitze (m gegen Median 2.5 m)
+R04,B5,71,175,71.5,175.5,4.861,Spitze (m gegen Median 2.5 m)
+R04,C5,89,175,89.5,175.5,2.569,Spitze (m gegen Median 2.5 m)
+R04,C5,90,176,90.5,176.0,2.056,Spitze (m gegen Median 2.5 m)
+R04,C5,100,180,100.0,180.0,2.051,Spitze (m gegen Median 2.5 m)
+R04,H5,305,180,305.0,180.5,2.634,Spitze (m gegen Median 2.5 m)
+R04,H5,306,181,306.0,181.0,2.048,Spitze (m gegen Median 2.5 m)
+R04,B5,79,185,79.0,185.0,2.194,Spitze (m gegen Median 2.5 m)
+R04,C5,113,187,113.5,187.0,3.556,Spitze (m gegen Median 2.5 m)
+R04,C5,114,187,114.0,187.5,3.684,Spitze (m gegen Median 2.5 m)
+R04,C5,114,188,114.5,188.0,3.841,Spitze (m gegen Median 2.5 m)
+R04,C5,115,188,115.5,188.5,3.452,Spitze (m gegen Median 2.5 m)
+R04,B5,81,189,81.0,189.5,2.099,Spitze (m gegen Median 2.5 m)
+R04,C5,124,191,124.5,191.5,2.496,Spitze (m gegen Median 2.5 m)
+R04,C5,118,202,118.0,202.0,4.217,Spitze (m gegen Median 2.5 m)
+R04,C5,89,201,89.0,201.5,2.407,Spitze (m gegen Median 2.5 m)
+R04,H5,306,201,306.0,201.5,2.696,Spitze (m gegen Median 2.5 m)
+R04,C5,94,203,94.5,203.0,2.161,Spitze (m gegen Median 2.5 m)
+R04,H5,311,204,311.0,204.5,2.259,Spitze (m gegen Median 2.5 m)
+R04,B5,71,206,71.0,206.0,3.42,Spitze (m gegen Median 2.5 m)
+R04,C5,94,211,94.5,211.5,2.23,Spitze (m gegen Median 2.5 m)
+R04,C5,95,212,95.0,212.0,2.101,Spitze (m gegen Median 2.5 m)
+R04,C5,101,215,101.5,215.0,2.457,Spitze (m gegen Median 2.5 m)
+R04,C6,89,220,89.5,220.0,2.89,Spitze (m gegen Median 2.5 m)
+R04,C6,97,223,97.0,223.5,3.136,Spitze (m gegen Median 2.5 m)
+R04,C6,88,223,88.5,223.5,2.101,Spitze (m gegen Median 2.5 m)
+R04,H6,299,223,299.5,223.5,2.097,Spitze (m gegen Median 2.5 m)
+R04,C6,100,223,100.5,223.5,2.873,Spitze (m gegen Median 2.5 m)
+R04,F6,218,225,218.5,225.0,2.131,Spitze (m gegen Median 2.5 m)
+R04,D6,160,227,160.0,227.0,2.697,Spitze (m gegen Median 2.5 m)
+R04,D6,156,229,156.5,229.0,2.5,Spitze (m gegen Median 2.5 m)
+R04,F6,250,228,250.5,228.5,2.366,Spitze (m gegen Median 2.5 m)
+R04,F6,243,229,243.0,229.0,2.012,Spitze (m gegen Median 2.5 m)
+R04,F6,214,231,214.0,231.5,3.069,Spitze (m gegen Median 2.5 m)
+R04,F6,237,231,237.0,231.0,2.432,Spitze (m gegen Median 2.5 m)
+R04,G6,261,233,261.5,233.0,4.025,Spitze (m gegen Median 2.5 m)
+R04,E6,208,232,208.0,232.5,2.192,Spitze (m gegen Median 2.5 m)
+R04,F6,236,233,236.0,233.0,2.407,Spitze (m gegen Median 2.5 m)
+R04,H6,311,235,311.5,235.0,6.484,Spitze (m gegen Median 2.5 m)
+R04,F6,235,235,235.5,235.5,2.149,Spitze (m gegen Median 2.5 m)
+R04,H6,316,240,316.0,240.0,5.718,Spitze (m gegen Median 2.5 m)
+R04,E6,206,243,206.0,243.0,6.602,Spitze (m gegen Median 2.5 m)
+R04,D6,163,241,163.0,241.5,3.005,Spitze (m gegen Median 2.5 m)
+R04,E6,169,241,169.0,241.5,2.966,Spitze (m gegen Median 2.5 m)
+R04,E6,175,243,175.0,243.0,4.929,Spitze (m gegen Median 2.5 m)
+R04,E6,180,243,180.5,243.0,2.375,Spitze (m gegen Median 2.5 m)
+R04,H6,322,244,322.0,244.5,3.126,Spitze (m gegen Median 2.5 m)
+R04,E6,198,245,198.0,245.0,4.169,Spitze (m gegen Median 2.5 m)
+R04,H6,321,245,321.0,245.5,3.297,Spitze (m gegen Median 2.5 m)
+R04,H6,326,248,326.0,248.0,2.501,Spitze (m gegen Median 2.5 m)
+R04,H6,324,249,324.5,249.5,3.752,Spitze (m gegen Median 2.5 m)
+R04,H6,329,253,329.0,253.5,3.494,Spitze (m gegen Median 2.5 m)
+R04,D1,160,18,160.5,18.5,-3.771,Loch (m gegen Median 2.5 m)
+R04,D1,165,19,165.0,19.5,-3.847,Loch (m gegen Median 2.5 m)
+R04,D1,149,20,149.5,20.0,-3.366,Loch (m gegen Median 2.5 m)
+R04,E1,175,23,175.5,23.0,-2.221,Loch (m gegen Median 2.5 m)
+R04,E1,176,23,176.5,23.0,-2.178,Loch (m gegen Median 2.5 m)
+R04,E1,177,23,177.0,23.5,-2.159,Loch (m gegen Median 2.5 m)
+R04,G1,278,24,278.5,24.0,-2.502,Loch (m gegen Median 2.5 m)
+R04,G1,279,26,279.5,26.0,-2.634,Loch (m gegen Median 2.5 m)
+R04,G1,269,26,269.0,26.5,-2.226,Loch (m gegen Median 2.5 m)
+R04,G1,280,26,280.0,26.5,-2.197,Loch (m gegen Median 2.5 m)
+R04,G1,270,27,270.0,27.0,-2.433,Loch (m gegen Median 2.5 m)
+R04,D1,148,31,148.0,31.5,-4.279,Loch (m gegen Median 2.5 m)
+R04,G1,288,32,288.5,32.0,-2.86,Loch (m gegen Median 2.5 m)
+R04,D1,147,32,147.5,32.0,-4.019,Loch (m gegen Median 2.5 m)
+R04,H1,329,33,329.0,33.0,-2.713,Loch (m gegen Median 2.5 m)
+R04,H1,324,33,324.0,33.0,-3.501,Loch (m gegen Median 2.5 m)
+R04,F1,225,34,225.5,34.0,-2.526,Loch (m gegen Median 2.5 m)
+R04,A1,36,38,36.0,38.5,-6.404,Loch (m gegen Median 2.5 m)
+R04,A1,17,36,17.0,36.0,-5.642,Loch (m gegen Median 2.5 m)
+R04,E1,205,36,205.0,36.0,-3.652,Loch (m gegen Median 2.5 m)
+R04,F1,213,36,213.5,36.5,-6.576,Loch (m gegen Median 2.5 m)
+R04,C1,124,37,124.0,37.0,-4.141,Loch (m gegen Median 2.5 m)
+R04,A1,22,37,22.0,37.5,-5.205,Loch (m gegen Median 2.5 m)
+R04,A1,29,38,29.0,38.0,-5.453,Loch (m gegen Median 2.5 m)
+R04,F1,224,38,224.5,38.0,-2.667,Loch (m gegen Median 2.5 m)
+R04,A1,5,38,5.0,38.5,-2.735,Loch (m gegen Median 2.5 m)
+R04,F1,219,39,219.0,39.5,-2.195,Loch (m gegen Median 2.5 m)
+R04,A1,4,39,4.5,39.5,-2.443,Loch (m gegen Median 2.5 m)
+R04,B1,49,41,49.0,41.5,-4.356,Loch (m gegen Median 2.5 m)
+R04,A1,8,42,8.0,42.5,-3.093,Loch (m gegen Median 2.5 m)
+R04,A1,0,41,0.0,41.5,-2.178,Loch (m gegen Median 2.5 m)
+R04,A1,7,41,7.0,41.5,-2.093,Loch (m gegen Median 2.5 m)
+R04,B1,44,41,44.5,41.5,-2.201,Loch (m gegen Median 2.5 m)
+R04,B1,49,42,49.5,42.0,-3.467,Loch (m gegen Median 2.5 m)
+R04,A2,0,46,0.5,46.5,-4.549,Loch (m gegen Median 2.5 m)
+R04,B2,62,43,62.5,43.5,-7.384,Loch (m gegen Median 2.5 m)
+R04,B2,70,43,70.5,43.0,-3.112,Loch (m gegen Median 2.5 m)
+R04,B2,51,43,51.0,43.0,-4.26,Loch (m gegen Median 2.5 m)
+R04,B2,76,44,76.0,44.0,-3.022,Loch (m gegen Median 2.5 m)
+R04,B2,80,44,80.0,44.0,-3.903,Loch (m gegen Median 2.5 m)
+R04,C2,85,43,85.5,43.5,-2.856,Loch (m gegen Median 2.5 m)
+R04,B2,64,44,64.0,44.5,-3.28,Loch (m gegen Median 2.5 m)
+R04,B2,77,44,77.0,44.5,-2.238,Loch (m gegen Median 2.5 m)
+R04,B2,59,45,59.0,45.5,-3.327,Loch (m gegen Median 2.5 m)
+R04,C2,108,47,108.0,47.5,-2.712,Loch (m gegen Median 2.5 m)
+R04,A2,0,48,0.0,48.5,-2.189,Loch (m gegen Median 2.5 m)
+R04,H2,320,75,320.5,75.5,-2.055,Loch (m gegen Median 2.5 m)
+R04,H2,314,84,314.0,84.5,-2.006,Loch (m gegen Median 2.5 m)
+R04,H2,313,86,313.5,86.0,-2.489,Loch (m gegen Median 2.5 m)
+R04,H3,298,91,298.5,91.0,-2.251,Loch (m gegen Median 2.5 m)
+R04,H3,304,91,304.5,91.5,-2.236,Loch (m gegen Median 2.5 m)
+R04,H3,305,93,305.0,93.0,-2.3,Loch (m gegen Median 2.5 m)
+R04,G3,293,96,293.0,96.5,-2.61,Loch (m gegen Median 2.5 m)
+R04,C3,99,103,99.0,103.5,-2.456,Loch (m gegen Median 2.5 m)
+R04,C3,100,103,100.5,103.0,-2.263,Loch (m gegen Median 2.5 m)
+R04,C3,95,107,95.0,107.5,-3.12,Loch (m gegen Median 2.5 m)
+R04,C3,117,107,117.5,107.5,-2.11,Loch (m gegen Median 2.5 m)
+R04,C3,105,108,105.0,108.5,-2.01,Loch (m gegen Median 2.5 m)
+R04,C3,91,116,91.0,116.5,-2.128,Loch (m gegen Median 2.5 m)
+R04,C3,92,118,92.5,118.5,-2.723,Loch (m gegen Median 2.5 m)
+R04,C3,116,119,116.5,119.0,-2.434,Loch (m gegen Median 2.5 m)
+R04,C3,85,119,85.0,119.5,-2.984,Loch (m gegen Median 2.5 m)
+R04,C3,97,120,97.0,120.0,-2.591,Loch (m gegen Median 2.5 m)
+R04,C3,122,122,122.0,122.0,-2.519,Loch (m gegen Median 2.5 m)
+R04,C3,85,129,85.0,129.0,-2.459,Loch (m gegen Median 2.5 m)
+R04,C4,100,131,100.5,131.0,-3.965,Loch (m gegen Median 2.5 m)
+R04,G4,272,134,272.5,134.0,-2.413,Loch (m gegen Median 2.5 m)
+R04,D4,134,135,134.5,135.0,-2.168,Loch (m gegen Median 2.5 m)
+R04,D4,135,136,135.5,136.5,-2.019,Loch (m gegen Median 2.5 m)
+R04,B4,80,140,80.0,140.0,-2.576,Loch (m gegen Median 2.5 m)
+R04,D4,126,141,126.0,141.0,-2.416,Loch (m gegen Median 2.5 m)
+R04,B4,79,140,79.5,140.5,-2.451,Loch (m gegen Median 2.5 m)
+R04,B4,79,141,79.0,141.0,-2.634,Loch (m gegen Median 2.5 m)
+R04,G4,280,142,280.5,142.0,-2.686,Loch (m gegen Median 2.5 m)
+R04,C4,124,146,124.5,146.0,-3.503,Loch (m gegen Median 2.5 m)
+R04,G4,286,157,286.0,157.5,-2.08,Loch (m gegen Median 2.5 m)
+R04,H4,296,159,296.5,159.5,-2.424,Loch (m gegen Median 2.5 m)
+R04,B4,72,160,72.0,160.5,-3.334,Loch (m gegen Median 2.5 m)
+R04,H4,294,161,294.5,161.5,-3.983,Loch (m gegen Median 2.5 m)
+R04,B4,67,166,67.5,166.0,-4.828,Loch (m gegen Median 2.5 m)
+R04,H4,298,167,298.5,167.5,-2.111,Loch (m gegen Median 2.5 m)
+R04,B5,70,173,70.5,173.0,-5.056,Loch (m gegen Median 2.5 m)
+R04,H4,303,172,303.5,172.5,-3.645,Loch (m gegen Median 2.5 m)
+R04,B5,76,181,76.5,181.0,-2.022,Loch (m gegen Median 2.5 m)
+R04,C5,125,183,125.0,183.0,-3.245,Loch (m gegen Median 2.5 m)
+R04,B5,77,181,77.0,181.5,-2.203,Loch (m gegen Median 2.5 m)
+R04,B5,77,182,77.5,182.0,-2.594,Loch (m gegen Median 2.5 m)
+R04,C5,111,185,111.5,185.0,-2.457,Loch (m gegen Median 2.5 m)
+R04,H5,311,187,311.0,187.0,-3.834,Loch (m gegen Median 2.5 m)
+R04,C5,87,196,87.5,196.0,-2.862,Loch (m gegen Median 2.5 m)
+R04,B5,74,206,74.5,206.0,-2.227,Loch (m gegen Median 2.5 m)
+R04,B5,73,207,73.5,207.5,-2.073,Loch (m gegen Median 2.5 m)
+R04,C5,96,207,96.0,207.5,-2.174,Loch (m gegen Median 2.5 m)
+R04,C5,97,209,97.0,209.5,-3.356,Loch (m gegen Median 2.5 m)
+R04,C5,93,213,93.0,213.5,-2.349,Loch (m gegen Median 2.5 m)
+R04,C5,105,213,105.0,213.0,-2.478,Loch (m gegen Median 2.5 m)
+R04,H6,300,225,300.5,225.5,-5.148,Loch (m gegen Median 2.5 m)
+R04,D6,161,226,161.5,226.5,-4.782,Loch (m gegen Median 2.5 m)
+R04,F6,216,226,216.5,226.5,-3.147,Loch (m gegen Median 2.5 m)
+R04,H6,303,226,303.5,226.0,-3.785,Loch (m gegen Median 2.5 m)
+R04,D6,154,227,154.0,227.5,-3.422,Loch (m gegen Median 2.5 m)
+R04,D6,166,226,166.0,226.5,-2.493,Loch (m gegen Median 2.5 m)
+R04,F6,247,228,247.5,228.0,-3.513,Loch (m gegen Median 2.5 m)
+R04,H6,304,226,304.5,226.5,-3.518,Loch (m gegen Median 2.5 m)
+R04,D6,158,227,158.0,227.5,-6.512,Loch (m gegen Median 2.5 m)
+R04,F6,241,227,241.0,227.0,-2.052,Loch (m gegen Median 2.5 m)
+R04,D6,155,227,155.5,227.5,-2.413,Loch (m gegen Median 2.5 m)
+R04,H6,309,229,309.0,229.0,-3.109,Loch (m gegen Median 2.5 m)
+R04,F6,218,229,218.5,229.0,-2.634,Loch (m gegen Median 2.5 m)
+R04,G6,254,229,254.0,229.0,-2.708,Loch (m gegen Median 2.5 m)
+R04,H6,311,231,311.5,231.0,-6.631,Loch (m gegen Median 2.5 m)
+R04,F6,234,231,234.0,231.0,-2.407,Loch (m gegen Median 2.5 m)
+R04,E6,209,232,209.5,232.0,-2.504,Loch (m gegen Median 2.5 m)
+R04,G6,260,232,260.0,232.0,-2.485,Loch (m gegen Median 2.5 m)
+R04,E6,206,235,206.5,235.0,-4.367,Loch (m gegen Median 2.5 m)
+R04,G6,267,234,267.0,234.0,-2.667,Loch (m gegen Median 2.5 m)
+R04,H6,313,237,313.5,237.5,-5.577,Loch (m gegen Median 2.5 m)
+R04,E6,206,238,206.5,238.0,-2.014,Loch (m gegen Median 2.5 m)
+R04,E6,207,239,207.5,239.0,-2.292,Loch (m gegen Median 2.5 m)
+R04,D6,166,241,166.5,241.0,-2.057,Loch (m gegen Median 2.5 m)
+R04,E6,171,241,171.0,241.5,-2.598,Loch (m gegen Median 2.5 m)
+R04,H6,319,243,319.5,243.0,-4.737,Loch (m gegen Median 2.5 m)
+R04,E6,177,242,177.0,242.0,-2.124,Loch (m gegen Median 2.5 m)
+R04,E6,199,243,199.5,243.5,-2.012,Loch (m gegen Median 2.5 m)
+R04,E6,192,244,192.5,244.0,-2.05,Loch (m gegen Median 2.5 m)
+R04,E6,200,244,200.0,244.0,-2.278,Loch (m gegen Median 2.5 m)
+R04,E6,194,244,194.0,244.5,-2.204,Loch (m gegen Median 2.5 m)
+R04,E6,201,244,201.0,244.5,-2.077,Loch (m gegen Median 2.5 m)
+R04,H6,323,245,323.0,245.5,-2.218,Loch (m gegen Median 2.5 m)
+R04,H6,326,250,326.0,250.5,-2.38,Loch (m gegen Median 2.5 m)
+R04,H6,327,251,327.0,251.0,-2.926,Loch (m gegen Median 2.5 m)
+R05,D1,157,13,157.64,13.4,23.25,glatte Steilflaeche (m2)
+R05,F1,251,23,251.42,23.91,18.25,glatte Steilflaeche (m2)
+R05,D1,145,25,145.26,25.26,12.75,glatte Steilflaeche (m2)
+R05,F1,239,27,239.88,27.93,31.0,glatte Steilflaeche (m2)
+R05,G1,257,31,257.24,31.57,20.75,glatte Steilflaeche (m2)
+R05,C1,100,36,100.47,36.15,87.0,glatte Steilflaeche (m2)
+R05,G3,278,120,278.07,120.11,26.75,glatte Steilflaeche (m2)
+R05,G3,286,129,286.48,129.36,29.5,glatte Steilflaeche (m2)
+R05,G4,278,133,278.26,133.23,42.0,glatte Steilflaeche (m2)
+R05,C4,96,146,96.74,146.52,33.75,glatte Steilflaeche (m2)
+R05,C4,85,168,85.37,168.97,25.25,glatte Steilflaeche (m2)
+R05,D5,126,190,126.75,190.19,19.25,glatte Steilflaeche (m2)
+R05,C5,106,194,106.57,194.45,22.75,glatte Steilflaeche (m2)
+R05,C5,99,205,99.49,205.51,17.75,glatte Steilflaeche (m2)
+R05,C6,120,225,120.9,225.32,12.25,glatte Steilflaeche (m2)
+R05,G6,275,231,275.06,231.44,22.25,glatte Steilflaeche (m2)
+R05,G6,283,236,283.55,236.26,14.5,glatte Steilflaeche (m2)
+R05,D6,129,244,129.82,244.04,17.75,glatte Steilflaeche (m2)
+R05,G6,270,245,270.43,245.94,13.75,glatte Steilflaeche (m2)
+R06,G4,293,157,293.0,157.25,7.083,baeume: schwebt (m)
+R06,D6,157,222,157.06,222.66,0.707,baeume: schwebt (m)
+R06,E6,204,230,204.37,230.68,0.5,baeume: schwebt (m)
+R06,E6,203,240,203.75,240.25,6.082,baeume: schwebt (m)
+R06,H2,319,84,319.25,84.5,0.521,baeume: schwebt (m)
+R06,F6,239,224,239.75,224.75,1.759,baeume: schwebt (m)
+R06,C3,113,111,113.75,111.0,3.172,baeume: schwebt (m)
+R06,C3,101,127,101.2,127.4,0.453,baeume: schwebt (m)
+R06,C5,91,196,91.25,196.0,1.58,baeume: schwebt (m)
+R06,E6,202,237,202.25,237.5,0.585,baeume: schwebt (m)
+R06,E1,190,34,190.15,34.78,0.592,baeume: schwebt (m)
+R06,B4,66,131,66.78,131.19,0.408,baeume: schwebt (m)
+R06,C5,87,189,87.75,189.5,0.373,baeume: schwebt (m)
+R06,H1,324,29,324.53,29.15,1.954,baeume: schwebt (m)
+R06,C1,111,32,111.74,32.64,0.373,baeume: schwebt (m)
+R06,B4,52,162,52.75,162.75,1.307,baeume: schwebt (m)
+R06,G6,252,224,252.81,224.81,1.239,baeume: schwebt (m)
+R06,A6,29,239,29.5,239.25,0.367,baeume: schwebt (m)
+R06,E1,189,33,189.5,33.5,1.161,baeume: schwebt (m)
+R06,C3,97,99,97.75,99.75,8.028,baeume: versunken (m)
+R06,E6,201,233,201.25,233.11,0.5,baeume: schwebt (m)
+R06,G3,282,107,282.75,107.0,3.247,baeume: schwebt (m)
+R06,C5,85,188,85.25,188.0,0.47,baeume: schwebt (m)
+R06,C6,95,243,95.75,243.25,0.526,baeume: schwebt (m)
+R06,C6,99,256,99.78,256.05,0.352,baeume: schwebt (m)
+R06,A1,2,35,2.6,35.33,0.541,baeume: schwebt (m)
+R06,E1,193,35,193.24,35.1,0.864,baeume: schwebt (m)
+R06,E1,194,35,194.52,35.75,0.515,baeume: schwebt (m)
+R06,G3,290,107,290.0,107.0,0.704,baeume: schwebt (m)
+R06,E1,189,30,189.25,30.0,0.481,baeume: schwebt (m)
+R06,H3,316,87,316.49,87.63,0.47,baeume: schwebt (m)
+R06,F6,234,225,234.37,225.52,0.784,baeume: schwebt (m)
+R06,C5,90,194,90.83,194.78,2.051,baeume: schwebt (m)
+R06,C6,95,248,95.25,248.75,5.819,baeume: schwebt (m)
+R06,F1,230,26,230.96,26.09,0.445,baeume: schwebt (m)
+R06,B4,68,148,68.78,148.08,0.471,baeume: schwebt (m)
+R06,H4,299,164,299.5,164.75,0.449,baeume: schwebt (m)
+R06,H4,300,165,300.23,165.54,0.483,baeume: schwebt (m)
+R06,F6,231,225,231.22,225.9,0.663,baeume: schwebt (m)
+R06,C6,97,247,97.5,247.5,0.39,baeume: schwebt (m)
+R06,H1,327,29,327.87,29.33,2.863,baeume: schwebt (m)
+R06,H1,330,29,330.06,29.89,2.905,baeume: schwebt (m)
+R06,E1,191,35,191.2,35.22,0.798,baeume: schwebt (m)
+R06,H6,303,221,303.0,221.5,1.058,baeume: schwebt (m)
+R06,D1,156,8,156.75,8.75,0.427,baeume: schwebt (m)
+R06,G3,289,110,289.5,110.0,0.758,baeume: schwebt (m)
+R06,C5,121,205,121.25,205.5,0.354,baeume: schwebt (m)
+R06,E1,192,34,192.12,34.5,0.889,baeume: schwebt (m)
+R06,H3,314,88,314.25,88.5,0.677,baeume: schwebt (m)
+R06,D6,161,223,161.5,223.75,2.873,baeume: schwebt (m)
+R06,C3,102,128,102.74,128.55,0.484,baeume: schwebt (m)
+R06,D4,129,140,129.5,140.5,0.719,baeume: versunken (m)
+R06,H5,312,181,312.25,181.75,0.468,baeume: schwebt (m)
+R06,C6,94,241,94.75,241.75,0.46,baeume: schwebt (m)
+R06,D6,160,222,160.25,222.0,0.487,baeume: schwebt (m)
+R06,E6,202,236,202.16,236.26,0.503,baeume: schwebt (m)
+R06,G3,290,104,290.74,104.98,1.995,baeume: schwebt (m)
+R06,H3,297,104,297.64,104.18,0.39,baeume: schwebt (m)
+R06,H2,318,86,318.52,86.43,0.356,baeume: schwebt (m)
+R06,H1,333,29,333.47,29.59,0.643,baeume: schwebt (m)
+R06,C3,105,129,105.63,129.75,0.392,baeume: schwebt (m)
+R06,C6,101,250,101.5,250.5,0.571,baeume: schwebt (m)
+R06,G3,289,105,289.25,105.0,2.184,baeume: schwebt (m)
+R06,H3,313,89,313.6,89.56,0.496,baeume: schwebt (m)
+R06,B4,53,166,53.74,166.47,1.883,baeume: schwebt (m)
+R06,C5,89,191,89.5,191.5,0.413,baeume: schwebt (m)
+R06,G6,265,228,265.76,228.93,0.595,baeume: schwebt (m)
+R06,F6,232,225,232.39,225.57,0.472,baeume: schwebt (m)
+R06,E6,203,235,203.5,235.5,1.502,baeume: schwebt (m)
+R06,D6,155,222,155.03,222.71,0.46,baeume: schwebt (m)
+R06,G6,261,228,261.5,228.42,0.374,baeume: schwebt (m)
+R06,G3,287,110,287.95,110.4,1.948,baeume: schwebt (m)
+R06,A1,33,29,33.51,29.86,0.412,baeume: schwebt (m)
+R06,C6,113,218,113.85,218.18,0.631,baeume: schwebt (m)
+R06,G6,256,224,256.13,224.92,0.709,baeume: schwebt (m)
+R06,G6,263,228,263.16,228.48,0.351,baeume: schwebt (m)
+R06,E6,206,231,206.75,231.25,0.623,baeume: versunken (m)
+R06,C6,101,249,101.52,249.55,0.649,baeume: schwebt (m)
+R06,H1,319,31,319.5,31.0,0.874,baeume: schwebt (m)
+R06,C5,93,195,93.25,195.5,0.402,baeume: schwebt (m)
+R06,A6,28,240,28.5,240.25,0.361,baeume: schwebt (m)
+R06,H1,327,27,327.25,27.75,0.537,baeume: schwebt (m)
+R06,C5,91,193,91.99,193.86,0.474,baeume: schwebt (m)
+R06,B5,82,175,82.22,175.3,0.671,baeume: schwebt (m)
+R06,C5,89,190,89.0,190.75,0.467,baeume: schwebt (m)
+R06,G3,291,105,291.69,105.62,1.463,baeume: schwebt (m)
+R06,H7,325,280,325.78,280.76,0.399,baeume: schwebt (m)
+R06,H1,320,29,320.75,29.5,0.456,baeume: schwebt (m)
+R06,B5,81,173,81.48,173.25,0.54,baeume: schwebt (m)
+R06,F6,211,227,211.0,227.25,0.48,baeume: schwebt (m)
+R06,E6,201,234,201.5,234.81,0.51,baeume: schwebt (m)
+R06,C6,94,243,94.0,243.0,1.686,baeume: schwebt (m)
+R06,C6,103,250,103.75,250.5,0.402,baeume: schwebt (m)
+R06,H3,300,101,300.79,101.7,0.361,baeume: schwebt (m)
+R06,H5,313,184,313.75,184.5,1.64,baeume: schwebt (m)
+R06,F1,237,24,237.07,24.53,0.405,baeume: schwebt (m)
+R06,D6,145,222,145.27,222.67,0.612,baeume: schwebt (m)
+R06,G4,291,153,291.0,153.5,1.689,baeume: schwebt (m)
+R06,C4,118,167,118.5,167.25,1.323,baeume: versunken (m)
+R06,F6,210,228,210.25,228.56,0.676,baeume: schwebt (m)
+R06,D1,160,10,160.13,10.17,0.505,baeume: schwebt (m)
+R06,G1,282,21,282.5,21.5,0.367,baeume: schwebt (m)
+R06,H1,326,27,326.0,27.75,0.478,baeume: schwebt (m)
+R06,B4,54,162,54.25,162.75,0.489,baeume: schwebt (m)
+R06,E6,201,239,201.58,239.07,0.68,baeume: schwebt (m)
+R06,C3,113,110,113.25,110.0,3.854,baeume: schwebt (m)
+R06,F6,249,223,249.11,223.41,0.577,baeume: schwebt (m)
+R06,F6,233,226,233.5,226.0,1.008,baeume: schwebt (m)
+R06,H5,314,183,314.42,183.79,0.556,baeume: schwebt (m)
+R06,C6,99,249,99.25,249.75,2.23,baeume: schwebt (m)
+R06,F6,247,223,247.15,223.71,0.611,baeume: schwebt (m)
+R06,G6,272,228,272.25,228.0,0.475,baeume: schwebt (m)
+R06,F1,229,26,229.39,26.08,0.472,baeume: schwebt (m)
+R06,H2,317,83,317.03,83.5,3.277,baeume: schwebt (m)
+R06,G6,274,226,274.76,226.67,0.433,baeume: schwebt (m)
+R06,C6,96,244,96.0,244.5,0.441,baeume: schwebt (m)
+R06,D1,161,10,161.25,10.75,0.454,baeume: schwebt (m)
+R06,B4,81,171,81.91,171.6,0.599,baeume: schwebt (m)
+R06,D1,163,12,163.0,12.0,0.52,baeume: schwebt (m)
+R06,H1,319,31,319.02,31.86,0.702,baeume: schwebt (m)
+R06,H5,310,182,310.72,182.46,2.065,baeume: schwebt (m)
+R06,G3,290,116,290.24,116.84,0.632,baeume: schwebt (m)
+R06,F1,229,28,229.5,28.5,4.215,baeume: schwebt (m)
+R06,F6,228,226,228.96,226.15,0.392,baeume: schwebt (m)
+R06,C6,94,248,94.0,248.0,5.656,baeume: schwebt (m)
+R06,G4,292,156,292.0,156.25,5.642,baeume: schwebt (m)
+R06,G6,273,227,273.5,227.5,0.363,baeume: schwebt (m)
+R06,A1,12,34,12.7,34.83,0.358,baeume: schwebt (m)
+R06,E6,209,227,209.98,227.55,0.544,baeume: schwebt (m)
+R06,D4,128,139,128.12,139.79,0.467,baeume: schwebt (m)
+R06,D6,154,222,154.26,222.72,0.503,baeume: schwebt (m)
+R06,E1,193,33,193.86,33.94,0.37,baeume: schwebt (m)
+R06,G3,292,106,292.0,106.38,0.731,baeume: schwebt (m)
+R06,F1,228,28,228.25,28.5,4.288,baeume: schwebt (m)
+R06,H2,317,84,317.0,84.75,2.567,baeume: schwebt (m)
+R06,C6,114,219,114.5,219.5,1.328,baeume: schwebt (m)
+R06,C3,110,129,110.5,129.0,0.67,baeume: schwebt (m)
+R06,B5,79,176,79.21,176.76,0.391,baeume: schwebt (m)
+R06,C6,115,218,115.77,218.69,0.392,baeume: schwebt (m)
+R06,G6,254,223,254.7,223.64,0.408,baeume: schwebt (m)
+R06,C6,93,241,93.44,241.91,0.842,baeume: schwebt (m)
+R06,H3,305,99,305.83,99.05,0.601,baeume: schwebt (m)
+R06,H1,318,31,318.25,31.5,0.516,baeume: schwebt (m)
+R06,H4,295,154,295.46,154.64,0.398,baeume: schwebt (m)
+R06,E6,208,227,208.85,227.39,0.353,baeume: schwebt (m)
+R06,H3,305,100,305.95,100.32,0.585,baeume: schwebt (m)
+R06,D1,162,13,162.5,13.5,1.83,baeume: schwebt (m)
+R06,H1,316,32,316.93,32.58,0.512,baeume: schwebt (m)
+R06,C3,109,129,109.52,129.81,0.864,baeume: schwebt (m)
+R06,H1,331,30,331.5,30.25,1.747,baeume: schwebt (m)
+R06,D6,152,221,152.42,221.42,0.455,baeume: schwebt (m)
+R06,E6,205,229,205.42,229.98,0.438,baeume: schwebt (m)
+R06,C6,100,250,100.5,250.0,1.126,baeume: schwebt (m)
+R06,B4,54,167,54.75,167.75,1.567,baeume: schwebt (m)
+R06,H1,332,30,332.15,30.06,1.416,baeume: schwebt (m)
+R06,C6,96,246,96.25,246.0,0.453,baeume: schwebt (m)
+R06,G1,281,20,281.75,20.75,0.492,baeume: schwebt (m)
+R06,H3,314,92,314.48,92.71,0.574,baeume: schwebt (m)
+R06,B3,73,112,73.49,112.45,0.384,baeume: schwebt (m)
+R06,H3,307,101,307.0,101.0,1.126,baeume: schwebt (m)
+R06,G3,289,108,289.25,108.75,0.773,baeume: schwebt (m)
+R06,C3,113,112,113.75,112.25,2.282,baeume: schwebt (m)
+R06,B4,53,165,53.25,165.5,1.841,baeume: schwebt (m)
+R06,C5,84,186,84.5,186.75,0.494,baeume: schwebt (m)
+R06,F6,233,224,233.6,224.9,0.359,baeume: schwebt (m)
+R06,F6,210,228,210.75,228.0,0.869,baeume: schwebt (m)
+R06,C5,122,187,122.5,187.0,3.046,baeume: schwebt (m)
+R06,D6,144,222,144.36,222.98,0.538,baeume: schwebt (m)
+R06,G6,253,223,253.45,223.47,0.48,baeume: schwebt (m)
+R06,C3,102,105,102.25,105.25,18.1,felsen: schwebt (m)
+R06,C3,102,107,102.56,107.49,16.748,felsen: schwebt (m)
+R06,C3,96,109,96.0,109.5,4.217,felsen: schwebt (m)
+R06,C3,101,108,101.49,108.88,15.114,felsen: schwebt (m)
+R06,C3,100,110,100.0,110.75,12.084,felsen: schwebt (m)
+R06,C3,100,110,100.87,110.98,11.806,felsen: schwebt (m)
+R06,C3,101,110,101.45,110.06,13.473,felsen: schwebt (m)
+R06,C3,97,111,97.29,111.91,6.566,felsen: schwebt (m)
+R06,C3,98,112,98.75,112.0,8.424,felsen: schwebt (m)
+R06,C3,97,112,97.4,112.35,6.806,felsen: schwebt (m)
+R06,C3,94,115,94.34,115.2,6.492,felsen: schwebt (m)
+R06,H5,308,206,308.55,206.11,0.476,felsen: schwebt (m)
+R06,E1,185,31,185.0,31.0,7.217,findlinge: schwebt (m)
+R06,G1,285,33,285.5,33.0,1.861,findlinge: versunken (m)
+R06,E1,209,38,209.5,38.75,3.235,findlinge: schwebt (m)
+R06,H3,311,90,311.0,90.5,2.155,findlinge: schwebt (m)
+R06,H3,310,97,310.5,97.5,1.951,findlinge: schwebt (m)
+R06,H3,306,98,306.5,98.5,0.53,findlinge: schwebt (m)
+R06,H3,309,99,309.0,99.5,1.258,findlinge: schwebt (m)
+R06,G3,278,111,278.25,111.25,3.422,findlinge: versunken (m)
+R06,G3,277,113,277.5,113.0,4.32,findlinge: versunken (m)
+R06,G4,291,161,291.0,161.5,5.525,findlinge: schwebt (m)
+R06,H5,307,184,307.0,184.0,2.516,findlinge: schwebt (m)
+R06,E1,183,5,183.68,5.69,1.0,steine: im Wasser
+R06,G1,272,6,272.1,6.81,1.0,steine: im Wasser
+R06,D1,137,11,137.03,11.88,1.0,steine: im Wasser
+R06,C1,123,16,123.27,16.3,1.0,steine: im Wasser
+R06,C1,124,19,124.78,19.98,1.0,steine: im Wasser
+R06,F1,213,31,213.64,31.27,1.0,steine: im Wasser
+R06,E2,198,51,198.01,51.69,1.0,steine: im Wasser
+R06,A2,27,57,27.48,57.83,1.0,steine: im Wasser
+R06,A2,36,57,36.68,57.99,1.0,steine: im Wasser
+R06,B2,60,59,60.96,59.25,1.0,steine: im Wasser
+R06,E2,196,65,196.61,65.92,1.0,steine: im Wasser
+R06,E2,191,69,191.15,69.2,1.0,steine: im Wasser
+R06,E2,189,74,189.09,74.04,1.0,steine: im Wasser
+R06,E2,192,74,192.54,74.74,1.0,steine: im Wasser
+R06,B2,59,77,59.14,77.9,1.0,steine: im Wasser
+R06,E2,190,80,190.9,80.78,1.0,steine: im Wasser
+R06,B3,57,91,57.02,91.39,1.0,steine: im Wasser
+R06,B3,50,96,50.43,96.01,1.0,steine: im Wasser
+R06,B3,47,97,47.73,97.33,1.0,steine: im Wasser
+R06,A3,38,102,38.59,102.23,1.0,steine: im Wasser
+R06,B3,53,102,53.54,102.59,1.0,steine: im Wasser
+R06,A3,35,108,35.15,108.95,1.0,steine: im Wasser
+R06,A3,41,111,41.58,111.16,1.0,steine: im Wasser
+R06,A3,40,113,40.76,113.87,1.0,steine: im Wasser
+R06,A3,39,115,39.32,115.58,1.0,steine: im Wasser
+R06,A3,38,116,38.68,116.72,1.0,steine: im Wasser
+R06,E3,187,117,187.81,117.76,1.0,steine: im Wasser
+R06,E3,182,120,182.56,120.04,1.0,steine: im Wasser
+R06,E3,186,121,186.74,121.2,1.0,steine: im Wasser
+R06,A3,26,122,26.12,122.25,1.0,steine: im Wasser
+R06,E4,181,130,181.96,130.07,1.0,steine: im Wasser
+R06,E4,178,136,178.71,136.84,1.0,steine: im Wasser
+R06,E4,173,153,173.21,153.35,1.0,steine: im Wasser
+R06,A4,30,161,30.47,161.95,1.0,steine: im Wasser
+R06,D4,151,165,151.08,165.52,1.0,steine: im Wasser
+R06,H5,333,194,333.08,194.39,1.0,steine: im Wasser
+R06,A5,28,206,28.91,206.08,1.0,steine: im Wasser
+R06,A5,15,212,15.19,212.81,1.0,steine: im Wasser
+R06,F5,217,213,217.19,213.87,1.0,steine: im Wasser
+R06,A5,21,214,21.94,214.74,1.0,steine: im Wasser
+R06,A5,21,215,21.97,215.44,1.0,steine: im Wasser
+R06,E6,208,220,208.86,220.0,1.0,steine: im Wasser
+R06,A6,13,228,13.2,228.51,1.0,steine: im Wasser
+R06,A6,12,230,12.71,230.3,1.0,steine: im Wasser
+R06,F6,214,243,214.22,243.03,1.0,steine: im Wasser
+R06,F6,223,247,223.24,247.97,1.0,steine: im Wasser
+R06,A6,9,249,9.13,249.17,1.0,steine: im Wasser
+R06,G6,270,253,270.11,253.35,1.0,steine: im Wasser
+R06,G6,272,253,272.44,253.34,1.0,steine: im Wasser
+R06,D6,160,254,160.29,254.45,1.0,steine: im Wasser
+R06,A6,6,255,6.17,255.52,1.0,steine: im Wasser
+R06,E6,171,255,171.34,255.14,1.0,steine: im Wasser
+R06,E6,177,255,177.93,255.65,1.0,steine: im Wasser
+R06,D6,157,256,157.25,256.11,1.0,steine: im Wasser
+R06,A6,38,257,38.75,257.13,1.0,steine: im Wasser
+R06,B6,70,257,70.02,257.26,1.0,steine: im Wasser
+R06,G6,282,257,282.63,257.03,1.0,steine: im Wasser
+R06,A6,13,258,13.42,258.91,1.0,steine: im Wasser
+R06,A6,19,258,19.71,258.92,1.0,steine: im Wasser
+R06,B6,54,258,54.03,258.06,1.0,steine: im Wasser
+R06,G6,258,258,258.28,258.37,1.0,steine: im Wasser
+R06,B6,58,259,58.26,259.16,1.0,steine: im Wasser
+R06,G6,257,259,257.85,259.07,1.0,steine: im Wasser
+R06,B7,50,260,50.25,260.11,1.0,steine: im Wasser
+R06,B7,60,260,60.97,260.25,1.0,steine: im Wasser
+R06,B7,75,260,75.61,260.01,1.0,steine: im Wasser
+R06,B7,62,261,62.15,261.43,1.0,steine: im Wasser
+R06,F7,217,262,217.6,262.3,1.0,steine: im Wasser
+R06,G7,292,262,292.71,262.35,1.0,steine: im Wasser
+R06,A7,17,263,17.16,263.52,1.0,steine: im Wasser
+R06,B7,69,263,69.08,263.23,1.0,steine: im Wasser
+R06,D7,142,263,142.71,263.08,1.0,steine: im Wasser
+R06,H7,330,263,330.62,263.33,1.0,steine: im Wasser
+R06,B7,78,264,78.57,264.42,1.0,steine: im Wasser
+R06,H7,301,264,301.22,264.39,1.0,steine: im Wasser
+R06,H7,312,264,312.16,264.12,1.0,steine: im Wasser
+R06,D7,131,265,131.1,265.44,1.0,steine: im Wasser
+R06,E7,188,265,188.89,265.02,1.0,steine: im Wasser
+R06,F7,216,265,216.1,265.2,1.0,steine: im Wasser
+R06,F7,250,265,250.07,265.94,1.0,steine: im Wasser
+R06,G7,274,266,274.22,266.88,1.0,steine: im Wasser
+R06,H7,325,266,325.44,266.44,1.0,steine: im Wasser
+R06,B7,83,267,83.13,267.43,1.0,steine: im Wasser
+R06,E7,173,267,173.56,267.87,1.0,steine: im Wasser
+R06,E7,192,267,192.31,267.13,1.0,steine: im Wasser
+R06,G7,267,267,267.48,267.69,1.0,steine: im Wasser
+R06,G7,278,267,278.68,267.76,1.0,steine: im Wasser
+R06,C7,84,268,84.85,268.04,1.0,steine: im Wasser
+R06,C7,116,268,116.7,268.12,1.0,steine: im Wasser
+R06,D7,158,268,158.52,268.61,1.0,steine: im Wasser
+R06,F7,214,268,214.25,268.5,1.0,steine: im Wasser
+R06,F7,246,268,246.07,268.18,1.0,steine: im Wasser
+R06,A7,25,269,25.57,269.92,1.0,steine: im Wasser
+R06,A7,36,269,36.9,269.82,1.0,steine: im Wasser
+R06,B7,43,269,43.62,269.79,1.0,steine: im Wasser
+R06,B7,44,269,44.02,269.77,1.0,steine: im Wasser
+R06,B7,46,269,46.21,269.86,1.0,steine: im Wasser
+R06,B7,47,269,47.77,269.69,1.0,steine: im Wasser
+R06,D7,155,269,155.52,269.99,1.0,steine: im Wasser
+R06,F7,212,269,212.7,269.42,1.0,steine: im Wasser
+R06,F7,243,269,243.54,269.39,1.0,steine: im Wasser
+R06,A7,22,270,22.74,270.81,1.0,steine: im Wasser
+R06,B7,69,270,69.05,270.85,1.0,steine: im Wasser
+R06,C7,114,270,114.12,270.33,1.0,steine: im Wasser
+R06,E7,200,270,200.87,270.08,1.0,steine: im Wasser
+R06,E7,203,270,203.34,270.14,1.0,steine: im Wasser
+R06,E7,207,270,207.28,270.39,1.0,steine: im Wasser
+R06,F7,226,270,226.56,270.08,1.0,steine: im Wasser
+R06,F7,240,270,240.83,270.29,1.0,steine: im Wasser
+R06,E7,181,271,181.06,271.69,1.0,steine: im Wasser
+R06,G7,258,271,258.82,271.93,1.0,steine: im Wasser
+R06,C7,90,272,90.86,272.07,1.0,steine: im Wasser
+R06,G7,257,272,257.7,272.82,1.0,steine: im Wasser
+R06,H7,303,273,303.94,273.84,1.0,steine: im Wasser
+R06,C7,97,274,97.27,274.26,1.0,steine: im Wasser
+R06,H7,297,274,297.15,274.53,1.0,steine: im Wasser
+R06,H7,315,274,315.39,274.86,1.0,steine: im Wasser
+R06,H7,316,274,316.53,274.94,1.0,steine: im Wasser
+R06,A7,13,275,13.85,275.08,1.0,steine: im Wasser
+R06,D7,133,275,133.44,275.79,1.0,steine: im Wasser
+R06,D7,136,275,136.26,275.69,1.0,steine: im Wasser
+R06,E7,186,275,186.42,275.41,1.0,steine: im Wasser
+R06,C7,119,276,119.35,276.79,1.0,steine: im Wasser
+R06,A7,9,278,9.69,278.59,1.0,steine: im Wasser
+R06,C7,115,278,115.77,278.67,1.0,steine: im Wasser
+R06,H7,324,278,324.97,278.99,1.0,steine: im Wasser
+R06,E7,192,279,192.35,279.56,1.0,steine: im Wasser
+R06,F7,225,279,225.09,279.87,1.0,steine: im Wasser
+R06,C7,111,280,111.25,280.8,1.0,steine: im Wasser
+R06,E7,194,280,194.38,280.7,1.0,steine: im Wasser
+R06,F7,229,280,229.93,280.87,1.0,steine: im Wasser
+R06,C7,110,281,110.1,281.61,1.0,steine: im Wasser
+R06,F7,232,281,232.78,281.62,1.0,steine: im Wasser
+R06,C7,88,282,88.33,282.99,1.0,steine: im Wasser
+R06,F7,234,282,234.67,282.85,1.0,steine: im Wasser
+R06,H7,330,282,330.44,282.8,1.0,steine: im Wasser
+R06,C7,92,284,92.41,284.9,1.0,steine: im Wasser
+R06,C7,101,284,101.98,284.95,1.0,steine: im Wasser
+R06,H7,332,284,332.25,284.8,1.0,steine: im Wasser
+R07,A1,17,2,17.07,2.4,21.0,begehbare Insel (Zellen)
+R07,B1,75,12,75.39,12.86,2665.0,begehbare Insel (Zellen)
+R07,G1,253,17,253.57,17.89,3608.0,begehbare Insel (Zellen)
+R07,D1,164,2,164.37,2.74,119.0,begehbare Insel (Zellen)
+R07,E1,194,3,194.58,3.39,207.0,begehbare Insel (Zellen)
+R07,F1,237,6,237.97,6.11,259.0,begehbare Insel (Zellen)
+R07,F1,245,2,245.42,2.21,133.0,begehbare Insel (Zellen)
+R07,G1,280,4,280.29,4.71,14.0,begehbare Insel (Zellen)
+R07,H1,316,7,316.73,7.62,169.0,begehbare Insel (Zellen)
+R07,C1,124,24,124.81,24.25,513.0,begehbare Insel (Zellen)
+R07,G1,291,7,291.78,7.5,29.0,begehbare Insel (Zellen)
+R07,F1,214,13,214.03,13.74,17.0,begehbare Insel (Zellen)
+R07,C1,104,15,104.22,15.78,25.0,begehbare Insel (Zellen)
+R07,D1,149,15,149.3,15.7,5.0,begehbare Insel (Zellen)
+R07,C1,115,20,115.86,20.0,14.0,begehbare Insel (Zellen)
+R07,A1,38,32,38.71,32.42,636.0,begehbare Insel (Zellen)
+R07,D1,153,24,153.83,24.42,12.0,begehbare Insel (Zellen)
+R07,E1,173,25,173.39,25.71,19.0,begehbare Insel (Zellen)
+R07,G1,262,25,262.3,25.23,15.0,begehbare Insel (Zellen)
+R07,D1,161,25,161.0,25.0,4.0,begehbare Insel (Zellen)
+R07,A1,3,29,3.91,29.04,41.0,begehbare Insel (Zellen)
+R07,A1,37,28,37.0,28.0,6.0,begehbare Insel (Zellen)
+R07,D1,137,30,137.52,30.59,46.0,begehbare Insel (Zellen)
+R07,G1,253,29,253.5,29.5,5.0,begehbare Insel (Zellen)
+R07,F3,248,128,248.68,128.51,19510.0,begehbare Insel (Zellen)
+R07,F1,249,31,249.0,31.0,6.0,begehbare Insel (Zellen)
+R07,C1,88,31,88.5,31.5,5.0,begehbare Insel (Zellen)
+R07,F1,238,33,238.0,33.77,30.0,begehbare Insel (Zellen)
+R07,B1,76,39,76.07,39.31,21.0,begehbare Insel (Zellen)
+R07,C1,89,40,89.0,40.5,4.0,begehbare Insel (Zellen)
+R07,C1,96,41,96.0,41.5,4.0,begehbare Insel (Zellen)
+R07,F2,222,43,222.14,43.29,14.0,begehbare Insel (Zellen)
+R07,A3,26,95,26.93,95.92,3743.0,begehbare Insel (Zellen)
+R07,H2,327,79,327.01,79.69,43.0,begehbare Insel (Zellen)
+R07,H2,323,76,323.7,76.1,5.0,begehbare Insel (Zellen)
+R07,H3,325,96,325.58,96.51,487.0,begehbare Insel (Zellen)
+R07,A3,19,88,19.03,88.09,64.0,begehbare Insel (Zellen)
+R07,D3,126,92,126.0,92.5,4.0,begehbare Insel (Zellen)
+R07,H3,297,94,297.06,94.06,9.0,begehbare Insel (Zellen)
+R07,C3,105,95,105.06,95.06,9.0,begehbare Insel (Zellen)
+R07,C3,118,97,118.0,97.5,4.0,begehbare Insel (Zellen)
+R07,H3,302,98,302.45,98.45,21.0,begehbare Insel (Zellen)
+R07,C3,94,104,94.92,104.5,43.0,begehbare Insel (Zellen)
+R07,H3,312,104,312.53,104.44,79.0,begehbare Insel (Zellen)
+R07,H3,317,99,317.25,99.5,4.0,begehbare Insel (Zellen)
+R07,A3,8,106,8.95,106.93,47.0,begehbare Insel (Zellen)
+R07,G3,281,105,281.3,105.3,5.0,begehbare Insel (Zellen)
+R07,H3,319,108,319.43,108.57,27.0,begehbare Insel (Zellen)
+R07,G3,282,107,282.0,107.9,10.0,begehbare Insel (Zellen)
+R07,H4,309,163,309.0,163.34,1187.0,begehbare Insel (Zellen)
+R07,H3,319,116,319.81,116.0,16.0,begehbare Insel (Zellen)
+R07,H3,328,116,328.0,116.5,4.0,begehbare Insel (Zellen)
+R07,H4,302,130,302.22,130.38,184.0,begehbare Insel (Zellen)
+R07,C4,96,159,96.52,159.93,1909.0,begehbare Insel (Zellen)
+R07,C3,93,122,93.63,122.63,15.0,begehbare Insel (Zellen)
+R07,D4,129,133,129.22,133.72,54.0,begehbare Insel (Zellen)
+R07,B4,47,133,47.72,133.49,101.0,begehbare Insel (Zellen)
+R07,C4,120,130,120.0,130.83,6.0,begehbare Insel (Zellen)
+R07,D4,134,139,134.75,139.75,4.0,begehbare Insel (Zellen)
+R07,C4,122,143,122.3,143.9,5.0,begehbare Insel (Zellen)
+R07,H4,318,151,318.44,151.91,54.0,begehbare Insel (Zellen)
+R07,D4,133,162,133.43,162.97,15.0,begehbare Insel (Zellen)
+R07,H5,327,175,327.84,175.41,116.0,begehbare Insel (Zellen)
+R07,C4,117,167,117.9,167.9,5.0,begehbare Insel (Zellen)
+R07,C5,120,181,120.26,181.09,97.0,begehbare Insel (Zellen)
+R07,A5,1,185,1.38,185.38,8.0,begehbare Insel (Zellen)
+R07,H5,315,194,315.0,194.08,26.0,begehbare Insel (Zellen)
+R07,C5,114,195,114.88,195.62,8.0,begehbare Insel (Zellen)
+R07,H5,314,198,314.12,198.62,8.0,begehbare Insel (Zellen)
+R07,H5,320,200,320.19,200.04,13.0,begehbare Insel (Zellen)
+R07,H5,330,200,330.18,200.39,19.0,begehbare Insel (Zellen)
+R07,H5,315,201,315.3,201.9,5.0,begehbare Insel (Zellen)
+R07,H5,333,206,333.69,206.69,26.0,begehbare Insel (Zellen)
+R07,A5,9,208,9.85,208.95,20.0,begehbare Insel (Zellen)
+R07,H5,326,206,326.3,206.9,5.0,begehbare Insel (Zellen)
+R07,C5,88,211,88.83,211.25,12.0,begehbare Insel (Zellen)
+R07,C5,100,211,100.33,211.33,6.0,begehbare Insel (Zellen)
+R07,A5,13,214,13.83,214.17,6.0,begehbare Insel (Zellen)
+R07,A6,9,225,9.61,226.0,141.0,begehbare Insel (Zellen)
+R07,C6,109,216,109.67,216.83,6.0,begehbare Insel (Zellen)
+R07,A6,40,235,40.05,235.86,312.0,begehbare Insel (Zellen)
+R07,H6,314,228,314.32,228.04,39.0,begehbare Insel (Zellen)
+R07,C6,93,229,93.45,229.76,43.0,begehbare Insel (Zellen)
+R07,H6,295,234,295.76,234.2,47.0,begehbare Insel (Zellen)
+R07,D6,146,230,146.5,230.33,6.0,begehbare Insel (Zellen)
+R07,H6,305,233,305.5,233.0,12.0,begehbare Insel (Zellen)
+R07,D6,159,232,159.36,232.36,7.0,begehbare Insel (Zellen)
+R07,G6,272,253,272.61,253.47,2129.0,begehbare Insel (Zellen)
+R07,G6,256,236,256.53,236.22,29.0,begehbare Insel (Zellen)
+R07,D6,145,235,145.07,235.64,35.0,begehbare Insel (Zellen)
+R07,C6,113,240,113.34,240.7,70.0,begehbare Insel (Zellen)
+R07,D6,157,237,157.94,237.06,9.0,begehbare Insel (Zellen)
+R07,F6,235,240,235.15,240.92,81.0,begehbare Insel (Zellen)
+R07,D6,165,238,165.62,238.38,17.0,begehbare Insel (Zellen)
+R07,G6,274,239,274.1,239.5,10.0,begehbare Insel (Zellen)
+R07,E6,175,239,175.38,239.62,8.0,begehbare Insel (Zellen)
+R07,E6,183,240,183.36,240.64,7.0,begehbare Insel (Zellen)
+R07,D6,135,246,135.4,246.06,62.0,begehbare Insel (Zellen)
+R07,G6,266,244,266.75,244.25,4.0,begehbare Insel (Zellen)
+R07,G6,254,246,254.13,246.34,19.0,begehbare Insel (Zellen)
+R07,H6,329,245,329.0,245.5,4.0,begehbare Insel (Zellen)
+R07,D7,137,278,137.56,278.04,3614.0,begehbare Insel (Zellen)
+R07,C6,124,253,124.25,253.62,8.0,begehbare Insel (Zellen)
+R07,E7,171,261,171.85,261.53,31.0,begehbare Insel (Zellen)
+R07,G7,272,266,272.0,266.5,6.0,begehbare Insel (Zellen)
+R07,H7,308,269,308.0,269.0,4.0,begehbare Insel (Zellen)
+R07,H7,333,270,333.83,270.06,18.0,begehbare Insel (Zellen)
+R07,E7,194,276,194.25,276.38,8.0,begehbare Insel (Zellen)
+R07,F7,237,277,237.5,277.25,4.0,begehbare Insel (Zellen)
+R07,H7,334,277,334.5,277.0,6.0,begehbare Insel (Zellen)
+R07,C7,92,280,92.81,280.19,13.0,begehbare Insel (Zellen)
+R07,H7,328,287,328.45,287.36,43.0,begehbare Insel (Zellen)
+R07,G7,283,290,283.1,290.8,10.0,begehbare Insel (Zellen)
+R07,H7,304,292,304.02,292.26,50.0,begehbare Insel (Zellen)
+R07,C7,122,291,122.25,291.25,4.0,begehbare Insel (Zellen)
+R07,E7,209,297,209.25,297.25,8.0,begehbare Insel (Zellen)
+R07,H7,324,301,324.05,301.32,11.0,begehbare Insel (Zellen)
+R08,B2,65,45,65.5,45.5,0.39,Spiegel steigt Richtung S (m)
+R08,B2,64,46,64.5,46.5,0.42,Spiegel steigt Richtung S (m)
+R08,B2,65,46,65.5,46.5,0.17,Spiegel steigt Richtung S (m)
+R08,B2,63,47,63.5,47.5,0.42,Spiegel steigt Richtung S (m)
+R08,B2,64,47,64.5,47.5,0.17,Spiegel steigt Richtung S (m)
+R08,B2,62,48,62.5,48.5,0.42,Spiegel steigt Richtung S (m)
+R08,B2,63,48,63.5,48.5,0.17,Spiegel steigt Richtung S (m)
+R08,A2,13,49,13.5,49.5,0.54,Spiegel steigt Richtung S (m)
+R08,A2,14,49,14.5,49.5,0.57,Spiegel steigt Richtung S (m)
+R08,A2,15,49,15.5,49.5,0.57,Spiegel steigt Richtung S (m)
+R08,A2,16,49,16.5,49.5,0.55,Spiegel steigt Richtung S (m)
+R08,B2,61,49,61.5,49.5,0.42,Spiegel steigt Richtung S (m)
+R08,B2,62,49,62.5,49.5,0.17,Spiegel steigt Richtung S (m)
+R08,B2,60,50,60.5,50.5,0.42,Spiegel steigt Richtung S (m)
+R08,B2,61,50,61.5,50.5,0.17,Spiegel steigt Richtung S (m)
+R08,B2,59,51,59.5,51.5,0.41,Spiegel steigt Richtung S (m)
+R08,B2,60,51,60.5,51.5,0.17,Spiegel steigt Richtung S (m)
+R08,B2,59,52,59.5,52.5,0.15,Spiegel steigt Richtung S (m)
+R08,A2,32,53,32.5,53.5,0.56,Spiegel steigt Richtung S (m)
+R08,A2,31,54,31.5,54.5,0.59,Spiegel steigt Richtung S (m)
+R08,A2,32,54,32.5,54.5,0.17,Spiegel steigt Richtung S (m)
+R08,A2,30,55,30.5,55.5,0.58,Spiegel steigt Richtung S (m)
+R08,B2,59,64,59.5,64.5,0.18,Spiegel steigt Richtung S (m)
+R08,F6,217,216,217.5,216.5,0.17,Spiegel steigt Richtung SO (m)
+R08,F6,217,217,217.5,217.5,0.26,Spiegel steigt Richtung SO (m)
+R08,F6,222,220,222.5,220.5,0.52,Spiegel steigt Richtung SO (m)
+R08,F6,218,223,218.5,223.5,0.3,Spiegel steigt Richtung SO (m)
+R08,A6,14,253,14.5,253.5,0.28,Spiegel steigt Richtung SO (m)
+R08,A6,15,253,15.5,253.5,0.27,Spiegel steigt Richtung SO (m)
+R08,D6,156,257,156.5,257.5,0.25,Spiegel steigt Richtung SO (m)
+R08,D6,155,258,155.5,258.5,0.24,Spiegel steigt Richtung SO (m)
+R08,D7,148,262,148.5,262.5,0.32,Spiegel steigt Richtung SO (m)
+R08,D7,144,263,144.5,263.5,0.61,Spiegel steigt Richtung SO (m)
+R08,D7,146,263,146.5,263.5,0.28,Spiegel steigt Richtung SO (m)
+R08,D7,147,263,147.5,263.5,0.26,Spiegel steigt Richtung SO (m)
+R08,D7,140,264,140.5,264.5,0.26,Spiegel steigt Richtung SO (m)
+R08,D7,141,264,141.5,264.5,0.26,Spiegel steigt Richtung SO (m)
+R08,D7,142,264,142.5,264.5,0.27,Spiegel steigt Richtung SO (m)
+R08,D7,143,264,143.5,264.5,0.25,Spiegel steigt Richtung SO (m)
+R08,D7,145,264,145.5,264.5,0.19,Spiegel steigt Richtung SO (m)
+R08,D7,137,265,137.5,265.5,0.21,Spiegel steigt Richtung SO (m)
+R08,F7,251,265,251.5,265.5,0.77,Spiegel steigt Richtung SO (m)
+R08,C7,123,266,123.5,266.5,0.23,Spiegel steigt Richtung SO (m)
+R08,D7,129,266,129.5,266.5,0.16,Spiegel steigt Richtung SO (m)
+R08,D7,130,266,130.5,266.5,0.21,Spiegel steigt Richtung SO (m)
+R08,A7,12,267,12.5,267.5,0.18,Spiegel steigt Richtung SO (m)
+R08,F7,248,267,248.5,267.5,0.69,Spiegel steigt Richtung SO (m)
+R08,A7,11,268,11.5,268.5,0.25,Spiegel steigt Richtung SO (m)
+R08,A7,10,269,10.5,269.5,0.28,Spiegel steigt Richtung SO (m)
+R08,A7,8,270,8.5,270.5,0.27,Spiegel steigt Richtung SO (m)
+R08,A7,9,270,9.5,270.5,0.16,Spiegel steigt Richtung SO (m)
+R08,F7,242,270,242.5,270.5,0.44,Spiegel steigt Richtung SO (m)
+R08,A7,6,271,6.5,271.5,0.21,Spiegel steigt Richtung SO (m)
+R08,A7,7,271,7.5,271.5,0.24,Spiegel steigt Richtung SO (m)
+R08,F7,231,271,231.5,271.5,0.19,Spiegel steigt Richtung SO (m)
+R08,F7,234,271,234.5,271.5,0.6,Spiegel steigt Richtung SO (m)
+R08,F7,235,271,235.5,271.5,0.57,Spiegel steigt Richtung SO (m)
+R08,F7,236,271,236.5,271.5,0.54,Spiegel steigt Richtung SO (m)
+R08,F7,239,271,239.5,271.5,0.46,Spiegel steigt Richtung SO (m)
+R08,F7,240,271,240.5,271.5,0.45,Spiegel steigt Richtung SO (m)
+R08,F7,230,272,230.5,272.5,0.18,Spiegel steigt Richtung SO (m)
+R08,C7,109,273,109.5,273.5,0.21,Spiegel steigt Richtung SO (m)
+R08,C7,110,273,110.5,273.5,0.17,Spiegel steigt Richtung SO (m)
+R08,C7,106,274,106.5,274.5,0.24,Spiegel steigt Richtung SO (m)
+R08,C7,107,274,107.5,274.5,0.2,Spiegel steigt Richtung SO (m)
+R08,C7,101,275,101.5,275.5,0.2,Spiegel steigt Richtung SO (m)
+R08,C7,102,275,102.5,275.5,0.25,Spiegel steigt Richtung SO (m)
+R08,C7,104,275,104.5,275.5,0.23,Spiegel steigt Richtung SO (m)
+R08,C7,105,275,105.5,275.5,0.2,Spiegel steigt Richtung SO (m)
+R08,C7,103,276,103.5,276.5,0.18,Spiegel steigt Richtung SO (m)
+R08,C7,104,276,104.5,276.5,0.19,Spiegel steigt Richtung SO (m)
+R08,C7,103,277,103.5,277.5,0.19,Spiegel steigt Richtung SO (m)
+R08,C7,102,278,102.5,278.5,0.2,Spiegel steigt Richtung SO (m)
+R08,C7,101,279,101.5,279.5,0.2,Spiegel steigt Richtung SO (m)
+R09,D1,159,15,159.25,15.0,0.428,Feinband-Rand weicht von Grobgitter ab (m)
+R09,D1,162,18,162.25,18.25,-0.438,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G1,272,25,272.75,25.75,-0.582,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G1,275,26,275.25,26.75,0.457,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E1,178,31,178.5,31.0,0.429,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E1,179,31,179.0,31.0,0.484,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E1,180,31,180.0,31.0,0.618,Feinband-Rand weicht von Grobgitter ab (m)
+R09,D1,155,32,155.75,32.25,-0.62,Feinband-Rand weicht von Grobgitter ab (m)
+R09,D1,157,32,157.25,32.25,0.501,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,335,33,335.0,33.0,-0.557,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,335,34,335.0,34.0,-0.8,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,18,35,18.25,35.25,0.456,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,335,35,335.0,35.5,-0.445,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,12,36,12.75,36.0,-0.523,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,13,36,13.0,36.0,-0.586,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G1,291,36,291.0,36.0,-2.595,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G1,292,36,292.5,36.0,0.462,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,294,36,294.0,36.0,0.453,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,295,36,295.0,36.0,0.49,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,306,36,306.0,36.0,-1.965,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,307,36,307.0,36.0,-0.45,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,308,36,308.0,36.0,-0.486,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,312,36,312.25,36.0,-0.5,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,313,36,313.0,36.0,-1.554,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,316,36,316.0,36.0,-1.014,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G1,290,37,290.0,37.0,-0.744,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H1,305,37,305.0,37.0,-1.066,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,22,37,22.25,37.25,0.453,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,27,37,27.75,37.25,-0.526,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,11,37,11.25,37.75,-0.404,Feinband-Rand weicht von Grobgitter ab (m)
+R09,F1,211,37,211.0,37.75,0.44,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,28,38,28.75,38.0,0.496,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E1,197,38,197.75,38.0,-0.431,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,10,38,10.25,38.25,-0.445,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,9,40,9.0,40.5,0.461,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,9,41,9.0,41.0,1.193,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A1,9,42,9.0,42.0,0.435,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,67,42,67.0,42.0,-5.374,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,68,42,68.0,42.0,-3.754,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,69,42,69.0,42.0,-1.256,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,70,42,70.0,42.0,-1.364,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,71,42,71.0,42.0,-1.611,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,72,42,72.0,42.0,-1.276,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B1,73,42,73.0,42.0,-0.773,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,43,8.0,43.0,0.784,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B2,65,43,65.0,43.0,-3.8,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B2,66,43,66.0,43.0,0.421,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,44,8.0,44.0,0.608,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B2,64,44,64.0,44.0,-0.728,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,45,8.0,45.0,0.628,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B2,63,45,63.0,45.0,-0.658,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,46,8.0,46.0,0.536,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B2,62,46,62.0,46.0,-0.456,Feinband-Rand weicht von Grobgitter ab (m)
+R09,F2,224,46,224.0,46.0,-0.441,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,0,46,0.25,46.25,-0.616,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C2,106,46,106.0,46.75,-0.433,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,0,47,0.75,47.0,0.413,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,47,8.0,47.0,0.489,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C2,106,47,106.0,47.0,-1.093,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,8,48,8.0,48.0,0.541,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C2,113,48,113.25,48.25,0.528,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,2,52,2.0,52.0,0.402,Feinband-Rand weicht von Grobgitter ab (m)
+R09,A2,3,52,3.0,52.0,0.561,Feinband-Rand weicht von Grobgitter ab (m)
+R09,H2,320,74,320.75,74.75,0.427,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C3,93,99,93.75,99.5,-0.475,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C3,91,100,91.75,100.25,0.424,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C3,109,111,109.0,111.0,0.422,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G3,273,111,273.75,111.75,-0.43,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,273,136,273.5,136.0,0.426,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,274,136,274.0,136.0,0.536,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,271,136,271.75,136.75,-0.445,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B4,79,146,79.0,146.0,0.441,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B4,78,147,78.0,147.0,0.45,Feinband-Rand weicht von Grobgitter ab (m)
+R09,B4,78,148,78.0,148.0,0.402,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,285,154,285.75,154.0,-0.448,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,286,154,286.0,154.0,-0.503,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G4,287,160,287.25,160.75,-0.568,Feinband-Rand weicht von Grobgitter ab (m)
+R09,C4,116,169,116.75,169.0,-0.518,Feinband-Rand weicht von Grobgitter ab (m)
+R09,F6,251,232,251.75,232.0,0.403,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G6,252,232,252.0,232.0,0.417,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G6,254,233,254.75,233.0,0.426,Feinband-Rand weicht von Grobgitter ab (m)
+R09,G6,256,234,256.5,234.0,0.433,Feinband-Rand weicht von Grobgitter ab (m)
+R09,D6,164,242,164.25,242.25,0.552,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E6,168,242,168.25,242.25,-0.434,Feinband-Rand weicht von Grobgitter ab (m)
+R09,E6,169,242,169.75,242.25,0.562,Feinband-Rand weicht von Grobgitter ab (m)
+R10,A3,3,117,3.98,117.53,1.419,baeume/baeume Abstand (m)
+R10,H7,334,294,334.87,294.54,0.84,baeume/baeume Abstand (m)
+R10,D7,126,291,126.77,291.63,1.126,baeume/baeume Abstand (m)
+R10,D7,139,285,139.04,285.95,1.195,baeume/baeume Abstand (m)
+R10,B5,78,176,78.7,176.37,1.282,baeume/baeume Abstand (m)
+R10,D7,135,301,135.84,301.83,1.192,baeume/baeume Abstand (m)
+R10,H4,324,159,324.78,159.84,1.179,baeume/baeume Abstand (m)
+R10,D7,145,299,145.63,299.38,1.176,baeume/baeume Abstand (m)
+R10,D7,141,287,141.44,287.55,1.257,baeume/baeume Abstand (m)
+R10,C6,103,250,103.38,250.62,0.791,baeume/baeume Abstand (m)
+R10,G7,258,288,258.38,288.04,1.22,baeume/baeume Abstand (m)
+R10,D7,162,297,162.26,297.92,1.251,baeume/baeume Abstand (m)
+R10,A6,3,238,3.28,238.3,1.116,baeume/baeume Abstand (m)
+R10,G7,278,290,278.79,290.68,0.989,baeume/baeume Abstand (m)
+R10,C7,124,293,124.69,293.14,1.203,baeume/baeume Abstand (m)
+R10,F7,219,295,219.98,295.5,1.42,baeume/baeume Abstand (m)
+R10,H3,330,118,330.73,118.28,1.398,baeume/baeume Abstand (m)
+R10,B7,68,290,68.33,290.67,0.696,baeume/baeume Abstand (m)
+R10,H1,326,27,326.62,27.75,1.25,baeume/baeume Abstand (m)
+R10,H4,333,139,333.39,139.74,1.191,baeume/baeume Abstand (m)
+R10,B5,77,175,77.66,175.61,1.29,baeume/baeume Abstand (m)
+R10,C7,115,292,115.56,292.06,1.018,baeume/baeume Abstand (m)
+R10,H4,333,131,333.15,131.1,1.332,baeume/baeume Abstand (m)
+R10,H7,329,297,329.37,297.0,0.69,baeume/baeume Abstand (m)
+R10,G7,274,290,274.64,290.23,1.228,baeume/baeume Abstand (m)
+R10,A4,11,165,11.68,165.56,1.257,baeume/baeume Abstand (m)
+R10,D6,154,222,154.44,222.08,1.317,baeume/baeume Abstand (m)
+R10,H4,326,133,326.48,133.88,1.401,baeume/baeume Abstand (m)
+R10,F6,225,224,225.47,224.89,1.181,baeume/baeume Abstand (m)
+R10,H4,334,139,334.4,139.69,1.096,baeume/baeume Abstand (m)
+R10,A2,1,82,1.39,82.53,1.42,baeume/baeume Abstand (m)
+R10,D6,158,221,158.84,221.39,0.932,baeume/baeume Abstand (m)
+R10,D7,126,294,126.4,294.1,1.309,baeume/baeume Abstand (m)
+R10,B7,68,290,68.86,290.65,1.417,baeume/baeume Abstand (m)
+R10,C7,120,288,120.73,288.75,0.987,baeume/baeume Abstand (m)
+R10,H3,330,125,330.21,125.05,1.412,baeume/baeume Abstand (m)
+R10,C7,122,284,122.28,284.39,1.021,baeume/baeume Abstand (m)
+R10,D7,151,301,151.03,301.32,0.944,baeume/baeume Abstand (m)
+R10,H4,322,155,322.24,155.46,1.315,baeume/baeume Abstand (m)
+R10,H1,316,32,316.69,32.27,0.798,baeume/baeume Abstand (m)
+R10,H3,313,89,313.93,89.03,1.243,baeume/baeume Abstand (m)
+R10,D7,151,302,151.44,302.12,1.424,baeume/baeume Abstand (m)
+R10,F7,214,292,214.22,292.24,1.175,baeume/baeume Abstand (m)
+R10,F6,210,227,210.49,227.4,1.063,baeume/baeume Abstand (m)
+R10,H4,323,159,323.56,159.95,1.391,baeume/baeume Abstand (m)
+R10,B7,65,292,65.85,292.98,1.042,baeume/baeume Abstand (m)
+R10,G7,284,283,284.13,283.09,1.387,baeume/baeume Abstand (m)
+R10,D7,159,301,159.95,301.28,1.309,baeume/baeume Abstand (m)
+R10,B7,67,290,67.91,290.62,1.021,baeume/baeume Abstand (m)
+R10,H3,331,117,331.76,117.03,1.35,baeume/baeume Abstand (m)
+R10,G3,289,109,289.38,109.38,1.275,baeume/baeume Abstand (m)
+R10,H4,335,141,335.18,141.26,0.771,baeume/baeume Abstand (m)
+R10,B7,46,296,46.48,296.69,1.285,baeume/baeume Abstand (m)
+R10,B7,63,289,63.94,289.51,0.91,baeume/baeume Abstand (m)
+R10,D6,160,221,160.38,221.55,0.944,baeume/baeume Abstand (m)
+R10,H4,299,165,299.87,165.14,1.076,baeume/baeume Abstand (m)
+R10,G6,255,224,255.86,224.29,1.371,baeume/baeume Abstand (m)
+R10,E1,191,34,191.66,34.86,1.168,baeume/baeume Abstand (m)
+R10,F7,223,295,223.32,295.87,1.07,baeume/baeume Abstand (m)
+R10,H3,314,88,314.67,88.98,1.283,baeume/baeume Abstand (m)
+R10,H4,323,144,323.94,144.5,1.025,baeume/baeume Abstand (m)
+R10,D7,135,288,135.43,288.49,1.068,baeume/baeume Abstand (m)
+R10,D7,155,298,155.75,298.33,1.198,baeume/baeume Abstand (m)
+R10,H1,318,31,318.63,31.68,0.85,baeume/baeume Abstand (m)
+R10,A5,2,197,2.15,197.53,1.186,baeume/baeume Abstand (m)
+R10,A5,3,197,3.17,197.58,1.032,baeume/baeume Abstand (m)
+R10,D7,150,299,150.33,299.87,1.101,baeume/baeume Abstand (m)
+R10,F7,223,295,223.86,295.42,0.792,baeume/baeume Abstand (m)
+R10,H7,329,296,330.0,296.67,0.749,baeume/baeume Abstand (m)
+R10,G7,276,297,276.94,297.17,1.196,baeume/baeume Abstand (m)
+R10,D7,126,290,126.6,290.86,0.728,baeume/baeume Abstand (m)
+R10,G7,290,301,290.15,301.72,1.424,baeume/baeume Abstand (m)
+R10,C6,101,250,101.51,250.03,0.95,baeume/baeume Abstand (m)
+R10,H3,319,121,319.76,121.68,1.216,baeume/baeume Abstand (m)
+R10,B7,73,292,73.62,292.44,1.395,baeume/baeume Abstand (m)
+R10,A7,30,292,30.34,292.02,1.219,baeume/baeume Abstand (m)
+R10,G7,281,282,281.27,282.47,1.225,baeume/baeume Abstand (m)
+R10,D7,129,296,129.39,296.3,1.401,baeume/baeume Abstand (m)
+R10,B7,77,294,77.67,294.43,0.905,baeume/baeume Abstand (m)
+R10,H4,330,156,330.35,156.87,1.139,baeume/baeume Abstand (m)
+R10,H7,334,299,334.8,299.1,1.122,baeume/baeume Abstand (m)
+R10,H3,329,127,329.15,127.31,0.979,baeume/baeume Abstand (m)
+R10,C6,95,243,95.88,243.88,1.275,baeume/baeume Abstand (m)
+R10,E7,182,302,182.75,302.4,1.294,baeume/baeume Abstand (m)
+R10,F6,210,225,210.88,225.78,0.908,baeume/baeume Abstand (m)
+R10,F6,237,224,237.41,224.11,0.876,baeume/baeume Abstand (m)
+R10,G7,273,296,273.42,296.66,1.283,baeume/baeume Abstand (m)
+R10,H4,332,140,332.05,140.86,1.16,baeume/baeume Abstand (m)
+R10,H3,306,98,306.16,98.78,0.867,baeume/findlinge Abstand (m)
+R10,D7,146,297,146.94,297.16,0.803,baeume/baeume Abstand (m)
+R10,G7,287,299,287.94,299.78,1.272,baeume/baeume Abstand (m)
+R10,C3,113,111,113.75,111.62,1.25,baeume/baeume Abstand (m)
+R10,H1,332,29,332.81,29.82,1.401,baeume/baeume Abstand (m)
+R10,H4,330,142,330.24,142.87,1.177,baeume/baeume Abstand (m)
+R10,H3,309,127,309.31,127.81,1.433,baeume/baeume Abstand (m)
+R10,B4,79,172,79.78,172.68,0.955,baeume/baeume Abstand (m)
+R10,G7,276,292,276.49,292.71,0.971,baeume/baeume Abstand (m)
+R10,B7,63,288,63.28,288.88,1.329,baeume/baeume Abstand (m)
+R10,G3,293,112,293.88,112.83,1.439,baeume/baeume Abstand (m)
+R10,D7,137,294,137.03,294.43,1.262,baeume/baeume Abstand (m)
+R10,H3,329,126,329.82,126.34,1.372,baeume/baeume Abstand (m)
+R10,H3,309,125,309.12,125.9,1.387,baeume/baeume Abstand (m)
+R10,H3,325,124,325.62,125.0,1.092,baeume/baeume Abstand (m)
+R10,G7,293,294,293.45,294.15,1.345,baeume/baeume Abstand (m)
+R10,A6,1,231,1.55,231.34,1.261,baeume/baeume Abstand (m)
+R10,H4,327,155,327.52,155.63,0.924,baeume/baeume Abstand (m)
+R10,A7,6,290,6.63,290.52,0.91,baeume/baeume Abstand (m)
+R10,C7,125,301,125.75,301.81,0.818,baeume/baeume Abstand (m)
+R10,G1,254,18,254.05,18.92,1.301,baeume/baeume Abstand (m)
+R10,F7,225,298,225.12,298.5,1.035,baeume/baeume Abstand (m)
+R10,D7,148,292,148.27,292.94,1.012,baeume/baeume Abstand (m)
+R10,B2,72,66,72.57,66.54,1.193,baeume/baeume Abstand (m)
+R10,H3,323,126,323.62,126.64,1.053,baeume/baeume Abstand (m)
+R10,D7,128,299,128.56,299.46,0.99,baeume/baeume Abstand (m)
+R10,H2,317,84,317.01,84.12,1.25,baeume/baeume Abstand (m)
+R10,H4,322,156,322.86,156.44,1.154,baeume/baeume Abstand (m)
+R10,A5,16,188,16.79,188.24,1.135,baeume/baeume Abstand (m)
+R10,H7,333,297,333.25,297.5,1.13,baeume/baeume Abstand (m)
+R10,G7,292,296,292.39,296.64,0.762,baeume/baeume Abstand (m)
+R10,G7,288,287,288.04,287.6,1.261,baeume/baeume Abstand (m)
+R10,H5,333,179,333.82,179.41,1.289,baeume/baeume Abstand (m)
+R10,C5,85,188,85.87,188.16,1.281,baeume/baeume Abstand (m)
+R10,B7,77,293,77.37,293.5,1.298,baeume/baeume Abstand (m)
+R10,D7,150,300,150.91,300.62,0.822,baeume/baeume Abstand (m)
+R10,A5,3,198,3.44,198.83,1.199,baeume/baeume Abstand (m)
+R10,C7,121,300,121.88,300.97,1.35,baeume/baeume Abstand (m)
+R10,H7,329,282,329.04,282.63,1.154,baeume/baeume Abstand (m)
+R10,C7,109,298,109.99,298.95,1.281,baeume/baeume Abstand (m)
+R10,H3,324,120,324.98,120.3,1.127,baeume/baeume Abstand (m)
+R10,B7,61,295,61.09,295.71,1.272,baeume/baeume Abstand (m)
+R10,D7,154,299,154.28,299.83,1.244,baeume/baeume Abstand (m)
+R10,G6,254,224,254.48,224.03,0.904,baeume/baeume Abstand (m)
+R10,H4,329,142,329.7,142.56,0.904,baeume/baeume Abstand (m)
+R10,C5,89,191,89.25,191.12,0.901,baeume/baeume Abstand (m)
+R10,F7,226,300,226.19,300.69,0.962,baeume/baeume Abstand (m)
+R10,C6,95,241,95.33,241.49,1.275,baeume/baeume Abstand (m)
+R10,H7,334,288,334.84,288.08,1.149,baeume/baeume Abstand (m)
+R10,H3,331,120,331.36,120.81,1.323,baeume/baeume Abstand (m)
+R10,H5,314,184,314.09,184.14,0.976,baeume/baeume Abstand (m)
+R10,G7,273,301,273.6,301.17,1.423,baeume/baeume Abstand (m)
+R10,E1,173,15,173.77,15.81,1.427,baeume/baeume Abstand (m)
+R10,G6,262,227,262.91,227.84,1.365,baeume/baeume Abstand (m)
+R10,D7,151,297,151.99,297.86,1.203,baeume/baeume Abstand (m)
+R10,D1,160,10,160.69,10.46,1.261,baeume/baeume Abstand (m)
+R10,A4,3,131,3.18,131.74,0.96,baeume/baeume Abstand (m)
+R10,E6,202,236,202.2,236.88,1.243,baeume/baeume Abstand (m)
+R10,B4,81,171,81.25,171.51,1.342,baeume/baeume Abstand (m)
+R10,D7,164,298,164.87,298.56,1.032,baeume/baeume Abstand (m)
+R10,D7,163,302,163.93,302.21,0.59,baeume/baeume Abstand (m)
+R10,H4,331,145,331.19,145.24,1.182,baeume/baeume Abstand (m)
+R10,H4,302,167,302.87,167.05,0.937,baeume/baeume Abstand (m)
+R10,E6,206,229,206.78,229.22,1.315,baeume/baeume Abstand (m)
+R10,C6,99,249,99.88,249.88,1.275,baeume/baeume Abstand (m)
+R10,H4,332,139,332.49,139.89,1.068,baeume/baeume Abstand (m)
+R10,H5,333,180,333.34,180.03,0.638,baeume/baeume Abstand (m)
+R10,H7,315,301,315.88,301.07,1.427,baeume/baeume Abstand (m)
+R10,G4,292,156,292.5,156.75,1.414,baeume/baeume Abstand (m)
+R10,F6,231,225,231.81,225.74,1.216,baeume/baeume Abstand (m)
+R10,H3,319,122,319.69,122.61,1.046,baeume/baeume Abstand (m)
+R10,H3,308,128,308.6,128.9,1.301,baeume/baeume Abstand (m)
+R10,A7,4,292,4.54,292.79,1.25,baeume/baeume Abstand (m)
+R10,G6,253,223,253.03,223.14,1.062,baeume/baeume Abstand (m)
+R10,G7,286,298,286.93,298.99,1.381,baeume/baeume Abstand (m)
+R10,B7,74,289,74.11,289.75,1.365,baeume/baeume Abstand (m)
+R10,F7,219,294,219.44,294.89,1.128,baeume/baeume Abstand (m)
+R10,D7,167,299,167.21,299.95,0.769,baeume/baeume Abstand (m)
+R10,B7,74,295,74.71,295.92,0.888,baeume/baeume Abstand (m)
+R10,H4,326,156,326.95,156.56,1.323,baeume/baeume Abstand (m)
+R10,C3,113,110,113.5,110.5,1.118,baeume/baeume Abstand (m)
+R10,A5,11,189,11.24,189.59,0.891,baeume/baeume Abstand (m)
+R10,H4,335,135,335.01,135.01,1.21,baeume/baeume Abstand (m)
+R10,G7,281,300,281.74,300.73,0.93,baeume/baeume Abstand (m)
+R10,G3,292,112,292.91,112.28,0.863,baeume/baeume Abstand (m)
+R10,H4,323,156,323.81,156.55,1.06,baeume/baeume Abstand (m)
+R10,F6,232,225,233.0,225.24,1.383,baeume/baeume Abstand (m)
+R10,H4,334,131,334.14,131.52,0.902,baeume/baeume Abstand (m)
+R10,C5,91,195,91.04,195.39,1.29,baeume/baeume Abstand (m)
+R10,G7,287,280,287.39,280.75,1.252,baeume/baeume Abstand (m)
+R10,D6,144,222,144.54,222.44,1.129,baeume/baeume Abstand (m)
+R10,H4,310,130,310.13,130.11,1.049,baeume/baeume Abstand (m)
+R10,D7,130,296,130.04,296.74,1.311,baeume/baeume Abstand (m)
+R10,D7,150,301,150.72,301.05,1.419,baeume/baeume Abstand (m)
+R10,G6,254,223,254.07,223.56,1.262,baeume/baeume Abstand (m)
+R10,D7,131,295,131.89,295.79,0.922,baeume/baeume Abstand (m)
+R10,D7,148,293,148.15,293.89,1.062,baeume/baeume Abstand (m)
+R10,B2,72,67,72.56,67.19,1.129,baeume/baeume Abstand (m)
+R10,A3,27,101,27.04,101.17,1.004,baeume/baeume Abstand (m)
+R10,G6,253,222,253.59,222.94,1.096,baeume/baeume Abstand (m)
+R10,A4,1,135,1.23,135.08,0.918,baeume/baeume Abstand (m)
+R10,D6,143,222,143.95,222.57,1.153,baeume/baeume Abstand (m)
+R10,C7,107,298,107.56,298.26,1.232,baeume/baeume Abstand (m)
+R10,A6,0,230,0.76,230.73,0.952,baeume/baeume Abstand (m)
+R10,C7,124,296,124.28,296.2,0.971,baeume/baeume Abstand (m)
+R10,C7,117,290,117.97,290.05,1.066,baeume/baeume Abstand (m)
+R10,H7,306,283,306.62,283.42,1.335,baeume/baeume Abstand (m)
+R10,A7,4,291,4.56,291.89,1.181,baeume/baeume Abstand (m)
+R10,A5,6,188,6.44,188.22,0.884,baeume/baeume Abstand (m)
+R10,C7,108,298,108.74,298.86,1.405,baeume/baeume Abstand (m)
+R10,B7,67,289,67.07,289.93,1.19,baeume/baeume Abstand (m)
+R10,F7,219,288,219.91,288.94,1.416,baeume/baeume Abstand (m)
+R10,A5,10,193,10.56,193.22,1.34,baeume/baeume Abstand (m)
+R10,C7,120,287,120.56,287.77,1.218,baeume/baeume Abstand (m)
+R10,C7,123,302,123.81,302.39,0.74,baeume/baeume Abstand (m)
+R10,F6,210,228,210.12,228.06,1.045,baeume/baeume Abstand (m)
+R10,G7,275,291,275.2,291.42,1.041,baeume/baeume Abstand (m)
+R10,G7,284,283,284.17,283.7,0.841,baeume/baeume Abstand (m)
+R10,H4,321,154,321.77,154.41,1.032,baeume/baeume Abstand (m)
+R10,C7,124,288,124.03,288.16,0.751,baeume/baeume Abstand (m)
+R10,A7,25,302,25.09,302.5,1.21,baeume/baeume Abstand (m)
+R10,H3,307,120,307.32,120.55,0.888,baeume/baeume Abstand (m)
+R10,B2,76,58,77.0,58.12,0.913,baeume/baeume Abstand (m)
+R10,C7,117,291,117.08,291.8,1.308,baeume/baeume Abstand (m)
+R10,G7,278,301,278.14,301.27,0.888,baeume/baeume Abstand (m)
+R10,A6,2,232,2.28,232.72,1.104,baeume/baeume Abstand (m)
+R10,H4,318,145,318.11,145.31,1.143,baeume/baeume Abstand (m)
+R10,C6,96,241,96.39,241.71,1.372,baeume/baeume Abstand (m)
+R10,A7,20,289,20.22,289.74,1.191,baeume/baeume Abstand (m)
+R10,D6,144,222,144.13,222.04,1.208,baeume/baeume Abstand (m)
+R10,A6,0,230,0.89,230.29,1.226,baeume/baeume Abstand (m)
+R10,H4,330,143,330.98,143.06,1.376,baeume/baeume Abstand (m)
+R10,H3,330,129,330.35,129.59,0.966,baeume/baeume Abstand (m)
+R10,H3,329,127,329.86,127.18,0.926,baeume/baeume Abstand (m)
+R10,F6,247,221,247.76,221.49,1.143,baeume/baeume Abstand (m)
+R10,D7,162,295,162.19,295.21,0.94,baeume/baeume Abstand (m)
+R10,G1,253,19,253.25,19.59,1.024,baeume/baeume Abstand (m)
+R10,F6,228,226,228.29,226.25,1.366,baeume/baeume Abstand (m)
+R10,A6,1,232,1.81,232.38,1.008,baeume/baeume Abstand (m)
+R10,D7,140,287,140.22,287.81,1.406,baeume/baeume Abstand (m)
+R10,G6,272,227,272.88,227.75,1.346,baeume/baeume Abstand (m)
+R10,G6,253,222,253.17,222.62,1.193,baeume/baeume Abstand (m)
+R10,C7,123,293,123.91,293.49,0.681,baeume/baeume Abstand (m)
+R10,E7,188,300,188.94,300.73,1.309,baeume/baeume Abstand (m)
+R10,A5,1,196,1.35,196.78,1.118,baeume/baeume Abstand (m)
+R10,H4,333,131,333.86,131.2,0.659,baeume/baeume Abstand (m)
+R10,E6,207,228,207.19,228.2,0.917,baeume/baeume Abstand (m)
+R10,D7,153,297,153.88,297.69,1.177,baeume/baeume Abstand (m)
+R10,H3,329,122,329.11,122.72,1.406,baeume/baeume Abstand (m)
+R10,G7,291,286,291.7,286.6,1.386,baeume/baeume Abstand (m)
+R10,G7,272,292,272.39,292.07,0.735,baeume/baeume Abstand (m)
+R10,H3,334,122,334.48,123.0,0.791,baeume/baeume Abstand (m)
+R10,A6,2,229,2.88,229.13,1.224,baeume/baeume Abstand (m)
+R10,F1,237,24,237.53,24.27,1.07,baeume/baeume Abstand (m)
+R10,A6,3,232,3.22,232.33,0.95,baeume/baeume Abstand (m)
+R10,G7,287,286,287.86,286.57,1.294,baeume/baeume Abstand (m)
+R10,F7,221,301,221.55,301.41,1.109,baeume/baeume Abstand (m)
+R10,A1,3,35,3.21,35.0,1.396,baeume/baeume Abstand (m)
+R10,D6,155,222,155.28,222.19,1.167,baeume/baeume Abstand (m)
+R10,D7,143,289,143.3,289.1,0.906,baeume/baeume Abstand (m)
+R10,A6,3,227,3.49,227.2,1.413,baeume/baeume Abstand (m)
+R10,A7,30,292,30.75,292.37,1.327,baeume/baeume Abstand (m)
+R10,D7,166,300,166.34,300.25,1.402,baeume/baeume Abstand (m)
+R10,G7,274,299,274.15,299.28,0.822,baeume/baeume Abstand (m)
+R10,C7,116,292,116.17,292.41,0.943,baeume/baeume Abstand (m)
+R10,D4,151,139,151.13,139.0,1.079,baeume/baeume Abstand (m)
+R10,H4,329,143,329.5,143.44,1.288,baeume/baeume Abstand (m)
+R10,G7,287,295,287.83,295.09,0.986,baeume/baeume Abstand (m)
+R10,G7,284,282,284.13,282.13,1.075,baeume/baeume Abstand (m)
+R10,A5,17,176,17.25,176.83,1.337,baeume/baeume Abstand (m)
+R10,H3,322,119,322.81,119.34,1.199,baeume/baeume Abstand (m)
+R10,F7,235,296,235.83,296.29,0.975,baeume/baeume Abstand (m)
+R10,C7,121,288,121.39,288.06,1.065,baeume/baeume Abstand (m)
+R10,C7,125,287,126.0,287.9,0.979,baeume/baeume Abstand (m)
+R10,C7,122,300,122.92,300.95,0.74,baeume/baeume Abstand (m)
+R10,C7,123,292,123.82,292.83,1.313,baeume/baeume Abstand (m)
+R10,C6,107,241,107.83,241.16,0.71,felsen/felsen Abstand (m)
+R10,D6,159,221,159.86,221.11,1.28,baeume/baeume Abstand (m)
+R10,D7,139,294,139.43,294.77,1.314,baeume/baeume Abstand (m)
+R10,H3,327,121,327.57,121.83,0.943,baeume/baeume Abstand (m)
+R10,F7,219,297,219.02,297.76,1.174,baeume/baeume Abstand (m)
+R10,H4,324,153,324.21,153.7,1.278,baeume/baeume Abstand (m)
+R10,A5,2,192,2.82,192.92,0.949,baeume/baeume Abstand (m)
+R10,G7,277,282,277.67,282.76,1.273,baeume/baeume Abstand (m)
+R10,E5,178,209,178.31,209.88,0.684,baeume/baeume Abstand (m)
+R10,C5,98,196,98.94,196.41,1.231,baeume/baeume Abstand (m)
+R10,A6,3,237,3.66,237.25,1.127,baeume/baeume Abstand (m)
+R10,H4,331,142,331.76,142.06,1.325,baeume/baeume Abstand (m)
+R10,A1,1,34,1.67,34.25,1.001,baeume/baeume Abstand (m)
+R10,C5,108,211,108.78,211.91,1.048,baeume/baeume Abstand (m)
+R10,H4,327,131,327.98,131.24,1.304,baeume/baeume Abstand (m)
+R10,H3,325,120,325.14,120.7,1.31,baeume/baeume Abstand (m)
+R10,H7,314,301,314.75,301.19,0.85,baeume/baeume Abstand (m)
+R10,C3,97,112,97.34,112.13,0.454,felsen/felsen Abstand (m)
+R10,G7,278,300,278.19,300.19,1.28,baeume/baeume Abstand (m)
+R10,B3,67,129,67.17,129.94,0.85,baeume/baeume Abstand (m)
+R10,E6,204,230,204.89,230.33,1.262,baeume/baeume Abstand (m)
+R10,H4,335,131,335.04,131.62,0.922,baeume/baeume Abstand (m)
+R10,A5,12,191,12.48,191.89,0.878,baeume/baeume Abstand (m)
+R10,B7,68,290,68.94,290.31,1.071,baeume/baeume Abstand (m)
+R10,H5,331,178,331.68,178.23,1.409,baeume/baeume Abstand (m)
+R10,A4,1,136,1.22,136.58,1.011,baeume/baeume Abstand (m)
+R10,B7,60,301,60.55,301.47,0.961,baeume/baeume Abstand (m)
+R10,G7,286,288,286.14,288.55,1.231,baeume/baeume Abstand (m)
+R10,G7,284,283,284.55,283.12,1.213,baeume/baeume Abstand (m)
+R10,H3,330,127,330.76,127.65,1.111,baeume/baeume Abstand (m)
+R10,C7,120,286,120.59,286.88,1.089,baeume/baeume Abstand (m)
+R10,D6,154,221,154.0,221.24,1.284,baeume/baeume Abstand (m)
+R10,C7,123,294,123.57,294.05,1.23,baeume/baeume Abstand (m)
+R10,C1,108,7,108.89,7.12,1.082,baeume/baeume Abstand (m)
+R10,H4,322,155,322.58,155.68,0.922,baeume/baeume Abstand (m)
+R10,C7,117,290,117.84,290.94,0.996,baeume/baeume Abstand (m)
+R10,F6,233,225,233.55,225.45,1.105,baeume/baeume Abstand (m)
+R10,F6,247,221,247.46,221.06,1.223,baeume/baeume Abstand (m)
+R10,H3,315,126,315.15,126.94,1.176,baeume/baeume Abstand (m)
+R10,A5,5,194,5.23,194.47,1.262,baeume/baeume Abstand (m)
+R10,B7,68,290,68.47,290.01,0.643,baeume/baeume Abstand (m)
+R10,F7,228,298,228.51,298.64,0.89,baeume/baeume Abstand (m)
+R10,G7,284,286,284.45,286.68,1.068,baeume/baeume Abstand (m)
+R10,H7,324,281,324.85,281.97,1.374,baeume/baeume Abstand (m)
+R10,G7,278,294,278.75,294.78,1.367,baeume/baeume Abstand (m)
+R10,H3,328,127,328.52,127.91,0.788,baeume/baeume Abstand (m)
+R10,D7,161,296,161.6,296.08,1.407,baeume/baeume Abstand (m)
+R10,H7,329,296,329.67,296.29,1.002,baeume/baeume Abstand (m)
+R10,A6,0,230,0.42,230.22,0.908,baeume/baeume Abstand (m)
+R10,H3,305,127,305.71,127.69,1.405,baeume/baeume Abstand (m)
+R10,F7,223,295,223.72,295.94,1.392,baeume/baeume Abstand (m)
+R10,A7,5,291,5.35,291.81,0.977,baeume/baeume Abstand (m)
+R10,F7,223,301,223.19,301.6,0.841,baeume/baeume Abstand (m)
+R10,G7,281,300,281.87,300.26,1.386,baeume/baeume Abstand (m)
+R10,D7,154,297,154.77,297.51,1.405,baeume/baeume Abstand (m)
+R10,A5,3,197,3.67,197.84,0.901,baeume/baeume Abstand (m)
+R10,D7,137,298,137.0,298.98,0.529,baeume/baeume Abstand (m)
+R10,G1,282,21,282.12,21.12,1.061,baeume/baeume Abstand (m)
+R10,D6,154,222,154.82,222.08,1.328,baeume/baeume Abstand (m)
+R10,F7,240,301,240.78,301.12,1.202,baeume/baeume Abstand (m)
+R10,G7,273,299,273.46,299.02,0.925,baeume/baeume Abstand (m)
+R10,H7,328,299,328.32,299.0,1.354,baeume/baeume Abstand (m)
+R10,F6,233,225,233.94,225.76,0.994,baeume/baeume Abstand (m)
+R10,E1,172,15,172.97,15.51,0.769,baeume/baeume Abstand (m)
+R10,B7,69,289,69.0,290.0,1.11,baeume/baeume Abstand (m)
+R10,D7,128,292,128.22,292.44,1.371,baeume/baeume Abstand (m)
+R10,F6,210,227,210.37,227.78,0.892,baeume/baeume Abstand (m)
+R10,A5,3,198,3.19,198.03,1.127,baeume/baeume Abstand (m)
+R10,H7,333,297,333.3,297.98,1.422,baeume/baeume Abstand (m)
+R10,G7,281,301,281.04,301.08,1.136,baeume/baeume Abstand (m)
+R10,D7,144,290,144.28,290.79,0.856,baeume/baeume Abstand (m)
+R10,H7,314,277,314.42,277.24,0.812,baeume/baeume Abstand (m)
+R10,B7,82,291,83.0,291.69,1.212,baeume/baeume Abstand (m)
+R10,C3,110,129,110.01,129.41,1.271,baeume/baeume Abstand (m)
+R10,A5,2,192,2.24,192.04,1.223,baeume/baeume Abstand (m)
+R10,F6,232,225,232.64,225.06,1.14,baeume/baeume Abstand (m)
+R10,A1,11,34,11.38,34.73,1.004,baeume/baeume Abstand (m)
+R10,B7,65,294,65.55,294.34,1.375,baeume/baeume Abstand (m)
+R10,C6,104,246,104.56,246.01,0.917,felsen/felsen Abstand (m)
+R10,D7,126,289,126.11,289.98,1.382,baeume/baeume Abstand (m)
+R10,H4,333,130,333.31,130.81,1.426,baeume/baeume Abstand (m)
+R10,H4,311,134,311.43,134.77,1.136,baeume/baeume Abstand (m)
+R10,H7,330,293,330.78,293.13,1.09,baeume/baeume Abstand (m)
+R10,D7,137,298,137.24,298.2,1.091,baeume/baeume Abstand (m)
+R10,G3,293,119,293.44,119.05,1.023,baeume/baeume Abstand (m)
+R10,H3,314,122,314.27,122.44,1.2,baeume/baeume Abstand (m)
+R10,A7,25,299,25.9,299.06,1.228,baeume/baeume Abstand (m)
+R10,B7,70,292,70.15,292.16,0.999,baeume/baeume Abstand (m)
+R10,D7,140,289,140.29,289.86,1.121,baeume/baeume Abstand (m)
+R10,G7,273,288,273.87,288.09,1.148,baeume/baeume Abstand (m)
+R10,D6,144,222,144.81,222.82,0.961,baeume/baeume Abstand (m)
+R10,D7,141,291,141.16,291.77,1.156,baeume/baeume Abstand (m)
+R10,B7,68,289,68.06,289.97,1.093,baeume/baeume Abstand (m)
+R10,G7,274,295,274.44,295.97,1.398,baeume/baeume Abstand (m)
+R10,H3,309,126,309.08,126.77,1.123,baeume/baeume Abstand (m)
+R10,A7,30,292,30.23,292.67,1.087,baeume/baeume Abstand (m)
+R10,H3,325,120,325.62,120.41,0.884,baeume/baeume Abstand (m)
+R10,G7,254,288,254.24,288.64,1.382,baeume/baeume Abstand (m)
+R10,G7,277,297,277.67,297.32,1.261,baeume/baeume Abstand (m)
+R10,G7,285,285,285.15,285.98,1.081,baeume/baeume Abstand (m)
+R10,H7,330,296,330.03,296.17,0.994,baeume/baeume Abstand (m)
+R10,G7,258,285,258.77,285.53,1.117,baeume/baeume Abstand (m)
+R10,G7,286,287,286.49,287.38,1.216,baeume/baeume Abstand (m)
+R10,H4,330,143,330.04,143.75,0.957,baeume/baeume Abstand (m)
+R10,C7,116,291,116.02,291.92,1.393,baeume/baeume Abstand (m)
+R10,C6,101,248,101.24,248.92,1.379,baeume/baeume Abstand (m)
+R10,H4,335,135,335.0,135.83,1.359,baeume/baeume Abstand (m)
+R10,F6,245,224,245.25,224.23,0.991,baeume/baeume Abstand (m)
+R10,B7,73,292,73.35,292.94,0.936,baeume/baeume Abstand (m)
+R10,H4,323,153,323.02,153.27,1.24,baeume/baeume Abstand (m)
+R10,C7,125,288,125.98,288.86,0.944,baeume/baeume Abstand (m)
+R10,D7,146,297,146.03,297.46,1.11,baeume/baeume Abstand (m)
+R10,B7,73,292,73.19,292.25,1.133,baeume/baeume Abstand (m)
+R10,G7,290,300,290.79,300.89,0.821,baeume/baeume Abstand (m)
+R10,D7,148,296,148.66,296.63,1.334,baeume/baeume Abstand (m)
+R10,D7,143,291,143.86,291.61,1.42,baeume/baeume Abstand (m)
+R10,H4,302,166,302.5,166.8,0.633,baeume/baeume Abstand (m)
+R10,G6,255,223,255.14,223.65,0.89,baeume/baeume Abstand (m)
+R10,H4,330,157,330.94,157.38,0.872,baeume/baeume Abstand (m)
+R10,F7,219,296,219.71,296.78,1.262,baeume/baeume Abstand (m)
+R10,D7,160,300,160.01,300.3,0.789,baeume/baeume Abstand (m)
+R10,D7,157,302,157.75,302.34,1.302,baeume/baeume Abstand (m)
+R10,E1,192,34,192.68,34.8,1.271,baeume/baeume Abstand (m)
+R10,H7,334,299,334.75,299.62,1.294,baeume/baeume Abstand (m)
+R10,H3,314,125,314.3,125.22,0.887,baeume/baeume Abstand (m)
+R10,B7,73,296,73.89,296.19,1.013,baeume/baeume Abstand (m)
+R10,A6,2,229,2.24,229.23,1.289,baeume/baeume Abstand (m)
+R10,D7,127,293,127.04,293.99,0.832,baeume/baeume Abstand (m)
+R10,D7,141,283,141.13,283.86,0.859,baeume/baeume Abstand (m)
+R10,H4,328,134,328.91,134.19,1.39,baeume/baeume Abstand (m)
+R10,B5,78,177,78.98,177.13,0.871,baeume/baeume Abstand (m)
+R10,B7,65,293,65.91,293.81,0.959,baeume/baeume Abstand (m)
+R10,A6,2,232,2.34,232.22,1.158,baeume/baeume Abstand (m)
+R10,D7,144,295,144.48,295.02,0.899,baeume/baeume Abstand (m)
+R10,H3,325,119,325.8,119.75,0.844,baeume/baeume Abstand (m)
+R10,H4,329,143,329.87,143.12,1.232,baeume/baeume Abstand (m)
+R10,D7,133,292,133.15,292.86,0.822,baeume/baeume Abstand (m)
+R10,E1,189,34,189.82,34.14,1.436,baeume/baeume Abstand (m)
+R10,H7,320,277,320.88,277.51,1.386,baeume/baeume Abstand (m)
+R10,A1,2,34,2.38,34.75,1.241,baeume/baeume Abstand (m)
+R10,A6,29,239,29.0,239.75,1.414,baeume/baeume Abstand (m)
+R10,G1,252,19,252.37,19.84,0.81,baeume/baeume Abstand (m)
+R10,H6,305,249,305.26,249.72,0.828,felsen/felsen Abstand (m)
+R10,A5,6,199,6.41,199.84,1.345,baeume/baeume Abstand (m)
+R10,F7,251,290,251.13,290.53,1.154,baeume/baeume Abstand (m)
+R10,H4,334,135,334.21,135.01,0.935,baeume/baeume Abstand (m)
+R10,H3,334,123,334.98,123.12,1.176,baeume/baeume Abstand (m)
+R10,H4,329,156,329.55,156.4,1.27,baeume/baeume Abstand (m)
+R10,B7,71,294,71.73,294.12,0.657,baeume/baeume Abstand (m)
+R10,A6,41,231,41.81,231.28,1.371,baeume/baeume Abstand (m)
+R10,G7,286,290,286.56,290.9,1.351,baeume/baeume Abstand (m)
+R10,H1,318,31,318.88,31.25,1.346,baeume/baeume Abstand (m)
+R10,G6,256,223,256.16,223.57,1.153,baeume/baeume Abstand (m)
+R10,H3,305,124,305.3,124.47,1.295,baeume/baeume Abstand (m)
+R10,D7,156,302,156.48,302.15,1.291,baeume/baeume Abstand (m)
+R10,G7,287,285,287.0,285.64,1.243,baeume/baeume Abstand (m)
+R10,H7,329,295,329.29,295.74,0.847,baeume/baeume Abstand (m)
+R10,H3,322,122,322.38,122.78,0.891,baeume/baeume Abstand (m)
+R10,F7,211,300,211.69,300.68,1.436,baeume/baeume Abstand (m)
+R10,C1,113,9,113.72,9.01,1.244,baeume/baeume Abstand (m)
+R10,G7,291,283,291.02,283.89,0.907,baeume/baeume Abstand (m)
+R10,H7,334,299,334.24,299.41,1.054,baeume/baeume Abstand (m)
+R10,F7,221,300,221.41,300.25,1.27,baeume/baeume Abstand (m)
+R10,G7,285,285,285.99,285.32,1.29,baeume/baeume Abstand (m)
+R10,A5,12,191,12.43,191.0,1.391,baeume/baeume Abstand (m)
+R10,B7,65,293,65.25,293.97,1.279,baeume/baeume Abstand (m)
+R10,G7,287,294,287.94,294.37,1.328,baeume/baeume Abstand (m)
+R10,D7,148,298,148.53,298.85,1.418,baeume/baeume Abstand (m)
+R10,A6,0,231,0.36,231.36,1.417,baeume/baeume Abstand (m)
+R10,C7,124,292,124.16,292.88,1.34,baeume/baeume Abstand (m)
+R10,A7,26,289,26.23,289.13,1.136,baeume/baeume Abstand (m)
+R10,H7,332,297,332.74,297.98,0.964,baeume/baeume Abstand (m)
+R10,H4,323,145,323.24,145.14,1.024,baeume/baeume Abstand (m)
+R10,A6,2,228,2.45,228.66,1.294,baeume/baeume Abstand (m)
+R10,D7,144,294,144.79,294.26,1.102,baeume/baeume Abstand (m)
+R10,H3,306,100,306.48,100.66,1.251,baeume/baeume Abstand (m)
+R10,E6,208,227,208.62,227.0,0.892,baeume/baeume Abstand (m)
+R10,H3,334,117,334.09,117.62,1.331,baeume/baeume Abstand (m)
+R10,C7,111,290,111.88,290.48,0.842,baeume/baeume Abstand (m)
+R10,D6,152,221,152.91,221.22,1.058,baeume/baeume Abstand (m)
+R10,B7,68,290,68.39,290.36,1.34,baeume/baeume Abstand (m)
+R10,A5,11,188,11.07,188.66,1.022,baeume/baeume Abstand (m)
+R10,B2,74,49,74.81,49.88,1.421,baeume/baeume Abstand (m)
+R10,C3,105,129,105.28,129.14,1.393,baeume/baeume Abstand (m)
+R10,A5,10,213,10.57,213.63,1.338,baeume/baeume Abstand (m)
+R10,H4,323,146,323.16,146.07,0.996,baeume/baeume Abstand (m)
+R10,F6,210,227,210.88,227.62,0.791,baeume/baeume Abstand (m)
+R10,H4,329,134,329.01,134.66,0.672,baeume/baeume Abstand (m)
+R10,A5,4,173,4.92,173.73,1.327,baeume/baeume Abstand (m)
+R10,E6,206,228,206.64,228.41,1.105,baeume/baeume Abstand (m)
+R10,H3,305,99,305.89,99.69,1.276,baeume/baeume Abstand (m)
+R10,G6,253,223,253.85,223.95,1.256,baeume/baeume Abstand (m)
+R10,B4,53,165,53.5,165.99,1.087,baeume/baeume Abstand (m)
+R10,G6,254,222,254.31,222.24,1.209,baeume/baeume Abstand (m)
+R10,D6,159,221,159.74,221.56,1.355,baeume/baeume Abstand (m)
+R10,A5,1,195,1.53,195.92,1.15,baeume/baeume Abstand (m)
+R10,E1,190,35,190.68,35.0,1.138,baeume/baeume Abstand (m)
+R10,B7,75,296,75.07,296.55,1.141,baeume/baeume Abstand (m)
+R10,H3,315,90,315.07,90.06,1.181,baeume/baeume Abstand (m)
+R10,F7,226,300,226.12,300.19,1.0,baeume/baeume Abstand (m)
+R10,H3,325,120,325.97,120.16,1.366,baeume/baeume Abstand (m)
+R10,G7,273,290,273.7,290.79,1.15,baeume/baeume Abstand (m)
+R10,D7,161,297,161.54,297.33,1.138,baeume/baeume Abstand (m)
+R10,A6,1,233,1.85,233.18,0.623,baeume/baeume Abstand (m)
+R10,H4,325,163,325.24,163.38,1.207,baeume/baeume Abstand (m)
+R10,B4,68,147,68.53,147.5,1.258,baeume/baeume Abstand (m)
+R10,C7,125,300,125.2,300.37,1.325,baeume/baeume Abstand (m)
+R10,F7,237,293,237.86,293.8,1.308,baeume/baeume Abstand (m)
+R10,G3,293,118,293.12,118.34,1.409,baeume/baeume Abstand (m)
+R10,B7,62,291,62.22,291.41,0.943,baeume/baeume Abstand (m)
+R10,A7,0,289,0.81,289.12,1.351,baeume/baeume Abstand (m)
+R10,G7,287,277,287.06,277.19,0.721,baeume/baeume Abstand (m)
+R10,G7,285,290,285.63,290.24,1.112,baeume/baeume Abstand (m)
+R10,D7,148,290,148.81,290.03,1.201,baeume/baeume Abstand (m)
+R10,H3,300,102,300.75,102.1,0.804,baeume/baeume Abstand (m)
+R10,D7,161,298,161.56,298.51,1.252,baeume/baeume Abstand (m)
+R10,C6,106,235,106.58,235.37,1.128,felsen/felsen Abstand (m)
+R10,A5,5,173,5.73,173.13,1.273,baeume/baeume Abstand (m)
+R10,G7,280,302,280.79,302.04,0.91,baeume/baeume Abstand (m)
+R10,G7,291,301,291.37,301.36,1.293,baeume/baeume Abstand (m)
+R10,G7,275,290,275.03,290.6,1.056,baeume/baeume Abstand (m)
+R10,D7,144,291,144.11,291.98,0.856,baeume/baeume Abstand (m)
+R10,G7,281,300,281.43,300.11,0.975,baeume/baeume Abstand (m)
+R10,H3,300,102,300.23,102.94,1.296,baeume/baeume Abstand (m)
+R10,A4,0,136,0.67,136.87,1.323,baeume/baeume Abstand (m)
+R10,D7,160,294,160.0,294.66,1.299,baeume/baeume Abstand (m)
+R10,D7,149,299,149.51,299.4,1.1,baeume/baeume Abstand (m)
+R10,D7,135,289,135.7,289.02,0.954,baeume/baeume Abstand (m)
+R10,C6,93,242,93.72,242.45,1.225,baeume/baeume Abstand (m)
+R10,C7,125,301,125.5,301.38,1.07,baeume/baeume Abstand (m)
+R10,E1,196,33,196.32,33.91,0.933,baeume/baeume Abstand (m)
+R10,G7,280,286,280.08,286.12,0.984,baeume/baeume Abstand (m)
+R10,H5,332,175,332.82,175.76,0.741,baeume/baeume Abstand (m)
+R10,B7,72,288,72.25,288.4,0.949,baeume/baeume Abstand (m)
+R10,A7,0,299,0.21,299.77,1.312,baeume/baeume Abstand (m)
+R10,E7,182,302,182.51,302.02,0.982,baeume/baeume Abstand (m)
+R10,H7,325,298,325.62,298.75,0.891,baeume/baeume Abstand (m)
+R10,B7,63,294,63.12,294.74,0.898,baeume/baeume Abstand (m)
+R10,D7,162,300,162.19,300.87,1.015,baeume/baeume Abstand (m)
+R10,E6,209,227,209.41,227.47,1.141,baeume/baeume Abstand (m)
+R10,H7,329,296,329.25,296.24,1.351,baeume/baeume Abstand (m)
+R10,B5,80,173,80.86,173.03,1.322,baeume/baeume Abstand (m)
+R10,E1,195,35,195.01,35.75,0.98,baeume/baeume Abstand (m)
+R10,H3,331,117,331.25,117.69,1.37,baeume/baeume Abstand (m)
+R10,F7,218,288,218.9,288.86,0.632,baeume/baeume Abstand (m)
+R10,F7,215,299,215.06,299.48,1.397,baeume/baeume Abstand (m)
+R10,C7,125,301,125.9,301.3,1.0,baeume/baeume Abstand (m)
+R10,H3,324,127,324.52,127.12,1.39,baeume/baeume Abstand (m)
+R10,F6,210,226,210.79,226.69,1.206,baeume/baeume Abstand (m)
+R10,G3,291,106,291.85,106.0,0.821,baeume/baeume Abstand (m)
+R10,E7,176,291,176.5,291.3,1.152,baeume/baeume Abstand (m)
+R10,H3,329,127,329.54,127.56,1.432,baeume/baeume Abstand (m)
+R10,G7,283,281,283.46,281.37,0.956,baeume/baeume Abstand (m)
+R10,G7,273,302,273.71,302.03,1.344,baeume/baeume Abstand (m)
+R10,H7,329,296,329.73,296.88,1.418,baeume/baeume Abstand (m)
+R10,H4,323,159,323.19,159.39,1.094,baeume/baeume Abstand (m)
+R10,D7,132,302,132.39,302.01,0.929,baeume/baeume Abstand (m)
+R10,A2,1,81,1.33,81.75,1.115,baeume/baeume Abstand (m)
+R10,H4,321,146,321.23,146.05,1.063,baeume/baeume Abstand (m)
+R10,G6,275,226,275.25,226.58,1.004,baeume/baeume Abstand (m)
+R10,H7,323,284,323.69,284.09,1.221,baeume/baeume Abstand (m)
+R10,H4,324,154,324.86,154.46,1.095,baeume/baeume Abstand (m)
+R10,F6,233,224,233.25,224.73,0.783,baeume/baeume Abstand (m)
+R10,G7,287,286,287.02,286.46,1.006,baeume/baeume Abstand (m)
+R10,D7,145,298,145.7,298.24,1.303,baeume/baeume Abstand (m)
+R10,D7,162,300,162.98,300.13,1.361,baeume/baeume Abstand (m)
+R10,H4,324,144,324.96,144.37,1.074,baeume/baeume Abstand (m)
+R10,C7,122,296,122.35,296.22,1.09,baeume/baeume Abstand (m)
+R10,C7,123,294,123.91,294.11,1.297,baeume/baeume Abstand (m)
+R10,D7,155,301,155.41,301.66,1.253,baeume/baeume Abstand (m)
+R10,G7,276,292,276.09,292.0,1.101,baeume/baeume Abstand (m)
+R10,A7,5,292,5.33,292.7,1.376,baeume/baeume Abstand (m)
+R10,H4,334,131,334.3,131.24,0.85,baeume/baeume Abstand (m)
+R10,G7,258,292,258.65,292.95,0.972,baeume/baeume Abstand (m)
+R10,A5,6,197,6.74,197.62,1.096,baeume/baeume Abstand (m)
+R10,H3,328,122,328.27,122.62,1.244,baeume/baeume Abstand (m)
+R10,H4,302,167,302.62,167.25,0.901,baeume/baeume Abstand (m)
+R10,H3,302,100,302.55,100.53,0.955,baeume/findlinge Abstand (m)
+R10,G7,286,289,286.08,289.75,1.228,baeume/baeume Abstand (m)
+R10,G1,258,17,258.57,17.8,1.009,baeume/baeume Abstand (m)
+R10,E5,178,210,178.74,210.55,1.371,baeume/baeume Abstand (m)
+R10,G7,258,284,258.64,284.75,1.422,baeume/baeume Abstand (m)
+R10,E1,193,34,193.55,34.52,1.315,baeume/baeume Abstand (m)
+R10,B4,67,130,67.13,130.7,1.202,baeume/baeume Abstand (m)
+R10,A5,6,198,6.51,198.69,1.426,baeume/baeume Abstand (m)
+R10,D7,144,291,144.12,291.27,0.899,baeume/baeume Abstand (m)
+R10,D7,135,288,135.91,288.53,1.212,baeume/baeume Abstand (m)
+R10,A7,1,295,1.46,295.77,0.782,baeume/baeume Abstand (m)
+R10,D6,154,222,154.64,222.72,0.77,baeume/baeume Abstand (m)
+R10,H4,328,134,328.59,134.1,0.951,baeume/baeume Abstand (m)
+R10,A7,21,280,21.12,280.84,1.152,baeume/baeume Abstand (m)
+R10,G1,254,18,254.88,18.24,1.108,baeume/baeume Abstand (m)
+R10,A5,5,182,5.99,182.19,1.332,baeume/baeume Abstand (m)
+R10,H4,331,157,331.36,157.94,1.171,baeume/baeume Abstand (m)
+R10,B7,60,299,60.61,299.46,1.222,baeume/baeume Abstand (m)
+R10,D7,128,291,128.4,291.29,1.03,baeume/baeume Abstand (m)
+R10,B7,74,291,74.96,291.52,1.064,baeume/baeume Abstand (m)
+R10,F1,228,28,228.88,28.5,1.25,baeume/baeume Abstand (m)
+R10,G3,291,105,291.22,105.3,1.145,baeume/baeume Abstand (m)
+R10,A5,10,179,10.72,179.29,0.859,baeume/baeume Abstand (m)
+R10,G7,274,290,274.43,290.7,1.075,baeume/baeume Abstand (m)
+R10,F6,233,225,233.99,225.21,0.989,baeume/baeume Abstand (m)
+R10,C7,124,302,124.76,302.1,1.243,baeume/baeume Abstand (m)
+R10,H7,323,285,323.57,285.2,1.03,baeume/baeume Abstand (m)
+R10,D7,149,287,149.54,287.5,1.299,baeume/baeume Abstand (m)
+R10,F7,222,301,222.27,301.65,1.301,baeume/baeume Abstand (m)
+R10,E6,205,229,205.93,229.88,1.039,baeume/baeume Abstand (m)
+R10,B7,67,290,67.99,290.28,0.825,baeume/baeume Abstand (m)
+R10,A5,6,181,6.32,181.31,1.056,baeume/baeume Abstand (m)
+R10,C7,117,289,117.53,289.04,1.14,baeume/baeume Abstand (m)
+R10,H4,323,157,323.14,157.16,0.868,baeume/baeume Abstand (m)
+R10,D4,147,139,147.4,139.75,1.359,baeume/baeume Abstand (m)
+R10,H7,331,294,331.29,294.14,1.209,baeume/baeume Abstand (m)
+R10,H1,319,31,319.26,31.43,0.985,baeume/baeume Abstand (m)
+R10,H1,331,30,331.82,30.16,0.677,baeume/baeume Abstand (m)
+R10,D7,131,301,131.41,301.95,1.066,baeume/baeume Abstand (m)
+R10,C6,94,255,94.56,255.7,1.11,baeume/baeume Abstand (m)
+R10,B7,74,291,74.06,291.86,1.185,baeume/baeume Abstand (m)
+R10,F6,232,225,232.94,225.78,1.19,baeume/baeume Abstand (m)
+R10,D7,141,296,141.3,296.85,1.144,baeume/baeume Abstand (m)
+R10,C6,106,234,106.02,234.51,1.017,felsen/felsen Abstand (m)
+R10,F6,210,228,210.5,228.28,0.751,baeume/baeume Abstand (m)
+R10,B7,78,295,78.2,295.07,1.385,baeume/baeume Abstand (m)
+R10,A6,40,231,40.94,231.91,1.249,baeume/baeume Abstand (m)
+R10,A7,19,282,19.73,282.69,0.964,baeume/baeume Abstand (m)
+R10,A6,2,233,2.38,233.02,1.245,baeume/baeume Abstand (m)
+R10,D6,144,222,145.0,222.29,0.938,baeume/baeume Abstand (m)
+R10,F7,212,299,212.44,299.97,0.642,baeume/baeume Abstand (m)
+R10,H3,295,111,295.14,111.04,1.204,baeume/baeume Abstand (m)
+R10,C6,94,241,94.09,241.83,1.32,baeume/baeume Abstand (m)
+R10,D7,126,294,126.59,294.47,1.297,baeume/baeume Abstand (m)
+R10,A5,17,187,17.35,187.68,1.02,baeume/baeume Abstand (m)
+R10,E7,168,291,168.41,291.91,1.36,baeume/baeume Abstand (m)
+R10,G7,272,291,272.91,291.48,0.993,baeume/baeume Abstand (m)
+R10,C3,100,110,100.44,110.87,0.9,felsen/felsen Abstand (m)
+R10,H4,310,134,310.9,134.28,1.301,baeume/baeume Abstand (m)
+R10,F6,247,221,247.15,221.53,1.057,baeume/baeume Abstand (m)
+R10,D7,144,288,144.18,288.49,1.258,baeume/baeume Abstand (m)
+R10,D7,154,301,154.71,301.85,1.415,baeume/baeume Abstand (m)
+R10,G7,258,289,258.21,289.04,0.802,baeume/baeume Abstand (m)
+R10,H4,311,134,311.45,134.12,1.436,baeume/baeume Abstand (m)
+R10,D7,132,294,132.06,294.81,1.419,baeume/baeume Abstand (m)
+R10,G7,285,289,285.53,289.63,1.325,baeume/baeume Abstand (m)
+R10,A5,10,187,10.66,187.86,0.816,baeume/baeume Abstand (m)
+R10,B7,65,298,65.81,298.5,1.372,baeume/baeume Abstand (m)
+R10,H3,329,118,329.68,118.61,1.064,baeume/baeume Abstand (m)
+R10,E1,191,33,191.01,33.05,0.934,baeume/baeume Abstand (m)
+R10,H4,322,155,322.43,155.04,0.81,baeume/baeume Abstand (m)
+R10,H3,334,122,335.0,122.72,1.038,baeume/baeume Abstand (m)
+R10,H4,321,153,321.94,153.54,1.365,baeume/baeume Abstand (m)
+R10,E1,191,34,191.62,34.0,1.407,baeume/baeume Abstand (m)
+R10,H4,334,135,334.2,135.82,1.107,baeume/baeume Abstand (m)
+R10,F7,226,300,226.57,300.37,1.0,baeume/baeume Abstand (m)
+R10,C7,124,292,124.6,292.48,1.172,baeume/baeume Abstand (m)
+R10,H3,334,116,334.94,116.86,1.002,baeume/baeume Abstand (m)
+R10,E7,183,302,183.15,302.12,0.899,baeume/baeume Abstand (m)
+R10,D7,152,294,152.87,294.1,0.801,baeume/baeume Abstand (m)
+R10,H7,317,300,317.13,300.54,1.392,baeume/baeume Abstand (m)
+R10,H7,335,293,335.36,293.92,1.071,baeume/baeume Abstand (m)
+R10,E6,206,227,206.69,227.95,1.161,baeume/baeume Abstand (m)
+R10,H3,315,89,315.29,89.11,0.829,baeume/findlinge Abstand (m)
+R10,G7,258,291,258.72,291.87,1.318,baeume/baeume Abstand (m)
+R10,C6,101,250,101.0,250.25,1.118,baeume/baeume Abstand (m)
+R10,C6,101,249,101.01,249.78,1.115,baeume/baeume Abstand (m)
+R10,H4,330,157,330.92,157.97,1.38,baeume/baeume Abstand (m)
+R10,C7,90,293,90.46,293.45,1.387,baeume/baeume Abstand (m)
+R10,H3,316,121,316.38,121.82,1.334,baeume/baeume Abstand (m)
+R10,E1,193,35,193.88,35.42,1.436,baeume/baeume Abstand (m)
+R10,B7,61,296,61.91,296.56,1.345,baeume/baeume Abstand (m)
+R10,G7,262,280,262.82,280.57,1.385,baeume/baeume Abstand (m)
+R10,A7,1,296,1.38,296.83,1.348,baeume/baeume Abstand (m)
+R10,D7,151,300,151.69,300.6,1.118,baeume/baeume Abstand (m)
+R10,D7,167,299,167.8,299.4,0.93,baeume/baeume Abstand (m)
+R10,H4,323,159,323.88,159.51,1.331,baeume/baeume Abstand (m)
+R10,A1,12,34,12.21,34.6,1.074,baeume/baeume Abstand (m)
+R10,B2,73,66,73.05,66.84,1.29,baeume/baeume Abstand (m)
+R10,D7,148,287,148.94,287.07,1.414,baeume/baeume Abstand (m)
+R10,B7,59,299,59.66,299.36,0.714,baeume/baeume Abstand (m)
+R10,F7,227,300,227.14,300.83,1.012,baeume/baeume Abstand (m)
+R10,D6,155,221,155.07,221.56,0.953,baeume/baeume Abstand (m)
+R10,C7,123,296,123.45,296.36,1.236,baeume/baeume Abstand (m)
+R10,A5,5,174,5.15,174.62,0.947,baeume/baeume Abstand (m)
+R10,D7,142,289,142.42,289.59,1.164,baeume/baeume Abstand (m)
+R10,A3,0,112,0.54,112.41,1.373,baeume/baeume Abstand (m)
+R10,A4,0,135,0.84,135.78,0.9,baeume/baeume Abstand (m)
+R10,D1,159,9,160.0,9.6,1.172,baeume/baeume Abstand (m)
+R10,A4,1,137,1.03,137.22,1.239,baeume/baeume Abstand (m)
+R10,H4,334,140,334.4,140.51,1.411,baeume/baeume Abstand (m)
+R10,G7,289,291,289.94,291.15,1.418,baeume/baeume Abstand (m)
+R10,H4,327,150,327.69,150.16,1.086,baeume/baeume Abstand (m)
+R10,D7,144,291,144.53,291.16,1.002,baeume/baeume Abstand (m)
+R10,D7,147,296,147.69,296.67,1.04,baeume/baeume Abstand (m)
+R10,E6,205,228,205.66,228.24,1.004,baeume/baeume Abstand (m)
+R10,C7,121,292,121.84,292.46,0.822,baeume/baeume Abstand (m)
+R10,H2,298,50,298.5,50.4,4.816,Haus 16/22 Ueberlappung (m2)
+R10,H2,308,57,308.0,57.21,3.026,Haus 19/25 Ueberlappung (m2)
+R10,H2,298,43,298.2,43.8,3.042,Haus 21/22 Ueberlappung (m2)
+R10,H2,314,50,314.79,50.93,4.458,Haus 25/34 Ueberlappung (m2)
+R10,E3,197,127,197.49,127.19,25.619,Haus 32/bld_guild Ueberlappung (m2)
+R10,H2,321,44,321.76,44.41,3.987,Haus 34/41 Ueberlappung (m2)
+R10,F4,230,143,230.87,143.2,12.761,Haus 35/bld_arena Ueberlappung (m2)
+R10,D3,167,109,167.12,109.82,2.689,Haus 50/53 Ueberlappung (m2)
+R10,D3,162,101,162.0,101.42,0.718,Haus 53/54 Ueberlappung (m2)
+R10,E4,191,159,191.28,159.19,3.249,Haus 60/64 Ueberlappung (m2)
+R10,D4,165,142,165.96,142.86,5.391,Haus 65/75 Ueberlappung (m2)
+R10,F5,215,185,215.3,185.07,5.166,Haus 73/82 Ueberlappung (m2)
+R10,E5,204,179,204.18,179.89,1.238,Haus 83/bld_woodcutter Ueberlappung (m2)
+R10,F2,244,81,244.92,81.84,46.552,Haus bld_center/bld_barracks Ueberlappung (m2)
+R10,F4,219,144,219.03,144.79,24.559,Haus bld_arena/bld_kas_spear Ueberlappung (m2)
+R10,F3,235,91,235.06,91.56,8.646,Haus bld_barracks/bld_relic_shrine Ueberlappung (m2)
+R11,G3,271,106,271.2,106.8,0.222,Haus 5 Standard Anteil Klippe/Wasser
+R11,G4,270,140,270.04,140.75,0.2,Haus 24 Standard Anteil Klippe/Wasser
+R11,H1,310,41,310.2,41.4,0.125,Haus 29 kompakt Anteil Klippe/Wasser
+R11,G4,282,159,282.6,159.0,0.156,Haus 46 kompakt Anteil Klippe/Wasser
+R11,C2,110,49,110.4,49.2,0.389,Haus N3 Hütte Anteil Klippe/Wasser
+R11,C4,112,171,112.8,171.6,0.361,Haus N8 Hütte Anteil Klippe/Wasser
+R11,C4,98,146,98.4,146.4,0.472,Haus N9 Hütte Anteil Klippe/Wasser
+R11,A2,36,61,36.0,61.2,0.111,Haus N44 Hütte Anteil Klippe/Wasser
+R11,D1,148,25,148.5,25.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,277,25,277.5,25.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,278,25,278.5,25.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,274,26,274.5,26.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,275,26,275.5,26.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,276,26,276.5,26.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,277,26,277.5,26.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,279,26,279.5,26.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,273,27,273.5,27.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,274,27,274.5,27.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,275,27,275.5,27.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,276,27,276.5,27.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,280,27,280.5,27.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,272,28,272.5,28.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,273,28,273.5,28.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,280,28,280.5,28.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,258,29,258.5,29.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,267,29,267.5,29.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,268,29,268.5,29.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,269,29,269.5,29.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,153,30,153.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,154,30,154.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,180,30,180.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,181,30,181.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,264,30,264.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,265,30,265.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,266,30,266.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,267,30,267.5,30.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,153,31,153.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,154,31,154.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,155,31,155.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,181,31,181.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,182,31,182.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,183,31,183.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,262,31,262.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,263,31,263.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,264,31,264.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,284,31,284.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,286,31,286.5,31.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,151,32,151.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,152,32,152.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,153,32,153.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,155,32,155.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,156,32,156.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,157,32,157.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,158,32,158.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,159,32,159.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,182,32,182.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,183,32,183.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,32,184.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,261,32,261.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,286,32,286.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,287,32,287.5,32.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,159,33,159.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,160,33,160.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,161,33,161.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,183,33,183.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,256,33,256.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,257,33,257.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,286,33,286.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,287,33,287.5,33.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,138,34,138.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,139,34,139.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,34,184.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,253,34,253.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,254,34,254.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,255,34,255.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,288,34,288.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,301,34,301.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,327,34,327.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,332,34,332.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,333,34,333.5,34.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,138,35,138.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,139,35,139.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,145,35,145.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,35,184.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,35,185.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,186,35,186.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,289,35,289.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,290,35,290.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,297,35,297.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,302,35,302.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,323,35,323.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,324,35,324.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,325,35,325.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,326,35,326.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,327,35,327.5,35.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,138,36,138.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D1,139,36,139.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,36,184.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,36,185.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,36,198.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,36,199.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,211,36,211.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,289,36,289.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,290,36,290.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,291,36,291.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,292,36,292.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,300,36,300.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,301,36,301.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,311,36,311.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,312,36,312.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,313,36,313.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,319,36,319.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,320,36,320.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,321,36,321.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,322,36,322.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,323,36,323.5,36.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,37,184.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,37,185.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,37,198.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,37,199.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,200,37,200.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,209,37,209.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,210,37,210.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,211,37,211.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,212,37,212.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,289,37,289.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G1,290,37,290.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,303,37,303.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,304,37,304.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,305,37,305.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,308,37,308.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,309,37,309.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,310,37,310.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,311,37,311.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,312,37,312.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,313,37,313.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,314,37,314.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,315,37,315.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,316,37,316.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,317,37,317.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,318,37,318.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,319,37,319.5,37.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,38,184.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,38,185.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,186,38,186.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,194,38,194.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,195,38,195.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,196,38,196.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,197,38,197.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,38,198.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,38,199.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,200,38,200.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,213,38,213.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,316,38,316.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,317,38,317.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H1,318,38,318.5,38.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,184,39,184.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,39,185.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,186,39,186.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,187,39,187.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,188,39,188.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,189,39,189.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,190,39,190.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,191,39,191.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,192,39,192.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,193,39,193.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,194,39,194.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,195,39,195.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,196,39,196.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,197,39,197.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,39,198.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,39,199.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,213,39,213.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F1,214,39,214.5,39.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,40,185.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,186,40,186.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,187,40,187.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,188,40,188.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,189,40,189.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,190,40,190.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,191,40,191.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,192,40,192.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,193,40,193.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,194,40,194.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,195,40,195.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,196,40,196.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,197,40,197.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,40,198.5,40.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,185,41,185.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,186,41,186.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,187,41,187.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,188,41,188.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,189,41,189.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,190,41,190.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,191,41,191.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,194,41,194.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,195,41,195.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,196,41,196.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,197,41,197.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,41,198.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,41,199.5,41.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,197,42,197.5,42.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,198,42,198.5,42.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,199,42,199.5,42.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,200,42,200.5,42.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E1,201,42,201.5,42.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,73,43,73.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,76,43,76.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,189,43,189.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,43,198.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,43,199.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,43,200.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,43,201.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,43,202.5,43.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,74,44,74.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,75,44,75.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,76,44,76.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,77,44,77.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,83,44,83.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,89,44,89.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,90,44,90.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,91,44,91.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,92,44,92.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,95,44,95.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,96,44,96.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,97,44,97.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,99,44,99.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,100,44,100.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,102,44,102.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,44,199.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,44,200.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,44,201.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,44,202.5,44.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,76,45,76.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,78,45,78.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,84,45,84.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,85,45,85.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,86,45,86.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,87,45,87.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,88,45,88.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,89,45,89.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,90,45,90.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,91,45,91.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,92,45,92.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,93,45,93.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,94,45,94.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,95,45,95.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,96,45,96.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,97,45,97.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,98,45,98.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,99,45,99.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,100,45,100.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,101,45,101.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,102,45,102.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,103,45,103.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,105,45,105.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,107,45,107.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,108,45,108.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,45,199.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,45,200.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,45,201.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,45,202.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,216,45,216.5,45.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B2,76,46,76.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,93,46,93.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,94,46,94.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,95,46,95.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,96,46,96.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,97,46,97.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,98,46,98.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,99,46,99.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,100,46,100.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,101,46,101.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,105,46,105.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,106,46,106.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,107,46,107.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,108,46,108.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,109,46,109.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,113,46,113.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,114,46,114.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,46,199.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,46,200.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,46,201.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,46,202.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,217,46,217.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,227,46,227.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,228,46,228.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,229,46,229.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,230,46,230.5,46.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,101,47,101.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,103,47,103.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,104,47,104.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,105,47,105.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,106,47,106.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,107,47,107.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,108,47,108.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,109,47,109.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,110,47,110.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,112,47,112.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,113,47,113.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,114,47,114.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,47,199.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,47,200.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,47,201.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,47,202.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,218,47,218.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,219,47,219.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,220,47,220.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,221,47,221.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,225,47,225.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,226,47,226.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,227,47,227.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,228,47,228.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,229,47,229.5,47.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,104,48,104.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,105,48,105.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,111,48,111.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,112,48,112.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,113,48,113.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,48,199.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,48,200.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,48,201.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,48,202.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,219,48,219.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,220,48,220.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,221,48,221.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,222,48,222.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,223,48,223.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,224,48,224.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,225,48,225.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,226,48,226.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,227,48,227.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,228,48,228.5,48.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,49,199.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,49,200.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,49,201.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,49,202.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,221,49,221.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,222,49,222.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,223,49,223.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,224,49,224.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,225,49,225.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,226,49,226.5,49.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,103,50,103.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C2,104,50,104.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,50,199.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,50,200.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,50,201.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,50,202.5,50.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,51,198.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,51,199.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,51,200.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,51,201.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,202,51,202.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,221,51,221.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,222,51,222.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,223,51,223.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,224,51,224.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F2,225,51,225.5,51.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,52,198.5,52.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,52,199.5,52.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,52,200.5,52.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,52,201.5,52.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,53,198.5,53.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,53,199.5,53.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,53,200.5,53.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,53,201.5,53.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,54,197.5,54.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,54,198.5,54.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,54,199.5,54.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,54,200.5,54.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,201,54,201.5,54.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,55,197.5,55.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,55,198.5,55.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,55,199.5,55.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,55,200.5,55.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,56,197.5,56.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,56,198.5,56.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,56,199.5,56.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,56,200.5,56.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,57,196.5,57.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,57,197.5,57.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,57,198.5,57.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,57,199.5,57.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,200,57,200.5,57.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,58,196.5,58.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,58,197.5,58.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,58,198.5,58.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,58,199.5,58.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,59,196.5,59.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,59,197.5,59.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,59,198.5,59.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,199,59,199.5,59.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,60,195.5,60.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,60,196.5,60.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,60,197.5,60.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,60,198.5,60.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,61,195.5,61.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,61,196.5,61.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,61,197.5,61.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,198,61,198.5,61.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,62,195.5,62.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,62,196.5,62.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,62,197.5,62.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,63,194.5,63.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,63,195.5,63.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,63,196.5,63.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,197,63,197.5,63.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,64,194.5,64.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,64,195.5,64.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,64,196.5,64.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,65,193.5,65.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,65,194.5,65.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,65,195.5,65.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,196,65,196.5,65.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,66,193.5,66.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,66,194.5,66.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,66,195.5,66.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,192,67,192.5,67.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,67,193.5,67.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,67,194.5,67.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,195,67,195.5,67.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,192,68,192.5,68.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,68,193.5,68.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,68,194.5,68.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,191,69,191.5,69.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,192,69,192.5,69.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,69,193.5,69.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,194,69,194.5,69.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,191,70,191.5,70.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,70,193.5,70.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,324,70,324.5,70.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,325,70,325.5,70.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,326,70,326.5,70.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,190,71,190.5,71.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,191,71,191.5,71.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,193,71,193.5,71.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,323,71,323.5,71.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,324,71,324.5,71.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,190,72,190.5,72.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,321,72,321.5,72.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,322,72,322.5,72.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,192,73,192.5,73.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,321,73,321.5,73.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,189,74,189.5,74.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,192,74,192.5,74.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,320,74,320.5,74.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,189,75,189.5,75.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,319,75,319.5,75.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,191,76,191.5,76.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,317,76,317.5,76.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,318,76,318.5,76.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,319,76,319.5,76.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,188,77,188.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,191,77,191.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,316,77,316.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,317,77,317.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,318,77,318.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,319,77,319.5,77.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,188,78,188.5,78.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,315,78,315.5,78.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,316,78,316.5,78.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,317,78,317.5,78.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,318,78,318.5,78.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,79,313.5,79.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,79,314.5,79.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,315,79,315.5,79.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,316,79,316.5,79.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,317,79,317.5,79.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,190,80,190.5,80.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,80,313.5,80.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,80,314.5,80.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,315,80,315.5,80.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,190,81,190.5,81.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,81,313.5,81.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,81,314.5,81.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,82,313.5,82.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,82,314.5,82.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,187,83,187.5,83.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E2,189,83,189.5,83.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,83,313.5,83.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,83,314.5,83.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,311,84,311.5,84.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,312,84,312.5,84.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,84,313.5,84.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,314,84,314.5,84.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,310,85,310.5,85.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,311,85,311.5,85.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,312,85,312.5,85.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,313,85,313.5,85.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,300,86,300.5,86.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,301,86,301.5,86.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,310,86,310.5,86.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H2,311,86,311.5,86.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,297,87,297.5,87.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,298,87,298.5,87.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,299,87,299.5,87.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,300,87,300.5,87.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,310,87,310.5,87.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,294,88,294.5,88.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,295,88,295.5,88.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,296,88,296.5,88.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,297,88,297.5,88.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,187,89,187.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,189,89,189.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,293,89,293.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,294,89,294.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,295,89,295.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,296,89,296.5,89.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,293,90,293.5,90.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H3,294,90,294.5,90.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,293,91,293.5,91.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,293,92,293.5,92.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,124,93,124.5,93.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,292,93,292.5,93.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,120,94,120.5,94.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,292,94,292.5,94.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,95,95,95.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,96,95,96.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,97,95,97.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,98,95,98.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,120,95,120.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,121,95,121.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,292,95,292.5,95.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,94,96,94.5,96.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,95,96,95.5,96.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,96,96,96.5,96.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,93,97,93.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,94,97,94.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,95,97,95.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,96,97,96.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,283,97,283.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,284,97,284.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,285,97,285.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,288,97,288.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,289,97,289.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,290,97,290.5,97.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,92,98,92.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,93,98,93.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,94,98,94.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,95,98,95.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,188,98,188.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,279,98,279.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,280,98,280.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,281,98,281.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,282,98,282.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,283,98,283.5,98.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,92,99,92.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,93,99,93.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,94,99,94.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,190,99,190.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,99,278.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,279,99,279.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,280,99,280.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,281,99,281.5,99.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,91,100,91.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,92,100,92.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,93,100,93.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,100,277.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,100,278.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,279,100,279.5,100.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,91,101,91.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,92,101,92.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,93,101,93.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,101,277.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,101,278.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,279,101,279.5,101.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,91,102,91.5,102.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,92,102,92.5,102.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,102,277.5,102.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,102,278.5,102.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,279,102,279.5,102.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,90,103,90.5,103.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,91,103,91.5,103.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,276,103,276.5,103.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,103,277.5,103.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,103,278.5,103.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,190,104,190.5,104.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,276,104,276.5,104.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,104,277.5,104.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,278,104,278.5,104.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,275,105,275.5,105.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,276,105,276.5,105.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,277,105,277.5,105.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,106,88.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,90,106,90.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,188,106,188.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,106,273.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,274,106,274.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,275,106,275.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,276,106,276.5,106.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,107,87.5,107.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,107,88.5,107.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,90,107,90.5,107.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,107,273.5,107.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,274,107,274.5,107.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,108,88.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,89,108,89.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,90,108,90.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,187,108,187.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,272,108,272.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,108,273.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,274,108,274.5,108.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,109,87.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,109,88.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,89,109,89.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,187,109,187.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,109,270.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,271,109,271.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,272,109,272.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,109,273.5,109.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,110,87.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,110,88.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,110,270.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,271,110,271.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,272,110,272.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,110,273.5,110.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,86,111,86.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,111,87.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,88,111,88.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,111,270.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,271,111,271.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,272,111,272.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,273,111,273.5,111.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,86,112,86.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,112,87.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,186,112,186.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,189,112,189.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,112,270.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,271,112,271.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,272,112,272.5,112.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,86,113,86.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,87,113,87.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,186,113,186.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,269,113,269.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,113,270.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,271,113,271.5,113.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,114,85.5,114.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,86,114,86.5,114.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,188,114,188.5,114.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,270,114,270.5,114.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,115,85.5,115.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,86,115,86.5,115.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,185,115,185.5,115.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,188,115,188.5,115.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,116,85.5,116.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,117,84.5,117.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,117,85.5,117.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,184,117,184.5,117.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,187,117,187.5,117.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,118,84.5,118.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,118,85.5,118.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,187,118,187.5,118.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,119,84.5,119.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,85,119,85.5,119.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,183,119,183.5,119.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,120,84.5,120.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,182,120,182.5,120.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,186,120,186.5,120.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,121,83.5,121.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,121,84.5,121.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,182,121,182.5,121.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,186,121,186.5,121.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,122,83.5,122.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C3,84,122,84.5,122.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,181,122,181.5,122.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,123,83.5,123.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,133,123,133.5,123.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,123,134.5,123.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,124,83.5,124.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,133,124,133.5,124.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,124,134.5,124.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,135,124,135.5,124.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,136,124,136.5,124.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,125,83.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,133,125,133.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,125,134.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,135,125,135.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,136,125,136.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,184,125,184.5,125.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,B3,83,126,83.5,126.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,132,126,132.5,126.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,133,126,133.5,126.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,126,134.5,126.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,137,126,137.5,126.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,133,127,133.5,127.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,127,134.5,127.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,137,127,137.5,127.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,178,127,178.5,127.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,134,128,134.5,128.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,137,128,137.5,128.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,178,128,178.5,128.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,182,128,182.5,128.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G3,269,128,269.5,128.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D3,137,129,137.5,129.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E3,181,129,181.5,129.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,130,137.5,130.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,177,130,177.5,130.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,181,130,181.5,130.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,268,130,268.5,130.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,131,137.5,131.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,138,131,138.5,131.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,268,131,268.5,131.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,269,131,269.5,131.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,132,136.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,132,137.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,176,132,176.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,180,132,180.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,268,132,268.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,269,132,269.5,132.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,133,136.5,133.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,176,133,176.5,133.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,269,133,269.5,133.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,270,133,270.5,133.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,135,134,135.5,134.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,178,134,178.5,134.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,179,134,179.5,134.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,270,134,270.5,134.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,271,135,271.5,135.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,135,272.5,135.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,178,136,178.5,136.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,271,136,271.5,136.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,136,272.5,136.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,136,273.5,136.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,137,272.5,137.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,137,273.5,137.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,138,272.5,138.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,138,273.5,138.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,139,272.5,139.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,139,273.5,139.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,272,140,272.5,140.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,140,273.5,140.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,274,140,274.5,140.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,275,140,275.5,140.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,175,141,175.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,273,141,273.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,274,141,274.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,275,141,275.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,276,141,276.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,277,141,277.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,278,141,278.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,279,141,279.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,280,141,280.5,141.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,276,142,276.5,142.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,277,142,277.5,142.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,280,142,280.5,142.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,132,143,132.5,143.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,132,144,132.5,144.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,133,144,133.5,144.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,134,144,134.5,144.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,282,144,282.5,144.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,282,145,282.5,145.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,283,145,283.5,145.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,174,146,174.5,146.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,173,149,173.5,149.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,175,149,175.5,149.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,150,284.5,150.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,150,285.5,150.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,151,284.5,151.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,151,285.5,151.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,283,152,283.5,152.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,152,284.5,152.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,152,285.5,152.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,173,153,173.5,153.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,153,284.5,153.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,173,154,173.5,154.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,154,284.5,154.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,154,285.5,154.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,284,155,284.5,155.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,155,285.5,155.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,172,156,172.5,156.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,156,285.5,156.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,286,156,286.5,156.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,175,157,175.5,157.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,285,157,285.5,157.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,286,157,286.5,157.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,286,158,286.5,158.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,176,159,176.5,159.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,286,159,286.5,159.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,287,159,287.5,159.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,157,160,157.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,178,160,178.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,179,160,179.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,286,160,286.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,287,160,287.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,288,160,288.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,G4,289,160,289.5,160.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,180,161,180.5,161.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,182,162,182.5,162.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,183,163,183.5,163.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,184,163,184.5,163.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,152,164,152.5,164.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,184,164,184.5,164.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,151,165,151.5,165.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,184,165,184.5,165.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,185,165,185.5,165.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,166,137.5,166.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,138,166,138.5,166.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,185,166,185.5,166.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,167,137.5,167.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,150,167,150.5,167.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,168,136.5,168.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,168,137.5,168.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,169,136.5,169.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,169,137.5,169.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,186,169,186.5,169.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,170,136.5,170.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,170,137.5,170.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,298,170,298.5,170.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,299,170,299.5,170.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,171,136.5,171.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,171,137.5,171.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,299,171,299.5,171.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,300,171,300.5,171.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,303,171,303.5,171.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,136,172,136.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D4,137,172,137.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E4,186,172,186.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,300,172,300.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,301,172,301.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H4,303,172,303.5,172.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,136,173,136.5,173.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,137,173,137.5,173.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,173,303.5,173.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,137,174,137.5,174.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,174,303.5,174.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,137,175,137.5,175.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,138,175,138.5,175.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,186,175,186.5,175.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,175,303.5,175.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,137,176,137.5,176.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,138,176,138.5,176.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,185,176,185.5,176.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,186,176,186.5,176.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,176,303.5,176.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,138,177,138.5,177.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,139,177,139.5,177.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,140,177,140.5,177.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,150,177,150.5,177.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,185,177,185.5,177.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,138,178,138.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,139,178,139.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,140,178,140.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,141,178,141.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,184,178,184.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,185,178,185.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,304,178,304.5,178.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,140,179,140.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,183,179,183.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,184,179,184.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,179,303.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,304,179,304.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,305,179,305.5,179.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,130,180,130.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,140,180,140.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,183,180,183.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,184,180,184.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,180,303.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,304,180,304.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,305,180,305.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,306,180,306.5,180.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,181,131.5,181.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,140,181,140.5,181.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,303,181,303.5,181.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,304,181,304.5,181.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,305,181,305.5,181.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,182,131.5,182.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,305,182,305.5,182.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,306,182,306.5,182.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,183,131.5,183.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,157,183,157.5,183.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,182,183,182.5,183.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,306,183,306.5,183.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,184,131.5,184.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,175,184,175.5,184.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,183,184,183.5,184.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,184,184,184.5,184.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,307,184,307.5,184.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,185,131.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,172,185,172.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,173,185,173.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,184,185,184.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,188,185,188.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,308,185,308.5,185.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,186,131.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,132,186,132.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,163,186,163.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,164,186,164.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,165,186,165.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,170,186,170.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,185,186,185.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,309,186,309.5,186.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,187,131.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,132,187,132.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,164,187,164.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,165,187,165.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,166,187,166.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,167,187,167.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,168,187,168.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,169,187,169.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,185,187,185.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,189,187,189.5,187.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,130,188,130.5,188.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,131,188,131.5,188.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,D5,132,188,132.5,188.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,189,188,189.5,188.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,186,189,186.5,189.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,190,189,190.5,189.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,310,189,310.5,189.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,187,190,187.5,190.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,191,190,191.5,190.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,193,191,193.5,191.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,194,191,194.5,191.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,188,192,188.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,196,192,196.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,197,192,197.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,200,192,200.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,201,192,201.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,210,192,210.5,192.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,190,193,190.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,211,193,211.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,212,193,212.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,213,193,213.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,311,193,311.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,312,193,312.5,193.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,191,194,191.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,205,194,205.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,206,194,206.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,208,194,208.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,209,194,209.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,213,194,213.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,214,194,214.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,310,194,310.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,311,194,311.5,194.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,211,195,211.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,212,195,212.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,214,195,214.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,309,195,309.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,310,195,310.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,H5,311,195,311.5,195.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,212,196,212.5,196.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,213,196,213.5,196.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,215,196,215.5,196.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,213,197,213.5,197.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,214,197,214.5,197.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,214,198,214.5,198.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,215,200,215.5,200.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,200,217.5,200.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,218,201,218.5,201.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,219,204,219.5,204.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,219,205,219.5,205.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,99,206,99.5,206.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,216,206,216.5,206.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,216,207,216.5,207.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,220,207,220.5,207.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,100,208,100.5,208.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,101,208,101.5,208.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,E5,169,208,169.5,208.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,220,208,220.5,208.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,100,209,100.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,101,209,101.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,102,209,102.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,103,209,103.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,104,209,104.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,105,209,105.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,106,209,106.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,107,209,107.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,209,217.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,221,209,221.5,209.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,101,210,101.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,102,210,102.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,103,210,103.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,104,210,104.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,105,210,105.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,106,210,106.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C5,107,210,107.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,210,217.5,210.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,211,217.5,211.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,222,211,222.5,211.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,212,217.5,212.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,223,212,223.5,212.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,213,217.5,213.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F5,217,214,217.5,214.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,223,217,223.5,217.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,216,218,216.5,218.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,210,219,210.5,219.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,215,219,215.5,219.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,216,219,216.5,219.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,217,219,217.5,219.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,116,223,116.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,117,223,117.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,118,223,118.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,119,223,119.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,120,223,120.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,121,223,121.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,122,223,122.5,223.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,116,224,116.5,224.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,117,224,117.5,224.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,118,224,118.5,224.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,C6,119,224,119.5,224.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,247,225,247.5,225.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,248,225,248.5,225.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,249,225,249.5,225.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,250,225,250.5,225.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,246,226,246.5,226.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,247,226,247.5,226.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,248,226,248.5,226.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,249,226,249.5,226.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,250,226,250.5,226.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,247,227,247.5,227.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,248,227,248.5,227.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,249,227,249.5,227.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,250,227,250.5,227.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,245,228,245.5,228.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,246,228,246.5,228.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,247,228,247.5,228.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,249,228,249.5,228.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,245,229,245.5,229.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,246,229,246.5,229.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser
+R11,F6,245,230,245.5,230.5,1.0,bebaubar/Bauzone-Zelle auf Klippe/Wasser

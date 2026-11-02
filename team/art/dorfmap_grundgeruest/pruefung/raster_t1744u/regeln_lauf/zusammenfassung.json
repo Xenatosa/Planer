@@ -1,0 +1,117 @@
+{
+ "parameter": {
+  "R01_weg_min_komponente": 6,
+  "R01_ziel_radius_m": 3.0,
+  "R01_rampe_ende_max_m": 3.0,
+  "R02_baum_rampe_abstand_m": 1.5,
+  "R03_fluss_min_luecke": 1,
+  "R03_rand_abstand_m": 2,
+  "R04_fenster_m": 2.5,
+  "R04_spitze_m": 2.0,
+  "R04_loch_m": 2.0,
+  "R05_neigung_grad": 50.0,
+  "R05_rauheit_max_m": 0.08,
+  "R05_min_flaeche_m2": 12.0,
+  "R06_schwebt_m": 0.35,
+  "R06_versunken_m": 0.6,
+  "R07_insel_min_zellen": 4,
+  "R08_bergauf_m": 0.15,
+  "R09_stufe_m": 0.4,
+  "R09_sprung_m": 1.5,
+  "R10_faktor": 0.6,
+  "R11_anteil": 0.1
+ },
+ "fehler": {},
+ "treffer_je_regel": {
+  "R01": 2,
+  "R02": 0,
+  "R03": 149,
+  "R04": 281,
+  "R05": 19,
+  "R06": 331,
+  "R07": 117,
+  "R08": 74,
+  "R09": 85,
+  "R10": 674,
+  "R11": 1020
+ },
+ "felder_je_regel": {
+  "R01": 2,
+  "R02": 0,
+  "R03": 29,
+  "R04": 32,
+  "R05": 12,
+  "R06": 45,
+  "R07": 36,
+  "R08": 9,
+  "R09": 21,
+  "R10": 47,
+  "R11": 29
+ },
+ "unterart": {
+  "R01": {
+   "Rampe 1 Ende fern von Weg/begehbar": 1,
+   "Rampe 5 Ende fern von Weg/begehbar": 1
+  },
+  "R02": {},
+  "R03": {
+   "abgetrenntes Stueck": 144,
+   "erreicht keinen Kartenrand": 1,
+   "offenes Ende im Feld": 4
+  },
+  "R04": {
+   "Spitze": 150,
+   "Loch": 131
+  },
+  "R05": {
+   "glatte Steilflaeche": 19
+  },
+  "R06": {
+   "schwebt": 185,
+   "versunken": 7,
+   "im Wasser": 139
+  },
+  "R07": {
+   "begehbare Insel": 117
+  },
+  "R08": {
+   "Spiegel steigt Richtung S": 23,
+   "Spiegel steigt Richtung SO": 51
+  },
+  "R09": {
+   "Feinband-Rand weicht von Grobgitter ab": 85
+  },
+  "R10": {
+   "baeume/baeume Abstand": 648,
+   "baeume/findlinge Abstand": 3,
+   "felsen/felsen Abstand": 7,
+   "Haus 16/22 Ueberlappung": 1,
+   "Haus 19/25 Ueberlappung": 1,
+   "Haus 21/22 Ueberlappung": 1,
+   "Haus 25/34 Ueberlappung": 1,
+   "Haus 32/bld_guild Ueberlappung": 1,
+   "Haus 34/41 Ueberlappung": 1,
+   "Haus 35/bld_arena Ueberlappung": 1,
+   "Haus 50/53 Ueberlappung": 1,
+   "Haus 53/54 Ueberlappung": 1,
+   "Haus 60/64 Ueberlappung": 1,
+   "Haus 65/75 Ueberlappung": 1,
+   "Haus 73/82 Ueberlappung": 1,
+   "Haus 83/bld_woodcutter Ueberlappung": 1,
+   "Haus bld_center/bld_barracks Ueberlappung": 1,
+   "Haus bld_arena/bld_kas_spear Ueberlappung": 1,
+   "Haus bld_barracks/bld_relic_shrine Ueberlappung": 1
+  },
+  "R11": {
+   "Haus 5 Standard Anteil Klippe/Wasser": 1,
+   "Haus 24 Standard Anteil Klippe/Wasser": 1,
+   "Haus 29 kompakt Anteil Klippe/Wasser": 1,
+   "Haus 46 kompakt Anteil Klippe/Wasser": 1,
+   "Haus N3 Hütte Anteil Klippe/Wasser": 1,
+   "Haus N8 Hütte Anteil Klippe/Wasser": 1,
+   "Haus N9 Hütte Anteil Klippe/Wasser": 1,
+   "Haus N44 Hütte Anteil Klippe/Wasser": 1,
+   "bebaubar/Bauzone-Zelle auf Klippe/Wasser": 1012
+  }
+ }
+}
