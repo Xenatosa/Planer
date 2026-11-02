@@ -185,3 +185,5 @@ Nichts davon behoben.
 
 ## Runde O11
 M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mtime=0); M3 Wasserfarbe geglättet (fluss_7 Kante teilweise); M4 bandrand_weich 12 + Cache-Auffrischung. Offen: fluss_7 Kante, wand_288_144 Wandfuß, Tümpel-West Flecken. Details pruefung/runde_o_status.md.
+
+- O12: fluss_7 helle eckige Zone im Wasser offen (nicht Mesh-Rand, per ?wwire=1 belegt). wand_288_144 Wandfuß offen. rampe_4/13 Weg-Overlay → Wege-Bot (UEBERGABE.md).

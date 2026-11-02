@@ -351,3 +351,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 
 ## O12 N4 – wand_288_144 Wandfuß: nur dokumentiert
 - Stand unverändert seit O10 L4/O11: echte, ca. 1 m breite Rinne plus scharfe Schattenkante am Feinbandrand (das Band endet bei x≈301 auf 12,0 m). Wandfuß leicht weicher als in O9, die Wand bleibt steil. Kein Eingriff in O12.
+
+## O12 N5 – Durchgang auf 2214266 (main.js = b3eedd0)
+- spitzen 4, senken>0,8 m 1, enge_grate 256, stufe_bandrand 0; det-Hashes gleich; Raycast 0; Spalt 0,0; t42u 0; bergauf_pfad 0 (bergauf_summe 3922).
+- Budget lod1: Bildpass 1,134 M, FBO-Pass 0,793 M. Ladezeit 7,88 / 7,53 / 7,62 s, Median 7,62 s.
+- Export neu: /workspace/dorfmap_3d_runde_O12.html (04:38).
+- O12 insgesamt einzeln in voller Größe angesehen: ca. 40 Bilder.
+- Offen: fluss_7 Ecke (Ursache nicht Wasserrand, s. N3b), wand_288_144, Tümpel-West-Schattenlücken, rampe_4/13 (Wege-Bot).

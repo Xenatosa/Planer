@@ -41,3 +41,5 @@
 - relief3d Runde O10: pruefung/runde_o_status.md (L1-L5), Export dorfmap_3d_runde_O10.html
 
 - Runde O11: /workspace/dorfmap_3d_runde_O11.html – relief3d/pruefung/runde_o_status.md
+
+- Runde O12: /workspace/dorfmap_3d_runde_O12.html, Status relief3d/pruefung/runde_o_status.md

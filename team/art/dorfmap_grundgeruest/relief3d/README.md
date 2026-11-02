@@ -104,3 +104,5 @@ Runde O8: Spalt 0, Raycast schwebend 0, Bett geglaettet; Details pruefung/runde_
 
 ## Runde O11
 M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mtime=0); M3 Wasserfarbe geglättet (fluss_7 Kante teilweise); M4 bandrand_weich 12 + Cache-Auffrischung. Offen: fluss_7 Kante, wand_288_144 Wandfuß, Tümpel-West Flecken. Details pruefung/runde_o_status.md.
+
+- O12: Kameras repariert, Wasserrand-Versuche (fluss_7) ohne Wirkung zurückgenommen, Export dorfmap_3d_runde_O12.html; Details pruefung/runde_o_status.md.
