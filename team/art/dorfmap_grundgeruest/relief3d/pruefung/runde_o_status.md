@@ -376,3 +376,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Bilder: Haarlinien-Stellen vorher/nachher (t65/o14, Textur+Clay) und 10 Stichproben + Randansichten (t65/o14v). Haarlinien an Kreuzung rampe_2/12, Mittelgebirge, rand_ost_80/265 weg.
 - Offen: feine dunkle Linien an Silhouetten-/Gratkanten (z. B. wand_288_72, wand_312_168) sowohl in O12 als auch O14 → nicht vom Band, Ursache ungeklärt. Schwacher Restpunkt-Strich auf dem Grat in r_kreuz (nrm) ungeklärt. Schluchtkante aus Fabians Screenshot = Kreuzung rampe_2/12.
 - Export /workspace/dorfmap_3d_runde_O14.html, Banner „Ansicht: NEU (Relief t67u, Runde O14)“.
+
+## O15 (Fabian t76u/t77u)
+- Weg zerfranst (Zelle 153|26, Kreuzung rampe_2/12): Ursache Viewer – Rampen-Overlay mit Randalpha 0 (Schleier statt Kante), Loecher wo Hang >0,8 m quer (Alpha 0), bei Handy-LOD Grobnetz-Buckel ueber dem Band; Wege-Maske WEGA mit weichem Alpha aus Zellmaske (viele schwache Werte -> Wolken/Flecken).
+  Fix (main.js, kartenweit alle Rampen + WEGA): Rampe QO ±1,08/0,88, Randalpha 0,3 statt 0, Loch-Schwelle 1,4 m; Handy-LOD: Band ueber Querbuckeln (max ±0,3 m) +QH*1,3. WEGA: Alpha-Schwelle smoothstep(0,22..0,52)*0,88, Hoehe +0,16 (Handy) / +0,05. Keine Zellwerte, keine Daten geaendert (det gleich).
+  Vorher/nachher /workspace/t65/o15 (b1_oben_*_t / *_t2) und Ausschnitte zk2_neu.png, zh_vn.png: Kreuzung jetzt durchgehend mit klaren Raendern; Handy noch etwas weich.
+- Schraege 133|173: ist der Ruecken, der rampe_9 traegt (Rampe (130,161)->(140,198), Zelle 133|173 liegt 0,4 m neben der Rampenmitte, Hoehe 11 -> ~7 m, Osten Abfall auf ~0-5 m). Entfernen = Rampe weg -> NICHT gemacht, Rueckfrage an Fabian.
+- Durchgang: det gleich, Spalt 0, t42u 0, bergauf_pfad 0, Budget 1,127 M, Ladezeit 7,5 s. Raycast: 1 Baum (97.75,99.75) 0,36 m – auch mit O14-HTML reproduzierbar, also nicht durch O15 entstanden; offen.
+- Kritischer Blick: 16 Handy-Kameras (13 Rampen + 3 WEGA) vorher/nachher /workspace/t65/o15k, nur als verkleinerte Raster angesehen + r3 voll; WEGA-Kameras schlecht gewaehlt (Haeuser/leer).
+- Export /workspace/dorfmap_3d_runde_O15.html, Banner "Runde O15".

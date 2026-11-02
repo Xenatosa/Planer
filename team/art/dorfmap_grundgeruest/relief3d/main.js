@@ -194,7 +194,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    g.visible=false;const gg=new THREE.Group();gg.userData.ebene='gelaende';gg.add(gl.scene);NEU.add(gg);window.__glb={ok:true,meshes:gl.scene.children.length};},undefined,e=>{window.__glb={ok:false,fehler:String(e)};});}
  window.__dreiecke={boden:bi.length/3-nw,wand:nw};
  // Wege-Overlay: weicher Rand ueber Vertex-Alpha
- {const A=u8(DN.WEGA),wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1);const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,h=hash(i,j);wp.push(i/RS,G[k]+0.05,j/RS);{const a=A[k]/255,e=a*a;wc.push(0.62-0.30*e+0.04*h,0.58-0.30*e+0.03*h,0.54-0.30*e+0.02*h,Math.min(0.85,Math.pow(a,1.4)*0.95));}}return map[k];};
+ {const A=u8(DN.WEGA),wp=[],wc=[],wi=[],map=new Int32Array(GX*GY).fill(-1);const vx=k=>{if(map[k]<0){map[k]=wp.length/3;const i=k%GX,j=(k/GX)|0,h=hash(i,j);wp.push(i/RS,G[k]+(LS==2?0.16:0.05),j/RS);{const a=A[k]/255,e=a*a,sa=Math.min(1,Math.max(0,(a-0.22)/0.3)),ka=sa*sa*(3-2*sa);wc.push(0.62-0.30*e+0.04*h,0.58-0.30*e+0.03*h,0.54-0.30*e+0.02*h,0.88*ka);}   /* O15 W1: Wegrand klar (Alpha-Schwelle statt Schleier), hoeher gegen Durchstossen bei Handy-LOD [A] */}return map[k];};
   for(let j=0;j<GY-1;j++)for(let i=0;i<GX-1;i++){const a=j*GX+i,b=a+1,c=a+GX,d=c+1;if(A[a]|A[b]|A[c]|A[d])wi.push(vx(a),vx(c),vx(d),vx(a),vx(d),vx(b));}
   const wg=new THREE.BufferGeometry();wg.setAttribute('position',new THREE.Float32BufferAttribute(wp,3));wg.setAttribute('color',new THREE.Float32BufferAttribute(wc,4));wg.setIndex(wi);wg.computeVertexNormals();
   DN.wegMesh=new THREE.Mesh(wg,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-2}));DN.wegMesh.receiveShadow=true;}
@@ -261,21 +261,21 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
   // t67u O8: Rampen folgen der sichtbaren Oberflaeche (Strahl auf Grob+Feinnetz), 5 Querpunkte, Raender blenden aus, leicht geschwungen [A]
   const BM=(window.__bodenMeshes||[]);NEU.updateMatrixWorld(true);const rcR=new THREE.Raycaster(),vR=new THREE.Vector3(),dn=new THREE.Vector3(0,-1,0);
   const hS=window.__hSurf;
-  const p=[],ix=[],cR=[],QO=[-1.15,-0.7,0,0.7,1.15],QA=[0,1,1,1,0],QH=[0.02,0.06,0.07,0.06,0.02];let wi=0;
+  const p=[],ix=[],cR=[],QO=[-1.08,-0.88,0,0.88,1.08],QA=[0.3,1,1,1,0.3],QH=[0.10,0.12,0.13,0.12,0.10];let wi=0;
   const RW=DN.rampenwege||[],nah=(P,me)=>RW.some((R,r)=>r!==me&&R.some(Q=>Math.hypot(Q[0]-P[0],Q[1]-P[1])<2.5));   /* O6 G2: Abzweig erkennen -> dort kein Ausblenden (Riss rampe_13) [A] */
   for(const L0 of RW){wi++;const L=[];for(let m=0;m<L0.length;m++){L.push(L0[m]);if(m<L0.length-1){const sg=Math.max(3,Math.ceil(Math.hypot(L0[m+1][0]-L0[m][0],L0[m+1][1]-L0[m][1])/0.4));for(let f=1;f<sg;f++)L.push([L0[m][0]+(L0[m+1][0]-L0[m][0])*f/sg,L0[m][1]+(L0[m+1][1]-L0[m][1])*f/sg]);}}   // O6 G2: alle 0,4 m statt 3x -> kein gerades Brett ueber Mulden (rampe_4) [A]
    const fA=nah(L0[0],wi-1)?0:1,fE=nah(L0[L0.length-1],wi-1)?0:1;   // t67u O9 S4: Rampe 3x dichter -> folgt Feinrelief statt zu ueberbruecken [A]
    for(let n=0;n<L.length;n++){const[a0,b0]=L[Math.max(0,n-1)],[a1,b1]=L[Math.min(L.length-1,n+1)],dx=a1-a0,dz=b1-b0,l=Math.hypot(dx,dz)||1,nx=-dz/l,nz=dx/l,[x0,z0]=L[n];
     const n3=n/3,end=Math.min(fA?n3:99,fE?(L.length-1-n)/3:99),sw=(0.32*Math.sin(n3*0.21+wi*1.7)+0.15*Math.sin(n3*0.57+wi))*Math.min(1,end/4),x=x0+nx*sw,z=z0+nz*sw;const o=p.length/3;
     const hc=hS(x,z),[pa,pb]=L[Math.max(0,n-3)],[qa,qb]=L[Math.min(L.length-1,n+3)],kc=((x0-pa)*(qa-x0)+(z0-pb)*(qb-z0))/((Math.hypot(x0-pa,z0-pb)*Math.hypot(qa-x0,qb-z0))||1),wk=kc<0.3?1.7:1;   /* O6 G2b: Kehre (Richtungswechsel) breiter -> Riss rampe_13 zu [A] */
-    for(let q=0;q<5;q++){const px=x+nx*QO[q]*wk,pz=z+nz*QO[q]*wk,hq=hS(px,pz),dq=Math.abs(hq-hc);p.push(px,hq+QH[q]*0.5,pz);   /* O6 G2b: Rand nicht mehr geklemmt -> liegt auf dem Hang statt als Brett [A] */const v=0.94+0.06*Math.sin(n/3*1.3+q);cR.push(0.36*v,0.29*v,0.20*v,dq>0.8?0:QA[q]*Math.min(1,Math.min(fA?n:99,fE?L.length-1-n:99)/6));}   // t67u O9 S5: an Kanten kein senkrechtes Brett (Rand klemmen+ausblenden) [A]
+    for(let q=0;q<5;q++){const px=x+nx*QO[q]*wk,pz=z+nz*QO[q]*wk,hq=hS(px,pz),dq=Math.abs(hq-hc);p.push(px,(LS==2?Math.max(hq,hS(px+nx*0.3,pz+nz*0.3)-0.15,hS(px-nx*0.3,pz-nz*0.3)-0.15)+QH[q]*1.3:hq+QH[q]*0.5),pz);/* O15 W2: Rand klar, ueber Buckeln statt Loecher [A] */   /* O6 G2b: Rand nicht mehr geklemmt -> liegt auf dem Hang statt als Brett [A] */const v=0.94+0.06*Math.sin(n/3*1.3+q);cR.push(0.36*v,0.29*v,0.20*v,dq>1.4?0:QA[q]*Math.min(1,Math.min(fA?n:99,fE?L.length-1-n:99)/6));}   // t67u O9 S5: an Kanten kein senkrechtes Brett (Rand klemmen+ausblenden) [A]
     if(n)for(let q=0;q<4;q++){const A=o-5+q,B=o+q;ix.push(A,A+1,B,A+1,B+1,B);}}}
   if(p.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('color',new THREE.Float32BufferAttribute(cR,4));g.setIndex(ix);g.computeVertexNormals();
    const me=new THREE.Mesh(g,new THREE.MeshLambertMaterial({vertexColors:true,transparent:true,depthWrite:false,side:THREE.DoubleSide,forceSinglePass:true,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));me.receiveShadow=true;me.renderOrder=2;me.visible=!/[?&]noramp=1/.test(location.search);const gr=new THREE.Group();gr.userData.ebene='wege';gr.add(me);NEU.add(gr);window.__rampenwege=(DN.rampenwege||[]).length;}}
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
-const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t67u, Runde O14)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
+const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t67u, Runde O15)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
 if(/[?&]nowa=1/.test(location.search)){document.querySelectorAll('[data-l]').forEach(c=>{if(c.dataset.l=='wasser')c.checked=false;});ebSicht();setTimeout(ebSicht,3000);}   // O4: Schalter Wasser aus [A]
