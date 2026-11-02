@@ -66,3 +66,6 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 - rampe_4 (Kamera in relief3d/pruefung/nah_kameras_t65u.json): In der Textur läuft nahe der Kamera ein unscharfes Weg-Band quer durchs Bild, im Clay-Render nicht zu sehen → Weg-Overlay liegt über/über die Hangkante hinaus. Bild: /workspace/t65/n2 (rampe_4, c/t).
 - rampe_13: Der Weg endet abrupt an der Kante, mit einem dunklen Rechteck am Ende → Overlay-Ende bzw. Platzhalter prüfen. Bild: /workspace/t65/n2 (rampe_13).
 - Das Gelände ist an beiden Stellen im Clay unauffällig. Bitte im Weg-Overlay beheben, nicht im Relief.
+
+## O16 (F t77u) – für alle Bots
+- rampe_9 (Krater, (130,161)->(140,198)) samt Ruecken 133|173 entfernt, nur Anzeige. Jetzt 13 Rampen; alte rampe_10..13 = neue rampe_9..12. Zellwerte unveraendert (nur boden_anzeige_m). Korridor bleibt in der CSV begehbar – Wege-/Deko-Bot: dort keinen Rampenweg mehr erwarten. Details relief3d/pruefung/runde_o_status.md.

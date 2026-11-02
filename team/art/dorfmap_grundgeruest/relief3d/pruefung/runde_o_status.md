@@ -385,3 +385,15 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Durchgang: det gleich, Spalt 0, t42u 0, bergauf_pfad 0, Budget 1,127 M, Ladezeit 7,5 s. Raycast: 1 Baum (97.75,99.75) 0,36 m – auch mit O14-HTML reproduzierbar, also nicht durch O15 entstanden; offen.
 - Kritischer Blick: 16 Handy-Kameras (13 Rampen + 3 WEGA) vorher/nachher /workspace/t65/o15k, nur als verkleinerte Raster angesehen + r3 voll; WEGA-Kameras schlecht gewaehlt (Haeuser/leer).
 - Export /workspace/dorfmap_3d_runde_O15.html, Banner "Runde O15".
+
+## Runde O16 (F t77u: rampe_9 + Ruecken 133|173 entfernen)
+- Umsetzung nur Anzeige (runde_o16.py, spaet in gen_relief.py): G_ANZ/VC harmonisch gefuellt (Laplace) im Bereich um rampe_9 + Kasten x125,5–139,5 z153,5–195, weicher Uebergang 3 m; Feinband-Ecken dort auf Grobform; rampenwege[9] entfernt -> 13 Rampen. G, RAMPPROF, Zufallsfolgen unberuehrt.
+- CSV gegen O15 (fddcdfd): nur Spalte boden_anzeige_m, 806 Zeilen. begehbar/bebaubar/untergrund/hindernis usw.: 0 Aenderungen. t42u 0.
+- R1 Erreichbarkeit (CSV begehbar_3d, 4er-Nachbarn, |dh|<=0,6 und <=1,0 gleich): rampe_9 ist nicht der einzige Weg; Hauptkomponente 22669 -> 22595 Zellen ohne Rampenkorridor (151 Zellen). Ohne Rampe zusaetzlich 7 Flankenzellen abgeschnitten: (131,173-174) 7,3-7,5 m, (136,177) 5,9 m, (137-138,179-181) 4,7-5,3 m – liegen alle auf der abgetragenen Flanke; Kraterrand (132,162) bleibt erreichbar, keine Terrasse abgeschnitten. Achtung: CSV markiert den Korridor weiter als begehbar (Zellwerte bewusst nicht geaendert), Gelaende dort ist jetzt ein weicher Hang.
+- Objekte: 17 Baeume/4 Felsen/1 Findling/1 Stein/140 Geroell auf Feinband abgesenkt (nur absenken), 41 Geroell der Rueckenflanke entfernt; Baum (97.75,99.75) behoben. Raycast: 0 schwebend.
+- Durchgang: det gleich, Spalt 0, t42u 0, bergauf_pfad 0, stufe_bandrand 0, Objekte auf Wegen 0, lod1 Bild 1,125 M, Ladezeit Median 7,6 s.
+- Fehlerzaehler misst jetzt den Endstand des Feinbands (vorher Zwischenstand vor Nachlauf): spitzen 5, senken_0_8m 19, enge_grate 258. Senken alle ausserhalb des Bereichs (FW ausserhalb identisch zu O15) -> Messaenderung, nicht neu. Im Bereich: 1 Spitze am Westrand (124,75|155,5), Grate am westlichen Kraterrand x~124 (vorhanden).
+- Bilder /workspace/t65/o16: Stelle b2_schraeg/b2_oben vorher/nachher, Textur+Clay, Desktop 1400 + Handy lod=2 (16) + Umgebung u1-u3 (u4/u5 siehe unten), einzeln angesehen. Erster Stand hatte gerade Naht an der Kastenkante (Clay) -> O16b weicher Rand, neu gerendert.
+- Rest-Befund: oestlich bleibt die vorhandene Rinne als laengliche Kante sichtbar; westlicher Fels hat eine steilere Ostflanke.
+- Rampen-IDs: rampe_10..13 heissen jetzt rampe_9..12 (sicht_kameras zaehlt durch). Aeltere Eintraege oben nutzen die alten IDs.
+- Export /workspace/dorfmap_3d_runde_O16.html, Banner "Runde O16".

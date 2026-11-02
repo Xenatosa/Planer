@@ -43,3 +43,4 @@
 - Runde O11: /workspace/dorfmap_3d_runde_O11.html – relief3d/pruefung/runde_o_status.md
 
 - Runde O12: /workspace/dorfmap_3d_runde_O12.html, Status relief3d/pruefung/runde_o_status.md
+- Runde O16: rampe_9 + Ruecken entfernt (13 Rampen, IDs 10..13 -> 9..12), /workspace/dorfmap_3d_runde_O16.html, Status relief3d/pruefung/runde_o_status.md
