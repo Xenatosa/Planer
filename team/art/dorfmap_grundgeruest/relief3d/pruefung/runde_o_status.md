@@ -294,3 +294,8 @@ Ursache: relief_daten.json.gz trug den gzip-Zeitstempel (Inhalt war bei jedem La
 Bisect (Worktrees, gleicher Ablauf): 543a49e/6dbe706 stufe_bandrand 0, Raycast 0; 1ee1d59 (L2 messergrate_fein) stufe_bandrand 20; e6e4cd7 (L3 Uferprofil) zusaetzlich 1 Baum schwebend.
 Fix: messergrate_fein laesst 2 Ecken am Bandrand aus (6175 statt 6277 Ecken). Baum: Objekthoehen kommen aus dem Raycast-Cache pruefung/strahl_hoehe_t65u.json, der nach Gelaendeaenderungen veraltet. Neues Werkzeug pruefung/strahl_cache_auffrischen.py (Ablauf: gen, html, Raycast, auffrischen, gen, html, Raycast).
 Ergebnis: stufe_bandrand 0, Raycast 0/0/0/0/0, Spalt 0, t42u 0, bergauf_pfad 0. 3. Lauf identisch (Fixpunkt).
+
+## O11 M3 Wasserfarbe (nur Farbe/Alpha, Geometrie/Raycast unveraendert)
+Bilder /workspace/t65/m3 (vt/vc vorher, nt Versuch 1, n2/n2c Versuch 2), Uebersicht /workspace/t65/m3b.png.
+Versuch 1: Rampe smoothstep 0..1,2 m + Farbtiefe geglaettet + Rand-Alpha 0..0,35 m -> Ecken weicher, aber alle Gewaesser grau/blass (Endsee, fluss_3). Verworfen.
+Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u)^2 ueber 0..0,75 m, Rand-Alpha smoothstep 0..0,35 m. Farbe nahe vorher, etwas matter. fluss_7: Ecken weicher, als hellere Kante aber noch sichtbar -> TEILWEISE. Clay an allen 6 Stellen pixelgleich. ?wfarbe=alt zeigt vorher.
