@@ -1,3 +1,4 @@
+import os
 # Runde O18 [F t83u D1/G1, t85u H1, t86u A2, t87u C2] -- NUR Anzeige (G_ANZ, VC, WV, Feinband FW). G, CSV-Zellwerte (ausser Anzeige-Spalten), Zufallsfolgen unberuehrt.
 # 1) Wasser ohne Fluss (fluss_id WASSER_FARBE-Komponenten ohne benannten Fluss) raus, Bett harmonisch auf Umgebung gefuellt, Farbe aus Umgebung.
 # 2) Geschlossene Senken (Mulden nach innen) <= 3,5 m tief, <= 2500 Ecken gefuellt (Krater/Becken bleiben), weich eingeblendet.
@@ -136,7 +137,11 @@ def band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS,thr=2.0):
     cq=nd.maximum_filter(q,size=RS,origin=-(RS//2))[::RS,::RS][:NY,:NX]
     wet=nd.maximum_filter((WV>-900).astype(np.uint8),size=RS+1,origin=-(RS//2))[::RS,::RS][:NY,:NX]>0
     weg=nd.maximum_filter((WEGA.reshape(GY,GX)>40).astype(np.uint8),size=RS+1,origin=-(RS//2))[::RS,::RS][:NY,:NX]>0
-    S=(cq>thr)&~B;S=nd.binary_dilation(S,iterations=1)&~B&~weg&~belegt   # O18b: auch nasse Schluchtzellen (Bett unter Spiegel geklemmt)
+    S=(cq>thr)&~B;S=nd.binary_dilation(S,iterations=1)&~B&~weg&~belegt
+    # O18d [F C2 Zahnkante]: konvexe Grate/Kuppen direkt am Bandrand -> Naht (0,25/0,5-m-Stich) lag auf dem Grat = Zaehne. Kuppe ganz ins Band.
+    cv=(G-nd.gaussian_filter(G,3.0));cvc=nd.maximum_filter(cv,size=RS,origin=-(RS//2))[::RS,::RS][:NY,:NX]
+    S2=(cvc>0.35)&nd.binary_dilation(B|S,iterations=3)&~B;S2=nd.binary_dilation(S2,iterations=1)&~B&~weg;S=S|S2|((cq>thr)&belegt&~B&~weg)   # O18d: C2-Kegel ist belegt (Platz E40) -> blieb grob = Zahnkante; steile/konvexe belegte Zellen duerfen fein
+    if os.environ.get('BDBG'):print('BDBG',[(int(cq[y,x]*10),int(cvc[y,x]*100),int(weg[y,x]),int(belegt[y,x]),int(B[y,x])) for y,x in((46,108),(47,108),(48,108),(47,110))])   # O18b: auch nasse Schluchtzellen (Bett unter Spiegel geklemmt)
     if not S.any():return {'zellen':0}
     B2=B|S
     # Feinpunkte aller Bandzellen
@@ -217,7 +222,7 @@ def kaskade_glatt(G_ANZ,WV,RS,sig=1.0):
     V2=np.where(m,Vs,WV);G2=np.where(m,np.minimum(Gs,V2-0.1),G)
     return G2.astype(G_ANZ.dtype),V2.astype(WV.dtype),{'ecken':int(m.sum()),'max_m':round(float(np.abs(G2-G).max()),2)}
 
-def gipfel_rund(G_ANZ,WV,WEGA,belegt,RS,sig=1.6,thr=0.25,it=4):
+def gipfel_rund(G_ANZ,WV,WEGA,belegt,RS,sig=2.5,thr=0.12,it=10,cap=3.0):   # O18d: staerker (G1-Pyramide blieb)
     """O18c [F G1-Block, C2-Kegel, Gipfelrundung]: konvexe Spitzen/Grate (Gauss-Mittel liegt >thr m unter dem Punkt)
     weich absenken (nur absenken, nie anheben). Wasser, Wege, belegte Zellen ausgenommen. Deterministisch."""
     G=G_ANZ.astype(float);fest=(WV>-900)|(WEGA>0)
@@ -227,23 +232,23 @@ def gipfel_rund(G_ANZ,WV,WEGA,belegt,RS,sig=1.6,thr=0.25,it=4):
             b=np.kron(b,np.ones((RS,RS),bool))[:G.shape[0],:G.shape[1]]
             if b.shape!=G.shape:b=np.pad(b,((0,G.shape[0]-b.shape[0]),(0,G.shape[1]-b.shape[1])))
         fest=fest|b
-    fest=nd.binary_dilation(fest,iterations=2);n=0;G0=G.copy()
+    fest=nd.binary_dilation(fest,iterations=1);tap=np.clip((nd.distance_transform_edt(~fest)-1)/5.0,0,1);n=0;G0=G.copy()   # O18d: weich auslaufen statt harter Kante
     for _ in range(it):
         Gs=nd.gaussian_filter(G,sig);k=G-Gs
-        w=np.clip((k-thr)/thr,0,1)*(~fest)
-        w=nd.gaussian_filter(w,1.0)*(~fest)
-        n=max(n,int((w>0.05).sum()));G=np.maximum(np.minimum(G,G*(1-w)+Gs*w),G0-2.0)   # max 2 m absenken
+        w=np.clip((k-thr)/thr,0,1)*tap
+        w=nd.gaussian_filter(w,1.0)*tap
+        n=max(n,int((w>0.05).sum()));G=np.maximum(np.minimum(G,G*(1-w)+Gs*w),G0-cap)
     return G.astype(G_ANZ.dtype),{'ecken':n,'max_m':round(float((G0-G).max()),2)}
 
-def fein_gipfel(FW,BAND,NX,NY,sig=2.0,thr=0.15,it=4):
+def fein_gipfel(FW,BAND,NX,NY,sig=4.0,thr=0.08,it=10,cap=3.0):   # O18d: staerker
     """O18c [F Gipfelrundung im Feinband]: wie gipfel_rund, im Feinraster; Bandrand (2 Punkte) fest."""
     FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
-    F=np.full((FY,FX),np.nan);F.ravel()[vid]=h;ok=~np.isnan(F);inn=nd.binary_erosion(ok,iterations=3)
+    F=np.full((FY,FX),np.nan);F.ravel()[vid]=h;ok=~np.isnan(F);inn=nd.binary_erosion(ok,iterations=2);tap=np.clip((nd.distance_transform_edt(ok)-2)/10.0,0,1)   # O18d: Rand weich, sonst Stufe am Bandrand
     Fz=np.where(ok,F,0.0);Wk=None;n=0
     for _ in range(it):
         Wk=nd.gaussian_filter(ok.astype(float),sig);Gs=nd.gaussian_filter(Fz,sig)/np.maximum(Wk,1e-6)
-        w=np.clip((Fz-Gs-thr)/thr,0,1)*inn;w=nd.gaussian_filter(w,1.0)*inn
-        n=max(n,int((w>0.05).sum()));Fz=np.where(inn,np.maximum(np.minimum(Fz,Fz*(1-w)+Gs*w),np.where(ok,F,0.0)-1.5),Fz)   # max 1,5 m
+        w=np.clip((Fz-Gs-thr)/thr,0,1)*tap;w=nd.gaussian_filter(w,1.0)*tap
+        n=max(n,int((w>0.05).sum()));Fz=np.where(inn,np.maximum(np.minimum(Fz,Fz*(1-w)+Gs*w),np.where(ok,F,0.0)-cap),Fz)
     h2=Fz.ravel()[vid];FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return {'punkte':n,'max_m':round(float((h-h2).max()),2)}
