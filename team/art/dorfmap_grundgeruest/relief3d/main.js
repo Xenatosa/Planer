@@ -137,11 +137,13 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
  const gb=new THREE.BufferGeometry();gb.setAttribute('position',new THREE.BufferAttribute(pS,3));gb.setAttribute('color',new THREE.BufferAttribute(clS,3));gb.setIndex(bi);gb.computeVertexNormals();{const NA=gb.attributes.normal.array,used=new Uint8Array(GX*GY);for(const v of bi)if(v<GX*GY)used[v]=1;let nb=0;for(const k of MXZ){const g=gN9(pS[k*3],pS[k*3+2]);NA[k*3]=g[0];NA[k*3+1]=g[1];NA[k*3+2]=g[2];}for(let k=0;k<GX*GY;k++){if(!VB[k]||!used[k])continue;const g=gN9((k%GX)/RS,((k/GX)|0)/RS);NA[k*3]=g[0];NA[k*3+1]=g[1];NA[k*3+2]=g[2];nb++;}gb.attributes.normal.needsUpdate=true;window.__grobrand=nb;}   // t67u O9 S3: Grob-Randnormalen gleich Fein [A]
  const wt=ladeTex(window.WANDTEX),dt=ladeTex(window.RTEX);for(const t of[wt,dt]){t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.NoColorSpace;}
  const mat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide}),matF=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.DoubleSide});matF.customProgramCacheKey=()=>'fw54';matF.polygonOffset=true;matF.polygonOffsetFactor=1;matF.polygonOffsetUnits=2;   /* O10 L2: Feinband gewinnt an der Naht gegen Grobnetz */
- const VCT=(()=>{const d=new Uint8Array(GX*GY*4);for(let k=0;k<GX*GY;k++){d[k*4]=VC[k*3];d[k*4+1]=VC[k*3+1];d[k*4+2]=VC[k*3+2];d[k*4+3]=255;}const t=new THREE.DataTexture(d,GX,GY,THREE.RGBAFormat);t.magFilter=t.minFilter=THREE.LinearFilter;t.colorSpace=THREE.NoColorSpace;t.needsUpdate=true;return t;})(),VCON=/[?&]vc=1/.test(location.search);   /* O6 G4: Bodenfarbe aus 0,5-m-Textur statt Grobnetz-Vertexfarbe -> keine Dreieckszaehne an Schnee/Sand-Grenze [A] */
+ const SBALT_JS=/[?&]steinband=alt/.test(location.search),VCT=(()=>{const d=new Uint8Array(GX*GY*4);for(let k=0;k<GX*GY;k++){d[k*4]=VC[k*3];d[k*4+1]=VC[k*3+1];d[k*4+2]=VC[k*3+2];d[k*4+3]=255;}if(!SBALT_JS){/* O17: geglaettete Hangneigung (Box 2x r=3 Ecken = 1,5 m) als Alpha -> Steinband als zusammenhaengende Flaeche statt Normalen-Fetzen [A] */let S=new Float32Array(GX*GY);for(let y=0;y<GY;y++)for(let x=0;x<GX;x++){const k=y*GX+x,xa=Math.max(0,x-1),xb=Math.min(GX-1,x+1),ya=Math.max(0,y-1),yb=Math.min(GY-1,y+1);const gx=(G[y*GX+xb]-G[y*GX+xa])/((xb-xa)/RS),gy=(G[yb*GX+x]-G[ya*GX+x])/((yb-ya)/RS);S[k]=Math.min(3,Math.hypot(gx,gy));}const bl=(A,R,dx)=>{const O=new Float32Array(A.length),L=dx?GX:GY,M=dx?GY:GX;for(let m=0;m<M;m++){let acc=0,n=0;const idx=i=>dx?m*GX+i:i*GX+m;for(let i=-R;i<L+R;i++){if(i+R<L){acc+=A[idx(i+R)];n++;}if(i-R-1>=0){acc-=A[idx(i-R-1)];n--;}if(i>=0&&i<L)O[idx(i)]=acc/n;}}return O;};for(let p=0;p<2;p++)S=bl(bl(S,3,1),3,0);for(let k=0;k<GX*GY;k++)d[k*4+3]=Math.round(Math.min(1,S[k]/2)*255);}const t=new THREE.DataTexture(d,GX,GY,THREE.RGBAFormat);t.magFilter=t.minFilter=THREE.LinearFilter;t.colorSpace=THREE.NoColorSpace;t.needsUpdate=true;return t;})(),VCON=/[?&]vc=1/.test(location.search);   /* O6 G4: Bodenfarbe aus 0,5-m-Textur statt Grobnetz-Vertexfarbe -> keine Dreieckszaehne an Schnee/Sand-Grenze [A] */
  const _pat=FWM=>sh=>{sh.uniforms.tW={value:wt};sh.uniforms.tD={value:dt};sh.uniforms.tVC={value:VCT};
   sh.vertexShader='varying vec3 vWP;varying vec3 vWN;varying vec3 vLP;'+(FWM?'attribute vec3 ftint;attribute float fsnow;varying vec3 vFT;varying float vFS;':'')+'\n'+sh.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\n'+(FWM?'vFT=ftint;vFS=fsnow;':'')+'vLP=transformed;vWP=(modelMatrix*vec4(transformed,1.)).xyz;vWN=normalize(mat3(modelMatrix)*objectNormal);');
   sh.fragmentShader='uniform sampler2D tW;uniform sampler2D tD;uniform sampler2D tVC;varying vec3 vWP;varying vec3 vWN;varying vec3 vLP;'+(FWM?'\n#define FWM 1\nvarying vec3 vFT;varying float vFS;':'')+'\n'+sh.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
    ${(!FWM&&VCON)?'diffuseColor.rgb=pow(texture2D(tVC,(vLP.xz*'+RS+'.+.5)/vec2('+GX+'.,'+GY+'.)).rgb,vec3(2.2));':''}
+   
+   #define SBALT ${/[?&]steinband=alt/.test(location.search)?'true':'false'}
    vec3 N=normalize(vWN);vec3 w=pow(abs(N),vec3(4.));w/=w.x+w.y+w.z;
    mat2 RT1=mat2(.96,-.28,.28,.96);vec3 tr=texture2D(tW,RT1*vWP.zy/9.).rgb*w.x+texture2D(tW,RT1*vWP.xy/9.).rgb*w.z+texture2D(tW,vWP.xz/9.).rgb*w.y;   // t66u N2: um -16 Grad gedreht, Schichtlinien nicht mehr waagrecht gestapelt [A]
    mat2 RT=mat2(.8,.6,-.6,.8);vec3 tr2=texture2D(tW,RT*vWP.zy/23.+.37).rgb*w.x+texture2D(tW,RT*vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;   // t65u M4: zweite Wandprobe um 37 Grad gedreht -> waagrechte Schichtstreifen gebrochen, Form unveraendert [A]
@@ -150,15 +152,17 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    diffuseColor.rgb*=(0.72+0.33*d)*(0.90+0.2*gD);
    {float f=TD3(1.4,.37),L=dot(diffuseColor.rgb,vec3(.33));float sw=smoothstep(.55,.75,L);diffuseColor.rgb*=1.+sw*(f-.5)*.12;diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.90,.95,1.05),sw*(1.-d)*.6);}
    float nzS=TD3(3.3,.53)*.6+TD3(11.,.29)*.4;   // O9: Rauschen gegen Dreieckszaehne an Schnee-/Felsgrenze, nur Farbe [A]
-   float st=1.-smoothstep(0.32,0.80,abs(N.y)+0.10*(d-0.8)+0.30*(nzS-0.5));
+   float st=SBALT?1.-smoothstep(0.32,0.80,abs(N.y)+0.10*(d-0.8)+0.30*(nzS-0.5)):1.-smoothstep(0.26,0.86,abs(N.y)+0.03*(d-0.8)+0.08*(nzS-0.5));   // O17: Steinband - Rauschen 0,30->0,08, breiterer Uebergang -> zusammenhaengendes Band statt Fetzen (?steinband=alt = O16) [A]
+   float slS=0.,kS=0.;if(!SBALT){slS=texture2D(tVC,(vLP.xz*${RS}.+.5)/vec2(${GX}.,${GY}.)).a*2.;kS=0.8*(1.-smoothstep(1.3,1.9,slS));st=mix(st,smoothstep(0.50,0.95,slS),kS);}   // O17: Steinband (Wandfuss/Schutt, geglaettete Neigung < ~55 Grad) aus geglaetteter Neigung statt Pixel-Normale; echte Waende (kS=0) unveraendert [A]
    vec3 tx=mix(tr,tr2,0.5);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.0,1.0,1.0)*mix(0.80,1.25,gD)*1.15;
-   float sn=smoothstep(0.44,0.66,abs(N.y)+0.18*(r-0.5)+0.20*(nzS-0.5));   // Schnee auf Simsen/Kanten [A]
+   float sn=SBALT?smoothstep(0.44,0.66,abs(N.y)+0.18*(r-0.5)+0.20*(nzS-0.5)):smoothstep(0.42,0.72,abs(N.y)+0.06*(r-0.5)+0.06*(nzS-0.5));   // Schnee auf Simsen/Kanten [A]
+   if(!SBALT)sn=mix(sn,1.-smoothstep(0.60,1.10,slS),kS);   // O17: Schnee im Steinband ebenfalls aus geglaetteter Neigung -> keine Schneefetzen im Band [A]
    {float g2=TD3(97.,.1);fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
     float ms=smoothstep(.30,.48,abs(N.y)+0.15*(r-0.5))*(1.-sn)*smoothstep(.45,.6,gD);fels=mix(fels,vec3(.16,.20,.11),ms*.55);}   // Moos auf Absaetzen [A]
    #ifdef FWM
    fels*=vFT*2.;fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // Runde D: grauer [A]
-   sn=max(sn,smoothstep(0.1,0.9,vFS+0.55*(nzS-0.5)));st=max(st,smoothstep(.05,.3,vFS)*0.0+st);
+   sn=max(sn,smoothstep(0.1,0.9,vFS+0.55*(1.-kS)*(nzS-0.5))*(1.-0.6*kS));   /* O17: Feinband-Schneeflecken im Steinband gedaempft */st=max(st,smoothstep(.05,.3,vFS)*0.0+st);
    #endif
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
    diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',/[?&]nobump=1/.test(location.search)?'#include <normal_fragment_maps>':`#include <normal_fragment_maps>
@@ -275,7 +279,7 @@ return map[k];};   // t54u: flach transparent (Kies sichtbar), Eis-/Uferlinie am
  objekte(DN,HN,NEU,menschPos);}
 // ---------- Umschalter, Ebenen, Licht ----------
 let modus='neu';const SP={alt:spaltenLesen(DA),neu:spaltenLesen(DN)};const Hf=()=>modus=='neu'?HN:HA;
-const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t67u, Runde O16)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
+const setModus=m=>{modus=m;ALT.visible=m=='alt';NEU.visible=m=='neu';$('modus').textContent=m=='neu'?'Ansicht: NEU (Relief t67u, Runde O17)':'Ansicht: ALT (t39u)';if(geh)cam.position.y=Hf()(cam.position.x,cam.position.z)+1.7;};
 $('balt').onclick=()=>setModus('alt');$('bneu').onclick=()=>setModus('neu');
 const ebSicht=()=>document.querySelectorAll('[data-l]').forEach(c=>[ALT,NEU].forEach(R=>R.children.forEach(g=>{if(g.userData.ebene==c.dataset.l)g.visible=c.checked;})));
 if(/[?&]nowa=1/.test(location.search)){document.querySelectorAll('[data-l]').forEach(c=>{if(c.dataset.l=='wasser')c.checked=false;});ebSicht();setTimeout(ebSicht,3000);}   // O4: Schalter Wasser aus [A]
