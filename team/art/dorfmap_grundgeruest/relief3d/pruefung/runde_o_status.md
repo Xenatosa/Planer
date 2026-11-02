@@ -462,3 +462,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - pruefung/loch_o18g.js (offene Innenkanten, 2-cm-verschweisst): index.html 1500 -> 0; alle 56 Felder: 0 innen (Rest = Feldschnittkanten/Sockel-Unterkante).
 - Magenta-Klickmarker nur noch mit ?dbg=1; Kamera nicht mehr unter Gelaende/von unten.
 - Regression: t42u 0, Zacken fein 45/16 grob 5/0, Budget lod1 1,187 M.
+
+## O18h – Wegbereich zurückgesetzt (598c197, 6e515db)
+- Weg ±3 m (+2 m Auslauf, ≥2 m zum Wasser) auf Stand vor O18 zurück, danach fein_entzacken; Raycast-Cache aufgefrischt (6e515db).
+- t42u 0 (CSV: nur boden_anzeige_m, 687 Werte); stufe_bandrand 0; Spalt 0/4 Ränder; bergauf 0 (max 0,011 m); lod1 1 186 669 Dreiecke; Lochscan index 0, 56 Felder 0 echte Innenlöcher (nur Schnittkante/Sockel).
+- Zähne fein 28/17, grob 5/0.
+- Offen: Raycast 2 Bäume versunken + 3 im Wasser, 3 Steine im Wasser, 8 Geröll versunken (vorher 0).
+- Ansicht G1-Weg O17 vs. jetzt (w1): Weg-Band wieder durchgehend, aber Terrassenkante weich, Felswand gerundet, heller Wulst an der Unterkante – O17-Optik NICHT erreicht.
+- H1/A1/C2 Ton+Textur angesehen: keine Durchsichten; Hänge weich/verwaschen, Textur in A1 streifig.
+- Export O18, 56 Felder, reihe_1..7.zip, O18_felder_1/2.zip mit Banner 6e515db neu gebaut.
