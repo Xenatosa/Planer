@@ -393,7 +393,7 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Objekte: 17 Baeume/4 Felsen/1 Findling/1 Stein/140 Geroell auf Feinband abgesenkt (nur absenken), 41 Geroell der Rueckenflanke entfernt; Baum (97.75,99.75) behoben. Raycast: 0 schwebend.
 - Durchgang: det gleich, Spalt 0, t42u 0, bergauf_pfad 0, stufe_bandrand 0, Objekte auf Wegen 0, lod1 Bild 1,125 M, Ladezeit Median 7,6 s.
 - Fehlerzaehler misst jetzt den Endstand des Feinbands (vorher Zwischenstand vor Nachlauf): spitzen 5, senken_0_8m 19, enge_grate 258. Senken alle ausserhalb des Bereichs (FW ausserhalb identisch zu O15) -> Messaenderung, nicht neu. Im Bereich: 1 Spitze am Westrand (124,75|155,5), Grate am westlichen Kraterrand x~124 (vorhanden).
-- Bilder /workspace/t65/o16: Stelle b2_schraeg/b2_oben vorher/nachher, Textur+Clay, Desktop 1400 + Handy lod=2 (16) + Umgebung u1-u3 (u4/u5 siehe unten), einzeln angesehen. Erster Stand hatte gerade Naht an der Kastenkante (Clay) -> O16b weicher Rand, neu gerendert.
+- Bilder /workspace/t65/o16: Stelle b2_schraeg/b2_oben vorher/nachher, Textur+Clay, Desktop 1400 + Handy lod=2 (16) + 5 Umgebung u1-u5 (Textur Desktop) = 21 Bilder, alle einzeln in voller Groesse angesehen. Nicht angesehen: Umgebung in Clay/Handy. Erster Stand hatte gerade Naht an der Kastenkante (Clay) -> O16b weicher Rand, neu gerendert.
 - Rest-Befund: oestlich bleibt die vorhandene Rinne als laengliche Kante sichtbar; westlicher Fels hat eine steilere Ostflanke.
 - Rampen-IDs: rampe_10..13 heissen jetzt rampe_9..12 (sicht_kameras zaehlt durch). Aeltere Eintraege oben nutzen die alten IDs.
 - Export /workspace/dorfmap_3d_runde_O16.html, Banner "Runde O16".
