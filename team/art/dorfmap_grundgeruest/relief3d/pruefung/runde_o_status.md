@@ -449,3 +449,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Rest: B2/C2 weiche Huegel mit facettierten Flaechen um Haeuser (Sockel-Hebung bis 3,1 m wirkt als Beule); Perlen-/Treppenlinien an Klippenoberkanten (E1, F1, G1, H1, D1); leichte Streifen (Moire) an Haengen D1/C1; A1 Textur harte Braun/Schnee-Kante oben links.
 - Bach-Kameras Y_* zu nah/flach, nicht aussagekraeftig.
 - Noch keine Verbesserungsschleife durchgefuehrt.
+
+## O18f (letzte Schleife, Daten-Commit 5ab2c63)
+- Sockel-Hebung gedeckelt 1,2 m, Auslauf 8 m (gen: max 1,2). Neu kante_bilateral (Feinband, Punkte mit 3x3-Spanne >1 m, bilateral sr 0,3 m, 2 It.) vor fein_entzacken. farbe_weich A1: Box 30x60, sigma 9.
+- Regression: t42u 0; Zacken fein 60/9, grob 5/0; lod1 1,187 M; Raycast: Baeume 2 versunken/3 im Wasser (1439), sonst 0, Cache unveraendert.
+- Export /workspace/dorfmap_3d_runde_O18.html, 56 Feld-HTML + reihe_1..7.zip (je 8), Banner 5ab2c63.
+- Bilder /tmp/o18/H (Ton 11 schraeg + 3 nah; Textur A1,B1,C1,D1). Pixel-Diff zu O18e klein (mittl. <0,2/255): Wirkung kaum sichtbar.
+- Rest (nur dokumentiert, kein Umbau mehr): B2/C2 weiche Kuppen um Haeuser mit Knicklinien dazwischen (C2_nah); Perlenlinien an Klippenoberkanten E1/F1/G1/H1/D1 bleiben -> Ursache vermutlich nicht Hoehe (Bilateral wirkte nicht), eher Wand-/Band-Naht-Geometrie; Moire D1/C1 Ursache nicht geprueft; A1 Braun-Schnee-Uebergang weicher, Braunflaeche bleibt.
