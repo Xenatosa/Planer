@@ -358,3 +358,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Export neu: /workspace/dorfmap_3d_runde_O12.html (04:38).
 - O12 insgesamt einzeln in voller Größe angesehen: ca. 40 Bilder.
 - Offen: fluss_7 Ecke (Ursache nicht Wasserrand, s. N3b), wand_288_144, Tümpel-West-Schattenlücken, rampe_4/13 (Wege-Bot).
+
+## O13 P1 – Hypothese „Schatten auf der Wasserfläche“ (Bilder /workspace/t65/p1)
+- fluss_7: Mit ?nosh=1 (alle Schatten aus) und mit „Wasser empfängt keine Schatten“ ist die helle eckige Kante unverändert da → **widerlegt**. Die Ursache ist kein Schatten (und laut N3b auch nicht der Mesh-Rand).
+- Tümpel West: Mit ?nosh=1 sind die hellen Flecken weg; mit „Wasser ohne Schatten“ sind sie noch da → sie sind besonnter **Boden unter dem Wasser** in Lücken des Felsschattens (wie in N1), nicht Schatten auf dem Wasser.
+- V1: normalBias 0,12→0,03 → Flecken unverändert, und das Wasser wird insgesamt dunkler. Zurückgenommen.
+- V2: shadow.radius 1,6→4 → die Kanten der Flecken nur minimal weicher, Flecken und Treppenrand bleiben. Zurückgenommen.
+- V3 nicht gemacht: Die Lücken sehen nach einem echten Schattenloch aus (vermutlich Werfer-Geometrie mit treppigem Umriss). Das lässt sich nicht mit Bias/Weichheit lösen. Nächster Schritt wäre: herausfinden, welches Mesh dort den Schatten wirft (Ebenen einzeln castShadow aus) [nicht geprüft].
+- Nicht gelöst → kein Export O13. main.js = 0b843be.
+- Angesehen voll: fluss_7 nosh/wnosh, tuempel_west nosh/wnosh/v1/v2 = 6.
