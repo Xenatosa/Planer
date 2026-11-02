@@ -442,3 +442,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Regression: t42u 0; lod1 Budget 1,188 M Dreiecke; Raycast nach Cache-Auffrischung: Baeume 2 versunken / 3 im Wasser (von 1438), sonst 0 schwebend.
 - Nicht gemacht: Ufer-Fallback "nur Sockelrandzone des Hauses heben" braucht Hausgeometrie-Aenderung (nicht erlaubt, nur Anzeige-Terrain). Treppenmuster am Feinbandrand (X_H2, X_E1) aus O18d nicht behoben.
 - Exporte: /workspace/dorfmap_3d_runde_O18.html, 56 Feld-HTML + reihe_1..7.zip (je 8, zipfile), Banner 397bdde.
+
+### O18e Bildpruefung Teil 1 (Export 397bdde, Renders /tmp/o18/G)
+- Ton schraeg angesehen: B2, A1, C2, G1, E1, F1, D1, H1, A2, B1, C1. Textur schraeg: A1, D1, E1, H1 (B2/C2/A2 Textur-Render lief noch).
+- Kein Kastenplateau, keine Dreiecks-Spitzen in den Boden, kein Fels-Sockel an Haeusern gesehen.
+- Rest: B2/C2 weiche Huegel mit facettierten Flaechen um Haeuser (Sockel-Hebung bis 3,1 m wirkt als Beule); Perlen-/Treppenlinien an Klippenoberkanten (E1, F1, G1, H1, D1); leichte Streifen (Moire) an Haengen D1/C1; A1 Textur harte Braun/Schnee-Kante oben links.
+- Bach-Kameras Y_* zu nah/flach, nicht aussagekraeftig.
+- Noch keine Verbesserungsschleife durchgefuehrt.
