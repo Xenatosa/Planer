@@ -2,12 +2,13 @@
 # Laeuft spaet (nach CSV, nach Feinband-Bau, vor Objekt-Nachlauf): G (Zellbasis) und alle Zufallsfolgen bleiben unberuehrt,
 # nur G_ANZ/VC/Feinband-Ecken im Ruecken-Bereich werden ersetzt. zellen_relief.csv: nur boden_anzeige_m (Anzeige) folgt. Deterministisch.
 import numpy as np,scipy.ndimage as nd,base64
-BOX=(125.5,139.5,153.5,195.0);R=6.5;RB=2.0
+BOX=(125.5,139.5,153.5,195.0);R=6.5;RB=3.0
 def _maske(P,GY,GX,RS):
     vj,vi=np.mgrid[0:GY,0:GX]/RS
     Pd=np.concatenate([np.linspace(P[i],P[i+1],12) for i in range(len(P)-1)]);d=np.full((GY,GX),99.)
     for px,py in Pd:d=np.minimum(d,np.hypot(vi-px,vj-py))
-    x0,x1,y0,y1=BOX;return np.where((vi>=x0)&(vi<=x1)&(vj>=y0)&(vj<=y1),0.0,d)
+    x0,x1,y0,y1=BOX;db=np.hypot(np.maximum(0,np.maximum(x0-vi,vi-x1)),np.maximum(0,np.maximum(y0-vj,vj-y1)))
+    return np.minimum(d,R+db)   # O16b: Kasten mit echtem Abstand -> weicher Uebergang statt Naht an der Kastenkante [A]
 def _fuell(a,M):
     ys,xs=np.nonzero(M);y0,y1,x0,x1=max(0,ys.min()-2),ys.max()+3,max(0,xs.min()-2),xs.max()+3
     s=a[y0:y1,x0:x1];m=M[y0:y1,x0:x1];s[m]=np.mean(s[~m])
