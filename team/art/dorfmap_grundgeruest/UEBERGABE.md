@@ -61,3 +61,8 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 - Vorher/Nachher: `pruefung/t34u_vorher_fehler.png`, `pruefung/t34u_nachher_ebenen.png`.
 - Regelpruefung aller Zellen: `pruef_konsistenz_t34u.py` (0 Verstoesse z25/z50).
 - 3D-Modell: `modell3d/` (t36u, GLB+OBJ, Sidecar, Abweichungen [F], BRAUCHE.md).
+
+## Für den Wege/Deko-Bot (O12, Relief-Bot, Gelände NICHT geändert)
+- rampe_4 (Kamera in relief3d/pruefung/nah_kameras_t65u.json): In der Textur läuft nahe der Kamera ein unscharfes Weg-Band quer durchs Bild, im Clay-Render nicht zu sehen → Weg-Overlay liegt über/über die Hangkante hinaus. Bild: /workspace/t65/n2 (rampe_4, c/t).
+- rampe_13: Der Weg endet abrupt an der Kante, mit einem dunklen Rechteck am Ende → Overlay-Ende bzw. Platzhalter prüfen. Bild: /workspace/t65/n2 (rampe_13).
+- Das Gelände ist an beiden Stellen im Clay unauffällig. Bitte im Weg-Overlay beheben, nicht im Relief.

@@ -339,3 +339,15 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Versuch 2: Vertex-Rand-Alpha über 0..0,75 m statt 0..0,35 m. fluss_7-Ecke etwas weicher, aber noch sichtbar; fluss_3 klar schlechter (flaches Wasser wird durchsichtig/bräunlich) → zurückgenommen.
 - Offen: echte Abhilfe wären geglättete Randvertices bzw. ein feinerer Wasserrand (Mesh-Arbeit) oder der Szenentiefen-Pfad an; beides nicht klein.
 - Angesehen voll: fluss_7 a/b/nowa, fluss_3/9/4, Endsee, Tümpel West (b).
+
+## O12 N3b – fluss_7 Wasserrand geglättet (3 Versuche, alle zurückgenommen)
+- V1 (af1f86e, Revert db051ac): Kontur und Rand-Alpha aus geglättetem Nassfeld (gewichtetes 3×3 im 0,5-m-Abstand, höchstens 15 cm über Rohtiefe). Das Mesh nutzt bereits Marching Triangles auf 0,25-m-Subzellen. fluss_7 und fluss_3 sehen fast gleich aus wie vorher → keine Wirkung.
+- V2 (Radius 1,5 m, +30 cm): fluss_7-Ecke bleibt; rechts erscheinen braune Flecken/Löcher im Wasser → schlechter, verworfen.
+- Diagnose ?wwire=1 (n3b/fluss_7_wire.png): Das Wassermesh deckt die ganze eckige Zone ab. Die helle Ecke ist **nicht** der Mesh-Rand, sondern liegt mitten im Wasser (gerade Kante bei ca. Bild-y 330, flache, durchsichtige Zone). Damit war die Annahme „Randvertices glätten“ falsch.
+- V3: Rand-Alpha aus geglätteter Tiefe dc über 0..0,4 m → Bild unverändert, zurückgenommen.
+- Ladezeit lag in allen Versuchen bei 7,5–7,9 s. main.js entspricht wieder b3eedd0.
+- Offen / Vermutung [nicht geprüft]: Die Ecke stammt aus der Wasserhöhe WE (grobe Zellen, bilinear) bzw. einer Schatten-/Licht-Kante auf der Wasserfläche, nicht aus Kontur oder Alpha. Nächster sinnvoller Test: ?wfarbe=alt und Schatten aus nur auf dem Wasser.
+- Angesehen voll: fluss_7 v1/v2/v3/wire, m5 fluss_7, n3 nowa, fluss_3 v1 + m5 fluss_3 = 8.
+
+## O12 N4 – wand_288_144 Wandfuß: nur dokumentiert
+- Stand unverändert seit O10 L4/O11: echte, ca. 1 m breite Rinne plus scharfe Schattenkante am Feinbandrand (das Band endet bei x≈301 auf 12,0 m). Wandfuß leicht weicher als in O9, die Wand bleibt steil. Kein Eingriff in O12.
