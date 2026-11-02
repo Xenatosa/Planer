@@ -317,3 +317,9 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
   Sonst ok: gipfel_0, klippe_a, rampe_3, rand_2, waldrand_a, see_fluss_naht, fluss_8_neu.
   Kamera-Probleme (keine Geländefehler): aus_ost_oben, baum_80_175, platz_Q1 Kamera steckt im Baum; krater_rand Kamera in/unter Gelände (Bild leer).
 - Export /workspace/dorfmap_3d_runde_O11.html (=index.html, 15.5 MB), headless geladen bis bereit (Ladezeittest).
+
+## O12 N1 – Tümpel West helle Flecken
+- Ursache NICHT M3: Flecken schon im Vorher-Bild (m3/tuempel_west_vt.png, ?wfarbe=alt-Stand) und auch mit ?nowa=1 (ohne Wasser, n1d/tuempel_west_nowa.png) identisch da.
+- Es sind sonnenbeschienene Stellen des Gelände-/Schneebodens in der Lücke des Klippen-Schattens; die blockigen Ränder kommen von der Schattenkarten-Auflösung. Das Wasser ist dort flach und fast durchsichtig.
+- Versuch 1: Alpha-Boden aus geglätteter Tiefe (≥0,35 m), keine sichtbare Änderung → zurückgenommen. Kein Code geändert.
+- Offen: höhere Schattenkarten-Auflösung oder Wasser-Mindestdeckung bei flachem Wasser; beides ist ein größerer Eingriff mit Risiko für fluss_3/4/9 → nicht gemacht.
