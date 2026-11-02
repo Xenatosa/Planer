@@ -507,11 +507,12 @@ def keile_fein(FH,vin,T=0.6,K=0.4):   # O9 K3 [F]: 1-Ecken-breite Kerben/Grate (
             F=np.where(k,m+K*(F-m),F);n+=int(k.sum())
     return F,n
 def messergrate_fein(FH,vin,T=0.3,K=0.5):   # O10 L2 [F]: 1-Ecken-Messergrate/-kerben (beidseitig >0,3 m auf 0,25 m, auch diagonal) erzeugen Faltdreiecke (Nachbarnormalen gegenlaeufig) = dunkle Haarlinien -> Hoehe zur Haelfte Richtung Nachbarmittel [A]
-    n=0;F=FH.copy()
+    n=0;F=FH.copy();vin2=nd.binary_erosion(vin,iterations=2)   # O11 M1: Bandrand (2 Ecken) nicht anfassen, sonst Stufe zum Grobnetz [A]
+   
     for it in range(3):
         for sh in ((1,0),(0,1),(1,1),(1,-1)):
             a=np.roll(F,sh,(0,1));b=np.roll(F,(-sh[0],-sh[1]),(0,1));m=(a+b)/2;lo=np.minimum(a,b);hi=np.maximum(a,b)
-            k=vin&((F<lo-T)|(F>hi+T));k[0]=k[-1]=k[:,0]=k[:,-1]=False
+            k=vin2&((F<lo-T)|(F>hi+T));k[0]=k[-1]=k[:,0]=k[:,-1]=False
             F=np.where(k,m+K*(F-m),F);n+=int(k.sum())
     return F,n
 FH,KF_O9=keile_fein(FH,_vin);FH,KF_O10=messergrate_fein(FH,_vin);print('messergrate_o10',KF_O10);FH=np.where(_vin,FH,FB);print('keile_o9',KF_O9)

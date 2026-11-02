@@ -289,3 +289,8 @@ Hinweis: stufe_bandrand 20 und 1 schwebender Baum waren in O9 0/0 – kommt aus 
 
 ## O11 M2 Determinismus
 Ursache: relief_daten.json.gz trug den gzip-Zeitstempel (Inhalt war bei jedem Lauf gleich, zcat-md5 identisch). Fix mtime=0. Zwei Laeufe: alle Daten-/pruefung-JSON identisch, index.html identisch. Alle Zufallsquellen sind geseedet.
+
+## O11 M1 Regressionen
+Bisect (Worktrees, gleicher Ablauf): 543a49e/6dbe706 stufe_bandrand 0, Raycast 0; 1ee1d59 (L2 messergrate_fein) stufe_bandrand 20; e6e4cd7 (L3 Uferprofil) zusaetzlich 1 Baum schwebend.
+Fix: messergrate_fein laesst 2 Ecken am Bandrand aus (6175 statt 6277 Ecken). Baum: Objekthoehen kommen aus dem Raycast-Cache pruefung/strahl_hoehe_t65u.json, der nach Gelaendeaenderungen veraltet. Neues Werkzeug pruefung/strahl_cache_auffrischen.py (Ablauf: gen, html, Raycast, auffrischen, gen, html, Raycast).
+Ergebnis: stufe_bandrand 0, Raycast 0/0/0/0/0, Spalt 0, t42u 0, bergauf_pfad 0. 3. Lauf identisch (Fixpunkt).
