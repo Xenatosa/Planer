@@ -727,6 +727,7 @@ def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1
     ds=nd.distance_transform_edt(WV<=-900);m=((ds<=6)&(WEGA.reshape(GA.shape)<20)).astype(float);m=nd.gaussian_filter(m,1.0)
     N=C*(1-m[...,None])+B*m[...,None];return np.clip(np.round(N),0,255).astype(np.uint8).reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3)}
 VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
+import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS);RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
 def _anz_objekte():                                    # t62u: Objekte der Anzeige folgen dem eingegrabenen/aufgefuellten Boden, keine Baeume/Steine im Wasser
     dG=G_ANZ.astype(float)-G;st={}
     _WVM3=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_WVMX=nd.maximum_filter(np.where(WV>-900,WV,-999.0),5);_gy,_gx=np.gradient(G_ANZ.astype(float),1/RS);_SLMX=nd.maximum_filter(np.degrees(np.arctan(np.hypot(_gx,_gy))),3)
@@ -765,6 +766,8 @@ def _bandnaht_j1():   # O8 J1: Feinband-Randpunkte = Grobnetz (G_ANZ wurde nach 
     d=np.abs(h[m]-gi);h[m]=gi;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return {'punkte':int(m.sum()),'geaendert_gt_1mm':int((d>1e-3).sum()),'max_m':round(float(d.max()),3)}
 if not os.environ.get('NAHT_ALT'):print('bandnaht_j1',_bandnaht_j1())
+RAMPE9_O16['objekte_feinband']=R16.objekte_feinband({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},FW,NX,NY);RAMPE9_O16['geroell_raus']=R16.geroell_raus(geroell,R16_W,RS);print('objfein_o16',RAMPE9_O16['objekte_feinband']);print('geroell_o16',RAMPE9_O16['geroell_raus'])
+if os.environ.get('FW_NPZ'):R16.npz_nach(os.environ['FW_NPZ'],FW,G_ANZ,R16_W,NX,NY,RS)   # O16: Fehlerzaehler sieht den Endstand [A]   # O16 R2: Schwebende im Feinband absenken [A]
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
