@@ -332,3 +332,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - rampe_4: In der Textur läuft ein unscharfes Weg-Band quer durchs Bild nahe der Kamera, im Clay nicht zu sehen → Weg-Overlay über der Kante, offen (nicht untersucht).
 - rampe_13: Weg endet abrupt an der Kante, mit dunklem Rechteck am Ende → offen.
 - Angesehen: 14 Bilder (6 Kameras × 2, plus krater_rand 2× nachgerendert).
+
+## O12 N3 – fluss_7 helle eckige Kante (2 Versuche, beide zurückgenommen)
+- Ohne Wasser (?nowa=1, n3/fluss_7_nowa.png) gibt es keine Ecke → die Kante kommt vom Wassermesh-Rand.
+- Versuch 1: Shader-Alpha aus Szenentiefe weicher (0,30→0,75 m). Keine Wirkung, denn der Szenentiefen-Pfad ist aus (__swU.on=0, headless geprüft); es greift die Vertex-Alpha.
+- Versuch 2: Vertex-Rand-Alpha über 0..0,75 m statt 0..0,35 m. fluss_7-Ecke etwas weicher, aber noch sichtbar; fluss_3 klar schlechter (flaches Wasser wird durchsichtig/bräunlich) → zurückgenommen.
+- Offen: echte Abhilfe wären geglättete Randvertices bzw. ein feinerer Wasserrand (Mesh-Arbeit) oder der Szenentiefen-Pfad an; beides nicht klein.
+- Angesehen voll: fluss_7 a/b/nowa, fluss_3/9/4, Endsee, Tümpel West (b).
