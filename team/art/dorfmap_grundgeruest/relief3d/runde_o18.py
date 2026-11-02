@@ -270,3 +270,28 @@ def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
         cs=np.stack([nd.map_coordinates(Vs[...,j],[gy[k],gx[k]],order=1) for j in range(3)],1);c[k]=c[k]*(1-wf[k,None])+cs*wf[k,None]
         FW['c']=base64.b64encode(np.clip(np.round(c),0,255).astype(np.uint8).tobytes()).decode()
     return {'punkte':int((w>0.05).sum()),'fein':int(k.sum())}
+
+def haus_sockel_feld(haeuser,WV,GY,GX,RS,rand=1.0,aus=2.5,tief=0.12):
+    """O18d [F B2 Haus mit freiliegendem Sockel am Bach]: Haus-y = Median des Quell-G; Anzeige-Gelaende lag talseitig bis >1 m
+    darunter. Mindesthoehe-Feld: unter Grundriss(+rand m) = y-tief, faellt ueber 'aus' m linear (1:1,2) ab. Nur anheben, nie Wasser."""
+    M=np.full((GY,GX),-1e9)
+    yy,xx=np.mgrid[0:GY,0:GX]/RS
+    for h in haeuser:
+        if h['typ']=='Quartiersplatz':continue
+        x0,x1=h['x']-h['b']/2*0.9,h['x']+h['b']/2*0.9;z0,z1=h['z']-h['t']/2*0.9,h['z']+h['t']/2*0.9
+        r=int((max(h['b'],h['t'])/2+rand+aus+1)*RS)+1;ci,cj=int(h['x']*RS),int(h['z']*RS)
+        sl=(slice(max(0,cj-r),min(GY,cj+r)),slice(max(0,ci-r),min(GX,ci+r)))
+        dx=np.maximum(np.maximum(x0-xx[sl],xx[sl]-x1),0);dz=np.maximum(np.maximum(z0-yy[sl],yy[sl]-z1),0);d=np.hypot(dx,dz)
+        v=np.where(d<=rand,h['y']-tief,h['y']-tief-(d-rand)*1.2);v=np.where(d<=rand+aus,v,-1e9);M[sl]=np.maximum(M[sl],v)
+    M[np.asarray(WV).reshape(GY,GX)>-900]=-1e9
+    return M
+
+def haus_sockel_grob(G_ANZ,M):
+    G=G_ANZ.astype(float).reshape(M.shape);n=int((M>G+0.02).sum());mx=float(np.max(np.where(M>G,M-G,0)));G=np.maximum(G,M)
+    return G.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'punkte':n,'max_m':round(mx,2)}
+
+def haus_sockel_fein(FW,M,NX,RS):
+    FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    m=nd.map_coordinates(M,[(vid//FX)/FS*RS,(vid%FX)/FS*RS],order=1,mode='nearest');k=m>h+0.02
+    h2=np.maximum(h,np.where(m>-1e8,m,-1e9));FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'punkte':int(k.sum()),'max_m':round(float((h2-h).max()),2)}
