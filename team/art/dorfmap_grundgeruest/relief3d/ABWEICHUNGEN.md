@@ -182,3 +182,6 @@ Nichts davon behoben.
 - O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.
 
 - O10: L1 Budget lod1 1,13 M (forceSinglePass Wasser); L2 Haarlinien Ostrand per polygonOffset behoben; L3/L3b fluss_7 und L4 wand_288_144 nicht behoben (siehe pruefung/runde_o_status.md). Export /workspace/dorfmap_3d_runde_O10.html.
+
+## Runde O11
+M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mtime=0); M3 Wasserfarbe geglättet (fluss_7 Kante teilweise); M4 bandrand_weich 12 + Cache-Auffrischung. Offen: fluss_7 Kante, wand_288_144 Wandfuß, Tümpel-West Flecken. Details pruefung/runde_o_status.md.

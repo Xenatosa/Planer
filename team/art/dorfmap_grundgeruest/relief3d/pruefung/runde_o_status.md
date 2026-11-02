@@ -306,3 +306,14 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - stufe_bandrand 0, Spalt 0, t42u summe 0, bergauf_pfad 0, Determinismus 2× gleicher Hash.
 - Fehlerzähler: spitzen 4, senken>0.8 m 1, enge_grate 256 (vorher 249).
 - wand_288_144: Wandfuß leicht weicher, Wand bleibt steil – Verbesserung gering.
+
+## O11 M5 – Durchgang (Stand b4d884f, Daten unverändert seit M4-Lauf)
+- t42u summe 0, Spalt 0.0, bergauf_pfad 0, Raycast 0 schwebend, stufe_bandrand 0, Determinismus ok (Werte aus M4-Kette auf identischem Build).
+- Fehlerzähler: spitzen 4, senken>0.8 m 1, enge_grate 256.
+- Budget lod1: Bildpass 1.134 M (<1.3 M), FBO 0.793 M. Ladezeit Median 8.92 s (8.92/9.28/8.89).
+- 25 Kameras × Clay+Textur = 50 Bilder (/workspace/t65/m5), alle angesehen (als Kontaktbögen 2 Bilder/Zeile).
+  Ostrand/Wände (8): rand_ost_80, rand_ost_265, wand_264_24, wand_288_144, wand_288_72, wand_312_168, wand_312_216, aus_ost_aussen – keine Löcher/Schweber; wand_288_144 Wandfuß weiterhin steil; aus_ost_aussen zeigt Schichten-Schürze (gewollt).
+  Wasser: fluss_3/9/4 ok; fluss_7 hellere eckige Uferkante noch sichtbar; Endsee ok; Tümpel West helle Flecken auf Wasser (Spiegelung/Schneeflächen?) – offen.
+  Sonst ok: gipfel_0, klippe_a, rampe_3, rand_2, waldrand_a, see_fluss_naht, fluss_8_neu.
+  Kamera-Probleme (keine Geländefehler): aus_ost_oben, baum_80_175, platz_Q1 Kamera steckt im Baum; krater_rand Kamera in/unter Gelände (Bild leer).
+- Export /workspace/dorfmap_3d_runde_O11.html (=index.html, 15.5 MB), headless geladen bis bereit (Ladezeittest).
