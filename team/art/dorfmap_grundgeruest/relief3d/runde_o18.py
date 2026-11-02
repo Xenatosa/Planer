@@ -79,3 +79,29 @@ def fluss_tiefer(G_ANZ,WV,WEGA,bruecken,FW,NX,NY,RS,D=0.6,B=3.0):
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)+nd.map_coordinates(delta,[fy/FS*RS,fx/FS*RS],order=1)
     FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return G2.astype(G_ANZ.dtype),WV2.astype(WV.dtype),{'D_m':D,'boeschung_m':B,'wasserecken':int(nass.sum()),'landecken_abgesenkt':int(((delta<-0.01)&~nass).sum()),'bett_max_m':round(float(-delta.min()),2)}
+
+def _zmaske(F,thr):
+    P=np.pad(F,1,mode='edge');c=P[1:-1,1:-1]
+    dd=np.array([P[1:-1,2:]+P[1:-1,:-2]-2*c,P[2:,1:-1]+P[:-2,1:-1]-2*c,(P[2:,2:]+P[:-2,:-2]-2*c)/2,(P[2:,:-2]+P[:-2,2:]-2*c)/2])
+    return (dd.min(0)>thr)|(dd.max(0)<-thr)
+
+def entstacheln(G_ANZ,FW,NX,NY,RS,thr=0.25,it=6):
+    """O18 [F A1 B1 C1 E1 F1 C2 'Dreiecke in den Boden', 'Spitzen']: Einzelpunkt-Ausreisser = in ALLEN 4 Richtungen gleich
+    gekruemmt (Nadel/Loch, kein Hang/Wandfuss). Ersatz durch 3x3-Median, iterativ. Grobnetz komplett, Feinband nur
+    Innenpunkte (alle 8 Nachbarn im Band) -> Bandnaht bleibt deckungsgleich. Deterministisch."""
+    G=G_ANZ.astype(float);ng=0
+    for _ in range(it):
+        M=_zmaske(G,thr)
+        if not M.any():break
+        ng+=int(M.sum());G=np.where(M,nd.median_filter(G,3,mode='nearest'),G)
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    m=np.zeros(FX*FY,bool);m[vid]=True;m=m.reshape(FY,FX)
+    inn=nd.binary_erosion(m,np.ones((3,3)),border_value=0)
+    F=np.zeros(FX*FY);F[vid]=h;F=F.reshape(FY,FX);nf=0
+    for _ in range(it):
+        M=_zmaske(F,thr)&inn
+        if not M.any():break
+        nf+=int(M.sum());F=np.where(M,nd.median_filter(F,3,mode='nearest'),F)
+    FW['h']=base64.b64encode(F.ravel()[vid].astype(np.float32).tobytes()).decode()
+    return G.astype(G_ANZ.dtype),{'grob_ersetzt':ng,'fein_ersetzt':nf,'thr_m':thr}
