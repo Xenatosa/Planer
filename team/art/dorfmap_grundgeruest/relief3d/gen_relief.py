@@ -777,6 +777,13 @@ RAMPE9_O16['objekte_feinband']=R16.objekte_feinband({'baeume':baeume,'felsen':fe
 if os.environ.get('FW_NPZ'):R16.npz_nach(os.environ['FW_NPZ'],FW,G_ANZ,R16_W,NX,NY,RS)   # O16: Fehlerzaehler sieht den Endstand [A]   # O16 R2: Schwebende im Feinband absenken [A]
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 G_ANZ,_uw=R18.ufer_weich(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_weich',_uw);G_ANZ,_ub=R18.ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_boeschung',_ub);G_ANZ,_hs2=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_fein',R18.haus_sockel_fein(FW,_HSM,NX,RS));print('o18d_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18d_farbe_weich',R18.farbe_weich(VC,FW,RS,NX,NY))   # O18d A1 [A]
+G_ANZ,WV,_ft=R18.fluss_einschnitt(FW,G_ANZ,WV,NX,NY,RS);print('o18d_fluss_einschnitt',_ft)
+_VW=json.load(open('pruefung/o18/versunken_weg.json')) if os.path.exists('pruefung/o18/versunken_weg.json') else []   # O18d [F 7 versunkene Geroellteile]: Raycast-gemeldete versunkene/im Wasser stehende Objekte entfernen [A]
+_vwn=0
+for _k,_x,_z,_d in _VW:
+    _L=globals()[_k];_i=[i for i,o in enumerate(_L) if abs(o[0]-_x)<0.02 and abs(o[2]-_z)<0.02]
+    for i in reversed(_i):_L.pop(i);_vwn+=1
+print('o18d_versunken_entfernt',_vwn,len(_VW))
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}

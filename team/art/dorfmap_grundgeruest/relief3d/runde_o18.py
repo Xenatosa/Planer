@@ -340,3 +340,16 @@ def ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS,s=0.9,zone=5.0):
     for _ in range(int(zone*FS)+2):A=np.where(ZF,np.minimum(A,nd.minimum_filter(A,footprint=fp)+s/FS),A)
     h2=np.maximum(A.ravel()[vid],h-1.5);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return G.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'grob_max':round(float((G0-G).max()),2),'grob_n':int((G0-G>0.05).sum()),'fein_max':round(float((h-h2).max()),2)}
+
+def fluss_einschnitt(FW,G_ANZ,WV,NX,NY,RS,senk=0.2,mulde=0.5,breit=1.2):
+    """O18d [F Flusstiefe: flach hellblau, kein Einschnitt]: Wasserspiegel aller Gewaesser -senk (Ufer ragt hoeher),
+    Bett -senk und zusaetzlich Mulde bis -mulde zur Mitte (Abstand zum Ufer / breit). Nur Anzeige (WV, G_ANZ, Feinband)."""
+    GY,GX=NY*RS+1,NX*RS+1;WV2=np.asarray(WV,float).reshape(GY,GX);W=WV2>-900
+    dS=nd.distance_transform_edt(W)/RS;dl=np.where(W,senk+mulde*np.clip((dS-0.25)/breit,0,1),0.0)
+    dl=np.maximum(dl,nd.gaussian_filter(dl,1.0)*0)  # keine Glaettung ueber das Ufer
+    G=np.asarray(G_ANZ,float).reshape(GY,GX)-dl;WV2=np.where(W,WV2-senk,WV2)
+    FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).astype(np.int64);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    r,c=vid//FX,vid%FX;Wf=nd.map_coordinates(W.astype(float),[r/FS*RS,c/FS*RS],order=1,mode='nearest')>0.999
+    df=nd.map_coordinates(dl,[r/FS*RS,c/FS*RS],order=1,mode='nearest');h=h-np.where(Wf,df,0)
+    FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return G.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),WV2.reshape(np.shape(WV)).astype(np.asarray(WV).dtype),{'zellen':int(W.sum()),'max_m':round(float(dl.max()),2)}
