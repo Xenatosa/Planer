@@ -286,3 +286,6 @@ bandrand_weich breite 16: Kerbe weg, Schattenkante weicher, aber Raycast 81 schw
 ## O10 L5 Durchgang (Stand dieses Commits)
 t42u 0 | Spalt 0,0 m | bergauf_pfad 0 (summe 3922) | Raycast 1 Baum (325.8/280.8, 0,32 m), sonst 0 | Fehlerzaehler: spitzen 4, nadeln 0, senken>0,8 m 3, >2 m 0, enge_grate 249, stufe_bandrand 20, Objekte auf Wegen 0 | Budget lod1 Bildpass 1,133 M (+ Tiefenpass FBO 0,793 M), test_budget 1,134 M | Ladezeit Median 7,96 s.
 Hinweis: stufe_bandrand 20 und 1 schwebender Baum waren in O9 0/0 – kommt aus L2/L3 (messergrate/Uferprofil), nicht untersucht.
+
+## O11 M2 Determinismus
+Ursache: relief_daten.json.gz trug den gzip-Zeitstempel (Inhalt war bei jedem Lauf gleich, zcat-md5 identisch). Fix mtime=0. Zwei Laeufe: alle Daten-/pruefung-JSON identisch, index.html identisch. Alle Zufallsquellen sind geseedet.
