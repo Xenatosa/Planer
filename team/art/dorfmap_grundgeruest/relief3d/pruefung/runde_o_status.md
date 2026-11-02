@@ -434,3 +434,11 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Zacken vorher(O18c)->O18d: fein unten 76->222, oben 50->126; grob unten 30->154, oben 17->304. Von den Top-40 liegen 27/17/39/40 im Wasser/Uferrand (Bettmulde), 13 fein-oben an Hausplateaus. Spitzen (s1>0,25|s3>1,5) 261->153 (P1a)->227 (Haus-/Uferkanten).
 - Noch sichtbar: Hausplateaus in Ton-Ansicht kastenfoermig; B2-Ufer am Haus steil/felsfarben; Zacken-Zuwachs an Ufern; A1 brauner Streifen weich aber rechteckig; G1 noch leicht spitz.
 - Exporte: /workspace/dorfmap_3d_runde_O18.html (= index.html dd8e113), /workspace/dorfmap_felder_3d/ 56 HTML + reihe_1..7.zip (Banner dd8e113).
+
+## O18e (Haus-Sockel neu, Zacken)
+- haus_sockel ersetzt: keine Plateaus/Kaesten mehr. Nur heben wo Gelaende < Hausbasis-0,05 m; Smoothstep-Auslauf 6 m, Steigung <= 0,35 m/m; Hebung blendet 2-3,5 m vor Wasser auf 0 aus (kein Heben in Wasser/Bachbett, keine neue Ufer-Boeschung). Max. Hebung 3,11 m.
+- ufer_boeschung s 0,9->0,6 (31 Grad, unter Fels-Schwelle des Shaders).
+- Zacken (zacken_t83u): fein unten 52 / oben 12, grob unten 5 / oben 0 (O18d: 222/126, 154/304). Neu: grob_entzacken (Laplace-Mittel, Median gab Schachbrett), fein_entzacken thr 0,22; Bachbett mit wassermaskiertem Gauss geglaettet.
+- Regression: t42u 0; lod1 Budget 1,188 M Dreiecke; Raycast nach Cache-Auffrischung: Baeume 2 versunken / 3 im Wasser (von 1438), sonst 0 schwebend.
+- Nicht gemacht: Ufer-Fallback "nur Sockelrandzone des Hauses heben" braucht Hausgeometrie-Aenderung (nicht erlaubt, nur Anzeige-Terrain). Treppenmuster am Feinbandrand (X_H2, X_E1) aus O18d nicht behoben.
+- Exporte: /workspace/dorfmap_3d_runde_O18.html, 56 Feld-HTML + reihe_1..7.zip (je 8, zipfile), Banner 397bdde.
