@@ -271,37 +271,54 @@ def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
         FW['c']=base64.b64encode(np.clip(np.round(c),0,255).astype(np.uint8).tobytes()).decode()
     return {'punkte':int((w>0.05).sum()),'fein':int(k.sum())}
 
-def haus_sockel_feld(haeuser,WV,GY,GX,RS,rand=0.6,aus=3.0,tief=-0.40):
-    """O18d [F B2 Haus mit freiliegendem Sockel am Bach]: Haus-y = Median des Quell-G; Anzeige-Gelaende lag talseitig bis >1 m
-    darunter. Mindesthoehe-Feld: unter Grundriss(+rand m) = y-tief, faellt ueber 'aus' m linear (1:1,2) ab. Nur anheben, nie Wasser."""
-    M=np.full((GY,GX),-1e9)
+def haus_sockel_feld(haeuser,WV,GY,GX,RS,unter=0.05,aus=6.0,smax=0.35,wasserabst=2.0):
+    """O18e [F B2 Kastenplateaus O18d]: kein Plateau mehr. Liefert Zielhoehe T=Haus-y-0,05 und Abstand d zum Grundriss
+    (naechstes Haus). Anheben nur wo Gelaende tiefer liegt, Auslauf smoothstep ueber 'aus' m, zusaetzlich Kegel max smax m/m.
+    Nie im Wasser und nicht naeher als wasserabst m am Wasser (Ufer bleibt O18c)."""
+    T=np.full((GY,GX),-1e9);Dm=np.full((GY,GX),1e9)
     yy,xx=np.mgrid[0:GY,0:GX]/RS
     for h in haeuser:
         if h['typ']=='Quartiersplatz':continue
         x0,x1=h['x']-h['b']/2*0.9,h['x']+h['b']/2*0.9;z0,z1=h['z']-h['t']/2*0.9,h['z']+h['t']/2*0.9
-        r=int((max(h['b'],h['t'])/2+rand+aus+1)*RS)+1;ci,cj=int(h['x']*RS),int(h['z']*RS)
+        r=int((max(h['b'],h['t'])/2+aus+1)*RS)+1;ci,cj=int(h['x']*RS),int(h['z']*RS)
         sl=(slice(max(0,cj-r),min(GY,cj+r)),slice(max(0,ci-r),min(GX,ci+r)))
         dx=np.maximum(np.maximum(x0-xx[sl],xx[sl]-x1),0);dz=np.maximum(np.maximum(z0-yy[sl],yy[sl]-z1),0);d=np.hypot(dx,dz)
-        v=np.where(d<=rand,h['y']-tief,h['y']-tief-(d-rand)*1.0);v=np.where(d<=rand+aus,v,-1e9);M[sl]=np.maximum(M[sl],v)  # O18d-2: Sockel-Oberkante y+0.45..0.75 -> Gelaende y+0.40 am Haus
-    M[np.asarray(WV).reshape(GY,GX)>-900]=-1e9
-    return M
+        k=d<Dm[sl];T[sl]=np.where(k,h['y']-unter,T[sl]);Dm[sl]=np.where(k,d,Dm[sl])
+    W=np.asarray(WV).reshape(GY,GX)>-900;dW=nd.distance_transform_edt(~W)/RS
+    wz=np.clip((dW-wasserabst)/1.5,0,1)  # weich zum Ufer hin ausblenden
+    return {'T':T,'d':Dm,'wz':wz,'aus':aus,'smax':smax}
+
+def _sockel_hebe(Gv,T,d,wz,aus,smax):
+    t=np.clip(d/aus,0,1);ss=t*t*(3-2*t);D_=np.maximum(T-Gv,0)*(d<aus)
+    neu=np.minimum(Gv+D_*(1-ss),T-smax*d);return np.maximum(Gv,Gv+(np.maximum(neu,Gv)-Gv)*wz)
 
 def haus_sockel_grob(G_ANZ,M):
-    G=G_ANZ.astype(float).reshape(M.shape);n=int((M>G+0.02).sum());mx=float(np.max(np.where(M>G,M-G,0)));G=np.maximum(G,M)
-    return G.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'punkte':n,'max_m':round(mx,2)}
+    G=G_ANZ.astype(float).reshape(M['T'].shape);G2=_sockel_hebe(G,M['T'],M['d'],M['wz'],M['aus'],M['smax'])
+    return G2.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'punkte':int((G2>G+0.02).sum()),'max_m':round(float((G2-G).max()),2)}
 
 def haus_sockel_fein(FW,M,NX,RS):
-    FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
-    m=nd.map_coordinates(M,[(vid//FX)/FS*RS,(vid%FX)/FS*RS],order=1,mode='nearest');k=m>h+0.02
-    h2=np.maximum(h,np.where(m>-1e8,m,-1e9));FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
-    return {'punkte':int(k.sum()),'max_m':round(float((h2-h).max()),2)}
+    FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).astype(np.int64);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    co=[(vid//FX)/FS*RS,(vid%FX)/FS*RS];f=lambda A,o=1:nd.map_coordinates(A,co,order=o,mode='nearest')
+    h2=_sockel_hebe(h,f(M['T'],0),f(M['d']),f(M['wz']),M['aus'],M['smax']);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'punkte':int((h2>h+0.02).sum()),'max_m':round(float((h2-h).max()),2)}
 
-def fein_entzacken(FW,NX,NY,thr_rand=0.3,thr_innen=0.45):
+def grob_entzacken(G_ANZ,WV,RS,thr=0.22,it=8):
+    """O18e [Zacken O18d gestiegen]: Grobnetz-Punkte, die in ALLEN 4 Richtungen gleich gekruemmt sind (Loch/Nadel), -> Median 3x3."""
+    G=np.asarray(G_ANZ,float).reshape(np.shape(WV)).copy();n=0
+    for _ in range(it):
+        P=np.pad(G,1,mode='edge');c=P[1:-1,1:-1]
+        dd=np.array([P[1:-1,2:]+P[1:-1,:-2]-2*c,P[2:,1:-1]+P[:-2,1:-1]-2*c,(P[2:,2:]+P[:-2,:-2]-2*c)/2,(P[2:,:-2]+P[:-2,2:]-2*c)/2])
+        k=(dd.min(0)>thr)|(dd.max(0)<-thr)
+        if not k.any():break
+        med=(nd.uniform_filter(G,3,mode='nearest')*9-G)/8;G[k]=med[k];n+=int(k.sum())  # Laplace-Mittel der 8 Nachbarn (Median erzeugte Schachbrett)
+    return G.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'ersetzt':n}
+
+def fein_entzacken(FW,NX,NY,thr_rand=0.3,thr_innen=0.22):  # O18e: innen 0.45->0.22 (Messschwelle 0.25)
     """O18d [F H2 Zacken am Kartenrandpunkt]: Feinband-Punktausreisser -> Median der 3x3-Nachbarn. Am Kartenrand (<=3 Feinzellen)
     jede Abweichung >thr_rand (Randspalte hatte 9,5/10/6 neben 8,4), innen nur Nadeln/Loecher (alle 4 Richtungen gleiches Vorzeichen)."""
     FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     A=np.full((FY+2,FX+2),np.nan);r,c=vid.astype(np.int64)//FX+1,vid.astype(np.int64)%FX+1;A[r,c]=h;n=0
-    for _ in range(3):
+    for _ in range(6):
         N=np.stack([A[r+dy,c+dx] for dy in(-1,0,1) for dx in(-1,0,1) if dy or dx]);med=np.nanmedian(N,0)
         dd=[A[r,c+1]+A[r,c-1]-2*A[r,c],A[r+1,c]+A[r-1,c]-2*A[r,c],A[r+1,c+1]+A[r-1,c-1]-2*A[r,c],A[r+1,c-1]+A[r-1,c+1]-2*A[r,c]]
         dd=np.nan_to_num(np.array(dd));nad=(np.min(dd,0)>thr_innen)|(np.max(dd,0)<-thr_innen)
@@ -326,7 +343,7 @@ def ufer_weich(FW,G_ANZ,WV,NX,NY,RS,sig=1.2,d0=0.5,d1=4.0):
     FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return G2.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'grob_max':round(float(np.abs(G2-G).max()),2),'fein_max':round(float(np.abs(h2-h).max()),2)}
 
-def ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS,s=0.9,zone=5.0):
+def ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS,s=0.6,zone=5.0):  # O18e: 0.9 (42 Grad -> Felsfarbe) -> 0.6 (31 Grad, Schnee/Gras)
     """O18d [F B2 Hangknick + abgeschnittene Boeschung]: Ufer hatte senkrechte 2-m-Stufe (-9,0 -> -7,1 in 0,5 m). Hangneigung zum
     Wasser auf s (m/m) begrenzt, nur Absenken der Oberkante, nur Land <=zone m vom Wasser. Grob + Fein; Haus-Sockel danach erneut."""
     GY,GX=NY*RS+1,NX*RS+1;W=np.asarray(WV).reshape(GY,GX)>-900;dW=nd.distance_transform_edt(~W)/RS;Z=(dW<zone)&~W
@@ -346,7 +363,7 @@ def fluss_einschnitt(FW,G_ANZ,WV,NX,NY,RS,senk=0.2,mulde=0.5,breit=1.2):
     Bett -senk und zusaetzlich Mulde bis -mulde zur Mitte (Abstand zum Ufer / breit). Nur Anzeige (WV, G_ANZ, Feinband)."""
     GY,GX=NY*RS+1,NX*RS+1;WV2=np.asarray(WV,float).reshape(GY,GX);W=WV2>-900
     dS=nd.distance_transform_edt(W)/RS;dl=np.where(W,senk+mulde*np.clip((dS-0.25)/breit,0,1),0.0)
-    dl=np.maximum(dl,nd.gaussian_filter(dl,1.0)*0)  # keine Glaettung ueber das Ufer
+    Wf_=W.astype(float);dl=np.where(W,nd.gaussian_filter(dl,1.0*RS)/np.maximum(nd.gaussian_filter(Wf_,1.0*RS),1e-6),0.0)  # O18e: Mulde glatt (nur Wasserzellen gemittelt) -> keine Bett-Zacken
     G=np.asarray(G_ANZ,float).reshape(GY,GX)-dl;WV2=np.where(W,WV2-senk,WV2)
     FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).astype(np.int64);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     r,c=vid//FX,vid%FX;Wf=nd.map_coordinates(W.astype(float),[r/FS*RS,c/FS*RS],order=1,mode='nearest')>0.999
