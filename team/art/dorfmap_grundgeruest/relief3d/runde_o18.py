@@ -254,7 +254,7 @@ def fein_gipfel(FW,BAND,NX,NY,sig=4.0,thr=0.08,it=10,cap=3.0):   # O18d: staerke
     h2=Fz.ravel()[vid];FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return {'punkte':n,'max_m':round(float((h-h2).max()),2)}
 
-def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
+def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,30,60),sig=9.0):  # O18f: A1 Kante weicher
     """O18d [F A1 braune Flaeche, harte Kante]: Quellkarte hat in A1 am Kartenrand einen geraden FELS-Streifen (x<15) mit
     senkrechter Kante zu SCHNEE. Nur Anzeige-Farbe: in der Box Farbsprung > 40 (0..255) per Gauss weich machen, Gewicht
     laeuft zum Boxrand aus. Grob-VC und Feinband-Farbe gleich behandelt. Deterministisch."""
@@ -271,7 +271,7 @@ def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
         FW['c']=base64.b64encode(np.clip(np.round(c),0,255).astype(np.uint8).tobytes()).decode()
     return {'punkte':int((w>0.05).sum()),'fein':int(k.sum())}
 
-def haus_sockel_feld(haeuser,WV,GY,GX,RS,unter=0.05,aus=6.0,smax=0.35,wasserabst=2.0):
+def haus_sockel_feld(haeuser,WV,GY,GX,RS,unter=0.05,aus=8.0,smax=0.35,wasserabst=2.0):  # O18f aus 6->8
     """O18e [F B2 Kastenplateaus O18d]: kein Plateau mehr. Liefert Zielhoehe T=Haus-y-0,05 und Abstand d zum Grundriss
     (naechstes Haus). Anheben nur wo Gelaende tiefer liegt, Auslauf smoothstep ueber 'aus' m, zusaetzlich Kegel max smax m/m.
     Nie im Wasser und nicht naeher als wasserabst m am Wasser (Ufer bleibt O18c)."""
@@ -289,7 +289,7 @@ def haus_sockel_feld(haeuser,WV,GY,GX,RS,unter=0.05,aus=6.0,smax=0.35,wasserabst
     return {'T':T,'d':Dm,'wz':wz,'aus':aus,'smax':smax}
 
 def _sockel_hebe(Gv,T,d,wz,aus,smax):
-    t=np.clip(d/aus,0,1);ss=t*t*(3-2*t);D_=np.maximum(T-Gv,0)*(d<aus)
+    t=np.clip(d/aus,0,1);ss=t*t*(3-2*t);D_=np.minimum(np.maximum(T-Gv,0),1.2)*(d<aus)  # O18f Deckel 1,2 m
     neu=np.minimum(Gv+D_*(1-ss),T-smax*d);return np.maximum(Gv,Gv+(np.maximum(neu,Gv)-Gv)*wz)
 
 def haus_sockel_grob(G_ANZ,M):
@@ -312,6 +312,18 @@ def grob_entzacken(G_ANZ,WV,RS,thr=0.22,it=8):
         if not k.any():break
         med=(nd.uniform_filter(G,3,mode='nearest')*9-G)/8;G[k]=med[k];n+=int(k.sum())  # Laplace-Mittel der 8 Nachbarn (Median erzeugte Schachbrett)
     return G.reshape(np.shape(G_ANZ)).astype(np.asarray(G_ANZ).dtype),{'ersetzt':n}
+
+def kante_bilateral(FW,NX,NY,sr=0.3,it=3,rng=1.0):
+    """O18f [Perlen/Treppen an Klippenoberkante]: Feinband-Punkte mit lokaler Spanne > rng m (Kante) -> bilateraler 3x3-Mittelwert
+    nur ueber Nachbarn mit aehnlicher Hoehe (Gauss sr m). Glaettet entlang der Kante, Klippensprung bleibt."""
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    A=np.full((FY+2,FX+2),np.nan);r,c=vid.astype(np.int64)//FX+1,vid.astype(np.int64)%FX+1;A[r,c]=h;n=0
+    for _ in range(it):
+        N=np.stack([A[r+dy,c+dx] for dy in(-1,0,1) for dx in(-1,0,1)]);m=A[r,c]
+        sp=np.nanmax(N,0)-np.nanmin(N,0);k=sp>rng
+        w=np.exp(-((N-m)/sr)**2);w[~np.isfinite(N)]=0;Nz=np.nan_to_num(N)
+        neu=(w*Nz).sum(0)/w.sum(0);A[r[k],c[k]]=neu[k];n+=int(k.sum())
+    FW['h']=base64.b64encode(A[r,c].astype(np.float32).tobytes()).decode();return {'punkte':n}
 
 def fein_entzacken(FW,NX,NY,thr_rand=0.3,thr_innen=0.22):  # O18e: innen 0.45->0.22 (Messschwelle 0.25)
     """O18d [F H2 Zacken am Kartenrandpunkt]: Feinband-Punktausreisser -> Median der 3x3-Nachbarn. Am Kartenrand (<=3 Feinzellen)
