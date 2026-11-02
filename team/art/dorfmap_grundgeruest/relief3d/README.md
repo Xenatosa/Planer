@@ -107,3 +107,7 @@ M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mti
 
 - O12: Kameras repariert, Wasserrand-Versuche (fluss_7) ohne Wirkung zurückgenommen, Export dorfmap_3d_runde_O12.html; Details pruefung/runde_o_status.md.
 - Runde O16: rampe_9 + Ruecken 133|173 entfernt (nur Anzeige, runde_o16.py), 13 Rampen; alte IDs rampe_10..13 -> rampe_9..12.
+
+## Runde O17
+- Zusammenhaengendes Steinband an Wandfuessen (Shader, geglaettete Neigung). Details in pruefung/runde_o_status.md.
+- Blender: /workspace/dorfmap_blender_O17/dorfmap_O17.glb (Viewer-Stand, 1 Einheit = 1 m), Anleitung in pruefung/README_Blender_O17.md. Erzeugen mit pruefung/blender_dump_o17.js und blender_paket_o17.py. Getestet mit Blender 4.2.3 (/tmp/blender-4.2.3-linux-x64/blender).

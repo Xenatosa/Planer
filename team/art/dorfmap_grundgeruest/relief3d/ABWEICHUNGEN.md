@@ -188,3 +188,7 @@ M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mti
 
 - O12: fluss_7 helle eckige Zone im Wasser offen (nicht Mesh-Rand, per ?wwire=1 belegt). wand_288_144 Wandfuß offen. rampe_4/13 Weg-Overlay → Wege-Bot (UEBERGABE.md).
 - O16: CSV-Zellwerte unveraendert; nur boden_anzeige_m 806 Zeilen. Rampenkorridor rampe_9 bleibt in der CSV begehbar (151 Zellen), im Gelaende nun Hang ohne Weg.
+
+## Runde O17
+- Steinband (Wandfuss/Schutt): Fels und Schnee kommen dort aus der geglaetteten Neigung (ca. 1,5 m), nicht aus der Pixel-Normale. Der Shader weicht damit bewusst von der reinen Normale ab. ?steinband=alt zeigt O16. ?sbdbg=1 ist ein Debug-Schalter (Fels aus).
+- Blender-GLB (/workspace/dorfmap_blender_O17) enthaelt nur Eckfarben. Die Shader-Effekte (Fels, Schnee, Steinband, Wasserglanz) fehlen dort. dorfmap_relief_z25.glb bleibt das Zellgrundgeruest (G, ohne Feinband, Wasser und Objekte).
