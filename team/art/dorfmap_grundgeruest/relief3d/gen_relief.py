@@ -728,6 +728,7 @@ def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1
     N=C*(1-m[...,None])+B*m[...,None];return np.clip(np.round(N),0,255).astype(np.uint8).reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3)}
 VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
 import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS);RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
+_WEG_G0=G_ANZ.reshape(GY,GX).astype(float).copy();_WEG_V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();_WEG_F0=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()   # O18h [F G1 Steinweg war in O17 besser]: Stand vor allen O18-Schritten merken
 import os as _o18os
 if not _o18os.environ.get('O18_AUS'):   # Runde O18 [F t83u/t85u/t86u/t87u]: Wasser ohne Fluss raus, Senken gefuellt, Spitzen/Zacken gerundet -- nur Anzeige [A]
     import runde_o18 as R18;G_ANZ,VC,WV,R18_W,O18_W=R18.wasser_raus(G_ANZ,VC,WV,fl,wa,RS);O18_W['feinband']=R16.feinband(FW,G_ANZ,VC,R18_W,NX,RS);G_ANZ,O18_G=R18.gelaende(G_ANZ,WV,WEGA,RS);O18_F=R18.feinband(FW,G_ANZ,WV,WEGA,NX,NY,RS);G_ANZ,WV,O18_T=R18.fluss_tiefer(G_ANZ,WV,WEGA,bruecken,FW,NX,NY,RS);G_ANZ,O18_GW=R18.grob_wand_glatt(G_ANZ,FW,WV,WEGA,NX,NY,RS);print('o18_grobwand',O18_GW);G_ANZ,O18_Z=R18.entstacheln(G_ANZ,FW,NX,NY,RS);print('o18_zacken',O18_Z);G_ANZ,WV,_kg=R18.kaskade_glatt(G_ANZ,WV,RS);print('o18_kaskade',_kg);G_ANZ,_gr=R18.gipfel_rund(G_ANZ,WV,WEGA,belegt,RS) if not os.environ.get('GIPFEL_ALT') else (G_ANZ,{});print('o18_gipfel_rund',_gr);_HSM=R18.haus_sockel_feld(haeuser,WV,GY,GX,RS);G_ANZ,_hs=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_grob',_hs);_be=R18.band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS);
@@ -778,7 +779,15 @@ if os.environ.get('FW_NPZ'):R16.npz_nach(os.environ['FW_NPZ'],FW,G_ANZ,R16_W,NX,
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 G_ANZ,_uw=R18.ufer_weich(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_weich',_uw);G_ANZ,_ub=R18.ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_boeschung',_ub);G_ANZ,_hs2=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_fein',R18.haus_sockel_fein(FW,_HSM,NX,RS));print('o18d_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_ge=R18.grob_entzacken(G_ANZ,WV,RS);print('o18e_grob_entzacken',_ge);print('o18d_farbe_weich',R18.farbe_weich(VC,FW,RS,NX,NY))   # O18d A1 [A]
 G_ANZ,WV,_ft=R18.fluss_einschnitt(FW,G_ANZ,WV,NX,NY,RS);print('o18d_fluss_einschnitt',_ft);print('o18f_kante',R18.kante_bilateral(FW,NX,NY,it=2));print('o18e_entzacken2',R18.fein_entzacken(FW,NX,NY));G_ANZ,_ge2=R18.grob_entzacken(G_ANZ,WV,RS);print('o18e_grob_entzacken2',_ge2)
-print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _weg_zurueck():   # O18h: Wegbereich (WEGA>20, +-3 m voll, 2 m Auslauf, nicht <2 m am Wasser) auf O17-Stand (vor O18-Glaettungen) zurueck; Fein: gleiche vid -> alter Wert, neue vid -> alter Grobwert
+    W=WEGA.reshape(GY,GX)>20;d=nd.distance_transform_edt(~W)/RS;w=np.clip(1-(d-3)/2,0,1)
+    w=w*(nd.distance_transform_edt(WV.reshape(GY,GX)<=-900)/RS>2)
+    GA=G_ANZ.reshape(GY,GX).astype(float);nG=GA*(1-w)+_WEG_G0*w
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1,mode='nearest')
+    alt=nd.map_coordinates(_WEG_G0,[fy/FS*RS,fx/FS*RS],order=1,mode='nearest');o=np.argsort(_WEG_V0);p=np.clip(np.searchsorted(_WEG_V0[o],vid),0,len(o)-1);hit=_WEG_V0[o][p]==vid;alt[hit]=_WEG_F0[o][p][hit]
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h*(1-wf)+alt*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob_pkt':int((w>0).sum()),'fein_pkt':int((wf>0).sum()),'fein_alt_vid':int(hit[wf>0].sum())}
+G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 _VW=json.load(open('pruefung/o18/versunken_weg.json')) if os.path.exists('pruefung/o18/versunken_weg.json') else []   # O18d [F 7 versunkene Geroellteile]: Raycast-gemeldete versunkene/im Wasser stehende Objekte entfernen [A]
 _vwn=0
 for _k,_x,_z,_d in _VW:
