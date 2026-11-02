@@ -29,7 +29,7 @@ export async function feldModus(o){
  UM.traverse(q=>q.renderOrder=10);sc.add(UM);
  // Kamera: schraeg von Sueden (+z) ueber dem Feld
  const cx=(F.x0+F.x1)/2,cz=(F.z0+F.z1)/2,hm=HN(cx,cz),S=Math.max(F.x1-F.x0,F.z1-F.z0);
- const start=()=>{cam.position.set(cx,hm+S*1.25,cz+S*1.45);oc.target.set(cx,hm,cz);oc.update();};start();
+ const start=()=>{const k=Math.max(1,1.2*innerHeight/innerWidth);cam.position.set(cx,hm+S*1.25*k,cz+S*1.45*k);oc.target.set(cx,hm,cz);oc.update();};start();
  oc.minDistance=3;oc.maxDistance=400;oc.touches={ONE:THREE.TOUCH.ROTATE,TWO:THREE.TOUCH.DOLLY_PAN};
  // Clay-Umschalter (wie ?clay=1: Gelaende grau, andere Ebenen aus)
  const CZ=window.__clayZ||{},CL=new THREE.MeshLambertMaterial({color:0x9c9c9c,side:THREE.DoubleSide}),orig=new Map();for(const k of ['m','fwMesh','ovMesh'])if(CZ[k])orig.set(CZ[k],CZ[k].material);
