@@ -411,3 +411,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - 56 Dateien dorfmap_3d_feld_A1…H7.html, Skripte relief3d/feld/ (README dort). Daten Commit 7a138db, Relief/gen_relief.py/relief_daten unverändert.
 - Geometrie-Identität (Mesh-Dump gekürzt vs. ungekürzt, nur Ausschnitt): D1 29/29 gleich; A1, H7 nur Abweichung in zwei Wege-Meshes, die im Ausschnitt 0 Vertices haben (nicht gezeichnet). Vorherige Kürzung von WV hatte H7-Wasser verändert → WV/WEGA jetzt ungekürzt.
 - Vergleichsbilder Feld vs. Hauptviewer (gleiche Kamera) D1, A1, H7 einzeln angesehen: im Feld deckungsgleich.
+
+## Runde O18 (02.11.) – Wandfuss-Zacken, Fluesse, Wasser ohne Fluss
+- runde_o18.py: wasser_raus, gelaende (Gipfel runden), feinband, fluss_tiefer (Bruecken weich), grob_wand_glatt, entstacheln.
+- Messung Zacken (pruefung/o18/zacken_t83u.py) vor/nach: fein unten 1424->101, oben 272->60; grob sichtbar unten 312->65, oben 145->28. Grob-Steilquads >6: 190->117.
+- Regression: t42u 0, Spalt 0 (4 Raender), bergauf_pfad 0, stufe_bandrand 0 (direkt), Raycast nach Cache 0 schwebend / max 1,1 m Findling, Budget lod1 1,13 M, Ladezeit 11,1 s (Median, gemessen waehrend 2 Render-Jobs liefen, daher nicht sauber).
+- Export /workspace/dorfmap_3d_runde_O18.html; Felder /workspace/dorfmap_felder_3d (56 + reihe_1..7.zip).
+- Offen: Feinband bis zum Wandfuss erweitern; Gelaende-Rundung ohne Band; Textur-Uebergaenge (Shadermasken A1/A2/B2/E1); G1-Block; Steinpfad D1/F1 (UEBERGABE.md); Kegel am Nordrand C2; F6-Restzacken.

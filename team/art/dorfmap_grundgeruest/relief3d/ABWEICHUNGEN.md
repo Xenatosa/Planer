@@ -192,3 +192,9 @@ M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mti
 ## Runde O17
 - Steinband (Wandfuss/Schutt): Fels und Schnee kommen dort aus der geglaetteten Neigung (ca. 1,5 m), nicht aus der Pixel-Normale. Der Shader weicht damit bewusst von der reinen Normale ab. ?steinband=alt zeigt O16. ?sbdbg=1 ist ein Debug-Schalter (Fels aus).
 - Blender-GLB (/workspace/dorfmap_blender_O17) enthaelt nur Eckfarben. Die Shader-Effekte (Fels, Schnee, Steinband, Wasserglanz) fehlen dort. dorfmap_relief_z25.glb bleibt das Zellgrundgeruest (G, ohne Feinband, Wasser und Objekte).
+
+## Runde O18
+- [F O18 Wasser ohne Fluss] Wasserflaechen ohne Fluss entfernt, Gelaende aufgefuellt (nur Anzeige; CSV: wasserspiegel_anzeige_m/wasser_anzeige geaendert, Zellwerte identisch, t42u=0).
+- [F A1 B1 C1 D1 E1 F1 G1 H1 "Dreiecke in den Boden"] Ursache 1: Feinband endet mitten in der Wand, der untere Wandteil liegt im 0,5-m-Grobnetz (702 Quads Steigung >3, v. a. E1/A1/D1/F6/B2). Fix runde_o18.grob_wand_glatt (Gauss-Zug nur an steilen sichtbaren Grobecken, Wasser/Wege ausgenommen). Ursache 2: Einzelpunkt-Nadeln/Loecher (2. Differenzen in 4 Richtungen) -> entstacheln (3x3-Median, nur Grobnetz + Band-Innenpunkte). Die Wand bleibt im Grobnetz; das Band selbst wurde NICHT erweitert (offen).
+- [F B2] BACH_NORD ist gefroren (wasser_eis=1) und erscheint als flacher grauer Eisstreifen. Das ist kein Fehler im Flussbett.
+- stufe_bandrand 673 aus fehlerzaehler_t67u ist ein Artefakt des alten FB; die direkte Messung pruefung/o18/bandrand_t83u.py ergibt 0.

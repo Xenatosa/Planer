@@ -111,3 +111,6 @@ M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mti
 ## Runde O17
 - Zusammenhaengendes Steinband an Wandfuessen (Shader, geglaettete Neigung). Details in pruefung/runde_o_status.md.
 - Blender: /workspace/dorfmap_blender_O17/dorfmap_O17.glb (Viewer-Stand, 1 Einheit = 1 m), Anleitung in pruefung/README_Blender_O17.md. Erzeugen mit pruefung/blender_dump_o17.js und blender_paket_o17.py. Getestet mit Blender 4.2.3 (/tmp/blender-4.2.3-linux-x64/blender).
+
+## Runde O18
+Siehe pruefung/runde_o_status.md (O18) und ABWEICHUNGEN.md. Messskripte: pruefung/o18/ (zacken_t83u.py, bandrand_t83u.py, grob_steil_t83u.py, render_o18.js); Bilder: pruefung/o18/bilder/.

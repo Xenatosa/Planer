@@ -69,3 +69,8 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 
 ## O16 (F t77u) – für alle Bots
 - rampe_9 (Krater, (130,161)->(140,198)) samt Ruecken 133|173 entfernt, nur Anzeige. Jetzt 13 Rampen; alte rampe_10..13 = neue rampe_9..12. Zellwerte unveraendert (nur boden_anzeige_m). Korridor bleibt in der CSV begehbar – Wege-/Deko-Bot: dort keinen Rampenweg mehr erwarten. Details relief3d/pruefung/runde_o_status.md.
+
+## O18 – Steinpfad D1/F1 (Overlay-Teil, nicht im Grundgeruest)
+- D1: Die Luecke auf der Gelaendeseite ist durch die O18-Glaettung und Wegschutz geschlossen. Die Pfadsteine selbst (Overlay) muessen in der Pfad-Ebene durchgezogen und an die Abzweigungen angeschlossen werden.
+- F1: Der Steinpfad beginnt an einer Felswand. Das Overlay muss den Startpunkt auf den Wandfuss bzw. eine Rampe legen; das Gelaende bietet dort keinen Aufgang (Zellwerte unveraendert).
+- Wege duerfen nicht schluchtartig eingesenkt werden: Overlay auf boden_anzeige_m legen, nicht tiefer.
