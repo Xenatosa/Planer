@@ -253,3 +253,20 @@ def fein_gipfel(FW,BAND,NX,NY,sig=4.0,thr=0.08,it=10,cap=3.0):   # O18d: staerke
         n=max(n,int((w>0.05).sum()));Fz=np.where(inn,np.maximum(np.minimum(Fz,Fz*(1-w)+Gs*w),np.where(ok,F,0.0)-cap),Fz)
     h2=Fz.ravel()[vid];FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return {'punkte':n,'max_m':round(float((h-h2).max()),2)}
+
+def farbe_weich(VC,FW,RS,NX,NY,box=(0,0,24,45),sig=5.0):
+    """O18d [F A1 braune Flaeche, harte Kante]: Quellkarte hat in A1 am Kartenrand einen geraden FELS-Streifen (x<15) mit
+    senkrechter Kante zu SCHNEE. Nur Anzeige-Farbe: in der Box Farbsprung > 40 (0..255) per Gauss weich machen, Gewicht
+    laeuft zum Boxrand aus. Grob-VC und Feinband-Farbe gleich behandelt. Deterministisch."""
+    GY,GX=NY*RS+1,NX*RS+1;V=VC.reshape(GY,GX,3).astype(float)
+    x0,y0,x1,y1=[v*RS for v in box];L=V.mean(2)
+    gm=np.hypot(nd.sobel(L,0),nd.sobel(L,1))/8;e=(gm>6).astype(float);e[:, :]*=0;e[y0:y1,x0:x1]=(gm[y0:y1,x0:x1]>6)
+    w=np.clip(nd.gaussian_filter(nd.binary_dilation(e>0,iterations=int(sig*1.5)).astype(float),sig/2)*1.5,0,1)
+    Vs=np.stack([nd.gaussian_filter(V[...,k],sig) for k in range(3)],2)
+    V2=V*(1-w[...,None])+Vs*w[...,None];VC[:]=np.clip(np.round(V2),0,255).astype(VC.dtype).reshape(VC.shape)
+    FS=FW['fs'];FX=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);c=np.frombuffer(base64.b64decode(FW['c']),np.uint8).reshape(-1,3).astype(float).copy()
+    gy=(vid//FX)/FS*RS;gx=(vid%FX)/FS*RS;wf=nd.map_coordinates(w,[gy,gx],order=1);k=wf>0.01
+    if k.any():
+        cs=np.stack([nd.map_coordinates(Vs[...,j],[gy[k],gx[k]],order=1) for j in range(3)],1);c[k]=c[k]*(1-wf[k,None])+cs*wf[k,None]
+        FW['c']=base64.b64encode(np.clip(np.round(c),0,255).astype(np.uint8).tobytes()).decode()
+    return {'punkte':int((w>0.05).sum()),'fein':int(k.sum())}
