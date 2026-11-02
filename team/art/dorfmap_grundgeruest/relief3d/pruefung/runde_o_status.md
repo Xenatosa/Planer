@@ -456,3 +456,9 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Export /workspace/dorfmap_3d_runde_O18.html, 56 Feld-HTML + reihe_1..7.zip (je 8), Banner 5ab2c63.
 - Bilder /tmp/o18/H (Ton 11 schraeg + 3 nah; Textur A1,B1,C1,D1). Pixel-Diff zu O18e klein (mittl. <0,2/255): Wirkung kaum sichtbar.
 - Rest (nur dokumentiert, kein Umbau mehr): B2/C2 weiche Kuppen um Haeuser mit Knicklinien dazwischen (C2_nah); Perlenlinien an Klippenoberkanten E1/F1/G1/H1/D1 bleiben -> Ursache vermutlich nicht Hoehe (Bilateral wirkte nicht), eher Wand-/Band-Naht-Geometrie; Moire D1/C1 Ursache nicht geprueft; A1 Braun-Schnee-Uebergang weicher, Braunflaeche bleibt.
+
+## O18g (Durchsicht-Schlitze H1/G1, Magenta-Marker)
+- Ursache: `_bandnaht_j1` lief vor den O18d-f-Nachschritten (Ufer, Sockel, Entzacken, Flusseinschnitt, kante_bilateral) -> Fein-/Grobnaht (T-Stoesse am Bandrand) wieder offen. Fix: Naht am Ende von gen erneut exakt (1180 Punkte angepasst).
+- pruefung/loch_o18g.js (offene Innenkanten, 2-cm-verschweisst): index.html 1500 -> 0; alle 56 Felder: 0 innen (Rest = Feldschnittkanten/Sockel-Unterkante).
+- Magenta-Klickmarker nur noch mit ?dbg=1; Kamera nicht mehr unter Gelaende/von unten.
+- Regression: t42u 0, Zacken fein 45/16 grob 5/0, Budget lod1 1,187 M.
