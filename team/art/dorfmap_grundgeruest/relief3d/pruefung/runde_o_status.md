@@ -323,3 +323,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Es sind sonnenbeschienene Stellen des Gelände-/Schneebodens in der Lücke des Klippen-Schattens; die blockigen Ränder kommen von der Schattenkarten-Auflösung. Das Wasser ist dort flach und fast durchsichtig.
 - Versuch 1: Alpha-Boden aus geglätteter Tiefe (≥0,35 m), keine sichtbare Änderung → zurückgenommen. Kein Code geändert.
 - Offen: höhere Schattenkarten-Auflösung oder Wasser-Mindestdeckung bei flachem Wasser; beides ist ein größerer Eingriff mit Risiko für fluss_3/4/9 → nicht gemacht.
+
+## O12 N2 – Kameras repariert (pruefung/nah_kameras_t65u.json), Bilder /workspace/t65/n2, alle einzeln in voller Größe angesehen
+- aus_ost_oben → [318,12,268]: Osthang mit Wald und Haus, frei; Clay: Hang/Grat ok.
+- baum_80_175 → [68,26,187]: Baumgruppe und Häuser von oben, frei; Clay: Hügel ok, feine Linien-Artefakte (bekannt).
+- platz_Q1 → [26,4,292]: frei. Die Platzfläche ist eine untexturierte graue Platte (Platzhalter, Befund). Clay: glatt.
+- krater_rand: erst [253,24,65], dann noch im Starthaus (16×16 m) → [253,40,50]: Dorf von oben, frei; Clay ok.
+- rampe_4: In der Textur läuft ein unscharfes Weg-Band quer durchs Bild nahe der Kamera, im Clay nicht zu sehen → Weg-Overlay über der Kante, offen (nicht untersucht).
+- rampe_13: Weg endet abrupt an der Kante, mit dunklem Rechteck am Ende → offen.
+- Angesehen: 14 Bilder (6 Kameras × 2, plus krater_rand 2× nachgerendert).
