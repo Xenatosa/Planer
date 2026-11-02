@@ -427,3 +427,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Offen: C2-Kegel Zahnkante am Grat (vermutlich Wand-Mesh, nicht Gelaende); G1-Gipfel noch spitz-pyramidal; B2 gerader Knick im Hang; E1-Nordrand: trockene Rinne bis Kartenrand (171–182|0, bis -9,6 m) – bestand schon vor O18; A1 braune Flaeche mit harter Kante am Kartenrand; H2 Kartenrandpunkt.
 - F1-Steinpfad: overlayseitig (rampenwege[1] endet blind 2 Zellen vor Nordwand 227|36), siehe UEBERGABE.md.
 - Exporte: /workspace/dorfmap_3d_runde_O18.html, /workspace/dorfmap_felder_3d/ (56 HTML + reihe_1..7.zip, Banner Commit 24c67ab).
+
+## O18d – sichtbare Fehler (Daten-Commit dd8e113)
+- Neu (runde_o18.py, nur Anzeige-Gelaende/Wasser): C2-Kegel ins Feinband (Zahnkante weg), gipfel_rund/fein_gipfel mit weichem Auslauf, Feinband bis an konvexe Kanten, farbe_weich (A1), haus_sockel (Gelaende am Haus y+0,40 -> grauer Sockelstreifen weg), ufer_weich + ufer_boeschung (max 0,9 m/m, max 1,5 m Abtrag; B2-Knick), fein_entzacken (H2-Randspalte 1,61 m weg), fluss_einschnitt (Wasser -0,2 m, Bettmulde bis 0,7 m), 23 versunkene/nasse Objekte entfernt (pruefung/o18/versunken_weg.json).
+- Regression: t42u 0; Spalt 0; bergauf_gt_2cm 0 (Stufen >30 cm 1304, unveraendert); stufe_bandrand_gt0,3 9 (max 0,41 m; fehlerzaehler 4012, FW-Dump vor Naht); Raycast 0 schwebend/versunken/nass (Baeume, Felsen, Findlinge); Budget lod1 1.202.239 (<1,3 M); deterministisch (md5 gleich). Ladezeit nicht neu gemessen.
+- Zacken vorher(O18c)->O18d: fein unten 76->222, oben 50->126; grob unten 30->154, oben 17->304. Von den Top-40 liegen 27/17/39/40 im Wasser/Uferrand (Bettmulde), 13 fein-oben an Hausplateaus. Spitzen (s1>0,25|s3>1,5) 261->153 (P1a)->227 (Haus-/Uferkanten).
+- Noch sichtbar: Hausplateaus in Ton-Ansicht kastenfoermig; B2-Ufer am Haus steil/felsfarben; Zacken-Zuwachs an Ufern; A1 brauner Streifen weich aber rechteckig; G1 noch leicht spitz.
+- Exporte: /workspace/dorfmap_3d_runde_O18.html (= index.html dd8e113), /workspace/dorfmap_felder_3d/ 56 HTML + reihe_1..7.zip (Banner dd8e113).
