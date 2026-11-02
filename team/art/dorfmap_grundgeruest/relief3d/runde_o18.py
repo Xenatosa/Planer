@@ -123,3 +123,96 @@ def grob_wand_glatt(G_ANZ,FW,WV,WEGA,NX,NY,RS,it=3):
         n=max(n,int((w>0.05).sum()))
         G=G*(1-0.8*w)+nd.gaussian_filter(G,1.0)*0.8*w
     return G.astype(G_ANZ.dtype),{'ecken':n,'max_aenderung_m':round(float(np.abs(G-G_ANZ).max()),2)}
+
+def band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS,thr=2.0):
+    """O18 Teil 2 [F 'Dreiecke in den Boden', Option a]: Feinband spaet auf alle Zellen erweitern, in denen das sichtbare
+    Grobnetz steil ist (Steigung>thr, +1 Zelle Rand). Ursache war: BAND schliesst Wassernaehe (dil 1), belegt und erst
+    spaeter (Anzeige-Schritte) steil gewordene Zellen aus -> Wandteile im 0,5-m-Netz mit Saegezaehnen.
+    Neue Feinpunkte: kubischer Spline aus G_ANZ (glatt, keine Diagonal-Knicke), Farbe aus VC, Tint neutral, Schnee 0
+    (wie Bandrand). Nasse Zellen, Wege (WEGA>40) und Gebaeude bleiben grob. Rand wird danach per bandnaht_j1 gepinnt."""
+    GY,GX=G_ANZ.shape;FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;G=G_ANZ.astype(float)
+    B=np.zeros(NX*NY,bool);B[np.frombuffer(base64.b64decode(FW['band']),np.uint32)]=True;B=B.reshape(NY,NX)
+    q=np.maximum.reduce([np.abs(G[1:,:-1]-G[:-1,:-1]),np.abs(G[:-1,1:]-G[:-1,:-1]),np.abs(G[1:,1:]-G[1:,:-1]),np.abs(G[1:,1:]-G[:-1,1:]),np.abs(G[1:,1:]-G[:-1,:-1])/1.414,np.abs(G[1:,:-1]-G[:-1,1:])/1.414])*RS
+    cq=nd.maximum_filter(q,size=RS,origin=-(RS//2))[::RS,::RS][:NY,:NX]
+    wet=nd.maximum_filter((WV>-900).astype(np.uint8),size=RS+1,origin=-(RS//2))[::RS,::RS][:NY,:NX]>0
+    weg=nd.maximum_filter((WEGA.reshape(GY,GX)>40).astype(np.uint8),size=RS+1,origin=-(RS//2))[::RS,::RS][:NY,:NX]>0
+    S=(cq>thr)&~B;S=nd.binary_dilation(S,iterations=1)&~B&~weg&~belegt   # O18b: auch nasse Schluchtzellen (Bett unter Spiegel geklemmt)
+    if not S.any():return {'zellen':0}
+    B2=B|S
+    # Feinpunkte aller Bandzellen
+    cy,cx=np.nonzero(B2);u=np.zeros((FY,FX),bool)
+    for a in range(FS+1):
+        for b in range(FS+1):u[cy*FS+a,cx*FS+b]=True
+    vid_alt=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);vid=np.flatnonzero(u.ravel()).astype(np.uint32)
+    neu=~np.isin(vid,vid_alt);pos=np.searchsorted(vid_alt,vid[~neu])
+    fy=vid//FX;fx=vid%FX;gy=fy/FS*RS;gx=fx/FS*RS
+    hs=nd.map_coordinates(nd.spline_filter(G,order=3),[gy[neu],gx[neu]],order=3,prefilter=False,mode='nearest')
+    hl=nd.map_coordinates(G,[gy[neu],gx[neu]],order=1)
+    hs=np.clip(hs,hl-0.6,hl+0.6)   # kein Ueberschwingen
+    Wn=np.where(WV>-900,WV,np.nan).astype(float);wi=[gy[neu],gx[neu]];wl=nd.map_coordinates(np.nan_to_num(Wn,nan=-999),wi,order=1);wok=nd.map_coordinates((WV>-900).astype(float),wi,order=1)>0.99
+    hs=np.where(wok,np.minimum(hs,wl-0.08),hs)
+    def mix(key,dt,k,fill):
+        a=np.frombuffer(base64.b64decode(FW[key]),dt).reshape(len(vid_alt),*( (k,) if k>1 else ()))
+        o=np.zeros((len(vid),)+a.shape[1:],dt);o[~neu]=a[pos];o[neu]=fill;return o
+    h=mix('h',np.float32,1,0);h[neu]=hs
+    V=VC.reshape(GY,GX,3).astype(float);vc=np.stack([nd.map_coordinates(V[...,k],[gy[neu],gx[neu]],order=1) for k in range(3)],1)
+    c=mix('c',np.uint8,3,0);c[neu]=np.clip(np.round(vc),0,255)
+    t=mix('t',np.uint8,3,128);s=mix('s',np.uint8,1,0)
+    FW['vid']=base64.b64encode(vid.tobytes()).decode();FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    FW['c']=base64.b64encode(c.tobytes()).decode();FW['t']=base64.b64encode(t.tobytes()).decode();FW['s']=base64.b64encode(s.tobytes()).decode()
+    FW['band']=base64.b64encode(np.flatnonzero(B2.ravel()).astype(np.uint32).tobytes()).decode()
+    return {'zellen':int(S.sum()),'punkte_neu':int(neu.sum()),'B':B2,'vid':vid}
+
+def naht_weich(FW,G_ANZ,BAND,NX,NY,RS,L=1.25):
+    """O18 [F Zacken am Bandrand]: bandnaht_j1 pinnt die Randpunkte auf G_ANZ (Sprung bis 2,6 m), das Innere blieb ->
+    Stufe/Zacke eine Feinreihe hinter dem Rand. Hier: Randversatz weich ins Innere tragen (Gewicht 1 am Rand -> 0 nach L m),
+    Versatz als normierte Gauss-Interpolation der Randwerte. Randpunkte = exakt G_ANZ (kein Spalt)."""
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1;GY,GX=G_ANZ.shape
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FX;fx=vid%FX
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()
+    BP=np.pad(BAND,1,constant_values=False)
+    def bc(yy,xx):return BP[np.clip(yy,-1,NY)+1,np.clip(xx,-1,NX)+1]
+    ya=(fy-(fy%FS==0))//FS;yb=fy//FS;xa=(fx-(fx%FS==0))//FS;xb=fx//FS
+    ya=np.where(fy%FS==0,(fy-1)//FS,fy//FS);xa=np.where(fx%FS==0,(fx-1)//FS,fx//FS)
+    rand=~(bc(ya,xa)&bc(ya,xb)&bc(yb,xa)&bc(yb,xb))
+    gi=nd.map_coordinates(G_ANZ.astype(float),[fy/FS*RS,fx/FS*RS],order=1,mode='nearest')
+    d=gi-h
+    D=np.zeros((FY,FX));W=np.zeros((FY,FX));D[fy[rand],fx[rand]]=d[rand];W[fy[rand],fx[rand]]=1
+    sg=L*FS/2;Dg=nd.gaussian_filter(D,sg);Wg=nd.gaussian_filter(W,sg)
+    M=np.ones((FY,FX),bool);M[fy[rand],fx[rand]]=False;dist=nd.distance_transform_edt(M)/FS
+    w=np.clip(1-dist/L,0,1);w=w*w*(3-2*w)
+    corr=np.where(Wg>1e-4,Dg/np.maximum(Wg,1e-4),0)*w
+    h2=h+corr[fy,fx];h2[rand]=gi[rand]
+    FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'randpunkte':int(rand.sum()),'max_versatz_m':round(float(np.abs(d[rand]).max()),2),'innen_geaendert':int((np.abs(corr[fy,fx])>0.01).sum())}
+
+def fein_glatt(FW,BAND,NX,NY,thr=0.35,it=8):
+    """O18 [F Zacken/Kerben im Feinband, Gipfel rund]: Knicke/Kerben/Spitzen im Feinband (|Laplace 4-Nachbarn|>thr m bei 0,25 m)
+    iterativ zum Gauss-Mittel ziehen (weich gewichtet). Randpunkte und Punkte ohne volle Nachbarschaft bleiben fest."""
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    F=np.full((FY,FX),np.nan);F.ravel()[vid]=h;ok=~np.isnan(F)
+    BP=np.repeat(np.repeat(BAND,FS,0),FS,1);inn=np.zeros((FY,FX),bool);inn[:-1,:-1]=BP
+    inn=nd.binary_erosion(ok&nd.binary_erosion(np.pad(inn,0)|False,iterations=0) if False else ok,iterations=2)
+    Fz=np.where(ok,F,0.0);n=0
+    for _ in range(it):
+        lap=np.zeros_like(Fz);lap[1:-1,1:-1]=(Fz[:-2,1:-1]+Fz[2:,1:-1]+Fz[1:-1,:-2]+Fz[1:-1,2:])/4-Fz[1:-1,1:-1]
+        w=np.clip((np.abs(lap)-thr)/thr,0,1);w=np.maximum(w,nd.maximum_filter(w,3)*0.5)*inn
+        if w.max()==0:break
+        n=max(n,int((w>0).sum()))
+        Wk=nd.gaussian_filter(ok.astype(float),1.0);Gs=nd.gaussian_filter(Fz,1.0)/np.maximum(Wk,1e-6)
+        Fz=np.where(inn,Fz*(1-w)+Gs*w,Fz)
+    h2=Fz.ravel()[vid];FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'punkte':n,'max_m':round(float(np.abs(h2-h).max()),2)}
+
+def kaskade_glatt(G_ANZ,WV,RS,sig=1.0):
+    """O18 [F F6 Restzacken]: Steile Bachkaskaden (F6/G7/E7) – Bett und Spiegel stufig je Ecke. Nur nasse Ecken mit Gefaelle>1:
+    Bett und Spiegel per normierter Gauss-Mittelung ueber nasse Ecken glaetten; Bett bleibt >=0,1 m unter Spiegel."""
+    w=(WV>-900);G=G_ANZ.astype(float);V=np.where(w,WV,0.0).astype(float)
+    gy,gx=np.gradient(np.where(w,V,np.nan));s=np.nan_to_num(np.hypot(gx,gy))*RS
+    m=w&(nd.maximum_filter(s,3)>1.0)
+    if not m.any():return G_ANZ,WV,{'ecken':0}
+    W=nd.gaussian_filter(w.astype(float),sig)+1e-9
+    Gs=nd.gaussian_filter(np.where(w,G,0),sig)/W;Vs=nd.gaussian_filter(V,sig)/W
+    V2=np.where(m,Vs,WV);G2=np.where(m,np.minimum(Gs,V2-0.1),G)
+    return G2.astype(G_ANZ.dtype),V2.astype(WV.dtype),{'ecken':int(m.sum()),'max_m':round(float(np.abs(G2-G).max()),2)}
