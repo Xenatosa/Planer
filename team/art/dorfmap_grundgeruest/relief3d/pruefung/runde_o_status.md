@@ -367,3 +367,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - V3 nicht gemacht: Die Lücken sehen nach einem echten Schattenloch aus (vermutlich Werfer-Geometrie mit treppigem Umriss). Das lässt sich nicht mit Bias/Weichheit lösen. Nächster Schritt wäre: herausfinden, welches Mesh dort den Schatten wirft (Ebenen einzeln castShadow aus) [nicht geprüft].
 - Nicht gelöst → kein Export O13. main.js = 0b843be.
 - Angesehen voll: fluss_7 nosh/wnosh, tuempel_west nosh/wnosh/v1/v2 = 6.
+
+## O14 (Stand 434686b + Doku)
+- Q1 Naht: T-Stöße Feinband/Grobnetz (LS1 8826, LS2 4413) zugenäht (817e8f6); Spaltmessung 0 bei beiden LOD; Schürze standardmäßig aus (?schuerze=1 = alt). Kanten Feinnetz: Falten 1856→137, mehr2 9→0.
+- Q1-Verifikation ohne Schürze: 9 Außen-/Randkameras (Nord 100/250, Süd 80/200, West 60/220, Ost 130, Ecken NW/SO) + aus_ost_aussen, Clay, o12 vs O14 LOD2 und O14 LOD0: Ränder/Wände identisch, kein Spalt sichtbar.
+- Q2: keine Datenänderung nötig. „Schlitz“ x148–157,z25–32 ist der Einschnitt der rampe_12 selbst und liegt ganz unter dem Rampenband (BANDZ=1), wird nicht gerendert. Spitze (158,18): 13,5 m nur im Roh-G, Anzeige-GB=7,99 bereits glatt. CSV unverändert.
+- Durchgang: det gleich, Raycast 0, Spalt 0,0, t42u 0, bergauf_pfad 0 (bergauf_summe 3922), stufe_bandrand 0, Budget lod1 1,127 M (fbo 786k), Ladezeit Median 7,3 s (Export 09:07: 8,5 s).
+- Bilder: Haarlinien-Stellen vorher/nachher (t65/o14, Textur+Clay) und 10 Stichproben + Randansichten (t65/o14v). Haarlinien an Kreuzung rampe_2/12, Mittelgebirge, rand_ost_80/265 weg.
+- Offen: feine dunkle Linien an Silhouetten-/Gratkanten (z. B. wand_288_72, wand_312_168) sowohl in O12 als auch O14 → nicht vom Band, Ursache ungeklärt. Schwacher Restpunkt-Strich auf dem Grat in r_kreuz (nrm) ungeklärt. Schluchtkante aus Fabians Screenshot = Kreuzung rampe_2/12.
+- Export /workspace/dorfmap_3d_runde_O14.html, Banner „Ansicht: NEU (Relief t67u, Runde O14)“.
