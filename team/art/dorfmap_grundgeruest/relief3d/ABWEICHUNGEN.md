@@ -180,3 +180,5 @@ Nichts davon behoben.
 - Bett-Glaettung (bett_glatt, Gauss 2,5 m, min 5 cm Tiefe): 20471 Vertices; Wasserspiegel unveraendert. Treppen bei fluss_7 bleiben (Umriss der Nasszellenmaske, ohne Zellaenderung nicht loesbar).
 - Offen: gepunktete Haarlinien am Bandrand (rand_ost_80/265, wand_264_24), Keile wand_288_144, Rillen wand_48_168.
 - O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.
+
+- O10: L1 Budget lod1 1,13 M (forceSinglePass Wasser); L2 Haarlinien Ostrand per polygonOffset behoben; L3/L3b fluss_7 und L4 wand_288_144 nicht behoben (siehe pruefung/runde_o_status.md). Export /workspace/dorfmap_3d_runde_O10.html.

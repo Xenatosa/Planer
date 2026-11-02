@@ -99,3 +99,5 @@ Runde O7 (01.11.): Flussbett im Generator weich geformt (`ufer_profil`, smoothst
 
 Runde O8: Spalt 0, Raycast schwebend 0, Bett geglaettet; Details pruefung/runde_o_status.md, Bilder pruefung/o8/.
 - O9 (K1b-K4): siehe pruefung/runde_o_status.md; Export dorfmap_3d_runde_O9.html; offen: Haarlinien Ostrand, fluss_7 Uferterrassen, Keil wand_288_144, Rillen wand_48_168.
+
+- O10: L1 Budget lod1 1,13 M (forceSinglePass Wasser); L2 Haarlinien Ostrand per polygonOffset behoben; L3/L3b fluss_7 und L4 wand_288_144 nicht behoben (siehe pruefung/runde_o_status.md). Export /workspace/dorfmap_3d_runde_O10.html.

@@ -271,3 +271,18 @@ Spalt LS1/LS2 0/0; t42u summe 0; Laengsprofil bergauf_pfad 0, Stufen >1 m ausser
 ## O10 L3 fluss_7 Eckigkeit
 - ufer_profil: Abstaende si/so jetzt aus geglaettetem signiertem Distanzfeld (Versuch 1 Gauss 1,5 Ecken, Versuch 2 Gauss 4 Ecken = 2 m; Stand: 4). bett_ecken 8.595 -> 13.252, land_ecken 2.643 -> 3.005. bergauf_pfad 0, bergauf_summe 3922 unveraendert.
 - Render fluss_7 Clay+Textur vorher/nachher (/workspace/t65/l3s.png, l3t.png): KEIN sichtbarer Unterschied. Die eckige Form liegt also nicht im Uferprofil (fluss_7 ist nicht im Feinband). Wahrscheinlich Bettform aus G/Anzeige-Netz bzw. Wasserkoerper-Rand selbst. Nach 2 Versuchen: NICHT behoben, dokumentiert.
+
+## O10 Aufraeumen (02.11.)
+Uncommittet vorgefunden: L4-Versuch halbfertig (gen_relief.py breite=16, Daten aus breite=8-Testlauf). Komplett zurueckgenommen.
+
+## O10 L3b fluss_7 Eckigkeit – NICHT behoben (2 Versuche)
+Eingrenzung (Bilder /workspace/t65/l3b, l3c.png, l3e.png): Clay mit/ohne Wasser rund; Textur ohne Wasser (?nowa=1) rund; ?hide=winnen,wrand unveraendert eckig -> Ursache ist das Wassermesh (wmesh). Wireframe (?wwire=1, neu) zeigt eckige Wasserflaeche.
+Versuch 1/2: fortgesetzten Spiegel ausserhalb 1 m bzw. 0,5 m mit 0,25 bzw. 1,0 m/m absenken -> optisch unveraendert (nur Rauschen). Reichweitengrenze ist es also nicht. Zurueckgenommen.
+Vermutung (ungeprueft): Wasserfarbe/Alpha kippt ueber nur 0..0,375 m Tiefe (col(): e=1-min(1,t*4)); kleine Zellstufen im Grobnetz-Bett, im Clay unsichtbar, werden so als eckige Farbkante sichtbar. Naechster Schritt: Farbrampe ueber Tiefe breiter bzw. Tiefe vor der Farbe glaetten.
+
+## O10 L4 wand_288_144 Feinbandrand – NICHT behoben (2 Versuche)
+bandrand_weich breite 16: Kerbe weg, Schattenkante weicher, aber Raycast 81 schwebende Objekte (19 Baeume, 61 Geroell). breite 12: 27 schwebend. Basis breite 8: 1. Beides verworfen (Objekte werden offenbar vor dem Bandrand-Ausgleich platziert).
+
+## O10 L5 Durchgang (Stand dieses Commits)
+t42u 0 | Spalt 0,0 m | bergauf_pfad 0 (summe 3922) | Raycast 1 Baum (325.8/280.8, 0,32 m), sonst 0 | Fehlerzaehler: spitzen 4, nadeln 0, senken>0,8 m 3, >2 m 0, enge_grate 249, stufe_bandrand 20, Objekte auf Wegen 0 | Budget lod1 Bildpass 1,133 M (+ Tiefenpass FBO 0,793 M), test_budget 1,134 M | Ladezeit Median 7,96 s.
+Hinweis: stufe_bandrand 20 und 1 schwebender Baum waren in O9 0/0 – kommt aus L2/L3 (messergrate/Uferprofil), nicht untersucht.
