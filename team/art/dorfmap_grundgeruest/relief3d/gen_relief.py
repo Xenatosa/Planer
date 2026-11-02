@@ -729,6 +729,32 @@ def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1
 VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
 import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS);RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
 _WEG_G0=G_ANZ.reshape(GY,GX).astype(float).copy();_WEG_V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();_WEG_F0=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()   # O18h [F G1 Steinweg war in O17 besser]: Stand vor allen O18-Schritten merken
+def _wand_maske(thr=1.0):   # O18i: Felswand = Steilheit Stand vor O18 >thr (dh/dm), 1 m erweitert
+    gy,gx=np.gradient(_WEG_G0*1.0,1.0/RS);m=np.hypot(gx,gy)>thr;return nd.binary_dilation(m,iterations=max(1,int(RS)))
+if not os.environ.get('WAND_ALT'):   # O18i [F G1 Felswand blobbig, Konturen als echte Geometrie]: gipfel_rund/fein_gipfel (Messung WANDMESS: 0.93/0.56 m an Wand) nur ausserhalb Steilwand
+    import runde_o18 as _R;_WW=np.clip(nd.distance_transform_edt(~_wand_maske())/RS,0,1)   # 0 in Wand, 1 ab 1 m Abstand
+    _gr0,_fg0=_R.gipfel_rund,_R.fein_gipfel
+    def _gr_w(G,*a,**k):
+        G0=G.reshape(GY,GX).astype(float).copy();r=_gr0(G,*a,**k);n=r[0].reshape(GY,GX).astype(float);n=G0+(n-G0)*_WW;return (n.reshape(r[0].shape).astype(r[0].dtype),)+tuple(r[1:])
+    def _fg_w(FW_,*a,**k):
+        h0=np.frombuffer(base64.b64decode(FW_['h']),np.float32).astype(float).copy();r=_fg0(FW_,*a,**k);h1=np.frombuffer(base64.b64decode(FW_['h']),np.float32).astype(float)
+        vid=np.frombuffer(base64.b64decode(FW_['vid']),np.uint32);wf=nd.map_coordinates(_WW,[vid//FXn/FS*RS,vid%FXn/FS*RS],order=1,mode='nearest')
+        FW_['h']=base64.b64encode((h0+(h1-h0)*wf).astype(np.float32).tobytes()).decode();return r
+    _R.gipfel_rund,_R.fein_gipfel=_gr_w,_fg_w
+if os.environ.get('WANDMESS'):   # O18i Diagnose: welche O18-Glaettung veraendert Wandpunkte
+    import runde_o18 as _R;_WM=_wand_maske();_WMESS={}
+    def _wrap(n,f):
+        def g(*a,**k):
+            G=a[0].reshape(GY,GX).astype(float).copy() if isinstance(a[0],np.ndarray) and a[0].size==GY*GX else None;h0=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()
+            r=f(*a,**k);h1=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+            dg=0.0
+            if G is not None:
+                o=r[0] if isinstance(r,tuple) else r
+                if isinstance(o,np.ndarray) and o.size==G.size: dg=float(np.abs(o.reshape(GY,GX)-G)[_WM].mean())
+            dh=float(np.abs(h1-h0).mean()) if h1.size==h0.size else -1
+            _WMESS[n]=(_WMESS.get(n,(0,0))[0]+dg,_WMESS.get(n,(0,0))[1]+dh);print('WANDMESS',n,round(dg,4),round(dh,4));return r
+        return g
+    for n in ['grob_wand_glatt','entstacheln','kaskade_glatt','gipfel_rund','naht_weich','fein_glatt','fein_gipfel','fein_entzacken','grob_entzacken','kante_bilateral','ufer_weich','ufer_boeschung']: setattr(_R,n,_wrap(n,getattr(_R,n)))
 import os as _o18os
 if not _o18os.environ.get('O18_AUS'):   # Runde O18 [F t83u/t85u/t86u/t87u]: Wasser ohne Fluss raus, Senken gefuellt, Spitzen/Zacken gerundet -- nur Anzeige [A]
     import runde_o18 as R18;G_ANZ,VC,WV,R18_W,O18_W=R18.wasser_raus(G_ANZ,VC,WV,fl,wa,RS);O18_W['feinband']=R16.feinband(FW,G_ANZ,VC,R18_W,NX,RS);G_ANZ,O18_G=R18.gelaende(G_ANZ,WV,WEGA,RS);O18_F=R18.feinband(FW,G_ANZ,WV,WEGA,NX,NY,RS);G_ANZ,WV,O18_T=R18.fluss_tiefer(G_ANZ,WV,WEGA,bruecken,FW,NX,NY,RS);G_ANZ,O18_GW=R18.grob_wand_glatt(G_ANZ,FW,WV,WEGA,NX,NY,RS);print('o18_grobwand',O18_GW);G_ANZ,O18_Z=R18.entstacheln(G_ANZ,FW,NX,NY,RS);print('o18_zacken',O18_Z);G_ANZ,WV,_kg=R18.kaskade_glatt(G_ANZ,WV,RS);print('o18_kaskade',_kg);G_ANZ,_gr=R18.gipfel_rund(G_ANZ,WV,WEGA,belegt,RS) if not os.environ.get('GIPFEL_ALT') else (G_ANZ,{});print('o18_gipfel_rund',_gr);_HSM=R18.haus_sockel_feld(haeuser,WV,GY,GX,RS);G_ANZ,_hs=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_grob',_hs);_be=R18.band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS);
