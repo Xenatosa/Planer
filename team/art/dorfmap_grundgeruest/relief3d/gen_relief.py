@@ -778,6 +778,7 @@ if os.environ.get('FW_NPZ'):R16.npz_nach(os.environ['FW_NPZ'],FW,G_ANZ,R16_W,NX,
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 G_ANZ,_uw=R18.ufer_weich(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_weich',_uw);G_ANZ,_ub=R18.ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_boeschung',_ub);G_ANZ,_hs2=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_fein',R18.haus_sockel_fein(FW,_HSM,NX,RS));print('o18d_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_ge=R18.grob_entzacken(G_ANZ,WV,RS);print('o18e_grob_entzacken',_ge);print('o18d_farbe_weich',R18.farbe_weich(VC,FW,RS,NX,NY))   # O18d A1 [A]
 G_ANZ,WV,_ft=R18.fluss_einschnitt(FW,G_ANZ,WV,NX,NY,RS);print('o18d_fluss_einschnitt',_ft);print('o18f_kante',R18.kante_bilateral(FW,NX,NY,it=2));print('o18e_entzacken2',R18.fein_entzacken(FW,NX,NY));G_ANZ,_ge2=R18.grob_entzacken(G_ANZ,WV,RS);print('o18e_grob_entzacken2',_ge2)
+print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 _VW=json.load(open('pruefung/o18/versunken_weg.json')) if os.path.exists('pruefung/o18/versunken_weg.json') else []   # O18d [F 7 versunkene Geroellteile]: Raycast-gemeldete versunkene/im Wasser stehende Objekte entfernen [A]
 _vwn=0
 for _k,_x,_z,_d in _VW:
