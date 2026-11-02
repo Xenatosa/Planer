@@ -72,5 +72,7 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
 
 ## O18 – Steinpfad D1/F1 (Overlay-Teil, nicht im Grundgeruest)
 - D1: Die Luecke auf der Gelaendeseite ist durch die O18-Glaettung und Wegschutz geschlossen. Die Pfadsteine selbst (Overlay) muessen in der Pfad-Ebene durchgezogen und an die Abzweigungen angeschlossen werden.
-- F1: Der Steinpfad beginnt an einer Felswand. Das Overlay muss den Startpunkt auf den Wandfuss bzw. eine Rampe legen; das Gelaende bietet dort keinen Aufgang (Zellwerte unveraendert).
+- F1 (O18c geprueft): Der Steinpfad ist rampenwege[1] (50 Punkte, Start G1 273,4|21,2 auf der Nordwand-Oberkante, Ende F1 227,1|37,0 = Zelle 227|36, zell_id 12323, boden_anzeige 0,39 m).
+  Das Ende liegt 2 Zellen suedlich vom Wandfuss der Nordwand (227|34 WAND_FUSS 11,1 m; 225|34 und 226|34 WAND 13,7 / 12,7 m) und endet dort blind: der naechste andere Weg-Punkt ist 18,4 m entfernt (245|41).
+  Gelaendeseitig ist die Rampe durchgehend (Hoehenschritt je Punkt <=0,45 m in F1, max 0,78 m bei 267|23 in G1). Ursache ist also overlayseitig: Endpunkt/Anschluss des Pfads, nicht das Gelaende. Overlay: Ende an das Wegnetz (z. B. 245|41) anschliessen oder vor der Wand enden lassen. Zellwerte unveraendert.
 - Wege duerfen nicht schluchtartig eingesenkt werden: Overlay auf boden_anzeige_m legen, nicht tiefer.

@@ -216,3 +216,34 @@ def kaskade_glatt(G_ANZ,WV,RS,sig=1.0):
     Gs=nd.gaussian_filter(np.where(w,G,0),sig)/W;Vs=nd.gaussian_filter(V,sig)/W
     V2=np.where(m,Vs,WV);G2=np.where(m,np.minimum(Gs,V2-0.1),G)
     return G2.astype(G_ANZ.dtype),V2.astype(WV.dtype),{'ecken':int(m.sum()),'max_m':round(float(np.abs(G2-G).max()),2)}
+
+def gipfel_rund(G_ANZ,WV,WEGA,belegt,RS,sig=1.6,thr=0.25,it=4):
+    """O18c [F G1-Block, C2-Kegel, Gipfelrundung]: konvexe Spitzen/Grate (Gauss-Mittel liegt >thr m unter dem Punkt)
+    weich absenken (nur absenken, nie anheben). Wasser, Wege, belegte Zellen ausgenommen. Deterministisch."""
+    G=G_ANZ.astype(float);fest=(WV>-900)|(WEGA>0)
+    if belegt is not None:
+        b=np.asarray(belegt)
+        if b.shape!=G.shape:
+            b=np.kron(b,np.ones((RS,RS),bool))[:G.shape[0],:G.shape[1]]
+            if b.shape!=G.shape:b=np.pad(b,((0,G.shape[0]-b.shape[0]),(0,G.shape[1]-b.shape[1])))
+        fest=fest|b
+    fest=nd.binary_dilation(fest,iterations=2);n=0;G0=G.copy()
+    for _ in range(it):
+        Gs=nd.gaussian_filter(G,sig);k=G-Gs
+        w=np.clip((k-thr)/thr,0,1)*(~fest)
+        w=nd.gaussian_filter(w,1.0)*(~fest)
+        n=max(n,int((w>0.05).sum()));G=np.maximum(np.minimum(G,G*(1-w)+Gs*w),G0-2.0)   # max 2 m absenken
+    return G.astype(G_ANZ.dtype),{'ecken':n,'max_m':round(float((G0-G).max()),2)}
+
+def fein_gipfel(FW,BAND,NX,NY,sig=2.0,thr=0.15,it=4):
+    """O18c [F Gipfelrundung im Feinband]: wie gipfel_rund, im Feinraster; Bandrand (2 Punkte) fest."""
+    FS=FW['fs'];FX,FY=NX*FS+1,NY*FS+1
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    F=np.full((FY,FX),np.nan);F.ravel()[vid]=h;ok=~np.isnan(F);inn=nd.binary_erosion(ok,iterations=3)
+    Fz=np.where(ok,F,0.0);Wk=None;n=0
+    for _ in range(it):
+        Wk=nd.gaussian_filter(ok.astype(float),sig);Gs=nd.gaussian_filter(Fz,sig)/np.maximum(Wk,1e-6)
+        w=np.clip((Fz-Gs-thr)/thr,0,1)*inn;w=nd.gaussian_filter(w,1.0)*inn
+        n=max(n,int((w>0.05).sum()));Fz=np.where(inn,np.maximum(np.minimum(Fz,Fz*(1-w)+Gs*w),np.where(ok,F,0.0)-1.5),Fz)   # max 1,5 m
+    h2=Fz.ravel()[vid];FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'punkte':n,'max_m':round(float((h-h2).max()),2)}

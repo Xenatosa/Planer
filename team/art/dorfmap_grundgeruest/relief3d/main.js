@@ -144,6 +144,7 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    ${(!FWM&&VCON)?'diffuseColor.rgb=pow(texture2D(tVC,(vLP.xz*'+RS+'.+.5)/vec2('+GX+'.,'+GY+'.)).rgb,vec3(2.2));':''}
    
    #define SBALT ${/[?&]steinband=alt/.test(location.search)?'true':'false'}
+   #define MKALT ${/[?&]maske=alt/.test(location.search)?'true':'false'}
    vec3 N=normalize(vWN);vec3 w=pow(abs(N),vec3(4.));w/=w.x+w.y+w.z;
    mat2 RT1=mat2(.96,-.28,.28,.96);vec3 tr=texture2D(tW,RT1*vWP.zy/9.).rgb*w.x+texture2D(tW,RT1*vWP.xy/9.).rgb*w.z+texture2D(tW,vWP.xz/9.).rgb*w.y;   // t66u N2: um -16 Grad gedreht, Schichtlinien nicht mehr waagrecht gestapelt [A]
    mat2 RT=mat2(.8,.6,-.6,.8);vec3 tr2=texture2D(tW,RT*vWP.zy/23.+.37).rgb*w.x+texture2D(tW,RT*vWP.xy/23.+.37).rgb*w.z+texture2D(tW,vWP.xz/23.+.37).rgb*w.y;   // t65u M4: zweite Wandprobe um 37 Grad gedreht -> waagrechte Schichtstreifen gebrochen, Form unveraendert [A]
@@ -157,13 +158,15 @@ const HN=(x,z)=>{x=Math.min(Math.max(x*RS,0),GX-1.001);z=Math.min(Math.max(z*RS,
    vec3 tx=mix(tr,tr2,0.5);float r=dot(tx,vec3(0.33));
    vec3 fels=pow(tx,vec3(2.2))*vec3(1.0,1.0,1.0)*mix(0.80,1.25,gD)*1.15;
    float sn=SBALT?smoothstep(0.44,0.66,abs(N.y)+0.18*(r-0.5)+0.20*(nzS-0.5)):smoothstep(0.42,0.72,abs(N.y)+0.06*(r-0.5)+0.06*(nzS-0.5));   // Schnee auf Simsen/Kanten [A]
-   if(!SBALT)sn=mix(sn,1.-smoothstep(0.60,1.10,slS),kS);   // O17: Schnee im Steinband ebenfalls aus geglaetteter Neigung -> keine Schneefetzen im Band [A]
+   if(!SBALT)sn=mix(sn,1.-smoothstep(0.60,1.10,slS),kS);
+   if(!MKALT){float snw=smoothstep(0.30,0.86,abs(N.y)+0.06*(r-0.5)+0.10*(nzS-0.5));sn=mix(sn,snw,0.5*(1.-kS));st=mix(st,1.-smoothstep(0.20,0.92,abs(N.y)+0.10*(nzS-0.5)),0.4*(1.-kS));}   // O18 [F A1 A2 B2 E1 C1 Texturuebergaenge]: Schnee/Fels-Grenze an Waenden breiter + Rauschen -> keine abgeschnittenen Dreiecks-Kanten (?maske=alt = O17) [A]   // O17: Schnee im Steinband ebenfalls aus geglaetteter Neigung -> keine Schneefetzen im Band [A]
    {float g2=TD3(97.,.1);fels*=mix(vec3(.90,.93,1.0),vec3(1.05,1.0,.92),g2);   // grossraeumige Farbe [A]
     float ms=smoothstep(.30,.48,abs(N.y)+0.15*(r-0.5))*(1.-sn)*smoothstep(.45,.6,gD);fels=mix(fels,vec3(.16,.20,.11),ms*.55);}   // Moos auf Absaetzen [A]
    #ifdef FWM
-   fels*=vFT*2.;fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // Runde D: grauer [A]
+   fels*=vFT*2.;if(MKALT)fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // Runde D: grauer [A] (O18: ausserhalb ifdef, s.u.)
    sn=max(sn,smoothstep(0.1,0.9,vFS+0.55*(1.-kS)*(nzS-0.5))*(1.-0.6*kS));   /* O17: Feinband-Schneeflecken im Steinband gedaempft */st=max(st,smoothstep(.05,.3,vFS)*0.0+st);
    #endif
+   if(!MKALT)fels=mix(vec3(dot(fels,vec3(.333))),fels,.5);   // O18 [F A2/E1 senkrechte Farbkante]: Grau-Angleich galt nur im Feinband -> harte Kante am Bandrand; jetzt Grob+Fein gleich [A]
    fels=mix(fels,vec3(0.80,0.84,0.90),sn*0.9);
    diffuseColor.rgb=mix(diffuseColor.rgb,fels,st);`).replace('#include <normal_fragment_maps>',/[?&]nobump=1/.test(location.search)?'#include <normal_fragment_maps>':`#include <normal_fragment_maps>
    {vec3 N2=normalize(vWN);vec3 w2=pow(abs(N2),vec3(4.));w2/=w2.x+w2.y+w2.z;   // t48u R5: Detail-Bump (triplanar) gegen "verpixelt" [A]
