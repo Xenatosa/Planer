@@ -299,3 +299,10 @@ Ergebnis: stufe_bandrand 0, Raycast 0/0/0/0/0, Spalt 0, t42u 0, bergauf_pfad 0. 
 Bilder /workspace/t65/m3 (vt/vc vorher, nt Versuch 1, n2/n2c Versuch 2), Uebersicht /workspace/t65/m3b.png.
 Versuch 1: Rampe smoothstep 0..1,2 m + Farbtiefe geglaettet + Rand-Alpha 0..0,35 m -> Ecken weicher, aber alle Gewaesser grau/blass (Endsee, fluss_3). Verworfen.
 Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u)^2 ueber 0..0,75 m, Rand-Alpha smoothstep 0..0,35 m. Farbe nahe vorher, etwas matter. fluss_7: Ecken weicher, als hellere Kante aber noch sichtbar -> TEILWEISE. Clay an allen 6 Stellen pixelgleich. ?wfarbe=alt zeigt vorher.
+
+## O11 M4 – bandrand_weich breite 12 + Objekte aus aufgefrischtem Cache
+- breite 12 (env BANDRAND_B, Default 12), Kette gen→html→Raycast→Cache auffrischen (281 Bäume, 6 Felsen, 16 Findlinge, 5 Steine, 493 Geröll neu)→gen→Raycast.
+- Vor Auffrischen: 11 Bäume/1 Fels/1 Findling/13 Geröll schwebend; danach Raycast 0.
+- stufe_bandrand 0, Spalt 0, t42u summe 0, bergauf_pfad 0, Determinismus 2× gleicher Hash.
+- Fehlerzähler: spitzen 4, senken>0.8 m 1, enge_grate 256 (vorher 249).
+- wand_288_144: Wandfuß leicht weicher, Wand bleibt steil – Verbesserung gering.

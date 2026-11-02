@@ -495,7 +495,7 @@ FH=np.where(_vin,FH+_wf*nd.gaussian_filter(_ab,1.2)*(0.22+0.08*_ff(5,213)),FB)
 # t57u: Schutthalde am Fuss als echte Kegel (nur unten, glatt) [A]
 _fz2=_wf*np.clip((0.30-_tl0)/0.2,0,1);_sh=nd.gaussian_filter(FH,10)-0.25+0.5*_ff(14,203)*0.3;FH=np.where(_vin,np.maximum(FH,FH*(1-_fz2)+np.maximum(FH,_sh)*_fz2),FB)
 _ap=nd.gaussian_filter(FH,8)-0.15;_fz=_wf*np.clip((0.28-_tl0)/0.18,0,1);FH=np.where(_vin,np.maximum(FH,_fz*_ap+(1-_fz)*FH),FB)   # nur am Wandfuss fuellen (t54u-D, vorher ganze Wand -> Relief weg)   # Schuttfuss/Kehlen fuellen
-import runde_o_t67u as RO;FH,BR_T67U=RO.bandrand_weich(FH,_FB0_T67U,_vin);print('bandrand_t67u',BR_T67U)   # t67u O5: keine Rechteck-Stufen am Feinbandrand [A]
+import runde_o_t67u as RO;FH,BR_T67U=RO.bandrand_weich(FH,_FB0_T67U,_vin,breite=int(os.environ.get('BANDRAND_B','12')));print('bandrand_t67u',BR_T67U)   # t67u O5: keine Rechteck-Stufen am Feinbandrand [A]
 import runde_o_t67u as RO;FH,ENTSP_T67U=RO.entspitzen(FH,FB,_vin);FH=np.where(_vin,FH,FB);FH,NK_T67U=RO.nadel_kappen(FH,_vin);print('entspitzen_t67u',ENTSP_T67U,NK_T67U)   # t67u Runde O3: keine Nadeln/Trichter [A]
 FH,ZF_T67U=RO.zacken_fein(FH,_vin);FH=np.where(_vin,FH,FB);print('zackenfein_t67u',ZF_T67U)   # t67u O9b: Restzacken Feinband [A]
 def keile_fein(FH,vin,T=0.6,K=0.4):   # O9 K3 [F]: 1-Ecken-breite Kerben/Grate (0,25 m breit, >0,6 m tief) quer zur Wand = Keile -> auf 40 % Tiefe, 2 Ecken breit; breitere Rinnen/Rippen bleiben [A]
