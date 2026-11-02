@@ -813,7 +813,24 @@ def _weg_zurueck():   # O18h: Wegbereich (WEGA>20, +-3 m voll, 2 m Auslauf, nich
     alt=nd.map_coordinates(_WEG_G0,[fy/FS*RS,fx/FS*RS],order=1,mode='nearest');o=np.argsort(_WEG_V0);p=np.clip(np.searchsorted(_WEG_V0[o],vid),0,len(o)-1);hit=_WEG_V0[o][p]==vid;alt[hit]=_WEG_F0[o][p][hit]
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h*(1-wf)+alt*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob_pkt':int((w>0).sum()),'fein_pkt':int((wf>0).sum()),'fein_alt_vid':int(hit[wf>0].sum())}
-G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5 m neben Weg Hoehe auf Linie Wegkante->Gelaende in 4 m deckeln (Grob+Fein)
+    GA=G_ANZ.reshape(GY,GX).astype(float);W=WEGA.reshape(GY,GX)>20
+    R=np.zeros((GY,GX),bool)   # nur Rampenwege (G1-Steinweg ist Rampe; WEGA-Dorfwege liessen Zacken steigen): Mittellinie verdichtet, Radius 1.5 m
+    for P in RAMPWEGE:
+        P=np.array(P,float)
+        for p,q in zip(P[:-1],P[1:]):
+            for t in np.linspace(0,1,int(np.hypot(*(q-p))*4)+2):
+                x,y=(p+(q-p)*t)*RS;R[int(np.clip(round(y),0,GY-1)),int(np.clip(round(x),0,GX-1))]=True
+    W=(nd.distance_transform_edt(~R)/RS<=1.5);d,(iy,ix)=nd.distance_transform_edt(~W,return_indices=True);d=d/RS
+    yy,xx=np.mgrid[0:GY,0:GX];vy=yy-iy;vx=xx-ix;n=np.maximum(np.hypot(vy,vx),1e-6);hp=GA[iy,ix]
+    s4=nd.map_coordinates(GA,[iy+vy/n*4*RS,ix+vx/n*4*RS],order=1,mode='nearest')
+    m=(d>0)&(d<=2.5)&(s4<hp-0.3)&(WV.reshape(GY,GX)<=-900)&(GA>hp+0.05);m=nd.binary_opening(m) if 0 else m;cap=np.where(m,hp+0.02,np.inf);ms=np.clip(nd.gaussian_filter(m.astype(float),1.0)*2,0,1);capf=np.where(m,hp+0.02,GA)   # nur echter Buckel ueber Wegkante -> auf Kantenhoehe, weicher Uebergang
+    nG=GA-np.maximum(GA-nd.grey_dilation(np.where(m,capf,-1e4),size=3).clip(min=-1e3),0)*ms*(nd.grey_dilation(m,size=3));nG=np.where(np.isfinite(nG),nG,GA);k=int((nG<GA-0.01).sum())
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn/FS*RS;fx=vid%FXn/FS*RS
+    cf=nd.map_coordinates(np.where(m,capf,nG),[fy,fx],order=1,mode='nearest');mf=nd.map_coordinates(ms,[fy,fx],order=1,mode='nearest')
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);hn=h-np.maximum(h-cf,0)*mf;kf=int((hn<h-0.01).sum());FW['h']=base64.b64encode(hn.astype(np.float32).tobytes()).decode()
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':k,'fein':kf}
+G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 _VW=json.load(open('pruefung/o18/versunken_weg.json')) if os.path.exists('pruefung/o18/versunken_weg.json') else []   # O18d [F 7 versunkene Geroellteile]: Raycast-gemeldete versunkene/im Wasser stehende Objekte entfernen [A]
 _vwn=0
 for _k,_x,_z,_d in _VW:
