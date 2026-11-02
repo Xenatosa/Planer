@@ -140,8 +140,9 @@ def band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS,thr=2.0):
     S=(cq>thr)&~B;S=nd.binary_dilation(S,iterations=1)&~B&~weg&~belegt
     # O18d [F C2 Zahnkante]: konvexe Grate/Kuppen direkt am Bandrand -> Naht (0,25/0,5-m-Stich) lag auf dem Grat = Zaehne. Kuppe ganz ins Band.
     cv=(G-nd.gaussian_filter(G,3.0));cvc=nd.maximum_filter(cv,size=RS,origin=-(RS//2))[::RS,::RS][:NY,:NX]
-    S2=(cvc>0.35)&nd.binary_dilation(B|S,iterations=3)&~B;S2=nd.binary_dilation(S2,iterations=1)&~B&~weg;S=S|S2|((cq>thr)&belegt&~B&~weg)   # O18d: C2-Kegel ist belegt (Platz E40) -> blieb grob = Zahnkante; steile/konvexe belegte Zellen duerfen fein
-    if os.environ.get('BDBG'):print('BDBG',[(int(cq[y,x]*10),int(cvc[y,x]*100),int(weg[y,x]),int(belegt[y,x]),int(B[y,x])) for y,x in((46,108),(47,108),(48,108),(47,110))])   # O18b: auch nasse Schluchtzellen (Bett unter Spiegel geklemmt)
+    # O18d A1: Lippe (Plateau->Wand) mit Treppen-Bandrand; C2-Kegel ist belegt (Platz E40) -> blieb grob = Zahnkante
+    S2=(cvc>0.10)&nd.binary_dilation(B|S,iterations=3)&~B;S2=nd.binary_dilation(S2,iterations=3)&~B&~weg;S=S|S2|((cq>thr)&belegt&~B&~weg)
+    if os.environ.get('BDBG'):print('BDBG',[(int(cq[y,x]*10),int(cvc[y,x]*100),int(weg[y,x]),int(belegt[y,x]),int(B[y,x])) for y,x in((28,20),(29,20),(29,24),(30,24))])   # O18b: auch nasse Schluchtzellen (Bett unter Spiegel geklemmt)
     if not S.any():return {'zellen':0}
     B2=B|S
     # Feinpunkte aller Bandzellen
