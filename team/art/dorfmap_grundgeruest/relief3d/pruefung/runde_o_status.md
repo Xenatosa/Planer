@@ -406,3 +406,8 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Durchgang: relief_daten/CSV/z25.glb md5 nach gen_relief-Neulauf gleich (det). t42u 0. Spalt 0,0. bergauf_pfad 0 (Summe 3922). stufe_bandrand 0 (spitzen 5, senken 19, grate 258, wie O16). Raycast: 0 schwebend, versunken Baum 1, Geroell 8, Stein im Wasser 1. Die Werte sind bytegleich mit dem O16-HTML (gleicher md5 der Auswertung), also nicht neu; der Cache wurde nicht aufgefrischt, weil die Geometrie unveraendert ist. Budget lod1 1,125 M. Ladezeit Median 11,15 s, das ist **ueber 10 s**. Allerdings lag die Box-Last bei 20, und O16 mass im selben Lauf 10,87 s. Der Unterschied liegt im Rauschen. Bei normaler Last bitte nachmessen.
 - __test.dump() (nur lesend) fuer den Blender-Export. Neue Skripte pruefung/blender_dump_o17.js, blender_paket_o17.py, blender_test_render.py, README_Blender_O17.md.
 - Export /workspace/dorfmap_3d_runde_O17.html (Banner "Runde O17"). Blender-Paket /workspace/dorfmap_blender_O17/.
+
+## t82u – Feld-3D-HTMLs je Rasterfeld
+- 56 Dateien dorfmap_3d_feld_A1…H7.html, Skripte relief3d/feld/ (README dort). Daten Commit 7a138db, Relief/gen_relief.py/relief_daten unverändert.
+- Geometrie-Identität (Mesh-Dump gekürzt vs. ungekürzt, nur Ausschnitt): D1 29/29 gleich; A1, H7 nur Abweichung in zwei Wege-Meshes, die im Ausschnitt 0 Vertices haben (nicht gezeichnet). Vorherige Kürzung von WV hatte H7-Wasser verändert → WV/WEGA jetzt ungekürzt.
+- Vergleichsbilder Feld vs. Hauptviewer (gleiche Kamera) D1, A1, H7 einzeln angesehen: im Feld deckungsgleich.
