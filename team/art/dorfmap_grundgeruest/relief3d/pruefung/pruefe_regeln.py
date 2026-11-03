@@ -146,5 +146,25 @@ S={}
 for t_ in T:S[t_['regel']]=S.get(t_['regel'],0)+1
 print(json.dumps({'summe':len(T),'je_regel':S},ensure_ascii=False))
 [print(t_) for t_ in T[:600]] if os.environ.get('LISTE') else None
+# ---------- G7b Wandkontur-Staerke gegen O17 (f65298b), O18o [F G1 geschmolzener Vorhang] ----------
+REF=os.environ.get('O17REF','/tmp/o18m/o17.json.gz')
+if not os.path.exists(REF):
+    import subprocess;open(REF,'wb').write(subprocess.check_output(['git','show','f65298b:team/art/dorfmap_grundgeruest/relief3d/relief_daten.json.gz']))
+D7=json.load(gzip.open(REF));G7=np.frombuffer(base64.b64decode(D7['GB']),np.float32).reshape(G.shape).astype(float)
+g7y,g7x=np.gradient(G7,1/RS);M7=(np.hypot(g7x,g7y)>1.0)&LAND
+def kontur(A,M):
+    rau=float(np.abs(A-nd.gaussian_filter(A,RS))[M].mean());kan=float(np.percentile(np.abs(nd.laplace(A))[M],90));return rau,kan
+r0,k0=kontur(G7,M7);r1,k1=kontur(G,M7);T7={}
+for nm,a,b in (('rauheit',r1,r0),('kantenschaerfe',k1,k0)):
+    T7[nm]=[round(a,3),round(b,3)]
+    if a<0.85*b:T.append({'regel':'G7b_wandkontur_'+nm,'feld':'-','x':0,'z':0,'wert':round(a/b,3)});S['G7b_wandkontur_'+nm]=S.get('G7b_wandkontur_'+nm,0)+1
+# Feld je Wandkontur
+for fx in range(8):
+    for fz in range(7):
+        sl=(slice(fz*43*RS,(fz+1)*43*RS),slice(fx*42*RS,(fx+1)*42*RS));m=M7[sl]
+        if m.sum()<200:continue
+        a=float(np.abs(G[sl]-nd.gaussian_filter(G,RS)[sl])[m].mean());b=float(np.abs(G7[sl]-nd.gaussian_filter(G7,RS)[sl])[m].mean())
+        if a<0.85*b:T.append({'regel':'G7b_wandkontur_feld','feld':'ABCDEFGH'[fx]+str(fz+1),'x':fx*42+21,'z':fz*43+21,'wert':round(a/b,3)});S['G7b_wandkontur_feld']=S.get('G7b_wandkontur_feld',0)+1
+print('G7b',T7,json.dumps({'summe':len(T),'je_regel':S},ensure_ascii=False))
 if len(sys.argv)>2:json.dump({'summe':len(T),'je_regel':S,'treffer':T},open(sys.argv[2],'w'),indent=0,ensure_ascii=False)
 sys.exit(1 if T else 0)
