@@ -1,6 +1,6 @@
 # Runde O – Status (t67u)
 
-> **Pflicht:** Regeln in `team/art/dorfmap_grundgeruest/REGELN_VERPFLICHTEND.md` (R1–R7, G1–G11, T1–T6). Vor jedem Export/ZIP `sh pruefung/export_gate.sh` (pruefe_regeln.py) – bei Treffern kein Export.
+> **Pflicht:** Regeln in `team/art/dorfmap_grundgeruest/REGELN_VERPFLICHTEND.md` (R1–R8, G1–G11, T1–T6). **Neu R8 Wegkreuzungen und Gabelungen** (Abschnitt "R8 Wegkreuzungen und Gabelungen", Beleg D1/G1 t120u). Vor jedem Export/ZIP `sh pruefung/export_gate.sh` (pruefe_regeln.py) – bei Treffern kein Export.
 
 Basis 364ede6 (Runde N inkl. Nachher-Nahbilder gesichert).
 Fabians Befunde: 1 Flussende Westrand, 2 Baeume auf Abstieg, 3/4 Nadelspitzen, 5 Trichter in Wand.

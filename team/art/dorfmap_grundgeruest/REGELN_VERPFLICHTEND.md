@@ -226,3 +226,18 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - G1-Lochscan (LOCHSCAN=/tmp/gate_loch.json, RAND 0.6): offen_innen 0, Punkte 0 -> G1 0. Summe 597->596 (ohne Ausnahmen 443).
 - R2: wegvorschlag.py um Abschnitt 3 ergaenzt (Gate-Komponenten inkl. Rampenzellen). 11 neue Vorschlaege r2_*; 9 mit Weg, r2_G6_271_238 und r2_D6_137_240 "kein Weg ohne Wand". r2_H5_317_201 max_steigung 0.898 (Treppe noetig). Feldbilder wegvorschlag/feld_*.png neu.
 - G5 (66), R5 (17), R6 (4) in O18z nicht bearbeitet.
+
+## R8 Wegkreuzungen und Gabelungen (verbindlich ab t121u)
+Beschwerde-Beleg: Fabian t120u/t121u, Bild D1_wege.png (Kreuzung rampe_2 x rampe_11 bei 152.3|28.5) und G1: Kreuzung "scheisse", nicht eben, abgehackt, Stufen/Kanten.
+Gemessen vorher (D1, Feinnetz 0,25 m): rampe_11 laeuft 152.7|28.0 -> 151.95|29.4 von 4.84 ueber 5.43 auf 3.86 m (Sprung 1,6 m auf 0,8 m); im Umkreis 4 m bis 2,1 m Hoehensprung zwischen Nachbarpunkten.
+
+**Soll-Aussehen:** Wo sich zwei oder mehr Wegbaender treffen, kreuzen, gabeln oder auf weniger als 6 m nahe kommen (auch Weg-Wand-Abzweig), entsteht EINE gemeinsame, ebene, stufenfreie Flaeche (nicht abgehackt, keine Kanten, kein Treppenmuster). Hoehe = gemittelte Wegbandhoehe der Arme. Quergefaelle <=2 % (Messgrenze 3 %). Jeder Arm schliesst laengsglatt an (kein Knick, kein Sprung). Rand: weicher Boeschungsuebergang, Neigung 0,7 ab 2 m ausserhalb der Flaeche ins Gelaende. Die Flanken/Boeschungen der einzelnen Wege duerfen sich NICHT ueberlagern oder gegenseitig anschneiden.
+
+**Messbare Schwellen (Skript-ID R8, pruefung/r8_kreuzung.py, ganze Karte, Liste je Feld):**
+- R8_stufe: im Umkreis 4 m um jede Kreuzung kein Hoehenunterschied >0,20 m zwischen benachbarten Feinnetzpunkten (0,25 m) innerhalb der Wegflaeche.
+- R8_gitter: max. Hoehenunterschied auf 1 m Abstand <=0,15 m innerhalb der Kreuzungsflaeche (Radius je Armbreite).
+- R8_quer: Querneigung der Kreuzungsflaeche (Ausgleichsebene) <=3 %.
+
+**Verbotene Fehler:** Stufen/Kanten an der Kreuzung; Wand oder Boeschung durch die Kreuzung; Voronoi-Kante, an der das Band von Weg A auf Weg B springt; Arm, der vor der Kreuzung abknickt; Loch/Buckel in der Kreuzungsflaeche.
+
+**Pflicht:** Vor jeder Lieferung R8 = 0 Treffer UND ein Nahbild (Ton, Streiflicht, schraeg von oben, lod=0) jeder gelieferten Kreuzung einzeln im Vollbild ansehen.
