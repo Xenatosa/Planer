@@ -1,7 +1,7 @@
 {
 "summe": 596,
-"summe_ohne_ausnahmen": 443,
-"ausnahmen": 153,
+"summe_ohne_ausnahmen": 596,
+"ausnahmen": 0,
 "je_regel": {
 "R1_blind": 24,
 "R2_getrennt": 15,
@@ -403,8 +403,7 @@
 "x": 146.4,
 "z": 29.2,
 "wert": 77.3,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_woelb_m",
@@ -412,8 +411,7 @@
 "x": 146.4,
 "z": 29.2,
 "wert": 1.16,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_quer_pct",
@@ -421,8 +419,7 @@
 "x": 150.3,
 "z": 28.7,
 "wert": 99.1,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_laengs_m",
@@ -430,8 +427,7 @@
 "x": 150.3,
 "z": 28.7,
 "wert": 0.247,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_woelb_m",
@@ -439,8 +435,7 @@
 "x": 150.3,
 "z": 28.7,
 "wert": 1.793,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_quer_pct",
@@ -448,8 +443,7 @@
 "x": 154.3,
 "z": 28.2,
 "wert": 16.0,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_woelb_m",
@@ -457,8 +451,7 @@
 "x": 154.3,
 "z": 28.2,
 "wert": 0.153,
-"weg": "rampe_2",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_2"
 },
 {
 "regel": "R3_laengs_m",
@@ -482,8 +475,7 @@
 "x": 138.0,
 "z": 232.2,
 "wert": 16.8,
-"weg": "rampe_3",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_3"
 },
 {
 "regel": "R3_laengs_m",
@@ -491,8 +483,7 @@
 "x": 138.0,
 "z": 232.2,
 "wert": 0.114,
-"weg": "rampe_3",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_3"
 },
 {
 "regel": "R3_woelb_m",
@@ -500,8 +491,7 @@
 "x": 138.0,
 "z": 232.2,
 "wert": 0.246,
-"weg": "rampe_3",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_3"
 },
 {
 "regel": "R3_quer_pct",
@@ -509,8 +499,7 @@
 "x": 134.1,
 "z": 231.6,
 "wert": 8.2,
-"weg": "rampe_3",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_3"
 },
 {
 "regel": "R3_woelb_m",
@@ -518,8 +507,7 @@
 "x": 134.1,
 "z": 231.6,
 "wert": 0.172,
-"weg": "rampe_3",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_3"
 },
 {
 "regel": "R3_laengs_m",
@@ -551,8 +539,7 @@
 "x": 135.2,
 "z": 230.8,
 "wert": 15.2,
-"weg": "rampe_5",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_5"
 },
 {
 "regel": "R3_laengs_m",
@@ -560,8 +547,7 @@
 "x": 135.2,
 "z": 230.8,
 "wert": 0.151,
-"weg": "rampe_5",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_5"
 },
 {
 "regel": "R3_woelb_m",
@@ -569,8 +555,7 @@
 "x": 135.2,
 "z": 230.8,
 "wert": 0.248,
-"weg": "rampe_5",
-"ausnahme": "R3 Kreuzung rampe_3x5 aus Overlay"
+"weg": "rampe_5"
 },
 {
 "regel": "R3_laengs_m",
@@ -738,8 +723,7 @@
 "x": 155.6,
 "z": 22.6,
 "wert": 6.0,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_quer_pct",
@@ -747,8 +731,7 @@
 "x": 153.7,
 "z": 26.1,
 "wert": 58.2,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_laengs_m",
@@ -756,8 +739,7 @@
 "x": 153.7,
 "z": 26.1,
 "wert": 1.378,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_woelb_m",
@@ -765,8 +747,7 @@
 "x": 153.7,
 "z": 26.1,
 "wert": 1.774,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_quer_pct",
@@ -774,8 +755,7 @@
 "x": 151.8,
 "z": 29.6,
 "wert": 99.3,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_laengs_m",
@@ -783,8 +763,7 @@
 "x": 151.8,
 "z": 29.6,
 "wert": 0.135,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_woelb_m",
@@ -792,8 +771,7 @@
 "x": 151.8,
 "z": 29.6,
 "wert": 1.56,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_quer_pct",
@@ -801,8 +779,7 @@
 "x": 150.4,
 "z": 33.1,
 "wert": 23.4,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_woelb_m",
@@ -810,8 +787,7 @@
 "x": 150.4,
 "z": 33.1,
 "wert": 0.233,
-"weg": "rampe_11",
-"ausnahme": "R3 Kreuzung rampe_2x11 aus Overlay"
+"weg": "rampe_11"
 },
 {
 "regel": "R3_laengs_m",
@@ -827,8 +803,7 @@
 "x": 127.5,
 "z": 133.5,
 "wert": 39.7,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -836,8 +811,7 @@
 "x": 127.5,
 "z": 133.5,
 "wert": 0.083,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -845,8 +819,7 @@
 "x": 127.5,
 "z": 133.5,
 "wert": 0.575,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -854,8 +827,7 @@
 "x": 130.4,
 "z": 130.8,
 "wert": 31.0,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -863,8 +835,7 @@
 "x": 130.4,
 "z": 130.8,
 "wert": 0.122,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -872,8 +843,7 @@
 "x": 130.4,
 "z": 130.8,
 "wert": 0.44,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -881,8 +851,7 @@
 "x": 130.2,
 "z": 129.1,
 "wert": 32.1,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -890,8 +859,7 @@
 "x": 130.2,
 "z": 129.1,
 "wert": 0.524,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -899,8 +867,7 @@
 "x": 126.3,
 "z": 128.9,
 "wert": 43.0,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -908,8 +875,7 @@
 "x": 126.3,
 "z": 128.9,
 "wert": 0.679,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -917,8 +883,7 @@
 "x": 122.3,
 "z": 128.6,
 "wert": 43.2,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -926,8 +891,7 @@
 "x": 122.3,
 "z": 128.6,
 "wert": 0.13,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -935,8 +899,7 @@
 "x": 122.3,
 "z": 128.6,
 "wert": 0.684,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -944,8 +907,7 @@
 "x": 120.6,
 "z": 127.5,
 "wert": 53.2,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -953,8 +915,7 @@
 "x": 120.6,
 "z": 127.5,
 "wert": 0.839,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -962,8 +923,7 @@
 "x": 123.6,
 "z": 124.7,
 "wert": 48.8,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -971,8 +931,7 @@
 "x": 123.6,
 "z": 124.7,
 "wert": 0.704,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -980,8 +939,7 @@
 "x": 126.5,
 "z": 122.0,
 "wert": 55.2,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -989,8 +947,7 @@
 "x": 126.5,
 "z": 122.0,
 "wert": 0.102,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -998,8 +955,7 @@
 "x": 126.5,
 "z": 122.0,
 "wert": 0.817,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_quer_pct",
@@ -1007,8 +963,7 @@
 "x": 127.7,
 "z": 119.8,
 "wert": 45.7,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -1016,8 +971,7 @@
 "x": 127.7,
 "z": 119.8,
 "wert": 0.094,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_woelb_m",
@@ -1025,8 +979,7 @@
 "x": 127.7,
 "z": 119.8,
 "wert": 0.728,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R3_laengs_m",
@@ -1034,8 +987,7 @@
 "x": 123.7,
 "z": 119.6,
 "wert": 0.112,
-"weg": "rampe_12",
-"ausnahme": "R3 Haarnadel rampe_12 aus Overlay"
+"weg": "rampe_12"
 },
 {
 "regel": "R5_loch",
@@ -1255,8 +1207,7 @@
 "x": 227.0,
 "z": 27.2,
 "wert": 0.47,
-"nachbarn": 5,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 5
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1264,8 +1215,7 @@
 "x": 306.8,
 "z": 85.8,
 "wert": 0.5,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1273,8 +1223,7 @@
 "x": 72.8,
 "z": 142.2,
 "wert": 0.59,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1282,8 +1231,7 @@
 "x": 67.2,
 "z": 156.2,
 "wert": 0.53,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1291,8 +1239,7 @@
 "x": 66.2,
 "z": 157.2,
 "wert": 0.51,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1300,8 +1247,7 @@
 "x": 109.8,
 "z": 179.8,
 "wert": 0.54,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1309,8 +1255,7 @@
 "x": 254.8,
 "z": 233.5,
 "wert": 0.54,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1318,8 +1263,7 @@
 "x": 255.2,
 "z": 234.0,
 "wert": 0.47,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G3_spitze_unten_fein",
@@ -1327,8 +1271,7 @@
 "x": 289.5,
 "z": 29.2,
 "wert": 0.48,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G3_spitze_unten_fein",
@@ -1336,8 +1279,7 @@
 "x": 306.5,
 "z": 85.5,
 "wert": 0.54,
-"nachbarn": 3,
-"ausnahme": "O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig"
+"nachbarn": 3
 },
 {
 "regel": "G5_beule_klippe",
@@ -3556,760 +3498,665 @@
 "feld": "A2",
 "x": 22.5,
 "z": 49.1,
-"wert": 876,
-"ausnahme": "G8 See A2 per Zellwert WASSER_EIS"
+"wert": 876
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E1",
 "x": 193.6,
 "z": 17.1,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E1",
 "x": 205.6,
 "z": 39.7,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G1",
 "x": 260.4,
 "z": 41.6,
-"wert": 19,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 19
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F1",
 "x": 246.2,
 "z": 42.4,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F1",
 "x": 250.1,
 "z": 42.4,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G1",
 "x": 288.1,
 "z": 42.1,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 168.3,
 "z": 43.1,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G1",
 "x": 285.0,
 "z": 42.9,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G2",
 "x": 284.1,
 "z": 45.4,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F2",
 "x": 214.7,
 "z": 44.6,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F2",
 "x": 248.8,
 "z": 48.0,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 156.4,
 "z": 47.7,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 180.5,
 "z": 48.1,
-"wert": 22,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 22
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 155.6,
 "z": 50.2,
-"wert": 23,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 23
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F2",
 "x": 251.5,
 "z": 52.9,
-"wert": 26,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 26
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 161.1,
 "z": 56.9,
-"wert": 26,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 26
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H2",
 "x": 327.9,
 "z": 57.6,
-"wert": 18,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 18
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G2",
 "x": 289.9,
 "z": 57.6,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H2",
 "x": 296.5,
 "z": 59.7,
-"wert": 19,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 19
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 155.2,
 "z": 59.1,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 161.4,
 "z": 60.8,
-"wert": 22,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 22
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 189.8,
 "z": 63.4,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H2",
 "x": 296.4,
 "z": 63.4,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 177.8,
 "z": 66.1,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H2",
 "x": 326.6,
 "z": 66.1,
-"wert": 24,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 24
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 184.2,
 "z": 68.7,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 162.2,
 "z": 74.5,
-"wert": 14,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 14
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D2",
 "x": 158.5,
 "z": 74.7,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F2",
 "x": 240.2,
 "z": 75.9,
-"wert": 24,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 24
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G2",
 "x": 283.0,
 "z": 79.8,
-"wert": 14,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 14
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E2",
 "x": 179.3,
 "z": 81.9,
-"wert": 21,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 21
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C2",
 "x": 89.7,
 "z": 82.8,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C2",
 "x": 89.7,
 "z": 85.3,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E3",
 "x": 179.8,
 "z": 86.0,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G3",
 "x": 274.5,
 "z": 87.3,
-"wert": 16,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 16
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E3",
 "x": 179.0,
 "z": 88.4,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D3",
 "x": 153.8,
 "z": 93.0,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G3",
 "x": 280.6,
 "z": 93.1,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B3",
 "x": 72.6,
 "z": 95.4,
-"wert": 19,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 19
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H3",
 "x": 312.2,
 "z": 96.0,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E3",
 "x": 179.8,
 "z": 96.6,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D3",
 "x": 130.2,
 "z": 99.9,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B3",
 "x": 78.4,
 "z": 107.0,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "A3",
 "x": 15.8,
 "z": 107.8,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "D3",
 "x": 163.2,
 "z": 113.6,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B3",
 "x": 65.3,
 "z": 118.9,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G3",
 "x": 263.2,
 "z": 118.9,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B3",
 "x": 69.0,
 "z": 123.0,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G3",
 "x": 268.7,
 "z": 122.6,
-"wert": 13,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 13
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B3",
 "x": 66.4,
 "z": 125.5,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E4",
 "x": 171.3,
 "z": 132.3,
-"wert": 23,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 23
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E4",
 "x": 189.3,
 "z": 133.2,
-"wert": 19,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 19
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C4",
 "x": 119.2,
 "z": 137.9,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H4",
 "x": 295.1,
 "z": 138.8,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F4",
 "x": 237.9,
 "z": 142.9,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B4",
 "x": 56.6,
 "z": 145.2,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B4",
 "x": 48.6,
 "z": 157.3,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E4",
 "x": 203.5,
 "z": 159.2,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F4",
 "x": 249.4,
 "z": 163.7,
-"wert": 13,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 13
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B4",
 "x": 53.7,
 "z": 166.3,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E4",
 "x": 189.8,
 "z": 168.3,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H5",
 "x": 296.7,
 "z": 178.5,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 249.7,
 "z": 179.9,
-"wert": 22,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 22
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 228.8,
 "z": 181.3,
-"wert": 14,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 14
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H5",
 "x": 295.2,
 "z": 182.1,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 230.5,
 "z": 183.8,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G5",
 "x": 284.0,
 "z": 183.6,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B5",
 "x": 62.1,
 "z": 185.6,
-"wert": 14,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 14
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C5",
 "x": 92.6,
 "z": 186.8,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 225.1,
 "z": 187.9,
-"wert": 9,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 9
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G5",
 "x": 286.4,
 "z": 191.0,
-"wert": 30,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 30
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G5",
 "x": 283.6,
 "z": 192.7,
-"wert": 20,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 20
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G5",
 "x": 289.6,
 "z": 191.7,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 235.6,
 "z": 200.8,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 241.8,
 "z": 201.6,
-"wert": 16,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 16
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 246.1,
 "z": 201.2,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 245.8,
 "z": 204.2,
-"wert": 19,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 19
 },
 {
 "regel": "T1_fleckrand",
 "feld": "F5",
 "x": 250.2,
 "z": 203.3,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H5",
 "x": 334.8,
 "z": 210.1,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H5",
 "x": 325.8,
 "z": 213.4,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C6",
 "x": 112.2,
 "z": 215.5,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H6",
 "x": 301.4,
 "z": 218.1,
-"wert": 16,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 16
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B6",
 "x": 50.2,
 "z": 231.7,
-"wert": 17,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 17
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H6",
 "x": 306.7,
 "z": 232.3,
-"wert": 16,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 16
 },
 {
 "regel": "T1_fleckrand",
 "feld": "E6",
 "x": 172.4,
 "z": 234.3,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H6",
 "x": 333.6,
 "z": 238.9,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H6",
 "x": 331.5,
 "z": 241.0,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "H6",
 "x": 306.2,
 "z": 245.6,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "B6",
 "x": 54.0,
 "z": 250.8,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T1_fleckrand",
 "feld": "G6",
 "x": 258.2,
 "z": 251.6,
-"wert": 12,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 12
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C6",
 "x": 119.9,
 "z": 252.5,
-"wert": 11,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 11
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C6",
 "x": 110.5,
 "z": 256.4,
-"wert": 8,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 8
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C7",
 "x": 115.2,
 "z": 258.7,
-"wert": 15,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 15
 },
 {
 "regel": "T1_fleckrand",
 "feld": "C7",
 "x": 108.8,
 "z": 261.2,
-"wert": 10,
-"ausnahme": "O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m"
+"wert": 10
 },
 {
 "regel": "T2_textur_abgeschnitten_bildpruefung_offen",

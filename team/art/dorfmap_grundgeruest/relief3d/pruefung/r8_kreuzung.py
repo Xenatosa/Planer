@@ -74,8 +74,22 @@ for g in grp.values():
         if gi>0.15:hit('R8_gitter',x,z,round(gi,2),art=KL[-1]['art'])
     m1=M&(DI<=1.5)
     if m1.sum()>10:
-        X=np.c_[xx_[m1]/FS-x,yy_[m1]/FS-z,np.ones(m1.sum())];co=np.linalg.lstsq(X,A[m1],rcond=None)[0];q=float(np.hypot(co[0],co[1])*100);KL[-1]['quer_pct']=round(q,1)
+        X=np.c_[xx_[m1]/FS-x,yy_[m1]/FS-z,np.ones(m1.sum())];co=np.linalg.lstsq(X,A[m1],rcond=None)[0];q=float(np.hypot(co[0],co[1])*100)
+        if all(K[i][1].endswith(('_anfang','_ende')) for i in g):   # reines Wegende: Quergefaelle senkrecht zur Wegrichtung (Laengsgefaelle zaehlt nicht)
+            i0=g[0];ri=int(K[i0][1].split('_')[1]);pp=R[ri][0];dv=(pp[min(8,len(pp)-1)]-pp[0]) if K[i0][1].endswith('_anfang') else (pp[-1]-pp[max(0,len(pp)-9)]);dv=dv/max(np.hypot(*dv),1e-9);q=float(abs(-dv[1]*co[0]+dv[0]*co[1])*100);KL[-1]['quer_pct']=round(q,1)
         if q>3.0:hit('R8_quer',x,z,round(q,1),art=KL[-1]['art'])
+# R8a Wegende (t122u): Auslauf 4 m hinter dem Ende, Streifen +-2,5 m um die verlaengerte Mittellinie, ohne Wand (Neigung>1): max Nachbar-dh (0,25 m) > 0,10 m = Treffer
+gyF,gxF=np.gradient(H,1/FS);WANDF=np.hypot(gxF,gyF)>1.0
+for i,(p,_) in enumerate(R):
+    for e,(q0,q1) in (('anfang',(p[0],p[min(8,len(p)-1)])),('ende',(p[-1],p[max(0,len(p)-9)]))):
+        dv=q0-q1;dv=dv/max(np.hypot(*dv),1e-9);nv=np.array([-dv[1],dv[0]])
+        y0,x0=int(round(q0[1]*FS)),int(round(q0[0]*FS));r=6*FS;sl=(slice(max(0,y0-r),y0+r+1),slice(max(0,x0-r),x0+r+1));yy_,xx_=np.mgrid[sl]
+        rx,rz=xx_/FS-q0[0],yy_/FS-q0[1];lo=rx*dv[0]+rz*dv[1];qu=rx*nv[0]+rz*nv[1]
+        M=(lo>=-1)&(lo<=4)&(np.abs(qu)<=2.5)&~WANDF[sl]&(xx_>0)&(yy_>0)&(xx_<FXn-1)&(yy_<FYn-1);A=H[sl];st=0.0
+        for ax in (0,1):
+            dA=np.abs(np.diff(A,axis=ax));mm=(M[1:,:]&M[:-1,:]) if ax==0 else (M[:,1:]&M[:,:-1])
+            if mm.any():st=max(st,float(dA[mm].max()))
+        if st>0.10:hit('R8a_wegende',q0[0],q0[1],round(st,2),weg=f'rampe_{i}_{e}')
 je_feld={}
 for t in T:je_feld.setdefault(t['feld'],{}).setdefault(t['regel'],0);je_feld[t['feld']][t['regel']]+=1
 out={'summe':len(T),'je_regel':S,'kreuzungen':len(KL),'je_feld':dict(sorted(je_feld.items())),'treffer':T,'liste':KL}

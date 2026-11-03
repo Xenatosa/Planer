@@ -501,3 +501,10 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Angesehen (Vollbild): w1 O17/jetzt, G1 Ton + Textur, E1, F1, D1, C1, H1. Keine Durchsicht.
   - Die Simse ist weg, darunter ist der Hang aber weiter hell verschneit.
   - Die Wände sind steil, oben aber weiter gerundet und nicht so kantig wie in O17.
+
+## t127u Ehrlicher Ausgangswert (Gate kartenweit, keine Ausnahmen mehr)
+- pruefe_regeln.py: 596 Treffer, Ausnahmen 0. `_ausnahme` ist abgeschaltet, auch fuer die Kreuzungen 2x11, 3x5 und die Kehre 12.
+- r8_kreuzung.py: 48 (R8_stufe 9, R8_gitter 10, R8_quer 5, R8a_wegende 24 von 24). Quer an reinen Wegenden wird jetzt senkrecht zur Wegrichtung gemessen.
+- r9_form.py (neu): 334 (R8b_delle 25, R9_saegezahn 34 Felder, R9w_wellen 275).
+- **Summe 978.** D2 hat 0 Treffer in R8/R9 (Regressionsbasis). G1: R8a 1, Delle 1, Saegezahn 1, Wellen 6. D1: R8 5, R8a 3, Delle 2, Saegezahn 1, Wellen 23.
+- export_gate.sh ruft alle drei Pruefer auf und meldet ROT, wenn einer Treffer hat.
