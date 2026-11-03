@@ -911,6 +911,192 @@ def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;hfein=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);zf,wf=ziel(fx,fz)
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h*(1-wf)+zf*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':int((w>0).sum()),'fein':int((wf>0).sum())}
+def _weg3_diagnose(G0,V0,H0,G1,V1,H1):
+    # Metriken fuer die betroffene Klippe, den Wandbereich und das Regressionsfeld D2.
+    G0=np.asarray(G0).reshape(GY,GX);G1=np.asarray(G1).reshape(GY,GX);V0=np.asarray(V0,np.uint32);V1=np.asarray(V1,np.uint32);H0=np.asarray(H0,np.float32);H1=np.asarray(H1,np.float32)
+    yy,xx=np.mgrid[0:GY,0:GX];x=xx/RS;z=yy/RS
+    wall=_wand_maske();d1=(x>=126)&(x<=168)&(z>=0)&(z<=43);g1=(x>=252)&(x<=294)&(z>=0)&(z<=43)
+    masks={'D1_klippe':(x>=134)&(x<=146)&(z>=28)&(z<=43),'D1_wandmaske':wall&d1,'G1_wandmaske':wall&g1,'D2':(x>=126)&(x<=168)&(z>=43)&(z<=86)}
+    def stat(d,m):
+        a=np.abs(d[m]);return {'geaendert':int(np.count_nonzero(a)),'max_m':round(float(a.max(initial=0)),6)}
+    dg=G1-G0;so={f'{n}_GB':stat(dg,m) for n,m in masks.items()}
+    order=np.argsort(V1);vs=V1[order];p=np.searchsorted(vs,V0);ok=p<len(vs);match=np.zeros_like(ok);match[ok]=vs[p[ok]]==V0[ok];ids=V0[match];dh=np.abs(H0[match]-H1[order[p[match]]]);fx=ids%FXn/FS;fz=ids//FXn/FS
+    for n,(x0,x1,z0,z1) in {'D1_klippe':(134,146,28,43),'D2':(126,168,43,86)}.items():
+        m=(fx>=x0)&(fx<=x1)&(fz>=z0)&(fz<=z1)
+        so[n+'_FW']={'geaendert':int(np.count_nonzero(dh[m])),'max_m':round(float(dh[m].max(initial=0)),6)}
+    wallf=nd.map_coordinates(wall.astype(np.uint8),[fz*RS,fx*RS],order=0,mode='nearest')>0
+    for n,(x0,x1,z0,z1) in {'D1_wandmaske':(126,168,0,43),'G1_wandmaske':(252,294,0,43)}.items():
+        m=wallf&(fx>=x0)&(fx<=x1)&(fz>=z0)&(fz<=z1)
+        so[n+'_FW']={'geaendert':int(np.count_nonzero(dh[m])),'max_m':round(float(dh[m].max(initial=0)),6)}
+    new=~np.isin(V1,V0);fn=V1[new];fxn=fn%FXn/FS;fzn=fn//FXn/FS;so['D2_FW_neue_vertices']=int(((fxn>=126)&(fxn<=168)&(fzn>=43)&(fzn<=86)).sum())
+    return so
+
+def _weg_mischung():   # O18weg [F] D1 rampe_2x11: alt 1.39 m je 0.25 m; Profile 5.73 vs 4.53-5.43 m; KREUZ-Mittel O18r hob R3 laengs 35->45. [A] 1/(d^4+EPS), Hc-Pad r=2.5 m, Boeschung tanh(0.7), Smoothstep-Armkorrektur WEGMISCH_GLATT=1 mit L>=max(8,|dh|/0.08), Endauslauf >=4 m; Grob+Fein
+    global BAND,_vid
+    from scipy.spatial import cKDTree
+    GA=G_ANZ.reshape(GY,GX).astype(float);G0=GA.copy();V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();H0=np.frombuffer(base64.b64decode(FW['h']),np.float32).copy();hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest')
+    routes=[]
+    for W in RAMPWEGE:
+        W=np.asarray(W,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(W,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25)
+        p=np.stack([np.interp(t,L,W[:,0]),np.interp(t,L,W[:,1])],1);tan=np.gradient(p,axis=0);tan/=np.maximum(np.linalg.norm(tan,axis=1,keepdims=True),1e-9);nor=np.stack([-tan[:,1],tan[:,0]],1)
+        hc=nd.gaussian_filter1d(hf(p[:,0],p[:,1]),12,mode='nearest');b=hf(p[:,0]+nor[:,0]*1.5,p[:,1]+nor[:,1]*1.5)-hf(p[:,0]-nor[:,0]*1.5,p[:,1]-nor[:,1]*1.5);sg=np.sign(nd.gaussian_filter1d(b,12,mode='nearest'))
+        routes.append({'p':p,'t':t,'tan':tan,'nor':nor,'hc':hc,'sg':sg,'tree':cKDTree(p)})
+    # Endkappen ergaenzen auch ausserhalb der alten Bandmaske, damit der halbrunde 4-6-m-Fade im Feinmesh liegt.
+    B=np.zeros((NY,NX),bool);B.ravel()[np.frombuffer(base64.b64decode(FW['band']),np.uint32)]=True;caps=np.zeros_like(B)
+    for r in routes:
+        for q in (r['p'][0],r['p'][-1]):
+            x0,x1=max(0,int(np.floor(q[0]-6))),min(NX,int(np.ceil(q[0]+6)));z0,z1=max(0,int(np.floor(q[1]-6))),min(NY,int(np.ceil(q[1]+6)))
+            cy,cx=np.mgrid[z0:z1,x0:x1];caps[z0:z1,x0:x1]|=(np.hypot(cx+0.5-q[0],cy+0.5-q[1])<=6.0)
+    D2GUARD=float(os.environ.get('WEGMISCH_D2_GUARD','1.0'))
+    if D2GUARD<0:raise ValueError('WEGMISCH_D2_GUARD muss >=0 sein')
+    _cz,_cx=np.mgrid[0:NY,0:NX];_dx=np.maximum(np.maximum(126-(_cx+0.5),0),(_cx+0.5)-168);_dz=np.maximum(np.maximum(43-(_cz+0.5),0),(_cz+0.5)-86);_D2BUF=np.hypot(_dx,_dz)<=D2GUARD
+    B2=B|(caps&~wa&~belegt&~_D2BUF)
+    if np.any(B2&~B):
+        cy,cx=np.nonzero(B2);used=np.zeros((FYn,FXn),bool)
+        for a in range(FS+1):
+            for b in range(FS+1):used[cy*FS+a,cx*FS+b]=True
+        v0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);vid=np.flatnonzero(used.ravel()).astype(np.uint32);neu=~np.isin(vid,v0);pos=np.searchsorted(v0,vid[~neu]);fy=vid//FXn;fx=vid%FXn;gy=fy/FS*RS;gx=fx/FS*RS
+        def mix(key,dt,shape,fill):
+            old=np.frombuffer(base64.b64decode(FW[key]),dt).reshape((len(v0),)+shape);out=np.empty((len(vid),)+shape,dtype=dt);out[~neu]=old[pos];out[neu]=fill;return out
+        h=mix('h',np.float32,(),0);h[neu]=nd.map_coordinates(GA,[gy[neu],gx[neu]],order=1,mode='nearest')
+        V=VC.reshape(GY,GX,3).astype(float);c=mix('c',np.uint8,(3,),0);c[neu]=np.clip(np.round(np.stack([nd.map_coordinates(V[...,k],[gy[neu],gx[neu]],order=1,mode='nearest') for k in range(3)],1)),0,255)
+        tint=mix('t',np.uint8,(3,),128);snow=mix('s',np.uint8,(),0)
+        FW['vid']=base64.b64encode(vid.tobytes()).decode();FW['h']=base64.b64encode(h.tobytes()).decode();FW['c']=base64.b64encode(c.tobytes()).decode();FW['t']=base64.b64encode(tint.tobytes()).decode();FW['s']=base64.b64encode(snow.tobytes()).decode();FW['band']=base64.b64encode(np.flatnonzero(B2.ravel()).astype(np.uint32).tobytes()).decode();BAND=B2;_vid=vid
+    else:vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32)
+    # Knotenliste aus R8: Rampenkreuzungen/Kehren, Rampen-Dorfweg-Kontakt und Rampenenden; 4-m-Cluster wie im Gate.
+    P=np.concatenate([r['p'] for r in routes]);RI=np.concatenate([np.full(len(r['p']),i) for i,r in enumerate(routes)]);LL=np.concatenate([r['t'] for r in routes]);kd=cKDTree(P);K=[]
+    pr=kd.query_pairs(6.0,output_type='ndarray');pr=pr[(RI[pr[:,0]]!=RI[pr[:,1]])|(np.abs(LL[pr[:,0]]-LL[pr[:,1]])>8)]
+    for a,b in pr:K.append({'c':(P[a]+P[b])/2,'arms':[(int(RI[a]),float(LL[a])),(int(RI[b]),float(LL[b]))],'dorf':False,'art':'kreuz'})
+    DW=np.zeros((NY,NX),bool)
+    for x,z in wege:DW[z,x]=1
+    DW|=WEGA.reshape(GY,GX)[:-1:RS,:-1:RS]>20
+    RZ=np.zeros((NY,NX),bool)
+    for r in routes:
+        p=r['p'];RZ[np.clip(p[:,1].astype(int),0,NY-1),np.clip(p[:,0].astype(int),0,NX-1)]=1
+    DWo=DW&~nd.binary_dilation(RZ,iterations=1);dz,dx=np.nonzero(DWo);DC=np.stack([dx+0.5,dz+0.5],1);kdw=cKDTree(DC) if len(DC) else None
+    if kdw is not None:
+        dd,_=kdw.query(P,distance_upper_bound=1.5)
+        for j in np.nonzero(np.isfinite(dd))[0]:K.append({'c':P[j],'arms':[(int(RI[j]),float(LL[j]))],'dorf':True,'art':'anschluss'})
+    for i,r in enumerate(routes):
+        for j in (0,len(r['p'])-1):K.append({'c':r['p'][j],'arms':[(i,float(r['t'][j]))],'dorf':False,'art':'ende'})
+    n4=sum(np.roll(DW,s,a) for s,a in ((1,0),(-1,0),(1,1),(-1,1)))
+    for z,x in zip(*np.nonzero(DW&(n4>=3))):K.append({'c':np.array([x+0.5,z+0.5]),'arms':[],'dorf':True,'art':'dorfweg_knoten'})
+    if len(K):
+        C=np.asarray([k['c'] for k in K]);prc=cKDTree(C).query_pairs(4.0,output_type='ndarray');par=np.arange(len(C))
+        def fi(i):
+            while par[i]!=i:par[i]=par[par[i]];i=par[i]
+            return i
+        for a,b in prc:par[fi(a)]=fi(b)
+        grp={}
+        for i in range(len(C)):grp.setdefault(fi(i),[]).append(i)
+    else:grp={}
+    GEF=float(os.environ.get('WEGMISCH_GEF','0.08'));GLATT=os.environ.get('WEGMISCH_GLATT','0')!='0';NODEPAD=os.environ.get('WEG2_NODEPAD','1')!='0';ENDFADE=float(os.environ.get('WEG2_ENDFADE','8'));NODEIN=float(os.environ.get('WEG2_NODEIN','0'));NODEOUT=float(os.environ.get('WEG2_NODEOUT','8'));D1_NODEPAD=os.environ.get('WEG2_D1_NODEPAD','0')!='0';D6_NODEPAD=os.environ.get('WEG2_D6_NODEPAD','0')!='0';ENDPADS=os.environ.get('WEG2_ENDPADS','7a,8e')
+    if NODEPAD and NODEOUT<=NODEIN:raise ValueError('WEG2_NODEOUT muss groesser als WEG2_NODEIN sein')
+    corr=[np.zeros(len(r['t'])) for r in routes];corrw=[np.zeros(len(r['t'])) for r in routes];nodes=[]
+    for g in grp.values():
+        kg=[K[i] for i in g];kg2=[k for k in kg if k['art']!='dorfweg_knoten'];c=np.mean([k['c'] for k in (kg2 or kg)],axis=0);dorf=any(k['dorf'] for k in kg)
+        raw={}
+        for k in kg:
+            for ri,s_ in k['arms']:raw.setdefault(ri,[]).append(s_)
+        arms=[]
+        for ri,ss in raw.items():
+            ss=sorted(ss);groups_=[]
+            for s_ in ss:
+                if not groups_ or s_-groups_[-1][-1]>8:groups_.append([s_])
+                else:groups_[-1].append(s_)
+            for q in groups_:arms.append((ri,int(np.argmin(np.abs(routes[ri]['t']-np.mean(q))))))
+        if not arms:
+            if dorf and any(k['art']=='dorfweg_knoten' for k in kg):nodes.append((c,float(hf([c[0]],[c[1]])[0])))
+            continue
+        hs=[routes[ri]['hc'][j] for ri,j in arms]
+        if dorf:hs.append(float(hf([c[0]],[c[1]])[0]))
+        Hc=float(np.mean(hs))
+        if GLATT:
+            for ri,j in arms:
+                r=routes[ri];dh=Hc-r['hc'][j];L=max(8.0,abs(dh)/0.08,abs(dh)/GEF);u=np.clip(np.abs(r['t']-r['t'][j])/L,0,1);w=1-u*u*(3-2*u);corr[ri]+=dh*w;corrw[ri]+=w
+        if len(arms)+(1 if dorf else 0)>=2:
+            _routes={ri for ri,j in arms};_d1node=_routes=={2,11} and np.hypot(c[0]-152.5,c[1]-28.5)<1.0;_d6node=_routes=={3,5} and np.hypot(c[0]-132.9,c[1]-232.4)<1.0
+            if (not _d1node or D1_NODEPAD) and (not _d6node or D6_NODEPAD):nodes.append((c,Hc))
+    if ENDPADS and ENDPADS!='0':
+        for _end in ENDPADS.split(','):
+            _ri=int(_end[:-1]);_j=0 if _end[-1]=='a' else -1;r=routes[_ri];nodes.append((r['p'][_j],float(r['hc'][_j])))
+    for i,r in enumerate(routes):
+        r['hc']=r['hc']+corr[i]/np.maximum(corrw[i],1e-6)
+    kn=cKDTree(np.asarray([c for c,_ in nodes])) if nodes else None;kh=np.asarray([h for _,h in nodes],float)
+    WATER=nd.distance_transform_edt(WV.reshape(GY,GX)<=-900)/RS;WANDNEU=os.environ.get('RAMPENBAND','1')!='0';EPS=float(os.environ.get('WEGMISCH_EPS','0.01'));WALL=_wand_maske();WALLDIST=nd.distance_transform_edt(~WALL)/RS;WALLFADE=float(os.environ.get('WEGMISCH_WANDFADE','8.0'));hfein=None
+    if WALLFADE<0:raise ValueError('WEGMISCH_WANDFADE muss >=0 sein')
+    def sm(u):return u*u*(3-2*u)
+    def ziel(X,Z,Hin=None):
+        X=np.asarray(X,float).ravel();Z=np.asarray(Z,float).ravel();Q=np.stack([X,Z],1);out=np.empty(len(X));ww=np.empty(len(X));chunk=50000
+        for a in range(0,len(Q),chunk):
+            q=Q[a:a+chunk];n=len(q);g0=hf(q[:,0],q[:,1]) if Hin is None else np.asarray(Hin[a:a+chunk],float);num=np.zeros(n);den=np.zeros(n);dm=np.full(n,np.inf)
+            for r in routes:
+                d,j=r['tree'].query(q,distance_upper_bound=6.1);ok=np.isfinite(d);j=np.where(ok,j,0);dm=np.minimum(dm,d)
+                s=r['t'][j]+np.sum((q-r['p'][j])*r['tan'][j],axis=1);side=np.sum((q-r['p'][j])*r['nor'][j],axis=1)
+                z=r['hc'][j]-0.015*np.clip(side,-1.5,1.5)*r['sg'][j]
+                before=np.maximum(-s,0);after=np.maximum(s-r['t'][-1],0);ext=np.maximum(before,after);start=before>0
+                gr0=(r['hc'][1]-r['hc'][0])/max(r['t'][1]-r['t'][0],1e-9);gr1=(r['hc'][-1]-r['hc'][-2])/max(r['t'][-1]-r['t'][-2],1e-9)
+                edge=np.where(start,r['hc'][0]-gr0*ext,r['hc'][-1]+gr1*ext)
+                if ENDFADE>0:
+                    Lout=np.maximum(ENDFADE,ENDFADE*np.abs(g0-edge));f=sm(np.clip(ext/Lout,0,1));z=np.where(ext>0,edge*(1-f)+g0*f,z)
+                else:z=np.where(ext>0,g0,z)
+                wr=np.where(ok,1.0/(d**4+EPS),0.0);num+=wr*z;den+=wr
+            if kdw is not None:
+                dv,_=kdw.query(q,distance_upper_bound=6.1);ok=np.isfinite(dv);dm=np.minimum(dm,dv);wv_=np.where(ok,1.0/(dv**4+EPS),0.0);num+=wv_*g0;den+=wv_
+            zb=np.divide(num,den,out=g0.copy(),where=den>0)
+            if kn is not None and NODEPAD:
+                dn,ki=kn.query(q,distance_upper_bound=NODEOUT);okn=np.isfinite(dn);ki=np.where(okn,ki,0);blend=sm(np.clip((dn-NODEIN)/(NODEOUT-NODEIN),0,1));pad=kh[ki]*(1-blend)+zb*blend;zb=np.where(okn,pad,zb)
+            if WANDNEU:
+                dms=np.where(np.isfinite(dm),dm,99.0);dd=np.clip(dms-2.5,0,None);k=0.7*np.where(dd<1,dd*dd/2,dd-0.5)+1e-6;z=np.where(np.isfinite(dm),zb+k*np.tanh((g0-zb)/k),g0);fade=sm(np.clip((6.0-dms)/1.5,0,1))
+            else:z=zb;fade=sm(np.clip((3.5-np.nan_to_num(dm,posinf=99))/2.0,0,1))
+            wa=nd.map_coordinates(WATER,[q[:,1]*RS,q[:,0]*RS],order=0,mode='nearest')>2;wd=nd.map_coordinates(WALLDIST,[q[:,1]*RS,q[:,0]*RS],order=1,mode='nearest');inwall=nd.map_coordinates(WALL.astype(np.uint8),[q[:,1]*RS,q[:,0]*RS],order=0,mode='nearest')>0;roadcore=dm<=float(os.environ.get('WEGMISCH_WANDKERN','4.5'));wallw=sm(np.clip(wd/max(WALLFADE,1e-6),0,1));wallw=np.where(inwall,0,wallw);wallw=np.where(roadcore,1,wallw);dx=np.maximum(np.maximum(126-q[:,0],0),q[:,0]-168);dz=np.maximum(np.maximum(43-q[:,1],0),q[:,1]-86);d2guard=np.hypot(dx,dz)<=D2GUARD;w=fade*wa*wallw*(~d2guard);out[a:a+n]=z;ww[a:a+n]=w
+        return out,ww
+    yy,xx=np.mgrid[0:GY,0:GX];z,w=ziel(xx.ravel()/RS,yy.ravel()/RS);nG=GA.ravel()*(1-w)+z*w
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);zf,wf=ziel(fx,fz,h);h=h*(1-wf)+zf*wf
+    FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    nG=nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype);_diag=_weg3_diagnose(G0,V0,H0,nG,vid,h)
+    return nG,{'grob':int((w>0).sum()),'fein':int((wf>0).sum()),'knoten':len(nodes),'kreuz_paare':len(pr),'band_zellen_neu':int((B2&~B).sum()),'WEGMISCH_EPS':EPS,'WEGMISCH_GEF':GEF,'WEGMISCH_GLATT':GLATT,'WEG2_NODEPAD':NODEPAD,'WEG2_ENDFADE':ENDFADE,'WEG2_NODEIN':NODEIN,'WEG2_NODEOUT':NODEOUT,'WEG2_D1_NODEPAD':D1_NODEPAD,'WEG2_D6_NODEPAD':D6_NODEPAD,'WEG2_ENDPADS':ENDPADS,'WEGMISCH_WANDFADE':WALLFADE,'WEGMISCH_D2_GUARD':D2GUARD,'messung':_diag}
+
+def _weg_dellen_anheben():   # O18weg K4 [F] G1 R8b an 278.5|27.0: Roh-G-Delle 0.423 m, 5.6 m vom Weg; R9 liest G. [A] nur Display-GB/FW-Mulden >0.30 m bis 0.28 m Resttiefe anheben, Roh-G bleibt unveraendert; Grob+Fein
+    from skimage.morphology import reconstruction
+    GA=G_ANZ.reshape(GY,GX).astype(float);G0=GA.copy();V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();H0=np.frombuffer(base64.b64decode(FW['h']),np.float32).copy();LAND=WV.reshape(GY,GX)<=-900;W=np.zeros((GY,GX),bool)
+    for r in RAMPWEGE:
+        r=np.asarray(r,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(r,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25);W[np.clip((np.interp(t,L,r[:,1])*RS).round().astype(int),0,GY-1),np.clip((np.interp(t,L,r[:,0])*RS).round().astype(int),0,GX-1)]=1
+    for x,z in wege:W[z*RS:z*RS+RS+1,x*RS:x*RS+RS+1]=1
+    dw=nd.distance_transform_edt(~W)/RS;gy,gx=np.gradient(GA,1/RS);S=np.hypot(gx,gy);sd=GA.copy();sd[1:-1,1:-1]=GA.max();tf=reconstruction(sd,GA,method='erosion')-GA
+    _d2y,_d2x=np.mgrid[0:GY,0:GX];_d2buf=(_d2x/RS>=125)&(_d2x/RS<=169)&(_d2y/RS>=42)&(_d2y/RS<=87);_allow=~_wand_maske()&~_d2buf;M=(tf>0.30)&LAND&_allow&(dw<=6);d=np.where(M,np.maximum(tf-0.28,0),0);nG=GA+d
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);df=nd.map_coordinates(d,[fz*RS,fx*RS],order=1,mode='nearest');df*=nd.map_coordinates(_allow.astype(np.uint8),[fz*RS,fx*RS],order=0,mode='nearest');h2=h+df;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    lab,n=nd.label(M);gy_,gx_=np.mgrid[0:GY,0:GX];g1=[]
+    for k,sl in enumerate(nd.find_objects(lab),1):
+        yy_,xx_=np.nonzero(lab[sl]==k);yy_+=sl[0].start;xx_+=sl[1].start
+        if len(xx_) and (xx_.min()/RS<294 and xx_.max()/RS>=252 and yy_.min()/RS<43):g1.append(k)
+    gm=(gx_/RS>=252)&(gx_/RS<294)&(gy_/RS<43)
+    nG=nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode();_diag=_weg3_diagnose(G0,V0,H0,nG,vid,h2)
+    return nG,{'mulden':int(n),'angehoben':int((d>0).sum()),'max_hub':round(float(d.max()),3),'G1_mulden':len(g1),'G1_max_hub':round(float(d[gm].max()),3),'messung':_diag}
+
+def _weg2_r1_flanke():   # Weg2: am gemessenen Ende rampe_8 den letzten Rampenquerschnitt 3 m fortsetzen; Laengsprofil bleibt erhalten.
+    global G_ANZ,FW
+    ends=os.environ.get('WEG2_R1_FLANKE','0')
+    if not ends or ends=='0':return {'enden':0,'grob':0,'fein':0,'max_m':0.0}
+    GA=G_ANZ.reshape(GY,GX).astype(float);G0=GA.copy();V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();H0=np.frombuffer(base64.b64decode(FW['h']),np.float32).copy();changed=0;changedf=0;maxd=0.0;sm=lambda u:u*u*(3-2*u);WALL=_wand_maske();WALLDIST=nd.distance_transform_edt(~WALL)/RS
+    def apply(Q,H,rid,side_step=1.5):
+        W=np.asarray(RAMPWEGE[rid],float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(W,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25);p=np.stack([np.interp(t,L,W[:,0]),np.interp(t,L,W[:,1])],1)
+        prof=nd.map_coordinates(GA,[p[:,1]*RS,p[:,0]*RS],order=1,mode='nearest');out=np.asarray(H,float).copy();nchange=0;md=0.0
+        for end in ends.split(','):
+            ri=int(end[:-1]);side=end[-1]
+            if ri!=rid or side not in ('a','e'):continue
+            k0=0 if side=='a' else len(p)-1;k1=min(8,len(p)-1) if side=='a' else max(0,len(p)-9)
+            q0=p[k0];dv=(p[k0]-p[k1]);dv/=max(np.hypot(*dv),1e-9);nv=np.array([-dv[1],dv[0]])
+            ds=max(np.hypot(*(p[k0]-p[k1])),0.25);slope=(prof[k0]-prof[k1])/ds
+            rx=Q[:,0]-q0[0];rz=Q[:,1]-q0[1];along=rx*dv[0]+rz*dv[1];across=rx*nv[0]+rz*nv[1]
+            wl=1-sm(np.clip((along-3.0)/1.0,0,1));wn=1-sm(np.clip((np.abs(across)-1.0)/side_step,0,1));w=wl*wn*((along>=0)&(along<=4.0)&(np.abs(across)<=1.0+side_step));d2guard=(Q[:,0]>=125)&(Q[:,0]<=169)&(Q[:,1]>=42)&(Q[:,1]<=87);wd=nd.map_coordinates(WALLDIST,[Q[:,1]*RS,Q[:,0]*RS],order=1,mode='nearest');inwall=nd.map_coordinates(WALL.astype(np.uint8),[Q[:,1]*RS,Q[:,0]*RS],order=0,mode='nearest')>0;wallw=sm(np.clip(wd/1.5,0,1));wallw=np.where(inwall&(np.abs(across)>1.0),0,wallw);wallw=np.where(np.abs(across)<=1.0,1,wallw);w*=~d2guard;w*=wallw
+            target=prof[k0]+slope*along;new=out*(1-w)+target*w;dd=np.abs(new-out);nchange+=int((dd>0.001).sum());md=max(md,float(dd.max(initial=0)));out=new
+        return out,nchange,md
+    yy,xx=np.mgrid[0:GY,0:GX];Q=np.stack([xx.ravel()/RS,yy.ravel()/RS],1);flat,nchange,md=apply(Q,GA.ravel(),8);G_ANZ=flat.reshape(GY,GX).astype(G_ANZ.dtype);changed+=nchange;maxd=max(maxd,md)
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fx=vid%(NX*FW['fs']+1)/FW['fs'];fz=vid//(NX*FW['fs']+1)/FW['fs'];Qf=np.stack([fx,fz],1);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h2,ncf,mdf=apply(Qf,h,8);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode();changedf+=ncf;maxd=max(maxd,mdf)
+    _diag=_weg3_diagnose(G0,V0,H0,G_ANZ.reshape(GY,GX),vid,h2)
+    return {'enden':len(ends.split(',')),'grob':changed,'fein':changedf,'max_m':round(maxd,4),'messung':_diag}
+
 def _senke_fuellen():   # O18r [Gate R5 loch 40: abflusslose Senken >1 m auf trockenem Land, meist am Wegrand/Wandfuss, von landschaft_final ausgenommen]: Senken auf 0.8 m Tiefe anheben (nur anheben), Rand weich Gauss 1 m; Grob+Fein
     from skimage.morphology import reconstruction
     GA=G_ANZ.reshape(GY,GX).astype(float);LAND=WV.reshape(GY,GX)<=-900
@@ -1144,7 +1330,7 @@ def _t1_naht():   # O18w [Gate T1_harte_farbkante, 4 Naehte G2 284|75, C2 84|84,
     M=nd.binary_dilation(M,iterations=int(os.environ.get('T1R','2')))&LAND_;sg=float(os.environ.get('T1S','1.5'))
     B=np.stack([nd.gaussian_filter(C[...,i],sg) for i in range(3)],-1);C[M]=B[M]
     return np.clip(np.round(C),0,255).astype(VC.dtype).reshape(VC.shape),{'naehte':k_,'ecken':int(M.sum())}
-VC,_t1=(_t1_naht() if os.environ.get('T1NAHT','1')!='0' else (VC,{}));print('o18w_t1_naht',_t1)
+VC,_t1=(_t1_naht() if os.environ.get('T1NAHT','1')!='0' else (VC,{}));print('o18w_t1_naht',_t1);G_ANZ,_wd=(_weg_dellen_anheben() if os.environ.get('WEG2_DELLEN','0')!='0' else (G_ANZ,{'aus':'WEG2_DELLEN=0'}));print('o18weg_dellen_anheben',_wd);_wf=_weg2_r1_flanke();print('weg2_R1_flanke',_wf);print('o18g_bandnaht_nach_weg3',_bandnaht_j1())
 
 def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält Nahtwerte und -neigung fest [A]
     global G,G_ANZ
@@ -1173,6 +1359,8 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+if os.environ.get('WEGMISCH','0')!='0':
+    G_ANZ,_we=_weg_mischung();print('o18k_weg_mischung_nachlauf',_we)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
