@@ -69,7 +69,7 @@ Quelle „vorher“: die im Branch liegenden Baseline-Berichte aus Stand `9d3f8f
 | G1 | 13 → 14 (+1) | 0 / 1 / 0 / 1 = 2 | 1 / 1 / 6 = 8 |
 | D2 | 8 → 8 (0) | 0 / 0 / 0 / 0 = 0 | 0 / 0 / 0 = 0 |
 
-Die acht vorhandenen `pruefe_regeln`-Treffer in D2 sind dieselben wie vorher; es gibt keinen neuen D2-Treffer. D2 bleibt bei null R8- und R9-Treffern.
+Die acht vorhandenen `pruefe_regeln`-Treffer in D2 sind dieselben wie vorher; es gibt keinen neuen D2-Treffer. D2 bleibt bei null R8- und R9-Treffern. **Die D2-Displaygeometrie ist dennoch nicht unverändert:** Gegenüber dem eingecheckten Reliefdatensatz änderten sich 90 GB-Werte (max. 0,00391 m); unter 32.958 gemeinsamen Feinband-Vertices änderten sich 1.898 Höhen (max. 0,41212 m), zusätzlich kamen 1.508 Feinband-Vertices hinzu. Damit ist die strikte D2-Geometrie-Invariante nicht erfüllt, obwohl die genannten D2-Gatebedingungen erfüllt sind.
 
 Am D1-Knoten `rampe_2x11` bei 152,5|28,5 fiel die gemessene R8-Stufe von 1,39 m auf 0,235 m je 0,25 m. Das Gittermaß liegt dort bei 0,046 m und ist unter der Schwelle; die Stufe bleibt knapp über 0,20 m. Am Ende von `rampe_11` verbleiben 0,45 m Stufe, 0,50 m Gitterabweichung, 11,3 % Querneigung und ein R8a-Wert von 0,45 m. In G1 verbleiben am Ende von `rampe_1` 0,17 m Gitterabweichung und 0,26 m bei R8a. Die Kehre C3 hat weiterhin 0,95 m Stufe, 1,38 m Gitterabweichung und 141,4 % Querneigung.
 
