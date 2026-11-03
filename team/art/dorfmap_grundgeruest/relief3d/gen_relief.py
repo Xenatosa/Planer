@@ -1173,6 +1173,102 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+def _dellen_wege_anheben(GA,WVA):   # t133u: abgeleitete, trockene Senken nahe Dorf-/Rampenwegen fuellen [A]
+    _var=int(os.environ.get('DELLENWEG','2'))
+    if _var not in (0,1,2,3):raise ValueError('DELLENWEG muss 0, 1, 2 oder 3 sein')
+    if _var==0:return GA,{'variante':0,'durchlaeufe':0,'komponenten':0,'punkte':0,'max_anhebung_m':0.0}
+    _rest=0.29 if _var in (2,3) else 0.0   # Varianten 2/3: 1 cm unter der R8b-Schwelle stehen lassen
+    from skimage.morphology import reconstruction
+    _G=np.asarray(GA,dtype=np.float32).copy()
+    _W=np.asarray(WVA).reshape(GY,GX)
+    _weg=np.zeros((GY,GX),bool)
+    for _o in csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')):
+        if not _o['weg_id']:continue
+        _x,_y=int(_o['cx']),int(_o['cy'])
+        _weg[_y*RS:_y*RS+RS+1,_x*RS:_x*RS+RS+1]=True
+    for _r in RAMPWEGE:
+        _r=np.asarray(_r,float);_L=np.r_[0,np.cumsum(np.hypot(*np.diff(_r,axis=0).T))]
+        _t=np.arange(0,_L[-1]+1e-6,0.25)
+        _y=np.clip((np.interp(_t,_L,_r[:,1])*RS).round().astype(int),0,GY-1)
+        _x=np.clip((np.interp(_t,_L,_r[:,0])*RS).round().astype(int),0,GX-1)
+        _weg[_y,_x]=True
+    _schutz=np.zeros((GY,GX),bool);_schutzpunkte=0
+    if _var==3:
+        for _r in RAMPWEGE:
+            for _x0,_y0 in (np.asarray(_r,float)[0],np.asarray(_r,float)[-1]):
+                _ix0=max(0,int(np.floor((_x0-1.0)*RS)));_ix1=min(GX,int(np.ceil((_x0+1.0)*RS))+1)
+                _iy0=max(0,int(np.floor((_y0-1.0)*RS)));_iy1=min(GY,int(np.ceil((_y0+1.0)*RS))+1)
+                _dx=np.arange(_ix0,_ix1)[None,:]/RS-_x0;_dy=np.arange(_iy0,_iy1)[:,None]/RS-_y0
+                _schutz[_iy0:_iy1,_ix0:_ix1]|=(_dx*_dx+_dy*_dy)<=1.0
+        _schutzpunkte=int(_schutz.sum())
+    _abstand=nd.distance_transform_edt(~_weg)/RS
+    _punkte=_komponenten=_durchlaeufe=0;_max=0.0
+    for _it in range(3):
+        _saum=_G.copy();_saum[1:-1,1:-1]=float(_G.max())
+        _fuellung=reconstruction(_saum,_G,method='erosion')-_G
+        _gy,_gx=np.gradient(_G.astype(float),1/RS);_wand=np.hypot(_gx,_gy)>1.0
+        _mulde=(_fuellung>0.30)&(_W<=-900)&~nd.binary_dilation(_wand,iterations=1)&~_schutz
+        _lab,_n=nd.label(_mulde);_heben=np.zeros_like(_mulde);_anz=0
+        for _k,_sl in enumerate(nd.find_objects(_lab),1):
+            _m=_lab[_sl]==_k
+            if _abstand[_sl][_m].min()<=6.0:_heben[_sl]|=_m;_anz+=1
+        if not _heben.any():break
+        _durchlaeufe+=1;_punkte+=int(_heben.sum());_komponenten+=_anz
+        _hub=np.maximum(_fuellung[_heben]-_rest,0.0)
+        _max=max(_max,float(_hub.max()))
+        _G[_heben]=(_G[_heben]+_hub).astype(np.float32)
+    return _G,{'variante':_var,'resttiefe_m':_rest,'rampenenden_schutzpunkte':_schutzpunkte,'durchlaeufe':_durchlaeufe,'komponenten':_komponenten,
+               'punkte':_punkte,'max_anhebung_m':round(_max,3)}
+
+_G_VOR_DELLEN=G.copy();G,DELLENWEG_MESS=_dellen_wege_anheben(G,WV);print('dellen_wege_t133u',DELLENWEG_MESS)
+_DELTA=G.astype(float)-_G_VOR_DELLEN.astype(float)
+if np.any(np.abs(_DELTA)>1e-7):
+    _DELTA_ANZEIGE=nd.gaussian_filter(_DELTA,0.6)   # Uebertrag auf GB/Feinmesh, damit die Anzeige der gefuellten G-Mulde folgt
+    G_ANZ=(np.asarray(G_ANZ).reshape(GY,GX).astype(float)+_DELTA_ANZEIGE).astype(np.float32)
+    _vid_l=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);_fy_l=_vid_l//FXn;_fx_l=_vid_l%FXn
+    _fh_l=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    _dh_l=nd.map_coordinates(_DELTA_ANZEIGE,[_fy_l/FS*RS,_fx_l/FS*RS],order=1,mode='nearest')
+    FW['h']=base64.b64encode((_fh_l+_dh_l).astype(np.float32).tobytes()).decode()
+    _obj_anhebung_l={'objekte':0,'max_m':0.0}
+    for _liste_l in (baeume,felsen,findlinge,steine,geroell,felsbloecke):
+        for _obj_l in _liste_l:
+            _dh_obj_l=float(nd.map_coordinates(_DELTA_ANZEIGE,[[float(_obj_l[2])*RS],[float(_obj_l[0])*RS]],order=1,mode='nearest')[0])
+            if _dh_obj_l>0.005:
+                _obj_l[1]=round(float(_obj_l[1])+_dh_obj_l,2)
+                _obj_anhebung_l['objekte']+=1;_obj_anhebung_l['max_m']=max(_obj_anhebung_l['max_m'],_dh_obj_l)
+    _obj_anhebung_l['max_m']=round(_obj_anhebung_l['max_m'],3);print('dellen_objekte_t133u',_obj_anhebung_l)
+    W1,W2=tri_steil(G);Wq=np.maximum(W1,W2);neig=Wq.reshape(NY,RS,NX,RS).max((1,3));steil=neig>WANDWINKEL
+    Hz=sum(G[dy:dy+GY-1:RS,dx:dx+GX-1:RS][:NY,:NX] for dy in range(3) for dx in range(3))/9
+    Gmax=nd.maximum_filter(np.maximum.reduceat(np.maximum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+    Gmin=nd.minimum_filter(np.minimum.reduceat(np.minimum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+    nb=nd.binary_dilation(steil,structure=np.ones((3,3)))&~steil;mid=(Gmax+Gmin)/2
+    oben=nb&(Hz>=mid);fuss=nb&(Hz<mid);kh=np.where(steil|nb,Gmax-Gmin,0.0)
+    b3d=(neig<=35)&(b3d_alt|wand)&~(wa&(fl=='SEE'))
+    F.update({'hoehe_m':np.round(Hz,2),'neigung_grad':np.round(neig,1),
+      'ecke_nw_m':np.round(G[0:-1:RS,0:-1:RS][:NY,:NX],2),
+      'ecke_no_m':np.round(G[0:-1:RS,RS::RS][:NY,:NX],2),
+      'ecke_so_m':np.round(G[RS::RS,RS::RS],2),
+      'ecke_sw_m':np.round(G[RS::RS,0:-1:RS][:NY,:NX],2),
+      'klippe':np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS',''))),
+      'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),
+      'klippe_hoehe_m':np.round(kh,1),
+      'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u',''),
+      'begehbar_3d':b3d.astype(int)})
+    spalten={}
+    for _c_l in outcols:
+        _u_l,_idx_l=np.unique(F[_c_l].astype(str).ravel(),return_inverse=True)
+        _dt_l=np.uint8 if len(_u_l)<256 else np.uint16 if len(_u_l)<65536 else np.uint32
+        spalten[_c_l]={'w':_u_l.tolist(),'t':_dt_l.__name__,'i':base64.b64encode(_idx_l.astype(_dt_l).tobytes()).decode()}
+    with open('zellen_relief.csv','w',newline='') as _csv_l:
+        _writer_l=csv.writer(_csv_l);_writer_l.writerow(outcols)
+        for _y_l in range(NY):
+            for _x_l in range(NX):_writer_l.writerow([F[_c_l][_y_l,_x_l] for _c_l in outcols])
+    V=np.stack([vi.ravel()/RS,G.ravel(),vj.ravel()/RS],1)
+    ST=np.concatenate([W1.ravel(),W2.ravel()])>WANDWINKEL;TW=TT[ST]
+    _scene_l=trimesh.Scene()
+    _scene_l.add_geometry(trimesh.Trimesh(V,TT[~ST][:,::-1],process=False,vertex_colors=_vc),'boden')
+    _scene_l.add_geometry(trimesh.Trimesh(V,TT[ST][:,::-1],process=False,vertex_colors=_vc),'waende')
+    _scene_l.export('dorfmap_relief_z25.glb')
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
