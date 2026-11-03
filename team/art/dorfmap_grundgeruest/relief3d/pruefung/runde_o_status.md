@@ -508,3 +508,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - r9_form.py (neu): 334 (R8b_delle 25, R9_saegezahn 34 Felder, R9w_wellen 275).
 - **Summe 978.** D2 hat 0 Treffer in R8/R9 (Regressionsbasis). G1: R8a 1, Delle 1, Saegezahn 1, Wellen 6. D1: R8 5, R8a 3, Delle 2, Saegezahn 1, Wellen 23.
 - export_gate.sh ruft alle drei Pruefer auf und meldet ROT, wenn einer Treffer hat.
+
+## t131u Stand 19:30
+- grundgeruest b1b2b99: wand gemerged -> pr 602 / r8 49 / r9 334, Loch 0, lod1 1.29M (knapp unter 1.3M).
+- weg: NICHT gemergt (R3_laengs +10, D2-Display abweichend) -> Folgejob weg2 laeuft.
+- wellen 07b9b2e: r9 auf G gemessen -> R9w/R8b unveraendert, GB-R9w 453->433, max +3. Kandidat.
+- c2 1852c42: Stufenanteil 5.2->2.4 %, global 595/48/334, max +1. Kandidat.
+- rillen 46d07ac: Querwelligkeit 0.95->0.60 cm, aber G6 +5 -> nicht gemergt.
+- g7b a96cbd4: Standard aus, keine Wirkung -> nicht gemergt.
+- g5r5, weg2: laufen.
