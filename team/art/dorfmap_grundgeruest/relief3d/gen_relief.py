@@ -834,7 +834,7 @@ def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5
     W=(nd.distance_transform_edt(~R)/RS<=1.5);d,(iy,ix)=nd.distance_transform_edt(~W,return_indices=True);d=d/RS
     yy,xx=np.mgrid[0:GY,0:GX];vy=yy-iy;vx=xx-ix;n=np.maximum(np.hypot(vy,vx),1e-6);hp=GA[iy,ix]
     s4=nd.map_coordinates(GA,[iy+vy/n*4*RS,ix+vx/n*4*RS],order=1,mode='nearest')
-    m=(d>0)&(d<=2.5)&(s4<hp-0.3)&(WV.reshape(GY,GX)<=-900)&(GA>hp+0.05);m=nd.binary_opening(m) if 0 else m;cap=np.where(m,hp+0.02,np.inf);ms=np.clip(nd.gaussian_filter(m.astype(float),1.0)*2,0,1);capf=np.where(m,hp+0.02,GA)   # nur echter Buckel ueber Wegkante -> auf Kantenhoehe, weicher Uebergang
+    tg=hp+0.02+(s4-hp)*np.clip(d,0,4)/4*(0 if os.environ.get('WULST_ALT') else 1);m=(d>0)&(d<=2.5)&(s4<hp-1.0)&(WV.reshape(GY,GX)<=-900)&(GA>tg+0.05)&(xx>=252*RS)&(xx<294*RS)&(yy<42*RS);ms=np.clip(nd.gaussian_filter(m.astype(float),1.5)*2,0,1);capf=np.where(m,tg,GA)   # O18j [F heller Streifen = flache Stufe unter Wegkante, Shader-Schnee nach |N.y|]: Ziel = Linie Wegkante->Gelaende 4 m (keine Simse)   # nur echter Buckel ueber Wegkante -> auf Kantenhoehe, weicher Uebergang   # nur Feld G1 (kartenweit stiegen Feinzacken 31->42/49)
     nG=GA-np.maximum(GA-nd.grey_dilation(np.where(m,capf,-1e4),size=3).clip(min=-1e3),0)*ms*(nd.grey_dilation(m,size=3));nG=np.where(np.isfinite(nG),nG,GA);k=int((nG<GA-0.01).sum())
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn/FS*RS;fx=vid%FXn/FS*RS
     cf=nd.map_coordinates(np.where(m,capf,nG),[fy,fx],order=1,mode='nearest');mf=nd.map_coordinates(ms,[fy,fx],order=1,mode='nearest')
