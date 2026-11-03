@@ -162,3 +162,8 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - Regel ab O18u: T1-Fehler nur dann, wenn die Komponente eine achsparallele Kante mit >=9 px (4,5 m) am Stueck hat. Gemessene Verteilung der laengsten Laeufe: 3..7 px bei 92 Komponenten, dann eine Luecke, dann 9/12/14 px. Komponenten unter 9 px heissen T1_fleckrand, bleiben in summe und sind als Ausnahme markiert.
 - Ergebnis auf 7bb8418: T1 95 -> 3 (2 + 1 gerade), dazu T1_fleckrand 92 als Ausnahme. Die Schwankung von +-5 lag nur in den Fleckraendern.
 - O18u S2 G11: Die Einbettung von Steinen, Felsen und Findlingen ist jetzt auf hoechstens 0,55 m begrenzt (runde_m_t65u.strahl_hoehe, vorher 0,25*Groesse). Der Findling H5 306,5|196,35 lag 1,09 m zu tief und liegt jetzt 0,55 m tief. G11 1 -> 0, Raycast alles 0, findlinge max_abw 0,55. Gate 1140 -> 1139.
+- O18u S3/S4 G5+G6, Wand-Grundform, 3 Varianten (Code in pruefung/o18/gen_relief_o18u_varianten.py.txt, env WANDV). Basis 1139.
+  - V1: Rippen, Grat, Simse und Baender nur >3 m von Fuss/Kopf mit 2 m Fade; Wandkopf gedeckelt auf max(Hs, 7 px). Ergebnis G5 166->108, G6 676->608, gesamt 1130. Gestiegen: G2 +1, G3 +3, T1 +1, R4 +1, G7b-Rauheit +1, G11 123 (Objekte nicht neu geraycastet). Abgelehnt.
+  - V2: wie V1, dazu Hohlkehle an Fuss/Kopf (Gauss 2 px, ausserhalb der Wandmitte). Ergebnis G5 85, G6 608, R5 27, gesamt 1103. Gestiegen: G2 +1, G3 +3, G7b_feld +5, Rauheit 0,51, R4 +1, T1 +1. Abgelehnt.
+  - V3: weicher Deckel, Hohlkehle 1,5 px. Ergebnis G5 102, G6 598, gesamt 1114. Gleiche Anstiege wie V1. Abgelehnt.
+  - Befund: Der Deckel (Ursache G5 = hi-Maximum ueber 10 m hebt die Kante ueber das Plateau) und der Fade wirken, erzeugen aber neue Spitzen (G2/G3) und glattere Waende (Rauheit). Alles zurueckgesetzt, Basis bleibt 1139.
