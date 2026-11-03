@@ -523,3 +523,6 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Job delle (G1 0,423 m Ursache in gen_relief) gestartet; weg2 laeuft.
 - 20:25 Bild D1/G1 nach wand-Merge: sichtbare Zaehne an Wandbandkante (Gate fing es nicht) -> WANDSTREIFEN Standard 0. Gate: pr 570, r8 48, r9 334 = 952 (Basis 978). Loch 0, Bilder D1/G1 ohne Zaehne.
 - weg2 fc8d651: R3_laengs 39 (+4), R8 38, D2 bytegleich -> wird gemergt.
+- 20:20 weg2-Merge faad82a gebaut: pr 581, r8 38 (R8_stufe 5, gitter 5, R8a 23), r9 334, Loch 0, R3_laengs 39, G5 70 (+4), G6 219.
+  ABER Bild D1: Klippe unten links verschwindet, wird zur weichen Boeschung (akzeptierte Optik geaendert). weg2-D2-Fix ist ein Zuruecksetzen auf eine 9d3f8fc-Referenz (GB 4922 Zellen bis 0,63 m, FW bis 6,28 m), keine Ursachenbehebung.
+  -> Revert 78b3627, Gate wieder pr 570 / r8 48 / r9 334, Loch 0. Naechster Versuch: weg2 einzeln (WEGMISCH / Knotenpad / Endauslauf / Dellen) per Schalter, Klippe D1 als Bildkriterium.
