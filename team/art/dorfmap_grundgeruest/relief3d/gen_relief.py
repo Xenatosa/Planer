@@ -983,7 +983,16 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 F
     GA=G_ANZ.reshape(GY,GX).astype(float);gy,gx=np.gradient(GA,1/RS);st=np.hypot(gx,gy);W_=st>1.0
     n=np.stack([-gx,-gy,np.ones_like(GA)]);n/=np.linalg.norm(n,axis=0);dn=np.zeros_like(GA);dn[:,:-1]=sum(np.abs(np.diff(n[i],axis=1)) for i in range(3))
     LAND_=WV.reshape(GY,GX)<=-900;M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=int(float(os.environ.get('FALTWD','1'))*RS))&~nd.binary_dilation(WEGA.reshape(GY,GX)>20,iterations=3*RS)
+    _ramp_guard=None;_fr=float(os.environ.get('FALTRAMPEN','1.5'))
+    if _fr not in (0.0,1.5,3.5):raise ValueError('FALTRAMPEN muss 0, 1.5 oder 3.5 sein')
+    if _fr>0:   # t133u: Hang-Endschliff darf Rampenquerprofile nicht erneut veraendern
+        _rm=np.zeros_like(M)
+        for _r in RAMPWEGE:
+            _p=np.asarray(_r,float);_L=np.r_[0,np.cumsum(np.hypot(*np.diff(_p,axis=0).T))];_t=np.arange(0,_L[-1]+1e-6,0.25)
+            _xx=np.clip(np.rint(np.interp(_t,_L,_p[:,0])*RS).astype(int),0,GX-1);_yy=np.clip(np.rint(np.interp(_t,_L,_p[:,1])*RS).astype(int),0,GY-1);_rm[_yy,_xx]=True
+        _ramp_guard=nd.binary_dilation(_rm,iterations=int(_fr*RS));M&=~_ramp_guard
     w=np.clip(nd.gaussian_filter(nd.binary_dilation(M,iterations=RS)*1.0,RS*0.5)*1.5,0,1)*nd.binary_erosion(LAND_,iterations=RS)
+    if _ramp_guard is not None:w[_ramp_guard]=0
     _yy,_xx=np.mgrid[0:GY,0:GX]
     for _r in RAMPWEGE:   # O18y [Gate R1_wand rampe_1/rampe_2 Enden]: Rampenenden 6 m frei lassen [A]
         _p=np.asarray([(q[0],q[1]) if not isinstance(q,dict) else (q['x'],q['z']) for q in (_r['punkte'] if isinstance(_r,dict) else _r)],float)
@@ -999,6 +1008,7 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 F
     nG=GA*(1-w)+S*w
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
+    if _ramp_guard is not None:wf[nd.map_coordinates(_ramp_guard.astype(np.float32),[fy/FS*RS,fx/FS*RS],order=0)>0.5]=0
     F=np.full((FYn,FXn),np.nan);F[fy,fx]=h;ok=np.isfinite(F);Sf=nd.gaussian_filter(np.where(ok,F,0),SG*FS)/np.maximum(nd.gaussian_filter(ok*1.0,SG*FS),1e-6)
     if LS>0:
         _Sl=nd.gaussian_filter(np.where(ok,F,0),LS*FS)/np.maximum(nd.gaussian_filter(ok*1.0,LS*FS),1e-6);_BF=nd.zoom(BM.astype(np.uint8),FS/RS,order=0);_B=np.zeros((FYn,FXn),bool);_B[:min(FYn,_BF.shape[0]),:min(FXn,_BF.shape[1])]=_BF[:FYn,:FXn]>0;Sf=np.where(_B,_Sl,Sf)
