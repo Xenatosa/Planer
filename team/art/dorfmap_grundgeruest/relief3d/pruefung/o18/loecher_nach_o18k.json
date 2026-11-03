@@ -1,0 +1,3008 @@
+[
+{
+"art": "beule",
+"x": 116.0,
+"z": 201.0,
+"feld": "C5",
+"tiefe_m": 6.36,
+"flaeche_m2": 228.2,
+"h": 9.81
+},
+{
+"art": "beule",
+"x": 125.5,
+"z": 96.5,
+"feld": "C3",
+"tiefe_m": 5.88,
+"flaeche_m2": 42.5,
+"h": 9.26
+},
+{
+"art": "loch",
+"x": 96.0,
+"z": 207.5,
+"feld": "C5",
+"tiefe_m": 5.25,
+"flaeche_m2": 64.0,
+"h": -6.15
+},
+{
+"art": "beule",
+"x": 273.0,
+"z": 131.0,
+"feld": "G4",
+"tiefe_m": 5.04,
+"flaeche_m2": 128.0,
+"h": 11.74
+},
+{
+"art": "beule",
+"x": 33.0,
+"z": 38.0,
+"feld": "A1",
+"tiefe_m": 4.74,
+"flaeche_m2": 20.2,
+"h": 7.51
+},
+{
+"art": "beule",
+"x": 92.5,
+"z": 107.0,
+"feld": "C3",
+"tiefe_m": 4.49,
+"flaeche_m2": 173.0,
+"h": 11.0
+},
+{
+"art": "beule",
+"x": 112.5,
+"z": 100.0,
+"feld": "C3",
+"tiefe_m": 4.44,
+"flaeche_m2": 136.2,
+"h": 7.53
+},
+{
+"art": "beule",
+"x": 94.5,
+"z": 211.0,
+"feld": "C5",
+"tiefe_m": 4.35,
+"flaeche_m2": 151.0,
+"h": -0.08
+},
+{
+"art": "beule",
+"x": 40.5,
+"z": 41.5,
+"feld": "A1",
+"tiefe_m": 4.32,
+"flaeche_m2": 71.0,
+"h": 6.5
+},
+{
+"art": "beule",
+"x": 127.0,
+"z": 148.0,
+"feld": "D4",
+"tiefe_m": 4.23,
+"flaeche_m2": 171.8,
+"h": 9.85
+},
+{
+"art": "beule",
+"x": 4.0,
+"z": 44.0,
+"feld": "A2",
+"tiefe_m": 4.21,
+"flaeche_m2": 28.0,
+"h": 12.91
+},
+{
+"art": "beule",
+"x": 24.5,
+"z": 39.0,
+"feld": "A1",
+"tiefe_m": 4.01,
+"flaeche_m2": 13.8,
+"h": 3.27
+},
+{
+"art": "loch",
+"x": 107.0,
+"z": 145.5,
+"feld": "C4",
+"tiefe_m": 3.96,
+"flaeche_m2": 1301.8,
+"h": 1.0
+},
+{
+"art": "loch",
+"x": 159.0,
+"z": 229.0,
+"feld": "D6",
+"tiefe_m": 3.87,
+"flaeche_m2": 15.5,
+"h": -10.56
+},
+{
+"art": "beule",
+"x": 291.0,
+"z": 36.0,
+"feld": "G1",
+"tiefe_m": 3.71,
+"flaeche_m2": 13.5,
+"h": 7.14
+},
+{
+"art": "beule",
+"x": 273.0,
+"z": 112.5,
+"feld": "G3",
+"tiefe_m": 3.62,
+"flaeche_m2": 106.0,
+"h": 9.02
+},
+{
+"art": "beule",
+"x": 156.5,
+"z": 228.5,
+"feld": "D6",
+"tiefe_m": 3.51,
+"flaeche_m2": 35.5,
+"h": -6.22
+},
+{
+"art": "beule",
+"x": 189.0,
+"z": 40.0,
+"feld": "E1",
+"tiefe_m": 3.42,
+"flaeche_m2": 103.0,
+"h": 8.24
+},
+{
+"art": "loch",
+"x": 152.5,
+"z": 228.5,
+"feld": "D6",
+"tiefe_m": 3.34,
+"flaeche_m2": 26.5,
+"h": -10.79
+},
+{
+"art": "beule",
+"x": 110.5,
+"z": 46.0,
+"feld": "C2",
+"tiefe_m": 3.19,
+"flaeche_m2": 30.0,
+"h": 4.96
+},
+{
+"art": "beule",
+"x": 117.5,
+"z": 168.5,
+"feld": "C4",
+"tiefe_m": 2.89,
+"flaeche_m2": 59.8,
+"h": 10.99
+},
+{
+"art": "beule",
+"x": 237.5,
+"z": 230.0,
+"feld": "F6",
+"tiefe_m": 2.88,
+"flaeche_m2": 36.0,
+"h": -0.75
+},
+{
+"art": "beule",
+"x": 207.5,
+"z": 241.5,
+"feld": "E6",
+"tiefe_m": 2.86,
+"flaeche_m2": 55.0,
+"h": -6.87
+},
+{
+"art": "beule",
+"x": 118.5,
+"z": 123.0,
+"feld": "C3",
+"tiefe_m": 2.8,
+"flaeche_m2": 22.8,
+"h": 8.62
+},
+{
+"art": "beule",
+"x": 317.5,
+"z": 37.5,
+"feld": "H1",
+"tiefe_m": 2.76,
+"flaeche_m2": 17.5,
+"h": 6.98
+},
+{
+"art": "beule",
+"x": 293.5,
+"z": 100.0,
+"feld": "G3",
+"tiefe_m": 2.7,
+"flaeche_m2": 87.5,
+"h": 12.0
+},
+{
+"art": "beule",
+"x": 317.0,
+"z": 237.5,
+"feld": "H6",
+"tiefe_m": 2.7,
+"flaeche_m2": 48.0,
+"h": 3.94
+},
+{
+"art": "beule",
+"x": 323.0,
+"z": 75.5,
+"feld": "H2",
+"tiefe_m": 2.66,
+"flaeche_m2": 61.2,
+"h": 13.67
+},
+{
+"art": "beule",
+"x": 223.5,
+"z": 47.5,
+"feld": "F2",
+"tiefe_m": 2.61,
+"flaeche_m2": 110.8,
+"h": 9.09
+},
+{
+"art": "beule",
+"x": 105.5,
+"z": 134.0,
+"feld": "C4",
+"tiefe_m": 2.6,
+"flaeche_m2": 34.2,
+"h": 6.92
+},
+{
+"art": "beule",
+"x": 244.0,
+"z": 227.0,
+"feld": "F6",
+"tiefe_m": 2.53,
+"flaeche_m2": 69.5,
+"h": -0.15
+},
+{
+"art": "beule",
+"x": 301.0,
+"z": 222.0,
+"feld": "H6",
+"tiefe_m": 2.49,
+"flaeche_m2": 25.5,
+"h": 4.62
+},
+{
+"art": "beule",
+"x": 124.5,
+"z": 187.0,
+"feld": "C5",
+"tiefe_m": 2.46,
+"flaeche_m2": 45.2,
+"h": 10.98
+},
+{
+"art": "beule",
+"x": 76.0,
+"z": 146.0,
+"feld": "B4",
+"tiefe_m": 2.45,
+"flaeche_m2": 73.0,
+"h": 10.94
+},
+{
+"art": "beule",
+"x": 308.0,
+"z": 182.0,
+"feld": "H5",
+"tiefe_m": 2.44,
+"flaeche_m2": 48.2,
+"h": 12.0
+},
+{
+"art": "beule",
+"x": 311.5,
+"z": 200.5,
+"feld": "H5",
+"tiefe_m": 2.44,
+"flaeche_m2": 39.0,
+"h": 11.9
+},
+{
+"art": "loch",
+"x": 70.0,
+"z": 172.0,
+"feld": "B5",
+"tiefe_m": 2.42,
+"flaeche_m2": 9.5,
+"h": 0.8
+},
+{
+"art": "beule",
+"x": 285.5,
+"z": 29.5,
+"feld": "G1",
+"tiefe_m": 2.32,
+"flaeche_m2": 48.2,
+"h": 13.94
+},
+{
+"art": "beule",
+"x": 211.0,
+"z": 229.0,
+"feld": "F6",
+"tiefe_m": 2.3,
+"flaeche_m2": 16.2,
+"h": -0.82
+},
+{
+"art": "beule",
+"x": 148.5,
+"z": 24.0,
+"feld": "D1",
+"tiefe_m": 2.24,
+"flaeche_m2": 25.0,
+"h": 10.22
+},
+{
+"art": "beule",
+"x": 80.5,
+"z": 42.0,
+"feld": "B1",
+"tiefe_m": 2.11,
+"flaeche_m2": 16.2,
+"h": 12.07
+},
+{
+"art": "beule",
+"x": 99.5,
+"z": 221.5,
+"feld": "C6",
+"tiefe_m": 2.06,
+"flaeche_m2": 14.5,
+"h": -5.84
+},
+{
+"art": "beule",
+"x": 98.5,
+"z": 44.5,
+"feld": "C2",
+"tiefe_m": 2.03,
+"flaeche_m2": 10.0,
+"h": 5.29
+},
+{
+"art": "beule",
+"x": 286.0,
+"z": 154.0,
+"feld": "G4",
+"tiefe_m": 2.01,
+"flaeche_m2": 26.5,
+"h": 8.22
+},
+{
+"art": "beule",
+"x": 207.0,
+"z": 35.0,
+"feld": "E1",
+"tiefe_m": 1.9,
+"flaeche_m2": 7.2,
+"h": 12.15
+},
+{
+"art": "beule",
+"x": 68.5,
+"z": 114.0,
+"feld": "B3",
+"tiefe_m": 1.77,
+"flaeche_m2": 8.5,
+"h": -0.98
+},
+{
+"art": "beule",
+"x": 273.0,
+"z": 27.0,
+"feld": "G1",
+"tiefe_m": 1.75,
+"flaeche_m2": 0.8,
+"h": 5.45
+},
+{
+"art": "beule",
+"x": 175.0,
+"z": 243.0,
+"feld": "E6",
+"tiefe_m": 1.75,
+"flaeche_m2": 12.0,
+"h": -8.01
+},
+{
+"art": "beule",
+"x": 151.5,
+"z": 29.0,
+"feld": "D1",
+"tiefe_m": 1.72,
+"flaeche_m2": 12.0,
+"h": 6.03
+},
+{
+"art": "loch",
+"x": 97.5,
+"z": 101.0,
+"feld": "C3",
+"tiefe_m": 1.71,
+"flaeche_m2": 13.8,
+"h": 8.0
+},
+{
+"art": "beule",
+"x": 163.5,
+"z": 241.5,
+"feld": "D6",
+"tiefe_m": 1.71,
+"flaeche_m2": 3.8,
+"h": -8.03
+},
+{
+"art": "beule",
+"x": 138.5,
+"z": 35.5,
+"feld": "D1",
+"tiefe_m": 1.65,
+"flaeche_m2": 14.8,
+"h": 8.36
+},
+{
+"art": "beule",
+"x": 284.5,
+"z": 98.5,
+"feld": "G3",
+"tiefe_m": 1.65,
+"flaeche_m2": 6.2,
+"h": 5.02
+},
+{
+"art": "beule",
+"x": 311.5,
+"z": 234.5,
+"feld": "H6",
+"tiefe_m": 1.64,
+"flaeche_m2": 5.0,
+"h": -6.88
+},
+{
+"art": "beule",
+"x": 229.0,
+"z": 227.5,
+"feld": "F6",
+"tiefe_m": 1.56,
+"flaeche_m2": 15.0,
+"h": -0.15
+},
+{
+"art": "beule",
+"x": 68.5,
+"z": 118.5,
+"feld": "B3",
+"tiefe_m": 1.53,
+"flaeche_m2": 6.2,
+"h": -1.2
+},
+{
+"art": "beule",
+"x": 54.0,
+"z": 168.0,
+"feld": "B4",
+"tiefe_m": 1.53,
+"flaeche_m2": 6.8,
+"h": -0.77
+},
+{
+"art": "beule",
+"x": 71.5,
+"z": 203.5,
+"feld": "B5",
+"tiefe_m": 1.51,
+"flaeche_m2": 6.5,
+"h": -0.68
+},
+{
+"art": "loch",
+"x": 281.5,
+"z": 107.0,
+"feld": "G3",
+"tiefe_m": 1.5,
+"flaeche_m2": 27.0,
+"h": 9.74
+},
+{
+"art": "beule",
+"x": 145.5,
+"z": 224.0,
+"feld": "D6",
+"tiefe_m": 1.5,
+"flaeche_m2": 25.0,
+"h": -0.36
+},
+{
+"art": "beule",
+"x": 288.5,
+"z": 231.0,
+"feld": "G6",
+"tiefe_m": 1.49,
+"flaeche_m2": 21.8,
+"h": -3.08
+},
+{
+"art": "loch",
+"x": 77.5,
+"z": 146.0,
+"feld": "B4",
+"tiefe_m": 1.46,
+"flaeche_m2": 12.0,
+"h": 8.49
+},
+{
+"art": "loch",
+"x": 298.0,
+"z": 94.5,
+"feld": "H3",
+"tiefe_m": 1.44,
+"flaeche_m2": 7.0,
+"h": 9.55
+},
+{
+"art": "beule",
+"x": 272.5,
+"z": 26.5,
+"feld": "G1",
+"tiefe_m": 1.42,
+"flaeche_m2": 0.8,
+"h": 8.6
+},
+{
+"art": "beule",
+"x": 104.0,
+"z": 224.0,
+"feld": "C6",
+"tiefe_m": 1.42,
+"flaeche_m2": 12.2,
+"h": -7.79
+},
+{
+"art": "beule",
+"x": 112.0,
+"z": 35.0,
+"feld": "C1",
+"tiefe_m": 1.39,
+"flaeche_m2": 44.2,
+"h": 13.85
+},
+{
+"art": "loch",
+"x": 114.0,
+"z": 109.0,
+"feld": "C3",
+"tiefe_m": 1.36,
+"flaeche_m2": 25.5,
+"h": 11.7
+},
+{
+"art": "beule",
+"x": 77.0,
+"z": 215.5,
+"feld": "B6",
+"tiefe_m": 1.36,
+"flaeche_m2": 9.8,
+"h": -6.51
+},
+{
+"art": "beule",
+"x": 155.5,
+"z": 238.0,
+"feld": "D6",
+"tiefe_m": 1.36,
+"flaeche_m2": 10.0,
+"h": -5.44
+},
+{
+"art": "loch",
+"x": 309.5,
+"z": 181.5,
+"feld": "H5",
+"tiefe_m": 1.35,
+"flaeche_m2": 9.5,
+"h": 9.56
+},
+{
+"art": "beule",
+"x": 96.5,
+"z": 134.5,
+"feld": "C4",
+"tiefe_m": 1.34,
+"flaeche_m2": 6.8,
+"h": 10.75
+},
+{
+"art": "beule",
+"x": 305.0,
+"z": 37.5,
+"feld": "H1",
+"tiefe_m": 1.33,
+"flaeche_m2": 8.2,
+"h": 4.86
+},
+{
+"art": "beule",
+"x": 22.5,
+"z": 35.5,
+"feld": "A1",
+"tiefe_m": 1.3,
+"flaeche_m2": 3.5,
+"h": 13.03
+},
+{
+"art": "beule",
+"x": 15.5,
+"z": 33.5,
+"feld": "A1",
+"tiefe_m": 1.28,
+"flaeche_m2": 4.0,
+"h": 13.19
+},
+{
+"art": "loch",
+"x": 105.0,
+"z": 198.5,
+"feld": "C5",
+"tiefe_m": 1.23,
+"flaeche_m2": 12.0,
+"h": 8.37
+},
+{
+"art": "beule",
+"x": 67.5,
+"z": 40.5,
+"feld": "B1",
+"tiefe_m": 1.22,
+"flaeche_m2": 2.5,
+"h": 13.12
+},
+{
+"art": "beule",
+"x": 180.5,
+"z": 246.0,
+"feld": "E6",
+"tiefe_m": 1.22,
+"flaeche_m2": 3.2,
+"h": -14.26
+},
+{
+"art": "beule",
+"x": 50.0,
+"z": 161.5,
+"feld": "B4",
+"tiefe_m": 1.21,
+"flaeche_m2": 5.2,
+"h": -4.68
+},
+{
+"art": "beule",
+"x": 56.0,
+"z": 172.0,
+"feld": "B5",
+"tiefe_m": 1.21,
+"flaeche_m2": 2.2,
+"h": -0.5
+},
+{
+"art": "beule",
+"x": 329.0,
+"z": 30.0,
+"feld": "H1",
+"tiefe_m": 1.2,
+"flaeche_m2": 6.0,
+"h": 13.61
+},
+{
+"art": "beule",
+"x": 85.5,
+"z": 46.0,
+"feld": "C2",
+"tiefe_m": 1.19,
+"flaeche_m2": 3.0,
+"h": -3.11
+},
+{
+"art": "beule",
+"x": 164.0,
+"z": 230.0,
+"feld": "D6",
+"tiefe_m": 1.18,
+"flaeche_m2": 6.2,
+"h": -2.69
+},
+{
+"art": "beule",
+"x": 99.0,
+"z": 181.5,
+"feld": "C5",
+"tiefe_m": 1.17,
+"flaeche_m2": 6.5,
+"h": 8.91
+},
+{
+"art": "loch",
+"x": 286.0,
+"z": 28.0,
+"feld": "G1",
+"tiefe_m": 1.16,
+"flaeche_m2": 6.0,
+"h": 11.62
+},
+{
+"art": "loch",
+"x": 299.5,
+"z": 165.0,
+"feld": "H4",
+"tiefe_m": 1.15,
+"flaeche_m2": 8.5,
+"h": 9.75
+},
+{
+"art": "beule",
+"x": 161.5,
+"z": 22.5,
+"feld": "D1",
+"tiefe_m": 1.15,
+"flaeche_m2": 2.5,
+"h": 5.55
+},
+{
+"art": "beule",
+"x": 295.0,
+"z": 168.0,
+"feld": "H4",
+"tiefe_m": 1.15,
+"flaeche_m2": 2.8,
+"h": 1.83
+},
+{
+"art": "beule",
+"x": 163.0,
+"z": 239.5,
+"feld": "D6",
+"tiefe_m": 1.14,
+"flaeche_m2": 1.2,
+"h": -4.03
+},
+{
+"art": "beule",
+"x": 150.0,
+"z": 7.5,
+"feld": "D1",
+"tiefe_m": 1.12,
+"flaeche_m2": 6.0,
+"h": 13.21
+},
+{
+"art": "loch",
+"x": 314.5,
+"z": 89.0,
+"feld": "H3",
+"tiefe_m": 1.11,
+"flaeche_m2": 7.8,
+"h": 10.08
+},
+{
+"art": "beule",
+"x": 64.0,
+"z": 132.0,
+"feld": "B4",
+"tiefe_m": 1.11,
+"flaeche_m2": 6.2,
+"h": -0.39
+},
+{
+"art": "beule",
+"x": 274.5,
+"z": 241.0,
+"feld": "G6",
+"tiefe_m": 1.11,
+"flaeche_m2": 5.8,
+"h": -7.75
+},
+{
+"art": "loch",
+"x": 107.0,
+"z": 130.0,
+"feld": "C4",
+"tiefe_m": 1.09,
+"flaeche_m2": 9.0,
+"h": 8.75
+},
+{
+"art": "beule",
+"x": 95.5,
+"z": 119.0,
+"feld": "C3",
+"tiefe_m": 1.09,
+"flaeche_m2": 1.8,
+"h": 9.7
+},
+{
+"art": "beule",
+"x": 169.0,
+"z": 21.5,
+"feld": "E1",
+"tiefe_m": 1.07,
+"flaeche_m2": 4.5,
+"h": 7.99
+},
+{
+"art": "beule",
+"x": 130.5,
+"z": 125.0,
+"feld": "D3",
+"tiefe_m": 1.07,
+"flaeche_m2": 3.0,
+"h": 5.44
+},
+{
+"art": "beule",
+"x": 111.0,
+"z": 187.0,
+"feld": "C5",
+"tiefe_m": 1.07,
+"flaeche_m2": 2.5,
+"h": 5.18
+},
+{
+"art": "beule",
+"x": 66.5,
+"z": 40.0,
+"feld": "B1",
+"tiefe_m": 1.05,
+"flaeche_m2": 2.0,
+"h": 13.01
+},
+{
+"art": "beule",
+"x": 135.0,
+"z": 129.5,
+"feld": "D4",
+"tiefe_m": 1.05,
+"flaeche_m2": 3.5,
+"h": 8.07
+},
+{
+"art": "loch",
+"x": 92.5,
+"z": 198.5,
+"feld": "C5",
+"tiefe_m": 1.01,
+"flaeche_m2": 6.8,
+"h": 8.6
+},
+{
+"art": "beule",
+"x": 105.0,
+"z": 48.0,
+"feld": "C2",
+"tiefe_m": 1.01,
+"flaeche_m2": 0.8,
+"h": 0.98
+},
+{
+"art": "beule",
+"x": 86.0,
+"z": 176.0,
+"feld": "C5",
+"tiefe_m": 1.01,
+"flaeche_m2": 11.2,
+"h": 10.85
+},
+{
+"art": "beule",
+"x": 169.5,
+"z": 244.5,
+"feld": "E6",
+"tiefe_m": 1.0,
+"flaeche_m2": 2.0,
+"h": -14.31
+},
+{
+"art": "beule",
+"x": 98.5,
+"z": 203.0,
+"feld": "C5",
+"tiefe_m": 0.99,
+"flaeche_m2": 0.8,
+"h": 3.37
+},
+{
+"art": "beule",
+"x": 169.5,
+"z": 242.0,
+"feld": "E6",
+"tiefe_m": 0.99,
+"flaeche_m2": 1.5,
+"h": -8.92
+},
+{
+"art": "beule",
+"x": 281.0,
+"z": 23.0,
+"feld": "G1",
+"tiefe_m": 0.98,
+"flaeche_m2": 1.0,
+"h": 13.3
+},
+{
+"art": "beule",
+"x": 274.0,
+"z": 26.0,
+"feld": "G1",
+"tiefe_m": 0.98,
+"flaeche_m2": 0.5,
+"h": 8.16
+},
+{
+"art": "beule",
+"x": 82.5,
+"z": 44.0,
+"feld": "B2",
+"tiefe_m": 0.98,
+"flaeche_m2": 1.2,
+"h": 3.82
+},
+{
+"art": "loch",
+"x": 166.5,
+"z": 16.5,
+"feld": "D1",
+"tiefe_m": 0.97,
+"flaeche_m2": 5.0,
+"h": 11.65
+},
+{
+"art": "loch",
+"x": 85.0,
+"z": 134.0,
+"feld": "C4",
+"tiefe_m": 0.97,
+"flaeche_m2": 5.5,
+"h": 8.98
+},
+{
+"art": "loch",
+"x": 117.0,
+"z": 220.5,
+"feld": "C6",
+"tiefe_m": 0.97,
+"flaeche_m2": 10.0,
+"h": -2.32
+},
+{
+"art": "beule",
+"x": 83.5,
+"z": 159.5,
+"feld": "B4",
+"tiefe_m": 0.97,
+"flaeche_m2": 5.8,
+"h": 10.87
+},
+{
+"art": "loch",
+"x": 84.0,
+"z": 188.5,
+"feld": "C5",
+"tiefe_m": 0.96,
+"flaeche_m2": 9.5,
+"h": 8.83
+},
+{
+"art": "loch",
+"x": 55.0,
+"z": 41.0,
+"feld": "B1",
+"tiefe_m": 0.95,
+"flaeche_m2": 4.8,
+"h": 11.25
+},
+{
+"art": "beule",
+"x": 80.5,
+"z": 212.0,
+"feld": "B5",
+"tiefe_m": 0.94,
+"flaeche_m2": 4.5,
+"h": -1.8
+},
+{
+"art": "beule",
+"x": 52.5,
+"z": 162.0,
+"feld": "B4",
+"tiefe_m": 0.93,
+"flaeche_m2": 1.5,
+"h": -2.35
+},
+{
+"art": "beule",
+"x": 86.0,
+"z": 163.0,
+"feld": "C4",
+"tiefe_m": 0.93,
+"flaeche_m2": 3.5,
+"h": 6.68
+},
+{
+"art": "loch",
+"x": 293.0,
+"z": 31.5,
+"feld": "G1",
+"tiefe_m": 0.92,
+"flaeche_m2": 7.8,
+"h": 11.86
+},
+{
+"art": "beule",
+"x": 281.5,
+"z": 24.0,
+"feld": "G1",
+"tiefe_m": 0.92,
+"flaeche_m2": 0.5,
+"h": 13.15
+},
+{
+"art": "beule",
+"x": 124.5,
+"z": 177.0,
+"feld": "C5",
+"tiefe_m": 0.91,
+"flaeche_m2": 2.2,
+"h": 8.69
+},
+{
+"art": "beule",
+"x": 212.0,
+"z": 235.5,
+"feld": "F6",
+"tiefe_m": 0.91,
+"flaeche_m2": 2.2,
+"h": -13.11
+},
+{
+"art": "beule",
+"x": 327.5,
+"z": 246.0,
+"feld": "H6",
+"tiefe_m": 0.91,
+"flaeche_m2": 2.2,
+"h": -2.34
+},
+{
+"art": "beule",
+"x": 53.0,
+"z": 47.5,
+"feld": "B2",
+"tiefe_m": 0.9,
+"flaeche_m2": 1.5,
+"h": -5.42
+},
+{
+"art": "beule",
+"x": 91.0,
+"z": 203.0,
+"feld": "C5",
+"tiefe_m": 0.9,
+"flaeche_m2": 0.8,
+"h": 3.33
+},
+{
+"art": "beule",
+"x": 324.0,
+"z": 36.5,
+"feld": "H1",
+"tiefe_m": 0.89,
+"flaeche_m2": 1.0,
+"h": 2.47
+},
+{
+"art": "beule",
+"x": 78.5,
+"z": 44.0,
+"feld": "B2",
+"tiefe_m": 0.89,
+"flaeche_m2": 1.0,
+"h": 3.73
+},
+{
+"art": "loch",
+"x": 271.0,
+"z": 29.5,
+"feld": "G1",
+"tiefe_m": 0.88,
+"flaeche_m2": 9.5,
+"h": -0.86
+},
+{
+"art": "beule",
+"x": 265.0,
+"z": 239.5,
+"feld": "G6",
+"tiefe_m": 0.88,
+"flaeche_m2": 1.8,
+"h": -9.84
+},
+{
+"art": "beule",
+"x": 188.0,
+"z": 245.0,
+"feld": "E6",
+"tiefe_m": 0.88,
+"flaeche_m2": 1.5,
+"h": -11.46
+},
+{
+"art": "beule",
+"x": 115.5,
+"z": 206.5,
+"feld": "C5",
+"tiefe_m": 0.87,
+"flaeche_m2": 2.2,
+"h": 1.45
+},
+{
+"art": "loch",
+"x": 88.5,
+"z": 211.5,
+"feld": "C5",
+"tiefe_m": 0.86,
+"flaeche_m2": 4.2,
+"h": -1.95
+},
+{
+"art": "beule",
+"x": 66.0,
+"z": 116.5,
+"feld": "B3",
+"tiefe_m": 0.86,
+"flaeche_m2": 2.0,
+"h": -3.82
+},
+{
+"art": "beule",
+"x": 117.5,
+"z": 136.0,
+"feld": "C4",
+"tiefe_m": 0.86,
+"flaeche_m2": 2.5,
+"h": 3.83
+},
+{
+"art": "beule",
+"x": 34.5,
+"z": 240.0,
+"feld": "A6",
+"tiefe_m": 0.86,
+"flaeche_m2": 1.2,
+"h": -11.7
+},
+{
+"art": "beule",
+"x": 164.0,
+"z": 243.5,
+"feld": "D6",
+"tiefe_m": 0.86,
+"flaeche_m2": 2.2,
+"h": -13.53
+},
+{
+"art": "beule",
+"x": 94.0,
+"z": 251.0,
+"feld": "C6",
+"tiefe_m": 0.86,
+"flaeche_m2": 1.0,
+"h": -14.32
+},
+{
+"art": "loch",
+"x": 190.0,
+"z": 35.0,
+"feld": "E1",
+"tiefe_m": 0.85,
+"flaeche_m2": 3.8,
+"h": 11.82
+},
+{
+"art": "beule",
+"x": 294.0,
+"z": 159.0,
+"feld": "H4",
+"tiefe_m": 0.85,
+"flaeche_m2": 0.2,
+"h": 10.45
+},
+{
+"art": "loch",
+"x": 75.5,
+"z": 175.0,
+"feld": "B5",
+"tiefe_m": 0.84,
+"flaeche_m2": 3.8,
+"h": 8.66
+},
+{
+"art": "loch",
+"x": 326.0,
+"z": 76.5,
+"feld": "H2",
+"tiefe_m": 0.83,
+"flaeche_m2": 4.2,
+"h": 11.01
+},
+{
+"art": "loch",
+"x": 261.0,
+"z": 228.5,
+"feld": "G6",
+"tiefe_m": 0.83,
+"flaeche_m2": 2.0,
+"h": -2.53
+},
+{
+"art": "beule",
+"x": 121.0,
+"z": 113.0,
+"feld": "C3",
+"tiefe_m": 0.83,
+"flaeche_m2": 4.5,
+"h": 2.68
+},
+{
+"art": "beule",
+"x": 110.5,
+"z": 223.0,
+"feld": "C6",
+"tiefe_m": 0.83,
+"flaeche_m2": 1.0,
+"h": -7.15
+},
+{
+"art": "loch",
+"x": 318.0,
+"z": 84.0,
+"feld": "H2",
+"tiefe_m": 0.82,
+"flaeche_m2": 2.2,
+"h": 10.37
+},
+{
+"art": "beule",
+"x": 87.0,
+"z": 184.0,
+"feld": "C5",
+"tiefe_m": 0.82,
+"flaeche_m2": 33.0,
+"h": 10.87
+},
+{
+"art": "loch",
+"x": 152.5,
+"z": 28.0,
+"feld": "D1",
+"tiefe_m": 0.81,
+"flaeche_m2": 3.0,
+"h": 4.2
+},
+{
+"art": "beule",
+"x": 79.5,
+"z": 46.5,
+"feld": "B2",
+"tiefe_m": 0.81,
+"flaeche_m2": 0.8,
+"h": -4.38
+},
+{
+"art": "beule",
+"x": 124.5,
+"z": 121.5,
+"feld": "C3",
+"tiefe_m": 0.81,
+"flaeche_m2": 1.5,
+"h": 3.0
+},
+{
+"art": "beule",
+"x": 130.0,
+"z": 130.0,
+"feld": "D4",
+"tiefe_m": 0.81,
+"flaeche_m2": 1.0,
+"h": 8.75
+},
+{
+"art": "beule",
+"x": 112.0,
+"z": 182.5,
+"feld": "C5",
+"tiefe_m": 0.81,
+"flaeche_m2": 0.2,
+"h": 6.26
+},
+{
+"art": "loch",
+"x": 203.0,
+"z": 240.0,
+"feld": "E6",
+"tiefe_m": 0.8,
+"flaeche_m2": 3.0,
+"h": -2.64
+},
+{
+"art": "beule",
+"x": 159.5,
+"z": 23.0,
+"feld": "D1",
+"tiefe_m": 0.8,
+"flaeche_m2": 0.5,
+"h": 6.55
+},
+{
+"art": "beule",
+"x": 307.5,
+"z": 105.0,
+"feld": "H3",
+"tiefe_m": 0.8,
+"flaeche_m2": 1.8,
+"h": 11.57
+},
+{
+"art": "loch",
+"x": 195.5,
+"z": 35.0,
+"feld": "E1",
+"tiefe_m": 0.79,
+"flaeche_m2": 3.0,
+"h": 11.88
+},
+{
+"art": "loch",
+"x": 282.0,
+"z": 119.0,
+"feld": "G3",
+"tiefe_m": 0.79,
+"flaeche_m2": 1.8,
+"h": 10.44
+},
+{
+"art": "loch",
+"x": 96.0,
+"z": 132.5,
+"feld": "C4",
+"tiefe_m": 0.79,
+"flaeche_m2": 1.2,
+"h": 9.41
+},
+{
+"art": "beule",
+"x": 158.0,
+"z": 24.0,
+"feld": "D1",
+"tiefe_m": 0.79,
+"flaeche_m2": 0.8,
+"h": 6.2
+},
+{
+"art": "beule",
+"x": 289.5,
+"z": 161.5,
+"feld": "G4",
+"tiefe_m": 0.79,
+"flaeche_m2": 0.8,
+"h": 2.51
+},
+{
+"art": "beule",
+"x": 188.0,
+"z": 42.0,
+"feld": "E1",
+"tiefe_m": 0.78,
+"flaeche_m2": 1.2,
+"h": 1.96
+},
+{
+"art": "beule",
+"x": 154.5,
+"z": 19.5,
+"feld": "D1",
+"tiefe_m": 0.77,
+"flaeche_m2": 0.5,
+"h": 7.45
+},
+{
+"art": "beule",
+"x": 310.5,
+"z": 37.5,
+"feld": "H1",
+"tiefe_m": 0.77,
+"flaeche_m2": 0.5,
+"h": 3.6
+},
+{
+"art": "beule",
+"x": 332.0,
+"z": 64.5,
+"feld": "H2",
+"tiefe_m": 0.77,
+"flaeche_m2": 3.8,
+"h": 3.83
+},
+{
+"art": "beule",
+"x": 95.5,
+"z": 180.0,
+"feld": "C5",
+"tiefe_m": 0.77,
+"flaeche_m2": 0.8,
+"h": 9.2
+},
+{
+"art": "beule",
+"x": 50.5,
+"z": 229.5,
+"feld": "B6",
+"tiefe_m": 0.77,
+"flaeche_m2": 1.0,
+"h": -11.65
+},
+{
+"art": "beule",
+"x": 270.0,
+"z": 244.0,
+"feld": "G6",
+"tiefe_m": 0.77,
+"flaeche_m2": 1.0,
+"h": -9.78
+},
+{
+"art": "beule",
+"x": 76.0,
+"z": 185.0,
+"feld": "B5",
+"tiefe_m": 0.76,
+"flaeche_m2": 3.0,
+"h": 1.74
+},
+{
+"art": "beule",
+"x": 308.5,
+"z": 223.5,
+"feld": "H6",
+"tiefe_m": 0.76,
+"flaeche_m2": 0.2,
+"h": 4.1
+},
+{
+"art": "loch",
+"x": 54.0,
+"z": 40.0,
+"feld": "B1",
+"tiefe_m": 0.75,
+"flaeche_m2": 0.2,
+"h": 11.45
+},
+{
+"art": "loch",
+"x": 122.5,
+"z": 221.5,
+"feld": "C6",
+"tiefe_m": 0.75,
+"flaeche_m2": 2.0,
+"h": -2.1
+},
+{
+"art": "beule",
+"x": 157.0,
+"z": 31.5,
+"feld": "D1",
+"tiefe_m": 0.75,
+"flaeche_m2": 1.8,
+"h": 4.55
+},
+{
+"art": "beule",
+"x": 37.5,
+"z": 33.5,
+"feld": "A1",
+"tiefe_m": 0.75,
+"flaeche_m2": 1.2,
+"h": 13.71
+},
+{
+"art": "beule",
+"x": 126.0,
+"z": 121.0,
+"feld": "D3",
+"tiefe_m": 0.75,
+"flaeche_m2": 0.5,
+"h": 2.65
+},
+{
+"art": "beule",
+"x": 91.0,
+"z": 178.0,
+"feld": "C5",
+"tiefe_m": 0.75,
+"flaeche_m2": 0.2,
+"h": 10.45
+},
+{
+"art": "beule",
+"x": 304.5,
+"z": 180.0,
+"feld": "H5",
+"tiefe_m": 0.75,
+"flaeche_m2": 0.2,
+"h": 5.66
+},
+{
+"art": "loch",
+"x": 308.0,
+"z": 176.0,
+"feld": "H5",
+"tiefe_m": 0.74,
+"flaeche_m2": 1.2,
+"h": 10.16
+},
+{
+"art": "loch",
+"x": 154.0,
+"z": 222.5,
+"feld": "D6",
+"tiefe_m": 0.74,
+"flaeche_m2": 5.8,
+"h": -1.67
+},
+{
+"art": "beule",
+"x": 14.0,
+"z": 34.5,
+"feld": "A1",
+"tiefe_m": 0.74,
+"flaeche_m2": 0.2,
+"h": 12.28
+},
+{
+"art": "beule",
+"x": 185.0,
+"z": 38.5,
+"feld": "E1",
+"tiefe_m": 0.74,
+"flaeche_m2": 0.2,
+"h": 3.53
+},
+{
+"art": "beule",
+"x": 104.0,
+"z": 48.5,
+"feld": "C2",
+"tiefe_m": 0.74,
+"flaeche_m2": 0.8,
+"h": -0.18
+},
+{
+"art": "beule",
+"x": 306.5,
+"z": 91.5,
+"feld": "H3",
+"tiefe_m": 0.74,
+"flaeche_m2": 0.2,
+"h": 5.76
+},
+{
+"art": "beule",
+"x": 92.5,
+"z": 32.5,
+"feld": "C1",
+"tiefe_m": 0.73,
+"flaeche_m2": 0.2,
+"h": 13.86
+},
+{
+"art": "beule",
+"x": 85.0,
+"z": 210.0,
+"feld": "C5",
+"tiefe_m": 0.73,
+"flaeche_m2": 0.8,
+"h": -0.35
+},
+{
+"art": "beule",
+"x": 49.5,
+"z": 231.0,
+"feld": "B6",
+"tiefe_m": 0.73,
+"flaeche_m2": 1.0,
+"h": -12.6
+},
+{
+"art": "beule",
+"x": 180.5,
+"z": 241.0,
+"feld": "E6",
+"tiefe_m": 0.73,
+"flaeche_m2": 1.0,
+"h": -1.66
+},
+{
+"art": "loch",
+"x": 144.0,
+"z": 224.0,
+"feld": "D6",
+"tiefe_m": 0.72,
+"flaeche_m2": 1.2,
+"h": -1.92
+},
+{
+"art": "beule",
+"x": 160.0,
+"z": 22.5,
+"feld": "D1",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 6.63
+},
+{
+"art": "beule",
+"x": 277.0,
+"z": 23.5,
+"feld": "G1",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.8,
+"h": 11.35
+},
+{
+"art": "beule",
+"x": 85.5,
+"z": 143.0,
+"feld": "C4",
+"tiefe_m": 0.72,
+"flaeche_m2": 6.0,
+"h": 10.36
+},
+{
+"art": "beule",
+"x": 287.5,
+"z": 148.5,
+"feld": "G4",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 8.99
+},
+{
+"art": "beule",
+"x": 68.0,
+"z": 162.0,
+"feld": "B4",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 1.18
+},
+{
+"art": "beule",
+"x": 296.0,
+"z": 162.0,
+"feld": "H4",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 8.89
+},
+{
+"art": "beule",
+"x": 90.5,
+"z": 177.5,
+"feld": "C5",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 10.5
+},
+{
+"art": "beule",
+"x": 110.5,
+"z": 182.0,
+"feld": "C5",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": 2.98
+},
+{
+"art": "beule",
+"x": 80.5,
+"z": 215.5,
+"feld": "B6",
+"tiefe_m": 0.72,
+"flaeche_m2": 0.2,
+"h": -7.37
+},
+{
+"art": "beule",
+"x": 32.5,
+"z": 241.5,
+"feld": "A6",
+"tiefe_m": 0.72,
+"flaeche_m2": 1.2,
+"h": -11.98
+},
+{
+"art": "loch",
+"x": 74.0,
+"z": 164.5,
+"feld": "B4",
+"tiefe_m": 0.71,
+"flaeche_m2": 2.0,
+"h": 9.18
+},
+{
+"art": "beule",
+"x": 287.5,
+"z": 31.5,
+"feld": "G1",
+"tiefe_m": 0.71,
+"flaeche_m2": 0.2,
+"h": 11.91
+},
+{
+"art": "beule",
+"x": 313.5,
+"z": 35.5,
+"feld": "H1",
+"tiefe_m": 0.71,
+"flaeche_m2": 0.5,
+"h": 12.92
+},
+{
+"art": "beule",
+"x": 84.5,
+"z": 123.5,
+"feld": "C3",
+"tiefe_m": 0.71,
+"flaeche_m2": 0.2,
+"h": 7.49
+},
+{
+"art": "beule",
+"x": 118.5,
+"z": 129.0,
+"feld": "C4",
+"tiefe_m": 0.71,
+"flaeche_m2": 2.8,
+"h": 5.47
+},
+{
+"art": "beule",
+"x": 205.0,
+"z": 232.0,
+"feld": "E6",
+"tiefe_m": 0.71,
+"flaeche_m2": 0.2,
+"h": -0.44
+},
+{
+"art": "loch",
+"x": 222.0,
+"z": 43.5,
+"feld": "F2",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.2,
+"h": 11.8
+},
+{
+"art": "loch",
+"x": 260.5,
+"z": 228.0,
+"feld": "G6",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.2,
+"h": -2.39
+},
+{
+"art": "beule",
+"x": 127.5,
+"z": 120.5,
+"feld": "D3",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.2,
+"h": 2.22
+},
+{
+"art": "beule",
+"x": 240.5,
+"z": 225.0,
+"feld": "F6",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.5,
+"h": -0.06
+},
+{
+"art": "beule",
+"x": 226.0,
+"z": 233.5,
+"feld": "F6",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.8,
+"h": -13.64
+},
+{
+"art": "beule",
+"x": 91.5,
+"z": 246.5,
+"feld": "C6",
+"tiefe_m": 0.7,
+"flaeche_m2": 0.8,
+"h": -14.53
+},
+{
+"art": "loch",
+"x": 122.0,
+"z": 34.0,
+"feld": "C1",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.8,
+"h": 11.91
+},
+{
+"art": "loch",
+"x": 290.0,
+"z": 156.0,
+"feld": "G4",
+"tiefe_m": 0.69,
+"flaeche_m2": 1.8,
+"h": 10.5
+},
+{
+"art": "beule",
+"x": 244.0,
+"z": 24.5,
+"feld": "F1",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.8,
+"h": 13.48
+},
+{
+"art": "beule",
+"x": 96.5,
+"z": 33.0,
+"feld": "C1",
+"tiefe_m": 0.69,
+"flaeche_m2": 1.0,
+"h": 13.86
+},
+{
+"art": "beule",
+"x": 4.0,
+"z": 36.0,
+"feld": "A1",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.2,
+"h": 13.7
+},
+{
+"art": "beule",
+"x": 307.0,
+"z": 92.0,
+"feld": "H3",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.5,
+"h": 6.31
+},
+{
+"art": "beule",
+"x": 66.5,
+"z": 111.5,
+"feld": "B3",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.8,
+"h": -4.24
+},
+{
+"art": "beule",
+"x": 303.5,
+"z": 180.5,
+"feld": "H5",
+"tiefe_m": 0.69,
+"flaeche_m2": 0.2,
+"h": 2.95
+},
+{
+"art": "beule",
+"x": 93.0,
+"z": 246.5,
+"feld": "C6",
+"tiefe_m": 0.69,
+"flaeche_m2": 2.5,
+"h": -13.15
+},
+{
+"art": "loch",
+"x": 221.5,
+"z": 43.0,
+"feld": "F2",
+"tiefe_m": 0.68,
+"flaeche_m2": 0.2,
+"h": 11.82
+},
+{
+"art": "beule",
+"x": 93.0,
+"z": 75.5,
+"feld": "C2",
+"tiefe_m": 0.68,
+"flaeche_m2": 0.2,
+"h": -2.65
+},
+{
+"art": "beule",
+"x": 67.0,
+"z": 112.5,
+"feld": "B3",
+"tiefe_m": 0.68,
+"flaeche_m2": 0.2,
+"h": -3.36
+},
+{
+"art": "beule",
+"x": 56.5,
+"z": 142.5,
+"feld": "B4",
+"tiefe_m": 0.68,
+"flaeche_m2": 0.2,
+"h": -2.91
+},
+{
+"art": "beule",
+"x": 162.0,
+"z": 231.5,
+"feld": "D6",
+"tiefe_m": 0.68,
+"flaeche_m2": 0.2,
+"h": -4.63
+},
+{
+"art": "loch",
+"x": 183.0,
+"z": 25.5,
+"feld": "E1",
+"tiefe_m": 0.67,
+"flaeche_m2": 1.0,
+"h": 12.0
+},
+{
+"art": "loch",
+"x": 125.5,
+"z": 222.0,
+"feld": "C6",
+"tiefe_m": 0.67,
+"flaeche_m2": 1.5,
+"h": -2.02
+},
+{
+"art": "beule",
+"x": 283.5,
+"z": 115.0,
+"feld": "G3",
+"tiefe_m": 0.67,
+"flaeche_m2": 2.5,
+"h": 11.58
+},
+{
+"art": "beule",
+"x": 298.0,
+"z": 161.0,
+"feld": "H4",
+"tiefe_m": 0.67,
+"flaeche_m2": 0.2,
+"h": 11.7
+},
+{
+"art": "beule",
+"x": 74.5,
+"z": 170.5,
+"feld": "B4",
+"tiefe_m": 0.67,
+"flaeche_m2": 0.2,
+"h": 10.2
+},
+{
+"art": "beule",
+"x": 276.0,
+"z": 228.0,
+"feld": "G6",
+"tiefe_m": 0.67,
+"flaeche_m2": 0.2,
+"h": -0.22
+},
+{
+"art": "loch",
+"x": 284.0,
+"z": 121.5,
+"feld": "G3",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": 10.57
+},
+{
+"art": "beule",
+"x": 313.5,
+"z": 37.0,
+"feld": "H1",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": 7.19
+},
+{
+"art": "beule",
+"x": 57.0,
+"z": 173.0,
+"feld": "B5",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": -0.93
+},
+{
+"art": "beule",
+"x": 100.0,
+"z": 193.0,
+"feld": "C5",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": 10.56
+},
+{
+"art": "beule",
+"x": 80.5,
+"z": 214.5,
+"feld": "B5",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": -5.95
+},
+{
+"art": "beule",
+"x": 137.0,
+"z": 238.0,
+"feld": "D6",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.8,
+"h": -10.96
+},
+{
+"art": "beule",
+"x": 165.5,
+"z": 239.5,
+"feld": "D6",
+"tiefe_m": 0.66,
+"flaeche_m2": 0.2,
+"h": -3.81
+},
+{
+"art": "beule",
+"x": 94.5,
+"z": 249.5,
+"feld": "C6",
+"tiefe_m": 0.66,
+"flaeche_m2": 1.2,
+"h": -13.14
+},
+{
+"art": "loch",
+"x": 304.5,
+"z": 169.5,
+"feld": "H4",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": 10.25
+},
+{
+"art": "beule",
+"x": 159.5,
+"z": 22.0,
+"feld": "D1",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": 6.71
+},
+{
+"art": "beule",
+"x": 155.5,
+"z": 31.5,
+"feld": "D1",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": 4.45
+},
+{
+"art": "beule",
+"x": 309.5,
+"z": 101.0,
+"feld": "H3",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.5,
+"h": 11.99
+},
+{
+"art": "beule",
+"x": 105.5,
+"z": 137.5,
+"feld": "C4",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.5,
+"h": 1.82
+},
+{
+"art": "beule",
+"x": 290.0,
+"z": 161.0,
+"feld": "G4",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": 4.72
+},
+{
+"art": "beule",
+"x": 73.0,
+"z": 162.0,
+"feld": "B4",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": 9.83
+},
+{
+"art": "beule",
+"x": 83.0,
+"z": 209.5,
+"feld": "B5",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.5,
+"h": -0.38
+},
+{
+"art": "beule",
+"x": 189.0,
+"z": 244.0,
+"feld": "E6",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": -7.15
+},
+{
+"art": "beule",
+"x": 267.0,
+"z": 245.5,
+"feld": "G6",
+"tiefe_m": 0.65,
+"flaeche_m2": 0.2,
+"h": -10.56
+},
+{
+"art": "loch",
+"x": 53.5,
+"z": 39.5,
+"feld": "B1",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.2,
+"h": 11.56
+},
+{
+"art": "loch",
+"x": 305.0,
+"z": 170.0,
+"feld": "H4",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.2,
+"h": 10.26
+},
+{
+"art": "beule",
+"x": 74.5,
+"z": 41.5,
+"feld": "B1",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.2,
+"h": 11.11
+},
+{
+"art": "beule",
+"x": 132.5,
+"z": 127.0,
+"feld": "D3",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.5,
+"h": 8.55
+},
+{
+"art": "beule",
+"x": 89.0,
+"z": 136.5,
+"feld": "C4",
+"tiefe_m": 0.64,
+"flaeche_m2": 1.0,
+"h": 10.82
+},
+{
+"art": "beule",
+"x": 121.0,
+"z": 140.0,
+"feld": "C4",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.8,
+"h": 2.53
+},
+{
+"art": "beule",
+"x": 82.0,
+"z": 214.5,
+"feld": "B5",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.2,
+"h": -5.97
+},
+{
+"art": "beule",
+"x": 137.5,
+"z": 235.5,
+"feld": "D6",
+"tiefe_m": 0.64,
+"flaeche_m2": 0.5,
+"h": -8.19
+},
+{
+"art": "loch",
+"x": 312.0,
+"z": 226.5,
+"feld": "H6",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": 2.2
+},
+{
+"art": "beule",
+"x": 250.0,
+"z": 22.0,
+"feld": "F1",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.5,
+"h": 13.82
+},
+{
+"art": "beule",
+"x": 250.0,
+"z": 32.0,
+"feld": "F1",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": 6.52
+},
+{
+"art": "beule",
+"x": 310.0,
+"z": 100.0,
+"feld": "H3",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": 11.97
+},
+{
+"art": "beule",
+"x": 54.0,
+"z": 159.0,
+"feld": "B4",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": -2.65
+},
+{
+"art": "beule",
+"x": 144.5,
+"z": 236.5,
+"feld": "D6",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.5,
+"h": -7.39
+},
+{
+"art": "beule",
+"x": 190.5,
+"z": 244.0,
+"feld": "E6",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": -7.17
+},
+{
+"art": "beule",
+"x": 93.5,
+"z": 247.5,
+"feld": "C6",
+"tiefe_m": 0.63,
+"flaeche_m2": 0.2,
+"h": -13.22
+},
+{
+"art": "loch",
+"x": 283.0,
+"z": 120.0,
+"feld": "G3",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 10.62
+},
+{
+"art": "loch",
+"x": 88.0,
+"z": 127.0,
+"feld": "C3",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 9.65
+},
+{
+"art": "loch",
+"x": 81.0,
+"z": 144.0,
+"feld": "B4",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 9.33
+},
+{
+"art": "loch",
+"x": 307.0,
+"z": 174.5,
+"feld": "H5",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 10.28
+},
+{
+"art": "beule",
+"x": 159.0,
+"z": 11.5,
+"feld": "D1",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 13.84
+},
+{
+"art": "beule",
+"x": 245.5,
+"z": 23.5,
+"feld": "F1",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 13.43
+},
+{
+"art": "beule",
+"x": 251.0,
+"z": 31.5,
+"feld": "F1",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 6.8
+},
+{
+"art": "beule",
+"x": 73.5,
+"z": 41.0,
+"feld": "B1",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 11.55
+},
+{
+"art": "beule",
+"x": 125.0,
+"z": 100.5,
+"feld": "C3",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.5,
+"h": 2.14
+},
+{
+"art": "beule",
+"x": 134.0,
+"z": 128.0,
+"feld": "D3",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.5,
+"h": 8.57
+},
+{
+"art": "beule",
+"x": 98.0,
+"z": 130.0,
+"feld": "C4",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 10.84
+},
+{
+"art": "beule",
+"x": 89.5,
+"z": 134.0,
+"feld": "C4",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.5,
+"h": 10.94
+},
+{
+"art": "beule",
+"x": 308.0,
+"z": 223.0,
+"feld": "H6",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 3.98
+},
+{
+"art": "beule",
+"x": 309.5,
+"z": 224.0,
+"feld": "H6",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": 3.94
+},
+{
+"art": "beule",
+"x": 37.0,
+"z": 236.5,
+"feld": "A6",
+"tiefe_m": 0.62,
+"flaeche_m2": 0.2,
+"h": -11.24
+},
+{
+"art": "loch",
+"x": 86.0,
+"z": 133.0,
+"feld": "C4",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 9.34
+},
+{
+"art": "loch",
+"x": 81.5,
+"z": 143.5,
+"feld": "B4",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 9.34
+},
+{
+"art": "loch",
+"x": 76.0,
+"z": 155.5,
+"feld": "B4",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.8,
+"h": 9.33
+},
+{
+"art": "beule",
+"x": 244.5,
+"z": 23.5,
+"feld": "F1",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 13.41
+},
+{
+"art": "beule",
+"x": 150.5,
+"z": 29.5,
+"feld": "D1",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 6.3
+},
+{
+"art": "beule",
+"x": 262.5,
+"z": 32.5,
+"feld": "G1",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 1.38
+},
+{
+"art": "beule",
+"x": 207.5,
+"z": 34.0,
+"feld": "E1",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 12.23
+},
+{
+"art": "beule",
+"x": 92.5,
+"z": 75.0,
+"feld": "C2",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": -3.09
+},
+{
+"art": "beule",
+"x": 123.5,
+"z": 102.0,
+"feld": "C3",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 1.59
+},
+{
+"art": "beule",
+"x": 133.5,
+"z": 127.5,
+"feld": "D3",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 8.56
+},
+{
+"art": "beule",
+"x": 87.5,
+"z": 139.0,
+"feld": "C4",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 10.48
+},
+{
+"art": "beule",
+"x": 305.0,
+"z": 179.5,
+"feld": "H5",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": 7.05
+},
+{
+"art": "beule",
+"x": 36.5,
+"z": 237.0,
+"feld": "A6",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": -11.33
+},
+{
+"art": "beule",
+"x": 148.5,
+"z": 237.0,
+"feld": "D6",
+"tiefe_m": 0.61,
+"flaeche_m2": 0.2,
+"h": -6.93
+},
+{
+"art": "loch",
+"x": 305.5,
+"z": 170.5,
+"feld": "H4",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 10.3
+},
+{
+"art": "loch",
+"x": 308.5,
+"z": 177.0,
+"feld": "H5",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 10.31
+},
+{
+"art": "beule",
+"x": 255.0,
+"z": 20.5,
+"feld": "G1",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 13.63
+},
+{
+"art": "beule",
+"x": 131.5,
+"z": 33.5,
+"feld": "D1",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 12.39
+},
+{
+"art": "beule",
+"x": 124.5,
+"z": 101.0,
+"feld": "C3",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 1.91
+},
+{
+"art": "beule",
+"x": 137.5,
+"z": 131.0,
+"feld": "D4",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 2.9
+},
+{
+"art": "beule",
+"x": 298.5,
+"z": 160.5,
+"feld": "H4",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 11.78
+},
+{
+"art": "beule",
+"x": 84.5,
+"z": 181.5,
+"feld": "C5",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": 10.72
+},
+{
+"art": "beule",
+"x": 161.5,
+"z": 239.0,
+"feld": "D6",
+"tiefe_m": 0.6,
+"flaeche_m2": 0.2,
+"h": -4.84
+},
+{
+"art": "loch",
+"x": 165.5,
+"z": 15.5,
+"feld": "D1",
+"tiefe_m": 0.59,
+"flaeche_m2": 0.2,
+"h": 12.03
+},
+{
+"art": "loch",
+"x": 143.5,
+"z": 21.5,
+"feld": "D1",
+"tiefe_m": 0.59,
+"flaeche_m2": 0.8,
+"h": 12.54
+},
+{
+"art": "loch",
+"x": 284.5,
+"z": 122.0,
+"feld": "G3",
+"tiefe_m": 0.58,
+"flaeche_m2": 0.2,
+"h": 10.65
+},
+{
+"art": "loch",
+"x": 87.5,
+"z": 126.5,
+"feld": "C3",
+"tiefe_m": 0.58,
+"flaeche_m2": 0.2,
+"h": 9.68
+},
+{
+"art": "loch",
+"x": 82.0,
+"z": 143.0,
+"feld": "B4",
+"tiefe_m": 0.57,
+"flaeche_m2": 0.2,
+"h": 9.37
+},
+{
+"art": "loch",
+"x": 76.5,
+"z": 153.5,
+"feld": "B4",
+"tiefe_m": 0.57,
+"flaeche_m2": 0.2,
+"h": 9.37
+},
+{
+"art": "loch",
+"x": 197.0,
+"z": 34.0,
+"feld": "E1",
+"tiefe_m": 0.56,
+"flaeche_m2": 0.2,
+"h": 12.11
+},
+{
+"art": "loch",
+"x": 82.0,
+"z": 183.5,
+"feld": "B5",
+"tiefe_m": 0.56,
+"flaeche_m2": 0.2,
+"h": 9.24
+},
+{
+"art": "loch",
+"x": 98.5,
+"z": 198.5,
+"feld": "C5",
+"tiefe_m": 0.56,
+"flaeche_m2": 0.5,
+"h": 9.05
+},
+{
+"art": "loch",
+"x": 311.5,
+"z": 226.0,
+"feld": "H6",
+"tiefe_m": 0.56,
+"flaeche_m2": 0.2,
+"h": 2.27
+},
+{
+"art": "loch",
+"x": 260.0,
+"z": 227.5,
+"feld": "G6",
+"tiefe_m": 0.56,
+"flaeche_m2": 0.2,
+"h": -2.25
+},
+{
+"art": "loch",
+"x": 184.0,
+"z": 26.5,
+"feld": "E1",
+"tiefe_m": 0.55,
+"flaeche_m2": 0.2,
+"h": 12.12
+},
+{
+"art": "loch",
+"x": 59.0,
+"z": 41.0,
+"feld": "B1",
+"tiefe_m": 0.55,
+"flaeche_m2": 0.2,
+"h": 11.64
+},
+{
+"art": "loch",
+"x": 296.0,
+"z": 99.0,
+"feld": "H3",
+"tiefe_m": 0.55,
+"flaeche_m2": 0.2,
+"h": 10.45
+},
+{
+"art": "loch",
+"x": 110.0,
+"z": 128.0,
+"feld": "C3",
+"tiefe_m": 0.55,
+"flaeche_m2": 0.2,
+"h": 9.29
+},
+{
+"art": "loch",
+"x": 283.5,
+"z": 24.0,
+"feld": "G1",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": 12.24
+},
+{
+"art": "loch",
+"x": 232.0,
+"z": 26.5,
+"feld": "F1",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": 12.17
+},
+{
+"art": "loch",
+"x": 184.5,
+"z": 27.0,
+"feld": "E1",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": 12.13
+},
+{
+"art": "loch",
+"x": 283.5,
+"z": 120.5,
+"feld": "G3",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": 10.7
+},
+{
+"art": "loch",
+"x": 121.5,
+"z": 186.5,
+"feld": "C5",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": 8.52
+},
+{
+"art": "loch",
+"x": 152.5,
+"z": 222.0,
+"feld": "D6",
+"tiefe_m": 0.54,
+"flaeche_m2": 0.2,
+"h": -1.47
+},
+{
+"art": "loch",
+"x": 100.5,
+"z": 212.0,
+"feld": "C5",
+"tiefe_m": 0.53,
+"flaeche_m2": 0.2,
+"h": -1.28
+},
+{
+"art": "loch",
+"x": 283.0,
+"z": 23.5,
+"feld": "G1",
+"tiefe_m": 0.52,
+"flaeche_m2": 0.2,
+"h": 12.25
+},
+{
+"art": "loch",
+"x": 291.0,
+"z": 30.0,
+"feld": "G1",
+"tiefe_m": 0.52,
+"flaeche_m2": 0.2,
+"h": 12.25
+},
+{
+"art": "loch",
+"x": 53.0,
+"z": 39.0,
+"feld": "B1",
+"tiefe_m": 0.52,
+"flaeche_m2": 0.2,
+"h": 11.68
+},
+{
+"art": "loch",
+"x": 323.5,
+"z": 78.0,
+"feld": "H2",
+"tiefe_m": 0.52,
+"flaeche_m2": 0.2,
+"h": 11.32
+},
+{
+"art": "loch",
+"x": 306.0,
+"z": 171.0,
+"feld": "H4",
+"tiefe_m": 0.52,
+"flaeche_m2": 0.2,
+"h": 10.38
+},
+{
+"art": "loch",
+"x": 150.5,
+"z": 21.5,
+"feld": "D1",
+"tiefe_m": 0.51,
+"flaeche_m2": 1.5,
+"h": 4.5
+},
+{
+"art": "loch",
+"x": 95.5,
+"z": 134.0,
+"feld": "C4",
+"tiefe_m": 0.51,
+"flaeche_m2": 0.2,
+"h": 9.7
+},
+{
+"art": "loch",
+"x": 82.5,
+"z": 142.5,
+"feld": "B4",
+"tiefe_m": 0.51,
+"flaeche_m2": 0.2,
+"h": 9.44
+},
+{
+"art": "loch",
+"x": 76.0,
+"z": 153.0,
+"feld": "B4",
+"tiefe_m": 0.51,
+"flaeche_m2": 0.2,
+"h": 9.44
+},
+{
+"art": "loch",
+"x": 122.0,
+"z": 186.0,
+"feld": "C5",
+"tiefe_m": 0.51,
+"flaeche_m2": 0.2,
+"h": 8.54
+},
+{
+"art": "loch",
+"x": 129.0,
+"z": 222.5,
+"feld": "D6",
+"tiefe_m": 0.51,
+"flaeche_m2": 0.2,
+"h": -1.86
+},
+{
+"art": "loch",
+"x": 285.0,
+"z": 122.5,
+"feld": "G3",
+"tiefe_m": 0.5,
+"flaeche_m2": 0.2,
+"h": 10.73
+},
+{
+"art": "loch",
+"x": 313.0,
+"z": 184.0,
+"feld": "H5",
+"tiefe_m": 0.5,
+"flaeche_m2": 0.2,
+"h": 10.4
+}
+]

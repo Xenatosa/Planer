@@ -867,6 +867,11 @@ def _rand_auslauf():   # O18k [F t105u D1 Weg geht steil nach unten aus der Map;
                 if abs(v-lim)<4:
                     u=x if ax==1 else z;q=np.arange(u-30,u+31,0.5);rr=hf(q,np.full_like(q,lim)) if ax==1 else hf(np.full_like(q,lim),q)
                     E.append((ax,lim,u,float(np.percentile(rr,80))))
+    LW=(WV.reshape(GY,GX)<=-900);GAs=nd.grey_erosion(LW,size=(10*RS+1,10*RS+1))   # O18k [F t107u E1 sehr tiefes Loch: Nordrand 171-183 Kerbe bis -4.7 m, Plateau 14 m]: trockene Randkerben >2 m (kein Wasser in 5 m) ebenso auf Randhoehe
+    for ax,lim,e,lw in ((1,0,GA[0],GAs[0]),(1,NY,GA[-1],GAs[-1]),(0,0,GA[:,0],GAs[:,0]),(0,NX,GA[:,-1],GAs[:,-1])):
+        ref=nd.percentile_filter(e,80,size=60*RS);lab,n=nd.label((ref-e>2)&lw)
+        for i in range(1,n+1):
+            ii=np.nonzero(lab==i)[0];j=ii[(ref-e)[ii].argmax()];E.append((ax,lim,j/RS,float(ref[j])))
     def lift(X,Z,H):
         for ax,lim,u,eh in E:
             d=np.abs((Z if ax==1 else X)-lim);t=np.abs((X if ax==1 else Z)-u);a=np.clip(d/10,0,1)
