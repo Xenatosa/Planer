@@ -213,3 +213,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - Ursache R1_wand rampe_1 (F1) und rampe_2 (E1): _falten_glatt (ab 1 m) hat Wandfuss vor dem Rampenende verschmiert. Fix: Rampenenden aller Rampen 6 m frei von _falten_glatt (FALTRE 6).
 - Varianten: V1 WD1 + Enden frei: R1_wand 2->0, G7b_feld 26->23, G6 233->249, G5 64->66, R3_woelb +1 (angenommen). V2 WD2: G7b_feld 21, aber G5 +19, G6 +32, G11 +9 (verworfen). V3 Fade 1->3 m: G7b_feld 21, aber G5 +20, R5 +5, G6 +25 (verworfen).
 - G7b_feld <=21 NICHT erreicht (23). Konflikt: Glaettung 1-3 m vor Wand senkt G5/G6, nimmt aber Wandrauheit je Feld. Summe 583->597 (ohne Ausnahmen 431->444). Raycast 2x: G11 0, t42u 0.
+
+### O18y S2/S4
+- G6 8 groesste Cluster (single-link 8 m; groesster 17 Treffer B4/C4 74-96|149-186): lokale Glaettung 1.6 m: G6 249->242, R3_quer +5, R3_woelb +3, Summe +2; 2.2 m: G6 241, R3 +10/+10 (beide verworfen, FALTLS=0). Cluster liegen an Wegen/Rampen, Glaettung trifft R3.
+- G2/G3 Seebett (6 Punkte E7/F7/D6): alle unter Wasser, 0.7-1.4 m tief, 0-5 Landpixel in 4 m. Bild pruefung/o18/o18y/seebett_e7f7_o18y.png: keine Spitzen sichtbar, aber eine gerade waagerechte Kante im Wasser (vermutlich die Rinne z~275 durchscheinend). Deshalb KEINE Ausnahme, bleibt offen.
+- R1_blind 24 = alle 24 Rampenenden ohne Anschluss; alle 24 in wegvorschlag.json mit gleichem Startpunkt (Abweichung <1 m). Vorschlag hat zusaetzlich rampe_5_anfang, rampe_11_anfang und 4 Inseln.
+- R2 15: 4 davon (D2, E3, F4, G2) = Inseln in wegvorschlag.json; 11 ohne Vorschlag (D1, F1, C1, G4, C3, C4 x2, C5, H5, G6, D6).

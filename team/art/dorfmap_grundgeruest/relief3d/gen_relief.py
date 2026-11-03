@@ -981,10 +981,19 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 F
         _p=np.asarray([(q[0],q[1]) if not isinstance(q,dict) else (q['x'],q['z']) for q in (_r['punkte'] if isinstance(_r,dict) else _r)],float)
         for _e in (_p[0],_p[-1]):w[np.hypot(_xx/RS-_e[0],_yy/RS-_e[1])<float(os.environ.get('FALTRE','6'))]=0
     if os.environ.get('FALTFADE','0')!='0':w*=np.clip((nd.distance_transform_edt(~W_)/RS-1)/2,0,1)   # O18y: Gewicht 1->3 m Wandabstand einblenden (G7b_feld)
-    S=nd.gaussian_filter(GA,SG*RS);nG=GA*(1-w)+S*w
+    S=nd.gaussian_filter(GA,SG*RS)
+    _BX=[(74,96,149,186),(85,104,201,227),(313,322,223,239),(109,124,167,187),(108,123,112,125),(173,181,127,153),(84,101,133,149),(187,192,71,94)]   # O18y S2: 8 groesste G6-Cluster (single-link 8 m) nach b3b3b94
+    LS=float(os.environ.get('FALTLS','0'))
+    if LS>0:
+        BM=np.zeros_like(GA,bool)
+        for x0,x1,z0,z1 in _BX:BM[max(0,(z0-3)*RS):(z1+3)*RS,max(0,(x0-3)*RS):(x1+3)*RS]=1
+        S=np.where(BM,nd.gaussian_filter(GA,LS*RS),S)
+    nG=GA*(1-w)+S*w
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
     F=np.full((FYn,FXn),np.nan);F[fy,fx]=h;ok=np.isfinite(F);Sf=nd.gaussian_filter(np.where(ok,F,0),SG*FS)/np.maximum(nd.gaussian_filter(ok*1.0,SG*FS),1e-6)
+    if LS>0:
+        _Sl=nd.gaussian_filter(np.where(ok,F,0),LS*FS)/np.maximum(nd.gaussian_filter(ok*1.0,LS*FS),1e-6);_BF=nd.zoom(BM.astype(np.uint8),FS/RS,order=0);_B=np.zeros((FYn,FXn),bool);_B[:min(FYn,_BF.shape[0]),:min(FXn,_BF.shape[1])]=_BF[:FYn,:FXn]>0;Sf=np.where(_B,_Sl,Sf)
     h=h*(1-wf)+Sf[fy,fx]*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((w>0.01).sum())}
 def _entspitzen(T=float(os.environ.get('SPITZE_T','0.38'))):   # O18w [Gate G2/G3/G2f/G3f]: Einzelpunkte >T ueber/unter 3x3-Nachbarmittel ausserhalb Wand+3 m auf Mittel+-T klemmen; Grob+Fein [A]
