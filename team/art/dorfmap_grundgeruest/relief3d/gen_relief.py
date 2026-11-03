@@ -974,7 +974,7 @@ def _wand_mikro(A=float(os.environ.get('WMR','0.25'))):   # O18w [Gate G7b_wandk
 def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 Facetten >=3 m von Wand = echte Knicklinien, Bild g6eich/g6_fern_*]: Normalensprung dn>0.25 auf Hang 0.15-0.8, >=3 m von Wand, nicht Weg/Wasser: Gauss SG m, Grob+Fein [A]
     GA=G_ANZ.reshape(GY,GX).astype(float);gy,gx=np.gradient(GA,1/RS);st=np.hypot(gx,gy);W_=st>1.0
     n=np.stack([-gx,-gy,np.ones_like(GA)]);n/=np.linalg.norm(n,axis=0);dn=np.zeros_like(GA);dn[:,:-1]=sum(np.abs(np.diff(n[i],axis=1)) for i in range(3))
-    LAND_=WV.reshape(GY,GX)<=-900;M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=3*RS)&~(WEGA.reshape(GY,GX)>20)
+    LAND_=WV.reshape(GY,GX)<=-900;M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=int(float(os.environ.get('FALTWD','1'))*RS))&~nd.binary_dilation(WEGA.reshape(GY,GX)>20,iterations=3*RS)
     w=np.clip(nd.gaussian_filter(nd.binary_dilation(M,iterations=RS)*1.0,RS*0.5)*1.5,0,1)*nd.binary_erosion(LAND_,iterations=RS)
     S=nd.gaussian_filter(GA,SG*RS);nG=GA*(1-w)+S*w
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)

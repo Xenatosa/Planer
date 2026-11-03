@@ -202,3 +202,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - G6: Treffer im 1-m-Wandsaum (Dilatation WAND um 1 m) werden nicht gezaehlt; dort gilt G7b. Schwelle dn>0.25, Hang 0.15-0.8, Cluster >=6 px ausserhalb unveraendert. Belege g6eich/g6_nah_0, g6_nah_1. Alt (GATE_G6ALT=1) 561 / neu 273.
 - G2f/G3f: dokumentierte Ausnahme, Kriterium im Gate codiert: Treffer mit <=5 gueltigen 3x3-Nachbarn (Maskenecke). Treffer bleiben in summe/je_regel sichtbar, nur als ausnahme markiert. Aktuell 4 von 4 (alle 3 Nachbarn).
 - G7b-Rauheit: Ziel bleibt (>=0.85*O17). Wand-Mikrorelief bleibt aus (WMR=0). Offen, erst nach allen anderen Punkten und Streiflicht-Bildern wieder angehen.
+
+### O18x G6 ausserhalb Wandsaum
+- Gemessen: Raycast-Zyklus nach 3359333: G11 0, t42u summe 0.
+- _falten_glatt ab 1 m statt 3 m Wandabstand (FALTWD 1, FALTSG 1.0), Wege +3 m ausgespart. Varianten: WD1/SG1.0 angenommen; WD1/SG1.5 verworfen (Summe 662, R3 +11, G11 +13).
+- Ergebnis nach Raycast: Summe 630->583 (ohne Ausnahmen 487->431). G6 273->233, G5 82->64, R5 21->17. Anstiege: G7b_feld 21->26 (+5), G2f 3->8/G3f 1->2 (alle Maskenecken-Ausnahme), R1_wand 0->2 (F1 rampe_1 Ende, E1 rampe_2 Ende), R3_laengs +1, T1 +1. Alle <=+5. R1_wand und G7b_feld noch nicht nachgebessert.
+- G6 je Feld vorher: C5 22, B4 21, C4 18, C3 15, G3 12, H6 12.
