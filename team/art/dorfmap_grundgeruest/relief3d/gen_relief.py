@@ -1010,6 +1010,34 @@ def _entspitzen(T=float(os.environ.get('SPITZE_T','0.38'))):   # O18w [Gate G2/G
     F2,cf=F,0;h2=h;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':cg,'fein':cf}
 G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _rillen_quer():   # K10 [F]: hochfrequente Feinband-Welligkeit quer zu Rampen beruhigen; Mittellinie und Grobnetz bleiben unveraendert
+    q=os.environ.get('RILLEN_Q','0.75')   # Varianten: 0=aus, 0.50/0.75 m Querfilter; 0.75 senkt die gemessene Quer-Restwelligkeit am staerksten innerhalb des Gates
+    if q=='0':return {'variante':0,'geaendert':0}
+    if q not in ('0.50','0.75'):raise ValueError('RILLEN_Q muss 0, 0.50 oder 0.75 sein')
+    from scipy.spatial import cKDTree
+    sigma=float(q);vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    fx=vid%FXn/FS;fz=vid//FXn/FS;xy=np.c_[fx,fz]
+    bm=np.zeros(NX*NY,bool);bm[np.frombuffer(base64.b64decode(FW['band']),np.uint32)]=1;bm=bm.reshape(NY,NX)
+    bx=np.clip(np.floor(fx).astype(int),0,NX-1);bz=np.clip(np.floor(fz).astype(int),0,NY-1);inband=bm[bz,bx]
+    _rp=[];_rn=[]
+    for _r in RAMPWEGE:
+        _p=np.asarray(_r,float);_l=np.r_[0,np.cumsum(np.hypot(*np.diff(_p,axis=0).T))]
+        if _l[-1]<1:continue
+        _t=np.arange(0,_l[-1]+0.126,0.25);_x=np.interp(_t,_l,_p[:,0]);_z=np.interp(_t,_l,_p[:,1]);_p2=np.c_[_x,_z]
+        _a=np.maximum(np.arange(len(_p2))-1,0);_b=np.minimum(np.arange(len(_p2))+1,len(_p2)-1);_d=_p2[_b]-_p2[_a];_n=np.maximum(np.hypot(_d[:,0],_d[:,1]),1e-9)
+        _rp.append(_p2);_rn.append(np.c_[-_d[:,1]/_n,_d[:,0]/_n])
+    _rp=np.concatenate(_rp);_rn=np.concatenate(_rn);_dist,_near=cKDTree(_rp).query(xy,distance_upper_bound=2.5)
+    m=inband&np.isfinite(_dist)&(_dist<2.5)
+    if not m.any():return {'variante':sigma,'geaendert':0}
+    _p=_rp[_near[m]];_n=_rn[_near[m]];_lat=np.sum((xy[m]-_p)*_n,axis=1)
+    _F=np.full((FYn,FXn),np.nan,float);_F.flat[vid]=h
+    _GA=G_ANZ.reshape(GY,GX).astype(float);_Y,_X=np.mgrid[0:FYn,0:FXn];_base=nd.map_coordinates(_GA,[_Y/FS*RS,_X/FS*RS],order=1,mode='nearest');_F=np.where(np.isfinite(_F),_F,_base)
+    _off=np.arange(-3*sigma,3*sigma+0.126,0.25);_wt=np.exp(-0.5*(_off/sigma)**2);_wt/=_wt.sum();_sm=np.zeros(m.sum(),float)
+    for _o,_w in zip(_off,_wt):_sm+=_w*nd.map_coordinates(_F,[(fz[m]+_n[:,1]*_o)*FS,(fx[m]+_n[:,0]*_o)*FS],order=1,mode='nearest')
+    _fade=np.clip(np.abs(_lat)/0.5,0,1)*np.clip((2.5-_dist[m])/0.5,0,1);_new=h[m]+0.75*_fade*(_sm-h[m]);_delta=np.abs(_new-h[m]);h[m]=_new
+    FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode();_naht=_bandnaht_j1()
+    return {'variante':sigma,'punkte':int(m.sum()),'geaendert_gt_1mm':int((_delta>0.001).sum()),'max_aenderung_m':round(float(_delta.max()),4),'naht':_naht}
+print('k10_rillen_quer',_rillen_quer())
 def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
     M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
