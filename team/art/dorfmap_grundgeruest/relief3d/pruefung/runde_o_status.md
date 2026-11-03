@@ -1,4 +1,7 @@
 # Runde O – Status (t67u)
+
+> **Pflicht:** Regeln in `team/art/dorfmap_grundgeruest/REGELN_VERPFLICHTEND.md` (R1–R7, G1–G11, T1–T6). Vor jedem Export/ZIP `sh pruefung/export_gate.sh` (pruefe_regeln.py) – bei Treffern kein Export.
+
 Basis 364ede6 (Runde N inkl. Nachher-Nahbilder gesichert).
 Fabians Befunde: 1 Flussende Westrand, 2 Baeume auf Abstieg, 3/4 Nadelspitzen, 5 Trichter in Wand.
 - [ ] A Fehlerzaehler pruefung/fehlerzaehler_t67u.py

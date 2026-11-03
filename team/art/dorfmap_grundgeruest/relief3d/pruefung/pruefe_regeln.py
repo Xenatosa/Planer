@@ -73,9 +73,76 @@ for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('R6_wasser_schnee',xx.mean()/
 # R7 Geometrie-Trennung: Fein-Daten muessen Wand/Boden/Weg-Kennung tragen
 FW=D['FW'];
 if not all(k in FW for k in ('vid','h','t')):hit('R7_trennung',0,0,'FW ohne t')
+
+# ---------- GELAENDE G1-G11 (t110u) ----------
+import os
+LS=os.environ.get('LOCHSCAN')   # JSON von pruefung/loch_o18g.js
+if LS and os.path.exists(LS):
+    l=json.load(open(LS));
+    if l.get('offen_innen',0):hit('G1_loch_offen',0,0,l['offen_innen'])
+else:hit('G1_lochscan_fehlt',0,0,'LOCHSCAN=... setzen')
+FWd=D['FW'];FS=FWd['fs'];FXn=NX*FS+1;vid=np.frombuffer(base64.b64decode(FWd['vid']),np.uint32);fh=np.frombuffer(base64.b64decode(FWd['h']),np.float32).astype(float)
+FYn=NY*FS+1;F=np.full((FYn,FXn),np.nan);F[vid//FXn,vid%FXn]=fh;ok=np.isfinite(F);Fz=np.where(ok,F,0)
+def ausreisser(A,okm,thr,nm,step):
+    mn=nd.grey_erosion(np.where(okm,A,1e9),size=3);mx=nd.grey_dilation(np.where(okm,A,-1e9),size=3)
+    nb=(nd.uniform_filter(np.where(okm,A,0),3)*9-A)/np.maximum(nd.uniform_filter(okm*1.0,3)*9-1,1)
+    up=(A-nb)*okm;dn=(nb-A)*okm
+    for r,arr in ((nm[0],up),(nm[1],dn)):
+        lab,n=nd.label(arr>thr)
+        for k in range(1,n+1):yy,xx=np.nonzero(lab==k);j=arr[yy,xx].argmax();hit(r,xx[j]/step,yy[j]/step,round(float(arr[yy[j],xx[j]]),2))
+ausreisser(G,~nd.binary_dilation(WAND,iterations=RS),0.35,('G2_spitze_oben','G3_spitze_unten'),RS)
+ausreisser(Fz,ok&nd.binary_erosion(ok,iterations=2),0.35,('G2_spitze_oben_fein','G3_spitze_unten_fein'),FS)
+lap=nd.laplace(nd.gaussian_filter(G,1));ref=nd.uniform_filter(np.abs(lap),20*RS);bad=(np.abs(lap)>np.maximum(6*ref,0.15))&LAND&~nd.binary_dilation(WAND,iterations=2*RS)
+lab,n=nd.label(bad)
+for k in range(1,n+1):
+    yy,xx=np.nonzero(lab==k)
+    if len(xx)>=4:hit('G4_delle_beule',xx.mean()/RS,yy.mean()/RS,round(float(np.abs(lap[yy,xx]).max()),2))
+OBEN=nd.binary_dilation(WAND,iterations=3*RS)&~WAND&(G>nd.grey_dilation(G,size=7*RS)-1.0);bb=(G-nd.gaussian_filter(G,2*RS))*OBEN;lab,n=nd.label(bb>0.6)
+for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('G5_beule_klippe',xx.mean()/RS,yy.mean()/RS,round(float(bb[yy,xx].max()),2))
+nrm=np.stack([-gx,-gy,np.ones_like(G)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
+fac=(dn>0.25)&(ST[:-1,:-1]>0.15)&(ST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)
+for k in range(1,n+1):
+    yy,xx=np.nonzero(lab==k)
+    if len(xx)>=6:hit('G6_facette',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
+M=WAND&LAND;rau=float(np.abs(G-nd.gaussian_filter(G,RS))[M].mean());glatt=nd.uniform_filter((np.abs(G-nd.gaussian_filter(G,RS))<0.05)*1.0,6*RS)>0.9
+if rau<0.40:hit('G7_wand_glatt_gesamt',0,0,round(rau,3),ref='O17 0.589/O18j 0.463, Schwelle 0.40')
+lab,n=nd.label(glatt&M)
+for k in range(1,n+1):
+    yy,xx=np.nonzero(lab==k)
+    if len(xx)>40:hit('G7_wand_glatte_flaeche',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
+WAS=~LAND;lab,n=nd.label(WAS)
+for k in range(1,n+1):
+    yy,xx=np.nonzero(lab==k)
+    if len(xx)>200*RS*RS and not (xx.min()==0 or yy.min()==0 or xx.max()==GX-1 or yy.max()==GY-1):hit('G8_fluss_nicht_bis_rand',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
+    tiefe=float(np.median(nd.grey_dilation(G,size=4*RS)[yy,xx]-G[yy,xx]))
+    if len(xx)>200*RS*RS and tiefe<0.6:hit('G8_fluss_flach',xx.mean()/RS,yy.mean()/RS,round(tiefe,2))
+# G9 = R6_wasser_schnee, G10 = R5_loch (gleiche Messung)
+for kind in ('baeume','felsen','findlinge','steine','felsbloecke'):
+    for o in D.get(kind,[]):
+        try:x,y,z=float(o[0]),float(o[1]),float(o[2])
+        except Exception:continue
+        if not(0<=x<NX and 0<=z<NY):continue
+        h0=float(hf([x],[z])[0]);
+        if abs(y-h0)>0.6:hit('G11_objekt_schwebt_sinkt',x,z,round(y-h0,2),art=kind)
+        if kind=='baeume' and float(nd.map_coordinates(ST,[[z*RS],[x*RS]],order=1)[0])>0.9:hit('G11_baum_an_wand',x,z,kind)
+# ---------- TEXTUR T1-T6 (Anzeige-Farbe VC, Daten) ----------
+VC=np.frombuffer(base64.b64decode(D['VC']),np.uint8).astype(float)
+if VC.size==GX*GY*3:
+    C=VC.reshape(GY,GX,3);dc=np.linalg.norm(np.diff(C,axis=1)[:-1],axis=2)+np.linalg.norm(np.diff(C,axis=0)[:,:-1],axis=2)
+    hart=(dc>70)&LAND[:-1,:-1]&~nd.binary_dilation(WAND,iterations=RS)[:-1,:-1];lab,n=nd.label(hart)
+    for k in range(1,n+1):
+        yy,xx=np.nonzero(lab==k)
+        if len(xx)>=8:
+            gerade=max(np.ptp(xx),np.ptp(yy))>=len(xx)*0.8;hit('T1_harte_farbkante'+('_gerade' if gerade else ''),xx.mean()/RS,yy.mean()/RS,int(len(xx)))
+    hell=C.mean(2)>215;sn=(~LAND)&hell
+    lab,n=nd.label(sn)
+    for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('T6_wasser_in_schnee_farbe',xx.mean()/RS,yy.mean()/RS,int(len(xx))) if len(xx)>4 else 0
+else:hit('T_VC_format',0,0,int(VC.size))
+for r in ('T2_textur_abgeschnitten','T3_streifen_ringe','T4_graue_flussstreifen','T5_textur_vs_clay'):
+    if not os.environ.get('BILD_'+r.split('_')[0]):hit(r+'_bildpruefung_offen',0,0,'Bildvergleich Clay/Textur noetig: BILD_'+r.split('_')[0]+'=ok nach Sichtpruefung')
 S={}
 for t_ in T:S[t_['regel']]=S.get(t_['regel'],0)+1
 print(json.dumps({'summe':len(T),'je_regel':S},ensure_ascii=False))
-for t_ in T[:400]:print(t_)
+[print(t_) for t_ in T[:600]] if os.environ.get('LISTE') else None
 if len(sys.argv)>2:json.dump({'summe':len(T),'je_regel':S,'treffer':T},open(sys.argv[2],'w'),indent=0,ensure_ascii=False)
 sys.exit(1 if T else 0)
