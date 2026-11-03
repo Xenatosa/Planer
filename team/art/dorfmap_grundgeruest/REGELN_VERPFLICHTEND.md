@@ -155,3 +155,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - V2 sigma 3: Gesamt 1229, G5 173, R5 47, T1 99 -> verworfen.
 - V3 sigma 7: Gesamt 1172 (G11 vor Cache-Auffrischung), G7b-Rauheit neu 1, G2f 7, G3f 2, T1 100 -> verworfen.
 - Befund: Glaetten der Rippen senkt G6 nur um ~5 %; die Facetten sitzen in der Grundform Gs (Hs->Wand-Uebergang), nicht im Rauschen allein.
+
+## O18u T1-Kalibrierung (Bildbeleg)
+- Bilder: relief3d/pruefung/o18/t1eich/ (12 Treffer t1_00..t1_11 ueber den Wertebereich 8..30 px, 6 Nicht-Treffer t1_12..t1_17 mit Farbsprung 45-70, Zusatz t1_18). *_2d.png = Textur x Streiflicht, links roh, rechts Kanten dc>70 rot. 3D-Ansichten t1_00..03 waren grossteils durch Haeuser/Baeume verdeckt, deshalb gilt die 2D-Ansicht.
+- Befund: Weder Farbsprung noch Pixelzahl trennen Fehler von Nicht-Fehler. Fast alle Treffer sind runde Raender von Gras-/Erdflecken im Schnee (t1_00, 03, 04, 05, 06, 07, 09, 10, 11) und sehen genauso aus wie die Nicht-Treffer (t1_14..17). Sichtbar falsch sind nur gerade, achsparallele Naehte (t1_08 C2 84|84, t1_18 G2 284|75, Kopf von t1_01).
+- Regel ab O18u: T1-Fehler nur dann, wenn die Komponente eine achsparallele Kante mit >=9 px (4,5 m) am Stueck hat. Gemessene Verteilung der laengsten Laeufe: 3..7 px bei 92 Komponenten, dann eine Luecke, dann 9/12/14 px. Komponenten unter 9 px heissen T1_fleckrand, bleiben in summe und sind als Ausnahme markiert.
+- Ergebnis auf 7bb8418: T1 95 -> 3 (2 + 1 gerade), dazu T1_fleckrand 92 als Ausnahme. Die Schwankung von +-5 lag nur in den Fleckraendern.

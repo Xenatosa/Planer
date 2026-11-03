@@ -145,7 +145,14 @@ if VC.size==GX*GY*3:
     for k in range(1,n+1):
         yy,xx=np.nonzero(lab==k)
         if len(xx)>=8:
-            gerade=max(np.ptp(xx),np.ptp(yy))>=len(xx)*0.8;hit('T1_harte_farbkante'+('_gerade' if gerade else ''),xx.mean()/RS,yy.mean()/RS,int(len(xx)))
+            gerade=max(np.ptp(xx),np.ptp(yy))>=len(xx)*0.8
+            # O18u Kalibrierung (Bilder /tmp/o18u/t1 -> pruefung/o18/t1eich): sichtbarer Fehler nur bei achsparalleler Kante >=9 px (4,5 m) am Stueck; kuerzere = natuerlicher Fleckrand (Ausnahme, bleibt gezaehlt)
+            sub=(lab[yy.min():yy.max()+1,xx.min():xx.max()+1]==k);lauf=0
+            for A_ in (sub,sub.T):
+                for row in A_:
+                    c_=0
+                    for v_ in row:c_=c_+1 if v_ else 0;lauf=max(lauf,c_)
+            hit(('T1_harte_farbkante'+('_gerade' if gerade else '')) if lauf>=9 else 'T1_fleckrand',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
     hell=C.mean(2)>215;sn=(~LAND)&hell
     lab,n=nd.label(sn)
     for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('T6_wasser_in_schnee_farbe',xx.mean()/RS,yy.mean()/RS,int(len(xx))) if len(xx)>4 else 0
@@ -181,6 +188,7 @@ def _kreuz(a,b):
     pa,pb=R[a][0],R[b][0];d=np.hypot(pa[:,None,0]-pb[None,::4,0],pa[:,None,1]-pb[None,::4,1]).min(1);return pa[d<2.0]
 _KP={(2,11):_kreuz(2,11),(3,5):_kreuz(3,5)}
 def _ausnahme(t_):
+    if t_['regel']=='T1_fleckrand':return 'O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m'
     r=t_['regel'];w=t_.get('weg','')
     if r=='G8_fluss_nicht_bis_rand' and abs(t_['x']-22.6)<3 and abs(t_['z']-49.1)<3:return 'G8 See A2 per Zellwert WASSER_EIS'
     if r.startswith('R3_'):
