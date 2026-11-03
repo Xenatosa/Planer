@@ -553,3 +553,38 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 [S] Speicher: von 87 % (18 G frei) auf 72 % (37 G frei). Entfernt nur Erzeugtes: Worktrees c2, delle, g5r5, g7b, regelwerk, rillen, wand, weg, weg2, wellen, saege, kontur, r3 (sauber, Branches auf origin), /tmp-Worktrees bs_* und vorher_t44u, /tmp/v-Kopien, /tmp/j4, k1b, fzc, o7base. Hauptrepo unangetastet.
 
 Kein Kontakt zu Fabian, bis alle 56 Kacheln Gate 0 haben.
+
+## t134u 04.11.2026 00:35 (Europe/Berlin) – Auswertung Welle 4 + Start Welle 5
+
+Basis art/dorfmap-grundgeruest e7a5874: pruefe_regeln 570, r8 48, r9 334 (Summe 952), Loch 0 (1.700.454 Dreiecke, 0 offene Innenkanten), t42u 0.
+Merge-Kriterium: keine Klasse steigt (auch nicht +1), Loch 0, t42u 0, D2 bytegleich, Nahbilder ohne neue sichtbare Fehler.
+
+| Lauf | Commit | pr / r8 / r9 nachher | Loch | t42u | D2 | Entscheidung |
+|---|---|---|---|---|---|---|
+| weg3 | 48da818 | 570 / 48 / 334 (Standard bytegleich, Mischung per env aus) | 0 | 0 | bytegleich | nicht gemergt (kein Gewinn; beste Mischung R8 35, aber G6 +10) |
+| saege | 34acdec | (t133u) kein Effekt | – | – | – | nicht gemergt (bleibt auf eigenem Branch) |
+| kontur | 667a924 | (t133u) Verschiebung | – | – | – | nicht gemergt |
+| r3 | 3aee638 | (t133u) Verschiebung | – | – | – | nicht gemergt |
+| g6 | d410234 (+ Patch t134u _g11_sichtbar) | 540 / 48 / 334 (G6 220→195, G2f 8→4, G3f 2→1; ohne Patch G11 0→3) | 0 | 0 | bytegleich | NICHT gemergt: sichtbare Treppe/Zähne + Haarriss am Hang B5 (o18/t134u/g6_B5_vor_nach.png) → Nachbesserung g6c |
+| wellen2 | cb424b7 | 568 / 48 / 311 (R9w 275→253, R8b 25→24) | 0 (1.698.596) | 0 | bytegleich | NICHT gemergt: R3_laengs 35→36, G5 68→71 → Nachbesserung wellen3 |
+| g5r5b | 41e949a | 537 / 48 / 334 (G5 68→47, R5 17→0) | 0 | 0 | bytegleich | NICHT gemergt: G6 220→225, laut Bericht neue Kerbe G4 + Absatz D6 → Nachbesserung g5r5c |
+| delle2 | a0a618b… | läuft noch (Fortsetzung seit 23:41) | | | | offen |
+
+Nichts gemergt, grundgeruest bleibt e7a5874-Stand (Gate 952). Kein Archiv nötig (keine Variante in grundgeruest übernommen; Läufe bleiben auf ihren Branches).
+
+Gate je Kachel (pr+r8+r9, Basis), 4 von 56 bei 0 (A4, A5, F3, G7), 2 Treffer ohne Kachel:
+```
+A1: 13 B1:  8 C1: 12 D1: 70 E1: 22 F1: 24 G1: 22 H1:  9
+A2: 16 B2:  8 C2: 12 D2:  8 E2: 14 F2:  9 G2:  4 H2: 15
+A3:  1 B3: 20 C3: 68 D3: 13 E3: 21 F3:  0 G3: 28 H3: 13
+A4:  0 B4: 34 C4: 49 D4: 32 E4: 17 F4:  3 G4: 22 H4: 17
+A5:  0 B5: 26 C5: 65 D5: 15 E5:  2 F5: 14 G5:  4 H5: 36
+A6:  5 B6:  7 C6: 33 D6: 32 E6: 11 F6: 16 G6: 19 H6: 30
+A7:  6 B7:  2 C7:  7 D7:  1 E7:  8 F7:  4 G7:  0 H7:  3
+```
+
+Welle 5 (Codex xhigh, queue_runde5.sh, max 3 parallel inkl. delle2, Marker /workspace/codex_jobs/ende_<tag>.txt):
+- g6c (von g6): G11-Fix + B5-Treppe/Riss beheben, G6 weiter senken – Start 00:32
+- g5r5c (von g5r5b): G6 +5, Kerbe G4, Absatz D6 beheben – Start 00:33
+- wellen3 (von wellen2): R3_laengs/G5-Anstieg beheben, R9w ≤240 – in Queue
+- fleck (von grundgeruest): T1_fleckrand 94 → ≤40 – in Queue
