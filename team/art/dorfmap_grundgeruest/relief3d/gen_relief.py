@@ -8,6 +8,13 @@ cols=[c for c in R[0].keys() if not c.startswith('modell_')]
 A=lambda k:np.array([r[k] for r in R]).reshape(NY,NX)
 eb=A('ebene');wn=A('wand_name');ug=A('untergrund').copy();h0=A('hoehe_m').astype(float);wa=A('wasser_eis')=='1';fl=A('fluss_id');ha=A('hindernis_art')
 wand=np.isin(ug,['KLIPPE_WAND','KLIPPE_KANTE'])
+# G7b: nur die 2D-Wandkontur aendern; 0 ist Standard, 1/2 sind verworfene Gate-Versuche.
+_WKV=int(os.environ.get('WANDKONTURV','0'))
+if _WKV not in (0,1,2):raise ValueError('WANDKONTURV muss 0, 1 oder 2 sein')
+_OV0=list(csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')))
+_ROAD0=np.zeros((NY,NX),bool);_BR0=np.zeros((NY,NX),bool)
+for _o in _OV0:
+    _x,_y=int(_o['cx']),int(_o['cy']);_ROAD0[_y,_x]|=bool(_o['weg_id']);_BR0[_y,_x]|=_o['bruecke']=='1'
 # --- Hoehen je Ebene (Wandhoehen aus Messung [R], Rest [A])
 WANDH={'Nord':14.0,'Suedgrat':16.0,'Krater':11.0,'Ostgrat':12.0}
 EBENE_H={'PLATEAU_NORD':14.0,'OSTPLATEAU':12.0,'TAL_SUED':-16.0,'GIPFEL':14.0,'KRATER':1.0}
@@ -126,6 +133,24 @@ def _serp(name,A_,B_,n=4,sg=1):
     RAMPPROF.append((P,hp));RAMPWEGE.append([[round(float(a),2),round(float(b),2)] for a,b in P[::20]]+[[round(float(P[-1,0]),2),round(float(P[-1,1]),2)]])
     SERPENTINEN.append((name,round(Ht,1),round(He,1),round(float(L[-1]),1),round(float(np.degrees(np.arctan(abs(Ht-He)/L[-1]))),1),round(float(W),1)))
 _serp('X084',(148,2),(156,37),n=3,sg=1);_serp('X069',(127,133),(122,119),n=3)
+# G7b: glatte 2D-Polylinie aus signiertem Abstand + seichtem, geglaettetem Konturverlauf.
+# Zellquellen und Overlay bleiben unberuehrt; die Wandflaechen-Tesselierung bleibt gleich.
+if _WKV:
+    _wa0=wand.copy();_sd0=nd.distance_transform_edt(_wa0)-nd.distance_transform_edt(~_wa0)
+    _amp={1:0.7,2:1.35}[_WKV];_noise=nd.gaussian_filter(np.random.default_rng(7107).standard_normal((NY,NX)),2.2,mode='nearest');_noise/=_noise.std()
+    _sdf=nd.gaussian_filter(_sd0,0.8,mode='nearest')+_amp*_noise
+    _mask_k=np.where(np.abs(_sd0)<=1.5,_sdf>0,_wa0)
+    _route=np.zeros((NY,NX),bool)
+    for _r in RAMPWEGE:
+        _p=np.asarray(_r,float);_x=np.clip(_p[:,0].round().astype(int),0,NX-1);_z=np.clip(_p[:,1].round().astype(int),0,NY-1);_route[_z,_x]=1
+    _protect=nd.binary_dilation(wa,iterations=2)|nd.binary_dilation(_route,iterations=8)|nd.binary_dilation(_bel,iterations=3)|nd.binary_dilation(_ROAD0,iterations=4)|nd.binary_dilation(_BR0,iterations=3)
+    _mask_k=np.where(_protect,_wa0,_mask_k)
+    _add=_mask_k&~_wa0;_rem=_wa0&~_mask_k
+    if _add.any():
+        _iy,_ix=nd.distance_transform_edt(~_wa0,return_indices=True)[1];H[_add]=H[_iy[_add],_ix[_add]]
+    if _rem.any():
+        _oy,_ox=nd.distance_transform_edt(_wa0,return_indices=True)[1];H[_rem]=H[_oy[_rem],_ox[_rem]]
+    print('wandkontur_2d',{'variante':_WKV,'amplitude_m':_amp,'hinzu':int(_add.sum()),'entfernt':int(_rem.sum()),'geschuetzt':int(_protect.sum())})
 print('serpentinen',SERPENTINEN)
 Hboden=H.copy()
 # t53u R4: Flussbett eingeschnitten: Tiefe nach Abstand zum Ufer, Kiesbaenke, Uferboeschung + Sandufer [A]
