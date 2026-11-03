@@ -532,3 +532,24 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
   Konflikt: G aendert sich -> zellen_relief.csv-Export muesste mit; mit CSV-Reset meldet t42u 3879. NICHT gemergt bis geklaert, ob zellen_relief.csv Quelle oder Export ist; Neuaufsatz auf de0d9b5 noetig.
 - 20:52 CSV-Entscheidung: Quellspalten byteweise fix, abgeleitete Spalten werden bei G-Aenderung neu exportiert, t42u danach 0. Job delle2 gestartet (Basis 4746125, WANDSTREIFEN=0). Wave 3 (weg3,saege,g6,g5r5b,r3,kontur,wellen2) laeuft noch, kein ende_*.txt. 8 Jobs, Load 2.6.
 - 21:31 Zwischenstand: alle 8 Jobs (weg3,saege,g6,g5r5b,r3,kontur,wellen2,delle2) aktiv (Logs 21:30), noch kein Ergebnis, nichts gemergt. Gate grundgeruest 570/48/334=952, Loch 0, t42u 0.
+
+## t133u 22:52 Auswertung Welle 3 + Neustart Welle 4
+
+**Gate grundgeruest (d3843dc) unveraendert:** pruefe_regeln 570, r8 48, r9 334 (Summe 952), Raycast-Loch 0, t42u 0. In dieser Runde nichts gemergt.
+
+[R] Ergebnisse einzeln selbst nachgebaut und gemessen (Bau deterministisch, eigene Gate-Laeufe, D2-Bytevergleich mit `codex_jobs/tools/d2_vergleich.py`, Trefferdiff mit `tools/treffer_diff.py`, Tonbilder angesehen):
+
+| Lauf | Commit | Loch | regeln | r8 | r9 | t42u | D2 | Entscheidung |
+|---|---|---|---|---|---|---|---|---|
+| saege | 34acdec | 0 | 570 | 48 | 334 (saege 34 unveraendert) | 0 | bytegleich | [F] nicht gemergt: relief_daten bytegleich zur Basis, bringt nichts |
+| kontur | 667a924 | 0 | 570 | 48 | 334 | 0 | bytegleich | [F] nicht gemergt: WANDKONTURV=0 bytegleich, bringt nichts |
+| r3 | 3aee638 | 0 | 569 | 48 | 334 | 0 | bytegleich | [F] nicht gemergt: -1 ist Verschiebung. Weg 3 (G5 D1 152.5/28.5; G6 C3 116.8/127.6; R3_laengs C3 122.3/128.6), neu 2 (G5_beule_klippe C4 119.0/130.0 0,68; R3_laengs C5 120.5/178.2 0,08) = lokale Regression C4/C5. Die export_gate.sh-Aenderung (TAG je /tmp) ist brauchbare Infrastruktur, separat uebernehmen. |
+| delle2 | a0a618b (gepusht 22:4x, Lauf war ohne ende-Datei abgebrochen) | 0 | 574 | 51 | 304 (R8b 25->0) | 0 | bytegleich | [F] nicht gemergt: Senkenfuellung hebt EIN ganzes Becken in C4 (x~107 z~157, 4273 Gitterpunkte, bis 3,82 m) -> Tonbild C4/C5 Tal wird Plateau/Damm (Landschaftsform). 29 neue Treffer fast nur C4: Rampe x~89.5 z155-171 (R1_wand, R3 laengs/quer/woelb +10, R8 stufe/gitter/quer bei 89.5/171.4), G11_baum_an_wand 3, R5_loch 2, G6 +13. Basis-R8b: E3 12, E4 4 flach (0,30-0,39 m), D1 2, G1/F1/C3/C5 je 1; tief: C4 106.5/145.5 4,11 m, D6 150.5/228 4,09 m. Nachauftrag delle2b: flache Dellen fuellen, tiefe Becken C4/D6 nur Ursache messen. D2-Kamera des Laufs liefert leeres Bild (Kamera im Gelaende). |
+
+[S] Abgebrochene Laeufe (Usage-Limit ~21:54): Worktrees weg3, g6, g5r5b, wellen2 mit nicht committeten Zwischenstaenden (gen_relief.py, index.html, relief_daten, Bilderordner) - nicht uebernommen; die Laeufe pruefen ihren Stand selbst neu (Auftrag `codex_jobs/fortsetzung_text.txt`).
+
+[A] Welle 4 ab 22:50:44 (nach Reset 22:50), max 3 parallel, Codex gpt-6-luna Denkstufe xhigh (im Log bestaetigt), per `codex exec resume` der Ursprungssitzung: wellen2 (R9 wellen 275), g6 (G6 ~220), weg3 (R8/R8a Kreuzungen). Warteschlange `codex_jobs/queue_runde4.sh`: danach g5r5b (G5/R5), delle2b. Bei erneutem Usage-Limit startet die Queue nichts mehr und notiert den Resetzeitpunkt in `codex_jobs/queue_runde4.log`. Noch ohne Auftrag: T1_fleckrand 94.
+
+[S] Speicher: von 87 % (18 G frei) auf 72 % (37 G frei). Entfernt nur Erzeugtes: Worktrees c2, delle, g5r5, g7b, regelwerk, rillen, wand, weg, weg2, wellen, saege, kontur, r3 (sauber, Branches auf origin), /tmp-Worktrees bs_* und vorher_t44u, /tmp/v-Kopien, /tmp/j4, k1b, fzc, o7base. Hauptrepo unangetastet.
+
+Kein Kontakt zu Fabian, bis alle 56 Kacheln Gate 0 haben.
