@@ -176,5 +176,21 @@ for fx in range(8):
         a=float(np.abs(G[sl]-nd.gaussian_filter(G,RS)[sl])[m].mean());b=float(np.abs(G7[sl]-nd.gaussian_filter(G7,RS)[sl])[m].mean())
         if a<0.85*b:T.append({'regel':'G7b_wandkontur_feld','feld':'ABCDEFGH'[fx]+str(fz+1),'x':fx*42+21,'z':fz*43+21,'wert':round(a/b,3)});S['G7b_wandkontur_feld']=S.get('G7b_wandkontur_feld',0)+1
 print('G7b',T7,json.dumps({'summe':len(T),'je_regel':S},ensure_ascii=False))
-if len(sys.argv)>2:json.dump({'summe':len(T),'je_regel':S,'treffer':T},open(sys.argv[2],'w'),indent=0,ensure_ascii=False)
+# O18t S3: dokumentierte Ausnahmen (REGELN_VERPFLICHTEND.md, O18r/O18t). Treffer bleiben in summe/je_regel sichtbar, zusaetzlich markiert + summe_ohne_ausnahmen [A]
+def _kreuz(a,b):
+    pa,pb=R[a][0],R[b][0];d=np.hypot(pa[:,None,0]-pb[None,::4,0],pa[:,None,1]-pb[None,::4,1]).min(1);return pa[d<2.0]
+_KP={(2,11):_kreuz(2,11),(3,5):_kreuz(3,5)}
+def _ausnahme(t_):
+    r=t_['regel'];w=t_.get('weg','')
+    if r=='G8_fluss_nicht_bis_rand' and abs(t_['x']-22.6)<3 and abs(t_['z']-49.1)<3:return 'G8 See A2 per Zellwert WASSER_EIS'
+    if r.startswith('R3_'):
+        if w=='rampe_12':return 'R3 Haarnadel rampe_12 aus Overlay'
+        for (a,b),kp in _KP.items():
+            if w in (f'rampe_{a}',f'rampe_{b}') and len(kp) and np.hypot(kp[:,0]-t_['x'],kp[:,1]-t_['z']).min()<6:return f'R3 Kreuzung rampe_{a}x{b} aus Overlay'
+    return None
+for t_ in T:
+    g=_ausnahme(t_)
+    if g:t_['ausnahme']=g
+NA=sum(1 for t_ in T if t_.get('ausnahme'));print('ausnahmen',NA,'summe_ohne_ausnahmen',len(T)-NA)
+if len(sys.argv)>2:json.dump({'summe':len(T),'summe_ohne_ausnahmen':len(T)-NA,'ausnahmen':NA,'je_regel':S,'treffer':T},open(sys.argv[2],'w'),indent=0,ensure_ascii=False)
 sys.exit(1 if T else 0)

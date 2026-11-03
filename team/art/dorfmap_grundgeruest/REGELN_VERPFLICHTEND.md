@@ -133,3 +133,19 @@ SENKE V1 flach 0.8 m: R5 40->0, G6 +16, G2f +1, G3 +1, T1 +1. V2 Kuppe: R3 quer 
 ### O18r Ausnahmen (Vorschlag, noch nicht im Gate)
 R3: Haarnadel rampe_12 (Schenkel 2-4 m, 2.5 m Hoehensprung) und Kreuzungen rampe_2x11, rampe_3x5 folgen aus Overlay-Geometrie; KREUZ-Angleich verworfen (R3 laengs 35->45, G6 +10).
 G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
+## O18s Regression-Basis und G6-Ursache (pruefung/o18/regression_o18s.json)
+- Basis: Gate 1055, t42u 0, bergauf 0 (max 0,02), Bandrand-Stufe 0, Loecher 0 (Index und 56 Felder), lod1 1 175 138 Dreiecke, Ladezeit Median 9,0 s.
+- Raycast ist auf der Basis ROT (Baeume 20 schwebend/105 versunken). Ursache: Block O18m G11 setzt Objekte auf G_ANZ statt auf das sichtbare Feinnetz. Fix (Raycast-Cache hat Vorrang) macht Raycast gruen, aber Gate G11 +162, weil G11 gegen G_ANZ misst -> nicht uebernommen. Messflaeche von G11 und G6 muss auf die Anzeige-Flaeche umgestellt werden (Entscheidung offen).
+- G6: Ursache ist die Wandformung Gs (Rippen-fBm RIB, Simse, Schuttfuss) im Grobnetz, nicht Zellraster/Bilinear. Bikubisch statt bilinear verschlechtert G6 (492->521).
+
+## O18t Messkorrektur G6/G11: sichtbare Flaeche
+- Grund: Im Feinband rendert der Viewer das Feinnetz (FW, 0,25 m), die Grobquads werden dort ausgelassen. Das Gate hat G6 und G11 auf dem Grobnetz GB gemessen, also teils auf einer unsichtbaren Flaeche. Dadurch widersprachen sich Raycast (gegen das sichtbare Netz) und G11.
+- Neu: G6 auf GV = Feinnetz (jeder 2. Feinpunkt, 0,5 m) wo vorhanden, sonst GB; G11 gegen bilineare Feinnetz-Hoehe wo alle 4 Ecken vorhanden, sonst GB. Schwellen unveraendert. Alte Messung: GATE_GROB=1.
+- Zahlen gleicher Stand (6e7dfff): G6 alt 592 -> sichtbar 676; G11 alt 0 -> sichtbar 107; Gesamt 1055 -> 1246. Alle anderen Regeln gleich. Neue Basis fuer Vergleiche: 1246.
+- O18t Schritt 1: Raycast-Hoehe hat Vorrang vor G11-Nachsetzen und vor objekte_feinband-Absenkung (gen_relief.py), Cache aufgefrischt (Geroell 43). Raycast alle Klassen 0/0; G11 sichtbar 107 -> 1 (Findling H5 306,5|196,3, -1,09 m, im Raycast innerhalb 0,6*h); Gesamt 1246 -> 1140, keine Klasse gestiegen. Geroell 635 -> 678, weil vorher nachtraeglich abgesenkte Geroellsteine als versunken entfernt wurden.
+
+### O18t S3 Ausnahmen im Gate (pruefe_regeln.py, Feld 'ausnahme', summe_ohne_ausnahmen)
+- R3 Haarnadel rampe_12 (alle R3-Treffer dieser Rampe) und R3 an den Kreuzungen rampe_2x11, rampe_3x5 (Treffer <6 m vom Kreuzungspunkt): Geometrie folgt aus dem Overlay (unveraenderbar); KREUZ-Angleich O18r verworfen (R3 laengs 35->45, G6 +10).
+- G8 See A2 22,6|49,1: per Zellwert WASSER_EIS gesetzt, kein Fluss.
+- Stand 1a92bd7: 48 Ausnahmen (R3 47, G8 1); R3 bleibt mit 34 echten Treffern offen. summe bleibt ungefiltert.
+- Hinweis: Die O18s/O18t-Eintraege standen versehentlich in relief3d/REGELN_VERPFLICHTEND.md; hierher uebernommen, alte Datei nach _alt verschoben.
