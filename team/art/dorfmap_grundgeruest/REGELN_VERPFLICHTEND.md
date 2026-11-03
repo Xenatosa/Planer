@@ -167,3 +167,7 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
   - V2: wie V1, dazu Hohlkehle an Fuss/Kopf (Gauss 2 px, ausserhalb der Wandmitte). Ergebnis G5 85, G6 608, R5 27, gesamt 1103. Gestiegen: G2 +1, G3 +3, G7b_feld +5, Rauheit 0,51, R4 +1, T1 +1. Abgelehnt.
   - V3: weicher Deckel, Hohlkehle 1,5 px. Ergebnis G5 102, G6 598, gesamt 1114. Gleiche Anstiege wie V1. Abgelehnt.
   - Befund: Der Deckel (Ursache G5 = hi-Maximum ueber 10 m hebt die Kante ueber das Plateau) und der Fade wirken, erzeugen aber neue Spitzen (G2/G3) und glattere Waende (Rauheit). Alles zurueckgesetzt, Basis bleibt 1139.
+
+## O18v
+- Regelanpassung (Fabian, 10:54): Eine Variante darf uebernommen werden, wenn die Summe deutlich sinkt und keine Klasse um mehr als 5 steigt. Die kleinen Anstiege werden im selben Schritt behoben. Vor jeder G11-Bewertung wird neu geraycastet.
+- S1: V2 ist uebernommen (gen_relief WANDV-Standard 2) und der Raycast-Cache ist aufgefrischt. Gate 1139 -> 979 (G5 85, G6 608, R5 27, G11 0). 3 Steine lagen nach dem Raycast im Wasser und stehen jetzt auf der raus-Liste (213,64|31,27; 216,62|224,27; 94,36|279,58).

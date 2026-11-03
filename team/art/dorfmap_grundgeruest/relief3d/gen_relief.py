@@ -159,7 +159,12 @@ _jj0,_ii0=np.mgrid[0:Hn.shape[0],0:Hn.shape[1]].astype(float)
 _wy=_jj0+7*_fbm(14,31);_wx=_ii0+7*_fbm(14,32)
 _rw=sum(a*(1-np.abs(np.clip(nd.map_coordinates(_fbm(sg,sd),[_wy,_wx],order=1,mode='reflect')/2.2,-1,1))) for a,sg,sd in ((0.55,7,33),(0.30,3.5,34),(0.15,1.8,35)))
 RIB=(_rw-_rw.mean())/_rw.std()                                       # >0 Rippe, <0 Runse
-u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB
+_WV=int(os.environ.get('WANDV','2'))   # O18u S3/S4 Varianten [A]
+if _WV:
+    _u0=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf;_t0=np.clip(_u0*2+0.5,0,1)
+    _dm=np.minimum(_t0,1-_t0)*Rg;_WM=np.clip((_dm-float(os.environ.get('FADE0','3.0')))/2.0,0,1)   # Rippen nur >3 m von Fuss/Kopf, 2 m Fade
+else:_WM=1.0
+u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB*_WM
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
 steil_k=(1.0+1.6*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
 t=np.clip(u*steil_k+0.5+0.25*krz*_fbm(6,11),0,1);t=t*t*(3-2*t)
@@ -168,13 +173,16 @@ _kc=np.argwhere(wand&(WN_VOR_K=='Krater')).mean(0)*RS;_jj,_ii=np.mgrid[0:Hn.shap
 _rib=np.sin(_ang*13+1.6*_fbm(14,21));_rib=np.sign(_rib)*np.abs(_rib)**0.6
 _sch=np.clip((np.abs(np.sin(_ang*2+0.7))-0.93)/0.07,0,1)
 _rid=1-2*np.abs(np.clip(_fbm(5,22)/2.5,-1,1))
-t=np.clip(t+np.sin(np.pi*t)*(krz*(0.20*_rib-0.45*_sch)+(1-krz)*0.10*(_rid-0.5)),0,1)
+t=np.clip(t+np.sin(np.pi*t)*(krz*(0.20*_rib-0.45*_sch)+(1-krz)*0.10*(_rid-0.5)*_WM),0,1)
 _ns=4+np.round(2*np.clip(0.5+0.4*_fbm(20,37),0,1));_tq=np.floor(t*_ns)/_ns;_fr=t*_ns-np.floor(t*_ns)
-_led=(_fbm(9,38)>0.0)*(1-krz)
+_led=(_fbm(9,38)>0.0)*(1-krz)*_WM
 t=np.clip(t*(1-0.55*_led)+0.55*_led*(_tq+np.clip((_fr-0.55)/0.45,0,1)/_ns),0,1)   # Simse: flache Absaetze + steile Stufen
-band=0.04*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)           # Simse/Baender in der Wand
+band=0.04*np.sin(t*np.pi*5+1.3*_fbm(8,9))*np.sin(np.pi*t)*_WM           # Simse/Baender in der Wand
 tw=np.clip(u*1.5+0.62,0,1);apron=np.clip(tw,0,0.3)                    # Schuttkegel am Fuss
 Gs=lo+Rg*np.clip(0.8*t+band+0.2*apron/0.3,0,1);Gs=np.where(Rg>SPRUNG,Gs,Hs)
+if _WV:
+    _cap=nd.maximum_filter(Hs,int(os.environ.get('CAPW','7')));_ex=np.maximum(Gs-_cap,0);Gs=Gs-(nd.gaussian_filter(_ex,1.5)*(Rg>SPRUNG) if _WV>=3 else _ex)   # G5: Kante nicht hoeher als Plateau in Naehe [A]
+    if _WV>=2:_sg=float(os.environ.get('KEHLE','2'));Gs=np.where(Rg>SPRUNG,nd.gaussian_filter(Gs,_sg)*(1-_WM)+Gs*_WM,Gs)   # Fuss/Kopf weich (C1-Hohlkehle) [A]
 Gsamp=Hs*(1-wz)+Gs*wz
 vj,vi=np.mgrid[0:GY,0:GX].astype(float)
 G=nd.map_coordinates(Gsamp,[vj-0.5,vi-0.5],order=1,mode='nearest').astype(np.float32)

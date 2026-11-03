@@ -467,30 +467,30 @@
     ]
    }
   ],
-  "auftrag_max_m": 5.02,
+  "auftrag_max_m": 4.63,
   "feinband": {
-   "ecken": 11439
+   "ecken": 11150
   }
  },
  "gelaende": {
-  "senken_gefuellt": 290,
-  "senk_ecken": 6695,
-  "auftrag_max_m": 2.17,
-  "gerundet_ecken": 10249,
+  "senken_gefuellt": 188,
+  "senk_ecken": 5042,
+  "auftrag_max_m": 3.26,
+  "gerundet_ecken": 5749,
   "rund_max_m": 4.6
  },
  "feinband": {
-  "senken_gefuellt": 1351,
-  "auftrag_max_m": 3.39,
-  "gerundet": 17049,
-  "aenderung_max_m": 3.39,
-  "ecken_geaendert": 33788
+  "senken_gefuellt": 1031,
+  "auftrag_max_m": 2.25,
+  "gerundet": 13295,
+  "aenderung_max_m": 2.25,
+  "ecken_geaendert": 25206
  },
  "fluss": {
   "D_m": 0.6,
   "boeschung_m": 3.0,
-  "wasserecken": 25135,
-  "landecken_abgesenkt": 22105,
+  "wasserecken": 25264,
+  "landecken_abgesenkt": 21954,
   "bett_max_m": 1.1
  }
 }
