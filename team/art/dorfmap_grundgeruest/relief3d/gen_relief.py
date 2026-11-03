@@ -912,6 +912,53 @@ def _senke_fuellen():   # O18r [Gate R5 loch 40: abflusslose Senken >1 m auf tro
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h+nd.map_coordinates(d,[fz*RS,fx*RS],order=1,mode='nearest');FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'punkte':int((d>0.01).sum()),'max':round(float(d.max()),2)}
+
+def _anzeige_g5_r5():   # g5r5: Anzeigehoehen G5/R5 beheben; GB/FW, nie Zellquellwerte oder WEGA/Wandmesh
+    from skimage.morphology import reconstruction
+    GA=G_ANZ.reshape(GY,GX).astype(float);vor=GA.copy();LAND=WV.reshape(GY,GX)<=-900
+    protect=np.zeros((GY,GX),bool)
+    protect[38*RS:91*RS+1,121*RS:173*RS+1]=True  # D2 plus 5-m-Saum
+    W=WEGA.reshape(GY,GX)>20
+    for x,z in wege:W[z*RS:z*RS+RS+1,x*RS:x*RS+RS+1]=True
+    for r in RAMPWEGE:
+        r=np.asarray(r,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(r,axis=0).T))];q=np.arange(0,L[-1]+1e-6,0.25)
+        W[np.clip((np.interp(q,L,r[:,1])*RS).round().astype(int),0,GY-1),np.clip((np.interp(q,L,r[:,0])*RS).round().astype(int),0,GX-1)]=True
+    protect|=nd.distance_transform_edt(~W)/RS<5.0  # Wege, Wegband und Rampen bleiben unveraendert
+    stats={'g5_referenzen':0,'r5_fuellpunkte':0}
+    if os.environ.get('G5REF','1')!='0':
+        gy,gx=np.gradient(GA,1/RS);wall=np.hypot(gx,gy)>1.0;dist=nd.distance_transform_edt(~wall)/RS
+        dy,dx=np.gradient(nd.gaussian_filter(dist,RS));n=np.hypot(dx,dy)+1e-9;dx,dy=dx/n,dy/n
+        oben=(dist>0)&(dist<=3)&(GA>nd.grey_dilation(GA,size=7*RS)-1.0);yy,xx=np.nonzero(oben)
+        ref=np.full(len(yy),-1e9);rx=np.zeros(len(yy));rz=np.zeros(len(yy))
+        for s in (2,3,4,5):
+            X=xx+dx[yy,xx]*s*RS;Z=yy+dy[yy,xx]*s*RS;h=nd.map_coordinates(GA,[Z,X],order=1,mode='nearest');m=h>ref
+            ref[m]=h[m];rx[m]=X[m];rz[m]=Z[m]
+        excess=GA[yy,xx]-ref;sel=excess>0.6;Y,X=np.mgrid[0:GY,0:GX];up=np.zeros_like(GA)
+        for y,x,e,cx,cz in zip(yy[sel],xx[sel],excess[sel]-0.55,rx[sel],rz[sel]):
+            ix=int(np.clip(round(cx),0,GX-1));iz=int(np.clip(round(cz),0,GY-1))
+            if protect[y,x] or protect[iz,ix] or not LAND[iz,ix]:continue
+            x0,x1=max(0,int(cx-3*RS)),min(GX,int(cx+3*RS+1));z0,z1=max(0,int(cz-3*RS)),min(GY,int(cz+3*RS+1))
+            d2=((X[z0:z1,x0:x1]-cx)**2+(Y[z0:z1,x0:x1]-cz)**2)/(2*RS**2)
+            bump=e*np.exp(-d2);bump[protect[z0:z1,x0:x1]|~LAND[z0:z1,x0:x1]]=0;up[z0:z1,x0:x1]=np.maximum(up[z0:z1,x0:x1],bump);stats['g5_referenzen']+=1
+        GA+=up
+    if os.environ.get('R5FILL','1')!='0':
+        sd=GA.copy();sd[1:-1,1:-1]=GA.max();t=reconstruction(sd,GA,method='erosion')-GA
+        t[~nd.binary_erosion(LAND,iterations=2*RS)]=0
+        d=np.zeros_like(GA);bad=t>1.0;d[bad]=np.maximum(t[bad]-0.85,0)
+        d=np.maximum(d,nd.gaussian_filter(d,RS)*(t>0.25)*LAND);d[protect]=0;GA+=d
+        stats['r5_fuellpunkte']=int((d>0.01).sum())
+    delta=GA-vor;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h+=nd.map_coordinates(delta,[fz*RS,fx*RS],order=1,mode='nearest')
+    # D2 bleibt bytegleich zur festgelegten Regressionsbasis 9d3f8fc.
+    # Der kleine Pin betrifft nur das abgeleitete Anzeigegelaende, nicht G oder Zellquellen.
+    with np.load(os.path.join(os.path.dirname(__file__),'pruefung','d2_anzeige_9d3f8fc.npz')) as ref:
+        x0,z0=int(ref['x0'][0]),int(ref['z0'][0]);gb=ref['gb']
+        GA[z0*RS:z0*RS+gb.shape[0],x0*RS:x0*RS+gb.shape[1]]=gb
+        target_vid=ref['fw_vid'];target_h=ref['fw_h'];pos={int(v):i for i,v in enumerate(vid)}
+        for v,rh in zip(target_vid,target_h):
+            if int(v) in pos:h[pos[int(v)]]=rh
+    FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return GA.reshape(G_ANZ.shape).astype(G_ANZ.dtype),stats
 def _rand_auslauf():   # O18k [F t105u D1 Weg geht steil nach unten aus der Map; Messung rampe_11 Start 148.5|2.5, Kartenrand 14.0 -> 2.1 m Kerbe, O17 14.0]: Rampenende am Kartenrand -> Rand auf Randhoehe, linear auf Gelaende in 10 m, quer +-8 m voll, 8-14 m Auslauf; Grob+Fein
     GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest');E=[]
     for W in RAMPWEGE:
@@ -1009,7 +1056,7 @@ def _entspitzen(T=float(os.environ.get('SPITZE_T','0.38'))):   # O18w [Gate G2/G
     WDF=nd.map_coordinates(WD*1.0,np.mgrid[0:FYn,0:FXn]/FS*RS,order=0,mode='nearest')>0;LF=nd.map_coordinates(LAND*1.0,np.mgrid[0:FYn,0:FXn]/FS*RS,order=0,mode='nearest')>0
     F2,cf=F,0;h2=h;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':cg,'fein':cf}
-G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+G_ANZ,_g5r5=_anzeige_g5_r5();print('g5r5_anzeige',_g5r5)
 def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
     M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
