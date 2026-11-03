@@ -517,3 +517,7 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - rillen 46d07ac: Querwelligkeit 0.95->0.60 cm, aber G6 +5 -> nicht gemergt.
 - g7b a96cbd4: Standard aus, keine Wirkung -> nicht gemergt.
 - g5r5, weg2: laufen.
+- 19:55 c2+wellen gemergt (Konflikt gen_relief aufgeloest): pr 577 (G6 251->222, G5 66->68), r8 49, r9 334, Raycast 0, D2 8/0/0 unveraendert.
+  G1_loch_offen 1 (wert 2134) = fremde /tmp-Lochdatei des g5r5-Laufs, eigener Raycast 0.
+- g5r5 dcd1881 verworfen: G5 66->63, R5 17->6, aber pr 902, r8 77, 2134 Loecher.
+- Job delle (G1 0,423 m Ursache in gen_relief) gestartet; weg2 laeuft.
