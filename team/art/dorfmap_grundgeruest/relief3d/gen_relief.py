@@ -1006,6 +1006,19 @@ for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
         _neu.append(o)
     _L[:]=_neu
 print('o18m_g11_gesetzt_entfernt',_g11)
+def _t1_naht():   # O18w [Gate T1_harte_farbkante, 4 Naehte G2 284|75, C2 84|84, B2 82|86, B3 77|93]: gerade Farbkanten (dc>70, Lauf >=9 Ecken) im Umkreis 2 Ecken weichzeichnen (Gauss 1.5 Ecken), nur Land ausserhalb Wand [A]
+    C=VC.reshape(GY,GX,3).astype(float);GA=np.asarray(G_ANZ,float).reshape(GY,GX);gy,gx=np.gradient(GA,1/RS);WAND_=np.hypot(gx,gy)>1.0;LAND_=WV.reshape(GY,GX)<=-900
+    dc=np.linalg.norm(np.diff(C,axis=1)[:-1],axis=2)+np.linalg.norm(np.diff(C,axis=0)[:,:-1],axis=2)
+    hart=(dc>70)&LAND_[:-1,:-1]&~nd.binary_dilation(WAND_,iterations=RS)[:-1,:-1];lab,n=nd.label(hart);OB=nd.find_objects(lab);M=np.zeros((GY,GX),bool);k_=0
+    for k in range(1,n+1):
+        sl=OB[k-1];sub=(lab[sl]==k)
+        if sub.sum()<8:continue
+        lauf=max(max((np.diff(np.r_[0,r_,0]).nonzero()[0].reshape(-1,2)@[-1,1]).max(initial=0) for r_ in A_.astype(int)) for A_ in (sub,sub.T))
+        if lauf>=9:M[:-1,:-1][sl]|=sub;k_+=1
+    M=nd.binary_dilation(M,iterations=int(os.environ.get('T1R','2')))&LAND_;sg=float(os.environ.get('T1S','1.5'))
+    B=np.stack([nd.gaussian_filter(C[...,i],sg) for i in range(3)],-1);C[M]=B[M]
+    return np.clip(np.round(C),0,255).astype(VC.dtype).reshape(VC.shape),{'naehte':k_,'ecken':int(M.sum())}
+VC,_t1=(_t1_naht() if os.environ.get('T1NAHT','1')!='0' else (VC,{}));print('o18w_t1_naht',_t1)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
