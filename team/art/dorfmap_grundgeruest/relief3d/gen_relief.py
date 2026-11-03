@@ -741,6 +741,16 @@ if not os.environ.get('WAND_ALT'):   # O18i [F G1 Felswand blobbig, Konturen als
         vid=np.frombuffer(base64.b64decode(FW_['vid']),np.uint32);wf=nd.map_coordinates(_WW,[vid//FXn/FS*RS,vid%FXn/FS*RS],order=1,mode='nearest')
         FW_['h']=base64.b64encode((h0+(h1-h0)*wf).astype(np.float32).tobytes()).decode();return r
     _R.gipfel_rund,_R.fein_gipfel=_gr_w,_fg_w
+    def _gw(f):   # O18j [F Felswaende ohne Kanten]: Grob-Glaettungen (Messung o18j_wandrau grob 0.589->0.449; grob_entzacken 0.17+0.05 m, grob_wand_glatt 0.016, entstacheln 0.013 an Wand) nur ausserhalb Wand
+        def g(G,*a,**k):
+            G0=G.reshape(GY,GX).astype(float).copy();r=f(G,*a,**k);o=r[0];n=G0+(o.reshape(GY,GX).astype(float)-G0)*_WW;return (n.reshape(o.shape).astype(o.dtype),)+tuple(r[1:])
+        return g
+    if not os.environ.get('WANDJ_ALT'):
+        for _n in ['grob_wand_glatt','entstacheln']:setattr(_R,_n,_gw(getattr(_R,_n)))
+        _ge0=_R.grob_entzacken
+        def _ge_w(G,WV_,RS_,**k):   # an Wand nur 3 Durchgaenge (echte Nadeln), ausserhalb volle 8 (sonst Grobzacken 7->48)
+            o,st=_ge0(G,WV_,RS_,**k);l,_=_ge0(G,WV_,RS_,it=3);n=l.reshape(GY,GX).astype(float)*(1-_WW)+o.reshape(GY,GX).astype(float)*_WW;return n.reshape(o.shape).astype(o.dtype),st
+        _R.grob_entzacken=_ge_w
 if os.environ.get('WANDMESS'):   # O18i Diagnose: welche O18-Glaettung veraendert Wandpunkte
     import runde_o18 as _R;_WM=_wand_maske();_WMESS={}
     def _wrap(n,f):
@@ -831,6 +841,14 @@ def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);hn=h-np.maximum(h-cf,0)*mf;kf=int((hn<h-0.01).sum());FW['h']=base64.b64encode(hn.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':k,'fein':kf}
 G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
+    M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    def fr(V,H):
+        F=np.full((FYn,FXn),np.nan);F[V//FXn,V%FXn]=H;ok=np.isfinite(F);Fz=np.where(ok,F,0);g=nd.gaussian_filter(Fz,FS)/np.maximum(nd.gaussian_filter(ok*1.0,FS),1e-6)
+        mf=ok&nd.map_coordinates(M*1.0,np.mgrid[0:FYn,0:FXn]/FS*RS,order=0,mode='nearest').astype(bool);return float(np.abs(F-g)[mf].mean()),int(mf.sum())
+    return {'grob_o17':round(r(_WEG_G0),4),'grob_jetzt':round(r(GA),4),'wandzellen':int(M.sum()),'fein_o17':[round(x,4) if isinstance(x,float) else x for x in fr(_WEG_V0,_WEG_F0)],'fein_jetzt':[round(x,4) if isinstance(x,float) else x for x in fr(vid,h)]}
+print('o18j_wandrau',_wand_rau())
 _VW=json.load(open('pruefung/o18/versunken_weg.json')) if os.path.exists('pruefung/o18/versunken_weg.json') else []   # O18d [F 7 versunkene Geroellteile]: Raycast-gemeldete versunkene/im Wasser stehende Objekte entfernen [A]
 _vwn=0
 for _k,_x,_z,_d in _VW:
