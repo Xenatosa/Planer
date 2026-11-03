@@ -1112,6 +1112,34 @@ def _t1_naht():   # O18w [Gate T1_harte_farbkante, 4 Naehte G2 284|75, C2 84|84,
     B=np.stack([nd.gaussian_filter(C[...,i],sg) for i in range(3)],-1);C[M]=B[M]
     return np.clip(np.round(C),0,255).astype(VC.dtype).reshape(VC.shape),{'naehte':k_,'ecken':int(M.sum())}
 VC,_t1=(_t1_naht() if os.environ.get('T1NAHT','1')!='0' else (VC,{}));print('o18w_t1_naht',_t1)
+
+def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält Nahtwerte und -neigung fest [A]
+    global G,G_ANZ
+    _var=int(os.environ.get('C2TERR','1'))  # 0 aus, 1 = gezielter Nordhang, sigma 1 m (Standard)
+    if _var not in (0,1):raise ValueError('C2TERR muss 0 oder 1 sein')
+    if _var==0:return {'variante':0,'grob_geaendert':0,'fein_geaendert':0,'max_m':0.0}
+    _sg=1.0
+    _xx=np.arange(GX,dtype=float)[None,:]/RS;_zz=np.arange(GY,dtype=float)[:,None]/RS
+    _d=np.minimum.reduce([np.broadcast_to(_xx-84,(GY,GX)),np.broadcast_to(126-_xx,(GY,GX)),np.broadcast_to(_zz-43,(GY,GX)),np.broadcast_to(86-_zz,(GY,GX))])
+    _u=np.clip(_d/3.0,0,1);_rand=_u*_u*(3-2*_u)
+    _v=np.clip(np.minimum(_zz-43,56-_zz)/2.5,0,1);_v=_v*_v*(3-2*_v);_rand*=_v
+    _land=WV.reshape(GY,GX)<=-900
+    _road=WEGA.reshape(GY,GX)>20
+    for _x,_z in wege:
+        _road[int(_z*RS):int(_z*RS+RS+1),int(_x*RS):int(_x*RS+RS+1)]=True
+    for _r in RAMPWEGE:
+        _p=np.asarray(_r,float);_L=np.r_[0,np.cumsum(np.hypot(*np.diff(_p,axis=0).T))];_t=np.arange(0,_L[-1]+1e-6,0.25)
+        _yi=np.clip((np.interp(_t,_L,_p[:,1])*RS).round().astype(int),0,GY-1);_xi=np.clip((np.interp(_t,_L,_p[:,0])*RS).round().astype(int),0,GX-1);_road[_yi,_xi]=True
+    _w=_rand*_land*(~_road);_max=0.0
+    _old=np.asarray(G_ANZ).reshape(GY,GX).astype(float);_smooth=nd.gaussian_filter(_old,_sg*RS);_neu=(_old*(1-_w)+_smooth*_w).astype(G_ANZ.dtype)
+    _dh=_neu.astype(float)-_old;_max=float(np.abs(_dh).max());_changed=int((np.abs(_dh)>1e-6).sum());G_ANZ=_neu.reshape(np.shape(G_ANZ))
+    _vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);_fy=_vid//FXn;_fx=_vid%FXn;_h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    _df=nd.map_coordinates(_dh,[_fy/FS*RS,_fx/FS*RS],order=1,mode='nearest')
+    _hn=(_h+_df).astype(np.float32);_changed_f=int((np.abs(_hn-_h)>1e-6).sum());_max=max(_max,float(np.abs(_hn-_h).max()))
+    FW['h']=base64.b64encode(_hn.tobytes()).decode()
+    return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
+
+_C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
