@@ -181,3 +181,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - Abgeleitete Spalten (aendern sich mit jedem Hoehenfeld-Lauf, kein Zellwert-Verstoss): hoehe_m, neigung, klippe, begehbar_3d, deko_baum_ok, Ecken (ecke_*), skin_slot, boden_anzeige.
 - Pruefung: pruefung/pruefe_t42u.py muss summe 0 liefern (Stand 361967b: 0). Von Fabian am 03.11.2026 geprueft.
 
+
+### O18w Schritt R4/G2/G3/G2f (Gate gegen basisRIB 948)
+- R4_rand H2 332.5|64.5 behoben (_rand_weg: Gelaende Weg->Rand max 0.1 m/m, 2 Zellen): 948 -> 947, keine Klasse steigt.
+- G2/G3 Reihe z~275 x199-216: liegt im Seebett (WV nass, -20.1 vs -19.4 m, 1-Ecken-Rille). _entspitzen (SPITZE=1, Default AUS), 3 Varianten:
+  V1 Land+Wasser ausserhalb Wand+3 m: G2/G3 3/3->0/0, G5 +6 (verworfen, >+5). V2 nur Wasser, Wand+3 m: G2 1, G3 0, G5 +6, R5_spitze +1 (verworfen). V3 nur Wasser, Wand+6 m: G2/G3 unveraendert (wirkungslos). Ursache G5-Anstieg: Klemmen im Seebett nahe Klippe aendert Steilheit/WAND-Maske. Offen.
+- G2f/G3f (3/1) = Messfehler an Maskenecken (Beleg: 227.2|27.2, 66.8|156.2, 109.8|179.8, 97.8|209.2 haben nur 3 gewertete Nachbarn auf glattem Hang, Rest zur vollen 8er-Mitte 0.00-0.03 m). VORSCHLAG Regelkorrektur (nicht umgesetzt): Nachbarmittel aus gueltigen Nachbarn statt Wertungsmaske - Probelauf ergab aber G3f 1->97 (Ring C4 104-120|136-178 an Feinband/Wandgrenze), daher braucht die Korrektur zusaetzlich einen Wandabstand fuer Nachbarn; bis zur Freigabe unveraendert.
