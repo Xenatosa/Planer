@@ -1009,7 +1009,67 @@ def _entspitzen(T=float(os.environ.get('SPITZE_T','0.38'))):   # O18w [Gate G2/G
     WDF=nd.map_coordinates(WD*1.0,np.mgrid[0:FYn,0:FXn]/FS*RS,order=0,mode='nearest')>0;LF=nd.map_coordinates(LAND*1.0,np.mgrid[0:FYn,0:FXn]/FS*RS,order=0,mode='nearest')>0
     F2,cf=F,0;h2=h;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':cg,'fein':cf}
-G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _wandstreifen_glatt():   # t128u [F K5b]: kurze Normalenperioden auf Steilwaenden glatten; Grenze wird danach an GB gepinnt
+    global G_ANZ,BAND,_vid
+    if os.environ.get('WANDSTREIFEN','1')=='0':return {'aus':'WANDSTREIFEN=0'}
+    sig=float(os.environ.get('WANDSTREIFEN_SIG','1.0'))
+    felder=os.environ.get('WANDSTREIFEN_FELDER','*').split(',')
+    TM=np.ones((NY,NX),bool)
+    if '*' not in felder:
+        TM[:]=False
+        for f in felder:
+            if len(f)<2 or f[0] not in 'ABCDEFGH' or not f[1:].isdigit():continue
+            tx,ty=ord(f[0])-65,int(f[1:])-1
+            if 0<=tx<8 and 0<=ty<7:TM[ty*43:min((ty+1)*43,NY),tx*42:min((tx+1)*42,NX)]=True
+    if '*' in felder:
+        import runde_o18 as RW18
+        BAND0=BAND.copy()
+        ext=RW18.band_erweitern(FW,G_ANZ,VC,WV,WEGA,belegt,NX,NY,RS,thr=1.0)
+        if 'B' in ext:
+            B2=ext.pop('B');_vid=ext.pop('vid')
+            # D2 ist unveraenderte Regressionsbasis; auch geteilte Randpunkte
+            # bleiben stabil. Sperre das Feld plus eine Bandzelle Puffer.
+            y0,y1=max(0,43-1),min(NY,86+1);x0,x1=max(0,126-1),min(NX,168+1)
+            locked=np.zeros_like(BAND);locked[y0:y1,x0:x1]=True
+            B2[locked]=BAND0[locked];BAND=B2
+            FW['band']=base64.b64encode(np.flatnonzero(BAND.ravel()).astype(np.uint32).tobytes()).decode()
+            cy,cx=np.nonzero(BAND);used=np.zeros((FYn,FXn),bool)
+            for ay in range(FS+1):
+                for ax in range(FS+1):used[cy*FS+ay,cx*FS+ax]=True
+            vid2=np.flatnonzero(used.ravel()).astype(np.uint32);keepgrid=np.zeros(FYn*FXn,bool);keepgrid[vid2]=True
+            vid_alt=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);keep=keepgrid[vid_alt]
+            FW['vid']=base64.b64encode(vid_alt[keep].tobytes()).decode()
+            for key,width in (('h',1),('c',3),('t',3),('s',1)):
+                arr=np.frombuffer(base64.b64decode(FW[key]),np.float32 if key=='h' else np.uint8)
+                FW[key]=base64.b64encode(arr.reshape(-1,width)[keep].tobytes()).decode()
+            _vid=vid_alt[keep]
+    else:ext={'hinweis':'Prototyp nur in '+','.join(felder)+'; Feinband-Erweiterung folgt im Kartenlauf'}
+    if sig<=0:return {'aus':'WANDSTREIFEN_SIG<=0','band':ext}
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    F=np.zeros((FYn,FXn),np.float32);OK=np.zeros((FYn,FXn),bool);F[fy,fx]=h;OK[fy,fx]=True
+    Sm=nd.gaussian_filter(F,sig*FS)/np.maximum(nd.gaussian_filter(OK.astype(np.float32),sig*FS),1e-6)
+    GA=G_ANZ.reshape(GY,GX).astype(float);gy,gx=np.gradient(GA,1/RS)
+    M=(np.hypot(gx,gy)>1.0)&(WV.reshape(GY,GX)<=-900)&(WEGA.reshape(GY,GX)<20)
+    if '*' in felder:M[max(0,43*RS-RS):min(GY,86*RS+RS),max(0,126*RS-RS):min(GX,168*RS+RS)]=False
+    if '*' not in felder:
+        tz,tx=np.mgrid[0:GY,0:GX];TG=nd.map_coordinates(TM.astype(np.float32),[tz/RS,tx/RS],order=0,mode='nearest')>0.5;M&=TG
+    smask=nd.gaussian_filter(M.astype(np.float32),RS*0.5)
+    if '*' in felder:smask[max(0,43*RS-RS):min(GY,86*RS+RS),max(0,126*RS-RS):min(GX,168*RS+RS)]=0
+    gsig=float(os.environ.get('WANDSTREIFEN_GROBSIG','0'))
+    Gsm=nd.gaussian_filter(GA,gsig*RS) if gsig>0 else GA;GA2=GA*(1-smask)+Gsm*smask
+    G_ANZ=GA2.reshape(G_ANZ.shape).astype(G_ANZ.dtype);GA=G_ANZ.reshape(GY,GX).astype(float)
+    gy,gx=np.gradient(GA,1/RS);M=(np.hypot(gx,gy)>1.0)&(WV.reshape(GY,GX)<=-900)&(WEGA.reshape(GY,GX)<20)
+    if '*' in felder:M[max(0,43*RS-RS):min(GY,86*RS+RS),max(0,126*RS-RS):min(GX,168*RS+RS)]=False
+    if '*' not in felder:M&=TG
+    wm=nd.map_coordinates(M.astype(np.float32),[fy/FS*RS,fx/FS*RS],order=0,mode='nearest')>0.5
+    BC=np.repeat(np.repeat(BAND,FS,axis=0),FS,axis=1);BV=np.zeros((FYn,FXn),bool);BV[:-1,:-1]|=BC;BV[1:,:-1]|=BC;BV[:-1,1:]|=BC;BV[1:,1:]|=BC
+    fade=np.clip(nd.distance_transform_edt(BV)[fy,fx]/FS,0,1)
+    if '*' not in felder:
+        TF=np.repeat(np.repeat(TM,FS,axis=0),FS,axis=1);TF=np.pad(TF,((0,1),(0,1)),mode='edge');fade*=TF[fy,fx]
+    w=wm*fade;h2=h*(1-w)+Sm[fy,fx]*w;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return {'sigma_m':sig,'grob_sigma_m':gsig,'wandpunkte':int(wm.sum()),'geaendert':int((np.abs(h2-h)>0.01).sum()),'max_m':round(float(np.abs(h2-h).max()),3),'band':ext}
+G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);_ws=_wandstreifen_glatt();print('o18s_wandstreifen',_ws);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
     M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
