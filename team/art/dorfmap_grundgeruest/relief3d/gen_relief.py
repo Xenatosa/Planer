@@ -241,6 +241,42 @@ lev=nd.gaussian_filter(Wn*wm,2)/np.maximum(nd.gaussian_filter(wm,2),1e-6)
 wmask=nd.map_coordinates(nd.gaussian_filter(wm,1),[vj-0.5,vi-0.5],order=1,mode='nearest')>0.5
 WV=np.where(wmask,np.maximum(nd.map_coordinates(lev,[vj-0.5,vi-0.5],order=1,mode='nearest'),G+0.05),-999).astype(np.float32)
 LEV_ROH=nd.map_coordinates(lev,[vj-0.5,vi-0.5],order=1,mode='nearest')   # t61u [A]
+# t132u: R8b-Dellen im abgeleiteten G nur anheben, wenn die ganze Senke an einem Weg/Rampenweg liegt.
+# Zellquellen und Wandpunkte bleiben unangetastet; DELLENWEG=0 schaltet die Variante aus.
+def dellen_bei_wegen_anheben(GA,WVA):
+    variante=int(os.environ.get('DELLENWEG','1'))
+    if variante not in (0,1):raise ValueError('DELLENWEG muss 0 oder 1 sein')
+    if variante==0:return GA,{'variante':0,'komponenten':0,'punkte':0,'max_anhebung_m':0.0}
+    from skimage.morphology import reconstruction
+    _G=np.asarray(GA,dtype=np.float32)
+    _weg=np.zeros((GY,GX),bool)
+    for _o in csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')):
+        if not _o['weg_id']:continue
+        _x,_y=int(_o['cx']),int(_o['cy'])
+        _weg[_y*RS:_y*RS+RS+1,_x*RS:_x*RS+RS+1]=True
+    for _r in RAMPWEGE:
+        _r=np.asarray(_r,float);_L=np.r_[0,np.cumsum(np.hypot(*np.diff(_r,axis=0).T))]
+        _t=np.arange(0,_L[-1]+1e-6,0.25)
+        _y=np.clip((np.interp(_t,_L,_r[:,1])*RS).round().astype(int),0,GY-1)
+        _x=np.clip((np.interp(_t,_L,_r[:,0])*RS).round().astype(int),0,GX-1)
+        _weg[_y,_x]=True
+    _abstand=nd.distance_transform_edt(~_weg)/RS
+    _punkte=_komponenten=0;_max=0.0;_durchlaeufe=0
+    for _it in range(3):
+        _saum=_G.copy();_saum[1:-1,1:-1]=float(_G.max())
+        _fuellung=reconstruction(_saum,_G,method='erosion')-_G
+        _gy,_gx=np.gradient(_G.astype(float),1/RS);_wand=np.hypot(_gx,_gy)>1.0
+        _mulde=(_fuellung>0.30)&(WVA<=-900)&~nd.binary_dilation(_wand,iterations=1)
+        _lab,_n=nd.label(_mulde);_heben=np.zeros_like(_mulde);_anz=0
+        for _k,_sl in enumerate(nd.find_objects(_lab),1):
+            _m=_lab[_sl]==_k
+            if _abstand[_sl][_m].min()<=6.0:_heben[_sl]|=_m;_anz+=1
+        if not _heben.any():break
+        _durchlaeufe+=1;_punkte+=int(_heben.sum());_komponenten+=_anz
+        _max=max(_max,float(_fuellung[_heben].max()))
+        _G[_heben]=(_G[_heben]+_fuellung[_heben]).astype(np.float32)
+    return _G,{'variante':1,'durchlaeufe':_durchlaeufe,'komponenten':_komponenten,
+                'punkte':_punkte,'max_anhebung_m':round(_max,3)}
 # Dreiecke je Teilquadrat (a=oben links,b=oben rechts,c=unten links,d=unten rechts): (a,c,d) und (a,d,b) – gleich im Viewer
 def tri_steil(G):
     a=G[:-1,:-1];b=G[:-1,1:];c=G[1:,:-1];d=G[1:,1:];s=1/RS
@@ -1173,6 +1209,53 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+_G_DAVOR=G.copy();G,DELLENWEG_MESS=dellen_bei_wegen_anheben(G,WV);print('dellen_wege_t132u',DELLENWEG_MESS)
+_DELTA=G.astype(float)-_G_DAVOR.astype(float)
+if np.any(np.abs(_DELTA)>1e-7):
+    _DELTA_ANZEIGE=nd.gaussian_filter(_DELTA,0.6)   # leichte Rundung (0,3 m) in GB/Feinmesh, damit keine neuen R5-Becken entstehen
+    G_ANZ=(np.asarray(G_ANZ).reshape(GY,GX).astype(float)+_DELTA_ANZEIGE).astype(np.float32)
+    _vid_l=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);_fy_l=_vid_l//FXn;_fx_l=_vid_l%FXn
+    _fh_l=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    _dh_l=nd.map_coordinates(_DELTA_ANZEIGE,[_fy_l/FS*RS,_fx_l/FS*RS],order=1,mode='nearest')
+    FW['h']=base64.b64encode((_fh_l+_dh_l).astype(np.float32).tobytes()).decode()
+    _obj_anhebung_l={'objekte':0,'max_m':0.0}
+    for _liste_l in (baeume,felsen,findlinge,steine,geroell,felsbloecke):
+        for _obj_l in _liste_l:
+            _dh_obj_l=float(nd.map_coordinates(_DELTA_ANZEIGE,[[float(_obj_l[2])*RS],[float(_obj_l[0])*RS]],order=1,mode='nearest')[0])
+            if _dh_obj_l>0.005:
+                _obj_l[1]=round(float(_obj_l[1])+_dh_obj_l,2)
+                _obj_anhebung_l['objekte']+=1;_obj_anhebung_l['max_m']=max(_obj_anhebung_l['max_m'],_dh_obj_l)
+    _obj_anhebung_l['max_m']=round(_obj_anhebung_l['max_m'],3);print('dellen_objekte_t132u',_obj_anhebung_l)
+    W1,W2=tri_steil(G);Wq=np.maximum(W1,W2);neig=Wq.reshape(NY,RS,NX,RS).max((1,3));steil=neig>WANDWINKEL
+    Hz=sum(G[dy:dy+GY-1:RS,dx:dx+GX-1:RS][:NY,:NX] for dy in range(3) for dx in range(3))/9
+    Gmax=nd.maximum_filter(np.maximum.reduceat(np.maximum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+    Gmin=nd.minimum_filter(np.minimum.reduceat(np.minimum.reduceat(G,np.arange(0,GY-1,RS),0),np.arange(0,GX-1,RS),1)[:NY,:NX],5)
+    nb=nd.binary_dilation(steil,structure=np.ones((3,3)))&~steil;mid=(Gmax+Gmin)/2
+    oben=nb&(Hz>=mid);fuss=nb&(Hz<mid);kh=np.where(steil|nb,Gmax-Gmin,0.0)
+    b3d=(neig<=35)&(b3d_alt|wand)&~(wa&(fl=='SEE'))
+    F.update({'hoehe_m':np.round(Hz,2),'neigung_grad':np.round(neig,1),
+      'ecke_nw_m':np.round(G[0:-1:RS,0:-1:RS][:NY,:NX],2),
+      'ecke_so_m':np.round(G[RS::RS,RS::RS],2),
+      'klippe':np.where(steil,'WAND',np.where(oben,'WAND_OBEN',np.where(fuss,'WAND_FUSS',''))),
+      'skin_slot':np.where(steil,'wand_fels',np.char.add('ug_',np.char.lower(ug2.astype(str)))),
+      'klippe_hoehe_m':np.round(kh,1),
+      'klippe_hoehe_quelle':np.where(kh>0,'R_messung_t40u',''),
+      'begehbar_3d':b3d.astype(int)})
+    spalten={}
+    for _c_l in outcols:
+        _u_l,_idx_l=np.unique(F[_c_l].astype(str).ravel(),return_inverse=True)
+        _dt_l=np.uint8 if len(_u_l)<256 else np.uint16 if len(_u_l)<65536 else np.uint32
+        spalten[_c_l]={'w':_u_l.tolist(),'t':_dt_l.__name__,'i':base64.b64encode(_idx_l.astype(_dt_l).tobytes()).decode()}
+    with open('zellen_relief.csv','w',newline='') as _csv_l:
+        _writer_l=csv.writer(_csv_l);_writer_l.writerow(outcols)
+        for _y_l in range(NY):
+            for _x_l in range(NX):_writer_l.writerow([F[_c_l][_y_l,_x_l] for _c_l in outcols])
+    V=np.stack([vi.ravel()/RS,G.ravel(),vj.ravel()/RS],1)
+    ST=np.concatenate([W1.ravel(),W2.ravel()])>WANDWINKEL;TW=TT[ST]
+    _scene_l=trimesh.Scene()
+    _scene_l.add_geometry(trimesh.Trimesh(V,TT[~ST][:,::-1],process=False,vertex_colors=_vc),'boden')
+    _scene_l.add_geometry(trimesh.Trimesh(V,TT[ST][:,::-1],process=False,vertex_colors=_vc),'waende')
+    _scene_l.export('dorfmap_relief_z25.glb')
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
