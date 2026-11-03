@@ -86,6 +86,7 @@ FYn=NY*FS+1;F=np.full((FYn,FXn),np.nan);F[vid//FXn,vid%FXn]=fh;ok=np.isfinite(F)
 def ausreisser(A,okm,thr,nm,step):
     mn=nd.grey_erosion(np.where(okm,A,1e9),size=3);mx=nd.grey_dilation(np.where(okm,A,-1e9),size=3)
     nb=(nd.uniform_filter(np.where(okm,A,0),3)*9-A)/np.maximum(nd.uniform_filter(okm*1.0,3)*9-1,1)
+    nn=nd.uniform_filter(okm*1.0,3)*9-okm;okm=okm&(nn>=3)   # O18r: Punkt ohne >=3 gueltige Nachbarn nicht werten (sonst nb=0 -> Treffer = Hoehe selbst, z.B. B1 80.2|36 10.2 m bei glattem Gelaende)
     up=(A-nb)*okm;dn=(nb-A)*okm
     for r,arr in ((nm[0],up),(nm[1],dn)):
         lab,n=nd.label(arr>thr)

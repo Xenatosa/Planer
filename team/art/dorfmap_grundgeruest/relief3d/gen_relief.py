@@ -872,13 +872,13 @@ def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite
         P.append(p);T.append(n);HC.append(hc);SG.append(sg)
     P=np.concatenate(P);T=np.concatenate(T);HC=np.concatenate(HC);SG=np.concatenate(SG);kd=cKDTree(P)
     wasser=nd.distance_transform_edt(WV.reshape(GY,GX)<=-900)/RS
-    WANDNEU=os.environ.get('RAMPENBAND','0')!='0';hfein=None;hgel=lambda X,Z:hf(X,Z) if hfein is None else hfein
+    WANDNEU=os.environ.get('RAMPENBAND','1')!='0';hfein=None;hgel=lambda X,Z:hf(X,Z) if hfein is None else hfein
     def ziel(X,Z):
         Q=np.stack([X,Z],1);dist,i=kd.query(Q,distance_upper_bound=(6.1 if WANDNEU else 3.6));ok=np.isfinite(dist);i=np.where(ok,i,0)
         s=((Q-P[i])*T[i]).sum(1);w=np.where(dist<=1.5,1.0,np.clip((3.5-dist)/2.0,0,1));w=w*w*(3-2*w)*ok
         if WANDNEU:   # O18p [F Rampe nicht Wurst]: Band 3 m eben (2 % Quergefaelle), ab 1.5 m gerade Boeschung 0.7 bis Gelaende, max 6 m
-            zb=HC[i]-0.02*np.clip(s,-1.5,1.5)*SG[i];g0=hgel(X,Z);k=0.7*np.clip(dist-2.0,0,None);zz=np.where(dist<=2.0,zb,np.clip(g0,zb-k,zb+k))
-            w=ok*1.0*(nd.map_coordinates(wasser,[Z*RS,X*RS],order=0,mode='nearest')>2);return zz,w
+            zb=HC[i]-0.015*np.clip(s,-1.5,1.5)*SG[i];g0=hgel(X,Z);dist=np.where(ok,dist,99.0);dd=np.clip(dist-2.5,0,None);k=0.7*np.where(dd<1,dd*dd/2,dd-0.5)+1e-6;zz=np.where(ok,zb+k*np.tanh((g0-zb)/k),0.0)   # O18r V1: eben 2.5 m, Boeschung C1-weich (tanh statt clip), Fade 4.5-6 m
+            fw=np.clip((6.0-np.nan_to_num(dist,posinf=99))/1.5,0,1);w=fw*fw*(3-2*fw)*ok*1.0*(nd.map_coordinates(wasser,[Z*RS,X*RS],order=0,mode='nearest')>2);return zz,w
         w=w*(nd.map_coordinates(wasser,[Z*RS,X*RS],order=0,mode='nearest')>2);return HC[i]-0.02*np.clip(s,-1.5,1.5)*SG[i],w
     yy,xx=np.mgrid[0:GY,0:GX];z,w=ziel(xx.ravel()/RS,yy.ravel()/RS);nG=GA.ravel()*(1-w)+z*w
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;hfein=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);zf,wf=ziel(fx,fz)

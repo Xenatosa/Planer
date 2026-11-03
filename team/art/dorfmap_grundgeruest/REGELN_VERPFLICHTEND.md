@@ -120,3 +120,7 @@ Schwellen G5/G6/G2/G3/G11 sind Erstkalibrierung (O18k) und muessen an Bildern ge
 - G5 neue Methode (`relief_o18n.g5_beulen`): Kantenpunkt bis 3 m an Wand, der >0.6 m hoeher liegt als das Plateau 2–5 m landeinwaerts (senkrecht zur Wand). Runde, abfallende Kante zaehlt nicht. 4 Bilder angesehen (273|132, 300|96, 115|201, 323|76): echte Aufwuerfe an der Kante. Treffer 375 -> 176 (alte Methode zaehlte die Kante selbst).
 - `landschaft_final` (gen_relief, abschaltbar LF_ALT=1): Senken >0.8 m nur anheben, Einzelspitzen, Facetten weich; nicht an Wand/Wegen/Rampen ±4 m/Wasser ±2 m/Hausplaetzen. G5-Absenken nach 3 Versuchen wirkungslos -> aus, offen.
 - Vergleich je Regel vor/nach: alles gleich oder weniger, Ausnahme G2_spitze_oben_fein 20 -> 21 (+1, Feinband, das der Schliff nicht anfasst; Ursache vermutlich Bandnaht-Uebernahme) – offen dokumentiert.
+
+## O18r
+- Gate-Fix G2/G3 (`ausreisser`): Punkte mit <3 gueltigen Nachbarn werden nicht gewertet. Vorher nb=0 -> Treffer = Hoehe selbst (z.B. B1 80.2|36 "10.2 m" bei glattem Gelaende). Basis 18b3a60 neu: G2 4->2, G3 6->0, G2f 21->6, G3f 13->1 (Summe 1153->1118). Die O18m-"echten Spitzen" 11.6/9.6 m waren dieses Messartefakt.
+- RAMPENBAND Standard (V2): Band eben 2.5 m, Quergefaelle 1.5 % zur Bergseite, Boeschung C1-weich (tanh, 0.7 m/m), Auslauf 4.5-6 m. V1 (2 %) R3 quer 24->27 -> 1.5 %. Gegen Basis: R1_wand 9->0, R4_schlucht 13->0, R4_rand 3->0, G6 615->592, G5 169->166, T1 95->94, keine neue Regel hoeher.
