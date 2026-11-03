@@ -455,6 +455,7 @@ if len(_cq):
         d=np.maximum(np.abs(dx*np.cos(a0)+dy*np.sin(a0)),np.abs(-dx*np.sin(a0)+dy*np.cos(a0)))*0.75+0.25*np.hypot(dx,dy)   # 4 Facetten, Kanten scharf
         FD[y0:y1,x0:x1]+=_wf[y0:y1,x0:x1]*h*(lambda p:p*p*(3-2*p))(np.clip(1-d/r,0,1))**0.8;_PY.append((float(q[1]/FS),float(q[0]/FS),round(h,1)))
 FH=FB+FD
+if os.environ.get('G6DIAG'):np.savez_compressed(os.environ['G6DIAG'],FB=FB,FD=FD,ter=_wf*_sf*1.4*_ter,vor=_wf*_sf*_gm*_bell**0.6*(1.2*_voff-0.45*_kl),pf=_wf*_sf*_bell**0.5*_gm*1.05*_pf,kar=-2.8*_kar,TW=_TW,rib=_wf*_sf*_gm*(_RB*(0.4+0.8*_bell)+_rib*(0.5+0.9*_bell)),vin=_vin,wf=_wf)   # O18s G6-Ursache (nur Diagnose)
 # hydraulische Erosion (Tropfen, vektorisiert) nur im Feinband
 _hr2=np.random.default_rng(78);_cand=np.argwhere(_vin&(_wf>0.3));_ND=min(90000,len(_cand))
 _p=_cand[_hr2.integers(0,len(_cand),_ND)].astype(float)+_hr2.random((_ND,2));_v=np.zeros((_ND,2));_sed=np.zeros(_ND);_wat=np.ones(_ND)
