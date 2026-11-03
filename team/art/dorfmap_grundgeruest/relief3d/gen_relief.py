@@ -979,16 +979,30 @@ def _wand_mikro(A=float(os.environ.get('WMR','0.25'))):   # O18w [Gate G7b_wandk
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     wf=nd.map_coordinates(wk,[fy/FS*RS,fx/FS*RS],order=1);h=h+A*N[fy,fx]*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((wk>0).sum()),'A':A}
-def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 Facetten >=3 m von Wand = echte Knicklinien, Bild g6eich/g6_fern_*]: Normalensprung dn>0.25 auf Hang 0.15-0.8, >=3 m von Wand, nicht Weg/Wasser: Gauss SG m, Grob+Fein [A]
+def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18z: bewahrte Grobmaske plus sichtflaechenbasierte Feinbandmaske, 3 m Wandabstand, D2 gesperrt [A]
     GA=G_ANZ.reshape(GY,GX).astype(float);gy,gx=np.gradient(GA,1/RS);st=np.hypot(gx,gy);W_=st>1.0
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    F=np.full((FYn,FXn),np.nan);F[fy,fx]=h;Fv=F[::FS//RS,::FS//RS][:GY,:GX];V=np.where(np.isfinite(Fv),Fv,GA)
+    LAND_=WV.reshape(GY,GX)<=-900;wega_=WEGA.reshape(GY,GX)>20
+    # Bewaehrte Maske auf dem Grobnetz beibehalten, damit bestehende G5/R5- und G6-Wirkung erhalten bleibt.
     n=np.stack([-gx,-gy,np.ones_like(GA)]);n/=np.linalg.norm(n,axis=0);dn=np.zeros_like(GA);dn[:,:-1]=sum(np.abs(np.diff(n[i],axis=1)) for i in range(3))
-    LAND_=WV.reshape(GY,GX)<=-900;M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=int(float(os.environ.get('FALTWD','1'))*RS))&~nd.binary_dilation(WEGA.reshape(GY,GX)>20,iterations=3*RS)
+    WD=float(os.environ.get('FALTWD','1.0'))
+    M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=int(WD*RS))&~nd.binary_dilation(wega_,iterations=3*RS)
     w=np.clip(nd.gaussian_filter(nd.binary_dilation(M,iterations=RS)*1.0,RS*0.5)*1.5,0,1)*nd.binary_erosion(LAND_,iterations=RS)
+    # G6 misst die sichtbare Mischflaeche: ergaenze Feinband-Treffer, die das Grobnetz nicht abbildet.
+    vy,vx=np.gradient(V,1/RS);vst=np.hypot(vx,vy);vn=np.stack([-vx,-vy,np.ones_like(V)]);vn/=np.linalg.norm(vn,axis=0);vdn=sum(np.abs(np.diff(vn[i],axis=1))[:-1,:] for i in range(3))
+    VWD=float(os.environ.get('FALTVWD','2.0'))
+    VM=(vdn>0.25)&(vst[:-1,:-1]>0.15)&(vst[:-1,:-1]<0.8)&LAND_[:-1,:-1]&~nd.binary_dilation(W_,iterations=int(VWD*RS))[:-1,:-1]&~nd.binary_dilation(wega_,iterations=3*RS)[:-1,:-1]
+    VM_=np.zeros_like(GA,bool);VM_[:-1,:-1]=VM
+    vw=np.clip(nd.gaussian_filter(nd.binary_dilation(VM_,iterations=RS)*1.0,RS*0.5)*1.5,0,1)*nd.binary_erosion(LAND_,iterations=RS)
+    vw*=nd.distance_transform_edt(~W_)/RS>=VWD
     _yy,_xx=np.mgrid[0:GY,0:GX]
     for _r in RAMPWEGE:   # O18y [Gate R1_wand rampe_1/rampe_2 Enden]: Rampenenden 6 m frei lassen [A]
         _p=np.asarray([(q[0],q[1]) if not isinstance(q,dict) else (q['x'],q['z']) for q in (_r['punkte'] if isinstance(_r,dict) else _r)],float)
-        for _e in (_p[0],_p[-1]):w[np.hypot(_xx/RS-_e[0],_yy/RS-_e[1])<float(os.environ.get('FALTRE','6'))]=0
+        for _e in (_p[0],_p[-1]):
+            _frei=np.hypot(_xx/RS-_e[0],_yy/RS-_e[1])>=float(os.environ.get('FALTRE','6'));w*= _frei;vw*= _frei
     if os.environ.get('FALTFADE','0')!='0':w*=np.clip((nd.distance_transform_edt(~W_)/RS-1)/2,0,1)   # O18y: Gewicht 1->3 m Wandabstand einblenden (G7b_feld)
+    vw[39*RS:90*RS+1,122*RS:172*RS+1]=0   # 2-m-Saum haelt die spaetere Bandnahtangleichung vollstaendig aus D2 fern
     S=nd.gaussian_filter(GA,SG*RS)
     _BX=[(74,96,149,186),(85,104,201,227),(313,322,223,239),(109,124,167,187),(108,123,112,125),(173,181,127,153),(84,101,133,149),(187,192,71,94)]   # O18y S2: 8 groesste G6-Cluster (single-link 8 m) nach b3b3b94
     LS=float(os.environ.get('FALTLS','0'))
@@ -997,13 +1011,12 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 F
         for x0,x1,z0,z1 in _BX:BM[max(0,(z0-3)*RS):(z1+3)*RS,max(0,(x0-3)*RS):(x1+3)*RS]=1
         S=np.where(BM,nd.gaussian_filter(GA,LS*RS),S)
     nG=GA*(1-w)+S*w
-    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
-    wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
+    wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);wfv=nd.map_coordinates(vw,[fy/FS*RS,fx/FS*RS],order=1);wf=np.maximum(wf,wfv);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
     F=np.full((FYn,FXn),np.nan);F[fy,fx]=h;ok=np.isfinite(F);Sf=nd.gaussian_filter(np.where(ok,F,0),SG*FS)/np.maximum(nd.gaussian_filter(ok*1.0,SG*FS),1e-6)
     if LS>0:
         _Sl=nd.gaussian_filter(np.where(ok,F,0),LS*FS)/np.maximum(nd.gaussian_filter(ok*1.0,LS*FS),1e-6);_BF=nd.zoom(BM.astype(np.uint8),FS/RS,order=0);_B=np.zeros((FYn,FXn),bool);_B[:min(FYn,_BF.shape[0]),:min(FXn,_BF.shape[1])]=_BF[:FYn,:FXn]>0;Sf=np.where(_B,_Sl,Sf)
     h=h*(1-wf)+Sf[fy,fx]*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
-    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((w>0.01).sum())}
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((w>0.01).sum()),'fein_extra':int((vw>0.01).sum())}
 def _hangwellen_glatt():   # O18w: Anzeige-Bandpass auf Haengen, Quellfeld G bleibt unveraendert; D2 bleibt Bytegleich
     A=float(os.environ.get('WELLEN','0.6'))
     if A==0:return G_ANZ,{'aus':True}
@@ -1018,6 +1031,8 @@ def _hangwellen_glatt():   # O18w: Anzeige-Bandpass auf Haengen, Quellfeld G ble
     # D2 ist feste Regressionsbasis; auch Feinbandpunkte dort bleiben unangetastet.
     M[43*RS:86*RS+1,126*RS:168*RS+1]=False
     w=np.clip(nd.distance_transform_edt(M)/2.0,0,1);w=w*w*(3-2*w)
+    # EDT liefert auch innerhalb der aus M entfernten Zellen ein Gewicht; D2 dort explizit sperren.
+    w[43*RS:86*RS+1,126*RS:168*RS+1]=0
     sm=nd.gaussian_filter(GA,0.75*RS);d=np.clip(sm-GA,-A,A)*w;nG=GA+d
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()
