@@ -1174,10 +1174,10 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
 def _dellen_wege_anheben(GA,WVA):   # t133u: abgeleitete, trockene Senken nahe Dorf-/Rampenwegen fuellen [A]
-    _var=int(os.environ.get('DELLENWEG','2'))
-    if _var not in (0,1,2,3):raise ValueError('DELLENWEG muss 0, 1, 2 oder 3 sein')
+    _var=int(os.environ.get('DELLENWEG','4'))
+    if _var not in (0,1,2,3,4):raise ValueError('DELLENWEG muss 0, 1, 2, 3 oder 4 sein')
     if _var==0:return GA,{'variante':0,'durchlaeufe':0,'komponenten':0,'punkte':0,'max_anhebung_m':0.0}
-    _rest=0.29 if _var in (2,3) else 0.0   # Varianten 2/3: 1 cm unter der R8b-Schwelle stehen lassen
+    _rest=0.29 if _var in (2,3,4) else 0.0   # Varianten 2/3/4: 1 cm unter der R8b-Schwelle stehen lassen
     from skimage.morphology import reconstruction
     _G=np.asarray(GA,dtype=np.float32).copy()
     _W=np.asarray(WVA).reshape(GY,GX)
@@ -1201,8 +1201,13 @@ def _dellen_wege_anheben(GA,WVA):   # t133u: abgeleitete, trockene Senken nahe D
                 _dx=np.arange(_ix0,_ix1)[None,:]/RS-_x0;_dy=np.arange(_iy0,_iy1)[:,None]/RS-_y0
                 _schutz[_iy0:_iy1,_ix0:_ix1]|=(_dx*_dx+_dy*_dy)<=1.0
         _schutzpunkte=int(_schutz.sum())
+    _kachel_puffer=None
+    if _var==4:
+        _yy0,_xx0=np.mgrid[0:GY,0:GX]
+        _kachel_puffer=(((_xx0//(RS*42)==2)&np.isin(_yy0//(RS*43),(3,4)))|((_xx0//(RS*42)==3)&(_yy0//(RS*43)==5)))
+        _kachel_puffer=nd.binary_dilation(_kachel_puffer,iterations=2*RS)
     _abstand=nd.distance_transform_edt(~_weg)/RS
-    _punkte=_komponenten=_durchlaeufe=0;_max=0.0
+    _punkte=_komponenten=_durchlaeufe=0;_max=0.0;_tiefe_skip=_flaeche_skip=_kachel_skip=0
     for _it in range(3):
         _saum=_G.copy();_saum[1:-1,1:-1]=float(_G.max())
         _fuellung=reconstruction(_saum,_G,method='erosion')-_G
@@ -1211,14 +1216,21 @@ def _dellen_wege_anheben(GA,WVA):   # t133u: abgeleitete, trockene Senken nahe D
         _lab,_n=nd.label(_mulde);_heben=np.zeros_like(_mulde);_anz=0
         for _k,_sl in enumerate(nd.find_objects(_lab),1):
             _m=_lab[_sl]==_k
-            if _abstand[_sl][_m].min()<=6.0:_heben[_sl]|=_m;_anz+=1
+            if _abstand[_sl][_m].min()>6.0:continue
+            if _var==4:
+                _yy,_xx=np.nonzero(_m);_yy=_yy+_sl[0].start;_xx=_xx+_sl[1].start
+                _area=len(_xx)/(RS*RS);_depth=float(_fuellung[_yy,_xx].max())
+                if _kachel_puffer[_yy,_xx].any():_kachel_skip+=1;continue
+                if _depth>1.0:_tiefe_skip+=1;continue
+                if _area>50.0:_flaeche_skip+=1;continue
+            _heben[_sl]|=_m;_anz+=1
         if not _heben.any():break
         _durchlaeufe+=1;_punkte+=int(_heben.sum());_komponenten+=_anz
         _hub=np.maximum(_fuellung[_heben]-_rest,0.0)
         _max=max(_max,float(_hub.max()))
         _G[_heben]=(_G[_heben]+_hub).astype(np.float32)
     return _G,{'variante':_var,'resttiefe_m':_rest,'rampenenden_schutzpunkte':_schutzpunkte,'durchlaeufe':_durchlaeufe,'komponenten':_komponenten,
-               'punkte':_punkte,'max_anhebung_m':round(_max,3)}
+               'punkte':_punkte,'max_anhebung_m':round(_max,3),'skip_tiefe':_tiefe_skip,'skip_flaeche':_flaeche_skip,'skip_kachel':_kachel_skip}
 
 _G_VOR_DELLEN=G.copy();G,DELLENWEG_MESS=_dellen_wege_anheben(G,WV);print('dellen_wege_t133u',DELLENWEG_MESS)
 _DELTA=G.astype(float)-_G_VOR_DELLEN.astype(float)
