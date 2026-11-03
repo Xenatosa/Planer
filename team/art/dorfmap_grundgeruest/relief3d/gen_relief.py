@@ -149,7 +149,29 @@ RS=2;GX,GY=NX*RS+1,NY*RS+1;WANDWINKEL=55.0
 Hn=np.kron(H,np.ones((RS,RS)))                                     # Proben in Zellmitte-Unterteilung
 J=np.zeros((NY,NX),bool);J[:,1:]|=np.abs(np.diff(H,axis=1))>SPRUNG;J[:,:-1]|=np.abs(np.diff(H,axis=1))>SPRUNG
 J[1:,:]|=np.abs(np.diff(H,axis=0))>SPRUNG;J[:-1,:]|=np.abs(np.diff(H,axis=0))>SPRUNG
-wz=nd.gaussian_filter(np.kron(nd.binary_dilation(J,iterations=3),np.ones((RS,RS))).astype(float),2)
+_WANDKONTURV=int(os.environ.get('WANDKONTURV','0'))  # kontur: 0=Bestand, 1..2 gepruefte Distanzfeld-Varianten
+if _WANDKONTURV not in (0,1,2):raise ValueError('WANDKONTURV muss 0, 1 oder 2 sein')
+_JMASKE=nd.binary_dilation(J,iterations=3)
+_JMASKEF=np.kron(_JMASKE,np.ones((RS,RS),bool))
+_wz_alt=nd.gaussian_filter(_JMASKEF.astype(float),2)
+if _WANDKONTURV:
+    # Weicher Aufsichtsrand aus dem signierten Abstand der Wandmaske. Das
+    # Raster/Vertexgitter bleibt gleich; nur der Uebergang zur Wandform wird
+    # stetig gewichtet. Die zusaetzliche Rippenstaerke klingt am Maskenrand
+    # mit demselben Distanzfeld aus.
+    _WANDKONTUR_CFG={1:(0.75,2.0),2:(1.0,1.5)}
+    _wd_m,_ribg_ziel=_WANDKONTUR_CFG[_WANDKONTURV]
+    _sdf=(nd.distance_transform_edt(~_JMASKEF)-nd.distance_transform_edt(_JMASKEF))/RS
+    _q=np.clip(0.5-_sdf/(2*_wd_m),0,1);_q=_q*_q*(3-2*_q)
+    wz=_q.astype(float)
+    # Variante 2 sperrt D2 samt 5 m Schutzsaum bereits am Quellschritt;
+    # kein nachtraegliches Zurueckkopieren.
+    _d2=np.zeros_like(wz,bool)
+    if _WANDKONTURV==2:
+        _d2[max(0,(43-5)*RS):min(wz.shape[0],(86+5)*RS+1),max(0,(126-5)*RS):min(wz.shape[1],(168+5)*RS+1)]=True
+        wz[_d2]=_wz_alt[_d2];_q[_d2]=0.0
+else:
+    _wd_m=0.0;_ribg_ziel=1.5;_sdf=np.zeros_like(_wz_alt);_q=np.zeros_like(_wz_alt);wz=_wz_alt;_d2=np.zeros_like(wz,bool)
 rs=np.random.default_rng(42);noi=nd.gaussian_filter(rs.standard_normal(Hn.shape),3);noi/=noi.std()
 Hs=nd.gaussian_filter(Hn,4.5)                                        # sigma 1,5 m [A]
 lo=nd.minimum_filter(Hn,21);hi=nd.maximum_filter(Hn,21);Rg=hi-lo
@@ -168,6 +190,8 @@ if _WV:
     _dm=np.minimum(_t0,1-_t0)*Rg;_WM=np.clip((_dm-float(os.environ.get('FADE0','3.0')))/2.0,0,1)   # Rippen nur >3 m von Fuss/Kopf, 2 m Fade
 else:_WM=1.0
 _RG=float(os.environ.get('RIBG','1.5')) if _WV else 1.0   # O18v: Rippenverstaerkung Wandmitte (G7b-Rauheit) [A]
+if _WANDKONTURV and _WV:_RG=_RG+(_ribg_ziel-1.5)*_q
+print('wandkontur_distanzfeld',{'variante':_WANDKONTURV,'breite_m':_wd_m,'randpunkte':int((_q>0).sum()) if _WANDKONTURV else 0,'d2_schutzpunkte':int(_d2.sum()),'ziel_rippenstaerke':_ribg_ziel})
 u=(Hs-lo)/np.maximum(Rg,1e-6)-0.5+0.10*nf+0.13*RIB*_WM*_RG
 krz=nd.gaussian_filter(np.kron(nd.binary_dilation(wand&(wn=='Krater'),iterations=4),np.ones((RS,RS))).astype(float),4)
 steil_k=(1.0+1.6*np.clip(0.5+0.4*_fbm(18,36),0,1))*(1-krz)+1.6*krz                                            # t47u: Kraterrand als geboeschter Wall statt Senkrechtring [A]
