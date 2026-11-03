@@ -526,3 +526,4 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - 20:20 weg2-Merge faad82a gebaut: pr 581, r8 38 (R8_stufe 5, gitter 5, R8a 23), r9 334, Loch 0, R3_laengs 39, G5 70 (+4), G6 219.
   ABER Bild D1: Klippe unten links verschwindet, wird zur weichen Boeschung (akzeptierte Optik geaendert). weg2-D2-Fix ist ein Zuruecksetzen auf eine 9d3f8fc-Referenz (GB 4922 Zellen bis 0,63 m, FW bis 6,28 m), keine Ursachenbehebung.
   -> Revert 78b3627, Gate wieder pr 570 / r8 48 / r9 334, Loch 0. Naechster Versuch: weg2 einzeln (WEGMISCH / Knotenpad / Endauslauf / Dellen) per Schalter, Klippe D1 als Bildkriterium.
+- 20:25 Welle 3 (8 parallel, Basis de0d9b5): delle, weg3 (Kreuzung/R8a, weg2 ohne Klippenverlust/D2-Reset), saege, g6, g5r5b, r3, kontur (G7b), wellen2 (R9w in G). Rillen nicht neu (G6 +5). Box 8 Kerne/15 GB.
