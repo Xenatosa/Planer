@@ -471,3 +471,12 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Ansicht G1-Weg O17 vs. jetzt (w1): Weg-Band wieder durchgehend, aber Terrassenkante weich, Felswand gerundet, heller Wulst an der Unterkante – O17-Optik NICHT erreicht.
 - H1/A1/C2 Ton+Textur angesehen: keine Durchsichten; Hänge weich/verwaschen, Textur in A1 streifig.
 - Export O18, 56 Felder, reihe_1..7.zip, O18_felder_1/2.zip mit Banner 6e515db neu gebaut.
+
+## Status O18i (Stand d78e8ed)
+- Wandkontur: gipfel_rund (Wand Ø 0,93 m) und fein_gipfel (Ø 0,56 m) wirken jetzt nur außerhalb der Wand. Die Kontur ist klarer als in O18h, aber noch weicher als in O17 (f65298b w1).
+- Raycast: 0 schwebend, 0 versunken, 0 im Wasser. 19 Objekte wurden über versunken_weg.json entfernt.
+- Lippe unter dem G1-Weg (_weg_wulst): die Geometrie sinkt nur leicht (8,08 → 7,77). Das helle Band ist weiter sichtbar. Nicht gelöst, 3 Versuche aufgebraucht.
+- Regression: t42u 0 | Spalt 0 an allen 4 Rändern | bergauf 0 (max 0,011 m) | stufe_bandrand 0 | lod1 1.177.224 Dreiecke | Lochscan: Index 0, 56 Felder 0 echte Innenlöcher | Zacken: fein 31/24, grob 7/0 | pruefung/o18/regression_o18i.json
+- Gesichtet: B1, D1, G1, E1, F1 in Ton und Textur, keine Durchsicht. Die Wände in E1/F1 sind steil, oben aber weich gerundet.
+- Ladezeit: 9,33 / 9,38 / 9,11 s, Median 9,33 s (< 10 s)
+- Export: dorfmap_3d_runde_O18.html, 56 Felder, reihe_1..7.zip, O18_felder_1/2.zip
