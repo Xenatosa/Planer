@@ -1173,6 +1173,42 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+def _g5_r5_r6_lokal():   # g5r5b: nur gemessene Anzeige-Treffer korrigieren; G/Quellwerte/Wasser bleiben unveraendert
+    global G_ANZ
+    _var=int(os.environ.get('G5R5_LOCAL','1'))
+    if _var not in (0,1):raise ValueError('G5R5_LOCAL muss 0 oder 1 sein')
+    _ziel=float(os.environ.get('G5R5_TARGET','0.55'))
+    if _ziel not in (0.55,0.59):raise ValueError('G5R5_TARGET muss 0.55 oder 0.59 sein')
+    GA=G_ANZ.reshape(GY,GX).astype(float).copy();vor=GA.copy();s={'variante':_var,'g5_ziel':_ziel,'g5_punkte':0,'g5_max_ab':0.0,'r5_punkte':0,'r5_max_auf':0.0,'r6_wasserpunkte':0,'g5_vor':0,'g5_nach':0,'r5_vor':0,'r5_nach':0,'r6_vor':0,'r6_nach':0}
+    if _var:
+        from skimage.morphology import reconstruction
+        from relief_o18n import g5_beulen
+        LAND=WV.reshape(GY,GX)<=-900
+        gy,gx=np.gradient(GA,1/RS);wall=np.hypot(gx,gy)>1.0
+        bb,_=g5_beulen(GA,RS,wall,0.6);m=bb>0
+        s['g5_vor']=int(nd.label(m)[1]);s['g5_punkte']=int(m.sum())
+        d=np.where(m,np.maximum(bb-_ziel,0),0);GA-=d;s['g5_max_ab']=round(float(d.max()),3)
+        sd=GA.copy();sd[1:-1,1:-1]=GA.max();t=reconstruction(sd,GA,method='erosion')-GA
+        t[~nd.binary_erosion(LAND,iterations=2*RS)]=0
+        bad=t>1.0;s['r5_vor']=int(nd.label(bad)[1]);s['r5_punkte']=int(bad.sum())
+        d=np.where(bad,np.maximum(t-0.95,0),0);GA+=d;s['r5_max_auf']=round(float(d.max()),3)
+        wasser=(~LAND)&(GA>10.0);s['r6_vor']=int(nd.label(wasser)[1]);s['r6_wasserpunkte']=int(wasser.sum())
+        # R6 bleibt gemessen, wird aber nicht unter der Wasserflaeche abgesenkt:
+        # die Probe erzeugt sichtbare Stufen am G1-Wasserrand.
+        gy,gx=np.gradient(GA,1/RS);wall=np.hypot(gx,gy)>1.0
+        bb,_=g5_beulen(GA,RS,wall,0.6);s['g5_nach']=int(nd.label(bb>0)[1])
+        sd=GA.copy();sd[1:-1,1:-1]=GA.max();t=reconstruction(sd,GA,method='erosion')-GA
+        t[~nd.binary_erosion(LAND,iterations=2*RS)]=0;s['r5_nach']=int(nd.label(t>1.0)[1])
+        s['r6_nach']=int(nd.label((~LAND)&(GA>10.0))[1])
+        delta=GA-vor
+        if np.any(np.abs(delta)>1e-7):
+            vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS
+            h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+            h+=nd.map_coordinates(delta,[fz*RS,fx*RS],order=1,mode='nearest')
+            FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+            G_ANZ=GA.reshape(G_ANZ.shape).astype(G_ANZ.dtype)
+    return G_ANZ,s
+G_ANZ,_g5r5b=_g5_r5_r6_lokal();print('g5r5b_lokal',_g5r5b)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
