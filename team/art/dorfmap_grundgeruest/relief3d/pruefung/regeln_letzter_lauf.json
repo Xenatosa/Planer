@@ -1,6 +1,6 @@
 {
-"summe": 577,
-"summe_ohne_ausnahmen": 577,
+"summe": 570,
+"summe_ohne_ausnahmen": 570,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 24,
@@ -10,16 +10,14 @@
 "R3_woelb_m": 22,
 "R5_loch": 17,
 "R6_wasser_schnee": 4,
-"G1_loch_offen": 1,
 "G2_spitze_oben": 3,
 "G3_spitze_unten": 3,
-"G2_spitze_oben_fein": 7,
+"G2_spitze_oben_fein": 8,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 68,
-"G6_facette": 222,
+"G6_facette": 220,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
-"G11_objekt_schwebt_sinkt": 5,
 "T1_fleckrand": 94,
 "T2_textur_abgeschnitten_bildpruefung_offen": 1,
 "T3_streifen_ringe_bildpruefung_offen": 1,
@@ -1156,13 +1154,6 @@
 "wert": 22
 },
 {
-"regel": "G1_loch_offen",
-"feld": "A1",
-"x": 0.0,
-"z": 0.0,
-"wert": 2134
-},
-{
 "regel": "G2_spitze_oben",
 "feld": "D6",
 "x": 162.0,
@@ -1229,26 +1220,26 @@
 {
 "regel": "G2_spitze_oben_fein",
 "feld": "B4",
-"x": 71.8,
-"z": 143.2,
-"wert": 0.56,
+"x": 72.8,
+"z": 142.2,
+"wert": 0.59,
 "nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
-"feld": "C4",
-"x": 98.0,
-"z": 161.8,
-"wert": 0.92,
-"nachbarn": 6
+"feld": "B4",
+"x": 67.2,
+"z": 156.2,
+"wert": 0.54,
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
-"feld": "C4",
-"x": 98.2,
-"z": 162.5,
-"wert": 1.39,
-"nachbarn": 6
+"feld": "B4",
+"x": 66.2,
+"z": 157.2,
+"wert": 0.51,
+"nachbarn": 3
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -1267,6 +1258,14 @@
 "nachbarn": 3
 },
 {
+"regel": "G2_spitze_oben_fein",
+"feld": "G6",
+"x": 255.2,
+"z": 234.0,
+"wert": 0.48,
+"nachbarn": 3
+},
+{
 "regel": "G3_spitze_unten_fein",
 "feld": "G1",
 "x": 289.5,
@@ -1276,11 +1275,11 @@
 },
 {
 "regel": "G3_spitze_unten_fein",
-"feld": "C4",
-"x": 98.0,
-"z": 162.0,
-"wert": 1.58,
-"nachbarn": 7
+"feld": "H2",
+"x": 306.5,
+"z": 85.5,
+"wert": 0.54,
+"nachbarn": 3
 },
 {
 "regel": "G5_beule_klippe",
@@ -1774,6 +1773,13 @@
 },
 {
 "regel": "G6_facette",
+"feld": "F1",
+"x": 211.0,
+"z": 9.2,
+"wert": 11
+},
+{
+"regel": "G6_facette",
 "feld": "G1",
 "x": 271.7,
 "z": 11.1,
@@ -1827,13 +1833,6 @@
 "x": 185.2,
 "z": 23.8,
 "wert": 8
-},
-{
-"regel": "G6_facette",
-"feld": "F1",
-"x": 210.6,
-"z": 25.1,
-"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -1992,30 +1991,16 @@
 {
 "regel": "G6_facette",
 "feld": "E2",
-"x": 203.8,
-"z": 46.2,
-"wert": 8
+"x": 198.7,
+"z": 45.9,
+"wert": 7
 },
 {
 "regel": "G6_facette",
 "feld": "E2",
-"x": 198.8,
-"z": 47.5,
-"wert": 24
-},
-{
-"regel": "G6_facette",
-"feld": "C2",
-"x": 112.7,
-"z": 47.3,
+"x": 199.3,
+"z": 48.4,
 "wert": 8
-},
-{
-"regel": "G6_facette",
-"feld": "A2",
-"x": 39.4,
-"z": 52.4,
-"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -2026,17 +2011,10 @@
 },
 {
 "regel": "G6_facette",
-"feld": "B2",
-"x": 69.5,
-"z": 52.9,
-"wert": 6
-},
-{
-"regel": "G6_facette",
 "feld": "A2",
-"x": 39.9,
-"z": 55.4,
-"wert": 7
+"x": 38.0,
+"z": 56.9,
+"wert": 14
 },
 {
 "regel": "G6_facette",
@@ -2048,20 +2026,6 @@
 {
 "regel": "G6_facette",
 "feld": "E2",
-"x": 194.2,
-"z": 63.4,
-"wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "E2",
-"x": 191.8,
-"z": 68.8,
-"wert": 24
-},
-{
-"regel": "G6_facette",
-"feld": "E2",
 "x": 195.6,
 "z": 67.3,
 "wert": 8
@@ -2069,16 +2033,9 @@
 {
 "regel": "G6_facette",
 "feld": "E2",
-"x": 189.0,
-"z": 76.0,
-"wert": 25
-},
-{
-"regel": "G6_facette",
-"feld": "C2",
-"x": 117.9,
-"z": 74.7,
-"wert": 10
+"x": 190.5,
+"z": 71.1,
+"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -2096,10 +2053,24 @@
 },
 {
 "regel": "G6_facette",
+"feld": "E2",
+"x": 188.4,
+"z": 78.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
 "feld": "H2",
 "x": 309.4,
 "z": 81.5,
 "wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 187.3,
+"z": 83.4,
+"wert": 8
 },
 {
 "regel": "G6_facette",
@@ -2111,8 +2082,8 @@
 {
 "regel": "G6_facette",
 "feld": "C2",
-"x": 85.1,
-"z": 84.6,
+"x": 84.8,
+"z": 84.4,
 "wert": 7
 },
 {
@@ -2138,6 +2109,13 @@
 },
 {
 "regel": "G6_facette",
+"feld": "B3",
+"x": 74.1,
+"z": 94.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
 "feld": "C3",
 "x": 93.5,
 "z": 95.7,
@@ -2152,13 +2130,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "B3",
-"x": 72.0,
-"z": 98.5,
-"wert": 11
-},
-{
-"regel": "G6_facette",
 "feld": "C3",
 "x": 119.9,
 "z": 97.8,
@@ -2166,10 +2137,17 @@
 },
 {
 "regel": "G6_facette",
+"feld": "B3",
+"x": 71.8,
+"z": 99.3,
+"wert": 7
+},
+{
+"regel": "G6_facette",
 "feld": "E3",
 "x": 188.6,
-"z": 102.8,
-"wert": 25
+"z": 102.5,
+"wert": 23
 },
 {
 "regel": "G6_facette",
@@ -2205,6 +2183,13 @@
 "x": 289.6,
 "z": 103.6,
 "wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 187.8,
+"z": 108.0,
+"wert": 6
 },
 {
 "regel": "G6_facette",
@@ -2292,13 +2277,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "E3",
-"x": 184.2,
-"z": 117.4,
-"wert": 7
-},
-{
-"regel": "G6_facette",
 "feld": "C3",
 "x": 114.8,
 "z": 120.7,
@@ -2313,16 +2291,16 @@
 },
 {
 "regel": "G6_facette",
-"feld": "C3",
-"x": 92.6,
-"z": 122.1,
-"wert": 6
+"feld": "E3",
+"x": 182.7,
+"z": 121.0,
+"wert": 13
 },
 {
 "regel": "G6_facette",
-"feld": "E3",
-"x": 185.6,
-"z": 122.4,
+"feld": "C3",
+"x": 92.6,
+"z": 122.1,
 "wert": 6
 },
 {
@@ -2341,10 +2319,10 @@
 },
 {
 "regel": "G6_facette",
-"feld": "E4",
-"x": 177.2,
-"z": 130.6,
-"wert": 39
+"feld": "E3",
+"x": 178.8,
+"z": 126.8,
+"wert": 18
 },
 {
 "regel": "G6_facette",
@@ -2380,6 +2358,13 @@
 "x": 284.8,
 "z": 130.0,
 "wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 176.5,
+"z": 132.6,
+"wert": 25
 },
 {
 "regel": "G6_facette",
@@ -2440,9 +2425,9 @@
 {
 "regel": "G6_facette",
 "feld": "E4",
-"x": 175.5,
-"z": 140.5,
-"wert": 11
+"x": 175.6,
+"z": 140.2,
+"wert": 9
 },
 {
 "regel": "G6_facette",
@@ -2565,6 +2550,13 @@
 },
 {
 "regel": "G6_facette",
+"feld": "E4",
+"x": 173.0,
+"z": 152.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
 "feld": "G4",
 "x": 289.4,
 "z": 154.4,
@@ -2621,13 +2613,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "C4",
-"x": 96.4,
-"z": 163.8,
-"wert": 20
-},
-{
-"regel": "G6_facette",
 "feld": "D4",
 "x": 140.8,
 "z": 162.0,
@@ -2646,6 +2631,13 @@
 "x": 92.9,
 "z": 163.1,
 "wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 96.3,
+"z": 164.4,
+"wert": 15
 },
 {
 "regel": "G6_facette",
@@ -2755,6 +2747,13 @@
 {
 "regel": "G6_facette",
 "feld": "D5",
+"x": 150.0,
+"z": 176.3,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
 "x": 141.1,
 "z": 175.7,
 "wert": 8
@@ -2772,13 +2771,6 @@
 "x": 52.2,
 "z": 176.1,
 "wert": 6
-},
-{
-"regel": "G6_facette",
-"feld": "D5",
-"x": 150.6,
-"z": 177.4,
-"wert": 11
 },
 {
 "regel": "G6_facette",
@@ -2874,9 +2866,9 @@
 {
 "regel": "G6_facette",
 "feld": "E5",
-"x": 189.3,
+"x": 189.4,
 "z": 184.1,
-"wert": 10
+"wert": 8
 },
 {
 "regel": "G6_facette",
@@ -2933,6 +2925,13 @@
 "x": 214.6,
 "z": 199.4,
 "wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 323.9,
+"z": 200.6,
+"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -3014,9 +3013,9 @@
 {
 "regel": "G6_facette",
 "feld": "H5",
-"x": 316.7,
-"z": 212.5,
-"wert": 22
+"x": 316.6,
+"z": 212.2,
+"wert": 20
 },
 {
 "regel": "G6_facette",
@@ -3259,30 +3258,16 @@
 {
 "regel": "G6_facette",
 "feld": "H6",
-"x": 335.4,
-"z": 245.7,
-"wert": 8
-},
-{
-"regel": "G6_facette",
-"feld": "G6",
-"x": 254.5,
-"z": 247.4,
-"wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "G6",
-"x": 256.7,
-"z": 251.8,
+"x": 334.9,
+"z": 245.9,
 "wert": 8
 },
 {
 "regel": "G6_facette",
 "feld": "B6",
-"x": 69.9,
-"z": 252.1,
-"wert": 8
+"x": 70.0,
+"z": 252.0,
+"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -3294,9 +3279,9 @@
 {
 "regel": "G6_facette",
 "feld": "B7",
-"x": 70.7,
-"z": 260.2,
-"wert": 13
+"x": 70.6,
+"z": 259.0,
+"wert": 21
 },
 {
 "regel": "G6_facette",
@@ -3325,46 +3310,6 @@
 "x": 22.5,
 "z": 49.1,
 "wert": 876
-},
-{
-"regel": "G11_objekt_schwebt_sinkt",
-"feld": "E1",
-"x": 184.8,
-"z": 31.5,
-"wert": 1.18,
-"art": "findlinge"
-},
-{
-"regel": "G11_objekt_schwebt_sinkt",
-"feld": "A2",
-"x": 9.7,
-"z": 48.8,
-"wert": -0.7,
-"art": "steine"
-},
-{
-"regel": "G11_objekt_schwebt_sinkt",
-"feld": "H7",
-"x": 335.2,
-"z": 262.3,
-"wert": 2.28,
-"art": "steine"
-},
-{
-"regel": "G11_objekt_schwebt_sinkt",
-"feld": "H7",
-"x": 333.5,
-"z": 269.0,
-"wert": 2.01,
-"art": "steine"
-},
-{
-"regel": "G11_objekt_schwebt_sinkt",
-"feld": "H7",
-"x": 334.4,
-"z": 268.7,
-"wert": 3.31,
-"art": "steine"
 },
 {
 "regel": "T1_fleckrand",

@@ -1040,7 +1040,7 @@ def _entspitzen(T=float(os.environ.get('SPITZE_T','0.38'))):   # O18w [Gate G2/G
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':cg,'fein':cf}
 def _wandstreifen_glatt():   # t128u [F K5b]: kurze Normalenperioden auf Steilwaenden glatten; Grenze wird danach an GB gepinnt
     global G_ANZ,BAND,_vid
-    if os.environ.get('WANDSTREIFEN','1')=='0':return {'aus':'WANDSTREIFEN=0'}
+    if os.environ.get('WANDSTREIFEN','0')=='0':return {'aus':'WANDSTREIFEN=1 schaltet ein; t131u verworfen: Bandkante D1/G1 sichtbare Zaehne (Bild), Gate fing es nicht'}
     sig=float(os.environ.get('WANDSTREIFEN_SIG','1.0'))
     felder=os.environ.get('WANDSTREIFEN_FELDER','*').split(',')
     TM=np.ones((NY,NX),bool)

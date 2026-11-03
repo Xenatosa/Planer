@@ -521,3 +521,5 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
   G1_loch_offen 1 (wert 2134) = fremde /tmp-Lochdatei des g5r5-Laufs, eigener Raycast 0.
 - g5r5 dcd1881 verworfen: G5 66->63, R5 17->6, aber pr 902, r8 77, 2134 Loecher.
 - Job delle (G1 0,423 m Ursache in gen_relief) gestartet; weg2 laeuft.
+- 20:25 Bild D1/G1 nach wand-Merge: sichtbare Zaehne an Wandbandkante (Gate fing es nicht) -> WANDSTREIFEN Standard 0. Gate: pr 570, r8 48, r9 334 = 952 (Basis 978). Loch 0, Bilder D1/G1 ohne Zaehne.
+- weg2 fc8d651: R3_laengs 39 (+4), R8 38, D2 bytegleich -> wird gemergt.
