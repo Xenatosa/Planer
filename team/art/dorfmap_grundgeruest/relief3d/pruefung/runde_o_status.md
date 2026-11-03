@@ -480,3 +480,21 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - Gesichtet: B1, D1, G1, E1, F1 in Ton und Textur, keine Durchsicht. Die Wände in E1/F1 sind steil, oben aber weich gerundet.
 - Ladezeit: 9,33 / 9,38 / 9,11 s, Median 9,33 s (< 10 s)
 - Export: dorfmap_3d_runde_O18.html, 56 Felder, reihe_1..7.zip, O18_felder_1/2.zip
+
+## Status O18j (Stand c4bbd9b)
+- Wandrauheit (Mittel |h − Gauss 1 m| auf 46.846 Wandzellen): grob O17 0,589 | O18i 0,449 | O18j 0,463. Fein (gleiche vid): O17 0,496 | O18j 0,485.
+- Verursacher an der Wand: grob_entzacken (0,17 + 0,05 m), grob_wand_glatt (0,016 m), entstacheln (0,013 m).
+  - grob_wand_glatt und entstacheln wirken jetzt nur außerhalb der Wand.
+  - grob_entzacken macht an der Wand nur noch 3 statt 8 Durchgänge. Ganz ohne grob_entzacken an der Wand stiegen die Grobzacken von 7 auf 48.
+- Kein Schritt „Wandband aus O17 übernehmen“: fein fehlen nur 2 %. Grob würden die Zacken wieder steigen.
+- G1-Streifen: die Ursache ist Geometrie. Unter der Wegkante lag eine flache Stufe, und der Shader legt Schnee nach der Normalen (|N.y|) darauf; in der Ton-Ansicht ist die Fläche genauso hell.
+  - Die Stufe ist jetzt auf die Linie Wegkante → Gelände in 4 m abgesenkt, nur in Feld G1. Kartenweit stiegen die Feinzacken auf 42–49.
+- Regression: pruefung/o18/regression_o18j.json
+  - t42u 0, Spalt 0, bergauf 0 (max 0,011 m), stufe_bandrand 0, lod1 1.179.170 Dreiecke
+  - Lochscan: Index 0, 56 Felder 0 echte Innenlöcher
+  - Zacken: fein 30/30 (O18i 31/24), grob 9/0 (O18i 7/0)
+  - Raycast: 0 (1 Geröll entfernt)
+  - Ladezeit: Median 9,19 s
+- Angesehen (Vollbild): w1 O17/jetzt, G1 Ton + Textur, E1, F1, D1, C1, H1. Keine Durchsicht.
+  - Die Simse ist weg, darunter ist der Hang aber weiter hell verschneit.
+  - Die Wände sind steil, oben aber weiter gerundet und nicht so kantig wie in O17.
