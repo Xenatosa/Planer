@@ -99,7 +99,7 @@ lab,n=nd.label(bad)
 for k in range(1,n+1):
     yy,xx=np.nonzero(lab==k)
     if len(xx)>=4:hit('G4_delle_beule',xx.mean()/RS,yy.mean()/RS,round(float(np.abs(lap[yy,xx]).max()),2))
-OBEN=nd.binary_dilation(WAND,iterations=3*RS)&~WAND&(G>nd.grey_dilation(G,size=7*RS)-1.0);bb=(G-nd.gaussian_filter(G,2*RS))*OBEN;lab,n=nd.label(bb>1.0)   # O18m geeicht: 0.6-1.0 = Faltlinie Klippenkante, Bild unauffaellig
+sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'));from relief_o18n import g5_beulen;bb,_o=g5_beulen(G,RS,WAND,0.6);lab,n=nd.label(bb>0)   # O18n: neue Methode, Kantenpunkt hoeher als Plateau 2-5 m landeinwaerts (runde Kante zaehlt nicht), Schwelle 0.6 m   # O18m geeicht: 0.6-1.0 = Faltlinie Klippenkante, Bild unauffaellig
 for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('G5_beule_klippe',xx.mean()/RS,yy.mean()/RS,round(float(bb[yy,xx].max()),2))
 nrm=np.stack([-gx,-gy,np.ones_like(G)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
 fac=(dn>0.25)&(ST[:-1,:-1]>0.15)&(ST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)

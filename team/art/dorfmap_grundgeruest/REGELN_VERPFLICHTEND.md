@@ -115,3 +115,8 @@ Schwellen G5/G6/G2/G3/G11 sind Erstkalibrierung (O18k) und muessen an Bildern ge
 - G6: Bilder zeigen echte Stufen-/Streifenfacetten (E5, H7) → Schwelle bleibt.
 - G11: echte Fehlplatzierungen (bis 16.5 m) → Schwelle bleibt; Behebung in gen_relief (Objekte aufs Endgelaende, 4 Baeume an Wand entfernt).
 - T1: noch nicht an Bildern geeicht.
+
+## O18n
+- G5 neue Methode (`relief_o18n.g5_beulen`): Kantenpunkt bis 3 m an Wand, der >0.6 m hoeher liegt als das Plateau 2–5 m landeinwaerts (senkrecht zur Wand). Runde, abfallende Kante zaehlt nicht. 4 Bilder angesehen (273|132, 300|96, 115|201, 323|76): echte Aufwuerfe an der Kante. Treffer 375 -> 176 (alte Methode zaehlte die Kante selbst).
+- `landschaft_final` (gen_relief, abschaltbar LF_ALT=1): Senken >0.8 m nur anheben, Einzelspitzen, Facetten weich; nicht an Wand/Wegen/Rampen ±4 m/Wasser ±2 m/Hausplaetzen. G5-Absenken nach 3 Versuchen wirkungslos -> aus, offen.
+- Vergleich je Regel vor/nach: alles gleich oder weniger, Ausnahme G2_spitze_oben_fein 20 -> 21 (+1, Feinband, das der Schliff nicht anfasst; Ursache vermutlich Bandnaht-Uebernahme) – offen dokumentiert.
