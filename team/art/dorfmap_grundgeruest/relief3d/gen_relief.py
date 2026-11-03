@@ -864,13 +864,22 @@ def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5
 def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite; Messung rampe_1 quer 28.7 %]: Rampenwege +-1.5 m quer eben (2 % zur Bergseite), Laengsprofil Gauss 3 m, Auslauf 1.5-3.5 m smoothstep, nicht <2 m am Wasser; Grob+Fein
     from scipy.spatial import cKDTree
     GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest')
-    P=[];T=[];HC=[];SG=[]
+    P=[];T=[];HC=[];SG=[];Pl=[];Ll=[]
     for W in RAMPWEGE:
         W=np.array(W,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(W,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25)
         p=np.stack([np.interp(t,L,W[:,0]),np.interp(t,L,W[:,1])],1);d=np.gradient(p,axis=0);d/=np.maximum(np.linalg.norm(d,axis=1,keepdims=True),1e-9);n=np.stack([-d[:,1],d[:,0]],1)
         hc=nd.gaussian_filter1d(hf(p[:,0],p[:,1]),12,mode='nearest');b=hf(p[:,0]+n[:,0]*1.5,p[:,1]+n[:,1]*1.5)-hf(p[:,0]-n[:,0]*1.5,p[:,1]-n[:,1]*1.5);sg=np.sign(nd.gaussian_filter1d(b,12,mode='nearest'))
-        P.append(p);T.append(n);HC.append(hc);SG.append(sg)
+        P.append(p);T.append(n);HC.append(hc);SG.append(sg);Pl.append(p);Ll.append(t)
     P=np.concatenate(P);T=np.concatenate(T);HC=np.concatenate(HC);SG=np.concatenate(SG);kd=cKDTree(P)
+    if os.environ.get('KREUZ','0')!='0':   # O18r verworfen (R3 laengs 35->45, G6 +10):  [Gate R3 quer bis 101 %: Kreuzungen rampe_2/11, 3/5 und Kehre rampe_12 mit 2-4 m Abstand, nearest-Band springt]: Hoehenprofile an Kreuzungen/Kehren angleichen (Mittel), Korrektur laengs Gauss 4 m
+        RI=np.concatenate([np.full(len(q),j) for j,q in enumerate(Pl)]);LL=np.concatenate(Ll);pr=kd.query_pairs(3.2,output_type='ndarray')
+        pr=pr[(RI[pr[:,0]]!=RI[pr[:,1]])|(np.abs(LL[pr[:,0]]-LL[pr[:,1]])>8)];st=np.r_[0,np.cumsum([len(q) for q in Pl])]
+        for _ in range(30):
+            dl=np.zeros(len(P));cn=np.zeros(len(P));m=(HC[pr[:,0]]+HC[pr[:,1]])/2
+            np.add.at(dl,pr[:,0],m-HC[pr[:,0]]);np.add.at(dl,pr[:,1],m-HC[pr[:,1]]);np.add.at(cn,pr[:,0],1);np.add.at(cn,pr[:,1],1)
+            for j in range(len(Pl)):
+                a,b=st[j],st[j+1];g=nd.gaussian_filter1d(cn[a:b],16,mode='nearest');HC[a:b]+=0.7*nd.gaussian_filter1d(dl[a:b],16,mode='nearest')/np.maximum(g,1e-3)*np.clip(g*40,0,1)
+        print('o18r_kreuz_paare',len(pr),'rest_max',round(float(np.abs(HC[pr[:,0]]-HC[pr[:,1]]).max()),3) if len(pr) else 0)
     wasser=nd.distance_transform_edt(WV.reshape(GY,GX)<=-900)/RS
     WANDNEU=os.environ.get('RAMPENBAND','1')!='0';hfein=None;hgel=lambda X,Z:hf(X,Z) if hfein is None else hfein
     def ziel(X,Z):
@@ -884,6 +893,15 @@ def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;hfein=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);zf,wf=ziel(fx,fz)
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h*(1-wf)+zf*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':int((w>0).sum()),'fein':int((wf>0).sum())}
+def _senke_fuellen():   # O18r [Gate R5 loch 40: abflusslose Senken >1 m auf trockenem Land, meist am Wegrand/Wandfuss, von landschaft_final ausgenommen]: Senken auf 0.8 m Tiefe anheben (nur anheben), Rand weich Gauss 1 m; Grob+Fein
+    from skimage.morphology import reconstruction
+    GA=G_ANZ.reshape(GY,GX).astype(float);LAND=WV.reshape(GY,GX)<=-900
+    sd=GA.copy();sd[1:-1,1:-1]=GA.max();t=reconstruction(sd,GA,method='erosion')-GA;t[~nd.binary_erosion(LAND,iterations=2*RS)]=0
+    d=np.clip(t-0.95,0,None)   # V3: nur Grubenspitze auf 0.95 m Tiefe (V1 flach 0.8: G6 +16, V2 Kuppe: R3 +13, G5 +6)
+    nG=GA+d
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h+nd.map_coordinates(d,[fz*RS,fx*RS],order=1,mode='nearest');FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'punkte':int((d>0.01).sum()),'max':round(float(d.max()),2)}
 def _rand_auslauf():   # O18k [F t105u D1 Weg geht steil nach unten aus der Map; Messung rampe_11 Start 148.5|2.5, Kartenrand 14.0 -> 2.1 m Kerbe, O17 14.0]: Rampenende am Kartenrand -> Rand auf Randhoehe, linear auf Gelaende in 10 m, quer +-8 m voll, 8-14 m Auslauf; Grob+Fein
     GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest');E=[]
     for W in RAMPWEGE:
@@ -919,7 +937,7 @@ def _anschluss_gang():   # O18k [F t106u F1 Weg endet an Felswand, rampe_1 Ende 
     yy,xx=np.mgrid[0:GY,0:GX];nG=f(xx.ravel()/RS,yy.ravel()/RS,GA.ravel())
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h2=f(fx,fz,h);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'h_ende':round(h0,2),'h_ziel':round(h1,2),'grob':int((nG<GA.ravel()-0.01).sum()),'fein':int((h2<h-0.01).sum()),'max_ab':round(float((GA.ravel()-nG).max()),2)}
-G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
     M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)

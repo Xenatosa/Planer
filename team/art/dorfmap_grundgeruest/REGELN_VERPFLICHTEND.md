@@ -124,3 +124,6 @@ Schwellen G5/G6/G2/G3/G11 sind Erstkalibrierung (O18k) und muessen an Bildern ge
 ## O18r
 - Gate-Fix G2/G3 (`ausreisser`): Punkte mit <3 gueltigen Nachbarn werden nicht gewertet. Vorher nb=0 -> Treffer = Hoehe selbst (z.B. B1 80.2|36 "10.2 m" bei glattem Gelaende). Basis 18b3a60 neu: G2 4->2, G3 6->0, G2f 21->6, G3f 13->1 (Summe 1153->1118). Die O18m-"echten Spitzen" 11.6/9.6 m waren dieses Messartefakt.
 - RAMPENBAND Standard (V2): Band eben 2.5 m, Quergefaelle 1.5 % zur Bergseite, Boeschung C1-weich (tanh, 0.7 m/m), Auslauf 4.5-6 m. V1 (2 %) R3 quer 24->27 -> 1.5 %. Gegen Basis: R1_wand 9->0, R4_schlucht 13->0, R4_rand 3->0, G6 615->592, G5 169->166, T1 95->94, keine neue Regel hoeher.
+
+### O18r R5 (Senken fuellen) – verworfen nach 3 Versuchen
+SENKE V1 flach 0.8 m: R5 40->0, G6 +16, G2f +1, G3 +1, T1 +1. V2 Kuppe: R3 quer +13, G5 +6. V3 nur Spitze >0.95 m: R5 40->0, G6 +13, G2f +1, T1 +1. Standard aus (SENKE=0), Basis bleibt.
