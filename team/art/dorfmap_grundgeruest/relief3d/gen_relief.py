@@ -909,6 +909,20 @@ for _k,_x,_z,_d in _VW:
     _L=globals()[_k];_i=[i for i,o in enumerate(_L) if abs(o[0]-_x)<0.02 and abs(o[2]-_z)<0.02]
     for i in reversed(_i):_L.pop(i);_vwn+=1
 print('o18d_versunken_entfernt',_vwn,len(_VW))
+# O18m G11 (t112u): Objekte auf das endgueltige Anzeige-Gelaende setzen, Baeume an Wand (>0.9) entfernen [F]
+_GA=np.asarray(G_ANZ,float);_gy,_gx=np.gradient(_GA,1/RS);_ST=np.hypot(_gx,_gy);_g11=[0,0]
+for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
+    _L=globals().get(_k,[]);_neu=[]
+    for o in _L:
+        try:_x,_y,_z=float(o[0]),float(o[1]),float(o[2])
+        except Exception:_neu.append(o);continue
+        if _k=='baeume' and 0<=_x<NX and 0<=_z<NY and float(nd.map_coordinates(_ST,[[_z*RS],[_x*RS]],order=1)[0])>0.9:_g11[1]+=1;continue
+        if 0<=_x<NX and 0<=_z<NY:
+            _h=float(nd.map_coordinates(_GA,[[_z*RS],[_x*RS]],order=1,mode='nearest')[0])
+            if abs(_y-_h)>0.6:o=list(o);o[1]=round(_h,2);_g11[0]+=1
+        _neu.append(o)
+    _L[:]=_neu
+print('o18m_g11_gesetzt_entfernt',_g11)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}

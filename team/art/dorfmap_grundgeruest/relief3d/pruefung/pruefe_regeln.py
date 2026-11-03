@@ -90,14 +90,16 @@ def ausreisser(A,okm,thr,nm,step):
     for r,arr in ((nm[0],up),(nm[1],dn)):
         lab,n=nd.label(arr>thr)
         for k in range(1,n+1):yy,xx=np.nonzero(lab==k);j=arr[yy,xx].argmax();hit(r,xx[j]/step,yy[j]/step,round(float(arr[yy[j],xx[j]]),2))
-ausreisser(G,~nd.binary_dilation(WAND,iterations=RS),0.35,('G2_spitze_oben','G3_spitze_unten'),RS)
-ausreisser(Fz,ok&nd.binary_erosion(ok,iterations=2),0.35,('G2_spitze_oben_fein','G3_spitze_unten_fein'),FS)
+ausreisser(G,~nd.binary_dilation(WAND,iterations=3*RS),0.45,   # O18m geeicht: 0.35-0.42 = Hangknick am Wandrand, Bild unauffaellig
+ ('G2_spitze_oben','G3_spitze_unten'),RS)
+WDF=nd.zoom(nd.binary_dilation(WAND,iterations=3*RS).astype(np.uint8),FS/RS,order=0)[:Fz.shape[0],:Fz.shape[1]]>0;WDF=np.pad(WDF,((0,Fz.shape[0]-WDF.shape[0]),(0,Fz.shape[1]-WDF.shape[1])),constant_values=True)
+ausreisser(Fz,ok&nd.binary_erosion(ok,iterations=2)&~WDF,0.45,('G2_spitze_oben_fein','G3_spitze_unten_fein'),FS)   # O18m geeicht wie grob
 lap=nd.laplace(nd.gaussian_filter(G,1));ref=nd.uniform_filter(np.abs(lap),20*RS);bad=(np.abs(lap)>np.maximum(6*ref,0.15))&LAND&~nd.binary_dilation(WAND,iterations=2*RS)
 lab,n=nd.label(bad)
 for k in range(1,n+1):
     yy,xx=np.nonzero(lab==k)
     if len(xx)>=4:hit('G4_delle_beule',xx.mean()/RS,yy.mean()/RS,round(float(np.abs(lap[yy,xx]).max()),2))
-OBEN=nd.binary_dilation(WAND,iterations=3*RS)&~WAND&(G>nd.grey_dilation(G,size=7*RS)-1.0);bb=(G-nd.gaussian_filter(G,2*RS))*OBEN;lab,n=nd.label(bb>0.6)
+OBEN=nd.binary_dilation(WAND,iterations=3*RS)&~WAND&(G>nd.grey_dilation(G,size=7*RS)-1.0);bb=(G-nd.gaussian_filter(G,2*RS))*OBEN;lab,n=nd.label(bb>1.0)   # O18m geeicht: 0.6-1.0 = Faltlinie Klippenkante, Bild unauffaellig
 for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('G5_beule_klippe',xx.mean()/RS,yy.mean()/RS,round(float(bb[yy,xx].max()),2))
 nrm=np.stack([-gx,-gy,np.ones_like(G)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
 fac=(dn>0.25)&(ST[:-1,:-1]>0.15)&(ST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)

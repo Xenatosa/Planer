@@ -108,3 +108,10 @@ Schwellen G5/G6/G2/G3/G11 sind Erstkalibrierung (O18k) und muessen an Bildern ge
 
 ## Begruendete Ausnahmen
 (keine)
+
+## Eichung O18m (Bilder `relief3d/pruefung/o18/eich_o18m/`)
+- G2/G3: 4 Treffer je Regel angesehen. 0.35–0.42 m liegen alle am Hangknick direkt neben Wand, unauffaellig → Schwelle 0.45 m, Wandabstand 1.5 m (grob+fein). Echte Spitzen (11.6, 9.6, 1.8, 1.7 m) bleiben Treffer.
+- G5: 0.6–1.0 m = Faltlinie an Klippenkante, unauffaellig → 1.0 m. Hinweis: Rest (375) ist zum grossen Teil die konvexe Kante selbst (Messfehler der Methode), Methode muss noch umgebaut werden, bis dahin nicht als Fehlalarm abgehakt.
+- G6: Bilder zeigen echte Stufen-/Streifenfacetten (E5, H7) → Schwelle bleibt.
+- G11: echte Fehlplatzierungen (bis 16.5 m) → Schwelle bleibt; Behebung in gen_relief (Objekte aufs Endgelaende, 4 Baeume an Wand entfernt).
+- T1: noch nicht an Bildern geeicht.
