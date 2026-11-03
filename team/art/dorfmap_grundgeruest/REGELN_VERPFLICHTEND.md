@@ -127,3 +127,9 @@ Schwellen G5/G6/G2/G3/G11 sind Erstkalibrierung (O18k) und muessen an Bildern ge
 
 ### O18r R5 (Senken fuellen) – verworfen nach 3 Versuchen
 SENKE V1 flach 0.8 m: R5 40->0, G6 +16, G2f +1, G3 +1, T1 +1. V2 Kuppe: R3 quer +13, G5 +6. V3 nur Spitze >0.95 m: R5 40->0, G6 +13, G2f +1, T1 +1. Standard aus (SENKE=0), Basis bleibt.
+
+### O18r G6-Eichung an Bildern (pruefung/o18/g6eich, clay, lod0, Streiflicht)
+542/592 G6-Treffer liegen <3 m an Waenden. Bilder: B4 Stufe/Kante an Plateaurand sichtbar, C4 treppige Blockstufen am Wandfuss, C6 knubbelige Facetten am Hang, D7 Rillen quer zum Hang + Gitterlinien. Alle vier sind echte Fehler -> keine Wandabstand-Ausnahme, G6 bleibt ungeeicht offen.
+### O18r Ausnahmen (Vorschlag, noch nicht im Gate)
+R3: Haarnadel rampe_12 (Schenkel 2-4 m, 2.5 m Hoehensprung) und Kreuzungen rampe_2x11, rampe_3x5 folgen aus Overlay-Geometrie; KREUZ-Angleich verworfen (R3 laengs 35->45, G6 +10).
+G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
