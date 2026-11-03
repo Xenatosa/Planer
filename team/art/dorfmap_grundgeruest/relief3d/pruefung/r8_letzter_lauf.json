@@ -1,10 +1,10 @@
 {
-"summe": 48,
+"summe": 49,
 "je_regel": {
-"R8_stufe": 9,
+"R8_stufe": 10,
 "R8_gitter": 10,
-"R8_quer": 5,
-"R8a_wegende": 24
+"R8_quer": 4,
+"R8a_wegende": 25
 },
 "kreuzungen": 31,
 "je_feld": {
@@ -33,6 +33,9 @@
 "R8_gitter": 1,
 "R8a_wegende": 1
 },
+"C7": {
+"R8a_wegende": 1
+},
 "D1": {
 "R8_stufe": 2,
 "R8_gitter": 2,
@@ -58,6 +61,7 @@
 "R8a_wegende": 1
 },
 "F6": {
+"R8_stufe": 1,
 "R8_gitter": 1
 },
 "G1": {
@@ -77,7 +81,6 @@
 "H5": {
 "R8_stufe": 1,
 "R8_gitter": 1,
-"R8_quer": 1,
 "R8a_wegende": 2
 },
 "H6": {
@@ -90,7 +93,7 @@
 "feld": "C3",
 "x": 125.3,
 "z": 126.5,
-"wert": 0.95,
+"wert": 0.88,
 "art": "rampe_12_anfang+rampe_12_ende+rampe_12x12"
 },
 {
@@ -98,7 +101,7 @@
 "feld": "C3",
 "x": 125.3,
 "z": 126.5,
-"wert": 1.38,
+"wert": 1.1,
 "art": "rampe_12_anfang+rampe_12_ende+rampe_12x12"
 },
 {
@@ -106,7 +109,7 @@
 "feld": "C3",
 "x": 125.3,
 "z": 126.5,
-"wert": 141.4,
+"wert": 138.5,
 "art": "rampe_12_anfang+rampe_12_ende+rampe_12x12"
 },
 {
@@ -114,7 +117,7 @@
 "feld": "D1",
 "x": 152.5,
 "z": 28.5,
-"wert": 1.39,
+"wert": 1.6,
 "art": "rampe_2x11"
 },
 {
@@ -122,7 +125,7 @@
 "feld": "D1",
 "x": 152.5,
 "z": 28.5,
-"wert": 2.18,
+"wert": 1.77,
 "art": "rampe_2x11"
 },
 {
@@ -130,7 +133,7 @@
 "feld": "D1",
 "x": 152.5,
 "z": 28.5,
-"wert": 23.0,
+"wert": 29.3,
 "art": "rampe_2x11"
 },
 {
@@ -172,6 +175,14 @@
 "z": 228.6,
 "wert": 0.17,
 "art": "rampe_3_ende"
+},
+{
+"regel": "R8_stufe",
+"feld": "F6",
+"x": 249.0,
+"z": 254.3,
+"wert": 0.2,
+"art": "rampe_4_ende"
 },
 {
 "regel": "R8_gitter",
@@ -242,7 +253,7 @@
 "feld": "H5",
 "x": 320.0,
 "z": 214.0,
-"wert": 0.26,
+"wert": 0.23,
 "art": "rampe_10_ende"
 },
 {
@@ -250,15 +261,7 @@
 "feld": "H5",
 "x": 320.0,
 "z": 214.0,
-"wert": 0.22,
-"art": "rampe_10_ende"
-},
-{
-"regel": "R8_quer",
-"feld": "H5",
-"x": 320.0,
-"z": 214.0,
-"wert": 6.3,
+"wert": 0.24,
 "art": "rampe_10_ende"
 },
 {
@@ -266,7 +269,7 @@
 "feld": "D1",
 "x": 156.5,
 "z": 37.5,
-"wert": 0.34,
+"wert": 0.37,
 "art": "rampe_11_ende"
 },
 {
@@ -274,7 +277,7 @@
 "feld": "D1",
 "x": 156.5,
 "z": 37.5,
-"wert": 0.34,
+"wert": 0.44,
 "art": "rampe_11_ende"
 },
 {
@@ -322,7 +325,7 @@
 "feld": "E1",
 "x": 175.1,
 "z": 25.7,
-"wert": 0.18,
+"wert": 0.17,
 "weg": "rampe_2_ende"
 },
 {
@@ -359,6 +362,14 @@
 },
 {
 "regel": "R8a_wegende",
+"feld": "C7",
+"x": 100.0,
+"z": 269.1,
+"wert": 0.28,
+"weg": "rampe_5_ende"
+},
+{
+"regel": "R8a_wegende",
 "feld": "C5",
 "x": 87.6,
 "z": 180.1,
@@ -386,7 +397,7 @@
 "feld": "D4",
 "x": 135.4,
 "z": 146.8,
-"wert": 0.26,
+"wert": 0.35,
 "weg": "rampe_7_ende"
 },
 {
@@ -402,7 +413,7 @@
 "feld": "C4",
 "x": 89.5,
 "z": 171.4,
-"wert": 0.18,
+"wert": 0.17,
 "weg": "rampe_8_ende"
 },
 {
@@ -434,7 +445,7 @@
 "feld": "H5",
 "x": 320.0,
 "z": 214.0,
-"wert": 0.41,
+"wert": 0.21,
 "weg": "rampe_10_ende"
 },
 {
@@ -450,7 +461,7 @@
 "feld": "D1",
 "x": 156.5,
 "z": 37.5,
-"wert": 0.49,
+"wert": 0.37,
 "weg": "rampe_11_ende"
 },
 {
@@ -476,16 +487,16 @@
 "z": 126.5,
 "feld": "C3",
 "art": "rampe_12_anfang+rampe_12_ende+rampe_12x12",
-"stufe": 0.951,
-"gitter": 1.378
+"stufe": 0.88,
+"gitter": 1.099
 },
 {
 "x": 152.5,
 "z": 28.5,
 "feld": "D1",
 "art": "rampe_2x11",
-"stufe": 1.389,
-"gitter": 2.18
+"stufe": 1.597,
+"gitter": 1.767
 },
 {
 "x": 132.9,
@@ -581,7 +592,7 @@
 "z": 254.3,
 "feld": "F6",
 "art": "rampe_4_ende",
-"stufe": 0.075,
+"stufe": 0.203,
 "gitter": 0.215,
 "quer_pct": 0.1
 },
@@ -590,9 +601,9 @@
 "z": 269.1,
 "feld": "C7",
 "art": "rampe_5_ende",
-"stufe": 0.033,
-"gitter": 0.082,
-"quer_pct": 0.0
+"stufe": 0.069,
+"gitter": 0.032,
+"quer_pct": 1.5
 },
 {
 "x": 87.6,
@@ -680,9 +691,9 @@
 "z": 214.0,
 "feld": "H5",
 "art": "rampe_10_ende",
-"stufe": 0.261,
-"gitter": 0.221,
-"quer_pct": 6.3
+"stufe": 0.233,
+"gitter": 0.241,
+"quer_pct": 1.5
 },
 {
 "x": 148.5,
@@ -698,9 +709,9 @@
 "z": 37.5,
 "feld": "D1",
 "art": "rampe_11_ende",
-"stufe": 0.337,
-"gitter": 0.34,
-"quer_pct": 0.0
+"stufe": 0.366,
+"gitter": 0.437,
+"quer_pct": 0.8
 },
 {
 "x": 269.6,
