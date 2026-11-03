@@ -172,7 +172,7 @@ def strahl_hoehe(L5,pfad='pruefung/strahl_hoehe_t65u.json'):
         for o in L:
             g=h_.get(f"{o[0]:.3f}|{o[2]:.3f}")
             if g is None:continue
-            y=g+0.3 if nm=='baeume' else g+min(0.0,max(-0.25*o[3],o[1]-g))
+            y=g+0.3 if nm=='baeume' else g+min(0.0,max(-min(0.25*o[3],0.55),o[1]-g))   # O18u: Einbettung max 0,55 m (G11-Toleranz 0,6) [A]
             if abs(y-o[1])>0.005:o[1]=round(y,3);c+=1
         st[nm]=c
     return L5,st
