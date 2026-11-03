@@ -976,6 +976,11 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18w [Gate G6 F
     n=np.stack([-gx,-gy,np.ones_like(GA)]);n/=np.linalg.norm(n,axis=0);dn=np.zeros_like(GA);dn[:,:-1]=sum(np.abs(np.diff(n[i],axis=1)) for i in range(3))
     LAND_=WV.reshape(GY,GX)<=-900;M=(dn>0.25)&(st>0.15)&(st<0.8)&LAND_&~nd.binary_dilation(W_,iterations=int(float(os.environ.get('FALTWD','1'))*RS))&~nd.binary_dilation(WEGA.reshape(GY,GX)>20,iterations=3*RS)
     w=np.clip(nd.gaussian_filter(nd.binary_dilation(M,iterations=RS)*1.0,RS*0.5)*1.5,0,1)*nd.binary_erosion(LAND_,iterations=RS)
+    _yy,_xx=np.mgrid[0:GY,0:GX]
+    for _r in RAMPWEGE:   # O18y [Gate R1_wand rampe_1/rampe_2 Enden]: Rampenenden 6 m frei lassen [A]
+        _p=np.asarray([(q[0],q[1]) if not isinstance(q,dict) else (q['x'],q['z']) for q in (_r['punkte'] if isinstance(_r,dict) else _r)],float)
+        for _e in (_p[0],_p[-1]):w[np.hypot(_xx/RS-_e[0],_yy/RS-_e[1])<float(os.environ.get('FALTRE','6'))]=0
+    if os.environ.get('FALTFADE','0')!='0':w*=np.clip((nd.distance_transform_edt(~W_)/RS-1)/2,0,1)   # O18y: Gewicht 1->3 m Wandabstand einblenden (G7b_feld)
     S=nd.gaussian_filter(GA,SG*RS);nG=GA*(1-w)+S*w
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fy=vid//FXn;fx=vid%FXn;h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
     wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)

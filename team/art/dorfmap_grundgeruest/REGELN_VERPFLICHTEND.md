@@ -208,3 +208,8 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - _falten_glatt ab 1 m statt 3 m Wandabstand (FALTWD 1, FALTSG 1.0), Wege +3 m ausgespart. Varianten: WD1/SG1.0 angenommen; WD1/SG1.5 verworfen (Summe 662, R3 +11, G11 +13).
 - Ergebnis nach Raycast: Summe 630->583 (ohne Ausnahmen 487->431). G6 273->233, G5 82->64, R5 21->17. Anstiege: G7b_feld 21->26 (+5), G2f 3->8/G3f 1->2 (alle Maskenecken-Ausnahme), R1_wand 0->2 (F1 rampe_1 Ende, E1 rampe_2 Ende), R3_laengs +1, T1 +1. Alle <=+5. R1_wand und G7b_feld noch nicht nachgebessert.
 - G6 je Feld vorher: C5 22, B4 21, C4 18, C3 15, G3 12, H6 12.
+
+### O18y S1 R1_wand / G7b_feld
+- Ursache R1_wand rampe_1 (F1) und rampe_2 (E1): _falten_glatt (ab 1 m) hat Wandfuss vor dem Rampenende verschmiert. Fix: Rampenenden aller Rampen 6 m frei von _falten_glatt (FALTRE 6).
+- Varianten: V1 WD1 + Enden frei: R1_wand 2->0, G7b_feld 26->23, G6 233->249, G5 64->66, R3_woelb +1 (angenommen). V2 WD2: G7b_feld 21, aber G5 +19, G6 +32, G11 +9 (verworfen). V3 Fade 1->3 m: G7b_feld 21, aber G5 +20, R5 +5, G6 +25 (verworfen).
+- G7b_feld <=21 NICHT erreicht (23). Konflikt: Glaettung 1-3 m vor Wand senkt G5/G6, nimmt aber Wandrauheit je Feld. Summe 583->597 (ohne Ausnahmen 431->444). Raycast 2x: G11 0, t42u 0.
