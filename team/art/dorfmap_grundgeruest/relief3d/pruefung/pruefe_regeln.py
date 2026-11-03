@@ -102,8 +102,17 @@ for k in range(1,n+1):
     if len(xx)>=4:hit('G4_delle_beule',xx.mean()/RS,yy.mean()/RS,round(float(np.abs(lap[yy,xx]).max()),2))
 sys.path.insert(0,os.path.join(os.path.dirname(os.path.abspath(__file__)),'..'));from relief_o18n import g5_beulen;bb,_o=g5_beulen(G,RS,WAND,0.6);lab,n=nd.label(bb>0)   # O18n: neue Methode, Kantenpunkt hoeher als Plateau 2-5 m landeinwaerts (runde Kante zaehlt nicht), Schwelle 0.6 m   # O18m geeicht: 0.6-1.0 = Faltlinie Klippenkante, Bild unauffaellig
 for k in range(1,n+1):yy,xx=np.nonzero(lab==k);hit('G5_beule_klippe',xx.mean()/RS,yy.mean()/RS,round(float(bb[yy,xx].max()),2))
-nrm=np.stack([-gx,-gy,np.ones_like(G)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
-fac=(dn>0.25)&(ST[:-1,:-1]>0.15)&(ST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)
+# O18t Messkorrektur: G6/G11 auf der SICHTBAREN Flaeche (Feinband wo vorhanden, sonst Grobnetz); GATE_GROB=1 = alte Messung. Schwellen unveraendert [A]
+GROB=bool(os.environ.get('GATE_GROB'));Fv=F[::FS//RS,::FS//RS][:GY,:GX];GV=G if GROB else np.where(np.isfinite(Fv),Fv,G)
+def hv(x,z):
+    if GROB:return float(hf([x],[z])[0])
+    fx,fy=x*FS,z*FS;i,j=int(fx),int(fy)
+    if 0<=i<FXn-1 and 0<=j<FYn-1 and ok[j:j+2,i:i+2].all():
+        u,v=fx-i,fy-j;q=F[j:j+2,i:i+2];return float(q[0,0]*(1-u)*(1-v)+q[0,1]*u*(1-v)+q[1,0]*(1-u)*v+q[1,1]*u*v)
+    return float(hf([x],[z])[0])
+vgy,vgx=np.gradient(GV,1/RS);VST=np.hypot(vgx,vgy)
+nrm=np.stack([-vgx,-vgy,np.ones_like(GV)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
+fac=(dn>0.25)&(VST[:-1,:-1]>0.15)&(VST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)
 for k in range(1,n+1):
     yy,xx=np.nonzero(lab==k)
     if len(xx)>=6:hit('G6_facette',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
@@ -125,7 +134,7 @@ for kind in ('baeume','felsen','findlinge','steine','felsbloecke'):
         try:x,y,z=float(o[0]),float(o[1]),float(o[2])
         except Exception:continue
         if not(0<=x<NX and 0<=z<NY):continue
-        h0=float(hf([x],[z])[0]);
+        h0=hv(x,z);
         if abs(y-h0)>0.6:hit('G11_objekt_schwebt_sinkt',x,z,round(y-h0,2),art=kind)
         if kind=='baeume' and float(nd.map_coordinates(ST,[[z*RS],[x*RS]],order=1)[0])>0.9:hit('G11_baum_an_wand',x,z,kind)
 # ---------- TEXTUR T1-T6 (Anzeige-Farbe VC, Daten) ----------
