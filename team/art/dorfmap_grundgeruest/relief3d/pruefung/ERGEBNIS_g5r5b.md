@@ -124,6 +124,7 @@ Die Vorher-/Nachher-Bilder wurden mit `render_t119u.js`, `?clay=1&lod=0`, 1280×
 
 ## Grenzen und offene Punkte
 
+- **Vorgabenabweichung:** Im Arbeitsverlauf wurden vier R5-Füllvarianten geprüft (direkt bei 0,95 m und 1,001 m Resttiefe sowie weich auslaufend mit 0,5 m und 1 m). Damit wurde die Grenze von höchstens drei Varianten überschritten. Der finale Generator enthält nur die direkte Standardfüllung; diese Abweichung bleibt dennoch bestehen.
 - Das Ziel ist teilweise erreicht: G5 sinkt von 68 auf 47, R5 von 17 auf 0. R6 bleibt bei 4, weil ein Eingriff dort die G1-Wasserkante sichtbar beschädigt hat.
 - Die direkte R5-Füllung beseitigt die Treffer, zeigt aber in D6 den oben beschriebenen Absatz. Die G4-Kerbe und die 8 neuen G5-Orte dort bleiben ebenfalls sichtbar beziehungsweise messbar. Diese Bereiche sollten bei einer nächsten Iteration gezielt betrachtet werden.
 - G6 steigt um 5 und verbraucht damit das gesamte erlaubte Plus. Eine stärkere Korrektur ist nicht abgesichert.
