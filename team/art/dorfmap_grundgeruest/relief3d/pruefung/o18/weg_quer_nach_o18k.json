@@ -1,0 +1,551 @@
+[
+{
+"weg": "WEGA_G1",
+"felder": [
+"G1"
+],
+"n": 22,
+"quer_mittel_pct": 3.8,
+"quer_max_pct": 18.6,
+"quer_gt8_anteil": 0.18,
+"woelb_mittel_m": 0.04,
+"woelb_max_m": 0.363,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "rampe_1",
+"felder": [
+"F1",
+"G1"
+],
+"n": 32,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.4,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.018,
+"woelb_max_m": 0.027,
+"laengs_rau_m": 0.035,
+"g1_schnitte": [
+[
+272.7,
+21.4,
+1.8,
+0.011
+],
+[
+271.3,
+21.9,
+1.9,
+0.013
+],
+[
+269.9,
+22.4,
+2.1,
+0.012
+],
+[
+268.5,
+22.9,
+1.8,
+0.015
+],
+[
+267.1,
+23.4,
+1.7,
+0.013
+],
+[
+265.6,
+23.8,
+1.9,
+0.013
+],
+[
+264.2,
+24.3,
+2.0,
+0.019
+],
+[
+262.8,
+24.8,
+1.7,
+0.015
+],
+[
+261.4,
+25.3,
+1.7,
+0.016
+],
+[
+260.0,
+25.8,
+1.4,
+0.02
+],
+[
+258.5,
+26.3,
+1.6,
+0.013
+],
+[
+257.1,
+26.7,
+2.2,
+0.013
+],
+[
+255.7,
+27.2,
+1.3,
+0.021
+],
+[
+254.3,
+27.7,
+1.5,
+0.013
+],
+[
+252.9,
+28.2,
+1.7,
+0.013
+]
+]
+},
+{
+"weg": "rampe_12",
+"felder": [
+"C3",
+"D3",
+"D4"
+],
+"n": 24,
+"quer_mittel_pct": 15.2,
+"quer_max_pct": 36.2,
+"quer_gt8_anteil": 0.58,
+"woelb_mittel_m": 0.278,
+"woelb_max_m": 0.8,
+"laengs_rau_m": 0.038,
+"g1_schnitte": []
+},
+{
+"weg": "WEGA_H1",
+"felder": [
+"H1"
+],
+"n": 4,
+"quer_mittel_pct": 23.7,
+"quer_max_pct": 58.9,
+"quer_gt8_anteil": 0.5,
+"woelb_mittel_m": 0.084,
+"woelb_max_m": 0.15,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "rampe_11",
+"felder": [
+"D1"
+],
+"n": 31,
+"quer_mittel_pct": 9.3,
+"quer_max_pct": 72.0,
+"quer_gt8_anteil": 0.26,
+"woelb_mittel_m": 0.158,
+"woelb_max_m": 1.334,
+"laengs_rau_m": 0.118,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_2",
+"felder": [
+"D1",
+"E1"
+],
+"n": 32,
+"quer_mittel_pct": 7.0,
+"quer_max_pct": 91.2,
+"quer_gt8_anteil": 0.12,
+"woelb_mittel_m": 0.136,
+"woelb_max_m": 1.298,
+"laengs_rau_m": 0.043,
+"g1_schnitte": []
+},
+{
+"weg": "WEGA_F5",
+"felder": [
+"F5"
+],
+"n": 50,
+"quer_mittel_pct": 2.4,
+"quer_max_pct": 25.3,
+"quer_gt8_anteil": 0.1,
+"woelb_mittel_m": 0.017,
+"woelb_max_m": 0.188,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_H2",
+"felder": [
+"H2"
+],
+"n": 39,
+"quer_mittel_pct": 2.3,
+"quer_max_pct": 18.4,
+"quer_gt8_anteil": 0.1,
+"woelb_mittel_m": 0.005,
+"woelb_max_m": 0.038,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "rampe_3",
+"felder": [
+"C6",
+"D6",
+"E6"
+],
+"n": 51,
+"quer_mittel_pct": 2.3,
+"quer_max_pct": 13.4,
+"quer_gt8_anteil": 0.04,
+"woelb_mittel_m": 0.022,
+"woelb_max_m": 0.165,
+"laengs_rau_m": 0.022,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_5",
+"felder": [
+"C6",
+"C7",
+"D6"
+],
+"n": 34,
+"quer_mittel_pct": 2.5,
+"quer_max_pct": 16.4,
+"quer_gt8_anteil": 0.03,
+"woelb_mittel_m": 0.015,
+"woelb_max_m": 0.171,
+"laengs_rau_m": 0.01,
+"g1_schnitte": []
+},
+{
+"weg": "WEGA_G4",
+"felder": [
+"G4"
+],
+"n": 69,
+"quer_mittel_pct": 0.6,
+"quer_max_pct": 11.2,
+"quer_gt8_anteil": 0.03,
+"woelb_mittel_m": 0.004,
+"woelb_max_m": 0.058,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "rampe_0",
+"felder": [
+"B1",
+"C1",
+"C2"
+],
+"n": 36,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.9,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.026,
+"woelb_max_m": 0.04,
+"laengs_rau_m": 0.029,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_4",
+"felder": [
+"F6",
+"G6",
+"H6"
+],
+"n": 37,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.2,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.017,
+"woelb_max_m": 0.026,
+"laengs_rau_m": 0.022,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_6",
+"felder": [
+"C5"
+],
+"n": 27,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.7,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.016,
+"woelb_max_m": 0.023,
+"laengs_rau_m": 0.025,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_7",
+"felder": [
+"C4",
+"C5",
+"D4"
+],
+"n": 28,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.6,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.016,
+"woelb_max_m": 0.024,
+"laengs_rau_m": 0.058,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_8",
+"felder": [
+"C4"
+],
+"n": 24,
+"quer_mittel_pct": 2.1,
+"quer_max_pct": 2.9,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.028,
+"woelb_max_m": 0.035,
+"laengs_rau_m": 0.02,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_9",
+"felder": [
+"G3",
+"G4",
+"H4"
+],
+"n": 28,
+"quer_mittel_pct": 2.0,
+"quer_max_pct": 2.6,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.016,
+"woelb_max_m": 0.023,
+"laengs_rau_m": 0.028,
+"g1_schnitte": []
+},
+{
+"weg": "rampe_10",
+"felder": [
+"H5"
+],
+"n": 16,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 2.5,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.017,
+"woelb_max_m": 0.028,
+"laengs_rau_m": 0.037,
+"g1_schnitte": []
+},
+{
+"weg": "WEGA_D2",
+"felder": [
+"D2"
+],
+"n": 50,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_D3",
+"felder": [
+"D3"
+],
+"n": 29,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_E1",
+"felder": [
+"E1"
+],
+"n": 4,
+"quer_mittel_pct": 1.9,
+"quer_max_pct": 6.5,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.013,
+"woelb_max_m": 0.044,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_E2",
+"felder": [
+"E2"
+],
+"n": 48,
+"quer_mittel_pct": 0.1,
+"quer_max_pct": 2.6,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.003,
+"woelb_max_m": 0.14,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_E3",
+"felder": [
+"E3"
+],
+"n": 22,
+"quer_mittel_pct": 0.1,
+"quer_max_pct": 1.3,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.008,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_E4",
+"felder": [
+"E4"
+],
+"n": 65,
+"quer_mittel_pct": 0.2,
+"quer_max_pct": 3.1,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.001,
+"woelb_max_m": 0.015,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_E5",
+"felder": [
+"E5"
+],
+"n": 10,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_F1",
+"felder": [
+"F1"
+],
+"n": 4,
+"quer_mittel_pct": 0.5,
+"quer_max_pct": 0.9,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.005,
+"woelb_max_m": 0.008,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_F2",
+"felder": [
+"F2"
+],
+"n": 52,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_F3",
+"felder": [
+"F3"
+],
+"n": 9,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_F4",
+"felder": [
+"F4"
+],
+"n": 83,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_G2",
+"felder": [
+"G2"
+],
+"n": 51,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.0,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.0,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_G3",
+"felder": [
+"G3"
+],
+"n": 13,
+"quer_mittel_pct": 0.0,
+"quer_max_pct": 0.3,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.003,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_G5",
+"felder": [
+"G5"
+],
+"n": 59,
+"quer_mittel_pct": 0.1,
+"quer_max_pct": 3.1,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.0,
+"woelb_max_m": 0.011,
+"laengs_rau_m": 0.0
+},
+{
+"weg": "WEGA_H5",
+"felder": [
+"H5"
+],
+"n": 12,
+"quer_mittel_pct": 0.2,
+"quer_max_pct": 0.5,
+"quer_gt8_anteil": 0.0,
+"woelb_mittel_m": 0.002,
+"woelb_max_m": 0.006,
+"laengs_rau_m": 0.0
+}
+]

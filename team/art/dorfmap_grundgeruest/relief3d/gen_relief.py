@@ -840,7 +840,45 @@ def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5
     cf=nd.map_coordinates(np.where(m,capf,nG),[fy,fx],order=1,mode='nearest');mf=nd.map_coordinates(ms,[fy,fx],order=1,mode='nearest')
     h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);hn=h-np.maximum(h-cf,0)*mf;kf=int((hn<h-0.01).sum());FW['h']=base64.b64encode(hn.astype(np.float32).tobytes()).decode()
     return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':k,'fein':kf}
-G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite; Messung rampe_1 quer 28.7 %]: Rampenwege +-1.5 m quer eben (2 % zur Bergseite), Laengsprofil Gauss 3 m, Auslauf 1.5-3.5 m smoothstep, nicht <2 m am Wasser; Grob+Fein
+    from scipy.spatial import cKDTree
+    GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest')
+    P=[];T=[];HC=[];SG=[]
+    for W in RAMPWEGE:
+        W=np.array(W,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(W,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25)
+        p=np.stack([np.interp(t,L,W[:,0]),np.interp(t,L,W[:,1])],1);d=np.gradient(p,axis=0);d/=np.maximum(np.linalg.norm(d,axis=1,keepdims=True),1e-9);n=np.stack([-d[:,1],d[:,0]],1)
+        hc=nd.gaussian_filter1d(hf(p[:,0],p[:,1]),12,mode='nearest');b=hf(p[:,0]+n[:,0]*1.5,p[:,1]+n[:,1]*1.5)-hf(p[:,0]-n[:,0]*1.5,p[:,1]-n[:,1]*1.5);sg=np.sign(nd.gaussian_filter1d(b,12,mode='nearest'))
+        P.append(p);T.append(n);HC.append(hc);SG.append(sg)
+    P=np.concatenate(P);T=np.concatenate(T);HC=np.concatenate(HC);SG=np.concatenate(SG);kd=cKDTree(P)
+    wasser=nd.distance_transform_edt(WV.reshape(GY,GX)<=-900)/RS
+    def ziel(X,Z):
+        Q=np.stack([X,Z],1);dist,i=kd.query(Q,distance_upper_bound=3.6);ok=np.isfinite(dist);i=np.where(ok,i,0)
+        s=((Q-P[i])*T[i]).sum(1);w=np.where(dist<=1.5,1.0,np.clip((3.5-dist)/2.0,0,1));w=w*w*(3-2*w)*ok
+        w=w*(nd.map_coordinates(wasser,[Z*RS,X*RS],order=0,mode='nearest')>2);return HC[i]-0.02*np.clip(s,-1.5,1.5)*SG[i],w
+    yy,xx=np.mgrid[0:GY,0:GX];z,w=ziel(xx.ravel()/RS,yy.ravel()/RS);nG=GA.ravel()*(1-w)+z*w
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS;zf,wf=ziel(fx,fz)
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h=h*(1-wf)+zf*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'grob':int((w>0).sum()),'fein':int((wf>0).sum())}
+def _rand_auslauf():   # O18k [F t105u D1 Weg geht steil nach unten aus der Map; Messung rampe_11 Start 148.5|2.5, Kartenrand 14.0 -> 2.1 m Kerbe, O17 14.0]: Rampenende am Kartenrand -> Rand auf Randhoehe, linear auf Gelaende in 10 m, quer +-8 m voll, 8-14 m Auslauf; Grob+Fein
+    GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest');E=[]
+    for W in RAMPWEGE:
+        for x,z in (W[0],W[-1]):
+            for ax,v,lim in ((1,z,0),(1,z,NY),(0,x,0),(0,x,NX)):
+                if abs(v-lim)<4:
+                    u=x if ax==1 else z;q=np.arange(u-30,u+31,0.5);rr=hf(q,np.full_like(q,lim)) if ax==1 else hf(np.full_like(q,lim),q)
+                    E.append((ax,lim,u,float(np.percentile(rr,80))))
+    def lift(X,Z,H):
+        for ax,lim,u,eh in E:
+            d=np.abs((Z if ax==1 else X)-lim);t=np.abs((X if ax==1 else Z)-u);a=np.clip(d/10,0,1)
+            far=hf(X,np.full_like(X,lim+np.sign(0.5-lim/ (NY if ax==1 else NX))*10)) if ax==1 else hf(np.full_like(Z,lim+np.sign(0.5-lim/NX)*10),Z)
+            ln=eh+(far-eh)*a;w=np.clip((14-t)/6,0,1);w=w*w*(3-2*w)*(d<10)
+            H=H+np.maximum(ln-H,0)*w
+        return H
+    yy,xx=np.mgrid[0:GY,0:GX];nG=lift(xx.ravel()/RS,yy.ravel()/RS,GA.ravel())
+    vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);fz=vid//FXn/FS;fx=vid%FXn/FS
+    h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float);h2=lift(fx,fz,h);FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'enden':[(a,l,round(u,1),round(e,2)) for a,l,u,e in E],'grob':int((nG>GA.ravel()+0.01).sum()),'fein':int((h2>h+0.01).sum())}
+G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 def _wand_rau():   # O18j: Wandrauheit (mittl. |h - Gauss 1 m|) Stand O17 vs jetzt, Grob + Fein (gleiche vid)
     M=_wand_maske();r=lambda A:float(np.abs(A-nd.gaussian_filter(A,RS*1.0))[M].mean());GA=G_ANZ.reshape(GY,GX).astype(float)
     vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
