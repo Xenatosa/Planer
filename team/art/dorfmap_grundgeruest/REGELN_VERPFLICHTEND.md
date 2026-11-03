@@ -191,3 +191,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - O18w G7b-Rauheit (Ziel r1>=0.584, Stand 0.521): _wand_mikro (WMR, Default AUS), Grob+Fein aus einem Rauschfeld, 3 Varianten:
   V1 Wandkern (Steil>1, 1 m eingerueckt) A0.25: 0.528, G6 +7, G5 +1. V2 Steil>0.8 A0.35: G6 +110, R5 +24, G5 +12, G11 +4 (verworfen). V3 Steil>1 A0.3 feiner: 0.544 (=0.79), G6 +36, R5 +13, G5 +3, aber kantenschaerfe 0->erfuellt.
   Befund: Rauheit gegen O17 ist mit den Gelaende-Regeln G5/G6/R5 im Wandsaum gekoppelt; ohne Regelentscheidung (z.B. G7b nur im Wandkern messen, oder G6/R5 im Wand-Saum anders) nicht erreichbar. Offen, Entscheidung Fabian.
+
+### O18w G6 gegen G7b (Eichbilder pruefung/o18/o18w/g6eich/, je 24 m, VC x Hillshade, blau=Wand, rot=G6)
+- Nah an Wand (C3, C4; dw 0-0.5 m): Treffer liegen auf Wandschulter/Felsband-Kanten, die G7b scharf verlangt. 230 von 578 Treffern < 1 m von Wand. Teilweise echter Widerspruch.
+- Fern (D4 dw 7.5, E3 dw 54): sichtbare echte Knicklinien (Rinne/Falte). Echte Fehler.
+- Fix: _falten_glatt (FALT, FALTSG 1.0): Gauss nur >=3 m von Wand, Land, kein Weg. G6 578->561, G5 84->82, R5 24->21, R3 -2. Summe 942->918, keine Klasse steigt.
+- Vorschlag Regelkorrektur (nicht umgesetzt, Entscheid Fabian): G6 im 1-m-Wandsaum nicht zaehlen, da dort G7b-Kantenschaerfe gilt. Belegt durch g6_nah_0/1.
