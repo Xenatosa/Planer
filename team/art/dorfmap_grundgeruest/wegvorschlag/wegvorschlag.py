@@ -48,6 +48,14 @@ for k in range(1,n+1):
     if k==hp:continue
     zz,xx=np.nonzero(lab==k);v=verbinde(list(zip(zz,xx)),lab==hp,f'insel_{feld(xx.mean(),zz.mean())}_{int(xx.mean())}_{int(zz.mean())}')
     if v:v.update(von=[int(xx.mean()),int(zz.mean())]);neu.append(v)
+# 3) O18z: R2-Komponenten wie im Gate (Dorfwege + Rampenzellen, 8er-Nachbarschaft), die nicht schon als Insel oben stehen -> Anschluss an Hauptkomponente (nur Vorschlag, Overlay unveraendert)
+W2=(W>0)|RM;lab2,n2=nd.label(W2,np.ones((3,3)));g2=np.bincount(lab2.ravel());g2[0]=0;hp2=g2.argmax();alt={v['name'] for v in neu}
+for k in range(1,n2+1):
+    if k==hp2:continue
+    zz,xx=np.nonzero(lab2==k);nm=f'insel_{feld(xx.mean(),zz.mean())}_{int(xx.mean())}_{int(zz.mean())}'
+    if nm in alt:continue
+    v=verbinde(list(zip(zz,xx)),lab2==hp2,'r2_'+nm[6:])
+    if v:v.update(von=[round(float(xx.mean()),1),round(float(zz.mean()),1)],quelle='O18z R2-Komponente mit Rampe');neu.append(v)
 json.dump({'regeln':'Anschluss jedes Endes an Netz; Gelaende-Neigung <=0.25 normal, 0.25-0.45 teuer (Serpentine/Treppe), >0.45 gesperrt (Wand); Wasser = Bruecke','verbindungen':neu},open('wegvorschlag.json','w'),indent=1)
 for v in neu:print(v['name'],v.get('status',''),v.get('laenge_m'),v.get('max_steigung'),v.get('wasser_zellen'),v.get('felder'))
 # Bilder je Feld: Hoehe grau, alt rot, neu gruen

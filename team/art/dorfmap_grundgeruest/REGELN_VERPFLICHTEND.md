@@ -219,3 +219,10 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - G2/G3 Seebett (6 Punkte E7/F7/D6): alle unter Wasser, 0.7-1.4 m tief, 0-5 Landpixel in 4 m. Bild pruefung/o18/o18y/seebett_e7f7_o18y.png: keine Spitzen sichtbar, aber eine gerade waagerechte Kante im Wasser (vermutlich die Rinne z~275 durchscheinend). Deshalb KEINE Ausnahme, bleibt offen.
 - R1_blind 24 = alle 24 Rampenenden ohne Anschluss; alle 24 in wegvorschlag.json mit gleichem Startpunkt (Abweichung <1 m). Vorschlag hat zusaetzlich rampe_5_anfang, rampe_11_anfang und 4 Inseln.
 - R2 15: 4 davon (D2, E3, F4, G2) = Inseln in wegvorschlag.json; 11 ohne Vorschlag (D1, F1, C1, G4, C3, C4 x2, C5, H5, G6, D6).
+
+### O18z Gewichtung (Fabian 03.11., Beschwerden)
+- Vorrang: Wege-Logik und Boden (R-Regeln, R3, G5, G6, R5, Loecher, Beulen). Nachrang: G7b_wandkontur_feld; darf bis 26 (21+5) steigen, wenn G5/G6/R3 dadurch sinken.
+- Umgesetzt: _falten_glatt ab 1 m Wandabstand, Rampenenden 6 m frei (Stand b3b3b94; G7b_feld 23 im Rahmen). Staerkere Varianten (SG 1.5, lokal 1.6/2.2) liessen R3/G11 steigen -> nicht genommen.
+- G1-Lochscan (LOCHSCAN=/tmp/gate_loch.json, RAND 0.6): offen_innen 0, Punkte 0 -> G1 0. Summe 597->596 (ohne Ausnahmen 443).
+- R2: wegvorschlag.py um Abschnitt 3 ergaenzt (Gate-Komponenten inkl. Rampenzellen). 11 neue Vorschlaege r2_*; 9 mit Weg, r2_G6_271_238 und r2_D6_137_240 "kein Weg ohne Wand". r2_H5_317_201 max_steigung 0.898 (Treppe noetig). Feldbilder wegvorschlag/feld_*.png neu.
+- G5 (66), R5 (17), R6 (4) in O18z nicht bearbeitet.
