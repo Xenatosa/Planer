@@ -90,7 +90,7 @@ def ausreisser(A,okm,thr,nm,step):
     up=(A-nb)*okm;dn=(nb-A)*okm
     for r,arr in ((nm[0],up),(nm[1],dn)):
         lab,n=nd.label(arr>thr)
-        for k in range(1,n+1):yy,xx=np.nonzero(lab==k);j=arr[yy,xx].argmax();hit(r,xx[j]/step,yy[j]/step,round(float(arr[yy[j],xx[j]]),2))
+        for k in range(1,n+1):yy,xx=np.nonzero(lab==k);j=arr[yy,xx].argmax();hit(r,xx[j]/step,yy[j]/step,round(float(arr[yy[j],xx[j]]),2),nachbarn=int(round(nn[yy[j],xx[j]])))   # O18x: Zahl gueltiger Nachbarn (Ausnahme Maskenecke)
 ausreisser(G,~nd.binary_dilation(WAND,iterations=3*RS),0.45,   # O18m geeicht: 0.35-0.42 = Hangknick am Wandrand, Bild unauffaellig
  ('G2_spitze_oben','G3_spitze_unten'),RS)
 WDF=nd.zoom(nd.binary_dilation(WAND,iterations=3*RS).astype(np.uint8),FS/RS,order=0)[:Fz.shape[0],:Fz.shape[1]]>0;WDF=np.pad(WDF,((0,Fz.shape[0]-WDF.shape[0]),(0,Fz.shape[1]-WDF.shape[1])),constant_values=True)
@@ -112,7 +112,9 @@ def hv(x,z):
     return float(hf([x],[z])[0])
 vgy,vgx=np.gradient(GV,1/RS);VST=np.hypot(vgx,vgy)
 nrm=np.stack([-vgx,-vgy,np.ones_like(GV)]);nrm/=np.linalg.norm(nrm,axis=0);dn=sum(np.abs(np.diff(nrm[i],axis=1))[:-1] for i in range(3))
-fac=(dn>0.25)&(VST[:-1,:-1]>0.15)&(VST[:-1,:-1]<0.8)&LAND[:-1,:-1];lab,n=nd.label(fac)
+fac=(dn>0.25)&(VST[:-1,:-1]>0.15)&(VST[:-1,:-1]<0.8)&LAND[:-1,:-1]
+if not os.environ.get('GATE_G6ALT'):fac&=~nd.binary_dilation(WAND,iterations=RS)[:-1,:-1]   # O18x Regelkorrektur (Fabian): G6 im 1-m-Wandsaum nicht zaehlen, dort gilt G7b. Belege g6eich/g6_nah_0/_1. Schwelle unveraendert. GATE_G6ALT=1 = alte Zaehlung [A]
+lab,n=nd.label(fac)
 for k in range(1,n+1):
     yy,xx=np.nonzero(lab==k)
     if len(xx)>=6:hit('G6_facette',xx.mean()/RS,yy.mean()/RS,int(len(xx)))
@@ -191,6 +193,7 @@ def _ausnahme(t_):
     if t_['regel']=='T1_fleckrand':return 'O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m'
     r=t_['regel'];w=t_.get('weg','')
     if r=='G8_fluss_nicht_bis_rand' and abs(t_['x']-22.6)<3 and abs(t_['z']-49.1)<3:return 'G8 See A2 per Zellwert WASSER_EIS'
+    if r in('G2_spitze_oben_fein','G3_spitze_unten_fein') and t_.get('nachbarn',8)<=5:return 'O18x G2f/G3f Maskenecke: <=5 gueltige Nachbarn, Restmittel unzuverlaessig'
     if r.startswith('R3_'):
         if w=='rampe_12':return 'R3 Haarnadel rampe_12 aus Overlay'
         for (a,b),kp in _KP.items():

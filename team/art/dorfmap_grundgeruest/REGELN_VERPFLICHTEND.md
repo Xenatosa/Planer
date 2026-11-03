@@ -197,3 +197,8 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - Fern (D4 dw 7.5, E3 dw 54): sichtbare echte Knicklinien (Rinne/Falte). Echte Fehler.
 - Fix: _falten_glatt (FALT, FALTSG 1.0): Gauss nur >=3 m von Wand, Land, kein Weg. G6 578->561, G5 84->82, R5 24->21, R3 -2. Summe 942->918, keine Klasse steigt.
 - Vorschlag Regelkorrektur (nicht umgesetzt, Entscheid Fabian): G6 im 1-m-Wandsaum nicht zaehlen, da dort G7b-Kantenschaerfe gilt. Belegt durch g6_nah_0/1.
+
+### O18x Regelkorrekturen (Entscheid Fabian 03.11.)
+- G6: Treffer im 1-m-Wandsaum (Dilatation WAND um 1 m) werden nicht gezaehlt; dort gilt G7b. Schwelle dn>0.25, Hang 0.15-0.8, Cluster >=6 px ausserhalb unveraendert. Belege g6eich/g6_nah_0, g6_nah_1. Alt (GATE_G6ALT=1) 561 / neu 273.
+- G2f/G3f: dokumentierte Ausnahme, Kriterium im Gate codiert: Treffer mit <=5 gueltigen 3x3-Nachbarn (Maskenecke). Treffer bleiben in summe/je_regel sichtbar, nur als ausnahme markiert. Aktuell 4 von 4 (alle 3 Nachbarn).
+- G7b-Rauheit: Ziel bleibt (>=0.85*O17). Wand-Mikrorelief bleibt aus (WMR=0). Offen, erst nach allen anderen Punkten und Streiflicht-Bildern wieder angehen.
