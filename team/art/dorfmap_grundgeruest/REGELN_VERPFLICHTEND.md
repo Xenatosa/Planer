@@ -149,3 +149,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 - G8 See A2 22,6|49,1: per Zellwert WASSER_EIS gesetzt, kein Fluss.
 - Stand 1a92bd7: 48 Ausnahmen (R3 47, G8 1); R3 bleibt mit 34 echten Treffern offen. summe bleibt ungefiltert.
 - Hinweis: Die O18s/O18t-Eintraege standen versehentlich in relief3d/REGELN_VERPFLICHTEND.md; hierher uebernommen, alte Datei nach _alt verschoben.
+
+### O18t S2 Rippen-Rauschen in Wandnaehe (<3 m) – 3 Varianten, alle verworfen (Basis 1140)
+- V1 RIB in Wandnaehe Gauss sigma 5 (nach Cache-Auffrischung): Gesamt 1093, G6 676->643, G5 166->155, R5 gleich, aber T1 94->99 -> verworfen (Klasse steigt).
+- V2 sigma 3: Gesamt 1229, G5 173, R5 47, T1 99 -> verworfen.
+- V3 sigma 7: Gesamt 1172 (G11 vor Cache-Auffrischung), G7b-Rauheit neu 1, G2f 7, G3f 2, T1 100 -> verworfen.
+- Befund: Glaetten der Rippen senkt G6 nur um ~5 %; die Facetten sitzen in der Grundform Gs (Hs->Wand-Uebergang), nicht im Rauschen allein.
