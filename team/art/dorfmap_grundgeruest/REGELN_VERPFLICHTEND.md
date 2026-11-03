@@ -175,3 +175,9 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 ### O18v S1 (RIBG 1.5)
 - V2 + Rippenverstaerkung RIBG=1.5 uebernommen: Summe 979 -> 948 (G6 608->578, G7b_feld 23->21, R5 27->24, G5 85->84; G3f +1, T1_fleckrand +4 = Ausnahme). G11 nach Raycast 0.
 - G7b-Rauheit: 3 Varianten erschoepft (RIBG1.5 0.521, RIBG2.0 0.531, RIBG1.5+KEHLE1 0.561; Ziel >=0.584). Offen, Ursache: Deckel und Fade glaetten beide (Einzeltests belegt).
+
+### Hinweis CSV zellen_relief.csv (O18w)
+- Quellspalten (duerfen sich NIE aendern): untergrund, hindernis, wasser_eis, ebene, bauzone, begehbar, bebaubar.
+- Abgeleitete Spalten (aendern sich mit jedem Hoehenfeld-Lauf, kein Zellwert-Verstoss): hoehe_m, neigung, klippe, begehbar_3d, deko_baum_ok, Ecken (ecke_*), skin_slot, boden_anzeige.
+- Pruefung: pruefung/pruefe_t42u.py muss summe 0 liefern (Stand 361967b: 0). Von Fabian am 03.11.2026 geprueft.
+

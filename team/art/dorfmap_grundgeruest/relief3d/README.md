@@ -114,3 +114,9 @@ M1 Regressionen (stufe_bandrand, Schweber) behoben; M2 deterministisch (gzip mti
 
 ## Runde O18
 Siehe pruefung/runde_o_status.md (O18) und ABWEICHUNGEN.md. Messskripte: pruefung/o18/ (zacken_t83u.py, bandrand_t83u.py, grob_steil_t83u.py, render_o18.js); Bilder: pruefung/o18/bilder/.
+
+### Hinweis CSV zellen_relief.csv (O18w)
+- Quellspalten (duerfen sich NIE aendern): untergrund, hindernis, wasser_eis, ebene, bauzone, begehbar, bebaubar.
+- Abgeleitete Spalten (aendern sich mit jedem Hoehenfeld-Lauf, kein Zellwert-Verstoss): hoehe_m, neigung, klippe, begehbar_3d, deko_baum_ok, Ecken (ecke_*), skin_slot, boden_anzeige.
+- Pruefung: pruefung/pruefe_t42u.py muss summe 0 liefern (Stand 361967b: 0). Von Fabian am 03.11.2026 geprueft.
+
