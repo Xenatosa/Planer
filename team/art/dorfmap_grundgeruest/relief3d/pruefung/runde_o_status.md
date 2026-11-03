@@ -530,3 +530,4 @@ Versuch 2 (behalten): Farbtiefe geglaettet (Mittel aus +-0,75/1,5 m), Rampe (1-u
 - 20:40 delle 45c2f25: R8b 25->0, pr 579, r9 305, aber R8 48->53 (+5 Grenze), Basis noch mit WANDSTREIFEN=1 (Zaehne).
   Ursache G1 (278.5|27.0, 0,423 m): Zellquellwert h0 0,000 m -> Mulde entsteht im abgeleiteten Wandmodell, Erosion verringert sie. Fix = Senkenfuellung als letzter abgeleiteter G-Schritt.
   Konflikt: G aendert sich -> zellen_relief.csv-Export muesste mit; mit CSV-Reset meldet t42u 3879. NICHT gemergt bis geklaert, ob zellen_relief.csv Quelle oder Export ist; Neuaufsatz auf de0d9b5 noetig.
+- 20:52 CSV-Entscheidung: Quellspalten byteweise fix, abgeleitete Spalten werden bei G-Aenderung neu exportiert, t42u danach 0. Job delle2 gestartet (Basis 4746125, WANDSTREIFEN=0). Wave 3 (weg3,saege,g6,g5r5b,r3,kontur,wellen2) laeuft noch, kein ende_*.txt. 8 Jobs, Load 2.6.
