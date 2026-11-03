@@ -76,3 +76,12 @@ Die Karte c20 ist unverändert. Das Grundgerüst liest sie nur aus.
   Das Ende liegt 2 Zellen suedlich vom Wandfuss der Nordwand (227|34 WAND_FUSS 11,1 m; 225|34 und 226|34 WAND 13,7 / 12,7 m) und endet dort blind: der naechste andere Weg-Punkt ist 18,4 m entfernt (245|41).
   Gelaendeseitig ist die Rampe durchgehend (Hoehenschritt je Punkt <=0,45 m in F1, max 0,78 m bei 267|23 in G1). Ursache ist also overlayseitig: Endpunkt/Anschluss des Pfads, nicht das Gelaende. Overlay: Ende an das Wegnetz (z. B. 245|41) anschliessen oder vor der Wand enden lassen. Zellwerte unveraendert.
 - Wege duerfen nicht schluchtartig eingesenkt werden: Overlay auf boden_anzeige_m legen, nicht tiefer.
+
+## O18k – Wegnetz-Befund Overlay (t105u/t106u, nur Doku, nicht gesendet)
+Messung `pruefung/o18/wegnetz_o18k.py` (Ergebnis `pruefung/o18/wegnetz_{vor,nach}_o18k.json`): Alle 13 `rampenwege` sind eigene Graph-Komponenten, keines der 26 Enden liegt ≤2 m an einem Dorfweg (`wege`/WEGA). Dorfnetz selbst zerfällt in Hauptnetz + G2 (1588 Zellen), D2 (1227), F4 (94), E3 (38).
+Vorschläge (Overlay-Daten, Koordinaten m):
+- rampe_1 F1/G1: Ende 227.1|37.0 im Wandfuß-Kessel (2 m weiter +2 m Fels). Verlängern 227.1|37.0 → 232|40 → 245|41 (Dorfweg). Gelände dafür in O18k bereits als Gang abgesenkt (`_anschluss_gang`). Oben 273.4|21.2 Plateau ohne Weg.
+- rampe_11 D1: Start 148.5|2.5 am Kartenrand (vorher Kerbe 14→2.1 m). Start ins Innere verlegen oder Plateau-Weg entlang z≈5 ergänzen; Gelände läuft jetzt auf Randhöhe aus (`_rand_auslauf`).
+- rampe_2 D1/E1: Ende 175.2|25.7 läuft in Hang (+1.9 m/2 m) → bis nächster Dorfweg verlängern.
+- rampe_4 H6 Anfang 295.3|222.9 (+1.7 m), rampe_8 C4 Ende 89.5|171.4 (+1.7 m), rampe_12 Anfang D4 127.5|133.5 (Wand 1.33 m/m): enden an Fels → Endpunkt 3–5 m ins freie Gelände verschieben und an Dorfweg anbinden.
+- Übrige Rampen-Enden (0,3,5,6,7,9,10): freies Gelände, aber ohne Wegnetz-Anschluss → je Verbindungsstück zum nächsten Dorfweg.
