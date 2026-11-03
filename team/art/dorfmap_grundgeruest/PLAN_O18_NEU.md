@@ -105,3 +105,16 @@ Der Schattenversuch in main.js ist zurueckgesetzt und liegt als Kopie in /worksp
 - Danach Abschnitte je Kachel A1-H7, die angeben, welche Elemente es dort gibt und welche Sollwerte gelten.
 - Verlinkt aus REGELN_VERPFLICHTEND.md.
 - Wird erst nach dem Kreuzungs-/D1-Auftrag geschrieben, wie verlangt.
+
+## 6. Pruefung der New-Bot-Hypothesen (t127u, gemessen)
+- **H1 "Raster kann Waende nicht":**
+  - Teilweise bestaetigt.
+  - 19 Wandzonen ≥10 m² (Neigung >1). Mittlere Horizontalbreite 4.5 m (9 Grobzellen), Hoehe 10.9 m, max. Neigung im Median 7.4.
+  - Keine Zone ist schmaler als 2 m. Das Raster bildet die Waende also ab, aber mit ~1.2 m Hoehe je 0.5-m-Zelle. Daraus entstehen die Facettenstreifen (K5b).
+  - Waende als eigene Meshes wuerden genau das beheben.
+- **H2 "Saegezahn und Kreuzung aus Raster-Schwellwert":**
+  - Saegezahn: widerlegt fuer den Hauptanteil. Ursache ist die Schattenkarte mit 0.116 m je Texel, bei el 22 Grad 0.31 m am Boden (Beleg saege/*.png).
+  - Kreuzung: bestaetigt im Sinn "Umschalten statt Abstandsfeld-Mischung". `_weg_eben` nimmt die naechste Rampe, dadurch entsteht ein Sprung von 1.0-1.6 m.
+- **H3 "Weg ohne Randueberblendung eingeschnitten":**
+  - Fuer die Wegenden bestaetigt: es gibt keinen Laengsauslauf.
+  - Fuer die Delle noch nicht gemessen.
