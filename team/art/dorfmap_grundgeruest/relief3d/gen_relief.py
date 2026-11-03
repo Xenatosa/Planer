@@ -811,7 +811,7 @@ def _bandnaht_j1():   # O8 J1: Feinband-Randpunkte = Grobnetz (G_ANZ wurde nach 
     d=np.abs(h[m]-gi);h[m]=gi;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
     return {'punkte':int(m.sum()),'geaendert_gt_1mm':int((d>1e-3).sum()),'max_m':round(float(d.max()),3)}
 if not os.environ.get('NAHT_ALT'):(print('naht_weich_o18',R18.naht_weich(FW,G_ANZ.reshape(GY,GX),BAND,NX,NY,RS)),print('fein_glatt_o18',R18.fein_glatt(FW,BAND,NX,NY,thr=0.22,it=14)),print('fein_gipfel_o18',R18.fein_gipfel(FW,BAND,NX,NY))) if not os.environ.get('O18_AUS') else None;print('bandnaht_j1',_bandnaht_j1())   # O18: Randversatz weich nach innen, dann Rand exakt [A]
-RAMPE9_O16['objekte_feinband']=R16.objekte_feinband({'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'geroell':geroell},FW,NX,NY);RAMPE9_O16['geroell_raus']=R16.geroell_raus(geroell,R16_W,RS);print('objfein_o16',RAMPE9_O16['objekte_feinband']);print('geroell_o16',RAMPE9_O16['geroell_raus'])
+_SHC0=json.load(open('pruefung/strahl_hoehe_t65u.json')) if os.path.exists('pruefung/strahl_hoehe_t65u.json') else {};RAMPE9_O16['objekte_feinband']=R16.objekte_feinband({_k:[o for o in _L if f"{o[0]:.3f}|{o[2]:.3f}" not in _SHC0.get(_k,{})] for _k,_L in (('baeume',baeume),('felsen',felsen),('findlinge',findlinge),('steine',steine),('geroell',geroell))},FW,NX,NY)   # O18t: Raycast-gesetzte Objekte nicht nachtraeglich absenken [A];RAMPE9_O16['geroell_raus']=R16.geroell_raus(geroell,R16_W,RS);print('objfein_o16',RAMPE9_O16['objekte_feinband']);print('geroell_o16',RAMPE9_O16['geroell_raus'])
 if os.environ.get('FW_NPZ'):R16.npz_nach(os.environ['FW_NPZ'],FW,G_ANZ,R16_W,NX,NY,RS)   # O16: Fehlerzaehler sieht den Endstand [A]   # O16 R2: Schwebende im Feinband absenken [A]
 if os.environ.get('DIAG'):np.savez_compressed(os.environ['DIAG'],WV=WV,G=G_ANZ,WV_ALT=WV_ALT,G_ALT=G,wa=wa,fl=fl.astype(str))
 G_ANZ,_uw=R18.ufer_weich(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_weich',_uw);G_ANZ,_ub=R18.ufer_boeschung(FW,G_ANZ,WV,NX,NY,RS);print('o18d_ufer_boeschung',_ub);G_ANZ,_hs2=R18.haus_sockel_grob(G_ANZ,_HSM);print('o18d_haus_sockel_fein',R18.haus_sockel_fein(FW,_HSM,NX,RS));print('o18d_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_ge=R18.grob_entzacken(G_ANZ,WV,RS);print('o18e_grob_entzacken',_ge);print('o18d_farbe_weich',R18.farbe_weich(VC,FW,RS,NX,NY))   # O18d A1 [A]
@@ -954,13 +954,14 @@ for _k,_x,_z,_d in _VW:
     for i in reversed(_i):_L.pop(i);_vwn+=1
 print('o18d_versunken_entfernt',_vwn,len(_VW))
 # O18m G11 (t112u): Objekte auf das endgueltige Anzeige-Gelaende setzen, Baeume an Wand (>0.9) entfernen [F]
-_GA=np.asarray(G_ANZ,float);_gy,_gx=np.gradient(_GA,1/RS);_ST=np.hypot(_gx,_gy);_g11=[0,0]
+_SHC=json.load(open('pruefung/strahl_hoehe_t65u.json')) if os.path.exists('pruefung/strahl_hoehe_t65u.json') else {};_GA=np.asarray(G_ANZ,float);_gy,_gx=np.gradient(_GA,1/RS);_ST=np.hypot(_gx,_gy);_g11=[0,0]
 for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
     _L=globals().get(_k,[]);_neu=[]
     for o in _L:
         try:_x,_y,_z=float(o[0]),float(o[1]),float(o[2])
         except Exception:_neu.append(o);continue
         if _k=='baeume' and 0<=_x<NX and 0<=_z<NY and float(nd.map_coordinates(_ST,[[_z*RS],[_x*RS]],order=1)[0])>0.9:_g11[1]+=1;continue
+        if f"{o[0]:.3f}|{o[2]:.3f}" in _SHC.get(_k,{}):_neu.append(o);continue   # O18t: Raycast-Hoehe (Anzeige-Netz) hat Vorrang vor G_ANZ [A]
         if 0<=_x<NX and 0<=_z<NY:
             _h=float(nd.map_coordinates(_GA,[[_z*RS],[_x*RS]],order=1,mode='nearest')[0])
             if abs(_y-_h)>0.6:o=list(o);o[1]=round(_h,2);_g11[0]+=1
