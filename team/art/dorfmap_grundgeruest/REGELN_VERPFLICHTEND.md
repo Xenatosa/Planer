@@ -171,3 +171,7 @@ G8: See A2 22.6|49.1 (891 Zellen, WASSER_EIS) ist per Zellwert gesetzt.
 ## O18v
 - Regelanpassung (Fabian, 10:54): Eine Variante darf uebernommen werden, wenn die Summe deutlich sinkt und keine Klasse um mehr als 5 steigt. Die kleinen Anstiege werden im selben Schritt behoben. Vor jeder G11-Bewertung wird neu geraycastet.
 - S1: V2 ist uebernommen (gen_relief WANDV-Standard 2) und der Raycast-Cache ist aufgefrischt. Gate 1139 -> 979 (G5 85, G6 608, R5 27, G11 0). 3 Steine lagen nach dem Raycast im Wasser und stehen jetzt auf der raus-Liste (213,64|31,27; 216,62|224,27; 94,36|279,58).
+
+### O18v S1 (RIBG 1.5)
+- V2 + Rippenverstaerkung RIBG=1.5 uebernommen: Summe 979 -> 948 (G6 608->578, G7b_feld 23->21, R5 27->24, G5 85->84; G3f +1, T1_fleckrand +4 = Ausnahme). G11 nach Raycast 0.
+- G7b-Rauheit: 3 Varianten erschoepft (RIBG1.5 0.521, RIBG2.0 0.531, RIBG1.5+KEHLE1 0.561; Ziel >=0.584). Offen, Ursache: Deckel und Fade glaetten beide (Einzeltests belegt).

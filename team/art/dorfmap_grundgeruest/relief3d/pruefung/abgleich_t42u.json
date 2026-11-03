@@ -12,9 +12,9 @@
  },
  "summe": 0,
  "glb": {
-  "waende": 33489,
-  "boden": 780975
+  "waende": 33476,
+  "boden": 780988
  },
  "zellen": 101808,
- "steile_zellen": 5832
+ "steile_zellen": 5857
 }
