@@ -1,9 +1,9 @@
 {
  "haeuser": 233,
- "baeume": 1470,
- "felsen": 96,
- "findlinge": 34,
- "steine": 669,
+ "baeume": 1471,
+ "felsen": 97,
+ "findlinge": 33,
+ "steine": 670,
  "bruecken": 20,
  "wege": 2839,
  "wand_dreiecke": 33476,
@@ -22,15 +22,15 @@
  "klippe_hoehe_median_3x3_je_wand": {
   "Nord": 6.31,
   "Suedgrat": 5.08,
-  "Krater": 4.54,
+  "Krater": 4.53,
   "Ostgrat": 5.1
  },
  "klippe_hoehe_median_je_wand": {
-  "Nord": 11.12,
-  "Suedgrat": 10.02,
+  "Nord": 11.14,
+  "Suedgrat": 10.03,
   "Krater": 8.04,
-  "Ostgrat": 8.77
+  "Ostgrat": 8.76
  },
  "bandzellen_umgedeutet": 17141,
- "begehbar_3d": 67738
+ "begehbar_3d": 67886
 }

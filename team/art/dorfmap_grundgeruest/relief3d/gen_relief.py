@@ -251,32 +251,35 @@ def tri_steil(G):
     z0=np.zeros_like(a)
     n1=ny(z0,c-a,z0+s,z0+s,d-a,z0+s);n2=ny(z0+s,d-a,z0+s,z0+s,b-a,z0)
     return np.degrees(np.arccos(np.clip(n1,0,1))),np.degrees(np.arccos(np.clip(n2,0,1)))
-# t133u: begrenzte Beseitigung kurzer Wellen im abgeleiteten G auf sanften Landhaengen.
-# Die Zellquellwerte bleiben unangetastet; Wand, Wege und D2 sind ausgenommen.
+# t134u: begrenzte Beseitigung kurzer Wellen im abgeleiteten G auf sanften Landhaengen.
+# G5-Klippenkandidaten und Rampenprofile werden vor der Glattung maskiert.
 G_WELLEN_VOR=G.copy()
 def _g_wellen_glatt():
-    A=float(os.environ.get('GWELLEN','0.05'))  # 0 aus; 0.05 m Maximalversatz, sigma 0.75 m
+    A=float(os.environ.get('GWELLEN','0.12'))  # Varianten: 0 aus; 0.05 oder 0.12 m Maximalversatz
     if A==0:return G,{'aus':True}
-    if A!=0.05:raise ValueError('GWELLEN muss 0 oder 0.05 sein')
+    if A not in (0.05,0.12):raise ValueError('GWELLEN muss 0, 0.05 oder 0.12 sein')
     GA=G.astype(float);gy,gx=np.gradient(GA,1/RS);sl=np.hypot(gx,gy);W_=sl>1.0
     wandabstand=nd.distance_transform_edt(~W_)/RS;land_=WV<=-900
-    weg=np.zeros((GY,GX),bool);_weg_zellen=np.zeros((NY,NX),bool)
+    weg=np.zeros((GY,GX),bool);rampe=np.zeros((GY,GX),bool);_weg_zellen=np.zeros((NY,NX),bool)
     for _o in csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')):
         if _o.get('weg_id'):
             _x,_z=int(_o['cx']),int(_o['cy']);_weg_zellen[_z,_x]=True
     weg[:-1,:-1]|=np.kron(_weg_zellen,np.ones((RS,RS),bool))
     for _r in RAMPWEGE:
         _p=np.asarray(_r,float);_L=np.r_[0,np.cumsum(np.hypot(*np.diff(_p,axis=0).T))];_t=np.arange(0,_L[-1]+1e-6,0.25)
-        weg[np.clip((np.interp(_t,_L,_p[:,1])*RS).round().astype(int),0,GY-1),np.clip((np.interp(_t,_L,_p[:,0])*RS).round().astype(int),0,GX-1)]=True
-    wegabstand=nd.distance_transform_edt(~weg)/RS
-    M=(sl>0.15)&(sl<0.8)&land_&(wandabstand>=1.5)&(wegabstand>=1.0)
+        _iy=np.clip((np.interp(_t,_L,_p[:,1])*RS).round().astype(int),0,GY-1);_ix=np.clip((np.interp(_t,_L,_p[:,0])*RS).round().astype(int),0,GX-1)
+        weg[_iy,_ix]=True;rampe[_iy,_ix]=True
+    wegabstand=nd.distance_transform_edt(~weg)/RS;rampenabstand=nd.distance_transform_edt(~rampe)/RS
+    M=(sl>0.15)&(sl<0.8)&land_&(wandabstand>=1.5)&(wegabstand>=1.0)&(rampenabstand>=2.0)
     W1_,W2_=tri_steil(GA);steil_=np.maximum(W1_,W2_).reshape(NY,RS,NX,RS).max((1,3))>WANDWINKEL
     wand_guard=np.zeros((GY,GX),bool);wand_guard[:-1,:-1]=np.kron(nd.binary_dilation(steil_,iterations=1),np.ones((RS,RS),bool));M&=~wand_guard
+    from relief_o18n import g5_beulen
+    _,g5_zone=g5_beulen(GA,RS,W_,0.6);M&=~g5_zone
     _d2=5*RS  # FALT sigma=1 m: auch dessen Nachbarschafts-Faltung in D2 unveraendert halten
     M[max(0,43*RS-_d2):min(GY,86*RS+1+_d2),max(0,126*RS-_d2):min(GX,168*RS+1+_d2)]=False
     w=np.clip(nd.distance_transform_edt(M)/2.0,0,1);w=w*w*(3-2*w)
-    sm=nd.gaussian_filter(GA,0.75*RS);d=np.clip(sm-GA,-A,A)*w;nG=(GA+d).astype(np.float32)
-    return nG,{'sigma_m':0.75,'max_limit_m':A,'ecken':int((np.abs(d)>1e-6).sum()),'max_m':round(float(np.abs(d).max()),3),'rms_m':round(float(np.sqrt(np.mean(d*d))),4)}
+    sig=0.75*RS;sm=nd.gaussian_filter(GA,sig);d=np.clip(sm-GA,-A,A)*w;nG=(GA+d).astype(np.float32)
+    return nG,{'sigma_m':0.75,'max_limit_m':A,'rampenabstand_m':2.0,'g5_schutz':'OBEN','ecken':int((np.abs(d)>1e-6).sum()),'max_m':round(float(np.abs(d).max()),3),'rms_m':round(float(np.sqrt(np.mean(d*d))),4)}
 G,_gw=_g_wellen_glatt();print('g_wellen_abgeleitet',_gw);_wellen_snap('g_wellen_glatt',G)
 W1,W2=tri_steil(G);Wq=np.maximum(W1,W2)                           # Neigung je Teilquadrat
 neig=Wq.reshape(NY,RS,NX,RS).max((1,3))
