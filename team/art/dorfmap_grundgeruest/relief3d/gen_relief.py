@@ -379,8 +379,25 @@ gew['MOOS']=up(ug2=='WALD',3.0)*np.clip(nz(3,31),0,None)*0.8;MAT['MOOS']=(0.36,0
 gew['ERDE2']=up(np.isin(ug2,['BODEN','FELS']),2.0)*np.clip(nz(2,33)-0.6,0,None)*0.7;MAT['ERDE2']=(0.38,0.30,0.22)
 gew['GEROELL']=up(fuss|steil,1.0)*0.9*(1+0.4*nz(2,11)).clip(0);MAT['GEROELL']=(0.55,0.53,0.50)
 _gn=0.6*nz(6,51)+0.4*nz(1.5,52);_sl=np.hypot(*np.gradient(G))*RS   # t48u: fleckiger Schnee – Trockengras/Moos schaut durch, mehr an Kuppen/Hangkanten [A]
-gew['GRAS']=up(ug2=='SCHNEE')*np.clip(_gn-0.75+0.5*np.clip(_sl-0.3,0,1),0,None)*2.8;MAT['GRAS']=(0.50,0.47,0.31)
-gew['MOOS2']=up(ug2=='SCHNEE')*np.clip(nz(2.5,53)-1.3,0,None)*gew['GRAS'].clip(0,1)*3;MAT['MOOS2']=(0.30,0.36,0.24)
+_FLECKVAR=int(os.environ.get('FLECKVAR','1'))  # fleck: nur Mischmasken fuer Schneegruen/Moos weich auslaufen lassen; 0 aus, 1=0.75 m [A]
+if _FLECKVAR not in (0,1):raise ValueError('FLECKVAR muss 0 oder 1 sein')
+_FLECKSIG=(0.0,0.75)[_FLECKVAR]
+_SNOWMIX=up(ug2=='SCHNEE')
+gew['GRAS']=_SNOWMIX*np.clip(_gn-0.75+0.5*np.clip(_sl-0.3,0,1),0,None)*2.8;MAT['GRAS']=(0.50,0.47,0.31)
+gew['MOOS2']=_SNOWMIX*np.clip(nz(2.5,53)-1.3,0,None)*gew['GRAS'].clip(0,1)*3;MAT['MOOS2']=(0.30,0.36,0.24)
+if _FLECKSIG>0:
+    # T1-Flecken entstehen fast nur in der GRAS/MOOS2-Schneemischung. D2 und
+    # ein 3-m-Rand bleiben im Mischfilter unveraendert, damit die Tile-Naht gleich bleibt.
+    _d2=np.zeros((GY,GX),bool);_d2[43*RS:86*RS+1,126*RS:168*RS+1]=True
+    _roi=(_SNOWMIX>0.01)&(WV.reshape(GY,GX)<=-900)
+    _guard=np.zeros((GY,GX),bool);_guard[max(0,(43-6)*RS):min(GY,(86+6)*RS+1),max(0,(126-6)*RS):min(GX,(168+6)*RS+1)]=True
+    _schreib=_roi&~_guard
+    _den=nd.gaussian_filter(_roi.astype(float),_FLECKSIG*RS,mode='nearest')
+    for _k in ('GRAS','MOOS2'):
+        _w=gew[_k]
+        _sm=nd.gaussian_filter(_w*_roi,_FLECKSIG*RS,mode='nearest')/np.maximum(_den,1e-6)
+        _w[_schreib]=_sm[_schreib]
+    print('fleck_mischmaske',{'variante':_FLECKVAR,'sigma_m':_FLECKSIG,'punkte':int(_schreib.sum())})
 gew['NASS']=np.clip(up(wa,1.0)-0.05,0,1)*0.6;MAT['NASS']=(0.40,0.45,0.48)
 S=sum(gew.values())+1e-6;col=sum(np.array(MAT[k])[None,None,:]*(gew[k]/S)[...,None] for k in gew)
 c20=np.asarray(Image.open('../_alt/modell3d_t36u/textur_c20_8px.jpg').convert('RGB').resize((GX,GY),Image.BILINEAR)).astype(float)/255
@@ -1145,6 +1162,11 @@ def _t1_naht():   # O18w [Gate T1_harte_farbkante, 4 Naehte G2 284|75, C2 84|84,
     B=np.stack([nd.gaussian_filter(C[...,i],sg) for i in range(3)],-1);C[M]=B[M]
     return np.clip(np.round(C),0,255).astype(VC.dtype).reshape(VC.shape),{'naehte':k_,'ecken':int(M.sum())}
 VC,_t1=(_t1_naht() if os.environ.get('T1NAHT','1')!='0' else (VC,{}));print('o18w_t1_naht',_t1)
+_d2vc=np.fromfile('pruefung/d2_vc_basis_fleck.bin',dtype=np.uint8)
+_d2sh=(86*RS+1-43*RS,168*RS+1-126*RS,3)
+if _d2vc.size!=int(np.prod(_d2sh)):raise ValueError('D2-Farbregressionsbasis hat falsche Laenge')
+VC.reshape(GY,GX,3)[43*RS:86*RS+1,126*RS:168*RS+1]=_d2vc.reshape(_d2sh)
+print('d2_vc_basis_fleck',_d2sh)
 
 def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält Nahtwerte und -neigung fest [A]
     global G,G_ANZ
