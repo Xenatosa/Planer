@@ -1003,6 +1003,10 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18z: bewahrte 
             _frei=np.hypot(_xx/RS-_e[0],_yy/RS-_e[1])>=float(os.environ.get('FALTRE','6'));w*= _frei;vw*= _frei
     if os.environ.get('FALTFADE','0')!='0':w*=np.clip((nd.distance_transform_edt(~W_)/RS-1)/2,0,1)   # O18y: Gewicht 1->3 m Wandabstand einblenden (G7b_feld)
     vw[39*RS:90*RS+1,122*RS:172*RS+1]=0   # 2-m-Saum haelt die spaetere Bandnahtangleichung vollstaendig aus D2 fern
+    # Die sichtbare Feinbandmaske muss dieselbe Korrektur auch am Grobnetzrand tragen.
+    # Sonst wird nur die Feinoberflaeche geglaettet und die benachbarte Grobflaeche bleibt kantig.
+    KOH=os.environ.get('FALT_KOH','1')!='0'
+    if KOH:w=np.maximum(w,vw)
     S=nd.gaussian_filter(GA,SG*RS)
     _BX=[(74,96,149,186),(85,104,201,227),(313,322,223,239),(109,124,167,187),(108,123,112,125),(173,181,127,153),(84,101,133,149),(187,192,71,94)]   # O18y S2: 8 groesste G6-Cluster (single-link 8 m) nach b3b3b94
     LS=float(os.environ.get('FALTLS','0'))
@@ -1011,12 +1015,14 @@ def _falten_glatt(SG=float(os.environ.get('FALTSG','1.0'))):   # O18z: bewahrte 
         for x0,x1,z0,z1 in _BX:BM[max(0,(z0-3)*RS):(z1+3)*RS,max(0,(x0-3)*RS):(x1+3)*RS]=1
         S=np.where(BM,nd.gaussian_filter(GA,LS*RS),S)
     nG=GA*(1-w)+S*w
-    wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1);wfv=nd.map_coordinates(vw,[fy/FS*RS,fx/FS*RS],order=1);wf=np.maximum(wf,wfv);d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
+    wf=nd.map_coordinates(w,[fy/FS*RS,fx/FS*RS],order=1)
+    if not KOH:wf=np.maximum(wf,nd.map_coordinates(vw,[fy/FS*RS,fx/FS*RS],order=1))
+    d=nd.map_coordinates(S-GA,[fy/FS*RS,fx/FS*RS],order=1)
     F=np.full((FYn,FXn),np.nan);F[fy,fx]=h;ok=np.isfinite(F);Sf=nd.gaussian_filter(np.where(ok,F,0),SG*FS)/np.maximum(nd.gaussian_filter(ok*1.0,SG*FS),1e-6)
     if LS>0:
         _Sl=nd.gaussian_filter(np.where(ok,F,0),LS*FS)/np.maximum(nd.gaussian_filter(ok*1.0,LS*FS),1e-6);_BF=nd.zoom(BM.astype(np.uint8),FS/RS,order=0);_B=np.zeros((FYn,FXn),bool);_B[:min(FYn,_BF.shape[0]),:min(FXn,_BF.shape[1])]=_BF[:FYn,:FXn]>0;Sf=np.where(_B,_Sl,Sf)
     h=h*(1-wf)+Sf[fy,fx]*wf;FW['h']=base64.b64encode(h.astype(np.float32).tobytes()).decode()
-    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((w>0.01).sum()),'fein_extra':int((vw>0.01).sum())}
+    return nG.reshape(G_ANZ.shape).astype(G_ANZ.dtype),{'ecken':int((w>0.01).sum()),'fein_extra':int((vw>0.01).sum()),'kohärent':KOH}
 def _hangwellen_glatt():   # O18w: Anzeige-Bandpass auf Haengen, Quellfeld G bleibt unveraendert; D2 bleibt Bytegleich
     A=float(os.environ.get('WELLEN','0.6'))
     if A==0:return G_ANZ,{'aus':True}
@@ -1188,6 +1194,25 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+def _g11_sichtbar():   # t134u [Gate G11 nach g6-Merge: 3 Objekte mit veralteter Raycast-Hoehe (strahl_hoehe_t65u.json) ueber/unter geaendertem Feinband]: Objekte, die >0,6 m von der SICHTBAREN Flaeche (Feinband, sonst Grob, wie pruefe_regeln.hv) abweichen, auf diese setzen; alle anderen bleiben unveraendert. G11SICHT=0 schaltet aus [A]
+    if os.environ.get('G11SICHT','1')=='0':return {'aus':True}
+    _vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);_h=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float)
+    _F=np.full((FYn,FXn),np.nan);_F[_vid//FXn,_vid%FXn]=_h;_ok=np.isfinite(_F);_GA=np.asarray(G_ANZ,float).reshape(GY,GX);_n=[]
+    def _hv(x,z):
+        fx,fy=x*FS,z*FS;i,j=int(fx),int(fy)
+        if 0<=i<FXn-1 and 0<=j<FYn-1 and _ok[j:j+2,i:i+2].all():
+            u,v=fx-i,fy-j;q=_F[j:j+2,i:i+2];return float(q[0,0]*(1-u)*(1-v)+q[0,1]*u*(1-v)+q[1,0]*(1-u)*v+q[1,1]*u*v)
+        return float(nd.map_coordinates(_GA,[[z*RS],[x*RS]],order=1,mode='nearest')[0])
+    for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
+        _L=globals().get(_k,[])
+        for _i,o in enumerate(_L):
+            try:_x,_y,_z=float(o[0]),float(o[1]),float(o[2])
+            except Exception:continue
+            if not(0<=_x<NX and 0<=_z<NY):continue
+            _hh=_hv(_x,_z)
+            if abs(_y-_hh)>0.6:o=list(o);o[1]=round(_hh,3);_L[_i]=o;_n.append((_k,round(_x,2),round(_z,2),round(_y-_hh,2)))
+    return {'gesetzt':len(_n),'liste':_n}
+_G11S=_g11_sichtbar();print('t134u_g11_sichtbar',_G11S)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
