@@ -597,3 +597,19 @@ Gestartet (Codex, eigene Worktrees, starte_proto.sh):
 - pnahbild: 6 Kameras/Kachel Ton+Textur, Bildzahlen (Zaehne, Facetten, Normalenspruenge) + Delta-Bericht mit Abbruch bei Anstieg
 - pregeln: REGELWERK_LANDSCHAFT_VOLLSTAENDIG.md je Element Aussehen/Masse [S]/[R]/Pruefzahl/Negativbeispiel, Luecken messen
 Folgt nach pvektor: pgelaende (Basis + Ueberblendprofile), pwand (Waende als eigene Meshes).
+
+## Welle 5 Auswertung (04.11.2026 10:25 MEZ, unter t138u: nur Auswertung)
+
+Ausgangsstand grundgeruest 1212c97: 952 Treffer (pruefe_regeln 570 / r8 48 / r9 334), Gate 0 in 4 von 56 Kacheln (A4, A5, F3, G7).
+Prüfung je Lauf mit /tmp/ev5/gate.sh: Lochscan headless, pruefe_regeln, r8, r9, t42u, D2-Vergleich gegen Basis, dazu eigene Nahbilder (Ton, 960x720).
+
+| Lauf | Commit | pr/r8/r9 = Summe | Loch | t42u | D2 | gesunken | gestiegen | Entscheidung |
+|---|---|---|---|---|---|---|---|---|
+| g6c | 1711b9d | 534/48/334 = 916 | 0 | 0 | bytegleich | G6 220→189, G2 fein 8→4, G3 fein 2→1 | keine Klasse; Kacheln B3 +2, D6 +5, H1 +2, B6/F6/G4/H5 je +1 | **verworfen**: eigene Nahbilder zeigen neue Defekte: D6 147/244 Treppe/Zähne, B5 75/195 Haarriss mit gezackter Schattengrenze, H5 306/190 harte diagonale Kante (pruefung/o18/w5/full_*.png). Die Codex-Bilder aus größerem Abstand hatten das verdeckt. |
+| delle2 | a3370bc | 571/48/313 = 932 | 0 | 0 | bytegleich | R8b_delle 25→4 | G6 220→221 | **verworfen** (Klasse steigt) |
+| g5r5c | c23f0b0 | 545/48/334 = 927 | 0 | 0 | bytegleich | G5 68→56, R5_loch 17→0 | G6 220→224 | **verworfen** (Klasse steigt; außerdem Kerbe G4 ~280/139, Schulter D6 ~151/229 laut eigenem Bericht) |
+| wellen3 | 793c73a | 580/48/307 = 935 | 0 | 0 | bytegleich | R9w 275→249, R8b 25→24, T1 94→91, G2 fein 8→7, G7b 24→23 | G6 220→234, G3 fein 2→3 | **verworfen** (Klassen steigen; laut Bericht neue Steilfläche bei H3 und gezackte Kontur bei E6) |
+
+Ergebnis: Nichts gemergt. grundgeruest bleibt bei 952 (570/48/334), Gate 0 weiterhin in 4 von 56 Kacheln (A4, A5, F3, G7).
+fleck läuft seit 10:17 (letzter Lauf der alten Queue) und wird nach Ende ebenso nur ausgewertet. Wegen t138u startet keine neue Flicken-Welle; die weitere Arbeit läuft über den Kern-Neubau (neu/, RELIEF_NEU=1).
+/tmp aufgeräumt (nur alte Zwischenstände fertiger Läufe, nichts aus dem Repo gelöscht): 30 → 34 GB frei.
