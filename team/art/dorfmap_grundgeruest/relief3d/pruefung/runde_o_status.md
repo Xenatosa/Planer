@@ -588,3 +588,12 @@ Welle 5 (Codex xhigh, queue_runde5.sh, max 3 parallel inkl. delle2, Marker /work
 - g5r5c (von g5r5b): G6 +5, Kerbe G4, Absatz D6 beheben – Start 00:33
 - wellen3 (von wellen2): R3_laengs/G5-Anstieg beheben, R9w ≤240 – in Queue
 - fleck (von grundgeruest): T1_fleckrand 94 → ≤40 – in Queue
+
+## t138u Kern-Neubau Prototyp (08:55)
+Entscheidung: keine Flicken mehr; Welle 5 (g6c, g5r5c, wellen3) laeuft zu Ende, wird nur noch ausgewertet. Neuer Kern unter relief3d/neu/, Schalter RELIEF_NEU=1, Prototyp D2 (unveraendert) / G1 / D1.
+Gestartet (Codex, eigene Worktrees, starte_proto.sh):
+- pvektor: Vektorschicht (Wege-Splines, Kreuzungsflaechen, Wegenden >=4 m, Wand-Polylinien, Wasser, Bauzonen) + globale Abstandsfelder 56 Kacheln
+- pregress: Regressionstest je Beanstandung (Kreuzung D1/G1, Wegende, Delle G1, Saegezahn D1, Wand D1, Wegende F1/C1, Schatten) + Negativ-Referenzsammlung neu/referenz_neg
+- pnahbild: 6 Kameras/Kachel Ton+Textur, Bildzahlen (Zaehne, Facetten, Normalenspruenge) + Delta-Bericht mit Abbruch bei Anstieg
+- pregeln: REGELWERK_LANDSCHAFT_VOLLSTAENDIG.md je Element Aussehen/Masse [S]/[R]/Pruefzahl/Negativbeispiel, Luecken messen
+Folgt nach pvektor: pgelaende (Basis + Ueberblendprofile), pwand (Waende als eigene Meshes).
