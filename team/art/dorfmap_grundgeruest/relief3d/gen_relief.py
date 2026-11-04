@@ -1,6 +1,10 @@
 # t41u: echtes neues 3D-Relief. Quelle Lage: raster_c20_z25_zellen.csv (+ t36u-Sidecar fuer Felder). c20 unveraendert.
 # Ausgabe: relief_daten.json.gz (Viewer), zellen_relief.csv (Sidecar), dorfmap_relief_z25.glb/.obj, relief_zaehlung.json
 import os
+from neu.selector import new_pipeline_enabled
+if new_pipeline_enabled():
+    from neu.gen_relief import main as gen_relief_neu
+    raise SystemExit(gen_relief_neu())
 import csv,json,gzip,base64,numpy as np,scipy.ndimage as nd
 _WELLEN_DIAG={}
 def _wellen_snap(n,a):
