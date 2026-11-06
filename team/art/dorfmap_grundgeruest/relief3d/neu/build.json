@@ -13,13 +13,13 @@
       "budget_triangles": 1300000,
       "sampling_m": 0.5,
       "sampling_m_by_tile": {
-        "D1": 1.0,
+        "D1": 0.5,
         "D2": 0.5,
-        "G1": 1.0
+        "G1": 0.5
       },
-      "terrain_closed_triangles": 44704,
-      "total_triangles": 51352,
-      "wall_triangles": 6648
+      "terrain_closed_triangles": 88728,
+      "total_triangles": 168600,
+      "wall_triangles": 79872
     },
     "output": "neu/relief_neu.json.gz",
     "source_columns": [
@@ -35,22 +35,62 @@
     ],
     "tiles": {
       "D1": {
-        "closed_triangles": 7564,
-        "height_sha256": "1e4b8efc1eac31fd5b1c8d752983dcf70548db4134be624c0dea7bc6d0bd4984",
-        "triangles": 3612,
-        "vertices": 1892
+        "closed_triangles": 29576,
+        "height_sha256": "d2b65f146c5bca66e76073b7f55d4d2a151ab258744d7620602055b9113263de",
+        "terrain": {
+          "changed_vertices": 84,
+          "crossing_flat_vertices": 152,
+          "layers": [
+            "basishoehe_GB",
+            "wege_spline_breite_laengsprofil",
+            "kreuzung_gemeinsame_ebene_weicher_rand",
+            "wand_abstandsschutz",
+            "kachelrand_fade_3m"
+          ],
+          "max_abs_delta_m": 0.000588,
+          "mean_abs_delta_m": 1e-06,
+          "variant": "2",
+          "wand_protected_vertices": 3123,
+          "zone_flat_vertices": 0
+        },
+        "triangles": 14448,
+        "vertices": 7395
       },
       "D2": {
         "closed_triangles": 29576,
         "height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+        "terrain": {
+          "changed_vertices": 0,
+          "layers": [],
+          "max_abs_delta_m": 0.0,
+          "variant": "2"
+        },
         "triangles": 14448,
         "vertices": 7395
       },
       "G1": {
-        "closed_triangles": 7564,
-        "height_sha256": "7c65e0bdcc1733c41c38ea7641810004f8e890ef18af4704281fa39497470fb3",
-        "triangles": 3612,
-        "vertices": 1892
+        "closed_triangles": 29576,
+        "height_sha256": "4e64ced95cabdf7b6ca5919931f8020825e618f370d4da016562352cb8cfff8e",
+        "terrain": {
+          "changed_vertices": 209,
+          "crossing_flat_vertices": 231,
+          "layers": [
+            "basishoehe_GB",
+            "wege_spline_breite_laengsprofil",
+            "kreuzung_gemeinsame_ebene_weicher_rand",
+            "bauzonen_lokales_profil_weicher_rand",
+            "wasser_spiegel_uferprofil",
+            "wand_abstandsschutz",
+            "kachelrand_fade_3m"
+          ],
+          "max_abs_delta_m": 0.001436,
+          "mean_abs_delta_m": 5e-06,
+          "variant": "2",
+          "wand_protected_vertices": 5268,
+          "zone_flat_vertices": 42
+        },
+        "triangles": 14448,
+        "vertices": 7395
       }
     },
     "waende": {
@@ -58,8 +98,8 @@
         "D1": {
           "features": 7,
           "min_width_m": 1.2,
-          "triangles": 2756,
-          "vertices": 5512
+          "triangles": 32976,
+          "vertices": 16502
         },
         "D2": {
           "features": 0,
@@ -70,8 +110,8 @@
         "G1": {
           "features": 13,
           "min_width_m": 1.2,
-          "triangles": 3892,
-          "vertices": 7784
+          "triangles": 46896,
+          "vertices": 23474
         }
       },
       "variant": 1

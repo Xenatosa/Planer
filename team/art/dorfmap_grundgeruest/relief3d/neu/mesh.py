@@ -173,7 +173,7 @@ def build_manifest(
     fields_path = fields_path or directory / "felder.npz"
     if variant is None:
         import os
-        variant = os.environ.get("RELIEF_GELAENDE_VAR", "0")
+        variant = os.environ.get("RELIEF_GELAENDE_VAR", "2")
     vector = json.loads(vector_path.read_text(encoding="utf-8"))
     with np.load(fields_path, allow_pickle=False) as archive:
         fields = {name: archive[name] for name in archive.files}
@@ -410,7 +410,7 @@ def terrain_heights(
     tile: str,
     vector: dict[str, Any],
     fields: dict[str, np.ndarray],
-    variant: str = "1",
+    variant: str = "2",
 ) -> tuple[np.ndarray, dict[str, Any]]:
     """Build a deterministic per-tile terrain surface from GB and feature layers."""
     if variant not in TERRAIN_VARIANTS:

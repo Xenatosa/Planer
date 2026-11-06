@@ -52,6 +52,9 @@ Maus: links drehen, rechts verschieben, Rad zoomen.
 </div><div id="info">3D Meshes: D1 · G1 · D2</div>
 <script>window.NEU_GZ="{data}";window.RELIEF_NEU_VIEWER=1;</script><script>{js}</script>
 </body></html>'''
+    # Three.js embeds multiline shader strings with trailing source whitespace.
+    # Match the legacy builder's deterministic cleanup without changing code.
+    doc = "\n".join(line.rstrip() for line in doc.splitlines()) + "\n"
     (ROOT / "index.html").write_text(doc, encoding="utf-8")
     (ROOT / "neu" / "index.html").write_text(doc, encoding="utf-8")
     print(f"index.html und neu/index.html {len(doc)} Bytes; Relief-Neu-Viewer mit D1/G1/D2")

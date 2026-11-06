@@ -15,7 +15,12 @@ abgelegten Auslaeufe. Aenderungen werden an Kachelraendern und im Wandabstand
 ausgeblendet. D2 bleibt exakt auf dem sichtbaren `GB`-Quellfeld.
 
 `RELIEF_GELAENDE_VAR=0|1|2` schaltet die drei deterministischen Profilstaerken.
-Die Standardvariante wird nach den Clay-Delta- und Regelgates ausgewaehlt.
+Variante `2` ist Standard: sie veraendert D1/G1-Profilvertices und hatte im
+Clay-Vergleich keinen Metrikanstieg gegen Variante `0`. Variante `1` bleibt die
+vollstaerkere, getestete Alternative mit sechs Metrikanstiegen. Variante `2`
+ist allerdings nur 0,59 mm (D1) bzw. 1,44 mm (G1) stark; die festen
+Nahbildkameras zeigen gegen Variante `0` keine geaenderten Pixel. Das Profil
+ist im Mesh aktiv, aber dort visuell nicht aufgeloest.
 `neu/mesh.py` protokolliert die Delta-Messwerte je Kachel. Zellquellspalten
 und das bestehende Relief-Paket werden nicht ueberschrieben.
 
