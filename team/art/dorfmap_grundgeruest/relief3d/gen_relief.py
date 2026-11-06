@@ -2,6 +2,7 @@
 # Ausgabe: relief_daten.json.gz (Viewer), zellen_relief.csv (Sidecar), dorfmap_relief_z25.glb/.obj, relief_zaehlung.json
 import os
 if os.environ.get('RELIEF_NEU')=='1':
+    # t139u: Vektorschicht (pvektor) ist Einstieg; Mesh-Kern (pregress) liegt in neu.pipeline und wird von pgelaende angebunden
     from neu.gen_relief import run as _relief_neu_run
     _relief_neu_run()
     raise SystemExit(0)

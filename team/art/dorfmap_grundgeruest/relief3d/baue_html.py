@@ -6,10 +6,12 @@ if os.environ.get('RELIEF_NEU')=='1':
     raise SystemExit(0)
 NM=os.environ.get('NODE_DIR','/tmp/w3');A='../_alt/modell3d_t36u/'
 subprocess.run(f'{NM}/node_modules/.bin/esbuild main.js --bundle --minify --format=iife --outfile=/tmp/w3/bundle_r.js',shell=True,check=True,env={**os.environ,'NODE_PATH':NM+'/node_modules'})
-b=lambda p:base64.b64encode(open(p,'rb').read()).decode()
+RELIEF_NEU=os.environ.get('RELIEF_NEU')=='1'
+RELIEF_DATEN='neu/relief_neu.json.gz' if RELIEF_NEU else 'relief_daten.json.gz'
+b=lambda p:base64.b64encode(open(RELIEF_DATEN if p=='relief_daten.json.gz' else p,'rb').read()).decode()
 js=open('/tmp/w3/bundle_r.js').read()
 html=f'''<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Epodarien Dorf – 3D-Relief t43u (Platzhalter)</title><style>body{{margin:0;overflow:hidden;font:13px sans-serif}}
+<title>Epodarien Dorf – 3D-Relief t43u (Platzhalter){" / Kern-Prototyp" if RELIEF_NEU else ""}</title><style>body{{margin:0;overflow:hidden;font:13px sans-serif}}
 #p{{position:absolute;left:8px;top:8px;background:#fffd;padding:8px;border-radius:6px;max-width:260px}}#info{{position:absolute;right:8px;top:8px;background:#fffd;padding:8px;border-radius:6px;white-space:pre;max-height:90vh;overflow:auto;font:11px monospace}}
 #lade{{position:absolute;inset:0;display:grid;place-items:center;font-size:20px}}label{{display:block}}button{{margin:2px}}#modus{{font-weight:bold;color:#a00}}</style></head><body>
 <div id="lade">Lade Welt …</div>

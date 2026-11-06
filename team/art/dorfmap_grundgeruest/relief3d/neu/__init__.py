@@ -1,1 +1,1 @@
-"""Deterministischer Neubau-Prototyp fuer die Dorfkarte."""
+"""Deterministischer Neubau-Prototyp fuer die Dorfkarte (Vektor + Mesh-Kern)."""
