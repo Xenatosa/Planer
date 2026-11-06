@@ -1,5 +1,9 @@
 # baut index.html: three.js-Bundle + NEU-Daten + ALT-Daten (t39u, _alt) + Texturen. Aufruf: python3 gen_relief.py && python3 baue_html.py
 import base64,subprocess,os
+if os.environ.get('RELIEF_NEU')=='1':
+    from neu.baue_html import run as _relief_neu_html
+    _relief_neu_html()
+    raise SystemExit(0)
 NM=os.environ.get('NODE_DIR','/tmp/w3');A='../_alt/modell3d_t36u/'
 subprocess.run(f'{NM}/node_modules/.bin/esbuild main.js --bundle --minify --format=iife --outfile=/tmp/w3/bundle_r.js',shell=True,check=True,env={**os.environ,'NODE_PATH':NM+'/node_modules'})
 b=lambda p:base64.b64encode(open(p,'rb').read()).decode()
