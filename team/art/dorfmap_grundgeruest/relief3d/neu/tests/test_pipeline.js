@@ -10,7 +10,7 @@ function runBuild() {
   return JSON.parse(lines[lines.length - 1]);
 }
 const a = runBuild();
-const files = ['vektor.json', 'felder.npz', 'felder.json', 'build.json', 'zellen_relief.csv', 'debug_D1.png', 'debug_G1.png', 'debug_D2.png'];
+const files = ['vektor.json', 'felder.npz', 'felder.json', 'build.json', 'zellen_relief.csv', 'debug_D1.png', 'debug_G1.png', 'debug_D2.png', 'relief_neu.json.gz'];
 const before = Object.fromEntries(files.map(f => [f, crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'neu', f))).digest('hex')]));
 const b = runBuild();
 const after = Object.fromEntries(files.map(f => [f, crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'neu', f))).digest('hex')]));

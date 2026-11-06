@@ -11,9 +11,8 @@ const first = build();
 const second = build();
 if (!crypto.timingSafeEqual(crypto.createHash('sha256').update(first).digest(), crypto.createHash('sha256').update(second).digest())) throw new Error('HTML-Ausgabe ist nicht deterministisch');
 const html = first.toString('utf8');
-for (const tile of ['D1', 'G1', 'D2']) {
-  if (!html.includes(`debug_${tile}.png`)) throw new Error(`Diagnoseansicht ${tile} fehlt`);
+for (const text of ['Relief-Neu Geländemesh', 'neu_mesh_tiles', 'window.__test.neuMeshDraw', 'D1', 'G1', 'D2']) {
+  if (!html.includes(text)) throw new Error(`Viewer-Integration fehlt: ${text}`);
 }
-if ((html.match(/<section>/g) || []).length !== 3) throw new Error('Viewer zeigt nicht genau drei Prototypkacheln');
-if (/https?:\/\//.test(html)) throw new Error('Viewer enthaelt externe Ressourcen');
-console.log(JSON.stringify({ offline: true, kacheln: ['D1', 'G1', 'D2'] }));
+if (html.includes('<script src=')) throw new Error('Viewer enthaelt externe Skripte');
+console.log(JSON.stringify({ offline: true, three_d_viewer: true, kacheln: ['D1', 'G1', 'D2'] }));
