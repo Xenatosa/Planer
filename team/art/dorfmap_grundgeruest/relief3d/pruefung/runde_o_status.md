@@ -632,3 +632,9 @@ Gestartet: pgelaende, pwand (echte 3D-Schichten). Anschluss: pruefung/ANSCHLUSS_
 - pwand cc9e42e: t42u 0, D2 bytegleich, 570/48/334, Lochscan legacy 0, neu (index.html) 0 bei 44.704 Dr.; neu/index.html-Scan Node-Fehler. Nahbilder selbst angesehen: D1/G1-Gelaende fast flache Ebene, Klippe D1 ~140|35 verloren, Waende kantige Brett-Extrusionen; test_beanstandungen 7/7 rot; Legacy-Build aendert index.html. -> NICHT gemergt.
 - Folgelauf: Codex p3d (gpt-6-luna/xhigh im Log bestaetigt), Branch art/dorfmap-p3d, Worktree /workspace/wt_dorfmap_p3d, Skript codex_jobs/starte_p3d.sh, Log log_p3d.txt, Ende ende_p3d.txt. Einzige Integration: merged pgelaende+pwand, eigenes D1/G1-Mesh mit Relief, gerundete Wandkontur, Profil aktiv, D2 bytegleich.
 - Bei ende_p3d.txt: Schritte 1-6 oben erneut.
+
+## t140u (06.11. ~10:10 UTC+1) p3d gegengeprueft, p3d2 gestartet
+p3d 576080b: Viewer zeichnet neu_mesh (RELIEF_NEU_VIEWER), LOD1 168600, D2 bytegleich, t42u 0, Loch 0.
+Ursache Nullwirkung: mesh.py VAR=2 `weight*=0.02` (D1 0,59 mm / G1 1,44 mm, Bilder pixelgleich); Gates/Beanstandungen messen Legacy-GB nicht neu_mesh; Wand-Fade belaesst GB-Stufen am Fuss. VAR=1: 6 Clay-Anstiege — kein weiterer Globalversuch.
+p3d NICHT nach grundgeruest als Erfolg gemergt. Folgejob p3d2 auf Basis p3d: sichtbare Kreuzung D1, Weg-/Endprofile, Wandanschluesse ohne GB-Stufen; Messung am neuen Mesh; D2+Klippe 140|35 halten; Luna/xhigh im Log bestaetigt.
+Anschluss: pruefung/ANSCHLUSS_t139u.md

@@ -1,28 +1,28 @@
-# Anschluss t139u (nicht stillstehen)
+# Anschluss t139u / t140u (Neubau)
 
-Stand HEAD nach Grundlagen-Merge: siehe `git log -1` auf art/dorfmap-grundgeruest.
-Legacy-Gate unveraendert 570/48/334=952, Loch 0, t42u 0. Mesh der Legacy-Pipeline unveraendert (kein Fortschritt am 3D-Mesh behaupten).
+## Ursache p3d (576080b) — Wirkung gegen Null
+1. `neu/mesh.py` Variante 2: `weight *= 0.02` nach allen Profilen → max Δh D1 **0,59 mm**, G1 **1,44 mm**; Nahbilder pixelgleich zu VAR=0.
+2. Legacy-Gates + `test_beanstandungen.py` lesen **`relief_daten.json.gz` / GB**, nicht `neu_mesh_tiles`. R8=48/R9=334 unverändert ist **kein** Mesh-Beweis.
+3. Wand-Abstandsschutz (`wall_weight` ab 1,2 m) hält Terrain am Wandfuß auf GB → sichtbare Stufen trotz gezeichneter Wandmeshes.
+4. Viewer **zeichnet** neues Mesh (`RELIEF_NEU_VIEWER=1` → `neu/viewer.js`); gemessen wurde größtenteils Legacy-GB.
 
-## Laufen jetzt
-- Codex `art/dorfmap-pgelaende` Worktree `/workspace/wt_dorfmap_pgelaende`, Log `/workspace/codex_jobs/log_pgelaende.txt`, Ende-Marker `ende_pgelaende.txt`
-- Codex `art/dorfmap-pwand` Worktree `/workspace/wt_dorfmap_pwand`, Log `/workspace/codex_jobs/log_pwand.txt`, Ende-Marker `ende_pwand.txt`
-- Config und effektive Logs: model gpt-6-luna, reasoning effort xhigh
+## Baseline neues Mesh (p3d Standard VAR=2) — zum Vergleichen, kein Erfolg
+- D1: 84 Vertices geändert, max|Δ| 0,000588 m; G1: 209 / 0,001436 m; D2: 0
+- LOD1 168600 Dreiecke; Lochscans 0; t42u 0; D2 bytegleich
+- Beanstandungen (noch am Legacy-Gate gemessen): Kreuzungsstufe 1,389 m; R8a 24; Delle G1 0,42 m; Sägezahn D1 41; Wandkante 2,24; F1 0,17 m; Schatten 0,307 — alle rot
+- VAR=1: größere Profile, aber 6 Clay-Metrikanstiege G1 — verworfen
 
-## Sobald ende_*.txt da ist
-1. Bericht `pruefung/ERGEBNIS_<tag>.md` lesen; gegenpruefen: Quellspalten-Diff 0, t42u 0, D2 bytegleich ohne Referenz-Reset, keine Regel +>5, Delta bricht bei Anstieg.
-2. Raycast + Gate kartenweit auf dem Worktree.
-3. Alle Nahbilder D1/G1/D2 (Ton+betroffene) persoenlich ansehen — Stichprobe reicht nicht als Endurteil; vor Lieferung spaeter alle 56.
-4. Pruefen dass RELIEF_NEU=1 wirklich neues 3D-Mesh im Viewer zeigt (nicht nur 2D/Diagnostik).
-5. Einzeln mergen nach Gate, pushen, Status in runde_o_status.md.
-6. Danach naechste Schichten/Details nur wenn D2/G1/D1 Gate 0 und Nahbilder gut; sonst Zahlen melden (kein Fabian-Kontakt).
+## Läuft jetzt
+- **p3d2** Worktree `/workspace/wt_dorfmap_p3d2`, Branch `art/dorfmap-p3d2` (Basis p3d 576080b)
+- Log `/workspace/codex_jobs/log_p3d2.txt`, Ende `ende_p3d2.txt`
+- Modell-Log: gpt-6-luna / xhigh (verifiziert)
+
+## Nach ende_p3d2.txt
+1. ERGEBNIS_p3d2.md: Ursache-Fix, Mesh-Baseline vor/nach (max|Δ|, Kreuzungsstufe am **neuen** Feld)
+2. Prüfen: Tests/Gates lesen neues Mesh; Schwellen unverändert; D2 + Klippe 140|35 erhalten
+3. Xvfb-Nahbilder persönlich ansehen (Kreuzung D1, Wandfuss, G1-Anschluss, D2, Wegende)
+4. Nur bei sichtbarer+messbarer Verbesserung einzeln mergen; sonst Zahlen, kein Fabian-Kontakt
+5. p3d selbst nicht als Mesh-Erfolg nach grundgeruest mergen (Infrastruktur ok, Wirkung Null)
 
 ## Nicht tun
-- Keine Legacy-Flicken mehr.
-- Nichts loeschen ohne ausdrueckliches Ja von Fabian.
-- Keine Nachricht an Fabian.
-
-## Gegenpruefung pgelaende/pwand (06.11.2026 ~08:30 MEZ, Grok Bot)
-- pgelaende 80de512: Quellspalten-Diff 0, t42u 0, D2 bytegleich, pr/r8/r9 570/48/334 (+0 je Regel), Lochscan frisch unter xvfb-run 0 offen (1.700.454 Dr., index.html und neu/index.html). ABER: Standard Variante 0 = pixelgleich zur Legacy; main.js schreibt nur Hoehen ins alte Feld G, kein eigenes sichtbares Mesh, Profil nicht aktiv. Schritt 4 nicht bestanden -> NICHT gemergt.
-- pwand cc9e42e: t42u 0, D2 bytegleich, 570/48/334, Lochscan legacy 0, neu (index.html) 0 bei 44.704 Dr.; neu/index.html-Scan Node-Fehler. Nahbilder selbst angesehen: D1/G1-Gelaende fast flache Ebene, Klippe D1 ~140|35 verloren, Waende kantige Brett-Extrusionen; test_beanstandungen 7/7 rot; Legacy-Build aendert index.html. -> NICHT gemergt.
-- Folgelauf: Codex p3d (gpt-6-luna/xhigh im Log bestaetigt), Branch art/dorfmap-p3d, Worktree /workspace/wt_dorfmap_p3d, Skript codex_jobs/starte_p3d.sh, Log log_p3d.txt, Ende ende_p3d.txt. Einzige Integration: merged pgelaende+pwand, eigenes D1/G1-Mesh mit Relief, gerundete Wandkontur, Profil aktiv, D2 bytegleich.
-- Bei ende_p3d.txt: Schritte 1-6 oben erneut.
+Keine globalen Minimalgewichte, keine Schwellenlockerung, keine Legacy-Flicken, keine Löschung, keine Nachricht an Fabian.
