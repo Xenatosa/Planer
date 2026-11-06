@@ -1,28 +1,14 @@
-# Anschluss t139u / t140u (Neubau)
+# Anschluss t141u (nach p3d3)
 
-## Ursache p3d (576080b) — Wirkung gegen Null
-1. `neu/mesh.py` Variante 2: `weight *= 0.02` nach allen Profilen → max Δh D1 **0,59 mm**, G1 **1,44 mm**; Nahbilder pixelgleich zu VAR=0.
-2. Legacy-Gates + `test_beanstandungen.py` lesen **`relief_daten.json.gz` / GB**, nicht `neu_mesh_tiles`. R8=48/R9=334 unverändert ist **kein** Mesh-Beweis.
-3. Wand-Abstandsschutz (`wall_weight` ab 1,2 m) hält Terrain am Wandfuß auf GB → sichtbare Stufen trotz gezeichneter Wandmeshes.
-4. Viewer **zeichnet** neues Mesh (`RELIEF_NEU_VIEWER=1` → `neu/viewer.js`); gemessen wurde größtenteils Legacy-GB.
+## p3d3 ad479b9 — nicht mergen
+Unabhaengig (06.11. ~23:05): Mesh D1 702 Vert. geaendert, max|Δ| 3,31 m; Kreuzung 152.5|28.5 Mesh-ptp≈0 (GB≈3,11); G1 0 Vert.; D2 max|Δ| 0; Klippe 140|35 h identisch GB. Bericht Stufe 1,746→0,038 m an Schnittpunkt plausibel. Clay: Kreuzung weicher, Wandfussnaht weiter sichtbar, Wegende ohne klaren Auslauf.
+Blocker: delta 10 Anstiege (R3_laengs D1 +5, G7b D1 +1, Clay); R8a 23; Saegezahn 47; G1 unangetastet (VAR=2 schaltet Wege/Rampen aus); Suite 13/9. Tests: Grenzen nicht gelockert (Wegende-Null wieder aktiv).
 
-## Baseline neues Mesh (p3d Standard VAR=2) — zum Vergleichen, kein Erfolg
-- D1: 84 Vertices geändert, max|Δ| 0,000588 m; G1: 209 / 0,001436 m; D2: 0
-- LOD1 168600 Dreiecke; Lochscans 0; t42u 0; D2 bytegleich
-- Beanstandungen (noch am Legacy-Gate gemessen): Kreuzungsstufe 1,389 m; R8a 24; Delle G1 0,42 m; Sägezahn D1 41; Wandkante 2,24; F1 0,17 m; Schatten 0,307 — alle rot
-- VAR=1: größere Profile, aber 6 Clay-Metrikanstiege G1 — verworfen
+## Laeuft
+- **p3d4** `/workspace/wt_dorfmap_p3d4` Branch `art/dorfmap-p3d4` Basis p3d3
+- Log `codex_jobs/log_p3d4.txt` Ende `ende_p3d4.txt`
+- Log-Modell: gpt-6-luna / xhigh
+- Isoliert: Wegenden-Auslauf, Wandfussnaht, Kreuzung ohne R3+5 / ohne Endpunkt-Verschlechterung
 
-## Läuft jetzt
-- **p3d2** Worktree `/workspace/wt_dorfmap_p3d2`, Branch `art/dorfmap-p3d2` (Basis p3d 576080b)
-- Log `/workspace/codex_jobs/log_p3d2.txt`, Ende `ende_p3d2.txt`
-- Modell-Log: gpt-6-luna / xhigh (verifiziert)
-
-## Nach ende_p3d2.txt
-1. ERGEBNIS_p3d2.md: Ursache-Fix, Mesh-Baseline vor/nach (max|Δ|, Kreuzungsstufe am **neuen** Feld)
-2. Prüfen: Tests/Gates lesen neues Mesh; Schwellen unverändert; D2 + Klippe 140|35 erhalten
-3. Xvfb-Nahbilder persönlich ansehen (Kreuzung D1, Wandfuss, G1-Anschluss, D2, Wegende)
-4. Nur bei sichtbarer+messbarer Verbesserung einzeln mergen; sonst Zahlen, kein Fabian-Kontakt
-5. p3d selbst nicht als Mesh-Erfolg nach grundgeruest mergen (Infrastruktur ok, Wirkung Null)
-
-## Nicht tun
-Keine globalen Minimalgewichte, keine Schwellenlockerung, keine Legacy-Flicken, keine Löschung, keine Nachricht an Fabian.
+## Nach ende_p3d4
+Bericht lesen, Mesh unabhaengig messen, Nahbilder ansehen, nur mergen wenn Delta ok und Kriterien. Sonst Zahlen + naechster isolierter Auftrag noch am selben Tag — nicht bis Werktag liegen lassen.

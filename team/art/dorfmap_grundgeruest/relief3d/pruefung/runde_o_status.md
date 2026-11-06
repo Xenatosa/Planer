@@ -647,3 +647,8 @@ Anschluss: pruefung/ANSCHLUSS_t139u.md
 - Nahbilder angesehen: Die D1-Kreuzung ist eine harte Platte mit geraden, abgehackten Kanten. Am G1-Wandanschluss sind Riss- und Nahtlinien sichtbar.
 - Entscheidung: KEIN Merge.
 - Anschluss: p3d3 gestartet (Basis p3d2, gpt-6-luna/xhigh, starte_p3d3.sh, log_p3d3.txt, ende_p3d3.txt). Auftrag: Regressionen ursachenbezogen beheben und die absoluten Test-Asserts wiederherstellen.
+
+## t141u (06.11. ~23:10 UTC+1) p3d3 auditiert, nicht gemergt; p3d4 gestartet
+p3d3 ad479b9 seit 18:15 unbearbeitet → jetzt gegengeprueft.
+Unabhaengig: D1 Kreuzung Mesh flach (ptp0 vs GB 3.11), 702 Vert./max 3.31 m; G1 0; D2 0; Klippe 140|35 gleich. Bericht 1.746→0.038 m ok. Nicht mergen: R3_laengs D1 +5, 10 Deltas, R8a 23, Wandfussnaht, Saegezahn 47, G1 unveraendert (VAR=2 ohne Wegeprofile). Tests Grenzen nicht gelockert.
+p3d4 gestartet (Luna/xhigh): isolierte Wegenden + Wandfuss + Kreuzungs-Regression. Anschluss aktualisiert.
