@@ -57,6 +57,7 @@ def test_opt_in_pipeline_writes_a_deterministic_read_only_package(tmp_path: Path
     shutil.copyfile(RELIEF3D / "zellen_relief.csv", fixture_root / "zellen_relief.csv")
     shutil.copyfile(RELIEF3D / "neu" / "vektor.json", fixture_root / "neu" / "vektor.json")
     shutil.copyfile(RELIEF3D / "neu" / "felder.npz", fixture_root / "neu" / "felder.npz")
+    shutil.copyfile(RELIEF3D / "neu" / "zellen_relief.csv", fixture_root / "neu" / "zellen_relief.csv")
     before = (fixture_root / "zellen_relief.csv").read_bytes()
     monkeypatch.setattr(pipeline, "ROOT", fixture_root)
     pipeline.build()

@@ -1,4 +1,5 @@
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import {renderNeuCore} from './neu/viewer.js';
 // t41u Viewer: NEU = echtes Relief (gen_relief.py), ALT = t39u-Welt. Alle Objekte PLATZHALTER.
 import * as THREE from 'three';
 import {objekteNeu} from './objekte_neu.js';
@@ -14,7 +15,9 @@ let __st='',__t0=performance.now();const stufe=async t=>{__st=t;const l=$('lade'
 window.__ladeWD=setTimeout(()=>{const l=$('lade');if(l&&!/Fehler/.test(l.textContent))l.textContent+='\nDas dauert ungewöhnlich lange (über 60 s) bei Schritt: '+__st;},60000);
 if(typeof DecompressionStream==='undefined')setTimeout(()=>zeigeFehler(new Error('Browser zu alt: DecompressionStream fehlt (Chrome/Brave/Edge ab 80, Firefox ab 113, Safari ab 16.4).')),0);
 (async()=>{
-await stufe('Daten entpacken …');const DN=await gz(window.NEU_GZ),DA=await gz(window.ALT_GZ),NX=DN.nx,NY=DN.ny;
+await stufe('Daten entpacken …');const DN=await gz(window.NEU_GZ);
+if(window.RELIEF_NEU_VIEWER){await renderNeuCore({THREE,OrbitControls,DN,stufe});return;}
+const DA=await gz(window.ALT_GZ),NX=DN.nx,NY=DN.ny;
 await stufe('Grafik (WebGL) starten …');{const tc=document.createElement('canvas');if(!(tc.getContext('webgl2')||tc.getContext('webgl')))throw new Error('WebGL ist in diesem Browser nicht verfügbar (Hardwarebeschleunigung aus oder blockiert).');}
 const ren=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});ren.setPixelRatio(Math.min(devicePixelRatio,2));
 ren.setSize(innerWidth,innerHeight);ren.shadowMap.enabled=!/[?&]nosh=1/.test(location.search);ren.shadowMap.type=THREE.PCFShadowMap;ren.toneMapping=THREE.ACESFilmicToneMapping;ren.toneMappingExposure=1.0;document.body.appendChild(ren.domElement);

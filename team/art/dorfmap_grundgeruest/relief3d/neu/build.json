@@ -8,6 +8,75 @@
     "weg"
   ],
   "felder_sha256": "64db8aac398fe627ee92935b662a0106d983337f57dd1b0412a7c3f5561fa41a",
+  "mesh_package": {
+    "lod1": {
+      "budget_triangles": 1300000,
+      "sampling_m": 0.5,
+      "sampling_m_by_tile": {
+        "D1": 1.0,
+        "D2": 0.5,
+        "G1": 1.0
+      },
+      "terrain_closed_triangles": 44704,
+      "total_triangles": 51352,
+      "wall_triangles": 6648
+    },
+    "output": "neu/relief_neu.json.gz",
+    "source_columns": [
+      "untergrund",
+      "hindernis_id",
+      "hindernis_art",
+      "wasser_eis",
+      "ebene",
+      "bauzone_bestand",
+      "bauzone_plan",
+      "begehbar",
+      "bebaubar"
+    ],
+    "tiles": {
+      "D1": {
+        "closed_triangles": 7564,
+        "height_sha256": "1e4b8efc1eac31fd5b1c8d752983dcf70548db4134be624c0dea7bc6d0bd4984",
+        "triangles": 3612,
+        "vertices": 1892
+      },
+      "D2": {
+        "closed_triangles": 29576,
+        "height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+        "triangles": 14448,
+        "vertices": 7395
+      },
+      "G1": {
+        "closed_triangles": 7564,
+        "height_sha256": "7c65e0bdcc1733c41c38ea7641810004f8e890ef18af4704281fa39497470fb3",
+        "triangles": 3612,
+        "vertices": 1892
+      }
+    },
+    "waende": {
+      "tiles": {
+        "D1": {
+          "features": 7,
+          "min_width_m": 1.2,
+          "triangles": 2756,
+          "vertices": 5512
+        },
+        "D2": {
+          "features": 0,
+          "min_width_m": null,
+          "triangles": 0,
+          "vertices": 0
+        },
+        "G1": {
+          "features": 13,
+          "min_width_m": 1.2,
+          "triangles": 3892,
+          "vertices": 7784
+        }
+      },
+      "variant": 1
+    }
+  },
   "prototype_kacheln": [
     "D1",
     "G1",

@@ -113,6 +113,49 @@ def tile_mesh(
     return positions, indices
 
 
+def source_tile_mesh(cells_csv: Path, tile: str) -> tuple[np.ndarray, np.ndarray]:
+    """Build D1/G1 from source cell-center heights at a 1 m vertex grid."""
+    import csv
+
+    if tile not in ("D1", "G1"):
+        raise KeyError(tile)
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    cell_h = np.full((z1 - z0, x1 - x0), np.nan, dtype=np.float64)
+    with cells_csv.open("r", encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        required = {"cx", "cy", "hoehe_m"}
+        if not required.issubset(reader.fieldnames or ()):
+            raise ValueError(f"Quell-CSV benoetigt Spalten {sorted(required)}")
+        for row in reader:
+            x, z = int(row["cx"]), int(row["cy"])
+            if x0 <= x < x1 and z0 <= z < z1:
+                cell_h[z - z0, x - x0] = float(row["hoehe_m"])
+    if not np.isfinite(cell_h).all():
+        raise ValueError(f"Unvollstaendige Zellhoehen in {tile}")
+    heights = np.empty((z1 - z0 + 1, x1 - x0 + 1), dtype="<f4")
+    for vz in range(heights.shape[0]):
+        for vx in range(heights.shape[1]):
+            samples = [cell_h[cz, cx] for cz in (vz - 1, vz) for cx in (vx - 1, vx)
+                       if 0 <= cz < cell_h.shape[0] and 0 <= cx < cell_h.shape[1]]
+            heights[vz, vx] = np.float32(sum(samples) / len(samples))
+    rows, cols = heights.shape[0] - 1, heights.shape[1] - 1
+    zz, xx = np.mgrid[0 : rows + 1, 0 : cols + 1]
+    positions = np.empty((heights.size, 3), dtype="<f4")
+    positions[:, 0] = (x0 + xx.ravel()).astype(np.float32)
+    positions[:, 1] = heights.ravel()
+    positions[:, 2] = (z0 + zz.ravel()).astype(np.float32)
+    width = cols + 1
+    indices = np.empty((rows * cols * 6,), dtype="<u4")
+    out = 0
+    for row in range(rows):
+        for col in range(cols):
+            a = row * width + col
+            b, c, d0 = a + 1, a + width, a + width + 1
+            indices[out : out + 6] = (a, c, d0, a, d0, b)
+            out += 6
+    return positions, indices
+
+
 def _b64(array: np.ndarray) -> str:
     return base64.b64encode(array.tobytes(order="C")).decode("ascii")
 
@@ -140,8 +183,13 @@ def build_manifest(
         heights, info = terrain_heights(source, tile, vector, fields, variant)
         positions, indices = tile_mesh(source, tile, heights)
         terrain[tile] = info
+        samples_per_m = int(source.data["rs"])
+        surface_mode = "locked_visible_GB_bytes" if tile == "D2" else "GB_with_local_profiles"
         tiles[tile] = {
             "bounds": list(TILE_BOUNDS[tile]),
+            "samples_per_m": samples_per_m,
+            "sampling_m": 1.0 / samples_per_m,
+            "surface_mode": surface_mode,
             "vertices_xyz_f32": _b64(positions),
             "indices_u32": _b64(indices),
             "vertices": int(len(positions)),
