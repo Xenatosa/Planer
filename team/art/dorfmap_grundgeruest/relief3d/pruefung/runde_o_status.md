@@ -626,3 +626,9 @@ Integration auf grundgeruest (einzeln, Konflikte an RELIEF_NEU zugunsten pvektor
 - Nachbau Legacy: Gate 570/48/334, Loch 0, t42u 0, Quellspalten-Diff 0; boden_anzeige_m 14429 (erlaubt).
 Codex-Modell: Config gpt-6-luna / xhigh; Logs pgelaende+pwand bestaetigen model: gpt-6-luna, reasoning effort: xhigh (Automationsbericht Default war falsch).
 Gestartet: pgelaende, pwand (echte 3D-Schichten). Anschluss: pruefung/ANSCHLUSS_t139u.md
+
+## Gegenpruefung pgelaende/pwand (06.11.2026 ~08:30 MEZ, Grok Bot)
+- pgelaende 80de512: Quellspalten-Diff 0, t42u 0, D2 bytegleich, pr/r8/r9 570/48/334 (+0 je Regel), Lochscan frisch unter xvfb-run 0 offen (1.700.454 Dr., index.html und neu/index.html). ABER: Standard Variante 0 = pixelgleich zur Legacy; main.js schreibt nur Hoehen ins alte Feld G, kein eigenes sichtbares Mesh, Profil nicht aktiv. Schritt 4 nicht bestanden -> NICHT gemergt.
+- pwand cc9e42e: t42u 0, D2 bytegleich, 570/48/334, Lochscan legacy 0, neu (index.html) 0 bei 44.704 Dr.; neu/index.html-Scan Node-Fehler. Nahbilder selbst angesehen: D1/G1-Gelaende fast flache Ebene, Klippe D1 ~140|35 verloren, Waende kantige Brett-Extrusionen; test_beanstandungen 7/7 rot; Legacy-Build aendert index.html. -> NICHT gemergt.
+- Folgelauf: Codex p3d (gpt-6-luna/xhigh im Log bestaetigt), Branch art/dorfmap-p3d, Worktree /workspace/wt_dorfmap_p3d, Skript codex_jobs/starte_p3d.sh, Log log_p3d.txt, Ende ende_p3d.txt. Einzige Integration: merged pgelaende+pwand, eigenes D1/G1-Mesh mit Relief, gerundete Wandkontur, Profil aktiv, D2 bytegleich.
+- Bei ende_p3d.txt: Schritte 1-6 oben erneut.
