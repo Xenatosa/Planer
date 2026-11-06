@@ -613,3 +613,16 @@ Prüfung je Lauf mit /tmp/ev5/gate.sh: Lochscan headless, pruefe_regeln, r8, r9,
 Ergebnis: Nichts gemergt. grundgeruest bleibt bei 952 (570/48/334), Gate 0 weiterhin in 4 von 56 Kacheln (A4, A5, F3, G7).
 fleck läuft seit 10:17 (letzter Lauf der alten Queue) und wird nach Ende ebenso nur ausgewertet. Wegen t138u startet keine neue Flicken-Welle; die weitere Arbeit läuft über den Kern-Neubau (neu/, RELIEF_NEU=1).
 /tmp aufgeräumt (nur alte Zwischenstände fertiger Läufe, nichts aus dem Repo gelöscht): 30 → 34 GB frei.
+
+## t139u (06.11. ~06:20 UTC+1) Grundlagen integriert, 3D-Schichten gestartet
+Ursache Stillstand: nach ende_pvektor/pregeln/pregress/pnahbild keine Weiterarbeit; HEAD lag bei cf57ac2.
+Gegenpruefung Berichte:
+- pvektor 31aa2da: Vektor+Felder ok, Tests ok, Quell-Diff 0, Gate 570/48/334; nur 2D-Diagnostik, kein neues 3D-Mesh.
+- pregress fce8143: 7 Beanstandungstests korrekt rot; mesh.py existiert, Renderer zeichnet neu_mesh_tiles noch nicht.
+- pnahbild 19b70be: Nahbild+Delta-Werkzeuge; Filterversuch schlechter, Standard unveraendert; Clay zeigt weiterhin Legacy-Mesh (Zaehne/Dellen sichtbar).
+- pregeln 2baa974: Regelwerk-Matrix + regelmessung; Terrainprototyp-Variante nicht als RELIEF_NEU-Einstieg uebernommen.
+Integration auf grundgeruest (einzeln, Konflikte an RELIEF_NEU zugunsten pvektor geloest; Alternativen als *_var.py behalten, nichts geloescht):
+- merge pvektor, pregress, pnahbild, pregeln → HEAD 9c9bf53
+- Nachbau Legacy: Gate 570/48/334, Loch 0, t42u 0, Quellspalten-Diff 0; boden_anzeige_m 14429 (erlaubt).
+Codex-Modell: Config gpt-6-luna / xhigh; Logs pgelaende+pwand bestaetigen model: gpt-6-luna, reasoning effort: xhigh (Automationsbericht Default war falsch).
+Gestartet: pgelaende, pwand (echte 3D-Schichten). Anschluss: pruefung/ANSCHLUSS_t139u.md
