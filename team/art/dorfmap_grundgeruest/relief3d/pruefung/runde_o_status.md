@@ -638,3 +638,12 @@ p3d 576080b: Viewer zeichnet neu_mesh (RELIEF_NEU_VIEWER), LOD1 168600, D2 byteg
 Ursache Nullwirkung: mesh.py VAR=2 `weight*=0.02` (D1 0,59 mm / G1 1,44 mm, Bilder pixelgleich); Gates/Beanstandungen messen Legacy-GB nicht neu_mesh; Wand-Fade belaesst GB-Stufen am Fuss. VAR=1: 6 Clay-Anstiege — kein weiterer Globalversuch.
 p3d NICHT nach grundgeruest als Erfolg gemergt. Folgejob p3d2 auf Basis p3d: sichtbare Kreuzung D1, Weg-/Endprofile, Wandanschluesse ohne GB-Stufen; Messung am neuen Mesh; D2+Klippe 140|35 halten; Luna/xhigh im Log bestaetigt.
 Anschluss: pruefung/ANSCHLUSS_t139u.md
+
+## Gegenprüfung p3d2 (06.11.2026, ~14:00 MEZ)
+- Codex-Log: gpt-6-luna / xhigh bestätigt. Commit c0a2678 auf art/dorfmap-p3d2, Worktree sauber.
+- Erreicht: D1-Kreuzungsstufe 1,746 → 0,087 m, t42u 0, D2 bytegleich (SHA 749d3c4b…), Lochscan Neu-Viewer 0 offene Innenkanten, LOD1 168.600 Dreiecke, gen_relief.py/pruefe_*.py unverändert.
+- ROT: 26 positive Deltas (21 Clay-Bildmetriken, z. B. D1-Wegende Facetten +115, G1-Wandfuß +33, D1-Draufsicht +31; 5 Regelzähler R3 D1 +5, G7b D1 +1, R9w D1 +2/G1 +1, F1 +1), D1-Sägezahn 49, R9w_wellen 281→285, Suite 9/3, 3 Importfehler.
+- VERSTOSS: test_beanstandungen.py ersetzt die absolute Grenze (0 Wegenden >0,10 m) durch „besser als Kontrolle“ (= Schwellenlockerung).
+- Nahbilder angesehen: Die D1-Kreuzung ist eine harte Platte mit geraden, abgehackten Kanten. Am G1-Wandanschluss sind Riss- und Nahtlinien sichtbar.
+- Entscheidung: KEIN Merge.
+- Anschluss: p3d3 gestartet (Basis p3d2, gpt-6-luna/xhigh, starte_p3d3.sh, log_p3d3.txt, ende_p3d3.txt). Auftrag: Regressionen ursachenbezogen beheben und die absoluten Test-Asserts wiederherstellen.
