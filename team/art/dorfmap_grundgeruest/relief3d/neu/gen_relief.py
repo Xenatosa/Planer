@@ -9,6 +9,7 @@ from pathlib import Path
 
 from .felder import build_fields
 from .vektor import OUT, SOURCE, build
+from .pipeline import build as build_mesh_package
 
 
 def run() -> None:
@@ -28,4 +29,5 @@ def run() -> None:
         "felder": sorted(fields), "prototype_kacheln": result["daten"]["prototype_kacheln"],
     }
     (OUT / "build.json").write_text(json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    build_mesh_package()
     print(json.dumps(summary, ensure_ascii=False))

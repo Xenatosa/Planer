@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import gzip
+import hashlib
 import json
 import shutil
 from pathlib import Path
 
 from neu.mesh import (
     SOURCE_COLUMNS,
+    build_manifest,
     load_relief,
     mesh_height_bytes,
     source_column_hashes,
@@ -53,6 +55,8 @@ def test_opt_in_pipeline_writes_a_deterministic_read_only_package(tmp_path: Path
     (fixture_root / "neu").mkdir(parents=True)
     shutil.copyfile(RELIEF3D / "relief_daten.json.gz", fixture_root / "relief_daten.json.gz")
     shutil.copyfile(RELIEF3D / "zellen_relief.csv", fixture_root / "zellen_relief.csv")
+    shutil.copyfile(RELIEF3D / "neu" / "vektor.json", fixture_root / "neu" / "vektor.json")
+    shutil.copyfile(RELIEF3D / "neu" / "felder.npz", fixture_root / "neu" / "felder.npz")
     before = (fixture_root / "zellen_relief.csv").read_bytes()
     monkeypatch.setattr(pipeline, "ROOT", fixture_root)
     pipeline.build()
@@ -66,3 +70,24 @@ def test_opt_in_pipeline_writes_a_deterministic_read_only_package(tmp_path: Path
     assert {key: value for key, value in package.items() if key != "neu_mesh_tiles"} == original
     assert package["neu_mesh_tiles"]["tiles"]["D2"]["height_sha256"]
     assert build is pipeline.build
+
+
+def test_profiles_change_d1_g1_and_keep_d2_legacy_height_bytes() -> None:
+    source = load_relief(RELIEF3D / "relief_daten.json.gz")
+    manifest = build_manifest(
+        RELIEF3D / "relief_daten.json.gz",
+        RELIEF3D / "zellen_relief.csv",
+        RELIEF3D / "neu" / "vektor.json",
+        RELIEF3D / "neu" / "felder.npz",
+        "1",
+    )
+    assert manifest["format"] == "relief-neu-tile-mesh-v2"
+    assert manifest["terrain"]["D1"]["changed_vertices"] > 0
+    assert manifest["terrain"]["G1"]["changed_vertices"] > 0
+    assert manifest["terrain"]["D2"]["changed_vertices"] == 0
+    expected = source.heights[43 * 2 : 86 * 2 + 1, 126 * 2 : 168 * 2 + 1].ravel().tobytes()
+    assert mesh_height_bytes(source, "D2") == expected
+    assert manifest["tiles"]["D2"]["height_sha256"] == hashlib.sha256(expected).hexdigest()
+    assert set(manifest["terrain"]["D1"]["layers"]) >= {
+        "wege_spline_breite_laengsprofil", "kreuzung_gemeinsame_ebene_weicher_rand",
+    }

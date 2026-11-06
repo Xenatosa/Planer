@@ -12,6 +12,9 @@ import struct
 from typing import Any
 
 import numpy as np
+from scipy import ndimage as ndi
+from scipy.spatial import cKDTree
+from shapely.geometry import Point, Polygon
 
 
 SOURCE_COLUMNS = (
@@ -30,6 +33,8 @@ TILE_BOUNDS = {
     "G1": (252, 0, 294, 43),
     "D1": (126, 0, 168, 43),
 }
+CELL_M = 1.2
+TERRAIN_VARIANTS = {"0", "1", "2"}
 
 
 @dataclass(frozen=True)
@@ -70,7 +75,9 @@ def source_column_hashes(path: Path) -> dict[str, str]:
     return {name: digest.hexdigest() for name, digest in hashes.items()}
 
 
-def tile_mesh(source: ReliefSource, tile: str) -> tuple[np.ndarray, np.ndarray]:
+def tile_mesh(
+    source: ReliefSource, tile: str, tile_heights: np.ndarray | None = None,
+) -> tuple[np.ndarray, np.ndarray]:
     """Triangulate one tile on the source grid; no height is resampled or edited."""
     if tile not in TILE_BOUNDS:
         raise KeyError(tile)
@@ -82,7 +89,9 @@ def tile_mesh(source: ReliefSource, tile: str) -> tuple[np.ndarray, np.ndarray]:
         raise ValueError(f"Kachel {tile} liegt ausserhalb des Reliefgitters")
 
     sx0, sz0, sx1, sz1 = x0 * rs, z0 * rs, x1 * rs, z1 * rs
-    slab = source.heights[sz0 : sz1 + 1, sx0 : sx1 + 1]
+    slab = tile_heights if tile_heights is not None else source.heights[sz0 : sz1 + 1, sx0 : sx1 + 1]
+    if slab.shape != (sz1 - sz0 + 1, sx1 - sx0 + 1):
+        raise ValueError(f"Hoehenfeld fuer {tile} hat unerwartete Form {slab.shape}")
     zz, xx = np.mgrid[sz0 : sz1 + 1, sx0 : sx1 + 1]
     positions = np.empty((slab.size, 3), dtype="<f4")
     positions[:, 0] = (xx.ravel() / rs).astype(np.float32)
@@ -108,11 +117,29 @@ def _b64(array: np.ndarray) -> str:
     return base64.b64encode(array.tobytes(order="C")).decode("ascii")
 
 
-def build_manifest(relief_path: Path, cells_csv: Path) -> dict[str, Any]:
+def build_manifest(
+    relief_path: Path,
+    cells_csv: Path,
+    vector_path: Path | None = None,
+    fields_path: Path | None = None,
+    variant: str | None = None,
+) -> dict[str, Any]:
     source = load_relief(relief_path)
+    directory = relief_path.parent / "neu"
+    vector_path = vector_path or directory / "vektor.json"
+    fields_path = fields_path or directory / "felder.npz"
+    if variant is None:
+        import os
+        variant = os.environ.get("RELIEF_GELAENDE_VAR", "0")
+    vector = json.loads(vector_path.read_text(encoding="utf-8"))
+    with np.load(fields_path, allow_pickle=False) as archive:
+        fields = {name: archive[name] for name in archive.files}
     tiles: dict[str, Any] = {}
+    terrain: dict[str, Any] = {}
     for tile in ("D2", "G1", "D1"):
-        positions, indices = tile_mesh(source, tile)
+        heights, info = terrain_heights(source, tile, vector, fields, variant)
+        positions, indices = tile_mesh(source, tile, heights)
+        terrain[tile] = info
         tiles[tile] = {
             "bounds": list(TILE_BOUNDS[tile]),
             "vertices_xyz_f32": _b64(positions),
@@ -123,11 +150,15 @@ def build_manifest(relief_path: Path, cells_csv: Path) -> dict[str, Any]:
             "mesh_sha256": hashlib.sha256(positions.tobytes() + indices.tobytes()).hexdigest(),
         }
     return {
-        "format": "relief-neu-tile-mesh-v1",
+        "format": "relief-neu-tile-mesh-v2",
         "sampling_m": 1.0 / int(source.data["rs"]),
         "source_relief_sha256": source.source_file_sha256,
+        "source_vector_sha256": hashlib.sha256(vector_path.read_bytes()).hexdigest(),
+        "source_fields_sha256": hashlib.sha256(fields_path.read_bytes()).hexdigest(),
         "source_cell_columns": list(SOURCE_COLUMNS),
         "source_cell_column_sha256": source_column_hashes(cells_csv),
+        "terrain_variant": variant,
+        "terrain": terrain,
         "tiles": tiles,
     }
 
@@ -144,3 +175,268 @@ def mesh_height_bytes(source: ReliefSource, tile: str) -> bytes:
     """Expose the exact per-tile y samples for byte-level D2 comparisons."""
     positions, _ = tile_mesh(source, tile)
     return b"".join(struct.pack("<f", float(v)) for v in positions[:, 1])
+
+
+def _smoothstep(edge0: float, edge1: float, value: np.ndarray) -> np.ndarray:
+    t = np.clip((value - edge0) / (edge1 - edge0), 0.0, 1.0)
+    return t * t * (3.0 - 2.0 * t)
+
+
+def _sample_field(field: np.ndarray, x: np.ndarray, z: np.ndarray) -> np.ndarray:
+    """Sample a cell-centred global field at the mesh's world coordinates."""
+    return ndi.map_coordinates(
+        field,
+        [z / CELL_M - 0.5, x / CELL_M - 0.5],
+        order=1,
+        mode="nearest",
+        prefilter=False,
+    )
+
+
+def _sample_height(source: ReliefSource, x: np.ndarray, z: np.ndarray) -> np.ndarray:
+    rs = int(source.data["rs"])
+    return ndi.map_coordinates(
+        source.heights,
+        [z * rs, x * rs],
+        order=1,
+        mode="nearest",
+        prefilter=False,
+    )
+
+
+def _polygon_from_feature(feature: dict[str, Any]) -> Polygon | None:
+    rings = feature.get("polygon_m") or []
+    if not rings:
+        return None
+    # Crossings store one ring directly; area features store a ring list.
+    ring_list = rings if rings and isinstance(rings[0][0], (int, float)) else rings[0]
+    exterior = [(float(x) / CELL_M, float(z) / CELL_M) for x, z in ring_list]
+    holes = [
+        [(float(x) / CELL_M, float(z) / CELL_M) for x, z in ring]
+        for ring in (feature.get("innenringe_m") or [[]])[0]
+    ]
+    polygon = Polygon(exterior, holes)
+    return polygon if not polygon.is_empty and polygon.is_valid else None
+
+
+def _local_polygon_mask(
+    polygon: Polygon, x: np.ndarray, z: np.ndarray, padding_world: float = 0.0,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return candidate grid indices and distances for a feature near a tile."""
+    min_x, min_z, max_x, max_z = polygon.bounds
+    rs = int(round(1.0 / (x[0, 1] - x[0, 0]))) if x.shape[1] > 1 else 2
+    pad = padding_world + 1.0 / rs
+    where = np.where(
+        (x >= min_x - pad) & (x <= max_x + pad)
+        & (z >= min_z - pad) & (z <= max_z + pad)
+    )
+    if not len(where[0]):
+        return where, np.empty(0, dtype=np.float64)
+    coords = zip(x[where].ravel(), z[where].ravel())
+    distances = np.fromiter(
+        (polygon.distance(Point(float(px), float(pz))) * CELL_M for px, pz in coords),
+        dtype=np.float64,
+        count=len(where[0]),
+    )
+    return where, distances
+
+
+def _road_profile_grid(
+    source: ReliefSource,
+    vector: dict[str, Any],
+    x: np.ndarray,
+    z: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Create the road-spline target and width mask from the vector layer."""
+    points: list[tuple[float, float]] = []
+    target_heights: list[float] = []
+    radii: list[float] = []
+    for road in vector.get("wege", []):
+        line = np.asarray(road.get("mittellinie_m", []), dtype=np.float64)
+        if len(line) < 2:
+            continue
+        line /= CELL_M
+        x0, z0 = x.min(), z.min()
+        x1, z1 = x.max(), z.max()
+        pad = float(road.get("breite_m", 2.4)) / CELL_M + 2.0
+        if line[:, 0].max() < x0 - pad or line[:, 0].min() > x1 + pad or line[:, 1].max() < z0 - pad or line[:, 1].min() > z1 + pad:
+            continue
+
+        profile = _sample_height(source, line[:, 0], line[:, 1]).astype(np.float64)
+        # Preserve the vector's explicit longitudinal shape where one exists;
+        # its current source values are often flat, so GB remains the anchor.
+        supplied = np.asarray(road.get("laengsprofil_m", []), dtype=np.float64)
+        if len(supplied) == len(profile) and np.ptp(supplied) > 0.02:
+            profile += supplied - ndi.gaussian_filter1d(supplied, sigma=4.0, mode="nearest")
+        profile = ndi.gaussian_filter1d(profile, sigma=4.0, mode="nearest")
+        points.extend(map(tuple, line.tolist()))
+        target_heights.extend(profile.tolist())
+        radii.extend([float(road.get("breite_m", 2.4)) * 0.5] * len(line))
+
+    if not points:
+        return np.zeros(x.shape, dtype=np.float64), np.zeros(x.shape, dtype=np.float64)
+    tree = cKDTree(np.asarray(points, dtype=np.float64))
+    q = np.column_stack((x.ravel(), z.ravel()))
+    distance_world, nearest = tree.query(q, k=1, workers=1)
+    distance_m = distance_world * CELL_M
+    radius_m = np.asarray(radii, dtype=np.float64)[nearest].reshape(x.shape)
+    target = np.asarray(target_heights, dtype=np.float64)[nearest].reshape(x.shape)
+    # A path may pass close to a cliff or a steep cell transition. Keep its
+    # longitudinal profile anchored to GB instead of dragging the whole slope.
+    base = _sample_height(source, x, z)
+    target = base + np.clip(target - base, -0.55, 0.55)
+    weight = 1.0 - _smoothstep(radius_m, radius_m + 1.35, distance_m.reshape(x.shape))
+    return target, weight
+
+
+def _apply_feature_planes(
+    base: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    result: np.ndarray,
+    features: list[dict[str, Any]],
+    transition_default_m: float,
+    kind: str,
+) -> int:
+    """Blend a crossing or zone to one shared plane with a soft outside edge."""
+    count = 0
+    for feature in features:
+        polygon = _polygon_from_feature(feature)
+        if polygon is None:
+            continue
+        where, distance_m = _local_polygon_mask(
+            polygon, x, z, transition_default_m / CELL_M,
+        )
+        if not len(where[0]):
+            continue
+        # Build the plane from unmodified visible-height samples inside the polygon.
+        inside = np.fromiter(
+            (polygon.covers(Point(float(px), float(pz))) for px, pz in zip(x[where].ravel(), z[where].ravel())),
+            dtype=bool,
+            count=len(where[0]),
+        )
+        if not inside.any():
+            continue
+        ix, iz = where[1][inside], where[0][inside]
+        # Use only the local tile samples in the polygon, avoiding a global fallback.
+        plane = float(np.median(base[iz, ix]))
+        if kind == "kreuzung":
+            transition_m = max(float(feature.get("uebergang_m", transition_default_m)), 0.1)
+        else:
+            transition_m = transition_default_m
+        weights = 1.0 - _smoothstep(0.0, transition_m, distance_m)
+        weights[inside] = 1.0
+        current = result[where]
+        correction = np.clip(plane - current, -0.6, 0.6)
+        result[where] = current + weights * correction
+        count += int(inside.sum())
+    return count
+
+
+def _apply_zone_profile(
+    fields: dict[str, np.ndarray], x: np.ndarray, z: np.ndarray, result: np.ndarray,
+) -> int:
+    distances = [
+        _sample_field(fields[name], x, z)
+        for name in ("bauzone_bestand", "bauzone_plan")
+        if name in fields
+    ]
+    if not distances:
+        return 0
+    distance = np.minimum.reduce(distances)
+    mask = distance <= 3.0
+    if not mask.any():
+        return 0
+    # The extracted polygons can span several elevations. Shape a local pad
+    # profile without forcing unrelated parts of a large polygon onto one plane.
+    sample_step_m = CELL_M * (x[0, 1] - x[0, 0])
+    local = ndi.gaussian_filter(result, sigma=max(1.0, 2.4 / sample_step_m), mode="nearest")
+    weight = (1.0 - _smoothstep(0.0, 3.0, np.maximum(distance, 0.0))) * 0.45
+    weight[distance <= 0.0] = 0.45
+    result += weight * np.clip(local - result, -0.35, 0.35)
+    return int(np.count_nonzero(mask))
+
+
+def terrain_heights(
+    source: ReliefSource,
+    tile: str,
+    vector: dict[str, Any],
+    fields: dict[str, np.ndarray],
+    variant: str = "1",
+) -> tuple[np.ndarray, dict[str, Any]]:
+    """Build a deterministic per-tile terrain surface from GB and feature layers."""
+    if variant not in TERRAIN_VARIANTS:
+        raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    rs = int(source.data["rs"])
+    sx0, sz0, sx1, sz1 = x0 * rs, z0 * rs, x1 * rs, z1 * rs
+    base = source.heights[sz0 : sz1 + 1, sx0 : sx1 + 1].copy()
+    if tile == "D2" or variant == "0":
+        return base, {"variant": variant, "changed_vertices": 0, "max_abs_delta_m": 0.0, "layers": []}
+
+    xx, zz = np.meshgrid(
+        np.arange(sx0, sx1 + 1, dtype=np.float64) / rs,
+        np.arange(sz0, sz1 + 1, dtype=np.float64) / rs,
+    )
+    result = base.astype(np.float64, copy=True)
+    layers: list[str] = ["basishoehe_GB"]
+
+    road_target, road_weight = _road_profile_grid(source, vector, xx, zz)
+    if road_weight.any():
+        result += road_weight * (road_target - result)
+        layers.append("wege_spline_breite_laengsprofil")
+
+    cross_features = [
+        item for item in vector.get("kreuzungen", [])
+        if item.get("polygon_m")
+    ]
+    cross_count = _apply_feature_planes(
+        base, xx, zz, result, cross_features, 2.4, "kreuzung",
+    )
+    if cross_count:
+        layers.append("kreuzung_gemeinsame_ebene_weicher_rand")
+
+    zone_count = _apply_zone_profile(fields, xx, zz, result)
+    if zone_count:
+        layers.append("bauzonen_lokales_profil_weicher_rand")
+
+    # Water remains below the existing WV surface and eases back to the terrain
+    # over 2.4 m; it is restricted to the selected tile using the global field.
+    if "wasser" in fields:
+        water_distance = _sample_field(fields["wasser"], xx, zz)
+        wv = source.data.get("WV")
+        if wv:
+            water = np.frombuffer(base64.b64decode(wv), dtype=np.float32).reshape(source.heights.shape)
+            water_surface = water[sz0 : sz1 + 1, sx0 : sx1 + 1]
+            valid = water_surface > -900.0
+            water_weight = 1.0 - _smoothstep(0.0, 2.4, np.maximum(water_distance, 0.0))
+            water_weight[water_distance <= 0.0] = 1.0
+            water_weight *= valid
+            water_target = result + np.clip(water_surface.astype(np.float64) - 0.20 - result, -0.35, 0.35)
+            result += water_weight * (water_target - result)
+            if water_weight.any():
+                layers.append("wasser_spiegel_uferprofil")
+
+    # Keep the emitted replacement surface pinned to GB at tile joins and at
+    # wall bands. This preserves D1's measured cliff silhouette and all borders.
+    edge_m = np.minimum.reduce((xx - x0, x1 - xx, zz - z0, z1 - zz)) * CELL_M
+    tile_weight = _smoothstep(0.0, 3.0, edge_m)
+    wall_distance = _sample_field(fields["wand"], xx, zz) if "wand" in fields else np.full(xx.shape, 99.0)
+    wall_weight = _smoothstep(1.2, 4.8, wall_distance)
+    weight = tile_weight * wall_weight
+    if variant == "2":
+        weight *= 0.02
+    result = base + (result - base) * weight
+
+    delta = result - base
+    info = {
+        "variant": variant,
+        "changed_vertices": int(np.count_nonzero(np.abs(delta) > 1e-5)),
+        "max_abs_delta_m": round(float(np.max(np.abs(delta))), 6),
+        "mean_abs_delta_m": round(float(np.mean(np.abs(delta))), 6),
+        "layers": layers + ["wand_abstandsschutz", "kachelrand_fade_3m"],
+        "wand_protected_vertices": int(np.count_nonzero(wall_distance <= 1.2)),
+        "crossing_flat_vertices": cross_count,
+        "zone_flat_vertices": zone_count,
+    }
+    return result.astype("<f4"), info
