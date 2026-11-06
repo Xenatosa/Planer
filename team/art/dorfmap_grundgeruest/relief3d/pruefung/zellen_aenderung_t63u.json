@@ -1,0 +1,43 @@
+{
+ "geaendert_zellen": 7390,
+ "wasser_zu_land": 1273,
+ "land_zu_wasser": 1416,
+ "nur_hoehe": 4701,
+ "geaendert_ausserhalb_westgebiet_x<110_y<262": 102,
+ "davon_ueber_0_5m": 20,
+ "bbox_x": [
+  0,
+  85
+ ],
+ "bbox_y": [
+  36,
+  267
+ ],
+ "delta_max_hoch_m": 5.21,
+ "delta_max_tief_m": -2.7299999999999986,
+ "kreuzung_neues_wasser": {
+  "weg": 0,
+  "bauplatz": 0,
+  "platz": 0,
+  "bruecke": 0,
+  "furt": 0,
+  "belegt_haus_platz": 0
+ },
+ "kreuzung_wasser_west_gesamt": {
+  "weg": 0,
+  "bauplatz": 0,
+  "platz": 0,
+  "bruecke": 0,
+  "furt": 0,
+  "belegt_haus_platz": 5
+ },
+ "alt_zu_land_untergrund": {
+  "SCHNEE": 1223,
+  "WALD": 50
+ },
+ "neu_wasser_fluss_id": {
+  "BACH_NORD": 933,
+  "BACH_SUED": 449,
+  "WASSER_FARBE": 34
+ }
+}

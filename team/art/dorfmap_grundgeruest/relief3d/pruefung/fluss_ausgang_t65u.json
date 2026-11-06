@@ -1,0 +1,455 @@
+{
+ "stuecke": 18,
+ "liste": [
+  {
+   "id": 12,
+   "punkte": 23539,
+   "zellen_ca": 5885,
+   "quelle_xz": [
+    212.0,
+    194.0
+   ],
+   "quelle_spiegel": -0.31,
+   "ende_art": "Rand",
+   "ende_xz": [
+    336.0,
+    281.5
+   ],
+   "ende_spiegel": -18.2,
+   "laenge_m": 211.0,
+   "gefaelle_m": 17.89,
+   "gefaelle_promille": 84.8,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": true,
+   "randseite": "Ost"
+  },
+  {
+   "id": 11,
+   "punkte": 932,
+   "zellen_ca": 233,
+   "quelle_xz": [
+    15.5,
+    39.5
+   ],
+   "quelle_spiegel": -9.45,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    15.5,
+    39.5
+   ],
+   "ende_spiegel": -9.45,
+   "laenge_m": 0.0,
+   "gefaelle_m": 0.0,
+   "gefaelle_promille": 0.0,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 2,
+   "punkte": 361,
+   "zellen_ca": 90,
+   "quelle_xz": [
+    212.5,
+    5.5
+   ],
+   "quelle_spiegel": 13.55,
+   "ende_art": "Rand",
+   "ende_xz": [
+    216.5,
+    0.0
+   ],
+   "ende_spiegel": 13.4,
+   "laenge_m": 7.2,
+   "gefaelle_m": 0.15,
+   "gefaelle_promille": 21.5,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": true,
+   "randseite": "Nord"
+  },
+  {
+   "id": 6,
+   "punkte": 158,
+   "zellen_ca": 40,
+   "quelle_xz": [
+    122.5,
+    19.5
+   ],
+   "quelle_spiegel": 13.65,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    139.5,
+    8.5
+   ],
+   "ende_spiegel": 12.59,
+   "laenge_m": 21.6,
+   "gefaelle_m": 1.06,
+   "gefaelle_promille": 49.1,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 16,
+   "punkte": 96,
+   "zellen_ca": 24,
+   "quelle_xz": [
+    332.5,
+    199.5
+   ],
+   "quelle_spiegel": 11.39,
+   "ende_art": "Rand",
+   "ende_xz": [
+    336.0,
+    194.5
+   ],
+   "ende_spiegel": 11.19,
+   "laenge_m": 6.4,
+   "gefaelle_m": 0.2,
+   "gefaelle_promille": 30.2,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": true,
+   "randseite": "Ost"
+  },
+  {
+   "id": 14,
+   "punkte": 89,
+   "zellen_ca": 22,
+   "quelle_xz": [
+    38.5,
+    51.5
+   ],
+   "quelle_spiegel": -7.86,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    32.5,
+    55.0
+   ],
+   "ende_spiegel": -8.94,
+   "laenge_m": 9.2,
+   "gefaelle_m": 1.08,
+   "gefaelle_promille": 117.6,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 15,
+   "punkte": 63,
+   "zellen_ca": 16,
+   "quelle_xz": [
+    330.5,
+    82.5
+   ],
+   "quelle_spiegel": 11.55,
+   "ende_art": "Rand",
+   "ende_xz": [
+    336.0,
+    79.5
+   ],
+   "ende_spiegel": 11.43,
+   "laenge_m": 6.7,
+   "gefaelle_m": 0.12,
+   "gefaelle_promille": 18.5,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": true,
+   "randseite": "Ost"
+  },
+  {
+   "id": 3,
+   "punkte": 55,
+   "zellen_ca": 14,
+   "quelle_xz": [
+    184.5,
+    6.5
+   ],
+   "quelle_spiegel": 13.6,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    179.5,
+    5.0
+   ],
+   "ende_spiegel": 13.56,
+   "laenge_m": 5.6,
+   "gefaelle_m": 0.04,
+   "gefaelle_promille": 7.5,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 13,
+   "punkte": 47,
+   "zellen_ca": 12,
+   "quelle_xz": [
+    13.5,
+    53.5
+   ],
+   "quelle_spiegel": -8.68,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    16.0,
+    50.5
+   ],
+   "ende_spiegel": -8.94,
+   "laenge_m": 4.0,
+   "gefaelle_m": 0.26,
+   "gefaelle_promille": 64.4,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 5,
+   "punkte": 39,
+   "zellen_ca": 10,
+   "quelle_xz": [
+    296.5,
+    8.5
+   ],
+   "quelle_spiegel": 13.66,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    297.5,
+    5.0
+   ],
+   "ende_spiegel": 13.66,
+   "laenge_m": 3.9,
+   "gefaelle_m": 0.01,
+   "gefaelle_promille": 2.1,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 7,
+   "punkte": 39,
+   "zellen_ca": 10,
+   "quelle_xz": [
+    190.5,
+    10.5
+   ],
+   "quelle_spiegel": 13.7,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    194.5,
+    7.5
+   ],
+   "ende_spiegel": 13.66,
+   "laenge_m": 5.2,
+   "gefaelle_m": 0.03,
+   "gefaelle_promille": 6.5,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 17,
+   "punkte": 31,
+   "zellen_ca": 8,
+   "quelle_xz": [
+    165.5,
+    211.5
+   ],
+   "quelle_spiegel": -0.29,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    168.0,
+    209.5
+   ],
+   "ende_spiegel": -0.29,
+   "laenge_m": 3.3,
+   "gefaelle_m": 0.01,
+   "gefaelle_promille": 2.2,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 1,
+   "punkte": 30,
+   "zellen_ca": 8,
+   "quelle_xz": [
+    176.5,
+    2.5
+   ],
+   "quelle_spiegel": 13.53,
+   "ende_art": "Rand",
+   "ende_xz": [
+    176.5,
+    0.0
+   ],
+   "ende_spiegel": 13.52,
+   "laenge_m": 2.5,
+   "gefaelle_m": 0.01,
+   "gefaelle_promille": 2.9,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": true,
+   "randseite": "Nord"
+  },
+  {
+   "id": 8,
+   "punkte": 29,
+   "zellen_ca": 7,
+   "quelle_xz": [
+    272.5,
+    11.5
+   ],
+   "quelle_spiegel": 13.69,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    273.5,
+    6.5
+   ],
+   "ende_spiegel": 13.64,
+   "laenge_m": 5.8,
+   "gefaelle_m": 0.05,
+   "gefaelle_promille": 8.0,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 10,
+   "punkte": 27,
+   "zellen_ca": 7,
+   "quelle_xz": [
+    224.5,
+    11.5
+   ],
+   "quelle_spiegel": 13.75,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    227.5,
+    11.5
+   ],
+   "ende_spiegel": 13.72,
+   "laenge_m": 3.0,
+   "gefaelle_m": 0.03,
+   "gefaelle_promille": 8.6,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 4,
+   "punkte": 25,
+   "zellen_ca": 6,
+   "quelle_xz": [
+    276.5,
+    4.5
+   ],
+   "quelle_spiegel": 13.66,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    274.5,
+    5.5
+   ],
+   "ende_spiegel": 13.64,
+   "laenge_m": 2.4,
+   "gefaelle_m": 0.02,
+   "gefaelle_promille": 10.3,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 9,
+   "punkte": 23,
+   "zellen_ca": 6,
+   "quelle_xz": [
+    315.5,
+    10.5
+   ],
+   "quelle_spiegel": 13.76,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    311.5,
+    11.5
+   ],
+   "ende_spiegel": 13.75,
+   "laenge_m": 4.4,
+   "gefaelle_m": 0.01,
+   "gefaelle_promille": 3.3,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  },
+  {
+   "id": 18,
+   "punkte": 21,
+   "zellen_ca": 5,
+   "quelle_xz": [
+    140.5,
+    211.5
+   ],
+   "quelle_spiegel": -0.26,
+   "ende_art": "Senke/See",
+   "ende_xz": [
+    142.5,
+    210.5
+   ],
+   "ende_spiegel": -0.27,
+   "laenge_m": 2.4,
+   "gefaelle_m": 0.0,
+   "gefaelle_promille": 2.1,
+   "pfad_lueckenlos": true,
+   "anstieg_summe_m": 0.0,
+   "anstieg_max_m": 0.0,
+   "anstieg_orte_xz": [],
+   "auslass_offen": null,
+   "randseite": ""
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "fehler": [],
+ "hoehen": {
+  "neu_oben_unten": [
+   14,
+   0
+  ],
+  "alt_6m_noerdlich_unten": [
+   1.6490076184272766,
+   0
+  ]
+ },
+ "klick_wand": {
+  "art": "felswand",
+  "zell_id": "9998",
+  "klippe": "WAND_FUSS",
+  "klippe_hoehe_m": "14.0",
+  "felder": 49
+ },
+ "klick_gebaeude": {
+  "art": "gebaeude",
+  "id": "bld_kas_siege"
+ }
+}

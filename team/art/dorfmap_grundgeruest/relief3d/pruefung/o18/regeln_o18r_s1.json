@@ -1,0 +1,7586 @@
+{
+"summe": 1055,
+"je_regel": {
+"R1_blind": 24,
+"R2_getrennt": 15,
+"R3_laengs_m": 35,
+"R3_quer_pct": 24,
+"R3_woelb_m": 22,
+"R5_loch": 40,
+"R5_spitze": 2,
+"R6_objekt_auf_weg": 1,
+"R6_wasser_schnee": 4,
+"G1_lochscan_fehlt": 1,
+"G2_spitze_oben": 2,
+"G2_spitze_oben_fein": 6,
+"G3_spitze_unten_fein": 1,
+"G5_beule_klippe": 166,
+"G6_facette": 592,
+"G7_wand_glatte_flaeche": 1,
+"G8_fluss_nicht_bis_rand": 1,
+"T1_harte_farbkante": 94,
+"T1_harte_farbkante_gerade": 1,
+"T2_textur_abgeschnitten_bildpruefung_offen": 1,
+"T3_streifen_ringe_bildpruefung_offen": 1,
+"T4_graue_flussstreifen_bildpruefung_offen": 1,
+"T5_textur_vs_clay_bildpruefung_offen": 1,
+"G7b_wandkontur_kantenschaerfe": 1,
+"G7b_wandkontur_feld": 18
+},
+"treffer": [
+{
+"regel": "R1_blind",
+"feld": "B1",
+"x": 65.5,
+"z": 35.4,
+"wert": 0,
+"weg": "rampe_0",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "C2",
+"x": 118.9,
+"z": 43.3,
+"wert": 0,
+"weg": "rampe_0",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "G1",
+"x": 273.4,
+"z": 21.2,
+"wert": 0,
+"weg": "rampe_1",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "F1",
+"x": 227.3,
+"z": 36.9,
+"wert": 0,
+"weg": "rampe_1",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "D1",
+"x": 126.5,
+"z": 31.6,
+"wert": 0,
+"weg": "rampe_2",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "E1",
+"x": 175.1,
+"z": 25.7,
+"wert": 0,
+"weg": "rampe_2",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "E6",
+"x": 189.5,
+"z": 239.6,
+"wert": 0,
+"weg": "rampe_3",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "C6",
+"x": 113.3,
+"z": 228.6,
+"wert": 0,
+"weg": "rampe_3",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "H6",
+"x": 295.3,
+"z": 222.9,
+"wert": 0,
+"weg": "rampe_4",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "F6",
+"x": 249.0,
+"z": 254.3,
+"wert": 0,
+"weg": "rampe_4",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "C7",
+"x": 100.0,
+"z": 269.1,
+"wert": 0,
+"weg": "rampe_5",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "C5",
+"x": 87.6,
+"z": 180.1,
+"wert": 0,
+"weg": "rampe_6",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "C5",
+"x": 124.5,
+"z": 198.0,
+"wert": 0,
+"weg": "rampe_6",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "C5",
+"x": 117.1,
+"z": 185.4,
+"wert": 0,
+"weg": "rampe_7",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "D4",
+"x": 135.4,
+"z": 146.8,
+"wert": 0,
+"weg": "rampe_7",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "C4",
+"x": 92.6,
+"z": 135.5,
+"wert": 0,
+"weg": "rampe_8",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "C4",
+"x": 89.5,
+"z": 171.4,
+"wert": 0,
+"weg": "rampe_8",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "H4",
+"x": 298.2,
+"z": 149.2,
+"wert": 0,
+"weg": "rampe_9",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "G3",
+"x": 269.8,
+"z": 117.3,
+"wert": 0,
+"weg": "rampe_9",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "H5",
+"x": 316.4,
+"z": 190.5,
+"wert": 0,
+"weg": "rampe_10",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "H5",
+"x": 320.0,
+"z": 214.0,
+"wert": 0,
+"weg": "rampe_10",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "D1",
+"x": 156.5,
+"z": 37.5,
+"wert": 0,
+"weg": "rampe_11",
+"wo": "ende"
+},
+{
+"regel": "R1_blind",
+"feld": "D4",
+"x": 127.5,
+"z": 133.5,
+"wert": 0,
+"weg": "rampe_12",
+"wo": "anfang"
+},
+{
+"regel": "R1_blind",
+"feld": "C3",
+"x": 122.7,
+"z": 119.5,
+"wert": 0,
+"weg": "rampe_12",
+"wo": "ende"
+},
+{
+"regel": "R2_getrennt",
+"feld": "D1",
+"x": 150.9,
+"z": 23.6,
+"wert": 116
+},
+{
+"regel": "R2_getrennt",
+"feld": "F1",
+"x": 249.7,
+"z": 28.6,
+"wert": 59
+},
+{
+"regel": "R2_getrennt",
+"feld": "G2",
+"x": 270.9,
+"z": 62.2,
+"wert": 1588
+},
+{
+"regel": "R2_getrennt",
+"feld": "D2",
+"x": 166.9,
+"z": 81.5,
+"wert": 1227
+},
+{
+"regel": "R2_getrennt",
+"feld": "C1",
+"x": 91.3,
+"z": 38.8,
+"wert": 60
+},
+{
+"regel": "R2_getrennt",
+"feld": "E3",
+"x": 200.2,
+"z": 110.2,
+"wert": 38
+},
+{
+"regel": "R2_getrennt",
+"feld": "G4",
+"x": 283.7,
+"z": 133.0,
+"wert": 59
+},
+{
+"regel": "R2_getrennt",
+"feld": "C3",
+"x": 125.3,
+"z": 125.4,
+"wert": 43
+},
+{
+"regel": "R2_getrennt",
+"feld": "F4",
+"x": 249.3,
+"z": 129.1,
+"wert": 94
+},
+{
+"regel": "R2_getrennt",
+"feld": "C4",
+"x": 90.5,
+"z": 153.0,
+"wert": 40
+},
+{
+"regel": "R2_getrennt",
+"feld": "C4",
+"x": 125.9,
+"z": 165.4,
+"wert": 58
+},
+{
+"regel": "R2_getrennt",
+"feld": "C5",
+"x": 105.5,
+"z": 188.5,
+"wert": 52
+},
+{
+"regel": "R2_getrennt",
+"feld": "H5",
+"x": 317.6,
+"z": 201.4,
+"wert": 27
+},
+{
+"regel": "R2_getrennt",
+"feld": "G6",
+"x": 271.7,
+"z": 238.1,
+"wert": 74
+},
+{
+"regel": "R2_getrennt",
+"feld": "D6",
+"x": 136.1,
+"z": 240.7,
+"wert": 151
+},
+{
+"regel": "R3_laengs_m",
+"feld": "B1",
+"x": 65.5,
+"z": 35.4,
+"wert": 0.107,
+"weg": "rampe_0"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C1",
+"x": 116.9,
+"z": 43.0,
+"wert": 0.116,
+"weg": "rampe_0"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "G1",
+"x": 273.4,
+"z": 21.2,
+"wert": 0.1,
+"weg": "rampe_1"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "F1",
+"x": 231.8,
+"z": 35.4,
+"wert": 0.094,
+"weg": "rampe_1"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "F1",
+"x": 228.0,
+"z": 36.7,
+"wert": 0.092,
+"weg": "rampe_1"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 126.5,
+"z": 31.6,
+"wert": 0.092,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 146.4,
+"z": 29.2,
+"wert": 78.6,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 146.4,
+"z": 29.2,
+"wert": 1.179,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 150.3,
+"z": 28.7,
+"wert": 100.8,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 150.3,
+"z": 28.7,
+"wert": 0.271,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 150.3,
+"z": 28.7,
+"wert": 1.82,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 154.3,
+"z": 28.2,
+"wert": 24.5,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 154.3,
+"z": 28.2,
+"wert": 0.334,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "E1",
+"x": 170.2,
+"z": 26.3,
+"wert": 0.101,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "E1",
+"x": 174.2,
+"z": 25.8,
+"wert": 0.113,
+"weg": "rampe_2"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D6",
+"x": 138.0,
+"z": 232.2,
+"wert": 18.0,
+"weg": "rampe_3"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D6",
+"x": 138.0,
+"z": 232.2,
+"wert": 0.125,
+"weg": "rampe_3"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D6",
+"x": 138.0,
+"z": 232.2,
+"wert": 0.26,
+"weg": "rampe_3"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D6",
+"x": 134.1,
+"z": 231.6,
+"wert": 8.3,
+"weg": "rampe_3"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D6",
+"x": 134.1,
+"z": 231.6,
+"wert": 0.183,
+"weg": "rampe_3"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "H6",
+"x": 295.3,
+"z": 222.9,
+"wert": 0.131,
+"weg": "rampe_4"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "G6",
+"x": 252.3,
+"z": 252.1,
+"wert": 0.12,
+"weg": "rampe_4"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "F6",
+"x": 249.0,
+"z": 254.3,
+"wert": 0.123,
+"weg": "rampe_4"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D6",
+"x": 135.2,
+"z": 230.8,
+"wert": 16.4,
+"weg": "rampe_5"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D6",
+"x": 135.2,
+"z": 230.8,
+"wert": 0.155,
+"weg": "rampe_5"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D6",
+"x": 135.2,
+"z": 230.8,
+"wert": 0.266,
+"weg": "rampe_5"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C5",
+"x": 87.6,
+"z": 180.1,
+"wert": 0.091,
+"weg": "rampe_6"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C5",
+"x": 120.0,
+"z": 195.8,
+"wert": 0.1,
+"weg": "rampe_6"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C5",
+"x": 123.6,
+"z": 197.5,
+"wert": 0.113,
+"weg": "rampe_6"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C5",
+"x": 118.8,
+"z": 181.8,
+"wert": 0.091,
+"weg": "rampe_7"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D4",
+"x": 132.5,
+"z": 152.9,
+"wert": 0.095,
+"weg": "rampe_7"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D4",
+"x": 134.3,
+"z": 149.3,
+"wert": 0.117,
+"weg": "rampe_7"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C4",
+"x": 92.6,
+"z": 135.5,
+"wert": 0.087,
+"weg": "rampe_8"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C4",
+"x": 90.9,
+"z": 155.4,
+"wert": 0.227,
+"weg": "rampe_8"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "C4",
+"x": 90.5,
+"z": 159.4,
+"wert": 3.9,
+"weg": "rampe_8"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C4",
+"x": 90.5,
+"z": 159.4,
+"wert": 0.222,
+"weg": "rampe_8"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "H4",
+"x": 298.2,
+"z": 149.2,
+"wert": 0.124,
+"weg": "rampe_9"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "G3",
+"x": 271.6,
+"z": 119.3,
+"wert": 0.128,
+"weg": "rampe_9"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "H5",
+"x": 319.4,
+"z": 210.3,
+"wert": 0.103,
+"weg": "rampe_10"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 148.5,
+"z": 2.5,
+"wert": 0.107,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 146.6,
+"z": 6.0,
+"wert": 14.5,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 146.6,
+"z": 6.0,
+"wert": 0.22,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 144.8,
+"z": 9.5,
+"wert": 18.4,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 144.8,
+"z": 9.5,
+"wert": 0.242,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 154.5,
+"z": 16.6,
+"wert": 19.2,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 154.5,
+"z": 16.6,
+"wert": 0.336,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 157.5,
+"z": 19.1,
+"wert": 23.8,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 157.5,
+"z": 19.1,
+"wert": 0.329,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 155.6,
+"z": 22.6,
+"wert": 4.9,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 153.7,
+"z": 26.1,
+"wert": 59.4,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 153.7,
+"z": 26.1,
+"wert": 1.418,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 153.7,
+"z": 26.1,
+"wert": 1.803,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 151.8,
+"z": 29.6,
+"wert": 101.2,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 151.8,
+"z": 29.6,
+"wert": 0.121,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 151.8,
+"z": 29.6,
+"wert": 1.589,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D1",
+"x": 150.4,
+"z": 33.1,
+"wert": 23.2,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D1",
+"x": 150.4,
+"z": 33.1,
+"wert": 0.337,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D1",
+"x": 153.7,
+"z": 35.4,
+"wert": 0.132,
+"weg": "rampe_11"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D4",
+"x": 127.5,
+"z": 133.5,
+"wert": 43.2,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D4",
+"x": 127.5,
+"z": 133.5,
+"wert": 0.095,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D4",
+"x": 127.5,
+"z": 133.5,
+"wert": 0.627,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D4",
+"x": 130.4,
+"z": 130.8,
+"wert": 33.9,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D4",
+"x": 130.4,
+"z": 130.8,
+"wert": 0.104,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D4",
+"x": 130.4,
+"z": 130.8,
+"wert": 0.482,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D4",
+"x": 130.2,
+"z": 129.1,
+"wert": 35.3,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D4",
+"x": 130.2,
+"z": 129.1,
+"wert": 0.573,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D3",
+"x": 126.3,
+"z": 128.9,
+"wert": 43.3,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D3",
+"x": 126.3,
+"z": 128.9,
+"wert": 0.684,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "C3",
+"x": 122.3,
+"z": 128.6,
+"wert": 43.5,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "C3",
+"x": 122.3,
+"z": 128.6,
+"wert": 0.698,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "C3",
+"x": 120.6,
+"z": 127.5,
+"wert": 53.7,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "C3",
+"x": 120.6,
+"z": 127.5,
+"wert": 0.845,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "C3",
+"x": 123.6,
+"z": 124.7,
+"wert": 45.7,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "C3",
+"x": 123.6,
+"z": 124.7,
+"wert": 0.692,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D3",
+"x": 126.5,
+"z": 122.0,
+"wert": 52.1,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D3",
+"x": 126.5,
+"z": 122.0,
+"wert": 0.105,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D3",
+"x": 126.5,
+"z": 122.0,
+"wert": 0.795,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_quer_pct",
+"feld": "D3",
+"x": 127.7,
+"z": 119.8,
+"wert": 44.1,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "D3",
+"x": 127.7,
+"z": 119.8,
+"wert": 0.085,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_woelb_m",
+"feld": "D3",
+"x": 127.7,
+"z": 119.8,
+"wert": 0.702,
+"weg": "rampe_12"
+},
+{
+"regel": "R3_laengs_m",
+"feld": "C3",
+"x": 123.7,
+"z": 119.6,
+"wert": 0.094,
+"weg": "rampe_12"
+},
+{
+"regel": "R5_loch",
+"feld": "A1",
+"x": 12.5,
+"z": 40.5,
+"wert": 1.03,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "A1",
+"x": 25.5,
+"z": 41.5,
+"wert": 1.01,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "A2",
+"x": 10.0,
+"z": 48.0,
+"wert": 1.06,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 111.5,
+"z": 133.0,
+"wert": 1.62,
+"m2": 4.5
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 101.5,
+"z": 132.5,
+"wert": 1.08,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 101.0,
+"z": 133.0,
+"wert": 1.15,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 102.0,
+"z": 133.0,
+"wert": 1.11,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 100.5,
+"z": 133.5,
+"wert": 1.08,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 102.5,
+"z": 133.5,
+"wert": 1.33,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 100.0,
+"z": 134.0,
+"wert": 1.02,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 103.5,
+"z": 134.5,
+"wert": 1.72,
+"m2": 4.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 99.5,
+"z": 134.5,
+"wert": 1.02,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 108.0,
+"z": 134.5,
+"wert": 1.18,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 108.5,
+"z": 135.0,
+"wert": 1.15,
+"m2": 0.5
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 99.0,
+"z": 136.0,
+"wert": 1.19,
+"m2": 0.5
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 98.5,
+"z": 142.0,
+"wert": 1.5,
+"m2": 6.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 124.0,
+"z": 140.5,
+"wert": 1.75,
+"m2": 5.0
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 120.5,
+"z": 149.0,
+"wert": 1.74,
+"m2": 14.5
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 124.0,
+"z": 145.0,
+"wert": 1.12,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 96.5,
+"z": 158.5,
+"wert": 2.16,
+"m2": 13.8
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 121.0,
+"z": 158.0,
+"wert": 1.21,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 121.5,
+"z": 158.5,
+"wert": 1.07,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 117.0,
+"z": 163.5,
+"wert": 1.86,
+"m2": 3.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 116.0,
+"z": 164.5,
+"wert": 1.31,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 87.0,
+"z": 175.0,
+"wert": 2.1,
+"m2": 7.2
+},
+{
+"regel": "R5_loch",
+"feld": "C4",
+"x": 115.5,
+"z": 165.0,
+"wert": 1.16,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 113.5,
+"z": 173.5,
+"wert": 2.1,
+"m2": 12.5
+},
+{
+"regel": "R5_loch",
+"feld": "B5",
+"x": 70.5,
+"z": 172.0,
+"wert": 1.56,
+"m2": 3.0
+},
+{
+"regel": "R5_loch",
+"feld": "B5",
+"x": 69.0,
+"z": 172.5,
+"wert": 1.08,
+"m2": 0.5
+},
+{
+"regel": "R5_loch",
+"feld": "B5",
+"x": 69.5,
+"z": 173.5,
+"wert": 1.32,
+"m2": 0.8
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 96.0,
+"z": 177.0,
+"wert": 2.52,
+"m2": 11.8
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 88.0,
+"z": 175.5,
+"wert": 2.15,
+"m2": 1.0
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 101.5,
+"z": 178.5,
+"wert": 1.31,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 110.5,
+"z": 184.0,
+"wert": 2.04,
+"m2": 14.2
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 102.0,
+"z": 180.0,
+"wert": 1.47,
+"m2": 1.5
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 95.0,
+"z": 208.5,
+"wert": 3.78,
+"m2": 35.2
+},
+{
+"regel": "R5_loch",
+"feld": "C5",
+"x": 102.0,
+"z": 209.0,
+"wert": 1.04,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "D6",
+"x": 153.5,
+"z": 228.5,
+"wert": 2.41,
+"m2": 9.2
+},
+{
+"regel": "R5_loch",
+"feld": "D6",
+"x": 148.0,
+"z": 227.5,
+"wert": 1.03,
+"m2": 0.2
+},
+{
+"regel": "R5_loch",
+"feld": "D6",
+"x": 158.0,
+"z": 229.0,
+"wert": 2.71,
+"m2": 10.0
+},
+{
+"regel": "R5_spitze",
+"feld": "D4",
+"x": 153.0,
+"z": 168.0,
+"wert": 0.57
+},
+{
+"regel": "R5_spitze",
+"feld": "A6",
+"x": 11.0,
+"z": 253.5,
+"wert": 0.51
+},
+{
+"regel": "R6_objekt_auf_weg",
+"feld": "F2",
+"x": 212.3,
+"z": 78.9,
+"wert": "steine"
+},
+{
+"regel": "R6_wasser_schnee",
+"feld": "F1",
+"x": 214.1,
+"z": 14.5,
+"wert": 323
+},
+{
+"regel": "R6_wasser_schnee",
+"feld": "G1",
+"x": 275.0,
+"z": 6.1,
+"wert": 6
+},
+{
+"regel": "R6_wasser_schnee",
+"feld": "G1",
+"x": 273.1,
+"z": 7.3,
+"wert": 7
+},
+{
+"regel": "R6_wasser_schnee",
+"feld": "G1",
+"x": 272.5,
+"z": 9.8,
+"wert": 22
+},
+{
+"regel": "G1_lochscan_fehlt",
+"feld": "A1",
+"x": 0.0,
+"z": 0.0,
+"wert": "LOCHSCAN=... setzen"
+},
+{
+"regel": "G2_spitze_oben",
+"feld": "A7",
+"x": 26.5,
+"z": 261.5,
+"wert": 0.45
+},
+{
+"regel": "G2_spitze_oben",
+"feld": "F7",
+"x": 216.0,
+"z": 275.5,
+"wert": 0.46
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "B3",
+"x": 62.8,
+"z": 113.2,
+"wert": 0.49
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "B4",
+"x": 76.2,
+"z": 138.2,
+"wert": 0.54
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "D6",
+"x": 166.5,
+"z": 225.2,
+"wert": 0.53
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "D6",
+"x": 167.0,
+"z": 225.2,
+"wert": 0.48
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "F6",
+"x": 224.8,
+"z": 237.0,
+"wert": 0.63
+},
+{
+"regel": "G2_spitze_oben_fein",
+"feld": "G6",
+"x": 258.8,
+"z": 237.0,
+"wert": 0.51
+},
+{
+"regel": "G3_spitze_unten_fein",
+"feld": "G1",
+"x": 291.5,
+"z": 30.2,
+"wert": 0.48
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D1",
+"x": 146.0,
+"z": 21.0,
+"wert": 0.65
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 213.8,
+"z": 31.0,
+"wert": 1.18
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E1",
+"x": 187.5,
+"z": 35.0,
+"wert": 0.83
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 221.0,
+"z": 36.0,
+"wert": 1.52
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E1",
+"x": 188.0,
+"z": 36.0,
+"wert": 0.84
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E1",
+"x": 190.2,
+"z": 37.0,
+"wert": 0.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 218.4,
+"z": 37.6,
+"wert": 1.86
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 220.5,
+"z": 37.0,
+"wert": 1.06
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 221.0,
+"z": 40.5,
+"wert": 1.82
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 222.5,
+"z": 41.0,
+"wert": 0.81
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "B1",
+"x": 79.5,
+"z": 41.8,
+"wert": 0.92
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 220.5,
+"z": 41.5,
+"wert": 1.18
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F1",
+"x": 223.5,
+"z": 42.0,
+"wert": 0.61
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A2",
+"x": 4.0,
+"z": 43.8,
+"wert": 3.45
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F2",
+"x": 219.5,
+"z": 43.5,
+"wert": 0.74
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C2",
+"x": 105.8,
+"z": 45.0,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C2",
+"x": 109.1,
+"z": 46.5,
+"wert": 1.55
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A2",
+"x": 17.3,
+"z": 49.9,
+"wert": 1.49
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 335.8,
+"z": 72.0,
+"wert": 1.66
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 334.2,
+"z": 72.5,
+"wert": 1.44
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 328.5,
+"z": 73.0,
+"wert": 0.61
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 333.5,
+"z": 73.0,
+"wert": 0.81
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 326.7,
+"z": 74.8,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 323.5,
+"z": 75.0,
+"wert": 1.52
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 323.0,
+"z": 75.5,
+"wert": 2.11
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 321.5,
+"z": 77.0,
+"wert": 1.43
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H2",
+"x": 320.4,
+"z": 78.8,
+"wert": 1.71
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 299.9,
+"z": 91.9,
+"wert": 1.04
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 301.0,
+"z": 92.5,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 295.5,
+"z": 95.2,
+"wert": 0.95
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 125.4,
+"z": 96.4,
+"wert": 2.32
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 99.4,
+"z": 99.3,
+"wert": 1.23
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 296.5,
+"z": 100.0,
+"wert": 0.61
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 99.0,
+"z": 102.0,
+"wert": 0.8
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 294.0,
+"z": 102.0,
+"wert": 0.94
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 98.5,
+"z": 102.5,
+"wert": 0.86
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 98.0,
+"z": 103.0,
+"wert": 0.94
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 282.8,
+"z": 103.5,
+"wert": 0.93
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 97.5,
+"z": 103.5,
+"wert": 0.93
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 97.0,
+"z": 104.0,
+"wert": 0.85
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 96.5,
+"z": 104.5,
+"wert": 1.08
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 96.0,
+"z": 105.0,
+"wert": 0.87
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H3",
+"x": 307.0,
+"z": 105.0,
+"wert": 0.72
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 91.9,
+"z": 108.6,
+"wert": 2.74
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 95.5,
+"z": 105.5,
+"wert": 0.74
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 283.5,
+"z": 107.0,
+"wert": 0.79
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 111.3,
+"z": 107.7,
+"wert": 1.38
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 114.0,
+"z": 107.0,
+"wert": 1.29
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 108.2,
+"z": 108.5,
+"wert": 1.28
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 107.5,
+"z": 109.0,
+"wert": 1.17
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 277.5,
+"z": 109.0,
+"wert": 0.62
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 283.5,
+"z": 109.0,
+"wert": 0.97
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 107.0,
+"z": 109.5,
+"wert": 1.21
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 116.5,
+"z": 109.5,
+"wert": 0.71
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 276.4,
+"z": 109.9,
+"wert": 1.06
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 282.8,
+"z": 109.9,
+"wert": 1.07
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 117.0,
+"z": 110.8,
+"wert": 0.86
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 275.5,
+"z": 111.0,
+"wert": 0.98
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 282.5,
+"z": 111.0,
+"wert": 0.72
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 275.0,
+"z": 111.5,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 116.5,
+"z": 113.2,
+"wert": 1.08
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 275.3,
+"z": 113.2,
+"wert": 1.1
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 114.5,
+"z": 114.0,
+"wert": 0.74
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 276.0,
+"z": 114.0,
+"wert": 1.19
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 114.0,
+"z": 114.5,
+"wert": 0.9
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 115.5,
+"z": 114.5,
+"wert": 0.88
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 276.5,
+"z": 114.5,
+"wert": 0.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 105.0,
+"z": 115.0,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 110.9,
+"z": 116.2,
+"wert": 1.04
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 277.0,
+"z": 115.0,
+"wert": 0.69
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G3",
+"x": 277.5,
+"z": 115.5,
+"wert": 0.65
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 104.8,
+"z": 116.1,
+"wert": 1.26
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 107.0,
+"z": 116.0,
+"wert": 0.64
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 90.4,
+"z": 121.6,
+"wert": 1.51
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 92.0,
+"z": 121.0,
+"wert": 1.82
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 111.5,
+"z": 121.5,
+"wert": 0.88
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 97.7,
+"z": 122.8,
+"wert": 1.3
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 112.2,
+"z": 122.5,
+"wert": 0.78
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 90.0,
+"z": 123.0,
+"wert": 1.41
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 90.0,
+"z": 124.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 96.5,
+"z": 124.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C3",
+"x": 96.0,
+"z": 124.5,
+"wert": 0.74
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 273.2,
+"z": 131.6,
+"wert": 4.62
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 274.5,
+"z": 133.5,
+"wert": 0.82
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 276.0,
+"z": 134.8,
+"wert": 1.33
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D4",
+"x": 133.0,
+"z": 135.8,
+"wert": 1.38
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 276.5,
+"z": 136.0,
+"wert": 1.26
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 277.5,
+"z": 136.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 277.6,
+"z": 136.9,
+"wert": 1.3
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 125.8,
+"z": 137.7,
+"wert": 1.05
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 280.5,
+"z": 138.5,
+"wert": 2.76
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D4",
+"x": 127.0,
+"z": 139.0,
+"wert": 1.08
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 281.0,
+"z": 139.0,
+"wert": 3.69
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 281.5,
+"z": 139.5,
+"wert": 3.34
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D4",
+"x": 134.0,
+"z": 140.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 282.0,
+"z": 140.0,
+"wert": 2.98
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 283.5,
+"z": 141.2,
+"wert": 2.29
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D4",
+"x": 131.0,
+"z": 142.0,
+"wert": 0.62
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 284.0,
+"z": 142.0,
+"wert": 1.93
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 285.4,
+"z": 143.1,
+"wert": 1.81
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 286.5,
+"z": 144.5,
+"wert": 1.22
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 287.0,
+"z": 145.0,
+"wert": 1.1
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 287.8,
+"z": 145.5,
+"wert": 0.7
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D4",
+"x": 126.4,
+"z": 148.2,
+"wert": 2.05
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 290.0,
+"z": 147.8,
+"wert": 0.66
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "G4",
+"x": 290.2,
+"z": 152.5,
+"wert": 0.79
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 123.5,
+"z": 154.8,
+"wert": 2.12
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 119.5,
+"z": 166.2,
+"wert": 0.73
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 118.0,
+"z": 167.4,
+"wert": 1.93
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 117.5,
+"z": 169.5,
+"wert": 2.61
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 117.0,
+"z": 172.0,
+"wert": 2.01
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 117.0,
+"z": 174.0,
+"wert": 1.09
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 116.7,
+"z": 175.9,
+"wert": 0.89
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 115.5,
+"z": 178.2,
+"wert": 0.84
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 113.9,
+"z": 181.6,
+"wert": 0.92
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 123.0,
+"z": 182.5,
+"wert": 0.65
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 123.5,
+"z": 183.5,
+"wert": 0.84
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 123.3,
+"z": 184.7,
+"wert": 1.13
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 124.1,
+"z": 188.3,
+"wert": 1.86
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 103.0,
+"z": 194.5,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 102.2,
+"z": 195.0,
+"wert": 0.75
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H5",
+"x": 311.6,
+"z": 200.3,
+"wert": 1.97
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 110.0,
+"z": 199.0,
+"wert": 0.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 94.0,
+"z": 200.5,
+"wert": 0.62
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 107.0,
+"z": 200.5,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 114.0,
+"z": 200.5,
+"wert": 1.92
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 115.2,
+"z": 200.9,
+"wert": 5.76
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H5",
+"x": 313.0,
+"z": 204.0,
+"wert": 0.66
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 91.0,
+"z": 210.3,
+"wert": 1.15
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 100.0,
+"z": 210.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 99.5,
+"z": 210.5,
+"wert": 0.68
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 101.5,
+"z": 210.5,
+"wert": 0.65
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 95.3,
+"z": 211.1,
+"wert": 2.0
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 102.0,
+"z": 211.0,
+"wert": 0.73
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 103.5,
+"z": 211.0,
+"wert": 1.39
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 103.0,
+"z": 211.5,
+"wert": 0.65
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 104.0,
+"z": 211.5,
+"wert": 0.63
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C5",
+"x": 95.5,
+"z": 212.0,
+"wert": 1.4
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 301.3,
+"z": 221.2,
+"wert": 1.47
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C6",
+"x": 100.0,
+"z": 221.0,
+"wert": 0.69
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C6",
+"x": 99.5,
+"z": 221.8,
+"wert": 1.28
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 302.0,
+"z": 222.5,
+"wert": 1.17
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "F6",
+"x": 220.0,
+"z": 223.0,
+"wert": 0.62
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 303.0,
+"z": 223.0,
+"wert": 1.01
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D6",
+"x": 156.1,
+"z": 230.2,
+"wert": 0.8
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D6",
+"x": 157.0,
+"z": 231.0,
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 316.5,
+"z": 237.0,
+"wert": 1.17
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 317.2,
+"z": 237.8,
+"wert": 1.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E6",
+"x": 205.0,
+"z": 239.5,
+"wert": 0.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E6",
+"x": 205.5,
+"z": 240.5,
+"wert": 0.91
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 322.5,
+"z": 241.5,
+"wert": 0.69
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E6",
+"x": 202.5,
+"z": 242.0,
+"wert": 1.17
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H6",
+"x": 335.6,
+"z": 249.3,
+"wert": 1.68
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C6",
+"x": 94.0,
+"z": 250.5,
+"wert": 1.66
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "D7",
+"x": 167.0,
+"z": 260.7,
+"wert": 0.92
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E7",
+"x": 171.0,
+"z": 261.0,
+"wert": 0.69
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A7",
+"x": 19.5,
+"z": 261.5,
+"wert": 0.87
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A7",
+"x": 25.0,
+"z": 262.1,
+"wert": 1.04
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A7",
+"x": 21.5,
+"z": 262.0,
+"wert": 0.68
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "B7",
+"x": 70.0,
+"z": 262.2,
+"wert": 0.75
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E7",
+"x": 175.2,
+"z": 262.3,
+"wert": 0.82
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E7",
+"x": 174.2,
+"z": 263.2,
+"wert": 1.06
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "E7",
+"x": 170.0,
+"z": 263.5,
+"wert": 0.6
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A7",
+"x": 22.5,
+"z": 264.5,
+"wert": 1.03
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "A7",
+"x": 24.5,
+"z": 264.5,
+"wert": 0.87
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "H7",
+"x": 331.8,
+"z": 278.0,
+"wert": 1.28
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 144.9,
+"z": 2.9,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 214.6,
+"z": 1.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 213.0,
+"z": 4.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 217.0,
+"z": 5.5,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 150.0,
+"z": 6.2,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 142.1,
+"z": 8.5,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 211.6,
+"z": 14.6,
+"wert": 39
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 153.2,
+"z": 7.8,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 217.8,
+"z": 9.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 159.1,
+"z": 11.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 272.1,
+"z": 11.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 163.0,
+"z": 13.9,
+"wert": 26
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 144.0,
+"z": 19.5,
+"wert": 43
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 160.4,
+"z": 16.2,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 166.8,
+"z": 16.8,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 215.0,
+"z": 17.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 160.3,
+"z": 19.4,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 180.3,
+"z": 22.0,
+"wert": 45
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 156.8,
+"z": 18.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 254.1,
+"z": 20.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 152.4,
+"z": 21.7,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 146.1,
+"z": 21.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 150.6,
+"z": 21.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 160.7,
+"z": 21.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 276.3,
+"z": 23.0,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 280.2,
+"z": 22.1,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 177.6,
+"z": 22.9,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 162.6,
+"z": 23.7,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 283.2,
+"z": 25.1,
+"wert": 30
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 151.1,
+"z": 24.3,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 240.5,
+"z": 25.3,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 178.8,
+"z": 26.4,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 234.2,
+"z": 26.1,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 185.4,
+"z": 27.7,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 232.3,
+"z": 27.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 183.8,
+"z": 28.1,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 178.6,
+"z": 30.8,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 221.2,
+"z": 32.1,
+"wert": 47
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 229.8,
+"z": 28.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 208.7,
+"z": 30.7,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 225.5,
+"z": 30.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 288.7,
+"z": 30.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 328.0,
+"z": 30.2,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 279.1,
+"z": 31.5,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 212.1,
+"z": 31.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 267.3,
+"z": 31.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 292.4,
+"z": 31.6,
+"wert": 30
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 187.1,
+"z": 32.4,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 302.4,
+"z": 31.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 103.6,
+"z": 32.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 188.7,
+"z": 33.0,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 198.6,
+"z": 32.9,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 206.6,
+"z": 32.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 14.0,
+"z": 33.8,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 31.1,
+"z": 33.8,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 39.3,
+"z": 33.6,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 108.1,
+"z": 33.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 301.6,
+"z": 33.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 18.2,
+"z": 33.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 111.8,
+"z": 33.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 146.9,
+"z": 33.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 221.5,
+"z": 34.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 304.8,
+"z": 33.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 22.4,
+"z": 34.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 115.9,
+"z": 34.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 281.7,
+"z": 34.5,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 122.3,
+"z": 35.0,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 216.7,
+"z": 36.2,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 21.6,
+"z": 35.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 192.7,
+"z": 34.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 224.5,
+"z": 36.2,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 286.5,
+"z": 37.4,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 313.5,
+"z": 34.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 11.3,
+"z": 35.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 23.6,
+"z": 35.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 26.8,
+"z": 35.9,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 41.9,
+"z": 36.1,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 182.5,
+"z": 36.1,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 189.6,
+"z": 35.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 6.7,
+"z": 36.0,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 254.1,
+"z": 36.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 49.9,
+"z": 36.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 51.3,
+"z": 37.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 321.2,
+"z": 38.3,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 48.1,
+"z": 38.0,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 181.8,
+"z": 38.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 40.7,
+"z": 38.6,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 43.4,
+"z": 38.3,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G1",
+"x": 293.3,
+"z": 39.0,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 4.1,
+"z": 39.7,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 313.1,
+"z": 39.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 326.3,
+"z": 41.2,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 51.2,
+"z": 39.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 220.9,
+"z": 39.4,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H1",
+"x": 311.2,
+"z": 39.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 54.7,
+"z": 40.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 66.2,
+"z": 39.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C1",
+"x": 123.6,
+"z": 40.0,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 183.6,
+"z": 40.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 217.8,
+"z": 40.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 58.9,
+"z": 41.4,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 77.1,
+"z": 41.0,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 199.5,
+"z": 40.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 1.2,
+"z": 41.6,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "A1",
+"x": 28.6,
+"z": 41.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 194.4,
+"z": 41.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B1",
+"x": 54.9,
+"z": 42.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 185.9,
+"z": 43.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 191.6,
+"z": 42.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F2",
+"x": 222.6,
+"z": 43.8,
+"wert": 29
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 4.0,
+"z": 43.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 36.1,
+"z": 43.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 198.9,
+"z": 44.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 103.4,
+"z": 44.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 203.0,
+"z": 46.8,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 106.5,
+"z": 45.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 114.3,
+"z": 46.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 84.3,
+"z": 47.4,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 80.0,
+"z": 47.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 95.0,
+"z": 48.0,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 59.2,
+"z": 48.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 51.9,
+"z": 48.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 13.1,
+"z": 51.0,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 17.0,
+"z": 52.0,
+"wert": 22
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 98.8,
+"z": 50.2,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 113.2,
+"z": 50.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 34.9,
+"z": 51.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 198.2,
+"z": 51.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F2",
+"x": 219.8,
+"z": 51.4,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 101.8,
+"z": 51.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 106.1,
+"z": 52.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 332.9,
+"z": 54.3,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 35.8,
+"z": 53.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 197.2,
+"z": 54.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A2",
+"x": 30.5,
+"z": 56.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 196.3,
+"z": 57.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 53.0,
+"z": 59.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 52.8,
+"z": 63.4,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 193.6,
+"z": 64.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 54.3,
+"z": 67.5,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 190.6,
+"z": 70.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 91.5,
+"z": 73.8,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "B2",
+"x": 57.8,
+"z": 73.7,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 103.9,
+"z": 73.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 192.3,
+"z": 74.1,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 332.2,
+"z": 73.1,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 326.3,
+"z": 74.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 314.8,
+"z": 76.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 94.2,
+"z": 78.2,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "E2",
+"x": 188.3,
+"z": 78.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 323.9,
+"z": 77.6,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 312.1,
+"z": 79.2,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C2",
+"x": 86.4,
+"z": 79.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 317.6,
+"z": 82.9,
+"wert": 29
+},
+{
+"regel": "G6_facette",
+"feld": "H2",
+"x": 299.2,
+"z": 84.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 186.6,
+"z": 86.5,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 307.6,
+"z": 87.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 316.7,
+"z": 87.0,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 304.6,
+"z": 87.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 313.2,
+"z": 91.2,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 187.5,
+"z": 93.9,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 291.5,
+"z": 92.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 300.5,
+"z": 92.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 297.7,
+"z": 95.5,
+"wert": 28
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 280.7,
+"z": 96.2,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 283.7,
+"z": 95.7,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 289.2,
+"z": 95.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 295.0,
+"z": 97.2,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 109.4,
+"z": 97.0,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 312.5,
+"z": 96.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 309.9,
+"z": 96.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 91.0,
+"z": 98.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 120.8,
+"z": 99.0,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 313.5,
+"z": 98.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 75.2,
+"z": 99.5,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 96.2,
+"z": 99.0,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 98.1,
+"z": 100.9,
+"wert": 28
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 188.6,
+"z": 102.5,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 276.8,
+"z": 98.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 306.5,
+"z": 101.8,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 123.1,
+"z": 99.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 89.9,
+"z": 101.0,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 294.5,
+"z": 101.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 310.0,
+"z": 100.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 95.3,
+"z": 101.6,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 105.0,
+"z": 102.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 289.7,
+"z": 101.6,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 275.5,
+"z": 102.4,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 93.2,
+"z": 103.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 283.2,
+"z": 103.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 292.7,
+"z": 104.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 282.2,
+"z": 109.0,
+"wert": 32
+},
+{
+"regel": "G6_facette",
+"feld": "H3",
+"x": 295.8,
+"z": 104.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 93.1,
+"z": 107.0,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 280.2,
+"z": 107.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 98.6,
+"z": 107.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 101.3,
+"z": 108.9,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 69.5,
+"z": 108.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 112.7,
+"z": 108.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 85.4,
+"z": 109.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 286.1,
+"z": 110.0,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 65.4,
+"z": 109.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 91.0,
+"z": 110.9,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 115.7,
+"z": 110.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 268.4,
+"z": 111.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 64.6,
+"z": 111.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 98.1,
+"z": 112.8,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 276.0,
+"z": 112.4,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 287.6,
+"z": 112.4,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 95.0,
+"z": 114.5,
+"wert": 25
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 115.8,
+"z": 112.5,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 290.4,
+"z": 112.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 110.3,
+"z": 115.2,
+"wert": 47
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 268.7,
+"z": 113.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 103.9,
+"z": 114.8,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 274.3,
+"z": 117.1,
+"wert": 44
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 285.6,
+"z": 114.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 89.0,
+"z": 115.5,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 114.7,
+"z": 117.8,
+"wert": 42
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 278.8,
+"z": 115.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 70.9,
+"z": 116.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 289.7,
+"z": 115.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 120.4,
+"z": 116.5,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 101.8,
+"z": 118.2,
+"wert": 33
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 280.9,
+"z": 117.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 63.9,
+"z": 117.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 183.2,
+"z": 119.8,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 106.8,
+"z": 118.5,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 119.8,
+"z": 120.0,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 82.4,
+"z": 119.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 87.3,
+"z": 123.2,
+"wert": 40
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 111.2,
+"z": 120.7,
+"wert": 34
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 90.7,
+"z": 121.2,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 81.8,
+"z": 121.7,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 100.1,
+"z": 122.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 286.3,
+"z": 124.6,
+"wert": 35
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 280.8,
+"z": 124.5,
+"wert": 25
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 81.0,
+"z": 124.6,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 92.3,
+"z": 124.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 113.5,
+"z": 125.3,
+"wert": 22
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 117.5,
+"z": 126.7,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "A4",
+"x": 25.5,
+"z": 139.7,
+"wert": 62
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 268.2,
+"z": 125.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D3",
+"x": 134.6,
+"z": 126.9,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "D3",
+"x": 138.8,
+"z": 126.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 89.4,
+"z": 127.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G3",
+"x": 267.0,
+"z": 127.2,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 109.9,
+"z": 128.2,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "E3",
+"x": 178.3,
+"z": 127.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "A4",
+"x": 31.5,
+"z": 129.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 61.5,
+"z": 128.8,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 87.1,
+"z": 129.1,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C3",
+"x": 102.5,
+"z": 128.3,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 285.1,
+"z": 129.4,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "B3",
+"x": 82.0,
+"z": 128.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 135.8,
+"z": 130.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 290.0,
+"z": 129.9,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 97.2,
+"z": 131.8,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 275.5,
+"z": 129.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 66.1,
+"z": 130.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 104.0,
+"z": 130.6,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 107.0,
+"z": 130.3,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 177.2,
+"z": 130.5,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 181.2,
+"z": 130.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 107.9,
+"z": 131.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 276.0,
+"z": 134.9,
+"wert": 50
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 132.3,
+"z": 137.2,
+"wert": 82
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 64.9,
+"z": 132.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 84.0,
+"z": 136.9,
+"wert": 52
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 176.0,
+"z": 133.7,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 288.8,
+"z": 132.9,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 100.8,
+"z": 133.3,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 279.9,
+"z": 133.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 59.2,
+"z": 134.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 120.7,
+"z": 134.3,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 124.4,
+"z": 134.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 289.0,
+"z": 134.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 88.9,
+"z": 135.9,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 108.4,
+"z": 135.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 78.0,
+"z": 136.2,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 99.2,
+"z": 135.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 268.2,
+"z": 135.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 94.3,
+"z": 147.0,
+"wert": 66
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 128.2,
+"z": 141.2,
+"wert": 61
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 58.0,
+"z": 138.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 126.2,
+"z": 138.5,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 52.6,
+"z": 139.4,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 98.7,
+"z": 139.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 292.5,
+"z": 138.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 139.6,
+"z": 139.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 175.5,
+"z": 140.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 57.6,
+"z": 141.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 74.2,
+"z": 141.2,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 89.0,
+"z": 141.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 271.5,
+"z": 142.1,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 123.8,
+"z": 143.6,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 287.9,
+"z": 143.5,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 51.8,
+"z": 148.0,
+"wert": 27
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 56.4,
+"z": 143.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 71.1,
+"z": 149.0,
+"wert": 43
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 80.7,
+"z": 144.1,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 138.6,
+"z": 144.0,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 278.8,
+"z": 143.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 55.0,
+"z": 146.3,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 77.9,
+"z": 145.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 88.5,
+"z": 146.9,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 128.2,
+"z": 154.2,
+"wert": 77
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 280.6,
+"z": 145.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 85.5,
+"z": 146.9,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 119.6,
+"z": 145.8,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 289.8,
+"z": 147.3,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 76.5,
+"z": 148.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 125.8,
+"z": 148.7,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 97.7,
+"z": 148.3,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H4",
+"x": 294.1,
+"z": 149.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 84.6,
+"z": 151.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 288.2,
+"z": 150.3,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 87.9,
+"z": 151.8,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 172.7,
+"z": 152.0,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 75.7,
+"z": 153.6,
+"wert": 35
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 54.1,
+"z": 152.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 94.7,
+"z": 156.3,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 123.8,
+"z": 154.4,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 87.2,
+"z": 157.2,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 282.8,
+"z": 155.5,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 288.1,
+"z": 155.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E4",
+"x": 171.4,
+"z": 156.6,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 83.2,
+"z": 164.2,
+"wert": 67
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 126.0,
+"z": 174.4,
+"wert": 135
+},
+{
+"regel": "G6_facette",
+"feld": "H4",
+"x": 294.5,
+"z": 156.5,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 50.2,
+"z": 157.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 289.5,
+"z": 157.4,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 292.3,
+"z": 156.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 68.2,
+"z": 158.7,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 75.2,
+"z": 158.7,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 161.0,
+"z": 158.4,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 284.4,
+"z": 159.3,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "A4",
+"x": 24.4,
+"z": 160.4,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "H4",
+"x": 298.3,
+"z": 163.1,
+"wert": 29
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 121.9,
+"z": 161.6,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 162.2,
+"z": 160.3,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 48.0,
+"z": 164.1,
+"wert": 34
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 72.9,
+"z": 165.1,
+"wert": 41
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 52.7,
+"z": 164.3,
+"wert": 28
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 154.7,
+"z": 163.1,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 121.6,
+"z": 168.6,
+"wert": 40
+},
+{
+"regel": "G6_facette",
+"feld": "G4",
+"x": 291.6,
+"z": 163.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 156.6,
+"z": 163.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 85.7,
+"z": 165.8,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "A5",
+"x": 23.5,
+"z": 183.7,
+"wert": 72
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 118.7,
+"z": 166.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 55.3,
+"z": 169.4,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 75.4,
+"z": 169.1,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 117.9,
+"z": 168.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 306.9,
+"z": 175.2,
+"wert": 70
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 66.6,
+"z": 168.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 145.9,
+"z": 170.0,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 151.8,
+"z": 170.0,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B4",
+"x": 56.9,
+"z": 171.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "H4",
+"x": 304.2,
+"z": 171.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
+"x": 149.5,
+"z": 173.3,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 64.7,
+"z": 172.4,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 70.2,
+"z": 172.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 74.6,
+"z": 173.1,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 116.9,
+"z": 173.9,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 50.3,
+"z": 173.2,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
+"x": 151.5,
+"z": 174.2,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 297.9,
+"z": 173.3,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 83.1,
+"z": 173.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 76.0,
+"z": 175.4,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 302.0,
+"z": 175.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 67.4,
+"z": 175.9,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 300.1,
+"z": 178.0,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 117.3,
+"z": 177.0,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 77.8,
+"z": 176.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 89.1,
+"z": 177.1,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
+"x": 147.8,
+"z": 177.3,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 114.6,
+"z": 181.7,
+"wert": 40
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 185.6,
+"z": 178.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
+"x": 151.6,
+"z": 179.8,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 80.1,
+"z": 181.0,
+"wert": 37
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 83.8,
+"z": 180.1,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 96.0,
+"z": 180.3,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 187.9,
+"z": 181.2,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 74.7,
+"z": 181.4,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 179.8,
+"z": 182.0,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 100.6,
+"z": 182.7,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 181.4,
+"z": 183.2,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 313.3,
+"z": 189.4,
+"wert": 72
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 304.4,
+"z": 185.0,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 176.1,
+"z": 184.7,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 183.4,
+"z": 184.8,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 190.1,
+"z": 186.2,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 82.0,
+"z": 185.7,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "D5",
+"x": 161.2,
+"z": 185.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 185.0,
+"z": 187.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 81.9,
+"z": 187.5,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 169.2,
+"z": 187.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 308.2,
+"z": 190.0,
+"wert": 29
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 120.7,
+"z": 188.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E5",
+"x": 187.7,
+"z": 191.3,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 86.4,
+"z": 190.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 79.6,
+"z": 192.6,
+"wert": 22
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 99.1,
+"z": 192.7,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 90.5,
+"z": 196.4,
+"wert": 31
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 101.2,
+"z": 195.0,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 103.4,
+"z": 195.3,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 105.2,
+"z": 196.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F5",
+"x": 218.0,
+"z": 198.1,
+"wert": 32
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 102.4,
+"z": 197.6,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 85.9,
+"z": 198.5,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 108.5,
+"z": 199.1,
+"wert": 33
+},
+{
+"regel": "G6_facette",
+"feld": "F5",
+"x": 215.1,
+"z": 201.4,
+"wert": 23
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 98.1,
+"z": 199.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 313.3,
+"z": 200.0,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 102.0,
+"z": 200.1,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 70.7,
+"z": 202.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "F5",
+"x": 220.4,
+"z": 202.2,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 303.8,
+"z": 203.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 312.1,
+"z": 202.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 315.9,
+"z": 208.1,
+"wert": 40
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 72.8,
+"z": 204.0,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 88.6,
+"z": 206.0,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 112.1,
+"z": 204.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 67.8,
+"z": 205.6,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 321.7,
+"z": 207.0,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 77.0,
+"z": 206.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 70.1,
+"z": 210.2,
+"wert": 34
+},
+{
+"regel": "G6_facette",
+"feld": "F5",
+"x": 216.1,
+"z": 207.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 88.6,
+"z": 208.7,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "B5",
+"x": 81.2,
+"z": 209.7,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "H5",
+"x": 312.3,
+"z": 210.1,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 85.1,
+"z": 210.2,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 87.9,
+"z": 211.0,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 99.2,
+"z": 211.1,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 101.7,
+"z": 212.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 107.1,
+"z": 213.6,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C5",
+"x": 88.6,
+"z": 214.3,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 109.1,
+"z": 215.2,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 83.2,
+"z": 216.9,
+"wert": 26
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 103.4,
+"z": 215.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 216.3,
+"z": 217.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 101.1,
+"z": 218.7,
+"wert": 39
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 13.5,
+"z": 220.2,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 96.1,
+"z": 217.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 80.9,
+"z": 218.3,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 114.0,
+"z": 219.1,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 71.5,
+"z": 219.6,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 111.3,
+"z": 218.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 298.1,
+"z": 220.4,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 84.7,
+"z": 220.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 103.2,
+"z": 221.6,
+"wert": 43
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 305.1,
+"z": 222.0,
+"wert": 35
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 119.6,
+"z": 221.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 297.5,
+"z": 224.9,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 94.5,
+"z": 223.2,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 145.1,
+"z": 223.3,
+"wert": 26
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 218.1,
+"z": 222.6,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 225.7,
+"z": 222.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 308.2,
+"z": 223.7,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 132.9,
+"z": 223.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 149.2,
+"z": 222.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 136.8,
+"z": 224.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 212.8,
+"z": 223.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 243.0,
+"z": 224.2,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 245.8,
+"z": 224.4,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 255.7,
+"z": 225.6,
+"wert": 49
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 161.1,
+"z": 224.5,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 13.1,
+"z": 226.1,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 141.3,
+"z": 225.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 215.6,
+"z": 224.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 224.8,
+"z": 225.5,
+"wert": 19
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 239.9,
+"z": 225.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 212.4,
+"z": 226.4,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 81.3,
+"z": 226.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 166.3,
+"z": 228.1,
+"wert": 41
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 98.6,
+"z": 226.3,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 244.1,
+"z": 226.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 88.2,
+"z": 226.9,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 236.9,
+"z": 227.8,
+"wert": 21
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 276.4,
+"z": 227.6,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 147.8,
+"z": 227.8,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 208.4,
+"z": 228.2,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 241.3,
+"z": 228.7,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 313.4,
+"z": 227.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 50.7,
+"z": 228.7,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 261.3,
+"z": 228.8,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 150.2,
+"z": 229.4,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 145.5,
+"z": 229.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 209.8,
+"z": 229.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 263.6,
+"z": 229.9,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 273.5,
+"z": 229.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 315.7,
+"z": 230.6,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 289.1,
+"z": 230.7,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 268.4,
+"z": 230.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 43.5,
+"z": 231.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 206.3,
+"z": 231.3,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 314.5,
+"z": 232.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 134.2,
+"z": 231.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 162.2,
+"z": 231.4,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 203.2,
+"z": 235.4,
+"wert": 45
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 50.6,
+"z": 232.2,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 286.9,
+"z": 232.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 307.1,
+"z": 234.1,
+"wert": 18
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 41.6,
+"z": 233.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 48.7,
+"z": 233.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 224.6,
+"z": 234.5,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 283.9,
+"z": 234.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 316.6,
+"z": 234.2,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 96.2,
+"z": 234.9,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 133.4,
+"z": 238.2,
+"wert": 27
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 210.9,
+"z": 236.9,
+"wert": 34
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 221.1,
+"z": 235.7,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 37.3,
+"z": 236.2,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 262.5,
+"z": 235.8,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 281.8,
+"z": 236.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 320.9,
+"z": 238.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 276.5,
+"z": 239.2,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 318.5,
+"z": 238.8,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 34.5,
+"z": 239.5,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 222.0,
+"z": 239.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 243.8,
+"z": 239.3,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 323.6,
+"z": 240.9,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 139.4,
+"z": 240.8,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 194.5,
+"z": 241.2,
+"wert": 22
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 198.2,
+"z": 240.9,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 204.9,
+"z": 241.1,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 262.4,
+"z": 240.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 273.7,
+"z": 241.3,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 32.8,
+"z": 241.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 91.1,
+"z": 246.4,
+"wert": 42
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 93.0,
+"z": 242.8,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 312.0,
+"z": 242.2,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 190.6,
+"z": 242.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 198.8,
+"z": 242.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 277.6,
+"z": 243.9,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 167.4,
+"z": 244.8,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 128.8,
+"z": 247.5,
+"wert": 20
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 171.0,
+"z": 245.4,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 93.1,
+"z": 246.6,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 178.2,
+"z": 246.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 327.8,
+"z": 246.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 176.6,
+"z": 246.8,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 192.6,
+"z": 247.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 12.9,
+"z": 248.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 94.1,
+"z": 248.7,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E6",
+"x": 196.8,
+"z": 247.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 16.0,
+"z": 249.2,
+"wert": 12
+},
+{
+"regel": "G6_facette",
+"feld": "G6",
+"x": 269.2,
+"z": 249.1,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 97.6,
+"z": 249.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 11.3,
+"z": 252.7,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 9.7,
+"z": 252.2,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "A6",
+"x": 13.9,
+"z": 252.6,
+"wert": 24
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 70.0,
+"z": 252.0,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 96.0,
+"z": 251.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 98.2,
+"z": 252.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 107.4,
+"z": 253.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "H6",
+"x": 325.0,
+"z": 253.8,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "F6",
+"x": 218.7,
+"z": 256.0,
+"wert": 11
+},
+{
+"regel": "G6_facette",
+"feld": "B6",
+"x": 70.2,
+"z": 256.4,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "D6",
+"x": 155.9,
+"z": 256.2,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C6",
+"x": 117.0,
+"z": 257.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "B7",
+"x": 70.6,
+"z": 260.3,
+"wert": 15
+},
+{
+"regel": "G6_facette",
+"feld": "D7",
+"x": 152.4,
+"z": 259.3,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "E7",
+"x": 173.7,
+"z": 260.3,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "D7",
+"x": 150.7,
+"z": 260.2,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "H7",
+"x": 325.8,
+"z": 262.8,
+"wert": 16
+},
+{
+"regel": "G6_facette",
+"feld": "D7",
+"x": 149.2,
+"z": 260.7,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "D7",
+"x": 147.5,
+"z": 261.6,
+"wert": 14
+},
+{
+"regel": "G6_facette",
+"feld": "A7",
+"x": 25.2,
+"z": 262.0,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "F7",
+"x": 217.5,
+"z": 262.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "D7",
+"x": 145.1,
+"z": 262.1,
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "G7",
+"x": 252.7,
+"z": 262.8,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "B7",
+"x": 71.6,
+"z": 263.2,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F7",
+"x": 216.0,
+"z": 266.0,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 119.6,
+"z": 265.9,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F7",
+"x": 246.0,
+"z": 267.7,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "G7",
+"x": 280.8,
+"z": 268.6,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "H7",
+"x": 301.2,
+"z": 269.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H7",
+"x": 308.0,
+"z": 269.0,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G7",
+"x": 283.2,
+"z": 269.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B7",
+"x": 65.2,
+"z": 271.1,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 98.0,
+"z": 271.6,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 112.2,
+"z": 271.8,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 106.8,
+"z": 273.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 105.1,
+"z": 273.4,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "G7",
+"x": 255.1,
+"z": 274.4,
+"wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "G7",
+"x": 292.8,
+"z": 274.2,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H7",
+"x": 295.1,
+"z": 274.9,
+"wert": 9
+},
+{
+"regel": "G6_facette",
+"feld": "B7",
+"x": 79.2,
+"z": 276.0,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "H7",
+"x": 323.3,
+"z": 278.1,
+"wert": 17
+},
+{
+"regel": "G6_facette",
+"feld": "C7",
+"x": 93.7,
+"z": 280.6,
+"wert": 11
+},
+{
+"regel": "G7_wand_glatte_flaeche",
+"feld": "A2",
+"x": 5.3,
+"z": 55.6,
+"wert": 41
+},
+{
+"regel": "G8_fluss_nicht_bis_rand",
+"feld": "A2",
+"x": 22.6,
+"z": 49.1,
+"wert": 891
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E1",
+"x": 193.6,
+"z": 17.1,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D1",
+"x": 149.5,
+"z": 37.4,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D1",
+"x": 145.9,
+"z": 38.6,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F1",
+"x": 247.3,
+"z": 39.2,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G1",
+"x": 260.4,
+"z": 41.6,
+"wert": 19
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F1",
+"x": 246.2,
+"z": 42.4,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F1",
+"x": 250.1,
+"z": 42.4,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G1",
+"x": 288.1,
+"z": 42.1,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 168.3,
+"z": 43.1,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G1",
+"x": 285.0,
+"z": 42.9,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G2",
+"x": 284.1,
+"z": 45.4,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F2",
+"x": 213.9,
+"z": 44.4,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F2",
+"x": 248.8,
+"z": 48.0,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 156.4,
+"z": 47.7,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 180.5,
+"z": 48.1,
+"wert": 22
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 155.6,
+"z": 50.2,
+"wert": 23
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F2",
+"x": 251.5,
+"z": 52.9,
+"wert": 26
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 161.1,
+"z": 56.9,
+"wert": 26
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H2",
+"x": 327.9,
+"z": 57.6,
+"wert": 18
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G2",
+"x": 289.9,
+"z": 57.6,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H2",
+"x": 296.5,
+"z": 59.7,
+"wert": 19
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 155.2,
+"z": 59.1,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 161.4,
+"z": 60.8,
+"wert": 22
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 189.8,
+"z": 63.4,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H2",
+"x": 296.4,
+"z": 63.4,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 177.8,
+"z": 66.1,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H2",
+"x": 325.3,
+"z": 65.6,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 184.2,
+"z": 68.7,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G2",
+"x": 283.9,
+"z": 74.9,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 162.2,
+"z": 74.5,
+"wert": 14
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D2",
+"x": 158.5,
+"z": 74.7,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F2",
+"x": 240.2,
+"z": 75.9,
+"wert": 24
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G2",
+"x": 283.0,
+"z": 79.8,
+"wert": 14
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E2",
+"x": 179.3,
+"z": 81.9,
+"wert": 21
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C2",
+"x": 89.8,
+"z": 82.8,
+"wert": 16
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C2",
+"x": 84.4,
+"z": 83.7,
+"wert": 21
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C2",
+"x": 89.7,
+"z": 85.3,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E3",
+"x": 179.8,
+"z": 86.0,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C2",
+"x": 86.6,
+"z": 85.2,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante_gerade",
+"feld": "B2",
+"x": 81.8,
+"z": 85.5,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G3",
+"x": 274.5,
+"z": 87.3,
+"wert": 16
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E3",
+"x": 179.0,
+"z": 88.4,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D3",
+"x": 128.0,
+"z": 89.5,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B3",
+"x": 77.1,
+"z": 91.5,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D3",
+"x": 153.8,
+"z": 93.0,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G3",
+"x": 281.9,
+"z": 93.6,
+"wert": 17
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B3",
+"x": 72.5,
+"z": 95.2,
+"wert": 22
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B3",
+"x": 76.8,
+"z": 93.7,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E3",
+"x": 179.8,
+"z": 96.6,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B3",
+"x": 78.4,
+"z": 107.0,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "A3",
+"x": 15.8,
+"z": 107.8,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "D3",
+"x": 163.2,
+"z": 113.6,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G3",
+"x": 263.2,
+"z": 118.9,
+"wert": 15
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E4",
+"x": 171.3,
+"z": 132.3,
+"wert": 23
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E4",
+"x": 189.3,
+"z": 133.2,
+"wert": 19
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C4",
+"x": 118.8,
+"z": 138.1,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F4",
+"x": 237.9,
+"z": 142.9,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B4",
+"x": 56.6,
+"z": 145.2,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B4",
+"x": 49.3,
+"z": 156.7,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E4",
+"x": 203.5,
+"z": 159.2,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F4",
+"x": 249.4,
+"z": 163.7,
+"wert": 13
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B4",
+"x": 55.1,
+"z": 165.0,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E4",
+"x": 190.1,
+"z": 168.3,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H5",
+"x": 296.7,
+"z": 178.5,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 249.7,
+"z": 179.9,
+"wert": 22
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 228.8,
+"z": 181.3,
+"wert": 14
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H5",
+"x": 295.2,
+"z": 182.1,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 230.5,
+"z": 183.8,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G5",
+"x": 284.0,
+"z": 183.6,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B5",
+"x": 62.1,
+"z": 185.6,
+"wert": 14
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C5",
+"x": 92.6,
+"z": 186.8,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 225.1,
+"z": 187.9,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G5",
+"x": 286.4,
+"z": 191.0,
+"wert": 30
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G5",
+"x": 283.6,
+"z": 192.7,
+"wert": 20
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G5",
+"x": 289.6,
+"z": 191.7,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 235.6,
+"z": 200.8,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 241.8,
+"z": 201.6,
+"wert": 16
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 246.1,
+"z": 201.2,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 245.8,
+"z": 204.2,
+"wert": 19
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "F5",
+"x": 250.2,
+"z": 203.3,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H5",
+"x": 305.3,
+"z": 208.4,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H5",
+"x": 334.8,
+"z": 210.1,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H6",
+"x": 301.9,
+"z": 217.8,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C6",
+"x": 93.3,
+"z": 226.9,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "E6",
+"x": 172.4,
+"z": 234.3,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C6",
+"x": 94.4,
+"z": 236.2,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H6",
+"x": 333.6,
+"z": 238.9,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H6",
+"x": 331.5,
+"z": 241.0,
+"wert": 15
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "H6",
+"x": 306.2,
+"z": 245.6,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "B6",
+"x": 54.0,
+"z": 250.8,
+"wert": 10
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "G6",
+"x": 258.2,
+"z": 251.6,
+"wert": 12
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C6",
+"x": 119.9,
+"z": 252.5,
+"wert": 11
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C6",
+"x": 110.5,
+"z": 256.4,
+"wert": 8
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C7",
+"x": 114.5,
+"z": 258.5,
+"wert": 9
+},
+{
+"regel": "T1_harte_farbkante",
+"feld": "C7",
+"x": 108.8,
+"z": 261.2,
+"wert": 10
+},
+{
+"regel": "T2_textur_abgeschnitten_bildpruefung_offen",
+"feld": "A1",
+"x": 0.0,
+"z": 0.0,
+"wert": "Bildvergleich Clay/Textur noetig: BILD_T2=ok nach Sichtpruefung"
+},
+{
+"regel": "T3_streifen_ringe_bildpruefung_offen",
+"feld": "A1",
+"x": 0.0,
+"z": 0.0,
+"wert": "Bildvergleich Clay/Textur noetig: BILD_T3=ok nach Sichtpruefung"
+},
+{
+"regel": "T4_graue_flussstreifen_bildpruefung_offen",
+"feld": "A1",
+"x": 0.0,
+"z": 0.0,
+"wert": "Bildvergleich Clay/Textur noetig: BILD_T4=ok nach Sichtpruefung"
+},
+{
+"regel": "T5_textur_vs_clay_bildpruefung_offen",
+"feld": "A1",
+"x": 0.0,
+"z": 0.0,
+"wert": "Bildvergleich Clay/Textur noetig: BILD_T5=ok nach Sichtpruefung"
+},
+{
+"regel": "G7b_wandkontur_kantenschaerfe",
+"feld": "-",
+"x": 0,
+"z": 0,
+"wert": 0.736
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "A1",
+"x": 21,
+"z": 21,
+"wert": 0.61
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "A2",
+"x": 21,
+"z": 64,
+"wert": 0.606
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "B1",
+"x": 63,
+"z": 21,
+"wert": 0.678
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "B2",
+"x": 63,
+"z": 64,
+"wert": 0.557
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "B3",
+"x": 63,
+"z": 107,
+"wert": 0.703
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "B4",
+"x": 63,
+"z": 150,
+"wert": 0.675
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "B5",
+"x": 63,
+"z": 193,
+"wert": 0.636
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "C3",
+"x": 105,
+"z": 107,
+"wert": 0.715
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "D5",
+"x": 147,
+"z": 193,
+"wert": 0.739
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "E6",
+"x": 189,
+"z": 236,
+"wert": 0.824
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "F2",
+"x": 231,
+"z": 64,
+"wert": 0.709
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "F6",
+"x": 231,
+"z": 236,
+"wert": 0.699
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H1",
+"x": 315,
+"z": 21,
+"wert": 0.546
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H2",
+"x": 315,
+"z": 64,
+"wert": 0.671
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H3",
+"x": 315,
+"z": 107,
+"wert": 0.704
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H4",
+"x": 315,
+"z": 150,
+"wert": 0.787
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H5",
+"x": 315,
+"z": 193,
+"wert": 0.714
+},
+{
+"regel": "G7b_wandkontur_feld",
+"feld": "H6",
+"x": 315,
+"z": 236,
+"wert": 0.749
+}
+]
+}

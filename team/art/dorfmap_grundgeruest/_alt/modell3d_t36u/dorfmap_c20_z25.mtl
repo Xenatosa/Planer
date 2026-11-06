@@ -1,0 +1,7 @@
+newmtl c20
+map_Kd textur_c20_8px.jpg
+newmtl Wasser
+Kd 0.25 0.5 0.7
+d 0.6
+newmtl Sockel
+Kd 0.36 0.31 0.29

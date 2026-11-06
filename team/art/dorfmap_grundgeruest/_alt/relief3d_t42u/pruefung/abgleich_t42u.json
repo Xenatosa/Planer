@@ -1,0 +1,20 @@
+{
+ "abweichungen": {
+  "hoehe_m": 0,
+  "ecke_nw_m": 0,
+  "ecke_so_m": 0,
+  "klippe_WAND_vs_steil": 0,
+  "skin_slot": 0,
+  "zell_id": 0,
+  "begehbar_auf_wand": 0,
+  "glb_dreiecke_summe": 0,
+  "glb_waende_vs_regel": 0
+ },
+ "summe": 0,
+ "glb": {
+  "waende": 24724,
+  "boden": 789740
+ },
+ "zellen": 101808,
+ "steile_zellen": 4650
+}

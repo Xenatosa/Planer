@@ -1,0 +1,78 @@
+{
+ "stuecke_ge200": 3,
+ "bergauf_summe": 3969,
+ "bergauf_pfad_summe": 0,
+ "stufen_gt_1m_ausserhalb_schlucht": 0,
+ "stufen_gt_1m_schlucht": 18,
+ "je_stueck": [
+  {
+   "nr": 2,
+   "ecken": 361,
+   "auslass": "rand",
+   "auslass_xz": [
+    216.5,
+    0.0
+   ],
+   "quelle_xz": [
+    213.0,
+    31.0
+   ],
+   "laenge_m": 33.3,
+   "spiegel_quelle": 13.46,
+   "spiegel_auslass": 13.4,
+   "bergauf_entlang_pfad_gt_2cm": 0,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 0,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 0,
+   "stufe_max_ausserhalb_schlucht_m": 0.09,
+   "stufe_max_m": 0.09,
+   "stufen_gt_0_3m": 0
+  },
+  {
+   "nr": 11,
+   "ecken": 932,
+   "auslass": "endsee",
+   "auslass_xz": [
+    15.5,
+    39.5
+   ],
+   "quelle_xz": [
+    32.5,
+    52.5
+   ],
+   "laenge_m": 23.7,
+   "spiegel_quelle": -9.45,
+   "spiegel_auslass": -9.45,
+   "bergauf_entlang_pfad_gt_2cm": 0,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 0,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 0,
+   "stufe_max_ausserhalb_schlucht_m": 0.0,
+   "stufe_max_m": 0.0,
+   "stufen_gt_0_3m": 0
+  },
+  {
+   "nr": 12,
+   "ecken": 23539,
+   "auslass": "rand",
+   "auslass_xz": [
+    336.0,
+    281.5
+   ],
+   "quelle_xz": [
+    74.0,
+    47.0
+   ],
+   "laenge_m": 616.7,
+   "spiegel_quelle": -7.22,
+   "spiegel_auslass": -18.2,
+   "bergauf_entlang_pfad_gt_2cm": 0,
+   "bergauf_ueber_wasserscheide_ecken_gt_2cm": 3969,
+   "stufen_gt_1m_ausserhalb_schlucht": 0,
+   "stufen_gt_1m_in_schlucht_wandband": 18,
+   "stufe_max_ausserhalb_schlucht_m": 0.93,
+   "stufe_max_m": 3.31,
+   "stufen_gt_0_3m": 1491
+  }
+ ]
+}

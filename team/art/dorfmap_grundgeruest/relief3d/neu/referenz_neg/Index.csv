@@ -1,0 +1,9 @@
+Bild,Kachel,Koordinate,Fehlerart,Beschreibung,Quelle
+kreuzung_D1_ton.png,D1,152.3|28.5,Kreuzung,"D1 rampe_2 x rampe_11: dokumentierter Sprung an der Kreuzung; Tonbild aus dem Vorher-Stand.",/workspace/o18_kreuzung/vorher/D1_ton.png
+wegende_G1_ton.png,G1,273.4|21.2,Wegende,"Rampe_1 endet ohne Laengsauslauf; Fabian-Ansicht G1.",/workspace/o18_kreuzung/vorher/G1o_ton.png
+delle_G1_ton.png,G1,278.5|27.0,Delle,"Fabians Delle unter der Plateaukante; R9 misst 0,42 m bei 5,6 m Wegabstand.",/workspace/o18_bilder_fabian/G1_ton.png
+saege_D1_schatten_an.png,D1,Bild-ROI 500:1050/300:600,Saegezahn/Schatten,"Schatten an: gezackte und verschmierte Kante; Negativbild fuer den Render-Messwert.",/workspace/o18_kreuzung/saege/D1_schatten_an.png
+saege_D1_schatten_aus.png,D1,Bild-ROI 500:1050/300:600,Saegezahn/Schatten,"Schatten aus: Vergleichsbild; Geometrie-Facetten bleiben als eigener Anteil sichtbar.",/workspace/o18_kreuzung/saege/D1_schatten_aus.png
+wand_D1_ton.png,D1,140|35,Verwaschene Wand,"Klippe D1: Streiflicht/Tonbild fuer den Wandkanten-Messwert.",/workspace/o18_bilder_fabian/D1_ton.png
+wegende_F1_wege.png,F1,227.3|36.9,Wegende,"Fabians F1-Ansicht; R8a misst am Rampenende 0,17 m.",/workspace/o18_bilder_fabian/F1_wege.png
+wegende_C1_wege.png,C1,im Bild,Wegende,"Fabians C1-Ansicht; im bisherigen R8-Auszug fehlt eine explizite C1-Wegende-Messung.",/workspace/o18_bilder_fabian/C1_wege.png

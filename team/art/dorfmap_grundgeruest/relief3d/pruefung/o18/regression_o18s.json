@@ -1,0 +1,73 @@
+{
+ "stand": "d038019+O18s",
+ "t42u_summe": 0,
+ "gate_summe": 1055,
+ "bergauf_gt_2cm": 0,
+ "bergauf_max_m": 0.02,
+ "stufe_bandrand": 0,
+ "bandrand_indexerror": "nicht reproduziert (bandrand_t83u laeuft fehlerfrei, 19026 Randpunkte)",
+ "budget_lod1_dreiecke": 1175138,
+ "lochscan_index_offen_innen": 0,
+ "lochscan_56_felder_echte_innen": 0,
+ "ladezeit_s": [
+  9.767,
+  9.015,
+  8.725
+ ],
+ "ladezeit_median_s": 9.015,
+ "raycast_basis": {
+  "baeume": [
+   20,
+   105
+  ],
+  "felsen": [
+   1,
+   11
+  ],
+  "findlinge": [
+   2,
+   8
+  ],
+  "steine": [
+   0,
+   2
+  ],
+  "geroell": [
+   0,
+   11
+  ],
+  "format": "[schwebend,versunken]"
+ },
+ "raycast_ursache": "Cache strahl_hoehe_t65u ist korrekt; der spaetere Block O18m G11 in gen_relief.py setzt Objekte mit >0,6 m Abweichung auf G_ANZ (Grobnetz) zurueck, im Feinband ist aber das Feinnetz sichtbar. Versuch: Raycast-Cache vor G11 -> Baeume 0/0, Felsen 0/0, aber Gate G11 0->162 (Gate misst gegen G_ANZ). Verworfen nach Regel (keine Klasse darf steigen). Loesung braucht G11-Messung auf Anzeige-Flaeche.",
+ "g6_ursache": {
+  "anteil_im_feinband": 0.864,
+  "wandabstand_lt_3m": 0.93,
+  "keine_gitterlinien_praeferenz": [
+   0.49,
+   0.5
+  ],
+  "feinband_komponenten_g6": {
+   "final": 394,
+   "FB_grob_basis": 342,
+   "FB+FD": 377,
+   "ohne_ter": 363,
+   "ohne_kar": 384,
+   "ohne_TW": 379
+  },
+  "grob_stufe_g6": {
+   "G_zeile180": 492,
+   "nur_Hs_glatt": 35,
+   "Hn_zellraster_bilinear": 370,
+   "Gsamp_bikubisch": 521,
+   "ohne_simse_led": 487,
+   "apron_weich": 465,
+   "ohne_band": 470,
+   "sprung_weich": 489,
+   "lo_hi_geglaettet": 465,
+   "ohne_RIB": 286,
+   "RIB_nur_grobe_oktave": 370,
+   "RIB_smooth_abs_0.35": 459
+  },
+  "befund": "Facetten entstehen in der Wandformung Gs (lo+Rg*t, Rippen-fBm RIB verschiebt Wandlinie hochfrequent), nicht durch Zellraster-Treppen oder Bilinear-Interpolation; Bikubisch verschlechtert (521). Feinband-Details addieren wenig (342->394)."
+ }
+}

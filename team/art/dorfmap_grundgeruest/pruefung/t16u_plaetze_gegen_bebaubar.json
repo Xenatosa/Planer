@@ -1,0 +1,14 @@
+{
+ "E16": {
+  "innerhalb_bebaubar": 118,
+  "Abstand(Wand/Wasser 2 m)": 2,
+  "ausserhalb_senke": 20,
+  "gesamt": 140
+ },
+ "E40": {
+  "innerhalb_bebaubar": 119,
+  "Abstand(Wand/Wasser 2 m)": 2,
+  "ausserhalb_senke": 112,
+  "gesamt": 233
+ }
+}
