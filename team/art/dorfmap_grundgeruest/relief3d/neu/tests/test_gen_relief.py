@@ -1,36 +1,43 @@
-import gzip
+import base64
+import hashlib
 import json
+from pathlib import Path
 
 import numpy as np
 
-from neu.gen_relief import SOURCE_COLUMNS, build
-from neu.tests.helpers import make_data
+from neu.mesh import build_manifest, load_relief, mesh_height_bytes, source_column_hashes
 
 
-def load(path):
-    with gzip.open(path, "rt", encoding="utf-8") as f:
-        return json.load(f)
+RELIEF3D = Path(__file__).resolve().parents[2]
 
 
-def test_selected_tile_rebuild_preserves_sources_and_d2(tmp_path):
-    source_path = tmp_path / "source.json.gz"
-    before = make_data(source_path)
-    out = tmp_path / "candidate"
-    summary = build(source_path, out, "1")
-    after = load(out / "relief_daten_neu.json.gz")
-    assert summary["quellspalten_diff_summe"] == 0
-    assert all(summary["quellspalten_diff_werte"][key] == 0 for key in SOURCE_COLUMNS)
-    assert all(summary["D2_anzeige_bytegleich"].values())
-    assert np.array_equal(np.frombuffer(__import__("base64").b64decode(before["G"]), np.float32),
-                          np.frombuffer(__import__("base64").b64decode(after["G"]), np.float32))
-    assert summary["geaenderte_gb_punkte"] > 0
-    assert after["relief_neu"]["kacheln"] == ["D1", "G1", "D2"]
+def test_mesh_manifest_is_deterministic_and_keeps_sources_and_d2_locked():
+    relief = RELIEF3D / "relief_daten.json.gz"
+    cells = RELIEF3D / "neu" / "zellen_relief.csv"
+    vector = RELIEF3D / "neu" / "vektor.json"
+    fields = RELIEF3D / "neu" / "felder.npz"
+
+    first = build_manifest(relief, cells, vector, fields, variant="2")
+    second = build_manifest(relief, cells, vector, fields, variant="2")
+    encode = lambda value: json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    assert encode(first) == encode(second)
+    assert tuple(first["tiles"]) == ("D2", "G1", "D1")
+    assert first["source_cell_column_sha256"] == source_column_hashes(cells)
+    assert set(first["source_cell_columns"]) == {
+        "untergrund", "hindernis_id", "hindernis_art", "wasser_eis", "ebene",
+        "bauzone_bestand", "bauzone_plan", "begehbar", "bebaubar",
+    }
+
+    source = load_relief(relief)
+    d2 = np.frombuffer(
+        base64.b64decode(first["tiles"]["D2"]["vertices_xyz_f32"]), dtype="<f4",
+    ).reshape(-1, 3)[:, 1]
+    expected_d2 = mesh_height_bytes(source, "D2")
+    assert d2.tobytes() == expected_d2
+    assert first["tiles"]["D2"]["height_sha256"] == hashlib.sha256(expected_d2).hexdigest()
 
 
-def test_candidate_is_byte_deterministic(tmp_path):
-    source_path = tmp_path / "source.json.gz"
-    make_data(source_path)
-    a, b = tmp_path / "a", tmp_path / "b"
-    build(source_path, a, "1")
-    build(source_path, b, "1")
-    assert (a / "relief_daten_neu.json.gz").read_bytes() == (b / "relief_daten_neu.json.gz").read_bytes()
+def test_mesh_source_hashes_cover_unchanged_cell_columns():
+    hashes = source_column_hashes(RELIEF3D / "neu" / "zellen_relief.csv")
+    assert len(hashes) == 9
+    assert all(len(value) == 64 for value in hashes.values())

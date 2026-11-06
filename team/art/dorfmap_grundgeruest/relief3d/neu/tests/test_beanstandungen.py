@@ -93,6 +93,11 @@ def test_wegende_d1_g1_meshmessung_verbessert(r8: dict, r8_control: dict) -> Non
     )
 
 
+def test_wegende_allgemein_mesh_ohne_blindenden(r8: dict) -> None:
+    anzahl = int(r8["je_regel"].get("R8a_wegende", 0))
+    assert anzahl == 0, f"ROT: {anzahl} Wegenden ueberschreiten die 0.10-m-Auslaufgrenze"
+
+
 def test_delle_g1_278_5_27_0_hoehenfeld(r9: dict) -> None:
     hit = next((
         t for t in r9["treffer"]
@@ -121,6 +126,22 @@ def test_verwaschene_wand_d1_kantenschaerfe() -> None:
 def test_d2_control_remains_out_of_r8_r9(r8: dict, r9: dict) -> None:
     assert not any(hit["feld"] == "D2" for hit in r8["treffer"])
     assert not any(hit["feld"] == "D2" for hit in r9["treffer"])
+
+
+def test_wegende_f1_c1_meshmessung(r8: dict) -> None:
+    f1 = [
+        float(hit["wert"]) for hit in r8["treffer"]
+        if hit["regel"] == "R8a_wegende" and hit["feld"] == "F1"
+    ]
+    c1 = [
+        hit for hit in r8["liste"]
+        if hit["feld"] == "C1" and ("ende" in hit["art"] or "anfang" in hit["art"])
+    ]
+    f1_max = max(f1) if f1 else float("inf")
+    assert f1_max <= 0.10 and c1, (
+        f"ROT: F1 Wegende-Stufe {f1_max:.2f} m (Grenze 0.10 m), "
+        f"C1 explizit vermessene Wegenden {len(c1)} (erwartet mindestens 1)"
+    )
 
 
 def test_schattenartefakt_renderbild() -> None:

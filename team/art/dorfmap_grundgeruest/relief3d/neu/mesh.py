@@ -39,7 +39,12 @@ RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
     "1": {"sigma_m": 3.0, "half_width_m": 1.5, "runout_m": 6.0, "endpoint_only": False, "cross_inner_m": 4.5, "cross_outer_m": 8.5},
-    "2": {"sigma_m": 4.0, "half_width_m": 1.8, "runout_m": 8.0, "endpoint_only": True, "cross_inner_m": 4.5, "cross_outer_m": 9.5},
+    "2": {
+        "sigma_m": 4.0, "half_width_m": 1.8, "runout_m": 8.0, "endpoint_only": True,
+        "cross_inner_m": 4.5, "cross_outer_m": 9.5,
+        "cross_half_width_m": 1.8, "cross_width_fade_m": 4.5,
+        "cross_core_runout_m": 5.0, "cross_runout_m": 7.0,
+    },
 }
 
 
@@ -455,6 +460,33 @@ def _ramp_intersections(source: ReliefSource, tile: str) -> list[tuple[float, fl
     return unique
 
 
+def _ramp_intersection_pairs(source: ReliefSource, tile: str) -> list[tuple[float, float, int, int]]:
+    """Return unique ramp crossing points with the two source path indices."""
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    bounds = Polygon([(x0, z0), (x1, z0), (x1, z1), (x0, z1)])
+    paths = [
+        np.asarray(path, dtype=np.float64)
+        for path in source.data.get("rampenwege", [])
+        if len(path) >= 2
+    ]
+    lines = [LineString(path) for path in paths]
+    found: list[tuple[float, float, int, int]] = []
+    for i, a in enumerate(lines):
+        if not a.intersects(bounds):
+            continue
+        for j in range(i + 1, len(lines)):
+            intersection = a.intersection(lines[j])
+            if intersection.is_empty:
+                continue
+            candidates = list(intersection.geoms) if hasattr(intersection, "geoms") else [intersection]
+            for item in candidates:
+                if item.geom_type != "Point" or not (x0 <= item.x <= x1 and z0 <= item.y <= z1):
+                    continue
+                if all(np.hypot(item.x - px, item.y - pz) > 0.5 for px, pz, _, _ in found):
+                    found.append((float(item.x), float(item.y), i, j))
+    return sorted(found, key=lambda item: (round(item[1], 5), round(item[0], 5), item[2], item[3]))
+
+
 def _apply_ramp_crossing_planes(
     base: np.ndarray,
     x: np.ndarray,
@@ -465,6 +497,95 @@ def _apply_ramp_crossing_planes(
     variant: str,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
+    if variant == "2":
+        # A circular constant-height patch made a visible plate and introduced
+        # short contour teeth at its rim. Grade only the two intersecting road
+        # corridors: keep a shared level through the measured crossing, then
+        # feather sideways and along each approach with smoothstep weights.
+        paths = [
+            np.asarray(raw, dtype=np.float64) * CELL_M
+            for raw in source.data.get("rampenwege", [])
+            if len(raw) >= 2
+        ]
+        lines = [LineString(path) for path in paths]
+        q = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+        correction_weight = np.zeros(len(q), dtype=np.float64)
+        target_sum = np.zeros(len(q), dtype=np.float64)
+        target_weight = np.zeros(len(q), dtype=np.float64)
+        count = 0
+        inner = float(settings["cross_inner_m"])
+        half_width = float(settings["cross_half_width_m"])
+        width_fade = float(settings["cross_width_fade_m"])
+        core_runout = float(settings["cross_core_runout_m"])
+        runout = float(settings["cross_runout_m"])
+
+        for cx, cz, first, second in _ramp_intersection_pairs(source, tile):
+            radial = np.hypot((x - cx) * CELL_M, (z - cz) * CELL_M)
+            inside = radial <= inner
+            if not inside.any():
+                continue
+            plane = float(np.median(base[inside]))
+            crossing_weight = np.zeros(len(q), dtype=np.float64)
+            point = Point(cx * CELL_M, cz * CELL_M)
+            for path_index in (first, second):
+                line = lines[path_index]
+                center_station = line.project(point)
+                lo = max(0.0, center_station - runout)
+                hi = min(line.length, center_station + runout)
+                stations = np.arange(lo, hi + 0.125, 0.25, dtype=np.float64)
+                if len(stations) < 2:
+                    continue
+                coords = np.asarray([
+                    (line.interpolate(float(station)).x, line.interpolate(float(station)).y)
+                    for station in stations
+                ], dtype=np.float64)
+                tree = cKDTree(coords)
+                _, nearest = tree.query(q, k=1, workers=1)
+                segments = np.clip(nearest - 1, 0, len(coords) - 2)
+                best_d2 = np.full(len(q), np.inf, dtype=np.float64)
+                best_station = np.zeros(len(q), dtype=np.float64)
+                for segment in (segments, np.clip(nearest, 0, len(coords) - 2)):
+                    vector = coords[segment + 1] - coords[segment]
+                    norm2 = np.maximum(np.einsum("ij,ij->i", vector, vector), 1e-15)
+                    t = np.clip(np.einsum("ij,ij->i", q - coords[segment], vector) / norm2, 0.0, 1.0)
+                    projected = coords[segment] + vector * t[:, None]
+                    delta = q - projected
+                    distance2 = np.einsum("ij,ij->i", delta, delta)
+                    better = distance2 < best_d2
+                    best_d2[better] = distance2[better]
+                    best_station[better] = (
+                        stations[segment[better]] * (1.0 - t[better])
+                        + stations[segment[better] + 1] * t[better]
+                    )
+                distance = np.sqrt(best_d2)
+                along = np.abs(best_station - center_station)
+                lateral_weight = 1.0 - _smoothstep(half_width, half_width + width_fade, distance)
+                along_weight = 1.0 - _smoothstep(core_runout, runout, along)
+                crossing_weight = np.maximum(crossing_weight, lateral_weight * along_weight)
+
+            # The corridor falloff alone left the outer edge of the measured
+            # 4 m crossing footprint partly ungraded where the two approaches
+            # curve away from one another. A broad radial feather fills that
+            # footprint and eases the shared plane back into the source surface.
+            radial_weight = 1.0 - _smoothstep(inner, inner + 4.0, radial.ravel())
+            crossing_weight = np.maximum(crossing_weight, radial_weight)
+
+            # The returned weight applies once in terrain_heights. Assigning the
+            # shared target here keeps the feather continuous instead of
+            # squaring its falloff at the corridor edge.
+            target_sum += crossing_weight * plane
+            target_weight += crossing_weight
+            correction_weight = np.maximum(correction_weight, crossing_weight)
+            count += int(np.count_nonzero(crossing_weight >= 0.999))
+
+        target = np.divide(
+            target_sum, target_weight,
+            out=np.zeros_like(target_sum), where=target_weight > 0,
+        ).reshape(x.shape)
+        affected = target_weight.reshape(x.shape) > 0
+        result[affected] = target[affected]
+        return correction_weight.reshape(x.shape), count
+
     crossing_weight = np.zeros(x.shape, dtype=np.float64)
     count = 0
     for cx, cz in _ramp_intersections(source, tile):
@@ -575,25 +696,30 @@ def terrain_heights(
     result = base.astype(np.float64, copy=True)
     layers: list[str] = ["basishoehe_GB"]
 
-    road_target, road_weight = _road_profile_grid(source, vector, xx, zz)
-    if road_weight.any():
-        result += road_weight * (road_target - result)
-        layers.append("wege_spline_breite_laengsprofil")
+    if variant == "2":
+        road_weight = np.zeros(xx.shape, dtype=np.float64)
+        ramp_weight = np.zeros(xx.shape, dtype=np.float64)
+        cross_count = 0
+    else:
+        road_target, road_weight = _road_profile_grid(source, vector, xx, zz)
+        if road_weight.any():
+            result += road_weight * (road_target - result)
+            layers.append("wege_spline_breite_laengsprofil")
 
-    ramp_target, ramp_weight = _ramp_profile_grid(source, xx, zz, variant)
-    if ramp_weight.any():
-        result += ramp_weight * (ramp_target - result)
-        layers.append("rampen_laengsprofil_weicher_querschnitt_auslauf_ge4m")
+        ramp_target, ramp_weight = _ramp_profile_grid(source, xx, zz, variant)
+        if ramp_weight.any():
+            result += ramp_weight * (ramp_target - result)
+            layers.append("rampen_laengsprofil_weicher_querschnitt_auslauf_ge4m")
 
-    cross_features = [
-        item for item in vector.get("kreuzungen", [])
-        if item.get("polygon_m")
-    ]
-    cross_count = _apply_feature_planes(
-        base, xx, zz, result, cross_features, 2.4, "kreuzung",
-    )
-    if cross_count:
-        layers.append("kreuzung_gemeinsame_ebene_weicher_rand")
+        cross_features = [
+            item for item in vector.get("kreuzungen", [])
+            if item.get("polygon_m")
+        ]
+        cross_count = _apply_feature_planes(
+            base, xx, zz, result, cross_features, 2.4, "kreuzung",
+        )
+        if cross_count:
+            layers.append("kreuzung_gemeinsame_ebene_weicher_rand")
 
     crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
         base, xx, zz, result, source, tile, variant,
@@ -601,13 +727,13 @@ def terrain_heights(
     if ramp_crossings:
         layers.append("rampenkreuzung_gemeinsame_ebene_weicher_rand")
 
-    zone_count = _apply_zone_profile(fields, xx, zz, result)
+    zone_count = _apply_zone_profile(fields, xx, zz, result) if variant == "1" else 0
     if zone_count:
         layers.append("bauzonen_lokales_profil_weicher_rand")
 
     # Water remains below the existing WV surface and eases back to the terrain
     # over 2.4 m; it is restricted to the selected tile using the global field.
-    if "wasser" in fields:
+    if variant == "1" and "wasser" in fields:
         water_distance = _sample_field(fields["wasser"], xx, zz)
         wv = source.data.get("WV")
         if wv:

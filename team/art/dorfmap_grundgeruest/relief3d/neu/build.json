@@ -36,22 +36,19 @@
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "6293d3b0d9a73438f66aad2d6e04fb2b2377f497ba866a8fcd9827cb94d8d899",
+        "height_sha256": "8f3384536d71e620640aefc0a540cee9a03c2a7a83438419ff57511014e57040",
         "terrain": {
-          "changed_vertices": 1487,
-          "crossing_flat_vertices": 152,
+          "changed_vertices": 702,
+          "crossing_flat_vertices": 0,
           "layers": [
             "basishoehe_GB",
-            "wege_spline_breite_laengsprofil",
-            "rampen_laengsprofil_weicher_querschnitt_auslauf_ge4m",
-            "kreuzung_gemeinsame_ebene_weicher_rand",
             "rampenkreuzung_gemeinsame_ebene_weicher_rand",
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 3.311102,
-          "mean_abs_delta_m": 0.06145,
-          "ramp_crossing_flat_vertices": 179,
+          "max_abs_delta_m": 3.314894,
+          "mean_abs_delta_m": 0.063969,
+          "ramp_crossing_flat_vertices": 207,
           "variant": "2",
           "wand_protected_vertices": 3123,
           "zone_flat_vertices": 0
@@ -73,26 +70,21 @@
       },
       "G1": {
         "closed_triangles": 29576,
-        "height_sha256": "4c72cac22813f8c388489377364627dc598e3d7f6d7eca7f38aef565eedc8ca4",
+        "height_sha256": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
         "terrain": {
-          "changed_vertices": 567,
-          "crossing_flat_vertices": 231,
+          "changed_vertices": 0,
+          "crossing_flat_vertices": 0,
           "layers": [
             "basishoehe_GB",
-            "wege_spline_breite_laengsprofil",
-            "rampen_laengsprofil_weicher_querschnitt_auslauf_ge4m",
-            "kreuzung_gemeinsame_ebene_weicher_rand",
-            "bauzonen_lokales_profil_weicher_rand",
-            "wasser_spiegel_uferprofil",
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 0.242815,
-          "mean_abs_delta_m": 0.002408,
+          "max_abs_delta_m": 0.0,
+          "mean_abs_delta_m": 0.0,
           "ramp_crossing_flat_vertices": 0,
           "variant": "2",
           "wand_protected_vertices": 5268,
-          "zone_flat_vertices": 42
+          "zone_flat_vertices": 0
         },
         "triangles": 14448,
         "vertices": 7395
