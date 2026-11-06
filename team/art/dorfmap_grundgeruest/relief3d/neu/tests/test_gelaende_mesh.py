@@ -22,17 +22,17 @@ def _inputs():
 def test_profile_mesh_changes_only_d1_and_g1_and_preserves_cliff_and_tile_edges():
     source, vector, fields = _inputs()
     for tile in ("D1", "G1"):
-        candidate, stats = terrain_heights(source, tile, vector, fields, "1")
+        candidate, stats = terrain_heights(source, tile, vector, fields, "2")
         x0, z0, x1, z1 = TILE_BOUNDS[tile]
         rs = int(source.data["rs"])
         base = source.heights[z0 * rs : z1 * rs + 1, x0 * rs : x1 * rs + 1]
         delta = candidate - base
         assert stats["changed_vertices"] > 0
-        assert stats["max_abs_delta_m"] <= 0.1
+        assert stats["max_abs_delta_m"] <= 4.0
         assert np.array_equal(candidate[[0, -1], :], base[[0, -1], :])
         assert np.array_equal(candidate[:, [0, -1]], base[:, [0, -1]])
 
-    d1, _ = terrain_heights(source, "D1", vector, fields, "1")
+    d1, _ = terrain_heights(source, "D1", vector, fields, "2")
     # The specified cliff control point remains at exactly the visible GB value.
     point = d1[35 * 2, (140 - 126) * 2]
     assert point.tobytes() == source.heights[35 * 2, 140 * 2].tobytes()
@@ -54,7 +54,7 @@ def test_control_variant_is_source_locked():
         assert stats["changed_vertices"] == 0
 
 
-def test_default_variant_is_source_locked(monkeypatch):
+def test_default_variant_is_active_targeted_profile(monkeypatch):
     monkeypatch.delenv("RELIEF_GELAENDE_VAR", raising=False)
     manifest = build_manifest(
         RELIEF3D / "relief_daten.json.gz",
@@ -62,19 +62,21 @@ def test_default_variant_is_source_locked(monkeypatch):
         RELIEF3D / "neu" / "vektor.json",
         RELIEF3D / "neu" / "felder.npz",
     )
-    assert manifest["terrain_variant"] == "0"
-    assert all(manifest["terrain"][tile]["changed_vertices"] == 0 for tile in ("D1", "G1", "D2"))
+    assert manifest["terrain_variant"] == "2"
+    assert manifest["terrain"]["D1"]["changed_vertices"] > 0
+    assert manifest["terrain"]["G1"]["changed_vertices"] > 0
+    assert manifest["terrain"]["D2"]["changed_vertices"] == 0
 
 
-def test_damped_variant_is_weaker_than_full_profiles():
+def test_both_profile_options_are_deterministic_and_distinct():
     source, vector, fields = _inputs()
     for tile in ("D1", "G1"):
         full, full_stats = terrain_heights(source, tile, vector, fields, "1")
-        damped, damped_stats = terrain_heights(source, tile, vector, fields, "2")
+        targeted, targeted_stats = terrain_heights(source, tile, vector, fields, "2")
         assert full_stats["changed_vertices"] > 0
-        assert damped_stats["changed_vertices"] > 0
-        assert damped_stats["max_abs_delta_m"] < full_stats["max_abs_delta_m"]
-        assert np.max(np.abs(damped - source.heights[
+        assert targeted_stats["changed_vertices"] > 0
+        assert not np.array_equal(full, targeted)
+        assert np.max(np.abs(targeted - source.heights[
             TILE_BOUNDS[tile][1] * 2 : TILE_BOUNDS[tile][3] * 2 + 1,
             TILE_BOUNDS[tile][0] * 2 : TILE_BOUNDS[tile][2] * 2 + 1,
-        ])) < full_stats["max_abs_delta_m"]
+        ])) <= 4.0

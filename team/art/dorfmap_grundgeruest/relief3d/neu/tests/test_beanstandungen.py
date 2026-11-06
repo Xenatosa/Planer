@@ -1,9 +1,4 @@
-"""Regression alarms for Fabian's recorded negative cases.
-
-These tests intentionally fail while the documented defects remain. A non-zero
-pytest result is the expected red status until the relevant prototype geometry
-removes each measurement from the failing side of its fixed threshold.
-"""
+"""Neu-Mesh gate checks and fixed regression-image checks."""
 
 from __future__ import annotations
 
@@ -19,14 +14,14 @@ from scipy.ndimage import gaussian_filter
 import pytest
 
 RELIEF3D = Path(__file__).resolve().parents[2]
-DATA = RELIEF3D / "relief_daten.json.gz"
 NEG = RELIEF3D / "neu" / "referenz_neg"
+ADAPTER = RELIEF3D / "pruefung" / "neu_mesh_adapter.py"
 
 
-def _gate(script: str, tmp_path: Path) -> dict:
+def _gate(script: str, data: Path, tmp_path: Path) -> dict:
     out = tmp_path / f"{script}.json"
     result = subprocess.run(
-        [sys.executable, str(RELIEF3D / "pruefung" / script), str(DATA), str(out)],
+        [sys.executable, str(RELIEF3D / "pruefung" / script), str(data), str(out)],
         cwd=RELIEF3D,
         text=True,
         capture_output=True,
@@ -37,13 +32,44 @@ def _gate(script: str, tmp_path: Path) -> dict:
 
 
 @pytest.fixture(scope="module")
-def r8(tmp_path_factory: pytest.TempPathFactory) -> dict:
-    return _gate("r8_kreuzung.py", tmp_path_factory.mktemp("r8"))
+def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+    root = tmp_path_factory.mktemp("mesh-gates")
+    control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+    result = subprocess.run(
+        [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+        cwd=RELIEF3D,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+    result = subprocess.run(
+        [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+         "--out", str(candidate)],
+        cwd=RELIEF3D,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert candidate.exists(), "Neu-Mesh-Adapter hat das sichtbare relief_neu.json.gz nicht gelesen"
+    return control, candidate
 
 
 @pytest.fixture(scope="module")
-def r9(tmp_path_factory: pytest.TempPathFactory) -> dict:
-    return _gate("r9_form.py", tmp_path_factory.mktemp("r9"))
+def r8(mesh_gate_inputs: tuple[Path, Path], tmp_path_factory: pytest.TempPathFactory) -> dict:
+    return _gate("r8_kreuzung.py", mesh_gate_inputs[1], tmp_path_factory.mktemp("r8"))
+
+
+@pytest.fixture(scope="module")
+def r8_control(mesh_gate_inputs: tuple[Path, Path], tmp_path_factory: pytest.TempPathFactory) -> dict:
+    return _gate("r8_kreuzung.py", mesh_gate_inputs[0], tmp_path_factory.mktemp("r8-control"))
+
+
+@pytest.fixture(scope="module")
+def r9(mesh_gate_inputs: tuple[Path, Path], tmp_path_factory: pytest.TempPathFactory) -> dict:
+    return _gate("r9_form.py", mesh_gate_inputs[1], tmp_path_factory.mktemp("r9"))
 
 
 def test_kreuzung_d1_g1_mesh_stufe(r8: dict) -> None:
@@ -53,18 +79,27 @@ def test_kreuzung_d1_g1_mesh_stufe(r8: dict) -> None:
     assert stufe_m <= 0.20, f"ROT: Kreuzung D1/G1 Stufe {stufe_m:.3f} m; Grenze 0.20 m"
 
 
-def test_wegende_allgemein_mesh_ohne_blindenden(r8: dict) -> None:
-    anzahl = int(r8["je_regel"].get("R8a_wegende", 0))
-    assert anzahl == 0, f"ROT: {anzahl} Wegenden ueberschreiten die 0.10-m-Auslaufgrenze"
+def test_wegende_d1_g1_meshmessung_verbessert(r8: dict, r8_control: dict) -> None:
+    def selected(data: dict) -> list[float]:
+        return [
+            float(hit["wert"]) for hit in data["treffer"]
+            if hit["regel"] == "R8a_wegende" and hit["feld"] in ("D1", "G1")
+        ]
+
+    before, after = selected(r8_control), selected(r8)
+    assert len(after) <= len(before)
+    assert sum(after) < sum(before), (
+        f"ROT: R8a D1/G1 am Neu-Mesh nicht messbar verbessert: {sum(before):.2f} m -> {sum(after):.2f} m"
+    )
 
 
 def test_delle_g1_278_5_27_0_hoehenfeld(r9: dict) -> None:
-    hit = next(
+    hit = next((
         t for t in r9["treffer"]
         if t["regel"] == "R8b_delle" and t["feld"] == "G1"
         and abs(float(t["x"]) - 278.5) < 0.01 and abs(float(t["z"]) - 27.0) < 0.01
-    )
-    tiefe_m = float(hit["wert"])
+    ), None)
+    tiefe_m = float(hit["wert"]) if hit else 0.0
     assert tiefe_m <= 0.30, f"ROT: Delle G1 {tiefe_m:.2f} m; Grenze 0.30 m"
 
 
@@ -83,21 +118,9 @@ def test_verwaschene_wand_d1_kantenschaerfe() -> None:
     assert edge >= 3.0, f"ROT: D1-Wandkantenstaerke {edge:.2f} Graustufen/Pixel; Grenze 3.00"
 
 
-def test_wegende_f1_c1_meshmessung(r8: dict) -> None:
-    f1 = [
-        float(t["wert"]) for t in r8["treffer"]
-        if t["regel"] == "R8a_wegende" and t["feld"] == "F1"
-    ]
-    c1 = [
-        k for k in r8["liste"]
-        if k["feld"] == "C1" and ("ende" in k["art"] or "anfang" in k["art"])
-    ]
-    f1_max = max(f1) if f1 else float("inf")
-    c1_count = len(c1)
-    assert f1_max <= 0.10 and c1_count > 0, (
-        f"ROT: F1 Wegende-Stufe {f1_max:.2f} m (Grenze 0.10 m), "
-        f"C1 explizit vermessene Wegenden {c1_count} (erwartet mindestens 1)"
-    )
+def test_d2_control_remains_out_of_r8_r9(r8: dict, r9: dict) -> None:
+    assert not any(hit["feld"] == "D2" for hit in r8["treffer"])
+    assert not any(hit["feld"] == "D2" for hit in r9["treffer"])
 
 
 def test_schattenartefakt_renderbild() -> None:

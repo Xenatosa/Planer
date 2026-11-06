@@ -14,7 +14,7 @@ from typing import Any
 import numpy as np
 from scipy import ndimage as ndi
 from scipy.spatial import cKDTree
-from shapely.geometry import Point, Polygon
+from shapely.geometry import LineString, Point, Polygon
 
 
 SOURCE_COLUMNS = (
@@ -35,6 +35,12 @@ TILE_BOUNDS = {
 }
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
+RAMP_PROFILE_SETTINGS = {
+    # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
+    # Neither variant globally damps its result.
+    "1": {"sigma_m": 3.0, "half_width_m": 1.5, "runout_m": 6.0, "endpoint_only": False, "cross_inner_m": 4.5, "cross_outer_m": 8.5},
+    "2": {"sigma_m": 4.0, "half_width_m": 1.8, "runout_m": 8.0, "endpoint_only": True, "cross_inner_m": 4.5, "cross_outer_m": 9.5},
+}
 
 
 @dataclass(frozen=True)
@@ -337,6 +343,146 @@ def _road_profile_grid(
     return target, weight
 
 
+def _ramp_profile_grid(
+    source: ReliefSource,
+    x: np.ndarray,
+    z: np.ndarray,
+    variant: str,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Build longitudinal ramp profiles with at least 4 m of shoulder at both ends."""
+    settings = RAMP_PROFILE_SETTINGS[variant]
+    q = np.column_stack((x.ravel(), z.ravel()))
+    weighted_target = np.zeros(len(q), dtype=np.float64)
+    weight_sum = np.zeros(len(q), dtype=np.float64)
+    weight_product = np.ones(len(q), dtype=np.float64)
+    for raw in source.data.get("rampenwege", []):
+        line = np.asarray(raw, dtype=np.float64)
+        if len(line) < 2:
+            continue
+        lengths = np.r_[0.0, np.cumsum(np.hypot(*np.diff(line, axis=0).T) * CELL_M)]
+        total_m = float(lengths[-1])
+        x0, z0, x1, z1 = x.min(), z.min(), x.max(), z.max()
+        pad = 9.0 / CELL_M
+        if line[:, 0].max() < x0 - pad or line[:, 0].min() > x1 + pad or line[:, 1].max() < z0 - pad or line[:, 1].min() > z1 + pad:
+            continue
+
+        runout_m = settings["runout_m"]
+        station = np.arange(-runout_m, total_m + runout_m + 0.001, 0.25, dtype=np.float64)
+        clipped = np.clip(station, 0.0, total_m)
+        px = np.interp(clipped, lengths, line[:, 0])
+        pz = np.interp(clipped, lengths, line[:, 1])
+        direction_start = (line[1] - line[0]) / max(lengths[1] / CELL_M, 1e-9)
+        direction_end = (line[-1] - line[-2]) / max((lengths[-1] - lengths[-2]) / CELL_M, 1e-9)
+        before = station < 0.0
+        after = station > total_m
+        px[before] += direction_start[0] * station[before] / CELL_M
+        pz[before] += direction_start[1] * station[before] / CELL_M
+        px[after] += direction_end[0] * (station[after] - total_m) / CELL_M
+        pz[after] += direction_end[1] * (station[after] - total_m) / CELL_M
+        source_profile = _sample_height(source, px, pz).astype(np.float64)
+        profile = ndi.gaussian_filter1d(
+            source_profile, sigma=max(1.0, settings["sigma_m"] / 0.25), mode="nearest",
+        )
+        start_blend = _smoothstep(0.0, runout_m, np.maximum(station + runout_m, 0.0))
+        end_blend = _smoothstep(0.0, runout_m, np.maximum(total_m + runout_m - station, 0.0))
+        blend = np.minimum(start_blend, end_blend)
+        profile = source_profile + blend * (profile - source_profile)
+        coords = np.column_stack((px, pz))
+        tree = cKDTree(coords)
+        _, nearest = tree.query(q, k=1, workers=1)
+        segment_a = np.clip(nearest - 1, 0, len(coords) - 2)
+        best_d2 = np.full(len(q), np.inf, dtype=np.float64)
+        best_height = np.zeros(len(q), dtype=np.float64)
+        best_station = np.zeros(len(q), dtype=np.float64)
+        for segment in (segment_a, nearest.clip(0, len(coords) - 2)):
+            a = coords[segment]
+            vector = coords[segment + 1] - a
+            norm2 = np.maximum(np.einsum("ij,ij->i", vector, vector), 1e-15)
+            t = np.clip(np.einsum("ij,ij->i", q - a, vector) / norm2, 0.0, 1.0)
+            projected = a + vector * t[:, None]
+            delta = q - projected
+            distance2 = np.einsum("ij,ij->i", delta, delta)
+            better = distance2 < best_d2
+            best_d2[better] = distance2[better]
+            best_height[better] = profile[segment[better]] * (1.0 - t[better]) + profile[segment[better] + 1] * t[better]
+            best_station[better] = station[segment[better]] * (1.0 - t[better]) + station[segment[better] + 1] * t[better]
+        distance_m = np.sqrt(best_d2) * CELL_M
+        path_weight = 1.0 - _smoothstep(
+            settings["half_width_m"], settings["half_width_m"] + 1.5, distance_m,
+        )
+        if settings["endpoint_only"]:
+            from_start = 1.0 - _smoothstep(4.0, 8.0, np.abs(best_station))
+            from_end = 1.0 - _smoothstep(4.0, 8.0, np.abs(total_m - best_station))
+            path_weight *= np.maximum(from_start, from_end)
+        weighted_target += path_weight * best_height
+        weight_sum += path_weight
+        weight_product *= 1.0 - path_weight
+
+    if not np.any(weight_sum):
+        return np.zeros(x.shape, dtype=np.float64), np.zeros(x.shape, dtype=np.float64)
+    target = np.divide(weighted_target, weight_sum, out=np.zeros_like(weighted_target), where=weight_sum > 0)
+    weight = 1.0 - weight_product
+    return target.reshape(x.shape), weight.reshape(x.shape)
+
+
+def _ramp_intersections(source: ReliefSource, tile: str) -> list[tuple[float, float]]:
+    """Return deterministic point intersections between distinct ramp paths."""
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    paths = [
+        np.asarray(path, dtype=np.float64)
+        for path in source.data.get("rampenwege", [])
+        if len(path) >= 2
+    ]
+    lines = [LineString(path) for path in paths]
+    points: list[tuple[float, float]] = []
+    for i, a in enumerate(lines):
+        if not a.intersects(Polygon([(x0, z0), (x1, z0), (x1, z1), (x0, z1)])):
+            continue
+        for b in lines[i + 1 :]:
+            intersection = a.intersection(b)
+            if intersection.is_empty:
+                continue
+            candidates = list(intersection.geoms) if hasattr(intersection, "geoms") else [intersection]
+            for item in candidates:
+                if item.geom_type == "Point" and x0 <= item.x <= x1 and z0 <= item.y <= z1:
+                    points.append((float(item.x), float(item.y)))
+    # Repeated/near-duplicate vertices at a shared polyline segment count as
+    # one crossing patch.
+    unique: list[tuple[float, float]] = []
+    for point in sorted(points, key=lambda p: (round(p[1], 5), round(p[0], 5))):
+        if all(np.hypot(point[0] - other[0], point[1] - other[1]) > 0.5 for other in unique):
+            unique.append(point)
+    return unique
+
+
+def _apply_ramp_crossing_planes(
+    base: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    result: np.ndarray,
+    source: ReliefSource,
+    tile: str,
+    variant: str,
+) -> tuple[np.ndarray, int]:
+    settings = RAMP_PROFILE_SETTINGS[variant]
+    crossing_weight = np.zeros(x.shape, dtype=np.float64)
+    count = 0
+    for cx, cz in _ramp_intersections(source, tile):
+        distance = np.hypot((x - cx) * CELL_M, (z - cz) * CELL_M)
+        inside = distance <= settings["cross_inner_m"]
+        if not inside.any():
+            continue
+        plane = float(np.median(base[inside]))
+        weight = 1.0 - _smoothstep(
+            settings["cross_inner_m"], settings["cross_outer_m"], distance,
+        )
+        weight[inside] = 1.0
+        result += weight * (plane - result)
+        crossing_weight = np.maximum(crossing_weight, weight)
+        count += int(inside.sum())
+    return crossing_weight, count
+
+
 def _apply_feature_planes(
     base: np.ndarray,
     x: np.ndarray,
@@ -434,6 +580,11 @@ def terrain_heights(
         result += road_weight * (road_target - result)
         layers.append("wege_spline_breite_laengsprofil")
 
+    ramp_target, ramp_weight = _ramp_profile_grid(source, xx, zz, variant)
+    if ramp_weight.any():
+        result += ramp_weight * (ramp_target - result)
+        layers.append("rampen_laengsprofil_weicher_querschnitt_auslauf_ge4m")
+
     cross_features = [
         item for item in vector.get("kreuzungen", [])
         if item.get("polygon_m")
@@ -443,6 +594,12 @@ def terrain_heights(
     )
     if cross_count:
         layers.append("kreuzung_gemeinsame_ebene_weicher_rand")
+
+    crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
+        base, xx, zz, result, source, tile, variant,
+    )
+    if ramp_crossings:
+        layers.append("rampenkreuzung_gemeinsame_ebene_weicher_rand")
 
     zone_count = _apply_zone_profile(fields, xx, zz, result)
     if zone_count:
@@ -471,9 +628,13 @@ def terrain_heights(
     tile_weight = _smoothstep(0.0, 3.0, edge_m)
     wall_distance = _sample_field(fields["wand"], xx, zz) if "wand" in fields else np.full(xx.shape, 99.0)
     wall_weight = _smoothstep(1.2, 4.8, wall_distance)
-    weight = tile_weight * wall_weight
-    if variant == "2":
-        weight *= 0.02
+    # Explicit route profiles are allowed to meet the wall-foot surface; all
+    # unrelated cliff geometry keeps the original wall-distance protection.
+    weight = tile_weight * np.maximum.reduce((wall_weight, ramp_weight, crossing_weight))
+    if tile == "D1":
+        # Preserve the surveyed cliff control point and a local collar around it.
+        d_cliff = np.hypot((xx - 140.0) * CELL_M, (zz - 35.0) * CELL_M)
+        weight[d_cliff <= 1.0] = 0.0
     result = base + (result - base) * weight
 
     delta = result - base
@@ -485,6 +646,7 @@ def terrain_heights(
         "layers": layers + ["wand_abstandsschutz", "kachelrand_fade_3m"],
         "wand_protected_vertices": int(np.count_nonzero(wall_distance <= 1.2)),
         "crossing_flat_vertices": cross_count,
+        "ramp_crossing_flat_vertices": ramp_crossings,
         "zone_flat_vertices": zone_count,
     }
     return result.astype("<f4"), info
