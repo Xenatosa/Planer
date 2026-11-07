@@ -18,8 +18,24 @@
         "G1": 0.5
       },
       "terrain_closed_triangles": 88728,
-      "total_triangles": 168600,
-      "wall_triangles": 79872
+      "total_triangles": 126792,
+      "wall_triangles": 38064
+    },
+    "object_binding": {
+      "max_abs_height_delta_m": 2.897433,
+      "moved_by_kind": {
+        "baeume": 19,
+        "felsbloecke": 0,
+        "felsen": 0,
+        "findlinge": 0,
+        "geroell": 29,
+        "steine": 33
+      },
+      "moved_total": 81,
+      "tiles": [
+        "D1",
+        "G1"
+      ]
     },
     "output": "neu/relief_neu.json.gz",
     "source_columns": [
@@ -107,13 +123,13 @@
       "foot_embed_m": 0.15,
       "foot_variant": 1,
       "foot_variant_name": "terrain_gebundener_fuss_0_15m",
-      "foot_vertices_lowered": 490,
+      "foot_vertices_lowered": 10018,
       "tiles": {
         "D1": {
-          "features": 7,
+          "features": 1,
           "min_width_m": 1.2,
-          "triangles": 32976,
-          "vertices": 16502
+          "triangles": 16816,
+          "vertices": 14072
         },
         "D2": {
           "features": 0,
@@ -122,10 +138,10 @@
           "vertices": 0
         },
         "G1": {
-          "features": 13,
+          "features": 3,
           "min_width_m": 1.2,
-          "triangles": 46896,
-          "vertices": 23474
+          "triangles": 21248,
+          "vertices": 17352
         }
       },
       "variant": 1

@@ -23,6 +23,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from neu.mesh import TILE_BOUNDS, build_manifest
+from neu.objekte import OBJECT_KEYS
 
 
 def _read_gzip(path: Path) -> dict:
@@ -65,6 +66,19 @@ def adapt_data(source: dict, mesh_package: dict) -> dict:
         raise ValueError("Mesh und Quellenrelief haben verschiedene Abmessungen")
 
     out = dict(source)
+    # Object base-height deltas live inside the opt-in mesh manifest so the
+    # original source arrays remain byte-for-byte present in the package.
+    # Apply those same derived positions to G11's unchanged-schema input.
+    binding = manifest.get("object_binding") or {}
+    for name, updates in binding.get("height_updates", {}).items():
+        if name not in OBJECT_KEYS or name not in source:
+            continue
+        objects = [list(row) for row in source[name]]
+        for index, height in updates:
+            if not (0 <= int(index) < len(objects)):
+                raise ValueError(f"Objektbindung {name}[{index}] liegt ausserhalb der Quellliste")
+            objects[int(index)][1] = float(height)
+        out[name] = objects
     patched: dict[str, np.ndarray] = {}
     mesh_fields: dict[str, np.ndarray] = {}
     extensions = manifest.get("terrain_extensions") or {}

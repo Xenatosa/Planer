@@ -6,6 +6,7 @@ import json
 
 from .mesh import TILE_BOUNDS, build_manifest, load_relief
 from .wand import build_wall_manifest
+from .objekte import bind_objects_to_mesh
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -24,6 +25,9 @@ def build() -> dict:
         ROOT / "neu" / "vektor.json",
         ROOT / "neu" / "felder.npz",
     )
+    package = dict(source.data)
+    object_binding, object_height_updates = bind_objects_to_mesh(source.data, manifest["tiles"])
+    manifest["object_binding"] = {**object_binding, "height_updates": object_height_updates}
     manifest["waende"] = build_wall_manifest(
         ROOT / "neu" / "vektor.json", terrain_tiles=manifest["tiles"],
     )
@@ -51,7 +55,6 @@ def build() -> dict:
         raise ValueError(f"LOD1-Dreiecksbudget ueberschritten: {manifest['lod1']['total_triangles']}")
     # Keep the original relief payload unchanged and attach the opt-in mesh
     # manifest for the separate Three.js terrain and wall viewer.
-    package = dict(source.data)
     package["neu_mesh_tiles"] = manifest
     payload = json.dumps(package, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -78,6 +81,7 @@ def build() -> dict:
                              "features": tile["features"], "min_width_m": tile["min_width_m"]}
                       for name, tile in manifest["waende"]["tiles"].items()},
         },
+        "object_binding": object_binding,
         "terrain_extensions": {
             "vertices": manifest["terrain_extensions"]["vertices"],
             "fine_vertices": manifest["terrain_extensions"]["fine_vertices"],

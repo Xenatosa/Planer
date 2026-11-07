@@ -8,6 +8,10 @@ from pathlib import Path
 from typing import Any
 
 import numpy as np
+from scipy.spatial import cKDTree
+from shapely import segmentize
+from shapely.geometry import LineString, MultiPoint, Point
+from shapely.ops import triangulate, unary_union
 
 from .mesh import TILE_BOUNDS
 
@@ -246,6 +250,150 @@ def _bind_wall_foot(
     return local_bottom, lowered
 
 
+def _network_solid(
+    chunks: list[tuple[np.ndarray, np.ndarray, float]],
+    heights: np.ndarray,
+    terrain_rs: int,
+    tile: str,
+    embed_m: float,
+) -> tuple[np.ndarray, np.ndarray, int, int, np.ndarray]:
+    """Extrude joined wall footprints with a terrain-sampled continuous foot."""
+    if not chunks:
+        return np.empty((0, 3), dtype="<f4"), np.empty(0, dtype="<u4"), 0, 0, np.empty((0, 3), dtype="<f4")
+
+    footprints = []
+    centerline_points: list[np.ndarray] = []
+    centerline_tops: list[np.ndarray] = []
+    widths: list[float] = []
+    for points, top, width in chunks:
+        line = LineString(points)
+        if line.is_empty or line.length <= 1e-8:
+            continue
+        # A small overlap makes profile branches one watertight plan-view
+        # component before the terrain-bound wall is meshed.
+        footprints.append(line.buffer(width * 0.5 + 0.02, quad_segs=4, cap_style="round", join_style="round"))
+        centerline_points.append(points)
+        centerline_tops.append(top)
+        widths.append(width)
+    if not footprints:
+        return np.empty((0, 3), dtype="<f4"), np.empty(0, dtype="<u4"), 0, 0, np.empty((0, 3), dtype="<f4")
+
+    merged = unary_union(footprints)
+    polygons = [merged] if merged.geom_type == "Polygon" else [g for g in merged.geoms if g.geom_type == "Polygon"]
+    source_points = np.concatenate(centerline_points, axis=0)
+    source_tops = np.concatenate(centerline_tops, axis=0)
+    tree = cKDTree(source_points)
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    all_positions: list[np.ndarray] = []
+    all_indices: list[np.ndarray] = []
+    all_normals: list[np.ndarray] = []
+    feature_count = 0
+    foot_samples = 0
+    vertex_offset = 0
+
+    for polygon in polygons:
+        if polygon.is_empty or polygon.area <= 0.01:
+            continue
+        polygon = segmentize(polygon, max_segment_length=0.5)
+        ring_coords = [np.asarray(polygon.exterior.coords[:-1], dtype=np.float64)]
+        ring_coords.extend(np.asarray(ring.coords[:-1], dtype=np.float64) for ring in polygon.interiors)
+        boundary = np.vstack(ring_coords)
+        inside_source = [p for p in source_points if polygon.buffer(1e-8).covers(Point(float(p[0]), float(p[1])))]
+        points_xz = np.vstack((boundary, np.asarray(inside_source, dtype=np.float64))) if inside_source else boundary
+        # Remove exact duplicates before Delaunay triangulation.
+        points_xz = np.unique(points_xz, axis=0)
+        index_by_point = {(float(x), float(z)): i for i, (x, z) in enumerate(points_xz)}
+        query = points_xz
+        distances, nearest = tree.query(query, k=min(4, len(source_points)), workers=1)
+        if np.ndim(nearest) == 1:
+            nearest = nearest[:, None]
+            distances = distances[:, None]
+        exact = distances[:, 0] <= 1e-8
+        inverse = 1.0 / np.maximum(distances, 0.15) ** 2
+        top = np.sum(source_tops[nearest] * inverse, axis=1) / np.maximum(inverse.sum(axis=1), 1e-12)
+        top[exact] = source_tops[nearest[exact, 0]]
+        # Preserve the source crest at centerlines and round the exposed roof
+        # edge by at most the same 12 cm used by the profile extrusion.
+        top -= np.minimum(0.12, distances[:, 0] * 0.18)
+        ground = _sample_grid(heights, terrain_rs, tile, points_xz[:, 0], points_xz[:, 1])
+        bottom = np.minimum(ground - embed_m, top - 0.01)
+        foot_samples += int(np.count_nonzero(ground > bottom + 1e-6))
+        count = len(points_xz)
+        top_xyz = np.column_stack((points_xz[:, 0], top, points_xz[:, 1])).astype("<f4")
+        bottom_xyz = np.column_stack((points_xz[:, 0], bottom, points_xz[:, 1])).astype("<f4")
+
+        cap_triangles: list[tuple[int, int, int]] = []
+        for triangle in triangulate(MultiPoint(points_xz)):
+            if not polygon.buffer(1e-8).covers(triangle):
+                continue
+            coords = list(triangle.exterior.coords)[:3]
+            ids = [index_by_point[(float(x), float(z))] for x, z in coords]
+            area2 = ((points_xz[ids[1], 0] - points_xz[ids[0], 0]) *
+                     (points_xz[ids[2], 1] - points_xz[ids[0], 1]) -
+                     (points_xz[ids[1], 1] - points_xz[ids[0], 1]) *
+                     (points_xz[ids[2], 0] - points_xz[ids[0], 0]))
+            if area2 > 0:
+                ids[1], ids[2] = ids[2], ids[1]
+            cap_triangles.append(tuple(ids))
+        if not cap_triangles:
+            continue
+        top_tri = np.asarray(cap_triangles, dtype=np.uint32)
+        bottom_tri = (top_tri[:, ::-1] + count).astype(np.uint32)
+
+        side_vertices: list[np.ndarray] = []
+        side_vertex_ids: dict[tuple[int, bool], int] = {}
+        side_vertex_normals: list[np.ndarray] = []
+        side_faces: list[tuple[int, int, int, int]] = []
+        side_offset = 2 * count
+
+        def side_vertex(vertex: int, is_bottom: bool) -> int:
+            key = (int(vertex), is_bottom)
+            if key not in side_vertex_ids:
+                side_vertex_ids[key] = len(side_vertices)
+                side_vertices.append(bottom_xyz[vertex] if is_bottom else top_xyz[vertex])
+                side_vertex_normals.append(np.zeros(3, dtype=np.float64))
+            return side_offset + side_vertex_ids[key]
+
+        for ring in ring_coords:
+            for p0, p1 in zip(ring, np.roll(ring, -1, axis=0)):
+                a0 = index_by_point[(float(p0[0]), float(p0[1]))]
+                b0 = index_by_point[(float(p1[0]), float(p1[1]))]
+                ids = (side_vertex(a0, False), side_vertex(b0, False),
+                       side_vertex(b0, True), side_vertex(a0, True))
+                side_faces.append(ids)
+                dx, dz = float(p1[0] - p0[0]), float(p1[1] - p0[1])
+                length = max(float(np.hypot(dx, dz)), 1e-12)
+                outward = np.array((dz / length, 0.0, -dx / length), dtype=np.float64)
+                for side_id in ids:
+                    side_vertex_normals[side_id - side_offset] += outward * length
+        faces = np.asarray(side_faces, dtype=np.uint32)
+        side_tri = np.column_stack((faces[:, 0], faces[:, 1], faces[:, 2],
+                                    faces[:, 0], faces[:, 2], faces[:, 3])).reshape(-1, 3)
+        side_array = np.asarray(side_vertices, dtype="<f4")
+        component_positions = np.vstack((top_xyz, bottom_xyz, side_array)).astype("<f4", copy=False)
+        component_indices = np.vstack((top_tri, bottom_tri, side_tri)).astype("<u4", copy=False)
+        all_positions.append(component_positions)
+        all_indices.append(component_indices + vertex_offset)
+        triangles = component_positions[component_indices].astype(np.float64, copy=False)
+        face_normals = np.cross(triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0])
+        vertex_normals = np.zeros_like(component_positions, dtype=np.float64)
+        for corner in range(3):
+            np.add.at(vertex_normals, component_indices[:, corner], face_normals)
+        side_start = 2 * count
+        if side_vertex_normals:
+            vertex_normals[side_start:] = np.asarray(side_vertex_normals, dtype=np.float64)
+        lengths = np.linalg.norm(vertex_normals, axis=1)
+        vertex_normals /= np.maximum(lengths[:, None], 1e-12)
+        all_normals.append(vertex_normals.astype("<f4"))
+        vertex_offset += len(component_positions)
+        feature_count += 1
+
+    if not all_positions:
+        return np.empty((0, 3), dtype="<f4"), np.empty(0, dtype="<u4"), feature_count, foot_samples, np.empty((0, 3), dtype="<f4")
+    return (np.vstack(all_positions).astype("<f4"), np.vstack(all_indices).ravel().astype("<u4"),
+            feature_count, foot_samples, np.vstack(all_normals).astype("<f4"))
+
+
 def _b64(array: np.ndarray) -> str:
     return base64.b64encode(array.tobytes(order="C")).decode("ascii")
 
@@ -274,25 +422,34 @@ def build_wall_manifest(
         bounds = TILE_BOUNDS[tile]
         terrain = _terrain_heights(terrain_tiles or {}, tile) if foot_variant in (1, 2) else None
         pieces: list[tuple[np.ndarray, np.ndarray]] = []
+        network_chunks: list[tuple[np.ndarray, np.ndarray, float]] = []
         features = 0
         used_widths: list[float] = []
+        normals = np.empty((0, 3), dtype="<f4")
         for wall in vector.get("waende", []):
             nominal = float(wall.get("breite_min_m", 0.0))
             if nominal <= 0:
                 raise ValueError(f"Wand ohne positive Mindestbreite: {wall.get('name')}:{wall.get('teil')}")
             width = max(nominal, 2.4 if variant == 0 else nominal)
             for points, top, bottom in _chunks(wall, bounds, width, variant):
+                used_widths.append(width)
                 if terrain is not None:
-                    bottom, lowered = _bind_wall_foot(
-                        points, bottom, width, terrain[0], terrain[1], tile,
-                        embed_m=0.15 if foot_variant == 1 else 0.05,
+                    network_chunks.append((points, np.maximum(top, bottom), width))
+                else:
+                    positions, indices = _solid(
+                        points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant,
                     )
-                    lowered_total += lowered
-                positions, indices = _solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant)
-                if len(indices):
-                    pieces.append((positions, indices))
-                    features += 1
-                    used_widths.append(width)
+                    if len(indices):
+                        pieces.append((positions, indices))
+                        features += 1
+        if terrain is not None and network_chunks:
+            positions, indices, features, lowered, normals = _network_solid(
+                network_chunks, terrain[0], terrain[1], tile,
+                embed_m=0.15 if foot_variant == 1 else 0.05,
+            )
+            lowered_total += lowered
+            if len(indices):
+                pieces = [(positions, indices)]
         if tile == "D2":
             pieces, features, used_widths = [], 0, []
         if pieces:
@@ -307,6 +464,7 @@ def build_wall_manifest(
             indices = np.empty((0,), dtype="<u4")
         tile_data[tile] = {
             "vertices_xyz_f32": _b64(positions.reshape(-1)), "indices_u32": _b64(indices),
+            "normals_xyz_f32": _b64(normals.reshape(-1)),
             "vertices": int(len(positions)), "triangles": int(len(indices) // 3),
             "features": int(features), "min_width_m": min(used_widths) if used_widths else None,
             "max_width_m": max(used_widths) if used_widths else None,

@@ -55,11 +55,12 @@ function foundationGeometry(THREE, top, indices, bounds, rs) {
   return { bottomGeo, sideGeo, floor };
 }
 
-function makeMesh(THREE, positions, indices, material, name, group) {
+function makeMesh(THREE, positions, indices, material, name, group, normals = null) {
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   if (indices.length) geometry.setIndex(new THREE.BufferAttribute(indices, 1));
-  geometry.computeVertexNormals();
+  if (normals && normals.length === positions.length) geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+  else geometry.computeVertexNormals();
   const mesh = new THREE.Mesh(geometry, material);
   mesh.name = name;
   mesh.castShadow = true;
@@ -153,9 +154,10 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
     if (!t || !t.triangles) continue;
     const positions = decodeF32(t.vertices_xyz_f32), indices = decodeU32(t.indices_u32);
     if (positions.length / 3 !== t.vertices || indices.length / 3 !== t.triangles) throw new Error(`Wandmeshzaehlung stimmt nicht: ${tile}`);
+    const normals = t.normals_xyz_f32 ? decodeF32(t.normals_xyz_f32) : null;
     const group = new THREE.Group(); group.name = `waende_${tile}`;
     group.userData.ebene = 'waende'; group.userData.kachel = tile; wallRoot.add(group);
-    makeMesh(THREE, positions, indices, wallMaterial, `wand_${tile}`, group);
+    makeMesh(THREE, positions, indices, wallMaterial, `wand_${tile}`, group, normals);
     wallStats[tile] = { features: t.features, vertices: t.vertices, triangles: t.triangles, minWidth: t.min_width_m };
   }
   if (manifest.waende.tiles.D2 && manifest.waende.tiles.D2.triangles !== 0) throw new Error('D2 muss wandfrei bleiben');
