@@ -24,7 +24,9 @@ def build() -> dict:
         ROOT / "neu" / "vektor.json",
         ROOT / "neu" / "felder.npz",
     )
-    manifest["waende"] = build_wall_manifest(ROOT / "neu" / "vektor.json")
+    manifest["waende"] = build_wall_manifest(
+        ROOT / "neu" / "vektor.json", terrain_tiles=manifest["tiles"],
+    )
     # LOD1 counts each terrain surface, bottom, boundary wall, and separate
     # profile-driven wall mesh that the viewer actually renders.
     terrain_triangles = 0
@@ -68,9 +70,18 @@ def build() -> dict:
         },
         "waende": {
             "variant": manifest["waende"]["variant"],
+            "foot_variant": manifest["waende"]["foot_variant"],
+            "foot_variant_name": manifest["waende"]["foot_variant_name"],
+            "foot_embed_m": manifest["waende"]["foot_embed_m"],
+            "foot_vertices_lowered": manifest["waende"]["foot_vertices_lowered"],
             "tiles": {name: {"vertices": tile["vertices"], "triangles": tile["triangles"],
                              "features": tile["features"], "min_width_m": tile["min_width_m"]}
                       for name, tile in manifest["waende"]["tiles"].items()},
+        },
+        "terrain_extensions": {
+            "vertices": manifest["terrain_extensions"]["vertices"],
+            "fine_vertices": manifest["terrain_extensions"]["fine_vertices"],
+            "height_sha256": manifest["terrain_extensions"].get("height_sha256"),
         },
         "lod1": manifest["lod1"],
         "source_columns": list(manifest["source_cell_columns"]),

@@ -76,7 +76,10 @@ def compare(before: Path, after: Path) -> dict:
     for key in sorted(set(a_img) | set(b_img)):
         av, bv = a_img.get(key, 0), b_img.get(key, 0)
         image_rows.append({"kachel": key[0], "modus": key[1], "kamera": key[2], "metrik": key[3], "vorher": av, "nachher": bv, "delta": bv - av})
-    increases = [row for row in rule_rows + image_rows if row["delta"] > 0]
+    increases = [
+        {**row, "metrik": row.get("metrik")}
+        for row in rule_rows + image_rows if row["delta"] > 0
+    ]
     return {"regel_und_kachel": rule_rows, "bildzahlen": image_rows, "anstiege": increases, "exit_code": 1 if increases else 0}
 
 

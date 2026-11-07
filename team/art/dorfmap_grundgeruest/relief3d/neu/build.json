@@ -33,22 +33,31 @@
       "begehbar",
       "bebaubar"
     ],
+    "terrain_extensions": {
+      "fine_vertices": 1246,
+      "height_sha256": "646cacac7c5d1f671f6c5f82de5b30172d9e652be14a73965cc62a27cac8055a",
+      "vertices": 293
+    },
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "8f3384536d71e620640aefc0a540cee9a03c2a7a83438419ff57511014e57040",
+        "height_sha256": "bbc2de2fe035800122fae0b222e55247e5cece3d0ebba131447cf41a367c97e2",
         "terrain": {
-          "changed_vertices": 702,
+          "changed_vertices": 956,
           "crossing_flat_vertices": 0,
+          "crossing_variant": "2",
+          "endpoint_runout_vertices": 524,
+          "endpoint_variant": "1",
           "layers": [
             "basishoehe_GB",
+            "rampenenden_lokaler_auslauf_ge4m_weich",
             "rampenkreuzung_gemeinsame_ebene_weicher_rand",
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 3.314894,
-          "mean_abs_delta_m": 0.063969,
-          "ramp_crossing_flat_vertices": 207,
+          "max_abs_delta_m": 3.30474,
+          "mean_abs_delta_m": 0.048682,
+          "ramp_crossing_flat_vertices": 181,
           "variant": "2",
           "wand_protected_vertices": 3123,
           "zone_flat_vertices": 0
@@ -70,17 +79,21 @@
       },
       "G1": {
         "closed_triangles": 29576,
-        "height_sha256": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
+        "height_sha256": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
         "terrain": {
-          "changed_vertices": 0,
+          "changed_vertices": 480,
           "crossing_flat_vertices": 0,
+          "crossing_variant": "2",
+          "endpoint_runout_vertices": 497,
+          "endpoint_variant": "1",
           "layers": [
             "basishoehe_GB",
+            "rampenenden_lokaler_auslauf_ge4m_weich",
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 0.0,
-          "mean_abs_delta_m": 0.0,
+          "max_abs_delta_m": 0.558914,
+          "mean_abs_delta_m": 0.00696,
           "ramp_crossing_flat_vertices": 0,
           "variant": "2",
           "wand_protected_vertices": 5268,
@@ -91,6 +104,10 @@
       }
     },
     "waende": {
+      "foot_embed_m": 0.15,
+      "foot_variant": 1,
+      "foot_variant_name": "terrain_gebundener_fuss_0_15m",
+      "foot_vertices_lowered": 490,
       "tiles": {
         "D1": {
           "features": 7,

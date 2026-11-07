@@ -14,6 +14,11 @@ from .mesh import TILE_BOUNDS
 
 DEFAULT_VARIANT = 1
 VARIANTS = {0: "breit_2m4", 1: "profil_minimal"}
+FOOT_VARIANTS = {
+    0: "profil_unveraendert",
+    1: "terrain_gebundener_fuss_0_15m",
+    2: "terrain_gebundener_fuss_0_05m",
+}
 
 
 def _clip(a: np.ndarray, b: np.ndarray, bounds: tuple[float, float, float, float]):
@@ -173,21 +178,101 @@ def _solid(points: np.ndarray, top: np.ndarray, bottom: np.ndarray, width: float
     return positions, np.asarray(indices, dtype="<u4")
 
 
+def _terrain_heights(terrain_tiles: dict[str, Any], tile: str) -> tuple[np.ndarray, int] | None:
+    item = terrain_tiles.get(tile)
+    if not item:
+        return None
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    rs = int(item["samples_per_m"])
+    cols, rows = (x1 - x0) * rs + 1, (z1 - z0) * rs + 1
+    positions = np.frombuffer(base64.b64decode(item["vertices_xyz_f32"]), dtype="<f4").reshape(-1, 3)
+    if len(positions) != cols * rows:
+        raise ValueError(f"Terrainmesh {tile} hat unerwartete Vertexzahl")
+    return positions[:, 1].reshape(rows, cols), rs
+
+
+def _sample_grid(heights: np.ndarray, rs: int, tile: str, x: np.ndarray, z: np.ndarray) -> np.ndarray:
+    """Sample the rendered terrain triangles, including their a-to-d diagonal."""
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    u = np.clip((x - x0) * rs, 0, heights.shape[1] - 1.001)
+    v = np.clip((z - z0) * rs, 0, heights.shape[0] - 1.001)
+    ix, iz = np.floor(u).astype(np.int64), np.floor(v).astype(np.int64)
+    du, dv = u - ix, v - iz
+    a = heights[iz, ix]
+    b = heights[iz, ix + 1]
+    c = heights[iz + 1, ix]
+    d = heights[iz + 1, ix + 1]
+    # tile_mesh uses triangles (a,c,d) and (a,d,b), split along a--d.
+    first = a * (1.0 - dv) + c * (dv - du) + d * du
+    second = a * (1.0 - du) + b * (du - dv) + d * dv
+    return np.where(du <= dv, first, second)
+
+
+def _bind_wall_foot(
+    points: np.ndarray,
+    bottom: np.ndarray,
+    width: float,
+    heights: np.ndarray,
+    rs: int,
+    tile: str,
+    embed_m: float = 0.15,
+) -> tuple[np.ndarray, int]:
+    """Lower each wall-foot station below the visible terrain under its strip."""
+    edges = np.diff(points, axis=0)
+    lengths = np.linalg.norm(edges, axis=1)
+    tangents = edges / np.maximum(lengths[:, None], 1e-12)
+    normals = np.column_stack((-tangents[:, 1], tangents[:, 0]))
+    local_bottom = bottom.copy()
+    lowered = 0
+    for i, point in enumerate(points):
+        if i == 0:
+            normal = normals[0]
+        elif i == len(points) - 1:
+            normal = normals[-1]
+        else:
+            normal = normals[i - 1] + normals[i]
+            normal /= max(float(np.linalg.norm(normal)), 1e-12)
+        # ``_solid`` spans half of the nominal width on each side. Sample that
+        # same strip here; looking twice as wide lowered the foot to unrelated
+        # terrain outside the wall and introduced avoidable bottom facets.
+        offsets = np.linspace(-width * 0.5, width * 0.5, 9)
+        sx = point[0] + normal[0] * offsets
+        sz = point[1] + normal[1] * offsets
+        ground = _sample_grid(heights, rs, tile, sx, sz)
+        buried = float(np.min(ground)) - embed_m
+        if buried < local_bottom[i]:
+            local_bottom[i] = buried
+            lowered += 1
+    return local_bottom, lowered
+
+
 def _b64(array: np.ndarray) -> str:
     return base64.b64encode(array.tobytes(order="C")).decode("ascii")
 
 
-def build_wall_manifest(vector_path: Path, variant: int | None = None) -> dict[str, Any]:
+def build_wall_manifest(
+    vector_path: Path,
+    variant: int | None = None,
+    terrain_tiles: dict[str, Any] | None = None,
+    foot_variant: int | None = None,
+) -> dict[str, Any]:
     """Build wall solids from the generated ``neu/vektor.json`` profiles."""
     if variant is None:
         import os
         variant = int(os.environ.get("WANDVAR", str(DEFAULT_VARIANT)))
+    if foot_variant is None:
+        import os
+        foot_variant = int(os.environ.get("RELIEF_WANDFUSS_VAR", "1"))
     if variant not in VARIANTS:
         raise ValueError(f"WANDVAR muss eine der Varianten {sorted(VARIANTS)} sein")
+    if foot_variant not in FOOT_VARIANTS:
+        raise ValueError(f"RELIEF_WANDFUSS_VAR muss eine der Varianten {sorted(FOOT_VARIANTS)} sein")
     vector = json.loads(vector_path.read_text(encoding="utf-8"))
     tile_data: dict[str, Any] = {}
+    lowered_total = 0
     for tile in ("D1", "G1", "D2"):
         bounds = TILE_BOUNDS[tile]
+        terrain = _terrain_heights(terrain_tiles or {}, tile) if foot_variant in (1, 2) else None
         pieces: list[tuple[np.ndarray, np.ndarray]] = []
         features = 0
         used_widths: list[float] = []
@@ -197,6 +282,12 @@ def build_wall_manifest(vector_path: Path, variant: int | None = None) -> dict[s
                 raise ValueError(f"Wand ohne positive Mindestbreite: {wall.get('name')}:{wall.get('teil')}")
             width = max(nominal, 2.4 if variant == 0 else nominal)
             for points, top, bottom in _chunks(wall, bounds, width, variant):
+                if terrain is not None:
+                    bottom, lowered = _bind_wall_foot(
+                        points, bottom, width, terrain[0], terrain[1], tile,
+                        embed_m=0.15 if foot_variant == 1 else 0.05,
+                    )
+                    lowered_total += lowered
                 positions, indices = _solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant)
                 if len(indices):
                     pieces.append((positions, indices))
@@ -223,4 +314,8 @@ def build_wall_manifest(vector_path: Path, variant: int | None = None) -> dict[s
         }
     return {"format": "relief-neu-wall-mesh-v1", "variant": variant,
             "variant_name": VARIANTS[variant], "source_vector_sha256": hashlib.sha256(vector_path.read_bytes()).hexdigest(),
+            "foot_variant": foot_variant, "foot_variant_name": FOOT_VARIANTS[foot_variant],
+            "foot_embed_m": (0.15 if foot_variant == 1 else 0.05)
+            if foot_variant in (1, 2) and terrain_tiles else 0.0,
+            "foot_vertices_lowered": int(lowered_total),
             "tiles": tile_data}

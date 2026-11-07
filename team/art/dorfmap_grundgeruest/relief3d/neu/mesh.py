@@ -35,6 +35,8 @@ TILE_BOUNDS = {
 }
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
+WEGENDE_VARIANTS = {"0", "1", "2"}
+KREUZUNG_VARIANTS = {"0", "1", "2"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -45,6 +47,31 @@ RAMP_PROFILE_SETTINGS = {
         "cross_half_width_m": 1.8, "cross_width_fade_m": 4.5,
         "cross_core_runout_m": 5.0, "cross_runout_m": 7.0,
     },
+}
+
+# The endpoint and crossing switches are deliberately independent from the
+# broad legacy terrain variants. Variant 1 only shapes the named local feature.
+WEGENDE_SETTINGS = {
+    "1": {"runin_m": 4.0, "runout_m": 8.0, "smooth_sigma_m": 6.0,
+          "max_grade": 0.10, "full_runout_m": 4.0, "lateral_core_m": 3.0,
+          "lateral_fade_m": 4.5,
+          # These are the three D1/G1 sites that fail the absolute R8a gate.
+          "eligible_endpoints": {(1, True), (2, True), (11, True)}},
+    "2": {"runin_m": 4.0, "runout_m": 8.0, "smooth_sigma_m": 2.5,
+          "max_grade": 0.35, "full_runout_m": 4.0, "lateral_core_m": 3.0,
+          "lateral_fade_m": 3.0,
+          # The four endpoints are the measured D1/G1 R8a sites, including
+          # the previously worse D1 endpoint at 156.5|37.5.
+          "eligible_endpoints": {(1, True), (2, True), (11, True), (11, False)}},
+}
+KREUZUNG_SETTINGS = {
+    "0": {"inner_m": 4.5, "radial_fade_m": 4.0},
+    # Keep the measured crossing core and spread the height transition over a
+    # wider shoulder so longitudinal grades return gradually to each approach.
+    "1": {"inner_m": 4.5, "radial_fade_m": 8.0},
+    # Radial-only correction leaves distant ramp ends on their source profile.
+    "2": {"inner_m": 4.5, "radial_fade_m": 3.0,
+          "core_runout_m": 2.8, "runout_m": 5.8, "radial_only": True},
 }
 
 
@@ -179,6 +206,7 @@ def build_manifest(
     variant: str | None = None,
 ) -> dict[str, Any]:
     source = load_relief(relief_path)
+    rs = int(source.data["rs"])
     directory = relief_path.parent / "neu"
     vector_path = vector_path or directory / "vektor.json"
     fields_path = fields_path or directory / "felder.npz"
@@ -208,6 +236,58 @@ def build_manifest(
             "height_sha256": hashlib.sha256(positions[:, 1].tobytes()).hexdigest(),
             "mesh_sha256": hashlib.sha256(positions.tobytes() + indices.tobytes()).hexdigest(),
         }
+
+    extensions: dict[str, Any] = {
+        "format": "relief-neu-local-terrain-extension-v1",
+        "vertices_xyz_f32": _b64(np.empty((0, 3), dtype="<f4")),
+        "vertices": 0,
+        "fine_vid_u32": _b64(np.empty(0, dtype="<u4")),
+        "fine_h_f32": _b64(np.empty(0, dtype="<f4")),
+        "fine_vertices": 0,
+    }
+    import os
+    endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
+    if variant == "2" and endpoint_variant != "0":
+        all_z, all_x = np.mgrid[0 : source.heights.shape[0], 0 : source.heights.shape[1]]
+        world_x, world_z = all_x.astype(np.float64) / rs, all_z.astype(np.float64) / rs
+        extension_heights = source.heights.astype(np.float64, copy=True)
+        extension_weight = np.zeros(source.heights.shape, dtype=np.float64)
+        for tile in ("D1", "G1"):
+            extension_heights, tile_weight, _ = _apply_ramp_endpoint_runouts(
+                source, tile, world_x, world_z, extension_heights,
+                endpoint_variant, outside_tile_only=True,
+            )
+            extension_weight = np.maximum(extension_weight, tile_weight)
+        changed = np.abs(extension_heights - source.heights) > 1e-5
+        if changed.any():
+            iz, ix = np.nonzero(changed)
+            vertices = np.column_stack((ix / rs, extension_heights[iz, ix], iz / rs)).astype("<f4")
+            extensions["vertices_xyz_f32"] = _b64(vertices.reshape(-1))
+            extensions["vertices"] = int(len(vertices))
+            extensions["height_sha256"] = hashlib.sha256(vertices[:, 1].tobytes()).hexdigest()
+
+            fine = source.data.get("FW") or {}
+            fine_ids = np.frombuffer(base64.b64decode(fine.get("vid", "")), dtype=np.uint32)
+            fine_h = np.frombuffer(base64.b64decode(fine.get("h", "")), dtype=np.float32)
+            fs = int(fine.get("fs", 0))
+            if fs and len(fine_ids) == len(fine_h):
+                fw_width = int(source.data["nx"]) * fs + 1
+                fx = (fine_ids % fw_width).astype(np.float64) / fs
+                fz = (fine_ids // fw_width).astype(np.float64) / fs
+                fine_weight = ndi.map_coordinates(
+                    extension_weight, [fz * rs, fx * rs], order=1,
+                    mode="nearest", prefilter=False,
+                )
+                fine_mask = fine_weight > 1e-5
+                if fine_mask.any():
+                    fine_values = ndi.map_coordinates(
+                        extension_heights, [fz[fine_mask] * rs, fx[fine_mask] * rs],
+                        order=1, mode="nearest", prefilter=False,
+                    ).astype("<f4")
+                    extensions["fine_vid_u32"] = _b64(fine_ids[fine_mask].astype("<u4"))
+                    extensions["fine_h_f32"] = _b64(fine_values)
+                    extensions["fine_vertices"] = int(len(fine_values))
+
     return {
         "format": "relief-neu-tile-mesh-v2",
         "sampling_m": 1.0 / int(source.data["rs"]),
@@ -217,6 +297,7 @@ def build_manifest(
         "source_cell_columns": list(SOURCE_COLUMNS),
         "source_cell_column_sha256": source_column_hashes(cells_csv),
         "terrain_variant": variant,
+        "terrain_extensions": extensions,
         "terrain": terrain,
         "tiles": tiles,
     }
@@ -430,6 +511,119 @@ def _ramp_profile_grid(
     return target.reshape(x.shape), weight.reshape(x.shape)
 
 
+def _apply_ramp_endpoint_runouts(
+    source: ReliefSource,
+    tile: str,
+    x: np.ndarray,
+    z: np.ndarray,
+    result: np.ndarray,
+    variant: str,
+    *,
+    outside_tile_only: bool = False,
+) -> tuple[np.ndarray, np.ndarray, int]:
+    """Soften only ramp endpoints; keep each correction local and grade-limited."""
+    weight_out = np.zeros(x.shape, dtype=np.float64)
+    if variant == "0" or tile not in ("D1", "G1"):
+        return result, weight_out, 0
+    settings = WEGENDE_SETTINGS[variant]
+    x0, z0, x1, z1 = TILE_BOUNDS[tile]
+    d2x0, d2z0, d2x1, d2z1 = TILE_BOUNDS["D2"]
+    q = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    tile_mask = (x >= x0) & (x <= x1) & (z >= z0) & (z <= z1)
+    outside_d2 = ~((x >= d2x0) & (x <= d2x1) & (z >= d2z0) & (z <= d2z1))
+    total_changed = 0
+    sample_step_m = 0.25
+
+    for ramp_index, raw in enumerate(source.data.get("rampenwege", [])):
+        line = np.asarray(raw, dtype=np.float64)
+        if len(line) < 2:
+            continue
+        for is_start, endpoint, adjacent in (
+            (True, line[0], line[1]), (False, line[-1], line[-2]),
+        ):
+            eligible = settings.get("eligible_endpoints")
+            if eligible is not None and (ramp_index, is_start) not in eligible:
+                continue
+            if not (x0 <= endpoint[0] <= x1 and z0 <= endpoint[1] <= z1):
+                continue
+            direction = endpoint - adjacent if is_start else endpoint - adjacent
+            length = float(np.hypot(*direction))
+            if length <= 1e-9:
+                continue
+            direction = direction / length
+            tangent = direction * (1.0 if is_start else 1.0)
+            tangent_m = tangent.copy()
+            tangent_m /= max(float(np.hypot(*tangent_m)), 1e-12)
+            endpoint_m = endpoint * CELL_M
+            rel = q - endpoint_m
+            station = rel @ tangent_m
+            lateral = np.abs(rel[:, 0] * tangent_m[1] - rel[:, 1] * tangent_m[0])
+
+            # The profile is sampled on a 0.25 m line through the endpoint,
+            # then its derivative is bounded before reintegration around the
+            # unchanged endpoint height. This avoids a flat pad or hard edge.
+            stations = np.arange(
+                -settings["runin_m"], settings["runout_m"] + sample_step_m * 0.5,
+                sample_step_m, dtype=np.float64,
+            )
+            coords = endpoint_m[None, :] + stations[:, None] * tangent_m[None, :]
+            raw_profile = _sample_height(
+                source, coords[:, 0] / CELL_M, coords[:, 1] / CELL_M,
+            ).astype(np.float64)
+            smoothed = ndi.gaussian_filter1d(
+                raw_profile, sigma=settings["smooth_sigma_m"] / sample_step_m,
+                mode="nearest",
+            )
+            grade = np.clip(
+                np.gradient(smoothed, sample_step_m),
+                -settings["max_grade"], settings["max_grade"],
+            )
+            grade = ndi.gaussian_filter1d(grade, sigma=0.5 / sample_step_m, mode="nearest")
+            zero = int(round(settings["runin_m"] / sample_step_m))
+            profile = np.empty_like(stations)
+            profile[zero] = float(_sample_height(
+                source, np.asarray([endpoint[0]]), np.asarray([endpoint[1]]),
+            )[0])
+            for i in range(zero + 1, len(profile)):
+                profile[i] = profile[i - 1] + 0.5 * (grade[i - 1] + grade[i]) * sample_step_m
+            for i in range(zero - 1, -1, -1):
+                profile[i] = profile[i + 1] - 0.5 * (grade[i] + grade[i + 1]) * sample_step_m
+
+            station_weight = _smoothstep(-settings["runin_m"], -1.5, station)
+            station_weight *= 1.0 - _smoothstep(
+                settings["full_runout_m"], settings["runout_m"], station,
+            )
+            lateral_weight = 1.0 - _smoothstep(
+                settings["lateral_core_m"],
+                settings["lateral_core_m"] + settings["lateral_fade_m"],
+                lateral,
+            )
+            local_weight = station_weight * lateral_weight
+            if outside_tile_only:
+                dx = np.maximum.reduce((x0 - x, np.zeros(x.shape), x - x1)) * CELL_M
+                dz = np.maximum.reduce((z0 - z, np.zeros(z.shape), z - z1)) * CELL_M
+                outside_distance = np.hypot(dx, dz)
+                edge_weight = _smoothstep(0.0, 3.0, outside_distance)
+                local_weight = local_weight.reshape(x.shape) * (~tile_mask) * outside_d2 * edge_weight
+                local_weight = local_weight.ravel()
+            else:
+                local_weight = local_weight.reshape(x.shape) * tile_mask
+                local_weight = local_weight.ravel()
+
+            eligible = local_weight > 1e-6
+            if not eligible.any():
+                continue
+            target = np.interp(station, stations, profile)
+            flat = result.ravel()
+            delta = local_weight * (target - flat)
+            flat += delta
+            result = flat.reshape(x.shape)
+            weight_out = np.maximum(weight_out, local_weight.reshape(x.shape))
+            total_changed += int(np.count_nonzero(np.abs(delta) > 1e-5))
+
+    return result, weight_out, total_changed
+
+
 def _ramp_intersections(source: ReliefSource, tile: str) -> list[tuple[float, float]]:
     """Return deterministic point intersections between distinct ramp paths."""
     x0, z0, x1, z1 = TILE_BOUNDS[tile]
@@ -495,6 +689,7 @@ def _apply_ramp_crossing_planes(
     source: ReliefSource,
     tile: str,
     variant: str,
+    crossing_variant: str,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
     if variant == "2":
@@ -513,11 +708,12 @@ def _apply_ramp_crossing_planes(
         target_sum = np.zeros(len(q), dtype=np.float64)
         target_weight = np.zeros(len(q), dtype=np.float64)
         count = 0
-        inner = float(settings["cross_inner_m"])
+        cross_settings = KREUZUNG_SETTINGS[crossing_variant]
+        inner = float(cross_settings["inner_m"])
         half_width = float(settings["cross_half_width_m"])
         width_fade = float(settings["cross_width_fade_m"])
-        core_runout = float(settings["cross_core_runout_m"])
-        runout = float(settings["cross_runout_m"])
+        core_runout = float(cross_settings.get("core_runout_m", settings["cross_core_runout_m"]))
+        runout = float(cross_settings.get("runout_m", settings["cross_runout_m"]))
 
         for cx, cz, first, second in _ramp_intersection_pairs(source, tile):
             radial = np.hypot((x - cx) * CELL_M, (z - cz) * CELL_M)
@@ -525,9 +721,11 @@ def _apply_ramp_crossing_planes(
             if not inside.any():
                 continue
             plane = float(np.median(base[inside]))
+            plane_values = None
             crossing_weight = np.zeros(len(q), dtype=np.float64)
             point = Point(cx * CELL_M, cz * CELL_M)
-            for path_index in (first, second):
+            path_indices = () if cross_settings.get("radial_only", False) else (first, second)
+            for path_index in path_indices:
                 line = lines[path_index]
                 center_station = line.project(point)
                 lo = max(0.0, center_station - runout)
@@ -567,13 +765,15 @@ def _apply_ramp_crossing_planes(
             # 4 m crossing footprint partly ungraded where the two approaches
             # curve away from one another. A broad radial feather fills that
             # footprint and eases the shared plane back into the source surface.
-            radial_weight = 1.0 - _smoothstep(inner, inner + 4.0, radial.ravel())
+            radial_weight = 1.0 - _smoothstep(
+                inner, inner + float(cross_settings["radial_fade_m"]), radial.ravel(),
+            )
             crossing_weight = np.maximum(crossing_weight, radial_weight)
 
             # The returned weight applies once in terrain_heights. Assigning the
             # shared target here keeps the feather continuous instead of
             # squaring its falloff at the corridor edge.
-            target_sum += crossing_weight * plane
+            target_sum += crossing_weight * (plane if plane_values is None else plane_values)
             target_weight += crossing_weight
             correction_weight = np.maximum(correction_weight, crossing_weight)
             count += int(np.count_nonzero(crossing_weight >= 0.999))
@@ -682,6 +882,13 @@ def terrain_heights(
     """Build a deterministic per-tile terrain surface from GB and feature layers."""
     if variant not in TERRAIN_VARIANTS:
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
+    import os
+    endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "2")
+    if endpoint_variant not in WEGENDE_VARIANTS:
+        raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
+    if crossing_variant not in KREUZUNG_VARIANTS:
+        raise ValueError(f"RELIEF_KREUZUNG_VAR muss einer von {sorted(KREUZUNG_VARIANTS)} sein")
     x0, z0, x1, z1 = TILE_BOUNDS[tile]
     rs = int(source.data["rs"])
     sx0, sz0, sx1, sz1 = x0 * rs, z0 * rs, x1 * rs, z1 * rs
@@ -721,8 +928,17 @@ def terrain_heights(
         if cross_count:
             layers.append("kreuzung_gemeinsame_ebene_weicher_rand")
 
+    endpoint_weight = np.zeros(xx.shape, dtype=np.float64)
+    endpoint_count = 0
+    if variant == "2" and endpoint_variant != "0":
+        result, endpoint_weight, endpoint_count = _apply_ramp_endpoint_runouts(
+            source, tile, xx, zz, result, endpoint_variant,
+        )
+        if endpoint_count:
+            layers.append("rampenenden_lokaler_auslauf_ge4m_weich")
+
     crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
-        base, xx, zz, result, source, tile, variant,
+        base, xx, zz, result, source, tile, variant, crossing_variant,
     )
     if ramp_crossings:
         layers.append("rampenkreuzung_gemeinsame_ebene_weicher_rand")
@@ -756,7 +972,7 @@ def terrain_heights(
     wall_weight = _smoothstep(1.2, 4.8, wall_distance)
     # Explicit route profiles are allowed to meet the wall-foot surface; all
     # unrelated cliff geometry keeps the original wall-distance protection.
-    weight = tile_weight * np.maximum.reduce((wall_weight, ramp_weight, crossing_weight))
+    weight = tile_weight * np.maximum.reduce((wall_weight, ramp_weight, crossing_weight, endpoint_weight))
     if tile == "D1":
         # Preserve the surveyed cliff control point and a local collar around it.
         d_cliff = np.hypot((xx - 140.0) * CELL_M, (zz - 35.0) * CELL_M)
@@ -773,6 +989,9 @@ def terrain_heights(
         "wand_protected_vertices": int(np.count_nonzero(wall_distance <= 1.2)),
         "crossing_flat_vertices": cross_count,
         "ramp_crossing_flat_vertices": ramp_crossings,
+        "endpoint_variant": endpoint_variant,
+        "endpoint_runout_vertices": endpoint_count,
+        "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
     return result.astype("<f4"), info

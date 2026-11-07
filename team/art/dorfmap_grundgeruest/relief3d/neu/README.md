@@ -16,15 +16,29 @@ Wand-Abstandsschutzgewicht ueberstimmen; eine lokale Sperre schuetzt die
 Klippenform bei D1 (140,35). Kachelraender bleiben auf der Quelle. D2 bleibt
 exakt auf dem sichtbaren `GB`-Quellfeld.
 
-`RELIEF_GELAENDE_VAR=0|1|2` schaltet drei reproduzierbare Varianten. `0` ist
+`RELIEF_GELAENDE_VAR=0|1|2` schaltet drei reproduzierbare Grundvarianten. `0` ist
 das bytegleiche Kontrollmesh. `1` bearbeitet Rampenprofile entlang ihrer
-gesamten Laenge. `2` ist die gezielte Standardvariante: Rampen werden an den
-Endbereichen profiliert und die erkannte D1-Kreuzung wird gemeinsam abgeflacht.
-Variante `2` reduziert die D1-Kreuzungsstufe im Neu-Mesh von 1,746 m auf
-0,087 m. D1/G1 aendern sich messbar (max. |Delta| 3,311 m bzw. 0,243 m); D2
-bleibt bytegleich. **Die Clay-Delta-Pruefung gegen Variante 0 meldet weiterhin
-positive Bildmetriken; Variante 2 erfuellt den Bild-Delta-Abbruch nicht.**
-Details und Grenzen stehen in `pruefung/ERGEBNIS_p3d2.md`.
+gesamten Laenge. `2` ist die gezielte Grundvariante; die benoetigten
+Endpunkt- und Kreuzungskorrekturen sind davon unabhaengig schaltbar. D1/G1
+werden messbar angepasst, D2 bleibt bytegleich. Die Messwerte und Grenzen
+dieses Worktrees stehen in `pruefung/ERGEBNIS_p3d4.md`; die vorherige
+Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
+
+Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
+Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
+`RELIEF_KREUZUNG_VAR=0|1|2`. Standard ist Wegende `1` mit lokalem,
+mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
+Kreuzung `2` mit radialer gemeinsamer Flaeche. Wegende `1` begrenzt die lokale
+Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
+unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
+Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
+Laengsarme. Die Auswahl `2` haelt den D1-Schnittpunkt bei 0,116 m und den
+Endpunkt `156.5|37.5` bei 0,188 m.
+`RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
+Standard ist Variante `1`: Sie senkt die Wandunterkante bis 0,15 m unter das
+mit derselben Dreiecksdiagonale wie im Viewer abgetastete Terrain. Variante `2`
+nutzt 0,05 m Einbettung; Variante `0` behaelt das Quellprofil.
+Keine dieser Schalter aendert Quellzellen oder D2.
 
 `pruefung/neu_mesh_adapter.py` adaptiert das `neu_mesh_tiles`-Hoehenfeld in die
 historischen Gate-Eingaben `G`, `GB` und die D1/G1-Stuetzstellen von `FW`.

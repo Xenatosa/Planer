@@ -67,6 +67,10 @@ def adapt_data(source: dict, mesh_package: dict) -> dict:
     out = dict(source)
     patched: dict[str, np.ndarray] = {}
     mesh_fields: dict[str, np.ndarray] = {}
+    extensions = manifest.get("terrain_extensions") or {}
+    extension_positions = np.frombuffer(
+        base64.b64decode(extensions.get("vertices_xyz_f32", "")), dtype="<f4",
+    ).reshape(-1, 3)
     for key in ("G", "GB"):
         field = _source_field(source, key)
         # D2 deliberately remains the original G/GB payload, even when those
@@ -89,6 +93,20 @@ def adapt_data(source: dict, mesh_package: dict) -> dict:
                 patched[name] = heights
                 mesh_fields[name] = heights
             field[ys, xs] = heights
+        if len(extension_positions):
+            ix = np.rint(extension_positions[:, 0] * int(source["rs"])).astype(np.int64)
+            iz = np.rint(extension_positions[:, 2] * int(source["rs"])).astype(np.int64)
+            if np.any((ix < 0) | (iz < 0) | (ix >= field.shape[1]) | (iz >= field.shape[0])):
+                raise ValueError("Lokale Terrain-Erweiterung liegt ausserhalb des Reliefgitters")
+            in_d2 = (
+                (ix >= TILE_BOUNDS["D2"][0] * int(source["rs"]))
+                & (ix <= TILE_BOUNDS["D2"][2] * int(source["rs"]))
+                & (iz >= TILE_BOUNDS["D2"][1] * int(source["rs"]))
+                & (iz <= TILE_BOUNDS["D2"][3] * int(source["rs"]))
+            )
+            if in_d2.any():
+                raise ValueError("Lokale Terrain-Erweiterung greift in D2 ein")
+            field[iz, ix] = extension_positions[:, 1]
         out[key] = base64.b64encode(field.astype("<f4", copy=False).tobytes()).decode("ascii")
 
     # R8/G6 read the legacy fine-band samples after loading G/GB.  The Neu
@@ -126,6 +144,29 @@ def adapt_data(source: dict, mesh_package: dict) -> dict:
             + tile[iz + 1, ix] * (1.0 - du) * dv
             + tile[iz + 1, ix + 1] * du * dv
         ).astype(np.float32)
+    extension_ids = np.frombuffer(
+        base64.b64decode(extensions.get("fine_vid_u32", "")), dtype="<u4",
+    )
+    extension_heights = np.frombuffer(
+        base64.b64decode(extensions.get("fine_h_f32", "")), dtype="<f4",
+    )
+    if len(extension_ids) != len(extension_heights):
+        raise ValueError("Lokale Terrain-Erweiterung hat ungleiche Feinband-Arrays")
+    if len(extension_ids):
+        extension_positions = np.searchsorted(vertex_ids, extension_ids)
+        if np.any(extension_positions >= len(vertex_ids)) or not np.array_equal(
+            vertex_ids[extension_positions], extension_ids,
+        ):
+            raise ValueError("Lokale Terrain-Erweiterung verweist auf fehlende Feinband-IDs")
+        ext_x = (extension_ids % width).astype(np.float64) / fs
+        ext_z = (extension_ids // width).astype(np.float64) / fs
+        in_d2 = (
+            (ext_x >= TILE_BOUNDS["D2"][0]) & (ext_x <= TILE_BOUNDS["D2"][2])
+            & (ext_z >= TILE_BOUNDS["D2"][1]) & (ext_z <= TILE_BOUNDS["D2"][3])
+        )
+        if in_d2.any():
+            raise ValueError("Feinband-Erweiterung greift in D2 ein")
+        fine_heights[extension_positions] = extension_heights
     fw["h"] = base64.b64encode(fine_heights.astype("<f4", copy=False).tobytes()).decode("ascii")
     out["FW"] = fw
 
@@ -150,6 +191,8 @@ def adapt_data(source: dict, mesh_package: dict) -> dict:
         "fw_samples_patched": int(np.count_nonzero(fine_heights != np.frombuffer(
             base64.b64decode(fw_source["h"]), dtype=np.float32
         ))),
+        "terrain_extension_vertices": int(len(extension_positions)),
+        "terrain_extension_fine_vertices": int(len(extension_ids)),
         "d2_gb_mesh_bytegleich": True,
         "height_sha256": {
             name: hashlib.sha256(value.astype("<f4", copy=False).tobytes()).hexdigest()
