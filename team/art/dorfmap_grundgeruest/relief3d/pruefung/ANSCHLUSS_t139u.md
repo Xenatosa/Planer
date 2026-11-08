@@ -58,3 +58,15 @@ Wie „Nach ende_p3d7“, mit /tmp/gp_p3d8 und Vergleich gegen die unabhaengige 
 
 ## Nach ende_p3d9 (Pruefschema)
 Wie „Nach ende_p3d8“, mit /tmp/gp_p3d9 und Vergleich gegen die unabhaengige p3d6- und p3d8-Referenz (R3 D1 nicht >10, Ziel <=6; Kreuzung nicht >0.116 bzw. <=0.20; delta p3d6->p3d9 = 0 Gate-Anstiege; D1-Hash != d8d44ff9… und != bbc2de2f… / ad026456…; G1/D2/Klippe halten; kein Seitencrash). Nur mergen wenn alle Kriterien; sonst Zahlen + naechster isolierter Auftrag sofort.
+
+## Stand 08.11. ~23:15 — p3d9 gegengeprueft, nicht gemergt; p3d10 laeuft
+- p3d9 acc4e9f unabhaengig in /tmp/gp_p3d9 (detached) neu gebaut: deterministisch, Pruefer/gen_relief/pruefe_*/neu/tests/Schwellen unveraendert (Code-Diff p3d6->p3d9 nur neu/mesh.py). Log gpt-6-luna/xhigh.
+- Messung = Codex-Bericht: R3 D1 laengs/quer/woelb 14/10/8 (p3d6 10/7/7, p3d8 14/9/8), R9w D1 22 (21), Kreuzung 152.5|28.5 Stufe 0.177 / Gitter 0.032 (p3d6 0.116/0, p3d8 0.043/0), Endpunkt 156.5|37.5 0.135. Gates 571/39/337. delta p3d6->p3d9 17 (4 Gate), p3d8->p3d9 14 (2 Gate: R3_quer +1, R9w +1), VAR0->p3d9 22. pytest 26/5.
+- Gehalten: t42u 0, Loch xvfb 0, LOD1 134316, D1-Hash -> 3f196347…, G1 38afeb30…, D2 749d3c4b… + Screenshot e8db06e6…, Klippe 140|35 GB 7.8840365.
+- Nahbilder: Kreuzung weich, aber feine Terrassenlinien (Facetten 317->362); Streiflicht/Wandfuss/Wegende ~p3d8; G1/D2 pixelgleich.
+- Ursache: (A) lokales Fenster: MILP-Machbarkeit (codex_jobs/tools/p3d10_milp) zeigt, dass ebene Kreuzung (+-2 m, 0.05 m, <=3 %) plus R3 |lr|<=0.075 im +-16-m-Fenster bzw. mit max|dh|<=1 m unmoeglich ist; ueber die ganze Rampe minimal 2 (frei, Hc ~4.83) bzw. 3 (Wandseite rampe_11 ab s=40 fest, Hc ~4.11) verletzte Abschnitte -> R3 <=6 nur mit Ganzrampen-Profil machbar. (B) 2D-Transfer: Fade-Gewicht <1 auf dem Wegband, Mesh bis 0.40 m neben LP-Soll, neue R3_quer-Treffer.
+- NICHT nach grundgeruest mergen.
+- **p3d10** `/workspace/wt_dorfmap_p3d10` Branch `art/dorfmap-p3d10` Basis p3d8 123408b; Log `codex_jobs/log_p3d10.txt`, Ende `ende_p3d10.txt`, Start `starte_p3d10.sh`, Auftrag `job_p3d10.txt`; Log gpt-6-luna/xhigh, PID 1191708, Start 08.11. 23:14.
+
+## Nach ende_p3d10 (Pruefschema)
+Wie „Nach ende_p3d8“, mit /tmp/gp_p3d10 (detached) und Vergleich gegen die unabhaengigen Referenzen p3d6/p3d8/p3d9 (Skripte /tmp/gp_p3d9_run.sh, /tmp/gp_p3d9_render.sh als Muster; delta-Vorher: /tmp/gp_p3d6_out/after, /tmp/gp_p3d8_out/after2, /tmp/gp_p3d8_out/var0_before). Kriterien: R3 D1 laengs <=6, quer <=7, woelb <=7; Kreuzung <=0.116, Gitter <=0.02; Endpunkt <=0.20; R8/R8a D1/G1 0; R9w D1 <=21; delta p3d6->p3d10 0 Gate-Anstiege; Achse = Soll +-0.02 m (Bericht); D1-Hash != d8d44ff9/3f196347/bbc2de2f/ad026456; G1/D2/Klippe halten; kein Seitencrash; pytest >=26/5. Nur mergen wenn alle Kriterien; sonst Zahlen + naechster isolierter Auftrag sofort.
