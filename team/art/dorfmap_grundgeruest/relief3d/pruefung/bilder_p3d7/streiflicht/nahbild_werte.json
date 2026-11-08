@@ -1,0 +1,28 @@
+{
+  "schema": "nahbild-v1",
+  "hinweis": "Bildzahlen sind deterministische Sichtindikatoren; stets mit den gespeicherten Bildern pruefen.",
+  "bilder": 1,
+  "images": [
+    {
+      "tile": "D1",
+      "camera": "kreuzung_streiflicht_rampe11",
+      "mode": "D1_kreuzung_streiflicht_rampe11.png",
+      "datei": "D1_kreuzung_streiflicht_rampe11.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 251,
+      "facetten": 1342,
+      "normale_spruenge": 2144,
+      "normale_sprung_inseln": 142,
+      "loecher": 2,
+      "loch_pixel": 16,
+      "flecken": 0,
+      "fleck_pixel": 0,
+      "loch_flecken": 2,
+      "patches_geprueft": 4814
+    }
+  ]
+}

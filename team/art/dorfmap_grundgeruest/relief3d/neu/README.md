@@ -26,14 +26,24 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2`. Standard ist Wegende `1` mit lokalem,
-mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
-Kreuzung `2` mit radialer gemeinsamer Flaeche. Wegende `1` begrenzt die lokale
-Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
-unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
-Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
-Laengsarme. Die Auswahl `2` haelt den D1-Schnittpunkt bei 0,116 m und den
-Endpunkt `156.5|37.5` bei 0,188 m.
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5`. Standard ist Wegende `1` mit lokalem,
+mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern.
+Kreuzung `0` nutzt einen 4-m-Rand, Kreuzung `1` einen 8-m-Rand und Kreuzung
+`2` eine radiale 3-m-Schulter ohne Laengsarme. Variante `2` war bis p3d6 der
+Standard und hielt den D1-Schnittpunkt bei 0,116 m sowie den Endpunkt
+`156.5|37.5` bei 0,188 m.
+
+Die Kreuzungsvarianten `3`, `4` und `5` optimieren die Laengsprofile von
+`rampe_2` und `rampe_11` gemeinsam mit einem deterministischen LP. Sie
+unterscheiden sich im Laengsfenster (18 m oder 20 m) und in der seitlichen
+Anschlussbreite (8 m oder 10 m); die gemeinsame Ebene deckt den 4-m-R8-
+Pruefradius ab. Sie werden nur auf D1 angewendet. G1 verwendet dabei weiter
+die Geometrie aus Variante `2`, D2 bleibt unveraendert. Variante `3` ist der
+aktuelle Standard. Die Messung steht in `pruefung/ERGEBNIS_p3d7.md`; sie
+verfehlt die R3- und Kreuzungsstufenziele weiterhin.
+
+Wegende `1` begrenzt die lokale Laengsneigung auf 0,10; Wegende `2` bezieht
+zusaetzlich das bereits messbar unauffaellige Ende `156.5|37.5` ein.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
 Standard ist Variante `2`: Sie teilt die Wandkontur an jedem Wechsel zwischen
 den gerenderten Terrain-Dreiecken und bettet die Unterkante 0,15 m ein. So liegt
