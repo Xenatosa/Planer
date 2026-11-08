@@ -22,7 +22,7 @@
       "wall_triangles": 45588
     },
     "object_binding": {
-      "max_abs_height_delta_m": 2.897433,
+      "max_abs_height_delta_m": 2.924923,
       "moved_by_kind": {
         "baeume": 19,
         "felsbloecke": 0,
@@ -57,11 +57,11 @@
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "bbc2de2fe035800122fae0b222e55247e5cece3d0ebba131447cf41a367c97e2",
+        "height_sha256": "d8d44ff95c7d748e77696a3d0b9027007836c5b18b5e362df0b97db7969a9ecc",
         "terrain": {
-          "changed_vertices": 956,
+          "changed_vertices": 1930,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "2",
+          "crossing_variant": "5",
           "endpoint_runout_vertices": 524,
           "endpoint_variant": "1",
           "layers": [
@@ -71,9 +71,9 @@
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 3.30474,
-          "mean_abs_delta_m": 0.048682,
-          "ramp_crossing_flat_vertices": 181,
+          "max_abs_delta_m": 2.908249,
+          "mean_abs_delta_m": 0.106113,
+          "ramp_crossing_flat_vertices": 211,
           "variant": "2",
           "wand_protected_vertices": 3123,
           "zone_flat_vertices": 0
@@ -99,7 +99,7 @@
         "terrain": {
           "changed_vertices": 480,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "2",
+          "crossing_variant": "5",
           "endpoint_runout_vertices": 497,
           "endpoint_variant": "1",
           "layers": [

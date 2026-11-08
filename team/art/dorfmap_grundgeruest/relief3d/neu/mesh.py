@@ -13,6 +13,7 @@ from typing import Any
 
 import numpy as np
 from scipy import ndimage as ndi
+from scipy.optimize import linprog
 from scipy.spatial import cKDTree
 from shapely.geometry import LineString, Point, Polygon
 
@@ -36,7 +37,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -73,6 +74,26 @@ KREUZUNG_SETTINGS = {
     # Radial-only correction leaves distant ramp ends on their source profile.
     "2": {"inner_m": 4.5, "radial_fade_m": 3.0,
           "core_runout_m": 2.8, "runout_m": 5.8, "radial_only": True},
+    # Variant 3 solves the two D1 approach profiles together. The 2D transfer
+    # applies the lateral and longitudinal weights as an actual height blend.
+    "3": {"window_m": 18.0, "half_width_m": 1.8,
+          "width_fade_m": 8.0, "along_fade_m": 2.0,
+          "radial_inner_m": 5.0, "radial_outer_m": 12.0,
+          "forward_window_m": 5.5,
+          "plane_inner_m": 4.2,
+          "plane_outer_m": 6.5},
+    "4": {"window_m": 18.0, "half_width_m": 1.8,
+          "width_fade_m": 8.0, "along_fade_m": 2.0,
+          "radial_inner_m": 4.5, "radial_outer_m": 12.0,
+          "forward_window_m": 6.5,
+          "plane_inner_m": 4.8,
+          "plane_outer_m": 7.0},
+    "5": {"window_m": 18.0, "half_width_m": 1.8,
+          "width_fade_m": 8.0, "along_fade_m": 2.0,
+          "radial_inner_m": 5.0, "radial_outer_m": 14.0,
+          "forward_window_m": 7.5,
+          "plane_inner_m": 4.8,
+          "plane_outer_m": 8.0},
 }
 
 
@@ -682,6 +703,337 @@ def _ramp_intersection_pairs(source: ReliefSource, tile: str) -> list[tuple[floa
     return sorted(found, key=lambda item: (round(item[1], 5), round(item[0], 5), item[2], item[3]))
 
 
+def _profile_path(path: np.ndarray, step_m: float = 0.25) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Sample the route using the same 0.25-coordinate-unit stations as R3."""
+    points = np.asarray(path, dtype=np.float64)
+    cumulative = np.r_[0.0, np.cumsum(np.hypot(*np.diff(points, axis=0).T))]
+    stations = np.arange(0.0, cumulative[-1] + 1e-7, step_m, dtype=np.float64)
+    coords = np.column_stack((
+        np.interp(stations, cumulative, points[:, 0]),
+        np.interp(stations, cumulative, points[:, 1]),
+    ))
+    return stations, coords, cumulative
+
+
+def _solve_crossing_profiles(
+    profiles: list[dict[str, Any]], crossing_m: np.ndarray,
+) -> list[np.ndarray]:
+    """Minimise the exact R3 residual around the crossing with a shared plane."""
+    matrices: list[np.ndarray] = []
+    free_indices: list[np.ndarray] = []
+    offsets: list[int] = []
+    variable_count = 0
+    slack_segments: list[list[int]] = []
+    for profile in profiles:
+        h0 = profile["height"]
+        stations = profile["stations"]
+        center = profile["center"]
+        in_window = (
+            (stations >= center - profile["window_before"] - 1e-8)
+            & (stations <= center + profile["window_after"] + 1e-8)
+        )
+        free = np.flatnonzero(in_window)
+        if len(free) < 8:
+            raise RuntimeError("LP-Fenster der Kreuzungsrampe ist zu kurz")
+        # Pin both window boundaries to the original p3d6 profile.
+        free = free[1:-1]
+        operator = np.eye(len(h0)) - ndi.gaussian_filter1d(
+            np.eye(len(h0)), sigma=8.0, axis=0, mode="nearest",
+        )
+        matrices.append(operator)
+        free_indices.append(free)
+        offsets.append(variable_count)
+        variable_count += len(free)
+        slack_segments.append(sorted({
+            k // 16 for k in range(len(h0))
+            if np.any(np.abs(operator[k, free]) > 1e-9)
+        }))
+
+    t_index = variable_count
+    hc_index, gx_index, gz_index = t_index + 1, t_index + 2, t_index + 3
+    slack_start = variable_count + 4
+    slack_offsets: list[dict[int, int]] = []
+    next_slack = slack_start
+    for segments in slack_segments:
+        slack_offsets.append({segment: next_slack + i for i, segment in enumerate(segments)})
+        next_slack += len(segments)
+    nvars = next_slack
+    aub: list[np.ndarray] = []
+    bub: list[float] = []
+
+    for route, profile in enumerate(profiles):
+        h0 = profile["height"]
+        stations = profile["stations"]
+        coords = profile["coords"]
+        center = profile["center"]
+        free = free_indices[route]
+        offset = offsets[route]
+        index_to_var = np.full(len(h0), -1, dtype=np.int64)
+        index_to_var[free] = offset + np.arange(len(free))
+        operator = matrices[route]
+        fixed_profile = h0.copy()
+        fixed_profile[free] = 0.0
+        fixed_residual = operator @ fixed_profile
+
+        # Match h - gaussian_filter1d(h, sigma=8), in the same 16-sample
+        # groups used by pruefe_regeln.py. The small slack keeps infeasible
+        # source sections solvable while the objective minimizes total excess.
+        for k in range(len(h0)):
+            coeff = operator[k, free]
+            if not np.any(np.abs(coeff) > 1e-9):
+                continue
+            segment = k // 16
+            row = np.zeros(nvars, dtype=np.float64)
+            row[offset:offset + len(free)] = coeff
+            row[slack_offsets[route][segment]] = -1.0
+            aub.append(row)
+            bub.append(0.075 - fixed_residual[k])
+            opposite = -row
+            opposite[slack_offsets[route][segment]] = -1.0
+            aub.append(opposite)
+            bub.append(0.075 + fixed_residual[k])
+
+        # Minimise the largest profile movement after the residual objective.
+        for local, k in enumerate(free):
+            row = np.zeros(nvars, dtype=np.float64)
+            row[offset + local] = 1.0
+            row[t_index] = -1.0
+            aub.append(row)
+            bub.append(float(h0[k]))
+            row = np.zeros(nvars, dtype=np.float64)
+            row[offset + local] = -1.0
+            row[t_index] = -1.0
+            aub.append(row)
+            bub.append(float(-h0[k]))
+
+        # Preserve the 0.6 m/m maximum change between adjacent stations.
+        for k in range(1, len(h0)):
+            if index_to_var[k] < 0 and index_to_var[k - 1] < 0:
+                continue
+            row = np.zeros(nvars, dtype=np.float64)
+            constant = 0.0
+            for idx, sign in ((k, 1.0), (k - 1, -1.0)):
+                var = index_to_var[idx]
+                if var >= 0:
+                    row[var] += sign
+                else:
+                    constant += sign * float(h0[idx])
+            aub.append(row)
+            bub.append(0.15 - constant)
+            aub.append(-row)
+            bub.append(0.15 + constant)
+
+        # Keep both 4 m crossing sections close to one shared, nearly level plane.
+        for k in np.flatnonzero(np.abs(stations - center) <= 4.0 + 1e-8):
+            var = index_to_var[k]
+            if var < 0:
+                continue
+            dx, dz = (coords[k] * CELL_M) - crossing_m
+            row = np.zeros(nvars, dtype=np.float64)
+            row[var] = 1.0
+            row[hc_index] = -1.0
+            row[gx_index] = -dx
+            row[gz_index] = -dz
+            aub.append(row)
+            bub.append(0.04)
+            aub.append(-row)
+            bub.append(0.04)
+
+    # Polygonal outer approximation of hypot(gx, gz) <= 0.03.
+    for angle in np.arange(0.0, 2.0 * np.pi, np.pi / 16.0):
+        row = np.zeros(nvars, dtype=np.float64)
+        row[gx_index] = np.cos(angle)
+        row[gz_index] = np.sin(angle)
+        aub.append(row)
+        bub.append(0.03)
+
+    objective = np.zeros(nvars, dtype=np.float64)
+    objective[t_index] = 1e-3
+    objective[slack_start:] = 1.0
+    bounds = [(None, None)] * variable_count + [
+        (0.0, None), (None, None), (-0.03, 0.03), (-0.03, 0.03),
+    ]
+    bounds.extend([(0.0, 0.225)] * (nvars - len(bounds)))
+    solution = linprog(
+        objective, A_ub=np.asarray(aub), b_ub=np.asarray(bub), bounds=bounds,
+        method="highs",
+    )
+    if not solution.success:
+        raise RuntimeError(f"D1-Kreuzungs-LP nicht lösbar: {solution.message}")
+
+    solved: list[np.ndarray] = []
+    for route, profile in enumerate(profiles):
+        height = profile["height"].copy()
+        free = free_indices[route]
+        offset = offsets[route]
+        height[free] = solution.x[offset:offset + len(free)]
+        solved.append(height)
+    return solved
+
+
+def _project_to_path(
+    query_m: np.ndarray,
+    path_m: np.ndarray,
+    cumulative: np.ndarray,
+    station_lo: float,
+    station_hi: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return nearest path station and lateral distance for local grid points."""
+    starts, ends = path_m[:-1], path_m[1:]
+    lengths = np.diff(cumulative)
+    keep = (cumulative[:-1] <= station_hi) & (cumulative[1:] >= station_lo)
+    starts, ends = starts[keep], ends[keep]
+    seg_start, seg_length = cumulative[:-1][keep], lengths[keep]
+    vector = ends - starts
+    norm2 = np.maximum(np.einsum("ij,ij->i", vector, vector), 1e-15)
+    delta = query_m[:, None, :] - starts[None, :, :]
+    t = np.clip(np.einsum("qsi,si->qs", delta, vector) / norm2[None, :], 0.0, 1.0)
+    projected = starts[None, :, :] + t[:, :, None] * vector[None, :, :]
+    residual = query_m[:, None, :] - projected
+    d2 = np.einsum("qsi,qsi->qs", residual, residual)
+    station = seg_start[None, :] + t * seg_length[None, :]
+    chosen = np.argmin(d2, axis=1)
+    rows = np.arange(len(query_m))
+    return station[rows, chosen], np.sqrt(d2[rows, chosen])
+
+
+def _apply_d1_optimized_crossing(
+    base: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    result: np.ndarray,
+    source: ReliefSource,
+    variant: str,
+    endpoint_weight: np.ndarray,
+) -> tuple[np.ndarray, int]:
+    """Blend jointly solved profiles into the p3d6 surface at the D1 crossing."""
+    settings = KREUZUNG_SETTINGS[variant]
+    crossings = _ramp_intersection_pairs(source, "D1")
+    if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
+        raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
+    cx, cz, _, _ = crossings[0]
+    crossing_m = np.array([cx, cz], dtype=np.float64) * CELL_M
+
+    # Recreate the selected p3d6 crossing as the local terrain background.
+    # The old radial mask is blended once here; it is not used as a hard write.
+    p3d6_surface = result.copy()
+    crossed_surface = p3d6_surface.copy()
+    old_weight, _ = _apply_ramp_crossing_planes(
+        base, x, z, crossed_surface, source, "D1", "2", "2",
+    )
+    p3d6_surface += old_weight * (crossed_surface - p3d6_surface)
+    # Keep the complete p3d6 crossing and its radial shoulder as the terrain
+    # background; only the weighted LP corridor below may replace its height.
+    result[:] = p3d6_surface
+
+    raw_paths = source.data.get("rampenwege", [])
+    x0, z0, _, _ = TILE_BOUNDS["D1"]
+    rs = int(source.data["rs"])
+    profiles: list[dict[str, Any]] = []
+    for path_index in (2, 11):
+        path = np.asarray(raw_paths[path_index], dtype=np.float64)
+        stations, coords, cumulative = _profile_path(path)
+        center = float(LineString(path).project(Point(cx, cz)))
+        window_before = float(settings["window_m"])
+        window_after = window_before
+        if path_index == 11:
+            window_after = min(
+                window_after,
+                float(cumulative[-1]) - center - 1.0 / CELL_M,
+            )
+        apply_window_after = window_after
+        if path_index == 11:
+            apply_window_after = min(
+                float(settings.get("forward_window_m", window_after)),
+                window_after,
+            )
+        row = (coords[:, 1] - z0) * rs
+        col = (coords[:, 0] - x0) * rs
+        height = ndi.map_coordinates(p3d6_surface, [row, col], order=1, mode="nearest")
+        profiles.append({
+            "index": path_index,
+            "stations": stations,
+            "coords": coords,
+            "path_m": path * CELL_M,
+            "cumulative": cumulative * CELL_M,
+            "center": center,
+            "center_phys": center * CELL_M,
+            "window_before": window_before,
+            "window_after": window_after,
+            "window_before_phys": window_before * CELL_M,
+            "window_after_phys": window_after * CELL_M,
+            "apply_window_after_phys": apply_window_after * CELL_M,
+            "height": height,
+        })
+
+    solved = _solve_crossing_profiles(profiles, crossing_m)
+    plane_height = float(np.mean([
+        np.interp(profile["center"], profile["stations"], height)
+        for profile, height in zip(profiles, solved)
+    ]))
+
+    # Restrict the expensive path projection to the local crossing region.
+    margin_m = float(settings["window_m"]) * CELL_M + float(settings["width_fade_m"]) + 8.0
+    local = np.hypot((x - cx) * CELL_M, (z - cz) * CELL_M) <= margin_m
+    flat_index = np.flatnonzero(local.ravel())
+    query = np.column_stack((x.ravel()[flat_index] * CELL_M, z.ravel()[flat_index] * CELL_M))
+    target_sum = np.zeros(len(flat_index), dtype=np.float64)
+    target_weight = np.zeros(len(flat_index), dtype=np.float64)
+    profile_weight = np.zeros(len(flat_index), dtype=np.float64)
+    crossing_weight = old_weight.ravel().copy()
+
+    for profile, height in zip(profiles, solved):
+        station, lateral = _project_to_path(
+            query, profile["path_m"], profile["cumulative"],
+            max(0.0, profile["center_phys"] - profile["window_before_phys"]),
+            min(float(profile["cumulative"][-1]), profile["center_phys"] + profile["apply_window_after_phys"]),
+        )
+        lateral_weight = 1.0 - _smoothstep(
+            float(settings["half_width_m"]),
+            float(settings["half_width_m"] + settings["width_fade_m"]),
+            lateral,
+        )
+        station_delta = station - profile["center_phys"]
+        station_window = np.where(
+            station_delta < 0.0,
+            profile["window_before_phys"],
+            profile["apply_window_after_phys"],
+        )
+        along_weight = 1.0 - _smoothstep(
+            np.maximum(0.0, station_window - settings["along_fade_m"]),
+            station_window,
+            np.abs(station_delta),
+        )
+        radius = np.hypot(query[:, 0] - crossing_m[0], query[:, 1] - crossing_m[1])
+        radial_weight = 1.0 - _smoothstep(
+            float(settings["radial_inner_m"]), float(settings["radial_outer_m"]), radius,
+        )
+        weight = lateral_weight * along_weight * radial_weight
+        target = np.interp(station / CELL_M, profile["stations"], height)
+        target_sum += weight * target
+        target_weight += weight
+        profile_weight = np.maximum(profile_weight, weight)
+        crossing_weight[flat_index] = np.maximum(crossing_weight[flat_index], weight)
+
+    affected = target_weight > 0.0
+    if affected.any():
+        radius = np.hypot(
+            query[affected, 0] - crossing_m[0], query[affected, 1] - crossing_m[1],
+        )
+        plane_mix = 1.0 - _smoothstep(
+            float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius,
+        )
+        profile_target = target_sum[affected] / target_weight[affected]
+        target = profile_target * (1.0 - plane_mix) + plane_height * plane_mix
+        weight = np.maximum(profile_weight[affected], plane_mix)
+        background = p3d6_surface.ravel()[flat_index[affected]]
+        result_flat = result.ravel()
+        result_flat[flat_index[affected]] = target * weight + background * (1.0 - weight)
+
+    weight_grid = crossing_weight.reshape(x.shape)
+    return weight_grid, int(np.count_nonzero(weight_grid >= 0.999))
+
+
 def _apply_ramp_crossing_planes(
     base: np.ndarray,
     x: np.ndarray,
@@ -691,8 +1043,18 @@ def _apply_ramp_crossing_planes(
     tile: str,
     variant: str,
     crossing_variant: str,
+    endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
+    if variant == "2" and crossing_variant in {"3", "4", "5"}:
+        if tile == "D1":
+            if endpoint_weight is None:
+                endpoint_weight = np.zeros(x.shape, dtype=np.float64)
+            return _apply_d1_optimized_crossing(
+                base, x, z, result, source, crossing_variant, endpoint_weight,
+            )
+        # The new solver is scoped to D1; preserve the p3d6 G1 crossing.
+        crossing_variant = "2"
     if variant == "2":
         # A circular constant-height patch made a visible plate and introduced
         # short contour teeth at its rim. Grade only the two intersecting road
@@ -885,7 +1247,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "2")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "5")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -940,6 +1302,7 @@ def terrain_heights(
 
     crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
         base, xx, zz, result, source, tile, variant, crossing_variant,
+        endpoint_weight=endpoint_weight,
     )
     if ramp_crossings:
         layers.append("rampenkreuzung_gemeinsame_ebene_weicher_rand")
