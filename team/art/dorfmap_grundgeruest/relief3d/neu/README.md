@@ -26,9 +26,9 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5`. Standard ist Wegende `1` mit lokalem,
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|6|7`. Standard ist Wegende `1` mit lokalem,
 mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
-Kreuzung `5` mit gemeinsam geloestem D1-Profil und radialer Flaeche. Wegende `1` begrenzt die lokale
+Kreuzung `6` mit gemeinsam geloestem D1-Profil und LP-Fades. Wegende `1` begrenzt die lokale
 Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
 unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
 Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
@@ -36,10 +36,20 @@ Laengsarme. Die Auswahl `2` haelt den D1-Schnittpunkt bei 0,116 m und den
 Endpunkt `156.5|37.5` bei 0,188 m. Kreuzung `3`, `4` und `5` loesen das
 gemeinsame Laengsprofil von `rampe_2` und `rampe_11` mit den unveraenderten
 R3-Formelwerten. Sie mischen das Profil seitlich und laengsgerichtet in die
-p3d6-Flaeche und staffeln die ebene Kernflaeche sowie ihren radialen Auslauf.
-Variante `5` ist Standard; von 3/4/5 hat sie die kleinste D1-Kreuzungs-
-Facettenzahl (317 statt 373/353) und die wenigsten p3d6-zu-p3d8-Anstiege
-(14 statt 14/15). R3-laengs D1 bleibt mit 14 Treffern ueber dem p3d6-Wert 10.
+p3d6-Flaeche. Variante `5` ist die p3d8-Referenz mit radialer Ebenenmischung
+bis 8 m. Variante `6` laesst diese zweite Ebenenmischung weg und uebertraegt
+das LP-Profil nur mit seinem seitlichen, laengsgerichteten und radialen Fade.
+Variante `7` blendet eine gemeinsame Ebene entlang der beiden Rampen nur
+innerhalb der LP-Abschnitte von +/-4 Stationen ein; das Quergewicht ist im
+R8-Wegband voll und laeuft seitlich bis 2,5 m aus.
+**Variante `6` ist Standard**: Ihre D1-Kreuzungsstufe betraegt 0,177 m gegen-
+ueber 0,195 m bei Variante `7`; die Gitterabweichung ist 0,032 m (Variante
+`7`: 0,004 m). Beide bleiben unter 0,20 m, erreichen aber nicht den p3d6-
+Stufenwert 0,116 m oder den p3d8-Wert 0,043 m. Variante `7` hat etwas bessere
+Clay-Messwerte an der Kreuzung (359 statt 362 Facetten), Variante `6` mehr
+Abstand zur 0,20-m-Stufengrenze. R3-laengs D1 bleibt bei 14 Treffern; R3-quer
+steigt auf 10 und R3-woelb bleibt bei 8 (p3d6: 7 und 7). Der D1-Anteil an
+R9w steigt von 21 auf 22 Treffern. Diese Zielwerte sind nicht erreicht.
 G1 behaelt bei diesen Varianten Kreuzung `2`, D2
 bleibt unveraendert.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.

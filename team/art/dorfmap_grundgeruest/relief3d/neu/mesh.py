@@ -37,7 +37,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "6", "7"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -94,6 +94,27 @@ KREUZUNG_SETTINGS = {
           "forward_window_m": 7.5,
           "plane_inner_m": 4.8,
           "plane_outer_m": 8.0},
+    # Variant 6 retains only the LP profiles and their actual corridor fades;
+    # it removes the second, radial plane blend that distorted the shoulders.
+    "6": {"window_m": 18.0, "half_width_m": 1.8,
+          "width_fade_m": 8.0, "along_fade_m": 2.0,
+          "radial_inner_m": 5.0, "radial_outer_m": 14.0,
+          "forward_window_m": 7.5,
+          "plane_inner_m": None,
+          "plane_outer_m": None},
+    # Variant 7 feathers a shared plane only over the LP-constrained portions
+    # of both ramp corridors, including their full R8 road bands.
+    "7": {"window_m": 18.0, "half_width_m": 1.8,
+          "width_fade_m": 8.0, "along_fade_m": 2.0,
+          "radial_inner_m": 5.0, "radial_outer_m": 14.0,
+          "forward_window_m": 7.5,
+          "plane_inner_m": None,
+          "plane_outer_m": None,
+          "plane_station_inner_m": 3.5,
+          "plane_station_outer_m": 4.0,
+          "plane_lateral_core_m": 1.5,
+          "plane_lateral_outer_m": 2.5,
+          "plane_all_points": True},
 }
 
 
@@ -980,6 +1001,7 @@ def _apply_d1_optimized_crossing(
     target_sum = np.zeros(len(flat_index), dtype=np.float64)
     target_weight = np.zeros(len(flat_index), dtype=np.float64)
     profile_weight = np.zeros(len(flat_index), dtype=np.float64)
+    profile_plane_weight = np.zeros(len(flat_index), dtype=np.float64)
     crossing_weight = old_weight.ravel().copy()
 
     for profile, height in zip(profiles, solved):
@@ -994,6 +1016,22 @@ def _apply_d1_optimized_crossing(
             lateral,
         )
         station_delta = station - profile["center_phys"]
+        plane_station_inner = settings.get("plane_station_inner_m")
+        plane_station_outer = settings.get("plane_station_outer_m")
+        if plane_station_inner is not None and plane_station_outer is not None:
+            plane_along = 1.0 - _smoothstep(
+                float(plane_station_inner) * CELL_M,
+                float(plane_station_outer) * CELL_M,
+                np.abs(station_delta),
+            )
+            plane_lateral = 1.0 - _smoothstep(
+                float(settings["plane_lateral_core_m"]),
+                float(settings["plane_lateral_outer_m"]),
+                lateral,
+            )
+            profile_plane_weight = np.maximum(
+                profile_plane_weight, plane_along * plane_lateral,
+            )
         station_window = np.where(
             station_delta < 0.0,
             profile["window_before_phys"],
@@ -1020,15 +1058,49 @@ def _apply_d1_optimized_crossing(
         radius = np.hypot(
             query[affected, 0] - crossing_m[0], query[affected, 1] - crossing_m[1],
         )
-        plane_mix = 1.0 - _smoothstep(
-            float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius,
-        )
         profile_target = target_sum[affected] / target_weight[affected]
-        target = profile_target * (1.0 - plane_mix) + plane_height * plane_mix
-        weight = np.maximum(profile_weight[affected], plane_mix)
+        plane_inner = settings.get("plane_inner_m")
+        plane_outer = settings.get("plane_outer_m")
+        plane_station_inner = settings.get("plane_station_inner_m")
+        plane_station_outer = settings.get("plane_station_outer_m")
+        if plane_station_inner is not None and plane_station_outer is not None:
+            plane_mix = profile_plane_weight[affected]
+            target = profile_target * (1.0 - plane_mix) + plane_height * plane_mix
+            weight = np.maximum(profile_weight[affected], plane_mix)
+        elif plane_inner is None or plane_outer is None:
+            # The LP already enforces a shared, nearly level plane along both
+            # route axes. Keep those solved heights intact in the 2D fade.
+            target = profile_target
+            weight = profile_weight[affected]
+        else:
+            plane_mix = 1.0 - _smoothstep(float(plane_inner), float(plane_outer), radius)
+            target = profile_target * (1.0 - plane_mix) + plane_height * plane_mix
+            weight = np.maximum(profile_weight[affected], plane_mix)
         background = p3d6_surface.ravel()[flat_index[affected]]
         result_flat = result.ravel()
         result_flat[flat_index[affected]] = target * weight + background * (1.0 - weight)
+
+    if settings.get("plane_all_points"):
+        # Close the small gaps between the overlapping corridor masks inside
+        # the LP-constrained core. The same smooth height blend returns to the
+        # p3d6 surface by the shared-plane window's radial boundary.
+        plane_station_inner = settings.get("plane_station_inner_m")
+        plane_station_outer = settings.get("plane_station_outer_m")
+        if plane_station_inner is not None and plane_station_outer is not None:
+            plane_mix_all = profile_plane_weight
+        else:
+            radius_all = np.hypot(
+                query[:, 0] - crossing_m[0], query[:, 1] - crossing_m[1],
+            )
+            plane_mix_all = 1.0 - _smoothstep(
+                float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius_all,
+            )
+        plane_only = (~affected) & (plane_mix_all > 0.0)
+        if plane_only.any():
+            result_flat = result.ravel()
+            background = p3d6_surface.ravel()[flat_index[plane_only]]
+            mix = plane_mix_all[plane_only]
+            result_flat[flat_index[plane_only]] = plane_height * mix + background * (1.0 - mix)
 
     weight_grid = crossing_weight.reshape(x.shape)
     return weight_grid, int(np.count_nonzero(weight_grid >= 0.999))
@@ -1046,7 +1118,7 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "6", "7"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
@@ -1247,7 +1319,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "5")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "6")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
