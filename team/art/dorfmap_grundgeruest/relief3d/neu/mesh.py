@@ -57,11 +57,12 @@ WEGENDE_SETTINGS = {
           "lateral_fade_m": 4.5,
           # These are the three D1/G1 sites that fail the absolute R8a gate.
           "eligible_endpoints": {(1, True), (2, True), (11, True)}},
-    "2": {"runin_m": 4.0, "runout_m": 8.0, "smooth_sigma_m": 2.5,
-          "max_grade": 0.35, "full_runout_m": 4.0, "lateral_core_m": 3.0,
-          "lateral_fade_m": 3.0,
+    "2": {"runin_m": 4.0, "runout_m": 6.0, "smooth_sigma_m": 8.0,
+          "max_grade": 0.10, "full_runout_m": 4.0, "lateral_core_m": 2.5,
+          "lateral_fade_m": 1.5,
           # The four endpoints are the measured D1/G1 R8a sites, including
-          # the previously worse D1 endpoint at 156.5|37.5.
+          # the D1 endpoint at 156.5|37.5. This variant keeps the R8a strip
+          # inside its full-weight lateral core and shortens the outer collar.
           "eligible_endpoints": {(1, True), (2, True), (11, True), (11, False)}},
 }
 KREUZUNG_SETTINGS = {

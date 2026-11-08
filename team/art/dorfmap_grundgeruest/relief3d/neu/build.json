@@ -18,8 +18,8 @@
         "G1": 0.5
       },
       "terrain_closed_triangles": 88728,
-      "total_triangles": 126792,
-      "wall_triangles": 38064
+      "total_triangles": 134316,
+      "wall_triangles": 45588
     },
     "object_binding": {
       "max_abs_height_delta_m": 2.897433,
@@ -121,15 +121,15 @@
     },
     "waende": {
       "foot_embed_m": 0.15,
-      "foot_variant": 1,
-      "foot_variant_name": "terrain_gebundener_fuss_0_15m",
-      "foot_vertices_lowered": 10018,
+      "foot_variant": 2,
+      "foot_variant_name": "terrain_dreieckskanten_0_15m",
+      "foot_vertices_lowered": 12009,
       "tiles": {
         "D1": {
           "features": 1,
           "min_width_m": 1.2,
-          "triangles": 16816,
-          "vertices": 14072
+          "triangles": 19920,
+          "vertices": 17176
         },
         "D2": {
           "features": 0,
@@ -140,8 +140,8 @@
         "G1": {
           "features": 3,
           "min_width_m": 1.2,
-          "triangles": 21248,
-          "vertices": 17352
+          "triangles": 25668,
+          "vertices": 21772
         }
       },
       "variant": 1

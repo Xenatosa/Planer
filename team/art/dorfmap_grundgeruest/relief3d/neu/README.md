@@ -35,10 +35,11 @@ Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
 Laengsarme. Die Auswahl `2` haelt den D1-Schnittpunkt bei 0,116 m und den
 Endpunkt `156.5|37.5` bei 0,188 m.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
-Standard ist Variante `1`: Sie senkt die Wandunterkante bis 0,15 m unter das
-mit derselben Dreiecksdiagonale wie im Viewer abgetastete Terrain. Variante `2`
-nutzt 0,05 m Einbettung; Variante `0` behaelt das Quellprofil.
-Keine dieser Schalter aendert Quellzellen oder D2.
+Standard ist Variante `2`: Sie teilt die Wandkontur an jedem Wechsel zwischen
+den gerenderten Terrain-Dreiecken und bettet die Unterkante 0,15 m ein. So liegt
+jeder Konturabschnitt auf einer einzelnen Terrain-Dreiecksfläche. Variante `1`
+verwendet die bisherige Konturabtastung mit derselben 0,15-m-Einbettung; Variante
+`0` behaelt das Quellprofil. Keine dieser Schalter aendert Quellzellen oder D2.
 
 `pruefung/neu_mesh_adapter.py` adaptiert das `neu_mesh_tiles`-Hoehenfeld in die
 historischen Gate-Eingaben `G`, `GB` und die D1/G1-Stuetzstellen von `FW`.

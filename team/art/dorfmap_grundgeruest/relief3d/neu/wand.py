@@ -9,8 +9,8 @@ from typing import Any
 
 import numpy as np
 from scipy.spatial import cKDTree
-from shapely import segmentize
-from shapely.geometry import LineString, MultiPoint, Point
+from shapely import constrained_delaunay_triangles, segmentize
+from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import triangulate, unary_union
 
 from .mesh import TILE_BOUNDS
@@ -21,7 +21,7 @@ VARIANTS = {0: "breit_2m4", 1: "profil_minimal"}
 FOOT_VARIANTS = {
     0: "profil_unveraendert",
     1: "terrain_gebundener_fuss_0_15m",
-    2: "terrain_gebundener_fuss_0_05m",
+    2: "terrain_dreieckskanten_0_15m",
 }
 
 
@@ -212,6 +212,212 @@ def _sample_grid(heights: np.ndarray, rs: int, tile: str, x: np.ndarray, z: np.n
     return np.where(du <= dv, first, second)
 
 
+def _split_ring_on_terrain_triangles(
+    ring: np.ndarray, values: np.ndarray, tile: str, rs: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Insert boundary vertices where the rendered terrain triangle changes."""
+    x0, z0, _, _ = TILE_BOUNDS[tile]
+    closed = np.vstack((ring, ring[0]))
+    out: list[np.ndarray] = []
+    out_values: list[float] = []
+    epsilon = 1e-9
+
+    def unique_parameters(values: list[float]) -> list[float]:
+        result: list[float] = []
+        for value in sorted(values):
+            if not result or value - result[-1] > epsilon:
+                result.append(value)
+        return result
+
+    for i, (a, b) in enumerate(zip(closed[:-1], closed[1:])):
+        ua, va = (a[0] - x0) * rs, (a[1] - z0) * rs
+        ub, vb = (b[0] - x0) * rs, (b[1] - z0) * rs
+        cuts = [0.0, 1.0]
+        for start, end in ((ua, ub), (va, vb)):
+            if abs(end - start) <= epsilon:
+                continue
+            for grid_line in range(int(np.floor(min(start, end))) + 1,
+                                   int(np.ceil(max(start, end)))):
+                t = (grid_line - start) / (end - start)
+                if epsilon < t < 1.0 - epsilon:
+                    cuts.append(float(t))
+        cuts = unique_parameters(cuts)
+        diagonal_cuts: list[float] = []
+        for t0, t1 in zip(cuts[:-1], cuts[1:]):
+            tm = (t0 + t1) * 0.5
+            ix = int(np.floor(ua + (ub - ua) * tm))
+            iz = int(np.floor(va + (vb - va) * tm))
+            f0 = (ua + (ub - ua) * t0 - ix) - (va + (vb - va) * t0 - iz)
+            f1 = (ua + (ub - ua) * t1 - ix) - (va + (vb - va) * t1 - iz)
+            if f0 * f1 < -epsilon:
+                t = t0 + (t1 - t0) * (-f0) / (f1 - f0)
+                if t0 + epsilon < t < t1 - epsilon:
+                    diagonal_cuts.append(float(t))
+        cuts = unique_parameters(cuts + diagonal_cuts)
+        if not out or np.hypot(*(out[-1] - a)) > epsilon:
+            out.append(np.asarray(a, dtype=np.float64))
+            out_values.append(float(values[i]))
+        for t in cuts[1:-1]:
+            point = a + (b - a) * t
+            if not out or np.hypot(*(out[-1] - point)) > epsilon:
+                out.append(point)
+                out_values.append(float(values[i] * (1.0 - t) + values[(i + 1) % len(values)] * t))
+    return np.asarray(out, dtype=np.float64), np.asarray(out_values, dtype=np.float64)
+
+
+def _source_top(points: np.ndarray, tree: cKDTree, source_tops: np.ndarray) -> np.ndarray:
+    distances, nearest = tree.query(points, k=min(4, len(source_tops)), workers=1)
+    if np.ndim(nearest) == 1:
+        nearest = nearest[:, None]
+        distances = distances[:, None]
+    exact = distances[:, 0] <= 1e-8
+    inverse = 1.0 / np.maximum(distances, 0.15) ** 2
+    top = np.sum(source_tops[nearest] * inverse, axis=1) / np.maximum(inverse.sum(axis=1), 1e-12)
+    top[exact] = source_tops[nearest[exact, 0]]
+    # Preserve the source crest at centerlines and round the exposed roof edge.
+    top -= np.minimum(0.12, distances[:, 0] * 0.18)
+    return top
+
+
+def _cap_triangles(
+    ring_coords: list[np.ndarray],
+    points_xz: np.ndarray,
+    index_by_point: dict[tuple[float, float], int],
+    constrained: bool,
+) -> list[tuple[int, int, int]]:
+    """Triangulate caps while retaining every subdivided boundary vertex."""
+    polygon = Polygon(ring_coords[0], ring_coords[1:])
+    if not polygon.is_valid or polygon.is_empty:
+        raise ValueError("Wandkontur ist nach Terrain-Splitting ungueltig")
+
+    triangles: list[list[int]] = []
+    shapes = (constrained_delaunay_triangles(polygon).geoms if constrained else
+              (triangle for triangle in triangulate(MultiPoint(points_xz))
+               if polygon.buffer(1e-8).covers(triangle)))
+    for triangle in shapes:
+        coords = list(triangle.exterior.coords)[:3]
+        ids = [index_by_point[(float(x), float(z))] for x, z in coords]
+        if len(set(ids)) != 3:
+            continue
+        xyz = points_xz[ids]
+        area2 = ((xyz[1, 0] - xyz[0, 0]) * (xyz[2, 1] - xyz[0, 1]) -
+                 (xyz[1, 1] - xyz[0, 1]) * (xyz[2, 0] - xyz[0, 0]))
+        if abs(area2) > 1e-12:
+            triangles.append(ids)
+
+    def containing(point: np.ndarray) -> tuple[int, np.ndarray] | None:
+        tri = np.asarray(triangles, dtype=np.int64)
+        xyz = points_xz[tri]
+        a, b, c = xyz[:, 0], xyz[:, 1], xyz[:, 2]
+        v0, v1 = b - a, c - a
+        v2 = point - a
+        den = v0[:, 0] * v1[:, 1] - v1[:, 0] * v0[:, 1]
+        valid = np.abs(den) > 1e-14
+        u = np.zeros(len(tri)); v = np.zeros(len(tri))
+        u[valid] = (v2[valid, 0] * v1[valid, 1] - v1[valid, 0] * v2[valid, 1]) / den[valid]
+        v[valid] = (v0[valid, 0] * v2[valid, 1] - v2[valid, 0] * v0[valid, 1]) / den[valid]
+        weights = np.column_stack((1.0 - u - v, u, v))
+        found = np.flatnonzero(valid & (weights.min(axis=1) >= -1e-9))
+        return (int(found[0]), weights[found[0]]) if len(found) else None
+
+    for point_index, point in enumerate(points_xz):
+        if any(point_index in triangle for triangle in triangles):
+            continue
+        found = containing(point)
+        if found is None:
+            continue
+        triangle_index, weights = found
+        old = triangles[triangle_index]
+        zero = np.flatnonzero(np.abs(weights) <= 1e-8)
+        if len(zero) == 0:
+            a, b, c = old
+            triangles[triangle_index:triangle_index + 1] = [
+                [a, b, point_index], [b, c, point_index], [c, a, point_index],
+            ]
+            continue
+        if len(zero) != 1:
+            continue
+
+        edge = {old[(int(zero[0]) + 1) % 3], old[(int(zero[0]) + 2) % 3]}
+        adjacent = [i for i, triangle in enumerate(triangles) if edge.issubset(triangle)]
+        for i in reversed(adjacent):
+            current = triangles.pop(i)
+            for j in range(3):
+                a, b, c = current[j], current[(j + 1) % 3], current[(j + 2) % 3]
+                if {a, b} == edge:
+                    triangles[i:i] = [[a, point_index, c], [point_index, b, c]]
+                    break
+
+    boundary_points = np.unique(np.vstack(ring_coords), axis=0)
+    boundary_ids = {
+        index_by_point[(float(x), float(z))]
+        for x, z in boundary_points
+    }
+    boundary_tree = cKDTree(boundary_points)
+
+    def split_long_boundary_edges(triangle: list[int]) -> list[list[int]]:
+        pending = [triangle]
+        result: list[list[int]] = []
+        while pending:
+            current = pending.pop()
+            split = False
+            for j in range(3):
+                a_id, b_id, c_id = current[j], current[(j + 1) % 3], current[(j + 2) % 3]
+                if a_id not in boundary_ids or b_id not in boundary_ids:
+                    continue
+                a, b = points_xz[a_id], points_xz[b_id]
+                delta = b - a
+                length2 = float(delta @ delta)
+                if length2 <= 1e-16:
+                    continue
+                length = float(np.sqrt(length2))
+                candidates = boundary_tree.query_ball_point((a + b) * 0.5, length * 0.5 + 1e-7)
+                between: list[tuple[float, int]] = []
+                for candidate in candidates:
+                    point = boundary_points[candidate]
+                    candidate_id = index_by_point[(float(point[0]), float(point[1]))]
+                    if candidate_id not in boundary_ids or candidate_id in (a_id, b_id):
+                        continue
+                    t = float((point - a) @ delta / length2)
+                    if not 1e-8 < t < 1.0 - 1e-8:
+                        continue
+                    distance = float(abs(delta[0] * (point[1] - a[1]) - delta[1] * (point[0] - a[0])) / length)
+                    if distance <= 1e-7:
+                        between.append((t, candidate_id))
+                if between:
+                    parameters = {index: t for t, index in between}
+                    chain = [a_id] + [index for index, _ in sorted(parameters.items(), key=lambda item: item[1])] + [b_id]
+                    for k in range(len(chain) - 2, -1, -1):
+                        piece = [chain[k], chain[k + 1], c_id]
+                        xyz = points_xz[piece]
+                        area2 = ((xyz[1, 0] - xyz[0, 0]) * (xyz[2, 1] - xyz[0, 1]) -
+                                 (xyz[1, 1] - xyz[0, 1]) * (xyz[2, 0] - xyz[0, 0]))
+                        if abs(area2) > 1e-12 and len(set(piece)) == 3:
+                            pending.append(piece)
+                    split = True
+                    break
+            if not split:
+                result.append(current)
+        return result
+
+    triangles = [
+        piece for triangle in triangles for piece in split_long_boundary_edges(triangle)
+    ]
+
+    # Every side segment must also be a cap edge; otherwise the solid contains
+    # a T-junction where the cap crosses a terrain sampling boundary.
+    cap_edges = {
+        frozenset((triangle[i], triangle[(i + 1) % 3]))
+        for triangle in triangles for i in range(3)
+    }
+    for ring in ring_coords:
+        ids = [index_by_point[(float(x), float(z))] for x, z in ring]
+        for a, b in zip(ids, ids[1:] + ids[:1]):
+            if frozenset((a, b)) not in cap_edges:
+                raise ValueError("Wandkappe enthaelt nicht alle Terrain-Randsegmente")
+    return [tuple(triangle) for triangle in triangles]
+
+
 def _bind_wall_foot(
     points: np.ndarray,
     bottom: np.ndarray,
@@ -256,6 +462,7 @@ def _network_solid(
     terrain_rs: int,
     tile: str,
     embed_m: float,
+    split_on_terrain: bool = False,
 ) -> tuple[np.ndarray, np.ndarray, int, int, np.ndarray]:
     """Extrude joined wall footprints with a terrain-sampled continuous foot."""
     if not chunks:
@@ -297,6 +504,20 @@ def _network_solid(
         polygon = segmentize(polygon, max_segment_length=0.5)
         ring_coords = [np.asarray(polygon.exterior.coords[:-1], dtype=np.float64)]
         ring_coords.extend(np.asarray(ring.coords[:-1], dtype=np.float64) for ring in polygon.interiors)
+        boundary_top_values: dict[tuple[float, float], float] = {}
+        if split_on_terrain:
+            split_rings = []
+            for ring in ring_coords:
+                ring_top = _source_top(ring, tree, source_tops)
+                split_ring, split_top = _split_ring_on_terrain_triangles(
+                    ring, ring_top, tile, terrain_rs,
+                )
+                split_rings.append(split_ring)
+                boundary_top_values.update({
+                    (float(point[0]), float(point[1])): float(value)
+                    for point, value in zip(split_ring, split_top)
+                })
+            ring_coords = split_rings
         boundary = np.vstack(ring_coords)
         inside_source = [p for p in source_points if polygon.buffer(1e-8).covers(Point(float(p[0]), float(p[1])))]
         points_xz = np.vstack((boundary, np.asarray(inside_source, dtype=np.float64))) if inside_source else boundary
@@ -304,17 +525,9 @@ def _network_solid(
         points_xz = np.unique(points_xz, axis=0)
         index_by_point = {(float(x), float(z)): i for i, (x, z) in enumerate(points_xz)}
         query = points_xz
-        distances, nearest = tree.query(query, k=min(4, len(source_points)), workers=1)
-        if np.ndim(nearest) == 1:
-            nearest = nearest[:, None]
-            distances = distances[:, None]
-        exact = distances[:, 0] <= 1e-8
-        inverse = 1.0 / np.maximum(distances, 0.15) ** 2
-        top = np.sum(source_tops[nearest] * inverse, axis=1) / np.maximum(inverse.sum(axis=1), 1e-12)
-        top[exact] = source_tops[nearest[exact, 0]]
-        # Preserve the source crest at centerlines and round the exposed roof
-        # edge by at most the same 12 cm used by the profile extrusion.
-        top -= np.minimum(0.12, distances[:, 0] * 0.18)
+        top = _source_top(query, tree, source_tops)
+        for point, value in boundary_top_values.items():
+            top[index_by_point[point]] = value
         ground = _sample_grid(heights, terrain_rs, tile, points_xz[:, 0], points_xz[:, 1])
         bottom = np.minimum(ground - embed_m, top - 0.01)
         foot_samples += int(np.count_nonzero(ground > bottom + 1e-6))
@@ -322,23 +535,26 @@ def _network_solid(
         top_xyz = np.column_stack((points_xz[:, 0], top, points_xz[:, 1])).astype("<f4")
         bottom_xyz = np.column_stack((points_xz[:, 0], bottom, points_xz[:, 1])).astype("<f4")
 
-        cap_triangles: list[tuple[int, int, int]] = []
-        for triangle in triangulate(MultiPoint(points_xz)):
-            if not polygon.buffer(1e-8).covers(triangle):
-                continue
-            coords = list(triangle.exterior.coords)[:3]
-            ids = [index_by_point[(float(x), float(z))] for x, z in coords]
-            area2 = ((points_xz[ids[1], 0] - points_xz[ids[0], 0]) *
-                     (points_xz[ids[2], 1] - points_xz[ids[0], 1]) -
-                     (points_xz[ids[1], 1] - points_xz[ids[0], 1]) *
-                     (points_xz[ids[2], 0] - points_xz[ids[0], 0]))
-            if area2 > 0:
-                ids[1], ids[2] = ids[2], ids[1]
-            cap_triangles.append(tuple(ids))
-        if not cap_triangles:
+        def oriented_cap(constrained: bool) -> np.ndarray:
+            result = []
+            for triangle in _cap_triangles(
+                ring_coords, points_xz, index_by_point, constrained,
+            ):
+                ids = list(triangle)
+                area2 = ((points_xz[ids[1], 0] - points_xz[ids[0], 0]) *
+                         (points_xz[ids[2], 1] - points_xz[ids[0], 1]) -
+                         (points_xz[ids[1], 1] - points_xz[ids[0], 1]) *
+                         (points_xz[ids[2], 0] - points_xz[ids[0], 0]))
+                if area2 > 0:
+                    ids[1], ids[2] = ids[2], ids[1]
+                result.append(ids)
+            return np.asarray(result, dtype=np.uint32)
+
+        top_tri = oriented_cap(constrained=False)
+        bottom_tri = oriented_cap(constrained=True)
+        if not len(top_tri) or not len(bottom_tri):
             continue
-        top_tri = np.asarray(cap_triangles, dtype=np.uint32)
-        bottom_tri = (top_tri[:, ::-1] + count).astype(np.uint32)
+        bottom_tri = (bottom_tri[:, ::-1] + count).astype(np.uint32)
 
         side_vertices: list[np.ndarray] = []
         side_vertex_ids: dict[tuple[int, bool], int] = {}
@@ -410,7 +626,7 @@ def build_wall_manifest(
         variant = int(os.environ.get("WANDVAR", str(DEFAULT_VARIANT)))
     if foot_variant is None:
         import os
-        foot_variant = int(os.environ.get("RELIEF_WANDFUSS_VAR", "1"))
+        foot_variant = int(os.environ.get("RELIEF_WANDFUSS_VAR", "2"))
     if variant not in VARIANTS:
         raise ValueError(f"WANDVAR muss eine der Varianten {sorted(VARIANTS)} sein")
     if foot_variant not in FOOT_VARIANTS:
@@ -445,7 +661,8 @@ def build_wall_manifest(
         if terrain is not None and network_chunks:
             positions, indices, features, lowered, normals = _network_solid(
                 network_chunks, terrain[0], terrain[1], tile,
-                embed_m=0.15 if foot_variant == 1 else 0.05,
+                embed_m=0.15,
+                split_on_terrain=foot_variant == 2,
             )
             lowered_total += lowered
             if len(indices):
@@ -473,7 +690,7 @@ def build_wall_manifest(
     return {"format": "relief-neu-wall-mesh-v1", "variant": variant,
             "variant_name": VARIANTS[variant], "source_vector_sha256": hashlib.sha256(vector_path.read_bytes()).hexdigest(),
             "foot_variant": foot_variant, "foot_variant_name": FOOT_VARIANTS[foot_variant],
-            "foot_embed_m": (0.15 if foot_variant == 1 else 0.05)
+            "foot_embed_m": 0.15
             if foot_variant in (1, 2) and terrain_tiles else 0.0,
             "foot_vertices_lowered": int(lowered_total),
             "tiles": tile_data}
