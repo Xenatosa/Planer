@@ -22,7 +22,7 @@
       "wall_triangles": 45588
     },
     "object_binding": {
-      "max_abs_height_delta_m": 2.852393,
+      "max_abs_height_delta_m": 2.897433,
       "moved_by_kind": {
         "baeume": 19,
         "felsbloecke": 0,
@@ -57,11 +57,11 @@
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "2b3655e774fe0cb3035ba3f9967a29c1d8ff91ddda6860e3576663eade6f1b39",
+        "height_sha256": "146bfdacfa17e10a678d311131bc79b8400c421cbc95330f38f8899ebe403bd9",
         "terrain": {
-          "changed_vertices": 5185,
+          "changed_vertices": 2666,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "10",
+          "crossing_variant": "12",
           "endpoint_runout_vertices": 524,
           "endpoint_variant": "1",
           "layers": [
@@ -71,19 +71,21 @@
             "wand_abstandsschutz",
             "kachelrand_fade_3m"
           ],
-          "max_abs_delta_m": 4.012822,
-          "mean_abs_delta_m": 0.359759,
+          "max_abs_delta_m": 2.607691,
+          "mean_abs_delta_m": 0.163854,
           "profile_solver": {
             "actual_sections_over_0_075_m": 6,
-            "crossing_plane_height_m": 5.040377,
-            "crossing_plane_max_deviation_m": 0.01,
+            "crossing_plane_height_m": 4.554548,
+            "crossing_plane_max_deviation_m": 0.002,
             "crossing_plane_slope_pct": 0.0,
-            "max_abs_delta_m": 0.539915,
+            "max_abs_delta_m": 1.678721,
             "mode": "mixed_wand",
             "optimal_sections_over_0_075_m": 6,
+            "overlap_core_max_abs_delta_m": 0.004,
+            "overlap_core_sample_count": 46,
             "sections": [
               {
-                "max_abs_lr_m": 0.755892,
+                "max_abs_lr_m": 0.613355,
                 "rampe": "rampe_2",
                 "station_start": 20.0,
                 "station_stop": 23.75
@@ -101,29 +103,29 @@
                 "station_stop": 49.0
               },
               {
-                "max_abs_lr_m": 0.540205,
+                "max_abs_lr_m": 0.567648,
                 "rampe": "rampe_11",
                 "station_start": 36.0,
                 "station_stop": 39.75
               },
               {
-                "max_abs_lr_m": 0.390811,
+                "max_abs_lr_m": 0.38706,
                 "rampe": "rampe_11",
                 "station_start": 40.0,
                 "station_stop": 43.75
               },
               {
-                "max_abs_lr_m": 0.266251,
+                "max_abs_lr_m": 0.264996,
                 "rampe": "rampe_11",
                 "station_start": 44.0,
                 "station_stop": 47.5
               }
             ],
             "status": "optimal",
-            "total_abs_delta_m": 19.411416,
-            "variant": "10"
+            "total_abs_delta_m": 132.84814,
+            "variant": "12"
           },
-          "ramp_crossing_flat_vertices": 1130,
+          "ramp_crossing_flat_vertices": 1172,
           "variant": "2",
           "wand_protected_vertices": 3123,
           "zone_flat_vertices": 0
@@ -149,7 +151,7 @@
         "terrain": {
           "changed_vertices": 480,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "10",
+          "crossing_variant": "12",
           "endpoint_runout_vertices": 497,
           "endpoint_variant": "1",
           "layers": [

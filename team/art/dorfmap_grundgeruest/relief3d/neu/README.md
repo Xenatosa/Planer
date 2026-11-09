@@ -26,7 +26,7 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10`. Standard ist Wegende `1` mit lokalem,
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10|11|12`. Standard ist Wegende `1` mit lokalem,
 mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
 Kreuzung `10` in diesem Worktree. Wegende `1` begrenzt die lokale
 Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
@@ -43,11 +43,15 @@ R3-Gaussoperator und einer gemeinsamen Ebene im 2-m-Kreuzungsradius. Der
 voll gewichtete Wegstreifen ist 1,81 m breit; danach folgt ein 10-m-Hoehenfade.
 Variante `8` laesst den wandseitigen Rampenabschnitt frei, `9` haelt `rampe_11`
 ab Station 40 fest, und `10` begrenzt dort die Abweichung zur p3d6-Flaeche auf
-0,25 m. Variante `10` ist Standard, weil sie unter diesen drei Varianten die
-geringsten Rueckgaenge bei R8-Gitter, R3-Woelbung und R9w zeigt. Die erreichten
-Grenzwerte, Abweichungen und die vollstaendige Profil-/Mesh-Tabelle stehen in
-`pruefung/ERGEBNIS_p3d10.md` und `pruefung/bilder_p3d10/`.
-G1 behaelt bei diesen Varianten Kreuzung `2`; D2 bleibt geometrisch bytegleich.
+0,25 m. Varianten `11` und `12` halten die geloesten Rampenprofile an ihren
+gemeinsamen Mesh-Abtastpunkten zusammen und uebertragen sie ohne hartes
+Umschalten. `12` ist in p3d11 Standard, weil es die Kreuzungsstufe und die
+R3-Treffer gegenueber `10` senkt; die geforderten Grenzwerte der Kreuzungsstufe,
+Querwoelbung und Achsabweichung werden damit noch verfehlt. Die Messwerte,
+Einschraenkungen und Profil-/Mesh-Tabelle stehen in
+`pruefung/ERGEBNIS_p3d11.md` und `pruefung/bilder_p3d11/`. Variante `10` und die
+p3d8-Referenz `5` bleiben auswaehlbar. G1 behaelt bei diesen Varianten
+Kreuzung `2`; D2 bleibt geometrisch bytegleich.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
 Standard ist Variante `2`: Sie teilt die Wandkontur an jedem Wechsel zwischen
 den gerenderten Terrain-Dreiecken und bettet die Unterkante 0,15 m ein. So liegt

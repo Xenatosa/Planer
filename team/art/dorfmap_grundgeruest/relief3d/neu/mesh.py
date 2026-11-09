@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -100,6 +100,13 @@ KREUZUNG_SETTINGS = {
     "8": {"mode": "free", "band_m": 1.81, "fade_m": 10.0, "plane_radius_m": 2.0, "plane_inner_m": 1.0, "plane_outer_m": 2.0},
     "9": {"mode": "wand40", "band_m": 1.81, "fade_m": 10.0, "plane_radius_m": 2.0, "plane_inner_m": 1.0, "plane_outer_m": 2.0},
     "10": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 10.0, "plane_radius_m": 2.0, "plane_inner_m": 1.0, "plane_outer_m": 2.0},
+    # Variant 11 retains the p3d10 whole-ramp objective and shared 2 m plane,
+    # then constrains both solved profiles to agree at sampled mesh vertices
+    # in their overlapping full-width strips inside a 5 m disk.
+    "11": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.0, "plane_inner_m": 1.0, "plane_outer_m": 2.0},
+    # Variant 12 uses one shared plane through the complete 5 m R8 footprint.
+    # Its boundary fades smoothly outside the full-weight road strips.
+    "12": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 5.0, "plane_inner_m": 5.0, "plane_outer_m": 8.0},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -879,6 +886,45 @@ def _solve_crossing_profiles(
     return solved
 
 
+def _full_ramp_overlap_station_pairs(
+    profiles: list[dict[str, Any]], crossing_m: np.ndarray,
+    band_m: float, radius_m: float,
+) -> list[tuple[float, float]]:
+    """Sample where both full-width ramp strips overlap near their crossing."""
+    if len(profiles) != 2:
+        return []
+    # The adapter mesh is sampled at two vertices per map unit. Use its exact
+    # world grid so every constrained point is also a transfer vertex.
+    step_m = CELL_M / 2.0
+    ix0 = int(np.floor((crossing_m[0] - radius_m) / step_m))
+    ix1 = int(np.ceil((crossing_m[0] + radius_m) / step_m))
+    iz0 = int(np.floor((crossing_m[1] - radius_m) / step_m))
+    iz1 = int(np.ceil((crossing_m[1] + radius_m) / step_m))
+    qx = np.arange(ix0, ix1 + 1, dtype=np.float64) * step_m
+    qz = np.arange(iz0, iz1 + 1, dtype=np.float64) * step_m
+    xx, zz = np.meshgrid(qx, qz)
+    query = np.column_stack((xx.ravel(), zz.ravel()))
+    radius = np.hypot(query[:, 0] - crossing_m[0], query[:, 1] - crossing_m[1])
+    query = query[radius <= radius_m + 1e-9]
+    station_samples: list[np.ndarray] = []
+    in_strips: list[np.ndarray] = []
+    for profile in profiles:
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        direction = np.gradient(coords, axis=0)
+        direction /= np.maximum(np.linalg.norm(direction, axis=1, keepdims=True), 1e-9)
+        normals = np.column_stack((-direction[:, 1], direction[:, 0]))
+        station, _, inside = _project_to_ramp_strip(
+            query, coords, profile["stations"], normals, band_m,
+        )
+        station_samples.append(station)
+        in_strips.append(inside)
+    common = in_strips[0] & in_strips[1]
+    return [
+        (float(a), float(b))
+        for a, b in zip(station_samples[0][common], station_samples[1][common])
+    ]
+
+
 def _solve_full_ramp_profiles(
     profiles: list[dict[str, Any]], crossing_m: np.ndarray, variant: str,
     cache_key: tuple[str, str, str],
@@ -1020,15 +1066,43 @@ def _solve_full_ramp_profiles(
             add_constraint({offset + k: 1.0, offset + k - 1: -1.0}, hi=0.18)
             add_constraint({offset + k: -1.0, offset + k - 1: 1.0}, hi=0.18)
 
-        # Both complete bands share one constant plane inside the 2 m crossing disk.
+        # Both complete bands share one constant plane inside the configured disk.
         center = float(profile["center"])
+        plane_tolerance = 0.002 if variant in {"11", "12"} else 0.01
         for k in np.flatnonzero(
             np.abs(stations - center) * CELL_M
             <= float(KREUZUNG_SETTINGS[variant]["plane_radius_m"]) + 1e-8
         ):
             h = offset + int(k)
-            add_constraint({h: 1.0, plane_index: -1.0}, hi=0.01)
-            add_constraint({h: -1.0, plane_index: 1.0}, hi=0.01)
+            add_constraint({h: 1.0, plane_index: -1.0}, hi=plane_tolerance)
+            add_constraint({h: -1.0, plane_index: 1.0}, hi=plane_tolerance)
+
+    overlap_station_pairs: list[tuple[float, float]] = []
+    if variant in {"11", "12"}:
+        overlap_station_pairs = _full_ramp_overlap_station_pairs(
+            profiles, crossing_m,
+            float(KREUZUNG_SETTINGS[variant]["band_m"]), radius_m=5.0,
+        )
+        if not overlap_station_pairs:
+            raise RuntimeError("Die D1-Rampenstreifen haben im 5-m-Kreuzungsbereich keine gemeinsame Abtastung")
+        overlap_tolerance = 0.005
+        for station_a, station_b in overlap_station_pairs:
+            entries: dict[int, float] = {}
+            for route, station in enumerate((station_a, station_b)):
+                profile = profiles[route]
+                offset = h_offsets[route]
+                axis_station = float(station) / CELL_M
+                stations = np.asarray(profile["stations"], dtype=np.float64)
+                hi = int(np.clip(np.searchsorted(stations, axis_station, side="right"), 1, len(stations) - 1))
+                lo = hi - 1
+                fraction = float(np.clip(
+                    (axis_station - stations[lo]) / max(stations[hi] - stations[lo], 1e-15),
+                    0.0, 1.0,
+                ))
+                sign = 1.0 if route == 0 else -1.0
+                entries[offset + lo] = entries.get(offset + lo, 0.0) + sign * (1.0 - fraction)
+                entries[offset + hi] = entries.get(offset + hi, 0.0) + sign * fraction
+            add_constraint(entries, lo=-overlap_tolerance, hi=overlap_tolerance)
 
     # The first solve minimizes the exact number of sections with any residual
     # above 0.075 m. The second solve fixes that count before minimizing L1 movement.
@@ -1103,6 +1177,18 @@ def _solve_full_ramp_profiles(
         ]) - second.x[plane_index]))), 6),
         "sections": section_report,
     }
+    if variant in {"11", "12"}:
+        mismatch = []
+        for station_a, station_b in overlap_station_pairs:
+            value_a = float(np.interp(
+                station_a / CELL_M, profiles[0]["stations"], solved[0],
+            ))
+            value_b = float(np.interp(
+                station_b / CELL_M, profiles[1]["stations"], solved[1],
+            ))
+            mismatch.append(abs(value_a - value_b))
+        diagnostics["overlap_core_sample_count"] = len(overlap_station_pairs)
+        diagnostics["overlap_core_max_abs_delta_m"] = round(max(mismatch, default=0.0), 6)
     _FULL_CROSSING_CACHE[cache_key] = ([item.copy() for item in solved], dict(diagnostics))
     return solved, diagnostics
 
@@ -1349,7 +1435,7 @@ def _apply_d1_full_crossing(
     source: ReliefSource,
     variant: str,
 ) -> tuple[np.ndarray, int]:
-    """Apply the p3d10 whole-ramp profiles with a full-weight road band."""
+    """Apply full-ramp profiles; variants 11/12 use a smooth overlap transfer."""
     settings = KREUZUNG_SETTINGS[variant]
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
@@ -1404,15 +1490,20 @@ def _apply_d1_full_crossing(
     )
     solved, solver_info = _solve_full_ramp_profiles(profiles, crossing_m, variant, cache_key)
 
-    # Rasterize a profile target on every mesh vertex in each complete corridor.
-    # Its blend is exactly one through +/-1.81 m (R3 samples +/-1.5 coordinate
-    # units = 1.8 m at CELL_M=1.2) and then eases into p3d6 over
-    # the selected 10 m collar. The final tile mask is set to one wherever this
-    # already blended value exists, avoiding a second fade in terrain_heights.
+    # Rasterize both profile targets and combine them with normalized weights.
+    # Each profile is fully weighted through the 1.81 m half-width (above the
+    # required 1.75 m), then fades smoothly into the source terrain. The union
+    # weight is 1-product(1-w), so overlapping collars have no nearest-route
+    # switch and form a C1 partition of unity.
     query = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    smooth_transfer = variant in {"11", "12"}
+    profile_target_sum = np.zeros(len(query), dtype=np.float64)
+    profile_selector_sum = np.zeros(len(query), dtype=np.float64)
+    uncovered_weight = np.ones(len(query), dtype=np.float64)
     best_lateral = np.full(len(query), np.inf, dtype=np.float64)
     best_target = np.zeros(len(query), dtype=np.float64)
     transfer_weight = np.zeros(len(query), dtype=np.float64)
+    selector_sigma = float(settings.get("selection_sigma_m", 0.6))
     for profile, height in zip(profiles, solved):
         coords = np.asarray(profile["coords"], dtype=np.float64)
         direction = np.gradient(coords, axis=0)
@@ -1437,29 +1528,57 @@ def _apply_d1_full_crossing(
         road_weight[inside_strip] = 1.0
         road_weight *= valid_station
         target = np.interp(station / CELL_M, profile["stations"], height)
-        abs_lateral = np.abs(lateral)
-        # Where the two broad collars overlap, use the nearest route. Averaging
-        # them would leak longitudinal slope across a road axis even though the
-        # profiles agree on the shared crossing plane.
-        nearest = valid_station & (abs_lateral < best_lateral)
-        best_lateral[nearest] = abs_lateral[nearest]
-        best_target[nearest] = target[nearest]
-        transfer_weight[nearest] = road_weight[nearest]
+        if smooth_transfer:
+            # The normalized selector stays close to each route's own profile
+            # on its axis. The MILP couples both targets in their shared core.
+            selector_weight = road_weight * np.exp(-0.5 * (lateral / selector_sigma) ** 2)
+            profile_target_sum += selector_weight * target
+            profile_selector_sum += selector_weight
+            uncovered_weight *= 1.0 - road_weight
+        else:
+            # Keep the p3d10 transfer available unchanged for variants 8–10.
+            nearest = valid_station & (np.abs(lateral) < best_lateral)
+            best_lateral[nearest] = np.abs(lateral[nearest])
+            best_target[nearest] = target[nearest]
+            transfer_weight[nearest] = road_weight[nearest]
 
-    affected = transfer_weight > 1e-12
+    if smooth_transfer:
+        profile_cover = 1.0 - uncovered_weight
+        affected = profile_selector_sum > 1e-12
+    else:
+        profile_cover = transfer_weight
+        affected = transfer_weight > 1e-12
     radius = np.hypot(query[:, 0] - crossing_m[0], query[:, 1] - crossing_m[1])
-    plane_mix = 1.0 - _smoothstep(
+    radial_plane_mix = 1.0 - _smoothstep(
         float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius,
+    )
+    # In the C1 variants the shared plane fills only the off-road part of the
+    # crossing. Preserve the original radial plane transfer for 8–10.
+    plane_mix = (
+        radial_plane_mix * (1.0 - profile_cover)
+        if smooth_transfer else radial_plane_mix
     )
     plane_affected = plane_mix > 1e-12
     blended = affected | plane_affected
     if blended.any():
         background = p3d6_surface.ravel()
         profile_surface = background.copy()
-        profile_surface[affected] = (
-            background[affected] * (1.0 - transfer_weight[affected])
-            + best_target[affected] * transfer_weight[affected]
-        )
+        if smooth_transfer:
+            profile_target = np.divide(
+                profile_target_sum,
+                profile_selector_sum,
+                out=np.zeros_like(profile_target_sum),
+                where=affected,
+            )
+            profile_surface[affected] = (
+                background[affected] * (1.0 - profile_cover[affected])
+                + profile_target[affected] * profile_cover[affected]
+            )
+        else:
+            profile_surface[affected] = (
+                background[affected] * (1.0 - transfer_weight[affected])
+                + best_target[affected] * transfer_weight[affected]
+            )
         plane_height = float(solver_info["crossing_plane_height_m"])
         result.ravel()[blended] = (
             profile_surface[blended] * (1.0 - plane_mix[blended])
@@ -1468,7 +1587,8 @@ def _apply_d1_full_crossing(
 
     crossing_weight = old_weight.copy()
     crossing_weight.ravel()[blended] = 1.0
-    return crossing_weight, int(np.count_nonzero(transfer_weight >= 0.999))
+    active_weight = profile_cover if smooth_transfer else transfer_weight
+    return crossing_weight, int(np.count_nonzero(active_weight >= 0.999))
 
 
 def _apply_ramp_crossing_planes(
@@ -1483,11 +1603,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10"}:
+            if crossing_variant in {"8", "9", "10", "11", "12"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -1688,7 +1808,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "10")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "12")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -1799,7 +1919,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,

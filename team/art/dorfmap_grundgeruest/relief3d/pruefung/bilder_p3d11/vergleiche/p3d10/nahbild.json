@@ -1,0 +1,64 @@
+{
+  "images": [
+    {
+      "tile": "D1",
+      "mode": "clay",
+      "camera": "kreuzung",
+      "facetten": 562,
+      "flecken": 0,
+      "kantenzaehne": 41,
+      "loch_flecken": 0,
+      "loecher": 0,
+      "normale_spruenge": 585,
+      "normale_sprung_inseln": 140
+    },
+    {
+      "tile": "D1",
+      "mode": "clay",
+      "camera": "wandfuss_140_35",
+      "facetten": 418,
+      "flecken": 58,
+      "kantenzaehne": 1467,
+      "loch_flecken": 109,
+      "loecher": 51,
+      "normale_spruenge": 3562,
+      "normale_sprung_inseln": 401
+    },
+    {
+      "tile": "D1",
+      "mode": "clay",
+      "camera": "wegende",
+      "facetten": 982,
+      "flecken": 28,
+      "kantenzaehne": 854,
+      "loch_flecken": 65,
+      "loecher": 37,
+      "normale_spruenge": 1839,
+      "normale_sprung_inseln": 192
+    },
+    {
+      "tile": "D2",
+      "mode": "clay",
+      "camera": "draufsicht",
+      "facetten": 21,
+      "flecken": 6,
+      "kantenzaehne": 313,
+      "loch_flecken": 18,
+      "loecher": 12,
+      "normale_spruenge": 2275,
+      "normale_sprung_inseln": 9
+    },
+    {
+      "tile": "G1",
+      "mode": "clay",
+      "camera": "wandfuss",
+      "facetten": 530,
+      "flecken": 34,
+      "kantenzaehne": 911,
+      "loch_flecken": 78,
+      "loecher": 44,
+      "normale_spruenge": 3393,
+      "normale_sprung_inseln": 182
+    }
+  ]
+}

@@ -1,0 +1,2284 @@
+{
+  "treffer": [
+    {
+      "regel": "G2_spitze_oben",
+      "feld": "D6"
+    },
+    {
+      "regel": "G2_spitze_oben",
+      "feld": "F7"
+    },
+    {
+      "regel": "G2_spitze_oben",
+      "feld": "F7"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "B4"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "B4"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "B4"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "C5"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "F1"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "G6"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "G6"
+    },
+    {
+      "regel": "G2_spitze_oben_fein",
+      "feld": "H2"
+    },
+    {
+      "regel": "G3_spitze_unten",
+      "feld": "E7"
+    },
+    {
+      "regel": "G3_spitze_unten",
+      "feld": "E7"
+    },
+    {
+      "regel": "G3_spitze_unten",
+      "feld": "F7"
+    },
+    {
+      "regel": "G3_spitze_unten_fein",
+      "feld": "C1"
+    },
+    {
+      "regel": "G3_spitze_unten_fein",
+      "feld": "H2"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "A2"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "A2"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "A7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "A7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "A7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "C5"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "D4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "D4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "D4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "D4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "D7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "E7"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "F1"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "F1"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "F1"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "F1"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "F6"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G3"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "G4"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "H6"
+    },
+    {
+      "regel": "G5_beule_klippe",
+      "feld": "H7"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "A2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "B7"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "C7"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "D6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "E6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "F7"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "G6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H1"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H2"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H3"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H4"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H5"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G6_facette",
+      "feld": "H6"
+    },
+    {
+      "regel": "G7_wand_glatte_flaeche",
+      "feld": "A2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "A1"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "A2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "B1"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "B2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "B3"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "B4"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "B5"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "C2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "C3"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "C4"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "C5"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "C6"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "D1"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "D4"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "D5"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "E1"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "E6"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "F2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "F6"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H1"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H2"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H3"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H4"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H5"
+    },
+    {
+      "regel": "G7b_wandkontur_feld",
+      "feld": "H6"
+    },
+    {
+      "regel": "G7b_wandkontur_kantenschaerfe",
+      "feld": "-"
+    },
+    {
+      "regel": "G7b_wandkontur_rauheit",
+      "feld": "-"
+    },
+    {
+      "regel": "G8_fluss_nicht_bis_rand",
+      "feld": "A2"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "B1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C2"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C3"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C4"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C4"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C5"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C5"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C5"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C6"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "C7"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "D1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "D1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "D4"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "D4"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "E1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "E6"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "F1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "F6"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "G1"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "G3"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "H4"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "H5"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "H5"
+    },
+    {
+      "regel": "R1_blind",
+      "feld": "H6"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "C1"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "C3"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "C4"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "C4"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "C5"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "D1"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "D2"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "D6"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "E3"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "F1"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "F4"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "G2"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "G4"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "G6"
+    },
+    {
+      "regel": "R2_getrennt",
+      "feld": "H5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "B1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "C5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "E1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "E1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "F1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "F1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "F6"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "G1"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "G3"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "G6"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "H4"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "H5"
+    },
+    {
+      "regel": "R3_laengs_m",
+      "feld": "H6"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_quer_pct",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "C3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D1"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D3"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D4"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D6"
+    },
+    {
+      "regel": "R3_woelb_m",
+      "feld": "D6"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "A1"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "A1"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "A2"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "A2"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C3"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C4"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C4"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C4"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C4"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "C5"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "D6"
+    },
+    {
+      "regel": "R5_loch",
+      "feld": "D6"
+    },
+    {
+      "regel": "R6_wasser_schnee",
+      "feld": "F1"
+    },
+    {
+      "regel": "R6_wasser_schnee",
+      "feld": "G1"
+    },
+    {
+      "regel": "R6_wasser_schnee",
+      "feld": "G1"
+    },
+    {
+      "regel": "R6_wasser_schnee",
+      "feld": "G1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "A3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "B6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C7"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "C7"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "D3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "E6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "F5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G1"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "G6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H2"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H3"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H4"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H5"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H6"
+    },
+    {
+      "regel": "T1_fleckrand",
+      "feld": "H6"
+    },
+    {
+      "regel": "T2_textur_abgeschnitten_bildpruefung_offen",
+      "feld": "A1"
+    },
+    {
+      "regel": "T3_streifen_ringe_bildpruefung_offen",
+      "feld": "A1"
+    },
+    {
+      "regel": "T4_graue_flussstreifen_bildpruefung_offen",
+      "feld": "A1"
+    },
+    {
+      "regel": "T5_textur_vs_clay_bildpruefung_offen",
+      "feld": "A1"
+    }
+  ]
+}
