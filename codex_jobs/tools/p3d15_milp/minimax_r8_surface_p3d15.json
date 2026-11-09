@@ -1,0 +1,60 @@
+{
+  "axis_supports": 68,
+  "axis_tolerance_m": 0.02,
+  "center": [
+    152.5,
+    28.5
+  ],
+  "checker_neighbor_pairs": 1114,
+  "local_fine_shape": [
+    33,
+    33
+  ],
+  "mesh_relaxation": "independent 0.25-map-unit raster; more degrees of freedom than the delivered 0.5-map-unit mesh",
+  "milp_pair_grade": 0.45,
+  "minimum_neighbor_grade_pct": 52.23597595318075,
+  "minimum_neighbor_step_m": 0.15670792785954224,
+  "minimum_surface_worst_pair": {
+    "a": {
+      "height_m": 5.063937,
+      "nearest_routes": [
+        {
+          "distance_m": 0.3285,
+          "route": "rampe_11",
+          "station_m": 37.2
+        },
+        {
+          "distance_m": 3.8926,
+          "route": "rampe_2",
+          "station_m": 33.6
+        }
+      ],
+      "x": 154.0,
+      "z": 25.0
+    },
+    "b": {
+      "height_m": 5.220645,
+      "nearest_routes": [
+        {
+          "distance_m": 0.0295,
+          "route": "rampe_11",
+          "station_m": 36.9
+        },
+        {
+          "distance_m": 3.8564,
+          "route": "rampe_2",
+          "station_m": 33.9
+        }
+      ],
+      "x": 154.25,
+      "z": 25.0
+    },
+    "step_m": 0.156707928
+  },
+  "plane_core_supports": 177,
+  "plane_radius_m": 2.25,
+  "plane_tolerance_m": 0.02,
+  "r3_sections_D1": 4,
+  "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "success": true
+}

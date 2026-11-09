@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -123,6 +123,12 @@ KREUZUNG_SETTINGS = {
     # arc length > 1.25 times their chord. The profile-fitted plane fades C1
     # from radius 2.25 m to 4 m, including the profile-covered part of the core.
     "17": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "plane_deviation_m": 0.05, "plane_over_profile": True, "pair_grade": 0.45, "same_route_arc_distance_factor": 1.25},
+    # p3d15 pins descending route samples to a non-increasing MILP profile,
+    # then fits one thin-plate field through both ramp axes and the C1 plane.
+    "18": {"mode": "unified_thin_plate", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "plane_deviation_m": 0.02, "pair_grade": 0.45, "same_route_arc_distance_factor": 1.25, "plane_support_spacing_m": 0.30},
+    # Variant 19 jointly fits the output raster to the same field, with the
+    # gate's bilinear axis samples and every in-core mesh vertex as supports.
+    "19": {"mode": "constrained_thin_plate", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "plane_deviation_m": 0.02, "pair_grade": 0.45, "same_route_arc_distance_factor": 1.25, "plane_support_spacing_m": 0.30, "constrained_mesh_supports": True, "surface_smoothness_weight": 10.0, "band_support_penalty": 1000.0},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -1304,6 +1310,7 @@ def _solve_spatially_coupled_profiles(
         add_upper({k: -1.0, dev: -1.0}, float(-h0))
 
     section_rows: list[dict[str, Any]] = []
+    monotone_rows = 0
     for route, profile in enumerate(profiles):
         h0 = np.asarray(profile["height"], dtype=np.float64)
         stations = np.asarray(profile["stations"], dtype=np.float64)
@@ -1334,6 +1341,9 @@ def _solve_spatially_coupled_profiles(
                 # Preserve p3d10's exact per-station limit: 0.60 * 0.25 m.
                 add_upper({offset + k + 1: 1.0, offset + k: -1.0}, 0.60 * 0.25)
                 add_upper({offset + k: 1.0, offset + k + 1: -1.0}, 0.60 * 0.25)
+                if variant in {"18", "19"} and h0[k + 1] <= h0[k] + 1e-9:
+                    add_upper({offset + k + 1: 1.0, offset + k: -1.0}, 0.0)
+                    monotone_rows += 1
             if k % 16 == 0:
                 px, pz = coords[k]
                 x0, z0, x1, z1 = TILE_BOUNDS["D1"]
@@ -1362,7 +1372,7 @@ def _solve_spatially_coupled_profiles(
     for angle in np.arange(32, dtype=np.float64) * (2.0 * np.pi / 32.0):
         add_upper({plane_gx: float(np.cos(angle)), plane_gz: float(np.sin(angle))}, float(slope_bound))
 
-    # Spatial pairs: every close pair across routes. Variants 15–17 also
+    # Spatial pairs: every close pair across routes. Variants 15–19 also
     # constrain sharply curved same-route pairs by their configured arc ratio.
     pair_rows: list[tuple[dict[int, float], float]] = []
     pair_records: list[tuple[int, int, int, int, float]] = []
@@ -1373,7 +1383,7 @@ def _solve_spatially_coupled_profiles(
         for route_b in range(route_a, len(profiles)):
             if route_a == route_b:
                 neighbors = trees[route_a].query_ball_point(station_xyz_m[route_a], 4.5)
-                if variant in {"15", "16", "17"}:
+                if variant in {"15", "16", "17", "18", "19"}:
                     candidates = (
                         (i, j) for i, js in enumerate(neighbors) for j in sorted(js)
                         if j > i
@@ -1391,7 +1401,7 @@ def _solve_spatially_coupled_profiles(
                 if distance > 4.5 + 1e-9:
                     continue
                 if (
-                    route_a == route_b and variant in {"15", "16", "17"}
+                    route_a == route_b and variant in {"15", "16", "17", "18", "19"}
                     and station_s_m[route_a][j] - station_s_m[route_a][i]
                     <= float(KREUZUNG_SETTINGS[variant].get("same_route_arc_distance_factor", 1.5)) * distance + 1e-9
                 ):
@@ -1516,7 +1526,7 @@ def _solve_spatially_coupled_profiles(
             plane_deviations.extend(np.abs(solved[route][mask] - fitted_plane).tolist())
     diagnostics = {
         "variant": variant,
-        "mode": "mixed_wand",
+        "mode": KREUZUNG_SETTINGS[variant]["mode"],
         "status": "optimal",
         "optimal_sections_over_0_075_m": optimal_sections,
         "actual_sections_over_0_075_m": len(section_report),
@@ -1533,6 +1543,7 @@ def _solve_spatially_coupled_profiles(
             KREUZUNG_SETTINGS[variant].get("same_route_arc_distance_factor", 1.5)
         ),
         "eligible_station_pair_count": len(pair_records),
+        "source_descending_monotone_rows": monotone_rows,
         "same_route_pair_count": len(same_route_records),
         "same_route_pair_abs_sum_m": round(pair_delta_sum, 6),
         "same_route_pair_midpoints_m": [
@@ -1797,7 +1808,7 @@ def _apply_d1_full_crossing(
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
         raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
-    if variant in {"13", "14", "15", "16", "17"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19"}:
         cx, cz = 152.5, 28.5
     else:
         cx, cz, _, _ = crossings[0]
@@ -1831,7 +1842,7 @@ def _apply_d1_full_crossing(
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
         col = coords[:, 0] * rs
-        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17"} else global_p3d6
+        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19"} else global_p3d6
         height = ndi.map_coordinates(profile_surface, [row, col], order=1, mode="nearest").astype(np.float64)
         profiles.append({
             "index": path_index,
@@ -1849,8 +1860,17 @@ def _apply_d1_full_crossing(
         variant,
         os.environ.get("RELIEF_WEGEND_VAR", "1"),
     )
-    if variant in {"13", "14", "15", "16", "17"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19"}:
         solved, solver_info = _solve_spatially_coupled_profiles(profiles, crossing_m, variant, cache_key)
+        if variant in {"18", "19"}:
+            crossing_weight, flat_count = _apply_d1_unified_field_transfer(
+                result, p3d6_surface, x, z, profiles, solved, solver_info,
+                crossing_m, old_weight, settings,
+            )
+            _FULL_CROSSING_CACHE[cache_key] = (
+                [item.copy() for item in solved], dict(solver_info),
+            )
+            return crossing_weight, flat_count
         if variant == "15":
             return _apply_d1_thin_plate_transfer(
                 result, p3d6_surface, x, z, profiles, solved, solver_info,
@@ -2183,6 +2203,371 @@ def _apply_d1_thin_plate_transfer(
     return crossing_weight, int(np.count_nonzero(profile_cover >= 0.999))
 
 
+def _constrain_unified_field_raster(
+    seed: np.ndarray,
+    profiles: list[dict[str, Any]],
+    solved: list[np.ndarray],
+    solver_info: dict[str, Any],
+    crossing_m: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    settings: dict[str, Any],
+) -> np.ndarray:
+    """Jointly fit the emitted raster to axis, exclusive band and plane supports."""
+    height = np.asarray(seed, dtype=np.float64)
+    rows, cols = height.shape
+    count = height.size
+    x0, z0, _, _ = TILE_BOUNDS["D1"]
+    rs = int(np.rint(1.0 / float(x[0, 1] - x[0, 0])))
+    tolerance = 0.019
+    row_ids: list[int] = []
+    col_ids: list[int] = []
+    coefficients: list[float] = []
+    upper: list[float] = []
+
+    def add_row(entries: dict[int, float], bound: float) -> None:
+        row = len(upper)
+        for column, value in entries.items():
+            if abs(value) > 1e-13:
+                row_ids.append(int(row))
+                col_ids.append(int(column))
+                coefficients.append(float(value))
+        upper.append(float(bound))
+
+    # Keep the thin-plate seed where unconstrained; minimize the L1 movement
+    # and the change in its discrete Laplacian in the same linear program.
+    for index, value in enumerate(height.ravel()):
+        deviation = count + index
+        add_row({index: 1.0, deviation: -1.0}, float(value))
+        add_row({index: -1.0, deviation: -1.0}, float(-value))
+
+    smoothness_weight = float(settings["surface_smoothness_weight"])
+    curvature_start = count * 2
+    flat_seed = height.ravel()
+    for iz in range(1, rows - 1):
+        for ix in range(1, cols - 1):
+            center = iz * cols + ix
+            neighbors = (center - cols, center + cols, center - 1, center + 1)
+            laplace_seed = float(sum(flat_seed[item] for item in neighbors) - 4.0 * flat_seed[center])
+            curvature = curvature_start + center
+            entries = {center: -4.0, **{item: 1.0 for item in neighbors}, curvature: -1.0}
+            add_row(entries, laplace_seed)
+            add_row({item: -value for item, value in entries.items() if item != curvature} | {curvature: -1.0}, -laplace_seed)
+
+    axis_tolerance = 0.015
+    axis_rows = 0
+    for profile, target_heights in zip(profiles, solved):
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        inside = (
+            (coords[:, 0] >= x0 - 1e-9)
+            & (coords[:, 0] <= x0 + (cols - 1) / rs + 1e-9)
+            & (coords[:, 1] >= z0 - 1e-9)
+            & (coords[:, 1] <= z0 + (rows - 1) / rs + 1e-9)
+        )
+        for point, target in zip(coords[inside], np.asarray(target_heights)[inside]):
+            u, v = (point[0] - x0) * rs, (point[1] - z0) * rs
+            ix = min(max(int(np.floor(u)), 0), cols - 2)
+            iz = min(max(int(np.floor(v)), 0), rows - 2)
+            fu, fv = u - ix, v - iz
+            entries = {
+                iz * cols + ix: (1.0 - fu) * (1.0 - fv),
+                iz * cols + ix + 1: fu * (1.0 - fv),
+                (iz + 1) * cols + ix: (1.0 - fu) * fv,
+                (iz + 1) * cols + ix + 1: fu * fv,
+            }
+            add_row(entries, float(target) + axis_tolerance)
+            add_row({key: -value for key, value in entries.items()}, -float(target) + axis_tolerance)
+            axis_rows += 1
+
+    query = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    delta = query - crossing_m[None, :]
+    in_plane = np.linalg.norm(delta, axis=1) <= float(settings["plane_radius_m"]) + 1e-9
+    plane = (
+        float(solver_info["crossing_plane_height_m"])
+        + float(solver_info["crossing_plane_gradient_x"]) * delta[:, 0]
+        + float(solver_info["crossing_plane_gradient_z"]) * delta[:, 1]
+    )
+    band_targets: list[np.ndarray] = []
+    band_masks: list[np.ndarray] = []
+    band = float(settings["band_m"])
+    for profile, target_heights in zip(profiles, solved):
+        coords_m = np.asarray(profile["coords"], dtype=np.float64) * CELL_M
+        lengths = np.linalg.norm(np.diff(coords_m, axis=0), axis=1)
+        cumulative = np.r_[0.0, np.cumsum(lengths)]
+        station, lateral = _project_to_path(
+            query, coords_m, cumulative, float(cumulative[0]), float(cumulative[-1]),
+        )
+        start_tangent = coords_m[1] - coords_m[0]
+        start_tangent /= max(float(np.hypot(*start_tangent)), 1e-12)
+        end_tangent = coords_m[-1] - coords_m[-2]
+        end_tangent /= max(float(np.hypot(*end_tangent)), 1e-12)
+        valid = ~(((query - coords_m[0]) @ start_tangent) < -1e-8)
+        valid &= ~(((query - coords_m[-1]) @ end_tangent) > 1e-8)
+        in_band = valid & (lateral <= band + 1e-9)
+        target = np.interp(station / CELL_M, profile["stations"], np.asarray(target_heights))
+        band_targets.append(target)
+        band_masks.append(in_band)
+    mask_array = np.stack(band_masks, axis=0)
+    band_count = mask_array.sum(axis=0)
+    # The two ramp ribbons can overlap near the turn. Keep those nodes on the
+    # joint thin-plate field; constrain a cross-section only where one route
+    # alone owns the full-weight band, so neither route wins by nearest-route
+    # selection and A/B axis supports remain authoritative.
+    exclusive_band = (band_count == 1) & ~in_plane
+    band_target_sum = np.sum(np.where(mask_array, np.stack(band_targets, axis=0), 0.0), axis=0)
+    band_target = np.divide(
+        band_target_sum, band_count, out=np.zeros_like(band_target_sum), where=band_count > 0,
+    )
+    band_support_indices = np.flatnonzero(exclusive_band)
+    band_tolerance = 0.02
+    band_slack_start = 3 * count
+    for offset, index in enumerate(band_support_indices):
+        target = float(band_target[index])
+        slack = band_slack_start + offset
+        add_row({int(index): 1.0, slack: -1.0}, target + band_tolerance)
+        add_row({int(index): -1.0, slack: -1.0}, -target + band_tolerance)
+
+    bounds: list[tuple[float | None, float | None]] = []
+    for index, value in enumerate(flat_seed):
+        if in_plane[index]:
+            bounds.append((float(plane[index] - tolerance), float(plane[index] + tolerance)))
+        else:
+            bounds.append((float(value - 2.0), float(value + 2.0)))
+    bounds.extend([(0.0, None)] * (2 * count))
+    bounds.extend([(0.0, None)] * len(band_support_indices))
+    variable_count = 3 * count + len(band_support_indices)
+    objective = np.zeros(variable_count, dtype=np.float64)
+    objective[count:2 * count] = 1.0
+    objective[2 * count:] = smoothness_weight
+    objective[band_slack_start:] = float(settings.get("band_support_penalty", 100.0))
+    matrix = coo_matrix(
+        (coefficients, (row_ids, col_ids)), shape=(len(upper), variable_count),
+    ).tocsr()
+    solved_lp = linprog(
+        objective, A_ub=matrix, b_ub=np.asarray(upper), bounds=bounds,
+        method="highs",
+    )
+    if not solved_lp.success or solved_lp.x is None:
+        raise RuntimeError(f"Gemeinsame Achs-/Ebenenstuetzen unloesbar: {solved_lp.message}")
+    result = solved_lp.x[:count].reshape(height.shape)
+    solver_info["field_joint_lp_status"] = str(solved_lp.message)
+    solver_info["field_joint_lp_axis_supports"] = int(axis_rows)
+    solver_info["field_joint_lp_exclusive_band_supports"] = int(len(band_support_indices))
+    solver_info["field_joint_lp_band_slack_max_m"] = round(
+        float(np.max(solved_lp.x[band_slack_start:])) if len(band_support_indices) else 0.0, 6,
+    )
+    solver_info["field_joint_lp_band_support_penalty"] = float(
+        settings.get("band_support_penalty", 100.0)
+    )
+    if len(band_support_indices):
+        slack_values = solved_lp.x[band_slack_start:]
+        worst = int(np.argmax(slack_values))
+        point = int(band_support_indices[worst])
+        iz, ix = divmod(point, cols)
+        solver_info["field_joint_lp_max_band_slack_at"] = [
+            round(float(x[iz, ix]), 6), round(float(z[iz, ix]), 6),
+        ]
+        solver_info["field_joint_lp_max_band_slack_target_m"] = round(float(band_target[point]), 6)
+        solver_info["field_joint_lp_max_band_slack_height_m"] = round(float(result.ravel()[point]), 6)
+    solver_info["field_joint_lp_plane_mesh_supports"] = int(np.count_nonzero(in_plane))
+    solver_info["field_joint_lp_smoothness_weight"] = smoothness_weight
+    solver_info["field_joint_lp_max_abs_adjustment_m"] = round(
+        float(np.max(np.abs(result - height))), 6,
+    )
+    return result
+
+
+def _apply_d1_unified_field_transfer(
+    result: np.ndarray,
+    background: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    profiles: list[dict[str, Any]],
+    solved: list[np.ndarray],
+    solver_info: dict[str, Any],
+    crossing_m: np.ndarray,
+    old_weight: np.ndarray,
+    settings: dict[str, Any],
+) -> tuple[np.ndarray, int]:
+    """Fit one thin-plate field through the ramp axes and crossing plane."""
+    from scipy.interpolate import RBFInterpolator
+
+    radius_m = float(settings["plane_radius_m"])
+    axis_coords: list[np.ndarray] = []
+    axis_values: list[np.ndarray] = []
+    support_coords: list[np.ndarray] = []
+    support_values: list[np.ndarray] = []
+    support_is_plane: list[np.ndarray] = []
+    x0, z0, x1, z1 = TILE_BOUNDS["D1"]
+    for profile, heights in zip(profiles, solved):
+        coords_m = np.asarray(profile["coords"], dtype=np.float64) * CELL_M
+        keep = (
+            (profile["coords"][:, 0] >= x0 - 1e-9)
+            & (profile["coords"][:, 0] <= x1 + 1e-9)
+            & (profile["coords"][:, 1] >= z0 - 1e-9)
+            & (profile["coords"][:, 1] <= z1 + 1e-9)
+        )
+        if not np.any(keep):
+            continue
+        coords_m = coords_m[keep]
+        values = np.asarray(heights, dtype=np.float64)[keep].copy()
+        delta = coords_m - crossing_m[None, :]
+        radial = np.linalg.norm(delta, axis=1)
+        on_plane = radial <= radius_m + 1e-9
+        plane_values = (
+            float(solver_info["crossing_plane_height_m"])
+            + float(solver_info["crossing_plane_gradient_x"]) * delta[:, 0]
+            + float(solver_info["crossing_plane_gradient_z"]) * delta[:, 1]
+        )
+        # The tightened MILP keeps these supports within 2 cm of its plane.
+        values[on_plane] = plane_values[on_plane]
+        axis_coords.append(coords_m)
+        axis_values.append(values)
+        support_coords.append(coords_m)
+        support_values.append(values)
+        support_is_plane.append(on_plane)
+
+    if not support_coords:
+        raise RuntimeError("Keine D1-Achs-Stuetzpunkte fuer das gemeinsame Feld")
+    axis_tree = cKDTree(np.concatenate(axis_coords, axis=0))
+
+    # Plane supports are denser than the output mesh and include its radial
+    # boundary. Nearby axis supports already carry the exact fitted plane.
+    spacing = float(settings["plane_support_spacing_m"])
+    offsets = np.arange(-radius_m, radius_m + spacing * 0.5, spacing, dtype=np.float64)
+    dx, dz = np.meshgrid(offsets, offsets)
+    disk = np.column_stack((crossing_m[0] + dx.ravel(), crossing_m[1] + dz.ravel()))
+    disk = disk[np.linalg.norm(disk - crossing_m[None, :], axis=1) <= radius_m + 1e-9]
+    angles = np.arange(96, dtype=np.float64) * (2.0 * np.pi / 96.0)
+    ring = crossing_m[None, :] + radius_m * np.column_stack((np.cos(angles), np.sin(angles)))
+    plane_coords = np.vstack((disk, ring))
+    nearest_axis, _ = axis_tree.query(plane_coords, k=1, workers=1)
+    plane_coords = plane_coords[nearest_axis > 0.18]
+    plane_delta = plane_coords - crossing_m[None, :]
+    plane_values = (
+        float(solver_info["crossing_plane_height_m"])
+        + float(solver_info["crossing_plane_gradient_x"]) * plane_delta[:, 0]
+        + float(solver_info["crossing_plane_gradient_z"]) * plane_delta[:, 1]
+    )
+    if len(plane_coords):
+        support_coords.append(plane_coords)
+        support_values.append(plane_values)
+        support_is_plane.append(np.ones(len(plane_coords), dtype=bool))
+
+    coordinates = np.concatenate(support_coords, axis=0)
+    values = np.concatenate(support_values, axis=0)
+    is_plane = np.concatenate(support_is_plane, axis=0)
+    # A route can pass through a plane-grid support. Collapse only sub-micron
+    # duplicates; all resulting elevations must satisfy the MILP's 2 cm band.
+    keys = np.rint(coordinates * 1_000_000.0).astype(np.int64)
+    _, first, inverse = np.unique(keys, axis=0, return_index=True, return_inverse=True)
+    if len(first) != len(coordinates):
+        collapsed_values = np.empty(len(first), dtype=np.float64)
+        collapsed_plane = np.zeros(len(first), dtype=bool)
+        for k in range(len(first)):
+            group = values[inverse == k]
+            if float(np.ptp(group)) > 0.020001:
+                raise RuntimeError("Doppelte Achs-/Ebenenstuetze verletzt die 2-cm-MILP-Bindung")
+            collapsed_values[k] = float(np.mean(group))
+            collapsed_plane[k] = bool(np.any(is_plane[inverse == k]))
+        coordinates = coordinates[first]
+        values = collapsed_values
+        is_plane = collapsed_plane
+
+    field = RBFInterpolator(
+        coordinates, values, kernel="thin_plate_spline", degree=1, smoothing=0.0,
+    )
+    query = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    profile_cover = np.zeros(len(query), dtype=np.float64)
+    uncovered = np.ones(len(query), dtype=np.float64)
+    band = float(settings["band_m"])
+    fade = float(settings["fade_m"])
+    softmin_m = 0.02
+    for profile in profiles:
+        coords_m = np.asarray(profile["coords"], dtype=np.float64) * CELL_M
+        starts, ends = coords_m[:-1], coords_m[1:]
+        lengths = np.linalg.norm(ends - starts, axis=1)
+        cumulative = np.r_[0.0, np.cumsum(lengths)]
+        start_tangent = ends[0] - starts[0]
+        start_tangent /= max(float(np.hypot(*start_tangent)), 1e-12)
+        end_tangent = ends[-1] - starts[-1]
+        end_tangent /= max(float(np.hypot(*end_tangent)), 1e-12)
+        valid = ~(((query - starts[0]) @ start_tangent) < -1e-8)
+        valid &= ~(((query - ends[-1]) @ end_tangent) > 1e-8)
+        min_distance = np.full(len(query), np.inf, dtype=np.float64)
+        softmin_sum = np.zeros(len(query), dtype=np.float64)
+        for start, end in zip(starts, ends):
+            vector = end - start
+            norm2 = max(float(vector @ vector), 1e-15)
+            t = np.clip(((query - start) @ vector) / norm2, 0.0, 1.0)
+            projected = start + t[:, None] * vector
+            distance = np.sqrt(np.einsum("ij,ij->i", query - projected, query - projected))
+            next_minimum = np.minimum(min_distance, distance)
+            softmin_sum *= np.exp(-(min_distance - next_minimum) / softmin_m)
+            softmin_sum += np.exp(-(distance - next_minimum) / softmin_m)
+            min_distance = next_minimum
+        soft_distance = min_distance - softmin_m * np.log(np.maximum(softmin_sum, 1e-300))
+        route_cover = (1.0 - _smoothstep(band, band + fade, soft_distance)) * valid
+        uncovered *= 1.0 - np.clip(route_cover, 0.0, 1.0)
+    profile_cover = 1.0 - uncovered
+    radial = np.linalg.norm(query - crossing_m[None, :], axis=1)
+    plane_cover = 1.0 - _smoothstep(
+        float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radial,
+    )
+    coverage = 1.0 - (1.0 - profile_cover) * (1.0 - plane_cover)
+    affected = coverage > 1e-12
+    field_values = field(query[affected])
+    bg = background.ravel()
+    seed = bg.copy()
+    seed[affected] = bg[affected] * (1.0 - coverage[affected]) + field_values * coverage[affected]
+    seed = seed.reshape(result.shape)
+    if settings.get("constrained_mesh_supports", False):
+        seed = _constrain_unified_field_raster(
+            seed, profiles, solved, solver_info, crossing_m, x, z, settings,
+        )
+    result[:] = seed
+    result_flat = result.ravel()
+
+    # Record the exact delivered mesh errors at all D1 axis stations, sampled
+    # with the same bilinear interpolation as the terrain gate.
+    rs = int(np.rint(1.0 / float(x[0, 1] - x[0, 0])))
+    axis_errors = []
+    for profile, heights in zip(profiles, solved):
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        inside = (
+            (coords[:, 0] >= x0 - 1e-9) & (coords[:, 0] <= x1 + 1e-9)
+            & (coords[:, 1] >= z0 - 1e-9) & (coords[:, 1] <= z1 + 1e-9)
+        )
+        if not inside.any():
+            continue
+        sampled = ndi.map_coordinates(
+            result,
+            [(coords[inside, 1] - z0) * rs, (coords[inside, 0] - x0) * rs],
+            order=1, mode="nearest",
+        )
+        target = np.asarray(heights, dtype=np.float64)[inside]
+        delta = np.abs(sampled - target)
+        axis_errors.extend(delta.tolist())
+    plane_mask = np.linalg.norm(query - crossing_m[None, :], axis=1) <= radius_m + 1e-9
+    plane_target_grid = (
+        float(solver_info["crossing_plane_height_m"])
+        + float(solver_info["crossing_plane_gradient_x"]) * (query[:, 0] - crossing_m[0])
+        + float(solver_info["crossing_plane_gradient_z"]) * (query[:, 1] - crossing_m[1])
+    )
+    solver_info["field_support_count"] = int(len(coordinates))
+    solver_info["field_plane_support_count"] = int(np.count_nonzero(is_plane))
+    solver_info["field_axis_mesh_max_abs_error_m"] = round(float(max(axis_errors, default=0.0)), 6)
+    solver_info["field_axis_mesh_over_0_02_count"] = int(np.count_nonzero(np.asarray(axis_errors) > 0.020001))
+    solver_info["field_plane_mesh_max_abs_deviation_m"] = round(
+        float(np.max(np.abs(result_flat[plane_mask] - plane_target_grid[plane_mask]))) if plane_mask.any() else 0.0,
+        6,
+    )
+
+    crossing_weight = old_weight.copy()
+    crossing_weight.ravel()[affected] = 1.0
+    return crossing_weight, int(np.count_nonzero(profile_cover >= 0.999))
+
+
 def _apply_ramp_crossing_planes(
     base: np.ndarray,
     x: np.ndarray,
@@ -2195,11 +2580,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}:
+            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -2400,7 +2785,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "17")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "19")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -2511,7 +2896,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,

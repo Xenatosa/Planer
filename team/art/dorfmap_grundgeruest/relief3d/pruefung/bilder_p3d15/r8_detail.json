@@ -1,0 +1,523 @@
+{
+  "surface": "neu_mesh_adapter",
+  "fine_spacing_m": 0.3,
+  "R8_D1_clusters": [
+    {
+      "cluster": {
+        "x": 152.5,
+        "z": 28.5,
+        "feld": "D1",
+        "art": "rampe_2x11",
+        "stufe": 0.844,
+        "gitter": 0.873
+      },
+      "R8_stufe_max_pair": {
+        "metric_m": 0.84406,
+        "point_a_map": [
+          154.5,
+          28.25
+        ],
+        "height_a_m": 4.08983,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_2",
+            "station_m": 33.9,
+            "distance_m": 0.087
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 40.2,
+            "distance_m": 2.0723
+          }
+        ],
+        "point_b_map": [
+          154.5,
+          28.5
+        ],
+        "height_b_m": 4.93389,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_2",
+            "station_m": 33.9,
+            "distance_m": 0.366
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 40.5,
+            "distance_m": 2.2125
+          }
+        ]
+      },
+      "R8_gitter_max_residual_pair": {
+        "metric_m": 0.877046,
+        "point_a_map": [
+          153.5,
+          28.5
+        ],
+        "height_a_m": 4.05372,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_2",
+            "station_m": 32.7,
+            "distance_m": 0.2277
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 41.1,
+            "distance_m": 1.153
+          }
+        ],
+        "point_b_map": [
+          154.5,
+          28.5
+        ],
+        "height_b_m": 4.93389,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_2",
+            "station_m": 33.9,
+            "distance_m": 0.366
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 40.5,
+            "distance_m": 2.2125
+          }
+        ],
+        "residual_a_m": -0.020804,
+        "residual_b_m": 0.856242,
+        "plane_gradient_pct_xy": [
+          0.312,
+          -3.845
+        ]
+      },
+      "R8_quer_pct": 3.433,
+      "R8_quer_gradient_per_map_unit": [
+        -0.003976,
+        -0.034095
+      ]
+    },
+    {
+      "cluster": {
+        "x": 126.5,
+        "z": 31.6,
+        "feld": "D1",
+        "art": "rampe_2_anfang",
+        "stufe": 0.125,
+        "gitter": 0.139,
+        "quer_pct": 1.2
+      },
+      "R8_stufe_max_pair": {
+        "metric_m": 0.125114,
+        "point_a_map": [
+          130.25,
+          32.5
+        ],
+        "height_a_m": 12.128964,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_2",
+            "station_m": 4.2,
+            "distance_m": 1.5921
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 23.9084
+          }
+        ],
+        "point_b_map": [
+          130.25,
+          32.75
+        ],
+        "height_b_m": 12.00385,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_2",
+            "station_m": 4.2,
+            "distance_m": 1.887
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 23.9068
+          }
+        ]
+      },
+      "R8_gitter_max_residual_pair": {
+        "metric_m": 0.140451,
+        "point_a_map": [
+          126.75,
+          33.0
+        ],
+        "height_a_m": 12.507323,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_2",
+            "station_m": 0.0,
+            "distance_m": 1.6809
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 28.1086
+          }
+        ],
+        "point_b_map": [
+          127.75,
+          33.0
+        ],
+        "height_b_m": 12.300636,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_2",
+            "station_m": 1.2,
+            "distance_m": 1.8247
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 26.9087
+          }
+        ],
+        "residual_a_m": 0.066655,
+        "residual_b_m": -0.073795,
+        "plane_gradient_pct_xy": [
+          -6.624,
+          1.17
+        ]
+      },
+      "R8_quer_pct": 1.228,
+      "R8_quer_gradient_per_map_unit": [
+        -0.050416,
+        0.018481
+      ]
+    },
+    {
+      "cluster": {
+        "x": 148.5,
+        "z": 2.5,
+        "feld": "D1",
+        "art": "rampe_11_anfang",
+        "stufe": 0.14,
+        "gitter": 0.276,
+        "quer_pct": 2.7
+      },
+      "R8_stufe_max_pair": {
+        "metric_m": 0.140483,
+        "point_a_map": [
+          149.75,
+          3.0
+        ],
+        "height_a_m": 13.034421,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.0,
+            "distance_m": 1.6155
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 31.8,
+            "distance_m": 30.713
+          }
+        ],
+        "point_b_map": [
+          149.75,
+          3.25
+        ],
+        "height_b_m": 12.893938,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.0,
+            "distance_m": 1.7493
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 31.8,
+            "distance_m": 30.4152
+          }
+        ]
+      },
+      "R8_gitter_max_residual_pair": {
+        "metric_m": 0.276468,
+        "point_a_map": [
+          149.5,
+          3.0
+        ],
+        "height_a_m": 13.040636,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.0,
+            "distance_m": 1.3416
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 31.5,
+            "distance_m": 30.7491
+          }
+        ],
+        "point_b_map": [
+          149.5,
+          4.0
+        ],
+        "height_b_m": 12.706048,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.9,
+            "distance_m": 1.9065
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 31.5,
+            "distance_m": 29.5581
+          }
+        ],
+        "residual_a_m": 0.146721,
+        "residual_b_m": -0.129747,
+        "plane_gradient_pct_xy": [
+          3.796,
+          -5.812
+        ]
+      },
+      "R8_quer_pct": 2.653,
+      "R8_quer_gradient_per_map_unit": [
+        0.055936,
+        -0.048393
+      ]
+    },
+    {
+      "cluster": {
+        "x": 156.5,
+        "z": 37.5,
+        "feld": "D1",
+        "art": "rampe_11_ende",
+        "stufe": 0.167,
+        "gitter": 0.246,
+        "quer_pct": 0.6
+      },
+      "R8_stufe_max_pair": {
+        "metric_m": 0.166767,
+        "point_a_map": [
+          154.5,
+          34.25
+        ],
+        "height_a_m": 1.338165,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 52.8,
+            "distance_m": 1.7307
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 33.0,
+            "distance_m": 7.2005
+          }
+        ],
+        "point_b_map": [
+          154.5,
+          34.5
+        ],
+        "height_b_m": 1.171398,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 53.1,
+            "distance_m": 1.4955
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 33.0,
+            "distance_m": 7.4986
+          }
+        ]
+      },
+      "R8_gitter_max_residual_pair": {
+        "metric_m": 0.246987,
+        "point_a_map": [
+          157.0,
+          36.0
+        ],
+        "height_a_m": 0.732458,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 56.4,
+            "distance_m": 1.8117
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 35.7,
+            "distance_m": 9.645
+          }
+        ],
+        "point_b_map": [
+          157.0,
+          37.0
+        ],
+        "height_b_m": 0.418676,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 57.0,
+            "distance_m": 0.8525
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 35.7,
+            "distance_m": 10.8374
+          }
+        ],
+        "residual_a_m": 0.107697,
+        "residual_b_m": -0.13929,
+        "plane_gradient_pct_xy": [
+          -7.486,
+          -6.68
+        ]
+      },
+      "R8_quer_pct": 0.54,
+      "R8_quer_gradient_per_map_unit": [
+        -0.067027,
+        -0.04222
+      ]
+    }
+  ],
+  "R8a_D1_endpoints": [
+    {
+      "endpoint": "rampe_2_anfang",
+      "endpoint_map": [
+        126.51,
+        31.62
+      ],
+      "R8a_max_pair": {
+        "metric_m": 0.117908,
+        "point_a_map": [
+          126.5,
+          34.0
+        ],
+        "height_a_m": 12.504212,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_2",
+            "station_m": 0.0,
+            "distance_m": 2.856
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 28.4474
+          }
+        ],
+        "point_b_map": [
+          126.75,
+          34.0
+        ],
+        "height_b_m": 12.386304,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_2",
+            "station_m": 0.0,
+            "distance_m": 2.8705
+          },
+          {
+            "route": "rampe_11",
+            "station_m": 47.4,
+            "distance_m": 28.1478
+          }
+        ]
+      }
+    },
+    {
+      "endpoint": "rampe_11_anfang",
+      "endpoint_map": [
+        148.5,
+        2.5
+      ],
+      "R8a_max_pair": {
+        "metric_m": 0.176239,
+        "point_a_map": [
+          150.0,
+          3.0
+        ],
+        "height_a_m": 13.028206,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.0,
+            "distance_m": 1.8974
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 32.1,
+            "distance_m": 30.6769
+          }
+        ],
+        "point_b_map": [
+          150.0,
+          3.25
+        ],
+        "height_b_m": 12.851967,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 0.0,
+            "distance_m": 2.0125
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 32.1,
+            "distance_m": 30.3791
+          }
+        ]
+      }
+    },
+    {
+      "endpoint": "rampe_11_ende",
+      "endpoint_map": [
+        156.4845,
+        37.4888
+      ],
+      "R8a_max_pair": {
+        "metric_m": 0.198631,
+        "point_a_map": [
+          157.5,
+          35.75
+        ],
+        "height_a_m": 0.855988,
+        "nearest_routes_a": [
+          {
+            "route": "rampe_11",
+            "station_m": 56.7,
+            "distance_m": 2.4061
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 36.3,
+            "distance_m": 9.4191
+          }
+        ],
+        "point_b_map": [
+          157.75,
+          35.75
+        ],
+        "height_b_m": 0.657357,
+        "nearest_routes_b": [
+          {
+            "route": "rampe_11",
+            "station_m": 57.0,
+            "distance_m": 2.5807
+          },
+          {
+            "route": "rampe_2",
+            "station_m": 36.6,
+            "distance_m": 9.4552
+          }
+        ]
+      }
+    }
+  ]
+}

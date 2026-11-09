@@ -1,0 +1,31 @@
+{
+  "mesh_hash": "0448b249a4d68547f34300bf5546f808ff7883877679cfda7a6c5afe66e5c102",
+  "plane_core": {
+    "max_abs_mesh_minus_plane_m": 0.01900021606430702,
+    "max_adjacent_grade_within_core": 0.0662740021944046,
+    "mesh_vertices": 45,
+    "slope_pct": 3.0
+  },
+  "routes": {
+    "rampe_11": {
+      "count_abs_error_over_0_02m": 0,
+      "max_abs_mesh_minus_soll_m": 0.01500054384195515,
+      "max_negative_error_m": -0.015000398286058925,
+      "max_positive_error_m": 0.01500054384195515,
+      "rms_mesh_minus_soll_m": 0.012336063203725886,
+      "station_count_D1": 191,
+      "station_count_total": 191
+    },
+    "rampe_2": {
+      "count_abs_error_over_0_02m": 0,
+      "max_abs_mesh_minus_soll_m": 0.015912294387817383,
+      "max_negative_error_m": -0.015001984868241447,
+      "max_positive_error_m": 0.015912294387817383,
+      "rms_mesh_minus_soll_m": 0.012318430618193182,
+      "station_count_D1": 168,
+      "station_count_total": 197
+    }
+  },
+  "table": "profil_tabelle.csv",
+  "variant": "2"
+}
