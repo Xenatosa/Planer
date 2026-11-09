@@ -26,9 +26,9 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10|11|12`. Standard ist Wegende `1` mit lokalem,
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10|11|12|13|14`. Standard ist Wegende `1` mit lokalem,
 mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
-Kreuzung `10` in diesem Worktree. Wegende `1` begrenzt die lokale
+Kreuzung `14` in diesem Worktree. Wegende `1` begrenzt die lokale
 Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
 unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
 Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
@@ -47,9 +47,13 @@ ab Station 40 fest, und `10` begrenzt dort die Abweichung zur p3d6-Flaeche auf
 gemeinsamen Mesh-Abtastpunkten zusammen und uebertragen sie ohne hartes
 Umschalten. `12` ist in p3d11 Standard, weil es die Kreuzungsstufe und die
 R3-Treffer gegenueber `10` senkt; die geforderten Grenzwerte der Kreuzungsstufe,
-Querwoelbung und Achsabweichung werden damit noch verfehlt. Die Messwerte,
-Einschraenkungen und Profil-/Mesh-Tabelle stehen in
-`pruefung/ERGEBNIS_p3d11.md` und `pruefung/bilder_p3d11/`. Variante `10` und die
+Querwoelbung und Achsabweichung werden damit noch verfehlt. Die p3d12-Varianten
+`13` und `14` koppeln ausserdem alle nahen 2D-Profilstationspaare (Grenzgefälle
+0,60 beziehungsweise 0,45) und begrenzen die Ebenenneigung im 2,25-m-Kern auf
+3 Prozent. Profilbeiträge werden auch zwischen Kehrenästen gewichtet gemischt;
+die profilabgeleitete Ebene läuft C1-stetig bis 4 m aus. `13` ist der neue
+Vergleichswert, `14` ist der Standard, weil sie die Kreuzungsstufe gegenüber
+`13` weiter senkt. Variante `10` und die
 p3d8-Referenz `5` bleiben auswaehlbar. G1 behaelt bei diesen Varianten
 Kreuzung `2`; D2 bleibt geometrisch bytegleich.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
