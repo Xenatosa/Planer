@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -112,6 +112,12 @@ KREUZUNG_SETTINGS = {
     # feathers into uncovered terrain through radius 4 m.
     "13": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "pair_grade": 0.60},
     "14": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "pair_grade": 0.45},
+    # p3d13 fits one thin-plate height field through every solved station. The
+    # same-route pair rule uses an arc/distance ratio of 1.5 in the solver.
+    "15": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "pair_grade": 0.45},
+    # Variant 16 keeps the core plane within the 5 cm MILP tolerance and fades
+    # it over the profile field from radius 2.25 m to 4 m.
+    "16": {"mode": "mixed_wand", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.25, "plane_inner_m": 2.25, "plane_outer_m": 4.0, "plane_deviation_m": 0.05, "plane_over_profile": True, "pair_grade": 0.45},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -1338,20 +1344,21 @@ def _solve_spatially_coupled_profiles(
                 })
 
         plane_radius = float(KREUZUNG_SETTINGS[variant]["plane_radius_m"])
+        plane_tolerance = float(KREUZUNG_SETTINGS[variant].get("plane_deviation_m", 0.05))
         for k in np.flatnonzero(np.linalg.norm((coords - crossing_m / CELL_M) * CELL_M, axis=1) <= plane_radius + 1e-9):
             dx_m, dz_m = (coords[k] - crossing_m / CELL_M) * CELL_M
             add_upper({offset + int(k): 1.0, plane_h: -1.0,
-                       plane_gx: -float(dx_m), plane_gz: -float(dz_m)}, 0.05)
+                       plane_gx: -float(dx_m), plane_gz: -float(dz_m)}, plane_tolerance)
             add_upper({offset + int(k): -1.0, plane_h: 1.0,
-                       plane_gx: float(dx_m), plane_gz: float(dz_m)}, 0.05)
+                       plane_gx: float(dx_m), plane_gz: float(dz_m)}, plane_tolerance)
 
     # Inscribed 32-gon conservatively bounds the plane's vector slope to 3%.
     slope_bound = 0.03 * np.cos(np.pi / 32.0)
     for angle in np.arange(32, dtype=np.float64) * (2.0 * np.pi / 32.0):
         add_upper({plane_gx: float(np.cos(angle)), plane_gz: float(np.sin(angle))}, float(slope_bound))
 
-    # Spatial pairs: every pair across routes; same-route pairs only when
-    # their arc separation exceeds 8 m. The 3D bounds use physical metres.
+    # Spatial pairs: every pair across routes. p3d13 also applies its requested
+    # short-range same-route rule using arc separation > 1.5 * d.
     pair_rows: list[tuple[dict[int, float], float]] = []
     pair_records: list[tuple[int, int, int, int, float]] = []
     station_xyz_m = [np.asarray(profile["coords"], dtype=np.float64) * CELL_M for profile in profiles]
@@ -1361,16 +1368,27 @@ def _solve_spatially_coupled_profiles(
         for route_b in range(route_a, len(profiles)):
             if route_a == route_b:
                 neighbors = trees[route_a].query_ball_point(station_xyz_m[route_a], 4.5)
-                candidates = (
-                    (i, j) for i, js in enumerate(neighbors) for j in sorted(js)
-                    if j > i and station_s_m[route_a][j] - station_s_m[route_a][i] > 8.0
-                )
+                if variant in {"15", "16"}:
+                    candidates = (
+                        (i, j) for i, js in enumerate(neighbors) for j in sorted(js)
+                        if j > i
+                    )
+                else:
+                    candidates = (
+                        (i, j) for i, js in enumerate(neighbors) for j in sorted(js)
+                        if j > i and station_s_m[route_a][j] - station_s_m[route_a][i] > 8.0
+                    )
             else:
                 neighbors = trees[route_b].query_ball_tree(trees[route_a], 4.5)
                 candidates = ((i, j) for j, ii in enumerate(neighbors) for i in sorted(ii))
             for i, j in candidates:
                 distance = float(np.linalg.norm(station_xyz_m[route_a][i] - station_xyz_m[route_b][j]))
                 if distance > 4.5 + 1e-9:
+                    continue
+                if (
+                    route_a == route_b and variant in {"15", "16"}
+                    and station_s_m[route_a][j] - station_s_m[route_a][i] <= 1.5 * distance + 1e-9
+                ):
                     continue
                 ia, ib = h_offsets[route_a] + i, h_offsets[route_b] + j
                 if ia == ib:
@@ -1735,7 +1753,7 @@ def _apply_d1_full_crossing(
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
         raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
-    if variant in {"13", "14"}:
+    if variant in {"13", "14", "15", "16"}:
         cx, cz = 152.5, 28.5
     else:
         cx, cz, _, _ = crossings[0]
@@ -1769,7 +1787,7 @@ def _apply_d1_full_crossing(
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
         col = coords[:, 0] * rs
-        profile_surface = source.heights if variant in {"13", "14"} else global_p3d6
+        profile_surface = source.heights if variant in {"13", "14", "15", "16"} else global_p3d6
         height = ndi.map_coordinates(profile_surface, [row, col], order=1, mode="nearest").astype(np.float64)
         profiles.append({
             "index": path_index,
@@ -1787,8 +1805,13 @@ def _apply_d1_full_crossing(
         variant,
         os.environ.get("RELIEF_WEGEND_VAR", "1"),
     )
-    if variant in {"13", "14"}:
+    if variant in {"13", "14", "15", "16"}:
         solved, solver_info = _solve_spatially_coupled_profiles(profiles, crossing_m, variant, cache_key)
+        if variant == "15":
+            return _apply_d1_thin_plate_transfer(
+                result, p3d6_surface, x, z, profiles, solved, solver_info,
+                crossing_m, old_weight, settings,
+            )
         return _apply_d1_spatial_transfer(
             result, p3d6_surface, x, z, profiles, solved, solver_info,
             crossing_m, old_weight, settings,
@@ -1971,7 +1994,11 @@ def _apply_d1_spatial_transfer(
     radial_plane_mix = 1.0 - _smoothstep(
         float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius,
     )
-    plane_mix = radial_plane_mix * (1.0 - profile_cover)
+    plane_mix = (
+        radial_plane_mix
+        if settings.get("plane_over_profile", False)
+        else radial_plane_mix * (1.0 - profile_cover)
+    )
     plane_height = float(solver_info["crossing_plane_height_m"])
     plane_height += float(solver_info["crossing_plane_gradient_x"]) * (query[:, 0] - crossing_m[0])
     plane_height += float(solver_info["crossing_plane_gradient_z"]) * (query[:, 1] - crossing_m[1])
@@ -1987,6 +2014,106 @@ def _apply_d1_spatial_transfer(
     return crossing_weight, int(np.count_nonzero(active))
 
 
+def _apply_d1_thin_plate_transfer(
+    result: np.ndarray,
+    background: np.ndarray,
+    x: np.ndarray,
+    z: np.ndarray,
+    profiles: list[dict[str, Any]],
+    solved: list[np.ndarray],
+    solver_info: dict[str, Any],
+    crossing_m: np.ndarray,
+    old_weight: np.ndarray,
+    settings: dict[str, Any],
+) -> tuple[np.ndarray, int]:
+    """Transfer the solved profiles through one continuous 2D height field."""
+    from scipy.interpolate import RBFInterpolator
+
+    query = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    station_coords = np.concatenate([
+        np.asarray(profile["coords"], dtype=np.float64) * CELL_M
+        for profile in profiles
+    ])
+    station_heights = np.concatenate([
+        np.asarray(height, dtype=np.float64) for height in solved
+    ])
+    field = RBFInterpolator(
+        station_coords,
+        station_heights,
+        kernel="thin_plate_spline",
+        degree=1,
+        smoothing=0.0,
+    )
+    profile_target = field(query)
+
+    uncovered = np.ones(len(query), dtype=np.float64)
+    band = float(settings["band_m"])
+    fade = float(settings["fade_m"])
+    softmin_m = 0.02
+    for profile in profiles:
+        coords_m = np.asarray(profile["coords"], dtype=np.float64) * CELL_M
+        start_tangent = coords_m[1] - coords_m[0]
+        start_tangent /= max(float(np.hypot(*start_tangent)), 1e-12)
+        end_tangent = coords_m[-1] - coords_m[-2]
+        end_tangent /= max(float(np.hypot(*end_tangent)), 1e-12)
+        beyond_start = ((query - coords_m[0]) @ start_tangent) < -1e-8
+        beyond_end = ((query - coords_m[-1]) @ end_tangent) > 1e-8
+        valid = ~beyond_start & ~beyond_end
+
+        min_distance = np.full(len(query), np.inf, dtype=np.float64)
+        softmin_sum = np.zeros(len(query), dtype=np.float64)
+        for segment in range(len(coords_m) - 1):
+            vector = coords_m[segment + 1] - coords_m[segment]
+            norm2 = max(float(vector @ vector), 1e-15)
+            t = np.clip(((query - coords_m[segment]) @ vector) / norm2, 0.0, 1.0)
+            projected = coords_m[segment] + t[:, None] * vector
+            distance = np.sqrt(np.einsum(
+                "ij,ij->i", query - projected, query - projected,
+            ))
+            next_minimum = np.minimum(min_distance, distance)
+            old_scale = np.exp(-(min_distance - next_minimum) / softmin_m)
+            new_scale = np.exp(-(distance - next_minimum) / softmin_m)
+            softmin_sum = softmin_sum * old_scale + new_scale
+            min_distance = next_minimum
+
+        soft_distance = min_distance - softmin_m * np.log(np.maximum(softmin_sum, 1e-300))
+        route_cover = 1.0 - _smoothstep(band, band + fade, soft_distance)
+        route_cover *= valid
+        uncovered *= 1.0 - np.clip(route_cover, 0.0, 1.0)
+
+    profile_cover = 1.0 - uncovered
+    background_flat = background.ravel()
+    profile_surface = (
+        background_flat * (1.0 - profile_cover)
+        + profile_target * profile_cover
+    )
+    radius = np.hypot(
+        query[:, 0] - crossing_m[0], query[:, 1] - crossing_m[1],
+    )
+    radial_plane_mix = 1.0 - _smoothstep(
+        float(settings["plane_inner_m"]), float(settings["plane_outer_m"]), radius,
+    )
+    plane_mix = (
+        radial_plane_mix
+        if settings.get("plane_over_profile", False)
+        else radial_plane_mix * (1.0 - profile_cover)
+    )
+    plane_height = float(solver_info["crossing_plane_height_m"])
+    plane_height += float(solver_info["crossing_plane_gradient_x"]) * (query[:, 0] - crossing_m[0])
+    plane_height += float(solver_info["crossing_plane_gradient_z"]) * (query[:, 1] - crossing_m[1])
+    blended = np.maximum(profile_cover, plane_mix) > 1e-12
+    result_flat = background_flat.copy()
+    result_flat[blended] = (
+        profile_surface[blended] * (1.0 - plane_mix[blended])
+        + plane_height[blended] * plane_mix[blended]
+    )
+    result[:] = result_flat.reshape(background.shape)
+
+    crossing_weight = old_weight.copy()
+    crossing_weight.ravel()[blended] = 1.0
+    return crossing_weight, int(np.count_nonzero(profile_cover >= 0.999))
+
+
 def _apply_ramp_crossing_planes(
     base: np.ndarray,
     x: np.ndarray,
@@ -1999,11 +2126,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14"}:
+            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -2204,7 +2331,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "14")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "16")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -2315,7 +2442,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,

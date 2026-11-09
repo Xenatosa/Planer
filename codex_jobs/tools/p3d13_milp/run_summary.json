@@ -1,0 +1,41 @@
+{
+  "additional_ways_within_6m": [],
+  "plane_center": [
+    152.5,
+    28.5
+  ],
+  "plane_radius_m": 2.25,
+  "ramp_indices_in_D1": [
+    2,
+    11
+  ],
+  "results": [
+    {
+      "Hc_m": 4.3408,
+      "cross_route_eligible_pair_count": 857,
+      "eligible_pair_count": 857,
+      "g": 0.6,
+      "max_abs_delta_m": 1.75826,
+      "max_abs_pair_grade": 0.6,
+      "r3_sections_D1": 3,
+      "r3_sections_total": 5,
+      "same_route_eligible_pair_count": 0,
+      "status": "optimal_and_within_six"
+    },
+    {
+      "Hc_m": 4.303255,
+      "cross_route_eligible_pair_count": 857,
+      "eligible_pair_count": 857,
+      "g": 0.45,
+      "max_abs_delta_m": 1.804759,
+      "max_abs_pair_grade": 0.45,
+      "r3_sections_D1": 3,
+      "r3_sections_total": 5,
+      "same_route_eligible_pair_count": 0,
+      "status": "optimal_and_within_six"
+    }
+  ],
+  "source": "team/art/dorfmap_grundgeruest/relief3d/relief_daten.json.gz",
+  "station_step_coordinate_units": 0.25,
+  "station_step_m": 0.3
+}

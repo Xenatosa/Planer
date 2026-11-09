@@ -57,11 +57,11 @@
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "e1b5250808fba3a51b7bc1a801afa2453b275362a0a50e5de483e8e8b6f4b53d",
+        "height_sha256": "8aa69a17df99029e8300831a55abefc505d3ca3ca4da0c3cee571fd84f71e446",
         "terrain": {
           "changed_vertices": 5050,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "14",
+          "crossing_variant": "16",
           "endpoint_runout_vertices": 524,
           "endpoint_variant": "1",
           "layers": [
@@ -72,7 +72,7 @@
             "kachelrand_fade_3m"
           ],
           "max_abs_delta_m": 3.643326,
-          "mean_abs_delta_m": 0.341861,
+          "mean_abs_delta_m": 0.342532,
           "profile_solver": {
             "actual_sections_D1_over_0_075_m": 3,
             "actual_sections_over_0_075_m": 5,
@@ -189,7 +189,7 @@
               }
             ],
             "total_abs_delta_m": 107.471639,
-            "variant": "14"
+            "variant": "16"
           },
           "ramp_crossing_flat_vertices": 1185,
           "variant": "2",
@@ -217,7 +217,7 @@
         "terrain": {
           "changed_vertices": 480,
           "crossing_flat_vertices": 0,
-          "crossing_variant": "14",
+          "crossing_variant": "16",
           "endpoint_runout_vertices": 497,
           "endpoint_variant": "1",
           "layers": [
