@@ -26,9 +26,9 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5`. Standard ist Wegende `1` mit lokalem,
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10`. Standard ist Wegende `1` mit lokalem,
 mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
-Kreuzung `5` mit gemeinsam geloestem D1-Profil und radialer Flaeche. Wegende `1` begrenzt die lokale
+Kreuzung `10` in diesem Worktree. Wegende `1` begrenzt die lokale
 Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
 unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
 Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
@@ -37,11 +37,17 @@ Endpunkt `156.5|37.5` bei 0,188 m. Kreuzung `3`, `4` und `5` loesen das
 gemeinsame Laengsprofil von `rampe_2` und `rampe_11` mit den unveraenderten
 R3-Formelwerten. Sie mischen das Profil seitlich und laengsgerichtet in die
 p3d6-Flaeche und staffeln die ebene Kernflaeche sowie ihren radialen Auslauf.
-Variante `5` ist Standard; von 3/4/5 hat sie die kleinste D1-Kreuzungs-
-Facettenzahl (317 statt 373/353) und die wenigsten p3d6-zu-p3d8-Anstiege
-(14 statt 14/15). R3-laengs D1 bleibt mit 14 Treffern ueber dem p3d6-Wert 10.
-G1 behaelt bei diesen Varianten Kreuzung `2`, D2
-bleibt unveraendert.
+Variante `5` bleibt die p3d8-Referenz. Die p3d10-Varianten `8`, `9` und `10`
+loesen `rampe_2` und `rampe_11` ueber die gesamte jeweilige Polylinie mit dem
+R3-Gaussoperator und einer gemeinsamen Ebene im 2-m-Kreuzungsradius. Der
+voll gewichtete Wegstreifen ist 1,81 m breit; danach folgt ein 10-m-Hoehenfade.
+Variante `8` laesst den wandseitigen Rampenabschnitt frei, `9` haelt `rampe_11`
+ab Station 40 fest, und `10` begrenzt dort die Abweichung zur p3d6-Flaeche auf
+0,25 m. Variante `10` ist Standard, weil sie unter diesen drei Varianten die
+geringsten Rueckgaenge bei R8-Gitter, R3-Woelbung und R9w zeigt. Die erreichten
+Grenzwerte, Abweichungen und die vollstaendige Profil-/Mesh-Tabelle stehen in
+`pruefung/ERGEBNIS_p3d10.md` und `pruefung/bilder_p3d10/`.
+G1 behaelt bei diesen Varianten Kreuzung `2`; D2 bleibt geometrisch bytegleich.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
 Standard ist Variante `2`: Sie teilt die Wandkontur an jedem Wechsel zwischen
 den gerenderten Terrain-Dreiecken und bettet die Unterkante 0,15 m ein. So liegt
