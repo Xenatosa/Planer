@@ -1,0 +1,8 @@
+regel,weg,station_m,zentrum,feinpunkt_pair,soll_grenze_m,mesh_metrik_m,mesh_hoehen_m,transferterm
+R8_stufe,rampe_2,0.00 (Start),126.510000|31.620000,130.250|32.500 → 130.250|32.750,0.2,0.208414,12.30418 → 12.09577,joint_dirichlet_raster; volles Wegband
+R8_stufe,rampe_11,0.00 (Start),148.500000|2.500000,147.000|4.000 → 147.000|4.250,0.2,0.651355,12.76606 → 12.11471,joint_dirichlet_raster; volles Wegband
+R8_gitter,rampe_11,0.00 (Start),148.500000|2.500000,147.500|2.500 → 147.500|3.500,0.15,0.596448,12.86228 → 12.16072,joint_dirichlet_raster; volles Wegband
+R8_gitter,rampe_11,57.00 (Ende),156.484516|37.488831,154.750|36.500 → 155.750|36.500,0.15,0.263076,1.03936 → 0.67528,joint_dirichlet_raster; volles Wegband
+R8a_wegende,rampe_2,0.00 (Start),126.510000|31.620000,127.500|33.750 → 127.750|33.750,0.1,0.118947,12.24426 → 12.12531,rampenenden_lokaler_auslauf_ge4m_weich; weicher Uebergang ausserhalb 1.81-m-Band
+R8a_wegende,rampe_11,0.00 (Start),148.500000|2.500000,150.500|3.750 → 150.500|4.000,0.1,0.178342,12.72958 → 12.55123,rampenenden_lokaler_auslauf_ge4m_weich; weicher Uebergang ausserhalb 1.81-m-Band
+R8a_wegende,rampe_11,57.00 (Ende),156.484516|37.488831,157.500|35.500 → 157.750|35.500,0.1,0.169395,0.86382 → 0.69442,rampenenden_lokaler_auslauf_ge4m_weich; weicher Uebergang ausserhalb 1.81-m-Band
