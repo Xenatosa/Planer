@@ -26,9 +26,9 @@ Ausgangsmessung steht in `pruefung/ERGEBNIS_p3d2.md`.
 
 Die gezielten Aenderungen an den Rampenenden und Kreuzungen haben eigene
 Schalter: `RELIEF_WEGEND_VAR=0|1|2` und
-`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10|11|12|13|14`. Standard ist Wegende `1` mit lokalem,
+`RELIEF_KREUZUNG_VAR=0|1|2|3|4|5|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24`. Standard ist Wegende `1` mit lokalem,
 mindestens 4 m langem Auslauf an den drei D1/G1-Enden mit R8a-Treffern und
-Kreuzung `14` in diesem Worktree. Wegende `1` begrenzt die lokale
+Kreuzung `24` in diesem Worktree. Wegende `1` begrenzt die lokale
 Laengsneigung auf 0,10; Wegende `2` bezieht zusaetzlich das bereits messbar
 unauffaellige Ende `156.5|37.5` ein. Kreuzung `0` nutzt einen 4-m-Rand,
 Kreuzung `1` einen 8-m-Rand und Kreuzung `2` eine radiale 3-m-Schulter ohne
@@ -56,6 +56,12 @@ Vergleichswert, `14` ist der Standard, weil sie die Kreuzungsstufe gegenüber
 `13` weiter senkt. Variante `10` und die
 p3d8-Referenz `5` bleiben auswaehlbar. G1 behaelt bei diesen Varianten
 Kreuzung `2`; D2 bleibt geometrisch bytegleich.
+Die p3d18-Variante `23` uebernimmt das mit dem offiziellen R3-Abschnittsoperator
+optimierte D1-Raster direkt. Die gebaute Variante verfehlte die ausgegebene
+R3-Zählung, weil der affine Transferintercept im Modell falsch angesetzt war.
+Variante `24` bindet R3-Operator und Achsstützen an den tatsächlich ausgegebenen
+Transfer samt Tile-Fade. Wegführung, Ebenenkernradius von 2,00 m und
+Transferfußabdruck bleiben gegenüber `22` unverändert; `24` ist Standard.
 `RELIEF_WANDFUSS_VAR=0|1|2` schaltet die separate Wandfuss-Anbindung.
 Standard ist Variante `2`: Sie teilt die Wandkontur an jedem Wechsel zwischen
 den gerenderten Terrain-Dreiecken und bettet die Unterkante 0,15 m ein. So liegt

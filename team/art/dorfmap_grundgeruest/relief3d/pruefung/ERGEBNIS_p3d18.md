@@ -1,6 +1,6 @@
 # Ergebnis p3d18
 
-**Zwischenstand: Variante 23 gebaut, aber die offizielle R3-Prüfung verfehlt. Eine gemessene Transferlücke rechtfertigt Variante 24; Korrektur und Endprüfung laufen.**
+**Zwischenstand: Variante 23 verfehlt die offizielle R3-Prüfung; die korrigierte Variante-24-Modellformulierung hat eine zulässige Lösung bewiesen. Stufenoptimierung und Endprüfung laufen.**
 Stand: 10.11.2026 · Branch `art/dorfmap-p3d18` · Basis `c3659e7` · Kosten **0 EUR**.
 
 ## Kalibrierung gegen p3d17
@@ -17,21 +17,24 @@ Die Abweichung ist damit reproduziert und für das Modell behoben: Die bisherige
 
 Reproduktion: `python3 codex_jobs/tools/p3d18_r3/calibrate_p3d17.py`. Der Lauf speichert seine temporären Prüfdaten unter `/tmp/gate_loch_p3d18_kalibrierung.json.gz` und `/tmp/regeln_p3d18_kalibrierung.json`.
 
-## Machbarkeit
+## Korrigierte Machbarkeit Variante 24
 
-Der gemeinsame MILP-Lauf mit `r=2,00 m`, unveränderter Wegführung, Achsstützen `±0,02 m`, R3-Limits längs/quer/Wölbung `6/7/7`, maximalem Quergefälle `20 %`, R8-Gitter `0,020 m`, R8-Quer `3 %` und Kreuzungsstufe `0,116 m` hat einen zulässigen Punkt gefunden. Der Lauf optimierte innerhalb dieser Schranken die Summe der R3-Abschnittsindikatoren und danach die Stufe; HiGHS meldete optimalen Status.
+Die Variante-23-Meshprüfung offenbarte einen Transferfehler; ihr vorheriger Modellpunkt ist daher kein Machbarkeitsbeleg. Nach Korrektur des affinen Intercepts und der Achsbedingungen wurde dieselbe Rechnung mit unveränderter Wegführung, `r=2,00 m`, Achsstützen `±0,02 m`, den offiziellen R3-Operatoren und Limits längs/quer/Wölbung `6/7/7`, Querkappe `20 %`, R8-Gitter `0,020 m`, R8-Quer `3 %` und Stufe `0,116 m` neu gelöst.
+
+HiGHS fand einen zulässigen ganzzahligen Punkt und bewies das Optimum der verwendeten Machbarkeitszielfunktion (Summe der R3-Indikatoren plus `0,001 × Stufe`). Das beantwortet die geforderte Machbarkeitsfrage mit **ja**; die separaten Mindeststufenrechnung läuft anschließend.
 
 | Modellmessung am zulässigen Punkt | Ergebnis | Schranke |
 |---|---:|---:|
-| Kreuzungsstufe | `0,115266302 m` | `≤0,116 m` |
-| R8-Gitter | `0,020000000000164 m` | `≤0,020 m` (numerisch am Rand) |
-| R8-Quer | `2,993104 %` | `≤3 %` |
-| R3 längs / quer / Wölbung | `6 / 0 / 4` Abschnitte | `≤6 / ≤7 / ≤7` |
+| Kreuzungsstufe | `0,115153279 m` | `≤0,116 m` |
+| R8-Gitter | `0,020000000000037 m` | `≤0,020 m` (numerisch am Rand) |
+| R8-Quer | `2,999422 %` | `≤3 %` |
+| R3 längs / quer / Wölbung | `4 / 0 / 4` Abschnitte | `≤6 / ≤7 / ≤7` |
 | R3 maximales Quergefälle | `≤20 %` im Modell | `≤20 %` |
 | Achsstützen | 359 Stützpunkte, mit `±0,02 m` begrenzt | `±0,02 m` |
-| Ebenenkern | `r=2,00 m`; Ebenenneigung `2,171746 %` | Radius unverändert; `≤3 %` |
+| Ebenenkern | `r=2,00 m`; Ebenenneigung `2,216100 %` | Radius unverändert; `≤3 %` |
+| Modell | 7.858 Variablen, 10.136 Nebenbedingungen; MIP-Lücke `0` | HiGHS Status optimal |
 
-Das bestätigt Machbarkeit im Transfermodell. Die offizielle Prüfung des späteren Meshes bleibt maßgeblich; der R8-Gitterwert liegt in der numerischen Lösung praktisch genau auf seiner Grenze. Noch wurde kein p3d18-Mesh gebaut.
+Das ist ein Modellbeleg, noch kein Mesh-Gate-Beleg. Der R8-Gitterwert liegt numerisch praktisch auf der Grenze und wird am ausgegebenen Mesh durch den unveränderten offiziellen Prüfer kontrolliert. Der vollständige Solverbericht liegt unter [`bilder_p3d18/variante24_machbarkeit.json`](bilder_p3d18/variante24_machbarkeit.json).
 
 ## Stufenoptimierung und Variante-23-Diagnose
 
@@ -67,7 +70,7 @@ Der Variante-23-Build hielt D2 bytegleich (`749d3c4b…`), G1 bytegleich (`38afe
 
 ## Noch offen
 
-- Korrigierte Variante 24, danach neue Machbarkeit und Stufenrechnung.
-- Vollständige offizielle Gate-Läufe, Regression, Adapter/Xvfb/LOD- und Bildprüfung auf der korrigierten Endvariante.
+- Mindeststufe bei denselben harten Grenzen; der zulässige Machbarkeitspunkt dient als MIP-Start.
+- Variante-24-Mesh und vollständige offizielle Gate-Läufe, Regression, Adapter/Xvfb/LOD- und Bildprüfung.
 
 Keine Wegführung, Prüfschwelle, Zellquelle, D2-Datei oder Ebenenkernradius wurde geändert. Es wurde noch kein p3d18-Mesh gebaut.

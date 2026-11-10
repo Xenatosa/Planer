@@ -18,6 +18,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 
 import numpy as np
 from scipy import ndimage as ndi
@@ -192,6 +193,65 @@ def d1_transfer_coverage(profiles, x, z, crossing_m, settings) -> np.ndarray:
     return coverage.reshape(x.shape)
 
 
+def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start, time_limit=600.0):
+    """Solve with a full incumbent start using the free HiGHS Python binding."""
+    highspy_dir = Path("/tmp/p3d18_highspy")
+    if str(highspy_dir) not in sys.path and highspy_dir.exists():
+        sys.path.insert(0, str(highspy_dir))
+    import highspy
+
+    lp = highspy.HighsLp()
+    lp.num_col_ = int(matrix.shape[1])
+    lp.num_row_ = int(matrix.shape[0])
+    lp.col_cost_ = np.asarray(objective, dtype=np.float64)
+    lp.col_lower_ = np.asarray(lower, dtype=np.float64)
+    lp.col_upper_ = np.asarray(upper, dtype=np.float64)
+    lp.row_lower_ = np.full(matrix.shape[0], -np.inf, dtype=np.float64)
+    lp.row_upper_ = np.asarray(rhs, dtype=np.float64)
+    lp.sense_ = highspy.ObjSense.kMinimize
+    lp.a_matrix_.format_ = highspy.MatrixFormat.kRowwise
+    lp.a_matrix_.start_ = matrix.indptr.astype(np.int32, copy=False)
+    lp.a_matrix_.index_ = matrix.indices.astype(np.int32, copy=False)
+    lp.a_matrix_.value_ = matrix.data.astype(np.float64, copy=False)
+    lp.integrality_ = [
+        highspy.HighsVarType.kInteger if value else highspy.HighsVarType.kContinuous
+        for value in np.asarray(integrality, dtype=np.uint8)
+    ]
+
+    highs = highspy.Highs()
+    highs.setOptionValue("output_flag", False)
+    highs.setOptionValue("presolve", "on")
+    highs.setOptionValue("threads", 1)
+    highs.setOptionValue("mip_rel_gap", 0.0)
+    highs.setOptionValue("time_limit", float(time_limit))
+    status = highs.passModel(lp)
+    if status not in (highspy.HighsStatus.kOk, highspy.HighsStatus.kWarning):
+        raise RuntimeError(f"HiGHS Modellannahme fehlgeschlagen: {status}")
+    start = np.asarray(start, dtype=np.float64)
+    if len(start) != matrix.shape[1]:
+        raise ValueError(f"MIP-Start hat {len(start)} statt {matrix.shape[1]} Werte")
+    start_status = highs.setSolution(
+        matrix.shape[1], np.arange(matrix.shape[1], dtype=np.int32), start,
+    )
+    if start_status not in (highspy.HighsStatus.kOk, highspy.HighsStatus.kWarning):
+        raise RuntimeError(f"HiGHS MIP-Start wurde abgelehnt: {start_status}")
+    highs.run()
+    model_status = highs.getModelStatus()
+    solution = highs.getSolution()
+    info = highs.getInfo()
+    success = model_status == highspy.HighsModelStatus.kOptimal
+    status_code = 0 if success else 1 if model_status == highspy.HighsModelStatus.kTimeLimit else 2
+    return SimpleNamespace(
+        success=success,
+        status=status_code,
+        message=highs.modelStatusToString(model_status),
+        x=np.asarray(solution.col_value, dtype=np.float64) if solution.value_valid else None,
+        fun=float(info.objective_function_value),
+        mip_dual_bound=float(info.mip_dual_bound),
+        mip_gap=float(info.mip_gap),
+    )
+
+
 def profile_path(raw: list[list[float]]) -> tuple[np.ndarray, np.ndarray]:
     path = np.asarray(raw, dtype=np.float64)
     cumulative = np.r_[0.0, np.cumsum(np.hypot(*np.diff(path, axis=0).T))]
@@ -291,6 +351,9 @@ def solve(
     wob_limit: int | None = 7,
     objective_mode: str = "step",
     relax_integrality: bool = False,
+    mip_start_path: Path | None = None,
+    mip_start_out: Path | None = None,
+    time_limit_s: float = 600.0,
 ) -> dict:
     if objective_mode not in {"feasibility", "step", "quer", "wob"}:
         raise ValueError(f"Unbekannter Ziellauf: {objective_mode}")
@@ -433,7 +496,9 @@ def solve(
                 coefficient = weight * support
                 if abs(coefficient) > 1e-13:
                     entries[surface_start + index] = coefficient
-                fixed += weight * (1.0 - support) * float(transfer_background[iz, ix])
+                # `transfer_background` is the affine intercept of the actual
+                # final transfer, not an unmodified terrain background.
+                fixed += weight * float(transfer_background[iz, ix])
             return entries, fixed
         fixed = float(ndi.map_coordinates(
             gb, [[pz * rs], [px * rs]], order=1, mode="nearest",
@@ -463,10 +528,10 @@ def solve(
         for k, (x, z) in enumerate(p["coords"]):
             if not (grid_x0 - 1e-9 <= x <= grid_x1 + 1e-9 and grid_z0 - 1e-9 <= z <= grid_z1 + 1e-9):
                 continue
-            row = {surface_start + j: v for j, v in mesh_row(float(x), float(z)).items()}
+            row, fixed = route_field_row(float(x), float(z))
             hidx = h_offsets[route] + k
-            add({**row, hidx: -1.0}, axis_tolerance)
-            add({**{j: -v for j, v in row.items()}, hidx: 1.0}, axis_tolerance)
+            add({**row, hidx: -1.0}, axis_tolerance - fixed)
+            add({**{j: -v for j, v in row.items()}, hidx: 1.0}, axis_tolerance + fixed)
             axis_count += 1
 
     # Hold the complete plane core at checker resolution, using bilinear mesh values.
@@ -706,13 +771,21 @@ def solve(
     elif objective_mode == "wob":
         for index in wob_binary_index.values():
             objective[index] = 1.0
-    result = milp(
-        objective,
-        integrality=(np.zeros_like(integrality) if relax_integrality else integrality),
-        bounds=Bounds(lower, upper),
-        constraints=LinearConstraint(matrix, np.full(len(rhs), -np.inf), np.asarray(rhs)),
-        options={"presolve": True, "mip_rel_gap": 0.0, "time_limit": 600},
-    )
+    if mip_start_path is not None:
+        mip_start = np.asarray(json.loads(mip_start_path.read_text(encoding="utf-8"))["x"], dtype=np.float64)
+        result = highs_mip_solve(
+            matrix, rhs, objective,
+            np.zeros_like(integrality) if relax_integrality else integrality,
+            lower, upper, mip_start, time_limit=time_limit_s,
+        )
+    else:
+        result = milp(
+            objective,
+            integrality=(np.zeros_like(integrality) if relax_integrality else integrality),
+            bounds=Bounds(lower, upper),
+            constraints=LinearConstraint(matrix, np.full(len(rhs), -np.inf), np.asarray(rhs)),
+            options={"presolve": True, "mip_rel_gap": 0.0, "time_limit": time_limit_s},
+        )
     primal_feasible = False
     if result.x is not None:
         activity = matrix @ result.x
@@ -724,7 +797,7 @@ def solve(
                 result.x[integrality.astype(bool)] - np.rint(result.x[integrality.astype(bool)])
             ) <= 2e-6))
         )
-    if (not result.success and not (objective_mode == "feasibility" and primal_feasible)) or result.x is None:
+    if (not result.success and not primal_feasible) or result.x is None:
         summary = {
             "status": str(result.message),
             "status_code": int(result.status),
@@ -807,6 +880,12 @@ def solve(
     result.fun = primary_step
     result.x = result_x
     tie_break_movement = float(secondary.fun)
+    if mip_start_out is not None:
+        mip_start_out.parent.mkdir(parents=True, exist_ok=True)
+        mip_start_out.write_text(
+            json.dumps({"x": result_x.tolist()}, separators=(",", ":")) + "\n",
+            encoding="utf-8",
+        )
 
     summary = {
         "status": str(result.message), "status_code": int(result.status),
@@ -922,6 +1001,9 @@ def main() -> None:
     ap.add_argument("--stage-limit", type=float, default=None)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--reference-mesh", type=Path, help="p3d16 relief JSON gzip; its GB field is used only for the deterministic minimax tie-break")
+    ap.add_argument("--mip-start", type=Path, help="full feasible HiGHS start vector from an earlier identical model")
+    ap.add_argument("--mip-start-out", type=Path, help="write the final feasible model vector for a later warm start")
+    ap.add_argument("--time-limit", type=float, default=600.0, help="MILP time limit in seconds")
     ap.add_argument("--axis-tolerance", type=float, default=0.02)
     ap.add_argument("--plane-tolerance", type=float, default=0.02)
     ap.add_argument("--relax-integrality", action="store_true")
@@ -944,6 +1026,9 @@ def main() -> None:
         args.r3_wob_limit,
         args.mode,
         args.relax_integrality,
+        args.mip_start,
+        args.mip_start_out,
+        args.time_limit,
     )
     summary["source_relief_sha256"] = hashlib.sha256(RELIEF.read_bytes()).hexdigest()
     summary["tie_break_reference_sha256"] = (
