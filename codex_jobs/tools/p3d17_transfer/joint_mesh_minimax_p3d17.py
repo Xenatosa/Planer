@@ -176,12 +176,14 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     binary_index = {item: total_h + 0 for item in []}
 
     checker_fs = int(data["FW"]["fs"])
-    local, x0, z0, neighbor_pairs = local_r8_mask(data, checker_fs)
+    local, local_x0, local_z0, neighbor_pairs = local_r8_mask(data, checker_fs)
     # D1 mesh vertices use the global relief resolution (rs=2 => 0.5 map units).
-    # Checker points remain at FW.fs=4 and are evaluated bilinearly on these nodes.
+    # The whole D1 mesh is part of the joint field; checker points remain at
+    # FW.fs=4 and are evaluated bilinearly on these nodes.
     fs = int(data["rs"])
-    height = int(round(8.0 * fs)) + 1
-    width = height
+    grid_x0, grid_z0, grid_x1, grid_z1 = D1_BOUNDS
+    height = int(round((grid_z1 - grid_z0) * fs)) + 1
+    width = int(round((grid_x1 - grid_x0) * fs)) + 1
     surface_count = height * width
     surface_start = total_h
     t_index = surface_start + surface_count
@@ -222,14 +224,14 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
 
     # Bilinear evaluation at every checker sample on the emitted mesh raster.
     def mesh_row(px: float, pz: float) -> dict[int, float]:
-        return bilinear_row(px, pz, x0, z0, fs, width)
+        return bilinear_row(px, pz, grid_x0, grid_z0, fs, width)
 
     def pair_row(a: int, b: int) -> dict[int, float]:
         checker_width = local.shape[1]
         az, ax = divmod(a, checker_width)
         bz, bx = divmod(b, checker_width)
-        row_a = mesh_row(x0 + ax / checker_fs, z0 + az / checker_fs)
-        row_b = mesh_row(x0 + bx / checker_fs, z0 + bz / checker_fs)
+        row_a = mesh_row(local_x0 + ax / checker_fs, local_z0 + az / checker_fs)
+        row_b = mesh_row(local_x0 + bx / checker_fs, local_z0 + bz / checker_fs)
         entries = dict(row_a)
         for index, value in row_b.items():
             entries[index] = entries.get(index, 0.0) - value
@@ -245,9 +247,9 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     axis_count = 0
     for route, p in enumerate(profiles):
         for k, (x, z) in enumerate(p["coords"]):
-            if not (x0 - 1e-9 <= x <= x0 + (width - 1) / fs + 1e-9 and z0 - 1e-9 <= z <= z0 + (height - 1) / fs + 1e-9):
+            if not (grid_x0 - 1e-9 <= x <= grid_x1 + 1e-9 and grid_z0 - 1e-9 <= z <= grid_z1 + 1e-9):
                 continue
-            row = {surface_start + j: v for j, v in bilinear_row(float(x), float(z), x0, z0, fs, width).items()}
+            row = {surface_start + j: v for j, v in mesh_row(float(x), float(z)).items()}
             hidx = h_offsets[route] + k
             add({**row, hidx: -1.0}, axis_tolerance)
             add({**{j: -v for j, v in row.items()}, hidx: 1.0}, axis_tolerance)
@@ -258,7 +260,7 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     checker_height, checker_width = local.shape
     for iz in range(checker_height):
         for ix in range(checker_width):
-            x, z = x0 + ix / checker_fs, z0 + iz / checker_fs
+            x, z = local_x0 + ix / checker_fs, local_z0 + iz / checker_fs
             dx, dz = (x - CROSSING[0]) * CELL_M, (z - CROSSING[1]) * CELL_M
             if np.hypot(dx, dz) > PLANE_RADIUS_M + 1e-9:
                 continue
@@ -339,8 +341,8 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     else:
         ref_data = json.loads(gzip.decompress(reference_mesh_path.read_bytes()))
         reference_g = np.frombuffer(base64.b64decode(ref_data["GB"]), dtype=np.float32).reshape(ny * rs + 1, nx * rs + 1).astype(np.float64)
-    mesh_x = x0 + np.arange(width, dtype=np.float64) / fs
-    mesh_z = z0 + np.arange(height, dtype=np.float64) / fs
+    mesh_x = grid_x0 + np.arange(width, dtype=np.float64) / fs
+    mesh_z = grid_z0 + np.arange(height, dtype=np.float64) / fs
     mz, mx = np.meshgrid(mesh_z, mesh_x, indexing="ij")
     surface_reference = ndi.map_coordinates(reference_g, [mz.ravel() * rs, mx.ravel() * rs], order=1, mode="nearest")
     slack_count = total_h + surface_count
@@ -392,7 +394,8 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
         "plane_slope_limit_pct": 3.0, "same_route_arc_distance_factor": SAME_ROUTE_ARC_FACTOR,
         "route_pair_count": len(pairs), "same_route_pair_count": sum(a == b for a, _, b, _, _ in pairs),
         "R8_neighbor_pair_count": len(neighbor_pairs), "axis_supports": axis_count,
-        "plane_core_supports": plane_count, "variables": nvars, "constraints": len(rhs),
+        "plane_core_supports": plane_count,
+        "variables": nvars, "constraints": len(rhs),
         "minimum_neighbor_step_m": primary_step,
         "tie_break_movement_l1_m": tie_break_movement,
         "tie_break_reference_mesh": reference_mesh_path.name if reference_mesh_path else "GB source field",
@@ -416,7 +419,7 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
         step, a, b = max(steps, default=(0.0, 0, 0))
         def checker_point(i: int) -> dict:
             iz, ix = divmod(i, local.shape[1])
-            px, pz = x0 + ix / checker_fs, z0 + iz / checker_fs
+            px, pz = local_x0 + ix / checker_fs, local_z0 + iz / checker_fs
             row = mesh_row(px, pz)
             sampled = sum(value * surface[index] for index, value in row.items())
             return {"x": px, "z": pz, "height_m": float(sampled)}
@@ -424,7 +427,7 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
         summary["mesh_raster_spacing_map_units"] = 1.0 / fs
         summary["checker_spacing_map_units"] = 1.0 / checker_fs
         summary["surface_grid"] = {
-            "x0": x0, "z0": z0, "spacing": 1.0 / fs,
+            "x0": grid_x0, "z0": grid_z0, "spacing": 1.0 / fs,
             "width": width, "height": height,
             "heights_m": surface.reshape(height, width).tolist(),
         }

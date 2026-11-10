@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -132,6 +132,9 @@ KREUZUNG_SETTINGS = {
     # Variant 20 keeps the p3d15 field and raster constraints, reduces only
     # the plane core radius to 2 m, and minimizes the exact local R8 mesh step.
     "20": {"mode": "constrained_thin_plate", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.0, "plane_inner_m": 2.0, "plane_outer_m": 4.0, "plane_deviation_m": 0.02, "pair_grade": 0.45, "same_route_arc_distance_factor": 1.25, "plane_support_spacing_m": 0.30, "constrained_mesh_supports": True, "surface_smoothness_weight": 10.0, "band_support_penalty": 1000.0, "r8_minimax_step": True},
+    # Variant 21 uses the exact common full-D1 raster LP/MILP solution as
+    # Dirichlet data through the 1.81 m route band and 2 m crossing core.
+    "21": {"mode": "joint_dirichlet_raster", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "pair_grade": 0.45, "r8_minimax_step": True},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -1811,7 +1814,7 @@ def _apply_d1_full_crossing(
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
         raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"}:
         cx, cz = 152.5, 28.5
     else:
         cx, cz, _, _ = crossings[0]
@@ -1845,7 +1848,7 @@ def _apply_d1_full_crossing(
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
         col = coords[:, 0] * rs
-        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20"} else global_p3d6
+        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"} else global_p3d6
         height = ndi.map_coordinates(profile_surface, [row, col], order=1, mode="nearest").astype(np.float64)
         profiles.append({
             "index": path_index,
@@ -1863,7 +1866,21 @@ def _apply_d1_full_crossing(
         variant,
         os.environ.get("RELIEF_WEGEND_VAR", "1"),
     )
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"}:
+        if variant == "21":
+            solved, solver_info = _load_p3d17_joint_solution(source, profiles)
+            crossing_weight, flat_count = _apply_d1_joint_solution_transfer(
+                result, p3d6_surface, profiles, solved, solver_info,
+                crossing_m, settings, x, z,
+            )
+            solver_info = {
+                key: value for key, value in solver_info.items()
+                if key not in {"surface_grid", "routes"}
+            }
+            _FULL_CROSSING_CACHE[cache_key] = (
+                [item.copy() for item in solved], dict(solver_info),
+            )
+            return crossing_weight, flat_count
         solved, solver_info = _solve_spatially_coupled_profiles(profiles, crossing_m, variant, cache_key)
         if variant in {"18", "19", "20"}:
             crossing_weight, flat_count = _apply_d1_unified_field_transfer(
@@ -2679,11 +2696,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}:
+            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -2884,7 +2901,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "20")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "21")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -2995,7 +3012,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,
@@ -3004,3 +3021,100 @@ def terrain_heights(
         if cache_key in _FULL_CROSSING_CACHE:
             info["profile_solver"] = dict(_FULL_CROSSING_CACHE[cache_key][1])
     return result.astype("<f4"), info
+
+
+def _load_p3d17_joint_solution(
+    source: ReliefSource, profiles: list[dict[str, Any]],
+) -> tuple[list[np.ndarray], dict[str, Any]]:
+    path = Path(__file__).with_name("p3d17_joint_mesh.json")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("source_relief_sha256") != source.source_file_sha256:
+        raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
+    solved = []
+    for profile in profiles:
+        record = payload["routes"][f"rampe_{profile['index']}"]
+        coords = np.asarray(record["coords_map"], dtype=np.float64)
+        target_coords = np.asarray(profile["coords"], dtype=np.float64)
+        if coords.shape != target_coords.shape or not np.array_equal(coords, target_coords):
+            raise RuntimeError(f"p3d17 Achsstuetzen fuer rampe_{profile['index']} passen nicht")
+        solved.append(np.asarray(record["solution_h_m"], dtype=np.float64))
+    return solved, payload
+
+
+def _apply_d1_joint_solution_transfer(
+    result: np.ndarray,
+    background: np.ndarray,
+    profiles: list[dict[str, Any]],
+    solved: list[np.ndarray],
+    solver_info: dict[str, Any],
+    crossing_m: np.ndarray,
+    settings: dict[str, Any],
+    x: np.ndarray,
+    z: np.ndarray,
+) -> tuple[np.ndarray, int]:
+    """Transfer the shared raster solution exactly, then fade outside its supports."""
+    grid = solver_info["surface_grid"]
+    target_grid = np.asarray(grid["heights_m"], dtype=np.float64)
+    if target_grid.shape != result.shape:
+        raise RuntimeError("p3d17 D1-Rasterloesung hat eine unerwartete Form")
+    spacing = float(grid["spacing"])
+    x_indices = np.rint((x[0] - float(grid["x0"])) / spacing).astype(np.int64)
+    z_indices = np.rint((z[:, 0] - float(grid["z0"])) / spacing).astype(np.int64)
+    if not np.allclose(x[0], float(grid["x0"]) + x_indices * spacing, atol=1e-9, rtol=0.0):
+        raise RuntimeError("p3d17 Rasterloesung liegt nicht auf dem D1-Meshgitter")
+    if not np.allclose(z[:, 0], float(grid["z0"]) + z_indices * spacing, atol=1e-9, rtol=0.0):
+        raise RuntimeError("p3d17 Rasterloesung liegt nicht auf dem D1-Meshgitter")
+    target = target_grid[np.ix_(z_indices, x_indices)]
+
+    query = np.column_stack((x.ravel() * CELL_M, z.ravel() * CELL_M))
+    uncovered = np.ones(len(query), dtype=np.float64)
+    band = float(settings["band_m"])
+    fade = float(settings["fade_m"])
+    for profile in profiles:
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        direction = np.gradient(coords, axis=0)
+        direction /= np.maximum(np.linalg.norm(direction, axis=1, keepdims=True), 1e-9)
+        normals = np.column_stack((-direction[:, 1], direction[:, 0]))
+        _, lateral, _ = _project_to_ramp_strip(
+            query, coords, np.asarray(profile["stations"], dtype=np.float64), normals, band,
+        )
+        path_m = coords * CELL_M
+        start_tangent = path_m[1] - path_m[0]
+        start_tangent /= max(float(np.hypot(*start_tangent)), 1e-12)
+        end_tangent = path_m[-1] - path_m[-2]
+        end_tangent /= max(float(np.hypot(*end_tangent)), 1e-12)
+        valid = ~(((query - path_m[0]) @ start_tangent) < -1e-8)
+        valid &= ~(((query - path_m[-1]) @ end_tangent) > 1e-8)
+        route_cover = (1.0 - _smoothstep(band, band + fade, lateral)) * valid
+        uncovered *= 1.0 - np.clip(route_cover, 0.0, 1.0)
+
+    profile_cover = 1.0 - uncovered
+    radius = np.linalg.norm(query - crossing_m[None, :], axis=1)
+    plane_cover = 1.0 - _smoothstep(
+        float(settings["plane_radius_m"]), float(settings["plane_outer_m"]), radius,
+    )
+    coverage = 1.0 - (1.0 - profile_cover) * (1.0 - plane_cover)
+    delivered = background.ravel() * (1.0 - coverage) + target.ravel() * coverage
+    result[:] = delivered.reshape(result.shape)
+
+    axis_errors = []
+    for profile, heights in zip(profiles, solved):
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        inside = (
+            (coords[:, 0] >= x[0, 0] - 1e-9) & (coords[:, 0] <= x[0, -1] + 1e-9)
+            & (coords[:, 1] >= z[0, 0] - 1e-9) & (coords[:, 1] <= z[-1, 0] + 1e-9)
+        )
+        sampled = ndi.map_coordinates(
+            result, [(coords[inside, 1] - z[0, 0]) / (z[1, 0] - z[0, 0]),
+                     (coords[inside, 0] - x[0, 0]) / (x[0, 1] - x[0, 0])],
+            order=1, mode="nearest",
+        )
+        axis_errors.extend(np.abs(sampled - np.asarray(heights)[inside]).tolist())
+    solver_info["variant21_axis_mesh_max_abs_error_m"] = float(max(axis_errors, default=0.0))
+    solver_info["variant21_axis_mesh_over_0_02_count"] = int(
+        np.count_nonzero(np.asarray(axis_errors) > 0.020001)
+    )
+    solver_info["variant21_direct_mesh_supports"] = int(np.count_nonzero(coverage >= 0.999999))
+    solver_info["variant21_max_fade_weight"] = float(np.max(coverage))
+    weight_grid = coverage.reshape(x.shape)
+    return weight_grid, int(np.count_nonzero(weight_grid >= 0.999999))
