@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -134,7 +134,12 @@ KREUZUNG_SETTINGS = {
     "20": {"mode": "constrained_thin_plate", "band_m": 1.81, "fade_m": 9.5, "selection_sigma_m": 0.6, "plane_radius_m": 2.0, "plane_inner_m": 2.0, "plane_outer_m": 4.0, "plane_deviation_m": 0.02, "pair_grade": 0.45, "same_route_arc_distance_factor": 1.25, "plane_support_spacing_m": 0.30, "constrained_mesh_supports": True, "surface_smoothness_weight": 10.0, "band_support_penalty": 1000.0, "r8_minimax_step": True},
     # Variant 21 uses the exact common full-D1 raster LP/MILP solution as
     # Dirichlet data through the 1.81 m route band and 2 m crossing core.
-    "21": {"mode": "joint_dirichlet_raster", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "pair_grade": 0.45, "r8_minimax_step": True},
+    "21": {"mode": "joint_dirichlet_raster", "solution_file": "p3d17_joint_mesh.json", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "pair_grade": 0.45, "r8_minimax_step": True},
+    # The gate exposed a narrow 4-map-unit ring point outside variant 21's
+    # direct support. Variant 22 uses the exact R8 fit operators and transfers
+    # that solved raster through their measured footprint before its smooth
+    # terrain fade. The physical plane core remains 2.00 m.
+    "22": {"mode": "joint_dirichlet_raster", "solution_file": "p3d17_joint_mesh_v22.json", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "r8_transfer_radius_map": 4.0, "r8_fade_m": 9.5, "pair_grade": 0.45, "r8_minimax_step": True},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -1814,7 +1819,7 @@ def _apply_d1_full_crossing(
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
         raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}:
         cx, cz = 152.5, 28.5
     else:
         cx, cz, _, _ = crossings[0]
@@ -1848,7 +1853,7 @@ def _apply_d1_full_crossing(
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
         col = coords[:, 0] * rs
-        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"} else global_p3d6
+        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22"} else global_p3d6
         height = ndi.map_coordinates(profile_surface, [row, col], order=1, mode="nearest").astype(np.float64)
         profiles.append({
             "index": path_index,
@@ -1866,9 +1871,11 @@ def _apply_d1_full_crossing(
         variant,
         os.environ.get("RELIEF_WEGEND_VAR", "1"),
     )
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21"}:
-        if variant == "21":
-            solved, solver_info = _load_p3d17_joint_solution(source, profiles)
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}:
+        if variant in {"21", "22"}:
+            solved, solver_info = _load_p3d17_joint_solution(
+                source, profiles, str(settings["solution_file"]),
+            )
             crossing_weight, flat_count = _apply_d1_joint_solution_transfer(
                 result, p3d6_surface, profiles, solved, solver_info,
                 crossing_m, settings, x, z,
@@ -2696,11 +2703,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
+            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -2901,7 +2908,7 @@ def terrain_heights(
         raise ValueError(f"RELIEF_GELAENDE_VAR muss einer von {sorted(TERRAIN_VARIANTS)} sein")
     import os
     endpoint_variant = os.environ.get("RELIEF_WEGEND_VAR", "1")
-    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "21")
+    crossing_variant = os.environ.get("RELIEF_KREUZUNG_VAR", "22")
     if endpoint_variant not in WEGENDE_VARIANTS:
         raise ValueError(f"RELIEF_WEGEND_VAR muss einer von {sorted(WEGENDE_VARIANTS)} sein")
     if crossing_variant not in KREUZUNG_VARIANTS:
@@ -3012,7 +3019,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,
@@ -3024,9 +3031,9 @@ def terrain_heights(
 
 
 def _load_p3d17_joint_solution(
-    source: ReliefSource, profiles: list[dict[str, Any]],
+    source: ReliefSource, profiles: list[dict[str, Any]], solution_file: str,
 ) -> tuple[list[np.ndarray], dict[str, Any]]:
-    path = Path(__file__).with_name("p3d17_joint_mesh.json")
+    path = Path(__file__).with_name(solution_file)
     payload = json.loads(path.read_text(encoding="utf-8"))
     if payload.get("source_relief_sha256") != source.source_file_sha256:
         raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
@@ -3094,6 +3101,21 @@ def _apply_d1_joint_solution_transfer(
         float(settings["plane_radius_m"]), float(settings["plane_outer_m"]), radius,
     )
     coverage = 1.0 - (1.0 - profile_cover) * (1.0 - plane_cover)
+    gate_radius_map = float(settings.get("r8_transfer_radius_map", 0.0))
+    if gate_radius_map > 0.0:
+        gate_center_map = np.asarray(
+            solver_info.get("R8_gate_center_unrounded_map", [
+                crossing_m[0] / CELL_M, crossing_m[1] / CELL_M,
+            ]),
+            dtype=np.float64,
+        )
+        gate_radius = np.linalg.norm(query / CELL_M - gate_center_map[None, :], axis=1)
+        gate_cover = 1.0 - _smoothstep(
+            gate_radius_map,
+            gate_radius_map + float(settings["r8_fade_m"]) / CELL_M,
+            gate_radius,
+        )
+        coverage = 1.0 - (1.0 - coverage) * (1.0 - gate_cover)
     delivered = background.ravel() * (1.0 - coverage) + target.ravel() * coverage
     result[:] = delivered.reshape(result.shape)
 
