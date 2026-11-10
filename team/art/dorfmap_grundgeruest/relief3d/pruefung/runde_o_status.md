@@ -716,3 +716,94 @@ Anschluss: p3d10 (Basis p3d8 @ 123408b; p3d9-Varianten 6/7 verworfen, nicht wied
 
 ## t144u (09.11. ~01:54 Europe/Berlin) p3d10 Hang -> Resume
 Live: Log 00:16 still, CPU0.5%, PIDs1191708/1191717 tot. Uncommitted nach sicher_p3d10_01152 kopiert. Session 01a1bd39… resumed; Log schreibt wieder (Luna/xhigh belegt). Kein Doppel-Lauf, keine Loeschung, keine Integration. Anschluss aktualisiert.
+
+## t142u-Watch (09.11. ~02:55 Europe/Berlin) p3d10 zweiter Haenger -> Resume
+Ursache: Log/Session-Rollout seit 01:58 ohne Ereignis, CPU ~1 %, keine Rechen-Kindprozesse, kein ende_p3d10.txt (gleiches Haengerbild). Uncommitted (index.html, neu/build.json, neu/index.html, neu/mesh.py) nach codex_jobs/sicher_p3d10_0255 gesichert (+ uncommitted.diff), nichts geloescht.
+Fortsetzung: alter Prozess beendet, gleiche Session 01a1bd39… resumed, Log codex_jobs/log_p3d10.txt (alter: log_p3d10_vor_haenger_0255.txt), Log bestaetigt gpt-6-luna / xhigh. Kein Doppel-Lauf, keine Integration.
+Anschluss: nach ende_p3d10.txt Ergebnis unabhaengig pruefen (job_p3d10.txt, ANSCHLUSS_t139u.md); haengt es erneut, Ursache (API-Haenger nach Reasoning-Schritt) pruefen und wieder resumen.
+
+## t142u-Watch (09.11. ~03:55 Europe/Berlin) p3d10 dritter Haenger -> Resume
+Ursache: Log/Session-Rollout seit 02:55 ohne Ereignis (letztes Item: Debug-Ausgabe eines Tool-Aufrufs), Prozess ~0 % CPU, keine Rechen-Kindprozesse, kein ende_p3d10.txt. Uncommitted (index.html, neu/build.json, neu/index.html, neu/mesh.py) nach codex_jobs/sicher_p3d10_0353 gesichert (+ uncommitted.diff), nichts geloescht.
+Fortsetzung: alter Prozess beendet, gleiche Session 01a1bd39… resumed, Log codex_jobs/log_p3d10.txt (alter: log_p3d10_vor_haenger_0353.txt), Log bestaetigt gpt-6-luna / xhigh. Kein Doppel-Lauf, keine Integration.
+Anschluss: nach ende_p3d10.txt Ergebnis unabhaengig pruefen (job_p3d10.txt, ANSCHLUSS_t139u.md); haengt es erneut, wieder resumen; bei wiederholtem Haengen ohne Fortschritt Fabian ehrlich melden.
+
+## t142u-Watch (09.11. ~09:10 Europe/Berlin): p3d10 gegengeprueft, nicht gemergt; p3d11 gestartet
+p3d10 992f191 (fertig 08:23, Log gpt-6-luna/xhigh). Unabhaengig in /tmp/gp_p3d10 (detached) neu gebaut: deterministisch, Pruefer/Tests/Schwellen unveraendert, eigene Render bytegleich mit committed. t42u 0, Loch xvfb 0 (88728), LOD1 134316, D1-Hash 2b3655e7…, G1 38afeb30…, D2-Mesh bytegleich, D2-Screenshot 558b76f2… statt e8db06e6… (Mesh gleich).
+Messung = Bericht: Gates 565/43/340 (p3d8 570/39/336). D1 R3 laengs/woelb/quer 6/7/9 (laengs-Ziel erreicht), aber R3_quer 54.2 % bei 151.8|29.6 und 48.6 % bei 150.4|33.1; Kreuzung 152.5|28.5 Stufe 1.028 (p3d8 0.043); Endpunkt 156.5|37.5 neu R8_gitter/R8_quer/R8a; G6 D1 0->2, G11 D1 0->2, R8b D1 +1. pytest 23/8 (u. a. Mesh-Quelle 4.0128 > 4.0 bei 128.5|37.5).
+Nahbilder selbst angesehen: D1-Kreuzung terrassiert mit scharfer senkrechter Knickfalte, deutlich schlechter als p3d8; Wandfuss/Wegende ohne Verbesserung; G1 pixelgleich.
+Ursache (gemessen): Stufe 1.028 m bei 152.0|32.0->32.25, 3.5 m vom Kreuzungszentrum auf der Wegflaeche. 2D-Transfer schreibt je Vertex hart die naechste Rampe (nearest), die MILP-Profile stimmen nur im Radius 2 m ueberein -> Profilsprung an der Mittelsenkrechte der Korridore; Band mit Gewicht 1 nur band_m 1.81, Ebene nur r 1–2 m statt R8-Umkreis 4 m.
+NICHT nach grundgeruest mergen.
+Anschluss: p3d11 (Basis p3d10 @ 992f191, MILP-1D behalten), Luna/xhigh, PID 1344582, Worktree /workspace/wt_dorfmap_p3d11, Branch art/dorfmap-p3d11, Log codex_jobs/log_p3d11.txt, Ende ende_p3d11.txt, Start starte_p3d11.sh, Auftrag job_p3d11.txt. Thema: 2D-Transfer ohne Hart-Umschalten (gemeinsame Flaeche/glatte Mischung im Ueberlappungsbereich bis r 4 m, Band >=1.75 m Halbbreite), Ziele R3 D1 <=6/7/7, Kreuzung <=0.116, R8/R8a 0, keine Regression gegen p3d8, pytest >=26/5.
+
+## t142u-Watch (09.11. ~11:10 Europe/Berlin): p3d11 gegengeprueft, nicht gemergt; p3d12 gestartet
+p3d11 4dd4c62 (fertig 10:43, Log gpt-6-luna/xhigh). Unabhaengig in /tmp/gp_p3d11 (detached) neu gebaut: deterministisch (git status leer, index.html 20d3425d… = Bericht), Pruefer/Tests/Schwellen unveraendert (Code-Diff nur neu/mesh.py). t42u 0, Loch xvfb 0 (88728), D1-Hash 146bfdac…, G1 38afeb30…, D2-Mesh bytegleich. Gates 560/40/338 (p3d10 565/43/340, p3d8 570/39/336). Bericht: Kreuzung Stufe 0.791 (Ziel <=0.116, p3d8 0.043), Gitter 0.004; R3 D1 laengs/quer/woelb 5/6/6, aber R3_quer >20 % an 4 Stellen (47.8 % 151.8|29.6, 36.3 % 150.4|33.1); Achse 12/359 Stationen >0.02; Clay-Facetten Kreuzung 640 (p3d8 317); pytest 25/6 (Ziel 26/5); R9w D1 21->23.
+Nahbilder selbst angesehen: Kreuzung terrassiert mit senkrechten Falten (Clay + Streiflicht), Wandfuss/Wegende ohne Verbesserung.
+Ursache (gemessen, Feinraster): Stufe 152.00|32.00 (4.557 = Ebene) -> 32.25 (3.765) -> 32.5 (2.974); rampe_11 macht hinter der Kreuzung eine Kehre (s 38-40), unterer Schenkel s 40-42 liegt 1.5-2.5 m neben der Ebene und muss ~1.5-2 m tiefer sein. Variante 12 stempelt die Ebene im 5-m-Kern auf Hc 4.55 (p3d8 4.01); das MILP kennt keine 2D-Nachbarschaft zwischen nahen Stationen (Kehrenschenkel/Nachbarrampe).
+NICHT nach grundgeruest mergen.
+Anschluss: p3d12 (Basis p3d11 @ 4dd4c62), Luna/xhigh, PID 1444932, Worktree /workspace/wt_dorfmap_p3d12, Branch art/dorfmap-p3d12, Log codex_jobs/log_p3d12.txt, Ende ende_p3d12.txt, Start starte_p3d12.sh, Auftrag job_p3d12.txt. Thema: zuerst MILP-Machbarkeit mit 2D-Nachbarschafts-Nebenbedingung |h_i-h_j|<=g*d (g 0.60/0.45, d<=4.5 m) und Ebene nur r<=2.25; bei Machbarkeit Variante 13 ohne starre 5-m-Ebene; sonst ehrlich mit Zahlen berichten.
+
+## t142u-Watch (09.11. ~11:50 Europe/Berlin): p3d12 laeuft
+PID 1444932 aktiv (Luna/xhigh laut Log), letzte Log-/Rollout-Aktivitaet 11:37, kein ende_p3d12.txt. Stille 12 min, noch kein Haengerbild (frühere Haenger: ~1 h still). Kein Eingriff, keine Integration.
+Anschluss: naechste Watch prueft ende_p3d12.txt; ist das Log dann weiter still (>~45 min, ~0 % CPU, keine Kindprozesse), uncommitted sichern und Session resumen.
+
+## t142u-Watch (09.11. ~15:55 Europe/Berlin): p3d12 gegengeprueft, nicht gemergt; p3d13 gestartet
+p3d12 8366bd1 (fertig ~14:55, Log gpt-6-luna/xhigh). Unabhaengig in /tmp/gp_p3d12 (detached) neu gebaut: deterministisch (Hashes = Bericht: index b66e6589…, build 3392bd76…, relief_neu fc369323…), Pruefer/Tests/Schwellen unveraendert (Code-Diff nur neu/mesh.py + tools/p3d12_milp). t42u 0, Loch xvfb 0 (88728), Gates 568/43/338 = Bericht, pytest 25/6, eigene Render Kreuzung-Clay/Streiflicht bytegleich mit committed.
+Bericht: 2D-MILP machbar (g 0.60/0.45, D1 3 Abschnitte), aber Kreuzung Stufe 0.535 (p3d11 0.791, p3d8 0.043), Gitter 0.197, R3 D1 8/9/9, R3_quer 35.1 % 150.4|33.1, Achse 63/359 >0.02, Wegende 156.5|37.5 schlechter (R8a neu), Delta p3d6->p3d12 10 Gate-Anstiege.
+Nahbilder selbst angesehen: Clay ruhiger als p3d11, Streiflicht rampe_11 weiter senkrechte Falten quer durch die Wegflaeche -> nicht lieferbar.
+Ursache (gemessen, profil_tabelle s_m): Stufe 152.0|32.0->32.25 liegt an der Innenseite einer scharfen Polylinien-Ecke von rampe_11 (R ~0.3 m bei s_m 47.4-47.7, 150.2|32.8, ~90 Grad). Knoten hat zwei Abstandsminima zur selben Rampe (s_m 45.6 d1.29 Soll 3.70 / s_m 48.9 d1.59 Soll 2.27, Bogen 3.3 m) -> Band (Halbbreite 1.75) ueberlappt sich selbst, Transfer springt zwischen Schenkeln; MILP koppelt gleiche Rampe erst ab Bogen >8 m.
+NICHT nach grundgeruest mergen.
+Anschluss: p3d13 (Basis p3d12 @ 8366bd1), Luna/xhigh, PID 1619761, Worktree /workspace/wt_dorfmap_p3d13, Branch art/dorfmap-p3d13, Log codex_jobs/log_p3d13.txt, Ende ende_p3d13.txt, Start starte_p3d13.sh, Auftrag job_p3d13.txt. Thema: stetiger 2D-Transfer an Innenecken/Selbstueberlappung (glattes Loesen ueber alle nahen Stationen, Hilfsachse nur fuer Hoehen, Wegfuehrung unveraendert) + MILP-Paare gleicher Rampe ab Bogen >1.5*d.
+
+## t142u-Watch (09.11. ~16:46 Europe/Berlin): p3d13 laeuft
+PID 1619770 aktiv (Laufzeit ~41 min, Log bestaetigt gpt-6-luna/xhigh), letzte Log-Aktivitaet 16:34 (Edit MILP-Paare same_route_arc_distance_factor 1.5), kein ende_p3d13.txt. Stille 12 min, kein Haengerbild. Kein Eingriff, keine Integration.
+Anschluss: naechste Watch prueft ende_p3d13.txt; bei >~45 min Stille, ~0 % CPU, keine Kindprozesse uncommitted sichern und Session resumen.
+
+## t146u-Watch (09.11. ~20:35 Europe/Berlin): p3d13 gegengeprueft, nicht gemergt; p3d14 gestartet
+p3d13 1bf25853 (fertig 19:51, Log gpt-6-luna/xhigh). Unabhaengig am committed Mesh gemessen (Adapter neu/relief_neu.json.gz -> /tmp/gp_p3d13_out, ohne vollen Worktree-Klon wegen 88 % Platte): t42u 0, Zellquell-Diff 0, D2-Hash 749d3c4b… bytegleich p3d12, G1 38afeb30… unveraendert, D1 8aa69a17… neu. Gates 567/42/338 = Bericht (ohne LOCHSCAN zusaetzlich G1_lochscan_fehlt; mit Scan waere 567). Kreuzungsstufe 0,534999 m bei 152.00|32.00 (3,645063) -> 152.00|32.25 (3,110064). R3 D1 10/8/7, max. Quer 35,1 % bei 150.4|33.1. Wegende 156.5|37.5 Stufe 0,23 m. pytest laut Bericht 25/6, nicht erneut vollständig gelaufen.
+Nahbilder selbst angesehen: Clay-Kreuzung grossflaechig ruhiger als fruehe Staende, im Streiflicht bleibt eine klare Falte quer ueber rampe_11; Wegende gestuft; Wandfuss mit Kerben. Nicht lieferbar.
+Ursache (nachgemessen, profil_tabelle, CELL_M=1,2): Same-Route-Paare in p3d13 = 0. Schenkel A s=45,6 (150,857|31,399, Soll 3,697) und B s=48,9 (151,034|33,508, Soll 2,272) haben Bogen 3,30 m, d=2,539 m, dh=1,424 m, Gefaelle 56,1 %. Kriterium Bogen > 1,5*d = 3,81 m hat das Paar ausgelassen. g=0,60 wuerde dh<=1,523 erlauben (gerade machbar); g=0,45 wuerde dh<=1,143 erlauben (unmachbar). Var 15 erreichte 0,209 m ohne Wegfuehrungsaenderung, also noch kein nachgewiesener Zwang, vektor.json zu aendern.
+NICHT nach grundgeruest mergen.
+Anschluss: p3d14 (Basis p3d13 @ 1bf25853), Luna/xhigh, PID 1796350/1796352, Worktree /workspace/wt_dorfmap_p3d14, Branch art/dorfmap-p3d14, Log codex_jobs/log_p3d14.txt, Ende ende_p3d14.txt, Start starte_p3d14.sh, Auftrag job_p3d14.txt. Thema: Paarregel so aendern, dass A/B gekoppelt sind; MILP g 0,60/0,45 zuerst; nur bei Machbarkeit Transfer ohne Sprung (Var 15 als Ausgang, Ziel Stufe <=0,116). Sind beide g unmachbar: nicht weiter bauen, Fabian Zahlen+Optionen per Widget vorlegen. Bei Haenger (Log >45 min still, CPU ~0) Uncommitted sichern und Session resumen.
+
+## t146u-Watch (09.11. ~22:00 Europe/Berlin): p3d14 gegengeprueft, nicht gemergt; p3d15 gestartet
+p3d14 5e61682 (fertig 21:39, Log gpt-6-luna/xhigh). Unabhaengig gemessen (Adapter committed neu/relief_neu.json.gz -> /tmp/gp_p3d14_out): Gates 570 (569 + G1_lochscan_fehlt ohne Scan) / R8 42 / R9 340 = Bericht, t42u 0, Pruefer/Tests unveraendert, vektor.json aac6afff… unveraendert, D1 d4f9a844… neu, G1 38afeb30… unveraendert, D2 bytegleich. MILP g 0,60 und 0,45 beide machbar (A/B gekoppelt) -> kein Zielkonflikt-Fall. D1-R8: Kreuzungsstufe 0,22 (Ziel <=0,116; p3d13 0,535), Quer 3,6 %, R8a Wegende 0,21 (p3d11 0,054). Bericht: R3 D1 11/9/7, Achse 95/388 ausserhalb +-0,02, pytest 25/6.
+Nahbilder selbst angesehen: Clay-Kreuzung ruhiger, Streiflicht weiter Wellen/Falten ueber rampe_11 am Wandfuss, Wegende mit dunkler Delle. Nicht lieferbar.
+Ursache (gemessen): Stufe 152.25|31.75 (3,299) -> 32.00 (3,083) liegt 3,3-3,5 m vom Kreuzungszentrum im C1-Auslaufring und ~1,3-1,6 m neben der rampe_11-Achse (Bandrand), Achse dort im Soll +-0,09. MILP-Soll rampe_11 nicht monoton: s 46,2 3,0795 -> s 46,5 3,1570. Achse max. -0,315 bei rampe_2 s=28,5.
+NICHT nach grundgeruest mergen.
+Anschluss: p3d15 (Basis p3d14 @ 5e61682), Luna/xhigh, PID 1901830, Worktree /workspace/wt_dorfmap_p3d15, Branch art/dorfmap-p3d15, Log codex_jobs/log_p3d15.txt, Ende ende_p3d15.txt, Start starte_p3d15.sh, Auftrag job_p3d15.txt. Thema: Ursachenmessung Bandrand/C1-Ring, MILP-Monotonie, Band+Ring als eine glatte Flaeche mit Achs-Soll als Stuetzen; bei belegtem geometrischem Zielkonflikt nicht weiterbauen, Zahlen fuer Fabian.
+
+## p3d15 – unabhängig gegengeprüft 09.11.2026 ~23:59 Europe/Berlin (Anschluss-Routine)
+- Lauf fertig 23:37, Commit cbb1368 auf art/dorfmap-p3d15, Worktree sauber; Log bestätigt gpt-6-luna / xhigh. [S]
+- Prüfer/Tests/Schwellen unverändert (Diff 5e61682..cbb1368 nur Kern-Mesh + Prüfausgaben). [S]
+- Nicht übernommen: D1 R8_stufe 0,844 m (Ziel ≤0,116 m), 8 R8/R8a-Treffer in D1, R3 +24, pytest 25/6. Nahbilder D1_kreuzung (Clay + Streiflicht rampe_11) angesehen: Knick/Spitze am Wandfuß sichtbar. [S]
+- LP-Untergrenze selbst neu gerechnet: g=0,45 → 0,156708 m, g=0,60 → 0,194996 m (HiGHS optimal), beides > 0,116 m. Ursache: rampe_11-Kehre fällt im R8-Fenster mit 35–50 % (Stationen 36,9–37,8 m), Kreuzungsgrenze erlaubt 38,7 %. [R]
+- => Belegter geometrischer Zielkonflikt Kreuzungsebene vs. Kehrenabfall rampe_11. Laut Auftrag keine weiteren Transfervarianten; Entscheidung Fabian nötig. [F offen]
+- Anschlussauftrag nach Entscheidung: gewählte Option als p3d16 auf Basis cbb1368 (Variante 19) umsetzen, volle Gegenprüfung wie bisher.
+
+## t153u (10.11. ~00:05 Europe/Berlin): Fabian Option A; p3d16 gestartet
+p3d15 bleibt nicht gemergt (Zielkonflikt r=2,25 m). Fabian folgt der Empfehlung und waehlt Option A (t153u): Ebenenkernradius 2,25 m auf 2,00 m, Wegfuehrung unveraendert, keine Schwellenlockerung.
+Anschluss: p3d16 (Basis p3d15 @ cbb1368, Variante 20 als Standard mit plane_radius_m=2.00), Luna/xhigh (Log Z. 4/8), PID 2026300/2026302/2026309, Worktree /workspace/wt_dorfmap_p3d16, Branch art/dorfmap-p3d16, Log codex_jobs/log_p3d16.txt, Ende ende_p3d16.txt, Start starte_p3d16.sh, Auftrag job_p3d16.txt. Zuerst LP mit r=2,00 m inklusive R3; nur bei Machbarkeit Mesh bauen und Transferluecke (p3d15: LP 0,157 vs Mesh 0,844) schliessen. Stuendliche Routine wieder aktiv, Frist 13.11.2026 18:00 Europe/Berlin.
+
+- 10.11. 01:55 (Europe/Berlin): p3d16 hing seit 00:56 (API "Reconnecting 2/5", ~0 % CPU, Worktree sauber). Prozess beendet, dieselbe Sitzung 01a1c28f per codex exec resume fortgesetzt (gpt-6-luna/xhigh, danger-full-access); alter Log log_p3d16_vor_haenger.txt, Anschluss resume_p3d16.txt. Anschluss: nach ende_p3d16.txt unabhängig prüfen.
+
+- 10.11. 02:52 (Europe/Berlin): p3d16 hing erneut seit 01:58 (Log still >50 min, CPU ~0, kein Kindprozess). Uncommittet nur codex_jobs/tools/p3d16_milp/ (Kopie codex_jobs/sicherung_p3d16_0250). Prozess beendet, dieselbe Sitzung 01a1c28f erneut fortgesetzt (gpt-6-luna/xhigh, bestaetigt im Log-Kopf); alter Log log_p3d16_haenger2.txt, Anschluss resume2_p3d16.txt (zuerst LP r=2,00 m inkl. R3, sofort dokumentieren+committen). Anschluss: nach ende_p3d16.txt unabhaengig pruefen.
+
+- 10.11. 03:52 (Europe/Berlin): p3d16-Resume (Sitzung 01a1c28f, gpt-6-luna/xhigh) läuft; Log seit 02:56 still, aber Prozess hat laut Monotonuhr erst ~8 min Laufzeit (Box war offenbar pausiert, Load steigt gerade wieder). Kein Hänger, kein Eingriff. Teilstand: Commit b14bb72 'record radius 2.0 feasibility bound' (LP r=2,00 m gemeinsam machbar, R3 D1=6 laut Bericht), mesh.py in Arbeit (Variante 20). Anschluss: nach ende_p3d16.txt unabhängig prüfen.
+
+## p3d16 – unabhängig gegengeprüft 10.11.2026 ~08:55 Europe/Berlin (Anschluss-Routine)
+- Lauf fertig 08:46, Commit 3021164 auf art/dorfmap-p3d16 (gepusht), Worktree sauber; Log bestätigt gpt-6-luna / xhigh. [S]
+- Prüfer/Tests/Schwellen unverändert (Diff cbb1368..3021164 nur mesh.py, build.json, relief_neu, HTML, Bericht, Bilder, Tools p3d16_milp). vektor.json unverändert. [S]
+- Selbst gemessen (Adapter -> /tmp/gp_p3d16_out): D1 bf42981f… neu, G1 38afeb30… unverändert, D2 bytegleich, t42u 0, Gates 601 (= Bericht 600 + G1_lochscan_fehlt ohne Scan), R8 46, R9 347. D1: R3 längs 17 / quer 22 / Wölbung 15 (Ziel ≤6/≤7/≤7), R8 152.5|28.5 Gitter 0,37 / Quer 3,4 %. Lochscan xvfb nur laut Bericht (0 offene Innenkanten), nicht erneut. pytest laut Bericht 26/5. [S]
+- Kreuzungsstufe Mesh 0,1588 m (Ziel ≤0,116), LP-Untergrenze gemeinsam mit R3 D1≤6 bei g=0,45: 0,0647 m (machbar). Mesh 2,45× über Untergrenze -> Transferlücke 0,094 m. [S/R]
+- Nahbilder selbst angesehen: Clay-Kreuzung deutlich ruhiger als p3d15 (kein Knick), Streiflicht weiter Wellen am Wandfuß rampe_11, Wegende mit dunkler Rinne/Dellen, Wandfuß 140|35 ok. Nicht lieferbar. [S]
+- NICHT nach grundgeruest mergen. Laut Auftrag (Mesh deutlich über Untergrenze) keine weitere Variante; Entscheidung Fabian (WakeParent 10.11. ~08:55).
+- Anschlussauftrag nach Entscheidung: gewählte Option als p3d17 auf Basis 3021164 (Variante 20), volle Gegenprüfung wie bisher.
+
+- 10.11. ~09:00 (Europe/Berlin): Keine Fabian-Entscheidung nötig (Option A bleibt, nichts gelockert). p3d17 gestartet: nur Transfer reparieren, Variante 21 baut Kern/Band/R3-Stationen direkt aus der gemeinsamen LP-Lösung. Basis 3021164, Worktree /workspace/wt_dorfmap_p3d17, Branch art/dorfmap-p3d17, PID 2136126, Log codex_jobs/log_p3d17.txt (gpt-6-luna/xhigh bestätigt), Auftrag job_p3d17.txt, Ende ende_p3d17.txt. Anschluss: nach Ende unabhängig prüfen.
+
+## p3d17 Abschluss (10.11.2026 13:55 Europe/Berlin)
+- Lauf fertig 13:43, Commit c3659e7 auf art/dorfmap-p3d17, Codex gpt-6-luna/xhigh laut Log.
+- Transfer repariert (max 0,000475 m an 359 Achsstützen), Kreuzungsstufe 0,080 m (Ziel <=0,116 erreicht).
+- Ziel verfehlt: R3 D1 6/17/19 (Ziel <=6/7/7), schon in der gemeinsamen Rasterlösung enthalten; rampe_11 Quergefälle 20 % bei s=43,2-47,7 m. Gate-Anstiege: R5_loch +8 (D1 0->8) vs p3d16, R9w +12 vs Ausgang. Suite neu/tests 26/5 (R8a-Wegenden 23, D1-Sägezahn 116, Wandkante 2,24, F1-Wegende 0,17 m, Schatten-HF 0,307). t42u 0, Lochscan 0.
+- NICHT übernommen. Laut Auftrag keine weiteren Varianten: Entscheidung an Fabian (A Schwelle nur an dieser Kreuzung lockern, B Kehre rampe_11 flacher führen, C Kreuzung zurückstellen, andere Fehler zuerst).
+- Anschlussauftrag: nach Fabians Wahl entsprechenden p3d18-Auftrag auf Basis 3021164/c3659e7 schreiben; bis dahin kein neuer Dorfmap-Codex-Lauf.
