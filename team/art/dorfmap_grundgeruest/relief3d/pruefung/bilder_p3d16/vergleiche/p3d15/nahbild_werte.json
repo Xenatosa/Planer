@@ -1,0 +1,133 @@
+{
+  "schema": "nahbild-v1",
+  "hinweis": "Bildzahlen sind deterministische Sichtindikatoren; stets mit den gespeicherten Bildern pruefen.",
+  "bilder": 6,
+  "images": [
+    {
+      "tile": "D1",
+      "camera": "kreuzung",
+      "mode": "clay",
+      "datei": "clay/D1_kreuzung.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 224,
+      "facetten": 279,
+      "normale_spruenge": 679,
+      "normale_sprung_inseln": 119,
+      "loecher": 1,
+      "loch_pixel": 3,
+      "flecken": 0,
+      "fleck_pixel": 0,
+      "loch_flecken": 1,
+      "patches_geprueft": 4814
+    },
+    {
+      "tile": "D1",
+      "camera": "wandfuss_140_35",
+      "mode": "clay",
+      "datei": "clay/D1_wandfuss_140_35.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 1155,
+      "facetten": 435,
+      "normale_spruenge": 3551,
+      "normale_sprung_inseln": 346,
+      "loecher": 71,
+      "loch_pixel": 961,
+      "flecken": 68,
+      "fleck_pixel": 952,
+      "loch_flecken": 139,
+      "patches_geprueft": 4814
+    },
+    {
+      "tile": "D1",
+      "camera": "wegende",
+      "mode": "clay",
+      "datei": "clay/D1_wegende.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 1055,
+      "facetten": 855,
+      "normale_spruenge": 2423,
+      "normale_sprung_inseln": 214,
+      "loecher": 48,
+      "loch_pixel": 588,
+      "flecken": 46,
+      "fleck_pixel": 573,
+      "loch_flecken": 94,
+      "patches_geprueft": 4814
+    },
+    {
+      "tile": "D1",
+      "camera": "kreuzung_streiflicht_rampe11",
+      "mode": "streiflicht",
+      "datei": "streiflicht/D1_kreuzung_streiflicht_rampe11.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 199,
+      "facetten": 776,
+      "normale_spruenge": 2282,
+      "normale_sprung_inseln": 371,
+      "loecher": 3,
+      "loch_pixel": 14,
+      "flecken": 4,
+      "fleck_pixel": 19,
+      "loch_flecken": 7,
+      "patches_geprueft": 4814
+    },
+    {
+      "tile": "D2",
+      "camera": "draufsicht",
+      "mode": "clay",
+      "datei": "clay/D2_draufsicht.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 313,
+      "facetten": 13,
+      "normale_spruenge": 2275,
+      "normale_sprung_inseln": 9,
+      "loecher": 12,
+      "loch_pixel": 442,
+      "flecken": 6,
+      "fleck_pixel": 125,
+      "loch_flecken": 18,
+      "patches_geprueft": 4814
+    },
+    {
+      "tile": "G1",
+      "camera": "wandfuss",
+      "mode": "clay",
+      "datei": "clay/G1_wandfuss.png",
+      "pixel": {
+        "width": 1000,
+        "height": 700
+      },
+      "ground_pixel": 700000,
+      "kantenzaehne": 911,
+      "facetten": 530,
+      "normale_spruenge": 3393,
+      "normale_sprung_inseln": 182,
+      "loecher": 44,
+      "loch_pixel": 787,
+      "flecken": 34,
+      "fleck_pixel": 654,
+      "loch_flecken": 78,
+      "patches_geprueft": 4814
+    }
+  ]
+}

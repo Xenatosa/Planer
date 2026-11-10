@@ -1,0 +1,2975 @@
+{
+  "regel_und_kachel": [
+    {
+      "gruppe": "regeln",
+      "regel": "G11_baum_an_wand",
+      "kachel": "D1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben",
+      "kachel": "F7",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben_fein",
+      "kachel": "B4",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben_fein",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben_fein",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben_fein",
+      "kachel": "G6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G2_spitze_oben_fein",
+      "kachel": "H2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G3_spitze_unten",
+      "kachel": "E7",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G3_spitze_unten",
+      "kachel": "F7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G3_spitze_unten_fein",
+      "kachel": "C1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G3_spitze_unten_fein",
+      "kachel": "H2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "A2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "A7",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "C3",
+      "vorher": 18,
+      "nachher": 18,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "C4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "C5",
+      "vorher": 14,
+      "nachher": 14,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "D1",
+      "vorher": 3,
+      "nachher": 0,
+      "delta": -3
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "D4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "D7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "E7",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "F1",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "G4",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G5_beule_klippe",
+      "kachel": "H7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "A1",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "A2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B3",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B4",
+      "vorher": 15,
+      "nachher": 15,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B5",
+      "vorher": 13,
+      "nachher": 13,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "B7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C1",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C2",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C3",
+      "vorher": 15,
+      "nachher": 15,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C4",
+      "vorher": 16,
+      "nachher": 16,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C5",
+      "vorher": 17,
+      "nachher": 17,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C6",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "C7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "D1",
+      "vorher": 3,
+      "nachher": 5,
+      "delta": 2
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "D4",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "D5",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "D6",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E1",
+      "vorher": 8,
+      "nachher": 8,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E2",
+      "vorher": 8,
+      "nachher": 8,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E3",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E4",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "E6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "F1",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "F2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "F5",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "F6",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "F7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "G1",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "G3",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "G4",
+      "vorher": 8,
+      "nachher": 8,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "G6",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H3",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H4",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H5",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "H6",
+      "vorher": 9,
+      "nachher": 9,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7_wand_glatte_flaeche",
+      "kachel": "A2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "A2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "B2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "B3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "B4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "B5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "C2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "C4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "D1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "D4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "D5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "E1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "E6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "F2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_feld",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_kantenschaerfe",
+      "kachel": "-",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G7b_wandkontur_rauheit",
+      "kachel": "-",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "G8_fluss_nicht_bis_rand",
+      "kachel": "A2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C5",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "C7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "D1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "D4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "E1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "E6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "G1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "H5",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R1_blind",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "C1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "C4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "D1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "D2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "E3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "F4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "G2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "G4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "G6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R2_getrennt",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "C1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "C3",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "C4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "C5",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "D1",
+      "vorher": 14,
+      "nachher": 17,
+      "delta": 3
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "D3",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "D4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "D6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "E1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "F1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "G1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "G6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_quer_pct",
+      "kachel": "C3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_quer_pct",
+      "kachel": "D1",
+      "vorher": 23,
+      "nachher": 22,
+      "delta": -1
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_quer_pct",
+      "kachel": "D3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_quer_pct",
+      "kachel": "D4",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_quer_pct",
+      "kachel": "D6",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "C3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "D1",
+      "vorher": 14,
+      "nachher": 15,
+      "delta": 1
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "D3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "D4",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "D6",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "A1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "A2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "C4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "C5",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R5_loch",
+      "kachel": "D6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R6_wasser_schnee",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R6_wasser_schnee",
+      "kachel": "G1",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "A3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "B3",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "B4",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "B5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "B6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "C2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "C4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "C6",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "C7",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "D2",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "D3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "E1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "E2",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "E3",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "E4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "E6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "F1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "F2",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "F4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "F5",
+      "vorher": 9,
+      "nachher": 9,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "G1",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "G2",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "G3",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "G5",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "G6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "H2",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "H3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "H5",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T1_fleckrand",
+      "kachel": "H6",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T2_textur_abgeschnitten_bildpruefung_offen",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T3_streifen_ringe_bildpruefung_offen",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T4_graue_flussstreifen_bildpruefung_offen",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "T5_textur_vs_clay_bildpruefung_offen",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "D1",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_gitter",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_quer",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_quer",
+      "kachel": "D1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_quer",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_quer",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_quer",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "D1",
+      "vorher": 1,
+      "nachher": 0,
+      "delta": -1
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8_stufe",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "C2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "C4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "C5",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "D1",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "D4",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "E1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "E6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "H5",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r8",
+      "regel": "R8a_wegende",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "C4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "D6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "E3",
+      "vorher": 12,
+      "nachher": 12,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "E4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R8b_delle",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "A2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "B6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "C6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "D1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "D3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "D4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "D5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "D6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "E1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "E6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "F1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "F2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "F6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "G1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "G3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "G4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "G6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H2",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H4",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9_saegezahn",
+      "kachel": "H6",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "A1",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "A2",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "A6",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "A7",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B1",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B2",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B3",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B4",
+      "vorher": 11,
+      "nachher": 11,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B5",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B6",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "B7",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C1",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C2",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C3",
+      "vorher": 17,
+      "nachher": 17,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C4",
+      "vorher": 13,
+      "nachher": 13,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C5",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C6",
+      "vorher": 18,
+      "nachher": 18,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "C7",
+      "vorher": 3,
+      "nachher": 3,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D1",
+      "vorher": 27,
+      "nachher": 31,
+      "delta": 4
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D3",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D4",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D5",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D6",
+      "vorher": 9,
+      "nachher": 9,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "E1",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "E4",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "E5",
+      "vorher": 1,
+      "nachher": 1,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "E6",
+      "vorher": 4,
+      "nachher": 4,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "F1",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "F2",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "F6",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "G1",
+      "vorher": 12,
+      "nachher": 12,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "G3",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "G4",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "G6",
+      "vorher": 7,
+      "nachher": 7,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H1",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H2",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H3",
+      "vorher": 8,
+      "nachher": 8,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H4",
+      "vorher": 5,
+      "nachher": 5,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H5",
+      "vorher": 11,
+      "nachher": 11,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H6",
+      "vorher": 10,
+      "nachher": 10,
+      "delta": 0
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "H7",
+      "vorher": 2,
+      "nachher": 2,
+      "delta": 0
+    }
+  ],
+  "bildzahlen": [
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "facetten",
+      "vorher": 279,
+      "nachher": 244,
+      "delta": -35
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "flecken",
+      "vorher": 0,
+      "nachher": 0,
+      "delta": 0
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "kantenzaehne",
+      "vorher": 224,
+      "nachher": 204,
+      "delta": -20
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "loch_flecken",
+      "vorher": 1,
+      "nachher": 0,
+      "delta": -1
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "loecher",
+      "vorher": 1,
+      "nachher": 0,
+      "delta": -1
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "normale_spruenge",
+      "vorher": 679,
+      "nachher": 536,
+      "delta": -143
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "kreuzung",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 119,
+      "nachher": 88,
+      "delta": -31
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "facetten",
+      "vorher": 435,
+      "nachher": 443,
+      "delta": 8
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "flecken",
+      "vorher": 68,
+      "nachher": 70,
+      "delta": 2
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "kantenzaehne",
+      "vorher": 1155,
+      "nachher": 1079,
+      "delta": -76
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "loch_flecken",
+      "vorher": 139,
+      "nachher": 135,
+      "delta": -4
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "loecher",
+      "vorher": 71,
+      "nachher": 65,
+      "delta": -6
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "normale_spruenge",
+      "vorher": 3551,
+      "nachher": 3542,
+      "delta": -9
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 346,
+      "nachher": 354,
+      "delta": 8
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "facetten",
+      "vorher": 855,
+      "nachher": 816,
+      "delta": -39
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "flecken",
+      "vorher": 46,
+      "nachher": 53,
+      "delta": 7
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "kantenzaehne",
+      "vorher": 1055,
+      "nachher": 1059,
+      "delta": 4
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "loch_flecken",
+      "vorher": 94,
+      "nachher": 115,
+      "delta": 21
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "loecher",
+      "vorher": 48,
+      "nachher": 62,
+      "delta": 14
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "normale_spruenge",
+      "vorher": 2423,
+      "nachher": 2419,
+      "delta": -4
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 214,
+      "nachher": 210,
+      "delta": -4
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "facetten",
+      "vorher": 13,
+      "nachher": 13,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "flecken",
+      "vorher": 6,
+      "nachher": 6,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "kantenzaehne",
+      "vorher": 313,
+      "nachher": 313,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "loch_flecken",
+      "vorher": 18,
+      "nachher": 18,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "loecher",
+      "vorher": 12,
+      "nachher": 12,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "normale_spruenge",
+      "vorher": 2275,
+      "nachher": 2275,
+      "delta": 0
+    },
+    {
+      "kachel": "D2",
+      "modus": "clay",
+      "kamera": "draufsicht",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 9,
+      "nachher": 9,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "facetten",
+      "vorher": 530,
+      "nachher": 530,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "flecken",
+      "vorher": 34,
+      "nachher": 34,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "kantenzaehne",
+      "vorher": 911,
+      "nachher": 911,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "loch_flecken",
+      "vorher": 78,
+      "nachher": 78,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "loecher",
+      "vorher": 44,
+      "nachher": 44,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "normale_spruenge",
+      "vorher": 3393,
+      "nachher": 3393,
+      "delta": 0
+    },
+    {
+      "kachel": "G1",
+      "modus": "clay",
+      "kamera": "wandfuss",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 182,
+      "nachher": 182,
+      "delta": 0
+    }
+  ],
+  "anstiege": [
+    {
+      "gruppe": "regeln",
+      "regel": "G6_facette",
+      "kachel": "D1",
+      "vorher": 3,
+      "nachher": 5,
+      "delta": 2,
+      "metrik": null
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_laengs_m",
+      "kachel": "D1",
+      "vorher": 14,
+      "nachher": 17,
+      "delta": 3,
+      "metrik": null
+    },
+    {
+      "gruppe": "regeln",
+      "regel": "R3_woelb_m",
+      "kachel": "D1",
+      "vorher": 14,
+      "nachher": 15,
+      "delta": 1,
+      "metrik": null
+    },
+    {
+      "gruppe": "r9",
+      "regel": "R9w_wellen",
+      "kachel": "D1",
+      "vorher": 27,
+      "nachher": 31,
+      "delta": 4,
+      "metrik": null
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "facetten",
+      "vorher": 435,
+      "nachher": 443,
+      "delta": 8
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "flecken",
+      "vorher": 68,
+      "nachher": 70,
+      "delta": 2
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wandfuss_140_35",
+      "metrik": "normale_sprung_inseln",
+      "vorher": 346,
+      "nachher": 354,
+      "delta": 8
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "flecken",
+      "vorher": 46,
+      "nachher": 53,
+      "delta": 7
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "kantenzaehne",
+      "vorher": 1055,
+      "nachher": 1059,
+      "delta": 4
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "loch_flecken",
+      "vorher": 94,
+      "nachher": 115,
+      "delta": 21
+    },
+    {
+      "kachel": "D1",
+      "modus": "clay",
+      "kamera": "wegende",
+      "metrik": "loecher",
+      "vorher": 48,
+      "nachher": 62,
+      "delta": 14
+    }
+  ],
+  "exit_code": 1
+}

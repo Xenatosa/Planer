@@ -1,0 +1,302 @@
+{
+  "variant": "20",
+  "fine_grid_step_map": 0.25,
+  "CELL_M": 1.2,
+  "items": [
+    {
+      "rule": "R8_gitter",
+      "hit_xy_map": [
+        152.5,
+        28.5
+      ],
+      "checker_value": 0.373,
+      "local_max_neighbor_step_m": 0.158764696,
+      "fine_a": {
+        "xy_map": [
+          155.25,
+          25.75
+        ],
+        "height_m": 5.038628
+      },
+      "fine_b": {
+        "xy_map": [
+          155.25,
+          26.0
+        ],
+        "height_m": 4.879863
+      },
+      "stations": [
+        {
+          "route": "rampe_2",
+          "index": 117,
+          "s_m": 35.1,
+          "xy_map": [
+            155.5448,
+            28.0794
+          ],
+          "distance_to_pair_midpoint_m": 2.669
+        },
+        {
+          "route": "rampe_11",
+          "index": 124,
+          "s_m": 37.2,
+          "xy_map": [
+            154.1555,
+            25.2253
+          ],
+          "distance_to_pair_midpoint_m": 1.527
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: single thin_plate_spline/RBF field and mesh raster fit"
+      ]
+    },
+    {
+      "rule": "R8_quer",
+      "hit_xy_map": [
+        152.5,
+        28.5
+      ],
+      "checker_value_pct": 3.4,
+      "local_max_neighbor_step_m": 0.158764696,
+      "fine_a": {
+        "xy_map": [
+          155.25,
+          25.75
+        ],
+        "height_m": 5.038628
+      },
+      "fine_b": {
+        "xy_map": [
+          155.25,
+          26.0
+        ],
+        "height_m": 4.879863
+      },
+      "stations": [
+        {
+          "route": "rampe_2",
+          "index": 117,
+          "s_m": 35.1,
+          "xy_map": [
+            155.5448,
+            28.0794
+          ],
+          "distance_to_pair_midpoint_m": 2.669
+        },
+        {
+          "route": "rampe_11",
+          "index": 124,
+          "s_m": 37.2,
+          "xy_map": [
+            154.1555,
+            25.2253
+          ],
+          "distance_to_pair_midpoint_m": 1.527
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: single thin_plate_spline/RBF field and mesh raster fit"
+      ]
+    },
+    {
+      "rule": "R8_gitter",
+      "hit_xy_map": [
+        148.5,
+        2.5
+      ],
+      "checker_value_m": 0.249,
+      "local_max_neighbor_step_m": 0.128009,
+      "fine_a": {
+        "xy_map": [
+          149.75,
+          3.0
+        ],
+        "height_m": 13.019716
+      },
+      "fine_b": {
+        "xy_map": [
+          149.75,
+          3.25
+        ],
+        "height_m": 12.891707
+      },
+      "stations": [
+        {
+          "route": "rampe_11",
+          "index": 0,
+          "s_m": 0.0,
+          "xy_map": [
+            148.5,
+            2.5
+          ],
+          "distance_to_pair_midpoint_m": 1.677
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: single thin_plate_spline/RBF field",
+        "rampenenden_lokaler_auslauf_ge4m_weich"
+      ]
+    },
+    {
+      "rule": "R8_gitter",
+      "hit_xy_map": [
+        156.5,
+        37.5
+      ],
+      "checker_value_m": 0.285,
+      "local_max_neighbor_step_m": 0.15045,
+      "fine_a": {
+        "xy_map": [
+          155.0,
+          36.5
+        ],
+        "height_m": 0.954496
+      },
+      "fine_b": {
+        "xy_map": [
+          155.25,
+          36.5
+        ],
+        "height_m": 0.804046
+      },
+      "stations": [
+        {
+          "route": "rampe_11",
+          "index": 183,
+          "s_m": 54.9,
+          "xy_map": [
+            155.0703,
+            36.4581
+          ],
+          "distance_to_pair_midpoint_m": 0.083
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: single thin_plate_spline/RBF field",
+        "rampenenden_lokaler_auslauf_ge4m_weich"
+      ]
+    },
+    {
+      "rule": "R8a_wegende",
+      "hit_xy_map": [
+        126.5,
+        31.6
+      ],
+      "checker_value_m": 0.11,
+      "weg": "rampe_2_anfang",
+      "local_max_neighbor_step_m": 0.114564,
+      "fine_a": {
+        "xy_map": [
+          126.5,
+          34.0
+        ],
+        "height_m": 12.503831
+      },
+      "fine_b": {
+        "xy_map": [
+          126.75,
+          34.0
+        ],
+        "height_m": 12.389267
+      },
+      "stations": [
+        {
+          "route": "rampe_2",
+          "index": 0,
+          "s_m": 0.0,
+          "xy_map": [
+            126.51,
+            31.62
+          ],
+          "distance_to_pair_midpoint_m": 2.859
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenenden_lokaler_auslauf_ge4m_weich",
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: rampe_2 profile in shared thin_plate_spline/RBF field"
+      ]
+    },
+    {
+      "rule": "R8a_wegende",
+      "hit_xy_map": [
+        148.5,
+        2.5
+      ],
+      "checker_value_m": 0.23,
+      "weg": "rampe_11_anfang",
+      "local_max_neighbor_step_m": 0.230019,
+      "fine_a": {
+        "xy_map": [
+          150.5,
+          3.5
+        ],
+        "height_m": 12.997211
+      },
+      "fine_b": {
+        "xy_map": [
+          150.5,
+          3.75
+        ],
+        "height_m": 12.767192
+      },
+      "stations": [
+        {
+          "route": "rampe_11",
+          "index": 0,
+          "s_m": 0.0,
+          "xy_map": [
+            148.5,
+            2.5
+          ],
+          "distance_to_pair_midpoint_m": 2.754
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenenden_lokaler_auslauf_ge4m_weich",
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: rampe_11 profile in shared thin_plate_spline/RBF field"
+      ]
+    },
+    {
+      "rule": "R8a_wegende",
+      "hit_xy_map": [
+        156.5,
+        37.5
+      ],
+      "checker_value_m": 0.19,
+      "weg": "rampe_11_ende",
+      "local_max_neighbor_step_m": 0.185865,
+      "fine_a": {
+        "xy_map": [
+          157.5,
+          35.5
+        ],
+        "height_m": 0.871043
+      },
+      "fine_b": {
+        "xy_map": [
+          157.75,
+          35.5
+        ],
+        "height_m": 0.685178
+      },
+      "stations": [
+        {
+          "route": "rampe_11",
+          "index": 189,
+          "s_m": 56.7,
+          "xy_map": [
+            156.2818,
+            37.3426
+          ],
+          "distance_to_pair_midpoint_m": 2.736
+        }
+      ],
+      "active_transfer_terms": [
+        "rampenenden_lokaler_auslauf_ge4m_weich",
+        "rampenkreuzung_gemeinsame_ebene_weicher_rand: rampe_11 profile in shared thin_plate_spline/RBF field"
+      ]
+    }
+  ],
+  "attribution_limit": "Listed layers are active at the sample location. The emitted manifest exposes the final blend, not counterfactual per-layer heights, so endpoint versus shared-field contributions cannot be numerically separated without another build/instrumentation pass."
+}

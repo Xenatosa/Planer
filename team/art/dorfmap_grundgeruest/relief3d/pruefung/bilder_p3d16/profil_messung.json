@@ -1,0 +1,64 @@
+{
+  "comparison_profile": "machbarkeit_g45.json (same Hc and plane gradients as generated mesh solver)",
+  "gate_R3_counts_D1": {
+    "R3_laengs_m": 17,
+    "R3_quer_pct": 22,
+    "R3_woelb_m": 15
+  },
+  "plane_core": {
+    "dense_plane_support_count": 222,
+    "gradient_x": -0.002940514,
+    "gradient_z": -0.029855542,
+    "height_m": 4.009337,
+    "max_abs_mesh_minus_plane_m": 0.02,
+    "mesh_support_count": 37,
+    "slope_pct": 3.0
+  },
+  "profile_solver_sections_D1_over_0_075_m": 4,
+  "routes": {
+    "rampe_11": {
+      "count_abs_error_over_0_02m": 6,
+      "max_abs_mesh_minus_soll_m": 0.020000374687457523,
+      "max_negative_error_m": -0.02000028655303332,
+      "max_positive_error_m": 0.020000374687457523,
+      "mesh_h_min_max_m": [
+        0.5111283278855298,
+        12.895461082458496
+      ],
+      "rms_mesh_minus_soll_m": 0.015615106928266054,
+      "soll_h_min_max_m": [
+        0.5105417966842651,
+        12.905089378356934
+      ],
+      "source_h_min_max_m": [
+        0.5105417966842651,
+        12.905089378356934
+      ],
+      "station_count_D1": 191,
+      "station_count_total": 191
+    },
+    "rampe_2": {
+      "count_abs_error_over_0_02m": 1,
+      "max_abs_mesh_minus_soll_m": 0.02000016592635312,
+      "max_negative_error_m": -0.02000004841141534,
+      "max_positive_error_m": 0.02000016592635312,
+      "mesh_h_min_max_m": [
+        1.8991087515131049,
+        12.47187233505249
+      ],
+      "rms_mesh_minus_soll_m": 0.014974249074899472,
+      "soll_h_min_max_m": [
+        1.8991684913635254,
+        12.469809532165527
+      ],
+      "source_h_min_max_m": [
+        1.8991684913635254,
+        12.469809532165527
+      ],
+      "station_count_D1": 168,
+      "station_count_total": 197
+    }
+  },
+  "table": "pruefung/bilder_p3d16/profil_tabelle.csv",
+  "variant": "20"
+}
