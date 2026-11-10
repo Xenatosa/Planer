@@ -278,7 +278,22 @@ def local_r8_mask(data: dict, fs: int) -> tuple[np.ndarray, float, float, list[t
     return local, ix0 / fs, iz0 / fs, pairs
 
 
-def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_mesh_path: Path | None, axis_tolerance: float, plane_tolerance: float) -> dict:
+def solve(
+    data: dict,
+    grade: float,
+    r3_limit: int | None,
+    out: Path,
+    reference_mesh_path: Path | None,
+    axis_tolerance: float,
+    plane_tolerance: float,
+    stage_limit: float | None = None,
+    quer_limit: int | None = 7,
+    wob_limit: int | None = 7,
+    objective_mode: str = "step",
+    relax_integrality: bool = False,
+) -> dict:
+    if objective_mode not in {"feasibility", "step", "quer", "wob"}:
+        raise ValueError(f"Unbekannter Ziellauf: {objective_mode}")
     rs = int(data["rs"])
     ny, nx = int(data["ny"]), int(data["nx"])
     gb = np.frombuffer(base64.b64decode(data["GB"]), dtype=np.float32).reshape(ny * rs + 1, nx * rs + 1)
@@ -362,7 +377,25 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     lower = np.full(nvars, -np.inf, dtype=np.float64)
     upper = np.full(nvars, np.inf, dtype=np.float64)
     lower[:total_h], upper[:total_h] = lo_h, hi_h
+    source_tile = gb[
+        int(grid_z0 * rs):int(grid_z1 * rs) + 1,
+        int(grid_x0 * rs):int(grid_x1 * rs) + 1,
+    ].astype(np.float64)
+    source_delta_limit = 4.0
+    for index, cover in enumerate(transfer_coverage.ravel()):
+        if cover <= 1e-12:
+            continue
+        fixed = float(transfer_background.ravel()[index])
+        source_height = float(source_tile.ravel()[index])
+        lower[surface_start + index] = (
+            source_height - source_delta_limit - fixed
+        ) / float(cover)
+        upper[surface_start + index] = (
+            source_height + source_delta_limit - fixed
+        ) / float(cover)
     lower[t_index] = 0.0
+    if stage_limit is not None:
+        upper[t_index] = float(stage_limit)
     lower[plane_h] = float(min(np.min(p["h0"]) for p in profiles) - 2.0)
     upper[plane_h] = float(max(np.max(p["h0"]) for p in profiles) + 2.0)
     lower[plane_gx:plane_gz + 1], upper[plane_gx:plane_gz + 1] = -PLANE_SLOPE_MAX, PLANE_SLOPE_MAX
@@ -397,7 +430,9 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
             for index, weight in raw.items():
                 iz, ix = divmod(index, width)
                 support = float(transfer_coverage[iz, ix])
-                entries[surface_start + index] = weight * support
+                coefficient = weight * support
+                if abs(coefficient) > 1e-13:
+                    entries[surface_start + index] = coefficient
                 fixed += weight * (1.0 - support) * float(transfer_background[iz, ix])
             return entries, fixed
         fixed = float(ndi.map_coordinates(
@@ -554,8 +589,18 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
                         row[column] = row.get(column, 0.0) + weight * value
                     fixed += weight * center_fixed[int(sample)]
                 threshold = R3_TOL - R3_FLOAT32_GUARD_M
-                add({**row, bidx: -100.0}, threshold - fixed)
-                add({**{j: -v for j, v in row.items()}, bidx: -100.0}, threshold + fixed)
+                max_value = fixed + sum(
+                    value * (upper[column] if value >= 0.0 else lower[column])
+                    for column, value in row.items()
+                )
+                min_value = fixed + sum(
+                    value * (lower[column] if value >= 0.0 else upper[column])
+                    for column, value in row.items()
+                )
+                upper_relax = max(0.0, max_value - threshold)
+                lower_relax = max(0.0, -min_value - threshold)
+                add({**row, bidx: -upper_relax}, threshold - fixed)
+                add({**{j: -v for j, v in row.items()}, bidx: -lower_relax}, threshold + fixed)
         for route, k, inside in section_lookup:
             if inside:
                 r3_d1_terms.append(binary_index[(route, k // R3_SECTION_SAMPLES)])
@@ -601,8 +646,9 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
                 q_binary = quer_binary_index[section]
                 add(q_row, 20.0 - R3_FLOAT32_GUARD_PCT - q_fixed)
                 add({column: -value for column, value in q_row.items()}, 20.0 - R3_FLOAT32_GUARD_PCT + q_fixed)
-                add({**q_row, q_binary: -30.0}, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)
-                add({**{column: -value for column, value in q_row.items()}, q_binary: -30.0}, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)
+                quer_big_m = 20.0 - 3.5
+                add({**q_row, q_binary: -quer_big_m}, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)
+                add({**{column: -value for column, value in q_row.items()}, q_binary: -quer_big_m}, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)
 
                 wob_row: dict[int, float] = {}
                 for column, value in axis_row.items():
@@ -613,14 +659,27 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
                     wob_row[column] = wob_row.get(column, 0.0) - 0.5 * value
                 wob_fixed = axis_fixed - 0.5 * (plus_fixed + minus_fixed)
                 wob_binary = wob_binary_index[section]
-                add({**wob_row, wob_binary: -100.0}, 0.08 - R3_FLOAT32_GUARD_M - wob_fixed)
-                add({**{column: -value for column, value in wob_row.items()}, wob_binary: -100.0}, 0.08 - R3_FLOAT32_GUARD_M + wob_fixed)
+                wob_threshold = 0.08 - R3_FLOAT32_GUARD_M
+                wob_max = wob_fixed + sum(
+                    value * (upper[column] if value >= 0.0 else lower[column])
+                    for column, value in wob_row.items()
+                )
+                wob_min = wob_fixed + sum(
+                    value * (lower[column] if value >= 0.0 else upper[column])
+                    for column, value in wob_row.items()
+                )
+                wob_upper_relax = max(0.0, wob_max - wob_threshold)
+                wob_lower_relax = max(0.0, -wob_min - wob_threshold)
+                add({**wob_row, wob_binary: -wob_upper_relax}, wob_threshold - wob_fixed)
+                add({**{column: -value for column, value in wob_row.items()}, wob_binary: -wob_lower_relax}, wob_threshold + wob_fixed)
             quer_section_terms.extend(quer_binary_index[(route, k // R3_SECTION_SAMPLES)]
                                       for r, k, inside in section_lookup if r == route and inside)
             wob_section_terms.extend(wob_binary_index[(route, k // R3_SECTION_SAMPLES)]
                                      for r, k, inside in section_lookup if r == route and inside)
-        add({j: 1.0 for j in sorted(set(quer_section_terms))}, 7.0)
-        add({j: 1.0 for j in sorted(set(wob_section_terms))}, 7.0)
+        if quer_limit is not None:
+            add({j: 1.0 for j in sorted(set(quer_section_terms))}, float(quer_limit))
+        if wob_limit is not None:
+            add({j: 1.0 for j in sorted(set(wob_section_terms))}, float(wob_limit))
 
     # Same-route and cross-route pairs from p3d15, with the selected physical grade.
     pairs = route_pairs(profiles)
@@ -632,19 +691,64 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
 
     matrix = coo_matrix((vals, (row_i, col_i)), shape=(len(rhs), nvars)).tocsr()
     objective = np.zeros(nvars, dtype=np.float64)
-    objective[t_index] = 1.0
+    if objective_mode == "feasibility":
+        feasibility_counts = set(r3_d1_terms)
+        feasibility_counts.update(quer_binary_index.values())
+        feasibility_counts.update(wob_binary_index.values())
+        for index in feasibility_counts:
+            objective[index] = 1.0
+        objective[t_index] = 1e-3
+    elif objective_mode == "step":
+        objective[t_index] = 1.0
+    elif objective_mode == "quer":
+        for index in quer_binary_index.values():
+            objective[index] = 1.0
+    elif objective_mode == "wob":
+        for index in wob_binary_index.values():
+            objective[index] = 1.0
     result = milp(
-        objective, integrality=integrality, bounds=Bounds(lower, upper),
+        objective,
+        integrality=(np.zeros_like(integrality) if relax_integrality else integrality),
+        bounds=Bounds(lower, upper),
         constraints=LinearConstraint(matrix, np.full(len(rhs), -np.inf), np.asarray(rhs)),
         options={"presolve": True, "mip_rel_gap": 0.0, "time_limit": 600},
     )
-    if not result.success or result.x is None:
-        raise RuntimeError(f"Joint mesh LP/MILP failed: {result.message}")
+    primal_feasible = False
+    if result.x is not None:
+        activity = matrix @ result.x
+        primal_feasible = bool(
+            np.all(activity <= np.asarray(rhs) + 2e-6)
+            and np.all(result.x >= lower - 2e-6)
+            and np.all(result.x <= upper + 2e-6)
+            and (relax_integrality or np.all(np.abs(
+                result.x[integrality.astype(bool)] - np.rint(result.x[integrality.astype(bool)])
+            ) <= 2e-6))
+        )
+    if (not result.success and not (objective_mode == "feasibility" and primal_feasible)) or result.x is None:
+        summary = {
+            "status": str(result.message),
+            "status_code": int(result.status),
+            "success": False,
+            "primal_feasible": primal_feasible,
+            "optimality_proven": bool(result.success),
+            "objective_mode": objective_mode,
+            "stage_limit_m": stage_limit,
+            "r3_long_limit": r3_limit,
+            "r3_quer_limit": quer_limit,
+            "r3_wob_limit": wob_limit,
+            "variables": nvars,
+            "constraints": len(rhs),
+        }
+        out.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        print(json.dumps(summary, indent=2, sort_keys=True))
+        return summary
 
     # Among exact minimax solutions, preserve the p3d16 feasible profile and
     # mesh as closely as possible. This removes arbitrary values at untargeted
     # variables while leaving the measured lower bound unchanged.
-    primary_step = float(result.fun)
+    primary_objective = float(result.fun)
+    primary_step = float(result.x[t_index])
+    primary_x = result.x.copy()
     add({t_index: 1.0}, primary_step + 1e-8)
     base_matrix = coo_matrix((vals, (row_i, col_i)), shape=(len(rhs), nvars)).tocsr()
     reference_profiles = json.loads((Path(__file__).resolve().parents[1] / "p3d16_milp/machbarkeit_g45.json").read_text(encoding="utf-8"))["routes"]
@@ -689,9 +793,10 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     b2 = np.asarray([*rhs, *secondary_rhs], dtype=np.float64)
     lower2 = np.r_[lower, np.zeros(slack_count, dtype=np.float64)]
     upper2 = np.r_[upper, np.full(slack_count, np.inf, dtype=np.float64)]
-    for index in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
-        fixed_value = float(round(result.x[index]))
-        lower2[index] = upper2[index] = fixed_value
+    if not relax_integrality:
+        for index in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
+            fixed_value = float(round(result.x[index]))
+            lower2[index] = upper2[index] = fixed_value
     c2 = np.zeros(nvars_secondary, dtype=np.float64)
     c2[nvars:nvars + total_h] = 1.0
     c2[nvars + total_h:] = 1.0
@@ -704,7 +809,10 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     tie_break_movement = float(secondary.fun)
 
     summary = {
-        "status": str(result.message), "status_code": int(result.status), "success": bool(result.success),
+        "status": str(result.message), "status_code": int(result.status),
+        "success": bool(result.success or primal_feasible),
+        "primal_feasible": primal_feasible,
+        "optimality_proven": bool(result.success),
         "g_m_per_m": grade, "r3_D1_limit": r3_limit, "plane_radius_m": PLANE_RADIUS_M,
         "axis_tolerance_m": axis_tolerance, "plane_tolerance_m": plane_tolerance,
         "plane_slope_limit_pct": 3.0, "same_route_arc_distance_factor": SAME_ROUTE_ARC_FACTOR,
@@ -716,7 +824,17 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
         "R8_gate_quer_supports": int(len(quer_ids)),
         "R8_gate_quer_slope_limit_pct": R8_QUER_LIMIT_PCT,
         "variables": nvars, "constraints": len(rhs),
-        "minimum_neighbor_step_m": primary_step,
+        "objective_mode": objective_mode,
+        "relaxed_integrality": relax_integrality,
+        "primary_objective_value": primary_objective,
+        "primary_r3_long_indicator_sum": float(sum(primary_x[j] for j in set(r3_d1_terms))),
+        "primary_r3_quer_indicator_sum": float(sum(primary_x[j] for j in set(quer_binary_index.values()))),
+        "primary_r3_wob_indicator_sum": float(sum(primary_x[j] for j in set(wob_binary_index.values()))),
+        "stage_limit_m": stage_limit,
+        "r3_long_limit": r3_limit,
+        "r3_quer_limit": quer_limit,
+        "r3_wob_limit": wob_limit,
+        "minimum_neighbor_step_m": float(result.x[t_index]),
         "tie_break_movement_l1_m": tie_break_movement,
         "tie_break_reference_mesh": reference_mesh_path.name if reference_mesh_path else "GB source field",
         "mip_dual_bound_m": (None if getattr(result, "mip_dual_bound", None) is None else float(result.mip_dual_bound)),
@@ -796,16 +914,37 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--grade", type=float, choices=(0.45, 0.60), required=True)
-    ap.add_argument("--r3-limit", type=int, default=None, help="omit for isolated surface bound without R3 rows")
+    ap.add_argument("--grade", type=float, choices=(0.45, 0.60), default=0.45)
+    ap.add_argument("--mode", choices=("feasibility", "step", "quer", "wob"), default="feasibility")
+    ap.add_argument("--r3-limit", type=int, default=6, help="official R3 longitudinal section limit")
+    ap.add_argument("--r3-quer-limit", type=int, default=7)
+    ap.add_argument("--r3-wob-limit", type=int, default=7)
+    ap.add_argument("--stage-limit", type=float, default=None)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--reference-mesh", type=Path, help="p3d16 relief JSON gzip; its GB field is used only for the deterministic minimax tie-break")
-    ap.add_argument("--axis-tolerance", type=float, default=0.0)
+    ap.add_argument("--axis-tolerance", type=float, default=0.02)
     ap.add_argument("--plane-tolerance", type=float, default=0.02)
+    ap.add_argument("--relax-integrality", action="store_true")
     args = ap.parse_args()
     with gzip.open(RELIEF, "rt", encoding="utf-8") as f:
         data = json.load(f)
-    summary = solve(data, args.grade, args.r3_limit, args.out, args.reference_mesh, args.axis_tolerance, args.plane_tolerance)
+    stage_limit = args.stage_limit
+    if stage_limit is None and args.mode in {"feasibility", "quer", "wob"}:
+        stage_limit = 0.116
+    summary = solve(
+        data,
+        args.grade,
+        args.r3_limit,
+        args.out,
+        args.reference_mesh,
+        args.axis_tolerance,
+        args.plane_tolerance,
+        stage_limit,
+        args.r3_quer_limit,
+        args.r3_wob_limit,
+        args.mode,
+        args.relax_integrality,
+    )
     summary["source_relief_sha256"] = hashlib.sha256(RELIEF.read_bytes()).hexdigest()
     summary["tie_break_reference_sha256"] = (
         hashlib.sha256(args.reference_mesh.read_bytes()).hexdigest()
