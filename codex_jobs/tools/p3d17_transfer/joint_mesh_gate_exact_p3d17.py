@@ -201,9 +201,19 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     binary_start = plane_gz + 1
     if r3_limit is None:
         binary_index = {}
+        quer_binary_index = {}
+        wob_binary_index = {}
     else:
         binary_index = {item: binary_start + i for i, item in enumerate(r3_sections)}
-    nvars = binary_start + len(binary_index)
+        d1_sections = list(dict.fromkeys(
+            (route, k // R3_SECTION_SAMPLES)
+            for route, k, inside in section_lookup if inside
+        ))
+        quer_start = binary_start + len(binary_index)
+        quer_binary_index = {item: quer_start + i for i, item in enumerate(d1_sections)}
+        wob_start = quer_start + len(quer_binary_index)
+        wob_binary_index = {item: wob_start + i for i, item in enumerate(d1_sections)}
+    nvars = binary_start + len(binary_index) + len(quer_binary_index) + len(wob_binary_index)
 
     lower = np.full(nvars, -np.inf, dtype=np.float64)
     upper = np.full(nvars, np.inf, dtype=np.float64)
@@ -213,7 +223,7 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     upper[plane_h] = float(max(np.max(p["h0"]) for p in profiles) + 2.0)
     lower[plane_gx:plane_gz + 1], upper[plane_gx:plane_gz + 1] = -PLANE_SLOPE_MAX, PLANE_SLOPE_MAX
     integrality = np.zeros(nvars, dtype=np.uint8)
-    for j in binary_index.values():
+    for j in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
         lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
 
     row_i: list[int] = []
@@ -233,6 +243,15 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     # Bilinear evaluation at every checker sample on the emitted mesh raster.
     def mesh_row(px: float, pz: float) -> dict[int, float]:
         return bilinear_row(px, pz, grid_x0, grid_z0, fs, width)
+
+    def route_field_row(px: float, pz: float) -> tuple[dict[int, float], float]:
+        if (grid_x0 - 1e-9 <= px <= grid_x1 + 1e-9
+                and grid_z0 - 1e-9 <= pz <= grid_z1 + 1e-9):
+            return ({surface_start + j: value for j, value in mesh_row(px, pz).items()}, 0.0)
+        fixed = float(ndi.map_coordinates(
+            gb, [[pz * rs], [px * rs]], order=1, mode="nearest",
+        )[0])
+        return {}, fixed
 
     def pair_row(a: int, b: int) -> dict[int, float]:
         checker_width = local.shape[1]
@@ -380,6 +399,57 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
                 r3_d1_terms.append(binary_index[(route, k // R3_SECTION_SAMPLES)])
         add({j: 1.0 for j in sorted(set(r3_d1_terms))}, float(r3_limit))
 
+    # Joint R3 cross-section constraints use the exact checker formulas:
+    # +/-1.5 map-unit samples, 3.5% quer sections, and 8 cm cross-section bow.
+    # Every D1 section remains capped at 20% quer; at most seven sections may
+    # exceed the ordinary checker thresholds.
+    if r3_limit is not None:
+        quer_section_terms: list[int] = []
+        wob_section_terms: list[int] = []
+        for route, p in enumerate(profiles):
+            coords = np.asarray(p["coords"], dtype=np.float64)
+            direction = np.gradient(coords, axis=0)
+            direction /= np.maximum(np.linalg.norm(direction, axis=1, keepdims=True), 1e-9)
+            normals = np.column_stack((-direction[:, 1], direction[:, 0]))
+            for k, (px, pz) in enumerate(coords):
+                section = (route, k // R3_SECTION_SAMPLES)
+                if section not in quer_binary_index:
+                    continue
+                normal = normals[k] * 1.5
+                plus_row, plus_fixed = route_field_row(float(px + normal[0]), float(pz + normal[1]))
+                minus_row, minus_fixed = route_field_row(float(px - normal[0]), float(pz - normal[1]))
+                axis_row, axis_fixed = route_field_row(float(px), float(pz))
+
+                q_row: dict[int, float] = {}
+                for column, value in plus_row.items():
+                    q_row[column] = q_row.get(column, 0.0) + value * (100.0 / 3.0)
+                for column, value in minus_row.items():
+                    q_row[column] = q_row.get(column, 0.0) - value * (100.0 / 3.0)
+                q_fixed = (plus_fixed - minus_fixed) * (100.0 / 3.0)
+                q_binary = quer_binary_index[section]
+                add(q_row, 20.0 - q_fixed)
+                add({column: -value for column, value in q_row.items()}, 20.0 + q_fixed)
+                add({**q_row, q_binary: -30.0}, 3.5 - q_fixed)
+                add({**{column: -value for column, value in q_row.items()}, q_binary: -30.0}, 3.5 + q_fixed)
+
+                wob_row: dict[int, float] = {}
+                for column, value in axis_row.items():
+                    wob_row[column] = wob_row.get(column, 0.0) + value
+                for column, value in plus_row.items():
+                    wob_row[column] = wob_row.get(column, 0.0) - 0.5 * value
+                for column, value in minus_row.items():
+                    wob_row[column] = wob_row.get(column, 0.0) - 0.5 * value
+                wob_fixed = axis_fixed - 0.5 * (plus_fixed + minus_fixed)
+                wob_binary = wob_binary_index[section]
+                add({**wob_row, wob_binary: -100.0}, 0.08 - wob_fixed)
+                add({**{column: -value for column, value in wob_row.items()}, wob_binary: -100.0}, 0.08 + wob_fixed)
+            quer_section_terms.extend(quer_binary_index[(route, k // R3_SECTION_SAMPLES)]
+                                      for r, k, inside in section_lookup if r == route and inside)
+            wob_section_terms.extend(wob_binary_index[(route, k // R3_SECTION_SAMPLES)]
+                                     for r, k, inside in section_lookup if r == route and inside)
+        add({j: 1.0 for j in sorted(set(quer_section_terms))}, 7.0)
+        add({j: 1.0 for j in sorted(set(wob_section_terms))}, 7.0)
+
     # Same-route and cross-route pairs from p3d15, with the selected physical grade.
     pairs = route_pairs(profiles)
     for ra, ia, rb, ib, distance in pairs:
@@ -447,7 +517,7 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
     b2 = np.asarray([*rhs, *secondary_rhs], dtype=np.float64)
     lower2 = np.r_[lower, np.zeros(slack_count, dtype=np.float64)]
     upper2 = np.r_[upper, np.full(slack_count, np.inf, dtype=np.float64)]
-    for index in binary_index.values():
+    for index in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
         fixed_value = float(round(result.x[index]))
         lower2[index] = upper2[index] = fixed_value
     c2 = np.zeros(nvars_secondary, dtype=np.float64)
@@ -484,6 +554,12 @@ def solve(data: dict, grade: float, r3_limit: int | None, out: Path, reference_m
         xsol = result.x
         section_count = int(sum(xsol[j] > 0.5 for j in set(r3_d1_terms))) if r3_limit is not None else None
         summary["r3_sections_D1_solution"] = section_count
+        summary["r3_quer_sections_D1_solution"] = int(
+            sum(xsol[j] > 0.5 for j in set(quer_binary_index.values()))
+        ) if r3_limit is not None else None
+        summary["r3_wob_sections_D1_solution"] = int(
+            sum(xsol[j] > 0.5 for j in set(wob_binary_index.values()))
+        ) if r3_limit is not None else None
         summary["plane_height_m"] = float(xsol[plane_h])
         summary["plane_gradient_x"] = float(xsol[plane_gx])
         summary["plane_gradient_z"] = float(xsol[plane_gz])

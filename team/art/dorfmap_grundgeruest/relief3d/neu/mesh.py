@@ -3132,11 +3132,11 @@ def _apply_d1_joint_solution_transfer(
             order=1, mode="nearest",
         )
         axis_errors.extend(np.abs(sampled - np.asarray(heights)[inside]).tolist())
-    solver_info["variant21_axis_mesh_max_abs_error_m"] = float(max(axis_errors, default=0.0))
-    solver_info["variant21_axis_mesh_over_0_02_count"] = int(
+    solver_info["joint_axis_mesh_max_abs_error_m"] = float(max(axis_errors, default=0.0))
+    solver_info["joint_axis_mesh_over_0_02_count"] = int(
         np.count_nonzero(np.asarray(axis_errors) > 0.020001)
     )
-    solver_info["variant21_direct_mesh_supports"] = int(np.count_nonzero(coverage >= 0.999999))
-    solver_info["variant21_max_fade_weight"] = float(np.max(coverage))
+    solver_info["joint_direct_mesh_supports"] = int(np.count_nonzero(coverage >= 0.999999))
+    solver_info["joint_max_fade_weight"] = float(np.max(coverage))
     weight_grid = coverage.reshape(x.shape)
     return weight_grid, int(np.count_nonzero(weight_grid >= 0.999999))

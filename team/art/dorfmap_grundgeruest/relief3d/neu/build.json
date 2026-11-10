@@ -57,7 +57,7 @@
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "ba3957f905cd7d0d0e0c6270eddfbafed5020729ac62df27e237c39caff8368c",
+        "height_sha256": "26b849f6384993d5029b58dc08f6c657406785e26939f7c172a0d8fafe1ace29",
         "terrain": {
           "changed_vertices": 4925,
           "crossing_flat_vertices": 0,
@@ -72,7 +72,7 @@
             "kachelrand_fade_3m"
           ],
           "max_abs_delta_m": 3.013915,
-          "mean_abs_delta_m": 0.276889,
+          "mean_abs_delta_m": 0.280173,
           "profile_solver": {
             "R8_gate_center_unrounded_map": [
               152.54985704503775,
@@ -80,9 +80,9 @@
             ],
             "R8_gate_gitter_support_pairs": 273,
             "R8_gate_metrics_solution": {
-              "R8_gitter_m": 0.02000000000004487,
-              "R8_quer_pct": 3.0000000000000138,
-              "R8_stufe_m": 0.08042386099566068
+              "R8_gitter_m": 0.020000000000119478,
+              "R8_quer_pct": 3.000000000000013,
+              "R8_stufe_m": 0.08042386099566112
             },
             "R8_gate_quer_slope_limit_pct": 3.0,
             "R8_gate_quer_supports": 112,
@@ -90,22 +90,28 @@
             "axis_supports": 359,
             "axis_tolerance_m": 0.0,
             "checker_spacing_map_units": 0.25,
-            "constraints": 7932,
+            "constraints": 10136,
             "g_m_per_m": 0.45,
+            "joint_axis_mesh_max_abs_error_m": 0.00047458591996019095,
+            "joint_axis_mesh_over_0_02_count": 0,
+            "joint_direct_mesh_supports": 1106,
+            "joint_max_fade_weight": 1.0,
             "mesh_raster_spacing_map_units": 0.5,
-            "minimum_neighbor_step_m": 0.08042385099566023,
-            "mip_dual_bound_m": 0.08042385099566023,
+            "minimum_neighbor_step_m": 0.08042385099566038,
+            "mip_dual_bound_m": 0.08042385099566038,
             "mip_gap": 0.0,
             "plane_core_supports": 137,
-            "plane_gradient_x": -0.01028441396161947,
-            "plane_gradient_z": -0.02805546183604112,
-            "plane_height_m": 4.074046581286601,
+            "plane_gradient_x": -0.01028441396158782,
+            "plane_gradient_z": -0.02805546183605423,
+            "plane_height_m": 4.074046581285742,
             "plane_radius_m": 2.0,
             "plane_slope_limit_pct": 3.0,
-            "plane_slope_pct": 2.988106606812269,
+            "plane_slope_pct": 2.9881066068124107,
             "plane_tolerance_m": 0.02,
             "r3_D1_limit": 6,
-            "r3_sections_D1_solution": 5,
+            "r3_quer_sections_D1_solution": 5,
+            "r3_sections_D1_solution": 6,
+            "r3_wob_sections_D1_solution": 4,
             "route_pair_count": 1075,
             "same_route_arc_distance_factor": 1.25,
             "same_route_pair_count": 218,
@@ -113,26 +119,22 @@
             "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
             "status_code": 0,
             "success": true,
-            "tie_break_movement_l1_m": 122.32521325172338,
+            "tie_break_movement_l1_m": 655.1269959339224,
             "tie_break_reference_mesh": "relief_p3d16_gate.json.gz",
             "tie_break_reference_sha256": "4fdf40c6ed1d2411d88f1da0f25063fc040cd579f9b7f018a056409f9468a40d",
-            "variables": 7812,
-            "variant21_axis_mesh_max_abs_error_m": 0.00047458591996019095,
-            "variant21_axis_mesh_over_0_02_count": 0,
-            "variant21_direct_mesh_supports": 1106,
-            "variant21_max_fade_weight": 1.0,
+            "variables": 7858,
             "worst_pair": {
               "a": {
-                "height_m": 3.7511194363524893,
-                "x": 149.75,
-                "z": 31.0
+                "height_m": 4.220702516651006,
+                "x": 153.0,
+                "z": 26.25
               },
               "b": {
-                "height_m": 3.6706955753568287,
-                "x": 150.0,
-                "z": 31.0
+                "height_m": 4.140278655655345,
+                "x": 153.0,
+                "z": 26.5
               },
-              "step_m": 0.08042386099566068
+              "step_m": 0.08042386099566112
             }
           },
           "ramp_crossing_flat_vertices": 1106,
