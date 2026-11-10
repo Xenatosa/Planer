@@ -1,0 +1,5 @@
+wand,band_median_zellen,band_p25_p75,spalten_n,band_px,fels_lauf_px_alt,fels_sicht_px_t40u,hoehe_alt_m,hoehe_neu_m,marke
+Nord,14,5-20,472,350,163,230 (Bild 795-870 bis 1020-1110),8.6,14,[S] Band/Spalten aus Raster; [S] Felssicht im Bild; [R] neu = Band_px/25
+Suedgrat,16,10-23,350,400,144,,7.6,16,[S]/[R]
+Krater,11,6-18,204,275,145,,7.7,11,[S]/[R]
+Ostgrat,12,5-21,182,300,127,,6.7,12,[S]/[R]

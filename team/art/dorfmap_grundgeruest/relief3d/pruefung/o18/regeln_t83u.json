@@ -1,0 +1,338 @@
+{
+ "A1": {
+  "mulde_max": 11.39,
+  "mulde_ecken_gt1m": 310,
+  "spitze_max": 8.42,
+  "spitze_ecken_gt1m": 102
+ },
+ "A2": {
+  "mulde_max": 10.4,
+  "mulde_ecken_gt1m": 48,
+  "spitze_max": 4.73,
+  "spitze_ecken_gt1m": 47
+ },
+ "A3": {
+  "mulde_max": 0.34,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.21,
+  "spitze_ecken_gt1m": 0
+ },
+ "A4": {
+  "mulde_max": 0.03,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.07,
+  "spitze_ecken_gt1m": 0
+ },
+ "A5": {
+  "mulde_max": 0.09,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.05,
+  "spitze_ecken_gt1m": 0
+ },
+ "A6": {
+  "mulde_max": 0.88,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.47,
+  "spitze_ecken_gt1m": 0
+ },
+ "A7": {
+  "mulde_max": 0.59,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.77,
+  "spitze_ecken_gt1m": 0
+ },
+ "B1": {
+  "mulde_max": 2.63,
+  "mulde_ecken_gt1m": 56,
+  "spitze_max": 2.85,
+  "spitze_ecken_gt1m": 52
+ },
+ "B2": {
+  "mulde_max": 5.33,
+  "mulde_ecken_gt1m": 93,
+  "spitze_max": 5.91,
+  "spitze_ecken_gt1m": 59
+ },
+ "B3": {
+  "mulde_max": 1.91,
+  "mulde_ecken_gt1m": 22,
+  "spitze_max": 2.47,
+  "spitze_ecken_gt1m": 9
+ },
+ "B4": {
+  "mulde_max": 6.06,
+  "mulde_ecken_gt1m": 229,
+  "spitze_max": 4.57,
+  "spitze_ecken_gt1m": 100
+ },
+ "B5": {
+  "mulde_max": 7.33,
+  "mulde_ecken_gt1m": 74,
+  "spitze_max": 6.4,
+  "spitze_ecken_gt1m": 68
+ },
+ "B6": {
+  "mulde_max": 1.72,
+  "mulde_ecken_gt1m": 21,
+  "spitze_max": 1.32,
+  "spitze_ecken_gt1m": 5
+ },
+ "B7": {
+  "mulde_max": 0.65,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.36,
+  "spitze_ecken_gt1m": 0
+ },
+ "C1": {
+  "mulde_max": 2.88,
+  "mulde_ecken_gt1m": 14,
+  "spitze_max": 1.66,
+  "spitze_ecken_gt1m": 8
+ },
+ "C2": {
+  "mulde_max": 3.27,
+  "mulde_ecken_gt1m": 28,
+  "spitze_max": 2.89,
+  "spitze_ecken_gt1m": 90
+ },
+ "C3": {
+  "mulde_max": 4.01,
+  "mulde_ecken_gt1m": 561,
+  "spitze_max": 4.01,
+  "spitze_ecken_gt1m": 259
+ },
+ "C4": {
+  "mulde_max": 5.57,
+  "mulde_ecken_gt1m": 210,
+  "spitze_max": 2.91,
+  "spitze_ecken_gt1m": 89
+ },
+ "C5": {
+  "mulde_max": 3.96,
+  "mulde_ecken_gt1m": 451,
+  "spitze_max": 2.78,
+  "spitze_ecken_gt1m": 163
+ },
+ "C6": {
+  "mulde_max": 2.94,
+  "mulde_ecken_gt1m": 232,
+  "spitze_max": 3.27,
+  "spitze_ecken_gt1m": 108
+ },
+ "C7": {
+  "mulde_max": 0.4,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.31,
+  "spitze_ecken_gt1m": 0
+ },
+ "D1": {
+  "mulde_max": 5.15,
+  "mulde_ecken_gt1m": 278,
+  "spitze_max": 2.74,
+  "spitze_ecken_gt1m": 57
+ },
+ "D2": {
+  "mulde_max": 0.03,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.0,
+  "spitze_ecken_gt1m": 0
+ },
+ "D3": {
+  "mulde_max": 1.45,
+  "mulde_ecken_gt1m": 11,
+  "spitze_max": 5.15,
+  "spitze_ecken_gt1m": 38
+ },
+ "D4": {
+  "mulde_max": 3.32,
+  "mulde_ecken_gt1m": 71,
+  "spitze_max": 1.8,
+  "spitze_ecken_gt1m": 29
+ },
+ "D5": {
+  "mulde_max": 1.39,
+  "mulde_ecken_gt1m": 5,
+  "spitze_max": 0.27,
+  "spitze_ecken_gt1m": 0
+ },
+ "D6": {
+  "mulde_max": 8.26,
+  "mulde_ecken_gt1m": 301,
+  "spitze_max": 4.21,
+  "spitze_ecken_gt1m": 63
+ },
+ "D7": {
+  "mulde_max": 0.54,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.4,
+  "spitze_ecken_gt1m": 0
+ },
+ "E1": {
+  "mulde_max": 4.11,
+  "mulde_ecken_gt1m": 49,
+  "spitze_max": 2.29,
+  "spitze_ecken_gt1m": 24
+ },
+ "E2": {
+  "mulde_max": 0.34,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.15,
+  "spitze_ecken_gt1m": 0
+ },
+ "E3": {
+  "mulde_max": 0.55,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.3,
+  "spitze_ecken_gt1m": 0
+ },
+ "E4": {
+  "mulde_max": 0.73,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.61,
+  "spitze_ecken_gt1m": 0
+ },
+ "E5": {
+  "mulde_max": 1.08,
+  "mulde_ecken_gt1m": 2,
+  "spitze_max": 1.08,
+  "spitze_ecken_gt1m": 1
+ },
+ "E6": {
+  "mulde_max": 4.69,
+  "mulde_ecken_gt1m": 167,
+  "spitze_max": 4.95,
+  "spitze_ecken_gt1m": 52
+ },
+ "E7": {
+  "mulde_max": 0.84,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.49,
+  "spitze_ecken_gt1m": 0
+ },
+ "F1": {
+  "mulde_max": 4.7,
+  "mulde_ecken_gt1m": 107,
+  "spitze_max": 3.19,
+  "spitze_ecken_gt1m": 15
+ },
+ "F2": {
+  "mulde_max": 0.58,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 1.56,
+  "spitze_ecken_gt1m": 9
+ },
+ "F3": {
+  "mulde_max": 0.0,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.0,
+  "spitze_ecken_gt1m": 0
+ },
+ "F4": {
+  "mulde_max": 0.0,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.0,
+  "spitze_ecken_gt1m": 0
+ },
+ "F5": {
+  "mulde_max": 0.2,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.08,
+  "spitze_ecken_gt1m": 0
+ },
+ "F6": {
+  "mulde_max": 4.37,
+  "mulde_ecken_gt1m": 217,
+  "spitze_max": 3.3,
+  "spitze_ecken_gt1m": 80
+ },
+ "F7": {
+  "mulde_max": 0.32,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.36,
+  "spitze_ecken_gt1m": 0
+ },
+ "G1": {
+  "mulde_max": 3.82,
+  "mulde_ecken_gt1m": 71,
+  "spitze_max": 3.2,
+  "spitze_ecken_gt1m": 32
+ },
+ "G2": {
+  "mulde_max": 0.0,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.0,
+  "spitze_ecken_gt1m": 0
+ },
+ "G3": {
+  "mulde_max": 2.66,
+  "mulde_ecken_gt1m": 123,
+  "spitze_max": 2.46,
+  "spitze_ecken_gt1m": 49
+ },
+ "G4": {
+  "mulde_max": 2.53,
+  "mulde_ecken_gt1m": 52,
+  "spitze_max": 2.33,
+  "spitze_ecken_gt1m": 104
+ },
+ "G5": {
+  "mulde_max": 0.0,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.04,
+  "spitze_ecken_gt1m": 0
+ },
+ "G6": {
+  "mulde_max": 3.19,
+  "mulde_ecken_gt1m": 93,
+  "spitze_max": 1.32,
+  "spitze_ecken_gt1m": 9
+ },
+ "G7": {
+  "mulde_max": 0.41,
+  "mulde_ecken_gt1m": 0,
+  "spitze_max": 0.75,
+  "spitze_ecken_gt1m": 0
+ },
+ "H1": {
+  "mulde_max": 4.12,
+  "mulde_ecken_gt1m": 86,
+  "spitze_max": 2.53,
+  "spitze_ecken_gt1m": 25
+ },
+ "H2": {
+  "mulde_max": 1.4,
+  "mulde_ecken_gt1m": 26,
+  "spitze_max": 1.89,
+  "spitze_ecken_gt1m": 42
+ },
+ "H3": {
+  "mulde_max": 2.62,
+  "mulde_ecken_gt1m": 97,
+  "spitze_max": 3.23,
+  "spitze_ecken_gt1m": 45
+ },
+ "H4": {
+  "mulde_max": 2.39,
+  "mulde_ecken_gt1m": 25,
+  "spitze_max": 1.9,
+  "spitze_ecken_gt1m": 5
+ },
+ "H5": {
+  "mulde_max": 2.22,
+  "mulde_ecken_gt1m": 46,
+  "spitze_max": 2.26,
+  "spitze_ecken_gt1m": 29
+ },
+ "H6": {
+  "mulde_max": 6.81,
+  "mulde_ecken_gt1m": 97,
+  "spitze_max": 3.5,
+  "spitze_ecken_gt1m": 49
+ },
+ "H7": {
+  "mulde_max": 1.12,
+  "mulde_ecken_gt1m": 4,
+  "spitze_max": 0.58,
+  "spitze_ecken_gt1m": 0
+ }
+}

@@ -1,0 +1,1939 @@
+{
+ "stand": "Commit 7fe23bf | Ansicht: NEU (Relief t67u, Runde O17)",
+ "commit": "7fe23bf",
+ "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+ "raster": {
+  "spalten": 8,
+  "reihen": 7,
+  "grenzen_x": [
+   0,
+   42,
+   84,
+   126,
+   168,
+   210,
+   252,
+   294,
+   336
+  ],
+  "grenzen_y": [
+   0,
+   43,
+   87,
+   130,
+   173,
+   216,
+   260,
+   303
+  ],
+  "zelle_m": 1,
+  "px_pro_zelle": 25
+ },
+ "uebersicht": "uebersicht_raster.jpg",
+ "felder": [
+  {
+   "feld": "A1",
+   "spalte": "A",
+   "reihe": 1,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_A1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     86.0,
+     85.5
+    ],
+    "ziel": [
+     21.0,
+     14.0,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B1",
+   "spalte": "B",
+   "reihe": 1,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_B1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     86.0,
+     85.5
+    ],
+    "ziel": [
+     63.0,
+     14.0,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C1",
+   "spalte": "C",
+   "reihe": 1,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_C1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     86.0,
+     85.5
+    ],
+    "ziel": [
+     105.0,
+     14.0,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D1",
+   "spalte": "D",
+   "reihe": 1,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_D1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     83.575,
+     85.5
+    ],
+    "ziel": [
+     147.0,
+     11.575,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E1",
+   "spalte": "E",
+   "reihe": 1,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_E1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     85.89,
+     85.5
+    ],
+    "ziel": [
+     189.0,
+     13.89,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F1",
+   "spalte": "F",
+   "reihe": 1,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_F1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     85.83,
+     85.5
+    ],
+    "ziel": [
+     231.0,
+     13.83,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G1",
+   "spalte": "G",
+   "reihe": 1,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_G1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     85.74,
+     85.5
+    ],
+    "ziel": [
+     273.0,
+     13.74,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H1",
+   "spalte": "H",
+   "reihe": 1,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 0,
+   "cy1": 42,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    0,
+    43
+   ],
+   "bild": "felder/feld_H1.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     85.99,
+     85.5
+    ],
+    "ziel": [
+     315.0,
+     13.99,
+     21.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A2",
+   "spalte": "A",
+   "reihe": 2,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_A2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     64.24,
+     129.0
+    ],
+    "ziel": [
+     21.0,
+     -7.76,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B2",
+   "spalte": "B",
+   "reihe": 2,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_B2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     64.93,
+     129.0
+    ],
+    "ziel": [
+     63.0,
+     -7.07,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C2",
+   "spalte": "C",
+   "reihe": 2,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_C2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     69.97,
+     129.0
+    ],
+    "ziel": [
+     105.0,
+     -2.03,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D2",
+   "spalte": "D",
+   "reihe": 2,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_D2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     72.0,
+     129.0
+    ],
+    "ziel": [
+     147.0,
+     0.0,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E2",
+   "spalte": "E",
+   "reihe": 2,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_E2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     72.0,
+     129.0
+    ],
+    "ziel": [
+     189.0,
+     0.0,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F2",
+   "spalte": "F",
+   "reihe": 2,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_F2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     72.0,
+     129.0
+    ],
+    "ziel": [
+     231.0,
+     0.0,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G2",
+   "spalte": "G",
+   "reihe": 2,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_G2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     72.0,
+     129.0
+    ],
+    "ziel": [
+     273.0,
+     0.0,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H2",
+   "spalte": "H",
+   "reihe": 2,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 43,
+   "cy1": 86,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    43,
+    87
+   ],
+   "bild": "felder/feld_H2.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     72.05,
+     129.0
+    ],
+    "ziel": [
+     315.0,
+     0.05,
+     65.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A3",
+   "spalte": "A",
+   "reihe": 3,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_A3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     64.1,
+     172.5
+    ],
+    "ziel": [
+     21.0,
+     -7.9,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B3",
+   "spalte": "B",
+   "reihe": 3,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_B3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     64.89,
+     172.5
+    ],
+    "ziel": [
+     63.0,
+     -7.11,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C3",
+   "spalte": "C",
+   "reihe": 3,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_C3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     76.435,
+     172.5
+    ],
+    "ziel": [
+     105.0,
+     4.4350000000000005,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D3",
+   "spalte": "D",
+   "reihe": 3,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_D3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     72.0,
+     172.5
+    ],
+    "ziel": [
+     147.0,
+     0.0,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E3",
+   "spalte": "E",
+   "reihe": 3,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_E3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     72.0,
+     172.5
+    ],
+    "ziel": [
+     189.0,
+     0.0,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F3",
+   "spalte": "F",
+   "reihe": 3,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_F3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     72.0,
+     172.5
+    ],
+    "ziel": [
+     231.0,
+     0.0,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G3",
+   "spalte": "G",
+   "reihe": 3,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_G3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     72.13,
+     172.5
+    ],
+    "ziel": [
+     273.0,
+     0.13,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H3",
+   "spalte": "H",
+   "reihe": 3,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 87,
+   "cy1": 129,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    87,
+    130
+   ],
+   "bild": "felder/feld_H3.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     84.0,
+     172.5
+    ],
+    "ziel": [
+     315.0,
+     12.0,
+     108.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A4",
+   "spalte": "A",
+   "reihe": 4,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_A4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     63.56,
+     215.5
+    ],
+    "ziel": [
+     21.0,
+     -8.44,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B4",
+   "spalte": "B",
+   "reihe": 4,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_B4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     71.57,
+     215.5
+    ],
+    "ziel": [
+     63.0,
+     -0.43,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C4",
+   "spalte": "C",
+   "reihe": 4,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_C4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     74.57,
+     215.5
+    ],
+    "ziel": [
+     105.0,
+     2.57,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D4",
+   "spalte": "D",
+   "reihe": 4,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_D4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     72.0,
+     215.5
+    ],
+    "ziel": [
+     147.0,
+     0.0,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E4",
+   "spalte": "E",
+   "reihe": 4,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_E4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     72.0,
+     215.5
+    ],
+    "ziel": [
+     189.0,
+     0.0,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F4",
+   "spalte": "F",
+   "reihe": 4,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_F4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     72.0,
+     215.5
+    ],
+    "ziel": [
+     231.0,
+     0.0,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G4",
+   "spalte": "G",
+   "reihe": 4,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_G4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     72.0,
+     215.5
+    ],
+    "ziel": [
+     273.0,
+     0.0,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H4",
+   "spalte": "H",
+   "reihe": 4,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 130,
+   "cy1": 172,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    130,
+    173
+   ],
+   "bild": "felder/feld_H4.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     84.0,
+     215.5
+    ],
+    "ziel": [
+     315.0,
+     12.0,
+     151.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A5",
+   "spalte": "A",
+   "reihe": 5,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_A5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     62.13,
+     258.5
+    ],
+    "ziel": [
+     21.0,
+     -9.87,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B5",
+   "spalte": "B",
+   "reihe": 5,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_B5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     65.255,
+     258.5
+    ],
+    "ziel": [
+     63.0,
+     -6.745,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C5",
+   "spalte": "C",
+   "reihe": 5,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_C5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     76.1,
+     258.5
+    ],
+    "ziel": [
+     105.0,
+     4.1,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D5",
+   "spalte": "D",
+   "reihe": 5,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_D5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     72.0,
+     258.5
+    ],
+    "ziel": [
+     147.0,
+     0.0,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E5",
+   "spalte": "E",
+   "reihe": 5,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_E5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     71.99,
+     258.5
+    ],
+    "ziel": [
+     189.0,
+     -0.01,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F5",
+   "spalte": "F",
+   "reihe": 5,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_F5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     72.0,
+     258.5
+    ],
+    "ziel": [
+     231.0,
+     0.0,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G5",
+   "spalte": "G",
+   "reihe": 5,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_G5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     72.0,
+     258.5
+    ],
+    "ziel": [
+     273.0,
+     0.0,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H5",
+   "spalte": "H",
+   "reihe": 5,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 173,
+   "cy1": 215,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    173,
+    216
+   ],
+   "bild": "felder/feld_H5.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     81.565,
+     258.5
+    ],
+    "ziel": [
+     315.0,
+     9.565000000000001,
+     194.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A6",
+   "spalte": "A",
+   "reihe": 6,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_A6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     58.53,
+     302.0
+    ],
+    "ziel": [
+     21.0,
+     -13.47,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B6",
+   "spalte": "B",
+   "reihe": 6,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_B6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     56.375,
+     302.0
+    ],
+    "ziel": [
+     63.0,
+     -15.625,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C6",
+   "spalte": "C",
+   "reihe": 6,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_C6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     58.96,
+     302.0
+    ],
+    "ziel": [
+     105.0,
+     -13.04,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D6",
+   "spalte": "D",
+   "reihe": 6,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_D6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     61.730000000000004,
+     302.0
+    ],
+    "ziel": [
+     147.0,
+     -10.27,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E6",
+   "spalte": "E",
+   "reihe": 6,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_E6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     71.14,
+     302.0
+    ],
+    "ziel": [
+     189.0,
+     -0.86,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F6",
+   "spalte": "F",
+   "reihe": 6,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_F6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     56.175,
+     302.0
+    ],
+    "ziel": [
+     231.0,
+     -15.825,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G6",
+   "spalte": "G",
+   "reihe": 6,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_G6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     59.825,
+     302.0
+    ],
+    "ziel": [
+     273.0,
+     -12.175,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H6",
+   "spalte": "H",
+   "reihe": 6,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 216,
+   "cy1": 259,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    216,
+    260
+   ],
+   "bild": "felder/feld_H6.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     64.695,
+     302.0
+    ],
+    "ziel": [
+     315.0,
+     -7.305,
+     238.0
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "A7",
+   "spalte": "A",
+   "reihe": 7,
+   "cx0": 0,
+   "cx1": 41,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    0,
+    42
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_A7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     21.0,
+     56.0,
+     345.5
+    ],
+    "ziel": [
+     21.0,
+     -16.0,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "B7",
+   "spalte": "B",
+   "reihe": 7,
+   "cx0": 42,
+   "cx1": 83,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    42,
+    84
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_B7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     63.0,
+     56.0,
+     345.5
+    ],
+    "ziel": [
+     63.0,
+     -16.0,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "C7",
+   "spalte": "C",
+   "reihe": 7,
+   "cx0": 84,
+   "cx1": 125,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    84,
+    126
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_C7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     105.0,
+     55.97,
+     345.5
+    ],
+    "ziel": [
+     105.0,
+     -16.03,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "D7",
+   "spalte": "D",
+   "reihe": 7,
+   "cx0": 126,
+   "cx1": 167,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    126,
+    168
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_D7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     147.0,
+     56.0,
+     345.5
+    ],
+    "ziel": [
+     147.0,
+     -16.0,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "E7",
+   "spalte": "E",
+   "reihe": 7,
+   "cx0": 168,
+   "cx1": 209,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    168,
+    210
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_E7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     189.0,
+     55.989999999999995,
+     345.5
+    ],
+    "ziel": [
+     189.0,
+     -16.01,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "F7",
+   "spalte": "F",
+   "reihe": 7,
+   "cx0": 210,
+   "cx1": 251,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    210,
+    252
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_F7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     231.0,
+     55.97,
+     345.5
+    ],
+    "ziel": [
+     231.0,
+     -16.03,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "G7",
+   "spalte": "G",
+   "reihe": 7,
+   "cx0": 252,
+   "cx1": 293,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    252,
+    294
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_G7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     273.0,
+     56.0,
+     345.5
+    ],
+    "ziel": [
+     273.0,
+     -16.0,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  },
+  {
+   "feld": "H7",
+   "spalte": "H",
+   "reihe": 7,
+   "cx0": 294,
+   "cx1": 335,
+   "cy0": 260,
+   "cy1": 302,
+   "meter_x": [
+    294,
+    336
+   ],
+   "meter_y": [
+    260,
+    303
+   ],
+   "bild": "felder/feld_H7.jpg",
+   "commit": "7fe23bf",
+   "banner": "Ansicht: NEU (Relief t67u, Runde O17)",
+   "kamera": {
+    "position": [
+     315.0,
+     55.980000000000004,
+     345.5
+    ],
+    "ziel": [
+     315.0,
+     -16.02,
+     281.5
+    ],
+    "fov": 50,
+    "query": "?lod=1 (LS=2)"
+   }
+  }
+ ]
+}

@@ -1,0 +1,39 @@
+{
+ "LS1": {
+  "LS": 1,
+  "dreiecke": 1290384,
+  "nan_hoehen": 0,
+  "fehlende_indizes": 0,
+  "entartet": 0,
+  "nicht_manifold_kanten": 0,
+  "offene_kanten_innen": 26754,
+  "spalt_max_m": 0.0,
+  "kanten_mit_spalt_gt_1cm": 0,
+  "kanten_mit_spalt_gt_1mm": 0,
+  "spalt_orte_beispiele": []
+ },
+ "LS2": {
+  "LS": 2,
+  "dreiecke": 322596,
+  "nan_hoehen": 0,
+  "fehlende_indizes": 0,
+  "entartet": 0,
+  "nicht_manifold_kanten": 0,
+  "offene_kanten_innen": 13377,
+  "spalt_max_m": 0.0,
+  "kanten_mit_spalt_gt_1cm": 0,
+  "kanten_mit_spalt_gt_1mm": 0,
+  "spalt_orte_beispiele": []
+ },
+ "wasser": {
+  "wasser_vertices": 23573,
+  "wv_unter_gelaende": 0,
+  "nan": 0
+ },
+ "gelaende": {
+  "g_min": -18.48,
+  "g_max": 14.47,
+  "unter_sockel_-34": 0,
+  "nan": 0
+ }
+}

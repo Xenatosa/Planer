@@ -1,0 +1,20 @@
+{
+  "felder": [
+    "bauzone_bestand",
+    "bauzone_plan",
+    "kreuzung",
+    "wand",
+    "wasser",
+    "weg"
+  ],
+  "felder_sha256": "64db8aac398fe627ee92935b662a0106d983337f57dd1b0412a7c3f5561fa41a",
+  "prototype_kacheln": [
+    "D1",
+    "G1",
+    "D2"
+  ],
+  "schema": "dorfmap-neu-1",
+  "vektor_sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+  "zellen_quell_diff": 0,
+  "zellen_sha256": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+}

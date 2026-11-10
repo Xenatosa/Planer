@@ -1,0 +1,191 @@
+{
+ "wasserzellen": 7844,
+ "komponenten": 15,
+ "ohne_fluss": 10,
+ "zellen_ohne_fluss": 232,
+ "liste": [
+  {
+   "n": 69,
+   "fluss": {
+    "WASSER_FARBE": 48,
+    "": 21
+   },
+   "untergrund": {
+    "WASSER_EIS": 48,
+    "SCHNEE": 21
+   },
+   "bbox": [
+    122,
+    5,
+    139,
+    19
+   ],
+   "feld": "C1"
+  },
+  {
+   "n": 29,
+   "fluss": {
+    "WASSER_FARBE": 23,
+    "": 6
+   },
+   "untergrund": {
+    "WASSER_EIS": 23,
+    "FELS": 4,
+    "SCHNEE": 2
+   },
+   "bbox": [
+    332,
+    190,
+    335,
+    199
+   ],
+   "feld": "H5"
+  },
+  {
+   "n": 23,
+   "fluss": {
+    "WASSER_FARBE": 17,
+    "": 6
+   },
+   "untergrund": {
+    "WASSER_EIS": 17,
+    "SCHNEE": 6
+   },
+   "bbox": [
+    178,
+    4,
+    184,
+    7
+   ],
+   "feld": "E1"
+  },
+  {
+   "n": 22,
+   "fluss": {
+    "": 6,
+    "WASSER_FARBE": 16
+   },
+   "untergrund": {
+    "WALD": 3,
+    "WASSER_EIS": 16,
+    "SCHNEE": 3
+   },
+   "bbox": [
+    330,
+    78,
+    335,
+    82
+   ],
+   "feld": "H2"
+  },
+  {
+   "n": 21,
+   "fluss": {
+    "": 8,
+    "WASSER_FARBE": 13
+   },
+   "untergrund": {
+    "SCHNEE": 8,
+    "WASSER_EIS": 13
+   },
+   "bbox": [
+    190,
+    6,
+    196,
+    10
+   ],
+   "feld": "E1"
+  },
+  {
+   "n": 17,
+   "fluss": {
+    "WASSER_FARBE": 12,
+    "": 5
+   },
+   "untergrund": {
+    "WASSER_EIS": 12,
+    "SCHNEE": 5
+   },
+   "bbox": [
+    296,
+    4,
+    299,
+    8
+   ],
+   "feld": "H1"
+  },
+  {
+   "n": 14,
+   "fluss": {
+    "WASSER_FARBE": 10,
+    "": 4
+   },
+   "untergrund": {
+    "WASSER_EIS": 10,
+    "WALD": 2,
+    "SCHNEE": 2
+   },
+   "bbox": [
+    165,
+    208,
+    169,
+    211
+   ],
+   "feld": "D5"
+  },
+  {
+   "n": 13,
+   "fluss": {
+    "": 4,
+    "WASSER_FARBE": 9
+   },
+   "untergrund": {
+    "SCHNEE": 4,
+    "WASSER_EIS": 9
+   },
+   "bbox": [
+    310,
+    10,
+    315,
+    13
+   ],
+   "feld": "H1"
+  },
+  {
+   "n": 13,
+   "fluss": {
+    "WASSER_FARBE": 10,
+    "": 3
+   },
+   "untergrund": {
+    "WASSER_EIS": 10,
+    "SCHNEE": 3
+   },
+   "bbox": [
+    224,
+    11,
+    230,
+    13
+   ],
+   "feld": "F1"
+  },
+  {
+   "n": 11,
+   "fluss": {
+    "": 3,
+    "WASSER_FARBE": 8
+   },
+   "untergrund": {
+    "SCHNEE": 3,
+    "WASSER_EIS": 8
+   },
+   "bbox": [
+    175,
+    0,
+    178,
+    2
+   ],
+   "feld": "E1"
+  }
+ ]
+}

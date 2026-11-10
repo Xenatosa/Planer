@@ -1,0 +1,21 @@
+{
+ "spitzen": 6,
+ "nadeln_1_5m": 0,
+ "senken_0_8m": 4,
+ "senken_2m": 0,
+ "senke_max_m": 1.7,
+ "enge_grate": 259,
+ "stufe_bandrand": 0,
+ "nadel_orte_xz": [],
+ "senke_orte_xz": [],
+ "objekte_auf_wegen": {
+  "baeume": 0,
+  "felsen": 0,
+  "findlinge": 0,
+  "steine": 0,
+  "geroell": 0
+ },
+ "wasser_ohne_randweg": 5402,
+ "flussenden_blind": 0,
+ "flussenden_orte_xz": []
+}

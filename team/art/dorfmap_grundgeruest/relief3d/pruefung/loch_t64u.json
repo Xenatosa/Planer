@@ -1,0 +1,425 @@
+{
+ "kameras": 29,
+ "ls1_viewport": "1120x700",
+ "ls2_viewport": "640x400 ?lod=1",
+ "summe": {
+  "ls1": {
+   "magenta": 0,
+   "eingeschlossen": 0,
+   "schwarz": 0
+  },
+  "ls2": {
+   "magenta": 0,
+   "eingeschlossen": 0,
+   "schwarz": 0
+  }
+ },
+ "bilder": {
+  "fels00_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels01_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels02_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels03_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels04_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels05_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels06_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels07_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels08_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels09_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels10_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels11_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels12_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels13_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels14_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater00_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater01_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater02_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater03_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater04_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater05_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater06_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater07_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater08_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater09_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater10_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater11_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater12_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater14_ls1.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels00_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels01_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels02_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels03_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels04_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels05_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels06_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels07_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels08_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels09_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels10_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels11_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels12_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels13_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "fels14_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater00_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater01_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater02_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater03_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater04_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater05_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater06_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater07_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater08_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater09_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater10_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater11_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater12_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  },
+  "krater14_ls2.png": {
+   "magenta": 0,
+   "magenta_komp": 0,
+   "eingeschlossen": 0,
+   "eingeschl_px": 0,
+   "schwarz": 0
+  }
+ }
+}

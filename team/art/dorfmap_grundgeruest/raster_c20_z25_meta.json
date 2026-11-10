@@ -1,0 +1,174 @@
+{
+ "karte": "KANDIDAT_NICHT_FREIGEGEBEN_master_v18_p7_c20.png",
+ "karte_md5": "d916c6ace52352d7fcf4ef13591cb5c0",
+ "karte_px": [
+  8400,
+  7560
+ ],
+ "px_pro_m": 25,
+ "zelle_px": 25,
+ "zelle_m": 1.0,
+ "raster": [
+  336,
+  303
+ ],
+ "epoche": "E1",
+ "epochen_variante": "fest_c20",
+ "layer": {
+  "gelaende": "raster_c20_z25_zellen.csv",
+  "overlay_plaetze_wege": "raster_c20_z25_overlay_plaetze_wege.csv"
+ },
+ "unbekannt_vorher": 14398,
+ "unbekannt_nachher": 0,
+ "unbekannt_filter": 172,
+ "glaettung_zellen": 7746,
+ "boden_zu_schnee": 8280,
+ "wasser_t12u": 1609,
+ "ovr12_n": 1287,
+ "suedwald_n": 1952,
+ "wald_aus_wand": 585,
+ "overrides_zellen": 1288,
+ "schatten_statt_wasser": 42,
+ "zaehlung_vor_t9u": {
+  "BODEN": 9504,
+  "BRUECKE": 20,
+  "FELS": 1608,
+  "FELS_WALD": 5999,
+  "FEUER": 271,
+  "HOF": 430,
+  "KLIPPE_KANTE": 1483,
+  "KLIPPE_WAND": 12925,
+  "SAND": 499,
+  "SCHATTEN": 3347,
+  "SCHNEE": 49360,
+  "UNBEKANNT": 1189,
+  "WALD": 7209,
+  "WASSER_EIS": 5139,
+  "WEG": 2825
+ },
+ "wand_hoehe_m": {
+  "Nord": [
+   8.6,
+   "R"
+  ],
+  "Krater": [
+   7.7,
+   "A"
+  ],
+  "Suedgrat": [
+   7.6,
+   "A"
+  ],
+  "Ostgrat": [
+   6.7,
+   "A"
+  ],
+  "sonstige": [
+   8.6,
+   "A"
+  ]
+ },
+ "wand_hoehe_herleitung": "Median senkrechte Felslaufweite px: Nord 163, Krater 145, Suedgrat 144, Ostgrat 127; h=8.6*px/163; Schatten nicht messbar",
+ "klippe_nord_band_m": [
+  7.6,
+  9.6
+ ],
+ "hoehe_stufen_m": {
+  "Senke": 0.0,
+  "Nordplateau": 8.6,
+  "Ostplateau": 6.7,
+  "Suedvorland": -7.6,
+  "Rest": 0.0
+ },
+ "quelle_anteil": {
+  "MASKE": 27.5,
+  "FARBE": 64.9,
+  "FILTER": 2.2,
+  "KEINE": 2.1
+ },
+ "zaehlung_untergrund": {
+  "BODEN": 896,
+  "FELS": 2123,
+  "KLIPPE_KANTE": 1178,
+  "KLIPPE_WAND": 17574,
+  "SAND": 546,
+  "SCHATTEN": 1772,
+  "SCHNEE": 59807,
+  "WALD": 11217,
+  "WASSER_EIS": 6695
+ },
+ "begehbar": 62391,
+ "bebaubar": 27140,
+ "bebaubar_erweitert": 54409,
+ "bebaubar_erweitert_je_ebene": {
+  "GIPFEL": 0,
+  "HANG": 13719,
+  "KRATER": 1180,
+  "OSTPLATEAU": 361,
+  "PLATEAU_NORD": 3162,
+  "SENKE": 28269,
+  "SIMS": 0,
+  "TAL_SUED": 7718,
+  "WAND": 0
+ },
+ "ebene_zellen": {
+  "GIPFEL": 160,
+  "HANG": 21148,
+  "KRATER": 1604,
+  "OSTPLATEAU": 2365,
+  "PLATEAU_NORD": 5049,
+  "SENKE": 33395,
+  "SIMS": 101,
+  "TAL_SUED": 19234,
+  "WAND": 18752
+ },
+ "bauzone_bestand": 23123,
+ "bauzone_plan": 31893,
+ "senke_becken": 31325,
+ "bebaubar_param": {
+  "abstand_wand_m": 2.0,
+  "abstand_wasser_m": 2.0,
+  "marker": "A"
+ },
+ "bebaubar_ausserhalb_bestand": 4887,
+ "hindernis_maske": 792,
+ "hindernis_gelaende": 31930,
+ "plaetze": 99,
+ "dekoplaetze_netz": 627,
+ "groessenbezug": {
+  "px_pro_m": 25,
+  "zelle_m": 1.0,
+  "zelle_m2": 1.0,
+  "unity_pro_m": 0.09765625,
+  "ppu": 256,
+  "nordwand_m": 8.6,
+  "deko_mindestabstand_m": 1.5,
+  "deko_footprint_rand_m": 0.5,
+  "quelle": "MASSGRUNDLAGE 25 px/m [F]; BERICHT_NETZ_E1 9.2"
+ },
+ "bezug_m": 0.0,
+ "neigung_max_3d": 30.0,
+ "dreid": {
+  "achse_z": "oben, Meter",
+  "einheit": "m",
+  "ppu": 256,
+  "unity_pro_m": 0.09765625,
+  "px_pro_m": 25
+ },
+ "fluss_zellen": {
+  "BACH_NORD": 1689,
+  "BACH_SUED": 891,
+  "SEE": 821,
+  "WASSER_FARBE": 3294
+ },
+ "fluss_breite_m_median": {
+  "BACH_NORD": 2.0,
+  "BACH_SUED": 2.48
+ },
+ "ufer": 2902,
+ "luecken": [
+  "wasser_tiefe_m leer: keine Quelle",
+  "hoehe_m ausserhalb Senke nur Stufen [A], keine Hoehenkarte",
+  "Kraterinneres auf Bezug [A]"
+ ]
+}

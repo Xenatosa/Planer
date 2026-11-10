@@ -1,0 +1,19 @@
+Nr,Zelle/Bereich,Feld,Ist,Soll,Beleg,Marker,Status
+F1,"15 Teile cx 11-335 cy 1-32 (1044 Zellen)",ebene,WEST,PLATEAU_NORD,"freie Flaechen oberhalb der Nordwand ohne Verbindung zur grossen Flaeche (4er-Nachbarschaft); c20 zeigt Schnee/Fels oben auf der Wand; t34u_vorher_fehler.png F1",[S] Lage / [A] Hoehe 8.6,behoben (Regel in gen_raster.py)
+F2,"Westseite cx 0-335 cy 36-263 (21114 Zellen)",ebene+hoehe_m,"WEST, 0 m flach","HANG, Hoehe glatt zwischen den Stufen","c20: Westhang faellt zum Fluss ab, keine Wand dazwischen; alter Wert war Rest-Klasse auf 0 m",[A],behoben (Laplace-Hoehe; Werte bleiben Annahme)
+F3,"West-Tal cx 0-80 cy 226-302 (Teil von 5124 Zellen)",ebene,WEST,TAL_SUED,"alte Grenze senkrecht bei cx 81 quer durch den Fluss; c20 zeigt dort durchgehendes Flusstal",[S] Kante / [A] neue Grenze ab Wasser cy>=252,behoben
+F4,"cx 329-335 cy 226-302",ebene,WEST,TAL_SUED,"Suedgrat-Schleife endete bei cx 328 statt am Kartenrand",[S],behoben (Schleife bis nx)
+F5,"Senkenrand West cx 114-136 und weitere (2108 Zellen)",ebene,WEST,SENKE,"alte senkrechte Kante bei cx 136 ohne Gelaendekante in c20; jetzt Grenze = Hoehe innerhalb 0,5 m der Senke",[S] Kante / [A] neue Grenze,behoben; neue Grenze ist [A]
+F6,"Schneekuppe cx 94-118 cy 106-122 (160 Zellen)",ebene+hoehe_m,"KRATER, 0 m","GIPFEL, +7,6 m","c20: weisse Schneespitze noerdlich ueber dem Kraterrand, kein Kraterboden",[S] Lage / [A] Hoehe,behoben
+F7,"Ostplateau cx 288-335 cy 82-207 (351 Zellen)",ebene,WEST,OSTPLATEAU,"alte waagrechte Kante bei cy 117; Flaeche haengt ohne Wand am Ostplateau",[S] Kante / [A] Grenze,behoben
+F8,"11 Simse cx 173-325 cy 94-241 (101 Zellen)",ebene+hoehe_m,"WEST, 0 m","SIMS, Mittel der Umgebung","kleine von Wand umschlossene Flaechen in c20; gehoeren zu keiner Ebene",[A] Hoehe,behoben
+F9,"cx 93-115 cy 203-204 (34 Zellen)",ebene,KRATER,HANG,"altes Kraterfenster schnitt bei cy 204 unter den Kraterwall durch",[S],behoben
+F10,"cx 121-131 cy 119-176 (22 Zellen)",ebene,KRATER,SENKE,"Zellen ausserhalb des Kraterwalls lagen noch im alten Fenster",[S],behoben
+B1,"cx 120-125 West-Senkenrand",ebene,SENKE/HANG-Grenze,unbekannt,"Grenze ist 0,5-m-Hoehenlinie der Interpolation, keine sichtbare Kante in c20",[A],offen (Befund)
+B2,"cx 320-336 cy 48-72",ebene,HANG,evtl. PLATEAU/SENKE,"c20 zeigt dort flachen Schnee; Hoehe nur interpoliert",[A],offen (Befund)
+B3,"cx 288-310 cy 92-115 Waldterrasse",ebene,HANG,evtl. OSTPLATEAU,"in c20 Terrasse sichtbar, aber keine Wand die sie trennt",[A],offen (Befund)
+B4,"cx 300-336 cy 205-260 Ostwald",ebene,HANG,unbekannt,"Hoehe nur interpoliert",[A],offen (Befund)
+B5,"Senkenunterkante ca. cy 224",ebene,SENKE-Kante gerade,unbekannt,"folgt Wandoberkante; ob Senke dort genau endet nicht pruefbar",[A],offen (Befund)
+B6,"63 Eisschollen Suedfluss y 258-285",begehbar,1,evtl. 0,"Schollen sind Inseln im Wasser, begehbar aber nicht erreichbar (t29u-Entscheidung)",[F] t29u / [A],offen (Befund)
+B7,"cx 66-70 cy 37-42 Bachkopf",untergrund,WALD,evtl. SCHNEE,"in Quadrantansicht wenige Baeume sichtbar, nicht im Zoom bestaetigt",[A],offen (Befund)
+B8,"cx 0-15 cy 0-30",untergrund,FELS,evtl. Wald/Schnee,"Block nur in Quadrantansicht gesehen",[A],offen (Befund)

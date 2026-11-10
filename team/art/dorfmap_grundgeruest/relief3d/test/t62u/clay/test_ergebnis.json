@@ -1,0 +1,27 @@
+{
+ "fehler": [],
+ "dreiecke": {
+  "boden": 651656,
+  "wand": 4168
+ },
+ "hoehen": {
+  "neu_oben_unten": [
+   13.476693153381348,
+   5.338484287261963
+  ],
+  "alt_6m_noerdlich_unten": [
+   0.007820152794010937,
+   0
+  ]
+ },
+ "klick_wand": {
+  "art": "felswand",
+  "zell_id": "15677",
+  "klippe": "WAND",
+  "klippe_hoehe_m": "11.6",
+  "felder": 49
+ },
+ "klick_gebaeude": {
+  "art": "zelle"
+ }
+}
