@@ -1,0 +1,2 @@
+regel,feinpunkt_x_map,feinpunkt_z_map,feinpunkt_unrund_x_map,feinpunkt_unrund_z_map,soll_modell_stufe_m,mesh_stufe_m,soll_modell_gitter_m,mesh_gitter_m,soll_modell_quer_pct,mesh_quer_pct_exakt,hoehe_mesh_am_center_m,rampe_2_station_m,rampe_2_abstand_map,rampe_11_station_m,rampe_11_abstand_map
+R8_quer,152.5,28.5,152.54985704503775,28.48954534572434,0.0760688815826116,0.07606935501098633,0.020000000000032436,0.020000531000224697,2.9999999999998255,3.0000022413299607,4.066427721942489,31.5,0.05217361027396049,41.699999999999996,0.16154177391951255

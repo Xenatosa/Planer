@@ -1,76 +1,154 @@
 # Ergebnis p3d18
 
-**Zwischenstand: Variante 23 verfehlt die offizielle R3-Prüfung; die korrigierte Variante-24-Modellformulierung hat eine zulässige Lösung bewiesen. Stufenoptimierung und Endprüfung laufen.**
-Stand: 10.11.2026 · Branch `art/dorfmap-p3d18` · Basis `c3659e7` · Kosten **0 EUR**.
+**Ergebnis: Die korrigierte offizielle R3-Modellformulierung ist machbar und die minimale Modellstufe ist bewiesen. Variante 24 wurde gebaut. D1-R3 besteht; zwei numerisch kleine R8-Grenzen, mehrere Regressionen und die weiche Clay-/Streiflichtvorgabe sind verfehlt.**
+Stand: 10.11.2026 · Worktree /workspace/wt_dorfmap_p3d18 · Branch art/dorfmap-p3d18 · Basis origin/art/dorfmap-p3d17 bei c3659e7 · Kosten **0 EUR**.
 
-## Kalibrierung gegen p3d17
+## Kalibrierung der offiziellen R3-Formel
 
-Die unveränderte p3d17-Variante 22 wurde mit dem offiziellen Relief-Neu-Transfer nachgebildet und in ein temporäres Prüfeingabefeld überführt. Der rekonstruierte D1-Höhenraster ist bytegleich zum p3d17-Bericht: SHA-256 `26b849f6384993d5029b58dc08f6c657406785e26939f7c172a0d8fafe1ace29`. Danach wurde der unveränderte `pruefung/pruefe_regeln.py` ausgeführt.
+Die unveränderte p3d17-Variante 22 wurde auf der Relief-Neu-Fläche nachgebildet. Der rekonstruierte D1-Raster ist bytegleich zum p3d17-Bericht, SHA-256 26b849f6384993d5029b58dc08f6c657406785e26939f7c172a0d8fafe1ace29. Der unveränderte offizielle Prüfer pruefung/pruefe_regeln.py wurde darauf erneut ausgeführt.
 
-| R3 D1-Zähler | p3d17-interne Ersatzindikatoren | offizieller Prüfer: Bericht | offizieller Prüfer: Wiederholung |
+| D1-R3-Zähler | bisherige Modellindikatoren | offizieller p3d17-Bericht | offizielle Wiederholung |
 |---|---:|---:|---:|
 | längs | 6 | 6 | 6 |
 | quer | 5 | 17 | 17 |
 | Wölbung | 4 | 19 | 19 |
 
-Die Abweichung ist damit reproduziert und für das Modell behoben: Die bisherigen Quer- und Wölbungsindikatoren werteten das Zielraster aus, bevor der vollständige p3d17-Transfer einschließlich äußerer Überblendung angewendet wurde. Der Längsindikator nutzte zusätzlich `0,075 m` statt der offiziellen `0,08 m`. Das neue Modell bildet den feststehenden Transfer als affine Abbildung von Zielraster zu ausgegebenem Raster ab. Die R3-Abtastung folgt dem Prüfer mit `0,25` Karteneinheiten, 16 Werten je Abschnitt, gaußgefiltertem Längsrest (`sigma=8`), seitlichen Abständen `±1,5`, Querschwelle `3,5 %`, Wölbungsschwelle `0,08 m` und Querkappe `20 %`. Der Prüfer selbst wurde nicht geändert.
+Die alte interne Ersatzformel zählte auf dem unveränderten p3d17-Mesh die Quer- und Wölbungsabschnitte deutlich zu niedrig. Die korrigierte Formulierung übernimmt die Prüferabtastung mit 0,25 Karten-Einheiten, 16 Punkten je Abschnitt, gaußgefiltertem Längsrest mit sigma 8, seitlichen Abständen ±1,5, Quergrenze 3,5 %, Wölbungsgrenze 0,08 m und einer Kappe von 20 % für jeden Querwert. Die Längsschwelle ist 0,08 m. Der Prüfer selbst und seine Schwellen blieben unverändert. Reproduktion: codex_jobs/tools/p3d18_r3/calibrate_p3d17.py.
 
-Reproduktion: `python3 codex_jobs/tools/p3d18_r3/calibrate_p3d17.py`. Der Lauf speichert seine temporären Prüfdaten unter `/tmp/gate_loch_p3d18_kalibrierung.json.gz` und `/tmp/regeln_p3d18_kalibrierung.json`.
+## Machbarkeit und minimale Modellstufe
 
-## Korrigierte Machbarkeit Variante 24
+Die Machbarkeitsrechnung hielt Route, Ebenenkernradius r=2,00 m und alle harten Limits fest: Stufe ≤0,116 m, Gitter ≤0,020 m, R8-Querneigung ≤3 %, Achsauflagen ±0,02 m, D1-R3 6/7/7 und kein Einzelquerwert >20 %. HiGHS fand einen zulässigen ganzzahligen Punkt und bewies das Optimum der Machbarkeitszielfunktion.
 
-Die Variante-23-Meshprüfung offenbarte einen Transferfehler; ihr vorheriger Modellpunkt ist daher kein Machbarkeitsbeleg. Nach Korrektur des affinen Intercepts und der Achsbedingungen wurde dieselbe Rechnung mit unveränderter Wegführung, `r=2,00 m`, Achsstützen `±0,02 m`, den offiziellen R3-Operatoren und Limits längs/quer/Wölbung `6/7/7`, Querkappe `20 %`, R8-Gitter `0,020 m`, R8-Quer `3 %` und Stufe `0,116 m` neu gelöst.
-
-HiGHS fand einen zulässigen ganzzahligen Punkt und bewies das Optimum der verwendeten Machbarkeitszielfunktion (Summe der R3-Indikatoren plus `0,001 × Stufe`). Das beantwortet die geforderte Machbarkeitsfrage mit **ja**; die separaten Mindeststufenrechnung läuft anschließend.
-
-| Modellmessung am zulässigen Punkt | Ergebnis | Schranke |
+| Machbarkeitspunkt | Modellwert | Grenze |
 |---|---:|---:|
-| Kreuzungsstufe | `0,115153279 m` | `≤0,116 m` |
-| R8-Gitter | `0,020000000000037 m` | `≤0,020 m` (numerisch am Rand) |
-| R8-Quer | `2,999422 %` | `≤3 %` |
-| R3 längs / quer / Wölbung | `4 / 0 / 4` Abschnitte | `≤6 / ≤7 / ≤7` |
-| R3 maximales Quergefälle | `≤20 %` im Modell | `≤20 %` |
-| Achsstützen | 359 Stützpunkte, mit `±0,02 m` begrenzt | `±0,02 m` |
-| Ebenenkern | `r=2,00 m`; Ebenenneigung `2,216100 %` | Radius unverändert; `≤3 %` |
-| Modell | 7.858 Variablen, 10.136 Nebenbedingungen; MIP-Lücke `0` | HiGHS Status optimal |
+| Stufe am R8-Zentrum | 0,115153279 m | ≤0,116 m |
+| R8-Gitter | 0,020000000000037 m | ≤0,020 m |
+| R8-Quer | 2,999421748 % | ≤3 % |
+| D1-R3 längs/quer/Wölbung | 4/0/4 | ≤6/≤7/≤7 |
+| Ebenenkernneigung | 2,216100 % | r=2,00 m, ≤3 % |
+| Achsstützen | 359 geprüft | ±0,02 m |
+| Modellgröße | 7.858 Variablen, 10.136 Bedingungen | optimal |
 
-Das ist ein Modellbeleg, noch kein Mesh-Gate-Beleg. Der R8-Gitterwert liegt numerisch praktisch auf der Grenze und wird am ausgegebenen Mesh durch den unveränderten offiziellen Prüfer kontrolliert. Der vollständige Solverbericht liegt unter [`bilder_p3d18/variante24_machbarkeit.json`](bilder_p3d18/variante24_machbarkeit.json).
+Ergebnis Machbarkeit: **ja**. Danach wurde die Stufe separat minimiert. HiGHS meldete optimalen Status und MIP-Lücke 0,0 %; Incumbent 0,076068881583 m, duale Untergrenze 0,076068871583 m, Abstand rund 0,000000010 m. Der Modellpunkt zählt D1-R3 mit 6/7/7 und sagt R8-Gitter 0,020000000000032 m sowie R8-Quer 2,999999999999826 % voraus. Die tatsächliche Meshprüfung steht unten; sie findet beim Float32-Export minimale Grenzüberschreitungen.
 
-## Stufenoptimierung und Variante-23-Diagnose
+## Variante 23, gemessener Transferfehler und Korrektur 24
 
-Nach dem Machbarkeitsnachweis lief dieselbe Ganzzahlrechnung mit der Kreuzungsstufe als Zielfunktion und einem vollständigen zulässigen MIP-Start. HiGHS erreichte nach 3.600 Sekunden keinen Optimalitätsbeweis, fand aber einen besseren zulässigen Punkt. Dieser Stand ist für den direkten Transfer mit Variante 23 vorgesehen.
+Variante 23 wurde gebaut und mit dem unveränderten Neu-Mesh-Adapter geprüft. Der offizielle Prüfer zählte im D1-Mesh R3 längs/quer/Wölbung **7/20/21**, die größte Einzelquerung war 41,3 % bei rampe_11 am Prüfort 148.5|2.5. Zwölf von 359 Achsstützen wichen mehr als 0,02 m ab; Maximum 0,064167 m. Damit war der vorherige Modellpunkt kein Mesh-Machbarkeitsbeleg.
 
-| Messung am verwendeten Baupunkt | Ergebnis | Schranke | Status |
-|---|---:|---:|---|
-| Kreuzungsstufe am tatsächlichen R8-Zentrum | `0,097046496 m` | `≤0,116 m` | erfüllt |
-| R8-Gitter | `0,020000000000011 m` | `≤0,020 m` | numerisch an Grenze; Mesh-Prüfer maßgeblich |
-| R8-Quer | `2,993470 %` | `≤3 %` | erfüllt |
-| R3 längs / quer / Wölbung | Modell: `6 / 7 / 6` Abschnitte | `≤6 / ≤7 / ≤7` | Modellzählung später durch Mesh-Prüfung widerlegt |
-| R3 maximales Quergefälle | Modell: `≤20 %` | `≤20 %` | Modellzählung später durch Mesh-Prüfung widerlegt |
-| Achsstützen | 359, je `±0,02 m` | `±0,02 m` | erfüllt |
-| Ebenenkern | `r=2,00 m`, Neigung `2,308368 %` | unveränderter Radius, `≤3 %` | erfüllt |
+Die Diagnose fand zwei Modellierungsfehler: Der affine Transferintercept war nochmals mit 1−Deckung gewichtet, obwohl er bereits der feste Intercept der finalen Transferfunktion ist; außerdem lagen Achsbedingungen am Zielraster statt an der tatsächlich ausgegebenen, überblendeten Meshfläche. Variante 24 korrigiert diese Abbildung. Wegführung, Ebenenkernradius, Prüfer und Schwellen blieben unverändert. Die Variante-23-Einzelbefunde liegen in bilder_p3d18/variante23_diagnose/.
 
-Der Incumbent ist `0,097046486 m`; die duale Untergrenze beträgt `0,076068872 m`, die MIP-Lücke `21,616 %`. Das ist nur der beste Punkt der fehlerhaften Transferformulierung, kein bestätigtes Mesh-Ergebnis und kein bewiesenes globales Minimum. Die frühere Modell-Machbarkeitslösung bei `0,115266302 m` zählt ebenfalls nicht als unabhängiger offizieller R3-Beleg.
+## Variante-24-Mesh und Zielprüfung
 
-Variante 23 wurde mit dem unveränderten Neu-Mesh-Adapter geprüft. Am Zielkreuz `152.5|28.5` misst R8 Stufe `0,097 m`, Gitter `0,020 m` und keinen R8-Quer-Treffer. Die Abweichungen an Achsstützen und R3-Zählern belegen jedoch einen Transferfehler:
+Der Build war RELIEF_NEU=1 RELIEF_KREUZUNG_VAR=24. Der Adapter patchte D1 und G1 in die offizielle Prüfeingabe; D2 blieb bytegleich.
 
-| Variante-23-Meshmessung D1 | Ergebnis | Vorgabe | Bewertung |
-|---|---:|---:|---|
-| Offizielles R3 längs / quer / Wölbung | `7 / 20 / 21` Abschnitte | `≤6 / ≤7 / ≤7` | verfehlt |
-| Größter offizieller R3-Querwert | `41,3 %` (`rampe_11`, `148.5|2.5`) | `≤20 %` | verfehlt |
-| Achsstützen nach endgültigem Meshtransfer | `12 / 359` über 2 cm; maximal `0,064167 m` | alle `±0,02 m` | verfehlt |
-| Internes Transferdiagnostikfeld vor nachgelagertem Tile-Fade | 2 Punkte über 2 cm; maximal `0,622627 m` | alle `±0,02 m` | verfehlt |
-| D1-R8-Gesamttreffer (Stufe/Gitter/Quer/Wegende) | `2 / 3 / 1 / 1` | Zielkreuz `0` | Zielkreuz selbst erfüllt; weitere Punkte außerhalb davon offen |
+| Messung | Ergebnis | Ziel / Bewertung |
+|---|---:|---|
+| D1-Meshhash | 9619da5083720eb43f736043452b28f87dd2f9aa946dc2cb453b5ed972d02c6c | neu, verschieden von p3d17 26b849f6… |
+| G1-Meshhash | 38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb | unverändert |
+| D2-Meshhash | 749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6 | unverändert; Adapter bestätigt bytegleich |
+| LOD1-Dreiecke | 134.316 | Grenze <1,3 Mio. bestanden |
+| maximale D1-Höhenänderung | 2,928332 m | test_gelaende_mesh-Grenze 4,0 m bestanden |
+| Klippenhöhe bei 140|35 | 7,884036541 m | Soll 7,8840365 m |
+| Vektor SHA-256 | aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e | unverändert |
+| Zellquell-Differenzen | 0 | Zellquellwerte unverändert |
 
-Die Ursache ist im Modell lokalisiert: Der affine Transferabschnitt behandelte den festen Transferintercept irrtümlich wie einen Hintergrundwert und multiplizierte ihn nochmals mit `1−Deckung`; die Achsbedingung bezog sich außerdem auf das Zielraster statt auf die ausgegebene, überblendete Meshfläche. Dadurch sagte das Modell R3 `6/7/6` voraus, während derselbe offizielle Prüfer am gebauten Mesh `7/20/21` zählt. Variante 24 korrigiert diese Abbildung und bindet die ausgegebene Meshhöhe an den Achsstützen. Prüfer, Schwellen, Route und Ebenenkernradius bleiben unverändert.
+### R3 und R8 an D1
 
-Die vollständigen Variante-23-Treffer und Achsabweichungen liegen unter [`bilder_p3d18/variante23_diagnose/`](bilder_p3d18/variante23_diagnose/). Der vorläufige `pruefe_regeln`-Lauf diente nur der R3-Diagnose und lief ohne Lochscan; seine Gesamtsumme ist deshalb kein Gate-Gesamtergebnis.
+| Prüfung | p3d17 / Modell vor Build | Variante 24 Modell | Variante 24 tatsächlicher Mesh-Prüfer | Vorgabe |
+|---|---:|---:|---:|---:|
+| D1 R3 längs/quer/Wölbung | offiziell 6/17/19 | 6/7/7 | **6/5/6** | ≤6/≤7/≤7 |
+| größter D1-Einzelquerwert | 20,002199 % in p3d17 | ≤20 % | **19,999708 %** | ≤20 % |
+| R8-Stufe bei 152.5|28.5 | p3d17 0,080 m | 0,076068882 m | **0,076069355 m** | ≤0,116 m |
+| R8-Gitter am Zielkreuz | p3d17 0,020 m | 0,020000000000032 m | **0,020000531 m** | ≤0,020 m |
+| R8-Querneigung am Zielkreuz | p3d17 Grenze 3,0 % | 2,999999999999826 % | **3,000002241 %** | ≤3,0 % |
+| Achsstützen | p3d17 max. Abweichung 0,000475 m | 359 innerhalb ±0,02 m | max. 0,020000000000032 m, 0 Stützen über 0,02 m laut Builddiagnostik | ±0,02 m |
 
-Der Variante-23-Build hielt D2 bytegleich (`749d3c4b…`), G1 bytegleich (`38afeb30…`), Zellquellspalten (`zellen_quell_diff=0`) und Vektorhash (`aac6afff…`) ein. LOD1 hat `134.316` Dreiecke. Die maximale D1-Höhenänderung lag genau an der Grenze `4,0 m`. D1-Hash: `c7a10535…`.
+D1-R3 besteht mit dem offiziellen Mesh-Prüfer. Der maximale Einzelquerwert bleibt um 0,000292 Prozentpunkte unter 20 %. Am R8-Zentrum sind Stufe und R3 erfüllt; Gitter überschreitet die verlangte 0,020-m-Grenze um 0,000000531 m und Querneigung die 3-%-Grenze um 0,000002241 Prozentpunkte. Der unveränderte R8-Prüfer rundet die Querneigung auf 3,0 % aus und meldet deshalb einen R8_quer-Treffer; die ungerundete Rechnung bestätigt, dass der harte Grenzwert knapp überschritten wird. Diese Werte werden als verfehlt berichtet, nicht als Rundungserfolg.
 
-## Noch offen
+Am gesonderten D1-Endpunkt 156.5|37.5 misst R8 eine Stufe von **0,135 m** statt höchstens 0,054 m wie p3d11; ein R8a-Treffer liegt dort nicht vor. Bei der Zielkreuzung gibt es keinen R8a-Treffer, aber einen R8-Quertreffer. G1 und D2 haben null R8- und R8a-Treffer.
 
-- Mindeststufe bei denselben harten Grenzen; der zulässige Machbarkeitspunkt dient als MIP-Start.
-- Variante-24-Mesh und vollständige offizielle Gate-Läufe, Regression, Adapter/Xvfb/LOD- und Bildprüfung.
+Die offiziellen D1-R3-Treffer mit Feinpunkt, Abschnittsstation, Soll- und Meshhöhe sowie nächster Station der jeweils anderen Rampe sind in [r3_d1_hits.csv](bilder_p3d18/nachher/r3_d1_hits.csv) dokumentiert. Der R8-Treffer und die ungerundeten Messwerte am Kreuzungszentrum stehen in [r8_d1_hits.csv](bilder_p3d18/nachher/r8_d1_hits.csv).
 
-Keine Wegführung, Prüfschwelle, Zellquelle, D2-Datei oder Ebenenkernradius wurde geändert. Es wurde noch kein p3d18-Mesh gebaut.
+## Zahlen je Regel und Kachel
+
+Die R1–R7/G-Regelsumme ist 596 für den p3d17-Ausgang und 577 im Variante-24-Mesh (−19). Vier bildabhängige T2–T5-Prüfvermerke sind in beiden Summen offen und wurden nicht als bestanden markiert. Die vollständige Einzelregelübersicht zeigt p3d17 → p3d18, Delta und D1/G1/D2 je Kachel:
+
+| Regel | p3d17 | p3d18 | Δ | D1 p3d17→18 | G1 p3d17→18 | D2 p3d17→18 |
+|---|---:|---:|---:|---:|---:|---:|
+| G2_spitze_oben | 3 | 3 | +0 | 0→0 | 0→0 | 0→0 |
+| G2_spitze_oben_fein | 8 | 8 | +0 | 0→0 | 0→0 | 0→0 |
+| G3_spitze_unten | 4 | 5 | +1 | 1→2 | 0→0 | 0→0 |
+| G3_spitze_unten_fein | 2 | 2 | +0 | 0→0 | 0→0 | 0→0 |
+| G5_beule_klippe | 69 | 69 | +0 | 2→2 | 0→0 | 0→0 |
+| G6_facette | 219 | 223 | +4 | 3→7 | 3→3 | 0→0 |
+| G7_wand_glatte_flaeche | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| G7b_wandkontur_feld | 25 | 25 | +0 | 1→1 | 0→0 | 0→0 |
+| G7b_wandkontur_kantenschaerfe | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| G7b_wandkontur_rauheit | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| G8_fluss_nicht_bis_rand | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| R1_blind | 24 | 24 | +0 | 2→2 | 1→1 | 0→0 |
+| R2_getrennt | 15 | 15 | +0 | 1→1 | 0→0 | 1→1 |
+| R3_laengs_m | 35 | 35 | +0 | 6→6 | 1→1 | 0→0 |
+| R3_quer_pct | 29 | 17 | -12 | 17→5 | 0→0 | 0→0 |
+| R3_woelb_m | 31 | 18 | -13 | 19→6 | 0→0 | 0→0 |
+| R4_rand | 1 | 0 | -1 | 1→0 | 0→0 | 0→0 |
+| R5_loch | 25 | 22 | -3 | 8→5 | 0→0 | 0→0 |
+| R5_spitze | 0 | 5 | +5 | 0→5 | 0→0 | 0→0 |
+| R6_wasser_schnee | 4 | 4 | +0 | 0→0 | 3→3 | 0→0 |
+| T1_fleckrand | 94 | 94 | +0 | 0→0 | 3→3 | 7→7 |
+| T2_textur_abgeschnitten_bildpruefung_offen | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| T3_streifen_ringe_bildpruefung_offen | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| T4_graue_flussstreifen_bildpruefung_offen | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+| T5_textur_vs_clay_bildpruefung_offen | 1 | 1 | +0 | 0→0 | 0→0 | 0→0 |
+
+R8-Ausgangswerte 9d3f8fc: 48 gesamt (Stufe/Gitter/Quer/Wegende 9/10/5/24). p3d17 ergab 46, Variante 24 ergibt 40:
+
+| Regel | Ausgang 9d3f8fc | p3d17 | p3d18 | D1 p3d17→18 | G1 p3d17→18 | D2 p3d17→18 |
+|---|---:|---:|---:|---:|---:|---:|
+| R8_gitter | 10 | 10 | 8 | 2→0 | 0→0 | 0→0 |
+| R8_quer | 5 | 4 | 5 | 0→1 | 0→0 | 0→0 |
+| R8_stufe | 9 | 9 | 7 | 2→0 | 0→0 | 0→0 |
+| R8a_wegende | 24 | 23 | 20 | 3→0 | 0→0 | 0→0 |
+
+R9-Ausgangswerte 9d3f8fc: 334 gesamt (Delle/Sägezahn/Wellen 25/34/275). p3d17 ergab 344, Variante 24 ergibt 341. Damit liegen R9 gesamt und R9w im Variante-24-Mesh **7 Treffer über dem ausdrücklich genannten Ausgangswert**; die +5-Grenze ist hier verfehlt, obwohl R9w gegenüber p3d17 um 5 sinkt:
+
+| Regel | Ausgang 9d3f8fc | p3d17 | p3d18 | D1 p3d17→18 | G1 p3d17→18 | D2 p3d17→18 |
+|---|---:|---:|---:|---:|---:|---:|
+| R8b_delle | 25 | 23 | 25 | 1→3 | 0→0 | 0→0 |
+| R9_saegezahn | 34 | 34 | 34 | 1→1 | 1→1 | 0→0 |
+| R9w_wellen | 275 | 287 | 282 | 27→23 | 12→12 | 0→0 |
+
+Für D2 kamen in pruefe_regeln keine Treffer neu hinzu. D2 ist außerdem in R8 und R9 weiterhin bei 0. Bei den übrigen p3d17→p3d18 Regelvergleichen ist der größte Zuwachs +5 bei R5_spitze; G6_facette steigt um 4. Der R9w-Gesamtanstieg von +7 gegenüber 9d3f8fc bleibt davon als ausdrückliche Ausnahme oberhalb der allgemeinen +5-Grenze stehen.
+
+## Bildprüfung, Regressionen und Tests
+
+Vorher-/Nachher-Bilder wurden bei derselben Auflösung 1000×700 selbst geprüft. Die sechs Pflichtbilder liegen unter [bilder_p3d18/nachher](bilder_p3d18/nachher); p3d17-Vergleichsbilder unter bilder_p3d17/nachher. D1-Kreuzung und Rampe-11-Streiflicht zeigen weiterhin sichtbare Faltungen und facettierte Übergänge; die Vorgabe einer weichen Fläche ohne Welle/Falte/Knick ist **nicht erreicht**. Die Clay-Bildindikatoren steigen p3d17→p3d18 in 13 Einträgen. D1-Kreuzung: Facetten 566→879, Kanten-Zähne 344→725, normale Sprünge 756→1471. D1-Wandfuß 140|35: Facetten 719→1020 und normale Sprünge 3597→4347. Diese Bildmetriken sind Proxys; die Bilder selbst sind gespeichert.
+
+Die geforderten Vergleiche liefern keine Null-Anstiege:
+
+| Vergleich | Gate-/Regelanstiege | Clay-Bildanstiege | Gesamt |
+|---|---:|---:|---:|
+| VAR0 → p3d18 | 11 | 25 | 36 |
+| p3d6 → p3d18 | 8 | 21 | 29 |
+| p3d8 → p3d18 | 8 | 18 | 26 |
+| p3d16 → p3d18 | 7 | 18 | 25 |
+| p3d17 → p3d18 | 5 | 13 | 18 |
+
+Vollständige Delta-Berichte und JSONs liegen in bilder_p3d18/. Die D1-Werte verschlechtern sich gegenüber p3d8 bei G6_facette (0→7), R8b_delle (0→3) und R9w_wellen (21→23); Sägezahn bleibt bei 1. G1 und D2 bleiben meshgleich.
+
+| Prüfung | Ergebnis |
+|---|---:|
+| Xvfb-Lochscan | 9 Meshes, 88.728 Geländedreiecke, 0 offene Innenkanten, 0 Punkte |
+| pruefe_t42u.py | Summe 0; alle Abweichungsfelder 0 |
+| pytest -q neu/tests/test_gelaende_mesh.py | 4 bestanden |
+| pytest -q neu/tests | 26 bestanden, 5 fehlgeschlagen; Suite nicht grün |
+
+Die fünf Suite-Fehler sind die unveränderten Prüfungen für allgemeine R8a-Wegenden, D1-Sägezahn, D1-Wandkantenschärfe, F1/C1-Wegende und Schattenbild-Hochfrequenz. Die Zielzahl ≥26/5 ist erreicht.
+
+## Annahmen, Grenzen und offene Punkte
+
+- Die Machbarkeit gilt für das linearisierte Transfermodell und wurde am tatsächlich exportierten Mesh nachgeprüft. Der Float32-Transfer überschreitet R8-Gitter und R8-Quer knapp; kein Grenzwert wurde angepasst.
+- Die minimale Modellstufe ist unter den formulierten Modellbedingungen bewiesen. Wegen der gemessenen Meshabweichung ist sie kein Beleg, dass alle Endziele gleichzeitig im exportierten Mesh eingehalten sind.
+- Die Achsstützen liegen bis auf 3,2×10⁻¹⁴ m numerische Differenz an der ±0,02-m-Grenze; Builddiagnostik zählt 0 Stützen außerhalb. Die R8-Abweichungen von 5,31×10⁻⁷ m und 2,24×10⁻⁶ Prozentpunkten sind ebenfalls klein, aber gegenüber den strikten Limits dennoch als Überschreitung gewertet.
+- Die verlangte minimale Stufe ist 0,076068882 m; die Mesh-Grenzen, D1-Endpunkt, R9w-Ausgangsdelta, mehrere Delta-Nullziele und die Clay-/Streiflicht-Weichheit sind nicht erreicht. Es wurde keine weitere Variante erfunden.
+- Zellquellwerte, Overlay, Wegführung und D2 blieben unverändert. Ebenenkernradius bleibt 2,00 m. Prüfer und Schwellen wurden nicht geändert. Laufzeitnachweis: /workspace/codex_jobs/log_p3d18.txt (gpt-6-luna, xhigh). Kosten: 0 EUR.

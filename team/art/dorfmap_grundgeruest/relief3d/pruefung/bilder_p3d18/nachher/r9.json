@@ -1,0 +1,2591 @@
+{
+"summe": 341,
+"je_regel": {
+"R8b_delle": 25,
+"R9_saegezahn": 34,
+"R9w_wellen": 282
+},
+"je_feld": {
+"A1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 1
+},
+"A2": {
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"A6": {
+"R9w_wellen": 5
+},
+"A7": {
+"R9w_wellen": 3
+},
+"B1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 2
+},
+"B2": {
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"B3": {
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"B4": {
+"R9_saegezahn": 1,
+"R9w_wellen": 11
+},
+"B5": {
+"R9_saegezahn": 1,
+"R9w_wellen": 10
+},
+"B6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 2
+},
+"B7": {
+"R9w_wellen": 1
+},
+"C1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 3
+},
+"C2": {
+"R9_saegezahn": 1,
+"R9w_wellen": 3
+},
+"C3": {
+"R8b_delle": 1,
+"R9_saegezahn": 1,
+"R9w_wellen": 17
+},
+"C4": {
+"R8b_delle": 1,
+"R9_saegezahn": 1,
+"R9w_wellen": 13
+},
+"C5": {
+"R8b_delle": 1,
+"R9_saegezahn": 1,
+"R9w_wellen": 10
+},
+"C6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 18
+},
+"C7": {
+"R9w_wellen": 3
+},
+"D1": {
+"R8b_delle": 3,
+"R9_saegezahn": 1,
+"R9w_wellen": 23
+},
+"D3": {
+"R9_saegezahn": 1,
+"R9w_wellen": 1
+},
+"D4": {
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"D5": {
+"R9_saegezahn": 1,
+"R9w_wellen": 10
+},
+"D6": {
+"R8b_delle": 2,
+"R9_saegezahn": 1,
+"R9w_wellen": 9
+},
+"E1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 8
+},
+"E3": {
+"R8b_delle": 12
+},
+"E4": {
+"R8b_delle": 4,
+"R9w_wellen": 4
+},
+"E5": {
+"R9w_wellen": 1
+},
+"E6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 4
+},
+"F1": {
+"R8b_delle": 1,
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"F2": {
+"R9_saegezahn": 1,
+"R9w_wellen": 2
+},
+"F6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 7
+},
+"G1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 12
+},
+"G3": {
+"R9_saegezahn": 1,
+"R9w_wellen": 10
+},
+"G4": {
+"R9_saegezahn": 1,
+"R9w_wellen": 5
+},
+"G6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 7
+},
+"H1": {
+"R9_saegezahn": 1,
+"R9w_wellen": 6
+},
+"H2": {
+"R9_saegezahn": 1,
+"R9w_wellen": 5
+},
+"H3": {
+"R9_saegezahn": 1,
+"R9w_wellen": 8
+},
+"H4": {
+"R9_saegezahn": 1,
+"R9w_wellen": 5
+},
+"H5": {
+"R9_saegezahn": 1,
+"R9w_wellen": 11
+},
+"H6": {
+"R9_saegezahn": 1,
+"R9w_wellen": 10
+},
+"H7": {
+"R9w_wellen": 2
+}
+},
+"treffer": [
+{
+"regel": "R8b_delle",
+"feld": "D1",
+"x": 144.0,
+"z": 7.5,
+"wert": 0.35,
+"abstand_weg": 1.4
+},
+{
+"regel": "R8b_delle",
+"feld": "D1",
+"x": 159.0,
+"z": 18.5,
+"wert": 0.76,
+"abstand_weg": 1.5
+},
+{
+"regel": "R8b_delle",
+"feld": "D1",
+"x": 157.5,
+"z": 20.0,
+"wert": 0.53,
+"abstand_weg": 0.5
+},
+{
+"regel": "R8b_delle",
+"feld": "F1",
+"x": 227.0,
+"z": 35.5,
+"wert": 0.35,
+"abstand_weg": 0.0
+},
+{
+"regel": "R8b_delle",
+"feld": "C3",
+"x": 122.0,
+"z": 118.0,
+"wert": 0.49,
+"abstand_weg": 0.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 183.0,
+"z": 121.5,
+"wert": 0.39,
+"abstand_weg": 5.3
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 185.5,
+"z": 121.5,
+"wert": 0.38,
+"abstand_weg": 2.5
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 181.5,
+"z": 123.0,
+"wert": 0.33,
+"abstand_weg": 5.3
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 181.0,
+"z": 124.0,
+"wert": 0.34,
+"abstand_weg": 5.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 185.0,
+"z": 124.0,
+"wert": 0.35,
+"abstand_weg": 1.8
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 180.5,
+"z": 124.5,
+"wert": 0.31,
+"abstand_weg": 5.1
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 184.5,
+"z": 125.0,
+"wert": 0.34,
+"abstand_weg": 1.8
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 184.0,
+"z": 125.5,
+"wert": 0.35,
+"abstand_weg": 1.4
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 183.5,
+"z": 126.5,
+"wert": 0.32,
+"abstand_weg": 1.6
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 183.0,
+"z": 127.0,
+"wert": 0.34,
+"abstand_weg": 2.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 179.0,
+"z": 127.5,
+"wert": 0.31,
+"abstand_weg": 3.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E3",
+"x": 182.5,
+"z": 127.5,
+"wert": 0.35,
+"abstand_weg": 2.5
+},
+{
+"regel": "R8b_delle",
+"feld": "E4",
+"x": 182.0,
+"z": 129.0,
+"wert": 0.3,
+"abstand_weg": 3.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E4",
+"x": 181.5,
+"z": 129.5,
+"wert": 0.33,
+"abstand_weg": 3.5
+},
+{
+"regel": "R8b_delle",
+"feld": "C4",
+"x": 106.5,
+"z": 145.5,
+"wert": 4.11,
+"abstand_weg": 0.0
+},
+{
+"regel": "R8b_delle",
+"feld": "E4",
+"x": 178.0,
+"z": 130.0,
+"wert": 0.31,
+"abstand_weg": 2.8
+},
+{
+"regel": "R8b_delle",
+"feld": "E4",
+"x": 181.0,
+"z": 130.5,
+"wert": 0.33,
+"abstand_weg": 4.3
+},
+{
+"regel": "R8b_delle",
+"feld": "C5",
+"x": 108.5,
+"z": 185.5,
+"wert": 0.31,
+"abstand_weg": 3.8
+},
+{
+"regel": "R8b_delle",
+"feld": "D6",
+"x": 150.5,
+"z": 228.0,
+"wert": 4.09,
+"abstand_weg": 5.9
+},
+{
+"regel": "R8b_delle",
+"feld": "D6",
+"x": 155.5,
+"z": 228.5,
+"wert": 1.86,
+"abstand_weg": 6.0
+},
+{
+"regel": "R9_saegezahn",
+"feld": "A1",
+"x": 17.5,
+"z": 33.5,
+"wert": 29
+},
+{
+"regel": "R9_saegezahn",
+"feld": "A2",
+"x": 2.5,
+"z": 43.0,
+"wert": 17
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B1",
+"x": 81.5,
+"z": 32.5,
+"wert": 14
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B2",
+"x": 66.5,
+"z": 43.5,
+"wert": 29
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B3",
+"x": 69.5,
+"z": 109.5,
+"wert": 16
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B4",
+"x": 83.0,
+"z": 129.0,
+"wert": 55
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B5",
+"x": 68.5,
+"z": 172.0,
+"wert": 48
+},
+{
+"regel": "R9_saegezahn",
+"feld": "B6",
+"x": 80.0,
+"z": 215.5,
+"wert": 7
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C1",
+"x": 124.5,
+"z": 35.5,
+"wert": 13
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C2",
+"x": 97.0,
+"z": 44.0,
+"wert": 15
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C3",
+"x": 123.5,
+"z": 93.5,
+"wert": 133
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C4",
+"x": 115.0,
+"z": 129.0,
+"wert": 51
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C5",
+"x": 117.0,
+"z": 172.0,
+"wert": 76
+},
+{
+"regel": "R9_saegezahn",
+"feld": "C6",
+"x": 85.2,
+"z": 215.5,
+"wert": 55
+},
+{
+"regel": "R9_saegezahn",
+"feld": "D1",
+"x": 155.2,
+"z": 10.0,
+"wert": 86
+},
+{
+"regel": "R9_saegezahn",
+"feld": "D3",
+"x": 127.0,
+"z": 93.5,
+"wert": 13
+},
+{
+"regel": "R9_saegezahn",
+"feld": "D4",
+"x": 134.5,
+"z": 129.5,
+"wert": 32
+},
+{
+"regel": "R9_saegezahn",
+"feld": "D5",
+"x": 127.0,
+"z": 178.2,
+"wert": 14
+},
+{
+"regel": "R9_saegezahn",
+"feld": "D6",
+"x": 162.5,
+"z": 224.5,
+"wert": 22
+},
+{
+"regel": "R9_saegezahn",
+"feld": "E1",
+"x": 168.3,
+"z": 16.5,
+"wert": 47
+},
+{
+"regel": "R9_saegezahn",
+"feld": "E6",
+"x": 209.0,
+"z": 234.5,
+"wert": 25
+},
+{
+"regel": "R9_saegezahn",
+"feld": "F1",
+"x": 251.5,
+"z": 25.5,
+"wert": 22
+},
+{
+"regel": "R9_saegezahn",
+"feld": "F2",
+"x": 215.0,
+"z": 43.0,
+"wert": 22
+},
+{
+"regel": "R9_saegezahn",
+"feld": "F6",
+"x": 242.0,
+"z": 226.5,
+"wert": 56
+},
+{
+"regel": "R9_saegezahn",
+"feld": "G1",
+"x": 257.0,
+"z": 20.5,
+"wert": 37
+},
+{
+"regel": "R9_saegezahn",
+"feld": "G3",
+"x": 293.5,
+"z": 89.5,
+"wert": 54
+},
+{
+"regel": "R9_saegezahn",
+"feld": "G4",
+"x": 269.0,
+"z": 129.5,
+"wert": 65
+},
+{
+"regel": "R9_saegezahn",
+"feld": "G6",
+"x": 281.1,
+"z": 227.2,
+"wert": 40
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H1",
+"x": 323.2,
+"z": 31.5,
+"wert": 24
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H2",
+"x": 336.0,
+"z": 71.0,
+"wert": 32
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H3",
+"x": 309.8,
+"z": 86.1,
+"wert": 23
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H4",
+"x": 294.0,
+"z": 158.5,
+"wert": 26
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H5",
+"x": 301.2,
+"z": 172.0,
+"wert": 62
+},
+{
+"regel": "R9_saegezahn",
+"feld": "H6",
+"x": 301.5,
+"z": 223.0,
+"wert": 64
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 143.2,
+"z": 0.5,
+"wert": 0.28
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 153.5,
+"z": 0.2,
+"wert": 0.27
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 143.9,
+"z": 10.0,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 152.8,
+"z": 2.8,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 159.0,
+"z": 9.6,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 275.1,
+"z": 5.9,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 145.4,
+"z": 8.5,
+"wert": 0.21
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 271.4,
+"z": 10.1,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 149.4,
+"z": 10.6,
+"wert": 0.28
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 165.1,
+"z": 11.1,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 135.6,
+"z": 20.9,
+"wert": 0.32
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 167.8,
+"z": 13.8,
+"wert": 0.23
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 272.2,
+"z": 14.0,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 274.1,
+"z": 19.4,
+"wert": 0.27
+},
+{
+"regel": "R9w_wellen",
+"feld": "C1",
+"x": 125.5,
+"z": 17.2,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 171.9,
+"z": 17.2,
+"wert": 0.52
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 264.7,
+"z": 21.5,
+"wert": 0.63
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 145.2,
+"z": 18.5,
+"wert": 0.25
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 159.6,
+"z": 20.1,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 251.6,
+"z": 19.9,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 155.0,
+"z": 24.4,
+"wert": 0.34
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 152.1,
+"z": 22.4,
+"wert": 0.51
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 168.9,
+"z": 24.7,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 201.4,
+"z": 31.6,
+"wert": 0.85
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 251.1,
+"z": 31.0,
+"wert": 0.82
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 285.4,
+"z": 25.8,
+"wert": 0.18
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 230.9,
+"z": 26.7,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 132.2,
+"z": 28.2,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "C1",
+"x": 120.1,
+"z": 29.2,
+"wert": 0.25
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 176.2,
+"z": 29.0,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 236.8,
+"z": 33.4,
+"wert": 0.55
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 164.2,
+"z": 29.5,
+"wert": 0.68
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 150.4,
+"z": 29.1,
+"wert": 0.4
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 289.0,
+"z": 29.8,
+"wert": 0.4
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 292.3,
+"z": 29.9,
+"wert": 0.33
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 315.0,
+"z": 31.2,
+"wert": 0.67
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 276.0,
+"z": 29.9,
+"wert": 0.67
+},
+{
+"regel": "R9w_wellen",
+"feld": "B1",
+"x": 76.9,
+"z": 30.9,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 143.1,
+"z": 31.4,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "B1",
+"x": 47.8,
+"z": 36.6,
+"wert": 0.95
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 134.8,
+"z": 32.7,
+"wert": 0.7
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 169.1,
+"z": 32.4,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 281.9,
+"z": 34.9,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "C1",
+"x": 94.9,
+"z": 38.8,
+"wert": 0.64
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 263.0,
+"z": 34.0,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 155.5,
+"z": 34.5,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 180.9,
+"z": 35.1,
+"wert": 0.4
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 127.8,
+"z": 34.5,
+"wert": 0.91
+},
+{
+"regel": "R9w_wellen",
+"feld": "A1",
+"x": 1.8,
+"z": 39.0,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 159.8,
+"z": 35.5,
+"wert": 0.32
+},
+{
+"regel": "R9w_wellen",
+"feld": "G1",
+"x": 256.8,
+"z": 35.8,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 330.9,
+"z": 38.2,
+"wert": 0.68
+},
+{
+"regel": "R9w_wellen",
+"feld": "D1",
+"x": 136.1,
+"z": 39.8,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 187.1,
+"z": 41.5,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 298.6,
+"z": 39.5,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 323.4,
+"z": 38.3,
+"wert": 0.66
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 237.5,
+"z": 40.0,
+"wert": 0.36
+},
+{
+"regel": "R9w_wellen",
+"feld": "E1",
+"x": 204.9,
+"z": 40.6,
+"wert": 0.56
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 320.5,
+"z": 39.2,
+"wert": 0.52
+},
+{
+"regel": "R9w_wellen",
+"feld": "F1",
+"x": 221.4,
+"z": 42.9,
+"wert": 0.98
+},
+{
+"regel": "R9w_wellen",
+"feld": "H1",
+"x": 316.0,
+"z": 40.6,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 30.5,
+"z": 43.4,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "F2",
+"x": 230.5,
+"z": 44.2,
+"wert": 0.4
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 10.8,
+"z": 47.2,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 46.6,
+"z": 45.5,
+"wert": 1.51
+},
+{
+"regel": "R9w_wellen",
+"feld": "F2",
+"x": 217.4,
+"z": 48.6,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 36.0,
+"z": 45.8,
+"wert": 0.17
+},
+{
+"regel": "R9w_wellen",
+"feld": "C2",
+"x": 115.6,
+"z": 46.5,
+"wert": 0.17
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 41.0,
+"z": 46.5,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "C2",
+"x": 86.8,
+"z": 47.2,
+"wert": 0.57
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 62.6,
+"z": 48.6,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 75.5,
+"z": 48.2,
+"wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 81.6,
+"z": 48.4,
+"wert": 0.57
+},
+{
+"regel": "R9w_wellen",
+"feld": "C2",
+"x": 106.5,
+"z": 50.1,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 54.1,
+"z": 50.2,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 9.1,
+"z": 50.6,
+"wert": 0.17
+},
+{
+"regel": "R9w_wellen",
+"feld": "A2",
+"x": 2.5,
+"z": 53.1,
+"wert": 0.36
+},
+{
+"regel": "R9w_wellen",
+"feld": "H2",
+"x": 333.3,
+"z": 65.3,
+"wert": 0.28
+},
+{
+"regel": "R9w_wellen",
+"feld": "H2",
+"x": 323.9,
+"z": 68.3,
+"wert": 0.51
+},
+{
+"regel": "R9w_wellen",
+"feld": "H2",
+"x": 335.0,
+"z": 72.5,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "H2",
+"x": 320.9,
+"z": 80.6,
+"wert": 0.59
+},
+{
+"regel": "R9w_wellen",
+"feld": "H2",
+"x": 311.6,
+"z": 79.8,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 299.6,
+"z": 86.5,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "B2",
+"x": 82.4,
+"z": 84.3,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 87.9,
+"z": 88.4,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 78.6,
+"z": 88.3,
+"wert": 0.15
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 311.8,
+"z": 91.1,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 124.1,
+"z": 102.6,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 85.9,
+"z": 114.5,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 297.8,
+"z": 96.7,
+"wert": 0.79
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 105.3,
+"z": 94.2,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 77.3,
+"z": 103.7,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 306.7,
+"z": 100.4,
+"wert": 0.33
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 281.1,
+"z": 97.1,
+"wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 299.8,
+"z": 98.2,
+"wert": 0.19
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 309.7,
+"z": 101.0,
+"wert": 0.33
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 107.0,
+"z": 99.0,
+"wert": 0.51
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 69.7,
+"z": 100.0,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 98.9,
+"z": 99.4,
+"wert": 0.84
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 95.9,
+"z": 102.6,
+"wert": 0.7
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 124.1,
+"z": 101.3,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 297.2,
+"z": 101.5,
+"wert": 0.16
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 284.6,
+"z": 103.6,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 287.8,
+"z": 108.6,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "H3",
+"x": 295.0,
+"z": 104.8,
+"wert": 0.24
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 280.2,
+"z": 106.2,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 71.6,
+"z": 105.9,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 64.3,
+"z": 114.7,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 290.4,
+"z": 106.7,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 111.6,
+"z": 108.4,
+"wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 98.2,
+"z": 110.0,
+"wert": 0.83
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 268.4,
+"z": 110.7,
+"wert": 0.35
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 284.3,
+"z": 114.3,
+"wert": 0.34
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 110.3,
+"z": 116.0,
+"wert": 0.71
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 277.0,
+"z": 112.2,
+"wert": 0.48
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 90.7,
+"z": 111.9,
+"wert": 0.66
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 269.4,
+"z": 114.9,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 94.8,
+"z": 115.0,
+"wert": 0.83
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 93.0,
+"z": 122.1,
+"wert": 0.62
+},
+{
+"regel": "R9w_wellen",
+"feld": "D3",
+"x": 130.1,
+"z": 117.9,
+"wert": 0.35
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 109.3,
+"z": 119.0,
+"wert": 0.27
+},
+{
+"regel": "R9w_wellen",
+"feld": "G4",
+"x": 284.0,
+"z": 132.9,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "G4",
+"x": 269.9,
+"z": 135.0,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "G3",
+"x": 269.7,
+"z": 123.9,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 122.6,
+"z": 125.2,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 55.2,
+"z": 135.3,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "B3",
+"x": 70.3,
+"z": 127.0,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 105.5,
+"z": 129.8,
+"wert": 0.59
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 119.4,
+"z": 127.0,
+"wert": 0.31
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 129.4,
+"z": 132.6,
+"wert": 0.61
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 66.1,
+"z": 130.6,
+"wert": 0.33
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 119.6,
+"z": 130.5,
+"wert": 0.32
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 111.2,
+"z": 141.7,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 139.9,
+"z": 137.6,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 84.2,
+"z": 137.1,
+"wert": 0.48
+},
+{
+"regel": "R9w_wellen",
+"feld": "H4",
+"x": 296.3,
+"z": 138.2,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 61.8,
+"z": 136.0,
+"wert": 0.23
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 93.0,
+"z": 152.7,
+"wert": 0.55
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 61.4,
+"z": 144.1,
+"wert": 0.22
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 133.0,
+"z": 139.3,
+"wert": 0.59
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 85.7,
+"z": 144.3,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 119.1,
+"z": 140.3,
+"wert": 0.15
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 90.6,
+"z": 157.5,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "G4",
+"x": 289.6,
+"z": 149.6,
+"wert": 0.66
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 128.6,
+"z": 142.3,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 70.2,
+"z": 149.4,
+"wert": 0.6
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 49.9,
+"z": 158.0,
+"wert": 0.48
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 52.4,
+"z": 145.2,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 75.9,
+"z": 155.6,
+"wert": 0.8
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 128.9,
+"z": 160.6,
+"wert": 0.82
+},
+{
+"regel": "R9w_wellen",
+"feld": "H4",
+"x": 298.2,
+"z": 147.5,
+"wert": 0.16
+},
+{
+"regel": "R9w_wellen",
+"feld": "G4",
+"x": 284.0,
+"z": 156.8,
+"wert": 0.56
+},
+{
+"regel": "R9w_wellen",
+"feld": "H4",
+"x": 295.9,
+"z": 149.4,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 140.6,
+"z": 158.1,
+"wert": 0.52
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 58.1,
+"z": 157.3,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 161.6,
+"z": 173.4,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "E4",
+"x": 184.1,
+"z": 167.5,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 120.3,
+"z": 158.1,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "E4",
+"x": 175.3,
+"z": 158.8,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "H4",
+"x": 296.9,
+"z": 158.3,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 96.3,
+"z": 163.0,
+"wert": 0.35
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 159.5,
+"z": 173.9,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 60.0,
+"z": 173.9,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 113.3,
+"z": 170.0,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "E4",
+"x": 178.0,
+"z": 161.2,
+"wert": 0.18
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 136.0,
+"z": 177.0,
+"wert": 1.41
+},
+{
+"regel": "R9w_wellen",
+"feld": "E4",
+"x": 184.1,
+"z": 171.4,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "H4",
+"x": 300.1,
+"z": 164.9,
+"wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 55.5,
+"z": 164.0,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "G4",
+"x": 292.3,
+"z": 166.8,
+"wert": 0.59
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 122.7,
+"z": 168.7,
+"wert": 0.24
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 119.5,
+"z": 169.1,
+"wert": 0.98
+},
+{
+"regel": "R9w_wellen",
+"feld": "B4",
+"x": 64.5,
+"z": 168.8,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 143.0,
+"z": 182.1,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 80.7,
+"z": 179.9,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 131.9,
+"z": 176.6,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 117.1,
+"z": 179.8,
+"wert": 0.8
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 309.4,
+"z": 177.9,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 127.1,
+"z": 175.6,
+"wert": 0.87
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 300.8,
+"z": 178.1,
+"wert": 0.47
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 98.0,
+"z": 183.0,
+"wert": 0.73
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 74.1,
+"z": 185.0,
+"wert": 0.61
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 121.2,
+"z": 184.4,
+"wert": 0.81
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 132.8,
+"z": 186.3,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 57.2,
+"z": 192.9,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "E5",
+"x": 178.8,
+"z": 181.5,
+"wert": 0.16
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 110.1,
+"z": 192.0,
+"wert": 0.52
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 306.2,
+"z": 189.0,
+"wert": 0.63
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 314.7,
+"z": 188.0,
+"wert": 0.62
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 93.8,
+"z": 189.8,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 67.9,
+"z": 193.3,
+"wert": 0.19
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 131.4,
+"z": 192.5,
+"wert": 0.74
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 82.5,
+"z": 198.5,
+"wert": 0.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 314.2,
+"z": 196.5,
+"wert": 0.63
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 96.5,
+"z": 198.5,
+"wert": 0.63
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 319.9,
+"z": 199.9,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 325.3,
+"z": 204.3,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 307.2,
+"z": 207.0,
+"wert": 0.4
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 140.5,
+"z": 196.9,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 138.4,
+"z": 197.3,
+"wert": 0.15
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 73.9,
+"z": 198.7,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 77.8,
+"z": 207.7,
+"wert": 0.56
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 316.7,
+"z": 211.8,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 110.4,
+"z": 207.3,
+"wert": 0.77
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 67.0,
+"z": 208.9,
+"wert": 0.42
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 333.1,
+"z": 206.4,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "H5",
+"x": 322.4,
+"z": 210.4,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 107.4,
+"z": 213.8,
+"wert": 0.71
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 70.0,
+"z": 211.9,
+"wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 87.9,
+"z": 211.0,
+"wert": 0.21
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 90.0,
+"z": 213.1,
+"wert": 0.62
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 215.1,
+"z": 216.4,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 85.5,
+"z": 226.0,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 84.0,
+"z": 216.8,
+"wert": 0.52
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 297.9,
+"z": 217.7,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 314.2,
+"z": 217.0,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "B6",
+"x": 80.5,
+"z": 217.2,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 99.1,
+"z": 217.8,
+"wert": 0.69
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 102.8,
+"z": 219.8,
+"wert": 0.76
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 312.7,
+"z": 228.7,
+"wert": 0.63
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 122.3,
+"z": 221.4,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 283.8,
+"z": 223.5,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 162.2,
+"z": 226.1,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 94.2,
+"z": 222.8,
+"wert": 0.48
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 105.6,
+"z": 223.9,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 107.6,
+"z": 223.3,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 244.5,
+"z": 225.6,
+"wert": 0.57
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 271.0,
+"z": 241.2,
+"wert": 0.7
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 283.0,
+"z": 228.9,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "E6",
+"x": 205.7,
+"z": 233.3,
+"wert": 0.82
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 110.8,
+"z": 227.0,
+"wert": 0.66
+},
+{
+"regel": "R9w_wellen",
+"feld": "A6",
+"x": 40.6,
+"z": 233.6,
+"wert": 0.34
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 123.7,
+"z": 229.5,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 97.1,
+"z": 232.2,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 300.8,
+"z": 232.9,
+"wert": 1.46
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 250.4,
+"z": 231.1,
+"wert": 1.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "B6",
+"x": 47.6,
+"z": 232.8,
+"wert": 0.3
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 247.9,
+"z": 236.6,
+"wert": 1.15
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 140.7,
+"z": 231.5,
+"wert": 0.45
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 155.8,
+"z": 233.2,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 123.2,
+"z": 233.1,
+"wert": 0.18
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 161.2,
+"z": 237.0,
+"wert": 0.71
+},
+{
+"regel": "R9w_wellen",
+"feld": "E6",
+"x": 173.9,
+"z": 234.7,
+"wert": 0.28
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 212.3,
+"z": 237.8,
+"wert": 1.25
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 120.8,
+"z": 236.7,
+"wert": 0.35
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 223.2,
+"z": 235.7,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 133.2,
+"z": 236.0,
+"wert": 0.33
+},
+{
+"regel": "R9w_wellen",
+"feld": "A6",
+"x": 37.8,
+"z": 241.6,
+"wert": 0.23
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 94.5,
+"z": 237.6,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 122.9,
+"z": 239.7,
+"wert": 0.15
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 288.0,
+"z": 238.2,
+"wert": 0.31
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 258.8,
+"z": 244.7,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 253.6,
+"z": 243.0,
+"wert": 0.29
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 309.6,
+"z": 240.7,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 141.0,
+"z": 241.1,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 98.2,
+"z": 248.7,
+"wert": 0.36
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 327.3,
+"z": 241.8,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 97.3,
+"z": 251.7,
+"wert": 0.43
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 336.0,
+"z": 245.8,
+"wert": 0.12
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 126.0,
+"z": 243.8,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 154.2,
+"z": 243.0,
+"wert": 0.53
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 328.1,
+"z": 244.3,
+"wert": 0.18
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 163.2,
+"z": 244.6,
+"wert": 0.61
+},
+{
+"regel": "R9w_wellen",
+"feld": "A6",
+"x": 12.1,
+"z": 249.1,
+"wert": 0.23
+},
+{
+"regel": "R9w_wellen",
+"feld": "C6",
+"x": 116.0,
+"z": 255.9,
+"wert": 0.37
+},
+{
+"regel": "R9w_wellen",
+"feld": "E6",
+"x": 201.1,
+"z": 248.1,
+"wert": 0.49
+},
+{
+"regel": "R9w_wellen",
+"feld": "E6",
+"x": 176.5,
+"z": 246.6,
+"wert": 0.6
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 331.5,
+"z": 249.2,
+"wert": 0.24
+},
+{
+"regel": "R9w_wellen",
+"feld": "A6",
+"x": 22.5,
+"z": 249.9,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "H6",
+"x": 320.2,
+"z": 250.5,
+"wert": 0.26
+},
+{
+"regel": "R9w_wellen",
+"feld": "G6",
+"x": 261.8,
+"z": 253.9,
+"wert": 0.28
+},
+{
+"regel": "R9w_wellen",
+"feld": "F6",
+"x": 250.1,
+"z": 253.7,
+"wert": 0.16
+},
+{
+"regel": "R9w_wellen",
+"feld": "C7",
+"x": 117.5,
+"z": 259.2,
+"wert": 0.36
+},
+{
+"regel": "R9w_wellen",
+"feld": "A6",
+"x": 3.2,
+"z": 255.4,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "C7",
+"x": 105.9,
+"z": 258.6,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "H7",
+"x": 328.7,
+"z": 260.1,
+"wert": 0.41
+},
+{
+"regel": "R9w_wellen",
+"feld": "B7",
+"x": 44.4,
+"z": 259.6,
+"wert": 0.1
+},
+{
+"regel": "R9w_wellen",
+"feld": "A7",
+"x": 19.5,
+"z": 260.0,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "A7",
+"x": 23.3,
+"z": 261.2,
+"wert": 0.13
+},
+{
+"regel": "R9w_wellen",
+"feld": "H7",
+"x": 334.7,
+"z": 262.5,
+"wert": 0.14
+},
+{
+"regel": "R9w_wellen",
+"feld": "A7",
+"x": 22.8,
+"z": 263.5,
+"wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "C7",
+"x": 101.4,
+"z": 273.2,
+"wert": 0.12
+}
+]
+}
