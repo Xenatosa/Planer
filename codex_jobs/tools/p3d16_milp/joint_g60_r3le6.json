@@ -1,0 +1,40 @@
+{
+  "R8_neighbor_pair_count": 1114,
+  "axis_supports": 68,
+  "axis_tolerance_m": 0.02,
+  "constraints": 6749,
+  "g_m_per_m": 0.6,
+  "minimum_neighbor_step_m": 0.05264921037362852,
+  "mip_dual_bound_m": 0.05264921037362852,
+  "mip_gap": 0.0,
+  "plane_core_supports": 137,
+  "plane_gradient_x": -0.021111056062895726,
+  "plane_gradient_z": -0.02111105606289574,
+  "plane_height_m": 4.134647804549641,
+  "plane_radius_m": 2.0,
+  "plane_slope_limit_pct": 3.0,
+  "plane_slope_pct": 2.98555418001659,
+  "plane_tolerance_m": 0.02,
+  "r3_D1_limit": 6,
+  "r3_sections_D1_solution": 6,
+  "route_pair_count": 1075,
+  "same_route_arc_distance_factor": 1.25,
+  "same_route_pair_count": 218,
+  "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "status_code": 0,
+  "success": true,
+  "variables": 1506,
+  "worst_pair": {
+    "a": {
+      "height_m": 3.9933690624082443,
+      "x": 156.25,
+      "z": 28.25
+    },
+    "b": {
+      "height_m": 4.046018272781884,
+      "x": 156.25,
+      "z": 28.5
+    },
+    "step_m": 0.05264921037364001
+  }
+}
