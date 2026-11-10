@@ -1,6 +1,6 @@
 # Ergebnis p3d18
 
-**Zwischenstand nach bestätigter Machbarkeit; minimale Stufe und Mesh-Prüfungen offen.**
+**Zwischenstand: Variante 23 gebaut, aber die offizielle R3-Prüfung verfehlt. Eine gemessene Transferlücke rechtfertigt Variante 24; Korrektur und Endprüfung laufen.**
 Stand: 10.11.2026 · Branch `art/dorfmap-p3d18` · Basis `c3659e7` · Kosten **0 EUR**.
 
 ## Kalibrierung gegen p3d17
@@ -33,9 +33,41 @@ Der gemeinsame MILP-Lauf mit `r=2,00 m`, unveränderter Wegführung, Achsstütze
 
 Das bestätigt Machbarkeit im Transfermodell. Die offizielle Prüfung des späteren Meshes bleibt maßgeblich; der R8-Gitterwert liegt in der numerischen Lösung praktisch genau auf seiner Grenze. Noch wurde kein p3d18-Mesh gebaut.
 
+## Stufenoptimierung und Variante-23-Diagnose
+
+Nach dem Machbarkeitsnachweis lief dieselbe Ganzzahlrechnung mit der Kreuzungsstufe als Zielfunktion und einem vollständigen zulässigen MIP-Start. HiGHS erreichte nach 3.600 Sekunden keinen Optimalitätsbeweis, fand aber einen besseren zulässigen Punkt. Dieser Stand ist für den direkten Transfer mit Variante 23 vorgesehen.
+
+| Messung am verwendeten Baupunkt | Ergebnis | Schranke | Status |
+|---|---:|---:|---|
+| Kreuzungsstufe am tatsächlichen R8-Zentrum | `0,097046496 m` | `≤0,116 m` | erfüllt |
+| R8-Gitter | `0,020000000000011 m` | `≤0,020 m` | numerisch an Grenze; Mesh-Prüfer maßgeblich |
+| R8-Quer | `2,993470 %` | `≤3 %` | erfüllt |
+| R3 längs / quer / Wölbung | Modell: `6 / 7 / 6` Abschnitte | `≤6 / ≤7 / ≤7` | Modellzählung später durch Mesh-Prüfung widerlegt |
+| R3 maximales Quergefälle | Modell: `≤20 %` | `≤20 %` | Modellzählung später durch Mesh-Prüfung widerlegt |
+| Achsstützen | 359, je `±0,02 m` | `±0,02 m` | erfüllt |
+| Ebenenkern | `r=2,00 m`, Neigung `2,308368 %` | unveränderter Radius, `≤3 %` | erfüllt |
+
+Der Incumbent ist `0,097046486 m`; die duale Untergrenze beträgt `0,076068872 m`, die MIP-Lücke `21,616 %`. Das ist nur der beste Punkt der fehlerhaften Transferformulierung, kein bestätigtes Mesh-Ergebnis und kein bewiesenes globales Minimum. Die frühere Modell-Machbarkeitslösung bei `0,115266302 m` zählt ebenfalls nicht als unabhängiger offizieller R3-Beleg.
+
+Variante 23 wurde mit dem unveränderten Neu-Mesh-Adapter geprüft. Am Zielkreuz `152.5|28.5` misst R8 Stufe `0,097 m`, Gitter `0,020 m` und keinen R8-Quer-Treffer. Die Abweichungen an Achsstützen und R3-Zählern belegen jedoch einen Transferfehler:
+
+| Variante-23-Meshmessung D1 | Ergebnis | Vorgabe | Bewertung |
+|---|---:|---:|---|
+| Offizielles R3 längs / quer / Wölbung | `7 / 20 / 21` Abschnitte | `≤6 / ≤7 / ≤7` | verfehlt |
+| Größter offizieller R3-Querwert | `41,3 %` (`rampe_11`, `148.5|2.5`) | `≤20 %` | verfehlt |
+| Achsstützen nach endgültigem Meshtransfer | `12 / 359` über 2 cm; maximal `0,064167 m` | alle `±0,02 m` | verfehlt |
+| Internes Transferdiagnostikfeld vor nachgelagertem Tile-Fade | 2 Punkte über 2 cm; maximal `0,622627 m` | alle `±0,02 m` | verfehlt |
+| D1-R8-Gesamttreffer (Stufe/Gitter/Quer/Wegende) | `2 / 3 / 1 / 1` | Zielkreuz `0` | Zielkreuz selbst erfüllt; weitere Punkte außerhalb davon offen |
+
+Die Ursache ist im Modell lokalisiert: Der affine Transferabschnitt behandelte den festen Transferintercept irrtümlich wie einen Hintergrundwert und multiplizierte ihn nochmals mit `1−Deckung`; die Achsbedingung bezog sich außerdem auf das Zielraster statt auf die ausgegebene, überblendete Meshfläche. Dadurch sagte das Modell R3 `6/7/6` voraus, während derselbe offizielle Prüfer am gebauten Mesh `7/20/21` zählt. Variante 24 korrigiert diese Abbildung und bindet die ausgegebene Meshhöhe an den Achsstützen. Prüfer, Schwellen, Route und Ebenenkernradius bleiben unverändert.
+
+Die vollständigen Variante-23-Treffer und Achsabweichungen liegen unter [`bilder_p3d18/variante23_diagnose/`](bilder_p3d18/variante23_diagnose/). Der vorläufige `pruefe_regeln`-Lauf diente nur der R3-Diagnose und lief ohne Lochscan; seine Gesamtsumme ist deshalb kein Gate-Gesamtergebnis.
+
+Der Variante-23-Build hielt D2 bytegleich (`749d3c4b…`), G1 bytegleich (`38afeb30…`), Zellquellspalten (`zellen_quell_diff=0`) und Vektorhash (`aac6afff…`) ein. LOD1 hat `134.316` Dreiecke. Die maximale D1-Höhenänderung lag genau an der Grenze `4,0 m`. D1-Hash: `c7a10535…`.
+
 ## Noch offen
 
-- Minimale Stufe mit den gemeinsamen R3-Limits und bindende Stationen.
-- Mesh-Bau, offizielle Prüferläufe, Vollregression, Adapter/Xvfb/LOD- und Bildprüfung.
+- Korrigierte Variante 24, danach neue Machbarkeit und Stufenrechnung.
+- Vollständige offizielle Gate-Läufe, Regression, Adapter/Xvfb/LOD- und Bildprüfung auf der korrigierten Endvariante.
 
 Keine Wegführung, Prüfschwelle, Zellquelle, D2-Datei oder Ebenenkernradius wurde geändert. Es wurde noch kein p3d18-Mesh gebaut.

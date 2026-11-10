@@ -1,0 +1,8 @@
+regel,x_map,z_map,pruefschwelle,prueferwert,beteiligte_rampen
+R8_stufe,126.5,31.6,0.2,3.99,rampe_2_anfang
+R8_gitter,126.5,31.6,0.15,5.04,rampe_2_anfang
+R8_quer,126.5,31.6,3.0,29.2,rampe_2_anfang
+R8_stufe,148.5,2.5,0.2,0.69,rampe_11_anfang
+R8_gitter,148.5,2.5,0.15,0.7,rampe_11_anfang
+R8_gitter,156.5,37.5,0.15,0.16,rampe_11_ende
+R8a_wegende,148.5,2.5,0.1,0.21,rampe_11_anfang
