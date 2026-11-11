@@ -1,6 +1,6 @@
-# Ergebnis p3d22 — Zwischenstand V24
+# Ergebnis p3d22 — Schlupfdiagnose
 
-Stand 11.11.2026, Branch `art/dorfmap-p3d22`, Basis `3c7e688`. Dieser Zwischenstand schließt V24 ab; V29, V30 und V3 folgen im selben Bericht.
+Stand 11.11.2026, Branch `art/dorfmap-p3d22`, Basis `3c7e688`. Ziel war eine Diagnose, keine Wegänderung oder Übernahme. Die V24-Rechnung ist gelöst, ihre offizielle Float32-Probe verfehlt mehrere Ziele. V29, V30 und V3 bleiben auch bei gemeinsamer Freigabe aller in Round00 modellierten Diagnose-Schlupfe unlösbar; daher gibt es für sie keine messbaren Schlupfminima.
 
 Marker: `[S]` direkt gemessen oder aus einem ausgeführten Prüferartefakt übernommen; `[R]` vom Diagnosemodell berechnet; `[A]` Annahme für die Ereignis-/Zählerabbildung.
 
@@ -15,8 +15,10 @@ Die p3d17-Kalibrierung wurde erneut mit dem offiziellen R3-Prüfer ausgeführt. 
 - Unveränderte Geometrie und Transfer: `neu/p3d18_joint_mesh_v24.json`; R8-Zentrum `152.54985704503775|28.48954534572434`.
 - Verwendete Datei: `codex_jobs/tools/p3d20_r3/event_cuts_cumulative05.json`, **50 Schnitte** (G5 17, R5 24, R4 5, G6 2, R5sp 1, R8G 1), SHA-256 `cb79b89bbd05d67a4607c5c6fa91dc660ea5cad73b1d2eb8b1aa0f30028b7005`.
 - Die gemeinsamen Grenzwerte blieben unverändert: Stufe `0,116 m`, Gitter `0,019 m`, Quer `2,95 %`, Einzelquer `19,5 %`, R3 D1 `6/7/7`, Achs- und Ebenenstützen `±0,02 m`, Ebenenkern `r=2,00 m`, Wegende `0,054 m`. Für den Runde-05-Vergleich war R8a-Endrunout deaktiviert; die p3d21-Runde-00-Läufe verwenden ihn aktiviert.
-- Die p3d22-Erweiterung enthält 18 nichtnegative Schlupfvariablen und 46 binäre Ereignisfreigaben. Sie ergänzt sechs Zähler-/Obergrenzenzeilen. Der gespeicherte Runde-05-Solve nennt 7.945 Variablen/11.295 Bedingungen; p3d22 enthält 8.009/11.308. Die 64 zusätzlichen Variablen entsprechen Schlupf- und Ereignisfreigaben. **Sieben der 13 zusätzlichen Bedingungen sind gegenüber dem archivierten Runde-05-Bericht nicht aufgeklärt.** Das ist eine verbleibende Reproduktionsgrenze.
+- Die p3d22-Erweiterung enthält 18 nichtnegative Schlupfvariablen und 46 binäre Ereignisfreigaben. Sie ergänzt fünf Zähler-/Obergrenzenzeilen (G5 gesamt/D1, R5 gesamt/D1, R4 D1). Der gespeicherte Runde-05-Solve nennt 7.945 Variablen/11.295 Bedingungen; p3d22 enthält 8.009/11.308. Die 64 zusätzlichen Variablen entsprechen Schlupf- und Ereignisfreigaben. **Acht der 13 zusätzlichen Bedingungen sind gegenüber dem archivierten Runde-05-Bericht nicht aufgeklärt.** Das ist eine verbleibende Reproduktionsgrenze.
+- Der archivierte V24-Lauf wurde mit Diagnosemodell-Hash `1eb67c462ac1649915118443c683f1f9f811811399f842e7b9ad7b3d772df9ad` gerechnet. Die Schlupfobergrenzen wurden danach entfernt; Variantenläufe nutzen Hash `385a249be392bfab4ece72f2fed63d81e46bc56b4d362ca9a49df8d1ce8554d3`. V24s gemessene Minima sind alle exakt null und damit auch unter unbeschränkten nichtnegativen Schlupfen minimal. Die frühere V24-Lösung bleibt mit den geöffneten Grenzen zulässig; Null ist die L1-Untergrenze.
 - Die G5/R5/R4-Zähler werden mit der Runde-05-Schnittliste und Budgets G5 `69/2`, R5-Loch `22/5`, R4 D1 `0` abgebildet. Die Schnittfreigaben sind keine frische Komponenten-Neuzählung durch die offiziellen Prüfer.
+- Die 14 V24-Solver-JSONs liegen in `codex_jobs/tools/p3d22/results/` (`p3d22_V24_isoliert_*.json` und `p3d22_V24_gemeinsam.json`); die offizielle Float32-Probe steht in `p3d22_V24_official_probe.json`.
 
 ### Isolierte und gemeinsame Lösungen
 
@@ -95,9 +97,43 @@ Da der gemeinsame Schnittmodell-Kandidat Nullschlupf und null freigegebene G5/R5
 
 Weitere Gate-Werte `[S]` der V24-Probe: R8 D1 `Stufe/Gitter/Quer/Wegende = 2/3/3/1`, G1 und D2 jeweils `0/0/0/0`; R9 D1 `Delle/Sägezahn/Wellen = 8/1/13`, G1 `0/1/12`, D2 `0/0/0`. G1-Hash `38afeb30…`; D2-Hash unverändert `749d3c4b…`.
 
+## V29, V30 und V3 — p3d21 Round00
+
+Die drei Reliefs wurden mit `codex_jobs/tools/p3d21/apply_route_variant.py` aus den dokumentierten Belegen rekonstruiert. Hash, Transferbasis und ungerundetes Zentrum stimmen mit den p3d21-Artefakten überein. Der exakte Round00-Modellstand lief **ohne Ereignisschnitte**; deshalb wurde für diese 42 Solves eine leere Cut-Liste (`[]`, SHA-256 `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570`) übergeben. Das entspricht dem p3d21-Round00-Lauf und erhält die bestehende R8a-Endrunout-Sperre.
+
+Jede Zelle zeigt `HiGHS-Status / primal_feasible`. Pro Geometrie wurden dieselben 13 isolierten Gruppen und die gemeinsame L1-Minimierung gerechnet; alle Läufe hatten 600 s Zeitlimit.
+
+| Gruppe | V29 isoliert | V30 isoliert | V3 isoliert | V29 gemeinsam | V30 gemeinsam | V3 gemeinsam |
+|---|---:|---:|---:|---:|---:|---:|
+| R3 längs | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| R3 quer | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| R3 Wölbung | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Kreuzungsstufe | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Achsstützen | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Ebenenkern `r=2,00 m` | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Wegende | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Sicherheitsabstand Gitter | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Sicherheitsabstand Quer | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| Sicherheitsabstand Einzelquer | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| G5 | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| R5-Loch | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+| R4 D1 | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein | 8 / nein |
+
+| Geometrie | p3d21 Round00 Variablen/Bedingungen | p3d22 Diagnose Variablen/Bedingungen | Source-Relief SHA-256 | Transferbasis (Datei; SHA-256) | R8-Zentrum x\|z |
+|---|---:|---:|---|---|---|
+| V29 | 7.856 / 15.236 | 7.874 / 15.237 | `9683b9fed1d80980615fe0c6c17ee5b75ae638074ae8c545900f8a4fe326c09f` | `p3d21_transfer_base_v29.json`; `2974d27b8770684b8b37bc6369df020c9bbbaae9b48cc087b515554a07a6e6a3` | `152.7601173875546\|28.07128239088488` |
+| V30 | 7.854 / 15.159 | 7.872 / 15.160 | `3a2e81dc6b2132238c92ddca971c1a9c2ad7c161b8facc7ae9e17468d4e89c80` | `p3d21_transfer_base_v30.json`; `e01165fb0b36e2186d05ea7eed6ced5aae28a44a98f1f0f78dab36d36611bed6` | `152.65796405573423\|28.263810474520962` |
+| V3 | 7.858 / 15.256 | 7.876 / 15.257 | `b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6` | `p3d21_transfer_base_route3_v29.json`; `07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287` | `152.6292918620858\|28.353590994151514` |
+
+In allen 42 Round00-Diagnoseläufen war `primal_feasible=false`, der HiGHS-Status 8 und `infeasibility_proven=true`; alle 600-s-Zeitlimits blieben ungenutzt. Deshalb sind gemeinsamer Zielfunktionswert und alle Schlupfwerte `null`: **kein isoliertes Minimum und kein gemeinsamer Nachlass ist für diese Kandidaten berechenbar.** Das belegt keine einzelne bindende Regel und es liegt keine IIS vor. Die p3d21-Basiswerte stehen in den drei `model_round00.json`-Belegen; die p3d22-Läufe fügen 18 Diagnosevariablen und eine Zeile hinzu.
+
+Im exakten Round00-Modell gibt es keine G5-, R5-Loch- oder R4-Ereignisschnitte. Diese drei Gruppen lassen sich daher für V29/V30/V3 in Round00 nicht numerisch bewerten; ihre Schlupfwerte bleiben ausdrücklich **nicht quantifizierbar**, nicht null. Es gibt folglich keine offizielle Gate-Probe für diese Geometrien.
+
+Zusätzliche, nicht als Round00-Ergebnis gewertete Läufe mit den 50 V24-Runde-05-Schnitten (SHA-256 wie oben) wurden aus Vergleichsgründen erhalten (`p3d22_V29_isoliert_*.json`, `p3d22_V30_isoliert_*.json`, `p3d22_V3_isoliert_*.json` und die drei jeweiligen `gemeinsam.json`). Auch dort waren alle 14 Läufe pro Geometrie HiGHS-Status 8, primal-feasible nein; die Modellgrößen betrugen V29 `8.007/15.481`, V30 `8.005/15.404` und V3 `8.009/15.501` Variablen/Bedingungen. Diese Schnitte ändern den Modellstand und ersetzen daher nicht die obige Round00-Auswertung. Die exakten Round00-JSONs heißen `p3d22_{V29,V30,V3}_R00_isoliert_*.json` und `p3d22_{V29,V30,V3}_R00_gemeinsam.json`.
+
 ### Annahmen und Grenzen
 
 - `[S]` Kalibrierung, Hashes, Gate-Zähler und Solverstatus stammen aus ausgeführten Prüfern bzw. gespeicherten Artefakten. `[R]` Schlupf-Minima und L1-Wert sind Solverergebnisse des diagnostischen linearen/MILP-Modells. `[A]` Die festen Nicht-D1-Baselines für die Zählerbudgets sind G5 `67` und R5-Loch `17`, abgeleitet aus dem offiziellen p3d20-R05-Probebericht.
 - Der V24-Nullschlupf-Befund gilt für `event_cuts_cumulative05.json`; die Direktprobe belegt, dass diese Schnitte neu entstehende G5/R5-Ereignisse nicht vollständig zählen. Deshalb ist Nullschlupf kein Nachweis der offiziellen Zielerreichung.
 - Die HTML-Lochprüfung liest die vorhandene Seite; es gab keinen Meshbau, keine Bilder und keine Übernahme. LOD1 und `t42u` wurden in diesem Auftrag nicht neu berechnet; Quellen, Overlay, G1 und D2 wurden nicht geändert.
-- Es wurden weder Prüfer, Grenzwerte noch Zell-/Vektorquellen verändert. Noch offen sind die sieben zusätzlichen Modellbedingungen gegenüber der archivierten p3d20-Runde-05-Zahl und die Validität der Ereignisschnitt-Näherung für neue Komponenten.
+- Es wurden weder Prüfer, Grenzwerte noch Zell-/Vektorquellen verändert. Noch offen sind die acht zusätzlichen Modellbedingungen gegenüber der archivierten p3d20-Runde-05-Zahl und die Validität der Ereignisschnitt-Näherung für neue Komponenten.
