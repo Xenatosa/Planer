@@ -27,8 +27,10 @@ VARIANTS = {
         "rampe_11": [(28.0, 1.8, 4.5, 1.0)],
     },
     "30": {
-        "rampe_2": [(20.055, 3.0, 3.6, 1.0), (40.0, 2.8, 4.3, -1.0)],
-        "rampe_11": [(28.0, 2.5, 5.0, 1.0)],
+        # Smaller, broader offsets keep the crossing and adjacent route pairs
+        # close to V24 while moving each measured residual off the centerline.
+        "rampe_2": [(20.055, 1.0, 3.0, 1.0), (40.0, 1.0, 4.0, -1.0)],
+        "rampe_11": [(28.0, 1.0, 5.0, 1.0)],
     },
 }
 

@@ -1,0 +1,222 @@
+{
+  "new_route_intersections_map": [
+    [
+      152.48145644688833,
+      28.365475040152035
+    ]
+  ],
+  "official_R8_gate_center_map": [
+    152.65796405573423,
+    28.263810474520962
+  ],
+  "old_route_intersections_map": [
+    [
+      152.43798797409806,
+      28.45569842738205
+    ]
+  ],
+  "other_rampenwege_semantically_unchanged": true,
+  "routes": {
+    "rampe_11": {
+      "end_after_map": [
+        156.49999997570302,
+        37.5000000320513
+      ],
+      "end_before_map": [
+        156.5,
+        37.5
+      ],
+      "endpoint_is_water": {
+        "end_after": false,
+        "end_before": false,
+        "start_after": false,
+        "start_before": false
+      },
+      "endpoint_wall_centerline_distances_m": {
+        "end_after": {
+          "distance_m": 17.978284813229347,
+          "wall": "Nord"
+        },
+        "end_before": {
+          "distance_m": 17.978284772469262,
+          "wall": "Nord"
+        },
+        "start_after": {
+          "distance_m": 1.1485549142426137,
+          "wall": "Nord"
+        },
+        "start_before": {
+          "distance_m": 1.1485548484944275,
+          "wall": "Nord"
+        }
+      },
+      "max_displacement_m": 0.9968680166432433,
+      "min_wall_centerline_after": {
+        "distance_m": 0.0,
+        "wall": "Nord"
+      },
+      "min_wall_centerline_before": {
+        "distance_m": 0.0,
+        "wall": "Nord"
+      },
+      "new_length_m": 56.07054847433143,
+      "new_vertex_count": 61,
+      "old_length_m": 57.022910149966364,
+      "old_vertex_count": 61,
+      "route_index": 11,
+      "start_after_map": [
+        148.49999992198218,
+        2.5000001029171215
+      ],
+      "start_before_map": [
+        148.5,
+        2.5
+      ],
+      "waypoints": [
+        {
+          "after_same_nominal_station_map": [
+            156.64648341974328,
+            19.209010560705266
+          ],
+          "before_map": [
+            157.1478835353359,
+            18.547589131625603
+          ],
+          "label": "R5 rampe_11",
+          "shift_m": 0.9959858187631918,
+          "station_old_m": 27.917
+        },
+        {
+          "after_same_nominal_station_map": [
+            150.17205042597905,
+            32.73416883347489
+          ],
+          "before_map": [
+            150.17233119483998,
+            32.733798457530646
+          ],
+          "label": "rampe_11 third bend",
+          "shift_m": 0.0005577218575725269,
+          "station_old_m": 47.4
+        }
+      ]
+    },
+    "rampe_2": {
+      "end_after_map": [
+        175.14999841551654,
+        25.689986795970846
+      ],
+      "end_before_map": [
+        175.15,
+        25.69
+      ],
+      "endpoint_is_water": {
+        "end_after": false,
+        "end_before": false,
+        "start_after": false,
+        "start_before": false
+      },
+      "endpoint_wall_centerline_distances_m": {
+        "end_after": {
+          "distance_m": 10.973171136871382,
+          "wall": "Nord"
+        },
+        "end_before": {
+          "distance_m": 10.973184770156749,
+          "wall": "Nord"
+        },
+        "start_after": {
+          "distance_m": 6.050005619987664,
+          "wall": "Nord"
+        },
+        "start_before": {
+          "distance_m": 6.050005619832112,
+          "wall": "Nord"
+        }
+      },
+      "max_displacement_m": 0.9948180285304958,
+      "min_wall_centerline_after": {
+        "distance_m": 5.0830786739741605,
+        "wall": "Nord"
+      },
+      "min_wall_centerline_before": {
+        "distance_m": 6.050005619832112,
+        "wall": "Nord"
+      },
+      "new_length_m": 59.05343681924772,
+      "new_vertex_count": 50,
+      "old_length_m": 58.80044112416466,
+      "old_vertex_count": 50,
+      "route_index": 2,
+      "start_after_map": [
+        126.51000000001984,
+        31.6200000001635
+      ],
+      "start_before_map": [
+        126.51,
+        31.62
+      ],
+      "waypoints": [
+        {
+          "after_same_nominal_station_map": [
+            143.1978441635807,
+            30.408145502241755
+          ],
+          "before_map": [
+            143.0991647807038,
+            29.594040632641963
+          ],
+          "label": "R4 rampe_2",
+          "shift_m": 0.9840763575088696,
+          "station_old_m": 20.055
+        },
+        {
+          "after_same_nominal_station_map": [
+            157.74618615233092,
+            27.08554422814457
+          ],
+          "before_map": [
+            157.8316285167702,
+            27.79756393214129
+          ],
+          "label": "G5 158.2|30.6",
+          "shift_m": 0.8605535064071224,
+          "station_old_m": 37.865
+        },
+        {
+          "after_same_nominal_station_map": [
+            159.2935900119112,
+            26.782633075493663
+          ],
+          "before_map": [
+            159.39217078356802,
+            27.604139505971837
+          ],
+          "label": "G5 159.5|28.5",
+          "shift_m": 0.9928801623331597,
+          "station_old_m": 39.752
+        },
+        {
+          "after_same_nominal_station_map": [
+            161.22489548510717,
+            26.650155206388316
+          ],
+          "before_map": [
+            161.31158113474427,
+            27.372535620030995
+          ],
+          "label": "G5 161.4|28.1",
+          "shift_m": 0.8730755545594591,
+          "station_old_m": 42.072
+        }
+      ]
+    }
+  },
+  "source_after_sha256": "3a2e81dc6b2132238c92ddca971c1a9c2ad7c161b8facc7ae9e17468d4e89c80",
+  "source_before_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+  "source_data_changes": [
+    "rampenwege[2]",
+    "rampenwege[11]"
+  ],
+  "variant": "30"
+}

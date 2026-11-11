@@ -46,6 +46,23 @@ Das p3d18/V24-Raster und der Transferoperator wurden für diese Wegstützen unve
 
 **Machbarkeit Variante 29: UNMACHBAR im unveränderten Modell.** Ohne neue Ereignisschnitte meldet HiGHS Status 8 (infeasible), 7.856 Variablen und 15.236 Bedingungen. Die feste Konjunktion aus R8, R3, Achsstützen, Wegende und 2-m-Kern hat keinen zulässigen Punkt; deshalb wurde für diese Variante keine offizielle Gate-Probe gestartet. Der verwendete Solver liefert für den infeasiblen MILP-Lauf keine IIS/Einzelzeile, daher wird keine einzelne bindende Bedingung behauptet. Für diesen Kandidaten existieren keine erreichbaren gemeinsamen Meshwerte für G5, R5-Loch, R4, R8/R3 oder die übrigen harten Zähler; die p3d20-Runde-05-Werte oben sind nur der unveränderte Ausgangskandidat. Maschinenbeleg: [`model_round00.json`](../../../../../codex_jobs/tools/p3d21/variant29/model_round00.json).
 
+### Lokale Wegvariante 30, vermessen
+
+Variante 30 ist die zweite und letzte hier geprüfte lokale Weggeometrie. Sie verwendet kleinere, breiter ausgeblendete Offsets als Variante 29: rampe_2 wird bei s≈20 m und s≈40 m jeweils um höchstens 1,0 m, rampe_11 an der zweiten Kehre um höchstens 1,0 m seitlich verschoben. Die Kandidatenquelle ändert weiterhin ausschließlich `rampenwege[2]` und `[11]`; elf andere Rampenpfade, Zellwerte, Vektorwege und Overlay bleiben unverändert. Kandidatenquellenhash: `3a2e81dc6b2132238c92ddca971c1a9c2ad7c161b8facc7ae9e17468d4e89c80`.
+
+| Pfad / Station | vorher | Variante 30 | Änderung |
+|---|---|---|---:|
+| rampe_2, Länge | 58,800 m | 59,053 m | +0,253 m |
+| rampe_2, s=20,055 m (R4) | 143,0992\|29,5940 | 143,1978\|30,4081 | 0,984 m |
+| rampe_2, s=37,865 m (G5) | 157,8316\|27,7976 | 157,7462\|27,0855 | 0,861 m |
+| rampe_2, s=39,752 m (G5) | 159,3922\|27,6041 | 159,2936\|26,7826 | 0,993 m |
+| rampe_2, s=42,072 m (G5) | 161,3116\|27,3725 | 161,2249\|26,6502 | 0,873 m |
+| rampe_11, Länge | 57,023 m | 56,071 m | −0,952 m |
+| rampe_11, s=27,917 m (R5) | 157,1479\|18,5476 | 156,6465\|19,2090 | 0,996 m |
+| rampe_11, s=47,400 m (dritte Kehre) | 150,1723\|32,7338 | 150,1721\|32,7342 | 0,0006 m |
+
+Die Anfangs- und Endkoordinaten bleiben gleich. Alle vier Endpunkte sind trocken; der nächste Wand-Mittellinienabstand am Start von rampe_11 bleibt 1,149 m. Der geometrische Achsschnitt wandert 0,120 m. Das offizielle R8-Clusterzentrum wandert von `152,549857|28,489545` nach `152,657964|28,263810`, also 0,303 m; der unveränderte R8-Prüfer zeigt `152,7|28,3`. Die Rohquellenprobe meldet dort Stufe `1,389 m` und Gitter `2,241 m`, weil das Quellhöhenfeld noch nicht das optimierte Mesh enthält. Transferbasis: [`p3d21_transfer_base_v30.json`](../neu/p3d21_transfer_base_v30.json), mit 187 rampe_11- und 197 rampe_2-Stützen. Der p3d20-Modelllauf für Variante 30 steht noch aus.
+
 ### R8-Fenster und Restfehler
 
 Das Längsfenster ist jeweils ±6,0 m um die nächste Achsstation am unveränderten R8-Zentrum. Die übertragenen V24-Höhen ergeben `[R]` für rampe_11 eine mittlere Längsneigung von 19,39 % und maximal 50,00 % pro Stützsegment; rampe_2 ergibt 10,57 % im Mittel und maximal 50,00 %. Querprofile wurden auf dem im Speicher rekonstruierten V24-D1-Mesh beidseits der Achse ausgewertet: bei ±1,5 m Offset beträgt die Querneigung am R8-Zentrum 1,36 % für rampe_11 und 2,48 % für rampe_2. Das Maximum über das jeweilige ±6-m-Fenster beträgt 15,09 % beziehungsweise 29,29 %. Diese Querprofile sind bilineare Achs-Normalprofile und nicht der offizielle R8-Ausgleichsebenenwert.
