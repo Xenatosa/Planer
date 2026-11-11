@@ -22,6 +22,7 @@ GROUPS = (
     "safety_single_quer", "g5", "r5_hole", "r4",
     "grade_cross", "grade_same", "endpoint_r8a", "plane_slope_polygon",
     "plane_slope_box", "variable_bounds", "route_profile_slope", "source_monotone",
+    "g11",
 )
 
 

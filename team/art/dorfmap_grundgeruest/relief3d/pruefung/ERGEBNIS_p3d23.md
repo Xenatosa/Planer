@@ -66,12 +66,96 @@ Der Deletion-Filter wurde je Geometrie mit zwei Gegenproben abgesichert: nur R8a
 
 ## Teil B — V24 Checker-in-the-loop
 
-Noch nicht ausgeführt in diesem Zwischenstand. Der nächste Schritt ist die serielle offizielle Float32-Direktprobe für V24 mit der Round05-Cutliste, danach höchstens acht Checker-Runden mit frischer G5-/R5-/G11-Zählung. Es wird kein Mesh gebaut und keine Wegvariante übernommen.
+`[S]` V24 wurde als Float32-Direkttransfer-Probe über der unveränderten p3d18-Variante 24 gemessen. Es gab keinen Meshbau: das Probe-Relief lag je Runde unter `/tmp`; `loch_o18g.js`, `pruefe_regeln.py`, `r8_kreuzung.py` und `r9_form.py` liefen unverändert. Die G5-/R5-Komponenten wurden nach jeder offiziellen Probe frisch gezählt. Runde 1 startete mit den 50 p3d20-Round05-Schnitten; danach wurden erkannte G5-, R5-Loch- und neue D1-G11-Objektereignisse angefügt.
 
-## Vorläufige Drei-Satz-Aussage
+`[R]` Die G11-Objektschnittbedingung verwendet intern `|h−Objekt| ≤ 0,59999 m`, also 10 µm Abstand zur unveränderten offiziellen 0,60-m-Grenze. Dieser kleine Sicherheitsabstand fängt Float32-Rundung am strikten Prüfervergleich ab. Vier verworfene Läufe sind mit den Belegen `attempt0` bis `attempt3` getrennt archiviert: Big-M-Fehler, falsches Interzept-Vorzeichen, historischer Score ohne G11 und exakte 0,60-m-Modellgrenze ohne Float32-Abstand. Keiner davon zählt als Messrunde. Der unten ausgewertete Loop nutzt den aktuellen p3d17-Prüfer-Replay: 600 Gesamt-Treffer, davon G11-Objekt 4; neue Regelbezeichnungen ohne Eintrag in diesem Replay werden für die +5-Auswertung mit Baseline 0 angesetzt `[A]`.
 
-V29/V30/V3 benötigen am Anfangsauslauf der Rampe 2 mindestens 0,072285 m zusätzliche R8a-Höhenänderung über der 0,10-m-Paargrenze, also 0,172285 m zwischen den bindendsten Nachbarpunkten. Das liegt außerhalb der unveränderten 0,10-m-Modellgrenze für R8a-Auslaufpaare; R3, Ebenenneigung, route/same-route Gefälle und Höhen-/Stufenschranken müssen dafür nicht gelockert werden. Die Wegführung kann in diesem Ansatz nur durch einen anders verteilten oder verlängerten Rampenstart-Auslauf mit der Grenze vereinbar werden; eine konkrete Wegänderung ist nicht Teil dieser Messung.
+### Checker-Runden
 
-## Artefakte und Grenzen
+`[S]` Jeder Solve war seriell, HiGHS mit einem Thread und 600 s Einzelzeitlimit. In allen vier ausgewerteten Runden waren die alten 18 Diagnose-Schlupfwerte sowie der zusätzliche G11-Zählerschlupf 0; gewichteter L1-Wert und maximaler normierter Schlupf waren ebenfalls 0. „Bestscore“ ist die Summe der Treffer oberhalb der je-Regel-Plus-5-Grenzen, der R8/R9-Grenzen und der kalibrierten D1-R3-Zähler 6/17/19. Das ist ein Vergleichswert, kein Beweis eines global minimalen Prüfergebnisses.
 
-JSON-Belege liegen unter `codex_jobs/tools/p3d23/results/`: p3d17-R3-Kalibrierung, Round00-All-open-Solves, sechs Familienfilterläufe, Round05-Row-Callsite-Diff und Familien-Diff-Rekonstruktion. `[A]` Der R8a-Maximalrest ist eine Diagnose des p3d22 linearen/MILP-Modells und noch kein offizieller R8/R9/Regel-Prüferlauf der resultierenden Float32-Fläche. Die ungerundeten Koordinaten und Transferbasen sind aus den p3d22-Artefakten übernommen.
+| Runde | Modellstatus | Schnitte vor → nach | Neue Schnitte G5/R5/G11 | L1 / Max.-Schlupf | `pruefe_regeln` gesamt | G5 Gesamt/D1 | R5-Loch Gesamt/D1 | R4-Schlucht Gesamt/D1 | G11-Objekt Gesamt/D1 | Bestscore |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | Optimal, machbar, Optimalität bewiesen | 50 → 102 | 5 / 29 / 18 | 0 / 0 | 626 | 74 / 7 | 51 / 34 | 0 / 0 | 22 / 20 | 35 |
+| 2 | Optimal, machbar, Optimalität bewiesen | 102 → 133 | 8 / 24 / 0 | 0 / 0 | **614** | **75 / 8** | **46 / 29** | 0 / 0 | **4 / 2** | **28** |
+| 3 | Optimal, machbar, Optimalität bewiesen | 133 → 170 | 1 / 36 / 0 | 0 / 0 | 622 | 70 / 3 | 58 / 41 | 0 / 0 | 4 / 2 | 36 |
+| 4 | Optimal, machbar, Optimalität bewiesen | 170 → 194 | 2 / 24 / 0 | 0 / 0 | 610 | 71 / 4 | 46 / 29 | 0 / 0 | 4 / 2 | 29 |
+
+| Runde | R8 Gesamt `Stufe/Gitter/Quer/Wegende` | R8 D1 `Stufe/Gitter/Quer/Wegende` | R9 Gesamt `Delle/Sägezahn/Wellen` | R9 D1 `Delle/Sägezahn/Wellen` | R3 D1 `längs/quer/Wölbung` | Score über Grenzwert |
+|---:|---|---|---|---|---|---|
+| 1 | 9 / 11 / 6 / 21 | 2 / 3 / 2 / 1 | 31 / 34 / 276 | 9 / 1 / 14 | 6 / 7 / 7 | Delle +1; R5 +21; G11-Objekt +13 |
+| 2 | 9 / 11 / 7 / 21 | 2 / 3 / 3 / 1 | 35 / 34 / 275 | 13 / 1 / 13 | 6 / 7 / 7 | G5 +1; R5 +16; G11-Baum/Wand +6; Delle +5 |
+| 3 | 9 / 11 / 6 / 21 | 2 / 3 / 2 / 1 | 32 / 34 / 272 | 10 / 1 / 10 | 6 / 6 / 7 | R5 +28; G11-Baum/Wand +6; Delle +2 |
+| 4 | 9 / 11 / 6 / 21 | 2 / 3 / 2 / 1 | 37 / 34 / 276 | 15 / 1 / 14 | 6 / 7 / 7 | R5 +16; G11-Baum/Wand +6; Delle +7 |
+
+`[S]` Der Loop stoppte nach Runde 4, nachdem die Runden 3 und 4 den besten Score nicht verbesserten. Runde 2 ist der beste beobachtete Kandidat (Score 28); Runde 4 erreicht 29. Damit ist kein globales Minimum bewiesen: Die offiziellen R5-Zahlen schwanken trotz frischer Komponenten-Schnitte, und die R5-Loch-Schnittnäherung bildet die offiziellen Ereignisse nach vier Runden nicht vollständig ab. G11-Objekt fällt in Runde 2 auf den aktuellen p3d17-Baselinewert 4 (D1=2, G1=2); G11-Baum/Wand ist eine andere Prüferregel und wurde nicht als Ereignisschnitt modelliert.
+
+### Regeln vorher/nachher
+
+`[S]` Die linke Spalte ist der historische Stand `9d3f8fc` (Summe 596); der aktuelle p3d17-Replay hat Summe 600, weil G11-Objekt dort 4 Treffer zählt. Für neue Kategorien ohne historischen Eintrag ist Baseline 0 angenommen. Bei Runde 2 beträgt die aktuelle Prüfersumme 614 (historischer Vergleich +18; gleiches aktuelles Schema +14).
+
+| Regel | Historisch 9d3f8fc | Best V24 R2 | Δ gegen vergleichbare Baseline | Über +5? |
+|---|---:|---:|---:|---:|
+| G11-Baum/Wand `[A: Baseline 0]` | — | 11 | +11 | +6 |
+| G11-Objekt schweben/sinken `[S: aktueller Replay 4]` | — | 4 | 0 | 0 |
+| G2-Spitze oben | 3 | 3 | 0 | 0 |
+| G2-Spitze oben fein | 8 | 8 | 0 | 0 |
+| G3-Spitze unten | 4 | 3 | −1 | 0 |
+| G3-Spitze unten fein | 2 | 2 | 0 | 0 |
+| G5-Beule/Klippe | 69 | 75 | +6 | +1 |
+| G6-Facette | 219 | 218 | −1 | 0 |
+| G7-Wand glatte Fläche | 1 | 1 | 0 | 0 |
+| G7b-Wandkontur Feld | 25 | 23 | −2 | 0 |
+| G7b-Wandkontur Kantenschärfe | 1 | 1 | 0 | 0 |
+| G7b-Wandkontur Rauheit | 1 | 1 | 0 | 0 |
+| G8-Fluss nicht bis Rand | 1 | 1 | 0 | 0 |
+| R1-blind | 24 | 24 | 0 | 0 |
+| R1-Wand `[A: Baseline 0]` | — | 2 | +2 | 0 |
+| R2-getrennt | 15 | 15 | 0 | 0 |
+| R3-längs | 35 | 35 | 0 | 0 |
+| R3-quer | 29 | 19 | −10 | 0 |
+| R3-Wölbung | 31 | 19 | −12 | 0 |
+| R4-Rand | 1 | 1 | 0 | 0 |
+| R4-Schlucht `[A: Baseline 0]` | — | 0 | 0 | 0 |
+| R5-Loch | 25 | 46 | +21 | +16 |
+| R6-Wasser/Schnee | 4 | 4 | 0 | 0 |
+| T1-Fleckrand | 94 | 94 | 0 | 0 |
+| T2-Textur abgeschnitten | 1 | 1 | 0 | 0 |
+| T3-Streifen/Ringe | 1 | 1 | 0 | 0 |
+| T4-graue Flussstreifen | 1 | 1 | 0 | 0 |
+| T5-Textur vs Clay | 1 | 1 | 0 | 0 |
+
+| R8-Regel | Start `9d3f8fc` | Best V24 R2 | Δ |
+|---|---:|---:|---:|
+| Stufe | 9 | 9 | 0 |
+| Gitter | 10 | 11 | +1 |
+| Quer | 5 | 7 | +2 |
+| Wegende | 24 | 21 | −3 |
+| **R8 gesamt** | **48** | **48** | **0** |
+
+| R9-Regel | Start `9d3f8fc` | Best V24 R2 | Δ | Über +5? |
+|---|---:|---:|---:|---:|
+| Delle | 25 | 35 | +10 | +5 |
+| Sägezahn | 34 | 34 | 0 | 0 |
+| Wellen | 275 | 275 | 0 | 0 |
+| **R9 gesamt** | **334** | **344** | **+10** | — |
+
+### Kachelwerte D1/G1/D2
+
+`[S]` Für die Regelzähler je Kachel ist links der offizielle p3d20-Round05-Probeausgang als Schnitteingang, rechts der beste p3d23-Probelauf R2 angegeben. Die R8-Spalten notieren `Stufe/Gitter/Quer/Wegende`; R9 notiert `Delle/Sägezahn/Wellen`.
+
+| Kachel | `pruefe_regeln` p3d20 R05 → p3d23 R2 | R8 p3d20 R05 → R2 | R9 p3d20 R05 → R2 |
+|---|---|---|---|
+| D1 | R05: G11-Objekt 2, G5 3, G6 2, G7b-Feld 1, R1-blind 2, R2 1, R3 4/0/4, R4-Schlucht 1, R5 6. R2: G11-Baum/Wand 11, G11-Objekt 2, G5 8, G6 2, R1-blind 2, R1-Wand 2, R2 1, R3 6/7/7, R4-Schlucht 0, R5 29. | R05 listet 4 D1-Kreuzungseinträge; R2: 2/3/3/1. | 1/1/21 → 13/1/13 |
+| G1 | G11-Objekt 2, G6 3, R1-blind 1, R3-längs 1, R6 3, T1 3 → unverändert | 0/0/0/0 → 0/0/0/0 | 0/1/12 → 0/1/12 |
+| D2 | R2 1, T1 7 → unverändert | 0/0/0/0 → 0/0/0/0 | 0/0/0 → 0/0/0 |
+
+`[S]` R8a-Wegende ist in D1 in jeder Looprunde ein offizieller Treffer (1); die D1-Kreuzungsstufe zählt 2. G1 und D2 bleiben bei R8/R9 null. Die G1-Höhenhashes bleiben `38afeb30…`, D2 `749d3c4b…`; D2-Regelzähler und Höhenbytes sind unverändert. D1-Probenhash Runde 2: `a22be9548f7f3f3e5735ad7ffbc03b415ed66ccd980737bae2a90665548039ac`.
+
+## Drei-Satz-Aussage
+
+V29/V30/V3 benötigen am Anfangsauslauf der Rampe 2 zusätzlich 0,072285 m über der 0,10-m-R8a-Paargrenze; für V24 bleiben im besten event-aware Probelauf mindestens 1 G5-, 16 R5-Loch-, 5 R9-Dellen- und 6 G11-Baum/Wand-Treffer über den aktuellen je-Regel-Plus-5-Grenzen, zusammen 28 Regelzählereinheiten. Damit liegt die R8a-Lockerung außerhalb der unveränderten 0,10-m-Modellgrenze und der V24-Probelauf außerhalb der Plus-5-Grenzen, während R8 gesamt bei 48 bleibt und G11-Objekt auf seinem aktuellen Referenzwert liegt. Die Messung belegt keinen passenden neuen Verlauf: R5-Komponenten blieben nach vier Schnittrunden instabil, R8a bindet am Start von Rampe 2, und eine konkrete Wegänderung lässt sich aus diesen Läufen nicht ableiten.
+
+## Artefakte, Annahmen und Grenzen
+
+JSON-Belege liegen unter `codex_jobs/tools/p3d23/results/`: R3-Kalibrierung, alle Teil-A-Solves und Filter, Row-Diff, Checker-Loop mit den vier gültigen Runden, vollständige offizielle Probes und die getrennten, als ungültig markierten Diagnoseversuche. `[S]` Die D2-Höhenhashes und Regeln blieben unverändert; G1 ebenfalls. `[A]` Für `G11_baum_an_wand` und `R1_wand` fehlt ein Eintrag im historischen Regelreport; ihre +5-Auswertung setzt daher Baseline 0. `[R]` Der Score 28 ist der beste beobachtete Stand, keine IIS und kein Beweis einer global minimalen Trefferzahl. Nicht gelöst sind die verbleibenden R5/G5-Checkerereignisse und die getrennte G11-Baum/Wand-Regel. Es gab keine Änderung an Wegführung, Prüfern, Schwellen, Overlay, Zellquellen oder Mesh; Kosten 0 EUR.

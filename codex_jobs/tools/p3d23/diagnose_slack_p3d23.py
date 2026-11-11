@@ -722,11 +722,18 @@ def solve(
             point_row, point_fixed = route_field_row(*cut["point"])
             y = float(cut["object_height_m"])
             hit_index = event_hit_indices[cut_i]
-            positive_m = event_big_m(point_row, point_fixed, y + 0.6)
+            # The official comparison is strict at 0.6 m and its visible
+            # samples are Float32. Keep a 10 µm internal margin so values that
+            # round to exactly ±0.60 in the report cannot reappear as hits.
+            clearance = 0.6 - 1e-5
+            positive_m = event_big_m(point_row, point_fixed, y + clearance)
             negative_row = {column: -value for column, value in point_row.items()}
-            negative_m = event_big_m(negative_row, -point_fixed, -y + 0.6)
-            add({**point_row, hit_index: -positive_m}, y + 0.6 + positive_m - point_fixed)
-            add({**negative_row, hit_index: -negative_m}, -y + 0.6 + negative_m + point_fixed)
+            negative_m = event_big_m(negative_row, -point_fixed, -y + clearance)
+            # hit=0 enforces the object's 0.59999 m clearance; hit=1 relaxes it.
+            # Keep the big-M term only on the left-hand side, as in the other
+            # event disjunctions, so a counted hit is the sole escape branch.
+            add({**point_row, hit_index: -positive_m}, y + clearance - point_fixed)
+            add({**negative_row, hit_index: -negative_m}, -y + clearance + point_fixed)
         elif cut["kind"] == "G6":
             x, z = cut["point"]
             spacing = 1.0 / rs
@@ -841,10 +848,11 @@ def solve(
     g11_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "G11"]
     if g11_hits:
         current_family = "event_counter_caps"
-        # The p3d17 current-schema replay has two fixed G11 hits outside D1;
-        # D1 is therefore capped at its recorded allowance of two.
+        # Only newly observed D1 G11 events enter this cut list. The two
+        # baseline D1 events already consume the allowance, so the counter
+        # slack measures the number of new events retained by the model.
         add({**{j: 1.0 for j in g11_hits},
-             slack_indices["g11_d1_extra_hits"]: -1.0}, 2.0)
+             slack_indices["g11_d1_extra_hits"]: -1.0}, 0.0)
 
     def pair_row(a: int, b: int) -> dict[int, float]:
         checker_width = local.shape[1]

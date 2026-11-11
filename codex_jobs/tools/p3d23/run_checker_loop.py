@@ -22,7 +22,6 @@ OLD_GROUPS = [
 ]
 G11_KINDS = ("baeume", "felsen", "findlinge", "steine", "felsbloecke")
 BASELINE_RULES = ROOT / "codex_jobs/tools/p3d20_r3/official_gates/p3d17_reference_regeln_current_schema.json"
-BASELINE_RULES_OLD = RELIEF3D / "pruefung/bilder_p3d17/nachher/regeln.json"
 TRANSFER = RELIEF3D / "neu/p3d18_joint_mesh_v24.json"
 SOURCE = RELIEF3D / "relief_daten.json.gz"
 EMPTY_CUTS = RESULTS / "p3d23_V24_R00_cuts.json"
@@ -44,8 +43,13 @@ def gate_score(probe: dict) -> tuple[int, dict]:
     d1 = probe.get("rules_by_tile", {}).get("D1", {})
     r8 = probe.get("R8_by_rule", {})
     r9 = probe.get("R9_by_rule", {})
-    r3_limits = {"R3_laengs_m": 6, "R3_quer_pct": 7, "R3_woelb_m": 7}
-    rule_limits = {k: v + 5 for k, v in json.loads(BASELINE_RULES_OLD.read_text()).get("je_regel", {}).items()}
+    # Compare against the p3d17 replay in the current checker schema. The
+    # historical 596 total omits G11; current-schema rules absent from that
+    # replay start at zero so newly emitted rule names are still bounded.
+    baseline_rules = json.loads(BASELINE_RULES.read_text(encoding="utf-8")).get("je_regel", {})
+    r3_limits = {"R3_laengs_m": 6, "R3_quer_pct": 17, "R3_woelb_m": 19}
+    rule_limits = {k: int(baseline_rules.get(k, 0)) + 5
+                   for k in sorted(set(baseline_rules) | set(rules))}
     r8_limits = {"R8_stufe": 14, "R8_gitter": 15, "R8_quer": 10, "R8a_wegende": 29}
     r9_limits = {"R8b_delle": 30, "R9_saegezahn": 39, "R9w_wellen": 280}
     excess = {}
@@ -176,7 +180,18 @@ def main() -> None:
             "official_R4_schlucht_total_D1": [probe.get("rules_by_rule", {}).get("R4_schlucht", 0), d1.get("R4_schlucht", 0)],
             "official_G11_total_D1": [g11, g11_d1_count],
             "official_R8_total_by_rule": {"total": probe.get("R8_total"), **probe.get("R8_by_rule", {})},
+            "official_R8_D1_by_rule": probe.get("R8_by_tile", {}).get("D1", {}),
+            "official_R8_by_tile_D1_G1_D2": {
+                tile: probe.get("R8_by_tile", {}).get(tile, {}) for tile in ("D1", "G1", "D2")
+            },
             "official_R9_total_by_rule": {"total": probe.get("R9_total"), **probe.get("R9_by_rule", {})},
+            "official_R9_D1_by_rule": probe.get("R9_by_tile", {}).get("D1", {}),
+            "official_R9_by_tile_D1_G1_D2": {
+                tile: probe.get("R9_by_tile", {}).get(tile, {}) for tile in ("D1", "G1", "D2")
+            },
+            "official_rules_by_tile_D1_G1_D2": {
+                tile: probe.get("rules_by_tile", {}).get(tile, {}) for tile in ("D1", "G1", "D2")
+            },
             "official_R3_D1": {k: int(d1.get(k, 0)) for k in ("R3_laengs_m", "R3_quer_pct", "R3_woelb_m")},
             "official_R8_D1_crossing_stage": [h for h in probe.get("R8_D1_hits", [])
                                                  if "stufe" in str(h.get("regel", "")).lower()],

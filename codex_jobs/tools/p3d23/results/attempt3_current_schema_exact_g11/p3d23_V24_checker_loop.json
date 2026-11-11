@@ -1,0 +1,617 @@
+{
+  "baseline_D1_G11_hits": 2,
+  "best_round": 2,
+  "best_score": 32,
+  "final_cut_count": 158,
+  "geometry": "V24",
+  "method": "serial official checker-in-the-loop; no mesh build",
+  "rounds": [
+    {
+      "cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round01_cuts.json",
+      "cuts_after": 90,
+      "cuts_before": 50,
+      "derived_cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round01_derived_cuts.json",
+      "fresh_component_derivation": "{\n  \"candidate_G5_total_D1\": [\n    73,\n    6\n  ],\n  \"candidate_G5_components_D1\": 6,\n  \"protected_G5\": 2,\n  \"new_G5_cuts\": 4,\n  \"candidate_R5_total_D1\": [\n    40,\n    23\n  ],\n  \"candidate_R5_components_D1\": 23,\n  \"protected_R5\": 5,\n  \"new_R5_cuts\": 18,\n  \"candidate_G6_D1\": 0,\n  \"candidate_G6_components_D1\": 0,\n  \"protected_G6\": 0,\n  \"new_G6_cuts\": 0,\n  \"new_R4_cuts\": 0,\n  \"out\": \"/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round01_derived_cuts.json\",\n  \"new_R5_spitze_cuts\": 0,\n  \"new_R8_gitter_cuts\": 0,\n  \"new_R9w_event_cuts\": 0\n}\n",
+      "model_maximum_normalized_slack": 0.13807876655881365,
+      "model_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.011046301324705092,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "model_status": "Time limit reached",
+      "model_status_code": 13,
+      "model_weighted_l1": 0.13807876655881365,
+      "new_G11_cuts": 18,
+      "new_G5_cuts": 4,
+      "new_R5_cuts": 18,
+      "official_G11_total_D1": [
+        22,
+        20
+      ],
+      "official_G5_total_D1": [
+        73,
+        6
+      ],
+      "official_R3_D1": {
+        "R3_laengs_m": 22,
+        "R3_quer_pct": 7,
+        "R3_woelb_m": 7
+      },
+      "official_R4_schlucht_total_D1": [
+        0,
+        0
+      ],
+      "official_R5_loch_total_D1": [
+        40,
+        23
+      ],
+      "official_R8_D1_crossing_stage": [
+        {
+          "art": "rampe_2_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 126.5,
+          "z": 31.6
+        },
+        {
+          "art": "rampe_11_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_D1_endpoint": [
+        {
+          "feld": "D1",
+          "regel": "R8a_wegende",
+          "weg": "rampe_11_anfang",
+          "wert": 0.17,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_total_by_rule": {
+        "R8_gitter": 11,
+        "R8_quer": 6,
+        "R8_stufe": 9,
+        "R8a_wegende": 21,
+        "total": 47
+      },
+      "official_R9_total_by_rule": {
+        "R8b_delle": 32,
+        "R9_saegezahn": 34,
+        "R9w_wellen": 277,
+        "total": 343
+      },
+      "official_rules_total": 631,
+      "optimality_proven": false,
+      "primal_feasible": true,
+      "probe_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round01_official_probe.json",
+      "round": 1,
+      "score": 52,
+      "score_excess_by_gate": {
+        "D1:R3_laengs_m": 16,
+        "D1:R3_quer_pct": 0,
+        "D1:R3_woelb_m": 0,
+        "R8:R8_gitter": 0,
+        "R8:R8_quer": 0,
+        "R8:R8_stufe": 0,
+        "R8:R8a_wegende": 0,
+        "R9:R8b_delle": 2,
+        "R9:R9_saegezahn": 0,
+        "R9:R9w_wellen": 0,
+        "rule:G11_baum_an_wand": 0,
+        "rule:G11_objekt_schwebt_sinkt": 13,
+        "rule:G2_spitze_oben": 0,
+        "rule:G2_spitze_oben_fein": 0,
+        "rule:G3_spitze_unten": 0,
+        "rule:G3_spitze_unten_fein": 0,
+        "rule:G5_beule_klippe": 0,
+        "rule:G6_facette": 0,
+        "rule:G7_wand_glatte_flaeche": 0,
+        "rule:G7b_wandkontur_feld": 0,
+        "rule:G7b_wandkontur_kantenschaerfe": 0,
+        "rule:G7b_wandkontur_rauheit": 0,
+        "rule:G8_fluss_nicht_bis_rand": 0,
+        "rule:R1_blind": 0,
+        "rule:R1_wand": 0,
+        "rule:R2_getrennt": 0,
+        "rule:R3_laengs_m": 11,
+        "rule:R3_quer_pct": 0,
+        "rule:R3_woelb_m": 0,
+        "rule:R4_rand": 0,
+        "rule:R5_loch": 10,
+        "rule:R6_wasser_schnee": 0,
+        "rule:T1_fleckrand": 0,
+        "rule:T2_textur_abgeschnitten_bildpruefung_offen": 0,
+        "rule:T3_streifen_ringe_bildpruefung_offen": 0,
+        "rule:T4_graue_flussstreifen_bildpruefung_offen": 0,
+        "rule:T5_textur_vs_clay_bildpruefung_offen": 0
+      },
+      "solution_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round01_model.json"
+    },
+    {
+      "cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round02_cuts.json",
+      "cuts_after": 121,
+      "cuts_before": 90,
+      "derived_cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round02_derived_cuts.json",
+      "fresh_component_derivation": "{\n  \"candidate_G5_total_D1\": [\n    76,\n    9\n  ],\n  \"candidate_G5_components_D1\": 9,\n  \"protected_G5\": 2,\n  \"new_G5_cuts\": 9,\n  \"candidate_R5_total_D1\": [\n    46,\n    29\n  ],\n  \"candidate_R5_components_D1\": 29,\n  \"protected_R5\": 5,\n  \"new_R5_cuts\": 24,\n  \"candidate_G6_D1\": 2,\n  \"candidate_G6_components_D1\": 2,\n  \"protected_G6\": 2,\n  \"new_G6_cuts\": 0,\n  \"new_R4_cuts\": 0,\n  \"out\": \"/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round02_derived_cuts.json\",\n  \"new_R5_spitze_cuts\": 0,\n  \"new_R8_gitter_cuts\": 0,\n  \"new_R9w_event_cuts\": 0\n}\n",
+      "model_maximum_normalized_slack": 0.0,
+      "model_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "model_status": "Optimal",
+      "model_status_code": 7,
+      "model_weighted_l1": 0.0,
+      "new_G11_cuts": 0,
+      "new_G5_cuts": 9,
+      "new_R5_cuts": 24,
+      "official_G11_total_D1": [
+        12,
+        10
+      ],
+      "official_G5_total_D1": [
+        76,
+        9
+      ],
+      "official_R3_D1": {
+        "R3_laengs_m": 6,
+        "R3_quer_pct": 7,
+        "R3_woelb_m": 7
+      },
+      "official_R4_schlucht_total_D1": [
+        0,
+        0
+      ],
+      "official_R5_loch_total_D1": [
+        46,
+        29
+      ],
+      "official_R8_D1_crossing_stage": [
+        {
+          "art": "rampe_2_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 126.5,
+          "z": 31.6
+        },
+        {
+          "art": "rampe_11_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_D1_endpoint": [
+        {
+          "feld": "D1",
+          "regel": "R8a_wegende",
+          "weg": "rampe_11_anfang",
+          "wert": 0.17,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_total_by_rule": {
+        "R8_gitter": 11,
+        "R8_quer": 7,
+        "R8_stufe": 9,
+        "R8a_wegende": 21,
+        "total": 48
+      },
+      "official_R9_total_by_rule": {
+        "R8b_delle": 35,
+        "R9_saegezahn": 34,
+        "R9w_wellen": 275,
+        "total": 344
+      },
+      "official_rules_total": 623,
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "probe_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round02_official_probe.json",
+      "round": 2,
+      "score": 32,
+      "score_excess_by_gate": {
+        "D1:R3_laengs_m": 0,
+        "D1:R3_quer_pct": 0,
+        "D1:R3_woelb_m": 0,
+        "R8:R8_gitter": 0,
+        "R8:R8_quer": 0,
+        "R8:R8_stufe": 0,
+        "R8:R8a_wegende": 0,
+        "R9:R8b_delle": 5,
+        "R9:R9_saegezahn": 0,
+        "R9:R9w_wellen": 0,
+        "rule:G11_baum_an_wand": 6,
+        "rule:G11_objekt_schwebt_sinkt": 3,
+        "rule:G2_spitze_oben": 0,
+        "rule:G2_spitze_oben_fein": 0,
+        "rule:G3_spitze_unten": 0,
+        "rule:G3_spitze_unten_fein": 0,
+        "rule:G5_beule_klippe": 2,
+        "rule:G6_facette": 0,
+        "rule:G7_wand_glatte_flaeche": 0,
+        "rule:G7b_wandkontur_feld": 0,
+        "rule:G7b_wandkontur_kantenschaerfe": 0,
+        "rule:G7b_wandkontur_rauheit": 0,
+        "rule:G8_fluss_nicht_bis_rand": 0,
+        "rule:R1_blind": 0,
+        "rule:R1_wand": 0,
+        "rule:R2_getrennt": 0,
+        "rule:R3_laengs_m": 0,
+        "rule:R3_quer_pct": 0,
+        "rule:R3_woelb_m": 0,
+        "rule:R4_rand": 0,
+        "rule:R5_loch": 16,
+        "rule:R6_wasser_schnee": 0,
+        "rule:T1_fleckrand": 0,
+        "rule:T2_textur_abgeschnitten_bildpruefung_offen": 0,
+        "rule:T3_streifen_ringe_bildpruefung_offen": 0,
+        "rule:T4_graue_flussstreifen_bildpruefung_offen": 0,
+        "rule:T5_textur_vs_clay_bildpruefung_offen": 0
+      },
+      "solution_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round02_model.json"
+    },
+    {
+      "cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round03_cuts.json",
+      "cuts_after": 158,
+      "cuts_before": 121,
+      "derived_cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round03_derived_cuts.json",
+      "fresh_component_derivation": "{\n  \"candidate_G5_total_D1\": [\n    70,\n    3\n  ],\n  \"candidate_G5_components_D1\": 3,\n  \"protected_G5\": 2,\n  \"new_G5_cuts\": 1,\n  \"candidate_R5_total_D1\": [\n    58,\n    41\n  ],\n  \"candidate_R5_components_D1\": 41,\n  \"protected_R5\": 5,\n  \"new_R5_cuts\": 36,\n  \"candidate_G6_D1\": 2,\n  \"candidate_G6_components_D1\": 2,\n  \"protected_G6\": 2,\n  \"new_G6_cuts\": 0,\n  \"new_R4_cuts\": 0,\n  \"out\": \"/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round03_derived_cuts.json\",\n  \"new_R5_spitze_cuts\": 0,\n  \"new_R8_gitter_cuts\": 0,\n  \"new_R9w_event_cuts\": 0\n}\n",
+      "model_maximum_normalized_slack": 0.0,
+      "model_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "model_status": "Optimal",
+      "model_status_code": 7,
+      "model_weighted_l1": 0.0,
+      "new_G11_cuts": 0,
+      "new_G5_cuts": 1,
+      "new_R5_cuts": 36,
+      "official_G11_total_D1": [
+        13,
+        11
+      ],
+      "official_G5_total_D1": [
+        70,
+        3
+      ],
+      "official_R3_D1": {
+        "R3_laengs_m": 6,
+        "R3_quer_pct": 6,
+        "R3_woelb_m": 7
+      },
+      "official_R4_schlucht_total_D1": [
+        0,
+        0
+      ],
+      "official_R5_loch_total_D1": [
+        58,
+        41
+      ],
+      "official_R8_D1_crossing_stage": [
+        {
+          "art": "rampe_2_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 126.5,
+          "z": 31.6
+        },
+        {
+          "art": "rampe_11_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_D1_endpoint": [
+        {
+          "feld": "D1",
+          "regel": "R8a_wegende",
+          "weg": "rampe_2_anfang",
+          "wert": 0.14,
+          "x": 126.5,
+          "z": 31.6
+        }
+      ],
+      "official_R8_total_by_rule": {
+        "R8_gitter": 11,
+        "R8_quer": 6,
+        "R8_stufe": 9,
+        "R8a_wegende": 21,
+        "total": 47
+      },
+      "official_R9_total_by_rule": {
+        "R8b_delle": 32,
+        "R9_saegezahn": 34,
+        "R9w_wellen": 272,
+        "total": 338
+      },
+      "official_rules_total": 631,
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "probe_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round03_official_probe.json",
+      "round": 3,
+      "score": 40,
+      "score_excess_by_gate": {
+        "D1:R3_laengs_m": 0,
+        "D1:R3_quer_pct": 0,
+        "D1:R3_woelb_m": 0,
+        "R8:R8_gitter": 0,
+        "R8:R8_quer": 0,
+        "R8:R8_stufe": 0,
+        "R8:R8a_wegende": 0,
+        "R9:R8b_delle": 2,
+        "R9:R9_saegezahn": 0,
+        "R9:R9w_wellen": 0,
+        "rule:G11_baum_an_wand": 6,
+        "rule:G11_objekt_schwebt_sinkt": 4,
+        "rule:G2_spitze_oben": 0,
+        "rule:G2_spitze_oben_fein": 0,
+        "rule:G3_spitze_unten": 0,
+        "rule:G3_spitze_unten_fein": 0,
+        "rule:G5_beule_klippe": 0,
+        "rule:G6_facette": 0,
+        "rule:G7_wand_glatte_flaeche": 0,
+        "rule:G7b_wandkontur_feld": 0,
+        "rule:G7b_wandkontur_kantenschaerfe": 0,
+        "rule:G7b_wandkontur_rauheit": 0,
+        "rule:G8_fluss_nicht_bis_rand": 0,
+        "rule:R1_blind": 0,
+        "rule:R1_wand": 0,
+        "rule:R2_getrennt": 0,
+        "rule:R3_laengs_m": 0,
+        "rule:R3_quer_pct": 0,
+        "rule:R3_woelb_m": 0,
+        "rule:R4_rand": 0,
+        "rule:R5_loch": 28,
+        "rule:R6_wasser_schnee": 0,
+        "rule:T1_fleckrand": 0,
+        "rule:T2_textur_abgeschnitten_bildpruefung_offen": 0,
+        "rule:T3_streifen_ringe_bildpruefung_offen": 0,
+        "rule:T4_graue_flussstreifen_bildpruefung_offen": 0,
+        "rule:T5_textur_vs_clay_bildpruefung_offen": 0
+      },
+      "solution_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round03_model.json"
+    },
+    {
+      "cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round04_cuts.json",
+      "cuts_after": 182,
+      "cuts_before": 158,
+      "derived_cut_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round04_derived_cuts.json",
+      "fresh_component_derivation": "{\n  \"candidate_G5_total_D1\": [\n    71,\n    4\n  ],\n  \"candidate_G5_components_D1\": 4,\n  \"protected_G5\": 2,\n  \"new_G5_cuts\": 2,\n  \"candidate_R5_total_D1\": [\n    46,\n    29\n  ],\n  \"candidate_R5_components_D1\": 29,\n  \"protected_R5\": 5,\n  \"new_R5_cuts\": 24,\n  \"candidate_G6_D1\": 0,\n  \"candidate_G6_components_D1\": 0,\n  \"protected_G6\": 0,\n  \"new_G6_cuts\": 0,\n  \"new_R4_cuts\": 0,\n  \"out\": \"/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round04_derived_cuts.json\",\n  \"new_R5_spitze_cuts\": 0,\n  \"new_R8_gitter_cuts\": 0,\n  \"new_R9w_event_cuts\": 0\n}\n",
+      "model_maximum_normalized_slack": 0.0,
+      "model_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "model_status": "Optimal",
+      "model_status_code": 7,
+      "model_weighted_l1": 0.0,
+      "new_G11_cuts": 0,
+      "new_G5_cuts": 2,
+      "new_R5_cuts": 24,
+      "official_G11_total_D1": [
+        13,
+        11
+      ],
+      "official_G5_total_D1": [
+        71,
+        4
+      ],
+      "official_R3_D1": {
+        "R3_laengs_m": 6,
+        "R3_quer_pct": 7,
+        "R3_woelb_m": 7
+      },
+      "official_R4_schlucht_total_D1": [
+        0,
+        0
+      ],
+      "official_R5_loch_total_D1": [
+        46,
+        29
+      ],
+      "official_R8_D1_crossing_stage": [
+        {
+          "art": "rampe_2_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 126.5,
+          "z": 31.6
+        },
+        {
+          "art": "rampe_11_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 4.04,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_D1_endpoint": [
+        {
+          "feld": "D1",
+          "regel": "R8a_wegende",
+          "weg": "rampe_11_anfang",
+          "wert": 0.17,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_total_by_rule": {
+        "R8_gitter": 11,
+        "R8_quer": 6,
+        "R8_stufe": 9,
+        "R8a_wegende": 21,
+        "total": 47
+      },
+      "official_R9_total_by_rule": {
+        "R8b_delle": 37,
+        "R9_saegezahn": 34,
+        "R9w_wellen": 275,
+        "total": 346
+      },
+      "official_rules_total": 619,
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "probe_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round04_official_probe.json",
+      "round": 4,
+      "score": 33,
+      "score_excess_by_gate": {
+        "D1:R3_laengs_m": 0,
+        "D1:R3_quer_pct": 0,
+        "D1:R3_woelb_m": 0,
+        "R8:R8_gitter": 0,
+        "R8:R8_quer": 0,
+        "R8:R8_stufe": 0,
+        "R8:R8a_wegende": 0,
+        "R9:R8b_delle": 7,
+        "R9:R9_saegezahn": 0,
+        "R9:R9w_wellen": 0,
+        "rule:G11_baum_an_wand": 6,
+        "rule:G11_objekt_schwebt_sinkt": 4,
+        "rule:G2_spitze_oben": 0,
+        "rule:G2_spitze_oben_fein": 0,
+        "rule:G3_spitze_unten": 0,
+        "rule:G3_spitze_unten_fein": 0,
+        "rule:G5_beule_klippe": 0,
+        "rule:G6_facette": 0,
+        "rule:G7_wand_glatte_flaeche": 0,
+        "rule:G7b_wandkontur_feld": 0,
+        "rule:G7b_wandkontur_kantenschaerfe": 0,
+        "rule:G7b_wandkontur_rauheit": 0,
+        "rule:G8_fluss_nicht_bis_rand": 0,
+        "rule:R1_blind": 0,
+        "rule:R1_wand": 0,
+        "rule:R2_getrennt": 0,
+        "rule:R3_laengs_m": 0,
+        "rule:R3_quer_pct": 0,
+        "rule:R3_woelb_m": 0,
+        "rule:R4_rand": 0,
+        "rule:R5_loch": 16,
+        "rule:R6_wasser_schnee": 0,
+        "rule:T1_fleckrand": 0,
+        "rule:T2_textur_abgeschnitten_bildpruefung_offen": 0,
+        "rule:T3_streifen_ringe_bildpruefung_offen": 0,
+        "rule:T4_graue_flussstreifen_bildpruefung_offen": 0,
+        "rule:T5_textur_vs_clay_bildpruefung_offen": 0
+      },
+      "solution_json": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d23/results/p3d23_V24_round04_model.json",
+      "stop_reason": "two_rounds_without_score_improvement"
+    }
+  ],
+  "start_event_cut_count": 50,
+  "tag": "p3d23"
+}
