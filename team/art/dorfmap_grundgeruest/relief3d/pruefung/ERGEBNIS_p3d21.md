@@ -61,7 +61,9 @@ Variante 30 ist die zweite und letzte hier geprüfte lokale Weggeometrie. Sie ve
 | rampe_11, s=27,917 m (R5) | 157,1479\|18,5476 | 156,6465\|19,2090 | 0,996 m |
 | rampe_11, s=47,400 m (dritte Kehre) | 150,1723\|32,7338 | 150,1721\|32,7342 | 0,0006 m |
 
-Die Anfangs- und Endkoordinaten bleiben gleich. Alle vier Endpunkte sind trocken; der nächste Wand-Mittellinienabstand am Start von rampe_11 bleibt 1,149 m. Der geometrische Achsschnitt wandert 0,120 m. Das offizielle R8-Clusterzentrum wandert von `152,549857|28,489545` nach `152,657964|28,263810`, also 0,303 m; der unveränderte R8-Prüfer zeigt `152,7|28,3`. Die Rohquellenprobe meldet dort Stufe `1,389 m` und Gitter `2,241 m`, weil das Quellhöhenfeld noch nicht das optimierte Mesh enthält. Transferbasis: [`p3d21_transfer_base_v30.json`](../neu/p3d21_transfer_base_v30.json), mit 187 rampe_11- und 197 rampe_2-Stützen. Der p3d20-Modelllauf für Variante 30 steht noch aus.
+Die Anfangs- und Endkoordinaten bleiben gleich. Alle vier Endpunkte sind trocken; der nächste Wand-Mittellinienabstand am Start von rampe_11 bleibt 1,149 m. Der geometrische Achsschnitt wandert 0,120 m. Das offizielle R8-Clusterzentrum wandert von `152,549857|28,489545` nach `152,657964|28,263810`, also 0,303 m; der unveränderte R8-Prüfer zeigt `152,7|28,3`. Die Rohquellenprobe meldet dort Stufe `1,389 m` und Gitter `2,241 m`, weil das Quellhöhenfeld noch nicht das optimierte Mesh enthält. Transferbasis: [`p3d21_transfer_base_v30.json`](../neu/p3d21_transfer_base_v30.json), mit 187 rampe_11- und 197 rampe_2-Stützen.
+
+**Machbarkeit Variante 30: UNMACHBAR im unveränderten Modell.** Ohne neue Ereignisschnitte meldet HiGHS Status 8 (infeasible), 7.854 Variablen und 15.159 Bedingungen. Es wurde keine offizielle Probe gestartet; eine IIS/Einzelzeile stellt der Solver nicht bereit. Für diese Variante gibt es daher keine gemeinsamen erreichbaren Meshwerte. Maschinenbeleg folgt unter `codex_jobs/tools/p3d21/variant30/model_round00.json`.
 
 ### R8-Fenster und Restfehler
 
