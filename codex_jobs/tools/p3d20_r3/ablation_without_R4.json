@@ -1,0 +1,16 @@
+{
+  "constraints": 15212,
+  "objective_mode": "feasibility",
+  "optimality_proven": false,
+  "primal_feasible": false,
+  "r3_long_limit": 6,
+  "r3_quer_limit": 7,
+  "r3_wob_limit": 7,
+  "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+  "stage_limit_m": 0.116,
+  "status": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+  "status_code": 2,
+  "success": false,
+  "tie_break_reference_sha256": null,
+  "variables": 7886
+}
