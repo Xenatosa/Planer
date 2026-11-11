@@ -38,7 +38,7 @@ TILE_BOUNDS = {
 CELL_M = 1.2
 TERRAIN_VARIANTS = {"0", "1", "2"}
 WEGENDE_VARIANTS = {"0", "1", "2"}
-KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}
+KREUZUNG_VARIANTS = {"0", "1", "2", "3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}
 RAMP_PROFILE_SETTINGS = {
     # Variant 1 profiles full ramp lengths; variant 2 is the targeted default.
     # Neither variant globally damps its result.
@@ -146,6 +146,9 @@ KREUZUNG_SETTINGS = {
     # Variant 24 binds both R3 rows and axis supports to the emitted affine
     # transfer, including its fixed intercept and final tile blend.
     "24": {"mode": "joint_dirichlet_raster", "solution_file": "p3d18_joint_mesh_v24.json", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "r8_transfer_radius_map": 4.0, "r8_fade_m": 9.5, "pair_grade": 0.45, "r8_minimax_step": True},
+    # p3d21 keeps the direct p3d18 raster transfer with locally changed routes.
+    "29": {"mode": "joint_dirichlet_raster", "solution_file": "p3d21_joint_mesh_v29.json", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "r8_transfer_radius_map": 4.0, "r8_fade_m": 9.5, "pair_grade": 0.45, "r8_minimax_step": True},
+    "30": {"mode": "joint_dirichlet_raster", "solution_file": "p3d21_joint_mesh_v30.json", "band_m": 1.81, "fade_m": 9.5, "plane_radius_m": 2.0, "plane_outer_m": 4.0, "r8_transfer_radius_map": 4.0, "r8_fade_m": 9.5, "pair_grade": 0.45, "r8_minimax_step": True},
 }
 
 _FULL_CROSSING_CACHE: dict[tuple[str, str, str], tuple[list[np.ndarray], dict[str, Any]]] = {}
@@ -1825,8 +1828,15 @@ def _apply_d1_full_crossing(
     crossings = _ramp_intersection_pairs(source, "D1")
     if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
         raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}:
-        cx, cz = 152.5, 28.5
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
+        crossing_center = settings.get("crossing_center_map")
+        if variant in {"29", "30"}:
+            solution_path = Path(__file__).with_name(str(settings["solution_file"]))
+            solution_payload = json.loads(solution_path.read_text(encoding="utf-8"))
+            crossing_center = solution_payload.get("R8_gate_center_unrounded_map")
+        if crossing_center is None:
+            crossing_center = (152.5, 28.5)
+        cx, cz = map(float, crossing_center)
     else:
         cx, cz, _, _ = crossings[0]
     crossing_m = np.array([cx, cz], dtype=np.float64) * CELL_M
@@ -1859,7 +1869,7 @@ def _apply_d1_full_crossing(
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
         col = coords[:, 0] * rs
-        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"} else global_p3d6
+        profile_surface = source.heights if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"} else global_p3d6
         height = ndi.map_coordinates(profile_surface, [row, col], order=1, mode="nearest").astype(np.float64)
         profiles.append({
             "index": path_index,
@@ -1877,8 +1887,8 @@ def _apply_d1_full_crossing(
         variant,
         os.environ.get("RELIEF_WEGEND_VAR", "1"),
     )
-    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}:
-        if variant in {"21", "22", "23", "24"}:
+    if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
+        if variant in {"21", "22", "23", "24", "29", "30"}:
             solved, solver_info = _load_p3d17_joint_solution(
                 source, profiles, str(settings["solution_file"]),
             )
@@ -2709,11 +2719,11 @@ def _apply_ramp_crossing_planes(
     endpoint_weight: np.ndarray | None = None,
 ) -> tuple[np.ndarray, int]:
     settings = RAMP_PROFILE_SETTINGS[variant]
-    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}:
+    if variant == "2" and crossing_variant in {"3", "4", "5", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
         if tile == "D1":
             if endpoint_weight is None:
                 endpoint_weight = np.zeros(x.shape, dtype=np.float64)
-            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}:
+            if crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
                 return _apply_d1_full_crossing(
                     base, x, z, result, source, crossing_variant,
                 )
@@ -3025,7 +3035,7 @@ def terrain_heights(
         "crossing_variant": crossing_variant,
         "zone_flat_vertices": zone_count,
     }
-    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"}:
+    if tile == "D1" and crossing_variant in {"8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
         cache_key = (
             source.source_file_sha256,
             crossing_variant,

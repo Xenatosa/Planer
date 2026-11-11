@@ -2,7 +2,7 @@
 
 ## Zwischenstand: Vermessung vor einer Wegänderung
 
-Stand 11.11.2026. Branch `art/dorfmap-p3d21`, Basis `385703d` (`origin/art/dorfmap-p3d20`). Die unveränderten p3d18-V24-Polylinien wurden vermessen, bevor eine Geometrie geändert wurde. Zu diesem Zwischenstand gibt es noch keine Wegvariante und kein neues Mesh.
+Stand 11.11.2026. Branch `art/dorfmap-p3d21`, Basis `385703d` (`origin/art/dorfmap-p3d20`). Die unveränderten p3d18-V24-Polylinien wurden vermessen, bevor eine Geometrie geändert wurde. Variante 29 ist danach lokal vermessen; Modell-Machbarkeit und offizielle Kandidatenprobe stehen noch aus. Ein neues Mesh wurde noch nicht gebaut.
 
 Die p3d17-Referenzkalibrierung wurde erneut mit dem unveränderten offiziellen R3-Prüfer ausgeführt. Sie stimmt bytegenau mit dem Referenzmesh überein und zählt in D1 weiterhin **R3 längs/quer/Wölbung = 6/17/19**. Der Messlauf nutzte die V24-Geometrie und den unveränderten Reliefquellenhash `5e8fdb51c3f3f...` sowie `vektor.json` `aac6afff89ec...`.
 
@@ -22,6 +22,27 @@ Die p3d17-Referenzkalibrierung wurde erneut mit dem unveränderten offiziellen R
 Der tatsächliche Schnitt der zwei diskreten V24-Linien liegt bei `[R]` `152,4380|28,4557`. Der unveränderte offizielle R8-Cluster hat sein ungerundetes Zentrum bei `152,549857|28,489545` und wird als `152,5|28,5` angezeigt.
 
 rampe_11 hat die drei vermessenen Kehren bei `[S]` s=`9,60 m` (`144,8252|9,5397`), s=`28,50 m` (`157,5350|18,8411`) und s=`47,40 m` (`150,1723|32,7338`). Gegenüber dem R8-Zentrum liegt die dritte Kehre bei `[R]` 5,838 m. Bei unverändertem Kernradius 2,00 m sind das 3,838 m Abstand außerhalb des Kerns; gegenüber dem 4,00-m-Übergangsaußenradius bleiben 1,838 m. `[A]` Der 4,00-m-Radius ist die p3d18/V24-Transferfade-Grenze und wird hier als äußerer Rand des Übergangs verwendet.
+
+### Lokale Wegvariante 29, vermessen
+
+Variante 29 ändert ausschließlich die beiden Rampenpfade `rampenwege[2]` und `[11]`; die übrigen elf Rampenpfade sind im Kandidaten semantisch unverändert. Die Kandidatenquelle in `/tmp` hat SHA-256 `9683b9fed1d80980615fe0c6c17ee5b75ae638074ae8c545900f8a4fe326c09f`. `vektor.json`, Dorfwege, Overlay und Zellquellen bleiben dabei unverändert. Die Wegänderungen werden durch `apply_route_variant.py` lokal und reproduzierbar erzeugt.
+
+| Pfad / Station | vorher | Variante 29 | Änderung |
+|---|---|---|---:|
+| rampe_2, Länge | 58,800 m | 60,128 m | +1,327 m |
+| rampe_2, s=20,055 m (R4) | 143,0992\|29,5940 | 143,3360\|31,5479 | 2,362 m |
+| rampe_2, s=37,865 m (G5) | 157,8316\|27,7976 | 157,6582\|26,3527 | 1,746 m |
+| rampe_2, s=39,752 m (G5) | 159,3922\|27,6041 | 159,1855\|25,8819 | 2,082 m |
+| rampe_2, s=42,072 m (G5) | 161,3116\|27,3725 | 161,1352\|25,9027 | 1,777 m |
+| rampe_11, Länge | 57,023 m | 55,390 m | −1,633 m |
+| rampe_11, s=27,917 m (R5) | 157,1479\|18,5476 | 156,2462\|19,7370 | 1,791 m |
+| rampe_11, s=47,400 m (dritte Kehre) | 150,1723\|32,7338 | 150,1722\|32,7339 | 0,0002 m |
+
+Die maximale Quer-Verschiebung beträgt 2,385 m auf rampe_2 und 1,793 m auf rampe_11. Anfangs- und Endkoordinaten bleiben unverändert; alle vier Endpunkte liegen im trockenen Gelände. Der Start von rampe_11 liegt 1,149 m von der nächsten unveränderten Wand-Mittellinie entfernt. Der Rampenverlauf schneidet stellenweise eine Wand-Mittellinie wie schon vorher; der Endpunkt liegt 17,978 m davon entfernt.
+
+Der geometrische Achsschnitt wandert von `[R]` `152,4380|28,4557` nach `152,4944|28,3426` (0,149 m). Das mit dem unveränderten `r8_kreuzung.py` berechnete offizielle Clusterzentrum wandert von `152,549857|28,489545` nach `152,760117|28,071282` (0,575 m); die Gate-Anzeige wird `152,8|28,1`. Das R8-Ziel folgt damit der geänderten Weggeometrie. Ein Quelllauf des offiziellen R8-Prüfers auf der Kandidatenquelle findet das neue Zentrum reproduzierbar; da er noch das unveränderte Höhenfeld sieht, ist seine Stufe `1,389 m` kein Mesh-Kandidat.
+
+Das p3d18/V24-Raster und der Transferoperator wurden für diese Wegstützen unverändert weitergebunden; Beleg [`p3d21_transfer_base_v29.json`](../neu/p3d21_transfer_base_v29.json). Die Transferbasis lädt mit 185 rampe_11- und 201 rampe_2-Stützen. Die Machbarkeit und offizielle Kandidatenprobe für Variante 29 stehen noch aus.
 
 ### R8-Fenster und Restfehler
 
