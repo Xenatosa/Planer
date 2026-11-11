@@ -12,6 +12,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[3]
 RELIEF3D = ROOT / "team/art/dorfmap_grundgeruest/relief3d"
 P3D20_MODEL = ROOT / "codex_jobs/tools/p3d20_r3/joint_mesh_r3_exact_p3d20.py"
+if str(RELIEF3D) not in sys.path:
+    sys.path.insert(0, str(RELIEF3D))
 
 
 def load_model():
@@ -50,12 +52,18 @@ def load_model():
 
     from neu import mesh as neu_mesh
     transfer = Path(os.environ["P3D21_TRANSFER_BASE_FILE"])
-    neu_mesh.KREUZUNG_SETTINGS["24"]["solution_file"] = transfer.name
-    neu_mesh.KREUZUNG_SETTINGS["24"]["crossing_center_map"] = center.tolist()
+    # The p3d20 transfer-context helper selects crossing variant 22; bind that
+    # slot and the p3d18 reference slot to the same V24 raster transfer.
+    for slot in ("22", "24"):
+        neu_mesh.KREUZUNG_SETTINGS[slot]["solution_file"] = transfer.name
+        neu_mesh.KREUZUNG_SETTINGS[slot]["crossing_center_map"] = center.tolist()
     return module
 
 
 def main() -> None:
+    for index, arg in enumerate(sys.argv[1:-1], start=1):
+        if arg == "--out":
+            Path(sys.argv[index + 1]).parent.mkdir(parents=True, exist_ok=True)
     model = load_model()
     sys.argv = [str(P3D20_MODEL), *sys.argv[1:]]
     model.main()

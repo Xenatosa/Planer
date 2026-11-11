@@ -42,7 +42,9 @@ Die maximale Quer-Verschiebung beträgt 2,385 m auf rampe_2 und 1,793 m auf ramp
 
 Der geometrische Achsschnitt wandert von `[R]` `152,4380|28,4557` nach `152,4944|28,3426` (0,149 m). Das mit dem unveränderten `r8_kreuzung.py` berechnete offizielle Clusterzentrum wandert von `152,549857|28,489545` nach `152,760117|28,071282` (0,575 m); die Gate-Anzeige wird `152,8|28,1`. Das R8-Ziel folgt damit der geänderten Weggeometrie. Ein Quelllauf des offiziellen R8-Prüfers auf der Kandidatenquelle findet das neue Zentrum reproduzierbar; da er noch das unveränderte Höhenfeld sieht, ist seine Stufe `1,389 m` kein Mesh-Kandidat.
 
-Das p3d18/V24-Raster und der Transferoperator wurden für diese Wegstützen unverändert weitergebunden; Beleg [`p3d21_transfer_base_v29.json`](../neu/p3d21_transfer_base_v29.json). Die Transferbasis lädt mit 185 rampe_11- und 201 rampe_2-Stützen. Die Machbarkeit und offizielle Kandidatenprobe für Variante 29 stehen noch aus.
+Das p3d18/V24-Raster und der Transferoperator wurden für diese Wegstützen unverändert weitergebunden; Beleg [`p3d21_transfer_base_v29.json`](../neu/p3d21_transfer_base_v29.json). Die Transferbasis lädt mit 185 rampe_11- und 201 rampe_2-Stützen.
+
+**Machbarkeit Variante 29: UNMACHBAR im unveränderten Modell.** Ohne neue Ereignisschnitte meldet HiGHS Status 8 (infeasible), 7.856 Variablen und 15.236 Bedingungen. Die feste Konjunktion aus R8, R3, Achsstützen, Wegende und 2-m-Kern hat keinen zulässigen Punkt; deshalb wurde für diese Variante keine offizielle Gate-Probe gestartet. Der verwendete Solver liefert für den infeasiblen MILP-Lauf keine IIS/Einzelzeile, daher wird keine einzelne bindende Bedingung behauptet. Für diesen Kandidaten existieren keine erreichbaren gemeinsamen Meshwerte für G5, R5-Loch, R4, R8/R3 oder die übrigen harten Zähler; die p3d20-Runde-05-Werte oben sind nur der unveränderte Ausgangskandidat. Maschinenbeleg: [`model_round00.json`](../../../../../codex_jobs/tools/p3d21/variant29/model_round00.json).
 
 ### R8-Fenster und Restfehler
 
