@@ -133,6 +133,8 @@ def main() -> None:
     result["highs_status_code"] = highs_status
     if highs_status is not None:
         result["status_code"] = highs_status
+    result["optimality_proven"] = highs_status == 7
+    result["infeasibility_proven"] = highs_status == 8
     if not args.keep_solution:
         result.pop("surface_grid", None)
         result.pop("routes", None)

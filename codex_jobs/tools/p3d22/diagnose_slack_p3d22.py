@@ -493,24 +493,24 @@ def solve(
     # Every slack is zero unless its named group is enabled for this solve.
     # Scales are the normalization units used by the joint weighted L1.
     slack_spec = {
-        "r3_long_extra_hits": ("r3_long", 1.0, 100.0),
-        "r3_long_residual_m": ("r3_long", 0.08, 10.0),
-        "r3_quer_extra_hits": ("r3_quer", 1.0, 100.0),
-        "r3_quer_residual_pp": ("r3_quer", 3.5, 100.0),
-        "r3_wob_extra_hits": ("r3_wob", 1.0, 100.0),
-        "r3_wob_residual_m": ("r3_wob", 0.08, 10.0),
-        "crossing_stage_extra_m": ("crossing_stage", 0.116, 10.0),
-        "axis_tolerance_extra_m": ("axis_supports", 0.02, 10.0),
-        "plane_tolerance_extra_m": ("plane_core", 0.02, 10.0),
-        "endpoint_stage_extra_m": ("endpoint_stage", 0.054, 10.0),
-        "safety_gitter_extra_m": ("safety_gitter", 0.019, 10.0),
-        "safety_quer_extra_pp": ("safety_quer", 2.95, 100.0),
-        "safety_single_quer_extra_pp": ("safety_single_quer", 19.5, 100.0),
-        "g5_total_extra_hits": ("g5", 1.0, 100.0),
-        "g5_d1_extra_hits": ("g5", 1.0, 100.0),
-        "r5_total_extra_hits": ("r5_hole", 1.0, 100.0),
-        "r5_d1_extra_hits": ("r5_hole", 1.0, 100.0),
-        "r4_d1_extra_hits": ("r4", 1.0, 100.0),
+        "r3_long_extra_hits": ("r3_long", 1.0, None),
+        "r3_long_residual_m": ("r3_long", 0.08, None),
+        "r3_quer_extra_hits": ("r3_quer", 1.0, None),
+        "r3_quer_residual_pp": ("r3_quer", 3.5, None),
+        "r3_wob_extra_hits": ("r3_wob", 1.0, None),
+        "r3_wob_residual_m": ("r3_wob", 0.08, None),
+        "crossing_stage_extra_m": ("crossing_stage", 0.116, None),
+        "axis_tolerance_extra_m": ("axis_supports", 0.02, None),
+        "plane_tolerance_extra_m": ("plane_core", 0.02, None),
+        "endpoint_stage_extra_m": ("endpoint_stage", 0.054, None),
+        "safety_gitter_extra_m": ("safety_gitter", 0.019, None),
+        "safety_quer_extra_pp": ("safety_quer", 2.95, None),
+        "safety_single_quer_extra_pp": ("safety_single_quer", 19.5, None),
+        "g5_total_extra_hits": ("g5", 1.0, None),
+        "g5_d1_extra_hits": ("g5", 1.0, None),
+        "r5_total_extra_hits": ("r5_hole", 1.0, None),
+        "r5_d1_extra_hits": ("r5_hole", 1.0, None),
+        "r4_d1_extra_hits": ("r4", 1.0, None),
     }
     slack_indices = {}
     for name in slack_spec:
@@ -551,8 +551,9 @@ def solve(
     for j in event_hit_indices.values():
         lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
     for name, index in slack_indices.items():
-        _, _, max_slack = slack_spec[name]
-        lower[index], upper[index] = 0.0, max_slack if slack_spec[name][0] in diagnostic_groups else 0.0
+        group = slack_spec[name][0]
+        lower[index] = 0.0
+        upper[index] = np.inf if group in diagnostic_groups else 0.0
 
     row_i: list[int] = []
     col_i: list[int] = []
@@ -1115,7 +1116,7 @@ def solve(
                 q_negative[slack_indices["safety_single_quer_extra_pp"]] = -1.0
                 add(q_positive, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT - q_fixed)
                 add(q_negative, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT + q_fixed)
-                quer_big_m = R3_SINGLE_QUER_LIMIT_PCT + 100.0 - 3.5 + 1.0
+                quer_big_m = 1000.0
                 q_count_positive = {**q_row, q_binary: -quer_big_m,
                                     slack_indices["r3_quer_residual_pp"]: -1.0}
                 q_count_negative = {**{column: -value for column, value in q_row.items()},
