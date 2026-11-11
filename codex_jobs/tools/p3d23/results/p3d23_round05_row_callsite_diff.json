@@ -1,0 +1,468 @@
+{
+  "observed_delta_rows": 14,
+  "old_p3d20_round05": {
+    "callsite_rows": [
+      {
+        "line": 578,
+        "rows": 17,
+        "source": "add({column: 1.0 for column in selectors}, 1.0)"
+      },
+      {
+        "line": 579,
+        "rows": 17,
+        "source": "add({column: -1.0 for column in selectors}, -1.0)"
+      },
+      {
+        "line": 587,
+        "rows": 68,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 591,
+        "rows": 5,
+        "source": "add({column: 1.0 for column in selectors}, 1.0)"
+      },
+      {
+        "line": 592,
+        "rows": 5,
+        "source": "add({column: -1.0 for column in selectors}, -1.0)"
+      },
+      {
+        "line": 600,
+        "rows": 10,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 606,
+        "rows": 24,
+        "source": "add(row, 1.0 - 1e-5 - (saddle_fixed - pit_fixed))"
+      },
+      {
+        "line": 634,
+        "rows": 4,
+        "source": "add(row, 0.10 - fixed)"
+      },
+      {
+        "line": 635,
+        "rows": 4,
+        "source": "add({column: -value for column, value in row.items()}, 0.10 + fixed)"
+      },
+      {
+        "line": 639,
+        "rows": 1,
+        "source": "add({column: 1.0 for column in selectors}, 1.0)"
+      },
+      {
+        "line": 640,
+        "rows": 1,
+        "source": "add({column: -1.0 for column in selectors}, -1.0)"
+      },
+      {
+        "line": 650,
+        "rows": 81,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 661,
+        "rows": 1,
+        "source": "add(row, threshold - fixed)"
+      },
+      {
+        "line": 662,
+        "rows": 1,
+        "source": "add({column: -value for column, value in row.items()}, threshold + fixed)"
+      },
+      {
+        "line": 812,
+        "rows": 1125,
+        "source": "add({**entries, t_index: -1.0}, 0.0)"
+      },
+      {
+        "line": 813,
+        "rows": 1125,
+        "source": "add({**{j: -v for j, v in entries.items()}, t_index: -1.0}, 0.0)"
+      },
+      {
+        "line": 821,
+        "rows": 460,
+        "source": "add(entries, cap - (fixed0 - fixed1))"
+      },
+      {
+        "line": 822,
+        "rows": 460,
+        "source": "add({index: -value for index, value in entries.items()}, cap + (fixed0 - fixed1))"
+      },
+      {
+        "line": 841,
+        "rows": 359,
+        "source": "add({**row, hidx: -1.0}, axis_tolerance - fixed)"
+      },
+      {
+        "line": 842,
+        "rows": 359,
+        "source": "add({**{j: -v for j, v in row.items()}, hidx: 1.0}, axis_tolerance + fixed)"
+      },
+      {
+        "line": 856,
+        "rows": 137,
+        "source": "add(entries, plane_tolerance)"
+      },
+      {
+        "line": 857,
+        "rows": 137,
+        "source": "add({j: -v for j, v in entries.items()}, plane_tolerance)"
+      },
+      {
+        "line": 910,
+        "rows": 273,
+        "source": "add(entries, R8_GITTER_LIMIT_M)"
+      },
+      {
+        "line": 911,
+        "rows": 273,
+        "source": "add({column: -value for column, value in entries.items()}, R8_GITTER_LIMIT_M)"
+      },
+      {
+        "line": 922,
+        "rows": 32,
+        "source": "add(entries, quer_bound)"
+      },
+      {
+        "line": 927,
+        "rows": 32,
+        "source": "add({plane_gx: float(np.cos(angle)), plane_gz: float(np.sin(angle))}, polygon_bound)"
+      },
+      {
+        "line": 933,
+        "rows": 386,
+        "source": "add({start + k + 1: 1.0, start + k: -1.0}, SLOPE_MAX * SAMPLE_STEP)"
+      },
+      {
+        "line": 934,
+        "rows": 386,
+        "source": "add({start + k: 1.0, start + k + 1: -1.0}, SLOPE_MAX * SAMPLE_STEP)"
+      },
+      {
+        "line": 936,
+        "rows": 380,
+        "source": "add({start + k + 1: 1.0, start + k: -1.0}, 0.0)"
+      },
+      {
+        "line": 975,
+        "rows": 388,
+        "source": "add({**row, bidx: -upper_relax}, threshold - fixed)"
+      },
+      {
+        "line": 976,
+        "rows": 388,
+        "source": "add({**{j: -v for j, v in row.items()}, bidx: -lower_relax}, threshold + fixed)"
+      },
+      {
+        "line": 980,
+        "rows": 1,
+        "source": "add({j: 1.0 for j in sorted(set(r3_d1_terms))}, float(r3_limit))"
+      },
+      {
+        "line": 1020,
+        "rows": 367,
+        "source": "add(q_row, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT - q_fixed)"
+      },
+      {
+        "line": 1021,
+        "rows": 367,
+        "source": "add({column: -value for column, value in q_row.items()}, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT + q_fixed)"
+      },
+      {
+        "line": 1023,
+        "rows": 367,
+        "source": "add({**q_row, q_binary: -quer_big_m}, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)"
+      },
+      {
+        "line": 1024,
+        "rows": 367,
+        "source": "add({**{column: -value for column, value in q_row.items()}, q_binary: -quer_big_m}, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)"
+      },
+      {
+        "line": 1046,
+        "rows": 367,
+        "source": "add({**wob_row, wob_binary: -wob_upper_relax}, wob_threshold - wob_fixed)"
+      },
+      {
+        "line": 1047,
+        "rows": 367,
+        "source": "add({**{column: -value for column, value in wob_row.items()}, wob_binary: -wob_lower_relax}, wob_threshold + wob_fixed)"
+      },
+      {
+        "line": 1053,
+        "rows": 1,
+        "source": "add({j: 1.0 for j in sorted(set(quer_section_terms))}, float(quer_limit))"
+      },
+      {
+        "line": 1055,
+        "rows": 1,
+        "source": "add({j: 1.0 for j in sorted(set(wob_section_terms))}, float(wob_limit))"
+      },
+      {
+        "line": 1062,
+        "rows": 1075,
+        "source": "add({va: 1.0, vb: -1.0}, bound)"
+      },
+      {
+        "line": 1063,
+        "rows": 1075,
+        "source": "add({va: -1.0, vb: 1.0}, bound)"
+      }
+    ],
+    "constraints": 11294,
+    "model_file": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d20_r3/joint_mesh_r3_exact_p3d20.py",
+    "variables": 7945
+  },
+  "p3d22_diagnostic_round05": {
+    "callsite_rows": [
+      {
+        "line": 576,
+        "rows": 1,
+        "source": "add({t_index: 1.0, slack_indices[\"crossing_stage_extra_m\"]: -1.0}, float(stage_limit))"
+      },
+      {
+        "line": 629,
+        "rows": 17,
+        "source": "add(selector_sum, 1.0)"
+      },
+      {
+        "line": 630,
+        "rows": 17,
+        "source": "add({column: -value for column, value in selector_sum.items()}, -1.0)"
+      },
+      {
+        "line": 638,
+        "rows": 68,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 644,
+        "rows": 5,
+        "source": "add(selector_sum, 1.0)"
+      },
+      {
+        "line": 645,
+        "rows": 5,
+        "source": "add({column: -value for column, value in selector_sum.items()}, -1.0)"
+      },
+      {
+        "line": 653,
+        "rows": 10,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 663,
+        "rows": 24,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 691,
+        "rows": 4,
+        "source": "add(row, 0.10 - fixed)"
+      },
+      {
+        "line": 692,
+        "rows": 4,
+        "source": "add({column: -value for column, value in row.items()}, 0.10 + fixed)"
+      },
+      {
+        "line": 696,
+        "rows": 1,
+        "source": "add({column: 1.0 for column in selectors}, 1.0)"
+      },
+      {
+        "line": 697,
+        "rows": 1,
+        "source": "add({column: -1.0 for column in selectors}, -1.0)"
+      },
+      {
+        "line": 707,
+        "rows": 81,
+        "source": "add(row, threshold + big_m - fixed)"
+      },
+      {
+        "line": 718,
+        "rows": 1,
+        "source": "add(row, threshold - fixed)"
+      },
+      {
+        "line": 719,
+        "rows": 1,
+        "source": "add({column: -value for column, value in row.items()}, threshold + fixed)"
+      },
+      {
+        "line": 767,
+        "rows": 1,
+        "source": "add({**{j: 1.0 for j in g5_hits}, slack_indices[\"g5_total_extra_hits\"]: -1.0}, 69.0 - 67.0)"
+      },
+      {
+        "line": 768,
+        "rows": 1,
+        "source": "add({**{j: 1.0 for j in g5_hits}, slack_indices[\"g5_d1_extra_hits\"]: -1.0}, 2.0)"
+      },
+      {
+        "line": 770,
+        "rows": 1,
+        "source": "add({**{j: 1.0 for j in r5_hits}, slack_indices[\"r5_total_extra_hits\"]: -1.0}, 22.0 - 17.0)"
+      },
+      {
+        "line": 771,
+        "rows": 1,
+        "source": "add({**{j: 1.0 for j in r5_hits}, slack_indices[\"r5_d1_extra_hits\"]: -1.0}, 5.0)"
+      },
+      {
+        "line": 773,
+        "rows": 1,
+        "source": "add({**{j: 1.0 for j in r4_hits}, slack_indices[\"r4_d1_extra_hits\"]: -1.0}, 0.0)"
+      },
+      {
+        "line": 884,
+        "rows": 1125,
+        "source": "add({**entries, t_index: -1.0}, 0.0)"
+      },
+      {
+        "line": 885,
+        "rows": 1125,
+        "source": "add({**{j: -v for j, v in entries.items()}, t_index: -1.0}, 0.0)"
+      },
+      {
+        "line": 899,
+        "rows": 460,
+        "source": "add(forward, cap - (fixed0 - fixed1))"
+      },
+      {
+        "line": 900,
+        "rows": 460,
+        "source": "add(backward, cap + (fixed0 - fixed1))"
+      },
+      {
+        "line": 922,
+        "rows": 359,
+        "source": "add(plus, axis_tolerance - fixed)"
+      },
+      {
+        "line": 923,
+        "rows": 359,
+        "source": "add(minus, axis_tolerance + fixed)"
+      },
+      {
+        "line": 941,
+        "rows": 141,
+        "source": "add(positive, plane_tolerance)"
+      },
+      {
+        "line": 942,
+        "rows": 141,
+        "source": "add(negative, plane_tolerance)"
+      },
+      {
+        "line": 999,
+        "rows": 273,
+        "source": "add(positive, R8_GITTER_LIMIT_M)"
+      },
+      {
+        "line": 1000,
+        "rows": 273,
+        "source": "add(negative, R8_GITTER_LIMIT_M)"
+      },
+      {
+        "line": 1012,
+        "rows": 32,
+        "source": "add(entries, quer_bound)"
+      },
+      {
+        "line": 1017,
+        "rows": 32,
+        "source": "add({plane_gx: float(np.cos(angle)), plane_gz: float(np.sin(angle))}, polygon_bound)"
+      },
+      {
+        "line": 1023,
+        "rows": 386,
+        "source": "add({start + k + 1: 1.0, start + k: -1.0}, SLOPE_MAX * SAMPLE_STEP)"
+      },
+      {
+        "line": 1024,
+        "rows": 386,
+        "source": "add({start + k: 1.0, start + k + 1: -1.0}, SLOPE_MAX * SAMPLE_STEP)"
+      },
+      {
+        "line": 1026,
+        "rows": 380,
+        "source": "add({start + k + 1: 1.0, start + k: -1.0}, 0.0)"
+      },
+      {
+        "line": 1069,
+        "rows": 388,
+        "source": "add(upper_row, threshold - fixed)"
+      },
+      {
+        "line": 1070,
+        "rows": 388,
+        "source": "add(lower_row, threshold + fixed)"
+      },
+      {
+        "line": 1076,
+        "rows": 1,
+        "source": "add(r3_count_row, float(r3_limit))"
+      },
+      {
+        "line": 1120,
+        "rows": 367,
+        "source": "add(q_positive, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT - q_fixed)"
+      },
+      {
+        "line": 1121,
+        "rows": 367,
+        "source": "add(q_negative, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT + q_fixed)"
+      },
+      {
+        "line": 1128,
+        "rows": 367,
+        "source": "add(q_count_positive, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)"
+      },
+      {
+        "line": 1129,
+        "rows": 367,
+        "source": "add(q_count_negative, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)"
+      },
+      {
+        "line": 1156,
+        "rows": 367,
+        "source": "add(wob_positive, wob_threshold - wob_fixed)"
+      },
+      {
+        "line": 1157,
+        "rows": 367,
+        "source": "add(wob_negative, wob_threshold + wob_fixed)"
+      },
+      {
+        "line": 1165,
+        "rows": 1,
+        "source": "add(quer_count_row, float(quer_limit))"
+      },
+      {
+        "line": 1169,
+        "rows": 1,
+        "source": "add(wob_count_row, float(wob_limit))"
+      },
+      {
+        "line": 1176,
+        "rows": 1075,
+        "source": "add({va: 1.0, vb: -1.0}, bound)"
+      },
+      {
+        "line": 1177,
+        "rows": 1075,
+        "source": "add({va: -1.0, vb: 1.0}, bound)"
+      }
+    ],
+    "constraints": 11308,
+    "model_file": "/workspace/wt_dorfmap_p3d23/codex_jobs/tools/p3d22/diagnose_slack_p3d22.py",
+    "variables": 8009
+  },
+  "scope": "instrumented add-callsites, exact V24 source and cumulative05 cuts; solver not invoked"
+}

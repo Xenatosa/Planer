@@ -1,0 +1,44 @@
+{
+  "accounting": "5 + 8 + 1 - 1 = 13 rows vs archived p3d20 result; the eight formerly unexplained net rows are the 8 plane-core rows plus the explicit stage-cap row offset by the p3d20-only secondary tie-break row.",
+  "archived_round05_summary": {
+    "p3d20_primary_rows_reconstructed_from_checked_in_model": 11294,
+    "reported_constraints": 11295,
+    "variables": 7945
+  },
+  "callsite_trace_json": "codex_jobs/tools/p3d23/results/p3d23_round05_row_callsite_diff.json",
+  "diff_to_archived_summary_rows": 13,
+  "family_differences": {
+    "crossing_stage_cap": {
+      "p3d20_representation": "t upper bound, no primary matrix row",
+      "p3d22_explicit_rows_added": 1
+    },
+    "event_counter_caps": {
+      "detail": [
+        "G5 total",
+        "G5 D1",
+        "R5 total",
+        "R5 D1",
+        "R4 D1"
+      ],
+      "rows_added": 5
+    },
+    "p3d20_secondary_tie_break": {
+      "cause": "after the primary solve, p3d20 adds t <= primary_step before its secondary L1 tie-break; p3d22 diagnostic output has no such secondary row",
+      "rows_in_archived_result_count_only": 1
+    },
+    "plane_core_supports": {
+      "cause": "plane core center moved from rounded [152.5,28.5] to exact R8 center [152.54985704503775,28.48954534572434]",
+      "p3d20_round05_support_points": 137,
+      "p3d22_round05_support_points": 141,
+      "points_added": 4,
+      "rows_added": 8,
+      "rows_per_point": 2
+    }
+  },
+  "p3d22_diagnostic_round05": {
+    "reported_constraints": 11308,
+    "rows_from_callsite_trace": 11308,
+    "variables": 8009
+  },
+  "trace_scope": "instrumented add-callsites, exact V24 source and cumulative05 cuts; solver not invoked"
+}
