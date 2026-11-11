@@ -2,7 +2,7 @@
 
 ## Zwischenstand: Vermessung vor einer Wegänderung
 
-Stand 11.11.2026. Branch `art/dorfmap-p3d21`, Basis `385703d` (`origin/art/dorfmap-p3d20`). Die unveränderten p3d18-V24-Polylinien wurden vermessen, bevor eine Geometrie geändert wurde. Variante 29 ist danach lokal vermessen; Modell-Machbarkeit und offizielle Kandidatenprobe stehen noch aus. Ein neues Mesh wurde noch nicht gebaut.
+Stand 11.11.2026. Branch `art/dorfmap-p3d21`, Basis `385703d` (`origin/art/dorfmap-p3d20`). Die unveränderten p3d18-V24-Polylinien wurden vor der Änderung vermessen. Zwei lokale Weggeometrien sind im p3d20-Modell infeasible. Eine dritte, kleinere lokale Geometrie ist vermessen; ihr Modelllauf steht noch aus. Ein neues Mesh wurde nicht gebaut.
 
 Die p3d17-Referenzkalibrierung wurde erneut mit dem unveränderten offiziellen R3-Prüfer ausgeführt. Sie stimmt bytegenau mit dem Referenzmesh überein und zählt in D1 weiterhin **R3 längs/quer/Wölbung = 6/17/19**. Der Messlauf nutzte die V24-Geometrie und den unveränderten Reliefquellenhash `5e8fdb51c3f3f...` sowie `vektor.json` `aac6afff89ec...`.
 
@@ -64,6 +64,21 @@ Variante 30 ist die zweite und letzte hier geprüfte lokale Weggeometrie. Sie ve
 Die Anfangs- und Endkoordinaten bleiben gleich. Alle vier Endpunkte sind trocken; der nächste Wand-Mittellinienabstand am Start von rampe_11 bleibt 1,149 m. Der geometrische Achsschnitt wandert 0,120 m. Das offizielle R8-Clusterzentrum wandert von `152,549857|28,489545` nach `152,657964|28,263810`, also 0,303 m; der unveränderte R8-Prüfer zeigt `152,7|28,3`. Die Rohquellenprobe meldet dort Stufe `1,389 m` und Gitter `2,241 m`, weil das Quellhöhenfeld noch nicht das optimierte Mesh enthält. Transferbasis: [`p3d21_transfer_base_v30.json`](../neu/p3d21_transfer_base_v30.json), mit 187 rampe_11- und 197 rampe_2-Stützen.
 
 **Machbarkeit Variante 30: UNMACHBAR im unveränderten Modell.** Ohne neue Ereignisschnitte meldet HiGHS Status 8 (infeasible), 7.854 Variablen und 15.159 Bedingungen. Es wurde keine offizielle Probe gestartet; eine IIS/Einzelzeile stellt der Solver nicht bereit. Für diese Variante gibt es daher keine gemeinsamen erreichbaren Meshwerte. Maschinenbeleg folgt unter `codex_jobs/tools/p3d21/variant30/model_round00.json`.
+
+### Lokale Wegvariante 3 mit Transfer 29, vermessen
+
+Als dritte und letzte Geometrievariante bleibt rampe_11 vollständig unverändert; nur rampe_2 wird lokal bei s≈20 m und s≈40 m um bis zu 0,6 m verschoben. Transfer 29 bleibt der direkte p3d18/V24-Transfer. Kandidatenquellenhash: `b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6`; geändert wird ausschließlich `rampenwege[2]`.
+
+| Pfad / Station | vorher | Wegvariante 3 | Änderung |
+|---|---|---|---:|
+| rampe_2, Länge | 58,800 m | 58,878 m | +0,077 m |
+| rampe_2, s=20,055 m (R4) | 143,0992\|29,5940 | 143,1588\|30,0859 | 0,595 m |
+| rampe_2, s=37,865 m (G5) | 157,8316\|27,7976 | 157,7788\|27,3569 | 0,533 m |
+| rampe_2, s=39,752 m (G5) | 159,3922\|27,6041 | 159,3329\|27,1105 | 0,597 m |
+| rampe_2, s=42,072 m (G5) | 161,3116\|27,3725 | 161,2581\|26,9267 | 0,539 m |
+| rampe_11, gesamte Linie | unverändert | unverändert | 0,000 m |
+
+Anfangs- und Endkoordinaten bleiben gleich, alle vier Endpunkte bleiben trocken. Der geometrische Achsschnitt verschiebt sich 0,102 m. Das offizielle R8-Zentrum bewegt sich von `152,549857|28,489545` nach `152,629292|28,353591` (0,188 m); der unveränderte Prüfer zeigt `152,6|28,4`. Die Rohquellenprobe zeigt dort Stufe `1,389 m` und Gitter `2,234 m`; das ist kein optimiertes Mesh. Der V24-Transfer lädt für die neuen 191/197 Achsstützen unverändert; Beleg [`p3d21_transfer_base_route3_v29.json`](../neu/p3d21_transfer_base_route3_v29.json). Dieser Geometrie-Kandidat erhält zuerst den unveränderten p3d20-Machbarkeitstest; noch keine offizielle Kandidatenprobe.
 
 ### R8-Fenster und Restfehler
 

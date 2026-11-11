@@ -32,6 +32,12 @@ VARIANTS = {
         "rampe_2": [(20.055, 1.0, 3.0, 1.0), (40.0, 1.0, 4.0, -1.0)],
         "rampe_11": [(28.0, 1.0, 5.0, 1.0)],
     },
+    "3": {
+        # Third and final route geometry: keep rampe_11 fixed and use the
+        # smallest local changes on rampe_2 while retaining transfer V29.
+        "rampe_2": [(20.055, 0.6, 4.0, 1.0), (40.0, 0.6, 4.5, -1.0)],
+        "rampe_11": [],
+    },
 }
 
 
@@ -163,9 +169,11 @@ def main() -> None:
     ap.add_argument("--manifest", type=Path, required=True)
     ap.add_argument("--variant", choices=sorted(VARIANTS), default=None)
     args = ap.parse_args()
-    variant = args.variant or __import__("os").environ.get("RELIEF_KREUZUNG_VAR", "29")
+    env = __import__("os").environ
+    variant = args.variant or env.get("P3D21_WEGE_VAR", env.get("RELIEF_KREUZUNG_VAR", "29"))
     if variant not in VARIANTS:
         raise ValueError(f"Unbekannte lokale Wegvariante: {variant}")
+    transfer_variant = env.get("RELIEF_KREUZUNG_VAR", "29")
     source_bytes = args.source.read_bytes()
     data = json.loads(gzip.decompress(source_bytes))
     vector = json.loads((RELIEF3D / "neu/vektor.json").read_text(encoding="utf-8"))
@@ -179,7 +187,8 @@ def main() -> None:
     changes = {}
     for name, index in route_indices.items():
         old = np.asarray(before_paths[index], dtype=np.float64)
-        new = deform(before_paths[index], VARIANTS[variant][name])
+        features = VARIANTS[variant][name]
+        new = deform(before_paths[index], features) if features else old.copy()
         after_paths[index] = new.tolist()
         old_line, new_line = LineString(old), LineString(new)
         old_cumulative = np.r_[0.0, np.cumsum(np.hypot(*np.diff(old, axis=0).T))] * CELL_M
@@ -239,9 +248,15 @@ def main() -> None:
         "variant": variant,
         "source_before_sha256": hashlib.sha256(source_bytes).hexdigest(),
         "source_after_sha256": out_sha,
-        "source_data_changes": ["rampenwege[2]", "rampenwege[11]"],
+        "transfer_variant": transfer_variant,
+        "source_data_changes": [
+            f"rampenwege[{i}]" for i in range(len(before_paths))
+            if after_paths[i] != before_paths[i]
+        ],
         "other_rampenwege_semantically_unchanged": all(
-            data["rampenwege"][i] == before_paths[i] for i in range(len(before_paths)) if i not in (2, 11)
+            data["rampenwege"][i] == before_paths[i]
+            for i in range(len(before_paths))
+            if after_paths[i] == before_paths[i]
         ),
         "official_R8_gate_center_map": gate_center,
         "old_route_intersections_map": points(old_crossings),
