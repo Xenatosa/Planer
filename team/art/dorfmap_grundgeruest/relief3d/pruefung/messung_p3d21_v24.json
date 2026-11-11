@@ -1,0 +1,265 @@
+{
+  "distance_caveat": "Wall distance is to the existing vector wall centerline; it is not the distance to a regenerated wall face.",
+  "label": "[S] geometry from p3d18 V24 source and unchanged relief; [R] derived distances/profiles",
+  "r8_gate_center_map": [
+    152.54985704503775,
+    28.48954534572434
+  ],
+  "residuals": {
+    "G5_158.2_30.6": {
+      "axes": {
+        "rampe_11": {
+          "distance_m": 7.315456213398105,
+          "station_m": 40.54920904649106
+        },
+        "rampe_2": {
+          "distance_m": 3.391851598965999,
+          "station_m": 37.8654445787187
+        }
+      },
+      "coord_map": [
+        158.2,
+        30.6
+      ],
+      "nearest_wall_centerline": {
+        "distance_m": 9.647785171309314,
+        "name": "Nord"
+      }
+    },
+    "G5_159.5_28.5": {
+      "axes": {
+        "rampe_11": {
+          "distance_m": 7.506420720501842,
+          "station_m": 37.59223539405321
+        },
+        "rampe_2": {
+          "distance_m": 1.082791764980296,
+          "station_m": 39.75238675463998
+        }
+      },
+      "coord_map": [
+        159.5,
+        28.5
+      ],
+      "nearest_wall_centerline": {
+        "distance_m": 7.199999999999996,
+        "name": "Nord"
+      }
+    },
+    "G5_161.4_28.1": {
+      "axes": {
+        "rampe_11": {
+          "distance_m": 9.288108544792902,
+          "station_m": 36.05272544419295
+        },
+        "rampe_2": {
+          "distance_m": 0.8793816338305879,
+          "station_m": 42.07228592467395
+        }
+      },
+      "coord_map": [
+        161.4,
+        28.1
+      ],
+      "nearest_wall_centerline": {
+        "distance_m": 7.096252532146808,
+        "name": "Nord"
+      }
+    },
+    "R4_143.1_29.6": {
+      "axes": {
+        "rampe_11": {
+          "distance_m": 9.282646620160454,
+          "station_m": 47.31506149053167
+        },
+        "rampe_2": {
+          "distance_m": 0.007219882051162618,
+          "station_m": 20.055133467361138
+        }
+      },
+      "coord_map": [
+        143.1,
+        29.6
+      ],
+      "nearest_wall_centerline": {
+        "distance_m": 11.812904823116126,
+        "name": "Nord"
+      }
+    },
+    "R5_158.0_17.5": {
+      "axes": {
+        "rampe_11": {
+          "distance_m": 1.619515870167814,
+          "station_m": 27.916529440379282
+        },
+        "rampe_2": {
+          "distance_m": 12.237707858341992,
+          "station_m": 39.552168875793015
+        }
+      },
+      "coord_map": [
+        158.0,
+        17.5
+      ],
+      "nearest_wall_centerline": {
+        "distance_m": 3.0,
+        "name": "Nord"
+      }
+    }
+  },
+  "route_intersections_map": [
+    [
+      152.43798855273815,
+      28.455697332657586
+    ]
+  ],
+  "routes": {
+    "rampe_11": {
+      "coordinate_samples": 191,
+      "end_elevation_m": 0.5105417966842651,
+      "end_map": [
+        156.48451599041033,
+        37.48883120619762
+      ],
+      "fall_m": 12.394547581672668,
+      "length_m": 57.0,
+      "mean_grade_pct": 21.744820318723978,
+      "r8_center_distance_m": 0.13766375097967978,
+      "r8_center_nearest_map": [
+        152.44843385695177,
+        28.435935946307474
+      ],
+      "r8_center_station_m": 41.47862214075445,
+      "r8_window_max_abs_segment_grade_pct": 50.00000000000044,
+      "r8_window_mean_grade_pct": -19.385337949766583,
+      "r8_window_source_elevation_m": [
+        5.334033012390137,
+        2.501943826675415
+      ],
+      "r8_window_station_m": [
+        35.699999999999996,
+        47.4
+      ],
+      "r8_window_transferred_elevation_m": [
+        4.954721123102545,
+        2.686636582979854
+      ],
+      "r8_window_transverse_profiles": {
+        "1.5": {
+          "at_r8_center_pct": 1.357727843869879,
+          "elevations_at_r8_center_m": [
+            4.059412314175445,
+            4.100144149491541
+          ],
+          "max_abs_pct": 15.087509791020567,
+          "mean_abs_pct": 4.2648981783572655
+        },
+        "4.0": {
+          "at_r8_center_pct": 11.31139214080048,
+          "elevations_at_r8_center_m": [
+            4.518798698636382,
+            5.42371006990042
+          ],
+          "max_abs_pct": 73.26075234082542,
+          "mean_abs_pct": 27.00161387870322
+        }
+      },
+      "start_elevation_m": 12.905089378356934,
+      "start_map": [
+        148.5,
+        2.5
+      ],
+      "turns": [
+        {
+          "coord_map": [
+            144.82524397995704,
+            9.539706610594113
+          ],
+          "distance_outside_2m_core_m": 22.556528470722952,
+          "distance_outside_4m_transition_m": 20.556528470722952,
+          "distance_to_R8_center_m": 24.556528470722952,
+          "station_m": 9.6
+        },
+        {
+          "coord_map": [
+            157.53504637027694,
+            18.841083538758326
+          ],
+          "distance_outside_2m_core_m": 11.032294352971904,
+          "distance_outside_4m_transition_m": 9.032294352971904,
+          "distance_to_R8_center_m": 13.032294352971904,
+          "station_m": 28.5
+        },
+        {
+          "coord_map": [
+            150.17233119483998,
+            32.733798457530646
+          ],
+          "distance_outside_2m_core_m": 3.837764268059135,
+          "distance_outside_4m_transition_m": 1.8377642680591348,
+          "distance_to_R8_center_m": 5.837764268059135,
+          "station_m": 47.4
+        }
+      ]
+    },
+    "rampe_2": {
+      "coordinate_samples": 197,
+      "end_elevation_m": 0.3659476041793823,
+      "end_map": [
+        175.14963501502834,
+        25.6900437981966
+      ],
+      "fall_m": 12.103861927986145,
+      "length_m": 58.8,
+      "mean_grade_pct": 20.58479919725535,
+      "r8_center_distance_m": 0.05647501731736424,
+      "r8_center_nearest_map": [
+        152.54419431526614,
+        28.442824753303924
+      ],
+      "r8_center_station_m": 31.472973285112182,
+      "r8_window_max_abs_segment_grade_pct": 50.0000000000003,
+      "r8_window_mean_grade_pct": -10.571244424471761,
+      "r8_window_source_elevation_m": [
+        7.014100074768066,
+        4.814521312713623
+      ],
+      "r8_window_station_m": [
+        25.5,
+        37.199999999999996
+      ],
+      "r8_window_transferred_elevation_m": [
+        5.33205618472321,
+        4.095220587060014
+      ],
+      "r8_window_transverse_profiles": {
+        "1.5": {
+          "at_r8_center_pct": -2.4795870218629723,
+          "elevations_at_r8_center_m": [
+            4.107773865028283,
+            4.0333862543723935
+          ],
+          "max_abs_pct": 29.288728831881212,
+          "mean_abs_pct": 9.412508927853676
+        },
+        "4.0": {
+          "at_r8_center_pct": -17.190633449296055,
+          "elevations_at_r8_center_m": [
+            4.652553777357971,
+            3.2773031014142866
+          ],
+          "max_abs_pct": 61.148447163824414,
+          "mean_abs_pct": 23.4885830212959
+        }
+      },
+      "start_elevation_m": 12.469809532165527,
+      "start_map": [
+        126.51,
+        31.62
+      ]
+    }
+  },
+  "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+  "v24_json_sha256": "fea0a08aa79de63a751630bb75ee7391d8f7bd532f416f4b224e9b1bb11ddf00",
+  "vektor_json_sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e"
+}
