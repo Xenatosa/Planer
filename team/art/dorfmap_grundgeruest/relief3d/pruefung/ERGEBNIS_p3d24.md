@@ -54,3 +54,15 @@ Variante 1 hält den Startpunkt `126,5100|31,6200` fest. Die Achse wird bis 10,8
 `[R]` Der all-open-Schlupf betrifft weiterhin nur `endpoint_r8a`. Das all-open-Maximum liegt bei `148,00|2,25`–`148,00|2,50` (Rest `0,072813 m`, nächster Endpunkt `rampe_11` Start); die endpoint-only-Gegenprobe lokalisiert ein gleich großes Paar am neuen Start von `rampe_2`, `128,00|30,25`–`128,00|30,50` (`0,172813 m` statt `0,10 m`). Gegenüber V3 p3d23 steigt der erforderliche Schlupf um `0,000528 m`; Variante 1 erfüllt das R8a-Ziel nicht.
 
 Belege: [`p3d24_start_v1_manifest.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_start_v1_manifest.json), [`p3d24_v1_all_hard.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v1_all_hard.json), [`p3d24_v1_family_iis.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v1_family_iis.json). Das angeforderte offizielle Float32-Gate wurde nicht gestartet, weil der all-families-hart Solve infeasible ist.
+
+### Variante 2
+
+Variante 2 versetzt den Start 1,2 m entlang der linken Achsnormalen nach Norden und führt über die ersten 10,8 m zurück auf die unveränderte V3-Achse. `[S]` Start `126,5100|31,6200` → `126,6303|32,6127`, Verschiebung 1,200 m; die lokale Achslänge wächst von 10,796 auf 10,873 m. GB am Start: 12,47564 m. Startabstände: Wand-Mittellinie 6,989 m, Wasser 15,002 m, Bauzone 17,732 m. Im 4-m-Auslaufkern liegen die Mindestabstände bei 2,211 m zur Wand-Mittellinie, 11,715 m zum Wasser und 14,588 m zur Bauzone; kein Schnitt mit Wasser oder Bauzone.
+
+| Variante | Start vorher → nachher | größte Verschiebung | alle Familien hart | bindende Familie / minimaler Schlupf | offizielle Probe |
+|---|---|---:|---|---|---|
+| 2 — seitlich nach Norden | `126,5100|31,6200` → `126,6303|32,6127` | 1,200 m am Start | infeasible, HiGHS 8 (`7.885` Variablen / `25.879` Zeilen) | `{endpoint_r8a}`; all-open und endpoint-only optimal, **0,415122 m**; all-except-endpoint infeasible | nicht ausgeführt, harte Machbarkeit verfehlt |
+
+`[R]` Das all-open- und endpoint-only-Maximum liegt am neuen Start von `rampe_2`: `127,75|33,25`–`127,75|33,50`, Höhendifferenz `0,515122 m` statt `0,10 m`. Gegenüber V3 p3d23 steigt der minimale Schlupf um `0,342837 m`; Variante 2 verfehlt R8a deutlich.
+
+Belege: [`p3d24_start_v2_manifest.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_start_v2_manifest.json), [`p3d24_v2_start_context.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_start_context.json), [`p3d24_v2_all_hard.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_all_hard.json), [`p3d24_v2_family_iis.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_family_iis.json). Eine offizielle Float32-Probe wurde nicht gestartet.
