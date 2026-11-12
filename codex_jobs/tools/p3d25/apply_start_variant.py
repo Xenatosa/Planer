@@ -26,10 +26,11 @@ VARIANTS = {
     "2": {"name": "both_axial_shift_r2_v3_r11_inboard_8m", "r2_shift_m": 1.2,
           "r2_shift_direction": "axis", "r2_turn_deg": -45.0,
           "r11_trim_m": 8.0},
-    # Joint compromise: slightly shallower R2 turn and a 0.5 m longer R11 trim.
-    "3": {"name": "joint_r2_30deg_r11_inboard_8_5m", "r2_shift_m": 1.2,
-          "r2_shift_direction": "axis", "r2_turn_deg": -30.0,
-          "r11_trim_m": 8.5},
+    # Retain the better p3d24-V1 start, lengthen its contour lead-in to 12 m,
+    # and move the rampe_11 start 0.5 m farther inboard.
+    "3": {"name": "joint_r2_v1_12m_r11_inboard_8_5m", "r2_shift_m": 0.0,
+          "r2_shift_direction": "left", "r2_turn_deg": 45.0,
+          "r2_join_m": 12.0, "r11_trim_m": 8.5},
 }
 
 
@@ -49,11 +50,12 @@ def transform_r2(raw: list[list[float]], spec: dict) -> tuple[np.ndarray, dict]:
     left = np.array([-tangent[1], tangent[0]], dtype=np.float64)
     direction = tangent if spec["r2_shift_direction"] == "axis" else left
     turn = np.deg2rad(float(spec["r2_turn_deg"]))
+    join_m = float(spec.get("r2_join_m", JOIN_M))
     new = old.copy()
     for i, s in enumerate(station_m):
-        if s > JOIN_M + 1e-9:
+        if s > join_m + 1e-9:
             continue
-        u = min(max(float(s / JOIN_M), 0.0), 1.0)
+        u = min(max(float(s / join_m), 0.0), 1.0)
         shift = float(spec["r2_shift_m"]) * (1.0 - 3.0 * u * u + 2.0 * u * u * u)
         lead = np.tan(turn) * s * (1.0 - u) ** 2
         new[i] += (shift * direction + lead * left) / CELL_M
@@ -66,10 +68,10 @@ def transform_r2(raw: list[list[float]], spec: dict) -> tuple[np.ndarray, dict]:
         "max_displacement_station_m": float(station_m[int(np.argmax(displacement))]),
         "changed_station_extent_m": ([float(station_m[changed[0]]), float(station_m[changed[-1]])]
                                      if len(changed) else None),
-        "join_station_m": JOIN_M,
+        "join_station_m": join_m,
         "old_length_m": float(station_m[-1]),
         "new_length_m": float(station_map(new)[-1] * CELL_M),
-        "geometry": "cubic offset/turn, zero derivative at the 10.8 m join",
+        "geometry": f"cubic offset/turn, zero derivative at the {join_m:g} m join",
     }
 
 
@@ -128,7 +130,7 @@ def main() -> None:
         raise RuntimeError(f"Unzulässiger Quellumfang: routes={changed_routes}, other_fields={unchanged_fields}")
     # The route geometry beyond the explicit R2 join and the trimmed R11 prefix
     # is checked against the original vertices in the manifest.
-    r2_join_map = JOIN_M / CELL_M
+    r2_join_map = float(spec.get("r2_join_m", JOIN_M)) / CELL_M
     r2_station_map = station_map(np.asarray(before_paths[2], dtype=np.float64))
     outside_r2 = np.flatnonzero(r2_station_map > r2_join_map + 1e-9)
     if not np.array_equal(new2[outside_r2], np.asarray(before_paths[2], dtype=np.float64)[outside_r2]):

@@ -1,0 +1,589 @@
+{
+  "base_commit": "56bfab88b10778e333f1747482eef98416bbc5ae",
+  "branch": "art/dorfmap-p3d25",
+  "default_reason": "V1 and V3 tie at 0.072813 m; V1 uses the smaller combined start displacement.",
+  "default_variant": "1",
+  "historical_baseline_9d3f8fc": {
+    "R8": {
+      "R8_gitter": 10,
+      "R8_quer": 5,
+      "R8_stufe": 9,
+      "R8a_wegende": 24,
+      "total": 48
+    },
+    "R9": {
+      "R8b_delle": 25,
+      "R9_saegezahn": 34,
+      "R9w_wellen": 275,
+      "total": 334
+    },
+    "pruefe_regeln_total": 596
+  },
+  "invariants": {
+    "base_source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+    "felder_json_sha256": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+    "mesh_built": false,
+    "source_relief_official_file_unchanged": false,
+    "t42u_lod1_images_pytest": "not_run; no candidate passed preconditions",
+    "thresholds_checkers_mesh_py_unchanged": true,
+    "vektor_sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+    "zellen_relief_sha256": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+  },
+  "last_reference_replay_current_schema": {
+    "R8": {
+      "by_tile": {
+        "D1": {
+          "R8_gitter": 2,
+          "R8_stufe": 2,
+          "R8a_wegende": 3
+        },
+        "D2": {},
+        "G1": {}
+      },
+      "total": 46
+    },
+    "R9": {
+      "by_tile": {
+        "D1": {
+          "R8b_delle": 1,
+          "R9_saegezahn": 1,
+          "R9w_wellen": 27
+        },
+        "D2": {},
+        "G1": {
+          "R9_saegezahn": 1,
+          "R9w_wellen": 12
+        }
+      },
+      "total": 344
+    },
+    "caveat": "Reference replay uses current schema and is not the historical 9d3f8fc totals; p3d25 candidate after-counts were not measured.",
+    "pruefe_regeln": 600,
+    "pruefe_regeln_by_tile": {
+      "D1": {
+        "G11_objekt_schwebt_sinkt": 2,
+        "G3_spitze_unten": 1,
+        "G5_beule_klippe": 2,
+        "G6_facette": 3,
+        "G7b_wandkontur_feld": 1,
+        "R1_blind": 2,
+        "R2_getrennt": 1,
+        "R3_laengs_m": 6,
+        "R3_quer_pct": 17,
+        "R3_woelb_m": 19,
+        "R4_rand": 1,
+        "R5_loch": 8
+      },
+      "D2": {
+        "R2_getrennt": 1,
+        "T1_fleckrand": 7
+      },
+      "G1": {
+        "G11_objekt_schwebt_sinkt": 2,
+        "G6_facette": 3,
+        "R1_blind": 1,
+        "R3_laengs_m": 1,
+        "R6_wasser_schnee": 3,
+        "T1_fleckrand": 3
+      }
+    }
+  },
+  "tag": "p3d25",
+  "variants": {
+    "1": {
+      "R8_gate_center_unrounded_map": [
+        152.54409624029773,
+        28.491539246947134
+      ],
+      "all_families_hard": {
+        "constraints": 24116,
+        "infeasibility_proven": true,
+        "status": "Infeasible",
+        "status_code": 8,
+        "time_limit_s": 600.0,
+        "variables": 7857
+      },
+      "family_diagnosis": {
+        "all_except_endpoint_status": "Infeasible",
+        "all_open_endpoint_r8a_slack_m": 0.07281341552734374,
+        "all_open_location": {
+          "maximum_violation_m": 0.07281341552735618,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51,
+              31.62
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              128.0,
+              29.75
+            ],
+            "b": [
+              128.0,
+              30.0
+            ],
+            "delta_m": 0.17281341552735618,
+            "limit_m": 0.1
+          }
+        },
+        "binding_groups_all_open": [
+          "endpoint_r8a_extra_m"
+        ],
+        "endpoint_only_slack_m": 0.07281341552734374,
+        "minimal_endpoint_r8a_family_supported": true
+      },
+      "mesh_built": false,
+      "name": "r2_v1_contour_r11_inboard_8m",
+      "official_float32_probe": {
+        "D1_G1_D2": null,
+        "R8": null,
+        "R9": null,
+        "reason": "all-families-hard solve infeasible; user workflow prohibits probe before feasible candidate",
+        "rules_total": null,
+        "status": "not_run"
+      },
+      "source_relief_sha256": "132e70af149e787a1abfe2dff6cd5c72d0aea2a4c0a93a0528ac477885c731ca",
+      "source_scope_valid": {
+        "all_nonroute_source_fields_unchanged": true,
+        "all_other_rampenwege_semantically_unchanged": true,
+        "changed_route_indices": [
+          2,
+          11
+        ],
+        "rampe_11_after_new_start_unchanged": true,
+        "rampe_2_after_join_unchanged": true
+      },
+      "start_changes": {
+        "rampe_11": {
+          "changed_station_extent_m": [
+            0.0,
+            8.0
+          ],
+          "geometry": "start moved to an interpolated point on the unchanged axis; remaining axis is byte-equivalent",
+          "max_displacement_m": 8.0,
+          "new_length_m": 49.022910149966364,
+          "old_length_m": 57.022910149966364,
+          "start_after_map": [
+            145.35812310445874,
+            8.379773228628641
+          ],
+          "start_before_map": [
+            148.5,
+            2.5
+          ],
+          "start_displacement_m": 7.9998811273318955,
+          "trimmed_original_station_m": 8.0
+        },
+        "rampe_2": {
+          "changed_station_extent_m": [
+            1.1966954499788096,
+            10.7955895837508
+          ],
+          "geometry": "cubic offset/turn, zero derivative at the 10.8 m join",
+          "join_station_m": 10.8,
+          "max_displacement_m": 1.599999629691585,
+          "max_displacement_station_m": 3.6020000179109957,
+          "new_length_m": 59.44811955334839,
+          "old_length_m": 58.80044112416466,
+          "start_after_map": [
+            126.51,
+            31.62
+          ],
+          "start_before_map": [
+            126.51,
+            31.62
+          ],
+          "start_displacement_m": 0.0
+        }
+      },
+      "start_context": {
+        "rampe_11": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 26.199791232696853,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 6.039394696294384,
+            "outside_map": false,
+            "wall_centerline_distance_m": 1.9637399045725206,
+            "water_polygon_distance_m": 2.2091148447407174
+          },
+          "start_GB_m": 11.7597017288208,
+          "start_distance_m": {
+            "build_zone_polygon": 28.407322890912916,
+            "wall_centerline": 3.987124909890462,
+            "water_polygon": 6.429747725350495
+          },
+          "start_map": [
+            145.35812310445874,
+            8.379773228628641
+          ]
+        },
+        "rampe_2": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 15.858959414349826,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 33.50263243475907,
+            "outside_map": false,
+            "wall_centerline_distance_m": 1.2855611379216085,
+            "water_polygon_distance_m": 8.867896130284523
+          },
+          "start_GB_m": 12.469809532165527,
+          "start_distance_m": {
+            "build_zone_polygon": 18.925202244626075,
+            "wall_centerline": 6.050005619832112,
+            "water_polygon": 13.845550909949383
+          },
+          "start_map": [
+            126.51,
+            31.62
+          ]
+        }
+      },
+      "transfer_sha256": "9ed22b87907093fc2086940638360aa5d05ea479903929d76323efa9294ef2f2"
+    },
+    "2": {
+      "R8_gate_center_unrounded_map": [
+        152.54388663808575,
+        28.489836357176127
+      ],
+      "all_families_hard": {
+        "constraints": 23868,
+        "infeasibility_proven": true,
+        "status": "Infeasible",
+        "status_code": 8,
+        "time_limit_s": 600.0,
+        "variables": 7853
+      },
+      "family_diagnosis": {
+        "all_except_endpoint_status": "Infeasible",
+        "all_open_endpoint_r8a_slack_m": 0.18307294845581054,
+        "all_open_location": {
+          "maximum_violation_m": 0.18307294845581232,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              127.50273378203372,
+              31.499668632480763
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              126.0,
+              30.0
+            ],
+            "b": [
+              126.25,
+              30.0
+            ],
+            "delta_m": 0.2830729484558123,
+            "limit_m": 0.1
+          }
+        },
+        "binding_groups_all_open": [
+          "endpoint_r8a_extra_m"
+        ],
+        "endpoint_only_slack_m": 0.18307294845581054,
+        "minimal_endpoint_r8a_family_supported": true
+      },
+      "mesh_built": false,
+      "name": "both_axial_shift_r2_v3_r11_inboard_8m",
+      "official_float32_probe": {
+        "D1_G1_D2": null,
+        "R8": null,
+        "R9": null,
+        "reason": "all-families-hard solve infeasible; user workflow prohibits probe before feasible candidate",
+        "rules_total": null,
+        "status": "not_run"
+      },
+      "source_relief_sha256": "93c74242767535dde0aaec4e4c77c124cbe54c4c3475e9e65bcd8e3f4952d542",
+      "source_scope_valid": {
+        "all_nonroute_source_fields_unchanged": true,
+        "all_other_rampenwege_semantically_unchanged": true,
+        "changed_route_indices": [
+          2,
+          11
+        ],
+        "rampe_11_after_new_start_unchanged": true,
+        "rampe_2_after_join_unchanged": true
+      },
+      "start_changes": {
+        "rampe_11": {
+          "changed_station_extent_m": [
+            0.0,
+            8.0
+          ],
+          "geometry": "start moved to an interpolated point on the unchanged axis; remaining axis is byte-equivalent",
+          "max_displacement_m": 8.0,
+          "new_length_m": 49.022910149966364,
+          "old_length_m": 57.022910149966364,
+          "start_after_map": [
+            145.35812310445874,
+            8.379773228628641
+          ],
+          "start_before_map": [
+            148.5,
+            2.5
+          ],
+          "start_displacement_m": 7.9998811273318955,
+          "trimmed_original_station_m": 8.0
+        },
+        "rampe_2": {
+          "changed_station_extent_m": [
+            0.0,
+            10.7955895837508
+          ],
+          "geometry": "cubic offset/turn, zero derivative at the 10.8 m join",
+          "join_station_m": 10.8,
+          "max_displacement_m": 1.830190026417604,
+          "max_displacement_station_m": 3.6020000179109957,
+          "new_length_m": 58.29165677379246,
+          "old_length_m": 58.80044112416466,
+          "start_after_map": [
+            127.50273378203372,
+            31.499668632480763
+          ],
+          "start_before_map": [
+            126.51,
+            31.62
+          ],
+          "start_displacement_m": 1.2000000000000024
+        }
+      },
+      "start_context": {
+        "rampe_11": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 26.199791232696853,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 6.039394696294384,
+            "outside_map": false,
+            "wall_centerline_distance_m": 1.9637399045725206,
+            "water_polygon_distance_m": 2.2091148447407174
+          },
+          "start_GB_m": 11.7597017288208,
+          "start_distance_m": {
+            "build_zone_polygon": 28.407322890912916,
+            "wall_centerline": 3.987124909890462,
+            "water_polygon": 6.429747725350495
+          },
+          "start_map": [
+            145.35812310445874,
+            8.379773228628641
+          ]
+        },
+        "rampe_2": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 14.306281704827324,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 34.744074051859954,
+            "outside_map": false,
+            "wall_centerline_distance_m": 3.489916445559496,
+            "water_polygon_distance_m": 11.041815182554572
+          },
+          "start_GB_m": 12.376370429992676,
+          "start_distance_m": {
+            "build_zone_polygon": 18.53088893704969,
+            "wall_centerline": 6.7902636157041565,
+            "water_polygon": 14.225093794899319
+          },
+          "start_map": [
+            127.50273378203372,
+            31.499668632480763
+          ]
+        }
+      },
+      "transfer_sha256": "7e89b3e41954bfa5ef36a84004bc094bcca018ea435941e14028d8a6f2765a98"
+    },
+    "3": {
+      "R8_gate_center_unrounded_map": [
+        152.542343213612,
+        28.498904890126923
+      ],
+      "all_families_hard": {
+        "constraints": 23962,
+        "infeasibility_proven": true,
+        "status": "Infeasible",
+        "status_code": 8,
+        "time_limit_s": 600.0,
+        "variables": 7855
+      },
+      "family_diagnosis": {
+        "all_except_endpoint_status": "Infeasible",
+        "all_open_endpoint_r8a_slack_m": 0.07281341552734374,
+        "all_open_location": {
+          "maximum_violation_m": 0.07281341552734552,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51,
+              31.62
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              127.75,
+              31.0
+            ],
+            "b": [
+              127.75,
+              31.25
+            ],
+            "delta_m": 0.17281341552734553,
+            "limit_m": 0.1
+          }
+        },
+        "binding_groups_all_open": [
+          "endpoint_r8a_extra_m"
+        ],
+        "endpoint_only_slack_m": 0.07281341552734374,
+        "minimal_endpoint_r8a_family_supported": true
+      },
+      "mesh_built": false,
+      "name": "joint_r2_v1_12m_r11_inboard_8_5m",
+      "official_float32_probe": {
+        "D1_G1_D2": null,
+        "R8": null,
+        "R9": null,
+        "reason": "all-families-hard solve infeasible; user workflow prohibits probe before feasible candidate",
+        "rules_total": null,
+        "status": "not_run"
+      },
+      "source_relief_sha256": "93b2e8508bbfe756cf8bc5da8520f77e65fbe28a7916db2349c1e3745c7660ec",
+      "source_scope_valid": {
+        "all_nonroute_source_fields_unchanged": true,
+        "all_other_rampenwege_semantically_unchanged": true,
+        "changed_route_indices": [
+          2,
+          11
+        ],
+        "rampe_11_after_new_start_unchanged": true,
+        "rampe_2_after_join_unchanged": true
+      },
+      "start_changes": {
+        "rampe_11": {
+          "changed_station_extent_m": [
+            0.0,
+            8.5
+          ],
+          "geometry": "start moved to an interpolated point on the unchanged axis; remaining axis is byte-equivalent",
+          "max_displacement_m": 8.5,
+          "new_length_m": 48.522910149966364,
+          "old_length_m": 57.022910149966364,
+          "start_after_map": [
+            145.15933482824863,
+            8.74596215848935
+          ],
+          "start_before_map": [
+            148.5,
+            2.5
+          ],
+          "start_displacement_m": 8.499870904198975,
+          "trimmed_original_station_m": 8.5
+        },
+        "rampe_2": {
+          "changed_station_extent_m": [
+            1.1966954499788096,
+            11.992285033729626
+          ],
+          "geometry": "cubic offset/turn, zero derivative at the 12 m join",
+          "join_station_m": 12.0,
+          "max_displacement_m": 1.7641396346360918,
+          "max_displacement_station_m": 3.6020000179109957,
+          "new_length_m": 59.5228968373938,
+          "old_length_m": 58.80044112416466,
+          "start_after_map": [
+            126.51,
+            31.62
+          ],
+          "start_before_map": [
+            126.51,
+            31.62
+          ],
+          "start_displacement_m": 0.0
+        }
+      },
+      "start_context": {
+        "rampe_11": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 26.8366657898226,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 5.690044836418157,
+            "outside_map": false,
+            "wall_centerline_distance_m": 1.978173173841327,
+            "water_polygon_distance_m": 1.9653573401274684
+          },
+          "start_GB_m": 11.659029960632324,
+          "start_distance_m": {
+            "build_zone_polygon": 28.105957632695553,
+            "wall_centerline": 3.6756271370633486,
+            "water_polygon": 6.191201793898358
+          },
+          "start_map": [
+            145.15933482824863,
+            8.74596215848935
+          ]
+        },
+        "rampe_2": {
+          "runout_4m_context": {
+            "along_extent_m": [
+              -1.2,
+              4.0
+            ],
+            "build_zone_polygon_distance_m": 15.88711798160755,
+            "half_width_m": 3.0,
+            "intersects_build_zone": false,
+            "intersects_water": false,
+            "map_edge_clearance_m": 33.44803152296869,
+            "outside_map": false,
+            "wall_centerline_distance_m": 1.3239001506885353,
+            "water_polygon_distance_m": 8.855833469298819
+          },
+          "start_GB_m": 12.469809532165527,
+          "start_distance_m": {
+            "build_zone_polygon": 18.925202244626075,
+            "wall_centerline": 6.050005619832112,
+            "water_polygon": 13.845550909949383
+          },
+          "start_map": [
+            126.51,
+            31.62
+          ]
+        }
+      },
+      "transfer_sha256": "570a743851c81ff3cd16fa05927f577581a681dd8cc549463c1f0d330e0a9ab3"
+    }
+  }
+}

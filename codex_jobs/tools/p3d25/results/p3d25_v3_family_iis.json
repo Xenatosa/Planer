@@ -1,0 +1,351 @@
+{
+  "binding_groups_all_open": [
+    "endpoint_r8a_extra_m"
+  ],
+  "diagnosis": "p3d23 family deletion filter; empty Round00 event-cut list; serial; 600 s per solve",
+  "minimal_endpoint_r8a_family_supported": true,
+  "r8_center_unrounded_map": [
+    152.542343213612,
+    28.498904890126923
+  ],
+  "runs": [
+    {
+      "constraints": 23962,
+      "enabled_groups": [
+        "r3_long",
+        "r3_quer",
+        "r3_wob",
+        "crossing_stage",
+        "axis_supports",
+        "plane_core",
+        "endpoint_stage",
+        "safety_gitter",
+        "safety_quer",
+        "safety_single_quer",
+        "g5",
+        "r5_hole",
+        "r4",
+        "grade_cross",
+        "grade_same",
+        "endpoint_r8a",
+        "plane_slope_polygon",
+        "plane_slope_box",
+        "variable_bounds",
+        "route_profile_slope",
+        "source_monotone",
+        "g11"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.07281341552734552,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51,
+              31.62
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              127.75,
+              31.0
+            ],
+            "b": [
+              127.75,
+              31.25
+            ],
+            "delta_m": 0.17281341552734553,
+            "limit_m": 0.1
+          }
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 2.2908758223749714e-13,
+          "pair": {
+            "a": [
+              154.75,
+              36.5
+            ],
+            "b": [
+              155.0,
+              36.5
+            ],
+            "delta_m": 0.05400000000022909,
+            "limit_m": 0.054
+          }
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 2.7977620220553945e-14,
+          "pair": {
+            "a_map": [
+              150.58422947112285,
+              31.914971270848657
+            ],
+            "b_map": [
+              150.8984874678338,
+              33.410137092125986
+            ],
+            "grade_limit_m": 0.8250307470284128,
+            "height_delta_m": 0.8250307470284408,
+            "pair_distance_m": 1.8334016600631395,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 37.8,
+            "station_b_m": 40.199999999999996
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.542343213612,
+            28.498904890126923
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.542343213612,
+            28.498904890126923
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 0.0,
+          "variable": null
+        }
+      },
+      "infeasibility_proven": false,
+      "label": "all_open",
+      "maximum_normalized_slack": 0.7281341552734374,
+      "model_json": "/workspace/wt_dorfmap_p3d25/codex_jobs/tools/p3d25/results/p3d25_v3_all_open.json",
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.07281341552734374,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "source_relief_sha256": "93b2e8508bbfe756cf8bc5da8520f77e65fbe28a7916db2349c1e3745c7660ec",
+      "status": "Optimal",
+      "status_code": 7,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "570a743851c81ff3cd16fa05927f577581a681dd8cc549463c1f0d330e0a9ab3",
+      "variables": 7855,
+      "weighted_l1_value": 0.7281341552734375
+    },
+    {
+      "constraints": 23962,
+      "enabled_groups": [
+        "endpoint_r8a"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.07281341552734552,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51,
+              31.62
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              128.25,
+              30.0
+            ],
+            "b": [
+              128.25,
+              30.25
+            ],
+            "delta_m": 0.17281341552734553,
+            "limit_m": 0.1
+          }
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 2.3748607247409126e-11,
+          "pair": {
+            "a": [
+              154.0,
+              34.25
+            ],
+            "b": [
+              154.0,
+              34.5
+            ],
+            "delta_m": 0.05400000002374861,
+            "limit_m": 0.054
+          }
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "plane_slope_box": {
+          "map": [
+            152.542343213612,
+            28.498904890126923
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.542343213612,
+            28.498904890126923
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 0.0,
+          "variable": null
+        }
+      },
+      "infeasibility_proven": false,
+      "label": "endpoint_only",
+      "maximum_normalized_slack": 0.7281341552734374,
+      "model_json": "/workspace/wt_dorfmap_p3d25/codex_jobs/tools/p3d25/results/p3d25_v3_endpoint_only.json",
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.07281341552734374,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "source_relief_sha256": "93b2e8508bbfe756cf8bc5da8520f77e65fbe28a7916db2349c1e3745c7660ec",
+      "status": "Optimal",
+      "status_code": 7,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "570a743851c81ff3cd16fa05927f577581a681dd8cc549463c1f0d330e0a9ab3",
+      "variables": 7855,
+      "weighted_l1_value": 0.7281341552734375
+    },
+    {
+      "constraints": 23962,
+      "enabled_groups": [
+        "r3_long",
+        "r3_quer",
+        "r3_wob",
+        "crossing_stage",
+        "axis_supports",
+        "plane_core",
+        "endpoint_stage",
+        "safety_gitter",
+        "safety_quer",
+        "safety_single_quer",
+        "g5",
+        "r5_hole",
+        "r4",
+        "grade_cross",
+        "grade_same",
+        "plane_slope_polygon",
+        "plane_slope_box",
+        "variable_bounds",
+        "route_profile_slope",
+        "source_monotone",
+        "g11"
+      ],
+      "family_max_relaxation_locations": null,
+      "infeasibility_proven": true,
+      "label": "all_except_endpoint",
+      "maximum_normalized_slack": null,
+      "model_json": "/workspace/wt_dorfmap_p3d25/codex_jobs/tools/p3d25/results/p3d25_v3_all_except_endpoint.json",
+      "optimality_proven": false,
+      "primal_feasible": false,
+      "slack_values": {
+        "axis_tolerance_extra_m": null,
+        "crossing_stage_extra_m": null,
+        "endpoint_r8a_extra_m": null,
+        "endpoint_stage_extra_m": null,
+        "g11_d1_extra_hits": null,
+        "g5_d1_extra_hits": null,
+        "g5_total_extra_hits": null,
+        "grade_cross_extra_m": null,
+        "grade_same_extra_m": null,
+        "plane_slope_box_extra_pp": null,
+        "plane_slope_polygon_extra_pp": null,
+        "plane_tolerance_extra_m": null,
+        "r3_long_extra_hits": null,
+        "r3_long_residual_m": null,
+        "r3_quer_extra_hits": null,
+        "r3_quer_residual_pp": null,
+        "r3_wob_extra_hits": null,
+        "r3_wob_residual_m": null,
+        "r4_d1_extra_hits": null,
+        "r5_d1_extra_hits": null,
+        "r5_total_extra_hits": null,
+        "route_profile_slope_extra_m": null,
+        "safety_gitter_extra_m": null,
+        "safety_quer_extra_pp": null,
+        "safety_single_quer_extra_pp": null,
+        "source_monotone_extra_m": null,
+        "variable_bounds_extra_m": null
+      },
+      "source_relief_sha256": "93b2e8508bbfe756cf8bc5da8520f77e65fbe28a7916db2349c1e3745c7660ec",
+      "status": "Infeasible",
+      "status_code": 8,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "570a743851c81ff3cd16fa05927f577581a681dd8cc549463c1f0d330e0a9ab3",
+      "variables": 7855,
+      "weighted_l1_value": null
+    }
+  ],
+  "source_relief": "/tmp/relief_p3d25_v3_source.json.gz",
+  "tag": "p3d25",
+  "transfer_base": "/workspace/wt_dorfmap_p3d25/team/art/dorfmap_grundgeruest/relief3d/neu/p3d25_start_v3_transfer.json",
+  "variant": "3"
+}
