@@ -24,9 +24,11 @@ VARIANTS = {
     # then rejoin smoothly before 10.8 m.
     "2": {"name": "left_contour_shift", "start_shift_m": 1.2,
           "initial_turn_deg": 0.0, "join_m": JOIN_M},
-    # Combine a smaller start shift and a gentler contour turn.
-    "3": {"name": "shift_plus_contour_leadin", "start_shift_m": 1.2,
-          "initial_turn_deg": 30.0, "join_m": JOIN_M},
+    # Move 1.2 m down the original axis, then turn the lead-in 45 degrees
+    # toward the south side and rejoin smoothly before 10.8 m.
+    "3": {"name": "axis_shift_plus_flatter_leadin", "start_shift_m": 1.2,
+          "start_shift_direction": "axis", "initial_turn_deg": -45.0,
+          "join_m": JOIN_M},
 }
 
 
@@ -45,6 +47,13 @@ def apply(raw_path: list[list[float]], variant: dict) -> tuple[np.ndarray, dict]
     tangent = old[1] - old[0]
     tangent /= max(float(np.linalg.norm(tangent)), 1e-12)
     left = np.array([-tangent[1], tangent[0]], dtype=np.float64)
+    shift_direction_name = str(variant.get("start_shift_direction", "left"))
+    if shift_direction_name == "left":
+        shift_direction = left
+    elif shift_direction_name == "axis":
+        shift_direction = tangent
+    else:
+        raise ValueError(f"Unbekannte Startverschieberichtung: {shift_direction_name}")
     turn = np.deg2rad(float(variant["initial_turn_deg"]))
     start_shift = float(variant["start_shift_m"])
 
@@ -55,7 +64,7 @@ def apply(raw_path: list[list[float]], variant: dict) -> tuple[np.ndarray, dict]
         u = min(max(float(s / join), 0.0), 1.0)
         shift = start_shift * (1.0 - 3.0 * u * u + 2.0 * u * u * u)
         lead = np.tan(turn) * s * (1.0 - u) ** 2
-        new[i] += (shift + lead) / CELL_M * left
+        new[i] += (shift * shift_direction + lead * left) / CELL_M
 
     new_station = route_station(new)
     changed = np.linalg.norm((new - old) * CELL_M, axis=1) > 1e-10
@@ -63,6 +72,7 @@ def apply(raw_path: list[list[float]], variant: dict) -> tuple[np.ndarray, dict]
         "name": variant["name"],
         "join_station_original_m": join,
         "start_shift_m": start_shift,
+        "start_shift_direction": shift_direction_name,
         "initial_turn_deg": float(variant["initial_turn_deg"]),
         "start_before_map": old[0].tolist(),
         "start_after_map": new[0].tolist(),

@@ -1,0 +1,391 @@
+{
+  "tag": "p3d24",
+  "base": "origin/art/dorfmap-p3d23@328c8f7",
+  "branch": "art/dorfmap-p3d24",
+  "variant_count": 3,
+  "variants": [
+    {
+      "variant": 1,
+      "name": "same_start_contour_leadin",
+      "source_sha256": "0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2",
+      "start_before_map": [
+        126.51000020929992,
+        31.620001726724226
+      ],
+      "start_after_map": [
+        126.51000020929992,
+        31.620001726724226
+      ],
+      "start_displacement_m": 0.0,
+      "max_displacement_m": 1.59999962964943,
+      "max_displacement_station_m": 3.602000131743994,
+      "changed_station_extent_m": [
+        1.196695449998463,
+        10.795831762318649
+      ],
+      "first_10_8m_length_before_m": 10.795831762318649,
+      "first_10_8m_length_after_m": 11.436277131552762,
+      "full_route_length_before_m": 58.877853525882784,
+      "full_route_length_after_m": 59.518298844737345,
+      "initial_turn_deg": 45.0,
+      "all_other_source_fields_unchanged": true,
+      "rampe_11_unchanged": true,
+      "start_GB_m": 12.469809532165527,
+      "profile_summary": {
+        "axis_fall_0_to_10m_m": 1.36960818410836,
+        "axis_fall_0_to_4m_m": 0.3357071375718288,
+        "max_abs_target_segment_grade_pct_0_to_10m": 32.25041736275943,
+        "terrain_fall_0_to_4m_m": 0.3225247065226231
+      },
+      "start_distances_m": {
+        "build_zone_polygon": 18.92520016834896,
+        "nearest_wall_centerline": {
+          "distance_m": 6.050007262603061,
+          "name": "Nord"
+        },
+        "water_polygon": 13.845552915339116
+      },
+      "runout_4m_context": {
+        "build_zone_polygon": 15.858969232539382,
+        "intersects_build_zone": false,
+        "intersects_water": false,
+        "nearest_wall_centerline": 1.285578972635766,
+        "water_polygon": 8.867891861363765
+      },
+      "all_families_hard": {
+        "status": "Infeasible",
+        "status_code": 8,
+        "proven_infeasible": true,
+        "variables": 7887,
+        "constraints": 25782,
+        "time_limit_s": 600.0
+      },
+      "family_diagnosis": {
+        "minimal_endpoint_r8a_family_supported": true,
+        "runs": [
+          {
+            "label": "all_open",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.07281341552734374,
+            "max_pair": {
+              "a": [
+                148.0,
+                2.25
+              ],
+              "b": [
+                148.0,
+                2.5
+              ],
+              "delta_m": 0.1728134155273775,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.0728134155273775,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                148.5,
+                2.5
+              ],
+              "route": 11
+            }
+          },
+          {
+            "label": "endpoint_only",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.07281341552734374,
+            "max_pair": {
+              "a": [
+                128.0,
+                30.25
+              ],
+              "b": [
+                128.0,
+                30.5
+              ],
+              "delta_m": 0.17281341552734553,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.07281341552734552,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                126.51000020929992,
+                31.620001726724226
+              ],
+              "route": 2
+            }
+          },
+          {
+            "label": "all_except_endpoint",
+            "status": "Infeasible",
+            "status_code": 8,
+            "r8a_extra_m": null,
+            "max_pair": null,
+            "maximum_violation_m": null,
+            "nearest_endpoint": null
+          }
+        ]
+      },
+      "official_float32_probe": "not_run_all_hard_infeasible",
+      "mesh_built": false
+    },
+    {
+      "variant": 2,
+      "name": "left_contour_shift",
+      "source_sha256": "2b90920af2541b561a639a49c9b03d30f80fcd827cb125ab57d7dcc0052acb97",
+      "start_before_map": [
+        126.51000020929992,
+        31.620001726724226
+      ],
+      "start_after_map": [
+        126.63032588804923,
+        32.61273619828926
+      ],
+      "start_displacement_m": 1.1999999999999966,
+      "max_displacement_m": 1.1999999999999966,
+      "max_displacement_station_m": 0.0,
+      "changed_station_extent_m": [
+        0.0,
+        10.795831762318649
+      ],
+      "first_10_8m_length_before_m": 10.795831762318649,
+      "first_10_8m_length_after_m": 10.873117573740846,
+      "full_route_length_before_m": 58.877853525882784,
+      "full_route_length_after_m": 58.95513932050939,
+      "initial_turn_deg": 0.0,
+      "all_other_source_fields_unchanged": true,
+      "rampe_11_unchanged": true,
+      "start_GB_m": 12.475641250610352,
+      "profile_summary": {
+        "axis_fall_0_to_10m_m": 1.39088547185861,
+        "axis_fall_0_to_4m_m": 0.34384479293136216,
+        "max_abs_target_segment_grade_pct_0_to_10m": 34.61510938607633,
+        "terrain_fall_0_to_4m_m": 0.4228375752766933
+      },
+      "start_distances_m": {
+        "build_zone_polygon": 17.731926324624318,
+        "nearest_wall_centerline": {
+          "distance_m": 6.9889157204090395,
+          "name": "Nord"
+        },
+        "water_polygon": 15.002186712958181
+      },
+      "runout_4m_context": {
+        "build_zone_polygon": 14.587668691657807,
+        "intersects_build_zone": false,
+        "intersects_water": false,
+        "nearest_wall_centerline": 2.211064026984707,
+        "water_polygon": 11.715235583750705
+      },
+      "all_families_hard": {
+        "status": "Infeasible",
+        "status_code": 8,
+        "proven_infeasible": true,
+        "variables": 7885,
+        "constraints": 25879,
+        "time_limit_s": 600.0
+      },
+      "family_diagnosis": {
+        "minimal_endpoint_r8a_family_supported": true,
+        "runs": [
+          {
+            "label": "all_open",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.41512241363525393,
+            "max_pair": {
+              "a": [
+                127.75,
+                33.25
+              ],
+              "b": [
+                127.75,
+                33.5
+              ],
+              "delta_m": 0.5151224136352557,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.4151224136352557,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                126.63032588804923,
+                32.61273619828926
+              ],
+              "route": 2
+            }
+          },
+          {
+            "label": "endpoint_only",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.41512241363525393,
+            "max_pair": {
+              "a": [
+                127.75,
+                33.25
+              ],
+              "b": [
+                127.75,
+                33.5
+              ],
+              "delta_m": 0.5151224136352557,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.4151224136352557,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                126.63032588804923,
+                32.61273619828926
+              ],
+              "route": 2
+            }
+          },
+          {
+            "label": "all_except_endpoint",
+            "status": "Infeasible",
+            "status_code": 8,
+            "r8a_extra_m": null,
+            "max_pair": null,
+            "maximum_violation_m": null,
+            "nearest_endpoint": null
+          }
+        ]
+      },
+      "official_float32_probe": "not_run_all_hard_infeasible",
+      "mesh_built": false
+    },
+    {
+      "variant": 3,
+      "name": "axis_shift_plus_flatter_leadin",
+      "source_sha256": "be8d02133deeb9f8a49a5707c06d88c40f10fef64ee7b8e1f52857490cf614f1",
+      "start_before_map": [
+        126.51000020929992,
+        31.620001726724226
+      ],
+      "start_after_map": [
+        127.50273468086496,
+        31.499676047974916
+      ],
+      "start_displacement_m": 1.200000000000005,
+      "max_displacement_m": 1.8301900181906128,
+      "max_displacement_station_m": 3.602000131743994,
+      "changed_station_extent_m": [
+        0.0,
+        10.795831762318649
+      ],
+      "first_10_8m_length_before_m": 10.795831762318649,
+      "first_10_8m_length_after_m": 10.294969976151894,
+      "full_route_length_before_m": 58.877853525882784,
+      "full_route_length_after_m": 58.376991254258,
+      "initial_turn_deg": -45.0,
+      "all_other_source_fields_unchanged": true,
+      "rampe_11_unchanged": true,
+      "start_GB_m": 12.376370429992676,
+      "profile_summary": {
+        "axis_fall_0_to_10m_m": 1.4118610914981993,
+        "axis_fall_0_to_4m_m": 0.348980221093953,
+        "max_abs_target_segment_grade_pct_0_to_10m": 30.892508170966266,
+        "terrain_fall_0_to_4m_m": 0.4658924738566075
+      },
+      "start_distances_m": {
+        "build_zone_polygon": 18.530880633908993,
+        "nearest_wall_centerline": {
+          "distance_m": 6.790270670643191,
+          "name": "Nord"
+        },
+        "water_polygon": 14.225102177341059
+      },
+      "runout_4m_context": {
+        "build_zone_polygon": 14.306299922126827,
+        "intersects_build_zone": false,
+        "intersects_water": false,
+        "nearest_wall_centerline": 3.489882969902331,
+        "water_polygon": 11.041830460558495
+      },
+      "all_families_hard": {
+        "status": "Infeasible",
+        "status_code": 8,
+        "proven_infeasible": true,
+        "variables": 7883,
+        "constraints": 25539,
+        "time_limit_s": 600.0
+      },
+      "family_diagnosis": {
+        "minimal_endpoint_r8a_family_supported": true,
+        "runs": [
+          {
+            "label": "all_open",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.18307294845581054,
+            "max_pair": {
+              "a": [
+                147.5,
+                2.5
+              ],
+              "b": [
+                147.5,
+                2.75
+              ],
+              "delta_m": 0.2830729484561587,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.1830729484561587,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                148.5,
+                2.5
+              ],
+              "route": 11
+            }
+          },
+          {
+            "label": "endpoint_only",
+            "status": "Optimal",
+            "status_code": 7,
+            "r8a_extra_m": 0.18307294845581054,
+            "max_pair": {
+              "a": [
+                147.5,
+                2.5
+              ],
+              "b": [
+                147.75,
+                2.5
+              ],
+              "delta_m": 0.28307294845598463,
+              "limit_m": 0.1
+            },
+            "maximum_violation_m": 0.18307294845598462,
+            "nearest_endpoint": {
+              "endpoint": "start",
+              "map": [
+                148.5,
+                2.5
+              ],
+              "route": 11
+            }
+          },
+          {
+            "label": "all_except_endpoint",
+            "status": "Infeasible",
+            "status_code": 8,
+            "r8a_extra_m": null,
+            "max_pair": null,
+            "maximum_violation_m": null,
+            "nearest_endpoint": null
+          }
+        ]
+      },
+      "official_float32_probe": "not_run_all_hard_infeasible",
+      "mesh_built": false
+    }
+  ],
+  "official_gates_run": false,
+  "mesh_built": false
+}

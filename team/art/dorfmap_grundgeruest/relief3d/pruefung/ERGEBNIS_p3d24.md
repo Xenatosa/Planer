@@ -66,3 +66,56 @@ Variante 2 versetzt den Start 1,2 m entlang der linken Achsnormalen nach Norden 
 `[R]` Das all-open- und endpoint-only-Maximum liegt am neuen Start von `rampe_2`: `127,75|33,25`–`127,75|33,50`, Höhendifferenz `0,515122 m` statt `0,10 m`. Gegenüber V3 p3d23 steigt der minimale Schlupf um `0,342837 m`; Variante 2 verfehlt R8a deutlich.
 
 Belege: [`p3d24_start_v2_manifest.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_start_v2_manifest.json), [`p3d24_v2_start_context.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_start_context.json), [`p3d24_v2_all_hard.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_all_hard.json), [`p3d24_v2_family_iis.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v2_family_iis.json). Eine offizielle Float32-Probe wurde nicht gestartet.
+
+
+## Variante 3 und Abschluss der drei Kandidaten
+
+Variante 3 kombiniert einen Startversatz von 1,2 m entlang der ursprünglichen Achse mit einem 45°-Anlauf nach Süden und dem weichen Anschluss an die unveränderte Achse spätestens bei Altstation 10,8 m. `[S]` Start `126,5100|31,6200` → `127,5027|31,4997`; größte Verschiebung **1,830 m** an Altstation 3,602 m (`129,4900|31,2601` → `130,0647|29,8474`). Die Länge der ersten 10,8 m Achse sinkt von 10,796 auf 10,295 m; die Gesamtlänge von `rampe_2` sinkt von 58,878 auf 58,377 m. Nur `rampenwege[2]` wurde geändert, `rampe_11` bleibt byte-/semantisch unverändert. Quellrelief-SHA-256: `be8d02133deeb9f8a49a5707c06d88c40f10fef64ee7b8e1f52857490cf614f1`.
+
+`[S]` Der Start liegt auf GB-Höhe 12,37637 m; im ersten 4-m-Achsenabschnitt fällt das Quellgelände 0,46589 m, und über 10 m fällt das Zielprofil 1,41186 m. Startabstände: Wand-Mittellinie 6,790 m, Wasser 14,225 m, Bauzone 18,531 m. Der näherungsweise 4-m-Auslaufbereich schneidet weder Wasser noch Bauzone; seine Mindestabstände betragen 3,490 m zur Wand-Mittellinie, 11,042 m zum Wasser und 14,306 m zur Bauzone. Wandabstände beziehen sich auf Vektor-Mittellinien, nicht Wandflächen.
+
+| Variante | Start vorher → nachher | größte Verschiebung / lokaler Verlauf | alle Familien hart | bindende Familie und minimaler Schlupf | offizieller Float32-Probelauf |
+|---|---|---|---|---|---|
+| 1 — Konturanlauf am selben Start | `126,5100|31,6200` → gleich | 1,600 m bei Altstation 3,602 m; erste 10,8 m Achse 10,796 → 11,436 m; volle Route 58,878 → 59,518 m | infeasible, HiGHS 8; 7.887 Variablen / 25.782 Zeilen | `{endpoint_r8a}`, **0,072813 m** Zusatzschlupf; `all_open`-Maximum an `rampe_11`, `endpoint_only`-Maximum gleich hoch an `rampe_2` | nicht ausgeführt |
+| 2 — Start 1,2 m seitlich nach Norden | `126,5100|31,6200` → `126,6303|32,6127` | 1,200 m am Start; erste 10,8 m Achse 10,796 → 10,873 m; volle Route 58,878 → 58,955 m | infeasible, HiGHS 8; 7.885 Variablen / 25.879 Zeilen | `{endpoint_r8a}`, **0,415122 m**; maximales Paar am neuen `rampe_2`-Start: `127,75|33,25`–`127,75|33,50`, Differenz 0,515122 m | nicht ausgeführt |
+| 3 — 1,2 m entlang der Achse plus Anlauf nach Süden | `126,5100|31,6200` → `127,5027|31,4997` | 1,830 m bei Altstation 3,602 m; erste 10,8 m Achse 10,796 → 10,295 m; volle Route 58,878 → 58,377 m | infeasible, HiGHS 8; 7.883 Variablen / 25.539 Zeilen | `{endpoint_r8a}`, **0,183073 m**; maximales Paar liegt nun am unveränderten `rampe_11`-Start: `147,50|2,50`–`147,50|2,75`, Differenz 0,283073 m | nicht ausgeführt |
+
+`[R]` Für jede Variante ist die Familien-IIS-Diagnose dieselbe: `all_open` und `endpoint_only` sind optimal mit R8a-Schlupf; `all_except_endpoint` ist infeasible. Damit ist im p3d23-Familienmodell ausschließlich die Endpunkt-R8a-Familie bindend, aber die Lage ihres Maximums wechselt je nach Variante. Die kleinste p3d24-Schlupfzahl hat Variante 1; sie liegt dennoch 0,000528 m über dem V3-p3d23-Wert 0,072285 m und erfüllt die 0,10-m-Paargrenze nicht. Alle R8a-Solverreste stehen in [`p3d24_variantenvergleich.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_variantenvergleich.json) und den je Variante gespeicherten `all_open`, `endpoint_only`, `all_except_endpoint`, `all_hard`- und `family_iis`-JSONs.
+
+### Offizielle Gatezahlen, Mesh und Kachelstand
+
+`[S]` Keine Variante besteht den vorgeschriebenen Vorab-Solve mit allen Familien hart. Daher wurde für keine Variante die offizielle Float32-Probe gestartet. Das ist ein bewusster Abbruchpunkt der Auftragslogik, keine fehlende Probe nach einer machbaren Variante.
+
+| Messgröße | letzter verfügbarer offizieller Vergleich (p3d23 V24, Runde 2) | p3d24 Varianten 1/2/3 |
+|---|---:|---|
+| `pruefe_regeln` gesamt | 614; historischer Stand `9d3f8fc` 596, aktueller p3d17-Replay 600 | nicht gemessen — keine offizielle Probe |
+| R8 gesamt `Stufe/Gitter/Quer/Wegende` | `9/11/7/21`, Summe 48 | nicht gemessen |
+| R9 gesamt `Delle/Sägezahn/Wellen` | `35/34/275`, Summe 344 | nicht gemessen |
+| R3 D1 `längs/quer/Wölbung` | `6/7/7` | nicht gemessen |
+| G5 gesamt / D1 | `75/8` (Ziel `≤69/≤2`) | nicht gemessen |
+| R5-Loch gesamt / D1 | `46/29` (Ziel `≤22/≤5`) | nicht gemessen |
+| R4-Schlucht D1 | `0` | nicht gemessen |
+| G11-Objekt gesamt / D1 | `4/2` | nicht gemessen |
+| G11-Baum/Wand gesamt / D1 | `11/11` | nicht gemessen |
+
+Die rechte Spalte ist ausdrücklich **kein p3d24-Ergebnis**. Die linke Spalte ist nur der p3d23-V24-Vergleich und belegt bereits Überschreitungen der alten Plus-5-Grenzen für G5 und R5-Loch sowie von R9-Delle; sie wird nicht als p3d24-Probe ausgegeben. Der komplette verfügbare Vergleich je Regel (historisch, letzter p3d23-Stand und Annahmen für neue Kategorien) ist in [`ERGEBNIS_p3d23.md`](ERGEBNIS_p3d23.md) aufgeführt; p3d24 hat mangels offizieller Probe für **jede** dieser Regeln keinen Nachher-Zähler. Damit sind weder „höchstens +5 je Regel“ noch die übrigen offiziellen Ziele für eine p3d24-Variante verifiziert.
+
+| Kachel / Werte | letzter verfügbarer offizieller Vergleich p3d23 Runde 2 | p3d24 Varianten 1/2/3 |
+|---|---|---|
+| D1 | R8 `2/3/3/1`; R9 `13/1/13`; R3 `6/7/7`; `pruefe_regeln`: u. a. G11 Baum/Wand 11, G11-Objekt 2, G5 8, G6 2, R5 29 | keine D1-Kachelprobe |
+| G1 | R8 `0/0/0/0`; R9 `0/1/12`; `pruefe_regeln`: G11-Objekt 2, G6 3, R1-blind 1, R3-längs 1, R6 3, T1 3 | keine G1-Kachelprobe |
+| D2 | R8 `0/0/0/0`; R9 `0/0/0`; `pruefe_regeln`: R2 1, T1 7; Höhenhash `749d3c4b…` | keine D2-Kachelprobe; D2-Nulländerung ist nicht offiziell nachgemessen |
+
+`[S]` Alle drei Kandidatenmanifeste bestätigen, dass nur `rampenwege[2]` geändert wurde; die übrigen Quellfelder, alle anderen Rampen und `rampe_11` sind unverändert. Die D2-Quelle wurde nicht geändert, aber mangels Probe kann ich keine unveränderten D2-Prüferzähler behaupten. Es wurde kein Mesh gebaut; folglich gibt es für p3d24 keine Mesh-Gatewerte, kein `delta.py`, keinen LOD1-Zähler, keine `pytest`-/xvfb-/Lochscan-Ausgabe, keine `t42u`-Neuberechnung und keine geforderten Vergleichsbilder. `t42u=0` und `lod1<1,3 M` sind in diesem Ergebnis nicht neu bestätigt.
+
+### Annahmen, Grenzen und offene Punkte
+
+- `[A]` Der 4-m-Auslaufabstand nutzt den in den Messartefakten dokumentierten Näherungs-Footprint; Wandabstände sind zu Mittellinien. Das ersetzt keine gerenderte Mesh- oder offizielle Prüfermessung.
+- `[R]` Die Modell-IIS ist eine Gruppenlöschdiagnose (p3d23-Familienmodell mit Round00-leerer Ereignisschnittliste), keine row-level IIS und kein offizieller Höhenfeld-Gatebeweis. Ihre Minimalitätsaussage gilt für diese Modellformulierung und diese drei Quellgeometrien.
+- `[R]` Die p3d23-Ausgangsdiagnose ordnete das größte 0,172285-m-Paar dem Startauslauf von `rampe_2` zu. In den p3d24-Neuberechnungen liegt das maximale R8a-Paar bei Variante 1 zugleich an `rampe_2` und `rampe_11`, bei Variante 3 an `rampe_11`, obwohl `rampe_11` unverändert ist. Diese Abweichung muss vor einer nächsten lokalen Änderung an `rampe_2` im Modell-/Paarumfang geklärt werden; eine vierte Variante wurde nicht angelegt.
+- `[S]` Erlaubt waren höchstens drei Varianten. Alle wurden erzeugt und mit 600-s-Solverlimit seriell diagnostiziert. Kein offizieller Prüfer, Schwellwert, Zellquellwert, Overlay, Referenz, Ebenenkern, G1- oder D2-Quellfeld wurde geändert. Es wurden keine Kosten verursacht.
+- Offene Punkte: End-to-end-Erreichbarkeit der R8a-Paargrenze ist nicht nachgewiesen; offizielle p3d24-Probezahlen, D1/G1/D2-Nachherzähler, Mesh-Bildvergleich, `delta.py`, LOD1, `t42u` und `pytest` fehlen absichtlich, weil alle Kandidaten im vorgeschalteten Modell infeasible waren.
+
+## Drei-Satz-Schluss
+
+`[S]` Alle drei erlaubten lokalen Startvarianten sind im gemeinsamen harten Familienmodell infeasible; ihre minimalen R8a-Schlupfe betragen 0,072813 m, 0,415122 m und 0,183073 m, sodass keine offizielle Float32-Probe oder ein Meshbau zulässig wurde. `[R]` Variante 1 ist nach Schlupf die beste getestete Geometrie, verfehlt aber die offizielle 0,10-m-Grenze, und die p3d24-Modelle lokalisieren zusätzlich ein maximales R8a-Paar am unveränderten Start von `rampe_11`, abweichend von der p3d23-Lokalisierung. `[A]` Deshalb bleibt das Ziel unerreicht; vor einer weiteren, separat freigegebenen Wegänderung müssen Paarumfang und R8a-Diagnose geklärt werden, und p3d24 besitzt keine offiziellen Nachher-, Mesh-, Kachel- oder Bildwerte.
