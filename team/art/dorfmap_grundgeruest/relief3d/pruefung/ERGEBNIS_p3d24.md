@@ -40,3 +40,17 @@ Marker: `[S]` direkt gemessen oder ausgeführter Prüfer-/Modellwert · `[R]` Di
 - `[R]` Paarorte und Modellrest stammen aus dem p3d23-Familienmodell und dem p3d23-Bericht. Die Abstände der Paarorte zum Start sowie GB-Höhendifferenzen wurden hier neu berechnet.
 - `[A]` Das 4-m-Auslaufkern-Rechteck approximiert den physischen Vollgewichtbereich. Der Prüfer verwendet ein eigenes Raster; seine seitliche Geometrie ist in der Messung separat am p3d23-Diagnosekorridor dokumentiert.
 - Noch nicht ausgeführt: p3d24-Varianten, Solver-IIS je Kandidat, offizielle Float32-Proben, kompletter Gate-Lauf, Mesh, `delta.py`, Tests, LOD1, `t42u` und Bilder.
+
+## Kalibrierung und Variante 1
+
+`[S]` Vor den Varianten wurde die offizielle R3-Kalibrierung mit der unveränderten p3d17-v22-Referenz wiederholt. Das rekonstruierte D1-Höhenfeld ist bytegleich (SHA-256 `26b849f6384993d5029b58dc08f6c657406785e26939f7c172a0d8fafe1ace29`); der offizielle Prüfer zählt D1 R3 `6/17/19` (längs/quer/Wölbung). Beleg: [`p3d24_R3_calibration.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_R3_calibration.json).
+
+Variante 1 hält den Startpunkt `126,5100|31,6200` fest. Die Achse wird bis 10,8 m mit einem 45°-Konturanlauf geführt und weich an die V3-Achse angeschlossen. `[S]` Größte Verschiebung: bei Altstation 3,603 m von `129,4900|31,2601` nach `129,6504|32,5838`, **1,600 m**; die veränderten Quellpunkte reichen von 1,197 bis 10,796 m. Die lokale Achslänge wächst von 10,796 auf 11,436 m. Nur `rampenwege[2]` änderte sich; `rampe_11` und alle übrigen Reliefquellfelder blieben gleich. Neuer Quellrelief-SHA-256: `0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2`.
+
+| Variante | Start vorher → nachher | größte Verschiebung | alle Familien hart | bindende Familie / minimaler Schlupf | offizielle Probe |
+|---|---|---:|---|---|---|
+| 1 — Konturanlauf am selben Start | `126,5100|31,6200` → `126,5100|31,6200` | 1,600 m bei `129,4900|31,2601` → `129,6504|32,5838` | infeasible, HiGHS 8 (`7.887` Variablen / `25.782` Zeilen) | `{endpoint_r8a}`; all-open und endpoint-only optimal, **0,072813 m**; all-except-endpoint infeasible | nicht ausgeführt, harte Machbarkeit verfehlt |
+
+`[R]` Der all-open-Schlupf betrifft weiterhin nur `endpoint_r8a`. Das all-open-Maximum liegt bei `148,00|2,25`–`148,00|2,50` (Rest `0,072813 m`, nächster Endpunkt `rampe_11` Start); die endpoint-only-Gegenprobe lokalisiert ein gleich großes Paar am neuen Start von `rampe_2`, `128,00|30,25`–`128,00|30,50` (`0,172813 m` statt `0,10 m`). Gegenüber V3 p3d23 steigt der erforderliche Schlupf um `0,000528 m`; Variante 1 erfüllt das R8a-Ziel nicht.
+
+Belege: [`p3d24_start_v1_manifest.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_start_v1_manifest.json), [`p3d24_v1_all_hard.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v1_all_hard.json), [`p3d24_v1_family_iis.json`](../../../../../codex_jobs/tools/p3d24/results/p3d24_v1_family_iis.json). Das angeforderte offizielle Float32-Gate wurde nicht gestartet, weil der all-families-hart Solve infeasible ist.

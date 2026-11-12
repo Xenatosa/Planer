@@ -1,0 +1,151 @@
+{
+  "all_other_source_fields_unchanged": true,
+  "input_source_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "other_rampenwege_semantically_unchanged": true,
+  "output_source": "/tmp/p3d24_start_v1_source.json.gz",
+  "output_source_sha256": "0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2",
+  "rampe_11_unchanged": true,
+  "rampe_2": {
+    "changed_station_extent_m": [
+      1.196695449998463,
+      10.795831762318649
+    ],
+    "changed_vertex_count": 9,
+    "changed_vertices": [
+      {
+        "after_map": [
+          127.59487651252223,
+          32.282768777695374
+        ],
+        "before_map": [
+          127.50000089694868,
+          31.500007399826497
+        ],
+        "displacement_m": 0.9461882107929935,
+        "station_before_m": 1.196695449998463
+      },
+      {
+        "after_map": [
+          128.63541037797833,
+          32.57969316670733
+        ],
+        "before_map": [
+          128.49000351475146,
+          31.380028996699316
+        ],
+        "displacement_m": 1.450132986457197,
+        "station_before_m": 2.393390900262055
+      },
+      {
+        "after_map": [
+          129.65044695009271,
+          32.583750834094424
+        ],
+        "before_map": [
+          129.49001274889588,
+          31.26010517839085
+        ],
+        "displacement_m": 1.59999962964943,
+        "station_before_m": 3.602000131743994
+      },
+      {
+        "after_map": [
+          130.62861616298483,
+          32.36614214665507
+        ],
+        "before_map": [
+          130.48004173203492,
+          31.140344289288038
+        ],
+        "displacement_m": 1.4817229289131921,
+        "station_before_m": 4.798695616627341
+      },
+      {
+        "after_map": [
+          131.58910194317113,
+          32.00263811928532
+        ],
+        "before_map": [
+          131.4701249093714,
+          31.02103050231417
+        ],
+        "displacement_m": 1.1865500535187283,
+        "station_before_m": 5.995391354081826
+      },
+      {
+        "after_map": [
+          132.54077429410432,
+          31.556419759335085
+        ],
+        "before_map": [
+          132.46034227387904,
+          30.89282375950189
+        ],
+        "displacement_m": 0.80214319398464,
+        "station_before_m": 7.1935704112097465
+      },
+      {
+        "after_map": [
+          133.5023927334803,
+          31.11975648727102
+        ],
+        "before_map": [
+          133.46086392793055,
+          30.777127405426864
+        ],
+        "displacement_m": 0.41416401866735175,
+        "station_before_m": 8.402196940069677
+      },
+      {
+        "after_map": [
+          134.4638785731395,
+          30.76450293956204
+        ],
+        "before_map": [
+          134.4519749339701,
+          30.666293205252682
+        ],
+        "displacement_m": 0.11871420258574754,
+        "station_before_m": 9.598943677921174
+      },
+      {
+        "after_map": [
+          135.44412831739038,
+          30.56405861853087
+        ],
+        "before_map": [
+          135.44412815614376,
+          30.56405728818243
+        ],
+        "displacement_m": 1.608101836478673e-06,
+        "station_before_m": 10.795831762318649
+      }
+    ],
+    "first_10_8m_axis_length_after_m": 12.633560470649627,
+    "first_10_8m_axis_length_before_m": 11.99311515179507,
+    "initial_turn_deg": 45.0,
+    "join_station_original_m": 10.8,
+    "max_displacement_m": 1.59999962964943,
+    "max_displacement_station_m": 3.602000131743994,
+    "name": "same_start_contour_leadin",
+    "new_first_10_8m_length_m": 11.436277131552762,
+    "new_full_length_m": 59.518298844737345,
+    "old_first_10_8m_length_m": 10.795831762318649,
+    "old_full_length_m": 58.877853525882784,
+    "start_after_map": [
+      126.51000020929992,
+      31.620001726724226
+    ],
+    "start_before_map": [
+      126.51000020929992,
+      31.620001726724226
+    ],
+    "start_displacement_m": 0.0,
+    "start_shift_m": 0.0
+  },
+  "rampenwege_other_than_2_unchanged": true,
+  "source_change_scope": "rampenwege[2] only",
+  "tag": "p3d24",
+  "variant": "1",
+  "variant_name": "same_start_contour_leadin"
+}

@@ -1,0 +1,375 @@
+{
+  "diagnosis": "p3d23 family deletion filter; empty Round00 event-cut list; serial; 600 s per solve",
+  "minimal_endpoint_r8a_family_supported": true,
+  "r8_center_unrounded_map": [
+    152.6292918620858,
+    28.353590994151514
+  ],
+  "runs": [
+    {
+      "constraints": 25782,
+      "enabled_groups": [
+        "r3_long",
+        "r3_quer",
+        "r3_wob",
+        "crossing_stage",
+        "axis_supports",
+        "plane_core",
+        "endpoint_stage",
+        "safety_gitter",
+        "safety_quer",
+        "safety_single_quer",
+        "g5",
+        "r5_hole",
+        "r4",
+        "grade_cross",
+        "grade_same",
+        "endpoint_r8a",
+        "plane_slope_polygon",
+        "plane_slope_box",
+        "variable_bounds",
+        "route_profile_slope",
+        "source_monotone",
+        "g11"
+      ],
+      "endpoint_R8a_pair_count": 2051,
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0728134155273775,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              148.5,
+              2.5
+            ],
+            "route": 11
+          },
+          "pair": {
+            "a": [
+              148.0,
+              2.25
+            ],
+            "b": [
+              148.0,
+              2.5
+            ],
+            "delta_m": 0.1728134155273775,
+            "limit_m": 0.1
+          }
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 2.706168622523819e-16,
+          "pair": {
+            "a": [
+              155.0,
+              36.0
+            ],
+            "b": [
+              155.25,
+              36.0
+            ],
+            "delta_m": 0.05400000000000027,
+            "limit_m": 0.054
+          }
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 2.220446049250313e-16,
+          "pair": {
+            "a_map": [
+              150.9752717965732,
+              31.179087730714834
+            ],
+            "b_map": [
+              152.44607254511865,
+              34.54086577532151
+            ],
+            "grade_limit_m": 1.9814988177251511,
+            "height_delta_m": 1.9814988177251514,
+            "pair_distance_m": 4.4033307060558915,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 45.3,
+            "station_b_m": 51.0
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 3.0819791163594346e-13,
+          "variable": {
+            "height_m": 4.232576847076108,
+            "kind": "route_height",
+            "lower_m": 4.232576847076416,
+            "map": [
+              150.269524844738,
+              28.744739611111232
+            ],
+            "route": 2,
+            "station_m": 29.4,
+            "upper_m": 8.232576847076416
+          }
+        }
+      },
+      "label": "all_open",
+      "maximum_normalized_slack": 0.7281341552734374,
+      "model_json": "/workspace/wt_dorfmap_p3d24/codex_jobs/tools/p3d24/results/p3d24_v1_all_open.json",
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.07281341552734374,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "source_relief_sha256": "0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2",
+      "status": "Optimal",
+      "status_code": 7,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "276276614a067b035456bab0620ea539eb9e70f42e82df712aed7c09569cf0d6",
+      "variables": 7887,
+      "weighted_l1_value": 0.7281341552734375
+    },
+    {
+      "constraints": 25782,
+      "enabled_groups": [
+        "endpoint_r8a"
+      ],
+      "endpoint_R8a_pair_count": 2051,
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.07281341552734552,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51000020929992,
+              31.620001726724226
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              128.0,
+              30.25
+            ],
+            "b": [
+              128.0,
+              30.5
+            ],
+            "delta_m": 0.17281341552734553,
+            "limit_m": 0.1
+          }
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 3.8018199699507704e-14,
+          "pair": {
+            "a": [
+              154.25,
+              36.0
+            ],
+            "b": [
+              154.25,
+              36.25
+            ],
+            "delta_m": 0.05400000000003802,
+            "limit_m": 0.054
+          }
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 2.220446049250313e-16,
+          "pair": {
+            "a_map": [
+              150.85712784423237,
+              31.39941023643154
+            ],
+            "b_map": [
+              152.244571437745,
+              34.39288839959399
+            ],
+            "grade_limit_m": 1.781665433561937,
+            "height_delta_m": 1.7816654335619373,
+            "pair_distance_m": 3.9592565190265265,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 45.6,
+            "station_b_m": 50.699999999999996
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 0.0,
+          "variable": null
+        }
+      },
+      "label": "endpoint_only",
+      "maximum_normalized_slack": 0.7281341552734374,
+      "model_json": "/workspace/wt_dorfmap_p3d24/codex_jobs/tools/p3d24/results/p3d24_v1_endpoint_only.json",
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.07281341552734374,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "source_relief_sha256": "0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2",
+      "status": "Optimal",
+      "status_code": 7,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "276276614a067b035456bab0620ea539eb9e70f42e82df712aed7c09569cf0d6",
+      "variables": 7887,
+      "weighted_l1_value": 0.7281341552734375
+    },
+    {
+      "constraints": 25782,
+      "enabled_groups": [
+        "r3_long",
+        "r3_quer",
+        "r3_wob",
+        "crossing_stage",
+        "axis_supports",
+        "plane_core",
+        "endpoint_stage",
+        "safety_gitter",
+        "safety_quer",
+        "safety_single_quer",
+        "g5",
+        "r5_hole",
+        "r4",
+        "grade_cross",
+        "grade_same",
+        "plane_slope_polygon",
+        "plane_slope_box",
+        "variable_bounds",
+        "route_profile_slope",
+        "source_monotone",
+        "g11"
+      ],
+      "endpoint_R8a_pair_count": null,
+      "family_max_relaxation_locations": null,
+      "label": "all_except_endpoint",
+      "maximum_normalized_slack": null,
+      "model_json": "/workspace/wt_dorfmap_p3d24/codex_jobs/tools/p3d24/results/p3d24_v1_all_except_endpoint.json",
+      "optimality_proven": false,
+      "primal_feasible": false,
+      "slack_values": {
+        "axis_tolerance_extra_m": null,
+        "crossing_stage_extra_m": null,
+        "endpoint_r8a_extra_m": null,
+        "endpoint_stage_extra_m": null,
+        "g11_d1_extra_hits": null,
+        "g5_d1_extra_hits": null,
+        "g5_total_extra_hits": null,
+        "grade_cross_extra_m": null,
+        "grade_same_extra_m": null,
+        "plane_slope_box_extra_pp": null,
+        "plane_slope_polygon_extra_pp": null,
+        "plane_tolerance_extra_m": null,
+        "r3_long_extra_hits": null,
+        "r3_long_residual_m": null,
+        "r3_quer_extra_hits": null,
+        "r3_quer_residual_pp": null,
+        "r3_wob_extra_hits": null,
+        "r3_wob_residual_m": null,
+        "r4_d1_extra_hits": null,
+        "r5_d1_extra_hits": null,
+        "r5_total_extra_hits": null,
+        "route_profile_slope_extra_m": null,
+        "safety_gitter_extra_m": null,
+        "safety_quer_extra_pp": null,
+        "safety_single_quer_extra_pp": null,
+        "source_monotone_extra_m": null,
+        "variable_bounds_extra_m": null
+      },
+      "source_relief_sha256": "0a84ecc8faea80cb73ec941438e054990e6361dd8ff96ea64d4732a843d512e2",
+      "status": "Infeasible",
+      "status_code": 8,
+      "time_limit_s": 600.0,
+      "transfer_base_sha256": "276276614a067b035456bab0620ea539eb9e70f42e82df712aed7c09569cf0d6",
+      "variables": 7887,
+      "weighted_l1_value": null
+    }
+  ],
+  "source_relief": "/tmp/p3d24_start_v1_source.json.gz",
+  "tag": "p3d24",
+  "transfer_base": "/workspace/wt_dorfmap_p3d24/team/art/dorfmap_grundgeruest/relief3d/neu/p3d24_start_v1.json",
+  "variant": "1"
+}

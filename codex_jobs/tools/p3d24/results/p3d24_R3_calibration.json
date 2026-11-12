@@ -1,0 +1,20 @@
+{
+  "D1_height_sha256": "26b849f6384993d5029b58dc08f6c657406785e26939f7c172a0d8fafe1ace29",
+  "calibration": "p3d17 v22 reference -> unchanged affine transfer -> official pruefe_regeln.py",
+  "expected_official_R3_D1_counts": {
+    "R3_laengs_m": 6,
+    "R3_quer_pct": 17,
+    "R3_woelb_m": 19
+  },
+  "gate_input": "/tmp/gate_loch_p3d24_r3.json.gz",
+  "matches": true,
+  "official_R3_D1_counts": {
+    "R3_laengs_m": 6,
+    "R3_quer_pct": 17,
+    "R3_woelb_m": 19
+  },
+  "p3d17_D1_hash_matches_reference": true,
+  "reconstructed_mesh_byte_equal": true,
+  "rules_output": "/tmp/regeln_p3d24_r3.json",
+  "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88"
+}
