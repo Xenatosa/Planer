@@ -1,0 +1,67 @@
+{
+  "all_nonroute_source_fields_unchanged": true,
+  "all_other_rampenwege_semantically_unchanged": true,
+  "changed_route_indices": [
+    2,
+    11
+  ],
+  "input_source_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+  "name": "r2_v1_contour_r11_inboard_8m",
+  "output_source": "/tmp/relief_p3d25_v1_source.json.gz",
+  "output_source_sha256": "132e70af149e787a1abfe2dff6cd5c72d0aea2a4c0a93a0528ac477885c731ca",
+  "rampe_11_after_new_start_unchanged": true,
+  "rampe_2_after_join_unchanged": true,
+  "routes": {
+    "rampe_11": {
+      "changed_station_extent_m": [
+        0.0,
+        8.0
+      ],
+      "geometry": "start moved to an interpolated point on the unchanged axis; remaining axis is byte-equivalent",
+      "max_displacement_m": 8.0,
+      "new_length_m": 49.022910149966364,
+      "old_length_m": 57.022910149966364,
+      "start_after_map": [
+        145.35812310445874,
+        8.379773228628641
+      ],
+      "start_before_map": [
+        148.5,
+        2.5
+      ],
+      "start_displacement_m": 7.9998811273318955,
+      "trimmed_original_station_m": 8.0
+    },
+    "rampe_2": {
+      "changed_station_extent_m": [
+        1.1966954499788096,
+        10.7955895837508
+      ],
+      "geometry": "cubic offset/turn, zero derivative at the 10.8 m join",
+      "join_station_m": 10.8,
+      "max_displacement_m": 1.599999629691585,
+      "max_displacement_station_m": 3.6020000179109957,
+      "new_length_m": 59.44811955334839,
+      "old_length_m": 58.80044112416466,
+      "start_after_map": [
+        126.51,
+        31.62
+      ],
+      "start_before_map": [
+        126.51,
+        31.62
+      ],
+      "start_displacement_m": 0.0
+    }
+  },
+  "source_change_scope": "rampenwege[2] and rampenwege[11] start sections only",
+  "tag": "p3d25",
+  "variant": "1",
+  "variant_parameters": {
+    "name": "r2_v1_contour_r11_inboard_8m",
+    "r11_trim_m": 8.0,
+    "r2_shift_direction": "left",
+    "r2_shift_m": 0.0,
+    "r2_turn_deg": 45.0
+  }
+}

@@ -1,0 +1,879 @@
+{
+  "coupling": {
+    "pair_scope": "The endpoint family adds a start-runout pair set specifically for routes 2 and 11, plus the shared D1 endpoint pairs.",
+    "shared_model_surface": "One D1 surface raster and one endpoint_r8a_extra_m slack variable cover both route starts.",
+    "shared_non_endpoint_constraints": "Both starts are represented in the joint solve alongside the same R3, crossing, plane-core, route-grade, variable-bound, and event-cut families.",
+    "spatial_note": "The two starts are separated spatially; the evidence does not indicate shared local raster cells or a direct local terrain constraint between them. Their model coupling is through the joint model and global family slack/feasibility, not physical adjacency."
+  },
+  "distance_caveat": "Wall distances are to vector centerlines, not generated wall faces; build-zone and water distances use vector polygons.",
+  "markers": {
+    "A": "Der rechteckige 4-m-Auslauf-Footprint bildet den vollen Gewichtskern mit 3-m-Halbbreite und 1.2-m-Innenbereich ab.",
+    "R": "Profilfaelle, Footprint-Abstaende und Modellkopplung aus den Messwerten und dem p3d23-Modell abgeleitet.",
+    "S": "Quellhashes, V24-Profile, GB-Hoehen und Vektorabstaende direkt ausgelesen."
+  },
+  "reported_p3d24_R8a_pairs_source_GB": {
+    "p3d24_v1_endpoint_only_rampe_2": {
+      "distance_m": 0.3,
+      "endpoint_distance_m": {
+        "rampe_11": 26.742163875665604,
+        "rampe_2": 2.080387791757653
+      },
+      "points_map": [
+        [
+          128.0,
+          30.25
+        ],
+        [
+          128.0,
+          30.5
+        ]
+      ],
+      "source_GB_delta_m": 0.019334793090820312,
+      "source_GB_m": [
+        12.286090850830078,
+        12.305425643920898
+      ]
+    },
+    "p3d24_v1_rampe_11": {
+      "distance_m": 0.3,
+      "endpoint_distance_m": {
+        "rampe_11": 7.735230786593353,
+        "rampe_2": 31.56025025314565
+      },
+      "points_map": [
+        [
+          148.0,
+          2.25
+        ],
+        [
+          148.0,
+          2.5
+        ]
+      ],
+      "source_GB_delta_m": 0.01215362548828125,
+      "source_GB_m": [
+        12.882801055908203,
+        12.870647430419922
+      ]
+    },
+    "p3d24_v3_rampe_11": {
+      "distance_m": 0.3,
+      "endpoint_distance_m": {
+        "rampe_11": 7.228143320913718,
+        "rampe_2": 31.3345239909587
+      },
+      "points_map": [
+        [
+          147.5,
+          2.5
+        ],
+        [
+          147.5,
+          2.75
+        ]
+      ],
+      "source_GB_delta_m": 0.02980327606201172,
+      "source_GB_m": [
+        12.834661483764648,
+        12.804858207702637
+      ]
+    }
+  },
+  "routes": {
+    "rampe_11": {
+      "first_interior_sample_map": [
+        145.36658756085217,
+        9.9287973093625
+      ],
+      "outward_unit_map": [
+        -0.005464298540949394,
+        -0.9999850706092843
+      ],
+      "profile_0_to_10m": [
+        {
+          "V24_target_axis_m": 12.000885908360067,
+          "coord_map": [
+            145.35812310445874,
+            8.379773228628641
+          ],
+          "source_profile_m": 11.760313426933134,
+          "station_m": 0.0,
+          "terrain_GB_m": 11.7597017288208
+        },
+        {
+          "V24_target_axis_m": 11.952250674852328,
+          "coord_map": [
+            145.2388501387327,
+            8.599486586545064
+          ],
+          "source_profile_m": 11.698039690243967,
+          "station_m": 0.3,
+          "terrain_GB_m": 11.69737720489502
+        },
+        {
+          "V24_target_axis_m": 11.899509090694156,
+          "coord_map": [
+            145.12000850867108,
+            8.819427899806255
+          ],
+          "source_profile_m": 11.64154501071519,
+          "station_m": 0.6,
+          "terrain_GB_m": 11.640918731689453
+        },
+        {
+          "V24_target_axis_m": 11.84495341282227,
+          "coord_map": [
+            145.0056715055159,
+            9.041749850385795
+          ],
+          "source_profile_m": 11.59181556089062,
+          "station_m": 0.8999999999999999,
+          "terrain_GB_m": 11.591076850891113
+        },
+        {
+          "V24_target_axis_m": 11.745404838460795,
+          "coord_map": [
+            144.89133450236068,
+            9.264071800965333
+          ],
+          "source_profile_m": 11.54768201436629,
+          "station_m": 1.2,
+          "terrain_GB_m": 11.547182083129883
+        },
+        {
+          "V24_target_axis_m": 11.66229385626377,
+          "coord_map": [
+            144.7769974992055,
+            9.486393751544872
+          ],
+          "source_profile_m": 11.510017947425315,
+          "station_m": 1.5,
+          "terrain_GB_m": 11.507633209228516
+        },
+        {
+          "V24_target_axis_m": 11.637100871451493,
+          "coord_map": [
+            144.96057987518083,
+            9.636979285286207
+          ],
+          "source_profile_m": 11.477700027169378,
+          "station_m": 1.7999999999999998,
+          "terrain_GB_m": 11.471657752990723
+        },
+        {
+          "V24_target_axis_m": 11.596696354088795,
+          "coord_map": [
+            145.1635837180165,
+            9.782888297324353
+          ],
+          "source_profile_m": 11.434602161387081,
+          "station_m": 2.1,
+          "terrain_GB_m": 11.42624568939209
+        },
+        {
+          "V24_target_axis_m": 11.534661659931743,
+          "coord_map": [
+            145.36658756085217,
+            9.9287973093625
+          ],
+          "source_profile_m": 11.383802453462627,
+          "station_m": 2.4,
+          "terrain_GB_m": 11.374438285827637
+        },
+        {
+          "V24_target_axis_m": 11.481774704285435,
+          "coord_map": [
+            145.56841002870297,
+            10.076332364828746
+          ],
+          "source_profile_m": 11.327401587268836,
+          "station_m": 2.6999999999999997,
+          "terrain_GB_m": 11.317456245422363
+        },
+        {
+          "V24_target_axis_m": 11.412290864421879,
+          "coord_map": [
+            145.76991113607662,
+            10.224309740556253
+          ],
+          "source_profile_m": 11.264740579691308,
+          "station_m": 3.0,
+          "terrain_GB_m": 11.2529935836792
+        },
+        {
+          "V24_target_axis_m": 11.340853367374391,
+          "coord_map": [
+            145.97141224345023,
+            10.372287116283761
+          ],
+          "source_profile_m": 11.194912931183257,
+          "station_m": 3.3,
+          "terrain_GB_m": 11.183171272277832
+        },
+        {
+          "V24_target_axis_m": 11.259253861901561,
+          "coord_map": [
+            146.17291335082388,
+            10.520264492011272
+          ],
+          "source_profile_m": 11.117612731528881,
+          "station_m": 3.5999999999999996,
+          "terrain_GB_m": 11.100348472595215
+        },
+        {
+          "V24_target_axis_m": 11.182519173998154,
+          "coord_map": [
+            146.3744144581975,
+            10.668241867738784
+          ],
+          "source_profile_m": 11.039470661020964,
+          "station_m": 3.9,
+          "terrain_GB_m": 11.02553653717041
+        },
+        {
+          "V24_target_axis_m": 11.11251443042347,
+          "coord_map": [
+            146.57591556557114,
+            10.816219243466296
+          ],
+          "source_profile_m": 10.972790960561989,
+          "station_m": 4.2,
+          "terrain_GB_m": 10.959582328796387
+        },
+        {
+          "V24_target_axis_m": 11.028899910091347,
+          "coord_map": [
+            146.77741667294475,
+            10.964196619193805
+          ],
+          "source_profile_m": 10.918505021963474,
+          "station_m": 4.5,
+          "terrain_GB_m": 10.909616470336914
+        },
+        {
+          "V24_target_axis_m": 10.945620415027918,
+          "coord_map": [
+            146.9789177803184,
+            11.112173994921314
+          ],
+          "source_profile_m": 10.857995997367968,
+          "station_m": 4.8,
+          "terrain_GB_m": 10.84862232208252
+        },
+        {
+          "V24_target_axis_m": 10.863372485111569,
+          "coord_map": [
+            147.180418887692,
+            11.26015137064882
+          ],
+          "source_profile_m": 10.78319695435358,
+          "station_m": 5.1,
+          "terrain_GB_m": 10.76671028137207
+        },
+        {
+          "V24_target_axis_m": 10.775357405705137,
+          "coord_map": [
+            147.38191999506566,
+            11.40812874637633
+          ],
+          "source_profile_m": 10.71282105994121,
+          "station_m": 5.3999999999999995,
+          "terrain_GB_m": 10.699468612670898
+        },
+        {
+          "V24_target_axis_m": 10.685206614602468,
+          "coord_map": [
+            147.58342110243927,
+            11.556106122103841
+          ],
+          "source_profile_m": 10.646734700723359,
+          "station_m": 5.7,
+          "terrain_GB_m": 10.635774612426758
+        },
+        {
+          "V24_target_axis_m": 10.593000561051698,
+          "coord_map": [
+            147.78492220981292,
+            11.704083497831354
+          ],
+          "source_profile_m": 10.572519208511437,
+          "station_m": 6.0,
+          "terrain_GB_m": 10.558049201965332
+        },
+        {
+          "V24_target_axis_m": 10.4981726403312,
+          "coord_map": [
+            147.9865457974124,
+            11.851892291890156
+          ],
+          "source_profile_m": 10.494508403223662,
+          "station_m": 6.3,
+          "terrain_GB_m": 10.480094909667969
+        },
+        {
+          "V24_target_axis_m": 10.401141931428475,
+          "coord_map": [
+            148.18954964024806,
+            11.997801303928298
+          ],
+          "source_profile_m": 10.415887683891757,
+          "station_m": 6.6,
+          "terrain_GB_m": 10.401200294494629
+        },
+        {
+          "V24_target_axis_m": 10.295896390770492,
+          "coord_map": [
+            148.39255348308376,
+            12.143710315966441
+          ],
+          "source_profile_m": 10.336755033052876,
+          "station_m": 6.8999999999999995,
+          "terrain_GB_m": 10.322007179260254
+        },
+        {
+          "V24_target_axis_m": 10.194148618392827,
+          "coord_map": [
+            148.59555732591943,
+            12.289619328004582
+          ],
+          "source_profile_m": 10.268620837889507,
+          "station_m": 7.199999999999999,
+          "terrain_GB_m": 10.2562894821167
+        },
+        {
+          "V24_target_axis_m": 10.097588032920077,
+          "coord_map": [
+            148.79716534515347,
+            12.437449550347072
+          ],
+          "source_profile_m": 10.215194602616506,
+          "station_m": 7.5,
+          "terrain_GB_m": 10.205785751342773
+        },
+        {
+          "V24_target_axis_m": 9.985797941448975,
+          "coord_map": [
+            148.9986664525271,
+            12.585426926074584
+          ],
+          "source_profile_m": 10.15183776688124,
+          "station_m": 7.8,
+          "terrain_GB_m": 10.142807960510254
+        },
+        {
+          "V24_target_axis_m": 9.878761376104075,
+          "coord_map": [
+            149.20016755990073,
+            12.733404301802096
+          ],
+          "source_profile_m": 10.072209474037711,
+          "station_m": 8.1,
+          "terrain_GB_m": 10.054970741271973
+        },
+        {
+          "V24_target_axis_m": 9.778391679580569,
+          "coord_map": [
+            149.40248645582665,
+            12.880259437290038
+          ],
+          "source_profile_m": 9.99830812704813,
+          "station_m": 8.4,
+          "terrain_GB_m": 9.984301567077637
+        },
+        {
+          "V24_target_axis_m": 9.66582337066258,
+          "coord_map": [
+            149.60507404534485,
+            13.026745848172428
+          ],
+          "source_profile_m": 9.927696476985762,
+          "station_m": 8.7,
+          "terrain_GB_m": 9.914660453796387
+        },
+        {
+          "V24_target_axis_m": 9.532948585371107,
+          "coord_map": [
+            149.80766163486305,
+            13.17323225905482
+          ],
+          "source_profile_m": 9.849101174938792,
+          "station_m": 9.0,
+          "terrain_GB_m": 9.834088325500488
+        },
+        {
+          "V24_target_axis_m": 9.382949003852449,
+          "coord_map": [
+            150.0096579551232,
+            13.320530060793606
+          ],
+          "source_profile_m": 9.769965438132713,
+          "station_m": 9.299999999999999,
+          "terrain_GB_m": 9.754090309143066
+        },
+        {
+          "V24_target_axis_m": 9.236163696461556,
+          "coord_map": [
+            150.21115906249685,
+            13.468507436521119
+          ],
+          "source_profile_m": 9.689556182039881,
+          "station_m": 9.6,
+          "terrain_GB_m": 9.674971580505371
+        },
+        {
+          "V24_target_axis_m": 9.089641584341237,
+          "coord_map": [
+            150.41266016987046,
+            13.61648481224863
+          ],
+          "source_profile_m": 9.607493257071075,
+          "station_m": 9.9,
+          "terrain_GB_m": 9.59248161315918
+        }
+      ],
+      "profile_summary_0_to_10m": {
+        "axis_fall_0_to_10m_m": 2.9112443240188295,
+        "axis_fall_0_to_4m_m": 0.8417016488868079,
+        "max_abs_axis_grade_pct": 49.999860506219626,
+        "max_axis_grade_station_m": 9.0,
+        "terrain_fall_0_to_10m_m": 2.167220115661621,
+        "terrain_fall_0_to_4m_m": 0.7561502456665039
+      },
+      "route": "rampe_11",
+      "runout_4m_context": {
+        "along_extent_m": [
+          -1.2,
+          4.0
+        ],
+        "build_zone_polygon_distance_m": 26.199791232696853,
+        "half_width_m": 3.0,
+        "intersects_build_zone": false,
+        "intersects_water": false,
+        "map_edge_clearance_m": 6.039394696294384,
+        "outside_map": false,
+        "wall_centerline_distance_m": 1.9637399045725206,
+        "water_polygon_distance_m": 2.2091148447407174
+      },
+      "start_GB_m": 11.7597017288208,
+      "start_V24_axis_m": 12.000885908360067,
+      "start_distance_m": {
+        "build_zone_polygon": 28.407322890912916,
+        "wall_centerline": 3.987124909890462,
+        "water_polygon": 6.429747725350495
+      },
+      "start_map": [
+        145.35812310445874,
+        8.379773228628641
+      ],
+      "start_nearest_wall_centerline": {
+        "distance_m": 3.987124909890462,
+        "name": "Nord"
+      },
+      "start_source_profile_m": 11.760313426933134,
+      "start_world_m": [
+        174.4297477253505,
+        10.05572787435437
+      ]
+    },
+    "rampe_2": {
+      "first_interior_sample_map": [
+        128.29560749567509,
+        32.48270412258799
+      ],
+      "outward_unit_map": [
+        -0.9004160179490007,
+        -0.43502987784848157
+      ],
+      "profile_0_to_10m": [
+        {
+          "V24_target_axis_m": 12.469809532165527,
+          "coord_map": [
+            126.51,
+            31.62
+          ],
+          "source_profile_m": 12.469809532165527,
+          "station_m": 0.0,
+          "terrain_GB_m": 12.469809532165527
+        },
+        {
+          "V24_target_axis_m": 12.452823446448521,
+          "coord_map": [
+            126.72333983235265,
+            31.75033079425733
+          ],
+          "source_profile_m": 12.452823446448521,
+          "station_m": 0.3,
+          "terrain_GB_m": 12.453521728515625
+        },
+        {
+          "V24_target_axis_m": 12.435789078084897,
+          "coord_map": [
+            126.9366796647053,
+            31.880661588514656
+          ],
+          "source_profile_m": 12.435789078084897,
+          "station_m": 0.6,
+          "terrain_GB_m": 12.437232971191406
+        },
+        {
+          "V24_target_axis_m": 12.41758281450618,
+          "coord_map": [
+            127.15001949705794,
+            32.01099238277198
+          ],
+          "source_profile_m": 12.41758281450618,
+          "station_m": 0.8999999999999999,
+          "terrain_GB_m": 12.418919563293457
+        },
+        {
+          "V24_target_axis_m": 12.397963573878604,
+          "coord_map": [
+            127.36335932941059,
+            32.141323177029314
+          ],
+          "source_profile_m": 12.397963573878604,
+          "station_m": 1.2,
+          "terrain_GB_m": 12.399750709533691
+        },
+        {
+          "V24_target_axis_m": 12.37832027964989,
+          "coord_map": [
+            127.57669916176323,
+            32.27165397128664
+          ],
+          "source_profile_m": 12.37832027964989,
+          "station_m": 1.5,
+          "terrain_GB_m": 12.381983757019043
+        },
+        {
+          "V24_target_axis_m": 12.352718163992446,
+          "coord_map": [
+            127.81479760369376,
+            32.345511383082965
+          ],
+          "source_profile_m": 12.352718163992446,
+          "station_m": 1.7999999999999998,
+          "terrain_GB_m": 12.366618156433105
+        },
+        {
+          "V24_target_axis_m": 12.326520171470507,
+          "coord_map": [
+            128.05520254968442,
+            32.41410775283548
+          ],
+          "source_profile_m": 12.326520171470507,
+          "station_m": 2.1,
+          "terrain_GB_m": 12.351688385009766
+        },
+        {
+          "V24_target_axis_m": 12.298019210672761,
+          "coord_map": [
+            128.29560749567509,
+            32.48270412258799
+          ],
+          "source_profile_m": 12.298019210672761,
+          "station_m": 2.4,
+          "terrain_GB_m": 12.32798957824707
+        },
+        {
+          "V24_target_axis_m": 12.268667448881175,
+          "coord_map": [
+            128.53601244166578,
+            32.5513004923405
+          ],
+          "source_profile_m": 12.268667448881175,
+          "station_m": 2.6999999999999997,
+          "terrain_GB_m": 12.300670623779297
+        },
+        {
+          "V24_target_axis_m": 12.255833625793457,
+          "coord_map": [
+            128.78204400425858,
+            32.580238486991725
+          ],
+          "source_profile_m": 12.235949287255107,
+          "station_m": 3.0,
+          "terrain_GB_m": 12.26812744140625
+        },
+        {
+          "V24_target_axis_m": 12.255833625793457,
+          "coord_map": [
+            129.0320420810762,
+            32.58121909266553
+          ],
+          "source_profile_m": 12.201039870839217,
+          "station_m": 3.3,
+          "terrain_GB_m": 12.234306335449219
+        },
+        {
+          "V24_target_axis_m": 12.243934496352633,
+          "coord_map": [
+            129.28204015789382,
+            32.58219969833934
+          ],
+          "source_profile_m": 12.164388834046735,
+          "station_m": 3.5999999999999996,
+          "terrain_GB_m": 12.197592735290527
+        },
+        {
+          "V24_target_axis_m": 12.220017426361395,
+          "coord_map": [
+            129.53203823471145,
+            32.58318030401315
+          ],
+          "source_profile_m": 12.126305420980412,
+          "station_m": 3.9,
+          "terrain_GB_m": 12.160473823547363
+        },
+        {
+          "V24_target_axis_m": 12.173868521034885,
+          "coord_map": [
+            129.7788901920289,
+            32.55503717492715
+          ],
+          "source_profile_m": 12.086831779635917,
+          "station_m": 4.2,
+          "terrain_GB_m": 12.120902061462402
+        },
+        {
+          "V24_target_axis_m": 12.115783848872669,
+          "coord_map": [
+            130.02291139539628,
+            32.50068966065888
+          ],
+          "source_profile_m": 12.045651218168343,
+          "station_m": 4.5,
+          "terrain_GB_m": 12.081398963928223
+        },
+        {
+          "V24_target_axis_m": 12.086282578485712,
+          "coord_map": [
+            130.26693259876365,
+            32.4463421463906
+          ],
+          "source_profile_m": 12.003029351721173,
+          "station_m": 4.8,
+          "terrain_GB_m": 12.034152030944824
+        },
+        {
+          "V24_target_axis_m": 12.08224355165932,
+          "coord_map": [
+            130.510953802131,
+            32.391994632122326
+          ],
+          "source_profile_m": 11.959067108518528,
+          "station_m": 5.1,
+          "terrain_GB_m": 11.986428260803223
+        },
+        {
+          "V24_target_axis_m": 12.06523351508091,
+          "coord_map": [
+            130.749658784364,
+            32.319883769511044
+          ],
+          "source_profile_m": 11.914396608221967,
+          "station_m": 5.3999999999999995,
+          "terrain_GB_m": 11.934982299804688
+        },
+        {
+          "V24_target_axis_m": 12.03058453819217,
+          "coord_map": [
+            130.98341624638906,
+            32.231241516902024
+          ],
+          "source_profile_m": 11.869032711641086,
+          "station_m": 5.7,
+          "terrain_GB_m": 11.882279396057129
+        },
+        {
+          "V24_target_axis_m": 11.990057224262229,
+          "coord_map": [
+            131.2171737084141,
+            32.142599264293004
+          ],
+          "source_profile_m": 11.822646899819992,
+          "station_m": 6.0,
+          "terrain_GB_m": 11.827103614807129
+        },
+        {
+          "V24_target_axis_m": 11.943559733293778,
+          "coord_map": [
+            131.45093117043916,
+            32.053957011683984
+          ],
+          "source_profile_m": 11.77509317933657,
+          "station_m": 6.3,
+          "terrain_GB_m": 11.771394729614258
+        },
+        {
+          "V24_target_axis_m": 11.9021134092405,
+          "coord_map": [
+            131.68158604599427,
+            31.95800227397134
+          ],
+          "source_profile_m": 11.729066204030874,
+          "station_m": 6.6,
+          "terrain_GB_m": 11.717860221862793
+        },
+        {
+          "V24_target_axis_m": 11.86338077883226,
+          "coord_map": [
+            131.90776558148715,
+            31.851499608632782
+          ],
+          "source_profile_m": 11.680510784392931,
+          "station_m": 6.8999999999999995,
+          "terrain_GB_m": 11.670061111450195
+        },
+        {
+          "V24_target_axis_m": 11.816644977000742,
+          "coord_map": [
+            132.13394511698004,
+            31.744996943294225
+          ],
+          "source_profile_m": 11.631429718070175,
+          "station_m": 7.199999999999999,
+          "terrain_GB_m": 11.621310234069824
+        },
+        {
+          "V24_target_axis_m": 11.768248346035413,
+          "coord_map": [
+            132.36012465247296,
+            31.63849427795567
+          ],
+          "source_profile_m": 11.581127582147412,
+          "station_m": 7.5,
+          "terrain_GB_m": 11.571869850158691
+        },
+        {
+          "V24_target_axis_m": 11.716061201706443,
+          "coord_map": [
+            132.58651621137741,
+            31.53244774345165
+          ],
+          "source_profile_m": 11.528901714891227,
+          "station_m": 7.8,
+          "terrain_GB_m": 11.521769523620605
+        },
+        {
+          "V24_target_axis_m": 11.662162189959831,
+          "coord_map": [
+            132.81374123186413,
+            31.42819425399057
+          ],
+          "source_profile_m": 11.477072473860215,
+          "station_m": 8.1,
+          "terrain_GB_m": 11.47059440612793
+        },
+        {
+          "V24_target_axis_m": 11.606197990883102,
+          "coord_map": [
+            133.04096625235084,
+            31.323940764529482
+          ],
+          "source_profile_m": 11.424956029474608,
+          "station_m": 8.4,
+          "terrain_GB_m": 11.419196128845215
+        },
+        {
+          "V24_target_axis_m": 11.547862715643317,
+          "coord_map": [
+            133.26819127283756,
+            31.219687275068395
+          ],
+          "source_profile_m": 11.37177368619967,
+          "station_m": 8.7,
+          "terrain_GB_m": 11.36672306060791
+        },
+        {
+          "V24_target_axis_m": 11.487683991523319,
+          "coord_map": [
+            133.49541629332427,
+            31.115433785607312
+          ],
+          "source_profile_m": 11.318387599006003,
+          "station_m": 9.0,
+          "terrain_GB_m": 11.314249038696289
+        },
+        {
+          "V24_target_axis_m": 11.411215806918763,
+          "coord_map": [
+            133.72897980418193,
+            31.026323550520107
+          ],
+          "source_profile_m": 11.263055835899394,
+          "station_m": 9.299999999999999,
+          "terrain_GB_m": 11.259391784667969
+        },
+        {
+          "V24_target_axis_m": 11.357030960604833,
+          "coord_map": [
+            133.96271859481925,
+            30.937632075442703
+          ],
+          "source_profile_m": 11.207384624891075,
+          "station_m": 9.6,
+          "terrain_GB_m": 11.204477310180664
+        },
+        {
+          "V24_target_axis_m": 11.277263796008599,
+          "coord_map": [
+            134.19645738545654,
+            30.8489406003653
+          ],
+          "source_profile_m": 11.15083561874291,
+          "station_m": 9.9,
+          "terrain_GB_m": 11.1486234664917
+        }
+      ],
+      "profile_summary_0_to_10m": {
+        "axis_fall_0_to_10m_m": 1.1925457361569283,
+        "axis_fall_0_to_4m_m": 0.2651750742463026,
+        "max_abs_axis_grade_pct": 26.58905486541124,
+        "max_axis_grade_station_m": 9.6,
+        "terrain_fall_0_to_10m_m": 1.3211860656738281,
+        "terrain_fall_0_to_4m_m": 0.3225259780883789
+      },
+      "route": "rampe_2",
+      "runout_4m_context": {
+        "along_extent_m": [
+          -1.2,
+          4.0
+        ],
+        "build_zone_polygon_distance_m": 15.858959414349826,
+        "half_width_m": 3.0,
+        "intersects_build_zone": false,
+        "intersects_water": false,
+        "map_edge_clearance_m": 33.50263243475907,
+        "outside_map": false,
+        "wall_centerline_distance_m": 1.2855611379216085,
+        "water_polygon_distance_m": 8.867896130284523
+      },
+      "start_GB_m": 12.469809532165527,
+      "start_V24_axis_m": 12.469809532165527,
+      "start_distance_m": {
+        "build_zone_polygon": 18.925202244626075,
+        "wall_centerline": 6.050005619832112,
+        "water_polygon": 13.845550909949383
+      },
+      "start_map": [
+        126.51,
+        31.62
+      ],
+      "start_nearest_wall_centerline": {
+        "distance_m": 6.050005619832112,
+        "name": "Nord"
+      },
+      "start_source_profile_m": 12.469809532165527,
+      "start_world_m": [
+        151.812,
+        37.944
+      ]
+    }
+  },
+  "source_relief_sha256": "132e70af149e787a1abfe2dff6cd5c72d0aea2a4c0a93a0528ac477885c731ca",
+  "tag": "p3d25",
+  "transfer_sha256": "9ed22b87907093fc2086940638360aa5d05ea479903929d76323efa9294ef2f2",
+  "vektor_sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+  "zellen_relief_sha256": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+}
