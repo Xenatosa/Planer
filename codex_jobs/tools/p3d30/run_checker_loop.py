@@ -40,9 +40,10 @@ def dump(path: Path, obj) -> None:
 
 
 def output_document(rounds: list[dict], best_round, best_score, cuts_count: int,
-                    status: str, baseline_d1_g11: int) -> dict:
+                    status: str, baseline_d1_g11: int, drainage_variant: str) -> dict:
     return {
         "tag": "p3d30", "geometry": "V3", "baseline_D1_G11_hits": baseline_d1_g11,
+        "drainage_variant": drainage_variant,
         "start_event_cut_count": len(json.loads(BASE_CUTS.read_text(encoding="utf-8"))),
         "rounds": rounds, "best_round": best_round, "best_score": best_score,
         "final_cut_count": cuts_count, "status": status,
@@ -255,6 +256,9 @@ def main() -> None:
     drainage_mode = str(feasibility.get("selected_drainage_mode", "hard"))
     if drainage_mode not in {"hard", "soft"}:
         raise RuntimeError(f"Unbekannter gespeicherter Drainage-Modus: {drainage_mode}")
+    drainage_variant = str(feasibility.get("selected_drainage_variant", "1"))
+    if drainage_variant not in {"1", "2"}:
+        raise RuntimeError(f"Unbekannter gespeicherter Drainage-Variant: {drainage_variant}")
     base = []
     dump(EMPTY_CUTS, base)
     old = json.loads(BASELINE_RULES.read_text(encoding="utf-8"))
@@ -312,6 +316,7 @@ def main() -> None:
         if not solution_path.exists():
             solve_env = dict(os.environ)
             solve_env["P3D30_DRAINAGE_MODE"] = drainage_mode
+            solve_env["P3D30_DRAINAGE_VARIANT"] = drainage_variant
             checked(solve_cmd, label=f"solve {round_name}", env=solve_env)
         solution = json.loads(solution_path.read_text(encoding="utf-8"))
         if not solution.get("primal_feasible"):
@@ -323,7 +328,8 @@ def main() -> None:
             status = f"nach Runde {round_index} beendet: kein machbarer Modellpunkt ({solution.get('status')})"
             record["stop_reason"] = "no_primal_feasible_solution"
             dump(RESULTS / "p3d30_V3_checker_loop.json",
-                 output_document(rounds, best_round, best_score, len(all_cuts), status, baseline_d1_g11))
+                 output_document(rounds, best_round, best_score, len(all_cuts), status,
+                                 baseline_d1_g11, drainage_variant))
             write_report_progress(rounds, status)
             checkpoint(round_index)
             break
@@ -433,7 +439,8 @@ def main() -> None:
         else:
             status = f"Runde {round_index} abgeschlossen; Checker-in-the-loop wird fortgesetzt"
         dump(RESULTS / "p3d30_V3_checker_loop.json",
-             output_document(rounds, best_round, best_score, len(all_cuts), status, baseline_d1_g11))
+             output_document(rounds, best_round, best_score, len(all_cuts), status,
+                             baseline_d1_g11, drainage_variant))
         write_report_progress(rounds, status)
         checkpoint(round_index)
         if cut_hash in seen_cut_hashes:

@@ -1,0 +1,15 @@
+{
+  "best_round": null,
+  "best_score": null,
+  "drainage_variant": null,
+  "final_cut_count": 0,
+  "geometry": "V3",
+  "method": "official Float32 checker-in-the-loop not started because neither tested drainage variant produced a primal feasible model point; no mesh build",
+  "probe_allowed": false,
+  "round_limit": 4,
+  "rounds": [],
+  "start_event_cut_count": 0,
+  "status": "Kein Float32-Probelauf: Variante 1 Soft-Fallback ohne zul\u00e4ssigen Punkt (HiGHS Zeitlimit); Variante 2 hart infeasible.",
+  "stop_reason": "no_primal_feasible_model_point",
+  "tag": "p3d30"
+}

@@ -415,17 +415,18 @@ def _flow_candidates(data: dict, profiles: list[dict], construction: dict,
     eps_mask = np.asarray(construction["zero_eps_mask"], dtype=bool).ravel()
     rejected_road_direction = 0
     rejected_reference_slope = 0
+    reference_slope_escape_vertices = 0
+    road_allowed_by_child: dict[int, list[tuple[float, int, list[float | int]]]] = {}
     for child in np.flatnonzero(active_flat & ~outlet):
         iz, ix = divmod(int(child), width)
+        node_candidates = []
+        road_allowed = []
         for dz, dx in neighbours:
             nz, nx_ = iz + dz, ix + dx
             if not (0 <= nz < height and 0 <= nx_ < width):
                 continue
             nxt = nz * width + nx_
             if not active_flat[nxt]:
-                continue
-            if variant == "2" and reference_flat[nxt] > reference_flat[child] + 0.02 + 1e-9:
-                rejected_reference_slope += 1
                 continue
             if road_band[child]:
                 direction = np.array([dx / fs, dz / fs], dtype=np.float64)
@@ -444,8 +445,54 @@ def _flow_candidates(data: dict, profiles: list[dict], construction: dict,
                     rejected_road_direction += 1
                     continue
             eps = 0.0 if eps_mask[child] or eps_mask[nxt] else 0.001
-            candidates.append([int(child), int(nxt), float(eps)])
-            outdegree[child] += 1
+            entry = [int(child), int(nxt), float(eps)]
+            road_allowed.append((float(reference_flat[nxt] - reference_flat[child]), int(nxt), entry))
+            if variant == "1" or reference_flat[nxt] <= reference_flat[child] + 0.02 + 1e-9:
+                node_candidates.append(entry)
+            else:
+                rejected_reference_slope += 1
+        road_allowed_by_child[int(child)] = road_allowed
+        if variant == "2" and not node_candidates and road_allowed:
+            # A small number of p3d17 local minima have no valid downhill
+            # neighbor. Keep exactly their least-uphill road-consistent edge
+            # so the requested one-successor graph remains complete.
+            node_candidates = [min(road_allowed, key=lambda item: (item[0], item[1]))[2]]
+            reference_slope_escape_vertices += 1
+        candidates.extend(node_candidates)
+        outdegree[child] = len(node_candidates)
+    outlet_reachability_escape_edges = 0
+    if variant == "2":
+        candidate_pairs = {(int(edge[0]), int(edge[1])) for edge in candidates}
+        while True:
+            reverse: list[list[int]] = [[] for _ in range(height * width)]
+            for child, nxt, _eps in candidates:
+                reverse[int(nxt)].append(int(child))
+            reachable = outlet.copy()
+            stack = [int(i) for i in np.flatnonzero(outlet)]
+            while stack:
+                node = stack.pop()
+                for child in reverse[node]:
+                    if not reachable[child]:
+                        reachable[child] = True
+                        stack.append(child)
+            unreachable = np.flatnonzero(active_flat & ~outlet & ~reachable)
+            if not len(unreachable):
+                break
+            repair = []
+            for child in unreachable.tolist():
+                crossing = [item for item in road_allowed_by_child.get(int(child), [])
+                            if reachable[item[1]]]
+                if crossing:
+                    repair.append(min(crossing, key=lambda item: (item[0], item[1]))[2])
+            repair = [edge for edge in repair
+                      if (int(edge[0]), int(edge[1])) not in candidate_pairs]
+            if not repair:
+                break
+            for edge in repair:
+                candidates.append(edge)
+                candidate_pairs.add((int(edge[0]), int(edge[1])))
+                outdegree[int(edge[0])] += 1
+                outlet_reachability_escape_edges += 1
     missing = [int(i) for i in np.flatnonzero(active_flat & ~outlet & (outdegree == 0))]
     if missing:
         first = missing[:12]
@@ -482,9 +529,15 @@ def _flow_candidates(data: dict, profiles: list[dict], construction: dict,
         "road_band_vertices": int(np.count_nonzero(active_flat & road_band)),
         "rejected_road_direction_edges": rejected_road_direction,
         "rejected_reference_slope_edges": rejected_reference_slope,
+        "reference_slope_escape_vertices": reference_slope_escape_vertices,
+        "outlet_reachability_escape_edges": outlet_reachability_escape_edges,
         "minimum_candidates_per_non_outlet": int(outdegree[active_flat & ~outlet].min()),
         "maximum_candidates_per_non_outlet": int(outdegree.max(initial=0)),
         "reference_slope_limit_m": 0.02 if variant == "2" else None,
+        "reference_slope_escape_policy": (
+            "for a node with no candidate at or below its p3d17 height + 0.02 m, keep only its least-uphill road-consistent neighbor"
+            if variant == "2" else None
+        ),
         "road_direction_policy": (
             "within 4.8 m of V3 route or WEGA road raster: flow is along the local ramp axis "
             "or moves away from it, with no lateral side crossing"

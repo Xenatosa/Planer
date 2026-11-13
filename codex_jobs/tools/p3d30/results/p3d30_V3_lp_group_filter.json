@@ -1,0 +1,168 @@
+{
+  "all_open": {
+    "drainage_slack_diagnostic": {
+      "integrality_relaxed": true,
+      "maximum_edge_slack": {
+        "child_xz": [
+          150.0,
+          0.5
+        ],
+        "maximum_edge_slack_m": 0.017687724393627226,
+        "required_eps_m": 0.0,
+        "successor_choice_value": 0.9987916163336492,
+        "successor_xz": [
+          149.5,
+          1.0
+        ]
+      },
+      "positive_edge_slack_count": 121,
+      "sum_edge_slack_m": 0.12464839648217897
+    },
+    "family_max_relaxation_locations": {
+      "endpoint_r8a": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "endpoint_stage": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "grade_cross": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "grade_same": {
+        "maximum_violation_m": 2.297717571764224e-12,
+        "pair": {
+          "a_map": [
+            151.3309431343996,
+            30.51878896294809
+          ],
+          "b_map": [
+            151.4385670082505,
+            33.80097889668396
+          ],
+          "grade_limit_m": 1.7733351423415338,
+          "height_delta_m": 1.7733351423438315,
+          "pair_distance_m": 3.940744760758964,
+          "route_a": 11,
+          "route_b": 11,
+          "station_a_m": 44.4,
+          "station_b_m": 49.5
+        }
+      },
+      "plane_slope_box": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "plane_slope_polygon": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "variable_bounds": {
+        "maximum_violation_m": 0.0,
+        "variable": null
+      }
+    },
+    "location_model_json": "codex_jobs/tools/p3d30/results/p3d30_V3_lp_all_open_location.json",
+    "model_json": "codex_jobs/tools/p3d30/results/p3d30_V3_lp_all_open.json",
+    "normalized_slack_values": {
+      "axis_tolerance_extra_m": 0.0,
+      "crossing_stage_extra_m": 0.0,
+      "endpoint_r8a_extra_m": 0.0,
+      "endpoint_stage_extra_m": 0.0,
+      "g11_d1_extra_hits": 0.0,
+      "g5_d1_extra_hits": 0.0,
+      "g5_total_extra_hits": 0.0,
+      "grade_cross_extra_m": 0.0,
+      "grade_same_extra_m": 0.0,
+      "p3d29_cliff_form_extra_m": 0.0,
+      "p3d29_locality_extra_m": 0.0,
+      "p3d29_tree_ground_extra_m": 0.0,
+      "p3d30_drainage_extra_m": 1246.4839648217896,
+      "plane_slope_box_extra_pp": 0.0,
+      "plane_slope_polygon_extra_pp": 0.0,
+      "plane_tolerance_extra_m": 0.0,
+      "r3_long_extra_hits": 0.0,
+      "r3_long_residual_m": 0.0,
+      "r3_quer_extra_hits": 0.0,
+      "r3_quer_residual_pp": 0.0,
+      "r3_wob_extra_hits": 0.0,
+      "r3_wob_residual_m": 0.0,
+      "r4_d1_extra_hits": 0.0,
+      "r5_d1_extra_hits": 0.0,
+      "r5_total_extra_hits": 0.0,
+      "r8b_d1_extra_hits": 0.0,
+      "route_profile_slope_extra_m": 0.0,
+      "safety_gitter_extra_m": 0.0,
+      "safety_quer_extra_pp": 0.0,
+      "safety_single_quer_extra_pp": 0.0,
+      "source_monotone_extra_m": 0.0,
+      "variable_bounds_extra_m": 0.0
+    },
+    "primal_feasible": true,
+    "slack_values": {
+      "axis_tolerance_extra_m": 0.0,
+      "crossing_stage_extra_m": 0.0,
+      "endpoint_r8a_extra_m": 0.0,
+      "endpoint_stage_extra_m": 0.0,
+      "g11_d1_extra_hits": 0.0,
+      "g5_d1_extra_hits": 0.0,
+      "g5_total_extra_hits": 0.0,
+      "grade_cross_extra_m": 0.0,
+      "grade_same_extra_m": 0.0,
+      "p3d29_cliff_form_extra_m": 0.0,
+      "p3d29_locality_extra_m": 0.0,
+      "p3d29_tree_ground_extra_m": 0.0,
+      "p3d30_drainage_extra_m": 0.017687724393627226,
+      "plane_slope_box_extra_pp": 0.0,
+      "plane_slope_polygon_extra_pp": 0.0,
+      "plane_tolerance_extra_m": 0.0,
+      "r3_long_extra_hits": 0.0,
+      "r3_long_residual_m": 0.0,
+      "r3_quer_extra_hits": 0.0,
+      "r3_quer_residual_pp": 0.0,
+      "r3_wob_extra_hits": 0.0,
+      "r3_wob_residual_m": 0.0,
+      "r4_d1_extra_hits": 0.0,
+      "r5_d1_extra_hits": 0.0,
+      "r5_total_extra_hits": 0.0,
+      "r8b_d1_extra_hits": 0.0,
+      "route_profile_slope_extra_m": 0.0,
+      "safety_gitter_extra_m": 0.0,
+      "safety_quer_extra_pp": 0.0,
+      "safety_single_quer_extra_pp": 0.0,
+      "source_monotone_extra_m": 0.0,
+      "variable_bounds_extra_m": 0.0
+    },
+    "status": "Optimal"
+  },
+  "method": "serial greedy family deletion filter over p3d30 LP relaxation",
+  "positive_slack_groups": [
+    "p3d30_drainage"
+  ],
+  "records": [
+    {
+      "enabled_groups": [],
+      "family_max_relaxation_locations": null,
+      "hard_family": "p3d30_drainage",
+      "index": 1,
+      "model_json": "codex_jobs/tools/p3d30/results/p3d30_V3_lp_filter_01_p3d30_drainage.json",
+      "normalized_slack_values": null,
+      "primal_feasible": false,
+      "removed_from_conflict_set": false,
+      "status": "Infeasible"
+    }
+  ],
+  "remaining_group_conflict": [
+    "p3d30_drainage"
+  ],
+  "scope": "LP relaxation and group-level deletion only; not an exact row IIS or integer IIS",
+  "source_relief": "/tmp/p3d22_v3_source.json.gz"
+}

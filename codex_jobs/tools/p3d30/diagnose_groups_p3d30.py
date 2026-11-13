@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -16,6 +17,10 @@ SOURCE_DEFAULT = Path("/tmp/p3d22_v3_source.json.gz")
 RELIEF3D = ROOT / "team/art/dorfmap_grundgeruest/relief3d"
 TRANSFER = RELIEF3D / "neu/p3d21_transfer_base_route3_v29.json"
 CUTS = RESULTS / "p3d30_V3_R00_cuts.json"
+VARIANT = os.environ.get("P3D30_DRAINAGE_VARIANT", "1")
+if VARIANT not in {"1", "2"}:
+    raise ValueError("P3D30_DRAINAGE_VARIANT muss 1 oder 2 sein")
+RESULT_PREFIX = "p3d30_V3" if VARIANT == "1" else "p3d30_V3_variant2"
 GROUPS = (
     "r3_long", "r3_quer", "r3_wob", "crossing_stage", "axis_supports",
     "plane_core", "endpoint_stage", "safety_gitter", "safety_quer",
@@ -28,7 +33,7 @@ GROUPS = (
 
 
 def run(groups: list[str], source: Path, name: str) -> dict:
-    output = RESULTS / f"p3d30_V3_lp_{name}.json"
+    output = RESULTS / f"{RESULT_PREFIX}_lp_{name}.json"
     command = [
         sys.executable, str(RUNNER), "--geometry", "V3", "--scenario", "joint",
         "--source-relief", str(source), "--transfer-base", str(TRANSFER),
@@ -103,6 +108,7 @@ def main() -> None:
             active.remove(group)
     result = {
         "method": "serial greedy family deletion filter over p3d30 LP relaxation",
+        "drainage_variant": VARIANT,
         "source_relief": str(args.source_relief),
         "all_open": {
             "status": all_open.get("status"),
@@ -117,7 +123,7 @@ def main() -> None:
         "records": records,
         "scope": "LP relaxation and group-level deletion only; not an exact row IIS or integer IIS",
     }
-    path = RESULTS / "p3d30_V3_lp_group_filter.json"
+    path = RESULTS / f"{RESULT_PREFIX}_lp_group_filter.json"
     path.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"out": str(path), "positive_slack_groups": sorted(enabled),
                       "remaining_group_conflict": sorted(active),

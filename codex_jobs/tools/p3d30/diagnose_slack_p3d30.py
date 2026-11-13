@@ -1154,9 +1154,10 @@ def solve(
 
     construction_meta["linear_constraint_rows"] = construction_rows
     construction_meta["outlet_note"] = (
-        "Priority-Flood roots lie on the work-area boundary. Ramp 2/11 axes are directed "
-        "toward their lower p3d26 helper-height endpoint and continued through the existing "
-        "endpoint runout band; at the crossing the downstream child with lower helper height is kept."
+        "All active work-area boundary cells are outlets. Each active non-outlet selects exactly "
+        "one local successor; single-commodity unit supply at every non-outlet forces all selected "
+        "paths to outlets and excludes directed cycles. The p3d29 Priority-Flood tree remains in "
+        "the construction record for comparison but does not constrain the p3d30 active area."
     )
 
     def event_big_m(row: dict[int, float], fixed: float, threshold: float) -> float:
@@ -2140,6 +2141,31 @@ def solve(
     summary["drainage_weighted_l1_value"] = float(
         drainage_slack_values.sum() / P3D30_DRAINAGE_L1_SCALE_M
     )
+    if drainage_slack_indices:
+        edge_slacks = [
+            (float(result.x[column]), edge_index)
+            for edge_index, column in drainage_slack_indices.items()
+        ]
+        max_slack_m, max_slack_edge = max(edge_slacks, default=(0.0, -1))
+        if max_slack_edge >= 0:
+            child, parent, eps_m = drainage_candidates[max_slack_edge]
+            child_z, child_x = divmod(int(child), width)
+            parent_z, parent_x = divmod(int(parent), width)
+            max_slack_location = {
+                "maximum_edge_slack_m": max_slack_m,
+                "child_xz": [float(grid_x0 + child_x / fs), float(grid_z0 + child_z / fs)],
+                "successor_xz": [float(grid_x0 + parent_x / fs), float(grid_z0 + parent_z / fs)],
+                "required_eps_m": float(eps_m),
+                "successor_choice_value": float(result.x[drainage_choice_indices[max_slack_edge]]),
+            }
+        else:
+            max_slack_location = None
+        summary["p3d30_drainage_slack_diagnostic"] = {
+            "positive_edge_slack_count": int(np.count_nonzero(drainage_slack_values > 1e-8)),
+            "sum_edge_slack_m": float(drainage_slack_values.sum()),
+            "maximum_edge_slack": max_slack_location,
+            "integrality_relaxed": bool(relax_integrality),
+        }
     summary["cliff_form_l1_absolute_deviation_sum_m"] = float(sum(
         float(result.x[column]) for column in curvature_l1_indices.values()
     ))
