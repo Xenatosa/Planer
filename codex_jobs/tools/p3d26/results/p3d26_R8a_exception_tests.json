@@ -1,4 +1,5 @@
 {
+  "V3_source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
   "all_other_endpoints_hit": true,
   "other_endpoints_0_11m": [
     {
@@ -254,6 +255,10 @@
   ],
   "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
   "target_endpoint": {
+    "V3_serialized_coordinate_map": [
+      126.51000020929992,
+      31.620001726724226
+    ],
     "checks": [
       {
         "delta_m": 0.17,

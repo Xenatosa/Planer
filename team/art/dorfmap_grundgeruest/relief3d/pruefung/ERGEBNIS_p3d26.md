@@ -8,7 +8,7 @@ Marker: `[S]` ausgeführte Messung oder Test · `[R]` Modellbefund · `[A]` Anna
 
 ## Prüferausnahme und Tests
 
-`[F]` Fabian hat am 13.11.2026 (Widget `t166s961`) ausschließlich für den 4-m-Auslauf am Anfang von `rampe_2`, ID `rampe_2_anfang`, Koordinate `126.51|31.62`, die R8a-Paargrenze von 0,10 m auf 0,18 m freigegeben. Alle anderen 25 Rampenenden behalten 0,10 m. Die Zuordnung verwendet Wegend-ID und die angegebene Koordinate mit 1e-6 m Serialisierungstoleranz; sie verwendet keinen räumlichen Suchradius.
+`[F]` Fabian hat am 13.11.2026 (Widget `t166s961`) ausschließlich für den 4-m-Auslauf am Anfang von `rampe_2`, ID `rampe_2_anfang`, Koordinate `126.51|31.62`, die R8a-Paargrenze von 0,10 m auf 0,18 m freigegeben. Alle anderen 25 Rampenenden behalten 0,10 m. V3 speichert denselben Start als `126.5100002|31.6200017`; die Zuordnung verlangt Wegend-ID plus Koordinate innerhalb 1e-5 Karten-Einheiten (12 µm), nicht einen räumlichen Suchradius.
 
 `[S]` Die neue Policy-Testdatei besteht mit 2 Tests. Ein synthetisches Paar mit 0,17 m am freigegebenen Ende ist kein Treffer; 0,19 m ist ein Treffer. Für jedes der übrigen 25 Wegenden ergibt 0,11 m einen Treffer. Die Testbelege liegen in [`p3d26_R8a_exception_tests.json`](../../../../../codex_jobs/tools/p3d26/results/p3d26_R8a_exception_tests.json).
 
