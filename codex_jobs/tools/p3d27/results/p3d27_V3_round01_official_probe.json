@@ -1,0 +1,2443 @@
+{
+  "D1_height_sha256": "7294f730a87ff72c81319c640897454ac89954f3dacd2b4e51ef1b4761a1d0f7",
+  "D1_rules": {
+    "G11_baum_an_wand": 12,
+    "G11_objekt_schwebt_sinkt": 18,
+    "G5_beule_klippe": 78,
+    "G6_facette": 1,
+    "R1_blind": 2,
+    "R2_getrennt": 1,
+    "R3_laengs_m": 6,
+    "R3_quer_pct": 7,
+    "R3_woelb_m": 7,
+    "R4_rand": 1,
+    "R4_schlucht": 5,
+    "R5_loch": 104
+  },
+  "D2_height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "G1_height_sha256": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
+  "R8_D1_hits": [
+    {
+      "art": "rampe_2_anfang",
+      "feld": "D1",
+      "regel": "R8_stufe",
+      "wert": 4.04,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "art": "rampe_2_anfang",
+      "feld": "D1",
+      "regel": "R8_gitter",
+      "wert": 4.78,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "art": "rampe_2_anfang",
+      "feld": "D1",
+      "regel": "R8_quer",
+      "wert": 3.0,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "art": "rampe_11_anfang",
+      "feld": "D1",
+      "regel": "R8_stufe",
+      "wert": 4.04,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "art": "rampe_11_anfang",
+      "feld": "D1",
+      "regel": "R8_gitter",
+      "wert": 4.54,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "art": "rampe_11_ende",
+      "feld": "D1",
+      "regel": "R8_gitter",
+      "wert": 0.21,
+      "x": 156.5,
+      "z": 37.5
+    },
+    {
+      "art": "rampe_11_ende",
+      "feld": "D1",
+      "regel": "R8_quer",
+      "wert": 3.3,
+      "x": 156.5,
+      "z": 37.5
+    },
+    {
+      "ausnahme": "R8a_ausnahme_rampe2_start",
+      "feld": "D1",
+      "limit_m": 0.18,
+      "regel": "R8a_wegende",
+      "weg": "rampe_2_anfang",
+      "wert": 0.18,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "ausnahme": null,
+      "feld": "D1",
+      "limit_m": 0.1,
+      "regel": "R8a_wegende",
+      "weg": "rampe_11_anfang",
+      "wert": 0.1,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "ausnahme": null,
+      "feld": "D1",
+      "limit_m": 0.1,
+      "regel": "R8a_wegende",
+      "weg": "rampe_11_ende",
+      "wert": 0.1,
+      "x": 156.5,
+      "z": 37.5
+    }
+  ],
+  "R8_by_rule": {
+    "R8_gitter": 11,
+    "R8_quer": 6,
+    "R8_stufe": 9,
+    "R8a_wegende": 23
+  },
+  "R8_by_tile": {
+    "B1": {
+      "R8a_wegende": 1
+    },
+    "C2": {
+      "R8a_wegende": 1
+    },
+    "C3": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "C4": {
+      "R8a_wegende": 2
+    },
+    "C5": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 3
+    },
+    "C6": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "D1": {
+      "R8_gitter": 3,
+      "R8_quer": 2,
+      "R8_stufe": 2,
+      "R8a_wegende": 3
+    },
+    "D4": {
+      "R8a_wegende": 2
+    },
+    "D6": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "E1": {
+      "R8a_wegende": 1
+    },
+    "E6": {
+      "R8a_wegende": 1
+    },
+    "F1": {
+      "R8a_wegende": 1
+    },
+    "F6": {
+      "R8_gitter": 1
+    },
+    "G3": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "H4": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "H5": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 2
+    },
+    "H6": {
+      "R8a_wegende": 1
+    }
+  },
+  "R8_crossing_gate": {
+    "R8_quer_hit": null,
+    "R8_quer_pass_from_official_checker": true,
+    "model_center_unrounded_map": [
+      152.6292918620858,
+      28.353590994151514
+    ],
+    "official_cluster": {
+      "art": "rampe_2x11",
+      "feld": "D1",
+      "gitter": 0.019,
+      "stufe": 0.116,
+      "x": 152.6,
+      "z": 28.4
+    },
+    "requested_label_coordinate_map": [
+      152.5,
+      28.5
+    ]
+  },
+  "R8_total": 49,
+  "R8a_hits_by_tile": {
+    "D1": [
+      {
+        "ausnahme": "R8a_ausnahme_rampe2_start",
+        "feld": "D1",
+        "limit_m": 0.18,
+        "regel": "R8a_wegende",
+        "weg": "rampe_2_anfang",
+        "wert": 0.18,
+        "x": 126.5,
+        "z": 31.6
+      },
+      {
+        "ausnahme": null,
+        "feld": "D1",
+        "limit_m": 0.1,
+        "regel": "R8a_wegende",
+        "weg": "rampe_11_anfang",
+        "wert": 0.1,
+        "x": 148.5,
+        "z": 2.5
+      },
+      {
+        "ausnahme": null,
+        "feld": "D1",
+        "limit_m": 0.1,
+        "regel": "R8a_wegende",
+        "weg": "rampe_11_ende",
+        "wert": 0.1,
+        "x": 156.5,
+        "z": 37.5
+      }
+    ],
+    "D2": [],
+    "G1": []
+  },
+  "R9_D1_hits": [
+    {
+      "abstand_weg": 1.4,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.04,
+      "x": 146.0,
+      "z": 4.0
+    },
+    {
+      "abstand_weg": 2.5,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 0.91,
+      "x": 157.0,
+      "z": 15.0
+    },
+    {
+      "abstand_weg": 2.8,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.13,
+      "x": 158.0,
+      "z": 15.5
+    },
+    {
+      "abstand_weg": 2.7,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.34,
+      "x": 158.5,
+      "z": 16.0
+    },
+    {
+      "abstand_weg": 2.5,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 3.32,
+      "x": 165.5,
+      "z": 24.0
+    },
+    {
+      "abstand_weg": 3.0,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.04,
+      "x": 146.0,
+      "z": 26.5
+    },
+    {
+      "abstand_weg": 3.0,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.77,
+      "x": 131.5,
+      "z": 28.0
+    },
+    {
+      "abstand_weg": 3.0,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 0.46,
+      "x": 141.0,
+      "z": 27.0
+    },
+    {
+      "abstand_weg": 2.0,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 1.73,
+      "x": 165.0,
+      "z": 31.0
+    },
+    {
+      "abstand_weg": 4.5,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 0.46,
+      "x": 160.5,
+      "z": 31.5
+    },
+    {
+      "abstand_weg": 3.2,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 3.04,
+      "x": 151.5,
+      "z": 38.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9_saegezahn",
+      "wert": 352,
+      "x": 138.5,
+      "z": 0.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.27,
+      "x": 153.4,
+      "z": 0.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.19,
+      "x": 159.1,
+      "z": 38.7
+    }
+  ],
+  "R9_by_rule": {
+    "R8b_delle": 33,
+    "R9_saegezahn": 34,
+    "R9w_wellen": 266
+  },
+  "R9_by_tile": {
+    "A1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 1
+    },
+    "A2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "A6": {
+      "R9w_wellen": 5
+    },
+    "A7": {
+      "R9w_wellen": 3
+    },
+    "B1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "B2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "B3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "B4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 11
+    },
+    "B5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "B6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "B7": {
+      "R9w_wellen": 1
+    },
+    "C1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "C2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 3
+    },
+    "C3": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 17
+    },
+    "C4": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 13
+    },
+    "C5": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "C6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 18
+    },
+    "C7": {
+      "R9w_wellen": 3
+    },
+    "D1": {
+      "R8b_delle": 11,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "D3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 1
+    },
+    "D4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "D5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "D6": {
+      "R8b_delle": 2,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 9
+    },
+    "E1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "E3": {
+      "R8b_delle": 12
+    },
+    "E4": {
+      "R8b_delle": 4,
+      "R9w_wellen": 4
+    },
+    "E5": {
+      "R9w_wellen": 1
+    },
+    "E6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 4
+    },
+    "F1": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "F2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "F6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 7
+    },
+    "G1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 12
+    },
+    "G3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "G4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "G6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 7
+    },
+    "H1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "H2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "H3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 8
+    },
+    "H4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "H5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 11
+    },
+    "H6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "H7": {
+      "R9w_wellen": 2
+    }
+  },
+  "R9_total": 333,
+  "candidate_kind": "Float32 direct-transfer probe; no mesh build",
+  "gate_loch_json": "/tmp/gate_loch_p3d27_p3d27_V3_round01_official_probe.json",
+  "geometry": "V3",
+  "node_stdout": "{\"meshes\":9,\"dreiecke\":88728,\"offen_innen\":0,\"bb\":[126,0,294,86],\"punkte\":0}\n",
+  "probe_relief": "/tmp/relief_p3d27_p3d27_V3_round01_official_probe.json.gz",
+  "rules_D1_hits": [
+    {
+      "feld": "D1",
+      "regel": "R1_blind",
+      "weg": "rampe_2",
+      "wert": 0,
+      "wo": "anfang",
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R1_blind",
+      "weg": "rampe_11",
+      "wert": 0,
+      "wo": "ende",
+      "x": 156.5,
+      "z": 37.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R2_getrennt",
+      "wert": 116,
+      "x": 150.9,
+      "z": 23.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.378,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 3.859,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 19.5,
+      "x": 138.4,
+      "z": 30.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 19.5,
+      "x": 146.4,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.206,
+      "x": 150.3,
+      "z": 28.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 19.5,
+      "x": 158.2,
+      "z": 27.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 3.811,
+      "x": 162.1,
+      "z": 26.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 4.08,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 3.241,
+      "x": 144.8,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 19.5,
+      "x": 154.5,
+      "z": 16.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 19.5,
+      "x": 157.5,
+      "z": 19.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.339,
+      "x": 155.6,
+      "z": 22.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 9.2,
+      "x": 153.7,
+      "z": 26.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.206,
+      "x": 153.7,
+      "z": 26.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.342,
+      "x": 151.8,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 4.099,
+      "x": 151.8,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 19.5,
+      "x": 150.4,
+      "z": 33.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 4.07,
+      "x": 150.4,
+      "z": 33.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.204,
+      "x": 153.7,
+      "z": 35.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.145,
+      "x": 153.7,
+      "z": 35.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_rand",
+      "wert": -0.55,
+      "x": 147.5,
+      "z": 3.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_schlucht",
+      "weg": "rampe_2",
+      "wert": 3.09,
+      "x": 128.0,
+      "z": 31.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_schlucht",
+      "weg": "rampe_2",
+      "wert": 3.27,
+      "x": 161.1,
+      "z": 26.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_schlucht",
+      "weg": "rampe_11",
+      "wert": 3.09,
+      "x": 145.0,
+      "z": 9.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_schlucht",
+      "weg": "rampe_11",
+      "wert": 1.84,
+      "x": 154.9,
+      "z": 16.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R4_schlucht",
+      "weg": "rampe_11",
+      "wert": 1.56,
+      "x": 152.3,
+      "z": 28.8
+    },
+    {
+      "feld": "D1",
+      "m2": 1.2,
+      "regel": "R5_loch",
+      "wert": 4.15,
+      "x": 139.0,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "m2": 7.2,
+      "regel": "R5_loch",
+      "wert": 1.75,
+      "x": 143.5,
+      "z": 7.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 4.01,
+      "x": 136.5,
+      "z": 5.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.09,
+      "x": 147.0,
+      "z": 6.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.5,
+      "regel": "R5_loch",
+      "wert": 1.4,
+      "x": 141.5,
+      "z": 8.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 2.27,
+      "x": 146.5,
+      "z": 7.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 4.09,
+      "x": 136.5,
+      "z": 8.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.2,
+      "regel": "R5_loch",
+      "wert": 2.95,
+      "x": 146.0,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.5,
+      "regel": "R5_loch",
+      "wert": 1.63,
+      "x": 151.0,
+      "z": 15.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.43,
+      "x": 161.0,
+      "z": 14.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.71,
+      "x": 161.5,
+      "z": 15.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.84,
+      "x": 151.5,
+      "z": 15.5
+    },
+    {
+      "feld": "D1",
+      "m2": 5.5,
+      "regel": "R5_loch",
+      "wert": 1.67,
+      "x": 158.5,
+      "z": 17.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.78,
+      "x": 162.0,
+      "z": 15.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.25,
+      "x": 152.5,
+      "z": 16.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.79,
+      "x": 162.5,
+      "z": 16.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 3.9,
+      "x": 166.5,
+      "z": 16.0
+    },
+    {
+      "feld": "D1",
+      "m2": 2.8,
+      "regel": "R5_loch",
+      "wert": 1.88,
+      "x": 153.0,
+      "z": 18.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.54,
+      "x": 153.5,
+      "z": 16.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.52,
+      "x": 163.5,
+      "z": 16.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.82,
+      "x": 154.0,
+      "z": 17.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.17,
+      "x": 164.5,
+      "z": 17.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.16,
+      "x": 161.5,
+      "z": 17.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.48,
+      "x": 163.0,
+      "z": 18.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.27,
+      "x": 151.5,
+      "z": 18.5
+    },
+    {
+      "feld": "D1",
+      "m2": 4.8,
+      "regel": "R5_loch",
+      "wert": 3.28,
+      "x": 149.5,
+      "z": 20.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.3,
+      "x": 162.0,
+      "z": 18.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.3,
+      "x": 156.5,
+      "z": 19.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.02,
+      "x": 159.5,
+      "z": 19.0
+    },
+    {
+      "feld": "D1",
+      "m2": 5.0,
+      "regel": "R5_loch",
+      "wert": 3.19,
+      "x": 163.5,
+      "z": 19.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.06,
+      "x": 158.5,
+      "z": 19.5
+    },
+    {
+      "feld": "D1",
+      "m2": 3.0,
+      "regel": "R5_loch",
+      "wert": 4.8,
+      "x": 163.5,
+      "z": 20.5
+    },
+    {
+      "feld": "D1",
+      "m2": 6.2,
+      "regel": "R5_loch",
+      "wert": 3.09,
+      "x": 150.5,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.42,
+      "x": 155.5,
+      "z": 20.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.38,
+      "x": 157.5,
+      "z": 20.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 3.65,
+      "x": 166.5,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.88,
+      "x": 155.0,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.82,
+      "x": 157.0,
+      "z": 22.0
+    },
+    {
+      "feld": "D1",
+      "m2": 4.8,
+      "regel": "R5_loch",
+      "wert": 2.5,
+      "x": 157.0,
+      "z": 24.5
+    },
+    {
+      "feld": "D1",
+      "m2": 7.8,
+      "regel": "R5_loch",
+      "wert": 3.41,
+      "x": 151.0,
+      "z": 26.0
+    },
+    {
+      "feld": "D1",
+      "m2": 2.0,
+      "regel": "R5_loch",
+      "wert": 2.66,
+      "x": 153.5,
+      "z": 24.0
+    },
+    {
+      "feld": "D1",
+      "m2": 10.5,
+      "regel": "R5_loch",
+      "wert": 3.67,
+      "x": 167.0,
+      "z": 24.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.0,
+      "x": 156.0,
+      "z": 23.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.18,
+      "x": 157.5,
+      "z": 23.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.82,
+      "x": 152.5,
+      "z": 24.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.2,
+      "regel": "R5_loch",
+      "wert": 2.42,
+      "x": 155.5,
+      "z": 24.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.5,
+      "x": 156.5,
+      "z": 25.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.28,
+      "x": 159.0,
+      "z": 25.5
+    },
+    {
+      "feld": "D1",
+      "m2": 3.0,
+      "regel": "R5_loch",
+      "wert": 3.85,
+      "x": 167.5,
+      "z": 25.5
+    },
+    {
+      "feld": "D1",
+      "m2": 2.5,
+      "regel": "R5_loch",
+      "wert": 1.54,
+      "x": 147.5,
+      "z": 27.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 2.87,
+      "x": 158.0,
+      "z": 26.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 3.16,
+      "x": 161.5,
+      "z": 26.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.61,
+      "x": 157.0,
+      "z": 27.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.16,
+      "x": 163.5,
+      "z": 26.5
+    },
+    {
+      "feld": "D1",
+      "m2": 5.8,
+      "regel": "R5_loch",
+      "wert": 2.2,
+      "x": 133.0,
+      "z": 28.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.95,
+      "x": 148.5,
+      "z": 27.0
+    },
+    {
+      "feld": "D1",
+      "m2": 5.0,
+      "regel": "R5_loch",
+      "wert": 2.36,
+      "x": 130.0,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.41,
+      "x": 161.0,
+      "z": 28.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.7,
+      "x": 167.5,
+      "z": 27.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.25,
+      "x": 143.5,
+      "z": 28.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.5,
+      "regel": "R5_loch",
+      "wert": 1.61,
+      "x": 148.0,
+      "z": 28.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.09,
+      "x": 159.0,
+      "z": 28.0
+    },
+    {
+      "feld": "D1",
+      "m2": 10.8,
+      "regel": "R5_loch",
+      "wert": 3.96,
+      "x": 167.5,
+      "z": 33.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 2.66,
+      "x": 167.5,
+      "z": 28.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.42,
+      "x": 142.0,
+      "z": 29.0
+    },
+    {
+      "feld": "D1",
+      "m2": 3.0,
+      "regel": "R5_loch",
+      "wert": 1.98,
+      "x": 134.0,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.06,
+      "x": 144.5,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 7.85,
+      "x": 161.5,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.32,
+      "x": 131.0,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.74,
+      "x": 140.5,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.55,
+      "x": 142.0,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 1.35,
+      "x": 148.5,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "m2": 1.5,
+      "regel": "R5_loch",
+      "wert": 1.54,
+      "x": 145.5,
+      "z": 31.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.68,
+      "x": 136.0,
+      "z": 31.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.21,
+      "x": 140.5,
+      "z": 31.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.0,
+      "regel": "R5_loch",
+      "wert": 1.43,
+      "x": 135.0,
+      "z": 31.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.52,
+      "x": 141.5,
+      "z": 31.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.5,
+      "regel": "R5_loch",
+      "wert": 2.51,
+      "x": 148.5,
+      "z": 32.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.46,
+      "x": 131.5,
+      "z": 32.0
+    },
+    {
+      "feld": "D1",
+      "m2": 4.2,
+      "regel": "R5_loch",
+      "wert": 2.48,
+      "x": 142.5,
+      "z": 34.0
+    },
+    {
+      "feld": "D1",
+      "m2": 12.2,
+      "regel": "R5_loch",
+      "wert": 4.0,
+      "x": 167.0,
+      "z": 36.0
+    },
+    {
+      "feld": "D1",
+      "m2": 8.0,
+      "regel": "R5_loch",
+      "wert": 3.99,
+      "x": 167.5,
+      "z": 35.0
+    },
+    {
+      "feld": "D1",
+      "m2": 4.0,
+      "regel": "R5_loch",
+      "wert": 2.59,
+      "x": 149.5,
+      "z": 33.5
+    },
+    {
+      "feld": "D1",
+      "m2": 3.5,
+      "regel": "R5_loch",
+      "wert": 3.59,
+      "x": 154.0,
+      "z": 33.5
+    },
+    {
+      "feld": "D1",
+      "m2": 3.2,
+      "regel": "R5_loch",
+      "wert": 2.39,
+      "x": 139.0,
+      "z": 34.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 7.21,
+      "x": 143.5,
+      "z": 33.0
+    },
+    {
+      "feld": "D1",
+      "m2": 8.8,
+      "regel": "R5_loch",
+      "wert": 3.7,
+      "x": 152.0,
+      "z": 37.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.73,
+      "x": 149.0,
+      "z": 34.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 3.4,
+      "x": 156.5,
+      "z": 34.5
+    },
+    {
+      "feld": "D1",
+      "m2": 1.2,
+      "regel": "R5_loch",
+      "wert": 5.69,
+      "x": 142.5,
+      "z": 35.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 3.57,
+      "x": 158.5,
+      "z": 35.0
+    },
+    {
+      "feld": "D1",
+      "m2": 13.8,
+      "regel": "R5_loch",
+      "wert": 3.65,
+      "x": 149.5,
+      "z": 39.5
+    },
+    {
+      "feld": "D1",
+      "m2": 3.0,
+      "regel": "R5_loch",
+      "wert": 3.98,
+      "x": 162.0,
+      "z": 36.0
+    },
+    {
+      "feld": "D1",
+      "m2": 5.5,
+      "regel": "R5_loch",
+      "wert": 3.48,
+      "x": 145.5,
+      "z": 38.0
+    },
+    {
+      "feld": "D1",
+      "m2": 3.0,
+      "regel": "R5_loch",
+      "wert": 3.05,
+      "x": 135.0,
+      "z": 38.0
+    },
+    {
+      "feld": "D1",
+      "m2": 8.8,
+      "regel": "R5_loch",
+      "wert": 3.86,
+      "x": 141.5,
+      "z": 39.5
+    },
+    {
+      "feld": "D1",
+      "m2": 8.8,
+      "regel": "R5_loch",
+      "wert": 3.72,
+      "x": 131.5,
+      "z": 40.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 2.8,
+      "x": 128.0,
+      "z": 38.5
+    },
+    {
+      "feld": "D1",
+      "m2": 5.2,
+      "regel": "R5_loch",
+      "wert": 3.84,
+      "x": 135.5,
+      "z": 40.0
+    },
+    {
+      "feld": "D1",
+      "m2": 10.0,
+      "regel": "R5_loch",
+      "wert": 3.98,
+      "x": 149.0,
+      "z": 41.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 3.97,
+      "x": 143.5,
+      "z": 39.5
+    },
+    {
+      "feld": "D1",
+      "m2": 2.5,
+      "regel": "R5_loch",
+      "wert": 4.0,
+      "x": 146.5,
+      "z": 41.5
+    },
+    {
+      "feld": "D1",
+      "m2": 2.5,
+      "regel": "R5_loch",
+      "wert": 4.0,
+      "x": 147.5,
+      "z": 42.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 3.95,
+      "x": 152.5,
+      "z": 42.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.35,
+      "x": 141.5,
+      "z": 1.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 0.72,
+      "x": 144.0,
+      "z": 1.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.34,
+      "x": 139.5,
+      "z": 2.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.08,
+      "x": 145.0,
+      "z": 2.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.44,
+      "x": 140.2,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.83,
+      "x": 138.0,
+      "z": 3.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.05,
+      "x": 143.2,
+      "z": 3.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.78,
+      "x": 140.5,
+      "z": 4.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.55,
+      "x": 141.5,
+      "z": 4.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.74,
+      "x": 137.7,
+      "z": 5.2
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.23,
+      "x": 153.0,
+      "z": 5.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.96,
+      "x": 152.0,
+      "z": 6.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.6,
+      "x": 139.2,
+      "z": 6.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.36,
+      "x": 149.8,
+      "z": 6.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.57,
+      "x": 154.8,
+      "z": 6.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.19,
+      "x": 151.5,
+      "z": 7.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.65,
+      "x": 137.0,
+      "z": 7.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.14,
+      "x": 152.5,
+      "z": 7.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.77,
+      "x": 153.0,
+      "z": 8.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.59,
+      "x": 137.0,
+      "z": 8.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.81,
+      "x": 158.2,
+      "z": 8.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 0.76,
+      "x": 139.5,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.32,
+      "x": 156.0,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.45,
+      "x": 137.5,
+      "z": 10.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 5.32,
+      "x": 159.2,
+      "z": 10.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.78,
+      "x": 136.0,
+      "z": 10.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.73,
+      "x": 156.5,
+      "z": 10.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.66,
+      "x": 161.0,
+      "z": 10.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 5.3,
+      "x": 137.5,
+      "z": 11.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.39,
+      "x": 158.5,
+      "z": 11.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.07,
+      "x": 139.0,
+      "z": 11.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.88,
+      "x": 160.2,
+      "z": 11.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.05,
+      "x": 161.5,
+      "z": 12.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.86,
+      "x": 136.5,
+      "z": 12.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 6.4,
+      "x": 164.0,
+      "z": 13.8
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 6.86,
+      "x": 138.6,
+      "z": 14.6
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.47,
+      "x": 142.5,
+      "z": 17.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.3,
+      "x": 146.0,
+      "z": 18.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.27,
+      "x": 166.8,
+      "z": 18.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.71,
+      "x": 142.8,
+      "z": 18.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.22,
+      "x": 145.2,
+      "z": 19.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 0.84,
+      "x": 143.5,
+      "z": 19.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.27,
+      "x": 147.0,
+      "z": 20.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.73,
+      "x": 145.5,
+      "z": 20.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.91,
+      "x": 138.0,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.29,
+      "x": 144.5,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 2.35,
+      "x": 160.0,
+      "z": 21.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.01,
+      "x": 134.5,
+      "z": 22.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.4,
+      "x": 145.0,
+      "z": 22.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 8.6,
+      "x": 130.6,
+      "z": 23.2
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 5.03,
+      "x": 135.8,
+      "z": 22.9
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.96,
+      "x": 140.5,
+      "z": 22.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.29,
+      "x": 141.5,
+      "z": 23.4
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 7.31,
+      "x": 146.0,
+      "z": 23.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 0.79,
+      "x": 158.0,
+      "z": 23.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.41,
+      "x": 137.0,
+      "z": 24.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 5.46,
+      "x": 127.2,
+      "z": 25.8
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.79,
+      "x": 166.6,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.72,
+      "x": 161.0,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 5.54,
+      "x": 162.0,
+      "z": 30.4
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.55,
+      "x": 157.1,
+      "z": 31.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.9,
+      "x": 137.5,
+      "z": 31.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 7.39,
+      "x": 137.5,
+      "z": 32.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.27,
+      "x": 133.0,
+      "z": 33.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.59,
+      "x": 139.0,
+      "z": 33.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.57,
+      "x": 134.2,
+      "z": 33.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.58,
+      "x": 139.5,
+      "z": 33.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 7.01,
+      "x": 129.8,
+      "z": 34.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.56,
+      "x": 127.8,
+      "z": 35.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.99,
+      "x": 152.0,
+      "z": 37.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.24,
+      "x": 151.0,
+      "z": 38.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 3.96,
+      "x": 153.0,
+      "z": 39.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.01,
+      "x": 146.5,
+      "z": 40.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.35,
+      "x": 151.5,
+      "z": 40.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.01,
+      "x": 148.0,
+      "z": 41.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.12,
+      "x": 150.0,
+      "z": 41.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.0,
+      "x": 147.8,
+      "z": 42.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 4.16,
+      "x": 152.5,
+      "z": 42.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G6_facette",
+      "wert": 6,
+      "x": 158.2,
+      "z": 37.7
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -3.6,
+      "x": 157.8,
+      "z": 8.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 157.8,
+      "z": 8.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 159.2,
+      "z": 11.5
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 2.13,
+      "x": 163.5,
+      "z": 11.7
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 163.5,
+      "z": 11.7
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -1.08,
+      "x": 160.3,
+      "z": 9.3
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 160.3,
+      "z": 9.3
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -2.55,
+      "x": 158.9,
+      "z": 8.3
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 158.9,
+      "z": 8.3
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 4.38,
+      "x": 138.7,
+      "z": 12.1
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 138.7,
+      "z": 12.1
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -0.86,
+      "x": 140.0,
+      "z": 6.7
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 140.0,
+      "z": 6.7
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 4.36,
+      "x": 139.9,
+      "z": 5.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 139.9,
+      "z": 5.0
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -0.79,
+      "x": 140.8,
+      "z": 6.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 140.8,
+      "z": 6.0
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 4.31,
+      "x": 159.3,
+      "z": 9.4
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 159.3,
+      "z": 9.4
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 2.74,
+      "x": 136.2,
+      "z": 39.8
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 136.2,
+      "z": 39.8
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 1.72,
+      "x": 138.2,
+      "z": 37.8
+    },
+    {
+      "feld": "D1",
+      "regel": "G11_baum_an_wand",
+      "wert": "baeume",
+      "x": 138.2,
+      "z": 37.8
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 2.67,
+      "x": 141.0,
+      "z": 3.6
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 3.9,
+      "x": 139.4,
+      "z": 4.1
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 2.68,
+      "x": 141.6,
+      "z": 4.5
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -1.58,
+      "x": 138.7,
+      "z": 5.4
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 2.62,
+      "x": 138.2,
+      "z": 6.8
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": -1.29,
+      "x": 138.4,
+      "z": 7.8
+    },
+    {
+      "art": "steine",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 3.97,
+      "x": 137.0,
+      "z": 11.9
+    }
+  ],
+  "rules_by_rule": {
+    "G11_baum_an_wand": 12,
+    "G11_objekt_schwebt_sinkt": 20,
+    "G2_spitze_oben": 3,
+    "G2_spitze_oben_fein": 8,
+    "G3_spitze_unten": 3,
+    "G3_spitze_unten_fein": 2,
+    "G5_beule_klippe": 145,
+    "G6_facette": 217,
+    "G7_wand_glatte_flaeche": 1,
+    "G7b_wandkontur_feld": 23,
+    "G7b_wandkontur_kantenschaerfe": 1,
+    "G8_fluss_nicht_bis_rand": 1,
+    "R1_blind": 24,
+    "R2_getrennt": 15,
+    "R3_laengs_m": 35,
+    "R3_quer_pct": 19,
+    "R3_woelb_m": 19,
+    "R4_rand": 1,
+    "R4_schlucht": 5,
+    "R5_loch": 121,
+    "R6_wasser_schnee": 4,
+    "T1_fleckrand": 94,
+    "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+    "T3_streifen_ringe_bildpruefung_offen": 1,
+    "T4_graue_flussstreifen_bildpruefung_offen": 1,
+    "T5_textur_vs_clay_bildpruefung_offen": 1
+  },
+  "rules_by_tile": {
+    "D1": {
+      "G11_baum_an_wand": 12,
+      "G11_objekt_schwebt_sinkt": 18,
+      "G5_beule_klippe": 78,
+      "G6_facette": 1,
+      "R1_blind": 2,
+      "R2_getrennt": 1,
+      "R3_laengs_m": 6,
+      "R3_quer_pct": 7,
+      "R3_woelb_m": 7,
+      "R4_rand": 1,
+      "R4_schlucht": 5,
+      "R5_loch": 104
+    },
+    "D2": {
+      "R2_getrennt": 1,
+      "T1_fleckrand": 7
+    },
+    "G1": {
+      "G11_objekt_schwebt_sinkt": 2,
+      "G6_facette": 3,
+      "R1_blind": 1,
+      "R3_laengs_m": 1,
+      "R6_wasser_schnee": 3,
+      "T1_fleckrand": 3
+    }
+  },
+  "rules_total": 777,
+  "scenario": "joint",
+  "source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "transfer_base": "p3d21_transfer_base_route3_v29.json",
+  "transfer_base_sha256": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287"
+}

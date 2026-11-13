@@ -26,11 +26,11 @@ Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer/Test · `[
 
 ## 1. V3 Float32-Gate-Probe
 
-`[S]` Noch nicht ausgeführt. Der vorbereitete serielle Checker-in-the-loop ist auf V3, sechs Solve-Runden zu höchstens 600 s und die unveränderten Familien begrenzt. Er verwendet die p3d23-V3-Quelle aus `/tmp/p3d22_v3_source.json.gz` (SHA-256 `b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6`), die p3d21-Transferbasis `p3d21_transfer_base_route3_v29.json` und die p3d26-ausnahmefähige Solverfassung. Frische offizielle G5-/R5-Loch-/G11-Ereignisse werden nach jeder Probe ergänzt. Die Regeln, R8- und R9-Prüfer bleiben unverändert.
+`[S]` Status: Runde 1 abgeschlossen; Checker-in-the-loop wird fortgesetzt Maximal sechs serielle Solve-Runden zu höchstens 600 s; V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- Ereignisse werden nach jeder Probe ergänzt.
 
-| Runde | `pruefe_regeln` gesamt / D1 / G1 / D2 | R8 gesamt / D1 / G1 / D2 | R9 gesamt / D1 / G1 / D2 | Zielstatus |
+| Runde | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | Ziele / Beleg |
 |---:|---|---|---|---|
-| 1–6 | noch nicht gemessen | noch nicht gemessen | noch nicht gemessen | offen |
+| 1 | 777 (242/13/8) | 49 (10/0/0) | 333 (14/13/0) | offen: R8b_D1, G5_total, G5_D1, R5_loch_total, R5_loch_D1, R4_schlucht_D1, R8a_D1_unpermitted; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round01_official_probe.json) |
 
 ## 2. Mesh-Gate
 
