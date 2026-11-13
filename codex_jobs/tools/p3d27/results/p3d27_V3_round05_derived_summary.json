@@ -1,0 +1,135 @@
+{
+  "candidate_G5_components_D1": 39,
+  "candidate_G5_total_D1": [
+    106,
+    39
+  ],
+  "candidate_G6_D1": 1,
+  "candidate_G6_components_D1": 1,
+  "candidate_R5_components_D1": 173,
+  "candidate_R5_total_D1": [
+    202,
+    185
+  ],
+  "new_G5_cuts": 40,
+  "new_G6_cuts": 0,
+  "new_R4_cuts": 9,
+  "new_R5_cuts": 168,
+  "new_R5_spitze_cuts": 0,
+  "new_R8_gitter_cuts": 0,
+  "new_R9w_event_cuts": 0,
+  "out": "/workspace/wt_dorfmap_p3d27/codex_jobs/tools/p3d27/results/p3d27_V3_round05_derived_cuts.json",
+  "protected_G5": 2,
+  "protected_G6": 1,
+  "protected_R5": 5,
+  "unsupported_R5_without_saddle": [
+    {
+      "depth_m": 8.152835845947266,
+      "fill_m": 16.490808486938477,
+      "pixels": 3,
+      "point": [
+        141.5,
+        6.5
+      ]
+    },
+    {
+      "depth_m": 8.399444580078125,
+      "fill_m": 16.249746322631836,
+      "pixels": 1,
+      "point": [
+        143.0,
+        6.5
+      ]
+    },
+    {
+      "depth_m": 7.921867370605469,
+      "fill_m": 14.215131759643555,
+      "pixels": 1,
+      "point": [
+        155.0,
+        11.0
+      ]
+    },
+    {
+      "depth_m": 5.828192710876465,
+      "fill_m": 14.5971097946167,
+      "pixels": 3,
+      "point": [
+        159.5,
+        12.5
+      ]
+    },
+    {
+      "depth_m": 8.374110221862793,
+      "fill_m": 15.418383598327637,
+      "pixels": 2,
+      "point": [
+        144.5,
+        13.0
+      ]
+    },
+    {
+      "depth_m": 8.060997009277344,
+      "fill_m": 14.506925582885742,
+      "pixels": 1,
+      "point": [
+        147.5,
+        16.5
+      ]
+    },
+    {
+      "depth_m": 7.3683977127075195,
+      "fill_m": 15.30915355682373,
+      "pixels": 4,
+      "point": [
+        146.0,
+        17.0
+      ]
+    },
+    {
+      "depth_m": 7.998673439025879,
+      "fill_m": 16.678741455078125,
+      "pixels": 1,
+      "point": [
+        145.0,
+        19.0
+      ]
+    },
+    {
+      "depth_m": 7.967157363891602,
+      "fill_m": 16.696805953979492,
+      "pixels": 2,
+      "point": [
+        145.5,
+        21.0
+      ]
+    },
+    {
+      "depth_m": 7.153764724731445,
+      "fill_m": 15.772570610046387,
+      "pixels": 1,
+      "point": [
+        146.0,
+        23.0
+      ]
+    },
+    {
+      "depth_m": 7.817256450653076,
+      "fill_m": 14.453058242797852,
+      "pixels": 4,
+      "point": [
+        139.0,
+        25.5
+      ]
+    },
+    {
+      "depth_m": 7.810576438903809,
+      "fill_m": 14.541533470153809,
+      "pixels": 5,
+      "point": [
+        135.5,
+        33.5
+      ]
+    }
+  ]
+}

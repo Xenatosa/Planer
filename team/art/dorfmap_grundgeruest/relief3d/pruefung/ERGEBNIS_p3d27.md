@@ -26,7 +26,7 @@ Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer/Test · `[
 
 ## 1. V3 Float32-Gate-Probe
 
-`[S]` Status: Runde 4 abgeschlossen; Checker-in-the-loop wird fortgesetzt Maximal sechs serielle Solve-Runden zu höchstens 600 s; V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- Ereignisse werden nach jeder Probe ergänzt; R5-Komponenten ohne ableitbaren Flutsattel bleiben ausdrücklich als nicht geschnittene Ereignisse dokumentiert. Nach den ersten Float32-Gates nutzt das Modell 0,00001 m interne Rundungspuffer innerhalb der unveränderten Stufen- und R8a-Limits.
+`[S]` Status: Runde 5 abgeschlossen; Checker-in-the-loop wird fortgesetzt Maximal sechs serielle Solve-Runden zu höchstens 600 s; V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- Ereignisse werden nach jeder Probe ergänzt; R5-Komponenten ohne ableitbaren Flutsattel bleiben ausdrücklich als nicht geschnittene Ereignisse dokumentiert. Nach den ersten Float32-Gates nutzt das Modell 0,00001 m interne Rundungspuffer innerhalb der unveränderten Stufen- und R8a-Limits.
 
 | Runde | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | Ziele / Beleg |
 |---:|---|---|---|---|
@@ -34,6 +34,7 @@ Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer/Test · `[
 | 2 | 833 (298/13/8) | 50 (11/0/0) | 331 (12/13/0) | offen: G5_D1, G5_total, R4_schlucht_D1, R5_loch_D1, R5_loch_total, R8a_D1_unpermitted, R8b_D1; R5 ohne Flutsattel 141.5|2.0, 141.5|6.5, 139.0|11.5, 141.5|13.5, 141.5|16.0, 146.0|23.0; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round02_official_probe.json) |
 | 3 | 812 (277/13/8) | 44 (5/0/0) | 331 (12/13/0) | offen: G5_D1, G5_total, R4_schlucht_D1, R5_loch_D1, R5_loch_total, R8b_D1; R5 ohne Flutsattel 157.5|9.5, 163.5|15.0, 140.0|21.5, 141.5|22.0, 141.0|22.5, 142.5|22.5, 143.5|22.5, 142.0|23.5, 146.0|23.0; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round03_official_probe.json) |
 | 4 | 820 (285/13/8) | 45 (6/0/0) | 330 (11/13/0) | offen: R8b_D1, G5_total, G5_D1, R5_loch_total, R5_loch_D1, R4_schlucht_D1; R5 ohne Flutsattel 152.0|6.0, 159.5|12.5, 160.0|13.0, 140.0|21.5, 144.5|21.5, 145.0|22.0, 146.0|23.0; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round04_official_probe.json) |
+| 5 | 823 (288/13/8) | 45 (6/0/0) | 327 (9/13/0) | offen: R8b_D1, G5_total, G5_D1, R5_loch_total, R5_loch_D1, R4_schlucht_D1; R5 ohne Flutsattel 141.5|6.5, 143.0|6.5, 155.0|11.0, 159.5|12.5, 144.5|13.0, 147.5|16.5, 146.0|17.0, 145.0|19.0, 145.5|21.0, 146.0|23.0, 139.0|25.5, 135.5|33.5; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round05_official_probe.json) |
 
 ## 2. Mesh-Gate
 
