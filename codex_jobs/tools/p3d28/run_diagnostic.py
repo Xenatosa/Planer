@@ -53,6 +53,8 @@ def main() -> None:
     ap.add_argument("--time-limit", type=float, default=600.0)
     ap.add_argument("--objective-mode", choices=("feasibility", "step", "quer", "wob", "diagnostic"),
                     default="step")
+    ap.add_argument("--relax-integrality", action="store_true",
+                    help="solve the linear relaxation for conflict diagnosis")
     ap.add_argument("--reference-solution", type=Path,
                     default=RELIEF3D / "neu/p3d17_joint_mesh_v22.json")
     ap.add_argument("--keep-solution", action="store_true")
@@ -96,7 +98,7 @@ def main() -> None:
         quer_limit=7,
         wob_limit=7,
         objective_mode=args.objective_mode,
-        relax_integrality=False,
+        relax_integrality=args.relax_integrality,
         mip_start_path=None,
         mip_start_out=None,
         time_limit_s=args.time_limit,
@@ -119,6 +121,7 @@ def main() -> None:
         "r8_center_unrounded_map": list(args.r8_center),
         "time_limit_s": args.time_limit,
         "reference_solution": args.reference_solution.name if args.reference_solution else None,
+        "relax_integrality": args.relax_integrality,
         "solver": "highspy.Highs; threads=1",
         "cuts_are_round05_v24_catalog_for_all_geometries": args.event_cuts.name == "event_cuts_cumulative05.json",
         "endpoint_r8a_lock_enabled": args.geometry != "V24",

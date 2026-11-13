@@ -1642,6 +1642,7 @@ def solve(
             "primal_feasible": primal_feasible,
             "optimality_proven": bool(result.success),
             "objective_mode": objective_mode,
+            "relaxed_integrality": relax_integrality,
             "stage_limit_m": stage_limit,
             "r3_long_limit": r3_limit,
             "r3_quer_limit": quer_limit,
