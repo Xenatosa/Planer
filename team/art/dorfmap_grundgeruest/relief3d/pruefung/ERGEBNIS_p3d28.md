@@ -32,3 +32,11 @@ Marker: `[S]` gemessen oder unverändert ausgeführter Prüfer · `[R]` Modellbe
 `[R]` Im Arbeitsbereich nahe Wand-/Klippenfuß (Referenzgradient über 1 m/m, Abstand höchstens 6 m, außerdem 4,8 m um die Wegachsen) bleibt jede zweite Differenz in vier Rasterrichtungen innerhalb ±0,02 m der p3d17-Referenz. Zusätzliche lineare Querschnitte begrenzen den R4-Schluchtindikator auf höchstens 1,499 m. Baumstandorte und Quellobjekte bleiben unverändert; die 3×3 Bodenstichprobe um einen Baum bleibt innerhalb 1 mm der p3d17-Referenz.
 
 `[A]` Anfangsvariante: Ring 4,5 m, Drainage-`eps=1 mm`. Nur ein nachgewiesener infeasibler Solve darf die Ringbreite auf 6,0 m und danach höchstens 7,5 m erhöhen. Offizielle Float32-Probe, Machbarkeit und Regelzahlen stehen im nächsten Abschnitt, sobald sie vorliegen.
+
+## 3. Float32-Gate-Probe mit Checker-in-the-loop
+
+`[S]` nach Runde 1 beendet: kein machbarer Modellpunkt (Infeasible) Höchstens vier serielle Runden, je Solve höchstens 600 s. Jede Probe lief über den unveränderten Float32-Direkttransfer und die vier unveränderten offiziellen Prüfer.
+
+| Runde | Solve | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | offene Ziele |
+|---:|---|---|---|---|---|
+| 1 | Infeasible | keine Probe | – | – | kein machbarer Punkt |
