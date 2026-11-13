@@ -279,16 +279,18 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
     lp = highspy.HighsLp()
     lp.num_col_ = int(matrix.shape[1])
     lp.num_row_ = int(matrix.shape[0])
-    lp.col_cost_ = np.asarray(objective, dtype=np.float64)
-    lp.col_lower_ = np.asarray(lower, dtype=np.float64)
-    lp.col_upper_ = np.asarray(upper, dtype=np.float64)
+    # Highs may take ownership of passModel arrays. Keep independent copies so
+    # the post-solve residual check still uses the original SciPy matrix/bounds.
+    lp.col_cost_ = np.array(objective, dtype=np.float64, copy=True)
+    lp.col_lower_ = np.array(lower, dtype=np.float64, copy=True)
+    lp.col_upper_ = np.array(upper, dtype=np.float64, copy=True)
     lp.row_lower_ = np.full(matrix.shape[0], -np.inf, dtype=np.float64)
-    lp.row_upper_ = np.asarray(rhs, dtype=np.float64)
+    lp.row_upper_ = np.array(rhs, dtype=np.float64, copy=True)
     lp.sense_ = highspy.ObjSense.kMinimize
     lp.a_matrix_.format_ = highspy.MatrixFormat.kRowwise
-    lp.a_matrix_.start_ = matrix.indptr.astype(np.int32, copy=False)
-    lp.a_matrix_.index_ = matrix.indices.astype(np.int32, copy=False)
-    lp.a_matrix_.value_ = matrix.data.astype(np.float64, copy=False)
+    lp.a_matrix_.start_ = matrix.indptr.astype(np.int32, copy=True)
+    lp.a_matrix_.index_ = matrix.indices.astype(np.int32, copy=True)
+    lp.a_matrix_.value_ = matrix.data.astype(np.float64, copy=True)
     lp.integrality_ = [
         highspy.HighsVarType.kInteger if value else highspy.HighsVarType.kContinuous
         for value in np.asarray(integrality, dtype=np.uint8)
