@@ -262,6 +262,8 @@ def main() -> None:
     else:
         prior = {}
         rounds = []
+    if rounds and rounds[-1].get("stop_reason") == "two_rounds_without_score_improvement":
+        rounds[-1].pop("stop_reason")
     all_cuts = list(base)
     seen_cut_hashes = set()
     if rounds and rounds[-1].get("next_cut_json"):
@@ -395,8 +397,6 @@ def main() -> None:
             stop_reason = "cut_cycle"
         elif len(next_cuts) == len(all_cuts):
             stop_reason = "no_new_cuts"
-        elif no_improve >= 2:
-            stop_reason = "two_rounds_without_score_improvement"
         elif round_index == 6:
             stop_reason = "six_round_limit"
         if stop_reason is not None:
