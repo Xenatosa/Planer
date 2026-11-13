@@ -94,3 +94,11 @@ Historische 9d3f8fc Summen: `pruefe_regeln` 596 (ohne G11), R8 48 (`R8_stufe` 9,
 ## Drei-Satz-Schluss
 
 `[S]` Der p3d29-Modellcode ist gegenüber p3d28 angepasst und die offiziellen Prüfer sowie Quelldaten sind unangetastet. `[S]` Machbarkeit und Float32-Probe sind noch nicht ausgeführt, daher gibt es keinen Nachweis für die Zielwerte oder D2-Regressionsfreiheit. `[A]` Der 7,5-m-Ring und die p3d26-gestützte Flood-Reihenfolge sind die festgelegte Standardkonstruktion; bei Infeasibility bleibt nur der einmalige Abfluss-L1-Fallback.
+
+## 3. Float32-Gate-Probe mit Checker-in-the-loop
+
+`[S]` Runde 1 abgeschlossen; Checker-in-the-loop wird fortgesetzt Höchstens vier serielle Runden, je Solve höchstens 600 s. Jede Probe lief über den unveränderten Float32-Direkttransfer und die vier unveränderten offiziellen Prüfer.
+
+| Runde | Solve | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | offene Ziele |
+|---:|---|---|---|---|---|
+| 1 | Optimal | 586 (47/13/8) | 44 (5/0/0) | 347 (31/13/0) | R5_spitze_D1, G6_D1, R9w_total, G5_total, G5_D1; [JSON](../../../../../codex_jobs/tools/p3d29/results/p3d29_V3_round01_official_probe.json) |

@@ -1,0 +1,31 @@
+{
+  "R9w_policy": "no R9w event cuts, height pins, or equality locks",
+  "candidate_G5_components_D1": 9,
+  "candidate_G5_total_D1": [
+    76,
+    7
+  ],
+  "candidate_G6_D1": 11,
+  "candidate_G6_components_D1": 11,
+  "candidate_R5_components_D1": 0,
+  "candidate_R5_total_D1": [
+    17,
+    0
+  ],
+  "candidate_R8b_D1": 0,
+  "candidate_R8b_components_D1": 0,
+  "new_G5_cuts": 20,
+  "new_G6_cuts": 8,
+  "new_R4_cuts": 0,
+  "new_R5_cuts": 0,
+  "new_R5_spitze_cuts": 3,
+  "new_R8_gitter_cuts": 0,
+  "new_R8b_cuts": 0,
+  "new_R9w_event_cuts": 0,
+  "out": "/workspace/wt_dorfmap_p3d29/codex_jobs/tools/p3d29/results/p3d29_V3_round01_derived_cuts.json",
+  "protected_G5": 2,
+  "protected_G6": 3,
+  "protected_R5": 0,
+  "protected_R8b": 0,
+  "unsupported_R5_without_saddle": []
+}
