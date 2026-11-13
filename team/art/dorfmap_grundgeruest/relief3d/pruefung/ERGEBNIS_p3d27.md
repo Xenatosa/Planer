@@ -26,11 +26,12 @@ Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer/Test · `[
 
 ## 1. V3 Float32-Gate-Probe
 
-`[S]` Status: Runde 1 abgeschlossen; Checker-in-the-loop wird fortgesetzt Maximal sechs serielle Solve-Runden zu höchstens 600 s; V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- Ereignisse werden nach jeder Probe ergänzt.
+`[S]` Status: Runde 2 abgeschlossen; Checker-in-the-loop wird fortgesetzt Maximal sechs serielle Solve-Runden zu höchstens 600 s; V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- Ereignisse werden nach jeder Probe ergänzt; R5-Komponenten ohne ableitbaren Flutsattel bleiben ausdrücklich als nicht geschnittene Ereignisse dokumentiert. Nach den ersten Float32-Gates nutzt das Modell 0,00001 m interne Rundungspuffer innerhalb der unveränderten Stufen- und R8a-Limits.
 
 | Runde | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | Ziele / Beleg |
 |---:|---|---|---|---|
-| 1 | 777 (242/13/8) | 49 (10/0/0) | 333 (14/13/0) | offen: R8b_D1, G5_total, G5_D1, R5_loch_total, R5_loch_D1, R4_schlucht_D1, R8a_D1_unpermitted; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round01_official_probe.json) |
+| 1 | 777 (242/13/8) | 49 (10/0/0) | 333 (14/13/0) | offen: G5_D1, G5_total, R4_schlucht_D1, R5_loch_D1, R5_loch_total, R8a_D1_unpermitted, R8b_D1; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round01_official_probe.json) |
+| 2 | 833 (298/13/8) | 50 (11/0/0) | 331 (12/13/0) | offen: R8b_D1, G5_total, G5_D1, R5_loch_total, R5_loch_D1, R4_schlucht_D1, R8a_D1_unpermitted; R5 ohne Flutsattel 141.5|2.0, 141.5|6.5, 139.0|11.5, 141.5|13.5, 141.5|16.0, 146.0|23.0; [JSON](../../../../../codex_jobs/tools/p3d27/results/p3d27_V3_round02_official_probe.json) |
 
 ## 2. Mesh-Gate
 

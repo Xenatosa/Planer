@@ -1,0 +1,81 @@
+{
+  "candidate_G5_components_D1": 72,
+  "candidate_G5_total_D1": [
+    139,
+    72
+  ],
+  "candidate_G6_D1": 0,
+  "candidate_G6_components_D1": 0,
+  "candidate_R5_components_D1": 176,
+  "candidate_R5_total_D1": [
+    199,
+    182
+  ],
+  "new_G5_cuts": 138,
+  "new_G6_cuts": 0,
+  "new_R4_cuts": 7,
+  "new_R5_cuts": 171,
+  "new_R5_spitze_cuts": 0,
+  "new_R8_gitter_cuts": 0,
+  "new_R9w_event_cuts": 0,
+  "out": "/workspace/wt_dorfmap_p3d27/codex_jobs/tools/p3d27/results/p3d27_V3_round02_derived_cuts.json",
+  "protected_G5": 2,
+  "protected_G6": 0,
+  "protected_R5": 5,
+  "unsupported_R5_without_saddle": [
+    {
+      "depth_m": 7.830811500549316,
+      "fill_m": 17.472164154052734,
+      "pixels": 1,
+      "point": [
+        141.5,
+        2.0
+      ]
+    },
+    {
+      "depth_m": 7.679098129272461,
+      "fill_m": 16.23717498779297,
+      "pixels": 3,
+      "point": [
+        141.5,
+        6.5
+      ]
+    },
+    {
+      "depth_m": 7.735532760620117,
+      "fill_m": 17.008712768554688,
+      "pixels": 4,
+      "point": [
+        139.0,
+        11.5
+      ]
+    },
+    {
+      "depth_m": 7.577605247497559,
+      "fill_m": 16.467853546142578,
+      "pixels": 4,
+      "point": [
+        141.5,
+        13.5
+      ]
+    },
+    {
+      "depth_m": 7.713047981262207,
+      "fill_m": 17.309696197509766,
+      "pixels": 1,
+      "point": [
+        141.5,
+        16.0
+      ]
+    },
+    {
+      "depth_m": 6.858437538146973,
+      "fill_m": 15.592209815979004,
+      "pixels": 1,
+      "point": [
+        146.0,
+        23.0
+      ]
+    }
+  ]
+}
