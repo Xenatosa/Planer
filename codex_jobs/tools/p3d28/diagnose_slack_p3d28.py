@@ -298,7 +298,7 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
 
     highs = highspy.Highs()
     highs.setOptionValue("output_flag", False)
-    highs.setOptionValue("presolve", "on")
+    highs.setOptionValue("presolve", "off" if not np.any(integrality) else "on")
     highs.setOptionValue("threads", 1)
     highs.setOptionValue("mip_rel_gap", 0.0)
     highs.setOptionValue("time_limit", float(time_limit))
