@@ -60,18 +60,6 @@ R3_SINGLE_QUER_LIMIT_PCT = float(os.environ.get("P3D20_MODEL_SINGLE_QUER_LIMIT",
 D1_BOUNDS = (126.0, 0.0, 168.0, 43.0)
 RELIEF3D = ROOT / "team/art/dorfmap_grundgeruest/relief3d"
 OFFICIAL_RULES = RELIEF3D / "pruefung/pruefe_regeln.py"
-R8A_POLICY_DIR = RELIEF3D / "pruefung"
-if str(R8A_POLICY_DIR) not in sys.path:
-    sys.path.insert(0, str(R8A_POLICY_DIR))
-from r8a_policy import (  # noqa: E402
-    R8A_DEFAULT_LIMIT_M,
-    R8A_RAMPE2_START_EXCEPTION,
-    R8A_RAMPE2_START_ENDPOINT_ID,
-    R8A_RAMPE2_START_LIMIT_M,
-    R8A_RAMPE2_START_XZ,
-    r8a_exception_for_endpoint,
-    r8a_pair_limit_m,
-)
 
 
 def p3d17_transfer_context() -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
@@ -964,26 +952,12 @@ def solve(
         return adjacent_pairs(mask, map_x, map_z)
 
     endpoint_stage_pairs = adjacent_pairs(end_stage_mask, exm, ezm)
-    endpoint_id = f"rampe_{endpoint['index']}_ende"
-    endpoint_anchor = q0.tolist()
-    endpoint_limit = r8a_pair_limit_m(endpoint_id, endpoint_anchor)
-    endpoint_runout_pair_specs = [
-        (pair, endpoint_limit, endpoint_id, endpoint_anchor)
-        for pair in adjacent_pairs(end_runout_mask, exm, ezm)
-    ]
-    extra_endpoint_runout_pair_specs = []
-    for profile in profiles:
-        if profile["index"] not in (2, 11):
-            continue
-        endpoint_id = f"rampe_{profile['index']}_anfang"
-        endpoint_anchor = np.asarray(profile["coords"][0], dtype=np.float64)
-        endpoint_limit = r8a_pair_limit_m(endpoint_id, endpoint_anchor)
-        extra_endpoint_runout_pair_specs.extend(
-            (pair, endpoint_limit, endpoint_id, endpoint_anchor.tolist())
-            for pair in endpoint_runout_pairs_for(profile, True)
-        )
-    endpoint_runout_pair_specs = [
-        *endpoint_runout_pair_specs, *extra_endpoint_runout_pair_specs,
+    endpoint_runout_pairs = adjacent_pairs(end_runout_mask, exm, ezm)
+    extra_endpoint_runout_pairs = [
+        pair
+        for profile in profiles
+        for pair in (endpoint_runout_pairs_for(profile, True)
+                     if profile["index"] in (2, 11) else [])
     ]
 
     # R8 checker local road-neighbor pairs, evaluated bilinearly on the 0.5 grid.
@@ -1016,8 +990,8 @@ def solve(
             add_pair_cap(*pair, 0.054, slack_indices["endpoint_stage_extra_m"])
     if endpoint_r8a_enabled:
         current_family = "endpoint_r8a_runout_pairs"
-        for pair, pair_limit, _endpoint_id, _anchor in endpoint_runout_pair_specs:
-            add_pair_cap(*pair, pair_limit, slack_indices["endpoint_r8a_extra_m"])
+        for pair in [*endpoint_runout_pairs, *extra_endpoint_runout_pairs]:
+            add_pair_cap(*pair, 0.10, slack_indices["endpoint_r8a_extra_m"])
 
     # Mesh axis samples agree with the exact ramp variables within 2 cm.
     axis_count = 0
@@ -1508,16 +1482,9 @@ def solve(
         "R8_gate_quer_slope_limit_pct": R8_QUER_LIMIT_PCT,
         "R3_single_cross_slope_limit_pct": R3_SINGLE_QUER_LIMIT_PCT,
         "endpoint_stage_limit_m": 0.054,
-        "endpoint_R8a_pair_limit_m": R8A_DEFAULT_LIMIT_M,
-        "endpoint_R8a_named_exception": {
-            "name": R8A_RAMPE2_START_EXCEPTION,
-            "limit_m": R8A_RAMPE2_START_LIMIT_M,
-            "endpoint_id": R8A_RAMPE2_START_ENDPOINT_ID,
-            "coordinate_map": list(R8A_RAMPE2_START_XZ),
-            "source": "[F] Fabian widget t166s961, 2026-11-13",
-        },
+        "endpoint_R8a_pair_limit_m": 0.10,
         "endpoint_stage_pair_count": len(endpoint_stage_pairs),
-        "endpoint_R8a_pair_count": len(endpoint_runout_pair_specs),
+        "endpoint_R8a_pair_count": len(endpoint_runout_pairs) + len(extra_endpoint_runout_pairs),
         "R9w_exact_bandpass_lock_points": hp_lock_count,
         "D1_regression_fence_vertex_counts": regression_locks,
         "exact_event_cut_count": len(event_cuts),
@@ -1590,21 +1557,6 @@ def solve(
                                         "delta_m": delta, "limit_m": cap})
             return {"maximum_violation_m": float(best[0]), "pair": best[1]}
 
-        def endpoint_pair_specs_max(pair_specs) -> dict:
-            best = (0.0, None)
-            for pair, cap, endpoint_id, anchor in pair_specs:
-                px0, pz0, px1, pz1 = pair
-                delta = abs(field_value(px0, pz0) - field_value(px1, pz1))
-                violation = max(0.0, delta - cap)
-                if violation > best[0]:
-                    best = (violation, {
-                        "a": [px0, pz0], "b": [px1, pz1],
-                        "delta_m": delta, "limit_m": cap,
-                        "wegend_id": endpoint_id, "anchor_xz": anchor,
-                        "ausnahme": r8a_exception_for_endpoint(endpoint_id, anchor),
-                    })
-            return {"maximum_violation_m": float(best[0]), "pair": best[1]}
-
         pair_grade_max = {"cross_route": (0.0, None), "same_route": (0.0, None)}
         for ra, ia, rb, ib, distance in pairs:
             va, vb = h_offsets[ra] + ia, h_offsets[rb] + ib
@@ -1619,7 +1571,9 @@ def solve(
                     "height_delta_m": float(abs(xsol[va] - xsol[vb])),
                     "grade_limit_m": float(grade * distance), "pair_distance_m": float(distance),
                 })
-        endpoint_max = endpoint_pair_specs_max(endpoint_runout_pair_specs)
+        endpoint_max = endpoint_pair_max(
+            [*endpoint_runout_pairs, *extra_endpoint_runout_pairs], 0.10,
+        )
         if endpoint_max["pair"] is not None:
             midpoint = np.mean([endpoint_max["pair"]["a"], endpoint_max["pair"]["b"]], axis=0)
             endpoints = []
