@@ -377,10 +377,12 @@ def profile_path(raw: list[list[float]]) -> tuple[np.ndarray, np.ndarray]:
     return station, coords
 
 
-def bilinear_row(x: float, z: float, x0: float, z0: float, fs: int, width: int) -> dict[int, float]:
+def bilinear_row(x: float, z: float, x0: float, z0: float, fs: int,
+                 width: int, height: int) -> dict[int, float]:
     u, v = (x - x0) * fs, (z - z0) * fs
     ix, iz = int(np.floor(u)), int(np.floor(v))
-    ix, iz = min(max(ix, 0), width - 2), min(max(iz, 0), width - 2)
+    ix = min(max(ix, 0), width - 2)
+    iz = min(max(iz, 0), height - 2)
     fu, fv = u - ix, v - iz
     return {
         iz * width + ix: (1.0 - fu) * (1.0 - fv),
@@ -760,7 +762,7 @@ def solve(
 
     # Bilinear evaluation at every checker sample on the emitted mesh raster.
     def mesh_row(px: float, pz: float) -> dict[int, float]:
-        return bilinear_row(px, pz, grid_x0, grid_z0, fs, width)
+        return bilinear_row(px, pz, grid_x0, grid_z0, fs, width, height)
 
     def route_field_row(px: float, pz: float) -> tuple[dict[int, float], float]:
         if (grid_x0 - 1e-9 <= px <= grid_x1 + 1e-9
