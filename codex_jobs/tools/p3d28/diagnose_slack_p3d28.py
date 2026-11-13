@@ -686,11 +686,13 @@ def solve(
     vals: list[float] = []
     rhs: list[float] = []
     family_counts: dict[str, int] = {}
+    row_families: list[str] = []
     current_family = "unclassified"
 
     def add(row: dict[int, float], bound: float) -> None:
         family_counts[current_family] = family_counts.get(current_family, 0) + 1
         rid = len(rhs)
+        row_families.append(current_family)
         for col, value in row.items():
             if abs(value) > 1e-13:
                 row_i.append(rid)
@@ -1620,17 +1622,30 @@ def solve(
         lower, upper, mip_start, time_limit=time_limit_s,
     )
     primal_feasible = False
+    feasibility_residuals = None
     if result.x is not None:
         activity = matrix @ result.x
+        row_violation = activity - np.asarray(rhs)
+        bound_violation = np.maximum(
+            np.maximum(lower - result.x, result.x - upper), 0.0,
+        )
+        worst_row = int(np.argmax(row_violation)) if len(row_violation) else 0
+        worst_bound = int(np.argmax(bound_violation)) if len(bound_violation) else 0
+        feasibility_residuals = {
+            "maximum_row_violation": float(max(0.0, row_violation[worst_row])) if len(row_violation) else 0.0,
+            "worst_row_index": worst_row if len(row_violation) else None,
+            "worst_row_family": row_families[worst_row] if len(row_families) else None,
+            "maximum_variable_bound_violation": float(bound_violation[worst_bound]) if len(bound_violation) else 0.0,
+            "worst_variable_index": worst_bound if len(bound_violation) else None,
+        }
         primal_feasible = bool(
-            np.all(activity <= np.asarray(rhs) + 2e-6)
-            and np.all(result.x >= lower - 2e-6)
-            and np.all(result.x <= upper + 2e-6)
+            feasibility_residuals["maximum_row_violation"] <= 2e-6
+            and feasibility_residuals["maximum_variable_bound_violation"] <= 2e-6
             and (relax_integrality or np.all(np.abs(
                 result.x[integrality.astype(bool)] - np.rint(result.x[integrality.astype(bool)])
             ) <= 2e-6))
         )
-    if (not result.success and not primal_feasible) or result.x is None:
+    if not primal_feasible or result.x is None:
         for name in ("event_cut_G5", "event_cut_R4", "event_cut_R5", "event_cut_G11",
                      "event_cut_G6", "event_cut_R5sp", "event_cut_R8G", "event_cut_R9w",
                      "event_counter_caps", "regression_locks"):
@@ -1643,6 +1658,7 @@ def solve(
             "optimality_proven": bool(result.success),
             "objective_mode": objective_mode,
             "relaxed_integrality": relax_integrality,
+            "primal_feasibility_residuals": feasibility_residuals,
             "stage_limit_m": stage_limit,
             "r3_long_limit": r3_limit,
             "r3_quer_limit": quer_limit,
@@ -1802,6 +1818,7 @@ def solve(
         "variables": nvars, "constraints": len(rhs),
         "objective_mode": objective_mode,
         "relaxed_integrality": relax_integrality,
+        "primal_feasibility_residuals": feasibility_residuals,
         "primary_objective_value": primary_objective,
         "primary_r3_long_indicator_sum": float(sum(primary_x[j] for j in set(r3_d1_terms))),
         "primary_r3_quer_indicator_sum": float(sum(primary_x[j] for j in set(quer_binary_index.values()))),
