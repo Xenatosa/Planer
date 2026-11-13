@@ -1690,6 +1690,23 @@ def solve(
             ) <= 2e-6))
         )
     if not primal_feasible or result.x is None:
+        invalid_point = None
+        if result.x is not None and feasibility_residuals is not None:
+            row_id = feasibility_residuals["worst_row_index"]
+            row_slice = matrix.getrow(int(row_id))
+            invalid_point = {
+                "worst_row": {
+                    "index": int(row_id), "family": row_families[int(row_id)],
+                    "rhs": float(rhs[int(row_id)]),
+                    "matrix_activity": float(activity[int(row_id)]),
+                    "solver_activity": (float(result.row_value[int(row_id)])
+                                        if result.row_value is not None else None),
+                    "terms": [[int(column), float(coefficient), float(result.x[int(column)])]
+                              for column, coefficient in zip(row_slice.indices, row_slice.data)],
+                },
+                "diagnostic_slacks": {name: float(result.x[index])
+                                      for name, index in slack_indices.items()},
+            }
         for name in ("event_cut_G5", "event_cut_R4", "event_cut_R5", "event_cut_G11",
                      "event_cut_G6", "event_cut_R5sp", "event_cut_R8G", "event_cut_R9w",
                      "event_counter_caps", "regression_locks"):
@@ -1703,6 +1720,7 @@ def solve(
             "objective_mode": objective_mode,
             "relaxed_integrality": relax_integrality,
             "primal_feasibility_residuals": feasibility_residuals,
+            "invalid_solver_point_diagnostic": invalid_point,
             "stage_limit_m": stage_limit,
             "r3_long_limit": r3_limit,
             "r3_quer_limit": quer_limit,
