@@ -317,6 +317,13 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
         ), shape=(lp.num_row_, lp.num_col_))
     loaded_delta = (loaded_matrix - matrix).tocsr()
     loaded_matrix_delta = float(np.max(np.abs(loaded_delta.data))) if loaded_delta.nnz else 0.0
+    loaded_row_upper = np.asarray(loaded_lp.row_upper_, dtype=np.float64).copy()
+    loaded_row_lower = np.asarray(loaded_lp.row_lower_, dtype=np.float64).copy()
+    upper_delta = float(np.max(np.abs(
+        loaded_row_upper - np.asarray(rhs, dtype=np.float64),
+    )))
+    lower_matches = np.array_equal(loaded_row_lower, np.full(len(rhs), -np.inf))
+    loaded_row_bound_delta = upper_delta if lower_matches else float("inf")
     if loaded_matrix_delta > 1e-9:
         raise RuntimeError(
             f"HiGHS hat eine andere Nebenbedingungsmatrix geladen (max_delta={loaded_matrix_delta:.9g})"
@@ -343,11 +350,13 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
         message=highs.modelStatusToString(model_status),
         x=np.asarray(solution.col_value, dtype=np.float64) if solution.value_valid else None,
         row_value=np.asarray(solution.row_value, dtype=np.float64) if solution.value_valid else None,
+        loaded_row_upper=loaded_row_upper,
         fun=float(info.objective_function_value),
         mip_dual_bound=float(info.mip_dual_bound),
         mip_gap=float(info.mip_gap),
         max_primal_infeasibility=float(getattr(info, "max_primal_infeasibility", 0.0)),
         loaded_matrix_delta=loaded_matrix_delta,
+        loaded_row_bound_delta=loaded_row_bound_delta,
     )
 
 
@@ -1658,6 +1667,11 @@ def solve(
             "worst_row_family": row_families[worst_row] if len(row_families) else None,
             "solver_max_primal_infeasibility": float(result.max_primal_infeasibility),
             "loaded_matrix_delta": float(result.loaded_matrix_delta),
+            "loaded_row_bound_delta": float(result.loaded_row_bound_delta),
+            "maximum_solver_row_upper_violation": (
+                float(max(0.0, np.max(result.row_value - result.loaded_row_upper)))
+                if result.row_value is not None and len(result.row_value) else None
+            ),
             "maximum_solver_matrix_activity_delta": (
                 float(np.max(np.abs(activity - result.row_value)))
                 if result.row_value is not None and len(activity) else None
