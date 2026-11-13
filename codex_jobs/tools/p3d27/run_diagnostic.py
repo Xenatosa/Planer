@@ -85,7 +85,7 @@ def main() -> None:
         reference_mesh_path=None,
         axis_tolerance=0.02,
         plane_tolerance=0.02,
-        stage_limit=0.116,
+        stage_limit=0.11599,
         quer_limit=7,
         wob_limit=7,
         objective_mode="diagnostic",

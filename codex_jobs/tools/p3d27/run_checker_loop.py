@@ -14,7 +14,7 @@ RELIEF3D = ROOT / "team/art/dorfmap_grundgeruest/relief3d"
 TOOLS = ROOT / "codex_jobs/tools/p3d27"
 RESULTS = TOOLS / "results"
 BASE_CUTS = ROOT / "codex_jobs/tools/p3d20_r3/event_cuts_cumulative05.json"
-DERIVER = ROOT / "codex_jobs/tools/p3d20_r3/derive_event_cuts.py"
+DERIVER = ROOT / "codex_jobs/tools/p3d27/derive_event_cuts_p3d27.py"
 G11_KINDS = ("baeume", "felsen", "findlinge", "steine", "felsbloecke")
 BASELINE_RULES = ROOT / "codex_jobs/tools/p3d20_r3/official_gates/p3d17_reference_regeln_current_schema.json"
 TRANSFER = RELIEF3D / "neu/p3d21_transfer_base_route3_v29.json"
@@ -60,7 +60,10 @@ def write_report_progress(rounds: list[dict], status: str) -> None:
         f"`[S]` Status: {status} Maximal sechs serielle Solve-Runden zu höchstens 600 s; "
         "V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben "
         "die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- "
-        "Ereignisse werden nach jeder Probe ergänzt.\n\n"
+        "Ereignisse werden nach jeder Probe ergänzt; R5-Komponenten ohne ableitbaren "
+        "Flutsattel bleiben ausdrücklich als nicht geschnittene Ereignisse dokumentiert. "
+        "Nach den ersten Float32-Gates nutzt das Modell 0,00001 m interne Rundungspuffer "
+        "innerhalb der unveränderten Stufen- und R8a-Limits.\n\n"
     )
     lines = [
         "| Runde | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | Ziele / Beleg |",
@@ -83,6 +86,14 @@ def write_report_progress(rounds: list[dict], status: str) -> None:
             missed = [name.removeprefix("target:") for name, value in excess.items()
                       if float(value) > 1e-9]
             verdict = "alle Ziele erfüllt" if not missed else "offen: " + ", ".join(missed)
+            derived_summary = record.get("derived_summary_json")
+            if derived_summary and Path(derived_summary).exists():
+                skipped = json.loads(Path(derived_summary).read_text(encoding="utf-8")).get(
+                    "unsupported_R5_without_saddle", [])
+                if skipped:
+                    places = ", ".join(f"{item['point'][0]:.1f}|{item['point'][1]:.1f}"
+                                        for item in skipped)
+                    verdict += f"; R5 ohne Flutsattel {places}"
             basename = Path(probe_path).name
             evidence = f"{verdict}; [JSON](../../../../../codex_jobs/tools/p3d27/results/{basename})"
             lines.append(f"| {round_no} | {rtuple(rules)} | {r8tuple} | {r9tuple} | {evidence} |")
@@ -244,17 +255,41 @@ def main() -> None:
     old = json.loads(BASELINE_RULES.read_text(encoding="utf-8"))
     baseline_d1_g11 = sum(h.get("feld") == "D1" and h.get("regel") == "G11_objekt_schwebt_sinkt"
                           for h in old.get("treffer", []))
-    rounds = []
+    loop_path = RESULTS / "p3d27_V3_checker_loop.json"
+    if loop_path.exists():
+        prior = json.loads(loop_path.read_text(encoding="utf-8"))
+        rounds = list(prior.get("rounds", []))
+    else:
+        prior = {}
+        rounds = []
     all_cuts = list(base)
     seen_cut_hashes = set()
-    best_score = None
-    best_round = None
+    if rounds and rounds[-1].get("next_cut_json"):
+        all_cuts = json.loads(Path(rounds[-1]["next_cut_json"]).read_text(encoding="utf-8"))
+        for old_round in rounds:
+            next_path = old_round.get("next_cut_json")
+            if next_path and Path(next_path).exists():
+                prior_cuts = json.loads(Path(next_path).read_text(encoding="utf-8"))
+                seen_cut_hashes.add(hashlib.sha256(
+                    json.dumps(prior_cuts, sort_keys=True, separators=(",", ":")).encode()
+                ).hexdigest())
+    best_score = prior.get("best_score")
+    best_round = prior.get("best_round")
     no_improve = 0
-    for round_index in range(1, 7):
+    if best_score is not None:
+        for old_round in reversed(rounds):
+            if old_round.get("score") == best_score:
+                break
+            no_improve += 1
+    start_round = int(rounds[-1]["round"]) + 1 if rounds else 1
+    if start_round > 6:
+        raise RuntimeError("Die sechste Proberunde ist bereits abgeschlossen")
+    for round_index in range(start_round, 7):
         round_name = f"V3_round{round_index:02d}"
         cuts_path = RESULTS / f"p3d27_{round_name}_cuts.json"
         dump(cuts_path, all_cuts)
         solution_path = RESULTS / f"p3d27_{round_name}_model.json"
+        probe_path = RESULTS / f"p3d27_{round_name}_official_probe.json"
         solve_cmd = [
             sys.executable, str(TOOLS / "run_diagnostic.py"),
             "--geometry", "V3", "--scenario", "joint",
@@ -263,7 +298,8 @@ def main() -> None:
             "--event-cuts", str(cuts_path), "--out", str(solution_path),
             "--time-limit", "600", "--keep-solution",
         ]
-        checked(solve_cmd, label=f"solve {round_name}")
+        if not (solution_path.exists() and probe_path.exists()):
+            checked(solve_cmd, label=f"solve {round_name}")
         solution = json.loads(solution_path.read_text(encoding="utf-8"))
         if not solution.get("primal_feasible"):
             record = {"round": round_index, "model_status": solution.get("status"),
@@ -278,13 +314,15 @@ def main() -> None:
             write_report_progress(rounds, status)
             checkpoint(round_index)
             break
-        probe_path = RESULTS / f"p3d27_{round_name}_official_probe.json"
-        checked([sys.executable, str(TOOLS / "probe_direct_transfer.py"), str(solution_path),
-                 str(TRANSFER), str(probe_path)], label=f"official probe {round_name}")
+        if not probe_path.exists():
+            checked([sys.executable, str(TOOLS / "probe_direct_transfer.py"), str(solution_path),
+                     str(TRANSFER), str(probe_path)], label=f"official probe {round_name}")
         probe = json.loads(probe_path.read_text(encoding="utf-8"))
         derived_path = RESULTS / f"p3d27_{round_name}_derived_cuts.json"
         derivation = checked([sys.executable, str(DERIVER), str(probe_path), str(derived_path)],
                              label=f"component derivation {round_name}")
+        derived_summary_path = RESULTS / f"p3d27_{round_name}_derived_summary.json"
+        dump(derived_summary_path, json.loads(derivation.stdout))
         derived = json.loads(derived_path.read_text(encoding="utf-8"))
         g5_r5_new = [cut for cut in derived if cut.get("kind") in {"G5", "R5"}]
         new_g11, g11_d1_count = g11_cuts(probe, all_cuts)
@@ -342,6 +380,7 @@ def main() -> None:
             "cuts_after": len(next_cuts), "score": score, "score_excess_by_gate": score_parts,
             "solution_json": str(solution_path), "probe_json": str(probe_path),
             "cut_json": str(cuts_path), "derived_cut_json": str(derived_path),
+            "derived_summary_json": str(derived_summary_path),
         }
         rounds.append(round_record)
         if best_score is None or score < best_score:

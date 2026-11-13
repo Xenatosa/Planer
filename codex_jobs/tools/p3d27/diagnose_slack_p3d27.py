@@ -73,6 +73,11 @@ from r8a_policy import (  # noqa: E402
     r8a_pair_limit_m,
 )
 
+# Keep the unchanged strict official caps clear of Float32/solver roundoff.
+# These are internal model guards, not changes to the checker policy.
+R8A_FLOAT32_GUARD_M = 1e-5
+ENDPOINT_STAGE_FLOAT32_GUARD_M = 1e-5
+
 
 def p3d17_transfer_context() -> tuple[np.ndarray, np.ndarray, np.ndarray, dict]:
     """Capture the unchanged p3d17 transfer's fixed background and support."""
@@ -1013,11 +1018,13 @@ def solve(
     if endpoint_stage_enabled:
         current_family = "endpoint_stage_pairs"
         for pair in endpoint_stage_pairs:
-            add_pair_cap(*pair, 0.054, slack_indices["endpoint_stage_extra_m"])
+            add_pair_cap(*pair, 0.054 - ENDPOINT_STAGE_FLOAT32_GUARD_M,
+                         slack_indices["endpoint_stage_extra_m"])
     if endpoint_r8a_enabled:
         current_family = "endpoint_r8a_runout_pairs"
         for pair, pair_limit, _endpoint_id, _anchor in endpoint_runout_pair_specs:
-            add_pair_cap(*pair, pair_limit, slack_indices["endpoint_r8a_extra_m"])
+            add_pair_cap(*pair, pair_limit - R8A_FLOAT32_GUARD_M,
+                         slack_indices["endpoint_r8a_extra_m"])
 
     # Mesh axis samples agree with the exact ramp variables within 2 cm.
     axis_count = 0
@@ -1508,7 +1515,9 @@ def solve(
         "R8_gate_quer_slope_limit_pct": R8_QUER_LIMIT_PCT,
         "R3_single_cross_slope_limit_pct": R3_SINGLE_QUER_LIMIT_PCT,
         "endpoint_stage_limit_m": 0.054,
+        "endpoint_stage_float32_guard_m": ENDPOINT_STAGE_FLOAT32_GUARD_M,
         "endpoint_R8a_pair_limit_m": R8A_DEFAULT_LIMIT_M,
+        "endpoint_R8a_float32_guard_m": R8A_FLOAT32_GUARD_M,
         "endpoint_R8a_named_exception": {
             "name": R8A_RAMPE2_START_EXCEPTION,
             "limit_m": R8A_RAMPE2_START_LIMIT_M,
