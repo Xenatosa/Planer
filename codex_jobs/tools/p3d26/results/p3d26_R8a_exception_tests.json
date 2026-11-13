@@ -1,0 +1,275 @@
+{
+  "all_other_endpoints_hit": true,
+  "other_endpoints_0_11m": [
+    {
+      "coordinate_map": [
+        65.51,
+        35.35
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_0_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        118.93,
+        43.27
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_0_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        273.45,
+        21.18
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_1_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        227.07,
+        36.98
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_1_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        175.15,
+        25.69
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_2_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        189.49,
+        239.64
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_3_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        113.28,
+        228.61
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_3_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        295.33,
+        222.94
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_4_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        248.95,
+        254.33
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_4_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        135.18,
+        230.76
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_5_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        100.03,
+        269.09
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_5_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        87.6,
+        180.06
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_6_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        124.48,
+        197.98
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_6_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        117.07,
+        185.4
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_7_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        135.55,
+        146.58
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_7_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        92.59,
+        135.5
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_8_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        89.49,
+        171.37
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_8_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        298.16,
+        149.25
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_9_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        269.64,
+        117.07
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_9_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        316.35,
+        190.51
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_10_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        320.0,
+        214.23
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_10_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        148.5,
+        2.5
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_11_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        156.5,
+        37.5
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_11_ende",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        127.5,
+        133.5
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_12_anfang",
+      "hit": true,
+      "limit_m": 0.1
+    },
+    {
+      "coordinate_map": [
+        122.5,
+        119.5
+      ],
+      "delta_m": 0.11,
+      "endpoint_id": "rampe_12_ende",
+      "hit": true,
+      "limit_m": 0.1
+    }
+  ],
+  "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+  "target_endpoint": {
+    "checks": [
+      {
+        "delta_m": 0.17,
+        "hit": false
+      },
+      {
+        "delta_m": 0.19,
+        "hit": true
+      }
+    ],
+    "coordinate_map": [
+      126.51,
+      31.62
+    ],
+    "endpoint_id": "rampe_2_anfang",
+    "exception": "R8a_ausnahme_rampe2_start",
+    "limit_m": 0.18
+  }
+}

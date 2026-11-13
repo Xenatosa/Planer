@@ -7,6 +7,7 @@
 # python3 pruefung/r8_kreuzung.py [relief_daten.json.gz] [out.json]  -> Exit 1 bei Treffern
 import json,gzip,sys,base64,numpy as np,scipy.ndimage as nd
 from scipy.spatial import cKDTree
+from r8a_policy import r8a_exception_for_endpoint, r8a_pair_is_hit, r8a_pair_limit_m
 f=sys.argv[1] if len(sys.argv)>1 else 'relief_daten.json.gz';D=json.load(gzip.open(f));NX,NY,RS=D['nx'],D['ny'],D['rs'];GX,GY=NX*RS+1,NY*RS+1
 feld=lambda x,z:'ABCDEFGH'[int(np.clip(x//42,0,7))]+str(int(np.clip(z//43,0,6))+1)
 G=np.frombuffer(base64.b64decode(D['G']),np.float32).reshape(GY,GX).astype(float);FW=D['FW'];FS=FW['fs'];FYn,FXn=NY*FS+1,NX*FS+1
@@ -78,7 +79,9 @@ for g in grp.values():
         if all(K[i][1].endswith(('_anfang','_ende')) for i in g):   # reines Wegende: Quergefaelle senkrecht zur Wegrichtung (Laengsgefaelle zaehlt nicht)
             i0=g[0];ri=int(K[i0][1].split('_')[1]);pp=R[ri][0];dv=(pp[min(8,len(pp)-1)]-pp[0]) if K[i0][1].endswith('_anfang') else (pp[-1]-pp[max(0,len(pp)-9)]);dv=dv/max(np.hypot(*dv),1e-9);q=float(abs(-dv[1]*co[0]+dv[0]*co[1])*100);KL[-1]['quer_pct']=round(q,1)
         if q>3.0:hit('R8_quer',x,z,round(q,1),art=KL[-1]['art'])
-# R8a Wegende (t122u): Auslauf 4 m hinter dem Ende, Streifen +-2,5 m um die verlaengerte Mittellinie, ohne Wand (Neigung>1): max Nachbar-dh (0,25 m) > 0,10 m = Treffer
+# R8a Wegende (t122u): Auslauf 4 m hinter dem Ende, Streifen +-2,5 m um die verlaengerte Mittellinie, ohne Wand (Neigung>1).
+# Alle Wegenden behalten 0,10 m, ausser R8a_ausnahme_rampe2_start ([F] Fabian, t166s961, 2026-11-13):
+# nur rampe_2_anfang bei 126.51|31.62 erhaelt im eigenen 4-m-Auslauf 0,18 m.
 gyF,gxF=np.gradient(H,1/FS);WANDF=np.hypot(gxF,gyF)>1.0
 for i,(p,_) in enumerate(R):
     for e,(q0,q1) in (('anfang',(p[0],p[min(8,len(p)-1)])),('ende',(p[-1],p[max(0,len(p)-9)]))):
@@ -89,7 +92,8 @@ for i,(p,_) in enumerate(R):
         for ax in (0,1):
             dA=np.abs(np.diff(A,axis=ax));mm=(M[1:,:]&M[:-1,:]) if ax==0 else (M[:,1:]&M[:,:-1])
             if mm.any():st=max(st,float(dA[mm].max()))
-        if st>0.10:hit('R8a_wegende',q0[0],q0[1],round(st,2),weg=f'rampe_{i}_{e}')
+        weg=f'rampe_{i}_{e}';limit=r8a_pair_limit_m(weg,q0);ausnahme=r8a_exception_for_endpoint(weg,q0)
+        if r8a_pair_is_hit(st,weg,q0):hit('R8a_wegende',q0[0],q0[1],round(st,2),weg=weg,limit_m=limit,ausnahme=ausnahme)
 je_feld={}
 for t in T:je_feld.setdefault(t['feld'],{}).setdefault(t['regel'],0);je_feld[t['feld']][t['regel']]+=1
 out={'summe':len(T),'je_regel':S,'kreuzungen':len(KL),'je_feld':dict(sorted(je_feld.items())),'treffer':T,'liste':KL}
