@@ -1,0 +1,248 @@
+{
+  "method": "serial greedy family deletion filter; LP relaxation; one pass over positive-slack families",
+  "records": [
+    {
+      "elapsed_s": 50.6,
+      "hard_family": "grade_same",
+      "index": 1,
+      "objective": 95.20100117687008,
+      "out": "p3d28_V3_variant3_iis_lp_01_grade_same.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage",
+        "p3d28_locality",
+        "route_profile_slope",
+        "safety_single_quer",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 2.660094367001875e-13,
+        "maximum_solver_matrix_activity_delta": 2.1453949727856525e-12,
+        "maximum_solver_row_upper_violation": 2.517985819849855e-13,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 2.517985819849855e-13,
+        "worst_row_family": "r3_cross_constraints",
+        "worst_row_index": 76761,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    },
+    {
+      "elapsed_s": 198.0,
+      "hard_family": "p3d28_cliff_form",
+      "index": 2,
+      "objective": null,
+      "out": "p3d28_V3_variant3_iis_lp_02_p3d28_cliff_form.json",
+      "primal_feasible": false,
+      "relaxed_families": [
+        "p3d28_drainage",
+        "p3d28_locality",
+        "route_profile_slope",
+        "safety_single_quer",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": false,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 15049676.345577797,
+        "maximum_solver_matrix_activity_delta": 4.9358099829532875e-09,
+        "maximum_solver_row_upper_violation": 15049676.345577797,
+        "maximum_variable_bound_violation": 15049666.329222282,
+        "solver_max_primal_infeasibility": 15049676.345577797,
+        "worst_row_family": "variable_bounds",
+        "worst_row_index": 3260,
+        "worst_variable_index": 3018
+      },
+      "returncode": 0,
+      "status": "Infeasible"
+    },
+    {
+      "elapsed_s": 128.5,
+      "hard_family": "p3d28_drainage",
+      "index": 3,
+      "objective": null,
+      "out": "p3d28_V3_variant3_iis_lp_03_p3d28_drainage.json",
+      "primal_feasible": false,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_locality",
+        "route_profile_slope",
+        "safety_single_quer",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": false,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 55273439.92741893,
+        "maximum_solver_matrix_activity_delta": 7.416975016383276e-07,
+        "maximum_solver_row_upper_violation": 55273439.92741893,
+        "maximum_variable_bound_violation": 27177736.193998147,
+        "solver_max_primal_infeasibility": 55273439.92741893,
+        "worst_row_family": "p3d28_cliff_gorge_curvature",
+        "worst_row_index": 48401,
+        "worst_variable_index": 5132
+      },
+      "returncode": 0,
+      "status": "Infeasible"
+    },
+    {
+      "elapsed_s": 46.9,
+      "hard_family": "p3d28_locality",
+      "index": 4,
+      "objective": 188.44917678062188,
+      "out": "p3d28_V3_variant3_iis_lp_04_p3d28_locality.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage",
+        "route_profile_slope",
+        "safety_single_quer",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 2.9303268145319805e-11,
+        "maximum_solver_matrix_activity_delta": 2.9303268145319805e-11,
+        "maximum_solver_row_upper_violation": 2.9303268145319805e-11,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 2.9303268145319805e-11,
+        "worst_row_family": "r8_neighbor_stage",
+        "worst_row_index": 67016,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    },
+    {
+      "elapsed_s": 42.0,
+      "hard_family": "route_profile_slope",
+      "index": 5,
+      "objective": 190.89172187952147,
+      "out": "p3d28_V3_variant3_iis_lp_05_route_profile_slope.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage",
+        "safety_single_quer",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 2.3714363805993344e-12,
+        "maximum_solver_matrix_activity_delta": 2.3714363805993344e-12,
+        "maximum_solver_row_upper_violation": 8.704148513061227e-14,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 8.704148513061227e-14,
+        "worst_row_family": "r3_cross_constraints",
+        "worst_row_index": 77356,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    },
+    {
+      "elapsed_s": 257.7,
+      "hard_family": "safety_single_quer",
+      "index": 6,
+      "objective": 207.3178955310814,
+      "out": "p3d28_V3_variant3_iis_lp_06_safety_single_quer.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 5.468514530093671e-12,
+        "maximum_solver_matrix_activity_delta": 5.468514530093671e-12,
+        "maximum_solver_row_upper_violation": 5.4640736379951704e-12,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 5.4640736379951704e-12,
+        "worst_row_family": "r3_cross_constraints",
+        "worst_row_index": 78634,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    },
+    {
+      "elapsed_s": 47.4,
+      "hard_family": "source_monotone",
+      "index": 7,
+      "objective": 207.32204370269227,
+      "out": "p3d28_V3_variant3_iis_lp_07_source_monotone.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage",
+        "variable_bounds"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 1.7665291451862686e-10,
+        "maximum_solver_matrix_activity_delta": 1.7665291451862686e-10,
+        "maximum_solver_row_upper_violation": 1.3115419861264854e-10,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 1.3115419861264854e-10,
+        "worst_row_family": "r3_cross_constraints",
+        "worst_row_index": 78819,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    },
+    {
+      "elapsed_s": 46.6,
+      "hard_family": "variable_bounds",
+      "index": 8,
+      "objective": 207.32204370269238,
+      "out": "p3d28_V3_variant3_iis_lp_08_variable_bounds.json",
+      "primal_feasible": true,
+      "relaxed_families": [
+        "p3d28_cliff_form",
+        "p3d28_drainage"
+      ],
+      "removed_from_iis": true,
+      "residuals": {
+        "loaded_matrix_delta": 0.0,
+        "loaded_row_bound_delta": 0.0,
+        "maximum_row_violation": 3.263291858957018e-10,
+        "maximum_solver_matrix_activity_delta": 4.156275323907721e-10,
+        "maximum_solver_row_upper_violation": 2.185522596231948e-11,
+        "maximum_variable_bound_violation": 0.0,
+        "solver_max_primal_infeasibility": 2.185522596231948e-11,
+        "worst_row_family": "r3_cross_constraints",
+        "worst_row_index": 77296,
+        "worst_variable_index": 0
+      },
+      "returncode": 0,
+      "status": "Optimal"
+    }
+  ],
+  "remaining_group_iis_candidate": [
+    "p3d28_cliff_form",
+    "p3d28_drainage"
+  ]
+}

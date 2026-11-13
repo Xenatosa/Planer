@@ -1,0 +1,96 @@
+{
+  "baseline": {
+    "R8_by_rule": {
+      "R8_gitter": 10,
+      "R8_quer": 5,
+      "R8_stufe": 9,
+      "R8a_wegende": 24
+    },
+    "R8_total": 48,
+    "R9_by_rule": {
+      "R8b_delle": 25,
+      "R9_saegezahn": 34,
+      "R9w_wellen": 275
+    },
+    "R9_total": 334,
+    "historical_pruefe_regeln_9d3f8fc": 596,
+    "p3d17_replay_by_rule": {
+      "G11_objekt_schwebt_sinkt": 4,
+      "G2_spitze_oben": 3,
+      "G2_spitze_oben_fein": 8,
+      "G3_spitze_unten": 4,
+      "G3_spitze_unten_fein": 2,
+      "G5_beule_klippe": 69,
+      "G6_facette": 219,
+      "G7_wand_glatte_flaeche": 1,
+      "G7b_wandkontur_feld": 25,
+      "G7b_wandkontur_kantenschaerfe": 1,
+      "G7b_wandkontur_rauheit": 1,
+      "G8_fluss_nicht_bis_rand": 1,
+      "R1_blind": 24,
+      "R2_getrennt": 15,
+      "R3_laengs_m": 35,
+      "R3_quer_pct": 29,
+      "R3_woelb_m": 31,
+      "R4_rand": 1,
+      "R5_loch": 25,
+      "R6_wasser_schnee": 4,
+      "T1_fleckrand": 94,
+      "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+      "T3_streifen_ringe_bildpruefung_offen": 1,
+      "T4_graue_flussstreifen_bildpruefung_offen": 1,
+      "T5_textur_vs_clay_bildpruefung_offen": 1
+    },
+    "p3d17_replay_by_tile_general": {
+      "D1": {
+        "by_rule": {
+          "G11_objekt_schwebt_sinkt": 2,
+          "G3_spitze_unten": 1,
+          "G5_beule_klippe": 2,
+          "G6_facette": 3,
+          "G7b_wandkontur_feld": 1,
+          "R1_blind": 2,
+          "R2_getrennt": 1,
+          "R3_laengs_m": 6,
+          "R3_quer_pct": 17,
+          "R3_woelb_m": 19,
+          "R4_rand": 1,
+          "R5_loch": 8
+        },
+        "total": 63
+      },
+      "D2": {
+        "by_rule": {
+          "R2_getrennt": 1,
+          "T1_fleckrand": 7
+        },
+        "total": 8
+      },
+      "G1": {
+        "by_rule": {
+          "G11_objekt_schwebt_sinkt": 2,
+          "G6_facette": 3,
+          "R1_blind": 1,
+          "R3_laengs_m": 1,
+          "R6_wasser_schnee": 3,
+          "T1_fleckrand": 3
+        },
+        "total": 13
+      }
+    },
+    "p3d17_replay_with_G11_total": 600
+  },
+  "p3d28_after": {
+    "R8_total": null,
+    "R9_total": null,
+    "by_tile": {
+      "D1": null,
+      "D2": null,
+      "G1": null
+    },
+    "official_float32_rounds": 0,
+    "pruefe_regeln_total": null,
+    "reason": "No hard-feasible model candidate after the three permitted ring widths; the task requires stopping before the Float32 probe."
+  },
+  "source": "codex_jobs/tools/p3d27/results/p3d27_final_gate_summary.json baseline and p3d20_r3 p3d17 current-schema replay"
+}

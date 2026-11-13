@@ -793,7 +793,9 @@ def solve(
 
     # p3d28 construction family: locality, a reference Priority-Flood forest,
     # cliff/gorge curvature, R4 cross-sections, and unchanged tree ground.
-    construction_variant = os.environ.get("P3D28_CONSTRUCTION_VARIANT", "1")
+    # Variant 3 has the lowest weighted LP minimum-slack objective among the
+    # three allowed transition widths; keep it as the deterministic default.
+    construction_variant = os.environ.get("P3D28_CONSTRUCTION_VARIANT", "3")
     drainage_eps_m = float(os.environ.get("P3D28_DRAINAGE_EPS_M", "0.001"))
     reference_full = gb.astype(np.float64, copy=True)
     ref_ix0, ref_iz0 = int(grid_x0 * rs), int(grid_z0 * rs)
