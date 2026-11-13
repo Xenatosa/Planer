@@ -303,6 +303,9 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
     highs.setOptionValue("threads", 1)
     highs.setOptionValue("mip_rel_gap", 0.0)
     highs.setOptionValue("time_limit", float(time_limit))
+    # Preserve small affine-transfer coefficients at the fade edge; the
+    # default 1e-9 can drop them while their pre-transfer target is large.
+    highs.setOptionValue("small_matrix_value", 1e-12)
     status = highs.passModel(lp)
     if status not in (highspy.HighsStatus.kOk, highspy.HighsStatus.kWarning):
         raise RuntimeError(f"HiGHS Modellannahme fehlgeschlagen: {status}")
