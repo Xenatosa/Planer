@@ -2,7 +2,7 @@
 
 Stand 13.11.2026 · Branch `art/dorfmap-p3d26` · Basis `89c61ce` (`origin/art/dorfmap-p3d25`) · Kosten 0 EUR.
 
-Zwischenstand nach Prüferausnahme und Tests. Familienmachbarkeit, offizielle Float32-Probe und Meshgate stehen noch aus.
+Endstand nach Überschreitung der vorgegebenen Gesamtzeit. Die Familienmachbarkeit ist belegt; die offizielle Float32-Probe und das Meshgate wurden deshalb nicht begonnen.
 
 Marker: `[S]` ausgeführte Messung oder Test · `[R]` Modellbefund · `[A]` Annahme · `[F]` Freigabe.
 
@@ -48,7 +48,7 @@ diff --git a/team/art/dorfmap_grundgeruest/relief3d/pruefung/r8_kreuzung.py b/te
 
 Die gemeinsame Policy in `r8a_policy.py` wird sowohl vom offiziellen Prüfer als auch vom p3d23-Familienmodell aufgerufen. Das Familienmodell wendet 0,18 m ausschließlich auf die Paare im bestehenden 4-m-Auslauf der identifizierten `rampe_2_anfang`-Geometrie an; übrige Wegende-Paare bleiben bei 0,10 m. Wegdaten und andere Schwellen wurden nicht geändert.
 
-## Geometriewahl und nächster Schritt
+## Geometriewahl
 
 `[R]` Arbeitsbasis ist p3d23 V3 mit unverändertem Start von rampe_2. p3d24 dokumentiert V3 als Basis mit den kleinsten lokalen Geometrieänderungen an rampe_2 und unveränderter rampe_11; p3d25 V1 bleibt nur die ausdrücklich erlaubte zweite Wahl, falls der V3-Hartsolve mit der Ausnahme unlösbar ist. Keine Wegdaten wurden bisher verändert.
 
