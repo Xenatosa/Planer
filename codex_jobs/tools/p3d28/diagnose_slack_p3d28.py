@@ -856,20 +856,38 @@ def solve(
         add(lower_row,
             -ref_height + tolerance + fixed)
 
+    locality_row_debug = {}
+    locality_debug_points = {(150.5, 42.5), (152.5, 42.5)}
+
+    def add_locality_band(ix: int, iz: int, tolerance: float) -> None:
+        px, pz = grid_x0 + ix / fs, grid_z0 + iz / fs
+        row, fixed = route_field_row(px, pz)
+        reference_height = float(p3d17_output[iz, ix])
+        upper_row = dict(row)
+        lower_row = {column: -value for column, value in row.items()}
+        slack_index = slack_indices["p3d28_locality_extra_m"]
+        upper_row[slack_index] = -1.0
+        lower_row[slack_index] = -1.0
+        upper_index = len(rhs)
+        add(upper_row, reference_height + tolerance - fixed)
+        lower_index = len(rhs)
+        add(lower_row, -reference_height + tolerance + fixed)
+        if (round(px, 6), round(pz, 6)) in locality_debug_points:
+            locality_row_debug[(px, pz)] = {
+                "upper_row": upper_index, "lower_row": lower_index,
+                "upper_rhs": float(rhs[upper_index]), "lower_rhs": float(rhs[lower_index]),
+                "target_coefficients": {str(k): float(v) for k, v in row.items()},
+                "fixed": fixed, "reference": reference_height,
+                "tolerance": float(tolerance),
+            }
+
     current_family = "p3d28_locality_outside"
     for iz, ix in zip(*np.nonzero(~active_mask)):
-        row, fixed = route_field_row(grid_x0 + ix / fs, grid_z0 + iz / fs)
-        add_final_height_band(
-            row, fixed, float(p3d17_output[iz, ix]), 0.001,
-            slack_indices["p3d28_locality_extra_m"],
-        )
+        add_locality_band(int(ix), int(iz), 0.001)
         construction_rows["locality_outside"] += 2
     current_family = "p3d28_locality_ring"
     for iz, ix in zip(*np.nonzero(ring_mask)):
-        row, fixed = route_field_row(grid_x0 + ix / fs, grid_z0 + iz / fs)
-        add_final_height_band(row, fixed, float(p3d17_output[iz, ix]),
-                              float(ring_tolerance_m[iz, ix]),
-                              slack_indices["p3d28_locality_extra_m"])
+        add_locality_band(int(ix), int(iz), float(ring_tolerance_m[iz, ix]))
         construction_rows["locality_ring"] += 2
 
     current_family = "p3d28_priority_flood_drainage"
@@ -2054,6 +2072,14 @@ def solve(
                         })
         summary["p3d28_construction_max_violations"] = {
             "locality": locality_violations,
+            "locality_row_debug": {
+                f"{point[0]}|{point[1]}": {
+                    **details,
+                    "upper_activity": float(activity[details["upper_row"]]),
+                    "lower_activity": float(activity[details["lower_row"]]),
+                }
+                for point, details in locality_row_debug.items()
+            },
             "drainage": {"maximum_violation_m": float(max(0.0, drainage_worst[0])),
                          "edge": drainage_worst[1]},
             "cliff_curvature": {"maximum_violation_m": float(curvature_worst[0]),
