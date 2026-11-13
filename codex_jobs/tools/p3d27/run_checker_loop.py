@@ -35,6 +35,77 @@ def dump(path: Path, obj) -> None:
     path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def output_document(rounds: list[dict], best_round, best_score, cuts_count: int,
+                    status: str, baseline_d1_g11: int) -> dict:
+    return {
+        "tag": "p3d27", "geometry": "V3", "baseline_D1_G11_hits": baseline_d1_g11,
+        "start_event_cut_count": len(json.loads(BASE_CUTS.read_text(encoding="utf-8"))),
+        "rounds": rounds, "best_round": best_round, "best_score": best_score,
+        "final_cut_count": cuts_count, "status": status,
+        "method": "serial all-family V3 Float32 official checker-in-the-loop; no mesh build",
+    }
+
+
+def _tile_total(by_tile: dict, tile: str) -> int:
+    return sum(int(value) for value in by_tile.get(tile, {}).values())
+
+
+def write_report_progress(rounds: list[dict], status: str) -> None:
+    report = RELIEF3D / "pruefung/ERGEBNIS_p3d27.md"
+    content = report.read_text(encoding="utf-8")
+    section = content.index("## 1. V3 Float32-Gate-Probe\n")
+    table_start = content.index("| Runde |", section)
+    section_end = content.index("\n\n## 2. Mesh-Gate", table_start)
+    intro = (
+        f"`[S]` Status: {status} Maximal sechs serielle Solve-Runden zu höchstens 600 s; "
+        "V3, alle Familien und unveränderte Prüfer. Die Quelle und Transferbasis haben "
+        "die im Abschnitt 0 angegebenen Hashes. Frische offizielle G5-/R5-Loch-/G11- "
+        "Ereignisse werden nach jeder Probe ergänzt.\n\n"
+    )
+    lines = [
+        "| Runde | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | Ziele / Beleg |",
+        "|---:|---|---|---|---|",
+    ]
+    for record in rounds:
+        round_no = int(record["round"])
+        probe_path = record.get("probe_json")
+        if probe_path:
+            rules = record.get("official_rules_by_tile_D1_G1_D2", {})
+            r8 = record.get("official_R8_by_tile_D1_G1_D2", {})
+            r9 = record.get("official_R9_by_tile_D1_G1_D2", {})
+            rtuple = lambda data: f"{int(record.get('official_rules_total', 0))} (" + "/".join(
+                str(_tile_total(data, t)) for t in ("D1", "G1", "D2")) + ")"
+            r8tuple = f"{int(record.get('official_R8_total_by_rule', {}).get('total', 0))} (" + "/".join(
+                str(_tile_total(r8, t)) for t in ("D1", "G1", "D2")) + ")"
+            r9tuple = f"{int(record.get('official_R9_total_by_rule', {}).get('total', 0))} (" + "/".join(
+                str(_tile_total(r9, t)) for t in ("D1", "G1", "D2")) + ")"
+            excess = record.get("hard_target_excess", {})
+            missed = [name.removeprefix("target:") for name, value in excess.items()
+                      if float(value) > 1e-9]
+            verdict = "alle Ziele erfüllt" if not missed else "offen: " + ", ".join(missed)
+            basename = Path(probe_path).name
+            evidence = f"{verdict}; [JSON](../../../../../codex_jobs/tools/p3d27/results/{basename})"
+            lines.append(f"| {round_no} | {rtuple(rules)} | {r8tuple} | {r9tuple} | {evidence} |")
+        else:
+            lines.append(f"| {round_no} | kein Probe-Relief | – | – | Solverstatus: {record.get('model_status')} |")
+    replacement = intro + "\n".join(lines)
+    content = content[:section] + "## 1. V3 Float32-Gate-Probe\n\n" + replacement + content[section_end:]
+    report.write_text(content, encoding="utf-8")
+
+
+def checkpoint(round_no: int) -> None:
+    branch = subprocess.run(["git", "branch", "--show-current"], cwd=ROOT,
+                            capture_output=True, text=True, check=True).stdout.strip()
+    if branch != "art/dorfmap-p3d27":
+        raise RuntimeError(f"Unerwarteter Branch für p3d27-Checkpoint: {branch}")
+    checked(["git", "add", "--", "codex_jobs/tools/p3d27/results",
+             "team/art/dorfmap_grundgeruest/relief3d/pruefung/ERGEBNIS_p3d27.md"],
+            label=f"git add round {round_no}")
+    checked(["git", "commit", "-m", f"p3d27: record V3 Float32 probe round {round_no:02d}"],
+            label=f"git commit round {round_no}")
+    checked(["git", "push", "origin", "art/dorfmap-p3d27"], label=f"git push round {round_no}")
+
+
 def gate_score(probe: dict, solution: dict) -> tuple[int, dict]:
     rules = probe.get("rules_by_rule", {})
     d1 = probe.get("rules_by_tile", {}).get("D1", {})
@@ -195,10 +266,17 @@ def main() -> None:
         checked(solve_cmd, label=f"solve {round_name}")
         solution = json.loads(solution_path.read_text(encoding="utf-8"))
         if not solution.get("primal_feasible"):
-            rounds.append({"round": round_index, "model_status": solution.get("status"),
-                           "model_status_code": solution.get("status_code"),
-                           "primal_feasible": False, "model_slack_values": solution.get("slack_values"),
-                           "cuts_before": len(all_cuts)})
+            record = {"round": round_index, "model_status": solution.get("status"),
+                      "model_status_code": solution.get("status_code"),
+                      "primal_feasible": False, "model_slack_values": solution.get("slack_values"),
+                      "cuts_before": len(all_cuts), "solution_json": str(solution_path)}
+            rounds.append(record)
+            status = f"nach Runde {round_index} beendet: kein machbarer Modellpunkt ({solution.get('status')})"
+            record["stop_reason"] = "no_primal_feasible_solution"
+            dump(RESULTS / "p3d27_V3_checker_loop.json",
+                 output_document(rounds, best_round, best_score, len(all_cuts), status, baseline_d1_g11))
+            write_report_progress(rounds, status)
+            checkpoint(round_index)
             break
         probe_path = RESULTS / f"p3d27_{round_name}_official_probe.json"
         checked([sys.executable, str(TOOLS / "probe_direct_transfer.py"), str(solution_path),
@@ -271,25 +349,40 @@ def main() -> None:
         else:
             no_improve += 1
         cut_hash = hashlib.sha256(json.dumps(next_cuts, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+        stop_reason = None
+        if score == 0:
+            stop_reason = "all_targets_passed"
+        elif cut_hash in seen_cut_hashes:
+            stop_reason = "cut_cycle"
+        elif len(next_cuts) == len(all_cuts):
+            stop_reason = "no_new_cuts"
+        elif no_improve >= 2:
+            stop_reason = "two_rounds_without_score_improvement"
+        elif round_index == 6:
+            stop_reason = "six_round_limit"
+        if stop_reason is not None:
+            round_record["stop_reason"] = stop_reason
+        else:
+            all_cuts = next_cuts
+        next_cuts_path = RESULTS / f"p3d27_{round_name}_next_cuts.json"
+        dump(next_cuts_path, next_cuts)
+        round_record["next_cut_json"] = str(next_cuts_path)
+        if score == 0:
+            status = f"alle angeforderten Gate-Ziele nach Runde {round_index} erfüllt"
+        elif stop_reason:
+            status = f"nach Runde {round_index} beendet ({stop_reason}); Zielabweichungen sind in der Tabelle aufgeführt"
+        else:
+            status = f"Runde {round_index} abgeschlossen; Checker-in-the-loop wird fortgesetzt"
+        dump(RESULTS / "p3d27_V3_checker_loop.json",
+             output_document(rounds, best_round, best_score, len(all_cuts), status, baseline_d1_g11))
+        write_report_progress(rounds, status)
+        checkpoint(round_index)
         if cut_hash in seen_cut_hashes:
-            round_record["stop_reason"] = "cut_cycle"
             break
         seen_cut_hashes.add(cut_hash)
-        if len(next_cuts) == len(all_cuts):
-            round_record["stop_reason"] = "no_new_cuts"
+        if stop_reason is not None:
             break
-        if no_improve >= 2:
-            round_record["stop_reason"] = "two_rounds_without_score_improvement"
-            break
-        all_cuts = next_cuts
-    output = {
-        "tag": "p3d27", "geometry": "V3", "baseline_D1_G11_hits": baseline_d1_g11,
-        "start_event_cut_count": len(base), "rounds": rounds,
-        "best_round": best_round, "best_score": best_score,
-        "final_cut_count": len(all_cuts), "method": "serial all-family V3 Float32 official checker-in-the-loop; no mesh build",
-    }
     out = RESULTS / "p3d27_V3_checker_loop.json"
-    dump(out, output)
     print(json.dumps({"out": str(out), "rounds": len(rounds), "best_round": best_round,
                       "best_score": best_score, "last_model_status": rounds[-1].get("model_status") if rounds else None},
                      indent=2, sort_keys=True))
