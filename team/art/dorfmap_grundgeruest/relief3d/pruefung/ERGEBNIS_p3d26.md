@@ -52,4 +52,74 @@ Die gemeinsame Policy in `r8a_policy.py` wird sowohl vom offiziellen Prüfer als
 
 `[R]` Arbeitsbasis ist p3d23 V3 mit unverändertem Start von rampe_2. p3d24 dokumentiert V3 als Basis mit den kleinsten lokalen Geometrieänderungen an rampe_2 und unveränderter rampe_11; p3d25 V1 bleibt nur die ausdrücklich erlaubte zweite Wahl, falls der V3-Hartsolve mit der Ausnahme unlösbar ist. Keine Wegdaten wurden bisher verändert.
 
-`[S]` Der all-hart Familienlauf mit 0,18 m nur an `rampe_2_anfang` ist noch nicht ausgeführt. Daher sind offizielle Probe, Regel- und Kachelzahlen nach Änderung, Mesh, Delta, LOD1 und Bilder noch nicht gemessen. Das Arbeitsziel ist bis zu diesen Schritten offen.
+## Familienmachbarkeit
+
+`[S]` V3 ist im p3d23-Familienmodell mit allen Familien hart **machbar**, HiGHS Status 7 (`Optimal`), 7.885 Variablen und 25.886 Bedingungen. `diagnostic_groups_enabled=[]`; alle 27 Familien-Schlupfvariablen sind 0 und der gewichtete L1-Schlupf ist 0. Deshalb wurde die zweite Wahl p3d25 V1 nicht ausgeführt.
+
+`[S]` Die R8a-Paarbedingungen enthalten 2.054 Paare: 0,10 m überall und 0,18 m nur für die Paare im Rampe-2-Startauslauf. Die benannte Ausnahme und Quelle `[F]` stehen im Solver-JSON. Das größte numerische Restmaß an einem regulären Wegende ist `2,27e-14 m` bei `rampe_11_anfang`, Paar `148.0|2.5`–`148.0|2.75` mit `0.100000000000023 m` gegenüber 0,10 m; das liegt innerhalb der Solver-Fließkommatoleranz. Wegende-Stufe bleibt 0,054 m (numerischer Rest `4,93e-16 m`).
+
+`[S]` Die Kreuzungsmodellwerte erfüllen die unveränderten Grenzen: Stufe `0.116000000002 m`, Gitter `0.0190000000004 m` (Modellziel 0,019 m) und Querneigung `2.9500000000001 %`; Einzelquergrenze 19,5 %. Keine R9w-Gleichheitsfixierung oder Regressionszaun-Höhenpins wurden hinzugefügt (`R9w_exact_bandpass_lock_points=0`, Regressionszaun-Zähler leer). Solverbeleg: [`p3d26_V3_all_hard_with_rampe2_exception.json`](../../../../../codex_jobs/tools/p3d26/results/p3d26_V3_all_hard_with_rampe2_exception.json).
+
+`[S]` Quelle und Transferbasis stimmen mit den p3d23-Belegen überein (Quellhash `b1e347e0…`, Transferhash `07c140cf…`). Die Laufzeitgrenze von etwa fünf Stunden war beim Wiederaufnehmen bereits überschritten: Der Laufzeitnachweis beginnt am 13.11.2026 um ca. 00:37 Europe/Berlin; beim Stand 08:15 waren etwa 7 h 38 min vergangen. Deshalb wurde gemäß Auftrag vor der offiziellen Float32-Probe gestoppt. Es gibt keine p3d26-Proberunde, keine p3d26-Regel-/Kachel-Nachherzahlen, keinen Meshbau, keine Delta-/LOD1-Prüfung und keine Bilder.
+
+### Regelzahlen vorher / p3d26
+
+`[S]` Die historische Vorher-Spalte ist der vorgegebene Stand `9d3f8fc`. Der letzte verfügbare D1/G1/D2-Kontext ist der p3d17-Referenzreplay im aktuellen Prüferschema; er ist keine p3d26-Probe. Wegen des Zeitlimits sind alle p3d26-Nachherwerte ausdrücklich **nicht gemessen**.
+
+| Regel | 9d3f8fc vorher gesamt | p3d17-Referenz D1/G1/D2 | p3d26 nachher |
+|---|---:|---:|---|
+| R1_blind | 24 | 2 / 1 / 0 | nicht gemessen |
+| R2_getrennt | 15 | 1 / 0 / 1 | nicht gemessen |
+| R3_laengs_m | 35 | 6 / 1 / 0 | nicht gemessen |
+| R3_quer_pct | 29 | 17 / 0 / 0 | nicht gemessen |
+| R3_woelb_m | 31 | 19 / 0 / 0 | nicht gemessen |
+| R4_rand | 1 | 1 / 0 / 0 | nicht gemessen |
+| R4_schlucht | 0 | 0 / 0 / 0 | nicht gemessen |
+| R5_loch | 25 | 8 / 0 / 0 | nicht gemessen |
+| R5_spitze | 0 | 0 / 0 / 0 | nicht gemessen |
+| R6_wasser_schnee | 4 | 0 / 3 / 0 | nicht gemessen |
+| G2_spitze_oben | 3 | 0 / 0 / 0 | nicht gemessen |
+| G2_spitze_oben_fein | 8 | 0 / 0 / 0 | nicht gemessen |
+| G3_spitze_unten | 4 | 1 / 0 / 0 | nicht gemessen |
+| G3_spitze_unten_fein | 2 | 0 / 0 / 0 | nicht gemessen |
+| G5_beule_klippe | 69 | 2 / 0 / 0 | nicht gemessen |
+| G6_facette | 219 | 3 / 3 / 0 | nicht gemessen |
+| G7_wand_glatte_flaeche | 1 | 0 / 0 / 0 | nicht gemessen |
+| G7b_wandkontur_feld | 25 | 1 / 0 / 0 | nicht gemessen |
+| G7b_wandkontur_kantenschaerfe | 1 | 0 / 0 / 0 | nicht gemessen |
+| G7b_wandkontur_rauheit | 1 | 0 / 0 / 0 | nicht gemessen |
+| G8_fluss_nicht_bis_rand | 1 | 0 / 0 / 0 | nicht gemessen |
+| G11_objekt_schwebt_sinkt | 0* | 2 / 2 / 0 | nicht gemessen |
+| T1_fleckrand | 94 | 0 / 3 / 7 | nicht gemessen |
+| T2_textur_abgeschnitten_bildpruefung_offen | 1 | 0 / 0 / 0 | nicht gemessen |
+| T3_streifen_ringe_bildpruefung_offen | 1 | 0 / 0 / 0 | nicht gemessen |
+| T4_graue_flussstreifen_bildpruefung_offen | 1 | 0 / 0 / 0 | nicht gemessen |
+| T5_textur_vs_clay_bildpruefung_offen | 1 | 0 / 0 / 0 | nicht gemessen |
+| **pruefe_regeln Summe** | **596** | **Referenzreplay gesamt 600** | **nicht gemessen** |
+
+`*` Das historische 596er-Schema hatte keinen G11-Zähler; der aktuelle Referenzreplay zählt 4 G11-Objekttreffer (D1=2, G1=2).
+
+| R8-Regel | 9d3f8fc vorher gesamt | p3d17-Referenz D1/G1/D2 | p3d26 nachher |
+|---|---:|---:|---|
+| R8_stufe | 9 | 2 / 0 / 0 | nicht gemessen |
+| R8_gitter | 10 | 2 / 0 / 0 | nicht gemessen |
+| R8_quer | 5 | 0 / 0 / 0 | nicht gemessen |
+| R8a_wegende | 24 | 3 / 0 / 0 | nicht gemessen |
+| **R8 Summe** | **48** | **gesamt 46; D1=7 / G1=0 / D2=0** | **nicht gemessen** |
+
+| R9-Regel | 9d3f8fc vorher gesamt | p3d17-Referenz D1/G1/D2 | p3d26 nachher |
+|---|---:|---:|---|
+| R8b_delle | 25 | 1 / 0 / 0 | nicht gemessen |
+| R9_saegezahn | 34 | 1 / 1 / 0 | nicht gemessen |
+| R9w_wellen | 275 | 27 / 12 / 0 | nicht gemessen |
+| **R9 Summe** | **334** | **gesamt 344; D1=29 / G1=13 / D2=0** | **nicht gemessen** |
+
+`[S]` Die D2-Quellwerte wurden nicht geändert; ohne p3d26-Probe ist jedoch nicht neu nachgewiesen, dass keine D2-Treffer hinzukamen. Ebenso sind `t42u=0`, `lod1<1,3 Mio.`, G1-/D2-Hashvergleich und sämtliche geforderten Bildansichten für p3d26 nicht gemessen.
+
+## Laufzeitgrenze und Abschluss
+
+`[S]` Die Machbarkeit ist belegt, die eigentliche offizielle Probe wurde wegen der überschrittenen Gesamtzeitgrenze nicht begonnen. Damit sind die harten Prüferziele und der Meshzustand für p3d26 weder bestanden noch widerlegt; das Ergebnis bleibt unverifiziert. Es wurden keine p3d26-Geometrie- oder Zellquellwerte geändert und kein Mesh erzeugt.
+
+## Drei-Satz-Schluss
+
+`[S]` Die eng begrenzte Ausnahme ist getestet, die R3-Kalibrierung blieb vor/nach der Prüferänderung bei `6/17/19`, und die p3d23-V3-Führung ist mit allen Familien hart machbar. `[S]` Wegen Überschreitung des Fünf-Stunden-Limits wurde die Float32-Probe vor Runde 1 gestoppt; deshalb gibt es keine p3d26-Nachherzahlen, keinen Meshbau und keine Bilder. `[A]` Das Qualitätsziel ist damit nicht verifiziert; D2-Regression, t42u, LOD1 und die übrigen Gateziele bleiben offen.
