@@ -1,0 +1,623 @@
+{
+  "D1_regression_fence_vertex_counts": {},
+  "R3_single_cross_slope_limit_pct": 19.5,
+  "R8_gate_center_unrounded_map": [
+    152.6292918620858,
+    28.353590994151514
+  ],
+  "R8_gate_gitter_support_pairs": 280,
+  "R8_gate_metrics_solution": {
+    "R8_gitter_m": 0.01900000000288138,
+    "R8_quer_pct": 2.947179430114642,
+    "R8_stufe_m": 0.1159900111753922
+  },
+  "R8_gate_quer_slope_limit_pct": 2.95,
+  "R8_gate_quer_supports": 115,
+  "R8_neighbor_pair_count": 1111,
+  "R9w_exact_bandpass_lock_points": 0,
+  "axis_supports": 359,
+  "axis_tolerance_m": 0.02,
+  "base_model_sha256": "64ce3df7bbaeb70b7c30e0ee6058fd47bf281b57106868833847481e7fa7c26e",
+  "checker_spacing_map_units": 0.25,
+  "cliff_form_l1_absolute_deviation_sum_m": 5961.381366122544,
+  "cliff_form_weighted_l1_value": 116758.73323465497,
+  "constraints": 81029,
+  "curvature_l1_variable_count": 12086,
+  "cuts_are_round05_v24_catalog_for_all_geometries": false,
+  "diagnostic_groups_enabled": [
+    "p3d29_drainage",
+    "variable_bounds"
+  ],
+  "diagnostic_model_sha256": "a6f6f075c623256baee27fed6d6f54b46d4cbec35da8d53f85bf9ac9b8311b32",
+  "drainage_l1_sum_m": 66.97116581450275,
+  "drainage_weighted_l1_value": 669711.6581450275,
+  "endpoint_R8a_float32_guard_m": 1e-05,
+  "endpoint_R8a_named_exception": {
+    "coordinate_map": [
+      126.51,
+      31.62
+    ],
+    "endpoint_id": "rampe_2_anfang",
+    "limit_m": 0.18,
+    "name": "R8a_ausnahme_rampe2_start",
+    "source": "[F] Fabian widget t166s961, 2026-11-13"
+  },
+  "endpoint_R8a_pair_count": 2054,
+  "endpoint_R8a_pair_limit_m": 0.1,
+  "endpoint_r8a_lock_enabled": true,
+  "endpoint_stage_float32_guard_m": 1e-05,
+  "endpoint_stage_limit_m": 0.054,
+  "endpoint_stage_pair_count": 460,
+  "event_counter_model": {
+    "g5_d1_max": 2,
+    "g5_fixed_non_d1_baseline": 67,
+    "g5_total_max": 69,
+    "r4_d1_max": 0,
+    "r5_hole_d1_max": 5,
+    "r5_hole_fixed_non_d1_baseline": 17,
+    "r5_hole_total_max": 22,
+    "scope": "round05 V24 event-cut catalog; cut relaxation indicators, not a fresh official component recount"
+  },
+  "event_cut_count_by_kind": {},
+  "event_cuts_file": "p3d29_V3_R00_cuts.json",
+  "event_cuts_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "exact_event_cut_count": 0,
+  "exact_event_selector_count": 0,
+  "family_iis_scope": "p3d29 V3 elastic extension; group-level only, not row IIS",
+  "family_max_relaxation_locations": {
+    "endpoint_r8a": {
+      "maximum_violation_m": 0.0,
+      "pair": null
+    },
+    "endpoint_stage": {
+      "maximum_violation_m": 0.0,
+      "pair": null
+    },
+    "grade_cross": {
+      "maximum_violation_m": 0.0,
+      "pair": null
+    },
+    "grade_same": {
+      "maximum_violation_m": 4.440892098500626e-16,
+      "pair": {
+        "a_map": [
+          145.67277612029486,
+          7.792045177820531
+        ],
+        "b_map": [
+          146.2400803866151,
+          10.569590283920446
+        ],
+        "grade_limit_m": 1.5308396128094457,
+        "height_delta_m": 1.5308396128094461,
+        "pair_distance_m": 3.4018658062432126,
+        "route_a": 11,
+        "route_b": 11,
+        "station_a_m": 7.199999999999999,
+        "station_b_m": 11.7
+      }
+    },
+    "plane_slope_box": {
+      "map": [
+        152.6292918620858,
+        28.353590994151514
+      ],
+      "maximum_violation_pp": 0.0
+    },
+    "plane_slope_polygon": {
+      "map": [
+        152.6292918620858,
+        28.353590994151514
+      ],
+      "maximum_violation_pp": 0.0
+    },
+    "variable_bounds": {
+      "maximum_violation_m": 2.854245447622643,
+      "variable": {
+        "height_m": -2.485205822693215,
+        "kind": "route_height",
+        "lower_m": 0.3690396249294281,
+        "map": [
+          175.08557332141362,
+          25.697639252945574
+        ],
+        "route": 2,
+        "station_m": 58.8,
+        "upper_m": 0.3690396249294281
+      }
+    }
+  },
+  "family_row_counts": {
+    "R8_gitter_safety": 560,
+    "R8_quer_safety": 32,
+    "axis_supports": 718,
+    "crossing_stage_cap": 1,
+    "endpoint_r8a_runout_pairs": 4108,
+    "endpoint_stage_pairs": 920,
+    "event_counter_caps": 0,
+    "event_cut_G11": 0,
+    "event_cut_G5": 0,
+    "event_cut_G6": 0,
+    "event_cut_R4": 0,
+    "event_cut_R5": 0,
+    "event_cut_R5sp": 0,
+    "event_cut_R8G": 0,
+    "event_cut_R8b": 0,
+    "event_cut_R9w": 0,
+    "p3d29_cliff_gorge_curvature": 40162,
+    "p3d29_locality_outside": 2830,
+    "p3d29_locality_ring": 6356,
+    "p3d29_priority_flood_drainage": 5579,
+    "p3d29_tree_ground_reference": 216,
+    "plane_core_supports": 286,
+    "plane_slope_box": 4,
+    "plane_slope_polygon": 32,
+    "r3_cross_constraints": 2204,
+    "r3_long_constraints": 777,
+    "r8_neighbor_stage": 2222,
+    "regression_locks": 0,
+    "route_pair_grade": 2244,
+    "route_profile_slope": 772,
+    "source_monotonicity": 381,
+    "variable_bounds": 10625
+  },
+  "g_m_per_m": 0.45,
+  "geometry": "V3",
+  "highs_status_code": 7,
+  "infeasibility_proven": false,
+  "maximum_normalized_slack": 669711.6581450275,
+  "mesh_raster_spacing_map_units": 0.5,
+  "minimum_neighbor_step_m": 0.11599,
+  "mip_dual_bound_m": 0.0,
+  "mip_gap": Infinity,
+  "normalized_slack_values": {
+    "axis_tolerance_extra_m": 0.0,
+    "crossing_stage_extra_m": 0.0,
+    "endpoint_r8a_extra_m": 0.0,
+    "endpoint_stage_extra_m": 0.0,
+    "g11_d1_extra_hits": 0.0,
+    "g5_d1_extra_hits": 0.0,
+    "g5_total_extra_hits": 0.0,
+    "grade_cross_extra_m": 0.0,
+    "grade_same_extra_m": 0.0,
+    "p3d29_cliff_form_extra_m": 0.0,
+    "p3d29_drainage_extra_m": 669711.6581450275,
+    "p3d29_locality_extra_m": 0.0,
+    "p3d29_tree_ground_extra_m": 0.0,
+    "plane_slope_box_extra_pp": 0.0,
+    "plane_slope_polygon_extra_pp": 0.0,
+    "plane_tolerance_extra_m": 0.0,
+    "r3_long_extra_hits": 0.0,
+    "r3_long_residual_m": 0.0,
+    "r3_quer_extra_hits": 0.0,
+    "r3_quer_residual_pp": 0.0,
+    "r3_wob_extra_hits": 0.0,
+    "r3_wob_residual_m": 0.0,
+    "r4_d1_extra_hits": 0.0,
+    "r5_d1_extra_hits": 0.0,
+    "r5_total_extra_hits": 0.0,
+    "r8b_d1_extra_hits": 0.0,
+    "route_profile_slope_extra_m": 0.0,
+    "safety_gitter_extra_m": 0.0,
+    "safety_quer_extra_pp": 0.0,
+    "safety_single_quer_extra_pp": 0.0,
+    "source_monotone_extra_m": 0.0,
+    "variable_bounds_extra_m": 10.0
+  },
+  "objective_mode": "diagnostic",
+  "optimality_proven": true,
+  "p3d18_variant24_reference_D1_sha256": "bcadfe7e0c03030ac040f259f788a390af39ae888f5d291c5869c1a9dbf10fd8",
+  "p3d26_priority_flood_seed": {
+    "file": "codex_jobs/tools/p3d26/results/p3d26_V3_all_hard_with_rampe2_exception.json",
+    "grid": {
+      "height": 87,
+      "spacing": 0.5,
+      "width": 85,
+      "x0": 126.0,
+      "z0": 0.0
+    },
+    "primal_feasible": true,
+    "sha256": "0b03648f7d71a25783d111b81d7d8b4980e3a5ad9c6760d76209cebae241245e",
+    "status": "Optimal"
+  },
+  "p3d29_construction": {
+    "counts": {
+      "active_vertices": 5980,
+      "core_vertices": 2802,
+      "curvature_l1_vertices": 2931,
+      "drainage_edges": 5579,
+      "endpoint_support_vertices": 527,
+      "outside_pinned_vertices": 1415,
+      "priority_flood_boundary_outlets": 402,
+      "priority_flood_model_vertices": 2911,
+      "ring_vertices": 3178,
+      "route_longitudinal_edges": 219,
+      "route_outlets_on_work_area_boundary": 2,
+      "transfer_support_outside_active_vertices": 0,
+      "transfer_support_vertices": 4924,
+      "wall_cliff_gorge_vertices": 5097,
+      "zero_eps_vertices": 1737
+    },
+    "crossing_radius_map": 4.0,
+    "curvature_hard_stencils": 7995,
+    "curvature_l1_stencils": 12086,
+    "curvature_l1_weight_rule": "1 / max(0.02 m, 0.25 * abs(reference second difference))",
+    "drainage_eps_m": 0.001,
+    "drainage_l1_mode": "soft",
+    "drainage_l1_scale_m": 0.0001,
+    "endpoint_runout_support_vertices": 527,
+    "exact_v3_transfer_support_vertices": 4924,
+    "hard_curvature_tolerance_rule": "max(0.02 m, 0.25 * abs(p3d17 reference second difference))",
+    "linear_constraint_rows": {
+      "cliff_curvature_hard": 15990,
+      "cliff_curvature_l1": 24172,
+      "drainage_tree": 5579,
+      "locality_outside": 2830,
+      "locality_ring": 6356,
+      "tree_ground": 216
+    },
+    "outlet_note": "Priority-Flood roots lie on the work-area boundary. Ramp 2/11 axes are directed toward their lower p3d17 endpoint and continued through the existing endpoint runout band; at the crossing the downstream child with lower p3d17 height is kept.",
+    "outside_tolerance_m": 0.001,
+    "p3d23_route_pair_radius_m": 4.5,
+    "priority_flood_seed": {
+      "file": "codex_jobs/tools/p3d26/results/p3d26_V3_all_hard_with_rampe2_exception.json",
+      "grid": {
+        "height": 87,
+        "spacing": 0.5,
+        "width": 85,
+        "x0": 126.0,
+        "z0": 0.0
+      },
+      "primal_feasible": true,
+      "sha256": "0b03648f7d71a25783d111b81d7d8b4980e3a5ad9c6760d76209cebae241245e",
+      "status": "Optimal"
+    },
+    "ring_tolerance_inner_m": 0.02,
+    "ring_width_m": 7.5,
+    "routes": [
+      {
+        "chain_nodes": 88,
+        "downhill_endpoint_is_route_start": false,
+        "outlet_on_boundary": true,
+        "outlet_xz": [
+          168.0,
+          26.5
+        ],
+        "priority_flood_start_to_end_m": [
+          0.0,
+          12.212055922120207
+        ],
+        "route": 2
+      },
+      {
+        "chain_nodes": 134,
+        "downhill_endpoint_is_route_start": false,
+        "outlet_on_boundary": true,
+        "outlet_xz": [
+          164.5,
+          43.0
+        ],
+        "priority_flood_start_to_end_m": [
+          0.0,
+          12.885089378356934
+        ],
+        "route": 11
+      }
+    ],
+    "runout_across_map": 2.5,
+    "runout_along_map": [
+      -1.0,
+      4.0
+    ],
+    "spec_file": "p3d29_V3_lp_filter_05_source_monotone_construction.json",
+    "spec_sha256": "356e31acf2bf3f303ae1aa1fccaffb9aa755cd9bce20d1a433aa4cedd98366af",
+    "tree_ground_tolerance_m": 0.001,
+    "variant": "3"
+  },
+  "p3d29_construction_max_violations": {
+    "cliff_curvature_hard": {
+      "maximum_violation_m": 3.1259717037102064e-15,
+      "stencil": {
+        "center_xz": [
+          130.5,
+          26.5
+        ],
+        "reference_second_difference_m": -0.031049728393554688,
+        "second_difference_m": -0.051049728393557814,
+        "tolerance_m": 0.02
+      }
+    },
+    "cliff_curvature_l1": {
+      "largest_stencil": {
+        "center_xz": [
+          128.0,
+          36.5
+        ],
+        "reference_second_difference_m": -2.093018054962158,
+        "second_difference_m": 18.816115776980656
+      },
+      "maximum_abs_deviation_m": 20.909133831942814,
+      "weighted_l1_sum": 116758.73335168396
+    },
+    "drainage": {
+      "edge": {
+        "child_xz": [
+          128.0,
+          36.5
+        ],
+        "required_eps_m": 0.0,
+        "successor_xz": [
+          127.5,
+          36.0
+        ]
+      },
+      "maximum_violation_m": 9.863219463954609
+    },
+    "locality": {
+      "outside": {
+        "allowed_abs_delta_m": 0.001,
+        "delta_m": 0.0,
+        "maximum_violation_m": 0.0,
+        "xz": [
+          126.0,
+          0.0
+        ]
+      },
+      "transition_ring": {
+        "allowed_abs_delta_m": 0.018479999154806137,
+        "delta_m": -0.018480001017451286,
+        "maximum_violation_m": 1.862645149230957e-09,
+        "xz": [
+          140.0,
+          26.5
+        ]
+      }
+    },
+    "locality_row_debug": {
+      "150.5|42.5": {
+        "fixed": 0.019270761888975408,
+        "lower_activity": 0.007914852370077875,
+        "lower_rhs": 0.007914852370077875,
+        "lower_row": 19661,
+        "reference": 0.019484329968690872,
+        "target_coefficients": {
+          "7662": 0.008564832109178995
+        },
+        "tolerance": 0.008128420449793339,
+        "upper_activity": -0.007914852370077875,
+        "upper_rhs": 0.008341988529508803,
+        "upper_row": 19660
+      },
+      "152.5|42.5": {
+        "fixed": 0.05873367366611505,
+        "lower_activity": 0.009873331424291379,
+        "lower_rhs": 0.009873331424291379,
+        "lower_row": 19669,
+        "reference": 0.06026192381978035,
+        "target_coefficients": {
+          "7666": 0.029948380255966734
+        },
+        "tolerance": 0.011401581577956676,
+        "upper_activity": -0.009873331424291379,
+        "upper_rhs": 0.012929831731621974,
+        "upper_row": 19668
+      }
+    },
+    "r4_official_indicator": {
+      "maximum_violation_m": 0.41805544251470694,
+      "section": {
+        "center_xz": [
+          148.0542137450243,
+          11.900528629236208
+        ],
+        "indicator_m": 1.9180454425147069,
+        "official_limit_m": 1.5,
+        "side_minus_center_m": [
+          1.9180454425147069,
+          2.3051148481868413
+        ]
+      }
+    },
+    "tree_ground": {
+      "maximum_violation_m": 8.673617379884035e-19,
+      "sample": {
+        "delta_m": -0.0010000000000000009,
+        "ground_sample_xz": [
+          135.5,
+          39.5
+        ],
+        "tree_index": 1479,
+        "tree_xz": [
+          136.25,
+          39.75
+        ]
+      },
+      "stencil_samples": 108
+    }
+  },
+  "plane_core_supports": 143,
+  "plane_gradient_x": -0.002004578099288903,
+  "plane_gradient_z": -0.024317258524253975,
+  "plane_height_m": 4.75683474226301,
+  "plane_radius_m": 2.0,
+  "plane_slope_limit_pct": 3.0,
+  "plane_slope_pct": 2.4399741709525355,
+  "plane_tolerance_m": 0.02,
+  "primal_feasibility_residuals": {
+    "loaded_matrix_delta": 0.0,
+    "loaded_row_bound_delta": 0.0,
+    "maximum_row_violation": 9.91821273998994e-08,
+    "maximum_solver_matrix_activity_delta": 1.1133188992928922e-07,
+    "maximum_solver_row_upper_violation": 9.91821273998994e-08,
+    "maximum_variable_bound_violation": 4.284095567186341e-08,
+    "solver_max_primal_infeasibility": 9.91821273998994e-08,
+    "worst_row_family": "p3d29_cliff_gorge_curvature",
+    "worst_row_index": 54536,
+    "worst_variable_index": 14625
+  },
+  "primal_feasible": true,
+  "primary_objective_value": 669721.6581450277,
+  "primary_r3_long_indicator_sum": 0.07438039804633872,
+  "primary_r3_quer_indicator_sum": 0.3372186023775013,
+  "primary_r3_wob_indicator_sum": 0.6102275529124229,
+  "r3_D1_limit": 6,
+  "r3_long_limit": 6,
+  "r3_quer_limit": 7,
+  "r3_quer_sections_D1_solution": 0,
+  "r3_sections_D1_solution": 0,
+  "r3_wob_limit": 7,
+  "r3_wob_sections_D1_solution": 0,
+  "r8_center_unrounded_map": [
+    152.6292918620858,
+    28.353590994151514
+  ],
+  "reference_solution": "p3d17_joint_mesh_v22.json",
+  "relax_integrality": true,
+  "relaxed_integrality": true,
+  "requested_groups": [
+    "p3d29_drainage",
+    "variable_bounds"
+  ],
+  "route_pair_count": 1122,
+  "same_route_arc_distance_factor": 1.25,
+  "same_route_pair_count": 218,
+  "scenario": "joint",
+  "selected_soft_event_cut_relaxations_by_kind": {
+    "G11": 0,
+    "G5": 0,
+    "R4": 0,
+    "R5": 0,
+    "R8b": 0
+  },
+  "slack_units": {
+    "axis_tolerance_extra_m": "m",
+    "crossing_stage_extra_m": "m",
+    "endpoint_r8a_extra_m": "m",
+    "endpoint_stage_extra_m": "m",
+    "g11_d1_extra_hits": "hits",
+    "g5_d1_extra_hits": "hits",
+    "g5_total_extra_hits": "hits",
+    "grade_cross_extra_m": "m",
+    "grade_same_extra_m": "m",
+    "p3d29_cliff_form_extra_m": "m",
+    "p3d29_drainage_extra_m": "max_edge_m; L1 is reported separately",
+    "p3d29_locality_extra_m": "m",
+    "p3d29_tree_ground_extra_m": "m",
+    "plane_slope_box_extra_pp": "percentage_points",
+    "plane_slope_polygon_extra_pp": "percentage_points",
+    "plane_tolerance_extra_m": "m",
+    "r3_long_extra_hits": "hits",
+    "r3_long_residual_m": "m",
+    "r3_quer_extra_hits": "hits",
+    "r3_quer_residual_pp": "percentage_points",
+    "r3_wob_extra_hits": "hits",
+    "r3_wob_residual_m": "m",
+    "r4_d1_extra_hits": "hits",
+    "r5_d1_extra_hits": "hits",
+    "r5_total_extra_hits": "hits",
+    "r8b_d1_extra_hits": "hits",
+    "route_profile_slope_extra_m": "m",
+    "safety_gitter_extra_m": "m",
+    "safety_quer_extra_pp": "percentage_points",
+    "safety_single_quer_extra_pp": "percentage_points",
+    "source_monotone_extra_m": "m",
+    "variable_bounds_extra_m": "m"
+  },
+  "slack_values": {
+    "axis_tolerance_extra_m": 0.0,
+    "crossing_stage_extra_m": 0.0,
+    "endpoint_r8a_extra_m": 0.0,
+    "endpoint_stage_extra_m": 0.0,
+    "g11_d1_extra_hits": 0.0,
+    "g5_d1_extra_hits": 0.0,
+    "g5_total_extra_hits": 0.0,
+    "grade_cross_extra_m": 0.0,
+    "grade_same_extra_m": 0.0,
+    "p3d29_cliff_form_extra_m": 0.0,
+    "p3d29_drainage_extra_m": 9.863219463954609,
+    "p3d29_locality_extra_m": 0.0,
+    "p3d29_tree_ground_extra_m": 0.0,
+    "plane_slope_box_extra_pp": 0.0,
+    "plane_slope_polygon_extra_pp": 0.0,
+    "plane_tolerance_extra_m": 0.0,
+    "r3_long_extra_hits": 0.0,
+    "r3_long_residual_m": 0.0,
+    "r3_quer_extra_hits": 0.0,
+    "r3_quer_residual_pp": 0.0,
+    "r3_wob_extra_hits": 0.0,
+    "r3_wob_residual_m": 0.0,
+    "r4_d1_extra_hits": 0.0,
+    "r5_d1_extra_hits": 0.0,
+    "r5_total_extra_hits": 0.0,
+    "r8b_d1_extra_hits": 0.0,
+    "route_profile_slope_extra_m": 0.0,
+    "safety_gitter_extra_m": 0.0,
+    "safety_quer_extra_pp": 0.0,
+    "safety_single_quer_extra_pp": 0.0,
+    "source_monotone_extra_m": 0.0,
+    "variable_bounds_extra_m": 10.0
+  },
+  "solver": "highspy.Highs; threads=1",
+  "source_relief_path": "/tmp/p3d22_v3_source.json.gz",
+  "source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "stage_limit_m": 0.11599,
+  "status": "Optimal",
+  "status_code": 7,
+  "success": true,
+  "tie_break_movement_l1_m": 0.0,
+  "tie_break_reference_mesh": "GB source field",
+  "tie_break_reference_solution": "p3d17_joint_mesh_v22.json",
+  "tie_break_weighted_l1_objective": 0.0,
+  "time_limit_s": 600.0,
+  "transfer_base": "p3d21_transfer_base_route3_v29.json",
+  "transfer_base_sha256": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287",
+  "variables": 25554,
+  "weighted_l1_scales": {
+    "axis_tolerance_extra_m": 0.02,
+    "crossing_stage_extra_m": 0.116,
+    "endpoint_r8a_extra_m": 0.1,
+    "endpoint_stage_extra_m": 0.054,
+    "g11_d1_extra_hits": 1.0,
+    "g5_d1_extra_hits": 1.0,
+    "g5_total_extra_hits": 1.0,
+    "grade_cross_extra_m": 0.45,
+    "grade_same_extra_m": 0.45,
+    "p3d29_cliff_form_extra_m": 0.02,
+    "p3d29_drainage_extra_m": 0.0001,
+    "p3d29_locality_extra_m": 0.02,
+    "p3d29_tree_ground_extra_m": 0.001,
+    "plane_slope_box_extra_pp": 1.0,
+    "plane_slope_polygon_extra_pp": 1.0,
+    "plane_tolerance_extra_m": 0.02,
+    "r3_long_extra_hits": 1.0,
+    "r3_long_residual_m": 0.08,
+    "r3_quer_extra_hits": 1.0,
+    "r3_quer_residual_pp": 3.5,
+    "r3_wob_extra_hits": 1.0,
+    "r3_wob_residual_m": 0.08,
+    "r4_d1_extra_hits": 1.0,
+    "r5_d1_extra_hits": 1.0,
+    "r5_total_extra_hits": 1.0,
+    "r8b_d1_extra_hits": 1.0,
+    "route_profile_slope_extra_m": 0.6,
+    "safety_gitter_extra_m": 0.019,
+    "safety_quer_extra_pp": 2.95,
+    "safety_single_quer_extra_pp": 19.5,
+    "source_monotone_extra_m": 1.0,
+    "variable_bounds_extra_m": 1.0
+  },
+  "weighted_l1_value": 669721.6581450277,
+  "worst_pair": {
+    "a": {
+      "height_m": 5.423888942921277,
+      "x": 149.0,
+      "z": 27.75
+    },
+    "b": {
+      "height_m": 5.539878954096669,
+      "x": 149.0,
+      "z": 28.0
+    },
+    "step_m": 0.1159900111753922
+  }
+}

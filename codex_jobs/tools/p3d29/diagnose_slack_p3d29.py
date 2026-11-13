@@ -1067,8 +1067,8 @@ def solve(
     construction_meta["linear_constraint_rows"] = construction_rows
     construction_meta["outlet_note"] = (
         "Priority-Flood roots lie on the work-area boundary. Ramp 2/11 axes are directed "
-        "toward their lower p3d17 endpoint and continued through the existing endpoint "
-        "runout band; at the crossing the downstream child with lower p3d17 height is kept."
+        "toward their lower p3d26 helper-height endpoint and continued through the existing "
+        "endpoint runout band; at the crossing the downstream child with lower helper height is kept."
     )
 
     def event_big_m(row: dict[int, float], fixed: float, threshold: float) -> float:

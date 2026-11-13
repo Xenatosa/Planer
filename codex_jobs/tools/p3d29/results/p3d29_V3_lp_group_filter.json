@@ -1,0 +1,749 @@
+{
+  "all_open": {
+    "family_max_relaxation_locations": {
+      "endpoint_r8a": {
+        "maximum_violation_m": 0.14134277522171218,
+        "nearest_route_endpoint": {
+          "endpoint": "start",
+          "map": [
+            126.51000020929992,
+            31.620001726724226
+          ],
+          "route": 2
+        },
+        "pair": {
+          "a": [
+            127.25,
+            31.0
+          ],
+          "anchor_xz": [
+            126.51000020929992,
+            31.620001726724226
+          ],
+          "ausnahme": "R8a_ausnahme_rampe2_start",
+          "b": [
+            127.25,
+            31.25
+          ],
+          "delta_m": 0.3213427752217122,
+          "limit_m": 0.18,
+          "wegend_id": "rampe_2_anfang"
+        }
+      },
+      "endpoint_stage": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "grade_cross": {
+        "maximum_violation_m": 2.220446049250313e-16,
+        "pair": {
+          "a_map": [
+            148.0908787338466,
+            29.15131811252046
+          ],
+          "b_map": [
+            150.73999857965103,
+            31.62027295741702
+          ],
+          "grade_limit_m": 1.9554841276803854,
+          "height_delta_m": 1.9554841276803856,
+          "pair_distance_m": 4.3455202837341895,
+          "route_a": 2,
+          "route_b": 11,
+          "station_a_m": 26.099999999999998,
+          "station_b_m": 45.9
+        }
+      },
+      "grade_same": {
+        "maximum_violation_m": 8.881784197001252e-16,
+        "pair": {
+          "a_map": [
+            145.90698317308295,
+            7.350294154847196
+          ],
+          "b_map": [
+            146.64308260136235,
+            10.865545035375469
+          ],
+          "grade_limit_m": 1.9394069080497074,
+          "height_delta_m": 1.9394069080497083,
+          "pair_distance_m": 4.30979312899935,
+          "route_a": 11,
+          "route_b": 11,
+          "station_a_m": 6.6,
+          "station_b_m": 12.299999999999999
+        }
+      },
+      "plane_slope_box": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "plane_slope_polygon": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "variable_bounds": {
+        "maximum_violation_m": 3.3958812904402453,
+        "variable": {
+          "height_m": 3.0395406532243054,
+          "kind": "route_height",
+          "lower_m": 6.435421943664551,
+          "map": [
+            153.70858252211218,
+            16.02692778967613
+          ],
+          "route": 11,
+          "station_m": 22.8,
+          "upper_m": 10.43542194366455
+        }
+      }
+    },
+    "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_all_open.json",
+    "normalized_slack_values": {
+      "axis_tolerance_extra_m": 0.0,
+      "crossing_stage_extra_m": 0.0,
+      "endpoint_r8a_extra_m": 1.413527752217063,
+      "endpoint_stage_extra_m": 0.0,
+      "g11_d1_extra_hits": 0.0,
+      "g5_d1_extra_hits": 0.0,
+      "g5_total_extra_hits": 0.0,
+      "grade_cross_extra_m": 0.0,
+      "grade_same_extra_m": 0.0,
+      "p3d29_cliff_form_extra_m": 113.11484268122842,
+      "p3d29_drainage_extra_m": 413190.6549592894,
+      "p3d29_locality_extra_m": 232.04063552595045,
+      "p3d29_tree_ground_extra_m": 0.0,
+      "plane_slope_box_extra_pp": 0.0,
+      "plane_slope_polygon_extra_pp": 0.0,
+      "plane_tolerance_extra_m": 0.0,
+      "r3_long_extra_hits": 0.0,
+      "r3_long_residual_m": 0.0,
+      "r3_quer_extra_hits": 0.0,
+      "r3_quer_residual_pp": 0.0,
+      "r3_wob_extra_hits": 0.0,
+      "r3_wob_residual_m": 0.0,
+      "r4_d1_extra_hits": 0.0,
+      "r5_d1_extra_hits": 0.0,
+      "r5_total_extra_hits": 0.0,
+      "r8b_d1_extra_hits": 0.0,
+      "route_profile_slope_extra_m": 0.0,
+      "safety_gitter_extra_m": 0.0,
+      "safety_quer_extra_pp": 0.0,
+      "safety_single_quer_extra_pp": 0.0,
+      "source_monotone_extra_m": 0.032049187644514934,
+      "variable_bounds_extra_m": 10.0
+    },
+    "primal_feasible": true,
+    "slack_values": {
+      "axis_tolerance_extra_m": 0.0,
+      "crossing_stage_extra_m": 0.0,
+      "endpoint_r8a_extra_m": 0.1413527752217063,
+      "endpoint_stage_extra_m": 0.0,
+      "g11_d1_extra_hits": 0.0,
+      "g5_d1_extra_hits": 0.0,
+      "g5_total_extra_hits": 0.0,
+      "grade_cross_extra_m": 0.0,
+      "grade_same_extra_m": 0.0,
+      "p3d29_cliff_form_extra_m": 2.2622968536245684,
+      "p3d29_drainage_extra_m": 5.802929336276508,
+      "p3d29_locality_extra_m": 4.640812710519009,
+      "p3d29_tree_ground_extra_m": 0.0,
+      "plane_slope_box_extra_pp": 0.0,
+      "plane_slope_polygon_extra_pp": 0.0,
+      "plane_tolerance_extra_m": 0.0,
+      "r3_long_extra_hits": 0.0,
+      "r3_long_residual_m": 0.0,
+      "r3_quer_extra_hits": 0.0,
+      "r3_quer_residual_pp": 0.0,
+      "r3_wob_extra_hits": 0.0,
+      "r3_wob_residual_m": 0.0,
+      "r4_d1_extra_hits": 0.0,
+      "r5_d1_extra_hits": 0.0,
+      "r5_total_extra_hits": 0.0,
+      "r8b_d1_extra_hits": 0.0,
+      "route_profile_slope_extra_m": 0.0,
+      "safety_gitter_extra_m": 0.0,
+      "safety_quer_extra_pp": 0.0,
+      "safety_single_quer_extra_pp": 0.0,
+      "source_monotone_extra_m": 0.032049187644514934,
+      "variable_bounds_extra_m": 10.0
+    },
+    "status": "Optimal"
+  },
+  "method": "serial greedy family deletion filter over p3d29 LP relaxation",
+  "positive_slack_groups": [
+    "endpoint_r8a",
+    "p3d29_cliff_form",
+    "p3d29_drainage",
+    "p3d29_locality",
+    "source_monotone",
+    "variable_bounds"
+  ],
+  "records": [
+    {
+      "enabled_groups": [
+        "p3d29_cliff_form",
+        "p3d29_drainage",
+        "p3d29_locality",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 8.881784197001252e-16,
+          "pair": {
+            "a_map": [
+              146.2647035860082,
+              6.691101323768216
+            ],
+            "b_map": [
+              146.03857927924145,
+              10.421612908192934
+            ],
+            "grade_limit_m": 2.018173613559738,
+            "height_delta_m": 2.018173613559739,
+            "pair_distance_m": 4.484830252354973,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 5.7,
+            "station_b_m": 11.4
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 3.159324669889512,
+          "variable": {
+            "height_m": 2.8671474217852926,
+            "kind": "route_height",
+            "lower_m": 6.026472091674805,
+            "map": [
+              154.92232676482638,
+              16.90827121791936
+            ],
+            "route": 11,
+            "station_m": 24.599999999999998,
+            "upper_m": 10.026472091674805
+          }
+        }
+      },
+      "hard_family": "endpoint_r8a",
+      "index": 1,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_01_endpoint_r8a.json",
+      "normalized_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 113.11484268122842,
+        "p3d29_drainage_extra_m": 428282.0461861682,
+        "p3d29_locality_extra_m": 232.04063552595045,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.010667943950636357,
+        "variable_bounds_extra_m": 10.0
+      },
+      "primal_feasible": true,
+      "removed_from_conflict_set": true,
+      "status": "Optimal"
+    },
+    {
+      "enabled_groups": [
+        "p3d29_drainage",
+        "p3d29_locality",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 2.7755575615628914e-16,
+          "pair": {
+            "a_map": [
+              144.85322216797562,
+              9.338179117825185
+            ],
+            "b_map": [
+              145.0282478227927,
+              9.685615622632259
+            ],
+            "grade_limit_m": 0.21007742414498382,
+            "height_delta_m": 0.2100774241449841,
+            "pair_distance_m": 0.46683872032218626,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 9.299999999999999,
+            "station_b_m": 9.9
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 1.550156183971474e-09
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 2.854245447622643,
+          "variable": {
+            "height_m": -2.485205822693215,
+            "kind": "route_height",
+            "lower_m": 0.3690396249294281,
+            "map": [
+              175.08557332141362,
+              25.697639252945574
+            ],
+            "route": 2,
+            "station_m": 58.8,
+            "upper_m": 0.3690396249294281
+          }
+        }
+      },
+      "hard_family": "p3d29_cliff_form",
+      "index": 2,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_02_p3d29_cliff_form.json",
+      "normalized_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 0.0,
+        "p3d29_drainage_extra_m": 631705.4770155044,
+        "p3d29_locality_extra_m": 56.113608274076476,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.010667943950636565,
+        "variable_bounds_extra_m": 10.0
+      },
+      "primal_feasible": true,
+      "removed_from_conflict_set": true,
+      "status": "Optimal"
+    },
+    {
+      "enabled_groups": [
+        "p3d29_locality",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "family_max_relaxation_locations": null,
+      "hard_family": "p3d29_drainage",
+      "index": 3,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_03_p3d29_drainage.json",
+      "normalized_slack_values": null,
+      "primal_feasible": false,
+      "removed_from_conflict_set": false,
+      "status": "Infeasible"
+    },
+    {
+      "enabled_groups": [
+        "p3d29_drainage",
+        "source_monotone",
+        "variable_bounds"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 4.440892098500626e-16,
+          "pair": {
+            "a_map": [
+              145.67277612029486,
+              7.792045177820531
+            ],
+            "b_map": [
+              146.2400803866151,
+              10.569590283920446
+            ],
+            "grade_limit_m": 1.5308396128094457,
+            "height_delta_m": 1.5308396128094461,
+            "pair_distance_m": 3.4018658062432126,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 7.199999999999999,
+            "station_b_m": 11.7
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 2.854245447622643,
+          "variable": {
+            "height_m": -2.485205822693215,
+            "kind": "route_height",
+            "lower_m": 0.3690396249294281,
+            "map": [
+              175.08557332141362,
+              25.697639252945574
+            ],
+            "route": 2,
+            "station_m": 58.8,
+            "upper_m": 0.3690396249294281
+          }
+        }
+      },
+      "hard_family": "p3d29_locality",
+      "index": 4,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_04_p3d29_locality.json",
+      "normalized_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 0.0,
+        "p3d29_drainage_extra_m": 669711.6581450275,
+        "p3d29_locality_extra_m": 0.0,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 10.0
+      },
+      "primal_feasible": true,
+      "removed_from_conflict_set": true,
+      "status": "Optimal"
+    },
+    {
+      "enabled_groups": [
+        "p3d29_drainage",
+        "variable_bounds"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 4.440892098500626e-16,
+          "pair": {
+            "a_map": [
+              145.67277612029486,
+              7.792045177820531
+            ],
+            "b_map": [
+              146.2400803866151,
+              10.569590283920446
+            ],
+            "grade_limit_m": 1.5308396128094457,
+            "height_delta_m": 1.5308396128094461,
+            "pair_distance_m": 3.4018658062432126,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 7.199999999999999,
+            "station_b_m": 11.7
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 2.854245447622643,
+          "variable": {
+            "height_m": -2.485205822693215,
+            "kind": "route_height",
+            "lower_m": 0.3690396249294281,
+            "map": [
+              175.08557332141362,
+              25.697639252945574
+            ],
+            "route": 2,
+            "station_m": 58.8,
+            "upper_m": 0.3690396249294281
+          }
+        }
+      },
+      "hard_family": "source_monotone",
+      "index": 5,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_05_source_monotone.json",
+      "normalized_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 0.0,
+        "p3d29_drainage_extra_m": 669711.6581450275,
+        "p3d29_locality_extra_m": 0.0,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 10.0
+      },
+      "primal_feasible": true,
+      "removed_from_conflict_set": true,
+      "status": "Optimal"
+    },
+    {
+      "enabled_groups": [
+        "p3d29_drainage"
+      ],
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 2.7755575615628914e-16,
+          "pair": {
+            "a_map": [
+              144.85322216797562,
+              9.338179117825185
+            ],
+            "b_map": [
+              145.0282478227927,
+              9.685615622632259
+            ],
+            "grade_limit_m": 0.21007742414498382,
+            "height_delta_m": 0.2100774241449841,
+            "pair_distance_m": 0.46683872032218626,
+            "route_a": 11,
+            "route_b": 11,
+            "station_a_m": 9.299999999999999,
+            "station_b_m": 9.9
+          }
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 0.0,
+          "variable": null
+        }
+      },
+      "hard_family": "variable_bounds",
+      "index": 6,
+      "model_json": "codex_jobs/tools/p3d29/results/p3d29_V3_lp_filter_06_variable_bounds.json",
+      "normalized_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 0.0,
+        "p3d29_drainage_extra_m": 758519.3537196884,
+        "p3d29_locality_extra_m": 0.0,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "primal_feasible": true,
+      "removed_from_conflict_set": true,
+      "status": "Optimal"
+    }
+  ],
+  "remaining_group_conflict": [
+    "p3d29_drainage"
+  ],
+  "scope": "LP relaxation and group-level deletion only; not an exact row IIS or integer IIS",
+  "source_relief": "/tmp/p3d22_v3_source.json.gz"
+}

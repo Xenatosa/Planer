@@ -2,7 +2,7 @@
 
 Stand 13.11.2026 · Worktree `/workspace/wt_dorfmap_p3d29` · Branch `art/dorfmap-p3d29` · Basis `origin/art/dorfmap-p3d28` @ `29cebf3` · Kosten **0 EUR**.
 
-`[S]` Modellcode und Prüfwerkzeuge sind vorbereitet; der p3d29-Machbarkeitssolve ist noch nicht gestartet. Dieser Zwischenbericht wird nach jedem abgeschlossenen Prüfeschritt aktualisiert.
+`[S]` Der p3d29-Machbarkeitssolve und der einmalige Drainage-L1-Fallback sind abgeschlossen; die offizielle Float32-Proberunde 1 steht als Nächstes an. Dieser Zwischenbericht wird nach jedem abgeschlossenen Prüfeschritt aktualisiert.
 
 Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer · `[R]` Modellbefund/abgeleitete Diagnose · `[A]` Annahme · `[F]` Freigabe.
 
@@ -20,9 +20,11 @@ Marker: `[S]` direkt gemessen oder unverändert ausgeführter Prüfer · `[R]` M
 
 ## 2. Machbarkeit
 
-`[S]` Noch nicht gemessen. Der geplante Ablauf ist ein serieller Hard-Solve mit maximal 600 s; bei Infeasibility folgt der LP-Gruppenfilter. Danach wird höchstens einmal nur die Abflussordnung als gewichtete L1-Summe (10.000 pro Meter und Kante) geöffnet, während alle übrigen Gruppen hart bleiben. Wenn auch dieser Solve keinen zulässigen Punkt liefert, wird mit Ort/Schlupf dokumentiert und ohne weitere Variante gestoppt.
+`[S]` Der serielle Hard-Solve endete mit HiGHS Status 8 (`Infeasible`), ohne zulässigen Primalpunkt. Der LP-Gruppenfilter fand bei 6 positiven Slackgruppen einen gruppenweisen Restkonflikt ausschließlich bei `p3d29_drainage`; die LP-Relaxation mit allen Gruppen offen war optimal. Der Filter ist ein gruppenweiser Relaxationsbefund, kein Zeilen-IIS oder Integer-IIS. [Filterbeleg](../../../../../codex_jobs/tools/p3d29/results/p3d29_V3_lp_group_filter.json)
 
-Belege werden unter `codex_jobs/tools/p3d29/results/` gespeichert.
+`[S]` Der einmalige Soft-Fallback öffnete nur die Abflusskanten-Slacks, mit 10.000 pro Meter und Kante im gewichteten L1-Ziel; alle anderen Gruppen blieben hart. HiGHS fand einen optimalen zulässigen Punkt (Status 7). Die Summe der Kantenabweichungen beträgt 78,456860 m über 5.579 Kanten; die größte Einzelabweichung beträgt 6,151269 m an Kind `128,0|36,5` → Nachfolger `127,5|36,0` (dort `eps=0`). Der gewählte Punkt erfüllt damit die Modellmachbarkeit mit weichem Abfluss, aber nicht die harte Abflussbaum-Bedingung. [Machbarkeitsbeleg](../../../../../codex_jobs/tools/p3d29/results/p3d29_V3_feasibility.json) · [Modellbeleg](../../../../../codex_jobs/tools/p3d29/results/p3d29_V3_round01_model.json)
+
+Belege liegen unter `codex_jobs/tools/p3d29/results/`.
 
 ## 3. Probezahlen je Runde
 
