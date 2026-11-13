@@ -653,10 +653,13 @@ def solve(
         "variable_bounds_extra_m": 10.0,
         "route_profile_slope_extra_m": 10.0,
         "source_monotone_extra_m": 10.0,
-        "p3d28_locality_extra_m": 0.5,
-        "p3d28_drainage_extra_m": 0.1,
-        "p3d28_cliff_form_extra_m": 0.5,
-        "p3d28_tree_ground_extra_m": 0.1,
+        # Diagnostic caps exceed the largest ±4 m surface bounds and keep
+        # the reported elastic minimum from being clipped by an arbitrary
+        # small cap. Official hard solves set these four slacks to exactly 0.
+        "p3d28_locality_extra_m": 10.0,
+        "p3d28_drainage_extra_m": 10.0,
+        "p3d28_cliff_form_extra_m": 10.0,
+        "p3d28_tree_ground_extra_m": 10.0,
     }
     for name, cap in slack_caps.items():
         upper[slack_indices[name]] = cap if slack_spec[name][0] in diagnostic_groups else 0.0
