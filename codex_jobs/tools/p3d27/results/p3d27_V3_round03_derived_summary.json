@@ -1,0 +1,108 @@
+{
+  "candidate_G5_components_D1": 62,
+  "candidate_G5_total_D1": [
+    129,
+    62
+  ],
+  "candidate_G6_D1": 0,
+  "candidate_G6_components_D1": 0,
+  "candidate_R5_components_D1": 161,
+  "candidate_R5_total_D1": [
+    187,
+    170
+  ],
+  "new_G5_cuts": 67,
+  "new_G6_cuts": 0,
+  "new_R4_cuts": 7,
+  "new_R5_cuts": 156,
+  "new_R5_spitze_cuts": 0,
+  "new_R8_gitter_cuts": 0,
+  "new_R9w_event_cuts": 0,
+  "out": "/workspace/wt_dorfmap_p3d27/codex_jobs/tools/p3d27/results/p3d27_V3_round03_derived_cuts.json",
+  "protected_G5": 2,
+  "protected_G6": 0,
+  "protected_R5": 5,
+  "unsupported_R5_without_saddle": [
+    {
+      "depth_m": 7.782143592834473,
+      "fill_m": 17.3157901763916,
+      "pixels": 1,
+      "point": [
+        157.5,
+        9.5
+      ]
+    },
+    {
+      "depth_m": 7.38151741027832,
+      "fill_m": 15.98797607421875,
+      "pixels": 3,
+      "point": [
+        163.5,
+        15.0
+      ]
+    },
+    {
+      "depth_m": 7.830998420715332,
+      "fill_m": 17.4776611328125,
+      "pixels": 1,
+      "point": [
+        140.0,
+        21.5
+      ]
+    },
+    {
+      "depth_m": 7.276386260986328,
+      "fill_m": 16.580312728881836,
+      "pixels": 1,
+      "point": [
+        141.5,
+        22.0
+      ]
+    },
+    {
+      "depth_m": 7.258711814880371,
+      "fill_m": 16.580312728881836,
+      "pixels": 3,
+      "point": [
+        141.0,
+        22.5
+      ]
+    },
+    {
+      "depth_m": 7.499294281005859,
+      "fill_m": 16.580312728881836,
+      "pixels": 2,
+      "point": [
+        142.5,
+        22.5
+      ]
+    },
+    {
+      "depth_m": 7.9881792068481445,
+      "fill_m": 16.912927627563477,
+      "pixels": 2,
+      "point": [
+        143.5,
+        22.5
+      ]
+    },
+    {
+      "depth_m": 7.3769121170043945,
+      "fill_m": 16.580312728881836,
+      "pixels": 4,
+      "point": [
+        142.0,
+        23.5
+      ]
+    },
+    {
+      "depth_m": 6.92379093170166,
+      "fill_m": 15.632122039794922,
+      "pixels": 1,
+      "point": [
+        146.0,
+        23.0
+      ]
+    }
+  ]
+}
