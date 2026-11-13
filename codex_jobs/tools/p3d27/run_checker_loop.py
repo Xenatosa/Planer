@@ -148,7 +148,6 @@ def hard_target_excess(probe: dict, solution: dict) -> dict:
     rules = probe.get("rules_by_rule", {})
     tiles = probe.get("rules_by_tile", {})
     d1 = tiles.get("D1", {})
-    r8_d1 = probe.get("R8_by_tile", {}).get("D1", {})
     r9_d1 = probe.get("R9_by_tile", {}).get("D1", {})
     crossing = probe.get("R8_crossing_gate", {})
     crossing_metrics = crossing.get("official_cluster", {})
@@ -184,9 +183,15 @@ def hard_target_excess(probe: dict, solution: dict) -> dict:
         "target:R8_crossing_gitter": max(0, float(crossing_metrics.get("gitter", 0.0)) - 0.020),
         "target:R8_crossing_quer": (0 if crossing_quer is None
                                     else max(0, float(crossing_quer.get("wert", 0.0)) - 3.0)),
+        "target:R3_laengs_D1": max(0, int(d1.get("R3_laengs_m", 0)) - 6),
+        "target:R3_quer_D1": max(0, int(d1.get("R3_quer_pct", 0)) - 7),
+        "target:R3_woelb_D1": max(0, int(d1.get("R3_woelb_m", 0)) - 7),
         "target:single_quer_over_20": max(0.0, float(solution.get("slack_values", {})
                                                      .get("safety_single_quer_extra_pp", 0.0)) - 0.5),
-        "target:R8a_D1_unpermitted": int(r8_d1.get("R8a_wegende", 0)),
+        "target:R8a_D1_unpermitted": sum(
+            1 for hit in probe.get("R8a_hits_by_tile", {}).get("D1", [])
+            if hit.get("ausnahme") != "R8a_ausnahme_rampe2_start"
+        ),
         "target:endpoint_stage_model_violation": max(0.0, endpoint_stage_violation),
         "target:D2_new_pruefe_regeln_hits": d2_new_hits,
         "target:D2_R8_R9_hits": d2_r8r9_hits,
