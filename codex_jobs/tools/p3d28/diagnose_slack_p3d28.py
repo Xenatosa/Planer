@@ -324,9 +324,11 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
         status=status_code,
         message=highs.modelStatusToString(model_status),
         x=np.asarray(solution.col_value, dtype=np.float64) if solution.value_valid else None,
+        row_value=np.asarray(solution.row_value, dtype=np.float64) if solution.value_valid else None,
         fun=float(info.objective_function_value),
         mip_dual_bound=float(info.mip_dual_bound),
         mip_gap=float(info.mip_gap),
+        max_primal_infeasibility=float(getattr(info, "max_primal_infeasibility", 0.0)),
     )
 
 
@@ -1635,6 +1637,11 @@ def solve(
             "maximum_row_violation": float(max(0.0, row_violation[worst_row])) if len(row_violation) else 0.0,
             "worst_row_index": worst_row if len(row_violation) else None,
             "worst_row_family": row_families[worst_row] if len(row_families) else None,
+            "solver_max_primal_infeasibility": float(result.max_primal_infeasibility),
+            "maximum_solver_matrix_activity_delta": (
+                float(np.max(np.abs(activity - result.row_value)))
+                if result.row_value is not None and len(activity) else None
+            ),
             "maximum_variable_bound_violation": float(bound_violation[worst_bound]) if len(bound_violation) else 0.0,
             "worst_variable_index": worst_bound if len(bound_violation) else None,
         }
