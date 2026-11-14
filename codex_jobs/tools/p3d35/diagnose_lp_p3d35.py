@@ -88,6 +88,9 @@ P3D33_VARIANTS = {"1": (25.0, 50.0), "2": (20.0, 55.0)}
 P3D33_PLATFORM_VARIANTS = {"1": 0.015, "2": 0.020}
 P3D33_CROSSING_ANCHOR = (152.5, 28.5)
 P3D33_RAMP2_START = (126.51, 31.62)
+# The inherited p3d34 IIS names rampe_11 stations with 2.4 m per raw path unit;
+# rampe_2's p3d33 physical window uses CELL_M=1.2 m per raw path unit.
+P3D35_PROFILE_STATION_SCALE_M = {2: CELL_M, 11: 2.4}
 P3D31_V3_REFERENCE = ROOT / "codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json"
 P3D35_POLICY = os.environ.get("P3D35_POLICY", "official")
 if P3D35_POLICY not in {"official", "p3d34"}:
@@ -671,7 +674,8 @@ def solve(
         # windows. Released samples receive the unchanged checker constraints
         # below; neighboring fixed samples close each interior seam with C1.
         lo, hi = v3_heights.copy(), v3_heights.copy()
-        station_m = station * CELL_M
+        station_scale_m = P3D35_PROFILE_STATION_SCALE_M.get(p["index"], CELL_M)
+        station_m = station * station_scale_m
         if p3d35_policy == "official" and p["index"] == 2:
             window_start_m, window_end_m = 0.0, 50.0
         elif p3d35_policy == "official" and p["index"] == 11:
@@ -708,6 +712,11 @@ def solve(
                 "variable_profile_samples_in_window": int(len(indices)),
                 "station_0_profile_sample_variable": bool(variable_with_policy[0]),
                 "policy": p3d35_policy,
+                "station_scale_m_per_path_unit": float(station_scale_m),
+                "station_scale_basis": (
+                    "p3d34 IIS row naming (route station * 2.4)"
+                    if p["index"] == 11 else "p3d33 physical window (route station * 1.2)"
+                ),
                 "outside_window_fixed_to_p3d31_v3": True,
             }
         p3d33_fixed_route_meta[f"rampe_{p['index']}"] = {
@@ -2815,7 +2824,9 @@ def solve(
         summary["routes"] = {
             f"rampe_{p['index']}": {
                 "station_map_units": p["station"].tolist(),
-                "station_m": (p["station"] * CELL_M).tolist(),
+                "station_m": (p["station"] * P3D35_PROFILE_STATION_SCALE_M.get(
+                    p["index"], CELL_M
+                )).tolist(),
                 "coords_map": p["coords"].tolist(),
                 "source_h_m": p["h0"].tolist(),
                 "solution_h_m": xsol[h_offsets[i]:h_offsets[i] + len(p["h0"])].tolist(),
