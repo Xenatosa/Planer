@@ -868,7 +868,7 @@ def solve(
     for cut_i, cut in enumerate(event_cuts):
         # p3d33 converts checker events to direct continuous inequalities.
         # It has no disjunctive selectors or hit-count indicator variables.
-        if cut["kind"] not in {"G5", "R4", "R5", "R8b", "G11", "G6", "R5sp", "R8G", "R9w", "FLOOR"}:
+        if cut["kind"] not in {"G5", "R4", "R5", "R8b", "G11", "G6", "R5sp", "R8G", "R9w", "FLOOR", "R3_SECTION"}:
             raise ValueError(f"Unbekannter p3d33-Lazy-Cut: {cut['kind']}")
     event_selector_count = next_event_column - nvars
     event_hit_indices: dict[int, int] = {}
@@ -965,6 +965,26 @@ def solve(
     integrality = np.zeros(nvars, dtype=np.uint8)
     for j in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
         lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
+    for cut in event_cuts:
+        if cut["kind"] != "R3_SECTION":
+            continue
+        route_number = int(cut["route"])
+        route = next((i for i, profile in enumerate(profiles)
+                      if int(profile["index"]) == route_number), None)
+        if route is None:
+            raise ValueError(f"R3_SECTION verweist auf unbekannte Rampe {route_number}")
+        section = int(cut["section"])
+        key = (route, section)
+        metric = str(cut["metric"])
+        selector_map = {
+            "laengs": binary_index,
+            "quer": quer_binary_index,
+            "woelb": wob_binary_index,
+        }
+        if metric not in selector_map or key not in selector_map[metric]:
+            raise ValueError(f"R3_SECTION verweist auf unbekannte D1-Gruppe: {cut}")
+        selector = selector_map[metric][key]
+        lower[selector] = upper[selector] = 0.0
     for j in drainage_choice_indices.values():
         lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
     flow_capacity = int(construction["drainage_candidate_meta"]["non_outlet_vertices"])
@@ -1422,6 +1442,10 @@ def solve(
     # Checker-triggered local LP cuts. Disjunctions are replaced by conservative
     # direct inequalities so the model passed to HiGHS remains a pure LP.
     for cut_i, cut in enumerate(event_cuts):
+        if cut["kind"] == "R3_SECTION":
+            # Checker-observed section cuts fix one relaxed LP selector to 0;
+            # its existing official R3 rows then become hard for that section.
+            continue
         current_family = "event_cut_" + cut["kind"]
         if cut["kind"] == "G5":
             point_row, point_fixed = route_field_row(*cut["point"])
@@ -2185,7 +2209,10 @@ def solve(
         summary["p3d35_profile_windows"] = p3d35_profile_windows
         summary["p3d35_profile_transitions"] = [
             {"route": int(profiles[route]["index"]),
-             "station_m": float(profiles[route]["station"][k] * CELL_M),
+             "station_m": float(profiles[route]["station"][k] *
+                                 P3D35_PROFILE_STATION_SCALE_M.get(
+                                     profiles[route]["index"], CELL_M
+                                 )),
              "profile_index": int(k)}
             for route, k in p3d35_profile_transitions
         ]
@@ -2472,7 +2499,10 @@ def solve(
     summary["p3d35_profile_windows"] = p3d35_profile_windows
     summary["p3d35_profile_transitions"] = [
         {"route": int(profiles[route]["index"]),
-         "station_m": float(profiles[route]["station"][k] * CELL_M),
+         "station_m": float(profiles[route]["station"][k] *
+                             P3D35_PROFILE_STATION_SCALE_M.get(
+                                 profiles[route]["index"], CELL_M
+                             )),
          "profile_index": int(k)}
         for route, k in p3d35_profile_transitions
     ]

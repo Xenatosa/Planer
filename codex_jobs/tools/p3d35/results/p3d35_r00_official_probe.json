@@ -1,0 +1,2961 @@
+{
+  "D1_height_sha256": "75405af352c9be641e276f1c5c7c334e104b6b694e9e1920c8584e17509441ce",
+  "D1_rules": {
+    "G11_objekt_schwebt_sinkt": 2,
+    "G5_beule_klippe": 1,
+    "G6_facette": 1,
+    "G7b_wandkontur_feld": 1,
+    "R1_blind": 2,
+    "R2_getrennt": 1,
+    "R3_laengs_m": 13,
+    "R3_quer_pct": 21,
+    "R3_woelb_m": 20,
+    "R5_loch": 8
+  },
+  "D2_height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "D2_new_rules_hits": [],
+  "D2_rules_bitwise_hit_records_equal_to_p3d17": true,
+  "G1_height_sha256": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
+  "R8_D1_hits": [
+    {
+      "art": "rampe_2_anfang",
+      "feld": "D1",
+      "regel": "R8_stufe",
+      "wert": 0.21,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "art": "rampe_11_anfang",
+      "feld": "D1",
+      "regel": "R8_stufe",
+      "wert": 0.67,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "art": "rampe_11_anfang",
+      "feld": "D1",
+      "regel": "R8_gitter",
+      "wert": 0.35,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "ausnahme": null,
+      "feld": "D1",
+      "limit_m": 0.1,
+      "regel": "R8a_wegende",
+      "weg": "rampe_11_anfang",
+      "wert": 0.1,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "ausnahme": null,
+      "feld": "D1",
+      "limit_m": 0.1,
+      "regel": "R8a_wegende",
+      "weg": "rampe_11_ende",
+      "wert": 0.1,
+      "x": 156.5,
+      "z": 37.5
+    }
+  ],
+  "R8_D2_hits": [],
+  "R8_by_rule": {
+    "R8_gitter": 9,
+    "R8_quer": 4,
+    "R8_stufe": 9,
+    "R8a_wegende": 22
+  },
+  "R8_by_tile": {
+    "B1": {
+      "R8a_wegende": 1
+    },
+    "C2": {
+      "R8a_wegende": 1
+    },
+    "C3": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "C4": {
+      "R8a_wegende": 2
+    },
+    "C5": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 3
+    },
+    "C6": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "D1": {
+      "R8_gitter": 1,
+      "R8_stufe": 2,
+      "R8a_wegende": 2
+    },
+    "D4": {
+      "R8a_wegende": 2
+    },
+    "D6": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "E1": {
+      "R8a_wegende": 1
+    },
+    "E6": {
+      "R8a_wegende": 1
+    },
+    "F1": {
+      "R8a_wegende": 1
+    },
+    "F6": {
+      "R8_gitter": 1
+    },
+    "G3": {
+      "R8_gitter": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "H4": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 1
+    },
+    "H5": {
+      "R8_gitter": 1,
+      "R8_quer": 1,
+      "R8_stufe": 1,
+      "R8a_wegende": 2
+    },
+    "H6": {
+      "R8a_wegende": 1
+    }
+  },
+  "R8_crossing_gate": {
+    "R8_quer_hit": null,
+    "R8_quer_pass_from_official_checker": true,
+    "model_center_unrounded_map": [
+      152.6292918620858,
+      28.353590994151514
+    ],
+    "official_cluster": {
+      "art": "rampe_2x11",
+      "feld": "D1",
+      "gitter": 0.02,
+      "stufe": 0.063,
+      "x": 152.6,
+      "z": 28.4
+    },
+    "requested_label_coordinate_map": [
+      152.5,
+      28.5
+    ]
+  },
+  "R8_total": 44,
+  "R8a_hits_by_tile": {
+    "D1": [
+      {
+        "ausnahme": null,
+        "feld": "D1",
+        "limit_m": 0.1,
+        "regel": "R8a_wegende",
+        "weg": "rampe_11_anfang",
+        "wert": 0.1,
+        "x": 148.5,
+        "z": 2.5
+      },
+      {
+        "ausnahme": null,
+        "feld": "D1",
+        "limit_m": 0.1,
+        "regel": "R8a_wegende",
+        "weg": "rampe_11_ende",
+        "wert": 0.1,
+        "x": 156.5,
+        "z": 37.5
+      }
+    ],
+    "D2": [],
+    "G1": []
+  },
+  "R9_D1_hits": [
+    {
+      "abstand_weg": 0.7,
+      "feld": "D1",
+      "regel": "R8b_delle",
+      "wert": 0.49,
+      "x": 146.0,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R9_saegezahn",
+      "wert": 115,
+      "x": 148.5,
+      "z": 5.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.17,
+      "x": 141.2,
+      "z": 0.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.24,
+      "x": 143.5,
+      "z": 0.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.27,
+      "x": 153.5,
+      "z": 0.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.13,
+      "x": 152.9,
+      "z": 2.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.4,
+      "x": 159.9,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.28,
+      "x": 152.5,
+      "z": 5.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.19,
+      "x": 149.2,
+      "z": 7.8
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.27,
+      "x": 142.8,
+      "z": 13.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.23,
+      "x": 167.8,
+      "z": 13.8
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.55,
+      "x": 136.8,
+      "z": 20.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.57,
+      "x": 164.4,
+      "z": 22.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.21,
+      "x": 164.0,
+      "z": 24.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.43,
+      "x": 149.3,
+      "z": 27.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.42,
+      "x": 139.5,
+      "z": 27.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.25,
+      "x": 156.7,
+      "z": 27.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.42,
+      "x": 162.6,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.18,
+      "x": 132.5,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.21,
+      "x": 128.5,
+      "z": 30.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.35,
+      "x": 145.2,
+      "z": 30.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.88,
+      "x": 134.3,
+      "z": 32.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.22,
+      "x": 163.5,
+      "z": 31.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.4,
+      "x": 155.0,
+      "z": 35.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.16,
+      "x": 147.8,
+      "z": 36.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.22,
+      "x": 159.5,
+      "z": 35.8
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.53,
+      "x": 135.8,
+      "z": 40.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.15,
+      "x": 154.6,
+      "z": 39.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R9w_wellen",
+      "wert": 0.15,
+      "x": 155.0,
+      "z": 40.8
+    }
+  ],
+  "R9_D2_hits": [],
+  "R9_by_rule": {
+    "R8b_delle": 23,
+    "R9_saegezahn": 34,
+    "R9w_wellen": 287
+  },
+  "R9_by_tile": {
+    "A1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 1
+    },
+    "A2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "A6": {
+      "R9w_wellen": 5
+    },
+    "A7": {
+      "R9w_wellen": 3
+    },
+    "B1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "B2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "B3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "B4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 11
+    },
+    "B5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "B6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "B7": {
+      "R9w_wellen": 1
+    },
+    "C1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 4
+    },
+    "C2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 3
+    },
+    "C3": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 17
+    },
+    "C4": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 13
+    },
+    "C5": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "C6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 18
+    },
+    "C7": {
+      "R9w_wellen": 3
+    },
+    "D1": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 27
+    },
+    "D3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 1
+    },
+    "D4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "D5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "D6": {
+      "R8b_delle": 2,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 9
+    },
+    "E1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 8
+    },
+    "E3": {
+      "R8b_delle": 12
+    },
+    "E4": {
+      "R8b_delle": 4,
+      "R9w_wellen": 4
+    },
+    "E5": {
+      "R9w_wellen": 1
+    },
+    "E6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 4
+    },
+    "F1": {
+      "R8b_delle": 1,
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "F2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 2
+    },
+    "F6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 7
+    },
+    "G1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 12
+    },
+    "G3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "G4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "G6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 7
+    },
+    "H1": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 6
+    },
+    "H2": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "H3": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 8
+    },
+    "H4": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 5
+    },
+    "H5": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 11
+    },
+    "H6": {
+      "R9_saegezahn": 1,
+      "R9w_wellen": 10
+    },
+    "H7": {
+      "R9w_wellen": 2
+    }
+  },
+  "R9_total": 344,
+  "candidate_kind": "p3d35 Float32 direct-transfer probe; no mesh build",
+  "gate_loch_json": "/tmp/gate_loch_p3d35_p3d35_r00_official_probe.json",
+  "geometry": "V3",
+  "hard_target_checks": {
+    "D1_R4_schlucht_eq_0": true,
+    "D2_no_new_pruefe_regeln_hits": true,
+    "G3_D1_le_1": true,
+    "G5_D1_le_2": true,
+    "G5_total_le_69": true,
+    "G6_D1_le_3": true,
+    "R3_D1_le_6_7_7": false,
+    "R5_loch_D1_le_5": false,
+    "R5_loch_total_le_22": false,
+    "R5_spitze_D1_eq_0": true,
+    "R8_D2_zero": true,
+    "R8b_D1_le_1": true,
+    "R9_D2_zero": true,
+    "R9w_total_le_280": false,
+    "per_rule_increase_vs_p3d17_le_5": false,
+    "rampe_2_start_R8a_exception_only": true
+  },
+  "hard_targets_pass": false,
+  "node_stdout": "{\"meshes\":9,\"dreiecke\":88728,\"offen_innen\":0,\"bb\":[126,0,294,86],\"punkte\":0}\n",
+  "outside_window_bitwise_equal_to_p3d17": true,
+  "outside_window_candidate_sha256": "996c1ce6f4c1b48f5a6e7cd74a270a87b541e1fc75f0b56884cf423a2e02daf7",
+  "outside_window_p3d17_sha256": "996c1ce6f4c1b48f5a6e7cd74a270a87b541e1fc75f0b56884cf423a2e02daf7",
+  "outside_window_vertex_count": 1415,
+  "probe_relief": "/tmp/relief_p3d35_p3d35_r00_official_probe.json.gz",
+  "profile_outside_each_window_bitwise_equal_to_p3d31_v3": true,
+  "profile_results": {
+    "rampe_11": {
+      "maximum_axis_to_float32_surface_delta_m": 0.02000042191036222,
+      "outside_window_bitwise_equal_to_p3d31_v3": true,
+      "profile_table": [
+        {
+          "height_new_m": 5.399203257782929,
+          "height_old_m": 5.399203257782929,
+          "second_difference_m_per_m2": -0.008501085671067915,
+          "slope_m_per_m": -0.13160657494261407,
+          "station_m": 65.39999999999999
+        },
+        {
+          "height_new_m": 5.318817141737712,
+          "height_old_m": 5.318817141737712,
+          "second_difference_m_per_m2": -0.014681100397246197,
+          "slope_m_per_m": -0.1390007822006991,
+          "station_m": 66.0
+        },
+        {
+          "height_new_m": 5.232402319142089,
+          "height_old_m": 5.232402319142089,
+          "second_difference_m_per_m2": -0.013984097340272367,
+          "slope_m_per_m": -0.14922389541930947,
+          "station_m": 66.6
+        },
+        {
+          "height_new_m": 5.139748467234541,
+          "height_old_m": 5.139748467234541,
+          "second_difference_m_per_m2": -0.004589281841459694,
+          "slope_m_per_m": -0.15578169900902594,
+          "station_m": 67.2
+        },
+        {
+          "height_new_m": 5.045464280331257,
+          "height_old_m": 5.045464280331257,
+          "second_difference_m_per_m2": -0.024364294542321557,
+          "slope_m_per_m": -0.15473103362906127,
+          "station_m": 67.8
+        },
+        {
+          "height_new_m": 4.95407122687967,
+          "height_old_m": 4.95407122687967,
+          "second_difference_m_per_m2": -0.0659391174620233,
+          "slope_m_per_m": -0.18501885245981153,
+          "station_m": 68.39999999999999
+        },
+        {
+          "height_new_m": 4.823441657379481,
+          "height_old_m": 4.823441657379481,
+          "second_difference_m_per_m2": 0.008403875203914946,
+          "slope_m_per_m": -0.2338579745834899,
+          "station_m": 69.0
+        },
+        {
+          "height_new_m": 4.673441657379481,
+          "height_old_m": 4.673441657379481,
+          "second_difference_m_per_m2": 0.11165797512771707,
+          "slope_m_per_m": -0.17493420221511613,
+          "station_m": 69.6
+        },
+        {
+          "height_new_m": 4.6135206147213434,
+          "height_old_m": 4.523441657379481,
+          "second_difference_m_per_m2": 0.08821098278313419,
+          "slope_m_per_m": -0.09986840443022871,
+          "station_m": 70.2
+        },
+        {
+          "height_new_m": 4.553599572063206,
+          "height_old_m": 4.404451949562375,
+          "second_difference_m_per_m2": 0.03578528006487499,
+          "slope_m_per_m": -0.06908102287535378,
+          "station_m": 70.8
+        },
+        {
+          "height_new_m": 4.53062338727092,
+          "height_old_m": 4.274776491680972,
+          "second_difference_m_per_m2": -0.00508488060030466,
+          "slope_m_per_m": -0.05692606835237912,
+          "station_m": 71.39999999999999
+        },
+        {
+          "height_new_m": 4.485288290040351,
+          "height_old_m": 4.191081249501517,
+          "second_difference_m_per_m2": -0.014177829502568469,
+          "slope_m_per_m": -0.07518287959572012,
+          "station_m": 72.0
+        },
+        {
+          "height_new_m": 4.440403931756055,
+          "height_old_m": 4.137135850302142,
+          "second_difference_m_per_m2": 0.0027928602464532895,
+          "slope_m_per_m": -0.07393946375546179,
+          "station_m": 72.6
+        },
+        {
+          "height_new_m": 4.396560933533796,
+          "height_old_m": 4.113859811063,
+          "second_difference_m_per_m2": 0.003941962731399316,
+          "slope_m_per_m": -0.07183144729997615,
+          "station_m": 73.2
+        },
+        {
+          "height_new_m": 4.354206194996084,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.014958217025390498,
+          "slope_m_per_m": -0.06920910847778261,
+          "station_m": 73.8
+        },
+        {
+          "height_new_m": 4.313510003360458,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.019114376790148525,
+          "slope_m_per_m": -0.053881586869507725,
+          "station_m": 74.39999999999999
+        },
+        {
+          "height_new_m": 4.289548290752675,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": -0.013263180196986836,
+          "slope_m_per_m": -0.04627185632960451,
+          "station_m": 75.0
+        },
+        {
+          "height_new_m": 4.257983775764932,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": -0.04896383018575352,
+          "slope_m_per_m": -0.06979740310589122,
+          "station_m": 75.6
+        },
+        {
+          "height_new_m": 4.205791407025606,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": -0.05217630171985373,
+          "slope_m_per_m": -0.10502845255250914,
+          "station_m": 76.2
+        },
+        {
+          "height_new_m": 4.131949632701921,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": -0.01127293576165636,
+          "slope_m_per_m": -0.132408965169716,
+          "station_m": 76.8
+        },
+        {
+          "height_new_m": 4.046900648821948,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.0706059524471083,
+          "slope_m_per_m": -0.11855597546649665,
+          "station_m": 77.39999999999999
+        },
+        {
+          "height_new_m": 3.989682462142125,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.09879664622207986,
+          "slope_m_per_m": -0.04768182223318451,
+          "station_m": 78.0
+        },
+        {
+          "height_new_m": 3.989682462142125,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.03973485186098794,
+          "slope_m_per_m": 0.0,
+          "station_m": 78.6
+        },
+        {
+          "height_new_m": 3.989682462142125,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 79.2
+        },
+        {
+          "height_new_m": 3.989682462142125,
+          "height_old_m": 4.100059561569326,
+          "second_difference_m_per_m2": -0.0008165666822424001,
+          "slope_m_per_m": 0.0,
+          "station_m": 79.8
+        },
+        {
+          "height_new_m": 3.989682462142125,
+          "height_old_m": 4.092111430109849,
+          "second_difference_m_per_m2": -0.0037098872461193673,
+          "slope_m_per_m": -0.0009798800186908707,
+          "station_m": 80.39999999999999
+        },
+        {
+          "height_new_m": 3.988506606119696,
+          "height_old_m": 4.083911259334208,
+          "second_difference_m_per_m2": -0.004970074445471676,
+          "slope_m_per_m": -0.0044518646953433105,
+          "station_m": 81.0
+        },
+        {
+          "height_new_m": 3.9843402245077133,
+          "height_old_m": 4.080260522435295,
+          "second_difference_m_per_m2": -0.002076753881626913,
+          "slope_m_per_m": -0.006943969353256918,
+          "station_m": 81.6
+        },
+        {
+          "height_new_m": 3.980173842895788,
+          "height_old_m": 4.075349102810443,
+          "second_difference_m_per_m2": -7.919619821050716e-14,
+          "slope_m_per_m": -0.006943969353295554,
+          "station_m": 82.2
+        },
+        {
+          "height_new_m": 3.9760074612837584,
+          "height_old_m": 4.0726508755664454,
+          "second_difference_m_per_m2": 5.8610558488023795e-06,
+          "slope_m_per_m": -0.006943969353351953,
+          "station_m": 82.8
+        },
+        {
+          "height_new_m": 3.9718410796717656,
+          "height_old_m": 4.075321253968727,
+          "second_difference_m_per_m2": 1.9146161539159053e-05,
+          "slope_m_per_m": -0.00693693608627699,
+          "station_m": 83.39999999999999
+        },
+        {
+          "height_new_m": 3.967683137980226,
+          "height_old_m": 4.0674322781422685,
+          "second_difference_m_per_m2": 2.0709155457894653e-05,
+          "slope_m_per_m": -0.006920993959504962,
+          "station_m": 84.0
+        },
+        {
+          "height_new_m": 3.9635358869203596,
+          "height_old_m": 4.054986917290575,
+          "second_difference_m_per_m2": 4.033615096377119e-06,
+          "slope_m_per_m": -0.006912085099727516,
+          "station_m": 84.6
+        },
+        {
+          "height_new_m": 3.9593886358605532,
+          "height_old_m": 4.050919169890949,
+          "second_difference_m_per_m2": -1.6675540412218297e-05,
+          "slope_m_per_m": -0.006916153621389309,
+          "station_m": 85.2
+        },
+        {
+          "height_new_m": 3.955236502574692,
+          "height_old_m": 4.050919169890949,
+          "second_difference_m_per_m2": -2.317977659630887e-05,
+          "slope_m_per_m": -0.006932095748222178,
+          "station_m": 85.8
+        },
+        {
+          "height_new_m": 3.9510701209626866,
+          "height_old_m": 4.049385680409543,
+          "second_difference_m_per_m2": -0.006377364726063262,
+          "slope_m_per_m": -0.00694396935330488,
+          "station_m": 86.39999999999999
+        },
+        {
+          "height_new_m": 3.9469037393507262,
+          "height_old_m": 4.045132052210562,
+          "second_difference_m_per_m2": -0.03381120644045282,
+          "slope_m_per_m": -0.014584933419498292,
+          "station_m": 87.0
+        },
+        {
+          "height_new_m": 3.9335682008592885,
+          "height_old_m": 4.031384103673799,
+          "second_difference_m_per_m2": -0.06396912816151476,
+          "slope_m_per_m": -0.04751741708184776,
+          "station_m": 87.6
+        },
+        {
+          "height_new_m": 3.8898828388525084,
+          "height_old_m": 3.9578791943002107,
+          "second_difference_m_per_m2": -0.06545757026137433,
+          "slope_m_per_m": -0.09134788721331644,
+          "station_m": 88.2
+        },
+        {
+          "height_new_m": 3.8239507362033094,
+          "height_old_m": 3.8589843945272104,
+          "second_difference_m_per_m2": -0.042315458354803576,
+          "slope_m_per_m": -0.12606650139549735,
+          "station_m": 88.8
+        },
+        {
+          "height_new_m": 3.738603037177913,
+          "height_old_m": 3.7600895947542083,
+          "second_difference_m_per_m2": -0.013283506700280015,
+          "slope_m_per_m": -0.14212643723908025,
+          "station_m": 89.39999999999999
+        },
+        {
+          "height_new_m": 3.653399011516413,
+          "height_old_m": 3.661331619487306,
+          "second_difference_m_per_m2": -0.0027218642993495357,
+          "slope_m_per_m": -0.14200670943583305,
+          "station_m": 90.0
+        },
+        {
+          "height_new_m": 3.568194985854913,
+          "height_old_m": 3.568194985854913,
+          "second_difference_m_per_m2": -0.010200268708966273,
+          "slope_m_per_m": -0.14539267439829962,
+          "station_m": 90.6
+        },
+        {
+          "height_new_m": 3.478927802238453,
+          "height_old_m": 3.478927802238453,
+          "second_difference_m_per_m2": -0.021943861224201902,
+          "slope_m_per_m": -0.15424703188659272,
+          "station_m": 91.2
+        },
+        {
+          "height_new_m": 3.383098547591001,
+          "height_old_m": 3.383098547591001,
+          "second_difference_m_per_m2": -0.040083069186887726,
+          "slope_m_per_m": -0.17172530786734175,
+          "station_m": 91.8
+        },
+        {
+          "height_new_m": 3.272857432797645,
+          "height_old_m": 3.272857432797645,
+          "second_difference_m_per_m2": -0.05312817615198806,
+          "slope_m_per_m": -0.20234671491085754,
+          "station_m": 92.39999999999999
+        },
+        {
+          "height_new_m": 3.140282489697971,
+          "height_old_m": 3.140282489697971,
+          "second_difference_m_per_m2": -0.038333196302062306,
+          "slope_m_per_m": -0.23547911924972764,
+          "station_m": 93.0
+        },
+        {
+          "height_new_m": 2.990282489697971,
+          "height_old_m": 2.990282489697971,
+          "second_difference_m_per_m2": 0.028221206753631628,
+          "slope_m_per_m": -0.24834655047333287,
+          "station_m": 93.6
+        },
+        {
+          "height_new_m": 2.842266629129971,
+          "height_old_m": 2.842266629129971,
+          "second_difference_m_per_m2": 0.0698138454484365,
+          "slope_m_per_m": -0.2016136711453682,
+          "station_m": 94.2
+        },
+        {
+          "height_new_m": 2.748346084323528,
+          "height_old_m": 2.748346084323528,
+          "second_difference_m_per_m2": 0.058827247372931046,
+          "slope_m_per_m": -0.16456993593520863,
+          "station_m": 94.8
+        }
+      ],
+      "profile_table_station_range_m": [
+        65.0,
+        95.0
+      ],
+      "transitions": [
+        {
+          "C0_height_continuous": true,
+          "C1_pass": true,
+          "height_m": 4.6135206147213434,
+          "height_old_m": 4.523441657379481,
+          "official_R3_wob_m": 0.08000011951488073,
+          "profile_index": 117,
+          "second_difference_m_per_m2": 0.0,
+          "slope_delta_m_per_m": -2.373101715136272e-15,
+          "slope_left_m_per_m": -0.09986840443022788,
+          "slope_right_m_per_m": -0.09986840443023025,
+          "station_m": 70.2
+        },
+        {
+          "C0_height_continuous": true,
+          "C1_pass": true,
+          "height_m": 3.653399011516413,
+          "height_old_m": 3.661331619487306,
+          "official_R3_wob_m": 0.07999993443917885,
+          "profile_index": 150,
+          "second_difference_m_per_m2": 0.0,
+          "slope_delta_m_per_m": -3.3584246494910985e-15,
+          "slope_left_m_per_m": -0.14200670943583146,
+          "slope_right_m_per_m": -0.14200670943583482,
+          "station_m": 90.0
+        }
+      ],
+      "variable_samples": 34,
+      "window_m": [
+        70.0,
+        90.0
+      ]
+    },
+    "rampe_2": {
+      "maximum_axis_to_float32_surface_delta_m": 1.4602055678680321,
+      "outside_window_bitwise_equal_to_p3d31_v3": true,
+      "profile_table": [
+        {
+          "height_new_m": 12.469809532165527,
+          "height_old_m": 12.469809532165527,
+          "second_difference_m_per_m2": -0.00047153896755640823,
+          "slope_m_per_m": -0.07218043009440105,
+          "station_m": 0.0
+        },
+        {
+          "height_new_m": 12.448155403137207,
+          "height_old_m": 12.448156356811523,
+          "second_difference_m_per_m2": -0.009542041354703282,
+          "slope_m_per_m": -0.07232189178466797,
+          "station_m": 0.3
+        },
+        {
+          "height_new_m": 12.426416397094727,
+          "height_old_m": 12.426416397094727,
+          "second_difference_m_per_m2": -0.01848008897569052,
+          "slope_m_per_m": -0.07790565490722301,
+          "station_m": 0.6
+        },
+        {
+          "height_new_m": 12.401412010192871,
+          "height_old_m": 12.401412010192871,
+          "second_difference_m_per_m2": -0.01867877112495367,
+          "slope_m_per_m": -0.08340994517008227,
+          "station_m": 0.8999999999999999
+        },
+        {
+          "height_new_m": 12.376370429992676,
+          "height_old_m": 12.376370429992676,
+          "second_difference_m_per_m2": -0.01890659332275388,
+          "slope_m_per_m": -0.0891129175821952,
+          "station_m": 1.2
+        },
+        {
+          "height_new_m": 12.347944259643555,
+          "height_old_m": 12.347944259643555,
+          "second_difference_m_per_m2": -0.018874804178879656,
+          "slope_m_per_m": -0.09475390116373461,
+          "station_m": 1.5
+        },
+        {
+          "height_new_m": 12.319518089294434,
+          "height_old_m": 12.319518089294434,
+          "second_difference_m_per_m2": -0.018978118896484347,
+          "slope_m_per_m": -0.10043780008952297,
+          "station_m": 1.7999999999999998
+        },
+        {
+          "height_new_m": 12.287681579589844,
+          "height_old_m": 12.287681579589844,
+          "second_difference_m_per_m2": 0.07892979515924393,
+          "slope_m_per_m": -0.10614077250162524,
+          "station_m": 2.1
+        },
+        {
+          "height_new_m": 12.255833625793457,
+          "height_old_m": 12.255833625793457,
+          "second_difference_m_per_m2": 0.17690128750270293,
+          "slope_m_per_m": -0.05307992299397668,
+          "station_m": 2.4
+        },
+        {
+          "height_new_m": 12.255833625793457,
+          "height_old_m": 12.255833625793457,
+          "second_difference_m_per_m2": 0.05603852423669544,
+          "slope_m_per_m": -3.552713678800501e-15,
+          "station_m": 2.6999999999999997
+        },
+        {
+          "height_new_m": 12.255833625793457,
+          "height_old_m": 12.255833625793457,
+          "second_difference_m_per_m2": -0.07423061085123805,
+          "slope_m_per_m": -0.019456808451959517,
+          "station_m": 3.0
+        },
+        {
+          "height_new_m": 12.244159540722281,
+          "height_old_m": 12.244159540722281,
+          "second_difference_m_per_m2": -0.09434574363160908,
+          "slope_m_per_m": -0.044538366510746386,
+          "station_m": 3.3
+        },
+        {
+          "height_new_m": 12.22911060588701,
+          "height_old_m": 12.22911060588701,
+          "second_difference_m_per_m2": -0.09758250228243169,
+          "slope_m_per_m": -0.07606425463092492,
+          "station_m": 3.5999999999999996
+        },
+        {
+          "height_new_m": 12.198520987943725,
+          "height_old_m": 12.198520987943725,
+          "second_difference_m_per_m2": -0.05648815000037402,
+          "slope_m_per_m": -0.10308786788020541,
+          "station_m": 3.9
+        },
+        {
+          "height_new_m": 12.167257885158888,
+          "height_old_m": 12.167257885158888,
+          "second_difference_m_per_m2": -0.02101197862253676,
+          "slope_m_per_m": -0.10995714463114936,
+          "station_m": 4.2
+        },
+        {
+          "height_new_m": 12.132546701165035,
+          "height_old_m": 12.132546701165035,
+          "second_difference_m_per_m2": -0.020691311025586884,
+          "slope_m_per_m": -0.11569505505372746,
+          "station_m": 4.5
+        },
+        {
+          "height_new_m": 12.097840852126652,
+          "height_old_m": 12.097840852126652,
+          "second_difference_m_per_m2": -0.022591835083467515,
+          "slope_m_per_m": -0.12237193124650148,
+          "station_m": 4.8
+        },
+        {
+          "height_new_m": 12.059123542417133,
+          "height_old_m": 12.059123542417133,
+          "second_difference_m_per_m2": -0.023331100026400264,
+          "slope_m_per_m": -0.12925015610380797,
+          "station_m": 5.1
+        },
+        {
+          "height_new_m": 12.020290758464368,
+          "height_old_m": 12.020290758464368,
+          "second_difference_m_per_m2": -0.02390314777558797,
+          "slope_m_per_m": -0.13637059126234163,
+          "station_m": 5.3999999999999995
+        },
+        {
+          "height_new_m": 11.977301187659728,
+          "height_old_m": 11.977301187659728,
+          "second_difference_m_per_m2": -0.02475775782108036,
+          "slope_m_per_m": -0.14359204476916076,
+          "station_m": 5.7
+        },
+        {
+          "height_new_m": 11.934135531602873,
+          "height_old_m": 11.934135531602873,
+          "second_difference_m_per_m2": -0.02486111070243288,
+          "slope_m_per_m": -0.15122524595498987,
+          "station_m": 6.0
+        },
+        {
+          "height_new_m": 11.886566040086734,
+          "height_old_m": 11.886566040086734,
+          "second_difference_m_per_m2": -0.02403497817393091,
+          "slope_m_per_m": -0.1585087111906205,
+          "station_m": 6.3
+        },
+        {
+          "height_new_m": 11.839030304888501,
+          "height_old_m": 11.839030304888501,
+          "second_difference_m_per_m2": -0.0254709232664041,
+          "slope_m_per_m": -0.16564623285934843,
+          "station_m": 6.6
+        },
+        {
+          "height_new_m": 11.787178300371126,
+          "height_old_m": 11.787178300371126,
+          "second_difference_m_per_m2": -0.026308944834928183,
+          "slope_m_per_m": -0.17379126515046295,
+          "station_m": 6.8999999999999995
+        },
+        {
+          "height_new_m": 11.734755545798222,
+          "height_old_m": 11.734755545798222,
+          "second_difference_m_per_m2": -0.025800215518601732,
+          "slope_m_per_m": -0.18143159976030532,
+          "station_m": 7.199999999999999
+        },
+        {
+          "height_new_m": 11.67831934051494,
+          "height_old_m": 11.67831934051494,
+          "second_difference_m_per_m2": -0.024196598229225375,
+          "slope_m_per_m": -0.189271394461624,
+          "station_m": 7.5
+        },
+        {
+          "height_new_m": 11.62119270912125,
+          "height_old_m": 11.62119270912125,
+          "second_difference_m_per_m2": -0.025942606566129456,
+          "slope_m_per_m": -0.1959495586978406,
+          "station_m": 7.8
+        },
+        {
+          "height_new_m": 11.560749605296236,
+          "height_old_m": 11.560749605296236,
+          "second_difference_m_per_m2": -0.030229395337032117,
+          "slope_m_per_m": -0.20483695840130167,
+          "station_m": 8.1
+        },
+        {
+          "height_new_m": 11.498290534080466,
+          "height_old_m": 11.498290534080466,
+          "second_difference_m_per_m2": -0.02598193073698246,
+          "slope_m_per_m": -0.21408719590005987,
+          "station_m": 8.4
+        },
+        {
+          "height_new_m": 11.432297287756198,
+          "height_old_m": 11.432297287756198,
+          "second_difference_m_per_m2": -0.022794787183274823,
+          "slope_m_per_m": -0.22042611684349112,
+          "station_m": 8.7
+        },
+        {
+          "height_new_m": 11.366034863974374,
+          "height_old_m": 11.366034863974374,
+          "second_difference_m_per_m2": -0.025977082619862868,
+          "slope_m_per_m": -0.22776406821002482,
+          "station_m": 9.0
+        },
+        {
+          "height_new_m": 11.29563884683018,
+          "height_old_m": 11.29563884683018,
+          "second_difference_m_per_m2": -0.026707844076785336,
+          "slope_m_per_m": -0.2360123664154088,
+          "station_m": 9.299999999999999
+        },
+        {
+          "height_new_m": 11.22442744412513,
+          "height_old_m": 11.22442744412513,
+          "second_difference_m_per_m2": -0.02596236372265054,
+          "slope_m_per_m": -0.24378877465609605,
+          "station_m": 9.6
+        },
+        {
+          "height_new_m": 11.149365582036522,
+          "height_old_m": 11.149365582036522,
+          "second_difference_m_per_m2": -0.025917771629278885,
+          "slope_m_per_m": -0.25158978464899917,
+          "station_m": 9.9
+        },
+        {
+          "height_new_m": 11.073473573335727,
+          "height_old_m": 11.073473573335727,
+          "second_difference_m_per_m2": -0.025952703989382486,
+          "slope_m_per_m": -0.2593394376336633,
+          "station_m": 10.2
+        },
+        {
+          "height_new_m": 10.993761919456324,
+          "height_old_m": 10.991237217143228,
+          "second_difference_m_per_m2": -0.02500905435731232,
+          "slope_m_per_m": -0.2671614070426287,
+          "station_m": 10.5
+        },
+        {
+          "height_new_m": 10.913176729110148,
+          "height_old_m": 10.907963082703827,
+          "second_difference_m_per_m2": -0.025955158052794247,
+          "slope_m_per_m": -0.27434487024805065,
+          "station_m": 10.799999999999999
+        },
+        {
+          "height_new_m": 10.829154997307494,
+          "height_old_m": 10.820649575215285,
+          "second_difference_m_per_m2": -0.027531633114925513,
+          "slope_m_per_m": -0.28273450187430527,
+          "station_m": 11.1
+        },
+        {
+          "height_new_m": 10.743536027985567,
+          "height_old_m": 10.732511796552911,
+          "second_difference_m_per_m2": -0.02597103481547225,
+          "slope_m_per_m": -0.290863850117006,
+          "station_m": 11.4
+        },
+        {
+          "height_new_m": 10.654636687237291,
+          "height_old_m": 10.63916518625966,
+          "second_difference_m_per_m2": -0.025194469142354736,
+          "slope_m_per_m": -0.29831712276358857,
+          "station_m": 11.7
+        },
+        {
+          "height_new_m": 10.564545754327415,
+          "height_old_m": 10.543778611305441,
+          "second_difference_m_per_m2": -0.02600189462472835,
+          "slope_m_per_m": -0.3059805316024189,
+          "station_m": 12.0
+        },
+        {
+          "height_new_m": 10.471048368275838,
+          "height_old_m": 10.442234340621003,
+          "second_difference_m_per_m2": -0.026099187229267073,
+          "slope_m_per_m": -0.31391825953842556,
+          "station_m": 12.299999999999999
+        },
+        {
+          "height_new_m": 10.376194798604363,
+          "height_old_m": 10.339087409750233,
+          "second_difference_m_per_m2": -0.026039088877608862,
+          "slope_m_per_m": -0.32164004393997914,
+          "station_m": 12.6
+        },
+        {
+          "height_new_m": 10.27806434191185,
+          "height_old_m": 10.242306364624813,
+          "second_difference_m_per_m2": -0.02833961963109033,
+          "slope_m_per_m": -0.3295417128649909,
+          "station_m": 12.9
+        },
+        {
+          "height_new_m": 10.178469770885366,
+          "height_old_m": 10.146814455754791,
+          "second_difference_m_per_m2": -0.026049610827652003,
+          "slope_m_per_m": -0.33864381571863333,
+          "station_m": 13.2
+        },
+        {
+          "height_new_m": 10.07487805248067,
+          "height_old_m": 10.041532480104907,
+          "second_difference_m_per_m2": -0.020739595452538562,
+          "slope_m_per_m": -0.3451714793615821,
+          "station_m": 13.5
+        },
+        {
+          "height_new_m": 9.971366883268416,
+          "height_old_m": 9.93383750929893,
+          "second_difference_m_per_m2": -0.025971719314003883,
+          "slope_m_per_m": -0.35108757299015636,
+          "station_m": 13.799999999999999
+        },
+        {
+          "height_new_m": 9.86422550868658,
+          "height_old_m": 9.822822480484687,
+          "second_difference_m_per_m2": -0.030181937796959657,
+          "slope_m_per_m": -0.36075451094998456,
+          "station_m": 14.1
+        },
+        {
+          "height_new_m": 9.754914176698424,
+          "height_old_m": 9.710627667752306,
+          "second_difference_m_per_m2": -0.02568144441021636,
+          "slope_m_per_m": -0.3691967356683321,
+          "station_m": 14.399999999999999
+        },
+        {
+          "height_new_m": 9.642707467285584,
+          "height_old_m": 9.595001636808055,
+          "second_difference_m_per_m2": -0.023841065800752848,
+          "slope_m_per_m": -0.3761633775961144,
+          "station_m": 14.7
+        },
+        {
+          "height_new_m": 9.529216150140755,
+          "height_old_m": 9.478291941581665,
+          "second_difference_m_per_m2": -0.025015413595867453,
+          "slope_m_per_m": -0.3835013751487839,
+          "station_m": 15.0
+        },
+        {
+          "height_new_m": 9.412606642196312,
+          "height_old_m": 9.357597381944029,
+          "second_difference_m_per_m2": -0.023803589971977956,
+          "slope_m_per_m": -0.39117262575363476,
+          "station_m": 15.299999999999999
+        },
+        {
+          "height_new_m": 9.294512574688575,
+          "height_old_m": 9.235618918375543,
+          "second_difference_m_per_m2": -0.023625848828509488,
+          "slope_m_per_m": -0.3977835291319707,
+          "station_m": 15.6
+        },
+        {
+          "height_new_m": 9.173936524717128,
+          "height_old_m": 9.105719309473079,
+          "second_difference_m_per_m2": -0.02505407965103379,
+          "slope_m_per_m": -0.4053481350507404,
+          "station_m": 15.899999999999999
+        },
+        {
+          "height_new_m": 9.051303693658133,
+          "height_old_m": 8.973413918449213,
+          "second_difference_m_per_m2": -0.021509335212748226,
+          "slope_m_per_m": -0.412815976922591,
+          "station_m": 16.2
+        },
+        {
+          "height_new_m": 8.926246938563573,
+          "height_old_m": 8.839964059921131,
+          "second_difference_m_per_m2": -0.017319301021968103,
+          "slope_m_per_m": -0.41825373617838935,
+          "station_m": 16.5
+        },
+        {
+          "height_new_m": 8.800351451951098,
+          "height_old_m": 8.706290094988013,
+          "second_difference_m_per_m2": -0.066391146196349,
+          "slope_m_per_m": -0.4232075575357719,
+          "station_m": 16.8
+        },
+        {
+          "height_new_m": 8.672322404042111,
+          "height_old_m": 8.57189025910241,
+          "second_difference_m_per_m2": -0.11916519974241147,
+          "slope_m_per_m": -0.4580884238961982,
+          "station_m": 17.099999999999998
+        },
+        {
+          "height_new_m": 8.52549839761338,
+          "height_old_m": 8.437760599664891,
+          "second_difference_m_per_m2": -0.06985262683966953,
+          "slope_m_per_m": -0.49470667738121854,
+          "station_m": 17.4
+        },
+        {
+          "height_new_m": 8.375498397613379,
+          "height_old_m": 8.297050383229566,
+          "second_difference_m_per_m2": -0.008822204364635766,
+          "slope_m_per_m": -0.5,
+          "station_m": 17.7
+        },
+        {
+          "height_new_m": 8.225498397613379,
+          "height_old_m": 8.15348400197799,
+          "second_difference_m_per_m2": -2.9976021664879227e-15,
+          "slope_m_per_m": -0.5,
+          "station_m": 18.0
+        },
+        {
+          "height_new_m": 8.075498397613378,
+          "height_old_m": 8.00545457800946,
+          "second_difference_m_per_m2": -5.88418203051333e-15,
+          "slope_m_per_m": -0.5000000000000018,
+          "station_m": 18.3
+        },
+        {
+          "height_new_m": 7.925498397613378,
+          "height_old_m": 7.855454578009459,
+          "second_difference_m_per_m2": 2.9976021664879227e-15,
+          "slope_m_per_m": -0.5000000000000036,
+          "station_m": 18.599999999999998
+        },
+        {
+          "height_new_m": 7.775498397613378,
+          "height_old_m": 7.707974919511376,
+          "second_difference_m_per_m2": 5.88418203051333e-15,
+          "slope_m_per_m": -0.5,
+          "station_m": 18.9
+        },
+        {
+          "height_new_m": 7.625498397613377,
+          "height_old_m": 7.560441400892327,
+          "second_difference_m_per_m2": 0.0017146100002118914,
+          "slope_m_per_m": -0.5,
+          "station_m": 19.2
+        },
+        {
+          "height_new_m": 7.475498397613377,
+          "height_old_m": 7.419894411304656,
+          "second_difference_m_per_m2": 0.028716328051681006,
+          "slope_m_per_m": -0.49897123399987287,
+          "station_m": 19.5
+        },
+        {
+          "height_new_m": 7.326115657213453,
+          "height_old_m": 7.281330351505048,
+          "second_difference_m_per_m2": 0.06243991443869401,
+          "slope_m_per_m": -0.48277020316899133,
+          "station_m": 19.8
+        },
+        {
+          "height_new_m": 7.185836275711983,
+          "height_old_m": 7.151309993755758,
+          "second_difference_m_per_m2": 0.058811246758565194,
+          "slope_m_per_m": -0.46150728533665664,
+          "station_m": 20.099999999999998
+        },
+        {
+          "height_new_m": 7.04921128601146,
+          "height_old_m": 7.024110349428016,
+          "second_difference_m_per_m2": 0.04436494656316303,
+          "slope_m_per_m": -0.44748345511385246,
+          "station_m": 20.4
+        },
+        {
+          "height_new_m": 6.91734620264367,
+          "height_old_m": 6.8997456441825165,
+          "second_difference_m_per_m2": 0.03565772482089291,
+          "slope_m_per_m": -0.4348883173987588,
+          "station_m": 20.7
+        },
+        {
+          "height_new_m": 6.788278295572204,
+          "height_old_m": 6.778757489858245,
+          "second_difference_m_per_m2": 0.023635217607556713,
+          "slope_m_per_m": -0.42608882022131667,
+          "station_m": 21.0
+        },
+        {
+          "height_new_m": 6.66169291051088,
+          "height_old_m": 6.6599222692545315,
+          "second_difference_m_per_m2": 0.019388715394604517,
+          "slope_m_per_m": -0.4207071868342247,
+          "station_m": 21.3
+        },
+        {
+          "height_new_m": 6.53585398347167,
+          "height_old_m": 6.540495803118651,
+          "second_difference_m_per_m2": 0.02064424555790978,
+          "slope_m_per_m": -0.414455590984554,
+          "station_m": 21.599999999999998
+        },
+        {
+          "height_new_m": 6.413019555920149,
+          "height_old_m": 6.421535038678343,
+          "second_difference_m_per_m2": 0.01337227002579755,
+          "slope_m_per_m": -0.40832063949947894,
+          "station_m": 21.9
+        },
+        {
+          "height_new_m": 6.290861599771982,
+          "height_old_m": 6.301968448872123,
+          "second_difference_m_per_m2": 0.0033618865684795773,
+          "slope_m_per_m": -0.4064322289690754,
+          "station_m": 22.2
+        },
+        {
+          "height_new_m": 6.169160218538703,
+          "height_old_m": 6.182906138449181,
+          "second_difference_m_per_m2": 0.003617611664171405,
+          "slope_m_per_m": -0.4063035075583912,
+          "station_m": 22.5
+        },
+        {
+          "height_new_m": 6.047079495236947,
+          "height_old_m": 6.063112447972506,
+          "second_difference_m_per_m2": 0.010766638536636064,
+          "slope_m_per_m": -0.40426166197057256,
+          "station_m": 22.8
+        },
+        {
+          "height_new_m": 5.92660322135636,
+          "height_old_m": 5.94583616061105,
+          "second_difference_m_per_m2": 0.02031205475779474,
+          "slope_m_per_m": -0.3998435244364096,
+          "station_m": 23.099999999999998
+        },
+        {
+          "height_new_m": 5.807173380575102,
+          "height_old_m": 5.83100152925778,
+          "second_difference_m_per_m2": 0.03472956544687966,
+          "slope_m_per_m": -0.39207442911589574,
+          "station_m": 23.4
+        },
+        {
+          "height_new_m": 5.691358563886823,
+          "height_old_m": 5.726365686252602,
+          "second_difference_m_per_m2": 0.015456816496814185,
+          "slope_m_per_m": -0.37900578516828176,
+          "station_m": 23.7
+        },
+        {
+          "height_new_m": 5.579769909474132,
+          "height_old_m": 5.633417489934045,
+          "second_difference_m_per_m2": -0.034625298682892436,
+          "slope_m_per_m": -0.3828003392178072,
+          "station_m": 24.0
+        },
+        {
+          "height_new_m": 5.461678360356138,
+          "height_old_m": 5.541686094362413,
+          "second_difference_m_per_m2": -0.0352825210978539,
+          "slope_m_per_m": -0.39978096437801725,
+          "station_m": 24.3
+        },
+        {
+          "height_new_m": 5.339901330847322,
+          "height_old_m": 5.44503745679469,
+          "second_difference_m_per_m2": -0.0022352951932715914,
+          "slope_m_per_m": -0.40396985187651957,
+          "station_m": 24.599999999999998
+        },
+        {
+          "height_new_m": 5.219296449230226,
+          "height_old_m": 5.347547914703497,
+          "second_difference_m_per_m2": 0.013110391169822266,
+          "slope_m_per_m": -0.40112214149398007,
+          "station_m": 24.9
+        },
+        {
+          "height_new_m": 5.099228045950934,
+          "height_old_m": 5.247490980185826,
+          "second_difference_m_per_m2": 0.02828570932467578,
+          "slope_m_per_m": -0.39610361717462617,
+          "station_m": 25.2
+        },
+        {
+          "height_new_m": 4.9816342789254495,
+          "height_old_m": 5.149915808901724,
+          "second_difference_m_per_m2": -0.051560950189897925,
+          "slope_m_per_m": -0.3841507158991746,
+          "station_m": 25.5
+        },
+        {
+          "height_new_m": 4.868737616411428,
+          "height_old_m": 5.059054590487349,
+          "second_difference_m_per_m2": -0.17454727866559427,
+          "slope_m_per_m": -0.42704018728856497,
+          "station_m": 25.8
+        },
+        {
+          "height_new_m": 4.725410166552312,
+          "height_old_m": 4.9479782362192966,
+          "second_difference_m_per_m2": -0.024853773456864015,
+          "slope_m_per_m": -0.48887908309853056,
+          "station_m": 26.099999999999998
+        },
+        {
+          "height_new_m": 4.575410166552311,
+          "height_old_m": 4.813953295953249,
+          "second_difference_m_per_m2": 0.3550494843797339,
+          "slope_m_per_m": -0.441952451362682,
+          "station_m": 26.4
+        },
+        {
+          "height_new_m": 4.460238695734701,
+          "height_old_m": 4.716423988342285,
+          "second_difference_m_per_m2": 0.4356781199064979,
+          "slope_m_per_m": -0.27584939247068974,
+          "station_m": 26.7
+        },
+        {
+          "height_new_m": 4.409900531069897,
+          "height_old_m": 4.658086976771868,
+          "second_difference_m_per_m2": 0.13172913877833192,
+          "slope_m_per_m": -0.1805455794187827,
+          "station_m": 27.0
+        },
+        {
+          "height_new_m": 4.351911348083432,
+          "height_old_m": 4.588833869755199,
+          "second_difference_m_per_m2": -0.03270765337833198,
+          "slope_m_per_m": -0.1968119092036904,
+          "station_m": 27.3
+        },
+        {
+          "height_new_m": 4.291813385547683,
+          "height_old_m": 4.516572060122916,
+          "second_difference_m_per_m2": -0.004356968519402704,
+          "slope_m_per_m": -0.20017017144578197,
+          "station_m": 27.599999999999998
+        },
+        {
+          "height_new_m": 4.231809245215963,
+          "height_old_m": 4.444276244651036,
+          "second_difference_m_per_m2": 0.001805672027346994,
+          "slope_m_per_m": -0.19942609031533198,
+          "station_m": 27.9
+        },
+        {
+          "height_new_m": 4.1721577313584834,
+          "height_old_m": 4.371975721579009,
+          "second_difference_m_per_m2": -0.0002624255381859508,
+          "slope_m_per_m": -0.19908676822937377,
+          "station_m": 28.2
+        },
+        {
+          "height_new_m": 4.112357184278339,
+          "height_old_m": 4.2943346190664595,
+          "second_difference_m_per_m2": 0.021472272739154752,
+          "slope_m_per_m": -0.19958354563824354,
+          "station_m": 28.5
+        },
+        {
+          "height_new_m": 4.052407603975538,
+          "height_old_m": 4.223830699920654,
+          "second_difference_m_per_m2": 0.1395762616067791,
+          "slope_m_per_m": -0.18620340458588114,
+          "station_m": 28.799999999999997
+        },
+        {
+          "height_new_m": 4.000635141526811,
+          "height_old_m": 4.159448623657227,
+          "second_difference_m_per_m2": 0.21972348248755438,
+          "slope_m_per_m": -0.11583778867417571,
+          "station_m": 29.099999999999998
+        },
+        {
+          "height_new_m": 3.982904930771032,
+          "height_old_m": 4.111555573626589,
+          "second_difference_m_per_m2": 0.15169804140076482,
+          "slope_m_per_m": -0.05436931509334819,
+          "station_m": 29.4
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.0906155251555801,
+          "slope_m_per_m": -0.024818963833716623,
+          "station_m": 29.7
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.04136493972286069,
+          "slope_m_per_m": 0.0,
+          "station_m": 30.0
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 30.299999999999997
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 30.599999999999998
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 30.9
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.07649347736686,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 31.2
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.071803749524424,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 31.5
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.071803749524424,
+          "second_difference_m_per_m2": 0.029594021186146333,
+          "slope_m_per_m": 0.0,
+          "station_m": 31.799999999999997
+        },
+        {
+          "height_new_m": 3.968013552470802,
+          "height_old_m": 4.071661369153611,
+          "second_difference_m_per_m2": 0.03307175260110896,
+          "slope_m_per_m": 0.017756412711688263,
+          "station_m": 32.1
+        },
+        {
+          "height_new_m": 3.9786674000978146,
+          "height_old_m": 4.069486325736172,
+          "second_difference_m_per_m2": -0.026116289771183326,
+          "slope_m_per_m": 0.019843051560665792,
+          "station_m": 32.4
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.065246102950302,
+          "second_difference_m_per_m2": -0.03307175260111019,
+          "slope_m_per_m": 0.002086638848978417,
+          "station_m": 32.699999999999996
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.065243361020334,
+          "second_difference_m_per_m2": -0.0034777314149639377,
+          "slope_m_per_m": 0.0,
+          "station_m": 33.0
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.063034911942455,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 33.3
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.045426868661822,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 33.6
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.026791269999309,
+          "second_difference_m_per_m2": 0.0,
+          "slope_m_per_m": 0.0,
+          "station_m": 33.9
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.016937226332346,
+          "second_difference_m_per_m2": -0.0744771988648621,
+          "slope_m_per_m": 0.0,
+          "station_m": 34.199999999999996
+        },
+        {
+          "height_new_m": 3.9799193834072017,
+          "height_old_m": 4.016937226332346,
+          "second_difference_m_per_m2": -0.20558424877913534,
+          "slope_m_per_m": -0.04468631931891842,
+          "station_m": 34.5
+        },
+        {
+          "height_new_m": 3.9531075918158516,
+          "height_old_m": 3.998435654323734,
+          "second_difference_m_per_m2": -0.17518511465839842,
+          "slope_m_per_m": -0.12335054926748068,
+          "station_m": 34.8
+        },
+        {
+          "height_new_m": 3.905909053846713,
+          "height_old_m": 3.972290623940818,
+          "second_difference_m_per_m2": -0.02858974986809315,
+          "slope_m_per_m": -0.1497973881139565,
+          "station_m": 35.1
+        },
+        {
+          "height_new_m": 3.863229158947477,
+          "height_old_m": 3.9636507206684963,
+          "second_difference_m_per_m2": 0.02824231428047949,
+          "slope_m_per_m": -0.14050439918833746,
+          "station_m": 35.4
+        },
+        {
+          "height_new_m": 3.821606414333712,
+          "height_old_m": 3.9615524256367523,
+          "second_difference_m_per_m2": 0.025019997043133402,
+          "slope_m_per_m": -0.13285199954566895,
+          "station_m": 35.699999999999996
+        },
+        {
+          "height_new_m": 3.7835179592200756,
+          "height_old_m": 3.9615524256367523,
+          "second_difference_m_per_m2": -0.1358947699499341,
+          "slope_m_per_m": -0.1254924009624574,
+          "station_m": 36.0
+        },
+        {
+          "height_new_m": 3.746310973756237,
+          "height_old_m": 3.9615524256367523,
+          "second_difference_m_per_m2": -0.3811157752471909,
+          "slope_m_per_m": -0.2143888615156273,
+          "station_m": 36.3
+        },
+        {
+          "height_new_m": 3.6548846423106975,
+          "height_old_m": 3.9365167618523533,
+          "second_difference_m_per_m2": -0.1395126020481708,
+          "slope_m_per_m": -0.3541618661107737,
+          "station_m": 36.6
+        },
+        {
+          "height_new_m": 3.533813854089773,
+          "height_old_m": 3.9332051387885394,
+          "second_difference_m_per_m2": 0.34839684740834276,
+          "slope_m_per_m": -0.29809642274453463,
+          "station_m": 36.9
+        },
+        {
+          "height_new_m": 3.4760267886639786,
+          "height_old_m": 3.9332051387885394,
+          "second_difference_m_per_m2": 0.3384067928244583,
+          "slope_m_per_m": -0.14512375766577001,
+          "station_m": 37.199999999999996
+        },
+        {
+          "height_new_m": 3.446739599490311,
+          "height_old_m": 3.9332051387885394,
+          "second_difference_m_per_m2": 0.08983497105593113,
+          "slope_m_per_m": -0.09505234704986165,
+          "station_m": 37.5
+        },
+        {
+          "height_new_m": 3.418995380434061,
+          "height_old_m": 3.9332051387885394,
+          "second_difference_m_per_m2": 0.0834498951856703,
+          "slope_m_per_m": -0.0912227750322101,
+          "station_m": 37.8
+        },
+        {
+          "height_new_m": 3.392005934470985,
+          "height_old_m": 3.9332051387885394,
+          "second_difference_m_per_m2": 0.15203795838701642,
+          "slope_m_per_m": -0.04498240993845837,
+          "station_m": 38.1
+        },
+        {
+          "height_new_m": 3.392005934470985,
+          "height_old_m": 3.9281089149670256,
+          "second_difference_m_per_m2": 0.07497068323076465,
+          "slope_m_per_m": 0.0,
+          "station_m": 38.4
+        },
+        {
+          "height_new_m": 3.392005934470985,
+          "height_old_m": 3.917999738738069,
+          "second_difference_m_per_m2": -0.06552512359729401,
+          "slope_m_per_m": 0.0,
+          "station_m": 38.699999999999996
+        },
+        {
+          "height_new_m": 3.392005934470985,
+          "height_old_m": 3.8845410641698646,
+          "second_difference_m_per_m2": -0.13488689118918518,
+          "slope_m_per_m": -0.03931507415837743,
+          "station_m": 39.0
+        },
+        {
+          "height_new_m": 3.368416889975959,
+          "height_old_m": 3.845652176973619,
+          "second_difference_m_per_m2": -0.08285621828657294,
+          "slope_m_per_m": -0.08093213471351124,
+          "station_m": 39.3
+        },
+        {
+          "height_new_m": 3.3434466536428786,
+          "height_old_m": 3.8121692878185782,
+          "second_difference_m_per_m2": 0.04145380011773597,
+          "slope_m_per_m": -0.08902880513032052,
+          "station_m": 39.6
+        },
+        {
+          "height_new_m": 3.314999606897766,
+          "height_old_m": 3.7894031200288927,
+          "second_difference_m_per_m2": 0.11759335040771166,
+          "slope_m_per_m": -0.056059854642870555,
+          "station_m": 39.9
+        },
+        {
+          "height_new_m": 3.3098107408571567,
+          "height_old_m": 3.774670324859951,
+          "second_difference_m_per_m2": 0.07705861637476796,
+          "slope_m_per_m": -0.0184727948856942,
+          "station_m": 40.199999999999996
+        },
+        {
+          "height_new_m": 3.30391592996635,
+          "height_old_m": 3.763667780593077,
+          "second_difference_m_per_m2": 0.025623458928915276,
+          "slope_m_per_m": -0.009824684818010354,
+          "station_m": 40.5
+        },
+        {
+          "height_new_m": 3.30391592996635,
+          "height_old_m": 3.7464767948974047,
+          "second_difference_m_per_m2": -0.0038810527003786364,
+          "slope_m_per_m": -0.003098719528344951,
+          "station_m": 40.8
+        },
+        {
+          "height_new_m": 3.302056698249343,
+          "height_old_m": 3.7245474718617375,
+          "second_difference_m_per_m2": -0.02741625361340507,
+          "slope_m_per_m": -0.012153316438237916,
+          "station_m": 41.1
+        },
+        {
+          "height_new_m": 3.2966239401034074,
+          "height_old_m": 3.6963496953603827,
+          "second_difference_m_per_m2": -0.05739218764383713,
+          "slope_m_per_m": -0.01954847169638807,
+          "station_m": 41.4
+        },
+        {
+          "height_new_m": 3.2903276152315106,
+          "height_old_m": 3.664756773745806,
+          "second_difference_m_per_m2": -0.08765747003266547,
+          "slope_m_per_m": -0.04658862902453986,
+          "station_m": 41.699999999999996
+        },
+        {
+          "height_new_m": 3.2686707626886835,
+          "height_old_m": 3.628654947932837,
+          "second_difference_m_per_m2": -0.04924518571687943,
+          "slope_m_per_m": -0.07214295371598745,
+          "station_m": 42.0
+        },
+        {
+          "height_new_m": 3.247041843001918,
+          "height_old_m": 3.590352332912884,
+          "second_difference_m_per_m2": -0.014324187357373619,
+          "slope_m_per_m": -0.07613574045466809,
+          "station_m": 42.3
+        },
+        {
+          "height_new_m": 3.2229893184158827,
+          "height_old_m": 3.5496419268748225,
+          "second_difference_m_per_m2": -0.02516784779525641,
+          "slope_m_per_m": -0.08073746613041166,
+          "station_m": 42.6
+        },
+        {
+          "height_new_m": 3.1985993633236705,
+          "height_old_m": 3.5070299501967934,
+          "second_difference_m_per_m2": -0.023477517938062187,
+          "slope_m_per_m": -0.09123644913182183,
+          "station_m": 42.9
+        },
+        {
+          "height_new_m": 3.16824744893679,
+          "height_old_m": 3.4616551976799093,
+          "second_difference_m_per_m2": -0.00196431278833864,
+          "slope_m_per_m": -0.09482397689324884,
+          "station_m": 43.199999999999996
+        },
+        {
+          "height_new_m": 3.1417049771877212,
+          "height_old_m": 3.4146951691296445,
+          "second_difference_m_per_m2": -0.01923939106910194,
+          "slope_m_per_m": -0.09241503680482488,
+          "station_m": 43.5
+        },
+        {
+          "height_new_m": 3.1127984268538946,
+          "height_old_m": 3.365068360130938,
+          "second_difference_m_per_m2": -0.049063308224574886,
+          "slope_m_per_m": -0.10636761153470964,
+          "station_m": 43.8
+        },
+        {
+          "height_new_m": 3.077884410266895,
+          "height_old_m": 3.3134951243783393,
+          "second_difference_m_per_m2": -0.039530717456728676,
+          "slope_m_per_m": -0.12185302173956991,
+          "station_m": 44.1
+        },
+        {
+          "height_new_m": 3.0396866138101526,
+          "height_old_m": 3.2588653802225704,
+          "second_difference_m_per_m2": -0.025491689534952067,
+          "slope_m_per_m": -0.13008604200874707,
+          "station_m": 44.4
+        },
+        {
+          "height_new_m": 2.9998327850616477,
+          "height_old_m": 3.2021796624000562,
+          "second_difference_m_per_m2": -0.02047943671116345,
+          "slope_m_per_m": -0.137148035460541,
+          "station_m": 44.699999999999996
+        },
+        {
+          "height_new_m": 2.9573977925338277,
+          "height_old_m": 3.1387294480749226,
+          "second_difference_m_per_m2": -0.020472490372623553,
+          "slope_m_per_m": -0.14237370403544514,
+          "station_m": 45.0
+        },
+        {
+          "height_new_m": 2.91440856264038,
+          "height_old_m": 3.070417126804336,
+          "second_difference_m_per_m2": -0.02375284820710355,
+          "slope_m_per_m": -0.1494315296841151,
+          "station_m": 45.3
+        },
+        {
+          "height_new_m": 2.8677388747233588,
+          "height_old_m": 3.00002945358461,
+          "second_difference_m_per_m2": -0.023927618778444626,
+          "slope_m_per_m": -0.15662541295970733,
+          "station_m": 45.6
+        },
+        {
+          "height_new_m": 2.8204333148645553,
+          "height_old_m": 2.9280645648441928,
+          "second_difference_m_per_m2": -0.02308762304208717,
+          "slope_m_per_m": -0.1637881009511819,
+          "station_m": 45.9
+        },
+        {
+          "height_new_m": 2.76946601415265,
+          "height_old_m": 2.856128839503172,
+          "second_difference_m_per_m2": 0.02682426460936299,
+          "slope_m_per_m": -0.1704779867849595,
+          "station_m": 46.199999999999996
+        },
+        {
+          "height_new_m": 2.7181465227935795,
+          "height_old_m": 2.783952970868501,
+          "second_difference_m_per_m2": 0.13198292213580143,
+          "slope_m_per_m": -0.1476935421855634,
+          "station_m": 46.5
+        },
+        {
+          "height_new_m": 2.680849888841312,
+          "height_old_m": 2.7131810898098756,
+          "second_difference_m_per_m2": 0.03178608739632524,
+          "slope_m_per_m": -0.09128823350347925,
+          "station_m": 46.8
+        },
+        {
+          "height_new_m": 2.6633735826914924,
+          "height_old_m": 2.647029442075559,
+          "second_difference_m_per_m2": -0.2982279047064952,
+          "slope_m_per_m": -0.12862188974777045,
+          "station_m": 47.1
+        },
+        {
+          "height_new_m": 2.6036767549926503,
+          "height_old_m": 2.575444459915161,
+          "second_difference_m_per_m2": -0.3178362448164822,
+          "slope_m_per_m": -0.2702249763273743,
+          "station_m": 47.4
+        },
+        {
+          "height_new_m": 2.501238596895069,
+          "height_old_m": 2.5019476413726807,
+          "second_difference_m_per_m2": -0.005367925356289938,
+          "slope_m_per_m": -0.31932363663765795,
+          "station_m": 47.699999999999996
+        },
+        {
+          "height_new_m": 2.412082573010056,
+          "height_old_m": 2.428499460220337,
+          "second_difference_m_per_m2": 0.1182724929116829,
+          "slope_m_per_m": -0.27344573154114604,
+          "station_m": 48.0
+        },
+        {
+          "height_new_m": 2.3371711579703804,
+          "height_old_m": 2.355262517929077,
+          "second_difference_m_per_m2": 0.04697049196358205,
+          "slope_m_per_m": -0.2483601408906475,
+          "station_m": 48.3
+        },
+        {
+          "height_new_m": 2.2630664884756673,
+          "height_old_m": 2.2821943759918213,
+          "second_difference_m_per_m2": 0.008078906710537959,
+          "slope_m_per_m": -0.2452634363629973,
+          "station_m": 48.6
+        },
+        {
+          "height_new_m": 2.1900130961525814,
+          "height_old_m": 2.2092199325561523,
+          "second_difference_m_per_m2": 0.0016606396316524719,
+          "slope_m_per_m": -0.2435127968643247,
+          "station_m": 48.9
+        },
+        {
+          "height_new_m": 2.116958810357074,
+          "height_old_m": 2.136293411254883,
+          "second_difference_m_per_m2": 0.02801482846591652,
+          "slope_m_per_m": -0.24426705258400583,
+          "station_m": 49.199999999999996
+        },
+        {
+          "height_new_m": 2.0434528646021777,
+          "height_old_m": 2.0629191398620605,
+          "second_difference_m_per_m2": 0.05979845366240355,
+          "slope_m_per_m": -0.22670389978477434,
+          "station_m": 49.5
+        },
+        {
+          "height_new_m": 1.9809364704862085,
+          "height_old_m": 1.990185260772705,
+          "second_difference_m_per_m2": 0.005977870559390308,
+          "slope_m_per_m": -0.2083879803865636,
+          "station_m": 49.8
+        },
+        {
+          "height_new_m": 1.9184200763702393,
+          "height_old_m": 1.9184200763702393,
+          "second_difference_m_per_m2": -0.04801351241776303,
+          "slope_m_per_m": -0.22311717744914095,
+          "station_m": 50.1
+        },
+        {
+          "height_new_m": 1.8470661640167236,
+          "height_old_m": 1.8470661640167236,
+          "second_difference_m_per_m2": -0.020830325347724332,
+          "slope_m_per_m": -0.23719608783722146,
+          "station_m": 50.4
+        },
+        {
+          "height_new_m": 1.7761024236679077,
+          "height_old_m": 1.7761024236679077,
+          "second_difference_m_per_m2": 0.005591909090683078,
+          "slope_m_per_m": -0.23561537265777543,
+          "station_m": 50.699999999999996
+        },
+        {
+          "height_new_m": 1.705696940422058,
+          "height_old_m": 1.705696940422058,
+          "second_difference_m_per_m2": 0.006337298287285964,
+          "slope_m_per_m": -0.2338409423828116,
+          "station_m": 51.0
+        },
+        {
+          "height_new_m": 1.6357978582382202,
+          "height_old_m": 1.6357978582382202,
+          "second_difference_m_per_m2": 0.0073085228602083885,
+          "slope_m_per_m": -0.23181299368540387,
+          "station_m": 51.3
+        },
+        {
+          "height_new_m": 1.5666091442108154,
+          "height_old_m": 1.5666091442108154,
+          "second_difference_m_per_m2": 0.008372134632529726,
+          "slope_m_per_m": -0.22945582866668657,
+          "station_m": 51.6
+        },
+        {
+          "height_new_m": 1.498124361038208,
+          "height_old_m": 1.498124361038208,
+          "second_difference_m_per_m2": 0.009425812297396752,
+          "slope_m_per_m": -0.226789712905886,
+          "station_m": 51.9
+        },
+        {
+          "height_new_m": 1.4305353164672852,
+          "height_old_m": 1.4305353164672852,
+          "second_difference_m_per_m2": 0.010474522908533845,
+          "slope_m_per_m": -0.22380034128824855,
+          "station_m": 52.199999999999996
+        },
+        {
+          "height_new_m": 1.3638441562652588,
+          "height_old_m": 1.3638441562652588,
+          "second_difference_m_per_m2": 0.011698073811001741,
+          "slope_m_per_m": -0.2205049991607657,
+          "station_m": 52.5
+        },
+        {
+          "height_new_m": 1.2982323169708252,
+          "height_old_m": 1.2982323169708252,
+          "second_difference_m_per_m2": 0.012960698869493359,
+          "slope_m_per_m": -0.2167814970016475,
+          "station_m": 52.8
+        },
+        {
+          "height_new_m": 1.23377525806427,
+          "height_old_m": 1.23377525806427,
+          "second_difference_m_per_m2": 0.01425875557793127,
+          "slope_m_per_m": -0.21272857983906968,
+          "station_m": 53.1
+        },
+        {
+          "height_new_m": 1.1705951690673828,
+          "height_old_m": 1.1705951690673828,
+          "second_difference_m_per_m2": 0.015525023142495764,
+          "slope_m_per_m": -0.20822624365488873,
+          "station_m": 53.4
+        },
+        {
+          "height_new_m": 1.108839511871338,
+          "height_old_m": 1.108839511871338,
+          "second_difference_m_per_m2": 0.016900069183777622,
+          "slope_m_per_m": -0.2034135659535723,
+          "station_m": 53.699999999999996
+        },
+        {
+          "height_new_m": 1.0485470294952393,
+          "height_old_m": 1.0485470294952393,
+          "second_difference_m_per_m2": 0.018222630023956243,
+          "slope_m_per_m": -0.19808620214462214,
+          "station_m": 54.0
+        },
+        {
+          "height_new_m": 0.9899877905845642,
+          "height_old_m": 0.9899877905845642,
+          "second_difference_m_per_m2": 0.01950595113966186,
+          "slope_m_per_m": -0.19247998793919852,
+          "station_m": 54.3
+        },
+        {
+          "height_new_m": 0.93305903673172,
+          "height_old_m": 0.93305903673172,
+          "second_difference_m_per_m2": 0.020681818326310886,
+          "slope_m_per_m": -0.186382631460825,
+          "station_m": 54.6
+        },
+        {
+          "height_new_m": 0.8781582117080688,
+          "height_old_m": 0.8781582117080688,
+          "second_difference_m_per_m2": 0.021859341197543403,
+          "slope_m_per_m": -0.18007089694341194,
+          "station_m": 54.9
+        }
+      ],
+      "profile_table_station_range_m": [
+        0.0,
+        55.0
+      ],
+      "transitions": [
+        {
+          "C0_height_continuous": true,
+          "C1_pass": true,
+          "height_m": 1.9809364704862085,
+          "height_old_m": 1.990185260772705,
+          "official_R3_wob_m": 0.014924859044958216,
+          "profile_index": 166,
+          "second_difference_m_per_m2": 0.0,
+          "slope_delta_m_per_m": 4.9404924595819466e-15,
+          "slope_left_m_per_m": -0.208387980386566,
+          "slope_right_m_per_m": -0.20838798038656106,
+          "station_m": 49.8
+        }
+      ],
+      "variable_samples": 167,
+      "window_m": [
+        0.0,
+        50.0
+      ]
+    }
+  },
+  "rules_D1_hits": [
+    {
+      "feld": "D1",
+      "regel": "R1_blind",
+      "weg": "rampe_2",
+      "wert": 0,
+      "wo": "anfang",
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R1_blind",
+      "weg": "rampe_11",
+      "wert": 0,
+      "wo": "ende",
+      "x": 156.5,
+      "z": 37.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R2_getrennt",
+      "wert": 116,
+      "x": 150.9,
+      "z": 23.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.08,
+      "x": 126.5,
+      "z": 31.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 3.5,
+      "x": 130.5,
+      "z": 31.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.082,
+      "x": 130.5,
+      "z": 31.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 4.6,
+      "x": 134.5,
+      "z": 30.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.082,
+      "x": 134.5,
+      "z": 30.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.122,
+      "x": 134.5,
+      "z": 30.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 9.3,
+      "x": 138.4,
+      "z": 30.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.084,
+      "x": 138.4,
+      "z": 30.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.199,
+      "x": 138.4,
+      "z": 30.4
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 15.3,
+      "x": 142.4,
+      "z": 30.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.246,
+      "x": 142.4,
+      "z": 30.2
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 17.7,
+      "x": 146.4,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.25,
+      "x": 146.4,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.177,
+      "x": 146.4,
+      "z": 29.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 16.2,
+      "x": 150.3,
+      "z": 28.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.216,
+      "x": 150.3,
+      "z": 28.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.105,
+      "x": 150.3,
+      "z": 28.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 20.0,
+      "x": 154.2,
+      "z": 28.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.149,
+      "x": 154.2,
+      "z": 28.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.346,
+      "x": 154.2,
+      "z": 28.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 19.8,
+      "x": 158.2,
+      "z": 27.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.356,
+      "x": 158.2,
+      "z": 27.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 10.4,
+      "x": 162.1,
+      "z": 26.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.123,
+      "x": 162.1,
+      "z": 26.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.231,
+      "x": 162.1,
+      "z": 26.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 3.6,
+      "x": 166.1,
+      "z": 26.7
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 5.8,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.1,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.733,
+      "x": 148.5,
+      "z": 2.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 10.2,
+      "x": 146.6,
+      "z": 6.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.104,
+      "x": 146.6,
+      "z": 6.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.628,
+      "x": 146.6,
+      "z": 6.0
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 14.5,
+      "x": 144.8,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.202,
+      "x": 144.8,
+      "z": 9.5
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 3.7,
+      "x": 148.1,
+      "z": 11.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.086,
+      "x": 148.1,
+      "z": 11.9
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 3.5,
+      "x": 151.3,
+      "z": 14.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.083,
+      "x": 151.3,
+      "z": 14.3
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 7.5,
+      "x": 154.5,
+      "z": 16.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.133,
+      "x": 154.5,
+      "z": 16.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 4.2,
+      "x": 157.5,
+      "z": 19.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.107,
+      "x": 157.5,
+      "z": 19.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.266,
+      "x": 157.5,
+      "z": 19.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 20.0,
+      "x": 155.6,
+      "z": 22.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.182,
+      "x": 155.6,
+      "z": 22.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.295,
+      "x": 155.6,
+      "z": 22.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 11.2,
+      "x": 153.7,
+      "z": 26.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.17,
+      "x": 153.7,
+      "z": 26.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 20.0,
+      "x": 151.8,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.252,
+      "x": 151.8,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.509,
+      "x": 151.8,
+      "z": 29.6
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 4.5,
+      "x": 150.4,
+      "z": 33.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 1.027,
+      "x": 150.4,
+      "z": 33.1
+    },
+    {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.153,
+      "x": 153.7,
+      "z": 35.4
+    },
+    {
+      "feld": "D1",
+      "m2": 0.5,
+      "regel": "R5_loch",
+      "wert": 1.35,
+      "x": 144.0,
+      "z": 7.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.7,
+      "x": 143.5,
+      "z": 8.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.15,
+      "x": 143.5,
+      "z": 10.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.14,
+      "x": 154.0,
+      "z": 14.0
+    },
+    {
+      "feld": "D1",
+      "m2": 0.8,
+      "regel": "R5_loch",
+      "wert": 1.41,
+      "x": 155.0,
+      "z": 15.5
+    },
+    {
+      "feld": "D1",
+      "m2": 2.0,
+      "regel": "R5_loch",
+      "wert": 2.86,
+      "x": 157.5,
+      "z": 16.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 2.17,
+      "x": 159.0,
+      "z": 18.5
+    },
+    {
+      "feld": "D1",
+      "m2": 0.2,
+      "regel": "R5_loch",
+      "wert": 1.45,
+      "x": 157.5,
+      "z": 20.0
+    },
+    {
+      "feld": "D1",
+      "regel": "G5_beule_klippe",
+      "wert": 1.27,
+      "x": 149.5,
+      "z": 34.5
+    },
+    {
+      "feld": "D1",
+      "regel": "G6_facette",
+      "wert": 8,
+      "x": 157.7,
+      "z": 29.1
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 0.74,
+      "x": 136.2,
+      "z": 39.8
+    },
+    {
+      "art": "baeume",
+      "feld": "D1",
+      "regel": "G11_objekt_schwebt_sinkt",
+      "wert": 1.7,
+      "x": 138.2,
+      "z": 37.8
+    },
+    {
+      "feld": "D1",
+      "regel": "G7b_wandkontur_feld",
+      "wert": 0.649,
+      "x": 147,
+      "z": 21
+    }
+  ],
+  "rules_by_rule": {
+    "G11_objekt_schwebt_sinkt": 4,
+    "G2_spitze_oben": 3,
+    "G2_spitze_oben_fein": 8,
+    "G3_spitze_unten": 3,
+    "G3_spitze_unten_fein": 2,
+    "G5_beule_klippe": 68,
+    "G6_facette": 217,
+    "G7_wand_glatte_flaeche": 1,
+    "G7b_wandkontur_feld": 25,
+    "G7b_wandkontur_kantenschaerfe": 1,
+    "G7b_wandkontur_rauheit": 1,
+    "G8_fluss_nicht_bis_rand": 1,
+    "R1_blind": 24,
+    "R2_getrennt": 15,
+    "R3_laengs_m": 42,
+    "R3_quer_pct": 33,
+    "R3_woelb_m": 32,
+    "R5_loch": 25,
+    "R6_wasser_schnee": 4,
+    "T1_fleckrand": 94,
+    "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+    "T3_streifen_ringe_bildpruefung_offen": 1,
+    "T4_graue_flussstreifen_bildpruefung_offen": 1,
+    "T5_textur_vs_clay_bildpruefung_offen": 1
+  },
+  "rules_by_tile": {
+    "D1": {
+      "G11_objekt_schwebt_sinkt": 2,
+      "G5_beule_klippe": 1,
+      "G6_facette": 1,
+      "G7b_wandkontur_feld": 1,
+      "R1_blind": 2,
+      "R2_getrennt": 1,
+      "R3_laengs_m": 13,
+      "R3_quer_pct": 21,
+      "R3_woelb_m": 20,
+      "R5_loch": 8
+    },
+    "D2": {
+      "R2_getrennt": 1,
+      "T1_fleckrand": 7
+    },
+    "G1": {
+      "G11_objekt_schwebt_sinkt": 2,
+      "G6_facette": 3,
+      "R1_blind": 1,
+      "R3_laengs_m": 1,
+      "R6_wasser_schnee": 3,
+      "T1_fleckrand": 3
+    }
+  },
+  "rules_delta_vs_p3d17_by_rule": {
+    "G11_objekt_schwebt_sinkt": 0,
+    "G2_spitze_oben": 0,
+    "G2_spitze_oben_fein": 0,
+    "G3_spitze_unten": -1,
+    "G3_spitze_unten_fein": 0,
+    "G5_beule_klippe": -1,
+    "G6_facette": -2,
+    "G7_wand_glatte_flaeche": 0,
+    "G7b_wandkontur_feld": 0,
+    "G7b_wandkontur_kantenschaerfe": 0,
+    "G7b_wandkontur_rauheit": 0,
+    "G8_fluss_nicht_bis_rand": 0,
+    "R1_blind": 0,
+    "R2_getrennt": 0,
+    "R3_laengs_m": 7,
+    "R3_quer_pct": 4,
+    "R3_woelb_m": 1,
+    "R4_rand": -1,
+    "R5_loch": 0,
+    "R6_wasser_schnee": 0,
+    "T1_fleckrand": 0,
+    "T2_textur_abgeschnitten_bildpruefung_offen": 0,
+    "T3_streifen_ringe_bildpruefung_offen": 0,
+    "T4_graue_flussstreifen_bildpruefung_offen": 0,
+    "T5_textur_vs_clay_bildpruefung_offen": 0
+  },
+  "rules_plus5_pass": false,
+  "rules_total": 607,
+  "scenario": "joint",
+  "source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "transfer_base": "p3d21_transfer_base_route3_v29.json",
+  "transfer_base_sha256": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287"
+}
