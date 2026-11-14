@@ -24,7 +24,7 @@ Marker: `[S]` direkt gemessen · `[R]` Modell-/Gruppenfilterbefund · `[A]` Anna
 
 `[S]` Der erste Versuch ließ versehentlich Rampenprofile variabel und war nicht anforderungskonform. Sein Gruppenfilter verlangte 0,05154638898 m Schlupf bei rampe_2, Station 14,7 m, Karte `138,68964|30,34365`; dieser Vorversuch ist unter `codex_jobs/tools/p3d32/results/_alt/` erhalten. Nach Fixierung der Profile endete ein Lauf mit Presolve aus nach 600 s ohne primalen Punkt (Zeitlimit, kein Unmachbarkeitsnachweis). Der dafür gestartete Diagnoseversuch ohne Presolve wurde nach etwa 170 s ohne Befund beendet. Beide Läufe sind separat unter `_alt/p3d32_fixed_routes_presolve_off/` archiviert.
 
-`[S]` Der korrigierte LP-Lauf mit deterministischem HiGHS-Presolve endete mit `Infeasible` (Code 8, HiGHS-Infeasibilität bewiesen, 1 Thread). Der anschließende All-Familien-Gruppenfilter war `Optimal` (Code 7). Von 26 aktivierten Diagnosegruppen war ausschließlich `variable_bounds` positiv; alle anderen Gruppen hatten Schlupf 0. Der einzige Maximalbefund ist:
+`[S]` Der korrigierte LP-Lauf mit deterministischem HiGHS-Presolve endete mit `Infeasible` (Code 8, HiGHS-Infeasibilität bewiesen, 1 Thread). Der anschließende All-Familien-Gruppenfilter war `Optimal` (Code 7). Von 27 aktivierten Diagnosegruppen war ausschließlich `variable_bounds` positiv; alle anderen Gruppen hatten Schlupf 0. Der einzige Maximalbefund ist:
 
 | Feld | Gruppenfilterbefund |
 |---|---:|
