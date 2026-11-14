@@ -1,0 +1,30 @@
+{
+  "constraints": 75451,
+  "drainage_model_variables": {
+    "edge_slack": 0,
+    "modeled_candidates": 0,
+    "network_flow": 0,
+    "potential_candidates": 37686,
+    "successor_binary": 0
+  },
+  "geometry": "V3",
+  "method": "hard all-family MIP without per-cell drainage constraints; official checker cuts enforce budgets",
+  "official_sink_policy": "V1: no successor-choice or reachability constraints; only official G5/R5_loch/G6 event cuts and checker budgets",
+  "optimality_proven": true,
+  "primal_feasible": true,
+  "probe_allowed": true,
+  "selected_drainage_mode": "off",
+  "selected_drainage_variant": "1",
+  "selected_variant": "1",
+  "solution_json": "codex_jobs/tools/p3d31/results/p3d31_V3_round01_model.json",
+  "source_relief": "/tmp/p3d22_v3_source.json.gz",
+  "source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "status": "Optimal",
+  "status_code": 7,
+  "tag": "p3d31",
+  "threads": 1,
+  "time_limit_s": 600,
+  "transfer_base": "p3d21_transfer_base_route3_v29.json",
+  "transfer_base_sha256": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287",
+  "variables": 19975
+}

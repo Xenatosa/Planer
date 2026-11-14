@@ -28,32 +28,8 @@ Marker: `[S]` direkt gemessen · `[R]` Modellbefund/abgeleitete Diagnose · `[A]
 
 ## 3. Float32-Gate-Probe mit Checker-in-the-loop
 
-`[S]` Noch nicht gestartet. Es gibt bislang keine Float32-Probe, keine neuen Prüfertreffer und keine gemessenen D1/G1/D2-Kachelzahlen.
+`[S]` Runde 1 abgeschlossen; Checker-in-the-loop wird fortgesetzt Höchstens vier serielle Runden, je Solve höchstens 600 s. Jede Probe lief über den unveränderten Float32-Direkttransfer und die vier unveränderten offiziellen Prüfer.
 
-## 4. Mesh-Gates, Hashes und Prüfer-Diff
-
-`[S]` Meshbau und Mesh-Gates sind noch nicht gestartet. Vorher-/Nachherwerte und die geforderten Eingabehashes werden nach Abschluss der zulässigen Proberunden ergänzt.
-
-`[S]` Der Prüfer-/Test-Diff gegen `89c61ce` wurde vor der p3d31-Bearbeitung geprüft: ausschließlich die bereits freigegebenen Unterschiede `r8_kreuzung.py`, `r8a_policy.py` und `test_r8a_policy_p3d26.py`; keine Prüferdatei wurde für p3d31 verändert.
-
-## 5. Annahmen, Grenzen und offene Punkte
-
-`[A]` Modellierte Ereignisschnitte sind eine lokale lineare Annäherung für bereits vom offiziellen Prüfer erkannte Ereignisse. Die Gate-Entscheidung basiert immer auf dem vollständigen unveränderten Float32-Prüferlauf, nicht allein auf Modellindikatoren.
-
-## Anforderungen 0–8: Selbstprüfung
-
-| Nr. | Selbstprüfung |
-|---:|---|
-| 0 | `[S]` Infeasibility durch LP-IIS mit Ort und Kantenhöhen lokalisiert; Details siehe Abschnitt 0 und JSON-Beleg. |
-| 1 | `[S]` Unveränderte harte Modellfamilien und V3-Wegführung sind in den separaten p3d31-Modellkopien übernommen; Gate-Nachweis folgt. |
-| 2 | `[R]` V1 entfernt nur die interne strikte Abflusspflicht; offizielle Prüfer und Schwellen bleiben unverändert. |
-| 3 | `[S]` V1-Solve noch ausstehend; V2 nur bei erforderlichem Rückfall. |
-| 4 | `[S]` Höchstens vier Float32-Runden; noch nicht gestartet. |
-| 5 | `[F]` Harte Ziele noch nicht gemessen. |
-| 6 | `[F]` Meshbau nur nach erfolgreichem Float32-Gate; noch nicht freigegeben. |
-| 7 | `[F]` Kein Mesh, keine Bilder. |
-| 8 | `[S]` Prüfer-Diff kontrolliert; Hashes und vollständige Zahlen folgen. |
-
-## Drei-Satz-Schluss
-
-`[R]` Die p3d30-Infeasibility entstand an einer p3d17-Lokalsenke mit sechs ausschließlich höher liegenden, transferfixierten Nachbarn und nicht durch das 1-mm-Epsilon. `[S]` V1 entfernt diese interne Abflusspflicht und prüft Senken mit den offiziellen G5-, R5-Loch- und G6-Komponentenbudgets. `[F]` Ob die harten Zielwerte erreicht werden und ein Mesh zulässig ist, bleibt bis zum V1-Solve und Float32-Gate offen.
+| Runde | Solve | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | offene Ziele |
+|---:|---|---|---|---|---|
+| 1 | Optimal | 574 (37/13/8) | 42 (3/0/0) | 343 (28/13/0) | R9w_total, R5_loch_total, R5_loch_D1; [JSON](../../../../../codex_jobs/tools/p3d31/results/p3d31_V3_round01_official_probe.json) |
