@@ -464,31 +464,39 @@ def main() -> None:
             "hard_lp_recheck": lp_recheck,
         }
         if not solution.get("primal_feasible"):
-            record["stop_reason"] = "no_primal_feasible_LP_point"
-            # One elastic LP group-filter solve identifies the active families.
-            diag_path = RESULTS / f"{prefix}_lp_group_filter.json"
-            diag_flood_path = RESULTS / f"{prefix}_lp_group_filter_flood_cuts.json"
-            dump(diag_flood_path, flood_cuts)
-            all_groups = [
-                "r3_long", "r3_quer", "r3_wob", "crossing_stage", "axis_supports",
-                "plane_core", "endpoint_stage", "safety_gitter", "safety_quer",
-                "safety_single_quer", "g5", "r5_hole", "r8b", "r4", "grade_cross",
-                "grade_same", "endpoint_r8a", "plane_slope_polygon", "plane_slope_box",
-                "variable_bounds", "route_profile_slope", "source_monotone", "g11",
-                "p3d29_locality", "p3d31_drainage", "p3d29_cliff_form", "p3d29_tree_ground",
-            ]
-            env = dict(os.environ)
-            env["P3D32_VARIANT"] = variant
-            proc = checked(make_lp_command(round_no, 90, event_path, diag_flood_path,
-                                           diag_path, diagnostic_groups=all_groups), env=env)
-            diag = json.loads(diag_path.read_text(encoding="utf-8"))
-            record["lp_group_filter"] = {
-                "status": diag.get("status"),
-                "positive_slacks": {k: v for k, v in diag.get("slack_values", {}).items()
-                                    if v is not None and float(v) > 1e-7},
-                "evidence_json": str(diag_path),
-                "method": "single all-family elastic LP solve; diagnostic, not an IIS",
-            }
+            model_status = str(solution.get("status", ""))
+            structurally_infeasible = "Infeasible" in model_status
+            record["stop_reason"] = (
+                "LP_structurally_infeasible" if structurally_infeasible
+                else "LP_time_limit_without_primal" if "Time limit" in model_status
+                else "LP_no_primal_other_status"
+            )
+            if structurally_infeasible:
+                # Only a proven structural infeasibility triggers the all-family
+                # elastic LP group filter; a time limit is not an IIS claim.
+                diag_path = RESULTS / f"{prefix}_lp_group_filter.json"
+                diag_flood_path = RESULTS / f"{prefix}_lp_group_filter_flood_cuts.json"
+                dump(diag_flood_path, flood_cuts)
+                all_groups = [
+                    "r3_long", "r3_quer", "r3_wob", "crossing_stage", "axis_supports",
+                    "plane_core", "endpoint_stage", "safety_gitter", "safety_quer",
+                    "safety_single_quer", "g5", "r5_hole", "r8b", "r4", "grade_cross",
+                    "grade_same", "endpoint_r8a", "plane_slope_polygon", "plane_slope_box",
+                    "variable_bounds", "route_profile_slope", "source_monotone", "g11",
+                    "p3d29_locality", "p3d31_drainage", "p3d29_cliff_form", "p3d29_tree_ground",
+                ]
+                env = dict(os.environ)
+                env["P3D32_VARIANT"] = variant
+                checked(make_lp_command(round_no, 90, event_path, diag_flood_path,
+                                        diag_path, diagnostic_groups=all_groups), env=env)
+                diag = json.loads(diag_path.read_text(encoding="utf-8"))
+                record["lp_group_filter"] = {
+                    "status": diag.get("status"),
+                    "positive_slacks": {k: v for k, v in diag.get("slack_values", {}).items()
+                                        if v is not None and float(v) > 1e-7},
+                    "evidence_json": str(diag_path),
+                    "method": "single all-family elastic LP solve; diagnostic, not an IIS",
+                }
             rounds.append(record)
             dump(RESULTS / "p3d32_V3_checker_loop.json", {
                 "tag": "p3d32", "variant": variant, "rounds": rounds,

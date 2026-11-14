@@ -393,7 +393,9 @@ def highs_mip_solve(matrix, rhs, objective, integrality, lower, upper, start=Non
 
     highs = highspy.Highs()
     highs.setOptionValue("output_flag", False)
-    highs.setOptionValue("presolve", "off" if not np.any(integrality) else "on")
+    # This p3d32 path is always an LP (the integrality vector passed to HiGHS
+    # is all zero), so use deterministic single-thread LP presolve.
+    highs.setOptionValue("presolve", "on")
     highs.setOptionValue("threads", 1)
     highs.setOptionValue("mip_rel_gap", 0.0)
     highs.setOptionValue("time_limit", float(time_limit))
