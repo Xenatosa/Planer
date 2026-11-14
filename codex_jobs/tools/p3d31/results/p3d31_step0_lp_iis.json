@@ -1,0 +1,269 @@
+{
+  "constraints": 173134,
+  "highspy_version": "1.15.1",
+  "iis_attempted": true,
+  "iis_column_indices": [
+    8434,
+    8435,
+    8436,
+    8437,
+    8438,
+    8439
+  ],
+  "iis_column_status_at_indices": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "iis_columns": 6,
+  "iis_drainage_edge_details": [
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 576,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 12.965963363647461,
+      "reference_successor_minus_child_m": 0.0055484771728515625,
+      "required_eps_m": 0.0,
+      "row_index": 80390,
+      "successor_flat": 134,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        150.5,
+        0.5
+      ]
+    },
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 577,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 13.132737159729004,
+      "reference_successor_minus_child_m": 0.17232227325439453,
+      "required_eps_m": 0.0,
+      "row_index": 80391,
+      "successor_flat": 135,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        151.0,
+        0.5
+      ]
+    },
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 578,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 13.008370399475098,
+      "reference_successor_minus_child_m": 0.04795551300048828,
+      "required_eps_m": 0.0,
+      "row_index": 80392,
+      "successor_flat": 220,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        151.0,
+        1.0
+      ]
+    },
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 579,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 12.967670440673828,
+      "reference_successor_minus_child_m": 0.00725555419921875,
+      "required_eps_m": 0.0,
+      "row_index": 80393,
+      "successor_flat": 303,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        150.0,
+        1.5
+      ]
+    },
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 580,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 12.97857666015625,
+      "reference_successor_minus_child_m": 0.018161773681640625,
+      "required_eps_m": 0.0,
+      "row_index": 80394,
+      "successor_flat": 304,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        150.5,
+        1.5
+      ]
+    },
+    {
+      "child_flat": 219,
+      "child_transfer_coverage": 0.0,
+      "child_work_area_core": true,
+      "child_work_area_ring": false,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "edge_index": 581,
+      "p3d17_child_height_m": 12.96041488647461,
+      "p3d17_successor_height_m": 12.992741584777832,
+      "reference_successor_minus_child_m": 0.032326698303222656,
+      "required_eps_m": 0.0,
+      "row_index": 80395,
+      "successor_flat": 305,
+      "successor_transfer_coverage": 0.0,
+      "successor_work_area_core": true,
+      "successor_work_area_ring": false,
+      "successor_xz": [
+        151.0,
+        1.5
+      ]
+    }
+  ],
+  "iis_drainage_successor_details": [
+    {
+      "child_flat": 219,
+      "child_xz": [
+        150.5,
+        1.0
+      ],
+      "row_index": 19977,
+      "sense": "sum(y)>=1",
+      "successors": [
+        {
+          "flat": 134,
+          "xz": [
+            150.5,
+            0.5
+          ]
+        },
+        {
+          "flat": 135,
+          "xz": [
+            151.0,
+            0.5
+          ]
+        },
+        {
+          "flat": 220,
+          "xz": [
+            151.0,
+            1.0
+          ]
+        },
+        {
+          "flat": 303,
+          "xz": [
+            150.0,
+            1.5
+          ]
+        },
+        {
+          "flat": 304,
+          "xz": [
+            150.5,
+            1.5
+          ]
+        },
+        {
+          "flat": 305,
+          "xz": [
+            151.0,
+            1.5
+          ]
+        }
+      ]
+    }
+  ],
+  "iis_model_file": "codex_jobs/tools/p3d31/results/p3d31_step0_lp_iis.ilp",
+  "iis_model_write_status": "HighsStatus.kError",
+  "iis_row_examples": {
+    "p3d30_drainage_selected_edge_height": [
+      80390,
+      80391,
+      80392,
+      80393,
+      80394,
+      80395
+    ],
+    "p3d30_drainage_successor_choice": [
+      19977
+    ]
+  },
+  "iis_row_families": {
+    "p3d30_drainage_selected_edge_height": 6,
+    "p3d30_drainage_successor_choice": 1
+  },
+  "iis_row_indices": [
+    19977,
+    80390,
+    80391,
+    80392,
+    80393,
+    80394,
+    80395
+  ],
+  "iis_row_status_at_indices": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "iis_rows": 7,
+  "iis_status": "HighsStatus.kOk",
+  "iis_status_enum": "3",
+  "iis_valid": true,
+  "model_status": "Infeasible",
+  "status_code": 8,
+  "threads": 1,
+  "time_limit_s": 600.0,
+  "variables": 95347
+}
