@@ -1,0 +1,33 @@
+{
+  "R9w_policy": "exact checker-component maximum event cuts; no height pins or equality locks",
+  "candidate_G5_components_D1": 6,
+  "candidate_G5_total_D1": [
+    73,
+    6
+  ],
+  "candidate_G6_D1": 0,
+  "candidate_G6_components_D1": 0,
+  "candidate_R5_components_D1": 8,
+  "candidate_R5_total_D1": [
+    25,
+    8
+  ],
+  "candidate_R8b_D1": 0,
+  "candidate_R8b_components_D1": 0,
+  "candidate_R9w_D1": 24,
+  "candidate_R9w_total": 284,
+  "new_G5_cuts": 4,
+  "new_G6_cuts": 0,
+  "new_R4_cuts": 0,
+  "new_R5_cuts": 3,
+  "new_R5_spitze_cuts": 0,
+  "new_R8_gitter_cuts": 0,
+  "new_R8b_cuts": 0,
+  "new_R9w_event_cuts": 4,
+  "out": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_derived_cuts.json",
+  "protected_G5": 2,
+  "protected_G6": 0,
+  "protected_R5": 5,
+  "protected_R8b": 0,
+  "unsupported_R5_without_saddle": []
+}

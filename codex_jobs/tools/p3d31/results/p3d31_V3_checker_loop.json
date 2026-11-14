@@ -877,9 +877,297 @@
       },
       "single_quer_slack_pp": 0.0,
       "solution_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json"
+    },
+    {
+      "R8_crossing_gate": {
+        "R8_quer_hit": null,
+        "R8_quer_pass_from_official_checker": true,
+        "model_center_unrounded_map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "official_cluster": {
+          "art": "rampe_2x11",
+          "feld": "D1",
+          "gitter": 0.019,
+          "stufe": 0.073,
+          "x": 152.6,
+          "z": 28.4
+        },
+        "requested_label_coordinate_map": [
+          152.5,
+          28.5
+        ]
+      },
+      "R8a_hits_by_tile": {
+        "D1": [],
+        "D2": [],
+        "G1": []
+      },
+      "cut_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_cuts.json",
+      "cuts_after": 36,
+      "cuts_before": 25,
+      "derived_cut_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_derived_cuts.json",
+      "derived_summary_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_derived_summary.json",
+      "endpoint_stage_model": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "fresh_component_derivation": "{\n  \"candidate_G5_total_D1\": [\n    73,\n    6\n  ],\n  \"candidate_G5_components_D1\": 6,\n  \"protected_G5\": 2,\n  \"new_G5_cuts\": 4,\n  \"candidate_R5_total_D1\": [\n    25,\n    8\n  ],\n  \"candidate_R5_components_D1\": 8,\n  \"protected_R5\": 5,\n  \"new_R5_cuts\": 3,\n  \"candidate_R8b_D1\": 0,\n  \"candidate_R8b_components_D1\": 0,\n  \"protected_R8b\": 0,\n  \"new_R8b_cuts\": 0,\n  \"candidate_G6_D1\": 0,\n  \"candidate_G6_components_D1\": 0,\n  \"protected_G6\": 0,\n  \"new_G6_cuts\": 0,\n  \"new_R4_cuts\": 0,\n  \"out\": \"/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_derived_cuts.json\",\n  \"new_R5_spitze_cuts\": 0,\n  \"new_R8_gitter_cuts\": 0,\n  \"candidate_R9w_total\": 284,\n  \"candidate_R9w_D1\": 24,\n  \"new_R9w_event_cuts\": 4,\n  \"R9w_policy\": \"exact checker-component maximum event cuts; no height pins or equality locks\",\n  \"unsupported_R5_without_saddle\": []\n}\n",
+      "hard_target_excess": {
+        "target:D2_R8_R9_hits": 0,
+        "target:D2_hash_changed": 0,
+        "target:D2_new_pruefe_regeln_hits": 0,
+        "target:G1_hash_changed": 0,
+        "target:G3_D1": 0,
+        "target:G5_D1": 4,
+        "target:G5_total": 4,
+        "target:G6_D1": 0,
+        "target:R3_laengs_D1": 0,
+        "target:R3_quer_D1": 0,
+        "target:R3_woelb_D1": 0,
+        "target:R4_schlucht_D1": 0,
+        "target:R5_loch_D1": 3,
+        "target:R5_loch_total": 3,
+        "target:R5_spitze_D1": 0,
+        "target:R8_crossing_gitter": 0,
+        "target:R8_crossing_quer": 0,
+        "target:R8_crossing_stage": 0,
+        "target:R8a_D1_unpermitted": 0,
+        "target:R8b_D1": 0,
+        "target:R9w_total": 4,
+        "target:endpoint_stage_model_violation": 0.0,
+        "target:single_quer_over_20": 0.0
+      },
+      "model_cliff_form_weighted_l1": 13636.582352956922,
+      "model_drainage_mode": "off",
+      "model_drainage_weighted_l1": 0.0,
+      "model_maximum_normalized_slack": 0.0,
+      "model_slack_values": {
+        "axis_tolerance_extra_m": 0.0,
+        "crossing_stage_extra_m": 0.0,
+        "endpoint_r8a_extra_m": 0.0,
+        "endpoint_stage_extra_m": 0.0,
+        "g11_d1_extra_hits": 0.0,
+        "g5_d1_extra_hits": 0.0,
+        "g5_total_extra_hits": 0.0,
+        "grade_cross_extra_m": 0.0,
+        "grade_same_extra_m": 0.0,
+        "p3d29_cliff_form_extra_m": 0.0,
+        "p3d29_locality_extra_m": 0.0,
+        "p3d29_tree_ground_extra_m": 0.0,
+        "p3d31_drainage_extra_m": 0.0,
+        "plane_slope_box_extra_pp": 0.0,
+        "plane_slope_polygon_extra_pp": 0.0,
+        "plane_tolerance_extra_m": 0.0,
+        "r3_long_extra_hits": 0.0,
+        "r3_long_residual_m": 0.0,
+        "r3_quer_extra_hits": 0.0,
+        "r3_quer_residual_pp": 0.0,
+        "r3_wob_extra_hits": 0.0,
+        "r3_wob_residual_m": 0.0,
+        "r4_d1_extra_hits": 0.0,
+        "r5_d1_extra_hits": 0.0,
+        "r5_total_extra_hits": 0.0,
+        "r8b_d1_extra_hits": 0.0,
+        "route_profile_slope_extra_m": 0.0,
+        "safety_gitter_extra_m": 0.0,
+        "safety_quer_extra_pp": 0.0,
+        "safety_single_quer_extra_pp": 0.0,
+        "source_monotone_extra_m": 0.0,
+        "variable_bounds_extra_m": 0.0
+      },
+      "model_status": "Optimal",
+      "model_status_code": 7,
+      "model_variant": "1",
+      "model_weighted_l1": 0.07293420067136003,
+      "new_G11_cuts": 0,
+      "new_G5_cuts": 4,
+      "new_G6_cuts": 0,
+      "new_R4_cuts": 0,
+      "new_R5_cuts": 3,
+      "new_R5_spitze_cuts": 0,
+      "new_R8b_cuts": 0,
+      "new_R9w_cuts": 4,
+      "next_cut_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_next_cuts.json",
+      "official_G11_total_D1": [
+        4,
+        2
+      ],
+      "official_G5_total_D1": [
+        73,
+        6
+      ],
+      "official_R3_D1": {
+        "R3_laengs_m": 6,
+        "R3_quer_pct": 7,
+        "R3_woelb_m": 6
+      },
+      "official_R4_schlucht_total_D1": [
+        0,
+        0
+      ],
+      "official_R5_loch_total_D1": [
+        25,
+        8
+      ],
+      "official_R8_D1_by_rule": {
+        "R8_gitter": 1,
+        "R8_stufe": 2
+      },
+      "official_R8_D1_crossing_stage": [
+        {
+          "art": "rampe_2_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 0.21,
+          "x": 126.5,
+          "z": 31.6
+        },
+        {
+          "art": "rampe_11_anfang",
+          "feld": "D1",
+          "regel": "R8_stufe",
+          "wert": 0.58,
+          "x": 148.5,
+          "z": 2.5
+        }
+      ],
+      "official_R8_D1_endpoint": [],
+      "official_R8_by_tile_D1_G1_D2": {
+        "D1": {
+          "R8_gitter": 1,
+          "R8_stufe": 2
+        },
+        "D2": {},
+        "G1": {}
+      },
+      "official_R8_total_by_rule": {
+        "R8_gitter": 9,
+        "R8_quer": 4,
+        "R8_stufe": 9,
+        "R8a_wegende": 20,
+        "total": 42
+      },
+      "official_R8b_D1": 0,
+      "official_R9_D1_by_rule": {
+        "R9_saegezahn": 1,
+        "R9w_wellen": 24
+      },
+      "official_R9_by_tile_D1_G1_D2": {
+        "D1": {
+          "R9_saegezahn": 1,
+          "R9w_wellen": 24
+        },
+        "D2": {},
+        "G1": {
+          "R9_saegezahn": 1,
+          "R9w_wellen": 12
+        }
+      },
+      "official_R9_total_by_rule": {
+        "R8b_delle": 22,
+        "R9_saegezahn": 34,
+        "R9w_wellen": 284,
+        "total": 340
+      },
+      "official_rules_by_tile_D1_G1_D2": {
+        "D1": {
+          "G11_objekt_schwebt_sinkt": 2,
+          "G5_beule_klippe": 6,
+          "G7b_wandkontur_feld": 1,
+          "R1_blind": 2,
+          "R2_getrennt": 1,
+          "R3_laengs_m": 6,
+          "R3_quer_pct": 7,
+          "R3_woelb_m": 6,
+          "R5_loch": 8
+        },
+        "D2": {
+          "R2_getrennt": 1,
+          "T1_fleckrand": 7
+        },
+        "G1": {
+          "G11_objekt_schwebt_sinkt": 2,
+          "G6_facette": 3,
+          "R1_blind": 1,
+          "R3_laengs_m": 1,
+          "R6_wasser_schnee": 3,
+          "T1_fleckrand": 3
+        }
+      },
+      "official_rules_total": 576,
+      "optimality_proven": true,
+      "primal_feasible": true,
+      "probe_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_official_probe.json",
+      "round": 4,
+      "score": 22.0,
+      "score_excess_by_gate": {
+        "D1:R3_laengs_m": 0,
+        "D1:R3_quer_pct": 0,
+        "D1:R3_woelb_m": 0,
+        "R8:R8_gitter": 0,
+        "R8:R8_quer": 0,
+        "R8:R8_stufe": 0,
+        "R8:R8a_wegende": 0,
+        "R9:R8b_delle": 0,
+        "R9:R9_saegezahn": 0,
+        "R9:R9w_wellen": 4,
+        "rule:G11_objekt_schwebt_sinkt": 0,
+        "rule:G2_spitze_oben": 0,
+        "rule:G2_spitze_oben_fein": 0,
+        "rule:G3_spitze_unten": 0,
+        "rule:G3_spitze_unten_fein": 0,
+        "rule:G5_beule_klippe": 0,
+        "rule:G6_facette": 0,
+        "rule:G7_wand_glatte_flaeche": 0,
+        "rule:G7b_wandkontur_feld": 0,
+        "rule:G7b_wandkontur_kantenschaerfe": 0,
+        "rule:G7b_wandkontur_rauheit": 0,
+        "rule:G8_fluss_nicht_bis_rand": 0,
+        "rule:R1_blind": 0,
+        "rule:R2_getrennt": 0,
+        "rule:R3_laengs_m": 0,
+        "rule:R3_quer_pct": 0,
+        "rule:R3_woelb_m": 0,
+        "rule:R4_rand": 0,
+        "rule:R5_loch": 0,
+        "rule:R6_wasser_schnee": 0,
+        "rule:T1_fleckrand": 0,
+        "rule:T2_textur_abgeschnitten_bildpruefung_offen": 0,
+        "rule:T3_streifen_ringe_bildpruefung_offen": 0,
+        "rule:T4_graue_flussstreifen_bildpruefung_offen": 0,
+        "rule:T5_textur_vs_clay_bildpruefung_offen": 0,
+        "target:D2_R8_R9_hits": 0,
+        "target:D2_hash_changed": 0,
+        "target:D2_new_pruefe_regeln_hits": 0,
+        "target:G1_hash_changed": 0,
+        "target:G3_D1": 0,
+        "target:G5_D1": 4,
+        "target:G5_total": 4,
+        "target:G6_D1": 0,
+        "target:R3_laengs_D1": 0,
+        "target:R3_quer_D1": 0,
+        "target:R3_woelb_D1": 0,
+        "target:R4_schlucht_D1": 0,
+        "target:R5_loch_D1": 3,
+        "target:R5_loch_total": 3,
+        "target:R5_spitze_D1": 0,
+        "target:R8_crossing_gitter": 0,
+        "target:R8_crossing_quer": 0,
+        "target:R8_crossing_stage": 0,
+        "target:R8a_D1_unpermitted": 0,
+        "target:R8b_D1": 0,
+        "target:R9w_total": 4,
+        "target:endpoint_stage_model_violation": 0.0,
+        "target:single_quer_over_20": 0.0
+      },
+      "single_quer_slack_pp": 0.0,
+      "solution_json": "/workspace/wt_dorfmap_p3d31/codex_jobs/tools/p3d31/results/p3d31_V3_round04_model.json",
+      "stop_reason": "four_round_limit"
     }
   ],
   "start_event_cut_count": 0,
-  "status": "Runde 3 abgeschlossen; Checker-in-the-loop wird fortgesetzt",
+  "status": "nach Runde 4 beendet (four_round_limit); Zielabweichungen sind in der Tabelle aufgef\u00fchrt",
   "tag": "p3d31"
 }
