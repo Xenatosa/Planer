@@ -508,6 +508,12 @@ def solve(
     variant = os.environ.get("P3D31_VARIANT", "1")
     if variant not in {"1", "2"}:
         raise ValueError("P3D31_VARIANT muss 1 oder 2 sein")
+    if variant == "2":
+        raise RuntimeError(
+            "P3D31_VARIANT=2 ist gesperrt: der p3d30-Soft-Abfluss-Pfad ist kein "
+            "konstruktiver V2-LP/Priority-Flood-Fallback und darf nicht als solcher "
+            "ausgeführt werden."
+        )
     drainage_mode = "off" if variant == "1" else "soft"
     if (drainage_mode == "soft" and objective_mode == "step"
             and "p3d31_drainage" not in diagnostic_groups):
@@ -679,7 +685,7 @@ def solve(
     construction["official_sink_policy"] = (
         "V1: no successor-choice or reachability constraints; only official G5/R5_loch/G6 event cuts and checker budgets"
         if variant == "1" else
-        "V2: soft drainage fallback; official checker remains authoritative"
+        "V2 unavailable: legacy soft drainage is not the requested LP/Priority-Flood construction"
     )
     drainage_choice_indices = {
         edge_index: binary_start + len(binary_index) + len(quer_binary_index)
@@ -1030,6 +1036,8 @@ def solve(
     active_flat = active_mask.ravel()
     outlets = set(int(v) for v in construction["outlet_flat_indices"])
     drainage_nodes = [int(v) for v in np.flatnonzero(active_flat) if int(v) not in outlets]
+    if variant == "1":
+        drainage_nodes = []
     drainage_node_rows: dict[int, tuple[dict[int, float], float]] = {}
     for node in np.flatnonzero(active_flat):
         iz, ix = divmod(int(node), width)

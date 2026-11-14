@@ -134,7 +134,7 @@ def main() -> None:
             "r5_hole_fixed_non_d1_baseline": 17,
             "r5_hole_d1_max": 5,
             "r4_d1_max": 0,
-            "scope": "round05 V24 event-cut catalog; cut relaxation indicators, not a fresh official component recount",
+            "scope": "p3d31 V1: budgets use fresh events from the official Float32 checker; no internal full-component recount",
         },
     })
     status_text = str(result.get("status", ""))

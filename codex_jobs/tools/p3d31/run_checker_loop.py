@@ -127,7 +127,8 @@ def gate_score(probe: dict, solution: dict) -> tuple[int, dict]:
                  ("R8_stufe", "R8_gitter", "R8_quer", "R8a_wegende")}
     r9_limits = {name: int(baseline_r9.get(name, 0)) + 5 for name in
                  ("R8b_delle", "R9_saegezahn", "R9w_wellen")}
-    r9_limits["R9w_wellen"] = min(r9_limits["R9w_wellen"], 280)
+    # Keep the general +5 rule gate separate from the stricter R9w <= 280
+    # hard target below; the score must not count the 280 limit twice.
     excess = {}
     for name, limit in rule_limits.items():
         excess[f"rule:{name}"] = max(0, int(rules.get(name, 0)) - limit)

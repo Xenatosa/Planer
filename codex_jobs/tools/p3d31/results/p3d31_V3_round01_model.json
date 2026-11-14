@@ -53,7 +53,7 @@
     "r5_hole_d1_max": 5,
     "r5_hole_fixed_non_d1_baseline": 17,
     "r5_hole_total_max": 22,
-    "scope": "round05 V24 event-cut catalog; cut relaxation indicators, not a fresh official component recount"
+    "scope": "p3d31 V1: budgets use fresh events from the official Float32 checker; no internal full-component recount"
   },
   "event_cut_count_by_kind": {},
   "event_cuts_file": "p3d31_V3_R00_cuts.json",
