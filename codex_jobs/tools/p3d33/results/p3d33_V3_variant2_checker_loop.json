@@ -1,0 +1,49 @@
+{
+  "best_round": null,
+  "method": "serial pure-LP, Priority-Flood and official Float32 checker loop",
+  "rounds": [
+    {
+      "all_solver_variables_continuous": true,
+      "constraints": 76388,
+      "construction_json": "/workspace/wt_dorfmap_p3d33/codex_jobs/tools/p3d33/results/p3d33_V3_variant2_round01_lp00_model_construction.json",
+      "event_cuts_before": 0,
+      "flood_cuts": 0,
+      "flood_passes": [],
+      "hard_lp_recheck": {
+        "R4_model_max_violation_m": 0.0,
+        "R8_gitter_m": 0.0,
+        "R8_limits_pass": true,
+        "R8_quer_pct": 0.0,
+        "R8_stufe_m": 0.0,
+        "R8a_model_max_violation_m": 0.0,
+        "all_slacks_zero": true,
+        "cliff_form_max_violation_m": 0.0,
+        "hard_lp_pass": false,
+        "locality_max_violation_m": 0.0,
+        "positive_slacks": {},
+        "primal_feasible": false,
+        "tree_ground_max_violation_m": 0.0
+      },
+      "integer_variable_count": 0,
+      "lp_group_filter": {
+        "evidence_json": "/workspace/wt_dorfmap_p3d33/codex_jobs/tools/p3d33/results/p3d33_V3_variant2_round01_lp_group_filter.json",
+        "method": "single all-family elastic LP solve; diagnostic, not an IIS",
+        "positive_slacks": {
+          "variable_bounds_extra_m": 0.0016555290700299707
+        },
+        "status": "Optimal"
+      },
+      "model_json": "/workspace/wt_dorfmap_p3d33/codex_jobs/tools/p3d33/results/p3d33_V3_variant2_round01_lp00_model.json",
+      "model_status": "Infeasible",
+      "optimality_proven": false,
+      "primal_feasible": false,
+      "round": 1,
+      "stop_reason": "LP_structurally_infeasible",
+      "variables": 20411,
+      "variant": "2"
+    }
+  ],
+  "status": "LP_structurally_infeasible",
+  "tag": "p3d33",
+  "variant": "2"
+}

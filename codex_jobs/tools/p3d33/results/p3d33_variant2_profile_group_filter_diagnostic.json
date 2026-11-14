@@ -1,0 +1,855 @@
+{
+  "local_second_difference_at_joins_m_per_m2": {
+    "left": 0.0,
+    "right": 0.0
+  },
+  "max_outside_window_profile_delta_m": 0.0016555290700299707,
+  "official_R3_wob_at_join_samples_m": {
+    "left": 0.08000006755769817,
+    "right": 0.027083458291734752
+  },
+  "one_sided_transition_slopes_m_per_m": {
+    "left": [
+      -0.5000000000000012,
+      -0.5000000000000012
+    ],
+    "right": [
+      0.0,
+      0.0
+    ]
+  },
+  "point_type": "elastic all-family LP group-filter point; not a primal-feasible hard LP or official Float32 probe",
+  "solver_status": "Optimal",
+  "table": [
+    {
+      "height_diagnostic_m": 7.1296748224350175,
+      "height_old_m": 7.151309993755758,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 20.099999999999998
+    },
+    {
+      "height_diagnostic_m": 6.979674822435017,
+      "height_old_m": 7.024110349428016,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 20.4
+    },
+    {
+      "height_diagnostic_m": 6.829674822435017,
+      "height_old_m": 6.8997456441825165,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 20.7
+    },
+    {
+      "height_diagnostic_m": 6.679674822435016,
+      "height_old_m": 6.778757489858245,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 21.0
+    },
+    {
+      "height_diagnostic_m": 6.529674822435016,
+      "height_old_m": 6.6599222692545315,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 21.3
+    },
+    {
+      "height_diagnostic_m": 6.379674822435016,
+      "height_old_m": 6.540495803118651,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 21.599999999999998
+    },
+    {
+      "height_diagnostic_m": 6.229674822435015,
+      "height_old_m": 6.421535038678343,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 21.9
+    },
+    {
+      "height_diagnostic_m": 6.079674822435015,
+      "height_old_m": 6.301968448872123,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 22.2
+    },
+    {
+      "height_diagnostic_m": 5.929674822435015,
+      "height_old_m": 6.182906138449181,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 22.5
+    },
+    {
+      "height_diagnostic_m": 5.779674822435014,
+      "height_old_m": 6.063112447972506,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 22.8
+    },
+    {
+      "height_diagnostic_m": 5.629674822435014,
+      "height_old_m": 5.94583616061105,
+      "second_difference_diagnostic_m_per_m2": 0.4722995689733741,
+      "slope_diagnostic_m_per_m": -0.4291550646539951,
+      "station_m": 23.099999999999998
+    },
+    {
+      "height_diagnostic_m": 5.522181783642617,
+      "height_old_m": 5.83100152925778,
+      "second_difference_diagnostic_m_per_m2": -0.4722995689733741,
+      "slope_diagnostic_m_per_m": -0.4291550646539951,
+      "station_m": 23.4
+    },
+    {
+      "height_diagnostic_m": 5.372181783642617,
+      "height_old_m": 5.726365686252602,
+      "second_difference_diagnostic_m_per_m2": 9.868649107779169e-15,
+      "slope_diagnostic_m_per_m": -0.4999999999999997,
+      "station_m": 23.7
+    },
+    {
+      "height_diagnostic_m": 5.222181783642617,
+      "height_old_m": 5.633417489934045,
+      "second_difference_diagnostic_m_per_m2": -9.868649107779169e-15,
+      "slope_diagnostic_m_per_m": -0.4999999999999997,
+      "station_m": 24.0
+    },
+    {
+      "height_diagnostic_m": 5.072181783642617,
+      "height_old_m": 5.541686094362413,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000012,
+      "station_m": 24.3
+    },
+    {
+      "height_diagnostic_m": 4.922181783642617,
+      "height_old_m": 5.44503745679469,
+      "second_difference_diagnostic_m_per_m2": 0.46190345058486754,
+      "slope_diagnostic_m_per_m": -0.43071448241227106,
+      "station_m": 24.599999999999998
+    },
+    {
+      "height_diagnostic_m": 4.813753094195254,
+      "height_old_m": 5.347547914703497,
+      "second_difference_diagnostic_m_per_m2": 0.11341248086640635,
+      "slope_diagnostic_m_per_m": -0.34441709269458,
+      "station_m": 24.9
+    },
+    {
+      "height_diagnostic_m": 4.715531528025869,
+      "height_old_m": 5.247490980185826,
+      "second_difference_diagnostic_m_per_m2": -0.3819642244635762,
+      "slope_diagnostic_m_per_m": -0.3846998542341555,
+      "station_m": 25.2
+    },
+    {
+      "height_diagnostic_m": 4.582933181654761,
+      "height_old_m": 5.149915808901724,
+      "second_difference_diagnostic_m_per_m2": 0.5122003977314155,
+      "slope_diagnostic_m_per_m": -0.3651644282439796,
+      "station_m": 25.5
+    },
+    {
+      "height_diagnostic_m": 4.496432871079481,
+      "height_old_m": 5.059054590487349,
+      "second_difference_diagnostic_m_per_m2": 0.509852272205475,
+      "slope_diagnostic_m_per_m": -0.21185652775344604,
+      "station_m": 25.8
+    },
+    {
+      "height_diagnostic_m": 4.4558192650026935,
+      "height_old_m": 4.9479782362192966,
+      "second_difference_diagnostic_m_per_m2": -0.8184611021685464,
+      "slope_diagnostic_m_per_m": -0.25814785224790676,
+      "station_m": 26.099999999999998
+    },
+    {
+      "height_diagnostic_m": 4.341544159730737,
+      "height_old_m": 4.813953295953249,
+      "second_difference_diagnostic_m_per_m2": 0.49778046011829485,
+      "slope_diagnostic_m_per_m": -0.3062499485554445,
+      "station_m": 26.4
+    },
+    {
+      "height_diagnostic_m": 4.272069295869427,
+      "height_old_m": 4.716423988342285,
+      "second_difference_diagnostic_m_per_m2": 0.06633437049659266,
+      "slope_diagnostic_m_per_m": -0.22163272396321138,
+      "station_m": 26.7
+    },
+    {
+      "height_diagnostic_m": 4.20856452535281,
+      "height_old_m": 4.658086976771868,
+      "second_difference_diagnostic_m_per_m2": 0.07907420427423083,
+      "slope_diagnostic_m_per_m": -0.19982143774758784,
+      "station_m": 27.0
+    },
+    {
+      "height_diagnostic_m": 4.152176433220874,
+      "height_old_m": 4.588833869755199,
+      "second_difference_diagnostic_m_per_m2": 0.11743868932098976,
+      "slope_diagnostic_m_per_m": -0.17034450370830476,
+      "station_m": 27.3
+    },
+    {
+      "height_diagnostic_m": 4.106357823127827,
+      "height_old_m": 4.516572060122916,
+      "second_difference_diagnostic_m_per_m2": 0.509095667700521,
+      "slope_diagnostic_m_per_m": -0.07636435015507814,
+      "station_m": 27.599999999999998
+    },
+    {
+      "height_diagnostic_m": 4.106357823127827,
+      "height_old_m": 4.444276244651036,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 27.9
+    },
+    {
+      "height_diagnostic_m": 4.106357823127827,
+      "height_old_m": 4.371975721579009,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 28.2
+    },
+    {
+      "height_diagnostic_m": 4.106357823127827,
+      "height_old_m": 4.2943346190664595,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 28.5
+    },
+    {
+      "height_diagnostic_m": 4.106357823127827,
+      "height_old_m": 4.223830699920654,
+      "second_difference_diagnostic_m_per_m2": -0.40985135260999983,
+      "slope_diagnostic_m_per_m": -0.06147770289149997,
+      "station_m": 28.799999999999997
+    },
+    {
+      "height_diagnostic_m": 4.069471201392927,
+      "height_old_m": 4.159448623657227,
+      "second_difference_diagnostic_m_per_m2": 0.16763431318267408,
+      "slope_diagnostic_m_per_m": -0.09781025880559883,
+      "station_m": 29.099999999999998
+    },
+    {
+      "height_diagnostic_m": 4.047671667844468,
+      "height_old_m": 4.111555573626589,
+      "second_difference_diagnostic_m_per_m2": 0.1675509268274311,
+      "slope_diagnostic_m_per_m": -0.047532472804083056,
+      "station_m": 29.4
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.07466611259989461,
+      "slope_diagnostic_m_per_m": -0.011199916889984193,
+      "station_m": 29.7
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 30.0
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 30.299999999999997
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 30.599999999999998
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 30.9
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.07649347736686,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 31.2
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.071803749524424,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 31.5
+    },
+    {
+      "height_diagnostic_m": 4.0409517177104775,
+      "height_old_m": 4.071803749524424,
+      "second_difference_diagnostic_m_per_m2": -0.018521060710380906,
+      "slope_diagnostic_m_per_m": -0.002778159106557136,
+      "station_m": 31.799999999999997
+    },
+    {
+      "height_diagnostic_m": 4.039284822246543,
+      "height_old_m": 4.071661369153611,
+      "second_difference_diagnostic_m_per_m2": 0.03193465046751085,
+      "slope_diagnostic_m_per_m": -0.0007661206429876444,
+      "station_m": 32.1
+    },
+    {
+      "height_diagnostic_m": 4.040492045324685,
+      "height_old_m": 4.069486325736172,
+      "second_difference_diagnostic_m_per_m2": 0.05693227785181776,
+      "slope_diagnostic_m_per_m": 0.012563918604911647,
+      "station_m": 32.4
+    },
+    {
+      "height_diagnostic_m": 4.04682317340949,
+      "height_old_m": 4.065246102950302,
+      "second_difference_diagnostic_m_per_m2": -0.0703458676089477,
+      "slope_diagnostic_m_per_m": 0.010551880141342156,
+      "station_m": 32.699999999999996
+    },
+    {
+      "height_diagnostic_m": 4.04682317340949,
+      "height_old_m": 4.065243361020334,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 33.0
+    },
+    {
+      "height_diagnostic_m": 4.04682317340949,
+      "height_old_m": 4.063034911942455,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 33.3
+    },
+    {
+      "height_diagnostic_m": 4.04682317340949,
+      "height_old_m": 4.045426868661822,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 33.6
+    },
+    {
+      "height_diagnostic_m": 4.04682317340949,
+      "height_old_m": 4.026791269999309,
+      "second_difference_diagnostic_m_per_m2": -0.1963338255407226,
+      "slope_diagnostic_m_per_m": -0.02945007383110839,
+      "station_m": 33.9
+    },
+    {
+      "height_diagnostic_m": 4.029153129110825,
+      "height_old_m": 4.016937226332346,
+      "second_difference_diagnostic_m_per_m2": 0.1963338255407226,
+      "slope_diagnostic_m_per_m": -0.02945007383110839,
+      "station_m": 34.199999999999996
+    },
+    {
+      "height_diagnostic_m": 4.029153129110825,
+      "height_old_m": 4.016937226332346,
+      "second_difference_diagnostic_m_per_m2": -0.43940100155079875,
+      "slope_diagnostic_m_per_m": -0.06591015023261981,
+      "station_m": 34.5
+    },
+    {
+      "height_diagnostic_m": 3.9896070389712532,
+      "height_old_m": 3.998435654323734,
+      "second_difference_diagnostic_m_per_m2": 0.19014370388546414,
+      "slope_diagnostic_m_per_m": -0.10329874488242001,
+      "station_m": 34.8
+    },
+    {
+      "height_diagnostic_m": 3.967173882181373,
+      "height_old_m": 3.972290623940818,
+      "second_difference_diagnostic_m_per_m2": 0.24925729766533464,
+      "slope_diagnostic_m_per_m": -0.0373885946498002,
+      "station_m": 35.1
+    },
+    {
+      "height_diagnostic_m": 3.967173882181373,
+      "height_old_m": 3.9636507206684963,
+      "second_difference_diagnostic_m_per_m2": -0.5861174559990702,
+      "slope_diagnostic_m_per_m": -0.08791761839986054,
+      "station_m": 35.4
+    },
+    {
+      "height_diagnostic_m": 3.914423311141457,
+      "height_old_m": 3.9615524256367523,
+      "second_difference_diagnostic_m_per_m2": 0.5861174559990702,
+      "slope_diagnostic_m_per_m": -0.08791761839986054,
+      "station_m": 35.699999999999996
+    },
+    {
+      "height_diagnostic_m": 3.914423311141457,
+      "height_old_m": 3.9615524256367523,
+      "second_difference_diagnostic_m_per_m2": -0.6826084079150481,
+      "slope_diagnostic_m_per_m": -0.10239126118725721,
+      "station_m": 36.0
+    },
+    {
+      "height_diagnostic_m": 3.8529885544291025,
+      "height_old_m": 3.9615524256367523,
+      "second_difference_diagnostic_m_per_m2": -0.08978276757939756,
+      "slope_diagnostic_m_per_m": -0.21824993751142405,
+      "station_m": 36.3
+    },
+    {
+      "height_diagnostic_m": 3.7834733486346024,
+      "height_old_m": 3.9365167618523533,
+      "second_difference_diagnostic_m_per_m2": 0.7723911754944456,
+      "slope_diagnostic_m_per_m": -0.11585867632416684,
+      "station_m": 36.6
+    },
+    {
+      "height_diagnostic_m": 3.7834733486346024,
+      "height_old_m": 3.9332051387885394,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 36.9
+    },
+    {
+      "height_diagnostic_m": 3.7834733486346024,
+      "height_old_m": 3.9332051387885394,
+      "second_difference_diagnostic_m_per_m2": -0.8545139218820325,
+      "slope_diagnostic_m_per_m": -0.12817708828230487,
+      "station_m": 37.199999999999996
+    },
+    {
+      "height_diagnostic_m": 3.7065670956652195,
+      "height_old_m": 3.9332051387885394,
+      "second_difference_diagnostic_m_per_m2": 0.8466556976164411,
+      "slope_diagnostic_m_per_m": -0.12935582192214357,
+      "station_m": 37.5
+    },
+    {
+      "height_diagnostic_m": 3.7058598554813162,
+      "height_old_m": 3.9332051387885394,
+      "second_difference_diagnostic_m_per_m2": -1.4864625405199248,
+      "slope_diagnostic_m_per_m": -0.22532684835766612,
+      "station_m": 37.8
+    },
+    {
+      "height_diagnostic_m": 3.57137098665062,
+      "height_old_m": 3.9332051387885394,
+      "second_difference_diagnostic_m_per_m2": 1.4943207647855161,
+      "slope_diagnostic_m_per_m": -0.22414811471782742,
+      "station_m": 38.1
+    },
+    {
+      "height_diagnostic_m": 3.57137098665062,
+      "height_old_m": 3.9281089149670256,
+      "second_difference_diagnostic_m_per_m2": -1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 38.4
+    },
+    {
+      "height_diagnostic_m": 3.42137098665062,
+      "height_old_m": 3.917999738738069,
+      "second_difference_diagnostic_m_per_m2": 1.0046185006380042,
+      "slope_diagnostic_m_per_m": -0.3493072249042991,
+      "station_m": 38.699999999999996
+    },
+    {
+      "height_diagnostic_m": 3.3617866517080404,
+      "height_old_m": 3.8845410641698646,
+      "second_difference_diagnostic_m_per_m2": 0.6620481660286615,
+      "slope_diagnostic_m_per_m": -0.09930722490429922,
+      "station_m": 39.0
+    },
+    {
+      "height_diagnostic_m": 3.3617866517080404,
+      "height_old_m": 3.845652176973619,
+      "second_difference_diagnostic_m_per_m2": -0.869196820325064,
+      "slope_diagnostic_m_per_m": -0.1303795230487596,
+      "station_m": 39.3
+    },
+    {
+      "height_diagnostic_m": 3.2835589378787846,
+      "height_old_m": 3.8121692878185782,
+      "second_difference_diagnostic_m_per_m2": 0.869196820325064,
+      "slope_diagnostic_m_per_m": -0.1303795230487596,
+      "station_m": 39.6
+    },
+    {
+      "height_diagnostic_m": 3.2835589378787846,
+      "height_old_m": 3.7894031200288927,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 39.9
+    },
+    {
+      "height_diagnostic_m": 3.2835589378787846,
+      "height_old_m": 3.774670324859951,
+      "second_difference_diagnostic_m_per_m2": -0.5223335741195958,
+      "slope_diagnostic_m_per_m": -0.07835003611793938,
+      "station_m": 40.199999999999996
+    },
+    {
+      "height_diagnostic_m": 3.236548916208021,
+      "height_old_m": 3.763667780593077,
+      "second_difference_diagnostic_m_per_m2": -1.1443330925470698,
+      "slope_diagnostic_m_per_m": -0.3283500361179392,
+      "station_m": 40.5
+    },
+    {
+      "height_diagnostic_m": 3.086548916208021,
+      "height_old_m": 3.7464767948974047,
+      "second_difference_diagnostic_m_per_m2": 0.7287888679712258,
+      "slope_diagnostic_m_per_m": -0.39068166980431585,
+      "station_m": 40.8
+    },
+    {
+      "height_diagnostic_m": 3.0021399143254315,
+      "height_old_m": 3.7245474718617375,
+      "second_difference_diagnostic_m_per_m2": 0.8455674825616181,
+      "slope_diagnostic_m_per_m": -0.1545282172243893,
+      "station_m": 41.1
+    },
+    {
+      "height_diagnostic_m": 2.9938319858733875,
+      "height_old_m": 3.6963496953603827,
+      "second_difference_diagnostic_m_per_m2": 0.09231031613382198,
+      "slope_diagnostic_m_per_m": -0.013846547420073296,
+      "station_m": 41.4
+    },
+    {
+      "height_diagnostic_m": 2.9938319858733875,
+      "height_old_m": 3.664756773745806,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 41.699999999999996
+    },
+    {
+      "height_diagnostic_m": 2.9938319858733875,
+      "height_old_m": 3.628654947932837,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 42.0
+    },
+    {
+      "height_diagnostic_m": 2.9938319858733875,
+      "height_old_m": 3.590352332912884,
+      "second_difference_diagnostic_m_per_m2": -0.9861428616547337,
+      "slope_diagnostic_m_per_m": -0.14792142924821006,
+      "station_m": 42.3
+    },
+    {
+      "height_diagnostic_m": 2.9050791283244615,
+      "height_old_m": 3.5496419268748225,
+      "second_difference_diagnostic_m_per_m2": 0.26382754249906093,
+      "slope_diagnostic_m_per_m": -0.256268727121561,
+      "station_m": 42.6
+    },
+    {
+      "height_diagnostic_m": 2.840070749600451,
+      "height_old_m": 3.5070299501967934,
+      "second_difference_diagnostic_m_per_m2": 0.7223153191556728,
+      "slope_diagnostic_m_per_m": -0.10834729787335093,
+      "station_m": 42.9
+    },
+    {
+      "height_diagnostic_m": 2.840070749600451,
+      "height_old_m": 3.4616551976799093,
+      "second_difference_diagnostic_m_per_m2": -0.7642813805248326,
+      "slope_diagnostic_m_per_m": -0.1146422070787249,
+      "station_m": 43.199999999999996
+    },
+    {
+      "height_diagnostic_m": 2.771285425353216,
+      "height_old_m": 3.4146951691296445,
+      "second_difference_diagnostic_m_per_m2": -0.7808116331691848,
+      "slope_diagnostic_m_per_m": -0.3464061591328275,
+      "station_m": 43.5
+    },
+    {
+      "height_diagnostic_m": 2.6322270541207544,
+      "height_old_m": 3.365068360130938,
+      "second_difference_diagnostic_m_per_m2": 1.0680581576162487,
+      "slope_diagnostic_m_per_m": -0.30331918046576795,
+      "station_m": 43.8
+    },
+    {
+      "height_diagnostic_m": 2.5892939170737552,
+      "height_old_m": 3.3134951243783393,
+      "second_difference_diagnostic_m_per_m2": -0.4158155623988592,
+      "slope_diagnostic_m_per_m": -0.20548279118315954,
+      "station_m": 44.1
+    },
+    {
+      "height_diagnostic_m": 2.5089373794108587,
+      "height_old_m": 3.2588653802225704,
+      "second_difference_diagnostic_m_per_m2": 0.8567293829618134,
+      "slope_diagnostic_m_per_m": -0.1393457180987164,
+      "station_m": 44.4
+    },
+    {
+      "height_diagnostic_m": 2.5056864862145254,
+      "height_old_m": 3.2021796624000562,
+      "second_difference_diagnostic_m_per_m2": -0.8598165328760369,
+      "slope_diagnostic_m_per_m": -0.1398087905858499,
+      "station_m": 44.699999999999996
+    },
+    {
+      "height_diagnostic_m": 2.4250521050593488,
+      "height_old_m": 3.1387294480749226,
+      "second_difference_diagnostic_m_per_m2": 0.8959375683908515,
+      "slope_diagnostic_m_per_m": -0.1343906352586277,
+      "station_m": 45.0
+    },
+    {
+      "height_diagnostic_m": 2.4250521050593488,
+      "height_old_m": 3.070417126804336,
+      "second_difference_diagnostic_m_per_m2": -0.5982521845469732,
+      "slope_diagnostic_m_per_m": -0.08973782768204597,
+      "station_m": 45.3
+    },
+    {
+      "height_diagnostic_m": 2.371209408450121,
+      "height_old_m": 3.00002945358461,
+      "second_difference_diagnostic_m_per_m2": 0.5982521845469732,
+      "slope_diagnostic_m_per_m": -0.08973782768204597,
+      "station_m": 45.6
+    },
+    {
+      "height_diagnostic_m": 2.371209408450121,
+      "height_old_m": 2.9280645648441928,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 45.9
+    },
+    {
+      "height_diagnostic_m": 2.371209408450121,
+      "height_old_m": 2.856128839503172,
+      "second_difference_diagnostic_m_per_m2": -1.11110347062739,
+      "slope_diagnostic_m_per_m": -0.1666655205941085,
+      "station_m": 46.199999999999996
+    },
+    {
+      "height_diagnostic_m": 2.271210096093656,
+      "height_old_m": 2.783952970868501,
+      "second_difference_diagnostic_m_per_m2": 1.11110347062739,
+      "slope_diagnostic_m_per_m": -0.1666655205941085,
+      "station_m": 46.5
+    },
+    {
+      "height_diagnostic_m": 2.271210096093656,
+      "height_old_m": 2.7131810898098756,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 46.8
+    },
+    {
+      "height_diagnostic_m": 2.271210096093656,
+      "height_old_m": 2.647029442075559,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 47.1
+    },
+    {
+      "height_diagnostic_m": 2.271210096093656,
+      "height_old_m": 2.575444459915161,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 47.4
+    },
+    {
+      "height_diagnostic_m": 2.271210096093656,
+      "height_old_m": 2.5019476413726807,
+      "second_difference_diagnostic_m_per_m2": -0.5321634229092759,
+      "slope_diagnostic_m_per_m": -0.07982451343639138,
+      "station_m": 47.699999999999996
+    },
+    {
+      "height_diagnostic_m": 2.2233153880318213,
+      "height_old_m": 2.428499460220337,
+      "second_difference_diagnostic_m_per_m2": 0.23220087091481034,
+      "slope_diagnostic_m_per_m": -0.1248188962355612,
+      "station_m": 48.0
+    },
+    {
+      "height_diagnostic_m": 2.1963187583523194,
+      "height_old_m": 2.355262517929077,
+      "second_difference_diagnostic_m_per_m2": -0.6160743094225504,
+      "slope_diagnostic_m_per_m": -0.1823999120117222,
+      "station_m": 48.3
+    },
+    {
+      "height_diagnostic_m": 2.113875440824788,
+      "height_old_m": 2.2821943759918213,
+      "second_difference_diagnostic_m_per_m2": 0.873013376567385,
+      "slope_diagnostic_m_per_m": -0.143859051939997,
+      "station_m": 48.6
+    },
+    {
+      "height_diagnostic_m": 2.110003327188321,
+      "height_old_m": 2.2092199325561523,
+      "second_difference_diagnostic_m_per_m2": -0.4615051431186087,
+      "slope_diagnostic_m_per_m": -0.08213281692268057,
+      "station_m": 48.9
+    },
+    {
+      "height_diagnostic_m": 2.0645957506711796,
+      "height_old_m": 2.136293411254883,
+      "second_difference_diagnostic_m_per_m2": -0.5374419485785382,
+      "slope_diagnostic_m_per_m": -0.23197488067725222,
+      "station_m": 49.199999999999996
+    },
+    {
+      "height_diagnostic_m": 1.9708183987819698,
+      "height_old_m": 2.0629191398620605,
+      "second_difference_diagnostic_m_per_m2": 0.5770677511888077,
+      "slope_diagnostic_m_per_m": -0.22603101028571104,
+      "station_m": 49.5
+    },
+    {
+      "height_diagnostic_m": 1.928977144499753,
+      "height_old_m": 1.990185260772705,
+      "second_difference_diagnostic_m_per_m2": 0.3515719955364421,
+      "slope_diagnostic_m_per_m": -0.08673504827692322,
+      "station_m": 49.8
+    },
+    {
+      "height_diagnostic_m": 1.918777369815816,
+      "height_old_m": 1.9184200763702393,
+      "second_difference_diagnostic_m_per_m2": -1.5533358368451453,
+      "slope_diagnostic_m_per_m": -0.26699962447322834,
+      "station_m": 50.1
+    },
+    {
+      "height_diagnostic_m": 1.768777369815816,
+      "height_old_m": 1.8470661640167236,
+      "second_difference_diagnostic_m_per_m2": 1.1620399964425272,
+      "slope_diagnostic_m_per_m": -0.32569400053362063,
+      "station_m": 50.4
+    },
+    {
+      "height_diagnostic_m": 1.7233609694956435,
+      "height_old_m": 1.7761024236679077,
+      "second_difference_diagnostic_m_per_m2": -1.1620399964425272,
+      "slope_diagnostic_m_per_m": -0.32569400053362063,
+      "station_m": 50.699999999999996
+    },
+    {
+      "height_diagnostic_m": 1.5733609694956436,
+      "height_old_m": 1.705696940422058,
+      "second_difference_diagnostic_m_per_m2": 1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 51.0
+    },
+    {
+      "height_diagnostic_m": 1.5733609694956436,
+      "height_old_m": 1.6357978582382202,
+      "second_difference_diagnostic_m_per_m2": -1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 51.3
+    },
+    {
+      "height_diagnostic_m": 1.4233609694956437,
+      "height_old_m": 1.5666091442108154,
+      "second_difference_diagnostic_m_per_m2": 1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 51.6
+    },
+    {
+      "height_diagnostic_m": 1.4233609694956437,
+      "height_old_m": 1.498124361038208,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 51.9
+    },
+    {
+      "height_diagnostic_m": 1.4233609694956437,
+      "height_old_m": 1.4305353164672852,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 52.199999999999996
+    },
+    {
+      "height_diagnostic_m": 1.4233609694956437,
+      "height_old_m": 1.3638441562652588,
+      "second_difference_diagnostic_m_per_m2": -1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 52.5
+    },
+    {
+      "height_diagnostic_m": 1.2733609694956438,
+      "height_old_m": 1.2982323169708252,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.4999999999999997,
+      "station_m": 52.8
+    },
+    {
+      "height_diagnostic_m": 1.123360969495644,
+      "height_old_m": 1.23377525806427,
+      "second_difference_diagnostic_m_per_m2": 1.6666666666666656,
+      "slope_diagnostic_m_per_m": -0.24999999999999986,
+      "station_m": 53.1
+    },
+    {
+      "height_diagnostic_m": 1.123360969495644,
+      "height_old_m": 1.1705951690673828,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 53.4
+    },
+    {
+      "height_diagnostic_m": 1.123360969495644,
+      "height_old_m": 1.108839511871338,
+      "second_difference_diagnostic_m_per_m2": -1.6666666666666683,
+      "slope_diagnostic_m_per_m": -0.25000000000000006,
+      "station_m": 53.699999999999996
+    },
+    {
+      "height_diagnostic_m": 0.9733609694956439,
+      "height_old_m": 1.0485470294952393,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": -0.5000000000000001,
+      "station_m": 54.0
+    },
+    {
+      "height_diagnostic_m": 0.8233609694956439,
+      "height_old_m": 0.9899877905845642,
+      "second_difference_diagnostic_m_per_m2": 1.666666666666667,
+      "slope_diagnostic_m_per_m": -0.25000000000000006,
+      "station_m": 54.3
+    },
+    {
+      "height_diagnostic_m": 0.8233609694956439,
+      "height_old_m": 0.93305903673172,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 54.6
+    },
+    {
+      "height_diagnostic_m": 0.8233609694956439,
+      "height_old_m": 0.8781582117080688,
+      "second_difference_diagnostic_m_per_m2": 0.0,
+      "slope_diagnostic_m_per_m": 0.0,
+      "station_m": 54.9
+    }
+  ],
+  "tag": "p3d33",
+  "transition_indices": {
+    "left": 67,
+    "right": 183
+  },
+  "variable_bounds_slack_m": 0.0016555290700299707,
+  "variant": "2",
+  "window_m": [
+    20.0,
+    55.0
+  ]
+}
