@@ -1,0 +1,19 @@
+{
+  "base_commit": "cc3693ec1f4b43a5b39f749d7b72d7a2d1883950",
+  "branch": "art/dorfmap-p3d35",
+  "felder_json": {
+    "path": "team/art/dorfmap_grundgeruest/relief3d/neu/felder.json",
+    "sha256": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435"
+  },
+  "policy_default": "official",
+  "status": "preflight",
+  "tag": "p3d35",
+  "vektor_json": {
+    "path": "team/art/dorfmap_grundgeruest/relief3d/neu/vektor.json",
+    "sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e"
+  },
+  "zellen_relief_csv": {
+    "path": "team/art/dorfmap_grundgeruest/relief3d/neu/zellen_relief.csv",
+    "sha256": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+  }
+}
