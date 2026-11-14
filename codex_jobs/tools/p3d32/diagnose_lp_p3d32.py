@@ -634,6 +634,8 @@ def solve(
     total_h = sum(lengths)
     lo_h = np.empty(total_h, dtype=np.float64)
     hi_h = np.empty(total_h, dtype=np.float64)
+    v3_route_payload = json.loads(P3D31_V3_REFERENCE.read_text(encoding="utf-8"))["routes"]
+    p3d32_fixed_route_meta = {}
     r3_sections = []
     section_lookup = []
     for route, p in enumerate(profiles):
@@ -648,6 +650,21 @@ def solve(
             lo[tail] = np.maximum(lo[tail], h0[tail] - WALL_TAIL_TOL)
             hi[tail] = np.minimum(hi[tail], h0[tail] + WALL_TAIL_TOL)
         lo[fixed], hi[fixed] = h0[fixed], h0[fixed]
+        v3_route = v3_route_payload[f"rampe_{p['index']}"]
+        v3_coords = np.asarray(v3_route["coords_map"], dtype=np.float64)
+        v3_heights = np.asarray(v3_route["solution_h_m"], dtype=np.float64)
+        if (len(v3_heights) != len(h0) or v3_coords.shape != coords.shape
+                or not np.allclose(v3_coords, coords, atol=1e-6, rtol=0.0)):
+            raise RuntimeError(f"V3-Rampenprofil rampe_{p['index']} passt nicht zum D1-Rasterprofil")
+        # p3d32 keeps every route height from the p3d31 V3 way model fixed.
+        lo, hi = v3_heights.copy(), v3_heights.copy()
+        p3d32_fixed_route_meta[f"rampe_{p['index']}"] = {
+            "stations": int(len(v3_heights)),
+            "source": str(P3D31_V3_REFERENCE.relative_to(ROOT)),
+            "height_sha256_f64le": hashlib.sha256(
+                v3_heights.astype("<f8", copy=False).tobytes()
+            ).hexdigest(),
+        }
         lo_h[h_offsets[route]:h_offsets[route] + len(h0)] = lo
         hi_h[h_offsets[route]:h_offsets[route] + len(h0)] = hi
         if r3_limit is not None:
@@ -1093,6 +1110,7 @@ def solve(
         "stencils": len(smoothness_specs),
         "terms": len(smoothness_specs),
     }
+    construction_meta["p3d32_fixed_route_profiles"] = p3d32_fixed_route_meta
     construction_spec = {
         "tag": "p3d31", "source_relief_sha256": hashlib.sha256(RELIEF.read_bytes()).hexdigest(),
         "p3d17_D1_reference_sha256": hashlib.sha256(
