@@ -1,0 +1,336 @@
+{
+  "constraints": 76458,
+  "highspy_version": "1.15.1",
+  "iis_attempted": true,
+  "iis_column_indices": [
+    336,
+    5285,
+    5286,
+    5370,
+    5371,
+    7784,
+    7785,
+    7786,
+    7865,
+    7883
+  ],
+  "iis_column_names": [
+    "route_11_height_station_83.400000m",
+    "surface_x_152.000_z_28.500",
+    "surface_x_152.500_z_28.500",
+    "surface_x_152.000_z_29.000",
+    "surface_x_152.500_z_29.000",
+    "x_7784",
+    "x_7785",
+    "x_7786",
+    "x_7865",
+    "x_7883"
+  ],
+  "iis_columns": 10,
+  "iis_model_file": "codex_jobs/tools/p3d34/results/p3d34_A1_only_endpoint_stage.iis.lp",
+  "iis_model_write_status": "HighsStatus.kOk",
+  "iis_row_families": {
+    "axis_supports": 1,
+    "p3d33_fixed_anchors": 3,
+    "plane_core_supports": 4,
+    "variable_bounds": 1
+  },
+  "iis_row_indices": [
+    508,
+    10465,
+    10466,
+    10468,
+    68773,
+    69190,
+    69195,
+    69242,
+    69294
+  ],
+  "iis_rows": 9,
+  "iis_rows_evidence": [
+    {
+      "family": "variable_bounds",
+      "nonzero_count": 2,
+      "rhs": -4.075321253968727,
+      "row_index": 508,
+      "row_name": "row_508_variable_bounds",
+      "terms_first_12": [
+        {
+          "coefficient": -1.0,
+          "column": 336,
+          "name": "route_11_height_station_83.400000m"
+        },
+        {
+          "coefficient": -1.0,
+          "column": 7883,
+          "name": "x_7883"
+        }
+      ]
+    },
+    {
+      "family": "p3d33_fixed_anchors",
+      "nonzero_count": 1,
+      "rhs": -0.0014789684735996105,
+      "row_index": 10465,
+      "row_name": "row_10465_p3d33_fixed_anchors",
+      "terms_first_12": [
+        {
+          "coefficient": -1.0,
+          "column": 7785,
+          "name": "x_7785"
+        }
+      ]
+    },
+    {
+      "family": "p3d33_fixed_anchors",
+      "nonzero_count": 1,
+      "rhs": -0.014926910338516087,
+      "row_index": 10466,
+      "row_name": "row_10466_p3d33_fixed_anchors",
+      "terms_first_12": [
+        {
+          "coefficient": 1.0,
+          "column": 7786,
+          "name": "x_7786"
+        }
+      ]
+    },
+    {
+      "family": "p3d33_fixed_anchors",
+      "nonzero_count": 1,
+      "rhs": 4.054505122834982,
+      "row_index": 10468,
+      "row_name": "row_10468_p3d33_fixed_anchors",
+      "terms_first_12": [
+        {
+          "coefficient": 1.0,
+          "column": 5286,
+          "name": "surface_x_152.500_z_28.500"
+        }
+      ]
+    },
+    {
+      "family": "axis_supports",
+      "nonzero_count": 6,
+      "rhs": 0.02,
+      "row_index": 68773,
+      "row_name": "row_68773_axis_supports",
+      "terms_first_12": [
+        {
+          "coefficient": 1.0,
+          "column": 336,
+          "name": "route_11_height_station_83.400000m"
+        },
+        {
+          "coefficient": -0.19414589738482876,
+          "column": 5285,
+          "name": "surface_x_152.000_z_28.500"
+        },
+        {
+          "coefficient": -0.7328813027214093,
+          "column": 5286,
+          "name": "surface_x_152.500_z_28.500"
+        },
+        {
+          "coefficient": -0.015282582558995415,
+          "column": 5370,
+          "name": "surface_x_152.000_z_29.000"
+        },
+        {
+          "coefficient": -0.057690217334766515,
+          "column": 5371,
+          "name": "surface_x_152.500_z_29.000"
+        },
+        {
+          "coefficient": -1.0,
+          "column": 7865,
+          "name": "x_7865"
+        }
+      ]
+    },
+    {
+      "family": "plane_core_supports",
+      "nonzero_count": 5,
+      "rhs": -0.0,
+      "row_index": 69190,
+      "row_name": "row_69190_plane_core_supports",
+      "terms_first_12": [
+        {
+          "coefficient": 0.5,
+          "column": 5285,
+          "name": "surface_x_152.000_z_28.500"
+        },
+        {
+          "coefficient": 0.5,
+          "column": 5286,
+          "name": "surface_x_152.500_z_28.500"
+        },
+        {
+          "coefficient": -1.0,
+          "column": 7784,
+          "name": "x_7784"
+        },
+        {
+          "coefficient": 0.45515023450296893,
+          "column": 7785,
+          "name": "x_7785"
+        },
+        {
+          "coefficient": -0.17569080701818365,
+          "column": 7786,
+          "name": "x_7786"
+        }
+      ]
+    },
+    {
+      "family": "plane_core_supports",
+      "nonzero_count": 4,
+      "rhs": 0.0,
+      "row_index": 69195,
+      "row_name": "row_69195_plane_core_supports",
+      "terms_first_12": [
+        {
+          "coefficient": -1.0,
+          "column": 5286,
+          "name": "surface_x_152.500_z_28.500"
+        },
+        {
+          "coefficient": 1.0,
+          "column": 7784,
+          "name": "x_7784"
+        },
+        {
+          "coefficient": -0.15515023450296894,
+          "column": 7785,
+          "name": "x_7785"
+        },
+        {
+          "coefficient": 0.17569080701818365,
+          "column": 7786,
+          "name": "x_7786"
+        }
+      ]
+    },
+    {
+      "family": "plane_core_supports",
+      "nonzero_count": 7,
+      "rhs": -0.0,
+      "row_index": 69242,
+      "row_name": "row_69242_plane_core_supports",
+      "terms_first_12": [
+        {
+          "coefficient": 0.25,
+          "column": 5285,
+          "name": "surface_x_152.000_z_28.500"
+        },
+        {
+          "coefficient": 0.25,
+          "column": 5286,
+          "name": "surface_x_152.500_z_28.500"
+        },
+        {
+          "coefficient": 0.25,
+          "column": 5370,
+          "name": "surface_x_152.000_z_29.000"
+        },
+        {
+          "coefficient": 0.25,
+          "column": 5371,
+          "name": "surface_x_152.500_z_29.000"
+        },
+        {
+          "coefficient": -1.0,
+          "column": 7784,
+          "name": "x_7784"
+        },
+        {
+          "coefficient": 0.45515023450296893,
+          "column": 7785,
+          "name": "x_7785"
+        },
+        {
+          "coefficient": -0.4756908070181836,
+          "column": 7786,
+          "name": "x_7786"
+        }
+      ]
+    },
+    {
+      "family": "plane_core_supports",
+      "nonzero_count": 4,
+      "rhs": -0.0,
+      "row_index": 69294,
+      "row_name": "row_69294_plane_core_supports",
+      "terms_first_12": [
+        {
+          "coefficient": 1.0,
+          "column": 5371,
+          "name": "surface_x_152.500_z_29.000"
+        },
+        {
+          "coefficient": -1.0,
+          "column": 7784,
+          "name": "x_7784"
+        },
+        {
+          "coefficient": 0.15515023450296894,
+          "column": 7785,
+          "name": "x_7785"
+        },
+        {
+          "coefficient": -0.7756908070181836,
+          "column": 7786,
+          "name": "x_7786"
+        }
+      ]
+    }
+  ],
+  "iis_status": "HighsStatus.kOk",
+  "iis_status_enum": "3",
+  "iis_strategy": 6,
+  "iis_strategy_note": "LP elasticity filter followed by reduction to an IIS, matching p3d31 step0",
+  "iis_valid": true,
+  "integer_variable_count": 0,
+  "intervention": {
+    "changed_rows": [],
+    "kind": "none",
+    "note": "LP-only targeted row relaxation; official checker and source files are unchanged",
+    "rampe_2_start_profile_column": 0,
+    "rampe_2_start_station_m": 0.0,
+    "relax_m": 0.0
+  },
+  "max_primal_infeasibility": Infinity,
+  "method": "HiGHS LP-IIS, p3d31 step0 strategy",
+  "model_status": "Infeasible",
+  "objective_value": 0.0,
+  "row_family_counts": {
+    "R8_gitter_safety": 560,
+    "R8_quer_safety": 32,
+    "axis_supports": 718,
+    "crossing_stage_cap": 1,
+    "endpoint_r8a_runout_pairs": 4108,
+    "endpoint_stage_pairs": 920,
+    "p3d29_cliff_gorge_curvature": 40162,
+    "p3d29_locality_outside": 2830,
+    "p3d29_locality_ring": 6356,
+    "p3d29_tree_ground_reference": 216,
+    "p3d33_fixed_anchors": 8,
+    "p3d33_ramp2_c1_transition": 4,
+    "p3d33_slope_smoothness_l1": 872,
+    "plane_core_supports": 572,
+    "plane_slope_box": 4,
+    "plane_slope_polygon": 32,
+    "r3_cross_constraints": 2208,
+    "r3_long_constraints": 777,
+    "r8_neighbor_stage": 2222,
+    "route_pair_grade": 2244,
+    "route_profile_slope": 772,
+    "source_monotonicity": 381,
+    "variable_bounds": 10459
+  },
+  "status_code": 8,
+  "tag": "p3d34_A1_only_endpoint_stage",
+  "threads": 1,
+  "time_limit_s": 600.0,
+  "variables": 20411
+}

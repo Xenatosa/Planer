@@ -1,0 +1,823 @@
+{
+  "D1_regression_fence_vertex_counts": {},
+  "R3_single_cross_slope_limit_pct": 20.0,
+  "R8_gate_center_unrounded_map": [
+    152.6292918620858,
+    28.353590994151514
+  ],
+  "R8_gate_gitter_support_pairs": 280,
+  "R8_gate_metrics_solution": {
+    "R8_gitter_m": 0.020000000000003126,
+    "R8_quer_pct": 1.7999999999999134,
+    "R8_stufe_m": 0.1160000000005923
+  },
+  "R8_gate_quer_slope_limit_pct": 3.0,
+  "R8_gate_quer_supports": 115,
+  "R8_neighbor_pair_count": 1111,
+  "R9w_exact_bandpass_lock_points": 0,
+  "all_solver_variables_continuous": true,
+  "axis_supports": 359,
+  "axis_tolerance_m": 0.02,
+  "base_model_sha256": "64ce3df7bbaeb70b7c30e0ee6058fd47bf281b57106868833847481e7fa7c26e",
+  "checker_spacing_map_units": 0.25,
+  "cliff_form_l1_absolute_deviation_sum_m": 21607.683023366953,
+  "cliff_form_weighted_l1_value": 634029.2338920992,
+  "constraints": 76454,
+  "curvature_l1_variable_count": 12086,
+  "cuts_are_round05_v24_catalog_for_all_geometries": false,
+  "diagnostic_groups_enabled": [
+    "axis_supports",
+    "crossing_stage",
+    "endpoint_r8a",
+    "endpoint_stage",
+    "g11",
+    "g5",
+    "grade_cross",
+    "grade_same",
+    "p3d29_cliff_form",
+    "p3d29_locality",
+    "p3d29_tree_ground",
+    "p3d31_drainage",
+    "plane_core",
+    "plane_slope_box",
+    "plane_slope_polygon",
+    "r3_long",
+    "r3_quer",
+    "r3_wob",
+    "r4",
+    "r5_hole",
+    "r8b",
+    "route_profile_slope",
+    "safety_gitter",
+    "safety_quer",
+    "safety_single_quer",
+    "source_monotone",
+    "variable_bounds"
+  ],
+  "diagnostic_model_sha256": "0d8c33fc84c963555df50a8b8af3f68d6d89ef0828dcd3d3dcf87661b8582ed6",
+  "drainage_l1_sum_m": 0.0,
+  "drainage_weighted_l1_value": 0.0,
+  "endpoint_R8a_float32_guard_m": 0.0,
+  "endpoint_R8a_named_exception": {
+    "coordinate_map": [
+      126.51,
+      31.62
+    ],
+    "endpoint_id": "rampe_2_anfang",
+    "limit_m": 0.18,
+    "name": "R8a_ausnahme_rampe2_start",
+    "source": "[F] Fabian widget t166s961, 2026-11-13"
+  },
+  "endpoint_R8a_pair_count": 2054,
+  "endpoint_R8a_pair_limit_m": 0.1,
+  "endpoint_r8a_lock_enabled": true,
+  "endpoint_stage_float32_guard_m": 0.0,
+  "endpoint_stage_limit_m": 0.054,
+  "endpoint_stage_pair_count": 460,
+  "event_counter_model": {
+    "g5_d1_max": 2,
+    "g5_fixed_non_d1_baseline": 67,
+    "g5_total_max": 69,
+    "r4_d1_max": 0,
+    "r5_hole_d1_max": 5,
+    "r5_hole_fixed_non_d1_baseline": 17,
+    "r5_hole_total_max": 22,
+    "scope": "p3d33: local cuts are derived only from official Float32 checker events"
+  },
+  "event_cut_count_by_kind": {},
+  "event_cuts_file": "p3d33_V3_variant1_round01_event_cuts.json",
+  "event_cuts_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "exact_event_cut_count": 0,
+  "exact_event_selector_count": 0,
+  "family_iis_scope": "p3d33 continuous V3 LP; group-level only, not row IIS",
+  "family_max_relaxation_locations": {
+    "endpoint_r8a": {
+      "maximum_violation_m": 1.4988010832439613e-15,
+      "nearest_route_endpoint": {
+        "endpoint": "start",
+        "map": [
+          126.51000020929992,
+          31.620001726724226
+        ],
+        "route": 2
+      },
+      "pair": {
+        "a": [
+          126.5,
+          29.25
+        ],
+        "anchor_xz": [
+          126.51000020929992,
+          31.620001726724226
+        ],
+        "ausnahme": "R8a_ausnahme_rampe2_start",
+        "b": [
+          126.5,
+          29.5
+        ],
+        "delta_m": 0.1800000000000015,
+        "limit_m": 0.18,
+        "wegend_id": "rampe_2_anfang"
+      }
+    },
+    "endpoint_stage": {
+      "maximum_violation_m": 3.8163916471489756e-16,
+      "pair": {
+        "a": [
+          153.25,
+          36.75
+        ],
+        "b": [
+          153.5,
+          36.75
+        ],
+        "delta_m": 0.05400000000000038,
+        "limit_m": 0.054
+      }
+    },
+    "grade_cross": {
+      "maximum_violation_m": 1.3877787807814457e-16,
+      "pair": {
+        "a_map": [
+          152.52228332229234,
+          28.370161473185767
+        ],
+        "b_map": [
+          152.5121125914242,
+          28.315462664873145
+        ],
+        "grade_limit_m": 0.030043628785937887,
+        "height_delta_m": 0.030043628785938026,
+        "pair_distance_m": 0.06676361952430641,
+        "route_a": 2,
+        "route_b": 11,
+        "station_a_m": 31.5,
+        "station_b_m": 41.4
+      }
+    },
+    "grade_same": {
+      "maximum_violation_m": 0.0,
+      "pair": null
+    },
+    "plane_slope_box": {
+      "map": [
+        152.6292918620858,
+        28.353590994151514
+      ],
+      "maximum_violation_pp": 0.0
+    },
+    "plane_slope_polygon": {
+      "map": [
+        152.6292918620858,
+        28.353590994151514
+      ],
+      "maximum_violation_pp": 0.0
+    },
+    "variable_bounds": {
+      "maximum_violation_m": 0.0016555290700299707,
+      "variable": {
+        "height_m": 12.446500827741493,
+        "kind": "route_height",
+        "lower_m": 12.448156356811523,
+        "map": [
+          126.75818382719117,
+          31.5899203070369
+        ],
+        "route": 2,
+        "station_m": 0.3,
+        "upper_m": 12.448156356811523
+      }
+    }
+  },
+  "family_row_counts": {
+    "R8_gitter_safety": 560,
+    "R8_quer_safety": 32,
+    "axis_supports": 718,
+    "crossing_stage_cap": 1,
+    "endpoint_r8a_runout_pairs": 4108,
+    "endpoint_stage_pairs": 920,
+    "event_counter_caps": 0,
+    "event_cut_G11": 0,
+    "event_cut_G5": 0,
+    "event_cut_G6": 0,
+    "event_cut_R4": 0,
+    "event_cut_R5": 0,
+    "event_cut_R5sp": 0,
+    "event_cut_R8G": 0,
+    "event_cut_R8b": 0,
+    "event_cut_R9w": 0,
+    "p3d29_cliff_gorge_curvature": 40162,
+    "p3d29_locality_outside": 2830,
+    "p3d29_locality_ring": 6356,
+    "p3d29_tree_ground_reference": 216,
+    "p3d33_fixed_anchors": 6,
+    "p3d33_ramp2_c1_transition": 4,
+    "p3d33_slope_smoothness_l1": 872,
+    "plane_core_supports": 572,
+    "plane_slope_box": 4,
+    "plane_slope_polygon": 32,
+    "r3_cross_constraints": 2208,
+    "r3_long_constraints": 777,
+    "r8_neighbor_stage": 2222,
+    "regression_locks": 0,
+    "route_pair_grade": 2244,
+    "route_profile_slope": 772,
+    "source_monotonicity": 381,
+    "variable_bounds": 10457
+  },
+  "flood_cut_count": 0,
+  "g_m_per_m": 0.45,
+  "geometry": "V3",
+  "highs_status_code": 7,
+  "infeasibility_proven": false,
+  "integer_variable_count": 0,
+  "maximum_normalized_slack": 0.0016555290700299707,
+  "mesh_raster_spacing_map_units": 0.5,
+  "minimum_neighbor_step_m": 0.116,
+  "mip_dual_bound_m": 0.0,
+  "mip_gap": Infinity,
+  "normalized_slack_values": {
+    "axis_tolerance_extra_m": 0.0,
+    "crossing_stage_extra_m": 0.0,
+    "endpoint_r8a_extra_m": 0.0,
+    "endpoint_stage_extra_m": 0.0,
+    "g11_d1_extra_hits": 0.0,
+    "g5_d1_extra_hits": 0.0,
+    "g5_total_extra_hits": 0.0,
+    "grade_cross_extra_m": 0.0,
+    "grade_same_extra_m": 0.0,
+    "p3d29_cliff_form_extra_m": 0.0,
+    "p3d29_locality_extra_m": 0.0,
+    "p3d29_tree_ground_extra_m": 0.0,
+    "p3d31_drainage_extra_m": 0.0,
+    "plane_slope_box_extra_pp": 0.0,
+    "plane_slope_polygon_extra_pp": 0.0,
+    "plane_tolerance_extra_m": 0.0,
+    "r3_long_extra_hits": 0.0,
+    "r3_long_residual_m": 0.0,
+    "r3_quer_extra_hits": 0.0,
+    "r3_quer_residual_pp": 0.0,
+    "r3_wob_extra_hits": 0.0,
+    "r3_wob_residual_m": 0.0,
+    "r4_d1_extra_hits": 0.0,
+    "r5_d1_extra_hits": 0.0,
+    "r5_total_extra_hits": 0.0,
+    "r8b_d1_extra_hits": 0.0,
+    "route_profile_slope_extra_m": 0.0,
+    "safety_gitter_extra_m": 0.0,
+    "safety_quer_extra_pp": 0.0,
+    "safety_single_quer_extra_pp": 0.0,
+    "source_monotone_extra_m": 0.0,
+    "variable_bounds_extra_m": 0.0016555290700299707
+  },
+  "objective_mode": "diagnostic",
+  "official_sink_policy": "V1: no successor-choice or reachability constraints; only official G5/R5_loch/G6 event cuts and checker budgets",
+  "optimality_proven": true,
+  "p3d18_variant24_reference_D1_sha256": "bcadfe7e0c03030ac040f259f788a390af39ae888f5d291c5869c1a9dbf10fd8",
+  "p3d26_priority_flood_seed": {
+    "file": "codex_jobs/tools/p3d26/results/p3d26_V3_all_hard_with_rampe2_exception.json",
+    "grid": {
+      "height": 87,
+      "spacing": 0.5,
+      "width": 85,
+      "x0": 126.0,
+      "z0": 0.0
+    },
+    "primal_feasible": true,
+    "sha256": "0b03648f7d71a25783d111b81d7d8b4980e3a5ad9c6760d76209cebae241245e",
+    "status": "Optimal"
+  },
+  "p3d31_construction": {
+    "counts": {
+      "active_vertices": 5980,
+      "core_vertices": 2802,
+      "curvature_l1_vertices": 2931,
+      "drainage_candidate_edges": 37686,
+      "drainage_edges": 5579,
+      "endpoint_support_vertices": 527,
+      "outside_pinned_vertices": 1415,
+      "priority_flood_boundary_outlets": 402,
+      "priority_flood_model_vertices": 2911,
+      "ring_vertices": 3178,
+      "route_longitudinal_edges": 219,
+      "route_outlets_on_work_area_boundary": 2,
+      "transfer_support_outside_active_vertices": 0,
+      "transfer_support_vertices": 4924,
+      "wall_cliff_gorge_vertices": 5097,
+      "zero_eps_vertices": 1737
+    },
+    "crossing_radius_map": 4.0,
+    "curvature_hard_stencils": 7995,
+    "curvature_l1_stencils": 12086,
+    "curvature_l1_weight_rule": "1 / max(0.02 m, 0.25 * abs(reference second difference))",
+    "drainage_binary_variables": 0,
+    "drainage_candidates": {
+      "candidate_edges": 37686,
+      "maximum_candidates_per_non_outlet": 8,
+      "minimum_candidates_per_non_outlet": 2,
+      "non_outlet_vertices": 5578,
+      "outlet_reachability_escape_edges": 0,
+      "outlet_vertices": 402,
+      "reachability_to_outlet_vertices": 5980,
+      "reference_slope_escape_policy": null,
+      "reference_slope_escape_vertices": 0,
+      "reference_slope_limit_m": null,
+      "rejected_reference_slope_edges": 0,
+      "rejected_road_direction_edges": 6938,
+      "road_band_vertices": 3275,
+      "road_direction_policy": "within 4.8 m of V3 route or WEGA road raster: flow is along the local ramp axis or moves away from it, with no lateral side crossing",
+      "unreachable_non_outlet_vertices": 0,
+      "variant": "1"
+    },
+    "drainage_eps_m": 0.001,
+    "drainage_flow_variables": 0,
+    "drainage_formulation": "official checker event cuts only; no per-cell successor or outlet reachability constraint",
+    "drainage_l1_mode": "off",
+    "drainage_l1_scale_m": 0.0001,
+    "drainage_slack_variables": 0,
+    "endpoint_runout_support_vertices": 527,
+    "exact_v3_transfer_support_vertices": 4924,
+    "hard_curvature_tolerance_rule": "max(0.02 m, 0.25 * abs(p3d17 reference second difference))",
+    "linear_constraint_rows": {
+      "cliff_curvature_hard": 15990,
+      "cliff_curvature_l1": 24172,
+      "locality_outside": 2830,
+      "locality_ring": 6356,
+      "tree_ground": 216
+    },
+    "modeled_drainage_candidate_count": 0,
+    "official_sink_policy": "V1: no successor-choice or reachability constraints; only official G5/R5_loch/G6 event cuts and checker budgets",
+    "outlet_note": "All active work-area boundary cells are outlets. Each active non-outlet selects exactly one local successor; single-commodity unit supply at every non-outlet forces all selected paths to outlets and excludes directed cycles. The p3d29 Priority-Flood tree remains in the construction record for comparison but does not constrain the p3d31 active area.",
+    "outside_tolerance_m": 0.001,
+    "p3d23_route_pair_radius_m": 4.5,
+    "p3d31_variant": "1",
+    "p3d33_fixed_route_profiles": {
+      "rampe_11": {
+        "height_sha256_f64le": "988b8602efd5037e1a3f37060f0dbd687cea40efba77c3cb03a54754056d70b1",
+        "source": "codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json",
+        "stations": 191
+      },
+      "rampe_2": {
+        "height_sha256_f64le": "d0167e4d1c861787040379f3dff86a4a7d1de0a8c271db328c241d9b4366bbe7",
+        "source": "codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json",
+        "stations": 197
+      }
+    },
+    "p3d33_smoothness": {
+      "reference_slope_range": [
+        0.15,
+        0.8
+      ],
+      "rule": "L1 deviation of second differences from p3d17 in active non-cliff gentle-slope stencils",
+      "stencils": 436,
+      "terms": 436
+    },
+    "p3d33_window_bounds": {
+      "active_vertices_core_plus_ring": 5980,
+      "outside_window_transfer_support_vertices": 0,
+      "ring_width_m": 7.5,
+      "x_map": [
+        126.0,
+        168.0
+      ],
+      "z_map": [
+        0.0,
+        43.0
+      ]
+    },
+    "priority_flood_seed": {
+      "file": "codex_jobs/tools/p3d26/results/p3d26_V3_all_hard_with_rampe2_exception.json",
+      "grid": {
+        "height": 87,
+        "spacing": 0.5,
+        "width": 85,
+        "x0": 126.0,
+        "z0": 0.0
+      },
+      "primal_feasible": true,
+      "sha256": "0b03648f7d71a25783d111b81d7d8b4980e3a5ad9c6760d76209cebae241245e",
+      "status": "Optimal"
+    },
+    "ring_tolerance_inner_m": 0.02,
+    "ring_width_m": 7.5,
+    "routes": [
+      {
+        "chain_nodes": 88,
+        "downhill_endpoint_is_route_start": false,
+        "outlet_on_boundary": true,
+        "outlet_xz": [
+          168.0,
+          26.5
+        ],
+        "priority_flood_start_to_end_m": [
+          0.0,
+          12.212055922120207
+        ],
+        "route": 2
+      },
+      {
+        "chain_nodes": 134,
+        "downhill_endpoint_is_route_start": false,
+        "outlet_on_boundary": true,
+        "outlet_xz": [
+          164.5,
+          43.0
+        ],
+        "priority_flood_start_to_end_m": [
+          0.0,
+          12.885089378356934
+        ],
+        "route": 11
+      }
+    ],
+    "runout_across_map": 2.5,
+    "runout_along_map": [
+      -1.0,
+      4.0
+    ],
+    "spec_file": "p3d34_B3_V1_official_full_start_all_family_filter_construction.json",
+    "spec_sha256": "671737ba2f491722ab52151ed77d0b4053417f918678dff0b93edcd1b8d7e828",
+    "tree_ground_tolerance_m": 0.001,
+    "variant": "3"
+  },
+  "p3d31_construction_max_violations": {
+    "cliff_curvature_hard": {
+      "maximum_violation_m": 1.349614864309956e-15,
+      "stencil": {
+        "center_xz": [
+          141.5,
+          6.5
+        ],
+        "reference_second_difference_m": 0.009135246276855469,
+        "second_difference_m": -0.010864753723145881,
+        "tolerance_m": 0.02
+      }
+    },
+    "cliff_curvature_l1": {
+      "largest_stencil": {
+        "center_xz": [
+          149.0,
+          33.5
+        ],
+        "reference_second_difference_m": 0.2142024040222168,
+        "second_difference_m": -16.00499307460393
+      },
+      "maximum_abs_deviation_m": 16.219195478626148,
+      "weighted_l1_sum": 634029.2339838278
+    },
+    "drainage": {
+      "edge": null,
+      "maximum_violation_m": 0.0
+    },
+    "locality": {
+      "outside": {
+        "allowed_abs_delta_m": 0.001,
+        "delta_m": 0.0,
+        "maximum_violation_m": 0.0,
+        "xz": [
+          126.0,
+          0.0
+        ]
+      },
+      "transition_ring": {
+        "allowed_abs_delta_m": 0.01696000061929226,
+        "delta_m": -0.016960000619293147,
+        "maximum_violation_m": 8.881784197001252e-16,
+        "xz": [
+          163.0,
+          22.5
+        ]
+      }
+    },
+    "locality_row_debug": {
+      "150.5|42.5": {
+        "fixed": 0.019270761888975408,
+        "lower_activity": 0.007914852370077875,
+        "lower_rhs": 0.007914852370077875,
+        "lower_row": 19499,
+        "reference": 0.019484329968690872,
+        "target_coefficients": {
+          "7662": 0.008564832109178995
+        },
+        "tolerance": 0.008128420449793339,
+        "upper_activity": -0.007914852370077875,
+        "upper_rhs": 0.008341988529508803,
+        "upper_row": 19498
+      },
+      "152.5|42.5": {
+        "fixed": 0.05873367366611505,
+        "lower_activity": 0.009873331424291379,
+        "lower_rhs": 0.009873331424291379,
+        "lower_row": 19507,
+        "reference": 0.06026192381978035,
+        "target_coefficients": {
+          "7666": 0.029948380255966734
+        },
+        "tolerance": 0.011401581577956676,
+        "upper_activity": -0.009873331424291379,
+        "upper_rhs": 0.012929831731621974,
+        "upper_row": 19506
+      }
+    },
+    "r4_official_indicator": {
+      "maximum_violation_m": 0.0,
+      "section": null
+    },
+    "tree_ground": {
+      "maximum_violation_m": 8.673617379884035e-19,
+      "sample": {
+        "delta_m": -0.0010000000000000009,
+        "ground_sample_xz": [
+          135.5,
+          39.5
+        ],
+        "tree_index": 1479,
+        "tree_xz": [
+          136.25,
+          39.75
+        ]
+      },
+      "stencil_samples": 108
+    }
+  },
+  "p3d31_drainage_selection": {
+    "integrality_relaxed": true,
+    "non_outlet_vertex_count": 0,
+    "selected_edge_count": 0,
+    "selected_edges": [],
+    "single_commodity_flow_capacity_per_edge": 5578
+  },
+  "p3d31_variant": "1",
+  "p3d33_linear_lazy_cuts": true,
+  "p3d33_platform": {
+    "anchor_source": "codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json",
+    "anchor_source_sha256": "b8aed2cf4d587d2c1a567398a1506786c337b6ce07d797643a2784492638a724",
+    "crossfall_percent": 1.5,
+    "crossing_anchor_height_m": 4.054505122834982,
+    "crossing_anchor_xz": [
+      152.5,
+      28.5
+    ],
+    "outlet_direction_basis": "negative bilinear central-difference gradient of p3d31 V3 round03 at 152.5|28.5",
+    "outlet_direction_physical_unit": [
+      -0.09859789823997403,
+      0.9951273559010725
+    ],
+    "outlet_target_cell_xz": [
+      152.5,
+      30.0
+    ],
+    "outlet_target_height_m": 4.027636684225653,
+    "plane_height_at_R8_center_m": 4.057357106064146,
+    "platform_gradient_physical": [
+      0.0014789684735996105,
+      -0.014926910338516087
+    ],
+    "platform_radius_physical_m": 2.0,
+    "rampe_2_start_height_m": 12.469809532165527,
+    "rampe_2_start_xz": [
+      126.51,
+      31.62
+    ],
+    "variant": "1"
+  },
+  "p3d33_ramp2_transition": {
+    "C0": "piecewise-linear profile interpolation is continuous",
+    "C1": "exact equal one-sided first differences at both fixed/variable seams",
+    "official_R3_wob_stencil_at_each_join_max_m": 0.08,
+    "second_difference_at_join_m": 0.0
+  },
+  "p3d33_ramp2_window": {
+    "first_variable_index": 84,
+    "first_variable_station_m": 25.2,
+    "last_variable_index": 166,
+    "last_variable_station_m": 49.8,
+    "outside_window_fixed_to_p3d31_v3_except_station_0": true,
+    "physical_station_window_m": [
+      25.0,
+      50.0
+    ],
+    "platform_crossfall_unchanged": 0.015,
+    "start_policy": "official",
+    "station_0_profile_sample_variable": true,
+    "variable_profile_samples_in_window": 83
+  },
+  "p3d33_smoothness_l1_absolute_deviation_sum_m": 44.50341467532643,
+  "p3d33_smoothness_l1_row_count": 872,
+  "p3d33_smoothness_l1_variable_count": 436,
+  "p3d33_variant": "1",
+  "p3d34_start_policy": "official",
+  "p3d34_start_policy_replacement": "rampe_2 station 0 profile bound and final-mesh p3d31 height anchor removed; existing official R8a 0.18 m exception, 0.054 m end-stage cap, R8, R3 and axis-support rows remain active",
+  "p3d34_start_policy_rule": "station 0 profile height uses existing axis support, official R8a 0.18 m named exception, R8 and R3",
+  "plane_core_supports": 143,
+  "plane_gradient_x": 0.0014789684735996105,
+  "plane_gradient_z": -0.014926910338516087,
+  "plane_height_m": 4.057357106064146,
+  "plane_radius_m": 2.0,
+  "plane_slope_limit_pct": 3.0,
+  "plane_slope_pct": 1.5,
+  "plane_tolerance_m": 0.02,
+  "primal_feasibility_residuals": {
+    "loaded_matrix_delta": 0.0,
+    "loaded_row_bound_delta": 0.0,
+    "maximum_row_violation": 9.91821273998994e-08,
+    "maximum_solver_matrix_activity_delta": 5.922901058497132e-13,
+    "maximum_solver_row_upper_violation": 9.91821273998994e-08,
+    "maximum_variable_bound_violation": 0.0,
+    "solver_max_primal_infeasibility": 9.91821273998994e-08,
+    "worst_row_family": "p3d29_cliff_gorge_curvature",
+    "worst_row_index": 48795,
+    "worst_variable_index": 0
+  },
+  "primal_feasible": true,
+  "primary_objective_value": 0.0016555290700299707,
+  "primary_r3_long_indicator_sum": 0.03800127945858779,
+  "primary_r3_quer_indicator_sum": 0.04839965837280036,
+  "primary_r3_wob_indicator_sum": 1.7266978606192978,
+  "priority_flood_cuts_file": "codex_jobs/tools/p3d33/results/p3d33_V3_variant1_round01_flood_cuts.json",
+  "r3_D1_limit": 6,
+  "r3_long_limit": 6,
+  "r3_quer_limit": 7,
+  "r3_quer_sections_D1_solution": 0,
+  "r3_sections_D1_solution": 0,
+  "r3_wob_limit": 7,
+  "r3_wob_sections_D1_solution": 0,
+  "r8_center_unrounded_map": [
+    152.6292918620858,
+    28.353590994151514
+  ],
+  "reference_solution": "p3d17_joint_mesh_v22.json",
+  "relax_integrality": true,
+  "relaxed_integrality": true,
+  "requested_groups": [
+    "axis_supports",
+    "crossing_stage",
+    "endpoint_r8a",
+    "endpoint_stage",
+    "g11",
+    "g5",
+    "grade_cross",
+    "grade_same",
+    "p3d29_cliff_form",
+    "p3d29_locality",
+    "p3d29_tree_ground",
+    "p3d31_drainage",
+    "plane_core",
+    "plane_slope_box",
+    "plane_slope_polygon",
+    "r3_long",
+    "r3_quer",
+    "r3_wob",
+    "r4",
+    "r5_hole",
+    "r8b",
+    "route_profile_slope",
+    "safety_gitter",
+    "safety_quer",
+    "safety_single_quer",
+    "source_monotone",
+    "variable_bounds"
+  ],
+  "route_pair_count": 1122,
+  "same_route_arc_distance_factor": 1.25,
+  "same_route_pair_count": 218,
+  "scenario": "joint",
+  "selected_soft_event_cut_relaxations_by_kind": {
+    "G11": 0,
+    "G5": 0,
+    "R4": 0,
+    "R5": 0,
+    "R8b": 0
+  },
+  "slack_units": {
+    "axis_tolerance_extra_m": "m",
+    "crossing_stage_extra_m": "m",
+    "endpoint_r8a_extra_m": "m",
+    "endpoint_stage_extra_m": "m",
+    "g11_d1_extra_hits": "hits",
+    "g5_d1_extra_hits": "hits",
+    "g5_total_extra_hits": "hits",
+    "grade_cross_extra_m": "m",
+    "grade_same_extra_m": "m",
+    "p3d29_cliff_form_extra_m": "m",
+    "p3d29_locality_extra_m": "m",
+    "p3d29_tree_ground_extra_m": "m",
+    "p3d31_drainage_extra_m": "max_edge_m; L1 is reported separately",
+    "plane_slope_box_extra_pp": "percentage_points",
+    "plane_slope_polygon_extra_pp": "percentage_points",
+    "plane_tolerance_extra_m": "m",
+    "r3_long_extra_hits": "hits",
+    "r3_long_residual_m": "m",
+    "r3_quer_extra_hits": "hits",
+    "r3_quer_residual_pp": "percentage_points",
+    "r3_wob_extra_hits": "hits",
+    "r3_wob_residual_m": "m",
+    "r4_d1_extra_hits": "hits",
+    "r5_d1_extra_hits": "hits",
+    "r5_total_extra_hits": "hits",
+    "r8b_d1_extra_hits": "hits",
+    "route_profile_slope_extra_m": "m",
+    "safety_gitter_extra_m": "m",
+    "safety_quer_extra_pp": "percentage_points",
+    "safety_single_quer_extra_pp": "percentage_points",
+    "source_monotone_extra_m": "m",
+    "variable_bounds_extra_m": "m"
+  },
+  "slack_values": {
+    "axis_tolerance_extra_m": 0.0,
+    "crossing_stage_extra_m": 0.0,
+    "endpoint_r8a_extra_m": 0.0,
+    "endpoint_stage_extra_m": 0.0,
+    "g11_d1_extra_hits": 0.0,
+    "g5_d1_extra_hits": 0.0,
+    "g5_total_extra_hits": 0.0,
+    "grade_cross_extra_m": 0.0,
+    "grade_same_extra_m": 0.0,
+    "p3d29_cliff_form_extra_m": 0.0,
+    "p3d29_locality_extra_m": 0.0,
+    "p3d29_tree_ground_extra_m": 0.0,
+    "p3d31_drainage_extra_m": 0.0,
+    "plane_slope_box_extra_pp": 0.0,
+    "plane_slope_polygon_extra_pp": 0.0,
+    "plane_tolerance_extra_m": 0.0,
+    "r3_long_extra_hits": 0.0,
+    "r3_long_residual_m": 0.0,
+    "r3_quer_extra_hits": 0.0,
+    "r3_quer_residual_pp": 0.0,
+    "r3_wob_extra_hits": 0.0,
+    "r3_wob_residual_m": 0.0,
+    "r4_d1_extra_hits": 0.0,
+    "r5_d1_extra_hits": 0.0,
+    "r5_total_extra_hits": 0.0,
+    "r8b_d1_extra_hits": 0.0,
+    "route_profile_slope_extra_m": 0.0,
+    "safety_gitter_extra_m": 0.0,
+    "safety_quer_extra_pp": 0.0,
+    "safety_single_quer_extra_pp": 0.0,
+    "source_monotone_extra_m": 0.0,
+    "variable_bounds_extra_m": 0.0016555290700299707
+  },
+  "solver": "highspy.Highs; threads=1",
+  "source_relief_path": "/tmp/p3d22_v3_source.json.gz",
+  "source_relief_sha256": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+  "stage_limit_m": 0.116,
+  "status": "Optimal",
+  "status_code": 7,
+  "success": true,
+  "tie_break_movement_l1_m": 0.0,
+  "tie_break_reference_mesh": "GB source field",
+  "tie_break_reference_solution": "p3d17_joint_mesh_v22.json",
+  "tie_break_weighted_l1_objective": 0.0,
+  "time_limit_s": 600.0,
+  "transfer_base": "p3d21_transfer_base_route3_v29.json",
+  "transfer_base_sha256": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287",
+  "variables": 20411,
+  "weighted_l1_scales": {
+    "axis_tolerance_extra_m": 0.02,
+    "crossing_stage_extra_m": 0.116,
+    "endpoint_r8a_extra_m": 0.1,
+    "endpoint_stage_extra_m": 0.054,
+    "g11_d1_extra_hits": 1.0,
+    "g5_d1_extra_hits": 1.0,
+    "g5_total_extra_hits": 1.0,
+    "grade_cross_extra_m": 0.45,
+    "grade_same_extra_m": 0.45,
+    "p3d29_cliff_form_extra_m": 0.02,
+    "p3d29_locality_extra_m": 0.02,
+    "p3d29_tree_ground_extra_m": 0.001,
+    "p3d31_drainage_extra_m": 0.0001,
+    "plane_slope_box_extra_pp": 1.0,
+    "plane_slope_polygon_extra_pp": 1.0,
+    "plane_tolerance_extra_m": 0.02,
+    "r3_long_extra_hits": 1.0,
+    "r3_long_residual_m": 0.08,
+    "r3_quer_extra_hits": 1.0,
+    "r3_quer_residual_pp": 3.5,
+    "r3_wob_extra_hits": 1.0,
+    "r3_wob_residual_m": 0.08,
+    "r4_d1_extra_hits": 1.0,
+    "r5_d1_extra_hits": 1.0,
+    "r5_total_extra_hits": 1.0,
+    "r8b_d1_extra_hits": 1.0,
+    "route_profile_slope_extra_m": 0.6,
+    "safety_gitter_extra_m": 0.02,
+    "safety_quer_extra_pp": 3.0,
+    "safety_single_quer_extra_pp": 20.0,
+    "source_monotone_extra_m": 1.0,
+    "variable_bounds_extra_m": 1.0
+  },
+  "weighted_l1_value": 0.0016555290700299707,
+  "worst_pair": {
+    "a": {
+      "height_m": 3.72434827280272,
+      "x": 156.5,
+      "z": 28.25
+    },
+    "b": {
+      "height_m": 3.608348272802128,
+      "x": 156.5,
+      "z": 28.5
+    },
+    "step_m": 0.1160000000005923
+  }
+}
