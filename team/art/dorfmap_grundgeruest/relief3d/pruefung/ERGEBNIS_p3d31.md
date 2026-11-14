@@ -28,9 +28,10 @@ Marker: `[S]` direkt gemessen · `[R]` Modellbefund/abgeleitete Diagnose · `[A]
 
 ## 3. Float32-Gate-Probe mit Checker-in-the-loop
 
-`[S]` Runde 2 abgeschlossen; Checker-in-the-loop wird fortgesetzt Höchstens vier serielle Runden, je Solve höchstens 600 s. Jede Probe lief über den unveränderten Float32-Direkttransfer und die vier unveränderten offiziellen Prüfer.
+`[S]` Runde 3 abgeschlossen; Checker-in-the-loop wird fortgesetzt Höchstens vier serielle Runden, je Solve höchstens 600 s. Jede Probe lief über den unveränderten Float32-Direkttransfer und die vier unveränderten offiziellen Prüfer.
 
 | Runde | Solve | `pruefe_regeln` gesamt (D1/G1/D2) | R8 gesamt (D1/G1/D2) | R9 gesamt (D1/G1/D2) | offene Ziele |
 |---:|---|---|---|---|---|
 | 1 | Optimal | 574 (37/13/8) | 42 (3/0/0) | 343 (28/13/0) | R9w_total, R5_loch_total, R5_loch_D1; [JSON](../../../../../codex_jobs/tools/p3d31/results/p3d31_V3_round01_official_probe.json) |
 | 2 | Optimal | 578 (41/13/8) | 42 (3/0/0) | 341 (26/13/0) | R9w_total, G5_total, G5_D1, R5_loch_total, R5_loch_D1; [JSON](../../../../../codex_jobs/tools/p3d31/results/p3d31_V3_round02_official_probe.json) |
+| 3 | Optimal | 576 (39/13/8) | 42 (3/0/0) | 340 (25/13/0) | R9w_total, G5_total, G5_D1, R5_loch_total, R5_loch_D1; [JSON](../../../../../codex_jobs/tools/p3d31/results/p3d31_V3_round03_official_probe.json) |
