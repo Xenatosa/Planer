@@ -22,7 +22,8 @@ GROUPS = (
     "safety_single_quer", "g5", "r5_hole", "r8b", "r4",
     "grade_cross", "grade_same", "endpoint_r8a", "plane_slope_polygon",
     "plane_slope_box", "variable_bounds", "route_profile_slope", "source_monotone",
-    "g11", "p3d29_locality", "p3d31_drainage", "p3d36_no_crossfall", "p3d29_cliff_form",
+    "g11", "p3d29_locality", "p3d31_drainage", "p3d36_crossfall",
+    "p3d36_no_crossfall", "p3d29_cliff_form",
     "p3d29_tree_ground",
 )
 
@@ -148,10 +149,19 @@ def main() -> None:
     })
     result["p3d33_variant"] = os.environ.get("P3D33_VARIANT", "1")
     result["p3d36_policy"] = policy
+    result["p3d36_drainage_policy"] = os.environ.get(
+        "P3D36_DRAINAGE_POLICY", "p3d35" if policy == "p3d35" else "official",
+    )
+    result["p3d36_r3_policy"] = os.environ.get(
+        "P3D36_R3_POLICY", "p3d35" if policy == "p3d35" else "official_hard",
+    )
+    result["p3d36_r8a_policy"] = os.environ.get(
+        "P3D36_R8A_POLICY", "p3d35" if policy == "p3d35" else "lazy_official",
+    )
     result["p3d36_policy_description"] = (
-        "official: crossing plane height variable; rampe_2 station 0-50 m and rampe_11 0-90 m variable, with guarded R3/R8/R8a rows and no-crossfall linear rows"
+        "official: crossing plane height variable; rampe_2 station 0-50 m and rampe_11 0-90 m variable, guarded R3/R8/R8a rows, hard R3 samples, and official R8_quer 3% crossfall after the stricter p3d30 zero-crossfall trial proved infeasible"
         if policy == "official" else
-        "p3d35: reproduce the p3d35 profile windows and zero float32 guards"
+        "p3d35: reproduce the p3d35 profile windows, relaxed R3 section indicators and zero float32 guards"
     )
     result["integer_variable_count"] = 0
     result["all_solver_variables_continuous"] = True

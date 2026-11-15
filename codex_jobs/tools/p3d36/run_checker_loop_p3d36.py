@@ -10,6 +10,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -236,6 +237,7 @@ def hard_target_excess(probe: dict, solution: dict) -> dict:
     d2_r8 = probe.get("R8_by_tile", {}).get("D2", {})
     d2_r9 = probe.get("R9_by_tile", {}).get("D2", {})
     single_quer = float(solution.get("slack_values", {}).get("safety_single_quer_extra_pp", 0.0))
+    d1_r8a_hits = probe.get("R8a_hits_by_tile", {}).get("D1", [])
     return {
         "R5_spitze_D1": int(d1.get("R5_spitze", 0)),
         "G6_D1_excess": max(0, int(d1.get("G6_facette", 0)) - 3),
@@ -258,8 +260,12 @@ def hard_target_excess(probe: dict, solution: dict) -> dict:
         "single_cross_quer_over_20_pct": max(0.0, single_quer),
         "R8a_D1_unpermitted": sum(
             hit.get("ausnahme") != "R8a_ausnahme_rampe2_start"
-            for hit in probe.get("R8a_hits_by_tile", {}).get("D1", [])
+            for hit in d1_r8a_hits
         ),
+        "R8a_ram2_exception_exceeded": sum(
+            hit.get("ausnahme") == "R8a_ausnahme_rampe2_start" for hit in d1_r8a_hits
+        ),
+        "R8_new_hits_vs_p3d17": int(probe.get("R8_new_hits_vs_p3d17", {}).get("count", 0)),
         "endpoint_stage_model_violation_m": max(0.0, endpoint_stage),
         "D2_new_pruefe_regeln_hits": sum(d2_new.values()),
         "D2_R8_R9_hits": sum(map(int, d2_r8.values())) + sum(map(int, d2_r9.values())),
@@ -288,6 +294,9 @@ def gate_score(probe: dict, solution: dict) -> tuple[float, dict]:
     for name, limit in (("R3_laengs_m", 6), ("R3_quer_pct", 7), ("R3_woelb_m", 7)):
         score[f"D1:{name}"] = max(0, int(d1.get(name, 0)) - limit)
     score.update(hard_target_excess(probe, solution))
+    score["hard_target_check_failures"] = sum(
+        not bool(passed) for passed in probe.get("hard_target_checks", {}).values()
+    )
     return float(sum(score.values())), score
 
 
@@ -301,8 +310,10 @@ def hard_lp_recheck(solution: dict) -> dict:
     cliff = float(maxviol.get("cliff_curvature_hard", {}).get("maximum_violation_m", 0.0))
     tree = float(maxviol.get("tree_ground", {}).get("maximum_violation_m", 0.0))
     r4 = float(maxviol.get("r4_official_indicator", {}).get("maximum_violation_m", 0.0))
-    endpoint_r8a = float(solution.get("family_max_relaxation_locations", {})
-                         .get("endpoint_r8a", {}).get("maximum_violation_m", 0.0))
+    r8a_policy = solution.get("p3d36_r8a_policy", "p3d35")
+    endpoint_r8a = (float(solution.get("family_max_relaxation_locations", {})
+                          .get("endpoint_r8a", {}).get("maximum_violation_m", 0.0))
+                    if r8a_policy == "p3d35" else None)
     r8 = solution.get("R8_gate_metrics_solution", {})
     checks = {
         "primal_feasible": bool(solution.get("primal_feasible")),
@@ -312,6 +323,8 @@ def hard_lp_recheck(solution: dict) -> dict:
         "tree_ground_max_violation_m": tree,
         "R4_model_max_violation_m": r4,
         "R8a_model_max_violation_m": endpoint_r8a,
+        "R8a_policy": r8a_policy,
+        "R8a_official_lazy_cut_count": solution.get("endpoint_R8a_lazy_cut_count", 0),
         "R8_stufe_m": float(r8.get("R8_stufe_m", 0.0)),
         "R8_gitter_m": float(r8.get("R8_gitter_m", 0.0)),
         "R8_quer_pct": float(r8.get("R8_quer_pct", 0.0)),
@@ -323,15 +336,18 @@ def hard_lp_recheck(solution: dict) -> dict:
     checks["hard_lp_pass"] = bool(
         checks["primal_feasible"] and checks["all_slacks_zero"]
         and loc_max <= 2e-6 and cliff <= 2e-6 and tree <= 2e-6
-        and r4 <= 2e-6 and endpoint_r8a <= 2e-6 and checks["R8_limits_pass"]
+        and r4 <= 2e-6
+        and (endpoint_r8a is None or endpoint_r8a <= 2e-6)
+        and checks["R8_limits_pass"]
     )
     return checks
 
 
 def run_lp_round(round_no: int, event_path: Path,
-                 starting_flood_cuts: list[dict] | None = None) -> tuple[dict, Path, list[dict], list[dict]]:
+                 starting_flood_cuts: list[dict] | None = None,
+                 variant: str = "official_official") -> tuple[dict, Path, list[dict], list[dict]]:
     policy = os.environ.get("P3D36_POLICY", "official")
-    prefix = f"p3d36_{policy}_round{round_no:02d}"
+    prefix = f"p3d36_{variant}_round{round_no:02d}"
     flood_path = WORK_TMP / f"{prefix}_flood_cuts.json"
     flood_cuts: list[dict] = list(starting_flood_cuts or [])
     dump(flood_path, flood_cuts)
@@ -467,9 +483,32 @@ def main() -> None:
     policy = os.environ.get("P3D36_POLICY", "official")
     if policy not in {"official", "p3d35"}:
         raise ValueError("P3D36_POLICY muss official oder p3d35 sein")
+    drainage_policy = os.environ.get(
+        "P3D36_DRAINAGE_POLICY", "p3d35" if policy == "p3d35" else "official",
+    )
+    if drainage_policy not in {"official", "zero", "p3d35"}:
+        raise ValueError("P3D36_DRAINAGE_POLICY muss official, zero oder p3d35 sein")
+    os.environ["P3D36_DRAINAGE_POLICY"] = drainage_policy
+    r3_policy = os.environ.get(
+        "P3D36_R3_POLICY", "p3d35" if policy == "p3d35" else "official_hard",
+    )
+    if r3_policy not in {"official_hard", "p3d35"}:
+        raise ValueError("P3D36_R3_POLICY muss official_hard oder p3d35 sein")
+    os.environ["P3D36_R3_POLICY"] = r3_policy
+    r8a_policy = os.environ.get(
+        "P3D36_R8A_POLICY", "p3d35" if policy == "p3d35" else "lazy_official",
+    )
+    if r8a_policy not in {"lazy_official", "p3d35"}:
+        raise ValueError("P3D36_R8A_POLICY muss lazy_official oder p3d35 sein")
+    os.environ["P3D36_R8A_POLICY"] = r8a_policy
     if MAX_PROBE_ROUNDS < 1 or MAX_PROBE_ROUNDS > 4:
         raise ValueError("P3D36_MAX_PROBE_ROUNDS muss zwischen 1 und 4 liegen")
-    variant = policy
+    run_label = os.environ.get("P3D36_RUN_LABEL", "")
+    if run_label and not re.fullmatch(r"[a-z0-9]+", run_label):
+        raise ValueError("P3D36_RUN_LABEL darf nur Kleinbuchstaben und Ziffern enthalten")
+    variant = f"{policy}_{drainage_policy}_{r3_policy}_{r8a_policy}"
+    if run_label:
+        variant += f"_{run_label}"
     event_cuts: list[dict] = (
         json.loads(Path(INITIAL_EVENT_CUTS_PATH).read_text(encoding="utf-8"))
         if INITIAL_EVENT_CUTS_PATH else []
@@ -489,12 +528,15 @@ def main() -> None:
             raise RuntimeError(f"Solve vor Start abgebrochen: nur {free_gb:.2f} GB frei")
         dump(event_path, event_cuts)
         solution, solution_path, flood_passes, flood_cuts = run_lp_round(
-            round_no, event_path, flood_seed_cuts,
+            round_no, event_path, flood_seed_cuts, variant,
         )
         lp_recheck = solution.get("p3d36_hard_lp_recheck", hard_lp_recheck(solution))
         record = {
             "round": round_no,
             "variant": variant,
+            "drainage_policy": drainage_policy,
+            "r3_policy": r3_policy,
+            "r8a_policy": r8a_policy,
             "model_status": solution.get("status"),
             "primal_feasible": solution.get("primal_feasible"),
             "optimality_proven": solution.get("optimality_proven"),
@@ -505,6 +547,7 @@ def main() -> None:
             "model_json": str(solution_path),
             "construction_json": str(solution_path.with_name(solution_path.stem + "_construction.json")),
             "event_cuts_before": len(event_cuts),
+            "event_cuts_before_catalog": event_cuts,
             "flood_cuts": len(flood_cuts),
             "flood_passes": flood_passes,
             "hard_lp_recheck": lp_recheck,
@@ -529,7 +572,8 @@ def main() -> None:
                     "safety_single_quer", "g5", "r5_hole", "r8b", "r4", "grade_cross",
                     "grade_same", "endpoint_r8a", "plane_slope_polygon", "plane_slope_box",
                     "variable_bounds", "route_profile_slope", "source_monotone", "g11",
-                    "p3d29_locality", "p3d31_drainage", "p3d36_no_crossfall",
+                    "p3d29_locality", "p3d31_drainage", "p3d36_crossfall",
+                    "p3d36_no_crossfall",
                     "p3d29_cliff_form", "p3d29_tree_ground",
                 ]
                 env = dict(os.environ)
@@ -542,6 +586,9 @@ def main() -> None:
                     "status": diag.get("status"),
                     "positive_slacks": {k: v for k, v in diag.get("slack_values", {}).items()
                                         if v is not None and float(v) > 1e-7},
+                    "p3d36_crossfall_measurement": diag.get("p3d36_crossfall_measurement"),
+                    "family_max_relaxation_locations": diag.get("family_max_relaxation_locations"),
+                    "p3d31_construction_max_violations": diag.get("p3d31_construction_max_violations"),
                     "evidence_json": str(diag_path),
                     "method": "single all-family elastic LP solve; diagnostic, not an IIS",
                 }
@@ -585,15 +632,19 @@ def main() -> None:
             "hard_target_excess": score_parts,
             "gate_totals": gate_details(probe),
             "remaining_D1_hits": locations(probe),
+            "model_vs_official_checker": probe.get("model_vs_official_checker"),
+            "profile_results": probe.get("profile_results"),
             "new_lazy_cuts": len(next_cuts),
             "lazy_cuts_after_dedup": len(merged_cuts),
             "event_cuts_after": len(merged_cuts),
             "official_probe_rules_by_rule": probe.get("rules_by_rule", {}),
             "official_probe_R8_by_rule": probe.get("R8_by_rule", {}),
+            "R8_new_hits_vs_p3d17": probe.get("R8_new_hits_vs_p3d17"),
             "official_probe_R9_by_rule": probe.get("R9_by_rule", {}),
             "official_probe_rules_by_tile": probe.get("rules_by_tile", {}),
             "official_probe_R8_by_tile": probe.get("R8_by_tile", {}),
             "official_probe_R9_by_tile": probe.get("R9_by_tile", {}),
+            "new_event_cuts_catalog": next_cuts,
         })
         rounds.append(record)
         probes.append(probe)
@@ -613,7 +664,7 @@ def main() -> None:
         elif merged_cuts == event_cuts:
             record["stop_reason"] = "no_new_official_lazy_cuts"
         elif round_no == MAX_PROBE_ROUNDS:
-            record["stop_reason"] = "four_probe_round_limit"
+            record["stop_reason"] = "probe_round_limit"
         dump(RESULTS / f"p3d36_{variant}_checker_loop.json", {
             "tag": "p3d36", "variant": variant, "rounds": rounds,
             "best_round": min(rounds, key=lambda item: item.get("gate_score", float("inf"))).get("round"),

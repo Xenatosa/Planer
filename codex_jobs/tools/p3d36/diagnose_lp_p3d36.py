@@ -88,13 +88,30 @@ P3D33_VARIANTS = {"1": (25.0, 50.0), "2": (20.0, 55.0)}
 P3D33_PLATFORM_VARIANTS = {"1": 0.015, "2": 0.020}
 P3D33_CROSSING_ANCHOR = (152.5, 28.5)
 P3D33_RAMP2_START = (126.51, 31.62)
-# The inherited p3d34 IIS names rampe_11 stations with 2.4 m per raw path unit;
-# rampe_2's p3d33 physical window uses CELL_M=1.2 m per raw path unit.
-P3D36_PROFILE_STATION_SCALE_M = {2: CELL_M, 11: 2.4}
+# Official route distance is the cumulative map-path distance multiplied by
+# CELL_M, as in p3d31's exported station_m arrays and the unchanged checker
+# path sampler. The p3d35 replay keeps its historical rampe_11 IIS alias.
+P3D36_PROFILE_STATION_SCALE_M = {2: CELL_M, 11: CELL_M}
 P3D31_V3_REFERENCE = ROOT / "codex_jobs/tools/p3d31/results/p3d31_V3_round03_model.json"
 P3D36_POLICY = os.environ.get("P3D36_POLICY", "official")
 if P3D36_POLICY not in {"official", "p3d35"}:
     raise ValueError("P3D36_POLICY muss official oder p3d35 sein")
+P3D36_DRAINAGE_POLICY = os.environ.get(
+    "P3D36_DRAINAGE_POLICY",
+    "p3d35" if P3D36_POLICY == "p3d35" else "official",
+)
+if P3D36_DRAINAGE_POLICY not in {"official", "zero", "p3d35"}:
+    raise ValueError("P3D36_DRAINAGE_POLICY muss official, zero oder p3d35 sein")
+P3D36_R3_POLICY = os.environ.get(
+    "P3D36_R3_POLICY", "p3d35" if P3D36_POLICY == "p3d35" else "official_hard",
+)
+if P3D36_R3_POLICY not in {"official_hard", "p3d35"}:
+    raise ValueError("P3D36_R3_POLICY muss official_hard oder p3d35 sein")
+P3D36_R8A_POLICY = os.environ.get(
+    "P3D36_R8A_POLICY", "p3d35" if P3D36_POLICY == "p3d35" else "lazy_official",
+)
+if P3D36_R8A_POLICY not in {"lazy_official", "p3d35"}:
+    raise ValueError("P3D36_R8A_POLICY muss lazy_official oder p3d35 sein")
 if P3D36_POLICY == "p3d35":
     R3_FLOAT32_GUARD_M = 0.0
     R3_FLOAT32_GUARD_PCT = 0.0
@@ -592,6 +609,22 @@ def solve(
     p3d36_policy = os.environ.get("P3D36_POLICY", "official")
     if p3d36_policy not in {"official", "p3d35"}:
         raise ValueError("P3D36_POLICY muss official oder p3d35 sein")
+    p3d36_drainage_policy = os.environ.get(
+        "P3D36_DRAINAGE_POLICY",
+        "p3d35" if p3d36_policy == "p3d35" else "official",
+    )
+    if p3d36_drainage_policy not in {"official", "zero", "p3d35"}:
+        raise ValueError("P3D36_DRAINAGE_POLICY muss official, zero oder p3d35 sein")
+    p3d36_r3_policy = os.environ.get(
+        "P3D36_R3_POLICY", "p3d35" if p3d36_policy == "p3d35" else "official_hard",
+    )
+    if p3d36_r3_policy not in {"official_hard", "p3d35"}:
+        raise ValueError("P3D36_R3_POLICY muss official_hard oder p3d35 sein")
+    p3d36_r8a_policy = os.environ.get(
+        "P3D36_R8A_POLICY", "p3d35" if p3d36_policy == "p3d35" else "lazy_official",
+    )
+    if p3d36_r8a_policy not in {"lazy_official", "p3d35"}:
+        raise ValueError("P3D36_R8A_POLICY muss lazy_official oder p3d35 sein")
     # The p3d31 model's drainage MIP is intentionally disabled in p3d33.
     # Priority-Flood is post-LP and any needed lift returns as a linear floor cut.
     variant = "1"
@@ -681,6 +714,8 @@ def solve(
         # below; neighboring fixed samples close each interior seam with C1.
         lo, hi = v3_heights.copy(), v3_heights.copy()
         station_scale_m = P3D36_PROFILE_STATION_SCALE_M.get(p["index"], CELL_M)
+        if p3d36_policy == "p3d35" and p["index"] == 11:
+            station_scale_m = 2.4
         station_m = station * station_scale_m
         p3d36_profile_station_m_by_route[route] = station_m.copy()
         if p["index"] == 2:
@@ -721,8 +756,9 @@ def solve(
                 "policy": p3d36_policy,
                 "station_scale_m_per_path_unit": float(station_scale_m),
                 "station_scale_basis": (
-                    "p3d34 IIS row naming (route station * 2.4)"
-                    if p["index"] == 11 else "p3d33 physical window (route station * 1.2)"
+                    "legacy p3d34 IIS alias (route station * 2.4)"
+                    if p3d36_policy == "p3d35" and p["index"] == 11
+                    else "official physical path distance (route station * CELL_M=1.2)"
                 ),
                 "outside_window_fixed_to_p3d31_v3": True,
             }
@@ -875,7 +911,7 @@ def solve(
     for cut_i, cut in enumerate(event_cuts):
         # p3d33 converts checker events to direct continuous inequalities.
         # It has no disjunctive selectors or hit-count indicator variables.
-        if cut["kind"] not in {"G5", "R4", "R5", "R8b", "G11", "G6", "R5sp", "R8G", "R9w", "FLOOR", "R3_SECTION"}:
+        if cut["kind"] not in {"G5", "R4", "R5", "R8b", "G11", "G6", "R5sp", "R8G", "R9w", "FLOOR", "R3_SECTION", "R8A"}:
             raise ValueError(f"Unbekannter p3d33-Lazy-Cut: {cut['kind']}")
     event_selector_count = next_event_column - nvars
     event_hit_indices: dict[int, int] = {}
@@ -916,6 +952,7 @@ def solve(
         "p3d29_locality_extra_m": ("p3d29_locality", 0.02, None),
         "p3d29_cliff_form_extra_m": ("p3d29_cliff_form", 0.02, None),
         "p3d29_tree_ground_extra_m": ("p3d29_tree_ground", 0.001, None),
+        "p3d36_crossfall_extra_m": ("p3d36_crossfall", 0.09, None),
         "p3d36_no_crossfall_extra_m": ("p3d36_no_crossfall", 0.25, None),
     }
     slack_indices = {}
@@ -969,8 +1006,16 @@ def solve(
     lower[plane_gx] = upper[plane_gx] = float(platform_meta["platform_gradient_physical"][0])
     lower[plane_gz] = upper[plane_gz] = float(platform_meta["platform_gradient_physical"][1])
     integrality = np.zeros(nvars, dtype=np.uint8)
-    for j in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
-        lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
+    if p3d36_r3_policy == "official_hard":
+        # A continuous relaxation of the inherited section-count selectors
+        # can hide arbitrarily large residuals behind fractional values.
+        # Keep these legacy columns fixed at zero and enforce the official R3
+        # operators below directly as hard LP rows on D1 sections.
+        for j in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
+            lower[j] = upper[j] = 0.0
+    else:
+        for j in (*binary_index.values(), *quer_binary_index.values(), *wob_binary_index.values()):
+            lower[j], upper[j], integrality[j] = 0.0, 1.0, 1
     for cut in event_cuts:
         if cut["kind"] != "R3_SECTION":
             continue
@@ -1029,6 +1074,7 @@ def solve(
         "p3d29_locality_extra_m": 10.0,
         "p3d29_cliff_form_extra_m": 10.0,
         "p3d29_tree_ground_extra_m": 10.0,
+        "p3d36_crossfall_extra_m": 10.0,
         "p3d36_no_crossfall_extra_m": 10.0,
     }
     for name, cap in slack_caps.items():
@@ -1447,6 +1493,8 @@ def solve(
             # Checker-observed section cuts fix one relaxed LP selector to 0;
             # its existing official R3 rows then become hard for that section.
             continue
+        if cut["kind"] == "R8A" and p3d36_r8a_policy != "lazy_official":
+            raise ValueError("R8A-Paarschnitte sind nur in lazy_official zulaessig")
         current_family = "event_cut_" + cut["kind"]
         if cut["kind"] == "G5":
             point_row, point_fixed = route_field_row(*cut["point"])
@@ -1585,6 +1633,18 @@ def solve(
             threshold = 0.10 - 1e-5
             add(row, threshold - fixed)
             add({column: -value for column, value in row.items()}, threshold + fixed)
+        elif cut["kind"] == "R8A":
+            # r8_kreuzung.py removes WAND cells dynamically. Add exact pair
+            # rows only for non-wall pairs reported by that checker; a blanket
+            # runout grid would impose an unobserved restriction on walls.
+            point_a, point_b = cut["pair"]
+            row_a, fixed_a = route_field_row(float(point_a[0]), float(point_a[1]))
+            row_b, fixed_b = route_field_row(float(point_b[0]), float(point_b[1]))
+            row = subtract_rows(row_a, row_b)
+            fixed = fixed_a - fixed_b
+            cap = float(cut["limit_m"]) - R8A_FLOAT32_GUARD_M
+            add(row, cap - fixed)
+            add({column: -value for column, value in row.items()}, cap + fixed)
         elif cut["kind"] == "FLOOR":
             point_row, point_fixed = route_field_row(*cut["point"])
             minimum = float(cut["minimum_final_height_m"])
@@ -1638,29 +1698,9 @@ def solve(
             entries[index] = entries.get(index, 0.0) - value
         return entries
 
-    # Hard p3d19 endpoint constraints use the same 0.25-map checker lattice
-    # as r8_kreuzung.py. The 5.4 cm cap applies to the ramp-end crossing
-    # footprint; the 10 cm runout cap prevents every possible R8a hit there.
-    endpoint = next(p for p in profiles if p["index"] == 11)
-    q0 = np.asarray(endpoint["coords"][-1], dtype=np.float64)
-    q1 = np.asarray(endpoint["coords"][max(0, len(endpoint["coords"]) - 9)], dtype=np.float64)
-    tangent = q0 - q1
-    tangent /= max(float(np.hypot(*tangent)), 1e-12)
-    normal = np.array([-tangent[1], tangent[0]], dtype=np.float64)
+    # Hard endpoint-stage rows use the same 0.25-map lattice as the official
+    # checker. Cover both starts and both ends of the two D1 ramps.
     end_fs = checker_fs
-    end_ix0 = max(0, int(np.floor((q0[0] - 6.0) * end_fs)))
-    end_ix1 = min(nx * end_fs, int(np.ceil((q0[0] + 6.0) * end_fs)))
-    end_iz0 = max(0, int(np.floor((q0[1] - 6.0) * end_fs)))
-    end_iz1 = min(ny * end_fs, int(np.ceil((q0[1] + 6.0) * end_fs)))
-    ez, ex = np.mgrid[end_iz0:end_iz1 + 1, end_ix0:end_ix1 + 1]
-    exm, ezm = ex / end_fs, ez / end_fs
-    ramp_mask = np.zeros((end_iz1 - end_iz0 + 1, end_ix1 - end_ix0 + 1), dtype=bool)
-    for px, pz in endpoint["coords"]:
-        ix = int(np.rint(px * end_fs)) - end_ix0
-        iz = int(np.rint(pz * end_fs)) - end_iz0
-        if 0 <= iz < ramp_mask.shape[0] and 0 <= ix < ramp_mask.shape[1]:
-            ramp_mask[iz, ix] = True
-    end_road = ndi.distance_transform_edt(~ramp_mask) / end_fs <= 1.5
     road_cells = np.zeros((ny, nx), dtype=bool)
     for rx, rz in data["wege"]:
         road_cells[int(rz), int(rx)] = True
@@ -1668,20 +1708,6 @@ def solve(
         ny * rs + 1, nx * rs + 1,
     )[:-1:rs, :-1:rs] > 20
     tiled_road = np.kron(road_cells, np.ones((end_fs, end_fs), dtype=bool))
-    end_road[:-1, :-1] |= tiled_road[
-        end_iz0:end_iz1, end_ix0:end_ix1
-    ]
-    end_distance = np.hypot(exm - q0[0], ezm - q0[1])
-    end_stage_mask = end_road & (end_distance <= 4.0 + 1e-9)
-    dx, dz = exm - q0[0], ezm - q0[1]
-    along = dx * tangent[0] + dz * tangent[1]
-    across = dx * normal[0] + dz * normal[1]
-    end_runout_mask = (
-        (along >= -1.0 - 1e-9) & (along <= 4.0 + 1e-9)
-        & (np.abs(across) <= 2.5 + 1e-9)
-        & (exm > 0.0) & (ezm > 0.0)
-        & (exm < nx) & (ezm < ny)
-    )
 
     def adjacent_pairs(
         mask: np.ndarray, xcoords: np.ndarray, zcoords: np.ndarray,
@@ -1724,28 +1750,49 @@ def solve(
         )
         return adjacent_pairs(mask, map_x, map_z)
 
-    endpoint_stage_pairs = adjacent_pairs(end_stage_mask, exm, ezm)
-    endpoint_id = f"rampe_{endpoint['index']}_ende"
-    endpoint_anchor = q0.tolist()
-    endpoint_limit = r8a_pair_limit_m(endpoint_id, endpoint_anchor)
-    endpoint_runout_pair_specs = [
-        (pair, endpoint_limit, endpoint_id, endpoint_anchor)
-        for pair in adjacent_pairs(end_runout_mask, exm, ezm)
-    ]
-    extra_endpoint_runout_pair_specs = []
+    endpoint_stage_pairs = []
+    endpoint_runout_pair_specs = []
     for profile in profiles:
         if profile["index"] not in (2, 11):
             continue
-        endpoint_id = f"rampe_{profile['index']}_anfang"
-        endpoint_anchor = np.asarray(profile["coords"][0], dtype=np.float64)
-        endpoint_limit = r8a_pair_limit_m(endpoint_id, endpoint_anchor)
-        extra_endpoint_runout_pair_specs.extend(
-            (pair, endpoint_limit, endpoint_id, endpoint_anchor.tolist())
-            for pair in endpoint_runout_pairs_for(profile, True)
-        )
-    endpoint_runout_pair_specs = [
-        *endpoint_runout_pair_specs, *extra_endpoint_runout_pair_specs,
-    ]
+        coords = np.asarray(profile["coords"], dtype=np.float64)
+        for at_start in (True, False):
+            q0 = coords[0] if at_start else coords[-1]
+            q1 = (coords[min(8, len(coords) - 1)] if at_start
+                  else coords[max(0, len(coords) - 9)])
+            tangent = q0 - q1
+            tangent /= max(float(np.hypot(*tangent)), 1e-12)
+            normal = np.array([-tangent[1], tangent[0]], dtype=np.float64)
+            ix0 = max(0, int(np.floor((q0[0] - 6.0) * end_fs)))
+            ix1 = min(nx * end_fs, int(np.ceil((q0[0] + 6.0) * end_fs)))
+            iz0 = max(0, int(np.floor((q0[1] - 6.0) * end_fs)))
+            iz1 = min(ny * end_fs, int(np.ceil((q0[1] + 6.0) * end_fs)))
+            zz, xx = np.mgrid[iz0:iz1 + 1, ix0:ix1 + 1]
+            map_x, map_z = xx / end_fs, zz / end_fs
+            ramp_mask = np.zeros((iz1 - iz0 + 1, ix1 - ix0 + 1), dtype=bool)
+            for px, pz in coords:
+                ix = int(np.rint(px * end_fs)) - ix0
+                iz = int(np.rint(pz * end_fs)) - iz0
+                if 0 <= iz < ramp_mask.shape[0] and 0 <= ix < ramp_mask.shape[1]:
+                    ramp_mask[iz, ix] = True
+            end_road = ndi.distance_transform_edt(~ramp_mask) / end_fs <= 1.5
+            end_road[:-1, :-1] |= tiled_road[iz0:iz1, ix0:ix1]
+            end_distance = np.hypot(map_x - q0[0], map_z - q0[1])
+            endpoint_stage_pairs.extend(
+                adjacent_pairs(end_road & (end_distance <= 4.0 + 1e-9), map_x, map_z)
+            )
+
+            endpoint_id = f"rampe_{profile['index']}_{'anfang' if at_start else 'ende'}"
+            endpoint_anchor = q0.tolist()
+            endpoint_limit = r8a_pair_limit_m(endpoint_id, endpoint_anchor)
+            endpoint_runout_pair_specs.extend(
+                (pair, endpoint_limit, endpoint_id, endpoint_anchor)
+                for pair in endpoint_runout_pairs_for(profile, at_start)
+            )
+    unique_stage_pairs = {
+        tuple(float(value) for value in pair): pair for pair in endpoint_stage_pairs
+    }
+    endpoint_stage_pairs = [unique_stage_pairs[key] for key in sorted(unique_stage_pairs)]
 
     # R8 checker local road-neighbor pairs, evaluated bilinearly on the 0.5 grid.
     current_family = "r8_neighbor_stage"
@@ -1771,16 +1818,18 @@ def solve(
 
     endpoint_stage_enabled = os.environ.get("P3D20_ENDPOINT_STAGE_LOCK", "1") != "0"
     endpoint_r8a_enabled = os.environ.get("P3D20_ENDPOINT_R8A_LOCK", "1") != "0"
+    endpoint_r8a_hard_rows = 0
     if endpoint_stage_enabled:
         current_family = "endpoint_stage_pairs"
         for pair in endpoint_stage_pairs:
             add_pair_cap(*pair, 0.054 - ENDPOINT_STAGE_FLOAT32_GUARD_M,
                          slack_indices["endpoint_stage_extra_m"])
-    if endpoint_r8a_enabled:
+    if endpoint_r8a_enabled and p3d36_r8a_policy == "p3d35":
         current_family = "endpoint_r8a_runout_pairs"
         for pair, pair_limit, _endpoint_id, _anchor in endpoint_runout_pair_specs:
             add_pair_cap(*pair, pair_limit - R8A_FLOAT32_GUARD_M,
                          slack_indices["endpoint_r8a_extra_m"])
+            endpoint_r8a_hard_rows += 2
 
     # Mesh axis samples agree with the exact ramp variables within 2 cm.
     axis_count = 0
@@ -1932,6 +1981,11 @@ def solve(
     # actually emits. The checker samples at 0.25 map units and counts the
     # maximum over each 16-sample (4.8 m) section.
     r3_d1_terms = []
+    r3_d1_sections = {(route, k // R3_SECTION_SAMPLES): bool(inside)
+                      for route, k, inside in section_lookup}
+    r3_long_hard_rows = 0
+    r3_quer_hard_rows = 0
+    r3_wob_hard_rows = 0
     current_family = "r3_long_constraints"
     if r3_limit is not None:
         for route, p in enumerate(profiles):
@@ -1947,7 +2001,9 @@ def solve(
             for k, op_row in enumerate(operator):
                 active = np.flatnonzero(np.abs(op_row) > 1e-12)
                 sec = k // R3_SECTION_SAMPLES
-                bidx = binary_index[(route, sec)]
+                hard_r3 = p3d36_r3_policy == "official_hard"
+                if hard_r3 and not r3_d1_sections.get((route, sec), False):
+                    continue
                 row: dict[int, float] = {}
                 fixed = 0.0
                 for sample in active:
@@ -1956,34 +2012,41 @@ def solve(
                         row[column] = row.get(column, 0.0) + weight * value
                     fixed += weight * center_fixed[int(sample)]
                 threshold = R3_TOL - R3_FLOAT32_GUARD_M
-                max_value = fixed + sum(
-                    value * (upper[column] if value >= 0.0 else lower[column])
-                    for column, value in row.items()
-                )
-                min_value = fixed + sum(
-                    value * (lower[column] if value >= 0.0 else upper[column])
-                    for column, value in row.items()
-                )
-                upper_relax = max(0.0, max_value - threshold)
-                lower_relax = max(0.0, -min_value - threshold)
-                upper_row = {**row, bidx: -upper_relax,
-                             slack_indices["r3_long_residual_m"]: -1.0}
-                lower_row = {**{j: -v for j, v in row.items()}, bidx: -lower_relax,
-                             slack_indices["r3_long_residual_m"]: -1.0}
-                add(upper_row, threshold - fixed)
-                add(lower_row, threshold + fixed)
-        for route, k, inside in section_lookup:
-            if inside:
-                r3_d1_terms.append(binary_index[(route, k // R3_SECTION_SAMPLES)])
-        r3_count_row = {j: 1.0 for j in sorted(set(r3_d1_terms))}
-        r3_count_row[slack_indices["r3_long_extra_hits"]] = -1.0
-        add(r3_count_row, float(r3_limit))
+                if hard_r3:
+                    add(row, threshold - fixed)
+                    add({j: -v for j, v in row.items()}, threshold + fixed)
+                    r3_long_hard_rows += 2
+                else:
+                    bidx = binary_index[(route, sec)]
+                    max_value = fixed + sum(
+                        value * (upper[column] if value >= 0.0 else lower[column])
+                        for column, value in row.items()
+                    )
+                    min_value = fixed + sum(
+                        value * (lower[column] if value >= 0.0 else upper[column])
+                        for column, value in row.items()
+                    )
+                    upper_relax = max(0.0, max_value - threshold)
+                    lower_relax = max(0.0, -min_value - threshold)
+                    add({**row, bidx: -upper_relax,
+                         slack_indices["r3_long_residual_m"]: -1.0}, threshold - fixed)
+                    add({**{j: -v for j, v in row.items()}, bidx: -lower_relax,
+                         slack_indices["r3_long_residual_m"]: -1.0}, threshold + fixed)
+        if p3d36_r3_policy == "p3d35":
+            for route, k, inside in section_lookup:
+                if inside:
+                    r3_d1_terms.append(binary_index[(route, k // R3_SECTION_SAMPLES)])
+            r3_count_row = {j: 1.0 for j in sorted(set(r3_d1_terms))}
+            r3_count_row[slack_indices["r3_long_extra_hits"]] = -1.0
+            add(r3_count_row, float(r3_limit))
 
     # The official cross-section formulas sample +/-1.5 map units. The fixed
     # numerical guards cover float32 mesh emission; the reported checker and
     # its 3.5%, 20%, and 0.08 m thresholds remain unchanged.
     current_family = "r3_cross_constraints"
     no_crossfall_rows = 0
+    crossfall_rows = 0
+    crossfall_specs: list[dict] = []
     if r3_limit is not None:
         quer_section_terms: list[int] = []
         wob_section_terms: list[int] = []
@@ -2008,7 +2071,7 @@ def solve(
                 section = (route, k // R3_SECTION_SAMPLES)
                 plus_row, minus_row = plus_rows[k], minus_rows[k]
                 plus_fixed, minus_fixed = plus_fixeds[k], minus_fixeds[k]
-                if (p3d36_policy == "official"
+                if (p3d36_drainage_policy in {"official", "zero"}
                         and D1_BOUNDS[0] <= px <= D1_BOUNDS[2]
                         and D1_BOUNDS[1] <= pz <= D1_BOUNDS[3]
                         and D1_BOUNDS[0] <= px + normals[k, 0] * 1.5 <= D1_BOUNDS[2]
@@ -2024,12 +2087,32 @@ def solve(
                     for column, value in minus_row.items():
                         cross_row[column] = cross_row.get(column, 0.0) - value
                     cross_fixed = plus_fixed - minus_fixed
-                    cross_slack = slack_indices["p3d36_no_crossfall_extra_m"]
-                    current_family = "p3d36_no_crossfall"
-                    add({**cross_row, cross_slack: -1.0}, -cross_fixed)
-                    add({**{j: -v for j, v in cross_row.items()},
-                         cross_slack: -1.0}, cross_fixed)
-                    no_crossfall_rows += 2
+                    crossfall_specs.append({
+                        "row": cross_row, "fixed": cross_fixed,
+                        "point": [float(px), float(pz)],
+                        "plus": [float(px + normals[k, 0] * 1.5),
+                                 float(pz + normals[k, 1] * 1.5)],
+                        "minus": [float(px - normals[k, 0] * 1.5),
+                                  float(pz - normals[k, 1] * 1.5)],
+                    })
+                    if p3d36_drainage_policy == "zero":
+                        cross_slack = slack_indices["p3d36_no_crossfall_extra_m"]
+                        current_family = "p3d36_no_crossfall"
+                        add({**cross_row, cross_slack: -1.0}, -cross_fixed)
+                        add({**{j: -v for j, v in cross_row.items()},
+                             cross_slack: -1.0}, cross_fixed)
+                        no_crossfall_rows += 2
+                    else:
+                        # The tested p3d30 equality is deliberately available as
+                        # `zero`; after its infeasibility proof, `official` uses
+                        # the corresponding official R8_quer 3% cap instead.
+                        cross_slack = slack_indices["p3d36_crossfall_extra_m"]
+                        cap = 0.03 * 3.0 - R8A_FLOAT32_GUARD_M
+                        current_family = "p3d36_crossfall"
+                        add({**cross_row, cross_slack: -1.0}, cap - cross_fixed)
+                        add({**{j: -v for j, v in cross_row.items()},
+                             cross_slack: -1.0}, cap + cross_fixed)
+                        crossfall_rows += 2
                     current_family = "r3_cross_constraints"
                 if section not in quer_binary_index:
                     continue
@@ -2041,21 +2124,27 @@ def solve(
                 for column, value in minus_row.items():
                     q_row[column] = q_row.get(column, 0.0) - value * (100.0 / 3.0)
                 q_fixed = (plus_fixed - minus_fixed) * (100.0 / 3.0)
-                q_binary = quer_binary_index[section]
                 q_positive = dict(q_row)
                 q_negative = {column: -value for column, value in q_row.items()}
                 q_positive[slack_indices["safety_single_quer_extra_pp"]] = -1.0
                 q_negative[slack_indices["safety_single_quer_extra_pp"]] = -1.0
                 add(q_positive, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT - q_fixed)
                 add(q_negative, R3_SINGLE_QUER_LIMIT_PCT - R3_FLOAT32_GUARD_PCT + q_fixed)
-                quer_big_m = 1000.0
-                q_count_positive = {**q_row, q_binary: -quer_big_m,
-                                    slack_indices["r3_quer_residual_pp"]: -1.0}
-                q_count_negative = {**{column: -value for column, value in q_row.items()},
-                                    q_binary: -quer_big_m,
-                                    slack_indices["r3_quer_residual_pp"]: -1.0}
-                add(q_count_positive, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)
-                add(q_count_negative, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)
+                if p3d36_r3_policy == "official_hard" and r3_d1_sections.get(section, False):
+                    q_limit = 3.5 - R3_FLOAT32_GUARD_PCT
+                    add(q_row, q_limit - q_fixed)
+                    add({column: -value for column, value in q_row.items()},
+                        q_limit + q_fixed)
+                    r3_quer_hard_rows += 2
+                elif p3d36_r3_policy == "p3d35":
+                    q_binary = quer_binary_index[section]
+                    q_count_positive = {**q_row, q_binary: -1000.0,
+                                        slack_indices["r3_quer_residual_pp"]: -1.0}
+                    q_count_negative = {**{column: -value for column, value in q_row.items()},
+                                        q_binary: -1000.0,
+                                        slack_indices["r3_quer_residual_pp"]: -1.0}
+                    add(q_count_positive, 3.5 - R3_FLOAT32_GUARD_PCT - q_fixed)
+                    add(q_count_negative, 3.5 - R3_FLOAT32_GUARD_PCT + q_fixed)
 
                 wob_row: dict[int, float] = {}
                 for column, value in axis_row.items():
@@ -2065,43 +2154,46 @@ def solve(
                 for column, value in minus_row.items():
                     wob_row[column] = wob_row.get(column, 0.0) - 0.5 * value
                 wob_fixed = axis_fixed - 0.5 * (plus_fixed + minus_fixed)
-                wob_binary = wob_binary_index[section]
                 wob_threshold = 0.08 - R3_FLOAT32_GUARD_M
-                wob_max = wob_fixed + sum(
-                    value * (upper[column] if value >= 0.0 else lower[column])
-                    for column, value in wob_row.items()
-                )
-                wob_min = wob_fixed + sum(
-                    value * (lower[column] if value >= 0.0 else upper[column])
-                    for column, value in wob_row.items()
-                )
-                wob_upper_relax = max(0.0, wob_max + 10.0 - wob_threshold)
-                wob_lower_relax = max(0.0, -wob_min + 10.0 - wob_threshold)
-                wob_positive = {**wob_row, wob_binary: -wob_upper_relax,
-                                slack_indices["r3_wob_residual_m"]: -1.0}
-                wob_negative = {**{column: -value for column, value in wob_row.items()},
-                                wob_binary: -wob_lower_relax,
-                                slack_indices["r3_wob_residual_m"]: -1.0}
-                add(wob_positive, wob_threshold - wob_fixed)
-                add(wob_negative, wob_threshold + wob_fixed)
+                if p3d36_r3_policy == "official_hard" and r3_d1_sections.get(section, False):
+                    add(wob_row, wob_threshold - wob_fixed)
+                    add({column: -value for column, value in wob_row.items()},
+                        wob_threshold + wob_fixed)
+                    r3_wob_hard_rows += 2
+                elif p3d36_r3_policy == "p3d35":
+                    wob_binary = wob_binary_index[section]
+                    wob_positive = {**wob_row, wob_binary: -100.0,
+                                    slack_indices["r3_wob_residual_m"]: -1.0}
+                    wob_negative = {**{column: -value for column, value in wob_row.items()},
+                                    wob_binary: -100.0,
+                                    slack_indices["r3_wob_residual_m"]: -1.0}
+                    add(wob_positive, wob_threshold - wob_fixed)
+                    add(wob_negative, wob_threshold + wob_fixed)
                 if (route, k) in p3d36_profile_transitions:
                     # At each join also require the official R3 transverse
                     # second-difference stencil itself to remain below 0.08 m.
                     add(wob_row, R3_TOL - wob_fixed)
                     add({column: -value for column, value in wob_row.items()},
                         R3_TOL + wob_fixed)
-            quer_section_terms.extend(quer_binary_index[(route, k // R3_SECTION_SAMPLES)]
-                                      for r, k, inside in section_lookup if r == route and inside)
-            wob_section_terms.extend(wob_binary_index[(route, k // R3_SECTION_SAMPLES)]
-                                     for r, k, inside in section_lookup if r == route and inside)
-        if quer_limit is not None:
+            if p3d36_r3_policy == "p3d35":
+                quer_section_terms.extend(
+                    quer_binary_index[(route, k // R3_SECTION_SAMPLES)]
+                    for r, k, inside in section_lookup if r == route and inside
+                )
+                wob_section_terms.extend(
+                    wob_binary_index[(route, k // R3_SECTION_SAMPLES)]
+                    for r, k, inside in section_lookup if r == route and inside
+                )
+        if p3d36_r3_policy == "p3d35":
             quer_count_row = {j: 1.0 for j in sorted(set(quer_section_terms))}
             quer_count_row[slack_indices["r3_quer_extra_hits"]] = -1.0
             add(quer_count_row, float(quer_limit))
-        if wob_limit is not None:
             wob_count_row = {j: 1.0 for j in sorted(set(wob_section_terms))}
             wob_count_row[slack_indices["r3_wob_extra_hits"]] = -1.0
             add(wob_count_row, float(wob_limit))
+        # Conservative pure-LP encoding: every sample in each D1 section
+        # satisfies the official metric threshold, hence the D1 checker hit
+        # count is zero and is within the 6/7/7 project caps.
 
     # Same-route and cross-route pairs from p3d15, with the selected physical grade.
     pairs = route_pairs(profiles)
@@ -2238,8 +2330,21 @@ def solve(
         }
         summary["p3d33_variant"] = p3d33_variant
         summary["p3d36_policy"] = p3d36_policy
+        summary["p3d36_drainage_policy"] = p3d36_drainage_policy
+        summary["p3d36_r3_policy"] = p3d36_r3_policy
+        summary["p3d36_r8a_policy"] = p3d36_r8a_policy
         summary["p3d36_profile_windows"] = p3d36_profile_windows
         summary["p3d36_no_crossfall_rows"] = no_crossfall_rows
+        summary["p3d36_crossfall_rows"] = crossfall_rows
+        summary["endpoint_R8a_hard_rows"] = endpoint_r8a_hard_rows
+        summary["endpoint_R8a_lazy_cut_count"] = sum(cut["kind"] == "R8A" for cut in event_cuts)
+        summary["r3_D1_hard_rows"] = {
+            "R3_laengs_m": r3_long_hard_rows,
+            "R3_quer_pct": r3_quer_hard_rows,
+            "R3_woelb_m": r3_wob_hard_rows,
+            "encoding": ("hard per-sample official thresholds" if p3d36_r3_policy == "official_hard"
+                         else "legacy relaxed section indicators"),
+        }
         summary["float32_guards"] = {
             "R3_m": R3_FLOAT32_GUARD_M,
             "R3_percentage_points": R3_FLOAT32_GUARD_PCT,
@@ -2415,6 +2520,8 @@ def solve(
         },
         "endpoint_stage_pair_count": len(endpoint_stage_pairs),
         "endpoint_R8a_pair_count": len(endpoint_runout_pair_specs),
+        "endpoint_R8a_hard_rows": endpoint_r8a_hard_rows,
+        "endpoint_R8a_lazy_cut_count": sum(cut["kind"] == "R8A" for cut in event_cuts),
         "R9w_exact_bandpass_lock_points": hp_lock_count,
         "D1_regression_fence_vertex_counts": regression_locks,
         "exact_event_cut_count": len(event_cuts),
@@ -2429,13 +2536,22 @@ def solve(
         "curvature_l1_variable_count": len(curvature_l1_indices),
         "primal_feasibility_residuals": feasibility_residuals,
         "primary_objective_value": primary_objective,
-        "primary_r3_long_indicator_sum": float(sum(primary_x[j] for j in set(r3_d1_terms))),
-        "primary_r3_quer_indicator_sum": float(sum(primary_x[j] for j in set(quer_binary_index.values()))),
-        "primary_r3_wob_indicator_sum": float(sum(primary_x[j] for j in set(wob_binary_index.values()))),
+        "primary_r3_long_indicator_sum": (float(sum(primary_x[j] for j in set(r3_d1_terms)))
+                                           if p3d36_r3_policy == "p3d35" else None),
+        "primary_r3_quer_indicator_sum": (float(sum(primary_x[j] for j in set(quer_binary_index.values())))
+                                           if p3d36_r3_policy == "p3d35" else None),
+        "primary_r3_wob_indicator_sum": (float(sum(primary_x[j] for j in set(wob_binary_index.values())))
+                                          if p3d36_r3_policy == "p3d35" else None),
         "stage_limit_m": stage_limit,
         "r3_long_limit": r3_limit,
         "r3_quer_limit": quer_limit,
         "r3_wob_limit": wob_limit,
+        "r3_D1_hard_rows": {
+            "R3_laengs_m": r3_long_hard_rows,
+            "R3_quer_pct": r3_quer_hard_rows,
+            "R3_woelb_m": r3_wob_hard_rows,
+            "encoding": "hard per-sample official thresholds; zero D1 R3 sections permitted to exceed",
+        },
         "minimum_neighbor_step_m": float(result.x[t_index]),
         "tie_break_movement_l1_m": tie_break_movement,
         "tie_break_weighted_l1_objective": float(
@@ -2534,8 +2650,21 @@ def solve(
     }
     summary["p3d33_variant"] = p3d33_variant
     summary["p3d36_policy"] = p3d36_policy
+    summary["p3d36_drainage_policy"] = p3d36_drainage_policy
+    summary["p3d36_r3_policy"] = p3d36_r3_policy
+    summary["p3d36_r8a_policy"] = p3d36_r8a_policy
     summary["p3d36_profile_windows"] = p3d36_profile_windows
     summary["p3d36_no_crossfall_rows"] = no_crossfall_rows
+    summary["p3d36_crossfall_rows"] = crossfall_rows
+    summary["endpoint_R8a_hard_rows"] = endpoint_r8a_hard_rows
+    summary["endpoint_R8a_lazy_cut_count"] = sum(cut["kind"] == "R8A" for cut in event_cuts)
+    summary["r3_D1_hard_rows"] = {
+        "R3_laengs_m": r3_long_hard_rows,
+        "R3_quer_pct": r3_quer_hard_rows,
+        "R3_woelb_m": r3_wob_hard_rows,
+        "encoding": ("hard per-sample official thresholds" if p3d36_r3_policy == "official_hard"
+                     else "legacy relaxed section indicators"),
+    }
     summary["float32_guards"] = {
         "R3_m": R3_FLOAT32_GUARD_M,
         "R3_percentage_points": R3_FLOAT32_GUARD_PCT,
@@ -2568,6 +2697,25 @@ def solve(
     summary["p3d33_smoothness_l1_row_count"] = 2 * len(smoothness_l1_indices)
     if result.x is not None:
         xsol = result.x
+        if crossfall_specs:
+            worst_crossfall = max(
+                crossfall_specs,
+                key=lambda item: abs(item["fixed"] + sum(
+                    value * xsol[column] for column, value in item["row"].items()
+                )),
+            )
+            worst_delta = abs(float(worst_crossfall["fixed"] + sum(
+                value * xsol[column] for column, value in worst_crossfall["row"].items()
+            )))
+            summary["p3d36_crossfall_measurement"] = {
+                "maximum_side_height_delta_m": worst_delta,
+                "equivalent_slope_pct_over_3m": worst_delta / 3.0 * 100.0,
+                "center_map": worst_crossfall["point"],
+                "positive_side_map": worst_crossfall["plus"],
+                "negative_side_map": worst_crossfall["minus"],
+            }
+        else:
+            summary["p3d36_crossfall_measurement"] = None
         def field_value(px: float, pz: float) -> float:
             row, fixed = route_field_row(px, pz)
             return fixed + sum(value * xsol[column] for column, value in row.items())
@@ -2775,7 +2923,12 @@ def solve(
                     "height_delta_m": float(abs(xsol[va] - xsol[vb])),
                     "grade_limit_m": float(grade * distance), "pair_distance_m": float(distance),
                 })
-        endpoint_max = endpoint_pair_specs_max(endpoint_runout_pair_specs)
+        endpoint_max = (endpoint_pair_specs_max(endpoint_runout_pair_specs)
+                        if p3d36_r8a_policy == "p3d35" else {
+                            "maximum_violation_m": None,
+                            "pair": None,
+                            "diagnostic": "official wall mask enforced through checker-derived R8A lazy cuts",
+                        })
         if endpoint_max["pair"] is not None:
             midpoint = np.mean([endpoint_max["pair"]["a"], endpoint_max["pair"]["b"]], axis=0)
             endpoints = []
@@ -2787,11 +2940,33 @@ def solve(
             endpoint_max["nearest_route_endpoint"] = {
                 "route": route_id, "endpoint": endpoint_label, "map": endpoint_xy,
             }
+        source_monotone_worst = (0.0, None)
+        for route, profile in enumerate(profiles):
+            start = h_offsets[route]
+            stations = p3d36_profile_station_m_by_route[route]
+            for k in range(len(profile["h0"]) - 1):
+                if profile["h0"][k + 1] > profile["h0"][k] + 1e-9:
+                    continue
+                violation = max(0.0, float(xsol[start + k + 1] - xsol[start + k]))
+                if violation > source_monotone_worst[0]:
+                    source_monotone_worst = (violation, {
+                        "route": int(profile["index"]),
+                        "station_start_m": float(stations[k]),
+                        "station_end_m": float(stations[k + 1]),
+                        "map_start": profile["coords"][k].tolist(),
+                        "map_end": profile["coords"][k + 1].tolist(),
+                        "source_height_start_m": float(profile["h0"][k]),
+                        "source_height_end_m": float(profile["h0"][k + 1]),
+                        "candidate_height_start_m": float(xsol[start + k]),
+                        "candidate_height_end_m": float(xsol[start + k + 1]),
+                    })
         summary["family_max_relaxation_locations"] = {
             "grade_cross": {"maximum_violation_m": pair_grade_max["cross_route"][0],
                             "pair": pair_grade_max["cross_route"][1]},
             "grade_same": {"maximum_violation_m": pair_grade_max["same_route"][0],
-                            "pair": pair_grade_max["same_route"][1]},
+                           "pair": pair_grade_max["same_route"][1]},
+            "source_monotone": {"maximum_violation_m": source_monotone_worst[0],
+                                "segment": source_monotone_worst[1]},
             "endpoint_r8a": endpoint_max,
             "endpoint_stage": endpoint_pair_max(endpoint_stage_pairs, 0.054),
         }
@@ -2823,14 +2998,9 @@ def solve(
             "maximum_violation_pp": max(0.0, (max(abs(xsol[plane_gx]), abs(xsol[plane_gz])) - PLANE_SLOPE_MAX) * 100.0),
             "map": R8_GATE_CENTER.tolist(),
         }
-        section_count = int(sum(xsol[j] > 0.5 for j in set(r3_d1_terms))) if r3_limit is not None else None
-        summary["r3_sections_D1_solution"] = section_count
-        summary["r3_quer_sections_D1_solution"] = int(
-            sum(xsol[j] > 0.5 for j in set(quer_binary_index.values()))
-        ) if r3_limit is not None else None
-        summary["r3_wob_sections_D1_solution"] = int(
-            sum(xsol[j] > 0.5 for j in set(wob_binary_index.values()))
-        ) if r3_limit is not None else None
+        summary["r3_sections_D1_solution"] = None
+        summary["r3_quer_sections_D1_solution"] = None
+        summary["r3_wob_sections_D1_solution"] = None
         summary["plane_height_m"] = float(xsol[plane_h])
         summary["plane_gradient_x"] = float(xsol[plane_gx])
         summary["plane_gradient_z"] = float(xsol[plane_gz])

@@ -1,0 +1,12 @@
+{
+  "constraints": 72509,
+  "diagnostic_groups_enabled": [
+    "p3d36_crossfall"
+  ],
+  "event_cut_count": 24,
+  "method": "single-family elastic filter with only the 3% crossfall family enabled; LP remains infeasible",
+  "status": "Infeasible",
+  "tag": "p3d36",
+  "time_limit_s": 600,
+  "variables": 20413
+}

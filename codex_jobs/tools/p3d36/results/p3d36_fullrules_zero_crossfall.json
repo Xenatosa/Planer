@@ -1,0 +1,26 @@
+{
+  "filter_status": "Optimal",
+  "interpretation": "strict p3d30 zero-crossfall row needs 0.05215529 m side-height difference; this is 1.7385097% over 3 m, within the official 3% cap",
+  "method": "pure continuous LP; no probe; all-family elastic diagnostic, not an IIS",
+  "p3d36_crossfall_measurement": {
+    "center_map": [
+      150.47982720566168,
+      13.665810604157805
+    ],
+    "equivalent_slope_pct_over_3m": 1.7385096955569213,
+    "maximum_side_height_delta_m": 0.052155290866707636,
+    "negative_side_map": [
+      151.36334986978454,
+      12.453627572606363
+    ],
+    "positive_side_map": [
+      149.5963045415388,
+      14.877993635709247
+    ]
+  },
+  "positive_slacks": {
+    "p3d36_no_crossfall_extra_m": 0.0521552908666862
+  },
+  "status": "Infeasible",
+  "tag": "p3d36"
+}

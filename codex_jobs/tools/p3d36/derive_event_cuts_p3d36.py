@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Derive local p3d36 checker cuts, including R3 section cuts."""
+"""Derive local p3d36 checker cuts for nonlinear official checker events."""
 from __future__ import annotations
 
 import argparse
 import base64
 import gzip
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -221,6 +222,81 @@ def r4_cuts(data: dict, g: np.ndarray, rs: int) -> list[dict]:
                 "sides": [(p[j] + normal[j] * 4.0).tolist(), (p[j] - normal[j] * 4.0).tolist()],
                 "signal_m": float(signal[j]),
             })
+    return cuts
+
+
+def r8a_cuts(data: dict, g: np.ndarray, gate: dict, rs: int) -> list[dict]:
+    """Extract the exact maximum non-wall adjacent pair for each R8a hit."""
+    fw = data["FW"]
+    fs = int(fw["fs"])
+    ny, nx = int(data["ny"]), int(data["nx"])
+    fine_h, fine_w = ny * fs + 1, nx * fs + 1
+    yy, xx = np.mgrid[0:fine_h, 0:fine_w]
+    h = ndi.map_coordinates(g, [yy / fs * rs, xx / fs * rs], order=1)
+    vids = np.frombuffer(base64.b64decode(fw["vid"]), dtype=np.uint32)
+    fine_heights = np.frombuffer(base64.b64decode(fw["h"]), dtype=np.float32)
+    h.flat[vids] = fine_heights
+    gy, gx = np.gradient(h, 1.0 / fs)
+    wall = np.hypot(gx, gy) > 1.0
+    routes = [sample_path(raw) for raw in data["rampenwege"]]
+    cuts = []
+    for hit in gate.get("R8a_hits_by_tile", {}).get("D1", []):
+        endpoint_id = str(hit.get("weg", ""))
+        parts = endpoint_id.split("_")
+        if len(parts) != 3 or not parts[0] == "rampe":
+            raise RuntimeError(f"R8a-Treffer ohne gueltige Wegend-ID: {hit}")
+        route_i = int(parts[1])
+        endpoint_side = parts[2]
+        if route_i < 0 or route_i >= len(routes) or endpoint_side not in {"anfang", "ende"}:
+            raise RuntimeError(f"R8a-Treffer mit unbekannter Wegend-ID: {hit}")
+        path = routes[route_i]
+        start = endpoint_side == "anfang"
+        q0 = path[0] if start else path[-1]
+        q1 = path[min(8, len(path) - 1)] if start else path[max(0, len(path) - 9)]
+        direction = q0 - q1
+        direction /= max(float(np.hypot(*direction)), 1e-12)
+        side = np.array([-direction[1], direction[0]], dtype=np.float64)
+        iy0, ix0 = int(round(q0[1] * fs)), int(round(q0[0] * fs))
+        radius = 6 * fs
+        ylo, yhi = max(0, iy0 - radius), min(fine_h - 1, iy0 + radius)
+        xlo, xhi = max(0, ix0 - radius), min(fine_w - 1, ix0 + radius)
+        local_y, local_x = np.mgrid[ylo:yhi + 1, xlo:xhi + 1]
+        map_x, map_z = local_x / fs, local_y / fs
+        rx, rz = map_x - q0[0], map_z - q0[1]
+        along = rx * direction[0] + rz * direction[1]
+        across = rx * side[0] + rz * side[1]
+        mask = ((along >= -1.0) & (along <= 4.0) & (np.abs(across) <= 2.5)
+                & ~wall[ylo:yhi + 1, xlo:xhi + 1]
+                & (local_x > 0) & (local_y > 0)
+                & (local_x < fine_w - 1) & (local_y < fine_h - 1))
+        local_h = h[ylo:yhi + 1, xlo:xhi + 1]
+        best = (0.0, None)
+        for axis in (0, 1):
+            delta = np.abs(np.diff(local_h, axis=axis))
+            valid = ((mask[1:, :] & mask[:-1, :]) if axis == 0
+                     else (mask[:, 1:] & mask[:, :-1]))
+            scored = np.where(valid, delta, -1.0)
+            if not np.any(valid):
+                continue
+            flat = int(np.argmax(scored))
+            iy, ix = np.unravel_index(flat, scored.shape)
+            value = float(scored[iy, ix])
+            if value > best[0]:
+                if axis == 0:
+                    a = [float(map_x[iy, ix]), float(map_z[iy, ix])]
+                    b = [a[0], float(a[1] + 1.0 / fs)]
+                else:
+                    a = [float(map_x[iy, ix]), float(map_z[iy, ix])]
+                    b = [float(a[0] + 1.0 / fs), a[1]]
+                best = (value, [a, b])
+        if best[1] is None:
+            raise RuntimeError(f"R8a-Treffer ohne gueltiges Paar in der offiziellen Maske: {hit}")
+        cuts.append({
+            "kind": "R8A", "pair": best[1], "limit_m": float(hit["limit_m"]),
+            "checker_value_m": float(hit["wert"]), "weg": endpoint_id,
+            "anchor_map": [float(q0[0]), float(q0[1])],
+            "wall_mask_applied": True,
+        })
     return cuts
 
 
@@ -510,6 +586,8 @@ def main() -> None:
                      "pixels": item["size"]})
 
     cuts.extend(r4_cuts(data, g, rs))
+    current_r8a = r8a_cuts(data, g, gate, rs)
+    cuts.extend(current_r8a)
     current_spikes = r5_spike_cuts(g, rs)
     cuts.extend(current_spikes)
     current_r8g = r8_gitter_cuts(data, g, gate, rs)
@@ -519,43 +597,40 @@ def main() -> None:
     # impose an equality band on the old field.
     current_r9w = r9w_cuts(data, g, gate, rs)
     cuts.extend(current_r9w)
-    r3_hit_keys: set[tuple[int, int, str]] = set()
     r3_section_cuts = []
-    route_profiles = {route: sample_path(raw) for route, raw in enumerate(data["rampenwege"])}
-    r3_metric_names = {
-        "R3_laengs_m": "laengs",
-        "R3_quer_pct": "quer",
-        "R3_woelb_m": "woelb",
-    }
-    for hit in gate.get("rules_D1_hits", []):
-        metric = r3_metric_names.get(str(hit.get("regel", "")))
-        weg = str(hit.get("weg", ""))
-        if metric is None or not weg.startswith("rampe_"):
-            continue
-        route_number = int(weg.split("_")[1])
-        path = route_profiles.get(route_number)
-        if path is None:
-            raise RuntimeError(f"R3-Treffer verweist auf unbekannte Route {weg}")
-        point = np.asarray([float(hit["x"]), float(hit["z"])], dtype=np.float64)
-        index = int(np.argmin(np.linalg.norm(path - point[None, :], axis=1)))
-        distance = float(np.linalg.norm(path[index] - point))
-        if distance > 0.20:
-            raise RuntimeError(f"R3-Treffer {hit} passt nicht auf die offizielle 0.25-Sample-Route")
-        section = index // 16
-        key = (route_number, section, metric)
-        if key in r3_hit_keys:
-            continue
-        r3_hit_keys.add(key)
-        r3_section_cuts.append({
-            "kind": "R3_SECTION", "route": route_number,
-            "section": section, "metric": metric,
-            "checker_start_sample_index": section * 16,
-            "nearest_sample_index": index,
-            "checker_hit_point_map": point.tolist(),
-            "nearest_sample_distance_map": distance,
-            "source_hit": hit,
-        })
-    cuts.extend(r3_section_cuts)
+    r3_section_hits = sum(str(hit.get("regel", "")).startswith("R3_")
+                          for hit in gate.get("rules_D1_hits", []))
+    legacy_r3 = os.environ.get("P3D36_R3_POLICY", "official_hard") == "p3d35"
+    if legacy_r3:
+        route_profiles = {route: sample_path(raw) for route, raw in enumerate(data["rampenwege"])}
+        metric_names = {"R3_laengs_m": "laengs", "R3_quer_pct": "quer", "R3_woelb_m": "woelb"}
+        seen = set()
+        for hit in gate.get("rules_D1_hits", []):
+            metric = metric_names.get(str(hit.get("regel", "")))
+            weg = str(hit.get("weg", ""))
+            if metric is None or not weg.startswith("rampe_"):
+                continue
+            route = int(weg.split("_")[1])
+            path = route_profiles.get(route)
+            if path is None:
+                raise RuntimeError(f"R3-Treffer verweist auf unbekannte Route {weg}")
+            point = np.asarray([float(hit["x"]), float(hit["z"])], dtype=np.float64)
+            index = int(np.argmin(np.linalg.norm(path - point[None, :], axis=1)))
+            distance = float(np.linalg.norm(path[index] - point))
+            if distance > 0.20:
+                raise RuntimeError(f"R3-Treffer {hit} passt nicht auf die offizielle 0.25-Sample-Route")
+            section = index // 16
+            key = (route, section, metric)
+            if key in seen:
+                continue
+            seen.add(key)
+            r3_section_cuts.append({
+                "kind": "R3_SECTION", "route": route, "section": section,
+                "metric": metric, "checker_start_sample_index": section * 16,
+                "nearest_sample_index": index, "checker_hit_point_map": point.tolist(),
+                "nearest_sample_distance_map": distance, "source_hit": hit,
+            })
+        cuts.extend(r3_section_cuts)
     args.out_cuts.parent.mkdir(parents=True, exist_ok=True)
     args.out_cuts.write_text(json.dumps(cuts, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({
@@ -568,13 +643,14 @@ def main() -> None:
         "candidate_G6_D1": g6_d1, "candidate_G6_components_D1": len(current_g6),
         "protected_G6": len(protected_g6), "new_G6_cuts": sum(c["kind"] == "G6" for c in cuts),
         "new_R4_cuts": sum(c["kind"] == "R4" for c in cuts), "out": str(args.out_cuts),
+        "new_R8a_cuts": len(current_r8a),
         "new_R5_spitze_cuts": len(current_spikes), "new_R8_gitter_cuts": len(current_r8g),
         "candidate_R9w_total": int(gate.get("R9_by_rule", {}).get("R9w_wellen", 0)),
         "candidate_R9w_D1": int(gate.get("R9_by_tile", {}).get("D1", {}).get("R9w_wellen", 0)),
         "new_R9w_event_cuts": len(current_r9w),
         "R9w_policy": "exact checker-component maximum event cuts; no height pins or equality locks",
-        "R3_section_hits_before_dedup": len(r3_section_cuts),
-        "R3_section_cut_keys": sorted([list(key) for key in r3_hit_keys]),
+        "R3_D1_checker_hits_handled_by_hard_LP_rows": (0 if legacy_r3 else int(r3_section_hits)),
+        "R3_section_event_cuts": len(r3_section_cuts),
         "unsupported_R5_without_saddle": UNSUPPORTED_R5_NO_SADDLE,
     }, indent=2))
 

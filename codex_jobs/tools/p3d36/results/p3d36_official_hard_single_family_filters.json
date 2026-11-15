@@ -1,0 +1,159 @@
+{
+  "event_cuts": 0,
+  "flood_cuts": 0,
+  "groups": [
+    {
+      "family_max_relaxation_locations": {
+        "endpoint_r8a": {
+          "maximum_violation_m": 0.9092845109001713,
+          "nearest_route_endpoint": {
+            "endpoint": "start",
+            "map": [
+              126.51000020929992,
+              31.620001726724226
+            ],
+            "route": 2
+          },
+          "pair": {
+            "a": [
+              127.25,
+              31.0
+            ],
+            "anchor_xz": [
+              126.51000020929992,
+              31.620001726724226
+            ],
+            "ausnahme": "R8a_ausnahme_rampe2_start",
+            "b": [
+              127.25,
+              31.25
+            ],
+            "delta_m": 1.0892845109001712,
+            "limit_m": 0.18,
+            "wegend_id": "rampe_2_anfang"
+          }
+        },
+        "endpoint_stage": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_cross": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "grade_same": {
+          "maximum_violation_m": 0.0,
+          "pair": null
+        },
+        "plane_slope_box": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "plane_slope_polygon": {
+          "map": [
+            152.6292918620858,
+            28.353590994151514
+          ],
+          "maximum_violation_pp": 0.0
+        },
+        "variable_bounds": {
+          "maximum_violation_m": 0.0,
+          "variable": null
+        }
+      },
+      "group": "endpoint_r8a",
+      "optimality_proven": true,
+      "p3d36_crossfall_measurement": {
+        "center_map": [
+          146.38153041740435,
+          6.470077588694484
+        ],
+        "equivalent_slope_pct_over_3m": 2.9966666666689226,
+        "maximum_side_height_delta_m": 0.08990000000006768,
+        "negative_side_map": [
+          147.70767282784672,
+          7.171038577071222
+        ],
+        "positive_side_map": [
+          145.05538800696198,
+          5.769116600317746
+        ]
+      },
+      "positive_slacks": {
+        "endpoint_r8a_extra_m": 0.9093845109001002
+      },
+      "primal_feasible": true,
+      "r3_D1_hard_rows": {
+        "R3_laengs_m": 734,
+        "R3_quer_pct": 734,
+        "R3_woelb_m": 734,
+        "encoding": "hard per-sample official thresholds"
+      },
+      "status": "Optimal"
+    },
+    {
+      "family_max_relaxation_locations": null,
+      "group": "endpoint_stage",
+      "optimality_proven": false,
+      "p3d36_crossfall_measurement": null,
+      "positive_slacks": {},
+      "primal_feasible": false,
+      "r3_D1_hard_rows": {
+        "R3_laengs_m": 734,
+        "R3_quer_pct": 734,
+        "R3_woelb_m": 734,
+        "encoding": "hard per-sample official thresholds"
+      },
+      "status": "Infeasible"
+    },
+    {
+      "family_max_relaxation_locations": null,
+      "group": "crossing_stage",
+      "optimality_proven": false,
+      "p3d36_crossfall_measurement": null,
+      "positive_slacks": {},
+      "primal_feasible": false,
+      "r3_D1_hard_rows": {
+        "R3_laengs_m": 734,
+        "R3_quer_pct": 734,
+        "R3_woelb_m": 734,
+        "encoding": "hard per-sample official thresholds"
+      },
+      "status": "Infeasible"
+    },
+    {
+      "family_max_relaxation_locations": null,
+      "group": "p3d36_crossfall",
+      "optimality_proven": false,
+      "p3d36_crossfall_measurement": null,
+      "positive_slacks": {},
+      "primal_feasible": false,
+      "r3_D1_hard_rows": {
+        "R3_laengs_m": 734,
+        "R3_quer_pct": 734,
+        "R3_woelb_m": 734,
+        "encoding": "hard per-sample official thresholds"
+      },
+      "status": "Infeasible"
+    },
+    {
+      "family_max_relaxation_locations": null,
+      "group": "source_monotone",
+      "optimality_proven": false,
+      "p3d36_crossfall_measurement": null,
+      "positive_slacks": {},
+      "primal_feasible": false,
+      "r3_D1_hard_rows": {
+        "R3_laengs_m": 734,
+        "R3_quer_pct": 734,
+        "R3_woelb_m": 734,
+        "encoding": "hard per-sample official thresholds"
+      },
+      "status": "Unknown"
+    }
+  ],
+  "method": "single-family elastic LP filters on the infeasible official-hard model; diagnostic only, not IIS"
+}

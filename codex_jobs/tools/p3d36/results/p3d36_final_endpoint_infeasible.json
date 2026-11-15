@@ -1,0 +1,106 @@
+{
+  "all_family_elastic_filter": {
+    "endpoint_stage_pair": {
+      "a": [
+        147.5,
+        5.0
+      ],
+      "b": [
+        147.5,
+        5.25
+      ],
+      "delta_m": 0.05852663517025647,
+      "limit_m": 0.054
+    },
+    "method": "single all-family elastic LP solve; diagnostic, not an IIS",
+    "other_family_maxima": {
+      "endpoint_r8a": {
+        "diagnostic": "official wall mask enforced through checker-derived R8A lazy cuts",
+        "maximum_violation_m": null,
+        "pair": null
+      },
+      "grade_cross": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "grade_same": {
+        "maximum_violation_m": 0.0,
+        "pair": null
+      },
+      "plane_slope_box": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "plane_slope_polygon": {
+        "map": [
+          152.6292918620858,
+          28.353590994151514
+        ],
+        "maximum_violation_pp": 0.0
+      },
+      "source_monotone": {
+        "maximum_violation_m": 0.0,
+        "segment": null
+      },
+      "variable_bounds": {
+        "maximum_violation_m": 0.0,
+        "variable": null
+      }
+    },
+    "positive_slacks_m": {
+      "endpoint_stage_extra_m": 0.004626635169982914
+    },
+    "querabfluss_measurement": {
+      "center_map": [
+        132.71400991372138,
+        30.86349064016586
+      ],
+      "equivalent_slope_pct_over_3m": 2.996666666667684,
+      "maximum_side_height_delta_m": 0.08990000000003052,
+      "negative_side_map": [
+        132.54170405052682,
+        29.37341994066574
+      ],
+      "positive_side_map": [
+        132.88631577691595,
+        32.35356133966598
+      ]
+    },
+    "status": "Optimal"
+  },
+  "branch": "art/dorfmap-p3d36",
+  "evidence_source": "p3d36_official_official_official_hard_lazy_official_endpts_checker_loop.json",
+  "final_corrected_run": {
+    "checker_probe_created": false,
+    "constraints": 75287,
+    "endpoint_stage_scope": [
+      "rampe_2_anfang",
+      "rampe_2_ende",
+      "rampe_11_anfang",
+      "rampe_11_ende"
+    ],
+    "integer_variables": 0,
+    "mesh_built": false,
+    "model_status": "Infeasible",
+    "round": 1,
+    "stop_reason": "LP_structurally_infeasible",
+    "variables": 20413
+  },
+  "limits": {
+    "disk_free_before_final_solve_gb": 33,
+    "long_highs_iis_run": false,
+    "solve_time_limit_seconds": 600
+  },
+  "policy": {
+    "P3D36_DRAINAGE_POLICY": "official",
+    "P3D36_MAX_PROBE_ROUNDS": 1,
+    "P3D36_POLICY": "official",
+    "P3D36_R3_POLICY": "official_hard",
+    "P3D36_R8A_POLICY": "lazy_official"
+  },
+  "prior_float32_probe_status": "preliminary_only_incomplete_endpoint_stage_scope_460_pairs",
+  "tag": "p3d36"
+}

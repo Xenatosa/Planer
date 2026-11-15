@@ -285,6 +285,18 @@ def main() -> None:
     rule_plus5_pass = all(delta <= 5 for delta in rule_deltas_vs_p3d17.values())
     r8_baseline = json.loads((ROOT / "codex_jobs/tools/p3d20_r3/official_gates/p3d17_reference_r8.json").read_text(encoding="utf-8"))
     r9_baseline = json.loads((ROOT / "codex_jobs/tools/p3d20_r3/official_gates/p3d17_reference_r9.json").read_text(encoding="utf-8"))
+    def r8_signature(hit):
+        return (str(hit.get("regel", "")), str(hit.get("feld", "")),
+                round(float(hit.get("x", 0.0)), 1), round(float(hit.get("z", 0.0)), 1),
+                str(hit.get("art", "")), str(hit.get("weg", "")))
+    r8_baseline_counts = Counter(map(r8_signature, r8_baseline.get("treffer", [])))
+    r8_new_hits = []
+    for hit in r8.get("treffer", []):
+        key = r8_signature(hit)
+        if r8_baseline_counts.get(key, 0):
+            r8_baseline_counts[key] -= 1
+        else:
+            r8_new_hits.append(hit)
     r8_d2 = [hit for hit in r8.get("treffer", []) if hit.get("feld") == "D2"]
     r9_d2 = [hit for hit in r9.get("treffer", []) if hit.get("feld") == "D2"]
     r8a_start_hits = [hit for hit in r8.get("treffer", [])
@@ -313,13 +325,13 @@ def main() -> None:
             hit.get("ausnahme") == "R8a_ausnahme_rampe2_start" for hit in r8a_d1_hits
         ),
         "rampe_2_start_R8a_exception_not_exceeded": not r8a_start_hits,
+        "R8_no_new_hits_vs_p3d17": not r8_new_hits,
     }
 
     def r3_formula_report(surface: np.ndarray) -> dict:
         result_by_rule = {name: {"sections_D1": 0, "max_section_value": 0.0}
                           for name in ("R3_laengs_m", "R3_quer_pct", "R3_woelb_m")}
         rs = int(source_data["rs"])
-        x0 = float(solution["surface_grid"]["x0"])
         for route_number in (2, 11):
             raw = np.asarray(source_data["rampenwege"][route_number], dtype=np.float64)
             length = np.r_[0.0, np.cumsum(np.hypot(*np.diff(raw, axis=0).T))]
@@ -331,11 +343,10 @@ def main() -> None:
             normal = np.column_stack((-direction[:, 1], direction[:, 0]))
 
             def sample(coords: np.ndarray) -> np.ndarray:
-                local = np.asarray(coords, dtype=np.float64).copy()
-                local[:, 0] -= x0
+                full_map = np.asarray(coords, dtype=np.float64)
                 return ndi.map_coordinates(
                     np.asarray(surface, dtype=np.float64),
-                    [local[:, 1] * rs, local[:, 0] * rs],
+                    [full_map[:, 1] * rs, full_map[:, 0] * rs],
                     order=1, mode="nearest",
                 )
 
@@ -352,6 +363,8 @@ def main() -> None:
             }
             for rule, (series, threshold) in values.items():
                 for start in range(0, len(points), 16):
+                    # Match pruefe_regeln.py's field() tile mapping exactly:
+                    # x=168 belongs to E1 and z=43 belongs to D2.
                     if not (126.0 <= points[start, 0] < 168.0
                             and 0.0 <= points[start, 1] < 43.0):
                         continue
@@ -362,8 +375,19 @@ def main() -> None:
         return result_by_rule
 
     lp_double = (fixed + coverage * target).astype(np.float64)
-    r3_double = r3_formula_report(lp_double)
-    r3_float32 = r3_formula_report(candidate)
+    checker_grid = np.frombuffer(
+        base64.b64decode(data["GB"]), dtype=np.float32,
+    ).reshape(int(data["ny"]) * rs + 1, int(data["nx"]) * rs + 1).copy()
+    grid_x0 = int(round(float(solution["surface_grid"]["x0"]) * rs))
+    grid_z0 = int(round(float(solution["surface_grid"]["z0"]) * rs))
+    full_double = checker_grid.astype(np.float64)
+    full_float32 = checker_grid
+    yslice = slice(grid_z0, grid_z0 + lp_double.shape[0])
+    xslice = slice(grid_x0, grid_x0 + lp_double.shape[1])
+    full_double[yslice, xslice] = lp_double
+    full_float32[yslice, xslice] = candidate
+    r3_double = r3_formula_report(full_double)
+    r3_float32 = r3_formula_report(full_float32)
     checker_r3_counts = {
         "R3_laengs_m": int(tiles["D1"].get("R3_laengs_m", 0)),
         "R3_quer_pct": int(tiles["D1"].get("R3_quer_pct", 0)),
@@ -372,11 +396,6 @@ def main() -> None:
     model_endpoint = solution.get("family_max_relaxation_locations", {}).get("endpoint_r8a", {})
     r8a_checker_d1 = [hit for hit in r8.get("treffer", [])
                       if hit.get("regel") == "R8a_wegende" and hit.get("feld") == "D1"]
-    r3_model_indicator_sums = {
-        "R3_laengs_m": solution.get("primary_r3_long_indicator_sum"),
-        "R3_quer_pct": solution.get("primary_r3_quer_indicator_sum"),
-        "R3_woelb_m": solution.get("primary_r3_wob_indicator_sum"),
-    }
     model_vs_checker = {
         "R3_LP_double_formula": r3_double,
         "R3_Float32_formula": r3_float32,
@@ -385,7 +404,7 @@ def main() -> None:
             rule: r3_float32[rule]["sections_D1"] == count
             for rule, count in checker_r3_counts.items()
         },
-        "R3_LP_relaxed_section_indicator_sums": r3_model_indicator_sums,
+        "R3_LP_hard_rows": solution.get("r3_D1_hard_rows"),
         "R8a_LP_max_violation_m": model_endpoint.get("maximum_violation_m"),
         "R8a_LP_worst_pair": model_endpoint.get("pair"),
         "R8a_official_checker_D1_hit_count": len(r8a_checker_d1),
@@ -428,6 +447,7 @@ def main() -> None:
         "R8_total": r8.get("summe"),
         "R8_by_rule": r8.get("je_regel", {}),
         "R8_by_tile": r8.get("je_feld", {}),
+        "R8_new_hits_vs_p3d17": {"count": len(r8_new_hits), "hits": r8_new_hits},
         "R8_D1_hits": [hit for hit in r8.get("treffer", []) if hit.get("feld") == "D1"],
         "R8_crossing_gate": crossing_gate,
         "R8a_hits_by_tile": {

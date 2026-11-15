@@ -1,0 +1,12 @@
+{
+  "sha256": {
+    "D2": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+    "G1": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
+    "felder.json": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+    "source_relief_gz": "b1e347e048d1f26d79b812b795645bf348ef83e831209669cf5cbd2f7717b4a6",
+    "transfer_base": "07c140cffa97df408f2c688ee910b4085e429e986b047f15b62551727ea69287",
+    "vektor.json": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+    "zellen_relief.csv": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+  },
+  "tag": "p3d36"
+}

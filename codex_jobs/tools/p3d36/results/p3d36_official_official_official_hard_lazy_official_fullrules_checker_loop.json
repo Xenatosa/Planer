@@ -1,0 +1,208 @@
+{
+  "best_round": null,
+  "method": "serial pure-LP, Priority-Flood and official Float32 checker loop",
+  "rounds": [
+    {
+      "all_solver_variables_continuous": true,
+      "constraints": 73179,
+      "construction_json": "/tmp/p3d36/p3d36_official_official_official_hard_lazy_official_fullrules_round01_lp00_model_construction.json",
+      "drainage_policy": "official",
+      "event_cuts_before": 0,
+      "event_cuts_before_catalog": [],
+      "flood_cuts": 0,
+      "flood_passes": [],
+      "hard_lp_recheck": {
+        "R4_model_max_violation_m": 0.0,
+        "R8_gitter_m": 0.0,
+        "R8_limits_pass": true,
+        "R8_quer_pct": 0.0,
+        "R8_stufe_m": 0.0,
+        "R8a_model_max_violation_m": null,
+        "R8a_official_lazy_cut_count": 0,
+        "R8a_policy": "lazy_official",
+        "all_slacks_zero": true,
+        "cliff_form_max_violation_m": 0.0,
+        "hard_lp_pass": false,
+        "locality_max_violation_m": 0.0,
+        "positive_slacks": {},
+        "primal_feasible": false,
+        "tree_ground_max_violation_m": 0.0
+      },
+      "integer_variable_count": 0,
+      "lp_group_filter": {
+        "evidence_json": "/tmp/p3d36/p3d36_official_official_official_hard_lazy_official_fullrules_round01_lp_group_filter.json",
+        "family_max_relaxation_locations": {
+          "endpoint_r8a": {
+            "diagnostic": "official wall mask enforced through checker-derived R8A lazy cuts",
+            "maximum_violation_m": null,
+            "pair": null
+          },
+          "endpoint_stage": {
+            "maximum_violation_m": 0.0,
+            "pair": null
+          },
+          "grade_cross": {
+            "maximum_violation_m": 0.0,
+            "pair": null
+          },
+          "grade_same": {
+            "maximum_violation_m": 0.0,
+            "pair": null
+          },
+          "plane_slope_box": {
+            "map": [
+              152.6292918620858,
+              28.353590994151514
+            ],
+            "maximum_violation_pp": 0.0
+          },
+          "plane_slope_polygon": {
+            "map": [
+              152.6292918620858,
+              28.353590994151514
+            ],
+            "maximum_violation_pp": 0.0
+          },
+          "variable_bounds": {
+            "maximum_violation_m": 0.0,
+            "variable": null
+          }
+        },
+        "method": "single all-family elastic LP solve; diagnostic, not an IIS",
+        "p3d31_construction_max_violations": {
+          "cliff_curvature_hard": {
+            "maximum_violation_m": 1.349614864309956e-15,
+            "stencil": {
+              "center_xz": [
+                141.5,
+                6.5
+              ],
+              "reference_second_difference_m": 0.009135246276855469,
+              "second_difference_m": -0.010864753723145881,
+              "tolerance_m": 0.02
+            }
+          },
+          "cliff_curvature_l1": {
+            "largest_stencil": {
+              "center_xz": [
+                147.0,
+                12.5
+              ],
+              "reference_second_difference_m": -4.344627380371094,
+              "second_difference_m": 11.904218522189561
+            },
+            "maximum_abs_deviation_m": 16.248845902560653,
+            "weighted_l1_sum": 902422.9437850226
+          },
+          "drainage": {
+            "edge": null,
+            "maximum_violation_m": 0.0
+          },
+          "locality": {
+            "outside": {
+              "allowed_abs_delta_m": 0.001,
+              "delta_m": 0.0,
+              "maximum_violation_m": 0.0,
+              "xz": [
+                126.0,
+                0.0
+              ]
+            },
+            "transition_ring": {
+              "allowed_abs_delta_m": 0.01696000061929226,
+              "delta_m": -0.016960000619293147,
+              "maximum_violation_m": 8.881784197001252e-16,
+              "xz": [
+                163.0,
+                22.5
+              ]
+            }
+          },
+          "locality_row_debug": {
+            "150.5|42.5": {
+              "fixed": 0.019270761888975408,
+              "lower_activity": 0.007914852370077875,
+              "lower_rhs": 0.007914852370077875,
+              "lower_row": 18949,
+              "reference": 0.019484329968690872,
+              "target_coefficients": {
+                "7662": 0.008564832109178995
+              },
+              "tolerance": 0.008128420449793339,
+              "upper_activity": -0.007914852370077875,
+              "upper_rhs": 0.008341988529508803,
+              "upper_row": 18948
+            },
+            "152.5|42.5": {
+              "fixed": 0.05873367366611505,
+              "lower_activity": 0.009873331424291379,
+              "lower_rhs": 0.009873331424291379,
+              "lower_row": 18957,
+              "reference": 0.06026192381978035,
+              "target_coefficients": {
+                "7666": 0.029948380255966734
+              },
+              "tolerance": 0.011401581577956676,
+              "upper_activity": -0.009873331424291379,
+              "upper_rhs": 0.012929831731621974,
+              "upper_row": 18956
+            }
+          },
+          "r4_official_indicator": {
+            "maximum_violation_m": 0.0,
+            "section": null
+          },
+          "tree_ground": {
+            "maximum_violation_m": 8.673617379884035e-19,
+            "sample": {
+              "delta_m": -0.0010000000000000009,
+              "ground_sample_xz": [
+                135.5,
+                39.5
+              ],
+              "tree_index": 1479,
+              "tree_xz": [
+                136.25,
+                39.75
+              ]
+            },
+            "stencil_samples": 108
+          }
+        },
+        "p3d36_crossfall_measurement": {
+          "center_map": [
+            150.47982720566168,
+            13.665810604157805
+          ],
+          "equivalent_slope_pct_over_3m": 1.7385096955569213,
+          "maximum_side_height_delta_m": 0.052155290866707636,
+          "negative_side_map": [
+            151.36334986978454,
+            12.453627572606363
+          ],
+          "positive_side_map": [
+            149.5963045415388,
+            14.877993635709247
+          ]
+        },
+        "positive_slacks": {
+          "p3d36_no_crossfall_extra_m": 0.0521552908666862
+        },
+        "status": "Optimal"
+      },
+      "model_json": "/tmp/p3d36/p3d36_official_official_official_hard_lazy_official_fullrules_round01_lp00_model.json",
+      "model_status": "Infeasible",
+      "optimality_proven": false,
+      "primal_feasible": false,
+      "r3_policy": "official_hard",
+      "r8a_policy": "lazy_official",
+      "round": 1,
+      "stop_reason": "LP_structurally_infeasible",
+      "variables": 20413,
+      "variant": "official_official_official_hard_lazy_official_fullrules"
+    }
+  ],
+  "status": "LP_structurally_infeasible",
+  "tag": "p3d36",
+  "variant": "official_official_official_hard_lazy_official_fullrules"
+}
