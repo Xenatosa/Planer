@@ -586,11 +586,12 @@
     "R5_loch_total_le_22": false,
     "R5_spitze_D1_eq_0": true,
     "R8_D2_zero": true,
+    "R8a_D1_no_unpermitted_hits": false,
     "R8b_D1_le_1": true,
     "R9_D2_zero": true,
     "R9w_total_le_280": false,
     "per_rule_increase_vs_p3d17_le_5": false,
-    "rampe_2_start_R8a_exception_only": true
+    "rampe_2_start_R8a_exception_not_exceeded": true
   },
   "hard_targets_pass": false,
   "node_stdout": "{\"meshes\":9,\"dreiecke\":88728,\"offen_innen\":0,\"bb\":[126,0,294,86],\"punkte\":0}\n",

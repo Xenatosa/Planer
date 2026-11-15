@@ -288,6 +288,8 @@ def main() -> None:
     r8a_start_hits = [hit for hit in r8.get("treffer", [])
                       if hit.get("regel") == "R8a_wegende"
                       and hit.get("weg") == "rampe_2_anfang"]
+    r8a_d1_hits = [hit for hit in r8.get("treffer", [])
+                   if hit.get("regel") == "R8a_wegende" and hit.get("feld") == "D1"]
     target_metrics = {
         "R5_spitze_D1_eq_0": sum(hit.get("regel") == "R5_spitze" and hit.get("feld") == "D1" for hit in rules.get("treffer", [])) == 0,
         "G6_D1_le_3": sum(hit.get("regel") == "G6_facette" and hit.get("feld") == "D1" for hit in rules.get("treffer", [])) <= 3,
@@ -305,7 +307,10 @@ def main() -> None:
         "D2_no_new_pruefe_regeln_hits": not new_d2,
         "R8_D2_zero": not r8_d2,
         "R9_D2_zero": not r9_d2,
-        "rampe_2_start_R8a_exception_only": all(float(hit.get("wert", 0.0)) <= 0.18 for hit in r8a_start_hits),
+        "R8a_D1_no_unpermitted_hits": all(
+            hit.get("ausnahme") == "R8a_ausnahme_rampe2_start" for hit in r8a_d1_hits
+        ),
+        "rampe_2_start_R8a_exception_not_exceeded": not r8a_start_hits,
     }
     result = {
         "candidate_kind": "p3d35 Float32 direct-transfer probe; no mesh build",

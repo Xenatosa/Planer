@@ -1,0 +1,1331 @@
+[
+  {
+    "checker_hit_point_map": [
+      126.5,
+      31.6
+    ],
+    "checker_start_sample_index": 0,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.02236231781351647,
+    "nearest_sample_index": 0,
+    "route": 2,
+    "section": 0,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.08,
+      "x": 126.5,
+      "z": 31.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      130.5,
+      31.1
+    ],
+    "checker_start_sample_index": 16,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.04442527463416102,
+    "nearest_sample_index": 16,
+    "route": 2,
+    "section": 1,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 3.5,
+      "x": 130.5,
+      "z": 31.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      130.5,
+      31.1
+    ],
+    "checker_start_sample_index": 16,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.04442527463416102,
+    "nearest_sample_index": 16,
+    "route": 2,
+    "section": 1,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.082,
+      "x": 130.5,
+      "z": 31.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      134.5,
+      30.7
+    ],
+    "checker_start_sample_index": 32,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.05801127440344935,
+    "nearest_sample_index": 32,
+    "route": 2,
+    "section": 2,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.082,
+      "x": 134.5,
+      "z": 30.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      134.5,
+      30.7
+    ],
+    "checker_start_sample_index": 32,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.05801127440344935,
+    "nearest_sample_index": 32,
+    "route": 2,
+    "section": 2,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 4.6,
+      "x": 134.5,
+      "z": 30.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      134.5,
+      30.7
+    ],
+    "checker_start_sample_index": 32,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.05801127440344935,
+    "nearest_sample_index": 32,
+    "route": 2,
+    "section": 2,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.122,
+      "x": 134.5,
+      "z": 30.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      138.4,
+      30.4
+    ],
+    "checker_start_sample_index": 48,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.061828807155151225,
+    "nearest_sample_index": 48,
+    "route": 2,
+    "section": 3,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.084,
+      "x": 138.4,
+      "z": 30.4
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      138.4,
+      30.4
+    ],
+    "checker_start_sample_index": 48,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.061828807155151225,
+    "nearest_sample_index": 48,
+    "route": 2,
+    "section": 3,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 9.3,
+      "x": 138.4,
+      "z": 30.4
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      138.4,
+      30.4
+    ],
+    "checker_start_sample_index": 48,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.061828807155151225,
+    "nearest_sample_index": 48,
+    "route": 2,
+    "section": 3,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.199,
+      "x": 138.4,
+      "z": 30.4
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      142.4,
+      30.2
+    ],
+    "checker_start_sample_index": 64,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.048744995998288174,
+    "nearest_sample_index": 64,
+    "route": 2,
+    "section": 4,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 15.3,
+      "x": 142.4,
+      "z": 30.2
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      142.4,
+      30.2
+    ],
+    "checker_start_sample_index": 64,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.048744995998288174,
+    "nearest_sample_index": 64,
+    "route": 2,
+    "section": 4,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.246,
+      "x": 142.4,
+      "z": 30.2
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      144.8,
+      9.5
+    ],
+    "checker_start_sample_index": 32,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.04705181663807696,
+    "nearest_sample_index": 32,
+    "route": 11,
+    "section": 2,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 14.5,
+      "x": 144.8,
+      "z": 9.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      144.8,
+      9.5
+    ],
+    "checker_start_sample_index": 32,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.04705181663807696,
+    "nearest_sample_index": 32,
+    "route": 11,
+    "section": 2,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.202,
+      "x": 144.8,
+      "z": 9.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.4,
+      29.5
+    ],
+    "checker_start_sample_index": 80,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.02384198235594345,
+    "nearest_sample_index": 80,
+    "route": 2,
+    "section": 5,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.25,
+      "x": 146.4,
+      "z": 29.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.4,
+      29.5
+    ],
+    "checker_start_sample_index": 80,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.02384198235594345,
+    "nearest_sample_index": 80,
+    "route": 2,
+    "section": 5,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 17.7,
+      "x": 146.4,
+      "z": 29.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.4,
+      29.5
+    ],
+    "checker_start_sample_index": 80,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.02384198235594345,
+    "nearest_sample_index": 80,
+    "route": 2,
+    "section": 5,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.177,
+      "x": 146.4,
+      "z": 29.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.6,
+      6.0
+    ],
+    "checker_start_sample_index": 16,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.031878579597843966,
+    "nearest_sample_index": 16,
+    "route": 11,
+    "section": 1,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.104,
+      "x": 146.6,
+      "z": 6.0
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.6,
+      6.0
+    ],
+    "checker_start_sample_index": 16,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.031878579597843966,
+    "nearest_sample_index": 16,
+    "route": 11,
+    "section": 1,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 10.2,
+      "x": 146.6,
+      "z": 6.0
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      146.6,
+      6.0
+    ],
+    "checker_start_sample_index": 16,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.031878579597843966,
+    "nearest_sample_index": 16,
+    "route": 11,
+    "section": 1,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.628,
+      "x": 146.6,
+      "z": 6.0
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      148.1,
+      11.9
+    ],
+    "checker_start_sample_index": 48,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.045789306541688946,
+    "nearest_sample_index": 48,
+    "route": 11,
+    "section": 3,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 3.7,
+      "x": 148.1,
+      "z": 11.9
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      148.1,
+      11.9
+    ],
+    "checker_start_sample_index": 48,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.045789306541688946,
+    "nearest_sample_index": 48,
+    "route": 11,
+    "section": 3,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.086,
+      "x": 148.1,
+      "z": 11.9
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      148.5,
+      2.5
+    ],
+    "checker_start_sample_index": 0,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.0,
+    "nearest_sample_index": 0,
+    "route": 11,
+    "section": 0,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.1,
+      "x": 148.5,
+      "z": 2.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      148.5,
+      2.5
+    ],
+    "checker_start_sample_index": 0,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.0,
+    "nearest_sample_index": 0,
+    "route": 11,
+    "section": 0,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 5.8,
+      "x": 148.5,
+      "z": 2.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      148.5,
+      2.5
+    ],
+    "checker_start_sample_index": 0,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.0,
+    "nearest_sample_index": 0,
+    "route": 11,
+    "section": 0,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.733,
+      "x": 148.5,
+      "z": 2.5
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      150.3,
+      28.7
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.038782987796388856,
+    "nearest_sample_index": 96,
+    "route": 2,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.216,
+      "x": 150.3,
+      "z": 28.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      150.3,
+      28.7
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.038782987796388856,
+    "nearest_sample_index": 96,
+    "route": 2,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 16.2,
+      "x": 150.3,
+      "z": 28.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      150.3,
+      28.7
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.038782987796388856,
+    "nearest_sample_index": 96,
+    "route": 2,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.105,
+      "x": 150.3,
+      "z": 28.7
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      150.4,
+      33.1
+    ],
+    "checker_start_sample_index": 160,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.04387336473952851,
+    "nearest_sample_index": 160,
+    "route": 11,
+    "section": 10,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 4.5,
+      "x": 150.4,
+      "z": 33.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      150.4,
+      33.1
+    ],
+    "checker_start_sample_index": 160,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.04387336473952851,
+    "nearest_sample_index": 160,
+    "route": 11,
+    "section": 10,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 1.027,
+      "x": 150.4,
+      "z": 33.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      151.3,
+      14.3
+    ],
+    "checker_start_sample_index": 64,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.049703616916058124,
+    "nearest_sample_index": 64,
+    "route": 11,
+    "section": 4,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 3.5,
+      "x": 151.3,
+      "z": 14.3
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      151.3,
+      14.3
+    ],
+    "checker_start_sample_index": 64,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.049703616916058124,
+    "nearest_sample_index": 64,
+    "route": 11,
+    "section": 4,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.083,
+      "x": 151.3,
+      "z": 14.3
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      151.8,
+      29.6
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.037580607434526646,
+    "nearest_sample_index": 144,
+    "route": 11,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.252,
+      "x": 151.8,
+      "z": 29.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      151.8,
+      29.6
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.037580607434526646,
+    "nearest_sample_index": 144,
+    "route": 11,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 20.0,
+      "x": 151.8,
+      "z": 29.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      151.8,
+      29.6
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.037580607434526646,
+    "nearest_sample_index": 144,
+    "route": 11,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.509,
+      "x": 151.8,
+      "z": 29.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      153.7,
+      26.1
+    ],
+    "checker_start_sample_index": 128,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.01510667925927109,
+    "nearest_sample_index": 128,
+    "route": 11,
+    "section": 8,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.17,
+      "x": 153.7,
+      "z": 26.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      153.7,
+      26.1
+    ],
+    "checker_start_sample_index": 128,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.01510667925927109,
+    "nearest_sample_index": 128,
+    "route": 11,
+    "section": 8,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 11.2,
+      "x": 153.7,
+      "z": 26.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      153.7,
+      35.4
+    ],
+    "checker_start_sample_index": 176,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.04591229969244535,
+    "nearest_sample_index": 176,
+    "route": 11,
+    "section": 11,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.153,
+      "x": 153.7,
+      "z": 35.4
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      154.2,
+      28.1
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.06110227420284785,
+    "nearest_sample_index": 112,
+    "route": 2,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.149,
+      "x": 154.2,
+      "z": 28.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      154.2,
+      28.1
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.06110227420284785,
+    "nearest_sample_index": 112,
+    "route": 2,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 20.0,
+      "x": 154.2,
+      "z": 28.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      154.2,
+      28.1
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.06110227420284785,
+    "nearest_sample_index": 112,
+    "route": 2,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.346,
+      "x": 154.2,
+      "z": 28.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      154.5,
+      16.6
+    ],
+    "checker_start_sample_index": 80,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.022915793286022543,
+    "nearest_sample_index": 80,
+    "route": 11,
+    "section": 5,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 7.5,
+      "x": 154.5,
+      "z": 16.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      154.5,
+      16.6
+    ],
+    "checker_start_sample_index": 80,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.022915793286022543,
+    "nearest_sample_index": 80,
+    "route": 11,
+    "section": 5,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.133,
+      "x": 154.5,
+      "z": 16.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      155.6,
+      22.6
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.03281172253462381,
+    "nearest_sample_index": 112,
+    "route": 11,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.182,
+      "x": 155.6,
+      "z": 22.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      155.6,
+      22.6
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.03281172253462381,
+    "nearest_sample_index": 112,
+    "route": 11,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 20.0,
+      "x": 155.6,
+      "z": 22.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      155.6,
+      22.6
+    ],
+    "checker_start_sample_index": 112,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.03281172253462381,
+    "nearest_sample_index": 112,
+    "route": 11,
+    "section": 7,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.295,
+      "x": 155.6,
+      "z": 22.6
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      157.5,
+      19.1
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.0629086177521623,
+    "nearest_sample_index": 96,
+    "route": 11,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_11",
+      "wert": 0.107,
+      "x": 157.5,
+      "z": 19.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      157.5,
+      19.1
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.0629086177521623,
+    "nearest_sample_index": 96,
+    "route": 11,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_11",
+      "wert": 4.2,
+      "x": 157.5,
+      "z": 19.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      157.5,
+      19.1
+    ],
+    "checker_start_sample_index": 96,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.0629086177521623,
+    "nearest_sample_index": 96,
+    "route": 11,
+    "section": 6,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_11",
+      "wert": 0.266,
+      "x": 157.5,
+      "z": 19.1
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      158.2,
+      27.3
+    ],
+    "checker_start_sample_index": 128,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.03601941081551562,
+    "nearest_sample_index": 128,
+    "route": 2,
+    "section": 8,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 19.8,
+      "x": 158.2,
+      "z": 27.3
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      158.2,
+      27.3
+    ],
+    "checker_start_sample_index": 128,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.03601941081551562,
+    "nearest_sample_index": 128,
+    "route": 2,
+    "section": 8,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.356,
+      "x": 158.2,
+      "z": 27.3
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      162.1,
+      26.9
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "laengs",
+    "nearest_sample_distance_map": 0.05067454418112068,
+    "nearest_sample_index": 144,
+    "route": 2,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_laengs_m",
+      "weg": "rampe_2",
+      "wert": 0.123,
+      "x": 162.1,
+      "z": 26.9
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      162.1,
+      26.9
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.05067454418112068,
+    "nearest_sample_index": 144,
+    "route": 2,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 10.4,
+      "x": 162.1,
+      "z": 26.9
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      162.1,
+      26.9
+    ],
+    "checker_start_sample_index": 144,
+    "kind": "R3_SECTION",
+    "metric": "woelb",
+    "nearest_sample_distance_map": 0.05067454418112068,
+    "nearest_sample_index": 144,
+    "route": 2,
+    "section": 9,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_woelb_m",
+      "weg": "rampe_2",
+      "wert": 0.231,
+      "x": 162.1,
+      "z": 26.9
+    }
+  },
+  {
+    "checker_hit_point_map": [
+      166.1,
+      26.7
+    ],
+    "checker_start_sample_index": 160,
+    "kind": "R3_SECTION",
+    "metric": "quer",
+    "nearest_sample_distance_map": 0.04431839239023957,
+    "nearest_sample_index": 160,
+    "route": 2,
+    "section": 10,
+    "source_hit": {
+      "feld": "D1",
+      "regel": "R3_quer_pct",
+      "weg": "rampe_2",
+      "wert": 3.6,
+      "x": 166.1,
+      "z": 26.7
+    }
+  },
+  {
+    "component_center": [
+      132.5,
+      29.5
+    ],
+    "kind": "R9w",
+    "peak_m": 0.1848041667571323,
+    "pixels": 5,
+    "point": [
+      132.5,
+      29.5
+    ],
+    "sign": -1
+  },
+  {
+    "component_center": [
+      142.83333333333334,
+      13.268518518518519
+    ],
+    "kind": "R9w",
+    "peak_m": 0.2686783966679194,
+    "pixels": 54,
+    "point": [
+      145.5,
+      15.5
+    ],
+    "sign": -1
+  },
+  {
+    "component_center": [
+      147.85,
+      36.25
+    ],
+    "kind": "R9w",
+    "peak_m": 0.15604026199272836,
+    "pixels": 10,
+    "point": [
+      148.0,
+      36.0
+    ],
+    "sign": 1
+  },
+  {
+    "component_center": [
+      149.25,
+      7.75
+    ],
+    "kind": "R9w",
+    "peak_m": 0.19045600542901653,
+    "pixels": 4,
+    "point": [
+      149.0,
+      8.0
+    ],
+    "sign": 1
+  },
+  {
+    "component_center": [
+      156.71428571428572,
+      27.285714285714285
+    ],
+    "kind": "R9w",
+    "peak_m": 0.24787814107814077,
+    "pixels": 7,
+    "point": [
+      156.5,
+      27.0
+    ],
+    "sign": -1
+  },
+  {
+    "component_center": [
+      157.4375,
+      16.8125
+    ],
+    "depth_m": 2.858015537261963,
+    "flood_level_m": 7.89063024520874,
+    "kind": "R5",
+    "pit": [
+      157.5,
+      16.5
+    ],
+    "pits": [
+      [
+        156.5,
+        16.0
+      ],
+      [
+        156.5,
+        16.5
+      ],
+      [
+        157.0,
+        16.5
+      ],
+      [
+        157.5,
+        16.5
+      ],
+      [
+        157.5,
+        17.0
+      ],
+      [
+        158.0,
+        17.0
+      ],
+      [
+        158.0,
+        17.5
+      ],
+      [
+        158.5,
+        17.5
+      ]
+    ],
+    "saddle": [
+      159.0,
+      18.0
+    ]
+  },
+  {
+    "component_center": [
+      157.5,
+      20.0
+    ],
+    "depth_m": 1.4465384483337402,
+    "flood_level_m": 5.971462249755859,
+    "kind": "R5",
+    "pit": [
+      157.5,
+      20.0
+    ],
+    "pits": [
+      [
+        157.5,
+        20.0
+      ]
+    ],
+    "saddle": [
+      157.0,
+      20.0
+    ]
+  },
+  {
+    "component_center": [
+      159.0,
+      18.5
+    ],
+    "depth_m": 2.1721057891845703,
+    "flood_level_m": 7.659991264343262,
+    "kind": "R5",
+    "pit": [
+      159.0,
+      18.5
+    ],
+    "pits": [
+      [
+        159.0,
+        18.5
+      ]
+    ],
+    "saddle": [
+      159.5,
+      19.0
+    ]
+  },
+  {
+    "component_center": [
+      159.5,
+      35.77777777777778
+    ],
+    "kind": "R9w",
+    "peak_m": 0.21831992135561476,
+    "pixels": 9,
+    "point": [
+      160.0,
+      35.5
+    ],
+    "sign": -1
+  },
+  {
+    "component_center": [
+      163.5,
+      31.0
+    ],
+    "kind": "R9w",
+    "peak_m": 0.21710474522467305,
+    "pixels": 7,
+    "point": [
+      162.0,
+      31.0
+    ],
+    "sign": 1
+  }
+]

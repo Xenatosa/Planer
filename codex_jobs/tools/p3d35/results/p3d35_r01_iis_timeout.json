@@ -1,0 +1,39 @@
+{
+  "attempted_elapsed_wall": "03:06:00 at termination",
+  "elastic_all_family_filter_is_not_an_IIS": true,
+  "elastic_filter_positive_slacks": {
+    "r3_long_residual_m": 0.009098928803238735,
+    "variable_bounds_extra_m": 0.5905407081754184
+  },
+  "elastic_filter_variable_bounds_location": {
+    "maximum_violation_m": 0.5905407081754186,
+    "variable": {
+      "height_m": 8.513833596870173,
+      "kind": "route_height",
+      "lower_m": 7.923292888694754,
+      "map": [
+        152.29807477049678,
+        14.991086159583562
+      ],
+      "route": 11,
+      "station_m": 20.7,
+      "upper_m": 7.923292888694754
+    }
+  },
+  "event_cut_count_by_kind": {
+    "R3_SECTION": 54,
+    "R5": 3,
+    "R9w": 7
+  },
+  "hard_lp_constraints": 76246,
+  "hard_lp_json": "codex_jobs/tools/p3d35/results/p3d35_official_round01_lp00_model.json",
+  "hard_lp_variables": 20411,
+  "highspy_version": "1.15.1",
+  "iis_strategy": 6,
+  "integer_variable_count": 0,
+  "model_status_from_hard_lp": "Infeasible",
+  "reason": "HiGHS IIS reduction remained CPU-bound and produced no JSON/.iis.lp artifact within the 3 h diagnostic allowance; process terminated.",
+  "source_event_cuts": "codex_jobs/tools/p3d35/results/p3d35_official_round01_event_cuts.json",
+  "status": "interrupted_no_iis_artifact",
+  "tag": "p3d35_r01_hard_iis"
+}

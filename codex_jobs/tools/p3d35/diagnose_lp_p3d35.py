@@ -650,6 +650,7 @@ def solve(
     p3d33_fixed_route_meta = {}
     p3d35_profile_transitions: list[tuple[int, int]] = []
     p3d35_profile_windows: dict[str, dict] = {}
+    p3d35_profile_station_m_by_route: dict[int, np.ndarray] = {}
     r3_sections = []
     section_lookup = []
     for route, p in enumerate(profiles):
@@ -676,6 +677,7 @@ def solve(
         lo, hi = v3_heights.copy(), v3_heights.copy()
         station_scale_m = P3D35_PROFILE_STATION_SCALE_M.get(p["index"], CELL_M)
         station_m = station * station_scale_m
+        p3d35_profile_station_m_by_route[route] = station_m.copy()
         if p3d35_policy == "official" and p["index"] == 2:
             window_start_m, window_end_m = 0.0, 50.0
         elif p3d35_policy == "official" and p["index"] == 11:
@@ -1595,10 +1597,16 @@ def solve(
     # The event catalogue is D1-local. Fixed non-D1 components are taken from
     # the official round-05 probe (G5=67, R5-hole=17); total and D1 allowances
     # are both kept explicit so their measured excesses can be reported.
-    g5_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "G5"]
-    r5_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "R5"]
-    r8b_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "R8b"]
-    r4_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "R4"]
+    # Checker cuts are direct hard inequalities and do not have event
+    # indicators. Counter rows apply only if a model variant supplies them.
+    g5_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts)
+               if cut["kind"] == "G5" and i in event_hit_indices]
+    r5_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts)
+               if cut["kind"] == "R5" and i in event_hit_indices]
+    r8b_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts)
+                if cut["kind"] == "R8b" and i in event_hit_indices]
+    r4_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts)
+               if cut["kind"] == "R4" and i in event_hit_indices]
     current_family = "event_counter_caps"
     if g5_hits:
         add({**{j: 1.0 for j in g5_hits}, slack_indices["g5_total_extra_hits"]: -1.0}, 69.0 - 67.0)
@@ -1610,7 +1618,8 @@ def solve(
         add({**{j: 1.0 for j in r8b_hits}, slack_indices["r8b_d1_extra_hits"]: -1.0}, 1.0)
     if r4_hits:
         add({**{j: 1.0 for j in r4_hits}, slack_indices["r4_d1_extra_hits"]: -1.0}, 0.0)
-    g11_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts) if cut["kind"] == "G11"]
+    g11_hits = [event_hit_indices[i] for i, cut in enumerate(event_cuts)
+                if cut["kind"] == "G11" and i in event_hit_indices]
     if g11_hits:
         current_family = "event_counter_caps"
         # Only newly observed D1 G11 events enter this cut list. The two
@@ -2209,10 +2218,7 @@ def solve(
         summary["p3d35_profile_windows"] = p3d35_profile_windows
         summary["p3d35_profile_transitions"] = [
             {"route": int(profiles[route]["index"]),
-             "station_m": float(profiles[route]["station"][k] *
-                                 P3D35_PROFILE_STATION_SCALE_M.get(
-                                     profiles[route]["index"], CELL_M
-                                 )),
+             "station_m": float(p3d35_profile_station_m_by_route[route][k]),
              "profile_index": int(k)}
             for route, k in p3d35_profile_transitions
         ]
@@ -2491,7 +2497,8 @@ def solve(
     }
     summary["selected_soft_event_cut_relaxations_by_kind"] = {
         kind: int(sum(result.x[event_hit_indices[i]] > 0.5
-                      for i, cut in enumerate(event_cuts) if cut["kind"] == kind))
+                      for i, cut in enumerate(event_cuts)
+                      if cut["kind"] == kind and i in event_hit_indices))
         for kind in ("G5", "R5", "R8b", "R4", "G11")
     }
     summary["p3d33_variant"] = p3d33_variant
@@ -2499,10 +2506,7 @@ def solve(
     summary["p3d35_profile_windows"] = p3d35_profile_windows
     summary["p3d35_profile_transitions"] = [
         {"route": int(profiles[route]["index"]),
-         "station_m": float(profiles[route]["station"][k] *
-                             P3D35_PROFILE_STATION_SCALE_M.get(
-                                 profiles[route]["index"], CELL_M
-                             )),
+         "station_m": float(p3d35_profile_station_m_by_route[route][k]),
          "profile_index": int(k)}
         for route, k in p3d35_profile_transitions
     ]

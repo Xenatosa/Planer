@@ -1,0 +1,64 @@
+{
+  "note": "The standalone p3d35_profile_transitions metadata field for rampe_11 was stale; the probe derived transitions from the route station arrays. Model metadata code now uses that same array.",
+  "source_solver_json": "p3d35_r00_official_hard_lp.json",
+  "station_source": "routes[rampe_N].station_m[index]",
+  "transitions": [
+    {
+      "probe_transition": {
+        "C0_height_continuous": true,
+        "C1_pass": true,
+        "height_m": 1.9809364704862085,
+        "height_old_m": 1.990185260772705,
+        "official_R3_wob_m": 0.014924859044958216,
+        "profile_index": 166,
+        "second_difference_m_per_m2": 0.0,
+        "slope_delta_m_per_m": 4.9404924595819466e-15,
+        "slope_left_m_per_m": -0.208387980386566,
+        "slope_right_m_per_m": -0.20838798038656106,
+        "station_m": 49.8
+      },
+      "profile_index": 166,
+      "route": 2,
+      "route_export_station_m": 49.8,
+      "solver_json_transition_station_m": 49.8
+    },
+    {
+      "probe_transition": {
+        "C0_height_continuous": true,
+        "C1_pass": true,
+        "height_m": 4.6135206147213434,
+        "height_old_m": 4.523441657379481,
+        "official_R3_wob_m": 0.08000011951488073,
+        "profile_index": 117,
+        "second_difference_m_per_m2": 0.0,
+        "slope_delta_m_per_m": -2.373101715136272e-15,
+        "slope_left_m_per_m": -0.09986840443022788,
+        "slope_right_m_per_m": -0.09986840443023025,
+        "station_m": 70.2
+      },
+      "profile_index": 117,
+      "route": 11,
+      "route_export_station_m": 70.2,
+      "solver_json_transition_station_m": 35.1
+    },
+    {
+      "probe_transition": {
+        "C0_height_continuous": true,
+        "C1_pass": true,
+        "height_m": 3.653399011516413,
+        "height_old_m": 3.661331619487306,
+        "official_R3_wob_m": 0.07999993443917885,
+        "profile_index": 150,
+        "second_difference_m_per_m2": 0.0,
+        "slope_delta_m_per_m": -3.3584246494910985e-15,
+        "slope_left_m_per_m": -0.14200670943583146,
+        "slope_right_m_per_m": -0.14200670943583482,
+        "station_m": 90.0
+      },
+      "profile_index": 150,
+      "route": 11,
+      "route_export_station_m": 90.0,
+      "solver_json_transition_station_m": 45.0
+    }
+  ]
+}
