@@ -1,0 +1,79 @@
+{
+  "constraints": 75287,
+  "highspy_version": "1.15.1",
+  "iis_attempted": true,
+  "iis_column_bounds": [
+    {
+      "column": 7867,
+      "diagnostic_group": "endpoint_stage",
+      "kind": "diagnostic_slack",
+      "lower": 0.0,
+      "name": "endpoint_stage_extra_m",
+      "upper": 0.0
+    }
+  ],
+  "iis_column_names": [
+    "column_7867"
+  ],
+  "iis_columns": 1,
+  "iis_model_file_tmp": "/tmp/p3d37/endpoint_infeasible.iis.lp",
+  "iis_model_write_status": "HighsStatus.kOk",
+  "iis_row_families": {
+    "endpoint_stage_pairs": 1
+  },
+  "iis_rows": 1,
+  "iis_rows_evidence": [
+    {
+      "family": "endpoint_stage_pairs",
+      "fixed_pair_delta_m": 0.05696749687194824,
+      "nonzero_count": 1,
+      "rhs": -0.0030674968719482457,
+      "row_index": 65382,
+      "row_name": "row_65382_endpoint_stage_pairs",
+      "slack_required_m": 0.0030674968719482457,
+      "terms_first_16": [
+        {
+          "coefficient": -1.0,
+          "column": 7867,
+          "name": "column_7867"
+        }
+      ]
+    }
+  ],
+  "iis_rows_metadata": [
+    {
+      "directed_row": "forward",
+      "endpoint_pair_index": 1403,
+      "endpoint_pair_map": [
+        171.25,
+        24.75,
+        171.5,
+        24.75
+      ],
+      "family": "endpoint_stage_pairs",
+      "nearest_endpoint_id": "rampe_2_ende",
+      "nearest_endpoint_map": [
+        175.08557332141362,
+        25.697639252945574
+      ],
+      "pair_center_distance_to_endpoint_m": 4.595604347561486,
+      "row_index": 65382
+    }
+  ],
+  "iis_run_elapsed_s": 0.11432727699866518,
+  "iis_status": "HighsStatus.kOk",
+  "iis_status_enum": "3",
+  "iis_strategy": 6,
+  "iis_strategy_note": "LP elasticity filter followed by reduction to an IIS",
+  "iis_valid": true,
+  "integer_variable_count": 0,
+  "max_primal_infeasibility": Infinity,
+  "method": "HiGHS continuous LP IIS",
+  "model_status": "Infeasible",
+  "objective_value": 0.0,
+  "status_code": 8,
+  "tag": "p3d37_startband",
+  "threads": 1,
+  "time_limit_s": 840.0,
+  "variables": 20413
+}
