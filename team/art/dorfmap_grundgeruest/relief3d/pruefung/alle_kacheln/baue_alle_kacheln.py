@@ -77,12 +77,14 @@ def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], orig
         for wall in vector.get("waende", []):
             nominal = float(wall.get("breite_min_m", 0.0))
             width = max(nominal, 2.4 if variant == 0 else nominal)
+            # P10c: neu/wand.py baut in Zellen (Breite / CELL_M); aeltere wand.py ohne _centerline_cells in Metern-als-Zellen.
+            width_geo = width / WD.CELL_M if hasattr(WD, "_centerline_cells") else width
             for points, top, bottom in WD._chunks(wall, bounds, width, variant):
                 used_widths.append(width)
                 if terrain is not None:
-                    network_chunks.append((points, np.maximum(top, bottom), width))
+                    network_chunks.append((points, np.maximum(top, bottom), width_geo))
                 else:
-                    positions, indices = WD._solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant)
+                    positions, indices = WD._solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width_geo, variant)
                     if len(indices):
                         pieces.append((positions, indices)); features += 1
         if terrain is not None and network_chunks:
@@ -127,8 +129,18 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
     source = M.load_relief(relief)
     rs, nx, ny = int(source.data["rs"]), int(source.data["nx"]), int(source.data["ny"])
     # 1) Prototyp-Kacheln exakt wie neu/pipeline.py (Standardvarianten aus der Umgebung).
-    manifest = M.build_manifest(relief, R / "neu" / "zellen_relief.csv",
-                                R / "neu" / "vektor.json", R / "neu" / "felder.npz")
+    try:
+        manifest = M.build_manifest(relief, R / "neu" / "zellen_relief.csv",
+                                    R / "neu" / "vektor.json", R / "neu" / "felder.npz")
+        prototyp_quelle = "neu.mesh.build_manifest"
+    except RuntimeError as err:
+        # P10c: Seit a10fc1e (P3) passt relief_daten.json.gz nicht mehr zur p3d17-Rasterloesung
+        # (source_relief_sha256), build_manifest() bricht fuer D1 ab. index.html nutzt das
+        # gespeicherte Manifest aus neu/relief_neu.json.gz -> genau dieses verwenden.
+        if "p3d17" not in str(err):
+            raise
+        manifest = json.loads(gzip.decompress((R / "neu" / "relief_neu.json.gz").read_bytes()))["neu_mesh_tiles"]
+        prototyp_quelle = f"neu/relief_neu.json.gz (gespeichert; build_manifest: {err})"
     waende = build_wall_manifest(R / "neu" / "vektor.json", terrain_tiles=manifest["tiles"])
     t_proto = time.time() - t0
 
@@ -309,6 +321,7 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
         "quelle": "relief_daten.json.gz", "source_relief_sha256": source.source_file_sha256,
         "kacheln": len(tiles), "prototyp_kacheln": sorted(proto),
         "prototyp_mit_tile_mesh_identisch": kontrolle,
+        "prototyp_quelle": prototyp_quelle,
         "terrain_extensions_angewendet": ext_n,
         "flaechen_dreiecke": sum(t["triangles"] for t in tiles.values()),
         "geschlossen_dreiecke": sum(t["closed_triangles"] for t in tiles.values()),
@@ -370,7 +383,7 @@ def main() -> None:
         info["dauer_s"]["html"] = round(time.time() - th, 2)
     info["dauer_s"]["gesamt"] = round(time.time() - t, 2)
     (out / f"{name}_build.json").write_text(json.dumps(info, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
-    kurz = {k: info[k] for k in ("kacheln", "prototyp_mit_tile_mesh_identisch", "terrain_extensions_angewendet",
+    kurz = {k: info[k] for k in ("kacheln", "prototyp_mit_tile_mesh_identisch", "prototyp_quelle", "terrain_extensions_angewendet",
                                   "wegprofile_andere_kacheln", "waende_d2_unterdrueckt", "wand_dreiecke",
                                   "flaechen_dreiecke", "geschlossen_dreiecke", "naht", "paket_bytes", "dauer_s")}
     kurz["html_bytes"] = info.get("html_bytes")

@@ -31,14 +31,15 @@ einheit = {
 }
 je_wand = []
 for w in walls:
-    P = np.asarray(w['mittellinie_m'], float)
+    # wie gezeichnet: neu/wand.py ab P10c rechnet ueber _centerline_cells (Meter / CELL_M), davor Meter als Zellen
+    P = W._centerline_cells(w) if hasattr(W, '_centerline_cells') else np.asarray(w['mittellinie_m'], float)
     q = np.asarray(w['quellzellen'], int)
     C = np.stack([q % NX + 0.5, q // NX + 0.5], 1)
     from scipy.spatial import cKDTree
     T = cKDTree(C)
     je_wand.append({'wand': f"{w['name']}:{w['teil']}", 'punkte': len(P),
                     'abstand_quelle_gezeichnet_median': float(np.median(T.query(P)[0])),
-                    'abstand_quelle_meter_durch_1_2_median': float(np.median(T.query(P / CELL_M)[0])),
+                    'abstand_quelle_meter_durch_1_2_median': float(np.median(T.query(np.asarray(w['mittellinie_m'], float) / CELL_M)[0])),
                     'ausserhalb_karte_gezeichnet': bool((P[:, 0] > NX).all() or (P[:, 1] > NY).all())})
 d_g = np.array([x['abstand_quelle_gezeichnet_median'] for x in je_wand])
 d_s = np.array([x['abstand_quelle_meter_durch_1_2_median'] for x in je_wand])
@@ -58,7 +59,7 @@ def stuecke(tiles):
         rows = []
         for w in walls:
             width = float(w['breite_min_m'])
-            m = width * 1.05
+            m = (width / CELL_M if hasattr(W, '_centerline_cells') else width) * 1.05
             for pts, top, bot in W._chunks(w, b, width, W.DEFAULT_VARIANT):
                 L = float(np.sum(np.linalg.norm(np.diff(pts, axis=0), axis=1)))
                 ends = 0
@@ -75,9 +76,17 @@ def stuecke(tiles):
 
 
 alle = kacheln()
+# Klippenzellen je Kachel (WAND/KANTE aus raster_c20_z25_zellen.csv, Zuordnung wie pruefe_regeln.feld())
+import csv
+klippe = {t: 0 for t in alle}
+with open(ROOT.parent / 'raster_c20_z25_zellen.csv', encoding='utf-8-sig', newline='') as fh:
+    for row in csv.DictReader(fh):
+        if row['klippe'] in ('WAND', 'KANTE'):
+            klippe['ABCDEFGH'[min(int(row['cx']) // 42, 7)] + str(min(int(row['cy']) // 43, 6) + 1)] += 1
 idx = stuecke({t: alle[t] for t in ('D1', 'G1')})
 ges = stuecke(alle)
 print(json.dumps({
+    'wand_py_einheit': 'Zellen (P10c, _centerline_cells)' if hasattr(W, '_centerline_cells') else 'Meter als Zellen (vor P10c)',
     'einheit': einheit,
     'waende_gesamt': len(walls),
     'abstand_quelle_gezeichnet': {'median': round(float(np.median(d_g)), 2), 'max': round(float(d_g.max()), 2)},
@@ -87,6 +96,10 @@ print(json.dumps({
     'alle_56_summe': {'kacheln_mit_wand': len(ges), 'stuecke': sum(x['stuecke'] for x in ges.values()),
                       'kurz_unter_5': sum(x['kurz_unter_5'] for x in ges.values()),
                       'enden_an_clipkante': sum(x['enden_an_clipkante'] for x in ges.values())},
-    'alle_56_je_kachel': {t: {k: x[k] for k in ('stuecke', 'kurz_unter_5', 'enden_an_clipkante')} for t, x in ges.items()},
+    'alle_56_je_kachel': {t: {**{k: x[k] for k in ('stuecke', 'kurz_unter_5', 'enden_an_clipkante')}, 'klippenzellen': klippe[t]}
+                          for t, x in ges.items()},
+    'klippe_ohne_wand': {t: klippe[t] for t in alle if klippe[t] > 0 and t not in ges},
+    'wand_ohne_klippe': {t: ges[t]['stuecke'] for t in ges if klippe[t] == 0},
+    'hinweis_D2': 'D2-Stuecke werden von build_wall_manifest bewusst verworfen (D2 wandfrei)',
     'je_wand': je_wand,
 }, indent=1))

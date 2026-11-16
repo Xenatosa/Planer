@@ -13,7 +13,7 @@ from shapely import constrained_delaunay_triangles, segmentize
 from shapely.geometry import LineString, MultiPoint, Point, Polygon
 from shapely.ops import triangulate, unary_union
 
-from .mesh import TILE_BOUNDS
+from .mesh import CELL_M, TILE_BOUNDS
 
 
 DEFAULT_VARIANT = 1
@@ -68,8 +68,19 @@ def _chaikin(
     return points, top, bottom
 
 
+def _centerline_cells(wall: dict[str, Any]) -> np.ndarray:
+    """Wall centerline in raster cells (the unit of TILE_BOUNDS and the terrain mesh x/z).
+
+    ``neu/vektor.py`` writes ``mittellinie_m`` in metres ((cell + 0.5) * CELL_M), while
+    ``mesh.tile_mesh`` places vertices at cell coordinates (D1: x 126..168). Before P10c
+    the metre values were clipped and drawn as cells, i.e. 1.2x too far from the origin.
+    """
+    return np.asarray(wall["mittellinie_m"], dtype=np.float64) / CELL_M
+
+
 def _chunks(wall: dict[str, Any], bounds: tuple[int, int, int, int], width: float, variant: int):
-    points = np.asarray(wall["mittellinie_m"], dtype=np.float64)
+    """Clip one wall profile to a tile. ``width`` is in metres; returned points are in cells."""
+    points = _centerline_cells(wall)
     top = np.asarray(wall["hoehe_oben_m"], dtype=np.float64)
     bottom = np.asarray(wall["hoehe_unten_m"], dtype=np.float64)
     if len(points) != len(top) or len(points) != len(bottom):
@@ -78,7 +89,7 @@ def _chunks(wall: dict[str, Any], bounds: tuple[int, int, int, int], width: floa
     # round of the source corners, while the default profile uses two.
     points, top, bottom = _chaikin(points, top, bottom, 1 if variant == 0 else 2)
     # Keep the complete minimum-width solid inside its prototype tile.
-    margin = width * 1.05
+    margin = width / CELL_M * 1.05
     x0, z0, x1, z1 = bounds
     clipbox = (x0 + margin, z0 + margin, x1 - margin, z1 - margin)
     result: list[tuple[np.ndarray, np.ndarray, np.ndarray]] = []
@@ -647,13 +658,15 @@ def build_wall_manifest(
             if nominal <= 0:
                 raise ValueError(f"Wand ohne positive Mindestbreite: {wall.get('name')}:{wall.get('teil')}")
             width = max(nominal, 2.4 if variant == 0 else nominal)
+            # Geometry is built in cells like the terrain mesh; widths stay reported in metres.
+            width_cells = width / CELL_M
             for points, top, bottom in _chunks(wall, bounds, width, variant):
                 used_widths.append(width)
                 if terrain is not None:
-                    network_chunks.append((points, np.maximum(top, bottom), width))
+                    network_chunks.append((points, np.maximum(top, bottom), width_cells))
                 else:
                     positions, indices = _solid(
-                        points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant,
+                        points, np.maximum(top, bottom), np.minimum(top, bottom), width_cells, variant,
                     )
                     if len(indices):
                         pieces.append((positions, indices))
