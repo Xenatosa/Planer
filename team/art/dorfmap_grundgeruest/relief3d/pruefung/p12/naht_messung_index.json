@@ -1,0 +1,53 @@
+{
+ "paket": "relief_neu.json.gz",
+ "kacheln": 3,
+ "vorher_gesamt": {
+  "naehte": 1,
+  "punkte": 85,
+  "max_grad": 4.133,
+  "ueber_1": 17,
+  "ueber_5": 0
+ },
+ "nachher_gesamt": {
+  "naehte": 1,
+  "punkte": 85,
+  "max_grad": 0.02,
+  "ueber_1": 0,
+  "ueber_5": 0
+ },
+ "randnormalen_geaendert": {
+  "D2": 85,
+  "G1": 0,
+  "D1": 85
+ },
+ "normal_komponenten_geaendert": 474,
+ "randvertices_geaendert": 170,
+ "vorher": {
+  "D1|D2": {
+   "punkte": 85,
+   "max_grad": 4.133,
+   "mittel_grad": 0.659,
+   "p95_grad": 2.974,
+   "ueber_1": 17,
+   "ueber_5": 0,
+   "max_bei": [
+    153,
+    43
+   ]
+  }
+ },
+ "nachher": {
+  "D1|D2": {
+   "punkte": 85,
+   "max_grad": 0.02,
+   "mittel_grad": 0.006,
+   "p95_grad": 0.019,
+   "ueber_1": 0,
+   "ueber_5": 0,
+   "max_bei": [
+    156.5,
+    43
+   ]
+  }
+ }
+}

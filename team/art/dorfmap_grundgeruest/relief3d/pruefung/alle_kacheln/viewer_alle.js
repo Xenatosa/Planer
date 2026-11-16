@@ -7,6 +7,8 @@
 // je Kachel als eigene Meshes in den Ebenen 'wege' und 'wasser' (nicht 'gelaende' -> Lochscan
 // unveraendert). Kamera-API __test.blick({kachel|x,z, abstand, azimut, neigung}).
 
+import { nahtNormalen } from '../../neu/naht_normalen.js';
+
 const decodeBytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 const decodeF32 = s => new Float32Array(decodeBytes(s).buffer);
 const decodeU32 = s => new Uint32Array(decodeBytes(s).buffer);
@@ -152,7 +154,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     const ix = Math.floor(fx), iz = Math.floor(fz), u = fx - ix, v = fz - iz, k = iz * GX + ix;
     return (Gf[k] * (1 - u) + Gf[k + 1] * u) * (1 - v) + (Gf[k + GX] * (1 - u) + Gf[k + GX + 1] * u) * v;
   };
-  const tileStats = {}, tileTop = {};
+  const tileStats = {}, tileTop = {}, topMesh = {};
   for (const tile of wahl) {
     const t = manifest.tiles[tile], bounds = t.bounds;
     const positions = tilePos[tile], indices = decodeU32(t.indices_u32);
@@ -168,7 +170,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     side.castShadow = side.receiveShadow = true; side.userData.boden = true; tileGroup.add(side);
     const cap = new THREE.Mesh(sealed.bottomGeo, foundationMaterial); cap.name = `terrain_bottom_${tile}`;
     cap.castShadow = cap.receiveShadow = true; cap.userData.boden = true; tileGroup.add(cap);
-    tileTop[tile] = positions;
+    tileTop[tile] = positions; topMesh[tile] = top;
     tileStats[tile] = { vertices: t.vertices, triangles: t.triangles, closedTriangles: t.closed_triangles,
       samplingM: t.sampling_m, surfaceMode: t.surface_mode };
     // Kachelrand als Linie 0,25 m ueber der Oberflaeche (nur Anzeige, Ebene 'raster', kein Mesh).
@@ -184,6 +186,15 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     line.name = `rand_${tile}`; line.visible = false; rasterRoot.add(line);
     if (tileGroup.children.length !== 3) throw new Error('Kachelgruppe unvollstaendig ' + tile);
   }
+  // P12: Normalen an den Kachelnaehten gemeinsam (alle 56 Kacheln, auch nicht angezeigte Nachbarn).
+  // ?nahtnormalen=0 = alter Stand (je Kachel getrennt, harte Helligkeitslinie auf der Naht).
+  let nahtInfo = null;
+  if (q.get('nahtnormalen') !== '0') {
+    nahtInfo = nahtNormalen(alle.map(tile => ({ name: tile, positions: tilePos[tile], indices: decodeU32(manifest.tiles[tile].indices_u32),
+      bounds: manifest.tiles[tile].bounds, normals: topMesh[tile] ? topMesh[tile].geometry.attributes.normal.array : null })), rs);
+    for (const tile of Object.keys(topMesh)) topMesh[tile].geometry.attributes.normal.needsUpdate = true;
+  }
+  window.__nahtNormalen = nahtInfo;
   const wallStats = {};
   const wandQuellen = Object.entries(manifest.waende?.tiles || {});
   if (q.get('d2wand') === '1' && manifest.waende?.d2_unterdrueckt_mesh) wandQuellen.push(['D2', manifest.waende.d2_unterdrueckt_mesh]);
