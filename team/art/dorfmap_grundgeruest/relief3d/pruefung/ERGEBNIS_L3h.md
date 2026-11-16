@@ -1,6 +1,6 @@
 # ERGEBNIS L3h – E3-Bach kräftiger, E4-Bach glatter Uferrand (QA P4e S3/S4) – Basis art/dorfmap-fertig @ f942124 (nach #37 P2e)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02 + Nachtrag 20:05–20:08 (gesamt 18:45–20:08)
+Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02 + Nachtrag 20:05–20:08 + Freigabe (a) 20:10–20:18 (gesamt 18:45–20:18)
 
 Worktree /workspace/wt_dorfmap_L3h, Branch art/dorfmap-L3h. Start auf bfe8dce, entwickelt dort (v1–v3). Nach Merge von #37 (P2e, Wege & Deko) auf den neuen
 Kopf **f942124** gesetzt (Branch war noch nicht gepusht, kein Force-Push nötig): Code/Konfig übernommen, **Binärdaten über die Pipeline neu gebaut**
@@ -76,3 +76,16 @@ Lauf nur 1–2 Vertices breit; der Viewer blendet Wasser über Tiefe *und* Absta
 Mit Tiefe/Ton allein ist das nicht lösbar, es bräuchte eine Rinnenverbreiterung auf 3–4 Vertices (Maske, wie E4) – das berührt die Westuferform und war nicht freigegeben.
 Deshalb **nichts an Daten/Pipeline committet**: Endstand, Gate (363/31/321, W1 0, Loch 0), *_letzter_lauf.json, Volllauf (bitgleich) und SHAs bleiben wie c6a413b.
 Versuch als Patch und Nahbild v1 in `pruefung/l3h/nachtrag_versuch/`.
+
+## Freigabe (a) 16.11. – Maskenverbreiterung E3-Nord ≈187–192|99–108 – zweimal gescheitert (Gate), Daten auf c6a413b
+Vorab geprüft: origin/art/dorfmap-fertig steht weiter auf f942124. Der verworfene Versuch bett_laengs war nie im Code (nur Patch); `pruefung/l3h/nachtrag_versuch/` ist mit `VERWORFEN.md` gekennzeichnet, nichts gelöscht.
+Versuch: Stelle `E3_nord_rinne` (Art `ufer` wie E4_rinne, nur Wachstum, Bett unter dem neuen Wasser auf Profil durch den Spiegel), vor E3_bett eingefügt, damit das neue Wasser mitvertieft wird.
+- **m1** (Box 186,5–192,5|98,5–108,5, Fade 2, σ 2,5, Versatz 1,3, Band 6): 50 neue Wasser-Vertices (gesamt 97 mit E4), Laufbreite 1–5 → **4–7 Vertices**,
+  mittlere Tiefe 0,12 → 0,31 m, tiefste Stelle je Zeile 0,28–0,55 m. Wasser entfernt 0, Komponenten 9→9, Lochscan 0, W1 0.
+  Abstände: Wege, Kreuzungen, WEGA/Brücken 0 Vertices (0,6 m), Rampenkern 0 (38,5 m), D2 0 (21,5 m, sha 749d3c4b… gleich), rampe_5 40,3 m, D4/D5 0 Änderungen, D1 50 Zellen.
+  **Gate 367** (statt 363): NEU G6_facette E3 193,3|99,1 (12), 185,3|103,1 (26), 193,1|106,0 (19), 192,0|104,8 (6) – Böschungsfacetten am Talhang neben der Box.
+- **m2** (Fade 3, σ 3, Band 8 wie E4): 31 neue Wasser-Vertices, Breite 3–7, Tiefe je Zeile 0,15–0,55 m. **Gate 366**: NEU G6 E3 193,1|104,6 (43), 185,4|101,1 (17), 184,8|107,0 (8).
+Nahbild `pruefung/l3h_nahbilder/paar_E3_nord_maske.jpg`: Zeilen E3_westufer_100, E3_westufer_106 (15 m), E3_bach_mittel (22 m), E3_dist_nord (60 m); je Farbe c6a413b | m1, Clay c6a413b | m1.
+Ehrlich zum Bild: m1 wirkt deutlich besser – der Lauf ist durchgehend, aus 22 m und 60 m ohne Unterbrechung; das Westufer schließt weich an (keine Kante, kein Zackenrand),
+nah bleiben aber zwei rundliche Ausbuchtungen (Breite schwankt), also noch leicht perlig. Wegen des schlechteren Gates (G6 an den Talhängen) **nicht übernommen**:
+Daten, Pipeline, Gate (363/31/321, W1 0, Loch 0), *_letzter_lauf.json, Volllauf und SHAs bleiben wie c6a413b. Parameter m1/m2 und Gate-Läufe in `pruefung/l3h/maske_versuch/` (nicht übernommen).
