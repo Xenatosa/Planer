@@ -81,6 +81,7 @@ H,wa,fl,ug,_VY,_VX,FLUSS_K_NEU,FLUSS_K_ALT,FLUSS_K_KURVE,FLUSS_K_W,FLUSS_K=fluss
 WN_VOR_K=wn.copy();eb=eb[_VY,_VX];wn=wn[_VY,_VX];ha=ha[_VY,_VX];_A0=A;A=lambda k:_A0(k) if k in('zell_id','cx','cy','px_x','px_y','flaeche_m2') else _A0(k)[_VY,_VX]   # Lage-Spalten bleiben, Inhalte folgen der Vorlage-Zelle
 # t47u/t48u: natuerliche Abstiegsrampen schraeg an den Waenden (Gelaende, nicht Overlay); Zellwerte folgen aus G [A]
 RAMPWEGE=[];RAMPPROF=[]
+P2_RAMPEN=os.environ.get('P2_RAMPEN','1')!='0';P2_X084_RAUS=os.environ.get('P2_X084_RAUS','0')!='0';RAMP_ENTFERNT=[]   # P2 (Wege & Deko, 16.11.2026, Entscheidung Dorfmap-Grundgeruest): freistehende Rampen rampe_0-10 (_rampen) und rampe_12 (X069) raus, Wand/Hang bleibt wie ohne Rampe; P2_RAMPEN=0 = alter Stand [A]
 def _rampen():
     Pl0=json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40'];hm=np.zeros((NY,NX),bool)
     for p in Pl0:
@@ -106,6 +107,8 @@ def _rampen():
                 if len(gew)>=anz:break
             if len(gew)>=anz:break
         for x,y,d,L in gew:
+            if P2_RAMPEN:   # P2: Pfad nur merken (fuer O16-Bereich), nicht ins Gelaende schneiden, kein Rampenweg [A]
+                RAMP_ENTFERNT.append([[round(float(x+0.5+d[0]*s_),2),round(float(y+0.5+d[1]*s_),2)] for s_ in np.arange(-1,L+1.01,1.0)]);log.append((w,int(x),int(y),int(L),'entfernt_p2'));continue
             Ht=H[y,x];He=H[int(round(y+d[1]*L)),int(round(x+d[0]*L))]
             RAMPWEGE.append([[round(float(x+0.5+d[0]*s_),2),round(float(y+0.5+d[1]*s_),2)] for s_ in np.arange(-1,L+1.01,1.0)])   # Overlay-Pfad (getrennt) [A]
             RAMPPROF.append((np.array([[x+0.5+d[0]*s_,y+0.5+d[1]*s_] for s_ in np.linspace(0,L,L*4+1)]),np.linspace(Ht,He,L*4+1)))
@@ -133,7 +136,8 @@ def _serp(name,A_,B_,n=4,sg=1):
         rr=np.hypot(xx[ys,xs]+0.5-cx,yy[ys,xs]+0.5-cy);sub=H[ys,xs];kern=(rr<=1.8)&~wa[ys,xs];sub[kern]=h;wand[ys,xs][kern]=False
     RAMPPROF.append((P,hp));RAMPWEGE.append([[round(float(a),2),round(float(b),2)] for a,b in P[::20]]+[[round(float(P[-1,0]),2),round(float(P[-1,1]),2)]])
     SERPENTINEN.append((name,round(Ht,1),round(He,1),round(float(L[-1]),1),round(float(np.degrees(np.arctan(abs(Ht-He)/L[-1]))),1),round(float(W),1)))
-_serp('X084',(148,2),(156,37),n=3,sg=1);_serp('X069',(127,133),(122,119),n=3)
+if not(P2_RAMPEN and P2_X084_RAUS):_serp('X084',(148,2),(156,37),n=3,sg=1)
+if not P2_RAMPEN:_serp('X069',(127,133),(122,119),n=3)   # P2: X069 (gate rampe_12) raus [A]
 print('serpentinen',SERPENTINEN)
 Hboden=H.copy()
 # t53u R4: Flussbett eingeschnitten: Tiefe nach Abstand zum Ufer, Kiesbaenke, Uferboeschung + Sandufer [A]
@@ -230,7 +234,7 @@ G=Ge.astype(np.float32)
 _wellen_snap('g_erosion',G)
 # t53u R2/R3: Rampen + Serpentinen nach Erosion exakt ins Gitter (Kern 1,6 m eben laengs, Rand weich bis 3,6 m) [A]
 from scipy.spatial import cKDTree
-_PP=np.concatenate([p for p,_ in RAMPPROF]);_HH=np.concatenate([h for _,h in RAMPPROF]);_kd=cKDTree(_PP)
+_PP=np.concatenate([p for p,_ in RAMPPROF]) if RAMPPROF else np.array([[-1e6,-1e6]]);_HH=np.concatenate([h for _,h in RAMPPROF]) if RAMPPROF else np.zeros(1);_kd=cKDTree(_PP)   # P2: leer-fest [A]
 _vx=np.stack([vi.ravel()/RS,vj.ravel()/RS],1);_r,_k=_kd.query(_vx,distance_upper_bound=7.0);_ok=np.isfinite(_r)
 _wv=nd.map_coordinates(np.kron(wa,np.ones((RS,RS))).astype(float),[vj-0.5,vi-0.5],order=0,mode='nearest').ravel()>0.5
 _ok&=~_wv;_w=np.clip((7.0-_r[_ok])/5.4,0,1);_w=_w*_w*(3-2*_w);_g=G.ravel().astype(float);_g[_ok]=_g[_ok]*(1-_w)+_HH[_k[_ok]]*_w;G=_g.reshape(G.shape).astype(np.float32)
@@ -301,6 +305,14 @@ OV=list(csv.DictReader(open(B+'raster_c20_z25_overlay_plaetze_wege.csv')))
 weg=np.zeros((NY,NX),bool);br=np.zeros((NY,NX),bool);deko=np.zeros((NY,NX),bool)
 for o in OV:
     x,y=int(o['cx']),int(o['cy']);weg[y,x]|=bool(o['weg_id']);br[y,x]|=o['bruecke']=='1';deko[y,x]|=o['dekoplaetze_netz']=='1'
+P2_VERB={}
+if os.environ.get('P2_VERBINDER','1')!='0':   # P2: kurze Verbinder fuer R2-Netzluecken D2(176|127, Bruecke)/F4/E3, additiv zur Overlay-CSV; Doku in p2_verbinder.json [A]
+    for _v in json.load(open('p2_verbinder.json'))['verbinder']:
+        for _x,_z in _v['zellen']:
+            weg[_z,_x]=True
+            if _v['art']=='bruecke':br[_z,_x]=True
+        P2_VERB[_v['id']]=len(_v['zellen'])
+print('p2_verbinder',P2_VERB)
 rng=lambda x,y,s:((x*73856093)^(y*19349663)^(s*83492791))%10007/10007.0
 Pl=json.load(open(B+'pruefung/quelle_plaetze_wachstum_ausbau_planm.json'))['E40'];belegt=np.zeros((NY,NX),bool);haeuser=[]
 HH={'Hütte':3,'kompakt':4,'schmal':5,'Standard':5,'Doppelhaus':5,'Eckhaus':6,'Turmhaus':9,'FUNKTION':7,'Quartiersplatz':0.15}
@@ -409,7 +421,7 @@ sc.add_geometry(trimesh.Trimesh(V,TT[ST][:,::-1],process=False,vertex_colors=_vc
 sc.export('dorfmap_relief_z25.glb')
 # t54u: Feinrelief der Wandbaender (0,25 m) als zusammenhaengende Felsform; nur Anzeige, Zellwerte bleiben aus G [A]
 FS=4;FXn,FYn=NX*FS+1,NY*FS+1
-_rkd=cKDTree(np.concatenate([p for p,_ in RAMPPROF]));_cc=np.stack(np.meshgrid(np.arange(NX)+0.5,np.arange(NY)+0.5),-1).reshape(-1,2)
+_rkd=cKDTree(np.concatenate([p for p,_ in RAMPPROF]) if RAMPPROF else np.array([[-1e6,-1e6]]));_cc=np.stack(np.meshgrid(np.arange(NX)+0.5,np.arange(NY)+0.5),-1).reshape(-1,2)
 _nahr=(_rkd.query(_cc,distance_upper_bound=4.5)[0]<9).reshape(NY,NX)
 BAND=nd.binary_dilation(steil|oben|fuss,iterations=3)&~nd.binary_dilation(wa,iterations=1)&~belegt   # Runde E: Band breiter (3 statt 1) [A]   # t54u-C: Rampennaehe jetzt im Band (FD dort weich auf 0) statt glatter grauer Streifen
 BAND=nd.binary_opening(BAND,iterations=1)|(BAND&steil)
@@ -748,7 +760,7 @@ def vc_ufer_weich(VC,GA,WV,WEGA):   # O9 Nachlauf: Uferfarben folgen sonst dem 1
     ds=nd.distance_transform_edt(WV<=-900);m=((ds<=6)&(WEGA.reshape(GA.shape)<20)).astype(float);m=nd.gaussian_filter(m,1.0)
     N=C*(1-m[...,None])+B*m[...,None];return np.clip(np.round(N),0,255).astype(np.uint8).reshape(VC.shape),{'anteil':round(float((m>0.5).mean()),3)}
 VC,VCU_O9=vc_ufer_weich(VC,G_ANZ,WV,WEGA);print('vcufer_o9',VCU_O9)
-import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS);RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
+import runde_o16 as R16;G_ANZ,VC,R16_W,RAMPE9_O16=(R16.entfernen(G_ANZ,VC,WV,[RAMP_ENTFERNT[9]],RS,idx=0) if P2_RAMPEN else R16.entfernen(G_ANZ,VC,WV,RAMPWEGE,RS));RAMPE9_O16['feinband']=R16.feinband(FW,G_ANZ,VC,R16_W,NX,RS);RAMPE9_O16['felsbloecke_raus']=R16.fels_raus(felsbloecke,R16_W,RS);print('rampe9_o16',RAMPE9_O16)   # O16 [F t77u]: rampe_9 + Ruecken 133|173 weg, nur Anzeige (G/CSV-Zellwerte bleiben) [A]
 _WEG_G0=G_ANZ.reshape(GY,GX).astype(float).copy();_WEG_V0=np.frombuffer(base64.b64decode(FW['vid']),np.uint32).copy();_WEG_F0=np.frombuffer(base64.b64decode(FW['h']),np.float32).astype(float).copy()   # O18h [F G1 Steinweg war in O17 besser]: Stand vor allen O18-Schritten merken
 _wellen_snap('gb_vor_o18',G_ANZ)
 def _wand_maske(thr=1.0):   # O18i: Felswand = Steilheit Stand vor O18 >thr (dh/dm), 1 m erweitert
@@ -887,6 +899,7 @@ def _weg_wulst():   # O18i [F G1 heller Wulst an Wegunterkante]: talseitig 0-2.5
 def _weg_eben():   # O18k [F pt104u G1 Steinweg uneben/gewoelbt, kippt zur Seite; Messung rampe_1 quer 28.7 %]: Rampenwege +-1.5 m quer eben (2 % zur Bergseite), Laengsprofil Gauss 3 m, Auslauf 1.5-3.5 m smoothstep, nicht <2 m am Wasser; Grob+Fein
     from scipy.spatial import cKDTree
     GA=G_ANZ.reshape(GY,GX).astype(float);hf=lambda X,Z:nd.map_coordinates(GA,[np.asarray(Z)*RS,np.asarray(X)*RS],order=1,mode='nearest')
+    if not RAMPWEGE:return G_ANZ,{'aus':'P2: keine Rampenwege'}
     P=[];T=[];HC=[];SG=[];Pl=[];Ll=[]
     for W in RAMPWEGE:
         W=np.array(W,float);L=np.r_[0,np.cumsum(np.hypot(*np.diff(W,axis=0).T))];t=np.arange(0,L[-1]+1e-6,0.25)
@@ -1103,7 +1116,7 @@ def _wandstreifen_glatt():   # t128u [F K5b]: kurze Normalenperioden auf Steilwa
         TF=np.repeat(np.repeat(TM,FS,axis=0),FS,axis=1);TF=np.pad(TF,((0,1),(0,1)),mode='edge');fade*=TF[fy,fx]
     w=wm*fade;h2=h*(1-w)+Sm[fy,fx]*w;FW['h']=base64.b64encode(h2.astype(np.float32).tobytes()).decode()
     return {'sigma_m':sig,'grob_sigma_m':gsig,'wandpunkte':int(wm.sum()),'geaendert':int((np.abs(h2-h)>0.01).sum()),'max_m':round(float(np.abs(h2-h).max()),3),'band':ext}
-G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') else (G_ANZ,{}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);_ws=_wandstreifen_glatt();print('o18s_wandstreifen',_ws);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
+G_ANZ,_ag=(_anschluss_gang() if not os.environ.get('ANSCHLUSS_ALT') and not P2_RAMPEN else (G_ANZ,{'aus':'P2: rampe_1 entfernt'} if P2_RAMPEN else {}));print('o18k_anschluss_gang',_ag);G_ANZ,_ra=(_rand_auslauf() if not os.environ.get('RANDAUS_ALT') else (G_ANZ,{}));print('o18k_rand_auslauf',_ra);G_ANZ,_wz=_weg_zurueck();print('o18h_weg_zurueck',_wz);G_ANZ,_wu=_weg_wulst();print('o18i_weg_wulst',_wu);G_ANZ,_we=(_weg_eben() if not os.environ.get('WEGEBEN_ALT') else (G_ANZ,{}));print('o18k_weg_eben',_we);G_ANZ,_lf=(__import__('relief_o18n').landschaft_final(G_ANZ,WV,WEGA.reshape(WV.shape),RS,_HSM.reshape(WV.shape)>0 if '_HSM' in globals() and np.size(_HSM)==WV.size else None,rampen=RAMPWEGE) if not os.environ.get('LF_ALT') else (G_ANZ,{}));print('o18n_landschaft_final',_lf);print('o18h_entzacken',R18.fein_entzacken(FW,NX,NY));G_ANZ,_wzr=(_wand_zurueck() if os.environ.get('WANDZ') else (G_ANZ,{'aus':'WANDZ=1 fuer O18o-Wandruecknahme; verworfen: R5 40->54, G5 169->183, O17-Saegezaehne G1'}));print('o18o_wand_zurueck',_wzr);G_ANZ,_wn=(_wand_neu() if os.environ.get('WANDNEU','0')!='0' else (G_ANZ,{'aus':'WANDNEU=1 schaltet ein; O18p 3 Versuche: G7b erfuellt, aber G2f/G5/G6/R5 neu'}));print('o18p_wand_neu',_wn);G_ANZ,_sf=(_senke_fuellen() if os.environ.get('SENKE','0')!='0' else (G_ANZ,{'aus':'SENKE=1 schaltet ein; O18r 3 Versuche R5 40->0, aber G6 +13..+16, G2f +1, T1 +1'}));print('o18r_senke',_sf);G_ANZ,_es=(_entspitzen() if os.environ.get('SPITZE','0')!='0' else (G_ANZ,{}));print('o18w_entspitzen',_es);G_ANZ,_rw=(_rand_weg() if os.environ.get('RANDWEG','1')!='0' else (G_ANZ,{}));print('o18w_rand_weg',_rw);G_ANZ,_wm=(_wand_mikro() if os.environ.get('WMR','0')!='0' else (G_ANZ,{}));print('o18w_wand_mikro',_wm);G_ANZ,_fg=(_falten_glatt() if os.environ.get('FALT','1')!='0' else (G_ANZ,{}));print('o18w_falten_glatt',_fg);_ws=_wandstreifen_glatt();print('o18s_wandstreifen',_ws);print('o18g_bandnaht_final',_bandnaht_j1())   # O18g [F G1/H1 Durchsicht-Schlitze]: O18d-f aendern Fein/Grob nach J1 -> Naht am Ende erneut exakt
 _wellen_snap('gb_nach_falten_vor_hangwellen',G_ANZ)
 G_ANZ,_hw=_hangwellen_glatt();print('o18w_hangwellen_glatt',_hw);print('o18g_bandnaht_nach_hangwellen',_bandnaht_j1())
 _wellen_snap('gb_anzeige_final',G_ANZ)
@@ -1178,6 +1191,15 @@ def _terrasse_c2():   # c2: Stufenprofile im Hang glätten; Fade auf 3 m hält N
     return {'variante':_var,'sigma_m':_sg,'grob_geaendert':_changed,'fein_geaendert':_changed_f,'max_m':round(_max,3)}
 
 _C2TERR=_terrasse_c2();print('c2_terrasse',_C2TERR)   # nur sichtbares Nordhangband in C2; G bleibt t42u-quellgleich
+P2_D2={}
+if os.environ.get('P2_D2_LOCK','1')!='0' and os.path.exists('p2_d2_referenz.npz'):   # P2: D2 (Zellen x126-168, z43-86) bleibt bitgleich (GB 749d3c4b, VC b67dc719); Fernwirkung der Rampen-Entnahme in D1/C2 (<=9 mm Randzeilen) wird hier verworfen [A]
+    import hashlib;_r=np.load('p2_d2_referenz.npz');_gr=_r['GB'];_vr=_r['VC']
+    assert hashlib.sha256(_gr.astype('<f4').tobytes()).hexdigest().startswith('749d3c4b'),'p2_d2_referenz.npz passt nicht zu D2-Hash 749d3c4b'
+    _GA=np.asarray(G_ANZ).reshape(GY,GX);_VA=VC.reshape(GY,GX,3);_sl=(slice(43*RS,86*RS+1),slice(126*RS,168*RS+1))
+    P2_D2={'gb_ecken':int((_GA[_sl]!=_gr).sum()),'gb_max_m':round(float(np.abs(_GA[_sl].astype(float)-_gr).max()),4),'vc_ecken':int((_VA[_sl]!=_vr).any(-1).sum())}
+    _GA[_sl]=_gr.astype(_GA.dtype);_VA[_sl]=_vr
+    P2_D2['gb_sha']=hashlib.sha256(np.ascontiguousarray(_GA[_sl]).astype('<f4').tobytes()).hexdigest()
+print('p2_d2_lock',P2_D2)
 D={'nx':NX,'ny':NY,'G':b64(G),'GB':b64(G_ANZ),'VC':base64.b64encode(VC.tobytes()).decode(),'WEGA':base64.b64encode(WEGA.tobytes()).decode(),'geroell':geroell,'felsbloecke':felsbloecke,'gras':gras,'felsmesh':(json.load(open('blender/fels_meshes.json')) if os.path.exists('blender/fels_meshes.json') else []),'rampenwege':RAMPWEGE,'WV':b64(WV),'rs':RS,'wandwinkel':WANDWINKEL,'ug':spalten['untergrund'],'sprung':SPRUNG,'spalten':spalten,'reihenfolge':outcols,
  'haeuser':haeuser,'baeume':baeume,'felsen':felsen,'findlinge':findlinge,'steine':steine,'bruecken':bruecken,'wege':wege,'start':start,
  'wandfuss':{'x':fx+.5,'z':fy+.5,'h':round(float(H[fy-1,fx]-H[fy,fx]),1),'zelle':int(fy*NX+fx)},'wandhoehen':WANDH,'FW':FW}
