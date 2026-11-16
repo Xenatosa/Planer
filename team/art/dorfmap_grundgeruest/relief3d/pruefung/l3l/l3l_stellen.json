@@ -1,0 +1,34 @@
+{
+ "basis": "art/dorfmap-L3k @9d04f67 (Stand nach Schritt 20 L3k)",
+ "basis_gb_wv_vc_sha256": "5914ca80fff6540367ec8f473cf4c49b06c8f4aabde42896057e8d9e45e92325",
+ "stellen": [
+  {
+   "id": "suedflanke_grat",
+   "art": "laengs_glatt",
+   "punkt": [
+    83.5,
+    135.3
+   ],
+   "gebiet_richtung": [
+    -1.0,
+    1.0
+   ],
+   "halblaenge": 3.0,
+   "r_kern": 1.0,
+   "r_fade": 1.5,
+   "richtung": [
+    1.0,
+    1.0
+   ],
+   "sigma_vertices": 1.5,
+   "runden": 2,
+   "waende_frei": true,
+   "wand_abstand_vertices": 1.0,
+   "wand_fade_vertices": 1.0,
+   "feinband": 1.0,
+   "nur_ueber_m": 3.0,
+   "notiz": "L3l: 1 Vertex breite Diagonalkrone mit Rinne dahinter - quer zur Krone (Falllinie) glaetten",
+   "feinband_weich": true
+  }
+ ]
+}
