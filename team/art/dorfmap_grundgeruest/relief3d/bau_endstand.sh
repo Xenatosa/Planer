@@ -1,6 +1,6 @@
 #!/bin/sh
 # P11: Ein-Befehl-Endbau. Erzeugt aus den Quelldaten in einem LEEREN Ausgabeordner alle Ausgaben des
-# Endstands (art/dorfmap-L3d = L3 + L3b + P2b/P2c + L3c2 + L3d auf 2771f70) und vergleicht sie per sha256 mit dem Repo-Stand.
+# Endstands (art/dorfmap-L3d = L3 + L3b + P2b/P2c + L3c2 + L3d auf 2771f70, + L3e, ab P2d + Schritt 14) und vergleicht sie per sha256 mit dem Repo-Stand.
 #
 #   sh bau_endstand.sh [AUSGABE]          (Standard /tmp/relief3d_endstand; muss leer sein oder fehlen)
 #   UEBERNEHMEN=1 sh bau_endstand.sh ...  kopiert die gebauten Ausgaben danach ins Repo (sonst nur Vergleich)
@@ -36,6 +36,9 @@
 #      Gelaende = Spiegel, Basis-Hash GB/WV/VC = Stand nach 12, Rueckweg relief_l3e.py --aus mit pruefung/l3e/l3e_rueck.npz),
 #      html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf, VC unveraendert. L3E=0 laesst Schritt 13 weg (Stand nach 12);
 #      L3E folgt standardmaessig L3D (Schritt 13 setzt den Stand nach 12 voraus).
+#  14 P2d (ERGEBNIS_P2D): relief_p2d.py (S7 rampe_5/O16-Band Farbe+Mikrorelief, S10 Bruecken E2/E3 Ostende; Basis-GB-Hash
+#      = Stand nach 13, Sperrbereich L3d/L3e), gen_textur.py vc, p2d_vc_lokal.py <Vorher-Stand>, html_payload_p3.py, waende_einsetzen.py.
+#      Nebenausgaben p2d_rueck.npz + p2d_bericht.json werden mitverglichen. Setzt Schritt 12+13 voraus (P2D=0 laesst 14 weg).
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -78,6 +81,9 @@ pruefung/l3c_rueck.npz pruefung/l3c_bericht.json pruefung/l3c_vc_rueck.npz"
 L3E=${L3E:-${L3D:-1}}
 if [ "$L3E" != 0 ] && [ "${L3D:-1}" = 0 ]; then echo "L3E braucht Schritt 12 (L3D=0 und L3E=1 geht nicht)"; exit 2; fi
 [ "$L3E" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3e/l3e_rueck.npz pruefung/l3e/l3e_bericht.json"
+P2D=${P2D:-$L3E}
+if [ "$P2D" != 0 ] && [ "$L3E" = 0 ]; then echo "P2D braucht Schritt 13 (L3E=0 und P2D=1 geht nicht)"; exit 2; fi
+[ "$P2D" = 0 ] || AUSGABEN="$AUSGABEN pruefung/p2_analyse/p2d/p2d_rueck.npz pruefung/p2_analyse/p2d/p2d_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -191,6 +197,16 @@ python3 relief_l3e.py > "$AUS/13_l3e.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/13_l3e.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/13_l3e.log" 2>&1
 z l3e $t
+fi
+# 14) P2d (= pruefung/p2_analyse/p2d/p2d_pipe.sh, inline weil die Arbeitskopie aus pruefung/ nur .json/.py uebernimmt)
+if [ "$P2D" != 0 ]; then
+t=$(date +%s); V4="$AUS/p2d_vorher"; mkdir -p "$V4"; cp relief_daten.json.gz neu/relief_neu.json.gz "$V4/"
+python3 relief_p2d.py > "$AUS/14_p2d.log" 2>&1
+python3 gen_textur.py vc >> "$AUS/14_p2d.log" 2>&1
+python3 pruefung/p2_analyse/p2d/p2d_vc_lokal.py "$V4/relief_daten.json.gz" "$V4/relief_neu.json.gz" >> "$AUS/14_p2d.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/14_p2d.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/14_p2d.log" 2>&1
+z p2d $t
 fi
 z gesamt_bau $T0
 
