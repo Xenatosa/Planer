@@ -44,3 +44,19 @@ Der Hash 749d3c4b bezieht sich auf SHA-256 der float32-Höhen GB im D2-Ausschnit
 - O16-Fläche (Krater) bleibt aus dem alten Rampenpfad abgeleitet; ohne Rampe ist das eine harmonische Füllfläche wie bisher.
 - `p2_verbinder.json` wirkt nur im Legacy-`gen_relief.py`; `neu/vektor.py`/vektor.json kennen die Verbinder nicht.
 - `baue_html.py` schreibt fest nach `/tmp/w3/bundle_r.js` (geteilt mit anderen Bots).
+
+## Nachtrag 16.11. ca. 07:45 Uhr MEZ: D2-Sperre freigegeben, weicher Übergang D1|D2 [S]
+Bedingung Dorfmap-Grundgerüst: keine harte Stufe an der D2-Kante. Umsetzung in `gen_relief.py` (`P2_D2_UEBERGANG`, Standard 4 Zellen):
+die Differenz Referenz − neu an der D2-Randecke wird außerhalb von D2 linear über 4 Zellen (8 Ecken, Gewicht 1 − d/9) ausgebaut; D2 selbst wird danach exakt auf die Referenz gesetzt.
+Gilt für alle vier Kanten; geändert hat sich nur Nord (D1) und West (C2).
+
+Trockenlauf (nur /tmp, /tmp/w3 nicht berührt, baue_html.py nicht gelaufen), Vergleich gegen relief_daten.json.gz 8e374b0:
+- D2 Höhen 749d3c4b…, Farben b67dc719…, Wasser 4b33ed17…, Wegtextur e6cf61d2… unverändert; D2 innen max. Differenz 0.
+- Rohdifferenz an der Kante (ohne Sperre): 387 Ecken, max 8,8 mm; Übergang verändert 865 Ecken (Farben ebenso gewichtet).
+- Korrektur-Verlauf an der stärksten Spalte x = 128,0: 7,78 / 6,81 / 5,84 / 4,86 / 3,89 / 2,92 / 1,95 / 0,97 / 0 mm (Ecke 1 bis 9) = linear, 0,97 mm je Ecke (0,6 m), entspricht 0,16 %.
+- Knick an der Kante (Kantenstufe minus Mittel der Nachbarstufen), Änderung gegenüber Basis: harte Sperre max 9,39 mm, weich **max 1,16 mm** (x = 127,5).
+- Stufenänderung an der Kante gegenüber Basis: Nord hart 18,3 mm → weich 10,6 mm (x = 128,5), West hart 5,9 mm → weich 0,41 mm, Süd/Ost 0.
+  Die verbleibenden 10,6 mm Nord sind kein Sprung: Das D1-Gelände an der C2/D1/D2-Ecke sinkt durch die Rampen-Entnahme stetig ab (neu minus Basis je Ecke ab Kante 0 / −10,6 / −30,1 / −65,8 / −147,5 / −297 / −421 / −562 / −889 mm).
+- Gate-Prüfung der Kante (G2/G3/G6) folgt nach L1, Schritt 6 in NACH_L1.md.
+
+`baue_html.py`: Bundle-Pfad per `BUNDLE_OUT` einstellbar, Standard unverändert `/tmp/w3/bundle_r.js`. Nicht ausgeführt.
