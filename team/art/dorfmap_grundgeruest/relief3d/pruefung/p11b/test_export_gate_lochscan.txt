@@ -1,0 +1,7 @@
+OK   LOCHSCAN gesetzt: G1_loch_offen=7 summe=372 exit=1
+OK   GATE_LOCH_JSON gesetzt: G1_loch_offen=7 summe=372 exit=1
+OK   ohne Variable (mktemp): G1_loch_offen=0 summe=371 exit=1
+OK   mktemp-Ordner aufgeraeumt
+OK   /tmp/gate_loch.json unberuehrt (95322e86131cbabe04303cf7bf6f44dd6742e1af6db1a9cd7006759c6a8073b0 1794832144.2026-11-16 13:29:04.634378237 +0100)
+OK   kein fester Pfad /tmp/gate_loch.json in export_gate.sh
+TEST GRUEN

@@ -1,0 +1,5 @@
+repo  5c012b05852a49ef30d13bc9970a128c8580683c601576602fbaeb49d151bdf5
+lauf1 c07bc86f20057aebaaa0945efb788f017b1873e71382977ea2978d2339fa620a
+lauf2 c07bc86f20057aebaaa0945efb788f017b1873e71382977ea2978d2339fa620a
+repo != lauf1 (einmaliger Fixpunkt-Nachlauf, s. Kopf)
+VC IDEMPOTENT: OK

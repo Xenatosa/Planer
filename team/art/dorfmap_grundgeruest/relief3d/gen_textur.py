@@ -39,35 +39,56 @@ def textur_t42u():
 # Messung wie pruefung/pruefe_regeln.py T1 (dort unveraendert): dc = |dC/dx| + |dC/dz| je Gitterpunkt, Schwelle 70, nur Land ausserhalb 1 m Wandsaum.
 # Hier: ueberall wo dc > ZIEL (62, Abstand zur Schwelle), Farbe lokal und iterativ weichzeichnen (Gauss 0,5 m, nur Landpunkte als Quelle,
 # Gewicht weich ausgeblendet). Der Rand folgt damit der vorhandenen Fleckkontur (organisch, keine geraden Kanten), wird nur 1-3 m weich.
-# Nur Farbdaten (VC, FW.c); Hoehen, Wasser, Wege bleiben bytegleich. Idempotent: zweiter Lauf aendert nichts.
+# Nur Farbdaten (VC, FW.c); Hoehen, Wasser, Wege bleiben bytegleich. Idempotent: zweiter Lauf aendert nichts (P11b: auch bei
+# nicht konvergierenden Raendern, siehe Fixpunkt unten).
 # FW.c (Feinband) wird danach aus der fertigen VC abgeleitet (siehe unten), damit Grob- und Feinnetz dieselbe Farbe zeigen.
 def _dc(C):
     return np.linalg.norm(np.diff(C,axis=1)[:-1],axis=2)+np.linalg.norm(np.diff(C,axis=0)[:,:-1],axis=2)
 
-def vc_fleckrand_p3(D,C_ein=None,ziel=62.0,sig=1.0,max_it=200):
+def vc_fleckrand_p3(D,C_ein=None,ziel=62.0,sig=1.0,max_it=200,max_fix=5000):
     NX,NY,RS=D['nx'],D['ny'],D['rs'];GX,GY=NX*RS+1,NY*RS+1
     G=np.frombuffer(base64.b64decode(D['GB']),np.float32).reshape(GY,GX).astype(float)
     LAND=np.frombuffer(base64.b64decode(D['WV']),np.float32).reshape(GY,GX)<=-900
     gy,gx=np.gradient(G,1/RS);WAND=np.hypot(gx,gy)>1.0
     R=LAND&~nd.binary_dilation(WAND,iterations=RS)
     C0=np.frombuffer(base64.b64decode(D['VC']),np.uint8).reshape(GY,GX,3).astype(float);C=(C0 if C_ein is None else C_ein).astype(float).copy()
-    Lf=LAND.astype(float);den=np.maximum(nd.gaussian_filter(Lf,sig),1e-6);it=0
-    for it in range(max_it):
+    Lf=LAND.astype(float);den=np.maximum(nd.gaussian_filter(Lf,sig),1e-6)
+    def schlecht(C):
         dc=_dc(np.round(C));bad=np.zeros((GY,GX),bool);bad[:-1,:-1]=(dc>ziel)&R[:-1,:-1]
-        bad[:-1,1:]|=bad[:-1,:-1];bad[1:,:-1]|=bad[:-1,:-1]
-        if not bad.any():break
+        bad[:-1,1:]|=bad[:-1,:-1];bad[1:,:-1]|=bad[:-1,:-1];return bad
+    def schritt(C,bad):
         m=nd.binary_dilation(bad,iterations=1)&LAND
         w=(np.clip(nd.gaussian_filter(m.astype(float),0.7)*1.6,0,1)*Lf)[...,None]
         B=np.stack([nd.gaussian_filter(C[...,c]*Lf,sig)/den for c in range(3)],-1)
-        C=C*(1-w)+B*w
+        return C*(1-w)+B*w
+    # P11b: bisher nicht idempotent. Wo der Fleckrand in max_it Iterationen nicht unter ZIEL kommt (Endstand: 107 Punkte in E4),
+    # lief jeder weitere vc-Lauf vom eigenen Ausgabestand aus 200 weitere Iterationen -> VC aenderte sich bei jedem Lauf
+    # (kein Zufall: Seeds fest, keine Threads/Reihenfolgen; Ursache ist die Abhaengigkeit vom vorherigen Ausgabestand).
+    # Jetzt: nach max_it ohne Konvergenz wird auf dem gerundeten Gitter bis zum Fixpunkt weitergerechnet; ist die Eingabe
+    # schon ein Fixpunkt (= Ergebnis eines frueheren Laufs auf demselben GB/WV), bleibt sie unveraendert. Wo der Rand
+    # konvergiert (bad leer), ist das Ergebnis wie bisher.
+    fix_it=0;Ci=np.round(C);bad=schlecht(Ci)
+    if bad.any() and np.array_equal(np.round(schritt(Ci,bad)),Ci):
+        it=0;C=Ci   # Eingabe ist schon Fixpunkt (Ergebnis eines frueheren Laufs): nichts zu tun
+    else:
+        for it in range(max_it):
+            bad=schlecht(C)
+            if not bad.any():break
+            C=schritt(C,bad)
+        if bad.any() and it==max_it-1:
+            C=np.round(C)
+            for fix_it in range(1,max_fix+1):
+                bad=schlecht(C)
+                if not bad.any():break
+                Cn=np.round(schritt(C,bad))
+                if np.array_equal(Cn,C):break
+                C=Cn
+    bad=schlecht(C)
     Cn=np.clip(np.round(C),0,255).astype(np.uint8);dl=Cn.astype(float)-C0;d=np.abs(dl).max(2)
     FW=D['FW'];FS=FW['fs'];FXn=NX*FS+1;vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32)
     fc=np.frombuffer(base64.b64decode(FW['c']),np.uint8).reshape(-1,3).astype(float)
-    # T2 (16.11.): Feinband-Farbe FW.c war in gen_relief.py vor den spaeteren VC-Glaettungen (vc_weich/vc_flecken/ufer, t64u-O9) abgegriffen
-    # -> im Feinband sichtbar abgeschnittene Flecken mit Treppenkante am Bandrand. Jetzt wie urspruenglich gedacht (gen_relief _vcf):
-    # FW.c = bilineare VC am Feinpunkt, mit der fertigen VC. An Waenden war die Abweichung ohnehin ~0,7 (Farbe dort aus dem Shader).
     fc2=np.clip(np.round(np.stack([nd.map_coordinates(Cn[...,c].astype(float),[(vid//FXn)/FS*RS,(vid%FXn)/FS*RS],order=1) for c in range(3)],1)),0,255).astype(np.uint8)
-    info={'iterationen':it,'rest_ueber_ziel':int(bad.sum()) if it==max_it-1 else 0,'vc_punkte_geaendert':int((d>0).sum()),'vc_punkte_ueber_10':int((d>10).sum()),
+    info={'iterationen':it,'fixpunkt_iterationen':fix_it,'rest_ueber_ziel':int(bad.sum()),'vc_punkte_geaendert':int((d>0).sum()),'vc_punkte_ueber_10':int((d>10).sum()),
           'vc_max_aenderung':int(d.max()),'fw_c_geaendert':int((np.abs(fc2.astype(float)-fc).max(1)>0).sum())}
     return Cn,fc2,info
 
