@@ -474,23 +474,23 @@
  },
  "gelaende": {
   "senken_gefuellt": 209,
-  "senk_ecken": 5193,
-  "auftrag_max_m": 2.9,
-  "gerundet_ecken": 6368,
+  "senk_ecken": 5323,
+  "auftrag_max_m": 2.91,
+  "gerundet_ecken": 6376,
   "rund_max_m": 4.6
  },
  "feinband": {
-  "senken_gefuellt": 1054,
+  "senken_gefuellt": 1157,
   "auftrag_max_m": 2.37,
-  "gerundet": 13791,
+  "gerundet": 13573,
   "aenderung_max_m": 3.25,
-  "ecken_geaendert": 26166
+  "ecken_geaendert": 25953
  },
  "fluss": {
   "D_m": 0.6,
   "boeschung_m": 3.0,
-  "wasserecken": 25274,
-  "landecken_abgesenkt": 21963,
+  "wasserecken": 25277,
+  "landecken_abgesenkt": 21933,
   "bett_max_m": 1.1
  }
 }
