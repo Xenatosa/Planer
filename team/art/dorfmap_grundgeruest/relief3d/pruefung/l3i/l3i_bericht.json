@@ -1,0 +1,61 @@
+{
+ "stellen": [
+  {
+   "id": "E3_kanal",
+   "neue_wasser_vertices": 47,
+   "wv_angehoben": 107,
+   "kanal_vertices": 175,
+   "land_band_vertices": 430,
+   "gb_max_m": 0.394,
+   "mittellinie_x": [
+    189.1,
+    189.65
+   ]
+  },
+  {
+   "id": "E3_hang",
+   "gb_vertices": 203,
+   "gb_max_m": 0.23
+  },
+  {
+   "id": "G1_krater",
+   "komponenten_vertices": [
+    29,
+    6,
+    29,
+    6,
+    29
+   ],
+   "wasser_entfernt": 35,
+   "gebiet_vertices": 211,
+   "gb_vertices": 817,
+   "gb_max_m": 1.284
+  }
+ ],
+ "wasser_neu": 47,
+ "wasser_entfernt": 35,
+ "wasser_entfernt_komponenten": 2,
+ "wv_kanal_angehoben": 107,
+ "wasser_komponenten": [
+  9,
+  7
+ ],
+ "bett_ueber_spiegel": [
+  493,
+  493
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 711,
+ "gb_vertices": 1683,
+ "gb_max_abs_m": 1.284,
+ "basis": "8b1aa2b881972b3b270be9778b3f9bcd9e7db1de12dca2066dfd24bcae5ec9c4",
+ "nachher_sha256": "7250e3bfab72df1d60fc8c6e901ee83f5c57d85586e59d53b2799da65ce3cc66",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 486,
+ "objekte_angepasst": 19,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "neu vermascht (tile_mesh)",
+  "D1": "unveraendert"
+ }
+}
