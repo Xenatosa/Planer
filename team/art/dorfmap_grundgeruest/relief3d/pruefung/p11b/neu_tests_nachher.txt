@@ -1,0 +1,15 @@
+FAILED neu/tests/test_beanstandungen.py::test_verwaschene_wand_d1_kantenschaerfe
+FAILED neu/tests/test_beanstandungen.py::test_schattenartefakt_renderbild - A...
+FAILED neu/tests/test_gelaende_mesh.py::test_profile_mesh_changes_only_d1_and_g1_and_preserves_cliff_and_tile_edges
+FAILED neu/tests/test_gelaende_mesh.py::test_variant_2_is_active_targeted_profile
+FAILED neu/tests/test_gelaende_mesh.py::test_both_profile_options_are_deterministic_and_distinct
+FAILED neu/tests/test_gen_relief.py::test_mesh_manifest_is_deterministic_and_keeps_sources_and_d2_locked
+FAILED neu/tests/test_mesh_gate_adapter.py::test_mesh_gate_adapter_uses_visible_mesh_and_locks_d2
+ERROR neu/tests/test_beanstandungen.py::test_kreuzung_d1_g1_mesh_stufe - Asse...
+ERROR neu/tests/test_beanstandungen.py::test_wegende_d1_g1_meshmessung_verbessert
+ERROR neu/tests/test_beanstandungen.py::test_wegende_allgemein_mesh_ohne_blindenden
+ERROR neu/tests/test_beanstandungen.py::test_delle_g1_278_5_27_0_hoehenfeld
+ERROR neu/tests/test_beanstandungen.py::test_saegezahn_d1_mesh_count - Assert...
+ERROR neu/tests/test_beanstandungen.py::test_d2_control_remains_out_of_r8_r9
+ERROR neu/tests/test_beanstandungen.py::test_wegende_f1_c1_meshmessung - Asse...
+7 failed, 18 passed, 7 errors in 22.62s
