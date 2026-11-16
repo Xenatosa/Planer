@@ -1,0 +1,75 @@
+diff --git a/team/art/dorfmap_grundgeruest/relief3d/pruefung/l3h/l3h_stellen.json b/team/art/dorfmap_grundgeruest/relief3d/pruefung/l3h/l3h_stellen.json
+index 2d28f17..a914bcd 100644
+--- a/team/art/dorfmap_grundgeruest/relief3d/pruefung/l3h/l3h_stellen.json
++++ b/team/art/dorfmap_grundgeruest/relief3d/pruefung/l3h/l3h_stellen.json
+@@ -72,6 +72,39 @@
+    "laengs_anteil": 1.0,
+    "vc_glatt_sigma": 1.5,
+    "vc_glatt_band": 3.0
++  },
++  {
++   "id": "E3_nord_laengs",
++   "art": "bett_laengs",
++   "x0": 187.5,
++   "x1": 191.5,
++   "z0": 96.5,
++   "z1": 108.5,
++   "fade_m": 2.0,
++   "tiefe_kern_m": 0.42,
++   "tiefe_rand_m": 0.1,
++   "tiefe_eng_m": 0.25,
++   "eng_radius": 2,
++   "ton_kern": [
++    141,
++    149,
++    152
++   ],
++   "ton_rand": [
++    150,
++    159,
++    165
++   ],
++   "mix_kern": 1.0,
++   "mix_rand": 0.75,
++   "mix_eng": 0.9,
++   "zweck": "Nachtrag L3h: Tuempelkette E3-Nord 188-190|100-106 -> gleichmaessige Tiefe/Ton laengs",
++   "eng_box": [
++    188.0,
++    103.5,
++    191.0,
++    107.5
++   ]
+   }
+  ]
+ }
+\ No newline at end of file
+diff --git a/team/art/dorfmap_grundgeruest/relief3d/relief_l3h.py b/team/art/dorfmap_grundgeruest/relief3d/relief_l3h.py
+index f0cba73..9093e0e 100644
+--- a/team/art/dorfmap_grundgeruest/relief3d/relief_l3h.py
++++ b/team/art/dorfmap_grundgeruest/relief3d/relief_l3h.py
+@@ -134,6 +134,25 @@ def main():
+                 ton = np.asarray(s["vc_ton"], float); Vf = VCn.astype(float); Vf = Vf + wc[..., None] * (ton - Vf)
+                 VCn = np.clip(np.round(Vf), 0, 255).astype(np.uint8)
+             bericht.append({"id": s["id"], "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3), "vc_vertices": int((VCn != VC).any(-1).sum())})
++        if s["art"] == "bett_laengs":
++            # Nachtrag L3h (E3-Nord): gleichmaessige Tiefe + gleichmaessiger Bett-Ton laengs des Laufs (keine Tuempelkette).
++            # Kern-Vertices (4 Wasser-Nachbarn) auf WV - tiefe_kern (heben oder senken), Rand-Vertices nur absenken, an Engstellen
++            # (kein Kern-Vertex in der Naehe) auf WV - tiefe_eng; Bett-VC Richtung Kern-/Randton der Rinne. WV/Maske bleiben.
++            ok = WVn > -900; box = L3D.box_gewicht(s, GY, GX, rs); box[F | d2 | sperr_d1] = 0.0; box *= ok
++            kern = ok & nd.binary_erosion(ok, np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]]))
++            rand = ok & ~kern; eng = rand & ~nd.binary_dilation(kern, np.ones((3, 3)), iterations=s.get("eng_radius", 2))
++            if s.get("eng_box"):   # Engstelle explizit (Lauf dort nur 2-3 Vertices breit): Rand-Vertices wie Engstelle
++                ex0, ez0, ex1, ez1 = s["eng_box"]; eng |= rand & (xx >= ex0) & (xx <= ex1) & (zz >= ez0) & (zz <= ez1)
++            ziel = GBn.copy()
++            ziel[kern] = WVn[kern] - s["tiefe_kern_m"]
++            ziel[rand] = np.minimum(GBn[rand], WVn[rand] - s.get("tiefe_rand_m", 0.0))
++            ziel[eng] = np.minimum(GBn[eng], WVn[eng] - s["tiefe_eng_m"])
++            G = GBn + box * (ziel - GBn); d = np.abs(G - GBn); GBn = G
++            Vf = VCn.astype(float); ton = np.where(kern[..., None], np.asarray(s["ton_kern"], float), np.asarray(s["ton_rand"], float))
++            wv_ = box * np.where(kern, s.get("mix_kern", 1.0), np.where(eng, s.get("mix_eng", 1.0), s.get("mix_rand", 0.7)))
++            VCn = np.clip(np.round(Vf + wv_[..., None] * (ton - Vf)), 0, 255).astype(np.uint8)
++            bericht.append({"id": s["id"], "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3), "kern": int((kern & (box > 0)).sum()),
++                            "eng": int((eng & (box > 0)).sum()), "vc_vertices": int((VCn != VC).any(-1).sum())})
+         if s["art"] == "wv_ring":
+             # L3g (1): aeusserer WV-Ring deutlich unter dem Innenniveau (auf dem Maskenraster gestuft) -> auf das geglaettete Innenmittel heben.
+             # Maske/Uferlinie bleiben; nur Anheben; nie ueber das benachbarte Gelaende (3x3 Land-Minimum - eps), sonst bleibt der Wert.

@@ -1,6 +1,6 @@
 # ERGEBNIS L3h – E3-Bach kräftiger, E4-Bach glatter Uferrand (QA P4e S3/S4) – Basis art/dorfmap-fertig @ f942124 (nach #37 P2e)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02
+Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02 + Nachtrag 20:05–20:08 (gesamt 18:45–20:08)
 
 Worktree /workspace/wt_dorfmap_L3h, Branch art/dorfmap-L3h. Start auf bfe8dce, entwickelt dort (v1–v3). Nach Merge von #37 (P2e, Wege & Deko) auf den neuen
 Kopf **f942124** gesetzt (Branch war noch nicht gepusht, kein Force-Push nötig): Code/Konfig übernommen, **Binärdaten über die Pipeline neu gebaut**
@@ -59,3 +59,20 @@ Volllauf auf dem Endstand (f942124 + L3h): **ENDBAU BITGLEICH (839 s)**, 37/37 A
 - `blatt_E4_vorher_nachher.jpg`: E4_bach_145 (15 m), E4_bach_weit (30 m), E4 Distanz von Norden (45 m).
 - Einzelbilder `einzel/<Kamera>_{farbe,clay}_{vorher,nachher}.jpg`; Versuche `versuche/` (v1, v2, Blätter v1|v2|v3).
 Die E3/E4-Ausschnitte sind pixelgleich zu v3 auf bfe8dce (P2e ändert nur D4/D5). Bewertung: E4 klar besser (Zacken weg). E3 klar kräftiger und als Wasser lesbar; Restschwäche Nordteil (ungleichmäßiger Ton, kleine Tümpel-Wirkung) – leicht.
+
+## Nachtrag 16.11. (Tümpelkette E3-Nord ≈188–190|100–106) – zweimal gescheitert, nur Messwert und Nahbild
+Vorab geprüft: origin/art/dorfmap-fertig steht weiter auf f942124.
+Versuch: neue Art `bett_laengs` in relief_l3h.py, Box 187,5–191,5|96,5–108,5. Kern-Vertices (4 Wasser-Nachbarn) auf gleichmäßige Tiefe WV−0,42 m,
+Rand-Vertices nur absenken, Engstellen auf WV−0,25 m, Bett-VC Richtung Kern-/Randton des Südteils. WV und Maske unverändert.
+v1 (Rand 0, Engstellen automatisch) und v2 (Rand 0,10 m, Engstelle 188–191|103,5–107,5 explizit).
+Messwert E3-Nord (x 187–192, z 99–108), c6a413b → v2:
+- mittlere Tiefe 0,12 → 0,27 m
+- tiefste Stelle je Vertexzeile 0,01–0,41 → 0,25–0,42 m (Streuung 0,12 → 0,07)
+- Bett-VC R 155 ± 7,4 → 147 ± 5,1
+- Laufbreite 1–5 Vertices (unverändert, Engstelle nur **1 Vertex** breit)
+Nahbild `pruefung/l3h_nahbilder/paar_E3_nord_nachtrag.jpg` (E3_westufer_100 oben, _106 unten; Farbe vorher|nachher, Clay vorher|nachher; vorher = c6a413b, nachher = v2).
+Ehrlich: Die Daten sind gleichmäßiger, das Bild aber kaum. Die Tümpelkette bleibt in Farbe und Clay sichtbar (v1 genauso). Wahrscheinliche Ursache: An der Engstelle ist der
+Lauf nur 1–2 Vertices breit; der Viewer blendet Wasser über Tiefe *und* Abstand zur Uferlinie (smoothstep 0,75 m) ein, dort gibt es keinen Innenbereich.
+Mit Tiefe/Ton allein ist das nicht lösbar, es bräuchte eine Rinnenverbreiterung auf 3–4 Vertices (Maske, wie E4) – das berührt die Westuferform und war nicht freigegeben.
+Deshalb **nichts an Daten/Pipeline committet**: Endstand, Gate (363/31/321, W1 0, Loch 0), *_letzter_lauf.json, Volllauf (bitgleich) und SHAs bleiben wie c6a413b.
+Versuch als Patch und Nahbild v1 in `pruefung/l3h/nachtrag_versuch/`.
