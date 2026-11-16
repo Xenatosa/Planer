@@ -1,6 +1,6 @@
 #!/bin/sh
 # P11: Ein-Befehl-Endbau. Erzeugt aus den Quelldaten in einem LEEREN Ausgabeordner alle Ausgaben des
-# Endstands (art/dorfmap-fertig, 81b6f94 = L3 + L3b + P2b/P2c + L3c2) und vergleicht sie per sha256 mit dem Repo-Stand.
+# Endstands (art/dorfmap-L3d = L3 + L3b + P2b/P2c + L3c2 + L3d auf 2771f70) und vergleicht sie per sha256 mit dem Repo-Stand.
 #
 #   sh bau_endstand.sh [AUSGABE]          (Standard /tmp/relief3d_endstand; muss leer sein oder fehlen)
 #   UEBERNEHMEN=1 sh bau_endstand.sh ...  kopiert die gebauten Ausgaben danach ins Repo (sonst nur Vergleich)
@@ -29,6 +29,9 @@
 #      html_payload_p3.py, waende_einsetzen.py. Nebenausgaben p2b_rueck.npz + p2b_bericht.json werden mitverglichen.
 #  11 L3c2 (81b6f94): relief_l3.py --stufe-c, gen_textur.py vc, pruefung/l3c_vc_lokal.py <Vorher-Stand>, html_payload_p3.py,
 #      waende_einsetzen.py. Nebenausgaben l3c_rueck.npz, l3c_bericht.json, l3c_vc_rueck.npz werden mitverglichen.
+#  12 L3d (ERGEBNIS_L3d): relief_l3d.py (QA-P4d-Platten/Bucht/Kerbe H7, E3-Westufer Rinne/Farbe lokal, Basis-Hash GB/WV/VC = Stand nach 11, Rueckweg
+#      relief_l3d.py --aus mit pruefung/l3d/l3d_rueck.npz), html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf
+#      (VC/FW.c schreibt relief_l3d.py selbst und nur in seiner Box). L3D=0 laesst Schritt 12 weg (Stand nach 11).
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -67,6 +70,7 @@ pruefung/runde_m_aenderungen_t65u.json neu/vektor.json neu/felder.json neu/felde
 neu/debug_D2.png neu/debug_G1.png dorfmap_relief_z25.glb pruefung/l3_rueck.npz pruefung/l3_bericht.json neu/build.json neu/relief_neu.json.gz index.html neu/index.html
 pruefung/p2_analyse/p2b/p2b_rueck.npz pruefung/p2_analyse/p2b/p2b_bericht.json
 pruefung/l3c_rueck.npz pruefung/l3c_bericht.json pruefung/l3c_vc_rueck.npz"
+[ "${L3D:-1}" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3d/l3d_rueck.npz pruefung/l3d/l3d_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -164,6 +168,15 @@ python3 pruefung/l3c_vc_lokal.py "$V3/relief_daten.json.gz" "$V3/relief_neu.json
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/11_l3c.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/11_l3c.log" 2>&1
 z l3c2 $t
+
+# 12) L3d (ERGEBNIS_L3d): eigener Basis-Hash im Skript, Rueckweg pruefung/l3d/l3d_rueck.npz (relief_l3d.py --aus).
+if [ "${L3D:-1}" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3d.py > "$AUS/12_l3d.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/12_l3d.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/12_l3d.log" 2>&1
+z l3d $t
+fi
 z gesamt_bau $T0
 
 # 2) Kontrolle: keine unerwarteten geschriebenen Dateien, sha256 je Ausgabe gegen den Repo-Stand

@@ -1,0 +1,123 @@
+{
+ "basis": "art/dorfmap-fertig @2771f70 (P12b gemergt; Reliefdaten = 9742a92, nach L3c2 Schritt 11)",
+ "basis_gb_wv_vc_sha256": "df1b605dbb071dba25482447c5b341ff673935c48a0faae649b684687be3e6c4",
+ "stellen": [
+  {
+   "id": "P4d_platten",
+   "art": "inseln",
+   "notiz": "QA P4d S1-S4 (stark) + S8 (leicht): Rasterplatten = eingeschlossene Landinseln im Fluss",
+   "punkte": [
+    [
+     193,
+     276
+    ],
+    [
+     202,
+     275
+    ],
+    [
+     218,
+     274
+    ],
+    [
+     237,
+     275
+    ],
+    [
+     303,
+     268
+    ],
+    [
+     308,
+     268
+    ],
+    [
+     32.5,
+     262.5
+    ],
+    [
+     29.5,
+     263.5
+    ],
+    [
+     46,
+     265.5
+    ],
+    [
+     124,
+     268
+    ],
+    [
+     129,
+     270.5
+    ],
+    [
+     135,
+     269
+    ]
+   ],
+   "radius": 4.0,
+   "insel_max_vertices": 60,
+   "huegel_vertices": 4.0,
+   "bett_tiefe_m": 0.5
+  },
+  {
+   "id": "P4d_S5_bucht",
+   "art": "bucht",
+   "notiz": "QA P4d S5 (leicht): weisse Landkuppe am Kartenrand H7 ~334|277 wird Wasser",
+   "x0": 332.5,
+   "x1": 336,
+   "z0": 275,
+   "z1": 280,
+   "fade_m": 0.5,
+   "ueber_spiegel_m": 0.9,
+   "bett_tiefe_m": 0.3,
+   "schritte": 10
+  },
+  {
+   "id": "P4d_S6_kerbe",
+   "art": "wv_glatt",
+   "notiz": "QA P4d S6 (leicht): V-Kerbe Wasserspiegel am Kartenrand H7 x=336 z~281,5",
+   "x0": 330,
+   "x1": 336,
+   "z0": 279,
+   "z1": 285,
+   "fade_m": 0.5,
+   "schwelle_m": 0.3
+  },
+  {
+   "id": "E3_west",
+   "art": "farbe",
+   "x0": 184,
+   "x1": 195,
+   "z0": 86,
+   "z1": 130,
+   "fade_m": 3.0,
+   "sigma_vertices": 2.0,
+   "band_vertices": 7.0,
+   "rest_sigma_vertices": 2.5,
+   "notiz": "QA/P12b: Zickzacklinie Westufer E3 in VC",
+   "rinne": true,
+   "rinne_band_vertices": 4.0,
+   "nachglatt_runden": 3,
+   "nachglatt_sigma": 1.0
+  },
+  {
+   "id": "G7_nord",
+   "art": "wassermaske",
+   "x0": 244,
+   "x1": 265,
+   "z0": 254,
+   "z1": 270,
+   "fade_m": 0.5,
+   "schritte": 6,
+   "notiz": "P12b: Treppe Nordufer G7 westlich x~265 = Maskenrand. Maske waechst bis das Gelaende 0,25 m ueber dem Spiegel liegt; der sichtbare Wasserrand ist dann die Schnittlinie Spiegel/Gelaende (glatt), die Maskentreppe liegt unter dem Gelaende.",
+   "ueber_spiegel_m": 0.5,
+   "aktiv": false,
+   "versuche": [
+    "1: ueber_spiegel_m 0,25 (29 neue Wasservertices) - Treppe im P12b- und aktuellen Viewer unveraendert",
+    "2: ueber_spiegel_m 0,5 (75 neue Wasservertices, Maske 2 Vertices weiter am Ufer) - Treppe verschiebt sich nur mit, bleibt sichtbar -> Ausnahme, Stelle aus"
+   ]
+  }
+ ]
+}
