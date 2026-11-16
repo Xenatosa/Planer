@@ -1,0 +1,63 @@
+{
+ "geaenderte_vertices": 1556,
+ "gb": 945,
+ "wv": 0,
+ "vc": 1508,
+ "zellweite_m": 1.2,
+ "je_flaeche": {
+  "weg_vektor": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "kreuzung": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 1.5,
+   "kleinster_abstand_m": 1.8
+  },
+  "rampenkern": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 46.8,
+   "kleinster_abstand_m": 56.16
+  },
+  "WEGA_wege_bruecken": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "D2": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 15.5,
+   "kleinster_abstand_m": 18.6
+  }
+ },
+ "wasser": {
+  "gb_unter_wasser_geaendert": 66,
+  "maske_gleich": true,
+  "wv_gleich": true,
+  "komponenten": [
+   9,
+   9
+  ],
+  "fill_holes_gleich": true,
+  "bett_ueber_spiegel_vorher_nachher": [
+   525,
+   523
+  ]
+ },
+ "D2_gb_sha256": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "D2_slice_sha": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "box_geaendert_zellen": [
+  181.5,
+  83.5,
+  194.5,
+  132.5
+ ],
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 65.6
+}
