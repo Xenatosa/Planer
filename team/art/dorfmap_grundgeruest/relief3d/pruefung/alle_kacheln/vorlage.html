@@ -10,17 +10,19 @@ button{margin:1px;padding:3px 5px}label{display:block;margin:3px 0}.sel{font-wei
 </style></head><body>
 <div id="lade">Lade alle Kachelmeshes …</div>
 <div id="p"><b>Relief-Neubau · 3D-Mesh · alle Kacheln</b><br><span id="modus"></span><hr>
-Oberfläche 0,5 m · D1/G1/D2 wie index.html, übrige Kacheln aus GB<br>
+Oberfläche 0,5 m · D1/G1/D2 wie index.html, übrige Kacheln aus GB + Pipeline-Profilen<br>
 <div id="raster"></div>
 <button id="reset">Schräg</button><button id="voben">Oben</button><button id="vkarte">Ganze Karte</button><br>
 <label><input type="checkbox" data-l="gelaende" checked> Gelände</label>
-<label><input type="checkbox" data-l="waende" checked> separate Wände D1/G1</label>
+<label><input type="checkbox" data-l="waende" checked> Wandkörper (neu/wand.py)</label>
+<label><input type="checkbox" data-l="wege" checked> Wege-Overlay (WEGA) + Brücken</label>
+<label><input type="checkbox" data-l="wasser" checked> Wasser (WV)</label>
 <label><input type="checkbox" data-l="raster" checked> Kachelrand</label>
 Licht Richtung <input id="az" type="range" min="0" max="360" value="315"><br>
 Licht Höhe <input id="el" type="range" min="5" max="90" value="35"><br>
 Licht Stärke <input id="st" type="range" min="0" max="150" value="90"><br>
 Maus: links drehen, rechts verschieben, Rad zoomen.<br>
-URL: ?tile=C3 · ?kacheln=C3,D3 (Teilmenge) · ?nosh=1 · ?clay=1 · ?raster=0
+URL: ?tile=C3 · ?kacheln=C3,D3 (Teilmenge) · ?ohne=wasser,wege,waende · ?d2wand=1 · ?nosh=1 · ?clay=1 · ?raster=0
 </div><div id="info">3D Meshes</div>
 <script>/*__DATEN__*/</script><script>/*__JS__*/</script>
 </body></html>
