@@ -42,6 +42,10 @@
 #  15 L3f/L3g (ERGEBNIS_L3f, ERGEBNIS_L3g): relief_l3f.py (L3g aktiv: E3-West-Rinne breiter/flacher, WV-Randring F7/G7-Nordufer angehoben;
 #      Basis-Hash = Stand nach 14, Rueckweg relief_l3f.py --aus mit pruefung/l3f/l3f_rueck.npz), html_payload_p3.py, waende_einsetzen.py.
 #      Nebenausgaben l3f_rueck.npz + l3f_bericht.json werden mitverglichen. L3F=0 laesst Schritt 15 weg; L3F folgt standardmaessig P2D.
+#  16 P2e (ERGEBNIS_P2E): relief_p2e.py (rampe_5 D4/D5 Milchband: nur VC, Farbe 1:1 aus hanggleichen Spender-Versaetzen, Mittel je Zone
+#      auf den Ring, Basis-Hash GB+VC = Stand nach 15, Rueckweg relief_p2e.py --aus mit pruefung/p2_analyse/p2e/p2e_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf. Nebenausgaben p2e_rueck.npz + p2e_bericht.json werden mitverglichen.
+#      P2E=0 laesst Schritt 16 weg; P2E folgt standardmaessig L3F.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -90,6 +94,9 @@ if [ "$P2D" != 0 ] && [ "$L3E" = 0 ]; then echo "P2D braucht Schritt 13 (L3E=0 u
 L3F=${L3F:-$P2D}
 if [ "$L3F" != 0 ] && [ "$P2D" = 0 ]; then echo "L3F braucht Schritt 14 (P2D=0 und L3F=1 geht nicht)"; exit 2; fi
 [ "$L3F" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3f/l3f_rueck.npz pruefung/l3f/l3f_bericht.json"
+P2E=${P2E:-$L3F}
+if [ "$P2E" != 0 ] && [ "$L3F" = 0 ]; then echo "P2E braucht Schritt 15 (L3F=0 und P2E=1 geht nicht)"; exit 2; fi
+[ "$P2E" = 0 ] || AUSGABEN="$AUSGABEN pruefung/p2_analyse/p2e/p2e_rueck.npz pruefung/p2_analyse/p2e/p2e_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -221,6 +228,14 @@ python3 relief_l3f.py > "$AUS/15_l3f.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/15_l3f.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/15_l3f.log" 2>&1
 z l3f $t
+fi
+# 16) P2e (ERGEBNIS_P2E): eigener Basis-Hash GB+VC im Skript, Rueckweg pruefung/p2_analyse/p2e/p2e_rueck.npz (relief_p2e.py --aus).
+if [ "$P2E" != 0 ]; then
+t=$(date +%s)
+python3 relief_p2e.py > "$AUS/16_p2e.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/16_p2e.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/16_p2e.log" 2>&1
+z p2e $t
 fi
 z gesamt_bau $T0
 
