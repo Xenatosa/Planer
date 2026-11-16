@@ -2,7 +2,7 @@
 
 Kosten: 0 € · Codex: nein · Laufzeit: 22:10–22:42
 
-Worktree /workspace/wt_dorfmap_L3j, Branch art/dorfmap-L3j auf origin/art/dorfmap-fertig = **0a0b83a** (geprüft, #40 gemergt; #41 QA-Doku noch offen → nicht darauf basiert, keine Überschneidung).
+Worktree /workspace/wt_dorfmap_L3j, Branch art/dorfmap-L3j auf origin/art/dorfmap-fertig = **0a0b83a** (geprüft, #40 gemergt). #41 (QA P4g, nur `pruefung/qa_p4g/`) wurde während der Arbeit gemergt (15763a7); da der Branch schon gepusht war, kein Rebase/Force-Push, sondern normaler Merge von art/dorfmap-fertig in den Branch – keine Überschneidung, Binärdaten unberührt (relief_daten/relief_neu/index von 15763a7 = 0a0b83a).
 Neues Skript `relief_l3j.py` = bau_endstand **Schritt 19** nach L3i-Schritt 18 (`L3J=0` schaltet ab, L3J=1 mit L3I=0 bricht ab; Rückweg `--aus` mit `pruefung/l3j/l3j_rueck.npz`).
 Stellen in `pruefung/l3j/l3j_stellen.json`, Basis-Hash GB/WV/VC = Stand nach Schritt 18 (7250e3bf…). Grundlage QA P4g (#41, `qa_p4g/bilder_0a0b83a/vn/E3_hals_190_97.jpg`). Checker und Schwellen unverändert.
 
