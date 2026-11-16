@@ -277,6 +277,26 @@ def _b64(array: np.ndarray) -> str:
     return base64.b64encode(array.tobytes(order="C")).decode("ascii")
 
 
+# P11: D1-Rampenkreuzung. Die Kreuzungsvarianten (p3d6..p3d18, Loesungsdateien, Gate-Namen)
+# kennen die beiden D1-Rampen unter ihren Gate-Nummern vor P2: rampe_2 (D1-E1) und rampe_11 (X084).
+# P2 (5a314c9/9ace686, P2_BEHALTEN=0,1,2,3,4,7,10,11) hat die Rampen 5, 6, 8, 9 und X069 entnommen;
+# relief_daten.json.gz hat seitdem 9 statt 13 rampenwege, und X084 steht an Pfadindex 8 statt 11.
+# Die Polylinien beider Rampen sind gegenueber d181fa6 punktgleich (geprueft in P11), die Kreuzung
+# ist dieselbe. Erwartet wird daher genau der Schnitt der Pfade 2 und 8; Namen/Loesungsschluessel
+# bleiben rampe_2/rampe_11, damit alle varianten-spezifischen Zweige und Loesungsdateien gleich greifen.
+D1_KREUZUNG_PFAD = {2: 2, 11: 8}   # Gate-/Loesungsnummer vor P2 -> Pfadindex in rampenwege (P2-Stand)
+D1_KREUZUNG_PAAR = (D1_KREUZUNG_PFAD[2], D1_KREUZUNG_PFAD[11])
+
+# P11: Soll-Quelle der p3d17/p3d18-Rasterloesungen. Die Loesungsdateien tragen ihre Entstehungsquelle
+# (source_relief_sha256 = relief_daten.json.gz von p3d18/ee46fe5). P3 (a10fc1e) hat nur VC/FW.c
+# geaendert (Hoehen/Wege bitgleich), P2 (9ace686) hat Rampen entnommen; beide Male blieb die Datei
+# unveraendert, deshalb brach Variante 2 seit P3 hier ab. Neuer Sollwert = relief_daten.json.gz des
+# Endstands c6a3db0 (bitgleich aus R/bau_endstand.sh). Die Pruefung bleibt aktiv: andere Quelle oder
+# andere Herkunft der Loesungsdatei -> Abbruch; zusaetzlich bleibt der Achsstuetzen-Vergleich.
+P3D17_QUELLE_SOLL_SHA256 = "b558f441b1fa72d328b57b6695422593fc28943ff60346fdc3326b5de4bb0d1f"   # c6a3db0
+P3D17_LOESUNG_HERKUNFT_SHA256 = "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88"  # ee46fe5 (p3d18)
+
+
 def build_manifest(
     relief_path: Path,
     cells_csv: Path,
@@ -1690,8 +1710,8 @@ def _apply_d1_optimized_crossing(
     """Blend jointly solved profiles into the p3d6 surface at the D1 crossing."""
     settings = KREUZUNG_SETTINGS[variant]
     crossings = _ramp_intersection_pairs(source, "D1")
-    if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
-        raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
+    if not crossings or (crossings[0][2], crossings[0][3]) != D1_KREUZUNG_PAAR:
+        raise RuntimeError(f"Erwartete D1-Kreuzung rampe_2/rampe_11 (Pfade {D1_KREUZUNG_PAAR}) fehlt")
     cx, cz, _, _ = crossings[0]
     crossing_m = np.array([cx, cz], dtype=np.float64) * CELL_M
 
@@ -1712,7 +1732,7 @@ def _apply_d1_optimized_crossing(
     rs = int(source.data["rs"])
     profiles: list[dict[str, Any]] = []
     for path_index in (2, 11):
-        path = np.asarray(raw_paths[path_index], dtype=np.float64)
+        path = np.asarray(raw_paths[D1_KREUZUNG_PFAD[path_index]], dtype=np.float64)
         stations, coords, cumulative = _profile_path(path)
         center = float(LineString(path).project(Point(cx, cz)))
         window_before = float(settings["window_m"])
@@ -1826,8 +1846,8 @@ def _apply_d1_full_crossing(
     """Apply full-ramp profiles; variants 11/12 use a smooth overlap transfer."""
     settings = KREUZUNG_SETTINGS[variant]
     crossings = _ramp_intersection_pairs(source, "D1")
-    if not crossings or (crossings[0][2], crossings[0][3]) != (2, 11):
-        raise RuntimeError("Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt")
+    if not crossings or (crossings[0][2], crossings[0][3]) != D1_KREUZUNG_PAAR:
+        raise RuntimeError(f"Erwartete D1-Kreuzung rampe_2/rampe_11 (Pfade {D1_KREUZUNG_PAAR}) fehlt")
     if variant in {"13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "29", "30"}:
         crossing_center = settings.get("crossing_center_map")
         if variant in {"29", "30"}:
@@ -1864,7 +1884,7 @@ def _apply_d1_full_crossing(
     rs = int(source.data["rs"])
     profiles: list[dict[str, Any]] = []
     for path_index in (2, 11):
-        path = np.asarray(raw_paths[path_index], dtype=np.float64)
+        path = np.asarray(raw_paths[D1_KREUZUNG_PFAD[path_index]], dtype=np.float64)
         stations, coords, cumulative = _profile_path(path)
         center = float(LineString(path).project(Point(cx, cz)))
         row = coords[:, 1] * rs
@@ -3051,7 +3071,9 @@ def _load_p3d17_joint_solution(
 ) -> tuple[list[np.ndarray], dict[str, Any]]:
     path = Path(__file__).with_name(solution_file)
     payload = json.loads(path.read_text(encoding="utf-8"))
-    if payload.get("source_relief_sha256") != source.source_file_sha256:
+    if payload.get("source_relief_sha256") != P3D17_LOESUNG_HERKUNFT_SHA256:
+        raise RuntimeError("p3d17 Rasterloesung hat unerwartete Herkunft (source_relief_sha256)")
+    if source.source_file_sha256 != P3D17_QUELLE_SOLL_SHA256:
         raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
     solved = []
     for profile in profiles:

@@ -18,8 +18,8 @@
         "G1": 0.5
       },
       "terrain_closed_triangles": 88728,
-      "total_triangles": 134316,
-      "wall_triangles": 45588
+      "total_triangles": 88728,
+      "wall_triangles": 0
     },
     "object_binding": {
       "max_abs_height_delta_m": 2.897433,
@@ -96,13 +96,13 @@
       "foot_embed_m": 0.15,
       "foot_variant": 2,
       "foot_variant_name": "terrain_dreieckskanten_0_15m",
-      "foot_vertices_lowered": 12009,
+      "foot_vertices_lowered": 0,
       "tiles": {
         "D1": {
-          "features": 1,
-          "min_width_m": 1.2,
-          "triangles": 19920,
-          "vertices": 17176
+          "features": 0,
+          "min_width_m": null,
+          "triangles": 0,
+          "vertices": 0
         },
         "D2": {
           "features": 0,
@@ -111,10 +111,10 @@
           "vertices": 0
         },
         "G1": {
-          "features": 3,
-          "min_width_m": 1.2,
-          "triangles": 25668,
-          "vertices": 21772
+          "features": 0,
+          "min_width_m": null,
+          "triangles": 0,
+          "vertices": 0
         }
       },
       "variant": 1

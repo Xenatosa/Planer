@@ -10,6 +10,7 @@ Die Wandkoerper haengen nur von neu/vektor.json und den gespeicherten Terrain-Ka
   3. Sonst 'waende' + lod1 ersetzen, gzip wie pipeline.py (level 9, mtime 0) schreiben und in
      index.html / neu/index.html nur die NEU_GZ-Datenzeile ersetzen (Bundle bytegleich, wie
      pruefung/p3_nahbilder/werkzeug/html_payload_p3.py).
+  4. P11: neu/build.json (waende, lod1) passend nachziehen.
 Aufruf (relief3d/): python3 pruefung/p10c/waende_einsetzen.py [--pruefen]
 """
 import base64
@@ -64,6 +65,22 @@ for p in (ROOT / "index.html", ROOT / "neu" / "index.html"):
     i = h.index('window.NEU_GZ="') + len('window.NEU_GZ="')
     j = h.index('"', i)
     p.write_text(h[:i] + d64 + h[j:], encoding="utf-8")
+# P11: neu/build.json (Bericht von neu/gen_relief.py) mitziehen, sonst bleiben dort alte Wandzahlen stehen
+# (c6a3db0: noch 45588 Wanddreiecke aus 5a314c9, obwohl relief_neu.json.gz seit P10e 0 hat). Felder und
+# Format exakt wie neu/pipeline.py-Bericht bzw. neu/gen_relief.py (sort_keys, indent=2).
+bj = ROOT / "neu" / "build.json"
+if bj.exists():
+    b = json.loads(bj.read_text(encoding="utf-8"))
+    b["mesh_package"]["waende"] = {
+        "variant": neu["variant"], "foot_variant": neu["foot_variant"],
+        "foot_variant_name": neu["foot_variant_name"], "foot_embed_m": neu["foot_embed_m"],
+        "foot_vertices_lowered": neu["foot_vertices_lowered"],
+        "tiles": {n: {"vertices": t["vertices"], "triangles": t["triangles"],
+                      "features": t["features"], "min_width_m": t["min_width_m"]}
+                  for n, t in neu["tiles"].items()},
+    }
+    b["mesh_package"]["lod1"] = man["lod1"]
+    bj.write_text(json.dumps(b, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
 bericht["lod1"] = man["lod1"]
 bericht["relief_neu_sha256"] = [hashlib.sha256(roh).hexdigest(), hashlib.sha256(daten).hexdigest()]
 print(json.dumps(bericht, indent=1))

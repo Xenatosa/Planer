@@ -1,0 +1,7 @@
+ZEIT gen_relief 71 s
+ZEIT gen_relief_neu 10 s
+ZEIT gen_textur_vc 14 s
+ZEIT baue_html 1 s
+ZEIT html_payload_p3 0 s
+ZEIT waende_einsetzen 5 s
+ZEIT gesamt_bau 102 s

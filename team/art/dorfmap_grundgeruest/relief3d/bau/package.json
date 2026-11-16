@@ -1,0 +1,9 @@
+{
+  "name": "relief3d-bau-endstand",
+  "private": true,
+  "description": "P11: gepinnte Bau-Werkzeuge fuer das Viewer-Bundle in index.html (siehe bau_endstand.sh)",
+  "dependencies": {
+    "esbuild": "0.24.2",
+    "three": "0.170.0"
+  }
+}

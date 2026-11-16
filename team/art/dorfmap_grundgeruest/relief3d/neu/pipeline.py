@@ -1,4 +1,12 @@
-"""Opt-in entry point for the new tiled mesh prototype."""
+"""Opt-in entry point for the new tiled mesh prototype.
+
+P11 (reproduzierbarer Endbau): Der p3d17-Pruefsummen-Abbruch (seit P3 a10fc1e, verschaerft durch
+P2 9ace686) ist behoben, ohne die Pruefung abzuschalten: neu/mesh.py prueft jetzt gegen den
+Sollwert P3D17_QUELLE_SOLL_SHA256 (relief_daten.json.gz des Endstands c6a3db0) und gegen die
+Herkunft der Loesungsdatei (P3D17_LOESUNG_HERKUNFT_SHA256, ee46fe5); die D1-Kreuzung wird mit den
+P2-Pfadindizes erwartet (D1_KREUZUNG_PFAD). Der Endstand selbst wird mit RELIEF_GELAENDE_VAR=0
+gebaut (bau_endstand.sh), dort greifen beide Stellen nicht; Variante 2 laeuft wieder durch.
+"""
 
 from pathlib import Path
 import gzip

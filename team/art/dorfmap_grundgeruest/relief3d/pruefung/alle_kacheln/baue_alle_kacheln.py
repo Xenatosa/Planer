@@ -2,8 +2,9 @@
 """P10: Gelaende-Meshes aller 56 Kacheln (A-H x 1-7) aus relief_daten.json.gz.
 
 Verfahren = das von index.html (neu/pipeline.py -> neu/mesh.py, Viewer neu/viewer.js):
-  * D1, G1, D2: unveraendert ueber neu.mesh.build_manifest() (Variante 2, Wegende 1,
-    Kreuzung 24 = Standard), daraus Kachelmesh mit neu.mesh.tile_mesh().
+  * D1, G1, D2: unveraendert ueber neu.mesh.build_manifest() (P11: Variante des Endstands
+    = 0 wie bau_endstand.sh, per RELIEF_GELAENDE_VAR ueberschreibbar; kein Rueckgriff auf das
+    gespeicherte Manifest), daraus Kachelmesh mit neu.mesh.tile_mesh().
   * Alle uebrigen 53 Kacheln: dasselbe neu.mesh.tile_mesh() auf dem sichtbaren
     GB-Hoehenfeld (Verfahren von D2, "locked_visible_GB_bytes"). Die 293
     terrain_extensions-Vertices des Pakets (Rampenauslauf ausserhalb D1/G1, alle in C1)
@@ -132,6 +133,10 @@ def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], orig
             "d2_unterdrueckt_mesh": d2}
 
 
+# P11: Gelaendevariante des Endstands (P2-Erzeugung RELIEF_GELAENDE_VAR=0, siehe bau_endstand.sh).
+ENDSTAND_GELAENDE_VAR = "0"
+
+
 def _b64(a: np.ndarray) -> str:
     return base64.b64encode(a.tobytes(order="C")).decode("ascii")
 
@@ -142,21 +147,22 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
     relief = R / "relief_daten.json.gz"
     source = M.load_relief(relief)
     rs, nx, ny = int(source.data["rs"]), int(source.data["nx"]), int(source.data["ny"])
-    # 1) Prototyp-Kacheln exakt wie neu/pipeline.py (Standardvarianten aus der Umgebung).
-    try:
-        manifest = M.build_manifest(relief, R / "neu" / "zellen_relief.csv",
-                                    R / "neu" / "vektor.json", R / "neu" / "felder.npz")
-        prototyp_quelle = "neu.mesh.build_manifest"
-    except RuntimeError as err:
-        # P10c: Seit a10fc1e (P3) passt relief_daten.json.gz nicht mehr zur p3d17-Rasterloesung
-        # (source_relief_sha256), build_manifest() bricht fuer D1 ab. index.html nutzt das
-        # gespeicherte Manifest aus neu/relief_neu.json.gz -> genau dieses verwenden.
-        # P10e: Seit P2 (9ace686, Rampen entnommen) bricht build_manifest() auch mit
-        # "Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt" ab -> ebenfalls das gespeicherte Manifest.
-        if "p3d17" not in str(err) and "rampe_2/rampe_11" not in str(err):
-            raise
-        manifest = json.loads(gzip.decompress((R / "neu" / "relief_neu.json.gz").read_bytes()))["neu_mesh_tiles"]
-        prototyp_quelle = f"neu/relief_neu.json.gz (gespeichert; build_manifest: {err})"
+    # 1) Prototyp-Kacheln exakt wie neu/pipeline.py im Endstand.
+    # P11: kein Rueckgriff mehr auf das gespeicherte Manifest aus neu/relief_neu.json.gz.
+    # Der Endstand (P2 9ace686 / c6a3db0, siehe bau_endstand.sh) ist mit RELIEF_GELAENDE_VAR=0 gebaut;
+    # genau diese Variante wird hier neu gerechnet (ueberschreibbar per Umgebung). Jeder Fehler in
+    # build_manifest() bricht ab. Zusaetzlich muessen die Kachel-Hoehen-Hashes zum Viewer-Paket passen.
+    variante = os.environ.get("RELIEF_GELAENDE_VAR", ENDSTAND_GELAENDE_VAR)
+    manifest = M.build_manifest(relief, R / "neu" / "zellen_relief.csv",
+                                R / "neu" / "vektor.json", R / "neu" / "felder.npz", variant=variante)
+    prototyp_quelle = f"neu.mesh.build_manifest (Variante {variante})"
+    paket = R / "neu" / "relief_neu.json.gz"
+    if paket.exists() and variante == ENDSTAND_GELAENDE_VAR:
+        soll = json.loads(gzip.decompress(paket.read_bytes()))["neu_mesh_tiles"]["tiles"]
+        abw = {t: (manifest["tiles"][t]["height_sha256"], soll[t]["height_sha256"]) for t in soll
+               if manifest["tiles"][t]["height_sha256"] != soll[t]["height_sha256"]}
+        if abw:
+            raise RuntimeError(f"build_manifest() passt nicht zu neu/relief_neu.json.gz: {abw}")
     waende = build_wall_manifest(R / "neu" / "vektor.json", terrain_tiles=manifest["tiles"])
     t_proto = time.time() - t0
 
