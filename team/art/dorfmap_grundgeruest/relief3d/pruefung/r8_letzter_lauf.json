@@ -283,7 +283,9 @@
 "x": 65.5,
 "z": 35.4,
 "wert": 0.15,
-"weg": "rampe_0_anfang"
+"weg": "rampe_0_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -291,7 +293,9 @@
 "x": 118.9,
 "z": 43.3,
 "wert": 0.29,
-"weg": "rampe_0_ende"
+"weg": "rampe_0_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -299,7 +303,9 @@
 "x": 273.4,
 "z": 21.2,
 "wert": 0.23,
-"weg": "rampe_1_anfang"
+"weg": "rampe_1_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -307,7 +313,9 @@
 "x": 227.3,
 "z": 36.9,
 "wert": 0.17,
-"weg": "rampe_1_ende"
+"weg": "rampe_1_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -315,7 +323,9 @@
 "x": 126.5,
 "z": 31.6,
 "wert": 0.25,
-"weg": "rampe_2_anfang"
+"weg": "rampe_2_anfang",
+"limit_m": 0.18,
+"ausnahme": "R8a_ausnahme_rampe2_start"
 },
 {
 "regel": "R8a_wegende",
@@ -323,7 +333,9 @@
 "x": 175.1,
 "z": 25.7,
 "wert": 0.18,
-"weg": "rampe_2_ende"
+"weg": "rampe_2_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -331,7 +343,9 @@
 "x": 189.5,
 "z": 239.6,
 "wert": 0.24,
-"weg": "rampe_3_anfang"
+"weg": "rampe_3_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -339,7 +353,9 @@
 "x": 113.3,
 "z": 228.6,
 "wert": 0.22,
-"weg": "rampe_3_ende"
+"weg": "rampe_3_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -347,7 +363,9 @@
 "x": 295.3,
 "z": 222.9,
 "wert": 0.18,
-"weg": "rampe_4_anfang"
+"weg": "rampe_4_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -355,7 +373,9 @@
 "x": 135.2,
 "z": 230.8,
 "wert": 0.33,
-"weg": "rampe_5_anfang"
+"weg": "rampe_5_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -363,7 +383,9 @@
 "x": 87.6,
 "z": 180.1,
 "wert": 0.16,
-"weg": "rampe_6_anfang"
+"weg": "rampe_6_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -371,7 +393,9 @@
 "x": 124.5,
 "z": 198.0,
 "wert": 0.25,
-"weg": "rampe_6_ende"
+"weg": "rampe_6_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -379,7 +403,9 @@
 "x": 117.1,
 "z": 185.4,
 "wert": 0.35,
-"weg": "rampe_7_anfang"
+"weg": "rampe_7_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -387,7 +413,9 @@
 "x": 135.4,
 "z": 146.8,
 "wert": 0.26,
-"weg": "rampe_7_ende"
+"weg": "rampe_7_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -395,7 +423,9 @@
 "x": 92.6,
 "z": 135.5,
 "wert": 0.12,
-"weg": "rampe_8_anfang"
+"weg": "rampe_8_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -403,7 +433,9 @@
 "x": 89.5,
 "z": 171.4,
 "wert": 0.18,
-"weg": "rampe_8_ende"
+"weg": "rampe_8_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -411,7 +443,9 @@
 "x": 298.2,
 "z": 149.2,
 "wert": 0.33,
-"weg": "rampe_9_anfang"
+"weg": "rampe_9_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -419,7 +453,9 @@
 "x": 269.8,
 "z": 117.3,
 "wert": 0.39,
-"weg": "rampe_9_ende"
+"weg": "rampe_9_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -427,7 +463,9 @@
 "x": 316.4,
 "z": 190.5,
 "wert": 0.33,
-"weg": "rampe_10_anfang"
+"weg": "rampe_10_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -435,7 +473,9 @@
 "x": 320.0,
 "z": 214.0,
 "wert": 0.41,
-"weg": "rampe_10_ende"
+"weg": "rampe_10_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -443,7 +483,9 @@
 "x": 148.5,
 "z": 2.5,
 "wert": 0.13,
-"weg": "rampe_11_anfang"
+"weg": "rampe_11_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -451,7 +493,9 @@
 "x": 156.5,
 "z": 37.5,
 "wert": 0.49,
-"weg": "rampe_11_ende"
+"weg": "rampe_11_ende",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -459,7 +503,9 @@
 "x": 127.5,
 "z": 133.5,
 "wert": 0.31,
-"weg": "rampe_12_anfang"
+"weg": "rampe_12_anfang",
+"limit_m": 0.1,
+"ausnahme": null
 },
 {
 "regel": "R8a_wegende",
@@ -467,7 +513,9 @@
 "x": 122.7,
 "z": 119.5,
 "wert": 0.17,
-"weg": "rampe_12_ende"
+"weg": "rampe_12_ende",
+"limit_m": 0.1,
+"ausnahme": null
 }
 ],
 "liste": [
