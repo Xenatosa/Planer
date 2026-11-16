@@ -1,0 +1,131 @@
+{
+ "basis": "a6a4831 (art/dorfmap-fertig nach #21)",
+ "felder_relief_daten": {
+  "FW": "geaendert",
+  "G": "gleich",
+  "GB": "geaendert",
+  "VC": "gleich",
+  "WEGA": "gleich",
+  "WV": "geaendert",
+  "baeume": "geaendert",
+  "bruecken": "gleich",
+  "felsbloecke": "gleich",
+  "felsen": "gleich",
+  "felsmesh": "gleich",
+  "findlinge": "gleich",
+  "geroell": "gleich",
+  "gras": "gleich",
+  "haeuser": "gleich",
+  "nx": "gleich",
+  "ny": "gleich",
+  "rampenwege": "gleich",
+  "reihenfolge": "gleich",
+  "rs": "gleich",
+  "spalten": "gleich",
+  "sprung": "gleich",
+  "start": "gleich",
+  "steine": "geaendert",
+  "ug": "gleich",
+  "wandfuss": "gleich",
+  "wandhoehen": "gleich",
+  "wandwinkel": "gleich",
+  "wege": "gleich"
+ },
+ "wassergrundriss_sha256": [
+  "c897e44c4f8fd1346d45008890f7b7219bb18c4e9597bb7f10706165818e21c5",
+  "2e8006ba147df18e7ec23f47e48fa06c17fd643f289db3dc033dc9e1f9f9e68f"
+ ],
+ "ohne_inseln_fill_holes_sha256": [
+  "defa6d613154538b1fcccb3b61fc5d1165c45dff40d1d0e86cb65379f03b98c4",
+  "defa6d613154538b1fcccb3b61fc5d1165c45dff40d1d0e86cb65379f03b98c4"
+ ],
+ "wasser_entfernt": 0,
+ "wasser_neu": 47,
+ "wasser_neu_ausserhalb_fill_holes": 0,
+ "wv_geaendert_auf_altem_wasser": 4092,
+ "wv_max_abs_auf_altem_wasser": 0.895,
+ "gb_vertices_geaendert": 7799,
+ "gb_max_m": 1.057,
+ "GB_D1_D2_geaendert": [
+  0,
+  0
+ ],
+ "WV_D1_D2_geaendert": [
+  0,
+  0
+ ],
+ "VC_D1_D2_geaendert": [
+  0,
+  0
+ ],
+ "d2_sha": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "p2b_vertices_auf_kernflaechen_info": 940,
+ "g6_23_bereich_geaendert": 0,
+ "sha256_nachher": {
+  "relief_daten.json.gz": "76a1e5830e8834c93ab49b8ea3b504ec7212f05913e6ac5a9eda915e7de6b547",
+  "neu/relief_neu.json.gz": "233b8373060c17449a1df481a03736e643a0217d80d44ad3f58582fc0d657178",
+  "index.html": "995a2764008befdb0fbd4e672d888f9be176a6350d60943fb3b0f9a86f925562",
+  "neu/index.html": "995a2764008befdb0fbd4e672d888f9be176a6350d60943fb3b0f9a86f925562",
+  "pruefung/l3c_rueck.npz": "9dfbdf9f84737725a002f9346e4431a29f75e1fca408efba4c7faa6d91cc3d2b",
+  "pruefung/l3c_vc_rueck.npz": "808ebb4656dca734f620262d7f2ead145135b2eca75703953428a8e5260ac5ee"
+ },
+ "sha256_a6a4831": {
+  "relief_daten.json.gz": "c4489748b5eb842b…",
+  "neu/relief_neu.json.gz": "941d0e21ed8619af…",
+  "index.html": "d4703a484437b7f1…"
+ },
+ "aus_roundtrip": "relief_l3.py --stufe-c --aus + l3c_vc_lokal.py --aus + payload + waende: relief_daten, relief_neu, index.html, neu/index.html bytegleich a6a4831; erneut an: bytegleich zum ersten an (inkl. l3c_rueck.npz, l3c_vc_rueck.npz)",
+ "l3_l3b_eingefroren_beleg": {
+  "neu_gerechnet_alter_massstab": "32e93914ba4e… = p2b basis_gb_sha256",
+  "richtiger_massstab_waere": "4531adafe78b…"
+ },
+ "l3_wegtreffer_zurueckgesetzt": {
+  "vertices": 7,
+  "max_abs_m": 0.284,
+  "orte_xz": [
+   [
+    329.5,
+    67.0
+   ],
+   [
+    330.5,
+    67.5
+   ],
+   [
+    277.5,
+    140.5
+   ],
+   [
+    277.5,
+    141.0
+   ],
+   [
+    278.0,
+    141.0
+   ],
+   [
+    278.5,
+    141.0
+   ],
+   [
+    278.5,
+    141.5
+   ]
+  ]
+ },
+ "test_l3_schutz": {
+  "zellweite_m": 1.2,
+  "median_abstand_quellzelle_mittellinie_umgerechnet": 0.0,
+  "median_abstand_meter_als_zellen_alt": 49.53,
+  "quellzellen_wege_kreuzungen": 4120,
+  "davon_im_schutz": 4120,
+  "nur_vektor_quellzellen_im_schutz_anteil": 1.0,
+  "wega_vertices_im_schutz_anteil": 1.0,
+  "bestanden": true
+ },
+ "alles_sh": "EXIT 0; D1/G1/D2 identisch mit index.html, Waende identisch, Naht max 0,0 m, Lochscan 56 = 0 (Positivkontrolle C3 = 3)",
+ "pruefer_unveraendert": true,
+ "kosten": "0 €",
+ "codex": "nein",
+ "laufzeit": "13:30–13:44"
+}

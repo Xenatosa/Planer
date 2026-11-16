@@ -5,6 +5,8 @@ Abschaltbarer Nachschritt auf dem sichtbaren Hoehenfeld GB (relief_daten.json.gz
   python3 relief_l3.py            -> anwenden (nur wenn GB noch der L3-Basis entspricht)
   python3 relief_l3.py --aus      -> rueckgaengig (Originalwerte aus pruefung/l3_rueck.npz)
   python3 relief_l3.py --trocken  -> nur rechnen und berichten, nichts schreiben
+  python3 relief_l3.py --stufe-c [--aus|--trocken] -> L3c-Nachschritt (Stellen L3c_*), NACH P2b/P2c; eigener Rueckweg
+                                    pruefung/l3c_rueck.npz, richtiger Massstab, setzt alte L3-Wegtreffer zurueck
 Stellenliste: pruefung/l3_stellen.json. Je Stelle Ellipse (x_m, z_m, rx_m, rz_m, Drehung) mit flachem Kern
 und weichem Auslauf (fade_m, Standard 3,5 m = 3-5 Zellen). Ersatzform je Stelle (verfahren):
   oeffnen_m   : graue Oeffnung (entfernt duenne Grate, Zaehne, Splitter, Wuelste nach oben)
@@ -38,7 +40,7 @@ def _schreibe(D, pfad, kompakt):
     pfad.write_bytes(gzip.compress(js.encode("utf-8"), 9, mtime=0))
 
 
-def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5, rampe_m=2.0):
+def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5, rampe_m=2.0, zellweite=None):
     """Gewicht 0 auf festen Flaechen, weicher Anstieg auf 1 daneben (Wege: Abstand weg_abstand_m, Wasser 1,5 m)."""
     fest = np.zeros((GY, GX), bool)
     WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX)
@@ -59,20 +61,25 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5, ra
     weg |= nd.distance_transform_edt(~rampe, sampling=1.0 / rs) <= rampe_m   # L3b: rampe_m=5 schuetzt auch die Boeschung (1,8-5 m)
     # Wegnetz aus neu/vektor.json (Gassen, Anbindungen, Hauswege): halbe Breite + 0,5 m fest; Kreuzungsflaechen + Uebergang fest
     V = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
+    # L3c-Fix: vektor.json rechnet in Metern (karte.zellweite_m = 1,2 m), das Hoehenraster in Zellen -> umrechnen.
+    # (Bis L3b wurden die Meter faelschlich als Zellen genommen: Schutz um Faktor 1,2 verschoben/zu breit.)
+    zw = float(V.get("karte", {}).get("zellweite_m", 1.0)) if zellweite is None else float(zellweite)
+    # zellweite=1.0 nur fuer den eingefrorenen L3/L3b-Lauf (bitgleiche Basis fuer P2b, siehe main); Standard = richtig.
     for wv in V.get("wege", []):
-        P = np.asarray(wv["mittellinie_m"], float)
+        P = np.asarray(wv["mittellinie_m"], float) / zw
         if len(P) < 2: continue
         L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t = np.arange(0.0, L[-1] + 1e-9, 0.25)
         lin = np.zeros((GY, GX), bool)
         lin[np.clip(np.rint(np.interp(t, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
-        zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + max(1.0, weg_rand_m + 0.5)) * rs) + 1
+        hb = wv["breite_m"] / zw / 2   # halbe Breite in Zellen
+        zs, xs = np.where(lin); pad = int((hb + max(1.0, weg_rand_m + 0.5)) * rs) + 1
         sl = (slice(max(zs.min() - pad, 0), zs.max() + pad + 1), slice(max(xs.min() - pad, 0), xs.max() + pad + 1))
-        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + weg_rand_m
+        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= hb + weg_rand_m
     from matplotlib.path import Path as _MP
     zz, xx = np.mgrid[0:GY, 0:GX] / float(rs); pts = np.c_[xx.ravel(), zz.ravel()]
     for k in V.get("kreuzungen", []):
-        weg |= _MP(k["polygon_m"]).contains_points(pts, radius=float(k.get("uebergang_m", 0.0)) + 0.5).reshape(GY, GX) | \
-               _MP(k["polygon_m"]).contains_points(pts, radius=-(float(k.get("uebergang_m", 0.0)) + 0.5)).reshape(GY, GX)
+        poly = np.asarray(k["polygon_m"], float) / zw; ue = float(k.get("uebergang_m", 0.0)) / zw + 0.5
+        weg |= _MP(poly).contains_points(pts, radius=ue).reshape(GY, GX) | _MP(poly).contains_points(pts, radius=-ue).reshape(GY, GX)
     dw = nd.distance_transform_edt(~wasser, sampling=1.0 / rs)
     dr = nd.distance_transform_edt(~weg, sampling=1.0 / rs)
     w = _ss((dw - 1.5) / 1.5) if mit_wasser else np.ones((GY, GX))   # Wasser: 0 bis 1,5 m Abstand, voll ab 3 m (L3b: Wasserstellen ohne)
@@ -110,14 +117,14 @@ def ersatz(H, s, rs):
     return E
 
 
-def anwenden(GB, D, stellen, rs, WV=None):
+def anwenden(GB, D, stellen, rs, WV=None, zellweite=None):
     """GB (und bei L3b-Wasserstellen den Wasserspiegel WV) lokal ersetzen. Wassergrundriss (WV > -900) bleibt gleich."""
     GY, GX = GB.shape
     H = GB.astype(np.float64)
-    W0 = schutz(D, GY, GX, rs); Wcache = {}
+    W0 = schutz(D, GY, GX, rs, zellweite=zellweite); Wcache = {}
     neu = H.copy(); bericht = []
     wv = None if WV is None else WV.astype(np.float64).copy()
-    wasser = None if WV is None else WV > -900
+    wasser = None if WV is None else WV > -900   # L3c: kann durch "inseln_fuellen" wachsen (nur eingeschlossene Inseln)
     for s in stellen:
         if not s.get("aktiv", True):
             bericht.append({"id": s["id"], "aktiv": False}); continue
@@ -126,7 +133,7 @@ def anwenden(GB, D, stellen, rs, WV=None):
         rm = s.get("rampe_m", 2.0)
         key = (wa, mw, wr, rm)
         if key not in Wcache:
-            Wcache[key] = schutz(D, GY, GX, rs, 1.5 if wa is None else wa, mw, wr, rm)
+            Wcache[key] = schutz(D, GY, GX, rs, 1.5 if wa is None else wa, mw, wr, rm, zellweite)
         w = gewicht(s, GY, GX, rs) * Wcache[key]
         m = w > 1e-4
         if not m.any():
@@ -139,6 +146,22 @@ def anwenden(GB, D, stellen, rs, WV=None):
             E = np.where(kern, np.median(E[kern]), E)
             E = nd.gaussian_filter(E, 1.0 * rs, mode="nearest") if s.get("sigma_m") else E
         info = {"id": s["id"], "kachel": s.get("kachel")}
+        loch = np.zeros(E.shape, bool)
+        if s.get("inseln_fuellen") and wv is not None:
+            # L3c: kleine, ganz von Wasser umschlossene Landinseln (Rasterplatten im Fluss) werden Wasser.
+            # Nur Inseln, die vollstaendig im Kern der Stelle liegen (Gewicht > 0,99); Aussenkontur bleibt gleich.
+            lab, nl = nd.label(nd.binary_fill_holes(wasser) & ~wasser)
+            kern = w > 0.99; n_ins = 0
+            for k in np.unique(lab[sl][kern[sl] & (lab[sl] > 0)]):
+                zz, xx = np.nonzero(lab == k)
+                if kern[zz, xx].all() and len(zz) <= s.get("insel_max_vertices", 400):
+                    wasser[zz, xx] = True; n_ins += 1
+            if n_ins:
+                alt_land = (wv <= -900) & wasser
+                idx = nd.distance_transform_edt(alt_land | ~wasser, return_distances=False, return_indices=True)
+                wv[alt_land] = wv[idx[0][alt_land], idx[1][alt_land]]
+                loch = alt_land[sl]
+            info["inseln_gefuellt"] = n_ins; info["insel_vertices"] = int(loch.sum())
         if s.get("wasser") and wv is not None:
             wm = wasser[sl]
             if wm.any():
@@ -148,6 +171,11 @@ def anwenden(GB, D, stellen, rs, WV=None):
                 Ew = ersatz(F, {k: v for k, v in s.items() if k not in ("oeffnen_m", "oeffnen2_m")}, rs) if s.get("wasserspiegel", True) else F
                 altw = wv[sl].copy()
                 neuw = np.where(wm, altw + w[sl] * (Ew - altw), altw)
+                if s.get("wv_rand_senken_m"):
+                    # L3c: Wasserspiegel im aeussersten Band leicht unter das Ufergelaende -> sichtbarer Wasserrand =
+                    # Schnittlinie Spiegel/Uferhang (schraeg, weich) statt Rasterkante der Wassermaske
+                    dwr = nd.distance_transform_edt(wm, sampling=1.0 / rs); bw = s.get("wv_rand_band_m", 0.75)
+                    neuw = np.where(wm & (dwr <= bw), neuw - w[sl] * s["wv_rand_senken_m"] * (1.0 - _ss((dwr - 0.5 / rs) / bw)), neuw)
                 wv[sl] = neuw
                 info["max_wv_m"] = round(float(np.abs(neuw - altw).max()), 3)
                 if s.get("ufer_heben_m") is not None:
@@ -158,6 +186,23 @@ def anwenden(GB, D, stellen, rs, WV=None):
                     E = np.where(wm & rand, np.maximum(E, ziel), E)
                     E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
                     E = np.where(wm & rand, np.maximum(E, ziel), E)
+                if s.get("land_ufer_heben_m") is not None:
+                    # L3c: Landvertices am Grundrissrand, die unter dem Spiegel liegen, knapp ueber den Spiegel heben
+                    # -> Wasserrand wird von der Gelaende-Hoehenlinie gebildet statt von der Rastertreppe
+                    idx2 = nd.distance_transform_edt(~wm, return_distances=False, return_indices=True)
+                    Fn = neuw[idx2[0], idx2[1]]
+                    lrand = (~wm) & (nd.distance_transform_edt(~wm, sampling=1.0 / rs) <= s.get("land_ufer_band_m", 1.0))
+                    ziel = Fn + s["land_ufer_heben_m"]
+                    for _ in range(2):
+                        E = np.where(lrand, np.maximum(E, ziel), E)
+                        E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
+                    E = np.where(lrand, np.maximum(E, ziel), E)
+                if loch.any():
+                    ziel = neuw - s.get("bett_tiefe_m", 0.6)
+                    for _ in range(2):
+                        E = np.where(loch, np.minimum(E, ziel), E)
+                        E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
+                    E = np.where(loch, np.minimum(E, ziel), E)
         alt = neu[sl].copy()
         neu[sl] = alt + w[sl] * (E - alt)
         d = neu[sl] - alt
@@ -218,17 +263,52 @@ def prototypen(N, GBn, geaendert):
     return out
 
 
+RUECK_C = R / "pruefung" / "l3c_rueck.npz"
+P2B_RUECK = R / "pruefung" / "p2_analyse" / "p2b" / "p2b_rueck.npz"
+
+
+def feste_flaechen(D, GY, GX, rs, zellweite=None):
+    """Kernflaechen (ohne Rand) im richtigen Massstab: vektor.json-Wegflaeche (halbe Breite), Kreuzungspolygone,
+    Rampenkern (rampenwege <= 1,8 Zellen), WEGA/wege/bruecken. Fuer Ruecksetzen und Nachweis (L3c)."""
+    from matplotlib.path import Path as _MP
+    V = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
+    zw = float(V.get("karte", {}).get("zellweite_m", 1.0)) if zellweite is None else float(zellweite)
+    F = np.frombuffer(base64.b64decode(D["WEGA"]), np.uint8).reshape(GY, GX) > 0
+    F = F.copy()
+    for x, z in D["wege"]: F[z * rs:z * rs + rs + 1, x * rs:x * rs + rs + 1] = True
+    for b in D.get("bruecken", []): F[int(round(b[2] * rs)), int(round(b[0] * rs))] = True
+    def _lin(P, step=0.1):
+        L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t_ = np.arange(0.0, L[-1] + 1e-9, step); m = np.zeros((GY, GX), bool)
+        m[np.clip(np.rint(np.interp(t_, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t_, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
+        return m
+    ram = np.zeros((GY, GX), bool)
+    for p in D.get("rampenwege", []):
+        P = np.asarray(p, float)[:, :2]
+        if len(P) >= 2: ram |= _lin(P)
+    F |= nd.distance_transform_edt(~ram, sampling=1.0 / rs) <= 1.8
+    for wv in V.get("wege", []):
+        P = np.asarray(wv["mittellinie_m"], float) / zw
+        if len(P) >= 2: F |= nd.distance_transform_edt(~_lin(P), sampling=1.0 / rs) <= wv["breite_m"] / zw / 2
+    zz, xx = np.mgrid[0:GY, 0:GX] / float(rs); pts = np.c_[xx.ravel(), zz.ravel()]
+    for k in V.get("kreuzungen", []):
+        F |= _MP(np.asarray(k["polygon_m"], float) / zw).contains_points(pts).reshape(GY, GX)
+    return F
+
+
 def main():
     arg = sys.argv[1:]
     cfg = json.loads(STELLEN.read_text(encoding="utf-8"))
+    stufe_c = "--stufe-c" in arg
+    rueck = RUECK_C if stufe_c else RUECK
     D = json.load(gzip.open(QUELLE)); N = json.load(gzip.open(NEU))
     nx, ny, rs = D["nx"], D["ny"], D["rs"]; GY, GX = ny * rs + 1, nx * rs + 1
     GB = np.frombuffer(base64.b64decode(D["GB"]), np.float32).reshape(GY, GX).copy()
     x0, z0, x1, z1 = D2_BOX
     d2_sha = _sha(GB[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1])
     if "--aus" in arg:
-        if not RUECK.exists(): print("kein l3_rueck.npz - L3 nicht aktiv"); return
-        r = np.load(RUECK); idx = r["idx"]; GBf = GB.reshape(-1).copy(); GBf[idx] = r["alt"]
+        if not rueck.exists(): print(f"kein {rueck.name} - nicht aktiv"); return
+        if not stufe_c and RUECK_C.exists(): sys.exit("L3c (Stufe c) ist aktiv: zuerst 'relief_l3.py --stufe-c --aus'")
+        r = np.load(rueck); idx = r["idx"]; GBf = GB.reshape(-1).copy(); GBf[idx] = r["alt"]
         if "wv_idx" in r.files:
             WVa = np.frombuffer(base64.b64decode(D["WV"]), np.float32).copy(); WVa[r["wv_idx"]] = r["wv_alt"]
             D["WV"] = N["WV"] = base64.b64encode(WVa.tobytes()).decode()
@@ -240,30 +320,53 @@ def main():
         D["GB"] = N["GB"] = base64.b64encode(GBn.tobytes()).decode()
         no = objekte(D, delta, rs); objekte(N, delta, rs)
         pt = prototypen(N, GBn, geaendert)
-        _schreibe(D, QUELLE, False); _schreibe(N, NEU, True); RUECK.unlink()
-        print(json.dumps({"l3": "aus", "objekte": no, "prototypen": pt})); return
-    if _sha(GB) != cfg["basis_gb_sha256"]:
-        sys.exit(f"GB entspricht nicht der L3-Basis ({_sha(GB)[:12]}); zuerst 'relief_l3.py --aus'")
+        _schreibe(D, QUELLE, False); _schreibe(N, NEU, True); rueck.unlink()
+        print(json.dumps({"l3c" if stufe_c else "l3": "aus", "objekte": no, "prototypen": pt})); return
+    if stufe_c:
+        # L3c-Nachschritt: laeuft NACH relief_l3 (L3/L3b) und P2b/P2c (relief_p2b.py, bruecken, Farbe) auf deren Ergebnis.
+        basis = cfg["stufe_c"]["basis_gb_sha256"]; stellen = [s for s in cfg["stellen"] if s["id"].startswith("L3c_")]; zw = None
+        if RUECK_C.exists(): sys.exit("L3c schon aktiv")
+    else:
+        # L3/L3b: eingefroren mit dem alten Massstab (Meter als Zellen), weil P2b (relief_p2b.py) bitgenau auf diesem
+        # Ergebnis aufsetzt (basis_gb_sha256). Die dadurch falsch geaenderten Wegvertices setzt die Stufe c zurueck.
+        basis = cfg["basis_gb_sha256"]; stellen = [s for s in cfg["stellen"] if not s["id"].startswith("L3c_")]
+        zw = cfg.get("massstab_l3_l3b_eingefroren", 1.0)
+    if _sha(GB) != basis:
+        sys.exit(f"GB entspricht nicht der Basis ({_sha(GB)[:12]}); zuerst --aus bzw. Reihenfolge pruefen")
     if os.environ.get("RELIEF_L3", "1") == "0":
         print("RELIEF_L3=0: nichts angewendet"); return
     WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX).copy()
-    GBn, bericht, WVn = anwenden(GB, D, cfg["stellen"], rs, WV)
+    GBn, bericht, WVn = anwenden(GB, D, stellen, rs, WV, zw)
+    GBs = GBn.copy()   # nur Stellen (fuer FW-Folgen)
+    info_r = None
+    if stufe_c and cfg["stufe_c"].get("l3_wegtreffer_zuruecksetzen", True):
+        # Vertices, die L3/L3b (alter Massstab) auf echten Kernflaechen geaendert hat und P2b nicht angefasst hat -> Originalwert
+        r3 = np.load(RUECK); i3, a3 = r3["idx"], r3["alt"]
+        p2 = set(np.load(P2B_RUECK)["idx"].tolist()) if P2B_RUECK.exists() else set()
+        F = feste_flaechen(D, GY, GX, rs).reshape(-1)
+        sel = F[i3] & ~np.isin(i3, np.fromiter(p2, np.int64, len(p2))) & (GB.reshape(-1)[i3] != a3)
+        Gf = GBn.reshape(-1); Gf[i3[sel]] = a3[sel]; GBn = Gf.reshape(GY, GX)
+        info_r = {"vertices": int(sel.sum()), "max_abs_m": round(float(np.abs(GB.reshape(-1)[i3[sel]].astype(float) - a3[sel]).max()), 3) if sel.any() else 0.0,
+                  "orte_xz": [[round(float(i % GX) / rs, 1), round(float(i // GX) / rs, 1)] for i in i3[sel]]}
     wv_geaendert = WVn != WV
-    if not np.array_equal(WVn > -900, WV > -900): sys.exit("Wassergrundriss geaendert - Abbruch")
+    m_alt, m_neu = WV > -900, WVn > -900
+    if (m_alt & ~m_neu).any(): sys.exit("Wasser entfernt - Abbruch")
+    if (m_neu & ~(nd.binary_fill_holes(m_alt))).any(): sys.exit("Wassergrundriss ausserhalb eingeschlossener Inseln geaendert - Abbruch")
     delta = GBn.astype(np.float64) - GB.astype(np.float64)
     geaendert = GBn != GB
     d2n = _sha(GBn[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1])
-    info = {"stellen": bericht, "vertices_geaendert": int(geaendert.sum()), "wv_vertices_geaendert": int(wv_geaendert.sum()),
+    info = {"stufe": "c" if stufe_c else "l3_l3b", "stellen": bericht, "vertices_geaendert": int(geaendert.sum()), "wv_vertices_geaendert": int(wv_geaendert.sum()),
             "wv_max_abs_m": round(float(np.abs(WVn.astype(float) - WV).max()), 3), "max_abs_m": round(float(np.abs(delta).max()), 3),
             "d2_gb_sha256_vorher": d2_sha, "d2_gb_sha256_nachher": d2n, "gb_sha256_nachher": _sha(GBn)}
+    if info_r is not None: info["l3_wegtreffer_zurueckgesetzt"] = info_r
     if d2n != d2_sha: sys.exit("D2 geaendert - Abbruch")
     if "--trocken" in arg:
         print(json.dumps(info, indent=1)); return
     idx = np.flatnonzero(geaendert.reshape(-1))
     widx = np.flatnonzero(wv_geaendert.reshape(-1))
-    GBo, _b, _w = anwenden(GB, D, [t for t in cfg["stellen"] if not t.get("fw_folgen")], rs, WV)
-    fidx, falt, fh_neu = fw_folgen(D, GBn.astype(np.float64) - GBo.astype(np.float64), rs)
-    np.savez_compressed(RUECK, idx=idx, alt=GB.reshape(-1)[idx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx], fw_idx=fidx, fw_alt=falt)
+    GBo, _b, _w = anwenden(GB, D, [t for t in stellen if not t.get("fw_folgen")], rs, WV, zw)
+    fidx, falt, fh_neu = fw_folgen(D, GBs.astype(np.float64) - GBo.astype(np.float64), rs)
+    np.savez_compressed(rueck, idx=idx, alt=GB.reshape(-1)[idx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx], fw_idx=fidx, fw_alt=falt)
     if fidx.size:
         D["FW"]["h"] = fh_neu
         if "FW" in N: N["FW"]["h"] = fh_neu
@@ -273,7 +376,7 @@ def main():
     info["objekte_angepasst"] = objekte(D, delta, rs); objekte(N, delta, rs)
     info["prototypen"] = prototypen(N, GBn, geaendert)
     _schreibe(D, QUELLE, False); _schreibe(N, NEU, True)
-    (R / "pruefung" / "l3_bericht.json").write_text(json.dumps(info, indent=1, ensure_ascii=False), encoding="utf-8")
+    (R / "pruefung" / ("l3c_bericht.json" if stufe_c else "l3_bericht.json")).write_text(json.dumps(info, indent=1, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(info, indent=1))
 
 

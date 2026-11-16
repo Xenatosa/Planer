@@ -1,5 +1,7 @@
 # ERGEBNIS L3b – Wasserstellen, Rand C4/D4, QA-P4c-Nachträge
 
+> **Korrektur (L3c, 16.11.2026):** Die Aussage „Wege: Kreuzungsflächen … max 0,0 m, vektor.json-Wege … max 0,0 m“ war **falsch**, weil sie mit falschem Maßstab gemessen wurde (Meter aus `vektor.json` als Zellen gelesen, Faktor 1,2). Mit richtigem Maßstab hatte `d5b17e2` 7 geänderte Vertices auf Wegflächen (13 G4 max 0,284 m; 18 H2 max 0,06 m). Behoben in L3c2 (Rücksetzen der 7 Vertices im Nachschritt `relief_l3.py --stufe-c`). Auch die Ausnahme-Begründung zu Stelle 20 E2 („Böschung Gasse G013/K009“) war maßstabsbedingt falsch. Der richtige Abstand zum Weg beträgt 7,0 Zellen; Ursache ist die Renderer-Rasterkante des Wassers (siehe `AUSNAHMEN_L3c.md`).
+
 Branch `art/dorfmap-L3b`, Basis `8cd6d37` (art/dorfmap-fertig). Kein Codex, keine Bildgenerierung, 0 €.
 Umsetzung als Erweiterung des schaltbaren Nachschritts `relief_l3.py` (Stellen `L3b_*` in `pruefung/l3_stellen.json`).
 `python3 relief_l3.py --aus` schaltet L3 + L3b komplett ab (GB, WV, FW.h, Objekte, Prototyp-Kacheln); erneutes Einschalten ist bytegleich (Beleg in `l3b_sha_belege.json`).
