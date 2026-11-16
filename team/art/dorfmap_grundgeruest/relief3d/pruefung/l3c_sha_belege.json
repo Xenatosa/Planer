@@ -13,7 +13,7 @@
   "felsen": "gleich",
   "felsmesh": "gleich",
   "findlinge": "gleich",
-  "geroell": "gleich",
+  "geroell": "geaendert",
   "gras": "gleich",
   "haeuser": "gleich",
   "nx": "gleich",
@@ -57,32 +57,17 @@
  ],
  "wv_vertices_geaendert_auf_altem_wasser": 4092,
  "wv_max_abs_m_auf_altem_wasser": 0.895,
- "gb_vertices_geaendert": 7792,
- "gb_max_m": 1.057,
+ "gb_vertices_geaendert": 9999,
+ "gb_max_m": 2.004,
  "d2_gb_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_tile_height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "wege_0m": {
-  "kreuzungsflaechen_vertices": 17644,
-  "max_delta_kreuzung_m": 0.0,
-  "vektor_wege_vertices": 19272,
-  "max_delta_vektor_wege_m": 0.0
- },
- "naehe_rampen_wege": {
-  "rampen_innerhalb_5m": [],
-  "vektor_wege_innerhalb_rand_plus_5m": []
- },
  "sha256_nachher": {
-  "relief_daten.json.gz": "23cdf73d7e44a77c3c8159ef6c81a32a849a8faba4f726b6c4479106486a06a0",
-  "neu/relief_neu.json.gz": "7224a607bfa12d2811f07f346cf3b6b68411fdc0d8f237ac31f0ae453fff4ab9",
-  "index.html": "288b3d64774634b2d7808a6d8567427c9bebf4e0d488b8f52eaeae61a4b51eda",
-  "neu/index.html": "288b3d64774634b2d7808a6d8567427c9bebf4e0d488b8f52eaeae61a4b51eda",
-  "neu/vektor.json": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
-  "neu/felder.json": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
-  "pruefung/pruefe_regeln.py": "f9ef4a470703480d5b7d94ee0e6de9e664289addc426723cfdc8bbf579dd4481",
-  "pruefung/export_gate.sh": "a505281cf71e80e4d46257b151bf9319a390a7f7a9a9c9a84e7db958630873d0",
-  "pruefung/loch_o18g.js": "2d1119eced25d7a408f4d4fd5884df1fb7d873f7c099c37d8fb14525f40dd049",
-  "relief_l3.py": "9f8488e67f7652f9a5c74f42041f2b0e6ced355776849ec18e763adc4382a6d9",
-  "pruefung/l3_stellen.json": "14cb262bc7b43991eb31b489041996ca80de29cc3d833314773fb99f530ba1fb"
+  "relief_daten.json.gz": "d96fc4b4b489f5e98f23f30893caf4e206bb7f1a2b52e5ad064a8d5b0af4fa08",
+  "neu/relief_neu.json.gz": "a609c5b97a07196da8ec1252d2a16a4f78a253af6f00883742f8f15d11776eb9",
+  "index.html": "74dad8286e92fd4c0743d8a241d79884fbbaff99499582d0d7d214b9f40cf6a5",
+  "neu/index.html": "74dad8286e92fd4c0743d8a241d79884fbbaff99499582d0d7d214b9f40cf6a5",
+  "pruefung/l3_rueck.npz": "6998f41fcf35e40a221ee1fdf16341aca8d74ea7ce413317d41dddc7f9751d72",
+  "pruefung/l3_bericht.json": "92ae3d205291f87ae08d3d009b1392588149a3dc2497bbf09d2703c5fe0a231b"
  },
  "geaenderte_dateien_vs_d5b17e2": [
   "team/art/dorfmap_grundgeruest/relief3d/index.html",
@@ -96,24 +81,78 @@
  ],
  "pruefer_unveraendert": true,
  "l3_aus_roundtrip": {
-  "an": [
-   "4340e8466ee22b5e3a5c6c1ea1cb3f5dee207608f878d55217f532b970649b41",
-   "relief_daten.json.gz",
-   "db434bed373da5b8c83a18cc4ea417d8b574020c7a61dc6658f455a6d1cd4ff7",
-   "neu/relief_neu.json.gz"
+  "aus": {
+   "relief_daten.json.gz": "1c713067ddf609027b51f9dd2d785ae2cbf26e66b404f1d7e2a997c7de52b893",
+   "neu/relief_neu.json.gz": "2fcaf595100ea0a9f5ad79b27a0d02f98ebb48c5a5a847df7d6bcf373f3483b1",
+   "index.html": "abdae83141e52d7361908da051e535bdcef4dd1aa0f17db391b5c283d9da37d2"
+  },
+  "an_nach_aus": {
+   "relief_daten.json.gz": "d96fc4b4b489f5e98f23f30893caf4e206bb7f1a2b52e5ad064a8d5b0af4fa08",
+   "neu/relief_neu.json.gz": "a609c5b97a07196da8ec1252d2a16a4f78a253af6f00883742f8f15d11776eb9",
+   "index.html": "74dad8286e92fd4c0743d8a241d79884fbbaff99499582d0d7d214b9f40cf6a5",
+   "neu/index.html": "74dad8286e92fd4c0743d8a241d79884fbbaff99499582d0d7d214b9f40cf6a5",
+   "pruefung/l3_rueck.npz": "6998f41fcf35e40a221ee1fdf16341aca8d74ea7ce413317d41dddc7f9751d72",
+   "pruefung/l3_bericht.json": "92ae3d205291f87ae08d3d009b1392588149a3dc2497bbf09d2703c5fe0a231b"
+  },
+  "bemerkung": "an→aus→an zweimal: aus und an jeweils bytegleich (sha_aus2=sha_aus3, sha_an1=sha_an2). Gegenüber dem allerersten an-Stand differiert nur VC (gen_textur nicht idempotent); GB/WV/FW/alle anderen Felder gleich. Gate auf Endstand erneut: identisch (377/33/325/0)."
+ },
+ "wassergrundriss_hash_methode": "sha256(np.packbits(WV>-900)); ohne_inseln = scipy binary_fill_holes",
+ "wasser_neu_ausserhalb_fill_holes_alt": 0,
+ "wegschutz_richtiger_massstab": {
+  "zellweite_m": 1.2,
+  "nach_L3c": {
+   "aenderungen_ohne_stelle": 0,
+   "gesamt_auf_vektorweg": 0,
+   "gesamt_auf_kreuzung": 0,
+   "gesamt_auf_rampenkern": 0,
+   "gesamt_auf_wega_wege": 0
+  },
+  "alter_stand_d5b17e2": {
+   "aenderungen_ohne_stelle": 0,
+   "gesamt_auf_vektorweg": 7,
+   "gesamt_auf_kreuzung": 0,
+   "gesamt_auf_rampenkern": 0,
+   "gesamt_auf_wega_wege": 0
+  },
+  "alter_stand_verletzungen": [
+   {
+    "stelle": "13",
+    "kachel": "G4",
+    "vertices_auf_weg": 5
+   },
+   {
+    "stelle": "18",
+    "kachel": "H2",
+    "vertices_auf_weg": 2
+   }
   ],
-  "aus": [
-   "bde2ab21e76909b6e3b0bd698d273313833729f7dae453dec9e4b981364e2802",
-   "relief_daten.json.gz",
-   "2de08b8b1d0e31917b2626d3ccd8a39c76d210b2237f09ca4f1dc51125a7091d",
-   "neu/relief_neu.json.gz"
-  ],
-  "wieder_an_bytegleich": true,
-  "aus_hoehen_gleich_vor_und_nach_L3c": {
-   "GB": true,
-   "WV": true,
-   "FW.h": true,
-   "hinweis": "aus-Zustand vor/nach L3c: GB, WV, FW.h identisch; Dateien unterscheiden sich nur durch VC/FW.c aus gen_textur vc"
+  "details": "l3c_abstaende_je_stelle.json"
+ },
+ "test_l3_schutz": {
+  "neu": {
+   "zellweite_m": 1.2,
+   "median_abstand_quellzelle_mittellinie_umgerechnet": 0.0,
+   "median_abstand_meter_als_zellen_alt": 49.53,
+   "quellzellen_wege_kreuzungen": 4120,
+   "davon_im_schutz": 4120,
+   "nur_vektor_quellzellen_im_schutz_anteil": 1.0,
+   "wega_vertices_im_schutz_anteil": 1.0,
+   "bestanden": true
+  },
+  "alt": {
+   "zellweite_m": 1.2,
+   "median_abstand_quellzelle_mittellinie_umgerechnet": 0.0,
+   "median_abstand_meter_als_zellen_alt": 49.53,
+   "quellzellen_wege_kreuzungen": 4120,
+   "davon_im_schutz": 4120,
+   "nur_vektor_quellzellen_im_schutz_anteil": 0.4362,
+   "wega_vertices_im_schutz_anteil": 1.0,
+   "bestanden": false
   }
+ },
+ "sperrzone_D1_und_D2_vertices_geaendert": {
+  "GB": 0,
+  "WV": 0,
+  "VC": 0
  }
 }

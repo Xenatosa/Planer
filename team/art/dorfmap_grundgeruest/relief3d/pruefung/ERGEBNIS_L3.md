@@ -1,5 +1,8 @@
 # ERGEBNIS L3 – einfache Ersatzgeometrie für die sichtbaren Höhenfehler
 
+> **Korrektur (L3c, 16.11.2026):** Die Aussage „Wege … unverändert (Δ = 0,0 m)“ bzw. „Wegnetz vektor.json 0.0 m, Kreuzungsflächen 0.0 m“ war **falsch**. `relief_l3.schutz()` und die Messung haben die Meterangaben aus `vektor.json` als Zellen gelesen (1 Zelle = 1,2 m). Mit richtigem Maßstab waren **7 Vertices auf echten Wegflächen geändert**: Stelle 13 G4 (5 Vertices, max 0,284 m) und Stelle 18 H2 (2 Vertices, max 0,06 m). Kreuzungen, Rampenkerne und WEGA waren nicht betroffen (0). Der Fehler ist in L3c (PR art/dorfmap-L3c) behoben und mit Test belegt; die 7 Vertices haben dort wieder ihren Originalwert. Siehe `ERGEBNIS_L3c.md` Abschnitt 1 und `l3c_abstaende_je_stelle.json`.
+> Ebenfalls maßstabsbedingt falsch: „Rippen am Weg G017 (geschützt)“ bei Stelle 23. G017 liegt 22,7 Zellen entfernt. Nach dem Fix wirkt Stelle 23 dort; die Rippen sind glatter (`l3c_nahbilder/fix_regionen/`).
+
 Stand 16.11.2026 · Branch `art/dorfmap-L3` · Basis `art/dorfmap-fertig` @ c6a3db0 · Auftrag Dorfmap-Grundgerüst (Prio 1, Fabian: „Optik ist alles“)
 
 ## Kurzfassung

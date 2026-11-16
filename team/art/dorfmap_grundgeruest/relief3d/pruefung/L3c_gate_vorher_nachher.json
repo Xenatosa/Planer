@@ -2,7 +2,7 @@
  "regeln": {
   "summe": [
    374,
-   375
+   377
   ],
   "je_regel": {
    "G2_spitze_oben": [
@@ -19,11 +19,11 @@
    ],
    "G5_beule_klippe": [
     35,
-    34
+    35
    ],
    "G6_facette": [
     213,
-    215
+    216
    ],
    "G7_wand_glatte_flaeche": [
     1,
@@ -93,6 +93,12 @@
     1,
     1
    ]
+  },
+  "geaendert": {
+   "G6_facette": [
+    213,
+    216
+   ]
   }
  },
  "r8": {
@@ -117,7 +123,8 @@
     17,
     17
    ]
-  }
+  },
+  "geaendert": {}
  },
  "r9": {
   "summe": [
@@ -137,7 +144,8 @@
     269,
     269
    ]
-  }
+  },
+  "geaendert": {}
  },
  "w1": {
   "summe": [
@@ -161,7 +169,8 @@
     0,
     0
    ]
-  }
+  },
+  "geaendert": {}
  },
  "w1_alle56": {
   "summe": [
@@ -185,17 +194,35 @@
     0,
     0
    ]
-  }
+  },
+  "geaendert": {}
  },
- "pruefe_regeln_eigener_lochscan": {
+ "pruefe_regeln_eigen": {
   "summe": [
    374,
-   375
+   377
+  ],
+  "summe_ohne_ausnahmen": [
+   374,
+   377
   ]
  },
- "lochscan_hauptviewer": "{\"meshes\":9,\"dreiecke\":88728,\"offen_innen\":0,\"bb\":[126,0,294,86],\"punkte\":0}",
  "treffer_diff": {
   "neu": [
+   {
+    "regel": "G5_beule_klippe",
+    "feld": "G4",
+    "x": 283.5,
+    "z": 140.0,
+    "wert": 0.69
+   },
+   {
+    "regel": "G6_facette",
+    "feld": "G6",
+    "x": 268.2,
+    "z": 237.8,
+    "wert": 6
+   },
    {
     "regel": "G6_facette",
     "feld": "G7",
@@ -220,5 +247,7 @@
     "wert": 1.28
    }
   ]
- }
+ },
+ "lochscan_hauptviewer_offene_kanten": 0,
+ "basis": "d5b17e2 (PR #20)"
 }
