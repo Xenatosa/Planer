@@ -1,0 +1,48 @@
+{
+ "stellen": [
+  {
+   "id": "F7_nord",
+   "neue_wasser_vertices": 16,
+   "gb_vertices": 324,
+   "gb_max_m": 0.347,
+   "altes_wasser_landseitig": 0
+  },
+  {
+   "id": "G7_nord",
+   "neue_wasser_vertices": 78,
+   "gb_vertices": 1333,
+   "gb_max_m": 0.453,
+   "altes_wasser_landseitig": 1
+  },
+  {
+   "id": "G7_plaettchen",
+   "neue_wasser_vertices": 23,
+   "gb_vertices": 428,
+   "gb_max_m": 0.39,
+   "altes_wasser_landseitig": 0
+  }
+ ],
+ "wasser_neu": 117,
+ "wasser_entfernt": 0,
+ "wasser_komponenten": [
+  9,
+  9
+ ],
+ "bett_ueber_spiegel": [
+  523,
+  515
+ ],
+ "vc_vertices": 0,
+ "gb_vertices": 2007,
+ "gb_max_abs_m": 0.567,
+ "basis": "f793b7ecee23762f9e5f2aa3f0c4637419fd88c0b63f1c1556a09069dd6dab20",
+ "nachher_sha256": "b3fbd2017359873dde8f7a7d9def6be38ecaf12369cf9b59076a0e7ac9e9f437",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 3350,
+ "objekte_angepasst": 17,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}

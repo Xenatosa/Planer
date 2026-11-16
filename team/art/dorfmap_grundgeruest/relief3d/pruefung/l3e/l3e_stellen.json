@@ -1,0 +1,45 @@
+{
+ "basis": "art/dorfmap-fertig @b3698e0 (nach L3d, Schritt 12)",
+ "basis_gb_wv_vc_sha256": "f793b7ecee23762f9e5f2aa3f0c4637419fd88c0b63f1c1556a09069dd6dab20",
+ "stellen": [
+  {
+   "id": "F7_nord",
+   "art": "ufer",
+   "notiz": "F7-Nordufer Zaehnchen ~240|271",
+   "x0": 230,
+   "x1": 242.5,
+   "z0": 267,
+   "z1": 274,
+   "fade_m": 1.5,
+   "neigung_min_m": 0.45,
+   "linear_vertices": 1.0,
+   "tiefe_min_m": 0.8
+  },
+  {
+   "id": "G7_nord",
+   "art": "ufer",
+   "notiz": "G7-Nordufer Treppe westlich x~265 (Weg A)",
+   "x0": 244,
+   "x1": 276,
+   "z0": 250,
+   "z1": 271,
+   "fade_m": 2.0,
+   "neigung_min_m": 0.45,
+   "linear_vertices": 1.0,
+   "tiefe_min_m": 0.8
+  },
+  {
+   "id": "G7_plaettchen",
+   "art": "ufer",
+   "notiz": "G7-Plaettchen NO ~283,5|268,8 (QA) = Suedwestufer mit Bett ueber Spiegel",
+   "x0": 276,
+   "x1": 292,
+   "z0": 265,
+   "z1": 274,
+   "fade_m": 1.5,
+   "neigung_min_m": 0.45,
+   "linear_vertices": 1.0,
+   "tiefe_min_m": 0.8
+  }
+ ]
+}

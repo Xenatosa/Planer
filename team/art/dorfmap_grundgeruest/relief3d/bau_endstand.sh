@@ -32,6 +32,10 @@
 #  12 L3d (ERGEBNIS_L3d): relief_l3d.py (QA-P4d-Platten/Bucht/Kerbe H7, E3-Westufer Rinne/Farbe lokal, Basis-Hash GB/WV/VC = Stand nach 11, Rueckweg
 #      relief_l3d.py --aus mit pruefung/l3d/l3d_rueck.npz), html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf
 #      (VC/FW.c schreibt relief_l3d.py selbst und nur in seiner Box). L3D=0 laesst Schritt 12 weg (Stand nach 11).
+#  13 L3e (ERGEBNIS_L3e): relief_l3e.py (Ufer F7-Nord/G7-Nord/G7-Plaettchen: Wassermaske und Boeschung folgen der Hoehenlinie
+#      Gelaende = Spiegel, Basis-Hash GB/WV/VC = Stand nach 12, Rueckweg relief_l3e.py --aus mit pruefung/l3e/l3e_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf, VC unveraendert. L3E=0 laesst Schritt 13 weg (Stand nach 12);
+#      L3E folgt standardmaessig L3D (Schritt 13 setzt den Stand nach 12 voraus).
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -71,6 +75,9 @@ neu/debug_D2.png neu/debug_G1.png dorfmap_relief_z25.glb pruefung/l3_rueck.npz p
 pruefung/p2_analyse/p2b/p2b_rueck.npz pruefung/p2_analyse/p2b/p2b_bericht.json
 pruefung/l3c_rueck.npz pruefung/l3c_bericht.json pruefung/l3c_vc_rueck.npz"
 [ "${L3D:-1}" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3d/l3d_rueck.npz pruefung/l3d/l3d_bericht.json"
+L3E=${L3E:-${L3D:-1}}
+if [ "$L3E" != 0 ] && [ "${L3D:-1}" = 0 ]; then echo "L3E braucht Schritt 12 (L3D=0 und L3E=1 geht nicht)"; exit 2; fi
+[ "$L3E" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3e/l3e_rueck.npz pruefung/l3e/l3e_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -176,6 +183,14 @@ python3 relief_l3d.py > "$AUS/12_l3d.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/12_l3d.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/12_l3d.log" 2>&1
 z l3d $t
+fi
+# 13) L3e (ERGEBNIS_L3e): eigener Basis-Hash im Skript, Rueckweg pruefung/l3e/l3e_rueck.npz (relief_l3e.py --aus).
+if [ "$L3E" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3e.py > "$AUS/13_l3e.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/13_l3e.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/13_l3e.log" 2>&1
+z l3e $t
 fi
 z gesamt_bau $T0
 
