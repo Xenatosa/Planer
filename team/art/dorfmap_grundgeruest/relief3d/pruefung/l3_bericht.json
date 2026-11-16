@@ -185,6 +185,7 @@
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "gb_sha256_nachher": "e1ff825e18ca5904cbb2c97a5db19628b540e0725d98568d8a8a37bcedd12b1e",
+ "fw_vertices_geaendert": 6961,
  "objekte_angepasst": 240,
  "prototypen": {
   "D2": "unveraendert",

@@ -339,7 +339,8 @@
    "sigma_m": 0.8,
    "wasser": true,
    "notiz": "L3b: Rinne quer durchs Flussbett (Zeile z=275/276) in Bett GB und Wasserspiegel WV fuellen",
-   "aktiv": true
+   "aktiv": true,
+   "fw_folgen": true
   },
   {
    "id": "L3b_20",
@@ -355,7 +356,8 @@
    "ufer_heben_m": 0.08,
    "ufer_band_m": 0.75,
    "notiz": "L3b: Uferkante Bachrinne glaetten, Uferband knapp ueber Spiegel",
-   "aktiv": true
+   "aktiv": true,
+   "fw_folgen": true
   },
   {
    "id": "L3b_22",
@@ -372,7 +374,8 @@
    "ufer_heben_m": 0.08,
    "ufer_band_m": 0.75,
    "notiz": "L3b: Kamm an der Wasserrinne abtragen, Ufer glaetten",
-   "aktiv": true
+   "aktiv": true,
+   "fw_folgen": true
   },
   {
    "id": "L3b_24",
@@ -385,7 +388,8 @@
    "oeffnen_m": 1.0,
    "sigma_m": 1.2,
    "notiz": "L3b: wolkiger Rand C4/D4 (Ueberlappung der L3-Auslaeufe 05/06b) weich nachziehen",
-   "aktiv": true
+   "aktiv": true,
+   "fw_folgen": true
   }
  ]
 }

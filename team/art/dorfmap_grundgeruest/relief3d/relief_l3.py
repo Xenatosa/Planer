@@ -176,6 +176,24 @@ def objekte(D, delta, rs):
     return n
 
 
+def fw_folgen(D, dfw, rs):
+    """L3b: Feinband-Hoehen FW.h folgen der Hoehenaenderung der Stellen mit "fw_folgen" (bilinear)."""
+    from scipy import ndimage as ndi
+    FW = D["FW"]; fs = int(FW["fs"]); fxn = int(D["nx"]) * fs + 1
+    vid = np.frombuffer(base64.b64decode(FW["vid"]), np.uint32)
+    fh = np.frombuffer(base64.b64decode(FW["h"]), np.float32).copy()
+    fx = (vid % fxn) / fs; fz = (vid // fxn) / fs
+    d = ndi.map_coordinates(dfw, [fz * rs, fx * rs], order=1, mode="nearest", prefilter=False)
+    sel = np.flatnonzero(np.abs(d) > 1e-5)
+    alt = fh[sel].copy(); fh[sel] = (fh[sel] + d[sel]).astype(np.float32)
+    return sel, alt, base64.b64encode(fh.tobytes()).decode()
+
+
+def fw_setzen(D, idx, werte):
+    fh = np.frombuffer(base64.b64decode(D["FW"]["h"]), np.float32).copy(); fh[idx] = werte
+    D["FW"]["h"] = base64.b64encode(fh.tobytes()).decode()
+
+
 def prototypen(N, GBn, geaendert):
     sys.path.insert(0, str(R))
     from neu import mesh as M
@@ -213,6 +231,9 @@ def main():
         if "wv_idx" in r.files:
             WVa = np.frombuffer(base64.b64decode(D["WV"]), np.float32).copy(); WVa[r["wv_idx"]] = r["wv_alt"]
             D["WV"] = N["WV"] = base64.b64encode(WVa.tobytes()).decode()
+        if "fw_idx" in r.files:
+            fw_setzen(D, r["fw_idx"], r["fw_alt"])
+            if "FW" in N: fw_setzen(N, r["fw_idx"], r["fw_alt"])
         GBn = GBf.reshape(GY, GX); delta = GBn.astype(np.float64) - GB
         geaendert = GBn != GB
         D["GB"] = N["GB"] = base64.b64encode(GBn.tobytes()).decode()
@@ -239,7 +260,13 @@ def main():
         print(json.dumps(info, indent=1)); return
     idx = np.flatnonzero(geaendert.reshape(-1))
     widx = np.flatnonzero(wv_geaendert.reshape(-1))
-    np.savez_compressed(RUECK, idx=idx, alt=GB.reshape(-1)[idx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx])
+    GBo, _b, _w = anwenden(GB, D, [t for t in cfg["stellen"] if not t.get("fw_folgen")], rs, WV)
+    fidx, falt, fh_neu = fw_folgen(D, GBn.astype(np.float64) - GBo.astype(np.float64), rs)
+    np.savez_compressed(RUECK, idx=idx, alt=GB.reshape(-1)[idx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx], fw_idx=fidx, fw_alt=falt)
+    if fidx.size:
+        D["FW"]["h"] = fh_neu
+        if "FW" in N: N["FW"]["h"] = fh_neu
+    info["fw_vertices_geaendert"] = int(fidx.size)
     if widx.size: D["WV"] = N["WV"] = base64.b64encode(WVn.tobytes()).decode()
     D["GB"] = N["GB"] = base64.b64encode(GBn.tobytes()).decode()
     info["objekte_angepasst"] = objekte(D, delta, rs); objekte(N, delta, rs)
