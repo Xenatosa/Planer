@@ -1,0 +1,78 @@
+{
+ "basis_gb_sha256": "32e93914ba4e3c16f860a70991b7be850ee0924e707fe5a2ae2529b26a1994ef",
+ "stellen": [
+  {
+   "id": "03",
+   "kachel": "D1",
+   "verfahren": "rampe_boeschung",
+   "rampe": 2,
+   "kern": 1.0,
+   "boeschung": 4.0,
+   "von_s": 3,
+   "bis_ende": 3,
+   "notiz": "Zickzack-Rillen an rampe_2 (126.5|31.6-175.1|25.7)",
+   "flach": 2.0
+  },
+  {
+   "id": "03b",
+   "kachel": "D1",
+   "verfahren": "rampe_boeschung",
+   "rampe": 8,
+   "kern": 1.0,
+   "boeschung": 4.0,
+   "x_m": 151,
+   "z_m": 27,
+   "rx_m": 9,
+   "rz_m": 9,
+   "fade_m": 3.0,
+   "notiz": "Serpentine X084 (Gate rampe_8) an der Kreuzung mit rampe_2: Boeschung neu, Kern fest",
+   "flach": 2.0
+  },
+  {
+   "id": "03c",
+   "kachel": "D1",
+   "verfahren": "rampe_boeschung",
+   "rampe": 8,
+   "kern": 1.0,
+   "flach": 1.0,
+   "boeschung": 2.0,
+   "x_m": 151.5,
+   "z_m": 30.0,
+   "rx_m": 7.0,
+   "rz_m": 7.0,
+   "fade_m": 2.5,
+   "notiz": "Kreuzung rampe_2 (oben, ~6,5 m) / rampe_8 X084 (unten, ~4 m): Zickzack-Wand = Rasterkante zwischen den Kernen. Kern rampe_2 +-1,0 fest (glatte Distanzkante statt Zellraster), Ausreisser im Kern rampe_8 (Reste von rampe_2, >0,5 m) aufs Kernprofil, Wand dazwischen glatt",
+   "kern_ausreisser_m": 0.5,
+   "kern_andere_m": 1.0
+  },
+  {
+   "id": "14",
+   "kachel": "E1",
+   "verfahren": "glaetten",
+   "x_m": 181.0,
+   "z_m": 27.0,
+   "rx_m": 1.5,
+   "rz_m": 2.5,
+   "fade_m": 1.5,
+   "oeffnen_m": 1.5,
+   "sigma_m": 0.5,
+   "notiz": "Finne an der Klippenecke 180|28 (L3b: im Boeschungsschutz von rampe_2). Oeffnen 2 m + Glaetten, Kern rampe_2 +-2 bleibt fest"
+  },
+  {
+   "id": "23",
+   "kachel": "G6",
+   "verfahren": "rampe_boeschung",
+   "rampe": 4,
+   "kern": 1.0,
+   "flach": 2.0,
+   "boeschung": 4.0,
+   "x_m": 282,
+   "z_m": 228,
+   "rx_m": 12,
+   "rz_m": 8,
+   "fade_m": 3.0,
+   "notiz": "Rippen = Saegezahn-Boeschung von rampe_4 (H6-F6); Schein-Schutz G017 aus L3 entfaellt"
+  }
+ ],
+ "basis": "art/dorfmap-fertig @d5b17e2 (L3b gemergt)"
+}

@@ -1,0 +1,42 @@
+{
+ "stellen": [
+  {
+   "id": "03",
+   "max_m": 3.197,
+   "vertices": 1545
+  },
+  {
+   "id": "03b",
+   "max_m": 4.126,
+   "vertices": 816
+  },
+  {
+   "id": "03c",
+   "max_m": 2.68,
+   "vertices": 329
+  },
+  {
+   "id": "14",
+   "max_m": 1.778,
+   "vertices": 180
+  },
+  {
+   "id": "23",
+   "max_m": 4.68,
+   "vertices": 1105
+  }
+ ],
+ "vertices_geaendert": 3337,
+ "d2_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "d2_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "feinband": {
+  "punkte": 13826,
+  "max_m": 6.125
+ },
+ "objekte": 14,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "neu vermascht (tile_mesh)"
+ }
+}

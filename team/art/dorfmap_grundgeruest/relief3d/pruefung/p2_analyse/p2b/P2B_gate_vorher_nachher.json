@@ -1,0 +1,138 @@
+{
+ "regeln:G2_spitze_oben": [
+  2,
+  2
+ ],
+ "regeln:G2_spitze_oben_fein": [
+  9,
+  9
+ ],
+ "regeln:G3_spitze_unten_fein": [
+  2,
+  2
+ ],
+ "regeln:G5_beule_klippe": [
+  35,
+  35
+ ],
+ "regeln:G6_facette": [
+  213,
+  214
+ ],
+ "regeln:G7_wand_glatte_flaeche": [
+  1,
+  1
+ ],
+ "regeln:G7b_wandkontur_feld": [
+  29,
+  29
+ ],
+ "regeln:G7b_wandkontur_kantenschaerfe": [
+  1,
+  1
+ ],
+ "regeln:G7b_wandkontur_rauheit": [
+  1,
+  1
+ ],
+ "regeln:G8_fluss_nicht_bis_rand": [
+  1,
+  1
+ ],
+ "regeln:R1_blind": [
+  17,
+  17
+ ],
+ "regeln:R2_getrennt": [
+  9,
+  8
+ ],
+ "regeln:R3_laengs_m": [
+  20,
+  20
+ ],
+ "regeln:R3_quer_pct": [
+  11,
+  10
+ ],
+ "regeln:R3_woelb_m": [
+  10,
+  10
+ ],
+ "regeln:R5_loch": [
+  4,
+  4
+ ],
+ "regeln:R6_wasser_schnee": [
+  4,
+  4
+ ],
+ "regeln:T1_fleckrand": [
+  1,
+  1
+ ],
+ "regeln:T2_textur_abgeschnitten_bildpruefung_offen": [
+  1,
+  1
+ ],
+ "regeln:T3_streifen_ringe_bildpruefung_offen": [
+  1,
+  1
+ ],
+ "regeln:T4_graue_flussstreifen_bildpruefung_offen": [
+  1,
+  1
+ ],
+ "regeln:T5_textur_vs_clay_bildpruefung_offen": [
+  1,
+  1
+ ],
+ "regeln:summe": [
+  374,
+  373
+ ],
+ "r8:R8_gitter": [
+  7,
+  7
+ ],
+ "r8:R8_quer": [
+  3,
+  3
+ ],
+ "r8:R8_stufe": [
+  6,
+  6
+ ],
+ "r8:R8a_wegende": [
+  17,
+  17
+ ],
+ "r8:summe": [
+  33,
+  33
+ ],
+ "r9:R8b_delle": [
+  22,
+  22
+ ],
+ "r9:R9_saegezahn": [
+  34,
+  34
+ ],
+ "r9:R9w_wellen": [
+  269,
+  269
+ ],
+ "r9:summe": [
+  325,
+  325
+ ],
+ "w1": [
+  0,
+  0
+ ],
+ "w1_alle56": [
+  0,
+  0
+ ]
+}

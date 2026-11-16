@@ -1,12 +1,12 @@
 {
-"summe": 374,
-"summe_ohne_ausnahmen": 374,
+"summe": 373,
+"summe_ohne_ausnahmen": 373,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
-"R2_getrennt": 9,
+"R2_getrennt": 8,
 "R3_laengs_m": 20,
-"R3_quer_pct": 11,
+"R3_quer_pct": 10,
 "R3_woelb_m": 10,
 "R5_loch": 4,
 "R6_wasser_schnee": 4,
@@ -14,7 +14,7 @@
 "G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 35,
-"G6_facette": 213,
+"G6_facette": 214,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
 "T1_fleckrand": 1,
@@ -196,13 +196,6 @@
 },
 {
 "regel": "R2_getrennt",
-"feld": "G2",
-"x": 270.9,
-"z": 62.2,
-"wert": 1588
-},
-{
-"regel": "R2_getrennt",
 "feld": "C1",
 "x": 91.3,
 "z": 38.8,
@@ -296,7 +289,7 @@
 "feld": "D1",
 "x": 146.4,
 "z": 29.2,
-"wert": 77.3,
+"wert": 69.1,
 "weg": "rampe_2"
 },
 {
@@ -304,7 +297,7 @@
 "feld": "D1",
 "x": 146.4,
 "z": 29.2,
-"wert": 1.16,
+"wert": 1.282,
 "weg": "rampe_2"
 },
 {
@@ -312,7 +305,7 @@
 "feld": "D1",
 "x": 150.3,
 "z": 28.7,
-"wert": 99.1,
+"wert": 90.0,
 "weg": "rampe_2"
 },
 {
@@ -328,7 +321,7 @@
 "feld": "D1",
 "x": 150.3,
 "z": 28.7,
-"wert": 1.793,
+"wert": 1.694,
 "weg": "rampe_2"
 },
 {
@@ -336,7 +329,7 @@
 "feld": "D1",
 "x": 154.3,
 "z": 28.2,
-"wert": 16.0,
+"wert": 6.5,
 "weg": "rampe_2"
 },
 {
@@ -344,7 +337,7 @@
 "feld": "D1",
 "x": 154.3,
 "z": 28.2,
-"wert": 0.153,
+"wert": 0.469,
 "weg": "rampe_2"
 },
 {
@@ -464,7 +457,7 @@
 "feld": "D1",
 "x": 154.5,
 "z": 16.6,
-"wert": 19.0,
+"wert": 21.7,
 "weg": "rampe_8"
 },
 {
@@ -472,7 +465,7 @@
 "feld": "D1",
 "x": 154.5,
 "z": 16.6,
-"wert": 0.194,
+"wert": 0.233,
 "weg": "rampe_8"
 },
 {
@@ -480,7 +473,7 @@
 "feld": "D1",
 "x": 157.5,
 "z": 19.1,
-"wert": 17.9,
+"wert": 21.1,
 "weg": "rampe_8"
 },
 {
@@ -488,15 +481,7 @@
 "feld": "D1",
 "x": 157.5,
 "z": 19.1,
-"wert": 0.17,
-"weg": "rampe_8"
-},
-{
-"regel": "R3_quer_pct",
-"feld": "D1",
-"x": 155.6,
-"z": 22.6,
-"wert": 6.0,
+"wert": 0.272,
 "weg": "rampe_8"
 },
 {
@@ -504,7 +489,7 @@
 "feld": "D1",
 "x": 153.7,
 "z": 26.1,
-"wert": 58.2,
+"wert": 62.2,
 "weg": "rampe_8"
 },
 {
@@ -520,7 +505,7 @@
 "feld": "D1",
 "x": 153.7,
 "z": 26.1,
-"wert": 1.774,
+"wert": 1.653,
 "weg": "rampe_8"
 },
 {
@@ -528,7 +513,7 @@
 "feld": "D1",
 "x": 151.8,
 "z": 29.6,
-"wert": 99.3,
+"wert": 100.6,
 "weg": "rampe_8"
 },
 {
@@ -544,7 +529,7 @@
 "feld": "D1",
 "x": 151.8,
 "z": 29.6,
-"wert": 1.56,
+"wert": 1.551,
 "weg": "rampe_8"
 },
 {
@@ -552,7 +537,7 @@
 "feld": "D1",
 "x": 150.4,
 "z": 33.1,
-"wert": 23.4,
+"wert": 21.4,
 "weg": "rampe_8"
 },
 {
@@ -560,7 +545,7 @@
 "feld": "D1",
 "x": 150.4,
 "z": 33.1,
-"wert": 0.233,
+"wert": 0.264,
 "weg": "rampe_8"
 },
 {
@@ -1025,9 +1010,16 @@
 {
 "regel": "G6_facette",
 "feld": "D1",
-"x": 145.6,
-"z": 19.2,
-"wert": 20
+"x": 146.1,
+"z": 17.5,
+"wert": 6
+},
+{
+"regel": "G6_facette",
+"feld": "D1",
+"x": 145.2,
+"z": 20.0,
+"wert": 12
 },
 {
 "regel": "G6_facette",
@@ -1053,9 +1045,9 @@
 {
 "regel": "G6_facette",
 "feld": "D1",
-"x": 157.4,
-"z": 24.2,
-"wert": 10
+"x": 159.0,
+"z": 22.9,
+"wert": 6
 },
 {
 "regel": "G6_facette",
@@ -1063,6 +1055,13 @@
 "x": 185.2,
 "z": 23.8,
 "wert": 8
+},
+{
+"regel": "G6_facette",
+"feld": "E1",
+"x": 184.2,
+"z": 27.8,
+"wert": 9
 },
 {
 "regel": "G6_facette",
@@ -2270,13 +2269,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "G6",
-"x": 287.2,
-"z": 221.2,
-"wert": 10
-},
-{
-"regel": "G6_facette",
 "feld": "C6",
 "x": 120.6,
 "z": 221.5,
@@ -2285,7 +2277,7 @@
 {
 "regel": "G6_facette",
 "feld": "G6",
-"x": 283.8,
+"x": 283.6,
 "z": 222.3,
 "wert": 10
 },
@@ -2525,14 +2517,14 @@
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.621
+"wert": 0.607
 },
 {
 "regel": "G7b_wandkontur_kantenschaerfe",
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.549
+"wert": 0.529
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2623,7 +2615,7 @@
 "feld": "D1",
 "x": 147,
 "z": 21,
-"wert": 0.639
+"wert": 0.515
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2658,7 +2650,7 @@
 "feld": "E1",
 "x": 189,
 "z": 21,
-"wert": 0.74
+"wert": 0.677
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2735,7 +2727,7 @@
 "feld": "H6",
 "x": 315,
 "z": 236,
-"wert": 0.63
+"wert": 0.596
 }
 ]
 }
