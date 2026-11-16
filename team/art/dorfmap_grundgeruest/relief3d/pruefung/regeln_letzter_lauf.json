@@ -2457,14 +2457,14 @@
 "feld": "B3",
 "x": 63,
 "z": 107,
-"wert": 0.359
+"wert": 0.349
 },
 {
 "regel": "G7b_wandkontur_feld",
 "feld": "B4",
 "x": 63,
 "z": 150,
-"wert": 0.369
+"wert": 0.367
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2485,14 +2485,14 @@
 "feld": "C3",
 "x": 105,
 "z": 107,
-"wert": 0.349
+"wert": 0.346
 },
 {
 "regel": "G7b_wandkontur_feld",
 "feld": "C4",
 "x": 105,
 "z": 150,
-"wert": 0.408
+"wert": 0.407
 },
 {
 "regel": "G7b_wandkontur_feld",

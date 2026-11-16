@@ -1,0 +1,65 @@
+{
+ "geaenderte_vertices": 113,
+ "gb": 113,
+ "wv": 0,
+ "vc": 0,
+ "zellweite_m": 1.2,
+ "je_flaeche": {
+  "weg_vektor": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 71.31,
+   "kleinster_abstand_m": 85.57
+  },
+  "kreuzung": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 69.59,
+   "kleinster_abstand_m": 83.51
+  },
+  "rampenkern": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 49.19,
+   "kleinster_abstand_m": 59.03
+  },
+  "WEGA_wege_bruecken": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 70.04,
+   "kleinster_abstand_m": 84.05
+  },
+  "D2": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 56.59,
+   "kleinster_abstand_m": 67.9
+  }
+ },
+ "wasser": {
+  "gb_unter_wasser_geaendert": 0,
+  "maske_gleich": true,
+  "wv_gleich": true,
+  "komponenten": [
+   7,
+   7
+  ],
+  "fill_holes_gleich": true,
+  "bett_ueber_spiegel_vorher_nachher": [
+   493,
+   493
+  ]
+ },
+ "D2_gb_sha256": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "D2_slice_sha": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "box_geaendert_zellen": [
+  80.5,
+  125.0,
+  86.0,
+  133.0
+ ],
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 126.1
+}
+{"fill_holes_diff_vertices": 0, "fill_holes_diff_box": null, "neues_wasser_gruppen_x_z_n": [], "wasser_entfernt": 0, "wv_alt_wasser_geaendert": 0, "wv_alt_wasser_geaendert_box": null}
+{"rampe_5_kleinster_abstand_zellen": 50.8, "rampe_5_kleinster_abstand_m": 60.9, "kachel_D4_D5_kleinster_abstand_zellen": 40.0, "kachel_D1_kleinster_abstand_zellen": 91.7, "aenderungen_in_D4_D5": 0, "mulde_159_22_9_kleinster_abstand_zellen": 126.1, "mulde_kleinster_abstand_m": 151.3, "mulde_abstand_zum_sperrkreis_r20_zellen": 106.1}

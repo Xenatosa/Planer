@@ -1,0 +1,31 @@
+{
+ "basis": "art/dorfmap-fertig @cc33fd1 (Stand nach Schritt 19 L3j)",
+ "basis_gb_wv_vc_sha256": "5ac12adbcd60504f9ca1b6891680dabd7770417cfec8e6777a650e27d81a5257",
+ "stellen": [
+  {
+   "id": "grat_84_129",
+   "art": "laengs_glatt",
+   "punkt": [
+    83.2,
+    129.0
+   ],
+   "r_kern": 2.0,
+   "r_fade": 2.5,
+   "sigma_vertices": 6.0,
+   "runden": 2,
+   "waende_frei": true,
+   "wand_abstand_vertices": 3.0,
+   "feinband": 1.0,
+   "notiz": "L3k: Versatz der Westkante/des Grats an der Kachelecke B3/C3/B4/C4 (Kante x~84 bis z 130, dann Sprung nach x~81,5 bei z 132) - entlang der Gratrichtung glaetten",
+   "richtung": [
+    -3.4,
+    9.0
+   ],
+   "wand_fade_vertices": 3.0,
+   "feinband_ab_m": 0.01,
+   "halblaenge": 0.0,
+   "nicht_senken_ueber_m": 9.0,
+   "nur_ueber_m": 3.0
+  }
+ ]
+}
