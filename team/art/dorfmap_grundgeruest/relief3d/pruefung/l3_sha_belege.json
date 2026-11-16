@@ -1,0 +1,127 @@
+{
+ "G": {
+  "vorher": "d7db7b469d920925dce6bf512eb5141c447d316e2b3fe090194000f2e0b32769",
+  "nachher": "d7db7b469d920925dce6bf512eb5141c447d316e2b3fe090194000f2e0b32769"
+ },
+ "WV": {
+  "vorher": "976ddf0e71a0eb255bfb83caf1c1f1b52dd10969996a526427d4a95350cf7b0c",
+  "nachher": "976ddf0e71a0eb255bfb83caf1c1f1b52dd10969996a526427d4a95350cf7b0c"
+ },
+ "WEGA": {
+  "vorher": "d4067ef282df49c6e92430eb8820dc10ebaec90a4d55b6a866eb4388a03bc48a",
+  "nachher": "d4067ef282df49c6e92430eb8820dc10ebaec90a4d55b6a866eb4388a03bc48a"
+ },
+ "wege": {
+  "vorher": "9b718f37ae2d743c026ce6252f3026b3ffc30d7977f0b8f8ac622240aee51a5e",
+  "nachher": "9b718f37ae2d743c026ce6252f3026b3ffc30d7977f0b8f8ac622240aee51a5e"
+ },
+ "bruecken": {
+  "vorher": "5e48b84d94877b7a14964f9723acad16a97ba85d9b28d060ba9dc538734fc7ea",
+  "nachher": "5e48b84d94877b7a14964f9723acad16a97ba85d9b28d060ba9dc538734fc7ea"
+ },
+ "rampenwege": {
+  "vorher": "ecdd9434432f2f5bf7861ea15181ef9cd1cc63786321854bd6287ec9afff5208",
+  "nachher": "ecdd9434432f2f5bf7861ea15181ef9cd1cc63786321854bd6287ec9afff5208"
+ },
+ "haeuser": {
+  "vorher": "ee2b7aafe33abdecf4aea9c761b59dbc7126ba9331b80153a32c25aa351efe91",
+  "nachher": "ee2b7aafe33abdecf4aea9c761b59dbc7126ba9331b80153a32c25aa351efe91"
+ },
+ "start": {
+  "vorher": "c589aac7fe1a5382684d41cc158f4015dc68802d3c18b2494af82f335682a1a6",
+  "nachher": "c589aac7fe1a5382684d41cc158f4015dc68802d3c18b2494af82f335682a1a6"
+ },
+ "spalten": {
+  "vorher": "be34d4ff4bac989e0cd912cd8ace29b1674874f8f69ab210fcbbeccf8498f29d",
+  "nachher": "be34d4ff4bac989e0cd912cd8ace29b1674874f8f69ab210fcbbeccf8498f29d"
+ },
+ "ug": {
+  "vorher": "aa2492d8c7b2a4fe80e106b446fa483b8ce78c177c4140fdc310955ecb360ee5",
+  "nachher": "aa2492d8c7b2a4fe80e106b446fa483b8ce78c177c4140fdc310955ecb360ee5"
+ },
+ "GB": {
+  "vorher": "ae279bc21c9d04ebd6ac9bcddb7c5f3f50ba08bd061c88a4347cb574f49b37ef",
+  "nachher": "2e63683df5cf6563315029368817211b5614e257a726e3302c12aa362f403b25",
+  "vertices_geaendert": 20061,
+  "max_abs_m": 3.2226924896240234
+ },
+ "D2_GB_87x85": {
+  "vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ },
+ "max_delta_wasser_vertices_m": 0.0,
+ "max_delta_wegzellen_WEGA_m": 0.0,
+ "max_delta_rampenkern_1_8m": 0.0,
+ "vektor_kreuzungsflaechen_vertices": 17644,
+ "vektor_max_delta_kreuzung_m": 0.0,
+ "vektor_vektor_wege_vertices": 19272,
+ "vektor_max_delta_vektor_wege_m": 0.0,
+ "neu/vektor.json": {
+  "vorher": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+  "nachher": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e"
+ },
+ "neu/zellen_relief.csv": {
+  "vorher": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa",
+  "nachher": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa"
+ },
+ "neu/felder.json": {
+  "vorher": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+  "nachher": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435"
+ },
+ "neu/felder.npz": {
+  "vorher": "64db8aac398fe627ee92935b662a0106d983337f57dd1b0412a7c3f5561fa41a",
+  "nachher": "64db8aac398fe627ee92935b662a0106d983337f57dd1b0412a7c3f5561fa41a"
+ },
+ "zellen_relief.csv": {
+  "vorher": "36f6763bab5ed57a2838b966d8f1b444c22f8c1f2ad59d79069b8566d6c6a283",
+  "nachher": "36f6763bab5ed57a2838b966d8f1b444c22f8c1f2ad59d79069b8566d6c6a283"
+ },
+ "pruefung/pruefe_regeln.py": {
+  "vorher": "f9ef4a470703480d5b7d94ee0e6de9e664289addc426723cfdc8bbf579dd4481",
+  "nachher": "f9ef4a470703480d5b7d94ee0e6de9e664289addc426723cfdc8bbf579dd4481"
+ },
+ "pruefung/r8_kreuzung.py": {
+  "vorher": "f7a667c12006aff3f04b1f898b3710969006d2c197525bc3e35468f818d25f03",
+  "nachher": "f7a667c12006aff3f04b1f898b3710969006d2c197525bc3e35468f818d25f03"
+ },
+ "pruefung/r9_form.py": {
+  "vorher": "4ea6f10e1daccc7a287ed0f63e02bff9e185f36b3f34d4f582d06c6cbc4922a4",
+  "nachher": "4ea6f10e1daccc7a287ed0f63e02bff9e185f36b3f34d4f582d06c6cbc4922a4"
+ },
+ "pruefung/w1_wand.py": {
+  "vorher": "fe8a200a54e8b24563f51a41d5d4fdf614cd1a3ece5b104bbcb3898fbfb0b9c8",
+  "nachher": "fe8a200a54e8b24563f51a41d5d4fdf614cd1a3ece5b104bbcb3898fbfb0b9c8"
+ },
+ "pruefung/export_gate.sh": {
+  "vorher": "a505281cf71e80e4d46257b151bf9319a390a7f7a9a9c9a84e7db958630873d0",
+  "nachher": "a505281cf71e80e4d46257b151bf9319a390a7f7a9a9c9a84e7db958630873d0"
+ },
+ "pruefung/loch_o18g.js": {
+  "vorher": "2d1119eced25d7a408f4d4fd5884df1fb7d873f7c099c37d8fb14525f40dd049",
+  "nachher": "2d1119eced25d7a408f4d4fd5884df1fb7d873f7c099c37d8fb14525f40dd049"
+ },
+ "prototypen": {
+  "D2": {
+   "height_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+   "height_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+   "mesh_vorher": "cbaaa85b2716137aa1960d867f96d0280432181e9a067129234f47aa5f794145",
+   "mesh_nachher": "cbaaa85b2716137aa1960d867f96d0280432181e9a067129234f47aa5f794145"
+  },
+  "G1": {
+   "height_vorher": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
+   "height_nachher": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
+   "mesh_vorher": "81f6a7e869d13f590d548a7eb1a64b4abb87212613ae064b6bf204c7ca0e54e0",
+   "mesh_nachher": "81f6a7e869d13f590d548a7eb1a64b4abb87212613ae064b6bf204c7ca0e54e0"
+  },
+  "D1": {
+   "height_vorher": "6838b44c59453cfc01c8ec865482dba8ad351df9d639497ef3fe1f27ebda17fe",
+   "height_nachher": "60d9e4a579a26d5fa72360fab02d46a1ca62ef9ec1de4e1bc0f3aa4fa5521d58",
+   "mesh_vorher": "f92586b429fd4ab9a7f40daad7504e1723769279b92cb75e917f8e74272aa386",
+   "mesh_nachher": "32924e9814d6de72203350fae54a304128e22554c225b615dfff3c31543d2a18"
+  }
+ },
+ "waende_relief_neu": {
+  "vorher": "7ecb1a08494031023965c8a0be085def903942565997e84de950375b017ae360",
+  "nachher": "39736eba22b9a162912d8905409e4b48266faadbc18a4d085dac013844af9bab"
+ }
+}
