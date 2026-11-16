@@ -46,6 +46,10 @@
 #      auf den Ring, Basis-Hash GB+VC = Stand nach 15, Rueckweg relief_p2e.py --aus mit pruefung/p2_analyse/p2e/p2e_rueck.npz),
 #      html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf. Nebenausgaben p2e_rueck.npz + p2e_bericht.json werden mitverglichen.
 #      P2E=0 laesst Schritt 16 weg; P2E folgt standardmaessig L3F.
+#  17 L3h (ERGEBNIS_L3h, QA P4e S3/S4): relief_l3h.py (E3-Bach Bett im Kern tiefer + Bett-VC kraeftiger, E4-Bach Rinne breiter/flacher +
+#      Ufer-VC weich; Basis-Hash = Stand nach 16, Sperrzonen D1/Mulde/D4-D5 rampe_5 im Skript, Rueckweg relief_l3h.py --aus mit
+#      pruefung/l3h/l3h_rueck.npz), html_payload_p3.py, waende_einsetzen.py. Nebenausgaben l3h_rueck.npz + l3h_bericht.json werden mitverglichen.
+#      L3H=0 laesst Schritt 17 weg; L3H folgt standardmaessig P2E.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -97,6 +101,9 @@ if [ "$L3F" != 0 ] && [ "$P2D" = 0 ]; then echo "L3F braucht Schritt 14 (P2D=0 u
 P2E=${P2E:-$L3F}
 if [ "$P2E" != 0 ] && [ "$L3F" = 0 ]; then echo "P2E braucht Schritt 15 (L3F=0 und P2E=1 geht nicht)"; exit 2; fi
 [ "$P2E" = 0 ] || AUSGABEN="$AUSGABEN pruefung/p2_analyse/p2e/p2e_rueck.npz pruefung/p2_analyse/p2e/p2e_bericht.json"
+L3H=${L3H:-$P2E}
+if [ "$L3H" != 0 ] && [ "$P2E" = 0 ]; then echo "L3H braucht Schritt 16 (P2E=0 und L3H=1 geht nicht)"; exit 2; fi
+[ "$L3H" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3h/l3h_rueck.npz pruefung/l3h/l3h_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -236,6 +243,14 @@ python3 relief_p2e.py > "$AUS/16_p2e.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/16_p2e.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/16_p2e.log" 2>&1
 z p2e $t
+fi
+# 17) L3h (ERGEBNIS_L3h): eigener Basis-Hash im Skript, Rueckweg pruefung/l3h/l3h_rueck.npz (relief_l3h.py --aus).
+if [ "$L3H" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3h.py > "$AUS/17_l3h.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/17_l3h.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/17_l3h.log" 2>&1
+z l3h $t
 fi
 z gesamt_bau $T0
 

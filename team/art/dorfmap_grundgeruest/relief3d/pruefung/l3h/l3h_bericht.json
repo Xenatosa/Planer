@@ -1,0 +1,48 @@
+{
+ "stellen": [
+  {
+   "id": "E4_rinne",
+   "neue_wasser_vertices": 47,
+   "davon_ecken": 0,
+   "gb_vertices": 975,
+   "gb_max_m": 0.477,
+   "altes_wasser_landseitig": 3
+  },
+  {
+   "id": "E4_bett",
+   "gb_vertices": 143,
+   "gb_max_m": 0.404,
+   "vc_vertices": 668
+  },
+  {
+   "id": "E3_bett",
+   "gb_vertices": 350,
+   "gb_max_m": 0.386,
+   "vc_vertices": 1694
+  }
+ ],
+ "wasser_neu": 47,
+ "wasser_entfernt": 0,
+ "wasser_komponenten": [
+  9,
+  9
+ ],
+ "bett_ueber_spiegel": [
+  512,
+  506
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 1694,
+ "gb_vertices": 1334,
+ "gb_max_abs_m": 0.477,
+ "basis": "6d7bfd8a1eeffef8eb4d1044fabcff6a27a4e85877187fb45c993e6e8f96730d",
+ "nachher_sha256": "2422fb4bab50773fa54b05023962815bdc4d35977caca57923b993ccbd8bcd03",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 0,
+ "objekte_angepasst": 15,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}

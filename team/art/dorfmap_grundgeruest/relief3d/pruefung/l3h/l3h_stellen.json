@@ -1,0 +1,77 @@
+{
+ "basis": "art/dorfmap-fertig @f942124 (Stand nach Schritt 16 P2e)",
+ "basis_gb_wv_vc_sha256": "6d7bfd8a1eeffef8eb4d1044fabcff6a27a4e85877187fb45c993e6e8f96730d",
+ "hinweis": "L3h: QA P4e S3 (E3-Bach blass) und S4 (E4-Bach gezackter Uferrand). Sperrzonen D1, Mulde, D4/D5 (rampe_5) im Skript.",
+ "stellen": [
+  {
+   "id": "E4_rinne",
+   "art": "ufer",
+   "aktiv": true,
+   "x0": 170,
+   "x1": 185,
+   "z0": 135,
+   "z1": 153,
+   "fade_m": 3.0,
+   "sigma_vertices": 3.0,
+   "versatz_vertices": 1.5,
+   "band_vertices": 8.0,
+   "neigung_min_m": 0.15,
+   "linear_vertices": 2.5,
+   "tiefe_min_m": 0.3,
+   "notiz": "L3h (2): Rinnenmethode wie L3g/E3 v2 (Maske waechst nur, sanfte Boeschung)"
+  },
+  {
+   "id": "E4_bett",
+   "art": "bett_tiefer",
+   "aktiv": true,
+   "x0": 170,
+   "x1": 185,
+   "z0": 135,
+   "z1": 153,
+   "fade_m": 3.0,
+   "sigma_vertices": 1.0,
+   "d0": 0.8,
+   "d1": 2.5,
+   "tiefe_kern_m": 0.6,
+   "vc_mix": 0.5,
+   "vc_ton": [
+    125,
+    132,
+    132
+   ],
+   "vc_d0": 0.5,
+   "vc_d1": 2.5,
+   "vc_glatt_sigma": 2.0,
+   "vc_glatt_band": 4.0,
+   "laengs_sigma": 2.5,
+   "laengs_anteil": 0.7
+  },
+  {
+   "id": "E3_bett",
+   "art": "bett_tiefer",
+   "aktiv": true,
+   "x0": 180,
+   "x1": 197,
+   "z0": 92,
+   "z1": 122,
+   "fade_m": 3.0,
+   "sigma_vertices": 1.0,
+   "d0": 0.8,
+   "d1": 2.5,
+   "tiefe_kern_m": 0.55,
+   "vc_mix": 0.55,
+   "vc_ton": [
+    125,
+    132,
+    132
+   ],
+   "vc_d0": -0.5,
+   "vc_d1": 2.5,
+   "notiz": "L3h (1): Bett im Kern bis 0,7 m unter Spiegel, Ufer-Vertex bleibt; Bett-VC Richtung Seeboden-Ton (G7-See 125|130|129), Gewicht ueber geglaettetes Abstandsfeld",
+   "laengs_sigma": 4.0,
+   "laengs_anteil": 1.0,
+   "vc_glatt_sigma": 1.5,
+   "vc_glatt_band": 3.0
+  }
+ ]
+}

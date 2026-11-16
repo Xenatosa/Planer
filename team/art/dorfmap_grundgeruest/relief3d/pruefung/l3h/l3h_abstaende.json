@@ -1,0 +1,149 @@
+{
+ "geaenderte_vertices": 2008,
+ "gb": 1334,
+ "wv": 47,
+ "vc": 1694,
+ "zellweite_m": 1.2,
+ "je_flaeche": {
+  "weg_vektor": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "kreuzung": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "rampenkern": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 32.06,
+   "kleinster_abstand_m": 38.47
+  },
+  "WEGA_wege_bruecken": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "D2": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 17.95,
+   "kleinster_abstand_m": 21.54
+  }
+ },
+ "wasser": {
+  "gb_unter_wasser_geaendert": 488,
+  "maske_gleich": false,
+  "wv_gleich": false,
+  "komponenten": [
+   9,
+   9
+  ],
+  "fill_holes_gleich": false,
+  "bett_ueber_spiegel_vorher_nachher": [
+   512,
+   506
+  ]
+ },
+ "D2_gb_sha256": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "D2_slice_sha": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "box_geaendert_zellen": [
+  168.5,
+  89.5,
+  193.0,
+  155.5
+ ],
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 72.1,
+ "wasser_detail": {
+  "fill_holes_diff_vertices": 47,
+  "fill_holes_diff_box": [
+   173.5,
+   134.0,
+   179.5,
+   153.5
+  ],
+  "neues_wasser_gruppen_x_z_n": [
+   [
+    176.5,
+    134.0,
+    1
+   ],
+   [
+    178.8,
+    135.5,
+    10
+   ],
+   [
+    176.0,
+    136.0,
+    5
+   ],
+   [
+    177.5,
+    138.0,
+    1
+   ],
+   [
+    177.0,
+    139.0,
+    1
+   ],
+   [
+    175.5,
+    142.0,
+    1
+   ],
+   [
+    177.0,
+    143.5,
+    1
+   ],
+   [
+    174.9,
+    145.5,
+    7
+   ],
+   [
+    176.2,
+    147.0,
+    5
+   ],
+   [
+    174.0,
+    148.5,
+    3
+   ],
+   [
+    175.1,
+    151.0,
+    9
+   ],
+   [
+    173.5,
+    150.0,
+    1
+   ],
+   [
+    173.5,
+    153.2,
+    2
+   ]
+  ],
+  "wasser_entfernt": 0,
+  "wv_alt_wasser_geaendert": 0,
+  "wv_alt_wasser_geaendert_box": null
+ },
+ "sperrzonen_l3h": {
+  "rampe_5_kleinster_abstand_zellen": 33.6,
+  "rampe_5_kleinster_abstand_m": 40.3,
+  "kachel_D4_D5_kleinster_abstand_zellen": 0.5,
+  "kachel_D1_kleinster_abstand_zellen": 50.2,
+  "aenderungen_in_D4_D5": 0
+ }
+}

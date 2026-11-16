@@ -1,6 +1,6 @@
 {
-"summe": 367,
-"summe_ohne_ausnahmen": 367,
+"summe": 363,
+"summe_ohne_ausnahmen": 363,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -14,10 +14,9 @@
 "G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 34,
-"G6_facette": 212,
+"G6_facette": 209,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
-"T1_fleckrand": 1,
 "T2_textur_abgeschnitten_bildpruefung_offen": 1,
 "T3_streifen_ringe_bildpruefung_offen": 1,
 "T4_graue_flussstreifen_bildpruefung_offen": 1,
@@ -1602,9 +1601,9 @@
 {
 "regel": "G6_facette",
 "feld": "E4",
-"x": 175.7,
-"z": 134.8,
-"wert": 9
+"x": 175.0,
+"z": 135.4,
+"wert": 12
 },
 {
 "regel": "G6_facette",
@@ -1640,13 +1639,6 @@
 "x": 127.3,
 "z": 140.4,
 "wert": 18
-},
-{
-"regel": "G6_facette",
-"feld": "E4",
-"x": 175.6,
-"z": 140.2,
-"wert": 9
 },
 {
 "regel": "G6_facette",
@@ -1759,20 +1751,6 @@
 "x": 68.4,
 "z": 151.4,
 "wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "E4",
-"x": 175.0,
-"z": 151.5,
-"wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "E4",
-"x": 173.0,
-"z": 152.7,
-"wert": 6
 },
 {
 "regel": "G6_facette",
@@ -2431,13 +2409,6 @@
 "x": 22.5,
 "z": 49.1,
 "wert": 876
-},
-{
-"regel": "T1_fleckrand",
-"feld": "E4",
-"x": 175.0,
-"z": 144.2,
-"wert": 8
 },
 {
 "regel": "T2_textur_abgeschnitten_bildpruefung_offen",
