@@ -1,6 +1,6 @@
 # ERGEBNIS L3h – E3-Bach kräftiger, E4-Bach glatter Uferrand (QA P4e S3/S4) – Basis art/dorfmap-fertig @ f942124 (nach #37 P2e)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 18:45–@@ENDE@@
+Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02
 
 Worktree /workspace/wt_dorfmap_L3h, Branch art/dorfmap-L3h. Start auf bfe8dce, entwickelt dort (v1–v3). Nach Merge von #37 (P2e, Wege & Deko) auf den neuen
 Kopf **f942124** gesetzt (Branch war noch nicht gepusht, kein Force-Push nötig): Code/Konfig übernommen, **Binärdaten über die Pipeline neu gebaut**
@@ -39,7 +39,7 @@ Land überflutet nur durch die gewollte Rinnenverbreiterung E4.
 
 ## bau_endstand.sh
 Schritt 17 (relief_l3h.py → html_payload_p3.py → waende_einsetzen.py), Nebenausgaben l3h_rueck.npz + l3h_bericht.json mitverglichen, `L3H=0` schaltet ab (L3H folgt P2E; L3H=1 mit P2E=0 bricht ab).
-Volllauf auf dem Endstand (f942124 + L3h): @@BAU@@
+Volllauf auf dem Endstand (f942124 + L3h): **ENDBAU BITGLEICH (839 s)**, 37/37 Ausgaben gleich (inkl. p2e_rueck/bericht und l3h_rueck/bericht), Schritt 16 p2e 12 s, Schritt 17 l3h 12 s.
 
 ## Rückweg
 `relief_l3h.py --aus` + html_payload_p3 + waende_einsetzen → relief_daten 3e37ea58…, relief_neu 3069a0ef…, index 976a4cb1… = exakt f942124 (geprüft), danach wieder Commit-Stand.
