@@ -1,3 +1,582 @@
+.EEEEEFEEF..F.FF.F..F...........                                         [100%]
+==================================== ERRORS ====================================
+_______________ ERROR at setup of test_kreuzung_d1_g1_mesh_stufe _______________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+_________ ERROR at setup of test_wegende_d1_g1_meshmessung_verbessert __________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+________ ERROR at setup of test_wegende_allgemein_mesh_ohne_blindenden _________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+____________ ERROR at setup of test_delle_g1_278_5_27_0_hoehenfeld _____________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+________________ ERROR at setup of test_saegezahn_d1_mesh_count ________________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+____________ ERROR at setup of test_d2_control_remains_out_of_r8_r9 ____________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+_______________ ERROR at setup of test_wegende_f1_c1_meshmessung _______________
+
+tmp_path_factory = TempPathFactory(_given_basetemp=None, _trace=<pluggy._tracing.TagTracerSub object at 0x7ff14048a060>, _basetemp=PosixPath('/tmp/pytest-of-box/pytest-9'), _retention_count=3, _retention_policy='all')
+
+    @pytest.fixture(scope="module")
+    def mesh_gate_inputs(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, Path]:
+        root = tmp_path_factory.mktemp("mesh-gates")
+        control, candidate = root / "control.json.gz", root / "candidate.json.gz"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--variant", "0", "--out", str(control)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert control.exists(), "Neu-Mesh-Adapter hat Kontrollvariante 0 nicht geschrieben"
+        result = subprocess.run(
+            [sys.executable, str(ADAPTER), "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"),
+             "--out", str(candidate)],
+            cwd=RELIEF3D,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 271, in <module>
+E             main()
+E             ~~~~^^
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 257, in main
+E             metadata = adapt_files(args.source, args.mesh, args.out)
+E           File "/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py", line 241, in adapt_files
+E             raise ValueError("Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle")
+E         ValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/ne...u aus der angegebenen Reliefquelle")\nValueError: Meshpaket stammt nicht bytegenau aus der angegebenen Reliefquelle\n').returncode
+
+neu/tests/test_beanstandungen.py:55: AssertionError
+=================================== FAILURES ===================================
+___________________ test_verwaschene_wand_d1_kantenschaerfe ____________________
+
+    def test_verwaschene_wand_d1_kantenschaerfe() -> None:
+        image = np.asarray(Image.open(NEG / "wand_D1_ton.png").convert("L"), dtype=float)
+        # Fixed wall crop of the D1 Fabian render; 90th-percentile edge gradient.
+        crop = image[400:720, 500:900]
+        gy, gx = np.gradient(crop)
+        edge = float(np.percentile(np.hypot(gx, gy), 90))
+>       assert edge >= 3.0, f"ROT: D1-Wandkantenstaerke {edge:.2f} Graustufen/Pixel; Grenze 3.00"
+E       AssertionError: ROT: D1-Wandkantenstaerke 2.24 Graustufen/Pixel; Grenze 3.00
+E       assert 2.23606797749979 >= 3.0
+
+neu/tests/test_beanstandungen.py:123: AssertionError
+_______________________ test_schattenartefakt_renderbild _______________________
+
+    def test_schattenartefakt_renderbild() -> None:
+        image = np.asarray(Image.open(NEG / "saege_D1_schatten_an.png").convert("L"), dtype=float)
+        # Fixed camera crop from the paired Fabian shadow comparison.
+        crop = image[300:600, 500:1050]
+        residual = np.abs(crop - gaussian_filter(crop, sigma=1.0))
+        score = float(residual.mean())
+>       assert score <= 0.25, f"ROT: Schattenbild-Hochfrequenz {score:.3f}; Grenze 0.25 Graustufen"
+E       AssertionError: ROT: Schattenbild-Hochfrequenz 0.307; Grenze 0.25 Graustufen
+E       assert 0.3067280786271658 <= 0.25
+
+neu/tests/test_beanstandungen.py:153: AssertionError
+_ test_profile_mesh_changes_only_d1_and_g1_and_preserves_cliff_and_tile_edges __
+
+    def test_profile_mesh_changes_only_d1_and_g1_and_preserves_cliff_and_tile_edges():
+        source, vector, fields = _inputs()
+        for tile in ("D1", "G1"):
+>           candidate, stats = terrain_heights(source, tile, vector, fields, "2")
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+neu/tests/test_gelaende_mesh.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+neu/mesh.py:3008: in terrain_heights
+    crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
+neu/mesh.py:2755: in _apply_ramp_crossing_planes
+    return _apply_d1_full_crossing(
+neu/mesh.py:1920: in _apply_d1_full_crossing
+    solved, solver_info = _load_p3d17_joint_solution(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+source = ReliefSource(data={'nx': 336, 'ny': 303, 'G': 'AABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQA...hape=(607, 673), dtype=float32), source_file_sha256='4973373fabd45ba40f7b8d03287f43dc3adcda016e0c131d0e82170e947dfb89')
+profiles = [{'index': 2, 'stations': array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ,  1.25,  1.5 ,  1.75,  2.  ,
+        2.25,  2.5 ,  ... ],
+       [185.532,  43.344],
+       [186.3  ,  43.908],
+       [187.068,  44.472],
+       [187.8  ,  45.   ]]), ...}]
+solution_file = 'p3d18_joint_mesh_v24.json'
+
+    def _load_p3d17_joint_solution(
+        source: ReliefSource, profiles: list[dict[str, Any]], solution_file: str,
+    ) -> tuple[list[np.ndarray], dict[str, Any]]:
+        path = Path(__file__).with_name(solution_file)
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("source_relief_sha256") != P3D17_LOESUNG_HERKUNFT_SHA256:
+            raise RuntimeError("p3d17 Rasterloesung hat unerwartete Herkunft (source_relief_sha256)")
+        if source.source_file_sha256 != P3D17_QUELLE_SOLL_SHA256:
+>           raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
+E           RuntimeError: p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle
+
+neu/mesh.py:3085: RuntimeError
+__________________ test_variant_2_is_active_targeted_profile ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7ff1101243e0>
+
+    def test_variant_2_is_active_targeted_profile(monkeypatch):
+        # P11b: Standard ist jetzt Variante 0 (Endstand); Variante 2 wird hier explizit gewaehlt,
+        # die Pruefungen unten sind unveraendert.
+        monkeypatch.delenv("RELIEF_GELAENDE_VAR", raising=False)
+>       manifest = build_manifest(
+            RELIEF3D / "relief_daten.json.gz",
+            RELIEF3D / "zellen_relief.csv",
+            RELIEF3D / "neu" / "vektor.json",
+            RELIEF3D / "neu" / "felder.npz",
+            variant="2",
+        )
+
+neu/tests/test_gelaende_mesh.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+neu/mesh.py:329: in build_manifest
+    heights, info = terrain_heights(source, tile, vector, fields, variant)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+neu/mesh.py:3008: in terrain_heights
+    crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
+neu/mesh.py:2755: in _apply_ramp_crossing_planes
+    return _apply_d1_full_crossing(
+neu/mesh.py:1920: in _apply_d1_full_crossing
+    solved, solver_info = _load_p3d17_joint_solution(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+source = ReliefSource(data={'nx': 336, 'ny': 303, 'G': 'AABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQA...hape=(607, 673), dtype=float32), source_file_sha256='4973373fabd45ba40f7b8d03287f43dc3adcda016e0c131d0e82170e947dfb89')
+profiles = [{'index': 2, 'stations': array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ,  1.25,  1.5 ,  1.75,  2.  ,
+        2.25,  2.5 ,  ... ],
+       [185.532,  43.344],
+       [186.3  ,  43.908],
+       [187.068,  44.472],
+       [187.8  ,  45.   ]]), ...}]
+solution_file = 'p3d18_joint_mesh_v24.json'
+
+    def _load_p3d17_joint_solution(
+        source: ReliefSource, profiles: list[dict[str, Any]], solution_file: str,
+    ) -> tuple[list[np.ndarray], dict[str, Any]]:
+        path = Path(__file__).with_name(solution_file)
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("source_relief_sha256") != P3D17_LOESUNG_HERKUNFT_SHA256:
+            raise RuntimeError("p3d17 Rasterloesung hat unerwartete Herkunft (source_relief_sha256)")
+        if source.source_file_sha256 != P3D17_QUELLE_SOLL_SHA256:
+>           raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
+E           RuntimeError: p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle
+
+neu/mesh.py:3085: RuntimeError
+___________ test_both_profile_options_are_deterministic_and_distinct ___________
+
+    def test_both_profile_options_are_deterministic_and_distinct():
+        source, vector, fields = _inputs()
+        for tile in ("D1", "G1"):
+            full, full_stats = terrain_heights(source, tile, vector, fields, "1")
+>           targeted, targeted_stats = terrain_heights(source, tile, vector, fields, "2")
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+neu/tests/test_gelaende_mesh.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+neu/mesh.py:3008: in terrain_heights
+    crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
+neu/mesh.py:2755: in _apply_ramp_crossing_planes
+    return _apply_d1_full_crossing(
+neu/mesh.py:1920: in _apply_d1_full_crossing
+    solved, solver_info = _load_p3d17_joint_solution(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+source = ReliefSource(data={'nx': 336, 'ny': 303, 'G': 'AABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQA...hape=(607, 673), dtype=float32), source_file_sha256='4973373fabd45ba40f7b8d03287f43dc3adcda016e0c131d0e82170e947dfb89')
+profiles = [{'index': 2, 'stations': array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ,  1.25,  1.5 ,  1.75,  2.  ,
+        2.25,  2.5 ,  ... ],
+       [185.532,  43.344],
+       [186.3  ,  43.908],
+       [187.068,  44.472],
+       [187.8  ,  45.   ]]), ...}]
+solution_file = 'p3d18_joint_mesh_v24.json'
+
+    def _load_p3d17_joint_solution(
+        source: ReliefSource, profiles: list[dict[str, Any]], solution_file: str,
+    ) -> tuple[list[np.ndarray], dict[str, Any]]:
+        path = Path(__file__).with_name(solution_file)
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("source_relief_sha256") != P3D17_LOESUNG_HERKUNFT_SHA256:
+            raise RuntimeError("p3d17 Rasterloesung hat unerwartete Herkunft (source_relief_sha256)")
+        if source.source_file_sha256 != P3D17_QUELLE_SOLL_SHA256:
+>           raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
+E           RuntimeError: p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle
+
+neu/mesh.py:3085: RuntimeError
+_____ test_mesh_manifest_is_deterministic_and_keeps_sources_and_d2_locked ______
+
+    def test_mesh_manifest_is_deterministic_and_keeps_sources_and_d2_locked():
+        relief = RELIEF3D / "relief_daten.json.gz"
+        cells = RELIEF3D / "neu" / "zellen_relief.csv"
+        vector = RELIEF3D / "neu" / "vektor.json"
+        fields = RELIEF3D / "neu" / "felder.npz"
+    
+>       first = build_manifest(relief, cells, vector, fields, variant="2")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+neu/tests/test_gen_relief.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+neu/mesh.py:329: in build_manifest
+    heights, info = terrain_heights(source, tile, vector, fields, variant)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+neu/mesh.py:3008: in terrain_heights
+    crossing_weight, ramp_crossings = _apply_ramp_crossing_planes(
+neu/mesh.py:2755: in _apply_ramp_crossing_planes
+    return _apply_d1_full_crossing(
+neu/mesh.py:1920: in _apply_d1_full_crossing
+    solved, solver_info = _load_p3d17_joint_solution(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+source = ReliefSource(data={'nx': 336, 'ny': 303, 'G': 'AABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQAAYEEAAGBBAABgQQA...hape=(607, 673), dtype=float32), source_file_sha256='4973373fabd45ba40f7b8d03287f43dc3adcda016e0c131d0e82170e947dfb89')
+profiles = [{'index': 2, 'stations': array([ 0.  ,  0.25,  0.5 ,  0.75,  1.  ,  1.25,  1.5 ,  1.75,  2.  ,
+        2.25,  2.5 ,  ... ],
+       [185.532,  43.344],
+       [186.3  ,  43.908],
+       [187.068,  44.472],
+       [187.8  ,  45.   ]]), ...}]
+solution_file = 'p3d18_joint_mesh_v24.json'
+
+    def _load_p3d17_joint_solution(
+        source: ReliefSource, profiles: list[dict[str, Any]], solution_file: str,
+    ) -> tuple[list[np.ndarray], dict[str, Any]]:
+        path = Path(__file__).with_name(solution_file)
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if payload.get("source_relief_sha256") != P3D17_LOESUNG_HERKUNFT_SHA256:
+            raise RuntimeError("p3d17 Rasterloesung hat unerwartete Herkunft (source_relief_sha256)")
+        if source.source_file_sha256 != P3D17_QUELLE_SOLL_SHA256:
+>           raise RuntimeError("p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle")
+E           RuntimeError: p3d17 Rasterloesung passt nicht zur relief_daten.json.gz Quelle
+
+neu/mesh.py:3085: RuntimeError
+____________ test_mesh_gate_adapter_uses_visible_mesh_and_locks_d2 _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-box/pytest-9/test_mesh_gate_adapter_uses_vi0')
+
+    def test_mesh_gate_adapter_uses_visible_mesh_and_locks_d2(tmp_path: Path) -> None:
+        import subprocess
+        import sys
+    
+        output = tmp_path / "mesh-gates.json.gz"
+>       subprocess.run(
+            [sys.executable, str(RELIEF3D / "pruefung" / "neu_mesh_adapter.py"),
+             "--mesh", str(RELIEF3D / "neu" / "relief_neu.json.gz"), "--out", str(output)],
+            cwd=RELIEF3D,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+neu/tests/test_mesh_gate_adapter.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = None, check = True
+popenargs = (['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py', '...d/neu/relief_neu.json.gz', '--out', '/tmp/pytest-of-box/pytest-9/test_mesh_gate_adapter_uses_vi0/mesh-gates.json.gz'],)
+kwargs = {'cwd': PosixPath('/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d'), 'text': True, 'stdout': -1, 'stderr': -1}
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['/usr/bin/python3', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/pruefung/neu_mesh_adapter.py', '--mesh', '/workspace/wt_devui_p11/team/art/dorfmap_grundgeruest/relief3d/neu/relief_neu.json.gz', '--out', '/tmp/pytest-of-box/pytest-9/test_mesh_gate_adapter_uses_vi0/mesh-gates.json.gz']' returned non-zero exit status 1.
+
+/usr/lib/python3.13/subprocess.py:577: CalledProcessError
+=========================== short test summary info ============================
 FAILED neu/tests/test_beanstandungen.py::test_verwaschene_wand_d1_kantenschaerfe
 FAILED neu/tests/test_beanstandungen.py::test_schattenartefakt_renderbild - A...
 FAILED neu/tests/test_gelaende_mesh.py::test_profile_mesh_changes_only_d1_and_g1_and_preserves_cliff_and_tile_edges
@@ -12,4 +591,4 @@ ERROR neu/tests/test_beanstandungen.py::test_delle_g1_278_5_27_0_hoehenfeld
 ERROR neu/tests/test_beanstandungen.py::test_saegezahn_d1_mesh_count - Assert...
 ERROR neu/tests/test_beanstandungen.py::test_d2_control_remains_out_of_r8_r9
 ERROR neu/tests/test_beanstandungen.py::test_wegende_f1_c1_meshmessung - Asse...
-7 failed, 18 passed, 7 errors in 22.62s
+7 failed, 18 passed, 7 errors in 20.53s

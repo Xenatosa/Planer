@@ -1,6 +1,6 @@
 #!/bin/sh
 # P11: Ein-Befehl-Endbau. Erzeugt aus den Quelldaten in einem LEEREN Ausgabeordner alle Ausgaben des
-# Endstands (art/dorfmap-fertig, c6a3db0) und vergleicht sie per sha256 mit dem Repo-Stand.
+# Endstands (art/dorfmap-fertig, d5b17e2 = L3b) und vergleicht sie per sha256 mit dem Repo-Stand.
 #
 #   sh bau_endstand.sh [AUSGABE]          (Standard /tmp/relief3d_endstand; muss leer sein oder fehlen)
 #   UEBERNEHMEN=1 sh bau_endstand.sh ...  kopiert die gebauten Ausgaben danach ins Repo (sonst nur Vergleich)
@@ -10,16 +10,19 @@
 #   2 RELIEF_NEU=1 RELIEF_GELAENDE_VAR=0 python3 gen_relief.py vektor.json, felder, neu/zellen_relief.csv,
 #                                                             build.json, neu/relief_neu.json.gz (neu/pipeline.py)
 #   2a python3 gen_textur.py vc                               (Stand P11/dc257c9, Basis fuer L3)
-#   2b L3 (8cd6d37) wie entstanden: relief_l3.py in drei Runden (232f113, 3e68969, aktueller Stand), je Runde
-#      --aus der Vorrunde, anwenden, gen_textur.py vc. Grund: gen_textur.py vc ist nicht idempotent (VC/FW.c
-#      werden aus dem vorhandenen VC weichgezeichnet), daher haengen VC/FW.c von jeder vc-Runde der
-#      L3-Entwicklung ab; GB/Objekte/D1 haengen nur von der letzten Runde ab. Die beiden alten relief_l3.py
-#      und die damalige l3_stellen.json (in 232f113 und 3e68969 gleich, 253b914 aenderte Stellen 12/14/23) kommen per
-#      git show (sha256 geprueft).
+#   2b L3 (8cd6d37) wie entstanden: relief_l3.py in drei Runden (232f113, 3e68969, 8cd6d37), je Runde --aus der
+#      Vorrunde und anwenden, nach den ersten beiden je gen_textur.py vc. Grund: gen_textur.py vc ist nicht idempotent
+#      (VC/FW.c werden aus dem vorhandenen VC weichgezeichnet, Maske aus GB), daher haengen VC/FW.c von jeder vc-Runde
+#      der L3/L3b-Entwicklung ab; GB/WV/FW.h/Objekte/Prototypen haengen nur von der letzten Runde ab. Alle historischen
+#      relief_l3.py und l3_stellen.json kommen per git show (sha256 geprueft).
 #   3 python3 gen_textur.py vc                                P3 T1/FW.c in relief_daten + relief_neu
 #   4 RELIEF_NEU=1 python3 baue_html.py                       index.html + neu/index.html (Bundle + Daten)
 #   5 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py   NEU_GZ-Zeile (hier ohne Wirkung, Kontrolle)
 #   6 python3 pruefung/p10c/waende_einsetzen.py               Wandkoerper (P10e: 0) in relief_neu + index.html
+#     (bis hier = Endstand 8cd6d37)
+#   7 L3b (d5b17e2) wie entstanden: Runde e7dadd6 (ohne vc), dann je Runde vc -> waende -> payload; Runden e193584,
+#      9bb5d10, aktueller Stand (= 1b8a477). Aufruf relief_l3.py unveraendert (die L3b-Schalter wasser, fw_folgen,
+#      rampe_m, weg_rand_m stehen je Stelle in l3_stellen.json). Jede Runde einzeln gegen ihren Commit nachgemessen.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -79,22 +82,47 @@ t=$(date +%s); python3 gen_relief.py > "$AUS/1_gen_relief.log" 2>&1; z gen_relie
 t=$(date +%s); RELIEF_NEU=1 RELIEF_GELAENDE_VAR=0 python3 gen_relief.py > "$AUS/2_gen_relief_neu.log" 2>&1; z gen_relief_neu $t
 t=$(date +%s); python3 gen_textur.py vc > "$AUS/2a_gen_textur_vc.log" 2>&1; z gen_textur_vc_p11 $t
 t=$(date +%s); VOR=""
-for RUNDE in 232f113:8f0c96074a243934134e2f611096ec895a96d65f4e1c1d0713bb58361f21567d 3e68969:b3fbf5eaeb539ab589c502667c8d968d409a13a9aa6cfb1bbe90ff60bf307086; do
-  REV=${RUNDE%%:*}; H="$AUS/l3_runde_$REV"; mkdir -p "$H/pruefung"
-  (cd "$R" && git show "$REV:./relief_l3.py") > "$H/relief_l3.py"; echo "${RUNDE#*:}  $H/relief_l3.py" | sha256sum -c --quiet
+# l3_runde REV:SHA_PY:SHA_STELLEN  (historische relief_l3.py + l3_stellen.json per git show, sha256 geprueft;
+# --aus mit dem l3_rueck.npz der Vorrunde, dann anwenden). Arbeitet ueber Links auf relief_daten/neu der Arbeitskopie.
+l3_runde() {
+  REV=$(echo "$1" | cut -d: -f1); H="$AUS/l3_runde_$REV"; mkdir -p "$H/pruefung"
+  (cd "$R" && git show "$REV:./relief_l3.py") > "$H/relief_l3.py"; echo "$(echo "$1" | cut -d: -f2)  $H/relief_l3.py" | sha256sum -c --quiet
   (cd "$R" && git show "$REV:./pruefung/l3_stellen.json") > "$H/pruefung/l3_stellen.json"
-  echo "2f0fe77f355f77c8d549b2c1d1cc47fc522da1d651f991394ff0ed76510eaa5b  $H/pruefung/l3_stellen.json" | sha256sum -c --quiet
+  echo "$(echo "$1" | cut -d: -f3)  $H/pruefung/l3_stellen.json" | sha256sum -c --quiet
   ln -s "$B/neu" "$H/neu"; ln -s "$B/relief_daten.json.gz" "$H/relief_daten.json.gz"
   if [ -n "$VOR" ]; then mv "$VOR/pruefung/l3_rueck.npz" "$H/pruefung/"; python3 "$H/relief_l3.py" --aus >> "$AUS/2b_relief_l3.log" 2>&1; fi
-  python3 "$H/relief_l3.py" >> "$AUS/2b_relief_l3.log" 2>&1
-  python3 gen_textur.py vc >> "$AUS/2b_relief_l3.log" 2>&1; VOR=$H
+  python3 "$H/relief_l3.py" >> "$AUS/2b_relief_l3.log" 2>&1; VOR=$H
+}
+SF=2f0fe77f355f77c8d549b2c1d1cc47fc522da1d651f991394ff0ed76510eaa5b
+for RUNDE in 232f113:8f0c96074a243934134e2f611096ec895a96d65f4e1c1d0713bb58361f21567d:$SF \
+             3e68969:b3fbf5eaeb539ab589c502667c8d968d409a13a9aa6cfb1bbe90ff60bf307086:$SF; do
+  l3_runde "$RUNDE"; python3 gen_textur.py vc >> "$AUS/2b_relief_l3.log" 2>&1
 done
-mv "$VOR/pruefung/l3_rueck.npz" pruefung/; python3 relief_l3.py --aus >> "$AUS/2b_relief_l3.log" 2>&1
-python3 relief_l3.py >> "$AUS/2b_relief_l3.log" 2>&1; z relief_l3_runden $t
+l3_runde 8cd6d37:b3fbf5eaeb539ab589c502667c8d968d409a13a9aa6cfb1bbe90ff60bf307086:713999a13dab4c844dbeffbb015ddd0a20280016efe31696ebe6c1d2ed3b05e5
+z relief_l3_runden $t
 t=$(date +%s); python3 gen_textur.py vc > "$AUS/3_gen_textur_vc.log" 2>&1; z gen_textur_vc $t
 t=$(date +%s); NODE_DIR="$NODE_BAU" RELIEF_NEU=1 python3 baue_html.py > "$AUS/4_baue_html.log" 2>&1; z baue_html $t
 t=$(date +%s); python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py > "$AUS/5_html_payload_p3.log" 2>&1; z html_payload_p3 $t
 t=$(date +%s); python3 pruefung/p10c/waende_einsetzen.py > "$AUS/6_waende_einsetzen.log" 2>&1; z waende_einsetzen $t
+# 7) L3b (d5b17e2) wie entstanden: e7dadd6 anwenden (ohne vc), dann je Runde vc -> waende -> payload
+#    (ERGEBNIS_L3b "Pipeline"); e193584, 9bb5d10 und der aktuelle Stand (= 1b8a477) je --aus, anwenden, Pipeline.
+#    Die L3b-Schalter (wasser, fw_folgen, rampe_m, weg_rand_m, ...) stehen je Stelle in l3_stellen.json, kein CLI-Flag.
+t=$(date +%s)
+l3b_pipeline() {
+  python3 gen_textur.py vc >> "$AUS/7_l3b.log" 2>&1
+  python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/7_l3b.log" 2>&1
+  python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/7_l3b.log" 2>&1
+}
+l3_runde e7dadd6:ba1d747b22806a0885a85e7a990cbd6387da6825bf13d0427fba8fc6f85d3591:558185481df3344c64d2667c268028f73368deba783dbe73824ea8141b127c36
+l3b_pipeline
+l3_runde e193584:aaf9f624d61c32ada519f0bc7b76bec48eb3d9d9cf3560c939613166df98e076:6d80c96b694126c9451a0e5c032de69aa643286157b2cef116e16cd156bfa6c0
+l3b_pipeline
+l3_runde 9bb5d10:5f593ef676eada30af1adcf8f7d9f89c060ff21f9cb469d12f2a8c7a593051f7:b4a4c024943008b91f5d01aef6dd4e740eb1e11c1e6690a6e453c29fb492765e
+l3b_pipeline
+mv "$VOR/pruefung/l3_rueck.npz" pruefung/; python3 relief_l3.py --aus >> "$AUS/7_l3b.log" 2>&1
+python3 relief_l3.py >> "$AUS/7_l3b.log" 2>&1
+l3b_pipeline
+z l3b_runden $t
 z gesamt_bau $T0
 
 # 2) Kontrolle: keine unerwarteten geschriebenen Dateien, sha256 je Ausgabe gegen den Repo-Stand
