@@ -38,7 +38,7 @@ def _schreibe(D, pfad, kompakt):
     pfad.write_bytes(gzip.compress(js.encode("utf-8"), 9, mtime=0))
 
 
-def schutz(D, GY, GX, rs, weg_abstand_m=1.5):
+def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5):
     """Gewicht 0 auf festen Flaechen, weicher Anstieg auf 1 daneben (Wege: Abstand weg_abstand_m, Wasser 1,5 m)."""
     fest = np.zeros((GY, GX), bool)
     WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX)
@@ -67,7 +67,7 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5):
         lin[np.clip(np.rint(np.interp(t, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
         zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + 1) * rs) + 1
         sl = (slice(max(zs.min() - pad, 0), zs.max() + pad + 1), slice(max(xs.min() - pad, 0), xs.max() + pad + 1))
-        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + 0.5
+        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + weg_rand_m
     from matplotlib.path import Path as _MP
     zz, xx = np.mgrid[0:GY, 0:GX] / float(rs); pts = np.c_[xx.ravel(), zz.ravel()]
     for k in V.get("kreuzungen", []):
@@ -75,12 +75,12 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5):
                _MP(k["polygon_m"]).contains_points(pts, radius=-(float(k.get("uebergang_m", 0.0)) + 0.5)).reshape(GY, GX)
     dw = nd.distance_transform_edt(~wasser, sampling=1.0 / rs)
     dr = nd.distance_transform_edt(~weg, sampling=1.0 / rs)
-    w = _ss((dw - 1.5) / 1.5)              # Wasser: 0 bis 1,5 m Abstand, voll ab 3 m
+    w = _ss((dw - 1.5) / 1.5) if mit_wasser else np.ones((GY, GX))   # Wasser: 0 bis 1,5 m Abstand, voll ab 3 m (L3b: Wasserstellen ohne)
     if weg_abstand_m >= 1.5:
         w *= _ss((dr - 1.5) / 1.5)         # Wege Standard wie Wasser
     else:
         w *= _ss((dr - weg_abstand_m) / 1.0)   # enger Wegabstand (Boeschung direkt am Weg), Wegvertices bleiben fest
-    w[weg | wasser] = 0.0
+    w[weg | (wasser if mit_wasser else False)] = 0.0
     d2 = np.zeros((GY, GX), bool); x0, z0, x1, z1 = D2_BOX
     d2[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1] = True
     dd2 = nd.distance_transform_edt(~d2, sampling=1.0 / rs)
@@ -110,18 +110,23 @@ def ersatz(H, s, rs):
     return E
 
 
-def anwenden(GB, D, stellen, rs):
+def anwenden(GB, D, stellen, rs, WV=None):
+    """GB (und bei L3b-Wasserstellen den Wasserspiegel WV) lokal ersetzen. Wassergrundriss (WV > -900) bleibt gleich."""
     GY, GX = GB.shape
     H = GB.astype(np.float64)
     W0 = schutz(D, GY, GX, rs); Wcache = {}
     neu = H.copy(); bericht = []
+    wv = None if WV is None else WV.astype(np.float64).copy()
+    wasser = None if WV is None else WV > -900
     for s in stellen:
         if not s.get("aktiv", True):
             bericht.append({"id": s["id"], "aktiv": False}); continue
-        wa = s.get("weg_abstand_m")
-        if wa is not None and wa not in Wcache:
-            Wcache[wa] = schutz(D, GY, GX, rs, wa)
-        w = gewicht(s, GY, GX, rs) * (Wcache[wa] if wa is not None else W0)
+        wa = s.get("weg_abstand_m"); mw = not s.get("wasser", False)
+        wr = s.get("weg_rand_m", 0.5)
+        key = (wa, mw, wr)
+        if key not in Wcache:
+            Wcache[key] = schutz(D, GY, GX, rs, 1.5 if wa is None else wa, mw, wr)
+        w = gewicht(s, GY, GX, rs) * Wcache[key]
         m = w > 1e-4
         if not m.any():
             bericht.append({"id": s["id"], "max_m": 0.0}); continue
@@ -132,12 +137,32 @@ def anwenden(GB, D, stellen, rs):
             kern = gewicht(s, GY, GX, rs)[sl] > 0.99
             E = np.where(kern, np.median(E[kern]), E)
             E = nd.gaussian_filter(E, 1.0 * rs, mode="nearest") if s.get("sigma_m") else E
+        info = {"id": s["id"], "kachel": s.get("kachel")}
+        if s.get("wasser") and wv is not None:
+            wm = wasser[sl]
+            if wm.any():
+                # Wasserspiegel: Landvertices mit naechstem Wasserwert fuellen, gleiche Ersatzform, nur auf Wasser zurueckschreiben
+                idx = nd.distance_transform_edt(~wm, return_distances=False, return_indices=True)
+                F = wv[sl][idx[0], idx[1]]
+                Ew = ersatz(F, {k: v for k, v in s.items() if k not in ("oeffnen_m", "oeffnen2_m")}, rs) if s.get("wasserspiegel", True) else F
+                altw = wv[sl].copy()
+                neuw = np.where(wm, altw + w[sl] * (Ew - altw), altw)
+                wv[sl] = neuw
+                info["max_wv_m"] = round(float(np.abs(neuw - altw).max()), 3)
+                if s.get("ufer_heben_m") is not None:
+                    # Uferband: aeusserste Wasservertices (<= ufer_band_m vom Grundrissrand) so heben, dass das Gelaende knapp
+                    # ueber dem Spiegel liegt -> sichtbare Uferlinie = glatte Hoehenlinie statt Rastertreppe
+                    rand = nd.distance_transform_edt(wm, sampling=1.0 / rs) <= s.get("ufer_band_m", 0.75)
+                    ziel = neuw + s["ufer_heben_m"]
+                    E = np.where(wm & rand, np.maximum(E, ziel), E)
+                    E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
+                    E = np.where(wm & rand, np.maximum(E, ziel), E)
         alt = neu[sl].copy()
         neu[sl] = alt + w[sl] * (E - alt)
         d = neu[sl] - alt
-        bericht.append({"id": s["id"], "kachel": s.get("kachel"), "max_m": round(float(np.abs(d).max()), 3),
-                        "vertices_geaendert": int((np.abs(d) > 1e-4).sum())})
-    return neu.astype(np.float32), bericht
+        info.update({"max_m": round(float(np.abs(d).max()), 3), "vertices_geaendert": int((np.abs(d) > 1e-4).sum())})
+        bericht.append(info)
+    return neu.astype(np.float32), bericht, (None if wv is None else wv.astype(np.float32))
 
 
 def objekte(D, delta, rs):
@@ -185,6 +210,9 @@ def main():
     if "--aus" in arg:
         if not RUECK.exists(): print("kein l3_rueck.npz - L3 nicht aktiv"); return
         r = np.load(RUECK); idx = r["idx"]; GBf = GB.reshape(-1).copy(); GBf[idx] = r["alt"]
+        if "wv_idx" in r.files:
+            WVa = np.frombuffer(base64.b64decode(D["WV"]), np.float32).copy(); WVa[r["wv_idx"]] = r["wv_alt"]
+            D["WV"] = N["WV"] = base64.b64encode(WVa.tobytes()).decode()
         GBn = GBf.reshape(GY, GX); delta = GBn.astype(np.float64) - GB
         geaendert = GBn != GB
         D["GB"] = N["GB"] = base64.b64encode(GBn.tobytes()).decode()
@@ -196,17 +224,23 @@ def main():
         sys.exit(f"GB entspricht nicht der L3-Basis ({_sha(GB)[:12]}); zuerst 'relief_l3.py --aus'")
     if os.environ.get("RELIEF_L3", "1") == "0":
         print("RELIEF_L3=0: nichts angewendet"); return
-    GBn, bericht = anwenden(GB, D, cfg["stellen"], rs)
+    WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX).copy()
+    GBn, bericht, WVn = anwenden(GB, D, cfg["stellen"], rs, WV)
+    wv_geaendert = WVn != WV
+    if not np.array_equal(WVn > -900, WV > -900): sys.exit("Wassergrundriss geaendert - Abbruch")
     delta = GBn.astype(np.float64) - GB.astype(np.float64)
     geaendert = GBn != GB
     d2n = _sha(GBn[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1])
-    info = {"stellen": bericht, "vertices_geaendert": int(geaendert.sum()), "max_abs_m": round(float(np.abs(delta).max()), 3),
+    info = {"stellen": bericht, "vertices_geaendert": int(geaendert.sum()), "wv_vertices_geaendert": int(wv_geaendert.sum()),
+            "wv_max_abs_m": round(float(np.abs(WVn.astype(float) - WV).max()), 3), "max_abs_m": round(float(np.abs(delta).max()), 3),
             "d2_gb_sha256_vorher": d2_sha, "d2_gb_sha256_nachher": d2n, "gb_sha256_nachher": _sha(GBn)}
     if d2n != d2_sha: sys.exit("D2 geaendert - Abbruch")
     if "--trocken" in arg:
         print(json.dumps(info, indent=1)); return
     idx = np.flatnonzero(geaendert.reshape(-1))
-    np.savez_compressed(RUECK, idx=idx, alt=GB.reshape(-1)[idx])
+    widx = np.flatnonzero(wv_geaendert.reshape(-1))
+    np.savez_compressed(RUECK, idx=idx, alt=GB.reshape(-1)[idx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx])
+    if widx.size: D["WV"] = N["WV"] = base64.b64encode(WVn.tobytes()).decode()
     D["GB"] = N["GB"] = base64.b64encode(GBn.tobytes()).decode()
     info["objekte_angepasst"] = objekte(D, delta, rs); objekte(N, delta, rs)
     info["prototypen"] = prototypen(N, GBn, geaendert)

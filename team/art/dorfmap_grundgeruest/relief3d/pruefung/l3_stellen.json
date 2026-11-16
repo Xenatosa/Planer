@@ -326,6 +326,66 @@
    "schliessen_m": 2.0,
    "drehung_grad": 135,
    "weg_abstand_m": 0.0
+  },
+  {
+   "id": "L3b_10",
+   "kachel": "E7/F7",
+   "x_m": 208,
+   "z_m": 275.5,
+   "rx_m": 25,
+   "rz_m": 2.5,
+   "fade_m": 3.5,
+   "schliessen_m": 1.5,
+   "sigma_m": 0.8,
+   "wasser": true,
+   "notiz": "L3b: Rinne quer durchs Flussbett (Zeile z=275/276) in Bett GB und Wasserspiegel WV fuellen",
+   "aktiv": true
+  },
+  {
+   "id": "L3b_20",
+   "kachel": "E2",
+   "x_m": 199.5,
+   "z_m": 57,
+   "rx_m": 6,
+   "rz_m": 6,
+   "fade_m": 3.5,
+   "sigma_m": 1.0,
+   "wasser": true,
+   "wasserspiegel": false,
+   "ufer_heben_m": 0.08,
+   "ufer_band_m": 0.75,
+   "notiz": "L3b: Uferkante Bachrinne glaetten, Uferband knapp ueber Spiegel",
+   "aktiv": true
+  },
+  {
+   "id": "L3b_22",
+   "kachel": "F1",
+   "x_m": 214,
+   "z_m": 12,
+   "rx_m": 4,
+   "rz_m": 14,
+   "fade_m": 3.5,
+   "oeffnen_m": 1.0,
+   "sigma_m": 1.0,
+   "wasser": true,
+   "wasserspiegel": false,
+   "ufer_heben_m": 0.08,
+   "ufer_band_m": 0.75,
+   "notiz": "L3b: Kamm an der Wasserrinne abtragen, Ufer glaetten",
+   "aktiv": true
+  },
+  {
+   "id": "L3b_24",
+   "kachel": "C4/D4",
+   "x_m": 124,
+   "z_m": 143.5,
+   "rx_m": 4,
+   "rz_m": 6,
+   "fade_m": 3.5,
+   "oeffnen_m": 1.0,
+   "sigma_m": 1.2,
+   "notiz": "L3b: wolkiger Rand C4/D4 (Ueberlappung der L3-Auslaeufe 05/06b) weich nachziehen",
+   "aktiv": true
   }
  ]
 }
