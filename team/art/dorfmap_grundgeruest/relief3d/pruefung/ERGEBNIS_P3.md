@@ -43,7 +43,7 @@ Uebersicht: `p3_nahbilder/uebersicht_T1_1.jpg` … `_4.jpg` (alle 31 Kacheln, dr
 |---|---|---|
 | T2 Textur abgeschnitten | **bestanden.** Abgeschnittene Flecken am Feinbandrand (C2, E6, H2, H5, H6) sind weg, die NW-Ecke A1/A2 hat Textur. Uebrig ist nur eine Formkante am Plateaurand A1/A2, auch im Clay → P1 | `ecke_drauf_T2.jpg`, `ecke_schraeg_T2.jpg`, `C2_schraeg_T1.jpg`, `H5_drauf_T1.jpg`, `E6_drauf_T1.jpg` |
 | T3 Streifen/Ringe | **bestanden (Textur).** Kein Streifen und kein Ring in der Textur. D1-Clay: schwacher Ring und Nahtlinie im Neu-Netz (Form, kaum sichtbar) → P1 | `bildpruefung/T3_kern_D1_D2_vorher_nachher_clay.jpg`, `bildpruefung/T3_kern_G1_vorher_nachher_clay.jpg`, `bildpruefung/T3_D1_wegende_textur_clay.jpg` |
-| T4 graue Flussstreifen | **bestanden.** 9 Flusskameras A3…H7 ohne graue Streifen. Weisse Linien im Wasser (C7/E7/F6) gab es schon vorher, sie gehoeren zum Wassernetz und zur Uferform | `bildpruefung/T4_fluss_vorher_nachher_clay.jpg` |
+| T4 graue Flussstreifen | **bestanden.** 9 Flusskameras A3…H7 ohne graue Streifen. Weisse Linien im Wasser (C7/E7/G7) gab es schon vorher, sie gehoeren zum Wassernetz und zur Uferform | `bildpruefung/T4_fluss_vorher_nachher_clay.jpg` |
 | T5 Textur vs Clay | **bestanden.** Textur folgt der Form, kein Texturmuster ohne Form. Formbefunde (C4-Treppen, B1/C1-Rampen, E1/F1-Wasserfallzaehne, C2-Hausplaetze) → P1 | `bildpruefung/feld_textur_clay_1.jpg` … `_7.jpg` |
 
 ## QA P4 Zusatz: punktierte Texturlinie C3 Hangfuss (x≈85, z 105–112)
