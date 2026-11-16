@@ -1,6 +1,6 @@
 {
-"summe": 378,
-"summe_ohne_ausnahmen": 378,
+"summe": 371,
+"summe_ohne_ausnahmen": 371,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -10,14 +10,14 @@
 "R3_woelb_m": 10,
 "R5_loch": 4,
 "R6_wasser_schnee": 4,
-"G2_spitze_oben": 3,
-"G3_spitze_unten": 3,
-"G2_spitze_oben_fein": 9,
+"G2_spitze_oben": 2,
+"G2_spitze_oben_fein": 8,
 "G3_spitze_unten_fein": 2,
-"G5_beule_klippe": 38,
-"G6_facette": 211,
+"G5_beule_klippe": 34,
+"G6_facette": 212,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
+"T1_fleckrand": 1,
 "T2_textur_abgeschnitten_bildpruefung_offen": 1,
 "T3_streifen_ringe_bildpruefung_offen": 1,
 "T4_graue_flussstreifen_bildpruefung_offen": 1,
@@ -633,51 +633,19 @@
 },
 {
 "regel": "G2_spitze_oben",
+"feld": "F1",
+"x": 215.0,
+"z": 9.0,
+"wert": 0.46,
+"nachbarn": 8
+},
+{
+"regel": "G2_spitze_oben",
 "feld": "D6",
 "x": 162.0,
 "z": 257.5,
 "wert": 0.45,
 "nachbarn": 4
-},
-{
-"regel": "G2_spitze_oben",
-"feld": "F7",
-"x": 212.5,
-"z": 275.5,
-"wert": 0.52,
-"nachbarn": 4
-},
-{
-"regel": "G2_spitze_oben",
-"feld": "F7",
-"x": 216.0,
-"z": 275.5,
-"wert": 0.57,
-"nachbarn": 3
-},
-{
-"regel": "G3_spitze_unten",
-"feld": "E7",
-"x": 199.0,
-"z": 275.0,
-"wert": 0.45,
-"nachbarn": 5
-},
-{
-"regel": "G3_spitze_unten",
-"feld": "E7",
-"x": 207.0,
-"z": 275.0,
-"wert": 0.53,
-"nachbarn": 8
-},
-{
-"regel": "G3_spitze_unten",
-"feld": "F7",
-"x": 215.5,
-"z": 275.0,
-"wert": 0.48,
-"nachbarn": 6
 },
 {
 "regel": "G2_spitze_oben_fein",
@@ -693,14 +661,6 @@
 "x": 306.8,
 "z": 85.8,
 "wert": 0.5,
-"nachbarn": 3
-},
-{
-"regel": "G2_spitze_oben_fein",
-"feld": "C4",
-"x": 121.8,
-"z": 144.2,
-"wert": 0.47,
 "nachbarn": 3
 },
 {
@@ -766,13 +726,6 @@
 "z": 85.5,
 "wert": 0.54,
 "nachbarn": 3
-},
-{
-"regel": "G5_beule_klippe",
-"feld": "F1",
-"x": 214.5,
-"z": 30.0,
-"wert": 0.65
 },
 {
 "regel": "G5_beule_klippe",
@@ -847,9 +800,9 @@
 {
 "regel": "G5_beule_klippe",
 "feld": "D4",
-"x": 127.5,
+"x": 126.8,
 "z": 132.0,
-"wert": 0.75
+"wert": 0.84
 },
 {
 "regel": "G5_beule_klippe",
@@ -896,9 +849,9 @@
 {
 "regel": "G5_beule_klippe",
 "feld": "D4",
-"x": 126.0,
-"z": 138.0,
-"wert": 0.84
+"x": 127.8,
+"z": 143.1,
+"wert": 1.32
 },
 {
 "regel": "G5_beule_klippe",
@@ -909,31 +862,10 @@
 },
 {
 "regel": "G5_beule_klippe",
-"feld": "D4",
-"x": 127.3,
-"z": 144.2,
-"wert": 0.85
-},
-{
-"regel": "G5_beule_klippe",
-"feld": "D4",
-"x": 127.6,
-"z": 147.2,
-"wert": 1.48
-},
-{
-"regel": "G5_beule_klippe",
 "feld": "C4",
-"x": 124.5,
-"z": 150.0,
-"wert": 0.67
-},
-{
-"regel": "G5_beule_klippe",
-"feld": "C4",
-"x": 125.0,
-"z": 150.5,
-"wert": 0.61
+"x": 125.8,
+"z": 148.6,
+"wert": 1.82
 },
 {
 "regel": "G5_beule_klippe",
@@ -1050,8 +982,15 @@
 {
 "regel": "G6_facette",
 "feld": "F1",
-"x": 211.0,
-"z": 9.2,
+"x": 211.7,
+"z": 6.7,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "F1",
+"x": 211.6,
+"z": 11.4,
 "wert": 11
 },
 {
@@ -1060,13 +999,6 @@
 "x": 271.7,
 "z": 11.1,
 "wert": 8
-},
-{
-"regel": "G6_facette",
-"feld": "F1",
-"x": 211.5,
-"z": 18.0,
-"wert": 25
 },
 {
 "regel": "G6_facette",
@@ -1715,16 +1647,30 @@
 {
 "regel": "G6_facette",
 "feld": "C4",
-"x": 116.6,
+"x": 116.7,
 "z": 138.0,
-"wert": 9
+"wert": 10
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 127.0,
+"z": 137.2,
+"wert": 8
 },
 {
 "regel": "G6_facette",
 "feld": "C4",
-"x": 122.3,
-"z": 139.3,
-"wert": 6
+"x": 123.4,
+"z": 140.3,
+"wert": 13
+},
+{
+"regel": "G6_facette",
+"feld": "D4",
+"x": 127.3,
+"z": 140.4,
+"wert": 18
 },
 {
 "regel": "G6_facette",
@@ -1758,14 +1704,7 @@
 "regel": "G6_facette",
 "feld": "C4",
 "x": 120.9,
-"z": 141.7,
-"wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "C4",
-"x": 123.2,
-"z": 141.2,
+"z": 141.9,
 "wert": 6
 },
 {
@@ -1812,6 +1751,13 @@
 },
 {
 "regel": "G6_facette",
+"feld": "C4",
+"x": 125.8,
+"z": 148.2,
+"wert": 17
+},
+{
+"regel": "G6_facette",
 "feld": "B4",
 "x": 79.1,
 "z": 149.8,
@@ -1821,8 +1767,8 @@
 "regel": "G6_facette",
 "feld": "C4",
 "x": 119.3,
-"z": 148.5,
-"wert": 8
+"z": 149.9,
+"wert": 23
 },
 {
 "regel": "G6_facette",
@@ -1851,13 +1797,6 @@
 "x": 175.0,
 "z": 151.5,
 "wert": 7
-},
-{
-"regel": "G6_facette",
-"feld": "C4",
-"x": 119.2,
-"z": 151.9,
-"wert": 8
 },
 {
 "regel": "G6_facette",
@@ -2525,6 +2464,13 @@
 "wert": 876
 },
 {
+"regel": "T1_fleckrand",
+"feld": "E4",
+"x": 175.0,
+"z": 144.2,
+"wert": 8
+},
+{
 "regel": "T2_textur_abgeschnitten_bildpruefung_offen",
 "feld": "A1",
 "x": 0.0,
@@ -2557,14 +2503,14 @@
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.623
+"wert": 0.621
 },
 {
 "regel": "G7b_wandkontur_kantenschaerfe",
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.55
+"wert": 0.549
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2634,7 +2580,7 @@
 "feld": "C4",
 "x": 105,
 "z": 150,
-"wert": 0.459
+"wert": 0.414
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2669,7 +2615,7 @@
 "feld": "D4",
 "x": 147,
 "z": 150,
-"wert": 0.447
+"wert": 0.419
 },
 {
 "regel": "G7b_wandkontur_feld",

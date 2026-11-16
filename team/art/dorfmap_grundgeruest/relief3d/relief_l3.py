@@ -38,7 +38,7 @@ def _schreibe(D, pfad, kompakt):
     pfad.write_bytes(gzip.compress(js.encode("utf-8"), 9, mtime=0))
 
 
-def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5):
+def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5, rampe_m=2.0):
     """Gewicht 0 auf festen Flaechen, weicher Anstieg auf 1 daneben (Wege: Abstand weg_abstand_m, Wasser 1,5 m)."""
     fest = np.zeros((GY, GX), bool)
     WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX)
@@ -56,7 +56,7 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5):
         L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t = np.arange(0.0, L[-1] + 1e-9, 0.25)
         x = np.interp(t, L, P[:, 0]); z = np.interp(t, L, P[:, 1])
         rampe[np.clip(np.rint(z * rs).astype(int), 0, GY - 1), np.clip(np.rint(x * rs).astype(int), 0, GX - 1)] = True
-    weg |= nd.distance_transform_edt(~rampe, sampling=1.0 / rs) <= 2.0
+    weg |= nd.distance_transform_edt(~rampe, sampling=1.0 / rs) <= rampe_m   # L3b: rampe_m=5 schuetzt auch die Boeschung (1,8-5 m)
     # Wegnetz aus neu/vektor.json (Gassen, Anbindungen, Hauswege): halbe Breite + 0,5 m fest; Kreuzungsflaechen + Uebergang fest
     V = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
     for wv in V.get("wege", []):
@@ -65,7 +65,7 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5):
         L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t = np.arange(0.0, L[-1] + 1e-9, 0.25)
         lin = np.zeros((GY, GX), bool)
         lin[np.clip(np.rint(np.interp(t, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
-        zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + 1) * rs) + 1
+        zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + max(1.0, weg_rand_m + 0.5)) * rs) + 1
         sl = (slice(max(zs.min() - pad, 0), zs.max() + pad + 1), slice(max(xs.min() - pad, 0), xs.max() + pad + 1))
         weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + weg_rand_m
     from matplotlib.path import Path as _MP
@@ -123,9 +123,10 @@ def anwenden(GB, D, stellen, rs, WV=None):
             bericht.append({"id": s["id"], "aktiv": False}); continue
         wa = s.get("weg_abstand_m"); mw = not s.get("wasser", False)
         wr = s.get("weg_rand_m", 0.5)
-        key = (wa, mw, wr)
+        rm = s.get("rampe_m", 2.0)
+        key = (wa, mw, wr, rm)
         if key not in Wcache:
-            Wcache[key] = schutz(D, GY, GX, rs, 1.5 if wa is None else wa, mw, wr)
+            Wcache[key] = schutz(D, GY, GX, rs, 1.5 if wa is None else wa, mw, wr, rm)
         w = gewicht(s, GY, GX, rs) * Wcache[key]
         m = w > 1e-4
         if not m.any():
