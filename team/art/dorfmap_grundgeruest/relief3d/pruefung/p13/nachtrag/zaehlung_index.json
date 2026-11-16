@@ -1,147 +1,147 @@
 {
- "html": "index.html (D1/G1/D2), Basis 9d04f67 vs P13-Nachtrag",
+ "html": "index.html (D1/G1/D2), Basis 12769d8 vs P13",
  "summe_vorher": 5051,
  "summe_nachher": 4814,
+ "silhouetten_dunkel_vorher": 242,
+ "silhouetten_dunkel_nachher": 3,
  "silh0_bytegleich": 15,
  "von": 15,
+ "hinweis": "Gesamtzaehler in index.html von Haeusern/Baeumen/Objektkanten dominiert; Silhouetten-Haarlinie = dunkle Pixel unter den geaenderten Pixeln",
  "bilder": [
   {
    "bild": "D1_Q1",
    "dunkel_vorher": 342,
    "dunkel_nachher": 339,
    "geaenderte_pixel": 8,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 3,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D1_Q2",
    "dunkel_vorher": 218,
    "dunkel_nachher": 211,
    "geaenderte_pixel": 8,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 7,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D1_Q3",
    "dunkel_vorher": 329,
    "dunkel_nachher": 277,
    "geaenderte_pixel": 68,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 52,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D1_Q4",
    "dunkel_vorher": 285,
    "dunkel_nachher": 270,
    "geaenderte_pixel": 18,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 15,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D2_Q1",
    "dunkel_vorher": 229,
    "dunkel_nachher": 206,
    "geaenderte_pixel": 71,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 23,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D2_Q2",
    "dunkel_vorher": 305,
    "dunkel_nachher": 305,
    "geaenderte_pixel": 6,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 0,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D2_Q3",
    "dunkel_vorher": 460,
    "dunkel_nachher": 448,
    "geaenderte_pixel": 34,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 17,
-   "dunkel_in_geaenderten_nachher": 3
+   "dunkel_in_geaenderten_nachher": 3,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "D2_Q4",
    "dunkel_vorher": 354,
    "dunkel_nachher": 354,
    "geaenderte_pixel": 0,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 0,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "G1_Q1",
    "dunkel_vorher": 323,
    "dunkel_nachher": 323,
    "geaenderte_pixel": 0,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 0,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "G1_Q2",
    "dunkel_vorher": 239,
    "dunkel_nachher": 239,
    "geaenderte_pixel": 0,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 0,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "G1_Q3",
    "dunkel_vorher": 189,
    "dunkel_nachher": 189,
    "geaenderte_pixel": 22,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 0,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "G1_Q4",
    "dunkel_vorher": 287,
    "dunkel_nachher": 230,
    "geaenderte_pixel": 74,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 57,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "P_147_21.5_60_35_0",
    "dunkel_vorher": 450,
    "dunkel_nachher": 448,
    "geaenderte_pixel": 3,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 2,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "P_147_64.5_60_35_0",
    "dunkel_vorher": 551,
    "dunkel_nachher": 524,
    "geaenderte_pixel": 37,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 27,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   },
   {
    "bild": "P_273_21.5_60_35_0",
    "dunkel_vorher": 490,
    "dunkel_nachher": 451,
    "geaenderte_pixel": 46,
-   "silh0_bytegleich_basis": true,
    "dunkel_in_geaenderten_vorher": 39,
-   "dunkel_in_geaenderten_nachher": 0
+   "dunkel_in_geaenderten_nachher": 0,
+   "silh0_bytegleich_basis": true
   }
- ],
- "hinweis": "Gesamtzaehler in index.html von Haeusern/Baeumen/Objektkanten dominiert; Silhouetten-Haarlinie = dunkle Pixel unter den geaenderten Pixeln",
- "silhouetten_dunkel_vorher": 242,
- "silhouetten_dunkel_nachher": 3
+ ]
 }

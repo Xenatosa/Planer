@@ -1,0 +1,150 @@
+{
+ "basis": "12769d8",
+ "metrik": "Luminanz < Median5x5 - 30 und Median5x5 > 120, 960x680 nativ, SwiftShader, nosh=1; Kritiker-Kameras (QA p4h) + Suedflanke 82|135,5 d15/30/60 und pk3 84|129 d15/30 (el 35, az 0)",
+ "summe_vorher": 6435,
+ "summe_nachher": 544,
+ "silh0_bytegleich": 20,
+ "von": 20,
+ "bilder": [
+  {
+   "bild": "B4_Q2",
+   "dunkel_vorher": 519,
+   "dunkel_nachher": 17,
+   "geaenderte_pixel": 1703,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "B4_Q3",
+   "dunkel_vorher": 308,
+   "dunkel_nachher": 23,
+   "geaenderte_pixel": 908,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "B4_Q4",
+   "dunkel_vorher": 513,
+   "dunkel_nachher": 33,
+   "geaenderte_pixel": 1848,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "B5_U",
+   "dunkel_vorher": 262,
+   "dunkel_nachher": 43,
+   "geaenderte_pixel": 780,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "C4_Q1",
+   "dunkel_vorher": 463,
+   "dunkel_nachher": 36,
+   "geaenderte_pixel": 1029,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "C4_U",
+   "dunkel_vorher": 374,
+   "dunkel_nachher": 43,
+   "geaenderte_pixel": 1160,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "C5_U",
+   "dunkel_vorher": 328,
+   "dunkel_nachher": 69,
+   "geaenderte_pixel": 1019,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "D3_U",
+   "dunkel_vorher": 107,
+   "dunkel_nachher": 31,
+   "geaenderte_pixel": 460,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "G3_Q2",
+   "dunkel_vorher": 250,
+   "dunkel_nachher": 0,
+   "geaenderte_pixel": 611,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "G3_U",
+   "dunkel_vorher": 153,
+   "dunkel_nachher": 7,
+   "geaenderte_pixel": 399,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "G4_Q2",
+   "dunkel_vorher": 192,
+   "dunkel_nachher": 31,
+   "geaenderte_pixel": 449,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "G4_U",
+   "dunkel_vorher": 124,
+   "dunkel_nachher": 5,
+   "geaenderte_pixel": 263,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "H2_U",
+   "dunkel_vorher": 59,
+   "dunkel_nachher": 5,
+   "geaenderte_pixel": 214,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "H3_U",
+   "dunkel_vorher": 208,
+   "dunkel_nachher": 4,
+   "geaenderte_pixel": 495,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "H4_U",
+   "dunkel_vorher": 143,
+   "dunkel_nachher": 11,
+   "geaenderte_pixel": 279,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "P_82_135.5_15_35_0",
+   "dunkel_vorher": 461,
+   "dunkel_nachher": 22,
+   "geaenderte_pixel": 1546,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "P_82_135.5_30_35_0",
+   "dunkel_vorher": 494,
+   "dunkel_nachher": 36,
+   "geaenderte_pixel": 1686,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "P_82_135.5_60_35_0",
+   "dunkel_vorher": 440,
+   "dunkel_nachher": 38,
+   "geaenderte_pixel": 1552,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "P_84_129_15_35_0",
+   "dunkel_vorher": 550,
+   "dunkel_nachher": 48,
+   "geaenderte_pixel": 1507,
+   "silh0_bytegleich_basis": true
+  },
+  {
+   "bild": "P_84_129_30_35_0",
+   "dunkel_vorher": 487,
+   "dunkel_nachher": 42,
+   "geaenderte_pixel": 1563,
+   "silh0_bytegleich_basis": true
+  }
+ ]
+}

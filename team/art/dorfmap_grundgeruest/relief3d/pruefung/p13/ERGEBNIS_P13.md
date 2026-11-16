@@ -1,6 +1,6 @@
 # P13 – Haarlinien an Grat-/Hangsilhouetten (Kritiker P8, Befund S1)
 
-> Nachtrag 16./17.11. (Basis 9d04f67, index.html über Pipeline, P13b D3) siehe unten.
+> Nachtrag 16./17.11. (Basis jetzt 12769d8, index.html über Pipeline, Südflanke 82|135, P13b D3) siehe unten. Die Werte im ersten Teil stammen von cc33fd1.
 
 Basis: art/dorfmap-fertig @ cc33fd1. Geändert: nur `pruefung/alle_kacheln/viewer_alle.js` (+7/−1), neu `pruefung/p13/`.
 Kosten: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: bau_endstand 500 s / Arbeitszeit ca. 30 min
@@ -41,21 +41,36 @@ Belege (Kritiker-Kameras nachgestellt, 960×680 nativ PNG, SwiftShader, nosh=1):
 
 ---
 
-# Nachtrag (Basis jetzt art/dorfmap-fertig @ 9d04f67, L3k #46 per Merge-Commit geholt)
-Kosten Nachtrag: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: 23:36–00:10 MEZ, bau_endstand 2 Läufe (Übernahme + leerer Ordner) je ca. 8,5 min
+# Nachtrag (Basis jetzt art/dorfmap-fertig @ 12769d8; L3k #46 und L3l #47 per normalem Merge-Commit geholt)
+Kosten Nachtrag: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: 23:36–00:36 MEZ, bau_endstand je Basis 2 Läufe (Übernahme + leerer Ordner) zu je ca. 8,5 min
 
 ## (2) index.html (D1/G1/D2): FrontSide
 - Geändert: **`neu/viewer.js`** (+6/−1). Für index.html ruft `main.js` (Zeile 19, `RELIEF_NEU_VIEWER`) `renderNeuCore` aus `neu/viewer.js` auf. Dort sitzt das Gelände-Material der Kacheln D1/G1/D2. `main.js` selbst bleibt unverändert: bau_endstand baut es gepinnt aus 6e58af0, und sein eigenes Grobnetz-Material liegt im Legacy-Pfad hinter dem Return. Gleiche Lösung wie im 56-Kachel-Viewer: `FrontSide` + `shadowSide = DoubleSide`, **`?silh=0`** = alter Stand.
-- Bundle/index.html **über die Pipeline** erzeugt: `UEBERNEHMEN=1 sh bau_endstand.sh` (esbuild 0.24.2 / three 0.170.0 aus /tmp/relief3d_bau_node, Schritt 4 baue_html, dann alle Schritte bis 20 L3k). In diesem Lauf waren 41 Ausgaben gleich, nur index.html und neu/index.html abweichend.
-- **Neues Soll** (`nachtrag/soll_sha_index.json`): index.html und neu/index.html `f356c5a3dc2326be75d3a4bd136192dc98598192166b7f92e7d137ca188bac08` (9d04f67) → `69bbf5caa1886ec47418d8abb84be367dee10573e1f4591a24667b79b093a2df`. Das Soll ist der Repo-Stand; bau_endstand.sh selbst ist unverändert.
-- bau_endstand.sh aus leerem Ordner: **ENDBAU BITGLEICH, 43/43** zum neuen Soll (522 s, `nachtrag/sha256_bau_p13_nachtrag.txt`).
-- D2 und D1/G1 in index.html: Positionen und Indizes basis = P13 = P13 silh=0 (`nachtrag/idx_d2.json`). D2 im 56-Viewer: Positionen ebeb46a1/6835acf2/b33d5a64, Nahtnormalen 52eb1840, gleich wie 9d04f67 (`nachtrag/d2_hashes_9d04f67.json`).
-- Bilder index.html, 12 Viertel-Kameras (30 m/35°) + 3 Übersichten (60 m): `?silh=0` ist 15 von 15 bytegleich mit index.html@9d04f67. Geänderte Pixel je Bild 0–74, Silhouetten-Dunkelpixel unter den geänderten **242 → 3**. Der Gesamtzähler sinkt nur 5051 → 4814, weil er in index.html von Häusern, Bäumen und Objektkanten dominiert wird (`nachtrag/zaehlung_index.json`). D1/G1/D2 haben weniger Grate, daher ist der Effekt dort kleiner als in B4/C4.
-- 56-Kachel-Viewer auf 9d04f67 nachgemessen: `?silh=0` 15/15 bytegleich zur Basis, dunkle Linienpixel **4025 → 353** (`nachtrag/zaehlung_9d04f67.json`), weiterhin 0 Dreiecke nach unten und 0 offene Innenkanten.
+- Bundle/index.html **über die Pipeline** erzeugt: `UEBERNEHMEN=1 sh bau_endstand.sh` (esbuild 0.24.2 / three 0.170.0 aus /tmp/relief3d_bau_node, Schritt 4 baue_html, dann alle Schritte bis 21 L3l). In diesem Lauf waren 43 Ausgaben gleich, nur index.html und neu/index.html abweichend. Beim Merge habe ich index.html aus 12769d8 übernommen und danach nur über die Pipeline neu erzeugt, nicht von Hand gemischt.
+- **Neues Soll** (`nachtrag/soll_sha_index.json`): index.html und neu/index.html `a964d923b8aaa3d9813c0558c6d1263f1c59d7bbf85d11463be30d0b889d305b` (12769d8) → **`842cc952cc336e407b334deb132f1bd763b21a9f4c079c897ef241c4cbdcaa6c`**. Das Soll ist der Repo-Stand; bau_endstand.sh selbst ist unverändert.
+- bau_endstand.sh aus leerem Ordner: **ENDBAU BITGLEICH, 45/45** zum neuen Soll (582 s, `nachtrag/sha256_bau_p13_nachtrag.txt`).
+- D1/G1/D2 in index.html: Positionen und Indizes basis = P13 = P13 silh=0 (`nachtrag/idx_d2.json`). D2 im 56-Viewer: Positionen ebeb46a1/6835acf2/b33d5a64, Nahtnormalen 52eb1840, gleich wie 12769d8 (`nachtrag/d2_hashes_12769d8.json`).
+- Bilder index.html, 12 Viertel-Kameras (30 m/35°) + 3 Übersichten (60 m): `?silh=0` ist 15 von 15 bytegleich mit index.html@12769d8. Geänderte Pixel je Bild 0–74, Silhouetten-Dunkelpixel unter den geänderten **242 → 3**. Der Gesamtzähler sinkt nur 5051 → 4814, weil er in index.html von Häusern, Bäumen und Objektkanten dominiert wird (`nachtrag/zaehlung_index.json`).
 - Gate 359/31/321, W1 0/0, Lochscan auf neuem index.html ok, Loch 0. Konsole ohne Fehler. P12c-Schalter `?wfeld=0`/`?wrand=0` wirken, ohne Fehler.
 
+## 56-Kachel-Viewer auf 12769d8 nachgemessen, inkl. Südflanke 82|135 (Art Umgebung)
+- `?silh=0` ist 20 von 20 bytegleich zum Basis-Viewer. Weiterhin 0 Dreiecke nach unten und 0 offene Innenkanten.
+- Dunkle Linienpixel über 20 Kameras (15 Kritiker-Kameras + Südflanke): **6435 → 544** (`nachtrag/zaehlung_12769d8.json`).
+- **Südflanke 82|135,5** (el 35, az 0, Blick von Süden), dunkle Linienpixel vorher → nachher:
+
+  | Kamera | vorher | nachher |
+  |---|---|---|
+  | 82|135,5 nah 15 m | 461 | 22 |
+  | 82|135,5 30 m | 494 | 36 |
+  | 82|135,5 Distanz 60 m | 440 | 38 |
+  | pk3 84|129 15 m | 550 | 48 |
+  | pk3 84|129 30 m | 487 | 42 |
+
+  Rückseiten magenta: 15 m 446 von 461, 30 m 464 von 494 (`nachtrag/rueckseite_beleg_12769d8.json`). Die gemeldeten dünnen Silhouettenlinien sind also derselbe Rückseiten-Effekt und mit P13 weg. Es bleiben Einzelpunkte und ein weicher olivgrauer Saum an streifend gesehenen Kanten (Schattierung).
+- Übrige Kameras z. B. B4_Q2 519 → 17, C4_Q1 463 → 36, G3_Q2 250 → 0, D3_U 107 → 31 (Brückenkanten).
+
 ## (1) P13b: D3-Bachufer oben rechts → Ursache in den Daten, nicht geändert
-- Ort: Die Stelle im Bild D3_U oben rechts ist der **E3-Kanal (L3i/L3j) bei x≈188, z≈97**. Die dunkle Linie ist 1 px breit und liegt am nahen Ufer, Bildpixel ~686|178.
+- Ort: Die Stelle im Bild D3_U oben rechts ist der **E3-Kanal (L3i/L3j) bei x≈188, z≈97**. Die dunkle Linie ist 1 px breit und liegt am nahen Ufer, Bildpixel ~686|178. L3k/L3l ändern dort nichts (GB/VC-Transekt auf 12769d8 gleich).
 - Der Dunkelpunkt-Zähler findet dort schon im Kritiker-Rohbild 0 Punkte (Ausschnitt 640–960×0–220), ebenso bei silh=0 und P13. Die 31 Rest-Pixel in D3_U sind Kanten der beiden Brücken; mit `ohne=wege` verschwinden sie.
 - Luminanz-Transekt quer zum Bach (`nachtrag/p13b_d3_bachufer.json`), Wert in der Linie gegen das Schneeufer daneben:
 
@@ -77,6 +92,7 @@ Kosten Nachtrag: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: 23:36
 
 ## Bilder Nachtrag
 `/workspace/p13_nahbilder/nachtrag/`:
-- `index_vorher/`, `index_nachher/`, `index_vergleich/` (Ausschnitte ×4.5)
-- `alle56_9d04f67_vorher/`, `alle56_9d04f67_nachher/`
+- `alle56_12769d8_vorher/`, `alle56_12769d8_nachher/` (20 Kameras)
+- `suedflanke_82_135/`: d15/d30/d60 vorher/nachher/Rückseite magenta, Ausschnitte ×3, auch pk3
+- `index_vorher/`, `index_nachher/`, `index_vergleich/`
 - `p13b_d3/`: D3_U-Varianten base/ow/owe/wf0/wr0/wb/wfr/wbk/web/mag/s0/clay/clayow, `d3_montage.png`, `d3_zoom*.png`, `d3_rest.png` (Brückenkanten), `D3_U_transekt_x4.png`
