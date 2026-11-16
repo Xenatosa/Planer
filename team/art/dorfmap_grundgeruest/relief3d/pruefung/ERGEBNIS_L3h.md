@@ -1,6 +1,6 @@
 # ERGEBNIS L3h – E3-Bach kräftiger, E4-Bach glatter Uferrand (QA P4e S3/S4) – Basis art/dorfmap-fertig @ f942124 (nach #37 P2e)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02 + Nachtrag 20:05–20:08 + Freigabe (a) 20:10–20:18 (gesamt 18:45–20:18)
+Kosten: 0 € · Codex: nein · Laufzeit: 18:45–20:02 + Nachtrag 20:05–20:08 + Freigabe (a) 20:10–20:18 + Entscheidung (2) 20:20–20:48 (gesamt 18:45–20:48)
 
 Worktree /workspace/wt_dorfmap_L3h, Branch art/dorfmap-L3h. Start auf bfe8dce, entwickelt dort (v1–v3). Nach Merge von #37 (P2e, Wege & Deko) auf den neuen
 Kopf **f942124** gesetzt (Branch war noch nicht gepusht, kein Force-Push nötig): Code/Konfig übernommen, **Binärdaten über die Pipeline neu gebaut**
@@ -44,15 +44,15 @@ Volllauf auf dem Endstand (f942124 + L3h): **ENDBAU BITGLEICH (839 s)**, 37/37 A
 ## Rückweg
 `relief_l3h.py --aus` + html_payload_p3 + waende_einsetzen → relief_daten 3e37ea58…, relief_neu 3069a0ef…, index 976a4cb1… = exakt f942124 (geprüft), danach wieder Commit-Stand.
 
-## SHA (Endstand)
+## SHA (Endstand, nach Entscheidung (2))
 | Datei | sha256 |
 |---|---|
-| relief_daten.json.gz | b2ef88a6d3895d090e69660f8a1d17fb7d0ee6acac7324da8da947c72eacd66f |
-| neu/relief_neu.json.gz | 575362c0680f2e52074d3407a9762089d7d3e4232378962246c82bc99c86cab5 |
-| index.html = neu/index.html | ddedba2bfaae0468173425775ff66f8912132a1f3149f60153552c6f274aa8b3 |
-| relief_l3h.py | 8950bb4dccd03a428f03b0b6452a514b0b8317813e3411d65d4853a511c0dcb6 |
+| relief_daten.json.gz | f99fe1155f577b1b988679c0b942839795f8bb4ed754af5038bd70e551e7ef94 |
+| neu/relief_neu.json.gz | 04bb0df4fc0fee15f71d06ac9797f54ad832d669aa7d20f909115d145718ac2b |
+| index.html = neu/index.html | 0e845b39c3818a89e37c25dc2a34fec0bcfe47ef9f0cbfda1a2dec0e7a2423ac |
+| relief_l3h.py | 37d9dc40181cbafdbdd544c2552a4ac36bcd7b79cb576b96147244519c9c30c7 |
 | bau_endstand.sh | 24ff110da1abcefe6e7a092c5954dbf878e105c7339f2a8534ccf7de6a0bb00f |
-| pruefung/l3h/l3h_rueck.npz | b75cbcf34f1669dea55039925805d7c37abeef03bef83e885362b97b7d3d485a |
+| pruefung/l3h/l3h_rueck.npz | c38843a4f6286ef998cc347a32b36ff05b7cabce274668553e6643a835c30943 |
 
 ## Nahbilder (`pruefung/l3h_nahbilder/`, selbst angesehen)
 - `blatt_E3_vorher_nachher.jpg`: E3_bach_weit (45 m), E3_bach_mittel (22 m), E3_westufer_100/106 (15 m), E3 Distanz von Norden (60 m); je Farbe vorher|nachher, Clay vorher|nachher.
@@ -89,3 +89,24 @@ Nahbild `pruefung/l3h_nahbilder/paar_E3_nord_maske.jpg`: Zeilen E3_westufer_100,
 Ehrlich zum Bild: m1 wirkt deutlich besser – der Lauf ist durchgehend, aus 22 m und 60 m ohne Unterbrechung; das Westufer schließt weich an (keine Kante, kein Zackenrand),
 nah bleiben aber zwei rundliche Ausbuchtungen (Breite schwankt), also noch leicht perlig. Wegen des schlechteren Gates (G6 an den Talhängen) **nicht übernommen**:
 Daten, Pipeline, Gate (363/31/321, W1 0, Loch 0), *_letzter_lauf.json, Volllauf und SHAs bleiben wie c6a413b. Parameter m1/m2 und Gate-Läufe in `pruefung/l3h/maske_versuch/` (nicht übernommen).
+
+## Entscheidung (2) 16.11. – m1 übernommen + Talhang geglättet – **Ziel erreicht** (neuer Endstand)
+Vorab geprüft: origin/art/dorfmap-fertig steht weiter auf f942124. Die folgenden Werte ersetzen die Endstand-Werte weiter oben (Gate/Abstände/SHA/Volllauf).
+- `E3_nord_rinne` = m1 (Art `ufer`, Box 186,5–192,5|98,5–108,5, Fade 2, σ 2,5, Versatz 1,3, Band 6), vor E3_bett: **50 neue Wasser-Vertices** (gesamt mit E4 97), nichts entfernt.
+  Laufbreite E3-Nord 1–5 → 4–7 Vertices, mittlere Tiefe 0,12 → 0,31 m.
+- Neue Art `hang_glatt` (`E3_nord_hang`): nur Land, ≥ 1 Vertex vom Wasser, weiche Kreise (Kern 1,5, Rand 2 Zellen) entlang des West- und Osthangs
+  (x≈185 bzw. 192–193,3, z 97–112, 15 Punkte inkl. der vier m1-Facetten), 3× Gauß σ 1,5 eingeblendet, Feinband folgt. 733 GB-Vertices, max 0,27 m.
+  Zwischenstufen (nur Regelprüfung): 4 Punkte → 365 (neue G6 185,4|98,8 und 185,0|107,1), 13 Punkte → 364 (G6 192,1|111,4), 15 Punkte → 363.
+- **Gate: regeln 363, R8 31, R9 321, W1 0, W1 alle 56 0, Lochscan 0** – Trefferliste identisch zu c6a413b (keine neue, keine weggefallene Facette).
+  Die vier m1-Facetten (193,3|99,1, 185,3|103,1, 193,1|106,0, 192,0|104,8) sind weg. `pruefung/*_letzter_lauf.json` und `pruefung/l3h/gate/` = dieser Lauf.
+- Abstände (Basis f942124, zellweite 1,2 m; `l3h_abstaende.json`): geändert 2525 Vertices (GB 2192, WV 97, VC 1737), Box 168,5–196,5|89,5–155,5.
+  Wege, Kreuzungen, WEGA/Brücken **0** (0,6 m), Rampenkern **0** (38,5 m), D2 **0** (20,5 m, sha 749d3c4b… gleich), rampe_5 **40,3 m**, D4/D5 **0 Änderungen**,
+  D1 (X084/rampe_2) **50,2 Zellen**, Mulde 159|22,9 **gemessen 72,1 Zellen = 86,6 m** (52 Zellen außerhalb des Sperrkreises r 20).
+  Wasser entfernt 0, WV auf altem Wasser 0, Komponenten 9→9, fill_holes-Differenz = genau die 97 neuen Vertices (keine Löcher).
+- **bau_endstand-Volllauf: ENDBAU BITGLEICH (669 s), 37/37.** Rückweg `--aus` → exakt f942124 (relief_daten, relief_neu, index, neu/index geprüft).
+- Ausbuchtungen: nicht zusätzlich gerundet (eigene Rundung hätte wieder an der Böschung gearbeitet; Gate-Risiko, Zeit).
+- Nahbilder (selbst angesehen): `l3h_nahbilder/paar_E3_nord_final.jpg` – E3_westufer_100/_106 (15 m), E3_bach_mittel (22 m), E3_dist_nord (60 m); Farbe c6a413b | neu, Clay c6a413b | neu.
+  `l3h_nahbilder/hang_E3_nord_final.jpg` – West-/Osthang an den Facetten (15 m).
+  Ehrlich: Der Lauf ist jetzt aus 15, 22 und 60 m durchgehend als Wasser lesbar (vorher Tümpelkette mit Unterbrechung). Westufer weich, keine Kante,
+  kein Zackenrand, die geglätteten Hänge zeigen keine sichtbare Facette oder Delle. Rest: Die Uferlinie im Nordteil bleibt leicht perlig (3–4 rundliche
+  Ausbuchtungen, Breite schwankt), aber ohne Unterbrechung.
