@@ -297,6 +297,14 @@ P3D17_QUELLE_SOLL_SHA256 = "b558f441b1fa72d328b57b6695422593fc28943ff60346fdc332
 P3D17_LOESUNG_HERKUNFT_SHA256 = "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88"  # ee46fe5 (p3d18)
 
 
+# P11b: Standard-Gelaendevariante = Variante des Endstands (P2 9ace686 / c6a3db0 / dc257c9, terrain_variant "0").
+# Bis P11 war der Standard "2" (gezielte Profile, Kreuzung 24), der Endstand wurde aber immer mit
+# RELIEF_GELAENDE_VAR=0 gebaut. Umgestellt erst nach Beleg: bau_endstand.sh ohne gesetzte Variable bitgleich
+# (alle 18 Ausgaben), D1/G1/D2 und Gate unveraendert (pruefung/p11b/). Variante 2 bleibt waehlbar
+# (RELIEF_GELAENDE_VAR=2 oder variant="2") und laeuft seit P11 durch.
+STANDARD_GELAENDE_VAR = "0"
+
+
 def build_manifest(
     relief_path: Path,
     cells_csv: Path,
@@ -311,7 +319,7 @@ def build_manifest(
     fields_path = fields_path or directory / "felder.npz"
     if variant is None:
         import os
-        variant = os.environ.get("RELIEF_GELAENDE_VAR", "2")
+        variant = os.environ.get("RELIEF_GELAENDE_VAR", STANDARD_GELAENDE_VAR)
     vector = json.loads(vector_path.read_text(encoding="utf-8"))
     with np.load(fields_path, allow_pickle=False) as archive:
         fields = {name: archive[name] for name in archive.files}
@@ -2937,7 +2945,7 @@ def terrain_heights(
     tile: str,
     vector: dict[str, Any],
     fields: dict[str, np.ndarray],
-    variant: str = "2",
+    variant: str = STANDARD_GELAENDE_VAR,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     """Build a deterministic per-tile terrain surface from GB and feature layers."""
     if variant not in TERRAIN_VARIANTS:

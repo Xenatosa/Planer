@@ -54,13 +54,16 @@ def test_control_variant_is_source_locked():
         assert stats["changed_vertices"] == 0
 
 
-def test_default_variant_is_active_targeted_profile(monkeypatch):
+def test_variant_2_is_active_targeted_profile(monkeypatch):
+    # P11b: Standard ist jetzt Variante 0 (Endstand); Variante 2 wird hier explizit gewaehlt,
+    # die Pruefungen unten sind unveraendert.
     monkeypatch.delenv("RELIEF_GELAENDE_VAR", raising=False)
     manifest = build_manifest(
         RELIEF3D / "relief_daten.json.gz",
         RELIEF3D / "zellen_relief.csv",
         RELIEF3D / "neu" / "vektor.json",
         RELIEF3D / "neu" / "felder.npz",
+        variant="2",
     )
     assert manifest["terrain_variant"] == "2"
     assert manifest["terrain"]["D1"]["changed_vertices"] > 0
@@ -80,3 +83,20 @@ def test_both_profile_options_are_deterministic_and_distinct():
             TILE_BOUNDS[tile][1] * 2 : TILE_BOUNDS[tile][3] * 2 + 1,
             TILE_BOUNDS[tile][0] * 2 : TILE_BOUNDS[tile][2] * 2 + 1,
         ])) <= 4.0
+
+
+def test_default_variant_is_endstand_variant_0(monkeypatch):
+    # P11b: ohne RELIEF_GELAENDE_VAR entsteht genau der Endstand (Hoehen-Hashes wie das Viewer-Paket
+    # neu/relief_neu.json.gz; neu/build.json traegt fuer D1 noch den Stand vor L3).
+    monkeypatch.delenv("RELIEF_GELAENDE_VAR", raising=False)
+    manifest = build_manifest(
+        RELIEF3D / "relief_daten.json.gz",
+        RELIEF3D / "zellen_relief.csv",
+        RELIEF3D / "neu" / "vektor.json",
+        RELIEF3D / "neu" / "felder.npz",
+    )
+    assert manifest["terrain_variant"] == "0"
+    import gzip
+    paket = json.loads(gzip.decompress((RELIEF3D / "neu" / "relief_neu.json.gz").read_bytes()))
+    for tile, info in paket["neu_mesh_tiles"]["tiles"].items():
+        assert manifest["tiles"][tile]["height_sha256"] == info["height_sha256"]
