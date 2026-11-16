@@ -1,0 +1,6 @@
+[
+ {"x":250,"z":262,"abstand":70,"azimut":0,"neigung":60,"out":"uebersicht_E7_H7.png","titel":"Uebersicht Fluss E7-H7"},
+ {"x":190,"z":100,"abstand":60,"azimut":0,"neigung":60,"out":"uebersicht_E2_E3.png","titel":"Uebersicht E2/E3"},
+ {"x":271,"z":259,"abstand":20,"azimut":20,"neigung":40,"out":"G7_wasser.png","titel":"G7 Fluss"},
+ {"x":173,"z":258,"abstand":22,"azimut":0,"neigung":40,"out":"E6E7_fluss.png","titel":"E6/E7 Fluss"}
+]
