@@ -1,6 +1,6 @@
 {
-"summe": 363,
-"summe_ohne_ausnahmen": 363,
+"summe": 359,
+"summe_ohne_ausnahmen": 359,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -9,12 +9,12 @@
 "R3_quer_pct": 8,
 "R3_woelb_m": 8,
 "R5_loch": 4,
-"R6_wasser_schnee": 4,
+"R6_wasser_schnee": 1,
 "G2_spitze_oben": 2,
 "G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 34,
-"G6_facette": 209,
+"G6_facette": 208,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
 "T2_textur_abgeschnitten_bildpruefung_offen": 1,
@@ -571,27 +571,6 @@
 "wert": 361
 },
 {
-"regel": "R6_wasser_schnee",
-"feld": "G1",
-"x": 275.0,
-"z": 6.1,
-"wert": 6
-},
-{
-"regel": "R6_wasser_schnee",
-"feld": "G1",
-"x": 273.1,
-"z": 7.3,
-"wert": 7
-},
-{
-"regel": "R6_wasser_schnee",
-"feld": "G1",
-"x": 272.5,
-"z": 9.8,
-"wert": 22
-},
-{
 "regel": "G2_spitze_oben",
 "feld": "F1",
 "x": 215.0,
@@ -960,13 +939,6 @@
 "x": 211.6,
 "z": 11.4,
 "wert": 11
-},
-{
-"regel": "G6_facette",
-"feld": "G1",
-"x": 271.7,
-"z": 11.1,
-"wert": 8
 },
 {
 "regel": "G6_facette",
