@@ -59,20 +59,24 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5, mit_wasser=True, weg_rand_m=0.5, ra
     weg |= nd.distance_transform_edt(~rampe, sampling=1.0 / rs) <= rampe_m   # L3b: rampe_m=5 schuetzt auch die Boeschung (1,8-5 m)
     # Wegnetz aus neu/vektor.json (Gassen, Anbindungen, Hauswege): halbe Breite + 0,5 m fest; Kreuzungsflaechen + Uebergang fest
     V = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
+    # L3c-Fix: vektor.json rechnet in Metern (karte.zellweite_m = 1,2 m), das Hoehenraster in Zellen -> umrechnen.
+    # (Bis L3b wurden die Meter faelschlich als Zellen genommen: Schutz um Faktor 1,2 verschoben/zu breit.)
+    zw = float(V.get("karte", {}).get("zellweite_m", 1.0))
     for wv in V.get("wege", []):
-        P = np.asarray(wv["mittellinie_m"], float)
+        P = np.asarray(wv["mittellinie_m"], float) / zw
         if len(P) < 2: continue
         L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t = np.arange(0.0, L[-1] + 1e-9, 0.25)
         lin = np.zeros((GY, GX), bool)
         lin[np.clip(np.rint(np.interp(t, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
-        zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + max(1.0, weg_rand_m + 0.5)) * rs) + 1
+        hb = wv["breite_m"] / zw / 2   # halbe Breite in Zellen
+        zs, xs = np.where(lin); pad = int((hb + max(1.0, weg_rand_m + 0.5)) * rs) + 1
         sl = (slice(max(zs.min() - pad, 0), zs.max() + pad + 1), slice(max(xs.min() - pad, 0), xs.max() + pad + 1))
-        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + weg_rand_m
+        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= hb + weg_rand_m
     from matplotlib.path import Path as _MP
     zz, xx = np.mgrid[0:GY, 0:GX] / float(rs); pts = np.c_[xx.ravel(), zz.ravel()]
     for k in V.get("kreuzungen", []):
-        weg |= _MP(k["polygon_m"]).contains_points(pts, radius=float(k.get("uebergang_m", 0.0)) + 0.5).reshape(GY, GX) | \
-               _MP(k["polygon_m"]).contains_points(pts, radius=-(float(k.get("uebergang_m", 0.0)) + 0.5)).reshape(GY, GX)
+        poly = np.asarray(k["polygon_m"], float) / zw; ue = float(k.get("uebergang_m", 0.0)) / zw + 0.5
+        weg |= _MP(poly).contains_points(pts, radius=ue).reshape(GY, GX) | _MP(poly).contains_points(pts, radius=-ue).reshape(GY, GX)
     dw = nd.distance_transform_edt(~wasser, sampling=1.0 / rs)
     dr = nd.distance_transform_edt(~weg, sampling=1.0 / rs)
     w = _ss((dw - 1.5) / 1.5) if mit_wasser else np.ones((GY, GX))   # Wasser: 0 bis 1,5 m Abstand, voll ab 3 m (L3b: Wasserstellen ohne)
@@ -164,6 +168,11 @@ def anwenden(GB, D, stellen, rs, WV=None):
                 Ew = ersatz(F, {k: v for k, v in s.items() if k not in ("oeffnen_m", "oeffnen2_m")}, rs) if s.get("wasserspiegel", True) else F
                 altw = wv[sl].copy()
                 neuw = np.where(wm, altw + w[sl] * (Ew - altw), altw)
+                if s.get("wv_rand_senken_m"):
+                    # L3c: Wasserspiegel im aeussersten Band leicht unter das Ufergelaende -> sichtbarer Wasserrand =
+                    # Schnittlinie Spiegel/Uferhang (schraeg, weich) statt Rasterkante der Wassermaske
+                    dwr = nd.distance_transform_edt(wm, sampling=1.0 / rs); bw = s.get("wv_rand_band_m", 0.75)
+                    neuw = np.where(wm & (dwr <= bw), neuw - w[sl] * s["wv_rand_senken_m"] * (1.0 - _ss((dwr - 0.5 / rs) / bw)), neuw)
                 wv[sl] = neuw
                 info["max_wv_m"] = round(float(np.abs(neuw - altw).max()), 3)
                 if s.get("ufer_heben_m") is not None:

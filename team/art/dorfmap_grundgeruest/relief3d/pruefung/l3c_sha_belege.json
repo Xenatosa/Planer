@@ -1,0 +1,119 @@
+{
+ "basis": "d5b17e2 (L3b-Kopf, PR #20)",
+ "felder_relief_daten": {
+  "FW": "geaendert",
+  "G": "gleich",
+  "GB": "geaendert",
+  "VC": "geaendert",
+  "WEGA": "gleich",
+  "WV": "geaendert",
+  "baeume": "geaendert",
+  "bruecken": "gleich",
+  "felsbloecke": "gleich",
+  "felsen": "gleich",
+  "felsmesh": "gleich",
+  "findlinge": "gleich",
+  "geroell": "gleich",
+  "gras": "gleich",
+  "haeuser": "gleich",
+  "nx": "gleich",
+  "ny": "gleich",
+  "rampenwege": "gleich",
+  "reihenfolge": "gleich",
+  "rs": "gleich",
+  "spalten": "gleich",
+  "sprung": "gleich",
+  "start": "gleich",
+  "steine": "geaendert",
+  "ug": "gleich",
+  "wandfuss": "gleich",
+  "wandhoehen": "gleich",
+  "wandwinkel": "gleich",
+  "wege": "gleich"
+ },
+ "wassergrundriss_sha256_vorher": "c897e44c4f8fd1346d45008890f7b7219bb18c4e9597bb7f10706165818e21c5",
+ "wassergrundriss_sha256_nachher": "2e8006ba147df18e7ec23f47e48fa06c17fd643f289db3dc033dc9e1f9f9e68f",
+ "wassergrundriss_ohne_inseln_sha256_vorher": "defa6d613154538b1fcccb3b61fc5d1165c45dff40d1d0e86cb65379f03b98c4",
+ "wassergrundriss_ohne_inseln_sha256_nachher": "defa6d613154538b1fcccb3b61fc5d1165c45dff40d1d0e86cb65379f03b98c4",
+ "wasser_entfernt_vertices": 0,
+ "wasser_neu_vertices_nur_eingeschlossene_inseln": 47,
+ "inseln_gefuellt": 3,
+ "inseln": [
+  {
+   "x_m": 271.5,
+   "z_m": 259.5,
+   "vertices": 5
+  },
+  {
+   "x_m": 92.8,
+   "z_m": 280.2,
+   "vertices": 39
+  },
+  {
+   "x_m": 99.0,
+   "z_m": 280.5,
+   "vertices": 3
+  }
+ ],
+ "wv_vertices_geaendert_auf_altem_wasser": 4092,
+ "wv_max_abs_m_auf_altem_wasser": 0.895,
+ "gb_vertices_geaendert": 7792,
+ "gb_max_m": 1.057,
+ "d2_gb_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "d2_tile_height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "wege_0m": {
+  "kreuzungsflaechen_vertices": 17644,
+  "max_delta_kreuzung_m": 0.0,
+  "vektor_wege_vertices": 19272,
+  "max_delta_vektor_wege_m": 0.0
+ },
+ "naehe_rampen_wege": {
+  "rampen_innerhalb_5m": [],
+  "vektor_wege_innerhalb_rand_plus_5m": []
+ },
+ "sha256_nachher": {
+  "relief_daten.json.gz": "23cdf73d7e44a77c3c8159ef6c81a32a849a8faba4f726b6c4479106486a06a0",
+  "neu/relief_neu.json.gz": "7224a607bfa12d2811f07f346cf3b6b68411fdc0d8f237ac31f0ae453fff4ab9",
+  "index.html": "288b3d64774634b2d7808a6d8567427c9bebf4e0d488b8f52eaeae61a4b51eda",
+  "neu/index.html": "288b3d64774634b2d7808a6d8567427c9bebf4e0d488b8f52eaeae61a4b51eda",
+  "neu/vektor.json": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+  "neu/felder.json": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+  "pruefung/pruefe_regeln.py": "f9ef4a470703480d5b7d94ee0e6de9e664289addc426723cfdc8bbf579dd4481",
+  "pruefung/export_gate.sh": "a505281cf71e80e4d46257b151bf9319a390a7f7a9a9c9a84e7db958630873d0",
+  "pruefung/loch_o18g.js": "2d1119eced25d7a408f4d4fd5884df1fb7d873f7c099c37d8fb14525f40dd049",
+  "relief_l3.py": "9f8488e67f7652f9a5c74f42041f2b0e6ced355776849ec18e763adc4382a6d9",
+  "pruefung/l3_stellen.json": "14cb262bc7b43991eb31b489041996ca80de29cc3d833314773fb99f530ba1fb"
+ },
+ "geaenderte_dateien_vs_d5b17e2": [
+  "team/art/dorfmap_grundgeruest/relief3d/index.html",
+  "team/art/dorfmap_grundgeruest/relief3d/neu/index.html",
+  "team/art/dorfmap_grundgeruest/relief3d/neu/relief_neu.json.gz",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_bericht.json",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_rueck.npz",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_stellen.json",
+  "team/art/dorfmap_grundgeruest/relief3d/relief_daten.json.gz",
+  "team/art/dorfmap_grundgeruest/relief3d/relief_l3.py"
+ ],
+ "pruefer_unveraendert": true,
+ "l3_aus_roundtrip": {
+  "an": [
+   "4340e8466ee22b5e3a5c6c1ea1cb3f5dee207608f878d55217f532b970649b41",
+   "relief_daten.json.gz",
+   "db434bed373da5b8c83a18cc4ea417d8b574020c7a61dc6658f455a6d1cd4ff7",
+   "neu/relief_neu.json.gz"
+  ],
+  "aus": [
+   "bde2ab21e76909b6e3b0bd698d273313833729f7dae453dec9e4b981364e2802",
+   "relief_daten.json.gz",
+   "2de08b8b1d0e31917b2626d3ccd8a39c76d210b2237f09ca4f1dc51125a7091d",
+   "neu/relief_neu.json.gz"
+  ],
+  "wieder_an_bytegleich": true,
+  "aus_hoehen_gleich_vor_und_nach_L3c": {
+   "GB": true,
+   "WV": true,
+   "FW.h": true,
+   "hinweis": "aus-Zustand vor/nach L3c: GB, WV, FW.h identisch; Dateien unterscheiden sich nur durch VC/FW.c aus gen_textur vc"
+  }
+ }
+}

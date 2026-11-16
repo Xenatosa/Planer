@@ -1,0 +1,224 @@
+{
+ "regeln": {
+  "summe": [
+   374,
+   375
+  ],
+  "je_regel": {
+   "G2_spitze_oben": [
+    2,
+    2
+   ],
+   "G2_spitze_oben_fein": [
+    9,
+    9
+   ],
+   "G3_spitze_unten_fein": [
+    2,
+    2
+   ],
+   "G5_beule_klippe": [
+    35,
+    34
+   ],
+   "G6_facette": [
+    213,
+    215
+   ],
+   "G7_wand_glatte_flaeche": [
+    1,
+    1
+   ],
+   "G7b_wandkontur_feld": [
+    29,
+    29
+   ],
+   "G7b_wandkontur_kantenschaerfe": [
+    1,
+    1
+   ],
+   "G7b_wandkontur_rauheit": [
+    1,
+    1
+   ],
+   "G8_fluss_nicht_bis_rand": [
+    1,
+    1
+   ],
+   "R1_blind": [
+    17,
+    17
+   ],
+   "R2_getrennt": [
+    9,
+    9
+   ],
+   "R3_laengs_m": [
+    20,
+    20
+   ],
+   "R3_quer_pct": [
+    11,
+    11
+   ],
+   "R3_woelb_m": [
+    10,
+    10
+   ],
+   "R5_loch": [
+    4,
+    4
+   ],
+   "R6_wasser_schnee": [
+    4,
+    4
+   ],
+   "T1_fleckrand": [
+    1,
+    1
+   ],
+   "T2_textur_abgeschnitten_bildpruefung_offen": [
+    1,
+    1
+   ],
+   "T3_streifen_ringe_bildpruefung_offen": [
+    1,
+    1
+   ],
+   "T4_graue_flussstreifen_bildpruefung_offen": [
+    1,
+    1
+   ],
+   "T5_textur_vs_clay_bildpruefung_offen": [
+    1,
+    1
+   ]
+  }
+ },
+ "r8": {
+  "summe": [
+   33,
+   33
+  ],
+  "je_regel": {
+   "R8_gitter": [
+    7,
+    7
+   ],
+   "R8_quer": [
+    3,
+    3
+   ],
+   "R8_stufe": [
+    6,
+    6
+   ],
+   "R8a_wegende": [
+    17,
+    17
+   ]
+  }
+ },
+ "r9": {
+  "summe": [
+   325,
+   325
+  ],
+  "je_regel": {
+   "R8b_delle": [
+    22,
+    22
+   ],
+   "R9_saegezahn": [
+    34,
+    34
+   ],
+   "R9w_wellen": [
+    269,
+    269
+   ]
+  }
+ },
+ "w1": {
+  "summe": [
+   0,
+   0
+  ],
+  "je_regel": {
+   "W1a_ausserhalb_karte": [
+    0,
+    0
+   ],
+   "W1b_ueber_krone": [
+    0,
+    0
+   ],
+   "W1c_schwebend": [
+    0,
+    0
+   ],
+   "W1d_quellabstand": [
+    0,
+    0
+   ]
+  }
+ },
+ "w1_alle56": {
+  "summe": [
+   0,
+   0
+  ],
+  "je_regel": {
+   "W1a_ausserhalb_karte": [
+    0,
+    0
+   ],
+   "W1b_ueber_krone": [
+    0,
+    0
+   ],
+   "W1c_schwebend": [
+    0,
+    0
+   ],
+   "W1d_quellabstand": [
+    0,
+    0
+   ]
+  }
+ },
+ "pruefe_regeln_eigener_lochscan": {
+  "summe": [
+   374,
+   375
+  ]
+ },
+ "lochscan_hauptviewer": "{\"meshes\":9,\"dreiecke\":88728,\"offen_innen\":0,\"bb\":[126,0,294,86],\"punkte\":0}",
+ "treffer_diff": {
+  "neu": [
+   {
+    "regel": "G6_facette",
+    "feld": "G7",
+    "x": 264.0,
+    "z": 268.8,
+    "wert": 18
+   },
+   {
+    "regel": "G6_facette",
+    "feld": "H7",
+    "x": 319.1,
+    "z": 275.4,
+    "wert": 9
+   }
+  ],
+  "weg": [
+   {
+    "regel": "G5_beule_klippe",
+    "feld": "H7",
+    "x": 331.8,
+    "z": 278.0,
+    "wert": 1.28
+   }
+  ]
+ }
+}
