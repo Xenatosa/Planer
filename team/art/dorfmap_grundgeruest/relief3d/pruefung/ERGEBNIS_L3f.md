@@ -70,7 +70,7 @@ Volllauf `sh bau_endstand.sh /tmp/l3f_bau3` auf dem rebasten Stand (c6dd64f): **
 ## Rueckweg
 `relief_l3f.py --aus` (mit `l3f_rueck.npz`, bei den Versuchen benutzt und jeweils auf den Basis-sha zurueckgekehrt); jetzt nichts zu tun. `L3F=0` laesst Schritt 15 weg. Stand = 8c1fc80.
 
-## SHA (unveraendert gegenueber 8c1fc80)
+## SHA (Stand L3f vor L3g, unveraendert gegenueber 8c1fc80; aktueller Endstand mit L3g siehe ERGEBNIS_L3g.md)
 | Datei | sha256 |
 |---|---|
 | relief_daten.json.gz | 98a6c8c4582b8c206550fc7b26b8af95c6940ca7b9cade43ab8a45a94df8a1eb |
