@@ -1,0 +1,1615 @@
+{
+ "dauer_s": {
+  "gesamt": 16.01,
+  "html": 0.18,
+  "prototyp": 1.24,
+  "waende": 4.88
+ },
+ "flaechen_dreiecke": 814464,
+ "geschlossen_dreiecke": 1667136,
+ "html_bytes": 11166303,
+ "kacheln": 56,
+ "kacheln_info": {
+  "A1": {
+   "bounds": [
+    0,
+    0,
+    42,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "47d4d4ea5751da4bd2f2140f3425c3befcc1bab55420c16a8a2ee40ec612eec8",
+   "mesh_sha256": "559a1109b201ac6758674a0d7a1f02bdf446958e7256a63210e05490dffccded",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A2": {
+   "bounds": [
+    0,
+    43,
+    42,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "1010bbdb10276cd8fb8f2674cc900b2d4656a9e21014899b285dad8415671e6e",
+   "mesh_sha256": "9dd2fcf6d3f5fa8dd352dd8b3a1721c1c17fa51b58c0cac8c024432f3d86816c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A3": {
+   "bounds": [
+    0,
+    86,
+    42,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b0422d58de2cc522e6a4acc94476ce63f4602d12c53164c740c21249cf168b72",
+   "mesh_sha256": "0088cc908a6d5291c6ee352387638bcf88838e938b7e4e1a651d1e84f195947a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A4": {
+   "bounds": [
+    0,
+    129,
+    42,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d5217754d6ba4031ecc6a34d9a2f78c907311ff22958d5673e62532670a96b7c",
+   "mesh_sha256": "366604829eedbffe12cc5ecba508c366cfba504ebfad2f87f8751688da12b156",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A5": {
+   "bounds": [
+    0,
+    172,
+    42,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a1f85197917f812ad6f0800b2d00b74faa3d20877b52e225950f5b4f53246240",
+   "mesh_sha256": "2c85856586744deb33f36cc9f8550e9013859f015aa3e5bd428125f15fd1977f",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A6": {
+   "bounds": [
+    0,
+    215,
+    42,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "c8a41a08ae87aeeb445353c6ffa4d3d65f3e1cd178c19f86ac90430d117b32f9",
+   "mesh_sha256": "a1f1d4479d851e3aaa454bb2cab0d3a53d753e065525c7dcb7f42cda2a33b460",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A7": {
+   "bounds": [
+    0,
+    258,
+    42,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "325791fc91e8bb949f39b75bd913858b3ab6b58eb6f2fe32d4dba7ddd8ebfa01",
+   "mesh_sha256": "fc17e51e02aac025c41bae0e2db2d58c9642762d8906faabe739ea826a99e997",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "B1": {
+   "bounds": [
+    42,
+    0,
+    84,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d5a480affa03657910bd32aa5b7c070616873dbdda230e54939fb66dd0a9b6bf",
+   "mesh_sha256": "33de94343ae5b5e05531fef9b02ef11f1a6c112ccbc6e22773c717e6c9732ce0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B2": {
+   "bounds": [
+    42,
+    43,
+    84,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b1a54fff434321f086fe8066945752fab95332b999560ccaa711a1a6fb5acd0d",
+   "mesh_sha256": "116f8832c7795a74646f487d2b2afc3ee0d047daf76925a0849cb0222e298fc4",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B3": {
+   "bounds": [
+    42,
+    86,
+    84,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b1c6dcac71c4dc97e56ba125ba88105649b9facd86b60dca2ca34bcc4911775f",
+   "mesh_sha256": "e4f98b48cd7caeb005b5a6cd9f463a6d37f7ee8c84cfcd3afb47bfefdc25abcf",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B4": {
+   "bounds": [
+    42,
+    129,
+    84,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "57f69a54ebd41f39ddd5313a4ff470ddec35a6d362d70b96f8acd1388c29f38c",
+   "mesh_sha256": "88ea810777184672d3634d61e471dcb54d82592431927682b25f05876e6e3efd",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B5": {
+   "bounds": [
+    42,
+    172,
+    84,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "5260e0d915c406d1b44f9290c48bfeddde999d2b7ee1a85180e9872cfa92baf4",
+   "mesh_sha256": "c53b447d20eb7e5a59d9ceaf1931b8126960ed25b919e88776c73a5332a541ec",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B6": {
+   "bounds": [
+    42,
+    215,
+    84,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "9ed9b4ed2285815694c36f557b34025bcfb9373230572b0d918cc841ca725261",
+   "mesh_sha256": "558963347ac71c1a967fa117cbe4485fe4ef4cd138799f691b69e7e470ec3ece",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B7": {
+   "bounds": [
+    42,
+    258,
+    84,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "ae406bcb2701e508e5bccfb55632ca6d1f969736a9d52160864d470e036f72af",
+   "mesh_sha256": "c68882206c53bcba37c3b0b208435ed4e487705110b0fe05453a0b5326643f26",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "C1": {
+   "bounds": [
+    84,
+    0,
+    126,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "42c4ae6deb516b041fb3ee9df0734822e886806df6ce83947e131f523fb87b13",
+   "mesh_sha256": "b7322ca5f7f4d268427b6c7e7d5053c95401b86358a96c9ab15f4c2ba5ce063d",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C2": {
+   "bounds": [
+    84,
+    43,
+    126,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "1c0a16e860abe2dd2c4ae8d87e692a66c96cf540becc3add341ef13dd6d383e0",
+   "mesh_sha256": "95a39a72d42fe42a1c7f49d86bb7953283ff768a55da94393e061e65119851df",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C3": {
+   "bounds": [
+    84,
+    86,
+    126,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f00da772086eb0bcbc76c13f57e4ae3b926ab2b7ee4bd5c6b16e5bb719a84d3d",
+   "mesh_sha256": "2ab56a42e86a6f5f8d05f8f8ca144aaa4db264ad881974d73f2842c78f065398",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C4": {
+   "bounds": [
+    84,
+    129,
+    126,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b04c86f4cbdbec0fe0b5b1f99847e049c9977b1a7fa03ea634856424a9f2a258",
+   "mesh_sha256": "b0da4d6ff314c4d58fe8703ddf58e098e61531830c4d4c0b9ee1911f59338de0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C5": {
+   "bounds": [
+    84,
+    172,
+    126,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "4f412bd3bc73e8f58e995801584fae937d03d9570c6fca124bc575d4b077a91d",
+   "mesh_sha256": "aacad915a2adc714f8d18b9ddd546ecbbccde0365b629c0ef409ed11b62a084a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C6": {
+   "bounds": [
+    84,
+    215,
+    126,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "8e91ff8f19e534b5a9e71c34d538f3c7030417ca186694b0c53fad0ed664c372",
+   "mesh_sha256": "d0139d1ceb714a888501a5b66317d81d665863cc9fa5c7e099e44be22ed23aa9",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C7": {
+   "bounds": [
+    84,
+    258,
+    126,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "64fccf8ceadcf436e8aa2df1f155a551fbcc8d4b730cf18653f15cf161894fe5",
+   "mesh_sha256": "4216ffdaa31e950bb92652c3be9e923ab2356a433a8d376da2da8b517c9c79ec",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "D1": {
+   "bounds": [
+    126,
+    0,
+    168,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f3b04e08093a0f20bf054cab6f590dcf20a4c8349cb4088fffe1c9fc751ecdec",
+   "mesh_sha256": "3fa0757a33d44b46531dbef435843ebfda9ff97eaed271874c1bc7a265bff79c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "GB_with_local_profiles",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "D2": {
+   "bounds": [
+    126,
+    43,
+    168,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+   "mesh_sha256": "cbaaa85b2716137aa1960d867f96d0280432181e9a067129234f47aa5f794145",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "D3": {
+   "bounds": [
+    126,
+    86,
+    168,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "98fa79d342e9c92481260ab03b7b52ce64f0fb0b8f7bc1718c1267fa4f033948",
+   "mesh_sha256": "b29a173a46a22676285ac58921a46d94b58e1cc4d115ed619155658deb7a0767",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D4": {
+   "bounds": [
+    126,
+    129,
+    168,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "16503f9d6cceaa71c843d28526055379f1b7eff1470c2b2a0fa6a5329d45f24d",
+   "mesh_sha256": "9ae9d0efbf53650515685039cc424a3647f2db3b36d7e8aa9c8fca037bd0c792",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D5": {
+   "bounds": [
+    126,
+    172,
+    168,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "9323fe738a86c14906cd52496a13d386f9910f4a0a67584095d7d22779c1a955",
+   "mesh_sha256": "c1fab87ca30adfd954c2879fcbfa75f04245c26af3a1beb1294a9126bb96f17b",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D6": {
+   "bounds": [
+    126,
+    215,
+    168,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "7074fbf4eb9ffda4b7c2b2ef9eae2f1a2ca459a440457ef85d0f5bc2686a831f",
+   "mesh_sha256": "4e3ed372c831ea616164f9d00b3b3fcfdba2fc424be248a917f88603a2015ab8",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D7": {
+   "bounds": [
+    126,
+    258,
+    168,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "59fce5cbf215523dd68ce1498be9c69c7b513c354973ef82ab8c233e702061fe",
+   "mesh_sha256": "035b81dddc3ab0bb1b6fe7c25d8ddd7e3805ae42547fbf14bfc43eadd18511b4",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "E1": {
+   "bounds": [
+    168,
+    0,
+    210,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "37c88c28771f580f4d3ab8ee12c42239a2953011d9bc53affc4f8f7724bf62c4",
+   "mesh_sha256": "5dde69567acb30d1c1ebef72b9fb5474b486a9d6cd096f2bb68ce3dceb669e0e",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E2": {
+   "bounds": [
+    168,
+    43,
+    210,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "acef51674de335f985a5afc8814767e9d4e551ea3ee0e7e54c45027a7990c46e",
+   "mesh_sha256": "036e3a4dbbfc48bac4cdb110a3ba592e0640d0458ff3ac572c13cb093e227396",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E3": {
+   "bounds": [
+    168,
+    86,
+    210,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f6714d57f3a9b456e5d30664f27bdb730e52d96d8968cf406bf18444270ce393",
+   "mesh_sha256": "c4c3d9f8ee8335da702c607f93370513c378d37d4069d99bd3a2936e4344eb48",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E4": {
+   "bounds": [
+    168,
+    129,
+    210,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "1e56bb30bfe15f3e24c1c62cd9c5fe5132f5c6e7bd2c827974e9659d467a1ad5",
+   "mesh_sha256": "91e710ddfea93155760fc02cf0fee62912b4cd2beec5a6caa9d66fa369ac9390",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E5": {
+   "bounds": [
+    168,
+    172,
+    210,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "dda67930812b803dfbb14d60be79dadfe6660995d7dd3a893b6463c350b08a30",
+   "mesh_sha256": "b88adb03a83fba7d00a3319ed53c4d73ad0df30829a7b299410a70fed869dde2",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E6": {
+   "bounds": [
+    168,
+    215,
+    210,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "77345a31df10789d4be13aee9c05d6ac7d54a1f54556f50ac7a9e9d0e34d842e",
+   "mesh_sha256": "e6fffe14c78fb09f51a58b8a0b6fb5c2d76f52b90e6f15f60aea1b0f7320f9e9",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E7": {
+   "bounds": [
+    168,
+    258,
+    210,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "4d2b9c76c4aac487de93e8c8a7a684be8b099e8df564a14bdd3bbd1494785278",
+   "mesh_sha256": "9f6d1c30878b10fd20689f868ad24e007519fab50dd364a63aadc9336c5c7d21",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "F1": {
+   "bounds": [
+    210,
+    0,
+    252,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "94bfdad30e49bf51a491076f1ee93b3ad0dfcee822c91c4a50faaa6ccb9e6bd8",
+   "mesh_sha256": "aefa083a449f917d2264bc34e710c4731fb2d1949d99489b7718036372657230",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F2": {
+   "bounds": [
+    210,
+    43,
+    252,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d4c2448da7575e8ee58575277c74e844bda1ec7f2dee6af1eb349177762dab36",
+   "mesh_sha256": "d8552f593f1aa69ce7a127916e379dc6ed17a40cbecdf5b602bb38706c8aa4c0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F3": {
+   "bounds": [
+    210,
+    86,
+    252,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a32bc2f03cc6d0d220e7baa902d0f01854c8982ce9f2864cd10f68037e8f1f5c",
+   "mesh_sha256": "2882b5438dfcc585909ba5be62db7d5218372edc7404e4dff9df02148c05d238",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F4": {
+   "bounds": [
+    210,
+    129,
+    252,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a32bc2f03cc6d0d220e7baa902d0f01854c8982ce9f2864cd10f68037e8f1f5c",
+   "mesh_sha256": "3cc5326de8d7ae0d464a362c7ef33ac575114dac557e168a05bd5abc62509ef4",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F5": {
+   "bounds": [
+    210,
+    172,
+    252,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a3c5a1f049fd2ac9c2a5428270b09927846ecea87c86987eb1b766654991e423",
+   "mesh_sha256": "8097e10ca10a12720962e54a7a0ac6408534e3a03759fcc8cda62296068c6fae",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F6": {
+   "bounds": [
+    210,
+    215,
+    252,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "304567bba93cbf283c7119d306cfe3805ee46ba0702ad99b1c4df7201be92904",
+   "mesh_sha256": "7bc66ea9281e53e7480f73795ab3b2a16ffe0df6b4e2309c06b8902bcb500aa0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F7": {
+   "bounds": [
+    210,
+    258,
+    252,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "79dee86f1ed51618dba732e8a691882c94fbf123619e71b6965479cfcba72ba0",
+   "mesh_sha256": "4e294e6158f603a4627cc248abbd72163ad4a888f4370e0247b9b628a2aaed0f",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "G1": {
+   "bounds": [
+    252,
+    0,
+    294,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
+   "mesh_sha256": "81f6a7e869d13f590d548a7eb1a64b4abb87212613ae064b6bf204c7ca0e54e0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "GB_with_local_profiles",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "G2": {
+   "bounds": [
+    252,
+    43,
+    294,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f42d0d2f752d1f271d767d70a6b016010edeb188709a5414cfcd6f323f657dee",
+   "mesh_sha256": "c00b862482a623baa36b4302f6da8d0c6798d5d7ce4b0b5d32b42a77eb54ad96",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G3": {
+   "bounds": [
+    252,
+    86,
+    294,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "86375f006a5b00e9ad342504dcf2d4e6244df7a8d506949ca110ff131032ebfd",
+   "mesh_sha256": "37f425a2fefbee790ac21d74e37cbc493f1da170efde05cc170c060a78187e87",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G4": {
+   "bounds": [
+    252,
+    129,
+    294,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a0600493e598ab33e69b7af24197b8ce8c3eb5fc9fa4af655b3b1c4e28eed695",
+   "mesh_sha256": "9ddd2d53e2487bab619b9c4e97bc5cfae163ad28b75cfd11197221e8165f3b7a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G5": {
+   "bounds": [
+    252,
+    172,
+    294,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "9d0af40e1eee27616b37a985124c8fc1a3fb8f8bcb0800643d6eb0afdd58c1a3",
+   "mesh_sha256": "80529032172d654dd7111bc0a9ec5d8a9d689520c36fb21e04112ed3a36097bf",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G6": {
+   "bounds": [
+    252,
+    215,
+    294,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "00c98ab4a99a4800caddb76ffe327f38fef6f648d53cbc759c4b2c9e0e13e1bc",
+   "mesh_sha256": "3ef682ccc59ed3f6b14652287c7d8937765792565405b300c0b93644a366f1c7",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G7": {
+   "bounds": [
+    252,
+    258,
+    294,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "d9a285b1749adc2dd088375252f91b2ff7515574358cc09889dfd8d7178100af",
+   "mesh_sha256": "fd1677182517b3b5455db690a7a59240b86d10520aa761536fd042f653d75d7d",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  },
+  "H1": {
+   "bounds": [
+    294,
+    0,
+    336,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "7d97d8dedb83bf8ed6b1d986f53d9ef676322c0f284ce02c49471c33b955d6d2",
+   "mesh_sha256": "f8dd46379a88402831d08e28e4519eec2fad459e84d243b83dba1cf6e4895d6c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H2": {
+   "bounds": [
+    294,
+    43,
+    336,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "50171534fb3f9c31e80b21d3f3d2a619418e68f970762c1c5ccf4401826a8a17",
+   "mesh_sha256": "538b8d559efad1bfabb5868b62cfcb5af2bfdc167ac7b9c538f1244e7fced985",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H3": {
+   "bounds": [
+    294,
+    86,
+    336,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f6e3bbd68ed6d2a9706cb09415ccdca65dea2e921b86febcd1ecc647709f37c8",
+   "mesh_sha256": "dd16ff6472ada0f85802b97e13b1bab94fb67cfce26f802cb7dca3fe74cef963",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H4": {
+   "bounds": [
+    294,
+    129,
+    336,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "52e941f08aed0e7febc3253ef9028987511bc99efc92677fd214293b54f76ad2",
+   "mesh_sha256": "35f3d79426bda8d06ec92e5960a585c3e0484c9b4e83b1cfbdfa1214f7e3e89d",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H5": {
+   "bounds": [
+    294,
+    172,
+    336,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "0eef0c997097307ac3efaffdfc7515231591a349c3300f79d189fcfe75b718de",
+   "mesh_sha256": "5f6f297c67f9988a506819c9894e979bff6a5ab6795144fc438f3ae242c72623",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H6": {
+   "bounds": [
+    294,
+    215,
+    336,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "3a007fd1850b1f40d8628225d864dd992383d57ee7cea4c840ab41b4096dc280",
+   "mesh_sha256": "ee232d0def0fe685c51fcb23d4da290e39e9fa45169c8eccf885d1555241823c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H7": {
+   "bounds": [
+    294,
+    258,
+    336,
+    303
+   ],
+   "closed_triangles": 30936,
+   "height_sha256": "b9f1fe6a4e15fcd4b9f234ac267e4b37c7846d6f723e84da709f9256d3274b36",
+   "mesh_sha256": "05f95cc5fca44bf2cc12fbbc5491a5cfd2265d1273906fcfa79305b3f602c5c0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 15120,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7735
+  }
+ },
+ "kennzahlen": {
+  "A1": {
+   "klippe_KANTE_zellen": 52,
+   "klippe_WAND_zellen": 463,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 12,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 95
+  },
+  "A2": {
+   "klippe_KANTE_zellen": 7,
+   "klippe_WAND_zellen": 21,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 975
+  },
+  "A3": {
+   "klippe_KANTE_zellen": 16,
+   "klippe_WAND_zellen": 88,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 647
+  },
+  "A4": {
+   "klippe_KANTE_zellen": 5,
+   "klippe_WAND_zellen": 12,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 817
+  },
+  "A5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 30,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 892
+  },
+  "A6": {
+   "klippe_KANTE_zellen": 14,
+   "klippe_WAND_zellen": 225,
+   "vektor_wasser": 22,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1493
+  },
+  "A7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 15,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1469
+  },
+  "B1": {
+   "klippe_KANTE_zellen": 47,
+   "klippe_WAND_zellen": 454,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 8,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 31,
+   "vektor_wasser": 42,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1004
+  },
+  "B3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 1,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 638
+  },
+  "B4": {
+   "klippe_KANTE_zellen": 28,
+   "klippe_WAND_zellen": 516,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 6,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B5": {
+   "klippe_KANTE_zellen": 1,
+   "klippe_WAND_zellen": 125,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B6": {
+   "klippe_KANTE_zellen": 12,
+   "klippe_WAND_zellen": 196,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 51
+  },
+  "B7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1508
+  },
+  "C1": {
+   "klippe_KANTE_zellen": 69,
+   "klippe_WAND_zellen": 567,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 9,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 30,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C3": {
+   "klippe_KANTE_zellen": 78,
+   "klippe_WAND_zellen": 633,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 8,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C4": {
+   "klippe_KANTE_zellen": 21,
+   "klippe_WAND_zellen": 580,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 10,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C5": {
+   "klippe_KANTE_zellen": 46,
+   "klippe_WAND_zellen": 862,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 5,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C6": {
+   "klippe_KANTE_zellen": 73,
+   "klippe_WAND_zellen": 972,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 20,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 62,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1495
+  },
+  "D1": {
+   "klippe_KANTE_zellen": 39,
+   "klippe_WAND_zellen": 628,
+   "vektor_wasser": 34,
+   "vektor_wege": 1,
+   "wand_chunks": 5,
+   "wand_dreiecke": 0,
+   "wega_vertices": 148,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "D2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 38,
+   "vektor_wege": 4,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1776,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "D3": {
+   "klippe_KANTE_zellen": 3,
+   "klippe_WAND_zellen": 16,
+   "vektor_wasser": 38,
+   "vektor_wege": 3,
+   "wand_chunks": 1,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1200,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "D4": {
+   "klippe_KANTE_zellen": 30,
+   "klippe_WAND_zellen": 315,
+   "vektor_wasser": 40,
+   "vektor_wege": 2,
+   "wand_chunks": 16,
+   "wand_dreiecke": 0,
+   "wega_vertices": 181,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 674
+  },
+  "D5": {
+   "klippe_KANTE_zellen": 33,
+   "klippe_WAND_zellen": 148,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 666
+  },
+  "D6": {
+   "klippe_KANTE_zellen": 42,
+   "klippe_WAND_zellen": 1008,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 6,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 154
+  },
+  "D7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1670
+  },
+  "E1": {
+   "klippe_KANTE_zellen": 43,
+   "klippe_WAND_zellen": 974,
+   "vektor_wasser": 30,
+   "vektor_wege": 2,
+   "wand_chunks": 12,
+   "wand_dreiecke": 0,
+   "wega_vertices": 300,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 19
+  },
+  "E2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 33,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1935,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 413
+  },
+  "E3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 33,
+   "vektor_wege": 8,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1507,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 351
+  },
+  "E4": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 35,
+   "vektor_wege": 9,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2609,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 940
+  },
+  "E5": {
+   "klippe_KANTE_zellen": 12,
+   "klippe_WAND_zellen": 52,
+   "vektor_wasser": 48,
+   "vektor_wege": 3,
+   "wand_chunks": 4,
+   "wand_dreiecke": 0,
+   "wega_vertices": 484,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1006
+  },
+  "E6": {
+   "klippe_KANTE_zellen": 55,
+   "klippe_WAND_zellen": 1073,
+   "vektor_wasser": 34,
+   "vektor_wege": 0,
+   "wand_chunks": 13,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 163
+  },
+  "E7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 23,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1469
+  },
+  "F1": {
+   "klippe_KANTE_zellen": 67,
+   "klippe_WAND_zellen": 948,
+   "vektor_wasser": 26,
+   "vektor_wege": 3,
+   "wand_chunks": 15,
+   "wand_dreiecke": 0,
+   "wega_vertices": 139,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 361
+  },
+  "F2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 30,
+   "vektor_wasser": 29,
+   "vektor_wege": 4,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1719,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 29,
+   "vektor_wege": 5,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 555,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F4": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 30,
+   "vektor_wege": 9,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 3547,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 42,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1989,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 270
+  },
+  "F6": {
+   "klippe_KANTE_zellen": 33,
+   "klippe_WAND_zellen": 649,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 5,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 943
+  },
+  "F7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 23,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1948
+  },
+  "G1": {
+   "klippe_KANTE_zellen": 38,
+   "klippe_WAND_zellen": 933,
+   "vektor_wasser": 17,
+   "vektor_wege": 5,
+   "wand_chunks": 10,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1031,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 35
+  },
+  "G2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 18,
+   "vektor_wege": 6,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2220,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G3": {
+   "klippe_KANTE_zellen": 28,
+   "klippe_WAND_zellen": 338,
+   "vektor_wasser": 18,
+   "vektor_wege": 4,
+   "wand_chunks": 5,
+   "wand_dreiecke": 0,
+   "wega_vertices": 545,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G4": {
+   "klippe_KANTE_zellen": 6,
+   "klippe_WAND_zellen": 401,
+   "vektor_wasser": 18,
+   "vektor_wege": 14,
+   "wand_chunks": 14,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2686,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 25,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2257,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G6": {
+   "klippe_KANTE_zellen": 52,
+   "klippe_WAND_zellen": 736,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 20,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 271
+  },
+  "G7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 24,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1681
+  },
+  "H1": {
+   "klippe_KANTE_zellen": 42,
+   "klippe_WAND_zellen": 1162,
+   "vektor_wasser": 5,
+   "vektor_wege": 2,
+   "wand_chunks": 10,
+   "wand_dreiecke": 0,
+   "wega_vertices": 190,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H2": {
+   "klippe_KANTE_zellen": 29,
+   "klippe_WAND_zellen": 93,
+   "vektor_wasser": 6,
+   "vektor_wege": 3,
+   "wand_chunks": 2,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1781,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H3": {
+   "klippe_KANTE_zellen": 49,
+   "klippe_WAND_zellen": 584,
+   "vektor_wasser": 6,
+   "vektor_wege": 0,
+   "wand_chunks": 21,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H4": {
+   "klippe_KANTE_zellen": 36,
+   "klippe_WAND_zellen": 617,
+   "vektor_wasser": 6,
+   "vektor_wege": 1,
+   "wand_chunks": 20,
+   "wand_dreiecke": 0,
+   "wega_vertices": 24,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H5": {
+   "klippe_KANTE_zellen": 40,
+   "klippe_WAND_zellen": 556,
+   "vektor_wasser": 12,
+   "vektor_wege": 4,
+   "wand_chunks": 19,
+   "wand_dreiecke": 0,
+   "wega_vertices": 455,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H6": {
+   "klippe_KANTE_zellen": 32,
+   "klippe_WAND_zellen": 475,
+   "vektor_wasser": 12,
+   "vektor_wege": 0,
+   "wand_chunks": 7,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 13,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1678
+  }
+ },
+ "naht": {
+  "abweichend": [],
+  "max_abs_m": 0.0,
+  "paare": 97
+ },
+ "name": "alle_kacheln",
+ "paket_bytes": 7831636,
+ "prototyp_kacheln": [
+  "D1",
+  "D2",
+  "G1"
+ ],
+ "prototyp_mit_tile_mesh_identisch": {
+  "D1": true,
+  "D2": true,
+  "G1": true
+ },
+ "prototyp_quelle": "neu.mesh.build_manifest (Variante 0)",
+ "quelle": "relief_daten.json.gz",
+ "randzeilen_z301_303": true,
+ "source_relief_sha256": "c4489748b5eb842b9d11853ce7f2e4e127c28526a77c9fc980332370e6e188ae",
+ "terrain_extensions_angewendet": 0,
+ "testloch": null,
+ "waende_d2_unterdrueckt": {
+  "chunks": 0,
+  "features": 0,
+  "triangles": 0,
+  "vertices": 0
+ },
+ "wand_dreiecke": 0,
+ "wegprofile_andere_kacheln": {}
+}

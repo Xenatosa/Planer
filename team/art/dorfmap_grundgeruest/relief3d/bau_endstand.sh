@@ -14,6 +14,14 @@
 #   5 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py   NEU_GZ-Zeile (hier ohne Wirkung, Kontrolle)
 #   6 python3 pruefung/p10c/waende_einsetzen.py               Wandkoerper (P10e: 0) in relief_neu + index.html
 #
+# Nachschritte seit P11 (NICHT in diesem Skript, Stand 16.11.2026): relief_l3.py (L3/L3b, art/dorfmap-fertig d5b17e2) und
+# danach P2b/P2c (PR #21) auf relief_daten.json.gz + neu/relief_neu.json.gz, jeweils mit Basis-Hash-Pruefung:
+#   7 python3 relief_p2b.py                                   GB-Stellen 03/03d/03m/14/23 (pruefung/p2_analyse/p2b/p2b_stellen.json)
+#   8 python3 pruefung/p2_analyse/p2b/p2b_bruecken.py         Bruecke E2 (W2)
+#   9 python3 gen_textur.py vc, dann pruefung/p2_analyse/p2b/p2b_vc_lokal.py <vorher-daten> <vorher-neu>  VC nur lokal
+#  10 pruefung/p2_analyse/p2b/p2b_r5_textur.py, html_payload_p3.py, p10c/waende_einsetzen.py
+# Da Schritt L3 hier fehlt, baut dieses Skript weiterhin den P11-Stand (c6a3db0); der Endbau-Vergleich gilt nur dafuer.
+#
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
 # Bundle (esbuild-Drift, P11 geklaert): Das Bundle in index.html ist seit 6e58af0 (p3d5) unveraendert und wurde mit

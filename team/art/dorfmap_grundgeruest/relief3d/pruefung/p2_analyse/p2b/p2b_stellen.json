@@ -25,8 +25,9 @@
    "rx_m": 9,
    "rz_m": 9,
    "fade_m": 3.0,
-   "notiz": "Serpentine X084 (Gate rampe_8) an der Kreuzung mit rampe_2: Boeschung neu, Kern fest",
-   "flach": 2.0
+   "notiz": "Serpentine X084 (Gate rampe_8) an der Kreuzung mit rampe_2: Boeschung neu, Kern fest | P2c: ersetzt durch 03d (Variante A)",
+   "flach": 2.0,
+   "aktiv": false
   },
   {
    "id": "03c",
@@ -41,9 +42,42 @@
    "rx_m": 7.0,
    "rz_m": 7.0,
    "fade_m": 2.5,
-   "notiz": "Kreuzung rampe_2 (oben, ~6,5 m) / rampe_8 X084 (unten, ~4 m): Zickzack-Wand = Rasterkante zwischen den Kernen. Kern rampe_2 +-1,0 fest (glatte Distanzkante statt Zellraster), Ausreisser im Kern rampe_8 (Reste von rampe_2, >0,5 m) aufs Kernprofil, Wand dazwischen glatt",
+   "notiz": "Kreuzung rampe_2 (oben, ~6,5 m) / rampe_8 X084 (unten, ~4 m): Zickzack-Wand = Rasterkante zwischen den Kernen. Kern rampe_2 +-1,0 fest (glatte Distanzkante statt Zellraster), Ausreisser im Kern rampe_8 (Reste von rampe_2, >0,5 m) aufs Kernprofil, Wand dazwischen glatt | P2c: ersetzt durch 03d (Variante A)",
    "kern_ausreisser_m": 0.5,
-   "kern_andere_m": 1.0
+   "kern_andere_m": 1.0,
+   "aktiv": false
+  },
+  {
+   "id": "03d",
+   "kachel": "D1",
+   "verfahren": "rampe_anheben",
+   "rampe": 8,
+   "kreuzt": 2,
+   "kern": 1.0,
+   "flach": 2.0,
+   "boeschung": 4.0,
+   "kern_kreuzt": 2.0,
+   "plateau": 2.5,
+   "auslauf": 9.0,
+   "frei_rampen": [
+    2
+   ],
+   "notiz": "P2c Variante A: X084 (rampe_8) an der Kreuzung auf rampe_2 anheben. Kreuzungsflaeche = rampe_2 (quadratischer Fit, alte Rinne geschlossen), bergseitig weiches Maximum, talseitig Gefaelle zurueck auf die alte Endhoehe (Exponent 1,5), Kehren stetig (Segment-Mischung), Boeschung harmonisch (wegnah) / Versatz (Rand)",
+   "glatt_s": 1.5,
+   "tal_exponent": 1.5
+  },
+  {
+   "id": "03m",
+   "kachel": "D1",
+   "verfahren": "glaetten",
+   "x_m": 163.75,
+   "z_m": 20.5,
+   "rx_m": 3.0,
+   "rz_m": 2.5,
+   "fade_m": 2.0,
+   "schliessen_m": 3.5,
+   "sigma_m": 0.75,
+   "notiz": "P2c: Mulde neben rampe_8 (QA D1 159|22,9, geschlossene Senke 0,87 m bei 163-164,5|20-21, sichtbar im Nahbild): Schliessen 3,5 + Glaetten, keine Ausnahme"
   },
   {
    "id": "14",

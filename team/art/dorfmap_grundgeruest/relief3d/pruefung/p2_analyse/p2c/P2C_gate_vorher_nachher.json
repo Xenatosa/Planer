@@ -1,0 +1,76 @@
+{
+ "regeln": {
+  "summe": [
+   373,
+   371
+  ],
+  "je_regel": {
+   "G6_facette": [
+    214,
+    215
+   ],
+   "R3_laengs_m": [
+    20,
+    21
+   ],
+   "R3_quer_pct": [
+    10,
+    8
+   ],
+   "R3_woelb_m": [
+    10,
+    8
+   ]
+  }
+ },
+ "r8": {
+  "summe": [
+   33,
+   31
+  ],
+  "je_regel": {
+   "R8_gitter": [
+    7,
+    6
+   ],
+   "R8a_wegende": [
+    17,
+    16
+   ]
+  }
+ },
+ "r9": {
+  "summe": [
+   325,
+   325
+  ],
+  "je_regel": {}
+ },
+ "w1": {
+  "summe": [
+   0,
+   0
+  ],
+  "je_regel": {}
+ },
+ "w1_alle56": {
+  "summe": [
+   0,
+   0
+  ],
+  "je_regel": {}
+ },
+ "loch": {
+  "vorher": 0,
+  "nachher": 0,
+  "alle56_nachher": 0
+ },
+ "d2": {
+  "GB": "749d3c4b…",
+  "VC": "8d7a7b82…",
+  "WV": "4b33ed17…",
+  "WEGA": "e6cf61d2…",
+  "gleich_2633f1d": true,
+  "mesh_D2_gleich": true
+ }
+}

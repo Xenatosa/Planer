@@ -1,10 +1,10 @@
 {
-"summe": 33,
+"summe": 31,
 "je_regel": {
 "R8_stufe": 6,
-"R8_gitter": 7,
 "R8_quer": 3,
-"R8a_wegende": 17
+"R8_gitter": 6,
+"R8a_wegende": 16
 },
 "kreuzungen": 21,
 "je_feld": {
@@ -24,9 +24,9 @@
 },
 "D1": {
 "R8_stufe": 2,
-"R8_gitter": 2,
 "R8_quer": 1,
-"R8a_wegende": 3
+"R8_gitter": 1,
+"R8a_wegende": 2
 },
 "D4": {
 "R8a_wegende": 1
@@ -73,15 +73,7 @@
 "feld": "D1",
 "x": 152.5,
 "z": 28.5,
-"wert": 1.34,
-"art": "rampe_2x8"
-},
-{
-"regel": "R8_gitter",
-"feld": "D1",
-"x": 152.5,
-"z": 28.5,
-"wert": 2.19,
+"wert": 0.59,
 "art": "rampe_2x8"
 },
 {
@@ -89,7 +81,7 @@
 "feld": "D1",
 "x": 152.5,
 "z": 28.5,
-"wert": 23.2,
+"wert": 23.6,
 "art": "rampe_2x8"
 },
 {
@@ -185,7 +177,7 @@
 "feld": "D1",
 "x": 156.5,
 "z": 37.5,
-"wert": 0.34,
+"wert": 0.8,
 "art": "rampe_8_ende"
 },
 {
@@ -193,7 +185,7 @@
 "feld": "D1",
 "x": 156.5,
 "z": 37.5,
-"wert": 0.34,
+"wert": 0.61,
 "art": "rampe_8_ende"
 },
 {
@@ -355,16 +347,6 @@
 "weg": "rampe_8_anfang",
 "limit_m": 0.1,
 "ausnahme": null
-},
-{
-"regel": "R8a_wegende",
-"feld": "D1",
-"x": 156.5,
-"z": 37.5,
-"wert": 0.5,
-"weg": "rampe_8_ende",
-"limit_m": 0.1,
-"ausnahme": null
 }
 ],
 "liste": [
@@ -373,8 +355,8 @@
 "z": 28.5,
 "feld": "D1",
 "art": "rampe_2x8",
-"stufe": 1.344,
-"gitter": 2.188
+"stufe": 0.587,
+"gitter": 0.016
 },
 {
 "x": 65.5,
@@ -534,8 +516,8 @@
 "z": 37.5,
 "feld": "D1",
 "art": "rampe_8_ende",
-"stufe": 0.337,
-"gitter": 0.34,
+"stufe": 0.804,
+"gitter": 0.61,
 "quer_pct": 0.0
 },
 {
