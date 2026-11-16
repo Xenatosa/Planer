@@ -1,6 +1,6 @@
 {
-"summe": 378,
-"summe_ohne_ausnahmen": 378,
+"summe": 377,
+"summe_ohne_ausnahmen": 377,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -15,7 +15,7 @@
 "G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 38,
-"G6_facette": 211,
+"G6_facette": 210,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
 "T2_textur_abgeschnitten_bildpruefung_offen": 1,
@@ -2323,13 +2323,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "G6",
-"x": 284.6,
-"z": 222.3,
-"wert": 6
-},
-{
-"regel": "G6_facette",
 "feld": "C6",
 "x": 93.1,
 "z": 223.1,
@@ -2557,14 +2550,14 @@
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.622
+"wert": 0.625
 },
 {
 "regel": "G7b_wandkontur_kantenschaerfe",
 "feld": "-",
 "x": 0,
 "z": 0,
-"wert": 0.546
+"wert": 0.551
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2718,7 +2711,7 @@
 "feld": "G3",
 "x": 273,
 "z": 107,
-"wert": 0.817
+"wert": 0.818
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2739,7 +2732,7 @@
 "feld": "H2",
 "x": 315,
 "z": 64,
-"wert": 0.508
+"wert": 0.524
 },
 {
 "regel": "G7b_wandkontur_feld",
@@ -2767,7 +2760,7 @@
 "feld": "H6",
 "x": 315,
 "z": 236,
-"wert": 0.626
+"wert": 0.63
 }
 ]
 }

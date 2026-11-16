@@ -57,6 +57,22 @@ def schutz(D, GY, GX, rs, weg_abstand_m=1.5):
         x = np.interp(t, L, P[:, 0]); z = np.interp(t, L, P[:, 1])
         rampe[np.clip(np.rint(z * rs).astype(int), 0, GY - 1), np.clip(np.rint(x * rs).astype(int), 0, GX - 1)] = True
     weg |= nd.distance_transform_edt(~rampe, sampling=1.0 / rs) <= 2.0
+    # Wegnetz aus neu/vektor.json (Gassen, Anbindungen, Hauswege): halbe Breite + 0,5 m fest; Kreuzungsflaechen + Uebergang fest
+    V = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
+    for wv in V.get("wege", []):
+        P = np.asarray(wv["mittellinie_m"], float)
+        if len(P) < 2: continue
+        L = np.r_[0.0, np.cumsum(np.hypot(*np.diff(P, axis=0).T))]; t = np.arange(0.0, L[-1] + 1e-9, 0.25)
+        lin = np.zeros((GY, GX), bool)
+        lin[np.clip(np.rint(np.interp(t, L, P[:, 1]) * rs).astype(int), 0, GY - 1), np.clip(np.rint(np.interp(t, L, P[:, 0]) * rs).astype(int), 0, GX - 1)] = True
+        zs, xs = np.where(lin); pad = int((wv["breite_m"] / 2 + 1) * rs) + 1
+        sl = (slice(max(zs.min() - pad, 0), zs.max() + pad + 1), slice(max(xs.min() - pad, 0), xs.max() + pad + 1))
+        weg[sl] |= nd.distance_transform_edt(~lin[sl], sampling=1.0 / rs) <= wv["breite_m"] / 2 + 0.5
+    from matplotlib.path import Path as _MP
+    zz, xx = np.mgrid[0:GY, 0:GX] / float(rs); pts = np.c_[xx.ravel(), zz.ravel()]
+    for k in V.get("kreuzungen", []):
+        weg |= _MP(k["polygon_m"]).contains_points(pts, radius=float(k.get("uebergang_m", 0.0)) + 0.5).reshape(GY, GX) | \
+               _MP(k["polygon_m"]).contains_points(pts, radius=-(float(k.get("uebergang_m", 0.0)) + 0.5)).reshape(GY, GX)
     dw = nd.distance_transform_edt(~wasser, sampling=1.0 / rs)
     dr = nd.distance_transform_edt(~weg, sampling=1.0 / rs)
     w = _ss((dw - 1.5) / 1.5)              # Wasser: 0 bis 1,5 m Abstand, voll ab 3 m
