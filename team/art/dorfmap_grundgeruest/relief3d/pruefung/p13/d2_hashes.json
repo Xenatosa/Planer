@@ -1,0 +1,46 @@
+{
+ "basis_cc33fd1": {
+  "terrain_surface_D2": {
+   "pos": "ebeb46a1",
+   "nor": "52eb1840"
+  },
+  "terrain_sides_D2": {
+   "pos": "6835acf2",
+   "nor": "98f2e596"
+  },
+  "terrain_bottom_D2": {
+   "pos": "b33d5a64",
+   "nor": "18aaf4e1"
+  }
+ },
+ "p13": {
+  "terrain_surface_D2": {
+   "pos": "ebeb46a1",
+   "nor": "52eb1840"
+  },
+  "terrain_sides_D2": {
+   "pos": "6835acf2",
+   "nor": "98f2e596"
+  },
+  "terrain_bottom_D2": {
+   "pos": "b33d5a64",
+   "nor": "18aaf4e1"
+  }
+ },
+ "p13_silh0": {
+  "terrain_surface_D2": {
+   "pos": "ebeb46a1",
+   "nor": "52eb1840"
+  },
+  "terrain_sides_D2": {
+   "pos": "6835acf2",
+   "nor": "98f2e596"
+  },
+  "terrain_bottom_D2": {
+   "pos": "b33d5a64",
+   "nor": "18aaf4e1"
+  }
+ },
+ "konsole": "keine Fehler/Warnungen",
+ "bitgleich": true
+}

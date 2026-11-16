@@ -1,0 +1,22 @@
+{
+ "quelle": "QA p4h rendere_kacheln.js / Kritiker P8: 960x680, nosh=1, SwiftShader, U = focus(Kachel,1.6), Qn = Viertelmitte, Abstand 30 m, Neigung 35 Grad, Blick nach Norden",
+ "bilder": [
+  "B4_Q2",
+  "B4_Q3",
+  "B4_Q4",
+  "C4_U",
+  "C4_Q1",
+  "B5_U",
+  "C5_U",
+  "H3_U",
+  "H4_U",
+  "G3_U",
+  "G3_Q2",
+  "G4_U",
+  "G4_Q2",
+  "H2_U",
+  "D3_U"
+ ],
+ "vorher": "?silh=0",
+ "nachher": "Standard (silh an)"
+}

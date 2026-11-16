@@ -123,7 +123,13 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   wegeRoot.visible = !ohne.has('wege'); wasserRoot.visible = !ohne.has('wasser'); wallRoot.visible = !ohne.has('waende');
   rasterRoot.visible = q.get('raster') !== '0';
   const clay = /[?&]clay=1/.test(location.search);
-  const terrainMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: THREE.DoubleSide });
+  // P13 Silhouetten: Mit DoubleSide gewinnen an Grat-/Hangsilhouetten einzelne Pixel der dunkel beleuchteten
+  // Rueckseiten (Falte, gleiche Tiefe an der Kante) -> gepunktete dunkle Haarlinie. Alle Oberflaechendreiecke zeigen
+  // nach oben (P13-Messung: 0 von 814464 nach unten), Rueckseiten sind von der Spielkamera nie gewollt sichtbar.
+  // Daher FrontSide; shadowSide bleibt DoubleSide, damit die Schattenkarte unveraendert ist. ?silh=0 = alter Stand.
+  const silh = q.get('silh') !== '0';
+  const terrainMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: silh ? THREE.FrontSide : THREE.DoubleSide });
+  if (silh) terrainMaterial.shadowSide = THREE.DoubleSide;
   // P10b Darstellung (QA P4b Punkt 2): Seiten/Boden jeder Kachel liegen an der Naht exakt auf der
   // Oberkante der Nachbaroberflaeche (gleiche Tiefe) und gewinnen dort einzelne Pixel -> dunkle Haarlinie.
   // polygonOffset schiebt nur Seiten/Boden in der Tiefe nach hinten; Geometrie/Hashes unveraendert.

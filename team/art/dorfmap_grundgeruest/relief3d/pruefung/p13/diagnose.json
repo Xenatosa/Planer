@@ -1,0 +1,34 @@
+{
+ "gelaende_oberflaeche_alle_56": {
+  "dreiecke": 814464,
+  "nach_unten_gerichtet": 0,
+  "offene_kanten": 19104,
+  "offene_innenkanten_ausserhalb_kachelrand": 0
+ },
+ "hinweis": "T-Stoesse/offene Kanten nur am Kachelrand (dort durch Seiten/Boden + Naht max_abs 0,0 m geschlossen); Clear-Farbe Rot (#ff0000): 0 rote Pixel im Gelaende von B4_Q2/B4_Q4/C4_U/D3_U, in G3_U/H2_U nur Himmel am Bildrand (17946/135389 px, mit und ohne Seiten/Boden identisch) -> keine Rasterluecken",
+ "webgl": {
+  "renderer": "SwiftShader (WebKit WebGL)",
+  "antialias": true,
+  "samples": 4
+ },
+ "aufloesung_2x": {
+  "B4_Q2": {
+   "doubleside_2x": 1384,
+   "doubleside_2x_auf_1x_verkleinert": 13,
+   "frontside_2x": 15,
+   "frontside_verkleinert": 11
+  },
+  "G3_U": {
+   "doubleside_2x": 306,
+   "verkleinert": 2,
+   "frontside_2x": 4,
+   "frontside_verkleinert": 0
+  },
+  "H2_U": {
+   "doubleside_2x": 123,
+   "verkleinert": 14,
+   "frontside_2x": 6,
+   "frontside_verkleinert": 4
+  }
+ }
+}

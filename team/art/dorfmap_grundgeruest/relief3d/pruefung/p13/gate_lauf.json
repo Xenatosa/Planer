@@ -1,0 +1,10 @@
+{
+ "pruefe_regeln": 359,
+ "r8": 31,
+ "r9": 321,
+ "w1": 0,
+ "w1_alle56": 0,
+ "lochscan": "ok, keine G1-Treffer",
+ "soll_cc33fd1": "359/31/321",
+ "ergebnis": "Zahlen = Soll der Basis (359/31/321, W1 0/0, Loch 0). Exit-Code 'GATE ROT' kommt daher, dass die Pruefer bei Befunden > 0 ungleich 0 enden; massgeblich ist die Zaehlung. Das Gate liest viewer_alle.js nicht (Lochscan auf index.html, W1 alle 56 mit --ohne-html)."
+}

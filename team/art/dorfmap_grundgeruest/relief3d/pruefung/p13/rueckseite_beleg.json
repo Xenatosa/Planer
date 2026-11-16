@@ -1,0 +1,38 @@
+{
+ "B4_Q2": {
+  "dunkel_doubleside": 558,
+  "davon_magenta_genau": 543,
+  "davon_magenta_1px": 549,
+  "magenta_pixel": 1829
+ },
+ "B4_Q4": {
+  "dunkel_doubleside": 512,
+  "davon_magenta_genau": 485,
+  "davon_magenta_1px": 493,
+  "magenta_pixel": 1853
+ },
+ "C4_U": {
+  "dunkel_doubleside": 380,
+  "davon_magenta_genau": 341,
+  "davon_magenta_1px": 355,
+  "magenta_pixel": 1132
+ },
+ "G3_U": {
+  "dunkel_doubleside": 153,
+  "davon_magenta_genau": 146,
+  "davon_magenta_1px": 149,
+  "magenta_pixel": 395
+ },
+ "H2_U": {
+  "dunkel_doubleside": 59,
+  "davon_magenta_genau": 58,
+  "davon_magenta_1px": 58,
+  "magenta_pixel": 213
+ },
+ "D3_U": {
+  "dunkel_doubleside": 107,
+  "davon_magenta_genau": 76,
+  "davon_magenta_1px": 76,
+  "magenta_pixel": 458
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "B4_Q2": {
+  "dunkel_vorher": 556,
+  "dunkel_nachher": 17,
+  "geaenderte_pixel": 1832
+ },
+ "G3_U": {
+  "dunkel_vorher": 162,
+  "dunkel_nachher": 15,
+  "geaenderte_pixel": 399
+ },
+ "H2_U": {
+  "dunkel_vorher": 59,
+  "dunkel_nachher": 5,
+  "geaenderte_pixel": 214
+ },
+ "wrand0_wirkt_G7_U": true
+}
