@@ -75,8 +75,8 @@
   {
    "id": "12",
    "kachel": "D6",
-   "max_m": 0.719,
-   "vertices_geaendert": 257
+   "max_m": 1.178,
+   "vertices_geaendert": 420
   },
   {
    "id": "13",
@@ -87,8 +87,8 @@
   {
    "id": "14",
    "kachel": "E1",
-   "max_m": 3.221,
-   "vertices_geaendert": 470
+   "max_m": 3.223,
+   "vertices_geaendert": 613
   },
   {
    "id": "15",
@@ -147,15 +147,15 @@
   {
    "id": "23",
    "kachel": "G6",
-   "max_m": 0.366,
-   "vertices_geaendert": 275
+   "max_m": 0.835,
+   "vertices_geaendert": 539
   }
  ],
- "vertices_geaendert": 19492,
- "max_abs_m": 3.221,
+ "vertices_geaendert": 20061,
+ "max_abs_m": 3.223,
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "gb_sha256_nachher": "8e665ce1dcf517e85170665fd1b251494294a20fda9c28983cec733fa6c3809f",
+ "gb_sha256_nachher": "2e63683df5cf6563315029368817211b5614e257a726e3302c12aa362f403b25",
  "objekte_angepasst": 193,
  "prototypen": {
   "D2": "unveraendert",

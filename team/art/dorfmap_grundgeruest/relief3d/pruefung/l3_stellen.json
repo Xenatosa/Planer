@@ -165,10 +165,11 @@
    "rx_m": 4,
    "rz_m": 3.5,
    "fade_m": 3.5,
-   "sigma_m": 1.0,
+   "sigma_m": 1.2,
    "notiz": "Saegezahnlinie Hangrand",
    "aktiv": true,
-   "oeffnen_m": 1.0
+   "oeffnen_m": 1.0,
+   "weg_abstand_m": 0.0
   },
   {
    "id": "13",
@@ -187,13 +188,13 @@
    "kachel": "E1",
    "x_m": 181,
    "z_m": 20,
-   "rx_m": 3,
-   "rz_m": 3,
+   "rx_m": 4,
+   "rz_m": 4,
    "fade_m": 3.5,
    "sigma_m": 1.0,
    "notiz": "Splitter Klippenecke",
    "aktiv": true,
-   "oeffnen_m": 2.0
+   "oeffnen_m": 3.0
   },
   {
    "id": "15",
@@ -319,11 +320,12 @@
    "rx_m": 11,
    "rz_m": 4,
    "fade_m": 3.5,
-   "sigma_m": 1.0,
+   "sigma_m": 1.5,
    "notiz": "Kerbe/Kammkante Krone",
    "aktiv": true,
    "schliessen_m": 2.0,
-   "drehung_grad": 135
+   "drehung_grad": 135,
+   "weg_abstand_m": 0.0
   }
  ]
 }
