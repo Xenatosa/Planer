@@ -69,6 +69,7 @@ def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], orig
     foot_variant = int(os.environ.get("RELIEF_WANDFUSS_VAR", "2"))
     vector = json.loads(vektor_pfad.read_text(encoding="utf-8"))
     out: dict[str, dict] = {}
+    nicht_gerendert: dict[str, list] = {}
     for tile in kacheln:
         bounds = M.TILE_BOUNDS[tile]
         terrain = WD._terrain_heights(terrain_tiles, tile) if foot_variant in (1, 2) else None
@@ -80,9 +81,21 @@ def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], orig
             # P10c: neu/wand.py baut in Zellen (Breite / CELL_M); aeltere wand.py ohne _centerline_cells in Metern-als-Zellen.
             width_geo = width / WD.CELL_M if hasattr(WD, "_centerline_cells") else width
             for points, top, bottom in WD._chunks(wall, bounds, width, variant):
+                # P10d: Oberkante an lokale Gelaendekrone binden, Schnittreste < 1 Zelle nicht bauen (wie neu/wand.py).
+                if hasattr(WD, "bind_chunk_to_terrain"):
+                    runs, info = WD.bind_chunk_to_terrain(points, top, bottom, width_geo, terrain, tile)
+                    if "grund" in info:
+                        nicht_gerendert.setdefault(tile, []).append({
+                            "wand": f"{wall.get('name')}:{wall.get('teil')}",
+                            "start": [round(float(v), 2) for v in points[0]],
+                            "ende": [round(float(v), 2) for v in points[-1]], **info})
+                    if not runs:
+                        continue
+                else:
+                    runs = [(points, np.maximum(top, bottom))]
                 used_widths.append(width)
                 if terrain is not None:
-                    network_chunks.append((points, np.maximum(top, bottom), width_geo))
+                    network_chunks.extend((rp, rt, width_geo) for rp, rt in runs)
                 else:
                     positions, indices = WD._solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width_geo, variant)
                     if len(indices):
@@ -114,7 +127,8 @@ def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], orig
             raise RuntimeError(f"Wandmesh {t} weicht von neu.wand.build_wall_manifest ab")
     d2 = out.pop("D2")
     out["D2"] = dict(original["tiles"]["D2"])
-    return {"tiles": out, "d2_unterdrueckt": {k: d2[k] for k in ("vertices", "triangles", "features", "chunks")},
+    nicht_gerendert.pop("D2", None)
+    return {"tiles": out, "nicht_gerendert": nicht_gerendert, "d2_unterdrueckt": {k: d2[k] for k in ("vertices", "triangles", "features", "chunks")},
             "d2_unterdrueckt_mesh": d2}
 
 
@@ -137,7 +151,9 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
         # P10c: Seit a10fc1e (P3) passt relief_daten.json.gz nicht mehr zur p3d17-Rasterloesung
         # (source_relief_sha256), build_manifest() bricht fuer D1 ab. index.html nutzt das
         # gespeicherte Manifest aus neu/relief_neu.json.gz -> genau dieses verwenden.
-        if "p3d17" not in str(err):
+        # P10e: Seit P2 (9ace686, Rampen entnommen) bricht build_manifest() auch mit
+        # "Erwartete D1-Kreuzung rampe_2/rampe_11 fehlt" ab -> ebenfalls das gespeicherte Manifest.
+        if "p3d17" not in str(err) and "rampe_2/rampe_11" not in str(err):
             raise
         manifest = json.loads(gzip.decompress((R / "neu" / "relief_neu.json.gz").read_bytes()))["neu_mesh_tiles"]
         prototyp_quelle = f"neu/relief_neu.json.gz (gespeichert; build_manifest: {err})"
@@ -257,7 +273,7 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
     tw = time.time()
     if alle_waende:
         wa = waende_alle(R / "neu" / "vektor.json", tiles, list(grenzen), waende)
-        waende_paket = {**{k: v for k, v in waende.items() if k != "tiles"}, "tiles": wa["tiles"],
+        waende_paket = {**{k: v for k, v in waende.items() if k != "tiles"}, "tiles": wa["tiles"], "nicht_gerendert": wa["nicht_gerendert"],
                         "d2_unterdrueckt": wa["d2_unterdrueckt"], "d2_unterdrueckt_mesh": wa["d2_unterdrueckt_mesh"]}
     else:
         waende_paket = waende

@@ -1,0 +1,22 @@
+{
+ "summe": 0,
+ "je_regel": {
+  "W1a_ausserhalb_karte": 0,
+  "W1b_ueber_krone": 0,
+  "W1c_schwebend": 0,
+  "W1d_quellabstand": 0
+ },
+ "je_feld": {},
+ "quelle": "/tmp/p10e/alle_nachher/alle_kacheln.json.gz",
+ "format": "alle_kacheln",
+ "gelaende_vertices_aus_quelle": 416840,
+ "schwellen_A": {
+  "krone_m": 0.5,
+  "krone_radius_zellen": 1.5,
+  "schweben_m": 0.5,
+  "quellabstand_zellen": 1.0,
+  "quellabstand_vertex_grenze_zellen": 1.52
+ },
+ "je_kachel": {},
+ "treffer": []
+}

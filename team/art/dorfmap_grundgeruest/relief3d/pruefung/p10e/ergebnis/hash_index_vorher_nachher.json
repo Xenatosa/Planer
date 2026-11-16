@@ -1,0 +1,299 @@
+{
+ "referenz": "/workspace/wt_p10e_basis/team/art/dorfmap_grundgeruest/relief3d/index.html",
+ "neu": "index.html",
+ "ladezeit_s": {
+  "referenz": 1.952,
+  "neu": 1.409
+ },
+ "referenz_kacheln": [
+  "D1",
+  "G1",
+  "D2"
+ ],
+ "neu_kacheln": [
+  "D1",
+  "G1",
+  "D2"
+ ],
+ "vergleich": {
+  "D1": {
+   "geometrisch_identisch": true,
+   "teile": {
+    "surface": {
+     "identisch": true,
+     "ref_pos_sha256": "5a1fff67b0dfcb1d168196a5ffd30a77c5f7d595fde740ea8a2601ad894da6a9",
+     "neu_pos_sha256": "5a1fff67b0dfcb1d168196a5ffd30a77c5f7d595fde740ea8a2601ad894da6a9",
+     "ref_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "neu_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "vertices": 7395,
+     "farbe_identisch": true
+    },
+    "sides": {
+     "identisch": true,
+     "ref_pos_sha256": "48b61c1b6d1b589a6a93811f115bb974bbfec6377d141e1d7749258c759a6d27",
+     "neu_pos_sha256": "48b61c1b6d1b589a6a93811f115bb974bbfec6377d141e1d7749258c759a6d27",
+     "ref_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "neu_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "vertices": 1360,
+     "farbe_identisch": true
+    },
+    "bottom": {
+     "identisch": true,
+     "ref_pos_sha256": "110e2ff11c02fcd4f07d680983a87e5cb058a07428ce205fbb2c982651daa8dc",
+     "neu_pos_sha256": "110e2ff11c02fcd4f07d680983a87e5cb058a07428ce205fbb2c982651daa8dc",
+     "ref_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "neu_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "vertices": 7395,
+     "farbe_identisch": true
+    }
+   },
+   "wand": {
+    "ref_vorhanden": true,
+    "neu_vorhanden": false,
+    "identisch": false,
+    "ref_pos_sha256": "9559714a577551c338f2464883171402c85323f818209f55b6121c9d43f35c46"
+   }
+  },
+  "G1": {
+   "geometrisch_identisch": true,
+   "teile": {
+    "surface": {
+     "identisch": true,
+     "ref_pos_sha256": "afd6afad9d075459dd58135e6b586f6b933485fa50ee447284dc4287dc86c62a",
+     "neu_pos_sha256": "afd6afad9d075459dd58135e6b586f6b933485fa50ee447284dc4287dc86c62a",
+     "ref_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "neu_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "vertices": 7395,
+     "farbe_identisch": true
+    },
+    "sides": {
+     "identisch": true,
+     "ref_pos_sha256": "99ddcb7db922b0f2efff97a6f0821fa446cecb20a5e72c736e71bf54929f2cce",
+     "neu_pos_sha256": "99ddcb7db922b0f2efff97a6f0821fa446cecb20a5e72c736e71bf54929f2cce",
+     "ref_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "neu_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "vertices": 1360,
+     "farbe_identisch": true
+    },
+    "bottom": {
+     "identisch": true,
+     "ref_pos_sha256": "b6ed71c46935a0e21d4c6586f672eb9a55f2ae81ee7182633e547dd22ef4d51b",
+     "neu_pos_sha256": "b6ed71c46935a0e21d4c6586f672eb9a55f2ae81ee7182633e547dd22ef4d51b",
+     "ref_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "neu_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "vertices": 7395,
+     "farbe_identisch": true
+    }
+   },
+   "wand": {
+    "ref_vorhanden": true,
+    "neu_vorhanden": false,
+    "identisch": false,
+    "ref_pos_sha256": "74692353d63527a56a4b08501ab2a6273d836194ce1ed46b92b022e8944fa37b"
+   }
+  },
+  "D2": {
+   "geometrisch_identisch": true,
+   "teile": {
+    "surface": {
+     "identisch": true,
+     "ref_pos_sha256": "ebeb46a15c25bce0225a71a439ea7e6442e8b763f18d75cdb1c7376a5f3e56e9",
+     "neu_pos_sha256": "ebeb46a15c25bce0225a71a439ea7e6442e8b763f18d75cdb1c7376a5f3e56e9",
+     "ref_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "neu_idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+     "vertices": 7395,
+     "farbe_identisch": true
+    },
+    "sides": {
+     "identisch": true,
+     "ref_pos_sha256": "6835acf26107fbe7d45305c9a954f74b8f8123a05d89f14464f685c5aa12b681",
+     "neu_pos_sha256": "6835acf26107fbe7d45305c9a954f74b8f8123a05d89f14464f685c5aa12b681",
+     "ref_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "neu_idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+     "vertices": 1360,
+     "farbe_identisch": true
+    },
+    "bottom": {
+     "identisch": true,
+     "ref_pos_sha256": "b33d5a64c686ce3f211553d2ec81c2cf5c73a7dca9d972445cd123ff81722b5c",
+     "neu_pos_sha256": "b33d5a64c686ce3f211553d2ec81c2cf5c73a7dca9d972445cd123ff81722b5c",
+     "ref_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "neu_idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+     "vertices": 7395,
+     "farbe_identisch": true
+    }
+   },
+   "wand": {
+    "ref_vorhanden": false,
+    "neu_vorhanden": false,
+    "identisch": true
+   }
+  }
+ },
+ "alle_identisch": true,
+ "waende_identisch": false,
+ "neu_hashes": {
+  "terrain_surface_D1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "5a1fff67b0dfcb1d168196a5ffd30a77c5f7d595fde740ea8a2601ad894da6a9",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "c8617abb9a775e624e6bbd8cc8b92531f99306cf13d253edd7eff9ea47dc56cf",
+   "matrix_identity": true
+  },
+  "terrain_sides_D1": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "48b61c1b6d1b589a6a93811f115bb974bbfec6377d141e1d7749258c759a6d27",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_D1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "110e2ff11c02fcd4f07d680983a87e5cb058a07428ce205fbb2c982651daa8dc",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_surface_G1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "afd6afad9d075459dd58135e6b586f6b933485fa50ee447284dc4287dc86c62a",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "c238478a17780dab10a1d89fd7d6f61be9357656225d52290097a7bb34c84e16",
+   "matrix_identity": true
+  },
+  "terrain_sides_G1": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "99ddcb7db922b0f2efff97a6f0821fa446cecb20a5e72c736e71bf54929f2cce",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_G1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "b6ed71c46935a0e21d4c6586f672eb9a55f2ae81ee7182633e547dd22ef4d51b",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_surface_D2": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "ebeb46a15c25bce0225a71a439ea7e6442e8b763f18d75cdb1c7376a5f3e56e9",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "46ad347adfa5c62c0567dc06936d27caea3fa4dc2f5701b3efa4f8bda05d517b",
+   "matrix_identity": true
+  },
+  "terrain_sides_D2": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "6835acf26107fbe7d45305c9a954f74b8f8123a05d89f14464f685c5aa12b681",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_D2": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "b33d5a64c686ce3f211553d2ec81c2cf5c73a7dca9d972445cd123ff81722b5c",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  }
+ },
+ "referenz_hashes": {
+  "terrain_surface_D1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "5a1fff67b0dfcb1d168196a5ffd30a77c5f7d595fde740ea8a2601ad894da6a9",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "c8617abb9a775e624e6bbd8cc8b92531f99306cf13d253edd7eff9ea47dc56cf",
+   "matrix_identity": true
+  },
+  "terrain_sides_D1": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "48b61c1b6d1b589a6a93811f115bb974bbfec6377d141e1d7749258c759a6d27",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_D1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "110e2ff11c02fcd4f07d680983a87e5cb058a07428ce205fbb2c982651daa8dc",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_surface_G1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "afd6afad9d075459dd58135e6b586f6b933485fa50ee447284dc4287dc86c62a",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "c238478a17780dab10a1d89fd7d6f61be9357656225d52290097a7bb34c84e16",
+   "matrix_identity": true
+  },
+  "terrain_sides_G1": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "99ddcb7db922b0f2efff97a6f0821fa446cecb20a5e72c736e71bf54929f2cce",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_G1": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "b6ed71c46935a0e21d4c6586f672eb9a55f2ae81ee7182633e547dd22ef4d51b",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_surface_D2": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "ebeb46a15c25bce0225a71a439ea7e6442e8b763f18d75cdb1c7376a5f3e56e9",
+   "idx_sha256": "dcc175769e81696f36450cdcd81fbeb4d5d5c95fbf08538095e60fb24aeaeabe",
+   "col_sha256": "46ad347adfa5c62c0567dc06936d27caea3fa4dc2f5701b3efa4f8bda05d517b",
+   "matrix_identity": true
+  },
+  "terrain_sides_D2": {
+   "vertices": 1360,
+   "indices": 2040,
+   "pos_sha256": "6835acf26107fbe7d45305c9a954f74b8f8123a05d89f14464f685c5aa12b681",
+   "idx_sha256": "d78766b08f5d4b720e40f35ed137494f8c75c873fc5305fcda46e83b99043cd9",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "terrain_bottom_D2": {
+   "vertices": 7395,
+   "indices": 43344,
+   "pos_sha256": "b33d5a64c686ce3f211553d2ec81c2cf5c73a7dca9d972445cd123ff81722b5c",
+   "idx_sha256": "b130fea93319b6db8366803cb6976954bcf1c6691c980c4ab3c77a7e4b708dd1",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "wand_D1": {
+   "vertices": 13876,
+   "indices": 49632,
+   "pos_sha256": "9559714a577551c338f2464883171402c85323f818209f55b6121c9d43f35c46",
+   "idx_sha256": "32eaeda101c5a2b1557bb3b7d3eda351659fe04bf8cbd2aa367fe552cfac3acc",
+   "col_sha256": null,
+   "matrix_identity": true
+  },
+  "wand_G1": {
+   "vertices": 21070,
+   "indices": 75012,
+   "pos_sha256": "74692353d63527a56a4b08501ab2a6273d836194ce1ed46b92b022e8944fa37b",
+   "idx_sha256": "b3f4038a82d3243ff2dbafa99f057e93a59abe9b22ec206163765b48814e752a",
+   "col_sha256": null,
+   "matrix_identity": true
+  }
+ }
+}

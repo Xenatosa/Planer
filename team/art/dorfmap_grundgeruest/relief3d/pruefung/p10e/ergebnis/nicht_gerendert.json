@@ -1,0 +1,5843 @@
+{
+ "hinweis": "Nichts aus vektor.json geloescht; nur nicht als Koerper gebaut (neu/wand.py bind_chunk_to_terrain). Koordinaten in Zellen.",
+ "anzahl": {
+  "alle_56": 299,
+  "index_html_D1_G1": 15
+ },
+ "gruende_alle_56": {
+  "Gelaende quer zur Linie flacher als 2 m": 233,
+  "kuerzer als 1 Zelle": 16,
+  "nur Laeufe < 3 Zellen mit Stufe": 30,
+  "Gelaende formt die Klippe selbst": 20
+ },
+ "gelaende_formt_klippe": [
+  {
+   "kachel": "H2",
+   "wand": "Nord:68",
+   "start": [
+    322.5,
+    74.5
+   ],
+   "ende": [
+    332.5,
+    70.5
+   ],
+   "laenge_zellen": 11.701,
+   "relief_max_m": 5.73,
+   "stationen": 200,
+   "stationen_ohne_relief": 0,
+   "laeufe_gebaut": 1,
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 11.7,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)"
+  },
+  {
+   "kachel": "C3",
+   "wand": "Krater:5",
+   "start": [
+    89.5,
+    124.5
+   ],
+   "ende": [
+    110.5,
+    97.5
+   ],
+   "laenge_zellen": 39.285,
+   "relief_max_m": 5.9,
+   "stationen": 684,
+   "stationen_ohne_relief": 282,
+   "laeufe_gebaut": 2,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 2,
+   "laenge_unterdrueckt_zellen": 23.44
+  },
+  {
+   "kachel": "C3",
+   "wand": "Krater:8",
+   "start": [
+    112.5,
+    103.5
+   ],
+   "ende": [
+    117.5,
+    120.5
+   ],
+   "laenge_zellen": 21.443,
+   "relief_max_m": 6.82,
+   "stationen": 380,
+   "stationen_ohne_relief": 110,
+   "laeufe_gebaut": 2,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 2,
+   "laenge_unterdrueckt_zellen": 15.31
+  },
+  {
+   "kachel": "H3",
+   "wand": "Ostgrat:13",
+   "start": [
+    295.05,
+    94.96
+   ],
+   "ende": [
+    319.56,
+    87.05
+   ],
+   "laenge_zellen": 29.567,
+   "relief_max_m": 3.22,
+   "stationen": 498,
+   "stationen_ohne_relief": 395,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.16
+  },
+  {
+   "kachel": "B4",
+   "wand": "unbenannt:3",
+   "start": [
+    70.5,
+    161.5
+   ],
+   "ende": [
+    70.5,
+    170.5
+   ],
+   "laenge_zellen": 9.874,
+   "relief_max_m": 4.37,
+   "stationen": 180,
+   "stationen_ohne_relief": 74,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 4.16
+  },
+  {
+   "kachel": "D4",
+   "wand": "Krater:25",
+   "start": [
+    127.05,
+    149.88
+   ],
+   "ende": [
+    128.5,
+    141.5
+   ],
+   "laenge_zellen": 12.756,
+   "relief_max_m": 2.81,
+   "stationen": 225,
+   "stationen_ohne_relief": 146,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 4.43
+  },
+  {
+   "kachel": "C6",
+   "wand": "Suedgrat:12",
+   "start": [
+    99.04,
+    216.05
+   ],
+   "ende": [
+    105.01,
+    216.05
+   ],
+   "laenge_zellen": 6.355,
+   "relief_max_m": 3.29,
+   "stationen": 120,
+   "stationen_ohne_relief": 55,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.41
+  },
+  {
+   "kachel": "C6",
+   "wand": "Suedgrat:17",
+   "start": [
+    124.95,
+    232.95
+   ],
+   "ende": [
+    111.5,
+    219.5
+   ],
+   "laenge_zellen": 23.518,
+   "relief_max_m": 4.06,
+   "stationen": 410,
+   "stationen_ohne_relief": 350,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.41
+  },
+  {
+   "kachel": "D6",
+   "wand": "Suedgrat:25",
+   "start": [
+    129.5,
+    236.5
+   ],
+   "ende": [
+    164.5,
+    226.5
+   ],
+   "laenge_zellen": 44.814,
+   "relief_max_m": 6.8,
+   "stationen": 776,
+   "stationen_ohne_relief": 428,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 17.94
+  },
+  {
+   "kachel": "E6",
+   "wand": "Suedgrat:36",
+   "start": [
+    190.5,
+    243.5
+   ],
+   "ende": [
+    202.5,
+    244.5
+   ],
+   "laenge_zellen": 15.868,
+   "relief_max_m": 7.96,
+   "stationen": 276,
+   "stationen_ohne_relief": 65,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 11.14
+  },
+  {
+   "kachel": "E6",
+   "wand": "Suedgrat:38",
+   "start": [
+    195.5,
+    229.5
+   ],
+   "ende": [
+    203.5,
+    244.5
+   ],
+   "laenge_zellen": 26.992,
+   "relief_max_m": 7.99,
+   "stationen": 464,
+   "stationen_ohne_relief": 236,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 13.36
+  },
+  {
+   "kachel": "F6",
+   "wand": "Suedgrat:41",
+   "start": [
+    211.05,
+    230.95
+   ],
+   "ende": [
+    213.5,
+    229.5
+   ],
+   "laenge_zellen": 3.066,
+   "relief_max_m": 5.99,
+   "stationen": 54,
+   "stationen_ohne_relief": 0,
+   "laeufe_gebaut": 1,
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.07,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)"
+  },
+  {
+   "kachel": "F6",
+   "wand": "Suedgrat:43",
+   "start": [
+    220.5,
+    228.5
+   ],
+   "ende": [
+    228.5,
+    223.5
+   ],
+   "laenge_zellen": 14.77,
+   "relief_max_m": 4.17,
+   "stationen": 244,
+   "stationen_ohne_relief": 188,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.21
+  },
+  {
+   "kachel": "F6",
+   "wand": "Suedgrat:45",
+   "start": [
+    230.5,
+    228.5
+   ],
+   "ende": [
+    237.5,
+    234.5
+   ],
+   "laenge_zellen": 10.122,
+   "relief_max_m": 4.74,
+   "stationen": 172,
+   "stationen_ohne_relief": 31,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 5.61
+  },
+  {
+   "kachel": "G6",
+   "wand": "Suedgrat:46",
+   "start": [
+    253.05,
+    247.56
+   ],
+   "ende": [
+    254.5,
+    228.5
+   ],
+   "laenge_zellen": 29.581,
+   "relief_max_m": 8.0,
+   "stationen": 506,
+   "stationen_ohne_relief": 348,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 8.54
+  },
+  {
+   "kachel": "G6",
+   "wand": "Suedgrat:50",
+   "start": [
+    263.5,
+    232.5
+   ],
+   "ende": [
+    274.5,
+    223.5
+   ],
+   "laenge_zellen": 15.358,
+   "relief_max_m": 7.16,
+   "stationen": 268,
+   "stationen_ohne_relief": 201,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.76
+  },
+  {
+   "kachel": "G6",
+   "wand": "Suedgrat:53",
+   "start": [
+    267.5,
+    232.5
+   ],
+   "ende": [
+    274.5,
+    233.5
+   ],
+   "laenge_zellen": 10.875,
+   "relief_max_m": 6.27,
+   "stationen": 184,
+   "stationen_ohne_relief": 113,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 4.05
+  },
+  {
+   "kachel": "H6",
+   "wand": "Suedgrat:64",
+   "start": [
+    299.5,
+    223.5
+   ],
+   "ende": [
+    319.5,
+    240.5
+   ],
+   "laenge_zellen": 34.985,
+   "relief_max_m": 9.36,
+   "stationen": 592,
+   "stationen_ohne_relief": 73,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 29.03
+  },
+  {
+   "kachel": "H6",
+   "wand": "Suedgrat:67",
+   "start": [
+    319.5,
+    241.5
+   ],
+   "ende": [
+    327.5,
+    255.5
+   ],
+   "laenge_zellen": 17.381,
+   "relief_max_m": 7.38,
+   "stationen": 300,
+   "stationen_ohne_relief": 17,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 11.96
+  },
+  {
+   "kachel": "H6",
+   "wand": "unbenannt:11",
+   "start": [
+    329.17,
+    256.95
+   ],
+   "ende": [
+    329.5,
+    252.5
+   ],
+   "laenge_zellen": 4.573,
+   "relief_max_m": 2.41,
+   "stationen": 81,
+   "stationen_ohne_relief": 19,
+   "laeufe_gebaut": 1,
+   "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+   "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+   "laeufe_unterdrueckt": 1,
+   "laenge_unterdrueckt_zellen": 3.56
+  }
+ ],
+ "alle_56": {
+  "A1": [
+   {
+    "wand": "Nord:0",
+    "start": [
+     2.5,
+     41.95
+    ],
+    "ende": [
+     11.5,
+     27.5
+    ],
+    "laenge_zellen": 25.757,
+    "relief_max_m": 0.74,
+    "stationen": 448,
+    "stationen_ohne_relief": 448,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:1",
+    "start": [
+     5.5,
+     36.5
+    ],
+    "ende": [
+     8.5,
+     40.5
+    ],
+    "laenge_zellen": 5.265,
+    "relief_max_m": 1.23,
+    "stationen": 96,
+    "stationen_ohne_relief": 96,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:2",
+    "start": [
+     15.5,
+     4.5
+    ],
+    "ende": [
+     16.5,
+     2.5
+    ],
+    "laenge_zellen": 5.855,
+    "relief_max_m": 0.0,
+    "stationen": 104,
+    "stationen_ohne_relief": 104,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:3",
+    "start": [
+     15.5,
+     31.5
+    ],
+    "ende": [
+     18.5,
+     23.5
+    ],
+    "laenge_zellen": 9.88,
+    "relief_max_m": 0.29,
+    "stationen": 176,
+    "stationen_ohne_relief": 176,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:4",
+    "start": [
+     15.5,
+     31.5
+    ],
+    "ende": [
+     16.5,
+     31.5
+    ],
+    "laenge_zellen": 4.411,
+    "relief_max_m": 0.15,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:5",
+    "start": [
+     17.5,
+     2.5
+    ],
+    "ende": [
+     18.5,
+     2.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.0,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:6",
+    "start": [
+     17.5,
+     31.5
+    ],
+    "ende": [
+     27.5,
+     32.5
+    ],
+    "laenge_zellen": 13.911,
+    "relief_max_m": 1.25,
+    "stationen": 240,
+    "stationen_ohne_relief": 240,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:7",
+    "start": [
+     28.5,
+     31.5
+    ],
+    "ende": [
+     39.5,
+     20.5
+    ],
+    "laenge_zellen": 18.004,
+    "relief_max_m": 0.8,
+    "stationen": 320,
+    "stationen_ohne_relief": 320,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:8",
+    "start": [
+     28.5,
+     31.5
+    ],
+    "ende": [
+     28.5,
+     32.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.96,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:9",
+    "start": [
+     29.5,
+     32.5
+    ],
+    "ende": [
+     40.95,
+     34.5
+    ],
+    "laenge_zellen": 12.321,
+    "relief_max_m": 0.86,
+    "stationen": 222,
+    "stationen_ohne_relief": 222,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:10",
+    "start": [
+     37.5,
+     24.5
+    ],
+    "ende": [
+     38.5,
+     23.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.0,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:11",
+    "start": [
+     38.5,
+     24.5
+    ],
+    "ende": [
+     39.5,
+     25.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.0,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "B1": [
+   {
+    "wand": "Nord:9",
+    "start": [
+     43.05,
+     35.06
+    ],
+    "ende": [
+     53.5,
+     37.5
+    ],
+    "laenge_zellen": 14.957,
+    "relief_max_m": 1.28,
+    "stationen": 270,
+    "stationen_ohne_relief": 270,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:12",
+    "start": [
+     54.5,
+     37.5
+    ],
+    "ende": [
+     66.5,
+     25.5
+    ],
+    "laenge_zellen": 20.598,
+    "relief_max_m": 0.59,
+    "stationen": 380,
+    "stationen_ohne_relief": 380,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:13",
+    "start": [
+     54.5,
+     38.5
+    ],
+    "ende": [
+     54.5,
+     39.5
+    ],
+    "laenge_zellen": 1.0,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Nord:14",
+    "start": [
+     61.5,
+     36.5
+    ],
+    "ende": [
+     64.5,
+     39.5
+    ],
+    "laenge_zellen": 4.243,
+    "relief_max_m": 0.46,
+    "stationen": 76,
+    "stationen_ohne_relief": 76,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:15",
+    "start": [
+     63.5,
+     33.5
+    ],
+    "ende": [
+     64.5,
+     33.5
+    ],
+    "laenge_zellen": 4.416,
+    "relief_max_m": 0.09,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:16",
+    "start": [
+     65.5,
+     26.5
+    ],
+    "ende": [
+     65.5,
+     27.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.01,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:17",
+    "start": [
+     65.5,
+     33.5
+    ],
+    "ende": [
+     82.95,
+     37.55
+    ],
+    "laenge_zellen": 19.214,
+    "relief_max_m": 0.05,
+    "stationen": 360,
+    "stationen_ohne_relief": 360,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:18",
+    "start": [
+     66.5,
+     27.5
+    ],
+    "ende": [
+     69.5,
+     28.5
+    ],
+    "laenge_zellen": 3.431,
+    "relief_max_m": 0.05,
+    "stationen": 64,
+    "stationen_ohne_relief": 64,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "C1": [
+   {
+    "wand": "Nord:17",
+    "start": [
+     85.05,
+     36.45
+    ],
+    "ende": [
+     102.5,
+     36.5
+    ],
+    "laenge_zellen": 20.908,
+    "relief_max_m": 2.58,
+    "stationen": 396,
+    "stationen_ohne_relief": 353,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Nord:19",
+    "start": [
+     98.5,
+     18.5
+    ],
+    "ende": [
+     101.5,
+     23.5
+    ],
+    "laenge_zellen": 46.329,
+    "relief_max_m": 0.26,
+    "stationen": 816,
+    "stationen_ohne_relief": 816,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:20",
+    "start": [
+     103.5,
+     35.5
+    ],
+    "ende": [
+     106.5,
+     28.5
+    ],
+    "laenge_zellen": 8.28,
+    "relief_max_m": 7.05,
+    "stationen": 152,
+    "stationen_ohne_relief": 133,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Nord:21",
+    "start": [
+     103.5,
+     36.5
+    ],
+    "ende": [
+     113.5,
+     25.5
+    ],
+    "laenge_zellen": 28.712,
+    "relief_max_m": 7.27,
+    "stationen": 508,
+    "stationen_ohne_relief": 448,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Nord:22",
+    "start": [
+     106.5,
+     29.5
+    ],
+    "ende": [
+     106.5,
+     30.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.39,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:23",
+    "start": [
+     111.5,
+     38.5
+    ],
+    "ende": [
+     112.5,
+     39.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.2,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:24",
+    "start": [
+     114.5,
+     24.5
+    ],
+    "ende": [
+     114.5,
+     25.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.0,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:25",
+    "start": [
+     118.5,
+     29.5
+    ],
+    "ende": [
+     118.5,
+     30.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.37,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:26",
+    "start": [
+     119.5,
+     29.5
+    ],
+    "ende": [
+     124.95,
+     26.05
+    ],
+    "laenge_zellen": 6.894,
+    "relief_max_m": 0.72,
+    "stationen": 118,
+    "stationen_ohne_relief": 118,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "D1": [
+   {
+    "wand": "Nord:26",
+    "start": [
+     127.05,
+     24.51
+    ],
+    "ende": [
+     150.5,
+     1.5
+    ],
+    "laenge_zellen": 39.027,
+    "relief_max_m": 0.58,
+    "stationen": 688,
+    "stationen_ohne_relief": 688,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:27",
+    "start": [
+     148.5,
+     11.5
+    ],
+    "ende": [
+     149.5,
+     11.5
+    ],
+    "laenge_zellen": 4.411,
+    "relief_max_m": 0.42,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:28",
+    "start": [
+     150.5,
+     11.5
+    ],
+    "ende": [
+     154.5,
+     12.5
+    ],
+    "laenge_zellen": 7.885,
+    "relief_max_m": 0.71,
+    "stationen": 136,
+    "stationen_ohne_relief": 136,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:29",
+    "start": [
+     155.5,
+     12.5
+    ],
+    "ende": [
+     159.5,
+     22.5
+    ],
+    "laenge_zellen": 14.281,
+    "relief_max_m": 0.83,
+    "stationen": 244,
+    "stationen_ohne_relief": 244,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:30",
+    "start": [
+     156.5,
+     12.5
+    ],
+    "ende": [
+     166.95,
+     12.5
+    ],
+    "laenge_zellen": 10.45,
+    "relief_max_m": 2.86,
+    "stationen": 188,
+    "stationen_ohne_relief": 138,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "E1": [
+   {
+    "wand": "Nord:30",
+    "start": [
+     169.05,
+     12.44
+    ],
+    "ende": [
+     170.5,
+     13.5
+    ],
+    "laenge_zellen": 5.316,
+    "relief_max_m": 0.54,
+    "stationen": 92,
+    "stationen_ohne_relief": 92,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:31",
+    "start": [
+     169.5,
+     18.5
+    ],
+    "ende": [
+     171.5,
+     13.5
+    ],
+    "laenge_zellen": 7.275,
+    "relief_max_m": 0.3,
+    "stationen": 128,
+    "stationen_ohne_relief": 128,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:32",
+    "start": [
+     172.5,
+     13.5
+    ],
+    "ende": [
+     177.5,
+     2.5
+    ],
+    "laenge_zellen": 14.894,
+    "relief_max_m": 0.42,
+    "stationen": 272,
+    "stationen_ohne_relief": 272,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:33",
+    "start": [
+     175.5,
+     13.5
+    ],
+    "ende": [
+     176.5,
+     13.5
+    ],
+    "laenge_zellen": 4.416,
+    "relief_max_m": 0.18,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:34",
+    "start": [
+     177.5,
+     13.5
+    ],
+    "ende": [
+     182.5,
+     13.5
+    ],
+    "laenge_zellen": 9.864,
+    "relief_max_m": 0.05,
+    "stationen": 172,
+    "stationen_ohne_relief": 172,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:35",
+    "start": [
+     182.5,
+     12.5
+    ],
+    "ende": [
+     185.5,
+     6.5
+    ],
+    "laenge_zellen": 7.287,
+    "relief_max_m": 0.17,
+    "stationen": 132,
+    "stationen_ohne_relief": 132,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:36",
+    "start": [
+     182.5,
+     14.5
+    ],
+    "ende": [
+     187.5,
+     37.5
+    ],
+    "laenge_zellen": 36.353,
+    "relief_max_m": 3.39,
+    "stationen": 628,
+    "stationen_ohne_relief": 612,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Nord:37",
+    "start": [
+     194.5,
+     21.5
+    ],
+    "ende": [
+     200.5,
+     21.5
+    ],
+    "laenge_zellen": 10.878,
+    "relief_max_m": 0.0,
+    "stationen": 196,
+    "stationen_ohne_relief": 196,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:38",
+    "start": [
+     200.5,
+     20.5
+    ],
+    "ende": [
+     208.95,
+     10.1
+    ],
+    "laenge_zellen": 13.952,
+    "relief_max_m": 0.29,
+    "stationen": 241,
+    "stationen_ohne_relief": 241,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:39",
+    "start": [
+     200.5,
+     22.5
+    ],
+    "ende": [
+     206.5,
+     32.5
+    ],
+    "laenge_zellen": 13.346,
+    "relief_max_m": 0.79,
+    "stationen": 232,
+    "stationen_ohne_relief": 232,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:40",
+    "start": [
+     207.5,
+     30.5
+    ],
+    "ende": [
+     207.5,
+     31.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.92,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:41",
+    "start": [
+     208.5,
+     31.5
+    ],
+    "ende": [
+     208.95,
+     32.01
+    ],
+    "laenge_zellen": 0.682,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "F1": [
+   {
+    "wand": "Nord:38",
+    "start": [
+     211.05,
+     4.9
+    ],
+    "ende": [
+     214.57,
+     1.05
+    ],
+    "laenge_zellen": 5.307,
+    "relief_max_m": 0.91,
+    "stationen": 90,
+    "stationen_ohne_relief": 90,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:41",
+    "start": [
+     211.05,
+     32.5
+    ],
+    "ende": [
+     217.5,
+     32.5
+    ],
+    "laenge_zellen": 9.896,
+    "relief_max_m": 1.19,
+    "stationen": 170,
+    "stationen_ohne_relief": 170,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:42",
+    "start": [
+     214.5,
+     19.5
+    ],
+    "ende": [
+     215.5,
+     21.5
+    ],
+    "laenge_zellen": 5.886,
+    "relief_max_m": 1.04,
+    "stationen": 104,
+    "stationen_ohne_relief": 104,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:43",
+    "start": [
+     215.5,
+     24.5
+    ],
+    "ende": [
+     216.5,
+     21.5
+    ],
+    "laenge_zellen": 4.838,
+    "relief_max_m": 0.45,
+    "stationen": 84,
+    "stationen_ohne_relief": 84,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:44",
+    "start": [
+     216.5,
+     9.5
+    ],
+    "ende": [
+     217.5,
+     21.5
+    ],
+    "laenge_zellen": 16.419,
+    "relief_max_m": 0.58,
+    "stationen": 276,
+    "stationen_ohne_relief": 276,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:45",
+    "start": [
+     216.5,
+     41.5
+    ],
+    "ende": [
+     216.89,
+     41.95
+    ],
+    "laenge_zellen": 0.598,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Nord:45",
+    "start": [
+     221.17,
+     41.95
+    ],
+    "ende": [
+     218.5,
+     32.5
+    ],
+    "laenge_zellen": 12.299,
+    "relief_max_m": 1.13,
+    "stationen": 217,
+    "stationen_ohne_relief": 217,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:46",
+    "start": [
+     219.5,
+     32.5
+    ],
+    "ende": [
+     221.5,
+     17.5
+    ],
+    "laenge_zellen": 21.276,
+    "relief_max_m": 0.46,
+    "stationen": 364,
+    "stationen_ohne_relief": 364,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:47",
+    "start": [
+     221.5,
+     41.95
+    ],
+    "ende": [
+     222.07,
+     41.95
+    ],
+    "laenge_zellen": 1.174,
+    "relief_max_m": 0.91,
+    "stationen": 24,
+    "stationen_ohne_relief": 24,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:48",
+    "start": [
+     221.5,
+     18.5
+    ],
+    "ende": [
+     222.5,
+     18.5
+    ],
+    "laenge_zellen": 1.0,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Nord:50",
+    "start": [
+     226.5,
+     21.5
+    ],
+    "ende": [
+     226.5,
+     22.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:51",
+    "start": [
+     227.5,
+     21.5
+    ],
+    "ende": [
+     231.5,
+     12.5
+    ],
+    "laenge_zellen": 12.449,
+    "relief_max_m": 0.01,
+    "stationen": 208,
+    "stationen_ohne_relief": 208,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:52",
+    "start": [
+     230.12,
+     1.05
+    ],
+    "ende": [
+     250.95,
+     1.5
+    ],
+    "laenge_zellen": 23.384,
+    "relief_max_m": 0.01,
+    "stationen": 397,
+    "stationen_ohne_relief": 397,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:53",
+    "start": [
+     231.5,
+     19.5
+    ],
+    "ende": [
+     231.5,
+     20.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:54",
+    "start": [
+     232.5,
+     20.5
+    ],
+    "ende": [
+     250.95,
+     17.44
+    ],
+    "laenge_zellen": 19.747,
+    "relief_max_m": 0.4,
+    "stationen": 336,
+    "stationen_ohne_relief": 336,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "G1": [
+   {
+    "wand": "Nord:52",
+    "start": [
+     253.05,
+     1.5
+    ],
+    "ende": [
+     260.96,
+     1.05
+    ],
+    "laenge_zellen": 8.105,
+    "relief_max_m": 0.02,
+    "stationen": 136,
+    "stationen_ohne_relief": 136,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:54",
+    "start": [
+     253.05,
+     16.94
+    ],
+    "ende": [
+     272.5,
+     8.5
+    ],
+    "laenge_zellen": 45.057,
+    "relief_max_m": 0.98,
+    "stationen": 762,
+    "stationen_ohne_relief": 762,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:55",
+    "start": [
+     268.5,
+     2.5
+    ],
+    "ende": [
+     277.96,
+     1.05
+    ],
+    "laenge_zellen": 10.084,
+    "relief_max_m": 0.11,
+    "stationen": 174,
+    "stationen_ohne_relief": 174,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:55",
+    "start": [
+     284.17,
+     1.05
+    ],
+    "ende": [
+     292.95,
+     21.5
+    ],
+    "laenge_zellen": 33.895,
+    "relief_max_m": 0.01,
+    "stationen": 587,
+    "stationen_ohne_relief": 587,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:56",
+    "start": [
+     273.5,
+     8.5
+    ],
+    "ende": [
+     274.5,
+     6.5
+    ],
+    "laenge_zellen": 2.431,
+    "relief_max_m": 0.54,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:57",
+    "start": [
+     274.5,
+     7.5
+    ],
+    "ende": [
+     274.5,
+     8.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.39,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:58",
+    "start": [
+     283.5,
+     13.5
+    ],
+    "ende": [
+     283.5,
+     14.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:59",
+    "start": [
+     284.5,
+     1.5
+    ],
+    "ende": [
+     284.5,
+     2.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:60",
+    "start": [
+     284.5,
+     14.5
+    ],
+    "ende": [
+     285.5,
+     14.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.0,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:61",
+    "start": [
+     285.5,
+     1.5
+    ],
+    "ende": [
+     292.95,
+     2.55
+    ],
+    "laenge_zellen": 7.895,
+    "relief_max_m": 0.01,
+    "stationen": 138,
+    "stationen_ohne_relief": 138,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "H1": [
+   {
+    "wand": "Nord:55",
+    "start": [
+     295.05,
+     21.5
+    ],
+    "ende": [
+     296.5,
+     21.5
+    ],
+    "laenge_zellen": 4.896,
+    "relief_max_m": 0.0,
+    "stationen": 86,
+    "stationen_ohne_relief": 86,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:61",
+    "start": [
+     295.05,
+     1.45
+    ],
+    "ende": [
+     333.5,
+     1.5
+    ],
+    "laenge_zellen": 39.333,
+    "relief_max_m": 0.02,
+    "stationen": 666,
+    "stationen_ohne_relief": 666,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:62",
+    "start": [
+     297.5,
+     21.5
+    ],
+    "ende": [
+     299.5,
+     9.5
+    ],
+    "laenge_zellen": 12.858,
+    "relief_max_m": 0.0,
+    "stationen": 220,
+    "stationen_ohne_relief": 220,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:63",
+    "start": [
+     297.5,
+     22.5
+    ],
+    "ende": [
+     322.5,
+     12.5
+    ],
+    "laenge_zellen": 35.605,
+    "relief_max_m": 0.0,
+    "stationen": 604,
+    "stationen_ohne_relief": 604,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:64",
+    "start": [
+     298.5,
+     15.5
+    ],
+    "ende": [
+     298.5,
+     16.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:65",
+    "start": [
+     298.5,
+     17.5
+    ],
+    "ende": [
+     300.5,
+     16.5
+    ],
+    "laenge_zellen": 2.429,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:66",
+    "start": [
+     320.5,
+     21.5
+    ],
+    "ende": [
+     320.5,
+     22.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.0,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:67",
+    "start": [
+     321.5,
+     22.5
+    ],
+    "ende": [
+     326.5,
+     22.5
+    ],
+    "laenge_zellen": 9.864,
+    "relief_max_m": 0.0,
+    "stationen": 168,
+    "stationen_ohne_relief": 168,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:69",
+    "start": [
+     326.5,
+     21.5
+    ],
+    "ende": [
+     333.5,
+     13.5
+    ],
+    "laenge_zellen": 10.917,
+    "relief_max_m": 0.0,
+    "stationen": 188,
+    "stationen_ohne_relief": 188,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:70",
+    "start": [
+     326.5,
+     23.5
+    ],
+    "ende": [
+     334.95,
+     33.96
+    ],
+    "laenge_zellen": 13.994,
+    "relief_max_m": 1.3,
+    "stationen": 242,
+    "stationen_ohne_relief": 242,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "A2": [
+   {
+    "wand": "Nord:0",
+    "start": [
+     2.5,
+     47.5
+    ],
+    "ende": [
+     2.5,
+     44.05
+    ],
+    "laenge_zellen": 3.45,
+    "relief_max_m": 4.65,
+    "stationen": 68,
+    "stationen_ohne_relief": 27,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "H2": [
+   {
+    "wand": "Nord:68",
+    "start": [
+     322.5,
+     74.5
+    ],
+    "ende": [
+     332.5,
+     70.5
+    ],
+    "laenge_zellen": 11.701,
+    "relief_max_m": 5.73,
+    "stationen": 200,
+    "stationen_ohne_relief": 0,
+    "laeufe_gebaut": 1,
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 11.7,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)"
+   },
+   {
+    "wand": "Ostgrat:13",
+    "start": [
+     319.5,
+     84.95
+    ],
+    "ende": [
+     323.5,
+     75.5
+    ],
+    "laenge_zellen": 11.152,
+    "relief_max_m": 1.06,
+    "stationen": 200,
+    "stationen_ohne_relief": 200,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "A3": [
+   {
+    "wand": "unbenannt:0",
+    "start": [
+     5.5,
+     106.5
+    ],
+    "ende": [
+     11.5,
+     105.5
+    ],
+    "laenge_zellen": 6.429,
+    "relief_max_m": 0.02,
+    "stationen": 120,
+    "stationen_ohne_relief": 120,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:1",
+    "start": [
+     16.1,
+     87.05
+    ],
+    "ende": [
+     22.5,
+     88.5
+    ],
+    "laenge_zellen": 7.033,
+    "relief_max_m": 0.03,
+    "stationen": 121,
+    "stationen_ohne_relief": 121,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "C3": [
+   {
+    "wand": "Krater:0",
+    "start": [
+     89.45,
+     127.95
+    ],
+    "ende": [
+     104.5,
+     93.5
+    ],
+    "laenge_zellen": 44.919,
+    "relief_max_m": 1.15,
+    "stationen": 794,
+    "stationen_ohne_relief": 794,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:5",
+    "start": [
+     89.5,
+     124.5
+    ],
+    "ende": [
+     110.5,
+     97.5
+    ],
+    "laenge_zellen": 39.285,
+    "relief_max_m": 5.9,
+    "stationen": 684,
+    "stationen_ohne_relief": 282,
+    "laeufe_gebaut": 2,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 2,
+    "laenge_unterdrueckt_zellen": 23.44
+   },
+   {
+    "wand": "Krater:6",
+    "start": [
+     102.04,
+     127.95
+    ],
+    "ende": [
+     116.5,
+     121.5
+    ],
+    "laenge_zellen": 20.661,
+    "relief_max_m": 0.61,
+    "stationen": 358,
+    "stationen_ohne_relief": 358,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:7",
+    "start": [
+     111.5,
+     103.5
+    ],
+    "ende": [
+     112.5,
+     102.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 1.38,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:8",
+    "start": [
+     112.5,
+     103.5
+    ],
+    "ende": [
+     117.5,
+     120.5
+    ],
+    "laenge_zellen": 21.443,
+    "relief_max_m": 6.82,
+    "stationen": 380,
+    "stationen_ohne_relief": 110,
+    "laeufe_gebaut": 2,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 2,
+    "laenge_unterdrueckt_zellen": 15.31
+   },
+   {
+    "wand": "Krater:10",
+    "start": [
+     117.5,
+     121.5
+    ],
+    "ende": [
+     122.06,
+     127.95
+    ],
+    "laenge_zellen": 9.363,
+    "relief_max_m": 2.26,
+    "stationen": 166,
+    "stationen_ohne_relief": 155,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:15",
+    "start": [
+     122.5,
+     127.5
+    ],
+    "ende": [
+     122.45,
+     127.95
+    ],
+    "laenge_zellen": 0.453,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Krater:15",
+    "start": [
+     123.01,
+     127.95
+    ],
+    "ende": [
+     122.5,
+     127.5
+    ],
+    "laenge_zellen": 0.677,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "D3": [
+   {
+    "wand": "Krater:36",
+    "start": [
+     136.5,
+     127.95
+    ],
+    "ende": [
+     136.5,
+     127.5
+    ],
+    "laenge_zellen": 0.45,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "G3": [
+   {
+    "wand": "Ostgrat:0",
+    "start": [
+     274.9,
+     127.95
+    ],
+    "ende": [
+     287.5,
+     98.5
+    ],
+    "laenge_zellen": 37.738,
+    "relief_max_m": 3.47,
+    "stationen": 645,
+    "stationen_ohne_relief": 526,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:1",
+    "start": [
+     284.5,
+     127.95
+    ],
+    "ende": [
+     284.5,
+     110.5
+    ],
+    "laenge_zellen": 18.323,
+    "relief_max_m": 2.91,
+    "stationen": 326,
+    "stationen_ohne_relief": 297,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:3",
+    "start": [
+     284.5,
+     115.5
+    ],
+    "ende": [
+     284.5,
+     116.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.34,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:5",
+    "start": [
+     285.5,
+     115.5
+    ],
+    "ende": [
+     286.5,
+     114.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.39,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:13",
+    "start": [
+     292.5,
+     98.5
+    ],
+    "ende": [
+     292.95,
+     98.56
+    ],
+    "laenge_zellen": 0.454,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "H3": [
+   {
+    "wand": "Ostgrat:13",
+    "start": [
+     295.05,
+     94.96
+    ],
+    "ende": [
+     319.56,
+     87.05
+    ],
+    "laenge_zellen": 29.567,
+    "relief_max_m": 3.22,
+    "stationen": 498,
+    "stationen_ohne_relief": 395,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.16
+   },
+   {
+    "wand": "Ostgrat:30",
+    "start": [
+     305.5,
+     98.5
+    ],
+    "ende": [
+     310.5,
+     99.5
+    ],
+    "laenge_zellen": 8.891,
+    "relief_max_m": 0.27,
+    "stationen": 160,
+    "stationen_ohne_relief": 160,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:38",
+    "start": [
+     310.5,
+     104.5
+    ],
+    "ende": [
+     310.5,
+     107.5
+    ],
+    "laenge_zellen": 3.0,
+    "relief_max_m": 0.42,
+    "stationen": 64,
+    "stationen_ohne_relief": 64,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:39",
+    "start": [
+     310.5,
+     104.5
+    ],
+    "ende": [
+     311.5,
+     100.5
+    ],
+    "laenge_zellen": 4.429,
+    "relief_max_m": 0.31,
+    "stationen": 84,
+    "stationen_ohne_relief": 84,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:40",
+    "start": [
+     310.5,
+     104.5
+    ],
+    "ende": [
+     310.5,
+     105.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.18,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:43",
+    "start": [
+     311.5,
+     99.5
+    ],
+    "ende": [
+     319.5,
+     87.5
+    ],
+    "laenge_zellen": 17.402,
+    "relief_max_m": 0.49,
+    "stationen": 304,
+    "stationen_ohne_relief": 304,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:44",
+    "start": [
+     311.5,
+     103.5
+    ],
+    "ende": [
+     311.5,
+     103.5
+    ],
+    "laenge_zellen": 3.449,
+    "relief_max_m": 0.16,
+    "stationen": 64,
+    "stationen_ohne_relief": 64,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:45",
+    "start": [
+     312.5,
+     104.5
+    ],
+    "ende": [
+     316.5,
+     106.5
+    ],
+    "laenge_zellen": 4.86,
+    "relief_max_m": 0.0,
+    "stationen": 88,
+    "stationen_ohne_relief": 88,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:50",
+    "start": [
+     318.5,
+     91.5
+    ],
+    "ende": [
+     319.5,
+     90.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 0.01,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:51",
+    "start": [
+     318.5,
+     113.5
+    ],
+    "ende": [
+     320.5,
+     117.5
+    ],
+    "laenge_zellen": 4.859,
+    "relief_max_m": 0.0,
+    "stationen": 84,
+    "stationen_ohne_relief": 84,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:54",
+    "start": [
+     319.5,
+     88.5
+    ],
+    "ende": [
+     319.5,
+     89.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.35,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:55",
+    "start": [
+     319.5,
+     91.5
+    ],
+    "ende": [
+     321.5,
+     93.5
+    ],
+    "laenge_zellen": 6.272,
+    "relief_max_m": 0.03,
+    "stationen": 108,
+    "stationen_ohne_relief": 108,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:56",
+    "start": [
+     319.5,
+     114.5
+    ],
+    "ende": [
+     319.5,
+     115.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:57",
+    "start": [
+     320.5,
+     114.5
+    ],
+    "ende": [
+     322.5,
+     93.5
+    ],
+    "laenge_zellen": 25.581,
+    "relief_max_m": 0.0,
+    "stationen": 460,
+    "stationen_ohne_relief": 460,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:59",
+    "start": [
+     323.5,
+     93.5
+    ],
+    "ende": [
+     323.5,
+     95.5
+    ],
+    "laenge_zellen": 2.868,
+    "relief_max_m": 0.01,
+    "stationen": 52,
+    "stationen_ohne_relief": 52,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:61",
+    "start": [
+     324.5,
+     99.5
+    ],
+    "ende": [
+     324.5,
+     100.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:62",
+    "start": [
+     324.5,
+     110.5
+    ],
+    "ende": [
+     325.5,
+     117.5
+    ],
+    "laenge_zellen": 13.111,
+    "relief_max_m": 0.0,
+    "stationen": 228,
+    "stationen_ohne_relief": 228,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:65",
+    "start": [
+     325.5,
+     99.5
+    ],
+    "ende": [
+     325.5,
+     99.5
+    ],
+    "laenge_zellen": 3.462,
+    "relief_max_m": 0.0,
+    "stationen": 68,
+    "stationen_ohne_relief": 68,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:68",
+    "start": [
+     326.5,
+     99.5
+    ],
+    "ende": [
+     332.45,
+     87.05
+    ],
+    "laenge_zellen": 15.002,
+    "relief_max_m": 0.0,
+    "stationen": 268,
+    "stationen_ohne_relief": 268,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:69",
+    "start": [
+     326.5,
+     100.5
+    ],
+    "ende": [
+     332.5,
+     105.5
+    ],
+    "laenge_zellen": 8.093,
+    "relief_max_m": 0.0,
+    "stationen": 144,
+    "stationen_ohne_relief": 144,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:70",
+    "start": [
+     326.5,
+     111.5
+    ],
+    "ende": [
+     332.5,
+     113.5
+    ],
+    "laenge_zellen": 6.844,
+    "relief_max_m": 0.0,
+    "stationen": 116,
+    "stationen_ohne_relief": 116,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "A4": [
+   {
+    "wand": "unbenannt:2",
+    "start": [
+     38.5,
+     132.5
+    ],
+    "ende": [
+     40.95,
+     133.5
+    ],
+    "laenge_zellen": 2.881,
+    "relief_max_m": 0.1,
+    "stationen": 54,
+    "stationen_ohne_relief": 54,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "B4": [
+   {
+    "wand": "Krater:0",
+    "start": [
+     76.5,
+     166.5
+    ],
+    "ende": [
+     82.95,
+     146.49
+    ],
+    "laenge_zellen": 23.624,
+    "relief_max_m": 0.64,
+    "stationen": 416,
+    "stationen_ohne_relief": 416,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:1",
+    "start": [
+     78.5,
+     165.5
+    ],
+    "ende": [
+     79.5,
+     164.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.04,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:2",
+    "start": [
+     78.5,
+     165.5
+    ],
+    "ende": [
+     79.5,
+     165.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.12,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:3",
+    "start": [
+     79.5,
+     166.5
+    ],
+    "ende": [
+     82.0,
+     170.95
+    ],
+    "laenge_zellen": 5.537,
+    "relief_max_m": 0.18,
+    "stationen": 98,
+    "stationen_ohne_relief": 98,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:2",
+    "start": [
+     43.05,
+     133.5
+    ],
+    "ende": [
+     61.5,
+     130.5
+    ],
+    "laenge_zellen": 19.754,
+    "relief_max_m": 1.54,
+    "stationen": 366,
+    "stationen_ohne_relief": 366,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:3",
+    "start": [
+     70.5,
+     161.5
+    ],
+    "ende": [
+     70.5,
+     170.5
+    ],
+    "laenge_zellen": 9.874,
+    "relief_max_m": 4.37,
+    "stationen": 180,
+    "stationen_ohne_relief": 74,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 4.16
+   }
+  ],
+  "C4": [
+   {
+    "wand": "Krater:0",
+    "start": [
+     85.05,
+     144.95
+    ],
+    "ende": [
+     89.99,
+     130.05
+    ],
+    "laenge_zellen": 17.045,
+    "relief_max_m": 0.48,
+    "stationen": 296,
+    "stationen_ohne_relief": 296,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:3",
+    "start": [
+     124.56,
+     170.95
+    ],
+    "ende": [
+     118.5,
+     166.5
+    ],
+    "laenge_zellen": 8.756,
+    "relief_max_m": 0.6,
+    "stationen": 154,
+    "stationen_ohne_relief": 154,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:4",
+    "start": [
+     88.5,
+     135.5
+    ],
+    "ende": [
+     94.5,
+     140.5
+    ],
+    "laenge_zellen": 8.086,
+    "relief_max_m": 0.44,
+    "stationen": 140,
+    "stationen_ohne_relief": 140,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:10",
+    "start": [
+     121.0,
+     130.05
+    ],
+    "ende": [
+     118.5,
+     139.5
+    ],
+    "laenge_zellen": 10.547,
+    "relief_max_m": 0.71,
+    "stationen": 186,
+    "stationen_ohne_relief": 186,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:11",
+    "start": [
+     119.5,
+     133.5
+    ],
+    "ende": [
+     119.5,
+     134.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.39,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:12",
+    "start": [
+     119.5,
+     135.5
+    ],
+    "ende": [
+     124.95,
+     135.94
+    ],
+    "laenge_zellen": 6.525,
+    "relief_max_m": 0.72,
+    "stationen": 114,
+    "stationen_ohne_relief": 114,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:14",
+    "start": [
+     121.5,
+     148.5
+    ],
+    "ende": [
+     121.5,
+     154.5
+    ],
+    "laenge_zellen": 7.723,
+    "relief_max_m": 3.14,
+    "stationen": 136,
+    "stationen_ohne_relief": 103,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:17",
+    "start": [
+     123.5,
+     151.5
+    ],
+    "ende": [
+     124.95,
+     151.55
+    ],
+    "laenge_zellen": 1.453,
+    "relief_max_m": 0.32,
+    "stationen": 30,
+    "stationen_ohne_relief": 30,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:18",
+    "start": [
+     123.5,
+     169.5
+    ],
+    "ende": [
+     124.5,
+     170.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 0.53,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:20",
+    "start": [
+     124.5,
+     169.5
+    ],
+    "ende": [
+     124.95,
+     169.11
+    ],
+    "laenge_zellen": 0.598,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "D4": [
+   {
+    "wand": "Krater:20",
+    "start": [
+     127.05,
+     165.95
+    ],
+    "ende": [
+     127.05,
+     152.12
+    ],
+    "laenge_zellen": 20.243,
+    "relief_max_m": 0.57,
+    "stationen": 351,
+    "stationen_ohne_relief": 351,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:23",
+    "start": [
+     127.05,
+     135.95
+    ],
+    "ende": [
+     128.5,
+     132.5
+    ],
+    "laenge_zellen": 7.512,
+    "relief_max_m": 2.27,
+    "stationen": 137,
+    "stationen_ohne_relief": 132,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:24",
+    "start": [
+     127.05,
+     141.17
+    ],
+    "ende": [
+     127.5,
+     141.5
+    ],
+    "laenge_zellen": 4.015,
+    "relief_max_m": 0.22,
+    "stationen": 73,
+    "stationen_ohne_relief": 73,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:25",
+    "start": [
+     127.05,
+     149.88
+    ],
+    "ende": [
+     128.5,
+     141.5
+    ],
+    "laenge_zellen": 12.756,
+    "relief_max_m": 2.81,
+    "stationen": 225,
+    "stationen_ohne_relief": 146,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 4.43
+   },
+   {
+    "wand": "Krater:26",
+    "start": [
+     127.5,
+     152.5
+    ],
+    "ende": [
+     128.5,
+     152.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.79,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:27",
+    "start": [
+     128.5,
+     133.5
+    ],
+    "ende": [
+     132.5,
+     132.5
+    ],
+    "laenge_zellen": 7.875,
+    "relief_max_m": 2.51,
+    "stationen": 136,
+    "stationen_ohne_relief": 120,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:28",
+    "start": [
+     128.5,
+     153.5
+    ],
+    "ende": [
+     129.5,
+     152.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.74,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:29",
+    "start": [
+     128.5,
+     153.5
+    ],
+    "ende": [
+     129.5,
+     154.5
+    ],
+    "laenge_zellen": 4.897,
+    "relief_max_m": 0.4,
+    "stationen": 88,
+    "stationen_ohne_relief": 88,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:30",
+    "start": [
+     129.5,
+     141.5
+    ],
+    "ende": [
+     130.5,
+     140.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.22,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:31",
+    "start": [
+     129.5,
+     148.5
+    ],
+    "ende": [
+     130.5,
+     148.5
+    ],
+    "laenge_zellen": 4.405,
+    "relief_max_m": 0.59,
+    "stationen": 76,
+    "stationen_ohne_relief": 76,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:32",
+    "start": [
+     130.5,
+     154.5
+    ],
+    "ende": [
+     131.5,
+     148.5
+    ],
+    "laenge_zellen": 7.878,
+    "relief_max_m": 0.44,
+    "stationen": 136,
+    "stationen_ohne_relief": 136,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:33",
+    "start": [
+     131.5,
+     154.5
+    ],
+    "ende": [
+     132.5,
+     153.5
+    ],
+    "laenge_zellen": 2.022,
+    "relief_max_m": 0.23,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:34",
+    "start": [
+     132.5,
+     154.5
+    ],
+    "ende": [
+     132.5,
+     155.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.24,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:35",
+    "start": [
+     133.5,
+     132.5
+    ],
+    "ende": [
+     136.5,
+     143.5
+    ],
+    "laenge_zellen": 13.729,
+    "relief_max_m": 3.42,
+    "stationen": 244,
+    "stationen_ohne_relief": 195,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:36",
+    "start": [
+     134.5,
+     132.5
+    ],
+    "ende": [
+     135.94,
+     130.05
+    ],
+    "laenge_zellen": 3.056,
+    "relief_max_m": 0.26,
+    "stationen": 54,
+    "stationen_ohne_relief": 54,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:5",
+    "start": [
+     137.5,
+     138.5
+    ],
+    "ende": [
+     138.5,
+     143.5
+    ],
+    "laenge_zellen": 5.439,
+    "relief_max_m": 3.18,
+    "stationen": 96,
+    "stationen_ohne_relief": 69,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "G4": [
+   {
+    "wand": "Ostgrat:0",
+    "start": [
+     283.5,
+     131.5
+    ],
+    "ende": [
+     280.04,
+     130.05
+    ],
+    "laenge_zellen": 4.086,
+    "relief_max_m": 0.14,
+    "stationen": 74,
+    "stationen_ohne_relief": 74,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:1",
+    "start": [
+     283.5,
+     131.5
+    ],
+    "ende": [
+     284.56,
+     130.05
+    ],
+    "laenge_zellen": 1.876,
+    "relief_max_m": 0.59,
+    "stationen": 34,
+    "stationen_ohne_relief": 34,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:2",
+    "start": [
+     283.5,
+     131.5
+    ],
+    "ende": [
+     284.5,
+     130.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.43,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:4",
+    "start": [
+     284.5,
+     131.5
+    ],
+    "ende": [
+     284.5,
+     141.5
+    ],
+    "laenge_zellen": 20.426,
+    "relief_max_m": 3.01,
+    "stationen": 352,
+    "stationen_ohne_relief": 331,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:6",
+    "start": [
+     285.5,
+     141.5
+    ],
+    "ende": [
+     285.5,
+     142.5
+    ],
+    "laenge_zellen": 1.0,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Ostgrat:7",
+    "start": [
+     285.5,
+     147.5
+    ],
+    "ende": [
+     287.5,
+     148.5
+    ],
+    "laenge_zellen": 7.285,
+    "relief_max_m": 3.09,
+    "stationen": 128,
+    "stationen_ohne_relief": 99,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:8",
+    "start": [
+     287.5,
+     138.5
+    ],
+    "ende": [
+     288.5,
+     137.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.35,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:9",
+    "start": [
+     287.5,
+     147.5
+    ],
+    "ende": [
+     288.5,
+     138.5
+    ],
+    "laenge_zellen": 14.012,
+    "relief_max_m": 1.29,
+    "stationen": 244,
+    "stationen_ohne_relief": 244,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:10",
+    "start": [
+     287.5,
+     149.5
+    ],
+    "ende": [
+     292.95,
+     154.17
+    ],
+    "laenge_zellen": 8.88,
+    "relief_max_m": 3.81,
+    "stationen": 149,
+    "stationen_ohne_relief": 113,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:10",
+    "start": [
+     292.95,
+     143.95
+    ],
+    "ende": [
+     290.5,
+     143.5
+    ],
+    "laenge_zellen": 4.047,
+    "relief_max_m": 0.43,
+    "stationen": 74,
+    "stationen_ohne_relief": 74,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:11",
+    "start": [
+     291.5,
+     139.5
+    ],
+    "ende": [
+     292.95,
+     140.17
+    ],
+    "laenge_zellen": 2.542,
+    "relief_max_m": 0.38,
+    "stationen": 45,
+    "stationen_ohne_relief": 45,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:11",
+    "start": [
+     292.95,
+     139.45
+    ],
+    "ende": [
+     292.5,
+     139.5
+    ],
+    "laenge_zellen": 0.453,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Ostgrat:12",
+    "start": [
+     291.5,
+     143.5
+    ],
+    "ende": [
+     292.5,
+     143.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.45,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:14",
+    "start": [
+     292.5,
+     154.5
+    ],
+    "ende": [
+     292.95,
+     154.55
+    ],
+    "laenge_zellen": 0.453,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "H4": [
+   {
+    "wand": "Ostgrat:17",
+    "start": [
+     295.05,
+     137.95
+    ],
+    "ende": [
+     297.5,
+     132.5
+    ],
+    "laenge_zellen": 6.48,
+    "relief_max_m": 0.43,
+    "stationen": 113,
+    "stationen_ohne_relief": 113,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:18",
+    "start": [
+     295.05,
+     140.05
+    ],
+    "ende": [
+     295.05,
+     154.5
+    ],
+    "laenge_zellen": 27.77,
+    "relief_max_m": 0.85,
+    "stationen": 474,
+    "stationen_ohne_relief": 474,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:19",
+    "start": [
+     295.05,
+     147.62
+    ],
+    "ende": [
+     295.05,
+     146.99
+    ],
+    "laenge_zellen": 1.139,
+    "relief_max_m": 0.11,
+    "stationen": 22,
+    "stationen_ohne_relief": 22,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:20",
+    "start": [
+     295.5,
+     147.5
+    ],
+    "ende": [
+     297.5,
+     149.5
+    ],
+    "laenge_zellen": 3.452,
+    "relief_max_m": 0.35,
+    "stationen": 68,
+    "stationen_ohne_relief": 68,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:21",
+    "start": [
+     296.5,
+     154.5
+    ],
+    "ende": [
+     297.5,
+     153.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 0.23,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:22",
+    "start": [
+     296.5,
+     167.5
+    ],
+    "ende": [
+     297.5,
+     154.5
+    ],
+    "laenge_zellen": 20.463,
+    "relief_max_m": 1.08,
+    "stationen": 352,
+    "stationen_ohne_relief": 352,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:23",
+    "start": [
+     297.5,
+     133.5
+    ],
+    "ende": [
+     297.5,
+     134.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.01,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:24",
+    "start": [
+     297.5,
+     135.5
+    ],
+    "ende": [
+     299.5,
+     134.5
+    ],
+    "laenge_zellen": 2.429,
+    "relief_max_m": 0.01,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:25",
+    "start": [
+     297.5,
+     151.5
+    ],
+    "ende": [
+     297.5,
+     151.5
+    ],
+    "laenge_zellen": 3.444,
+    "relief_max_m": 0.02,
+    "stationen": 60,
+    "stationen_ohne_relief": 60,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:26",
+    "start": [
+     297.5,
+     152.5
+    ],
+    "ende": [
+     299.5,
+     151.5
+    ],
+    "laenge_zellen": 2.429,
+    "relief_max_m": 0.15,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:27",
+    "start": [
+     302.5,
+     145.5
+    ],
+    "ende": [
+     302.5,
+     146.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.01,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:28",
+    "start": [
+     303.5,
+     145.5
+    ],
+    "ende": [
+     304.5,
+     159.5
+    ],
+    "laenge_zellen": 24.453,
+    "relief_max_m": 0.04,
+    "stationen": 428,
+    "stationen_ohne_relief": 428,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:32",
+    "start": [
+     306.5,
+     159.5
+    ],
+    "ende": [
+     307.5,
+     158.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 0.0,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:33",
+    "start": [
+     306.5,
+     159.5
+    ],
+    "ende": [
+     307.5,
+     159.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:35",
+    "start": [
+     307.5,
+     160.5
+    ],
+    "ende": [
+     310.45,
+     170.95
+    ],
+    "laenge_zellen": 11.757,
+    "relief_max_m": 0.19,
+    "stationen": 206,
+    "stationen_ohne_relief": 206,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:37",
+    "start": [
+     309.5,
+     163.5
+    ],
+    "ende": [
+     309.5,
+     164.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:41",
+    "start": [
+     310.5,
+     163.5
+    ],
+    "ende": [
+     310.5,
+     168.5
+    ],
+    "laenge_zellen": 19.616,
+    "relief_max_m": 0.01,
+    "stationen": 340,
+    "stationen_ohne_relief": 340,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:42",
+    "start": [
+     310.5,
+     169.5
+    ],
+    "ende": [
+     310.5,
+     170.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.02,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:46",
+    "start": [
+     319.94,
+     170.95
+    ],
+    "ende": [
+     317.5,
+     168.5
+    ],
+    "laenge_zellen": 4.076,
+    "relief_max_m": 0.0,
+    "stationen": 70,
+    "stationen_ohne_relief": 70,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:52",
+    "start": [
+     318.5,
+     167.5
+    ],
+    "ende": [
+     318.5,
+     168.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.0,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "B5": [
+   {
+    "wand": "Krater:3",
+    "start": [
+     82.5,
+     173.05
+    ],
+    "ende": [
+     82.95,
+     174.96
+    ],
+    "laenge_zellen": 2.107,
+    "relief_max_m": 0.11,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "C5": [
+   {
+    "wand": "Suedgrat:12",
+    "start": [
+     96.5,
+     212.5
+    ],
+    "ende": [
+     96.45,
+     213.95
+    ],
+    "laenge_zellen": 1.453,
+    "relief_max_m": 0.65,
+    "stationen": 26,
+    "stationen_ohne_relief": 26,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:3",
+    "start": [
+     85.05,
+     181.1
+    ],
+    "ende": [
+     124.56,
+     173.05
+    ],
+    "laenge_zellen": 67.18,
+    "relief_max_m": 0.71,
+    "stationen": 1175,
+    "stationen_ohne_relief": 1175,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:9",
+    "start": [
+     114.5,
+     196.5
+    ],
+    "ende": [
+     116.5,
+     202.5
+    ],
+    "laenge_zellen": 6.858,
+    "relief_max_m": 3.24,
+    "stationen": 120,
+    "stationen_ohne_relief": 103,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Krater:19",
+    "start": [
+     123.5,
+     174.5
+    ],
+    "ende": [
+     124.5,
+     173.5
+    ],
+    "laenge_zellen": 2.022,
+    "relief_max_m": 0.4,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Krater:21",
+    "start": [
+     124.5,
+     174.5
+    ],
+    "ende": [
+     124.95,
+     174.95
+    ],
+    "laenge_zellen": 0.636,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   }
+  ],
+  "D5": [
+   {
+    "wand": "Krater:21",
+    "start": [
+     127.05,
+     176.49
+    ],
+    "ende": [
+     136.5,
+     189.5
+    ],
+    "laenge_zellen": 18.483,
+    "relief_max_m": 0.55,
+    "stationen": 324,
+    "stationen_ohne_relief": 324,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:6",
+    "start": [
+     137.5,
+     184.5
+    ],
+    "ende": [
+     156.5,
+     199.5
+    ],
+    "laenge_zellen": 29.717,
+    "relief_max_m": 0.53,
+    "stationen": 508,
+    "stationen_ohne_relief": 508,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:7",
+    "start": [
+     160.5,
+     197.5
+    ],
+    "ende": [
+     160.5,
+     199.5
+    ],
+    "laenge_zellen": 2.868,
+    "relief_max_m": 0.0,
+    "stationen": 52,
+    "stationen_ohne_relief": 52,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:8",
+    "start": [
+     161.5,
+     198.5
+    ],
+    "ende": [
+     166.95,
+     198.5
+    ],
+    "laenge_zellen": 5.45,
+    "relief_max_m": 0.0,
+    "stationen": 100,
+    "stationen_ohne_relief": 100,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "E5": [
+   {
+    "wand": "Suedgrat:28",
+    "start": [
+     175.5,
+     205.5
+    ],
+    "ende": [
+     177.5,
+     210.5
+    ],
+    "laenge_zellen": 5.86,
+    "relief_max_m": 0.0,
+    "stationen": 104,
+    "stationen_ohne_relief": 104,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:29",
+    "start": [
+     176.5,
+     206.5
+    ],
+    "ende": [
+     176.5,
+     207.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.01,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:30",
+    "start": [
+     177.5,
+     206.5
+    ],
+    "ende": [
+     179.5,
+     208.5
+    ],
+    "laenge_zellen": 2.828,
+    "relief_max_m": 0.01,
+    "stationen": 52,
+    "stationen_ohne_relief": 52,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "unbenannt:8",
+    "start": [
+     169.05,
+     198.44
+    ],
+    "ende": [
+     178.5,
+     204.5
+    ],
+    "laenge_zellen": 11.989,
+    "relief_max_m": 0.01,
+    "stationen": 204,
+    "stationen_ohne_relief": 204,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "H5": [
+   {
+    "wand": "Suedgrat:63",
+    "start": [
+     301.56,
+     213.95
+    ],
+    "ende": [
+     301.5,
+     213.5
+    ],
+    "laenge_zellen": 0.454,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Suedgrat:65",
+    "start": [
+     313.5,
+     206.5
+    ],
+    "ende": [
+     315.5,
+     206.5
+    ],
+    "laenge_zellen": 2.0,
+    "relief_max_m": 1.71,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:29",
+    "start": [
+     303.5,
+     203.5
+    ],
+    "ende": [
+     306.5,
+     197.5
+    ],
+    "laenge_zellen": 7.882,
+    "relief_max_m": 1.02,
+    "stationen": 140,
+    "stationen_ohne_relief": 140,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:31",
+    "start": [
+     305.5,
+     201.5
+    ],
+    "ende": [
+     305.5,
+     202.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.84,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:34",
+    "start": [
+     306.5,
+     200.5
+    ],
+    "ende": [
+     306.5,
+     200.5
+    ],
+    "laenge_zellen": 3.444,
+    "relief_max_m": 1.92,
+    "stationen": 60,
+    "stationen_ohne_relief": 60,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:35",
+    "start": [
+     311.55,
+     173.05
+    ],
+    "ende": [
+     314.5,
+     178.5
+    ],
+    "laenge_zellen": 10.773,
+    "relief_max_m": 0.75,
+    "stationen": 186,
+    "stationen_ohne_relief": 186,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:36",
+    "start": [
+     307.5,
+     201.5
+    ],
+    "ende": [
+     309.5,
+     197.5
+    ],
+    "laenge_zellen": 22.046,
+    "relief_max_m": 3.33,
+    "stationen": 376,
+    "stationen_ohne_relief": 362,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Ostgrat:46",
+    "start": [
+     315.5,
+     178.5
+    ],
+    "ende": [
+     320.56,
+     173.05
+    ],
+    "laenge_zellen": 7.533,
+    "relief_max_m": 0.01,
+    "stationen": 130,
+    "stationen_ohne_relief": 130,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:47",
+    "start": [
+     315.5,
+     179.5
+    ],
+    "ende": [
+     317.5,
+     201.5
+    ],
+    "laenge_zellen": 31.728,
+    "relief_max_m": 0.57,
+    "stationen": 548,
+    "stationen_ohne_relief": 548,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:48",
+    "start": [
+     317.5,
+     181.5
+    ],
+    "ende": [
+     317.5,
+     182.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:49",
+    "start": [
+     317.5,
+     202.5
+    ],
+    "ende": [
+     318.5,
+     201.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.36,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:53",
+    "start": [
+     318.5,
+     181.5
+    ],
+    "ende": [
+     324.5,
+     184.5
+    ],
+    "laenge_zellen": 10.677,
+    "relief_max_m": 0.02,
+    "stationen": 184,
+    "stationen_ohne_relief": 184,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:58",
+    "start": [
+     322.5,
+     199.5
+    ],
+    "ende": [
+     323.5,
+     198.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.55,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:60",
+    "start": [
+     323.5,
+     199.5
+    ],
+    "ende": [
+     326.5,
+     202.5
+    ],
+    "laenge_zellen": 4.243,
+    "relief_max_m": 0.84,
+    "stationen": 76,
+    "stationen_ohne_relief": 76,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:63",
+    "start": [
+     324.5,
+     185.5
+    ],
+    "ende": [
+     325.5,
+     184.5
+    ],
+    "laenge_zellen": 4.341,
+    "relief_max_m": 0.05,
+    "stationen": 76,
+    "stationen_ohne_relief": 76,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:64",
+    "start": [
+     324.5,
+     192.5
+    ],
+    "ende": [
+     324.5,
+     193.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.04,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:66",
+    "start": [
+     325.5,
+     186.5
+    ],
+    "ende": [
+     326.5,
+     185.5
+    ],
+    "laenge_zellen": 2.018,
+    "relief_max_m": 0.01,
+    "stationen": 40,
+    "stationen_ohne_relief": 40,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:67",
+    "start": [
+     325.5,
+     192.5
+    ],
+    "ende": [
+     326.5,
+     186.5
+    ],
+    "laenge_zellen": 7.88,
+    "relief_max_m": 0.08,
+    "stationen": 140,
+    "stationen_ohne_relief": 140,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Ostgrat:71",
+    "start": [
+     327.5,
+     190.5
+    ],
+    "ende": [
+     327.5,
+     191.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.01,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "A6": [
+   {
+    "wand": "Suedgrat:0",
+    "start": [
+     30.5,
+     242.5
+    ],
+    "ende": [
+     40.95,
+     233.99
+    ],
+    "laenge_zellen": 15.279,
+    "relief_max_m": 1.4,
+    "stationen": 267,
+    "stationen_ohne_relief": 267,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:1",
+    "start": [
+     39.5,
+     236.5
+    ],
+    "ende": [
+     40.95,
+     237.95
+    ],
+    "laenge_zellen": 2.051,
+    "relief_max_m": 0.44,
+    "stationen": 38,
+    "stationen_ohne_relief": 38,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "B6": [
+   {
+    "wand": "Suedgrat:0",
+    "start": [
+     43.05,
+     230.83
+    ],
+    "ende": [
+     49.5,
+     229.5
+    ],
+    "laenge_zellen": 10.458,
+    "relief_max_m": 1.06,
+    "stationen": 185,
+    "stationen_ohne_relief": 185,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:1",
+    "start": [
+     43.05,
+     240.12
+    ],
+    "ende": [
+     47.5,
+     241.5
+    ],
+    "laenge_zellen": 5.049,
+    "relief_max_m": 0.45,
+    "stationen": 98,
+    "stationen_ohne_relief": 98,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:2",
+    "start": [
+     50.5,
+     228.5
+    ],
+    "ende": [
+     51.5,
+     227.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.7,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:3",
+    "start": [
+     50.5,
+     229.5
+    ],
+    "ende": [
+     51.5,
+     230.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 0.63,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "C6": [
+   {
+    "wand": "Suedgrat:4",
+    "start": [
+     85.05,
+     220.04
+    ],
+    "ende": [
+     93.5,
+     224.5
+    ],
+    "laenge_zellen": 14.398,
+    "relief_max_m": 2.11,
+    "stationen": 258,
+    "stationen_ohne_relief": 245,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:5",
+    "start": [
+     91.5,
+     240.5
+    ],
+    "ende": [
+     109.5,
+     247.5
+    ],
+    "laenge_zellen": 29.614,
+    "relief_max_m": 1.03,
+    "stationen": 532,
+    "stationen_ohne_relief": 532,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:6",
+    "start": [
+     92.5,
+     244.5
+    ],
+    "ende": [
+     92.5,
+     245.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.6,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:7",
+    "start": [
+     92.5,
+     246.5
+    ],
+    "ende": [
+     94.5,
+     245.5
+    ],
+    "laenge_zellen": 2.429,
+    "relief_max_m": 0.66,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:8",
+    "start": [
+     93.5,
+     234.5
+    ],
+    "ende": [
+     94.5,
+     225.5
+    ],
+    "laenge_zellen": 10.31,
+    "relief_max_m": 1.02,
+    "stationen": 176,
+    "stationen_ohne_relief": 176,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:9",
+    "start": [
+     94.5,
+     224.5
+    ],
+    "ende": [
+     99.5,
+     221.5
+    ],
+    "laenge_zellen": 6.258,
+    "relief_max_m": 0.76,
+    "stationen": 112,
+    "stationen_ohne_relief": 112,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:10",
+    "start": [
+     95.5,
+     226.5
+    ],
+    "ende": [
+     95.5,
+     227.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.32,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:11",
+    "start": [
+     95.5,
+     228.5
+    ],
+    "ende": [
+     95.5,
+     229.5
+    ],
+    "laenge_zellen": 2.424,
+    "relief_max_m": 0.57,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:12",
+    "start": [
+     99.04,
+     216.05
+    ],
+    "ende": [
+     105.01,
+     216.05
+    ],
+    "laenge_zellen": 6.355,
+    "relief_max_m": 3.29,
+    "stationen": 120,
+    "stationen_ohne_relief": 55,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.41
+   },
+   {
+    "wand": "Suedgrat:13",
+    "start": [
+     96.5,
+     226.5
+    ],
+    "ende": [
+     101.5,
+     224.5
+    ],
+    "laenge_zellen": 5.861,
+    "relief_max_m": 0.64,
+    "stationen": 108,
+    "stationen_ohne_relief": 108,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:14",
+    "start": [
+     96.5,
+     229.5
+    ],
+    "ende": [
+     98.5,
+     230.5
+    ],
+    "laenge_zellen": 2.429,
+    "relief_max_m": 0.65,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:15",
+    "start": [
+     104.5,
+     216.5
+    ],
+    "ende": [
+     110.5,
+     219.5
+    ],
+    "laenge_zellen": 10.739,
+    "relief_max_m": 3.98,
+    "stationen": 188,
+    "stationen_ohne_relief": 100,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:16",
+    "start": [
+     107.5,
+     251.5
+    ],
+    "ende": [
+     108.5,
+     251.5
+    ],
+    "laenge_zellen": 4.435,
+    "relief_max_m": 0.62,
+    "stationen": 84,
+    "stationen_ohne_relief": 84,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:17",
+    "start": [
+     109.5,
+     251.5
+    ],
+    "ende": [
+     124.95,
+     240.99
+    ],
+    "laenge_zellen": 22.268,
+    "relief_max_m": 1.09,
+    "stationen": 379,
+    "stationen_ohne_relief": 379,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:17",
+    "start": [
+     124.95,
+     232.95
+    ],
+    "ende": [
+     111.5,
+     219.5
+    ],
+    "laenge_zellen": 23.518,
+    "relief_max_m": 4.06,
+    "stationen": 410,
+    "stationen_ohne_relief": 350,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.41
+   },
+   {
+    "wand": "Suedgrat:18",
+    "start": [
+     112.5,
+     219.5
+    ],
+    "ende": [
+     115.5,
+     218.5
+    ],
+    "laenge_zellen": 3.431,
+    "relief_max_m": 0.31,
+    "stationen": 64,
+    "stationen_ohne_relief": 64,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:19",
+    "start": [
+     113.5,
+     231.5
+    ],
+    "ende": [
+     115.5,
+     230.5
+    ],
+    "laenge_zellen": 5.868,
+    "relief_max_m": 0.07,
+    "stationen": 100,
+    "stationen_ohne_relief": 100,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:20",
+    "start": [
+     116.5,
+     230.5
+    ],
+    "ende": [
+     117.5,
+     230.5
+    ],
+    "laenge_zellen": 1.0,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Suedgrat:21",
+    "start": [
+     119.5,
+     250.5
+    ],
+    "ende": [
+     120.5,
+     249.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 1.01,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:22",
+    "start": [
+     120.5,
+     250.5
+    ],
+    "ende": [
+     124.5,
+     253.5
+    ],
+    "laenge_zellen": 5.259,
+    "relief_max_m": 0.01,
+    "stationen": 96,
+    "stationen_ohne_relief": 96,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "D6": [
+   {
+    "wand": "Suedgrat:17",
+    "start": [
+     127.05,
+     238.95
+    ],
+    "ende": [
+     127.05,
+     235.05
+    ],
+    "laenge_zellen": 5.145,
+    "relief_max_m": 1.29,
+    "stationen": 88,
+    "stationen_ohne_relief": 88,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:23",
+    "start": [
+     127.5,
+     238.5
+    ],
+    "ende": [
+     128.5,
+     236.5
+    ],
+    "laenge_zellen": 4.431,
+    "relief_max_m": 1.04,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:24",
+    "start": [
+     128.5,
+     238.5
+    ],
+    "ende": [
+     136.5,
+     250.5
+    ],
+    "laenge_zellen": 15.945,
+    "relief_max_m": 0.07,
+    "stationen": 272,
+    "stationen_ohne_relief": 272,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:25",
+    "start": [
+     129.5,
+     236.5
+    ],
+    "ende": [
+     164.5,
+     226.5
+    ],
+    "laenge_zellen": 44.814,
+    "relief_max_m": 6.8,
+    "stationen": 776,
+    "stationen_ohne_relief": 428,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 17.94
+   },
+   {
+    "wand": "Suedgrat:26",
+    "start": [
+     165.5,
+     225.5
+    ],
+    "ende": [
+     166.95,
+     224.05
+    ],
+    "laenge_zellen": 2.051,
+    "relief_max_m": 0.14,
+    "stationen": 38,
+    "stationen_ohne_relief": 38,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:27",
+    "start": [
+     165.5,
+     226.5
+    ],
+    "ende": [
+     166.95,
+     234.07
+    ],
+    "laenge_zellen": 8.169,
+    "relief_max_m": 1.78,
+    "stationen": 139,
+    "stationen_ohne_relief": 139,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ],
+  "E6": [
+   {
+    "wand": "Suedgrat:26",
+    "start": [
+     169.05,
+     222.51
+    ],
+    "ende": [
+     186.5,
+     232.5
+    ],
+    "laenge_zellen": 27.147,
+    "relief_max_m": 0.52,
+    "stationen": 464,
+    "stationen_ohne_relief": 464,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:27",
+    "start": [
+     169.05,
+     235.06
+    ],
+    "ende": [
+     174.5,
+     244.5
+    ],
+    "laenge_zellen": 22.031,
+    "relief_max_m": 1.59,
+    "stationen": 378,
+    "stationen_ohne_relief": 378,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:31",
+    "start": [
+     180.5,
+     237.5
+    ],
+    "ende": [
+     187.5,
+     232.5
+    ],
+    "laenge_zellen": 12.873,
+    "relief_max_m": 0.11,
+    "stationen": 224,
+    "stationen_ohne_relief": 224,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:32",
+    "start": [
+     185.5,
+     247.5
+    ],
+    "ende": [
+     187.5,
+     236.5
+    ],
+    "laenge_zellen": 14.996,
+    "relief_max_m": 1.26,
+    "stationen": 264,
+    "stationen_ohne_relief": 264,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:33",
+    "start": [
+     187.5,
+     237.5
+    ],
+    "ende": [
+     187.5,
+     238.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.08,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:34",
+    "start": [
+     188.5,
+     232.5
+    ],
+    "ende": [
+     195.5,
+     226.5
+    ],
+    "laenge_zellen": 10.125,
+    "relief_max_m": 0.07,
+    "stationen": 176,
+    "stationen_ohne_relief": 176,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:35",
+    "start": [
+     188.5,
+     243.5
+    ],
+    "ende": [
+     189.5,
+     243.5
+    ],
+    "laenge_zellen": 4.411,
+    "relief_max_m": 2.76,
+    "stationen": 80,
+    "stationen_ohne_relief": 53,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:36",
+    "start": [
+     190.5,
+     243.5
+    ],
+    "ende": [
+     202.5,
+     244.5
+    ],
+    "laenge_zellen": 15.868,
+    "relief_max_m": 7.96,
+    "stationen": 276,
+    "stationen_ohne_relief": 65,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 11.14
+   },
+   {
+    "wand": "Suedgrat:37",
+    "start": [
+     193.5,
+     229.5
+    ],
+    "ende": [
+     194.5,
+     229.5
+    ],
+    "laenge_zellen": 4.416,
+    "relief_max_m": 0.0,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:38",
+    "start": [
+     195.5,
+     229.5
+    ],
+    "ende": [
+     203.5,
+     244.5
+    ],
+    "laenge_zellen": 26.992,
+    "relief_max_m": 7.99,
+    "stationen": 464,
+    "stationen_ohne_relief": 236,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 13.36
+   },
+   {
+    "wand": "Suedgrat:39",
+    "start": [
+     203.5,
+     245.5
+    ],
+    "ende": [
+     204.5,
+     244.5
+    ],
+    "laenge_zellen": 1.414,
+    "relief_max_m": 2.4,
+    "stationen": 28,
+    "stationen_ohne_relief": 16,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:40",
+    "start": [
+     203.5,
+     245.5
+    ],
+    "ende": [
+     205.5,
+     248.5
+    ],
+    "laenge_zellen": 3.845,
+    "relief_max_m": 0.42,
+    "stationen": 68,
+    "stationen_ohne_relief": 68,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:41",
+    "start": [
+     207.5,
+     233.5
+    ],
+    "ende": [
+     208.95,
+     232.49
+    ],
+    "laenge_zellen": 1.872,
+    "relief_max_m": 5.36,
+    "stationen": 34,
+    "stationen_ohne_relief": 0,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "F6": [
+   {
+    "wand": "Suedgrat:41",
+    "start": [
+     211.05,
+     230.95
+    ],
+    "ende": [
+     213.5,
+     229.5
+    ],
+    "laenge_zellen": 3.066,
+    "relief_max_m": 5.99,
+    "stationen": 54,
+    "stationen_ohne_relief": 0,
+    "laeufe_gebaut": 1,
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.07,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)"
+   },
+   {
+    "wand": "Suedgrat:42",
+    "start": [
+     211.05,
+     232.05
+    ],
+    "ende": [
+     215.5,
+     240.5
+    ],
+    "laenge_zellen": 11.152,
+    "relief_max_m": 0.76,
+    "stationen": 189,
+    "stationen_ohne_relief": 189,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:43",
+    "start": [
+     220.5,
+     228.5
+    ],
+    "ende": [
+     228.5,
+     223.5
+    ],
+    "laenge_zellen": 14.77,
+    "relief_max_m": 4.17,
+    "stationen": 244,
+    "stationen_ohne_relief": 188,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.21
+   },
+   {
+    "wand": "Suedgrat:44",
+    "start": [
+     228.5,
+     228.5
+    ],
+    "ende": [
+     229.5,
+     228.5
+    ],
+    "laenge_zellen": 4.405,
+    "relief_max_m": 3.3,
+    "stationen": 76,
+    "stationen_ohne_relief": 43,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:45",
+    "start": [
+     230.5,
+     228.5
+    ],
+    "ende": [
+     237.5,
+     234.5
+    ],
+    "laenge_zellen": 10.122,
+    "relief_max_m": 4.74,
+    "stationen": 172,
+    "stationen_ohne_relief": 31,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 5.61
+   }
+  ],
+  "G6": [
+   {
+    "wand": "Suedgrat:46",
+    "start": [
+     253.05,
+     247.56
+    ],
+    "ende": [
+     254.5,
+     228.5
+    ],
+    "laenge_zellen": 29.581,
+    "relief_max_m": 8.0,
+    "stationen": 506,
+    "stationen_ohne_relief": 348,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 8.54
+   },
+   {
+    "wand": "Suedgrat:47",
+    "start": [
+     261.5,
+     238.5
+    ],
+    "ende": [
+     262.5,
+     237.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 0.94,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:48",
+    "start": [
+     262.5,
+     232.5
+    ],
+    "ende": [
+     262.5,
+     233.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 4.08,
+    "stationen": 44,
+    "stationen_ohne_relief": 19,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:49",
+    "start": [
+     262.5,
+     238.5
+    ],
+    "ende": [
+     265.5,
+     240.5
+    ],
+    "laenge_zellen": 7.309,
+    "relief_max_m": 0.74,
+    "stationen": 132,
+    "stationen_ohne_relief": 132,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:50",
+    "start": [
+     263.5,
+     232.5
+    ],
+    "ende": [
+     274.5,
+     223.5
+    ],
+    "laenge_zellen": 15.358,
+    "relief_max_m": 7.16,
+    "stationen": 268,
+    "stationen_ohne_relief": 201,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.76
+   },
+   {
+    "wand": "Suedgrat:51",
+    "start": [
+     266.5,
+     232.5
+    ],
+    "ende": [
+     267.5,
+     231.5
+    ],
+    "laenge_zellen": 2.013,
+    "relief_max_m": 5.73,
+    "stationen": 36,
+    "stationen_ohne_relief": 18,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:52",
+    "start": [
+     266.5,
+     240.5
+    ],
+    "ende": [
+     267.5,
+     240.5
+    ],
+    "laenge_zellen": 6.798,
+    "relief_max_m": 0.47,
+    "stationen": 116,
+    "stationen_ohne_relief": 116,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:53",
+    "start": [
+     267.5,
+     232.5
+    ],
+    "ende": [
+     274.5,
+     233.5
+    ],
+    "laenge_zellen": 10.875,
+    "relief_max_m": 6.27,
+    "stationen": 184,
+    "stationen_ohne_relief": 113,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 4.05
+   },
+   {
+    "wand": "Suedgrat:54",
+    "start": [
+     267.5,
+     242.5
+    ],
+    "ende": [
+     268.5,
+     242.5
+    ],
+    "laenge_zellen": 4.404,
+    "relief_max_m": 0.42,
+    "stationen": 76,
+    "stationen_ohne_relief": 76,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:55",
+    "start": [
+     269.5,
+     242.5
+    ],
+    "ende": [
+     270.5,
+     242.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.48,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:56",
+    "start": [
+     275.5,
+     233.5
+    ],
+    "ende": [
+     281.5,
+     222.5
+    ],
+    "laenge_zellen": 18.646,
+    "relief_max_m": 0.47,
+    "stationen": 320,
+    "stationen_ohne_relief": 320,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:57",
+    "start": [
+     275.5,
+     234.5
+    ],
+    "ende": [
+     276.5,
+     241.5
+    ],
+    "laenge_zellen": 7.429,
+    "relief_max_m": 1.6,
+    "stationen": 128,
+    "stationen_ohne_relief": 128,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:58",
+    "start": [
+     285.5,
+     226.5
+    ],
+    "ende": [
+     291.5,
+     226.5
+    ],
+    "laenge_zellen": 9.446,
+    "relief_max_m": 0.72,
+    "stationen": 164,
+    "stationen_ohne_relief": 164,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:59",
+    "start": [
+     291.5,
+     231.5
+    ],
+    "ende": [
+     292.95,
+     236.56
+    ],
+    "laenge_zellen": 5.896,
+    "relief_max_m": 0.83,
+    "stationen": 98,
+    "stationen_ohne_relief": 98,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:59",
+    "start": [
+     292.95,
+     227.06
+    ],
+    "ende": [
+     292.95,
+     225.94
+    ],
+    "laenge_zellen": 1.46,
+    "relief_max_m": 0.36,
+    "stationen": 28,
+    "stationen_ohne_relief": 28,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:60",
+    "start": [
+     291.5,
+     231.5
+    ],
+    "ende": [
+     292.95,
+     227.39
+    ],
+    "laenge_zellen": 4.9,
+    "relief_max_m": 8.83,
+    "stationen": 82,
+    "stationen_ohne_relief": 51,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:60",
+    "start": [
+     292.95,
+     228.1
+    ],
+    "ende": [
+     292.5,
+     228.5
+    ],
+    "laenge_zellen": 0.602,
+    "grund": "kuerzer als 1 Zelle (Schnittrest)"
+   },
+   {
+    "wand": "Suedgrat:61",
+    "start": [
+     291.5,
+     231.5
+    ],
+    "ende": [
+     291.5,
+     233.5
+    ],
+    "laenge_zellen": 4.835,
+    "relief_max_m": 2.55,
+    "stationen": 84,
+    "stationen_ohne_relief": 63,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   },
+   {
+    "wand": "Suedgrat:62",
+    "start": [
+     291.5,
+     234.5
+    ],
+    "ende": [
+     292.95,
+     233.13
+    ],
+    "laenge_zellen": 1.994,
+    "relief_max_m": 1.38,
+    "stationen": 36,
+    "stationen_ohne_relief": 36,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:62",
+    "start": [
+     292.95,
+     231.92
+    ],
+    "ende": [
+     292.5,
+     230.5
+    ],
+    "laenge_zellen": 1.628,
+    "relief_max_m": 2.53,
+    "stationen": 33,
+    "stationen_ohne_relief": 29,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "H6": [
+   {
+    "wand": "Suedgrat:59",
+    "start": [
+     295.05,
+     236.56
+    ],
+    "ende": [
+     295.05,
+     229.05
+    ],
+    "laenge_zellen": 8.964,
+    "relief_max_m": 0.08,
+    "stationen": 152,
+    "stationen_ohne_relief": 152,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:59",
+    "start": [
+     295.05,
+     224.45
+    ],
+    "ende": [
+     298.5,
+     223.5
+    ],
+    "laenge_zellen": 7.334,
+    "relief_max_m": 1.2,
+    "stationen": 126,
+    "stationen_ohne_relief": 126,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:63",
+    "start": [
+     299.5,
+     222.5
+    ],
+    "ende": [
+     300.45,
+     216.05
+    ],
+    "laenge_zellen": 6.884,
+    "relief_max_m": 0.85,
+    "stationen": 120,
+    "stationen_ohne_relief": 120,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:64",
+    "start": [
+     299.5,
+     223.5
+    ],
+    "ende": [
+     319.5,
+     240.5
+    ],
+    "laenge_zellen": 34.985,
+    "relief_max_m": 9.36,
+    "stationen": 592,
+    "stationen_ohne_relief": 73,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 29.03
+   },
+   {
+    "wand": "Suedgrat:66",
+    "start": [
+     319.5,
+     239.5
+    ],
+    "ende": [
+     321.5,
+     237.5
+    ],
+    "laenge_zellen": 2.828,
+    "relief_max_m": 0.62,
+    "stationen": 52,
+    "stationen_ohne_relief": 52,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Suedgrat:67",
+    "start": [
+     319.5,
+     241.5
+    ],
+    "ende": [
+     327.5,
+     255.5
+    ],
+    "laenge_zellen": 17.381,
+    "relief_max_m": 7.38,
+    "stationen": 300,
+    "stationen_ohne_relief": 17,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 11.96
+   },
+   {
+    "wand": "unbenannt:11",
+    "start": [
+     329.17,
+     256.95
+    ],
+    "ende": [
+     329.5,
+     252.5
+    ],
+    "laenge_zellen": 4.573,
+    "relief_max_m": 2.41,
+    "stationen": 81,
+    "stationen_ohne_relief": 19,
+    "laeufe_gebaut": 1,
+    "grund": "Gelaende formt die Klippe selbst (Stufe >= 2 m auf 2,4 m)",
+    "grund_vorher": "teilweise: Abschnitte flacher als 2 m oder Laeufe < 3 Zellen",
+    "laeufe_unterdrueckt": 1,
+    "laenge_unterdrueckt_zellen": 3.56
+   }
+  ],
+  "C7": [
+   {
+    "wand": "unbenannt:4",
+    "start": [
+     100.04,
+     259.05
+    ],
+    "ende": [
+     103.96,
+     259.05
+    ],
+    "laenge_zellen": 4.312,
+    "relief_max_m": 0.01,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ]
+ },
+ "index_html_D1_G1": {
+  "D1": [
+   {
+    "wand": "Nord:26",
+    "start": [
+     127.05,
+     24.51
+    ],
+    "ende": [
+     150.5,
+     1.5
+    ],
+    "laenge_zellen": 39.027,
+    "relief_max_m": 0.58,
+    "stationen": 688,
+    "stationen_ohne_relief": 688,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:27",
+    "start": [
+     148.5,
+     11.5
+    ],
+    "ende": [
+     149.5,
+     11.5
+    ],
+    "laenge_zellen": 4.411,
+    "relief_max_m": 0.42,
+    "stationen": 80,
+    "stationen_ohne_relief": 80,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:28",
+    "start": [
+     150.5,
+     11.5
+    ],
+    "ende": [
+     154.5,
+     12.5
+    ],
+    "laenge_zellen": 7.885,
+    "relief_max_m": 0.71,
+    "stationen": 136,
+    "stationen_ohne_relief": 136,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:29",
+    "start": [
+     155.5,
+     12.5
+    ],
+    "ende": [
+     159.5,
+     22.5
+    ],
+    "laenge_zellen": 14.281,
+    "relief_max_m": 0.83,
+    "stationen": 244,
+    "stationen_ohne_relief": 244,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:30",
+    "start": [
+     156.5,
+     12.5
+    ],
+    "ende": [
+     166.95,
+     12.5
+    ],
+    "laenge_zellen": 10.45,
+    "relief_max_m": 2.86,
+    "stationen": 188,
+    "stationen_ohne_relief": 138,
+    "laeufe_gebaut": 0,
+    "grund": "nur Laeufe < 3 Zellen mit Stufe (einzelne Kloetze)"
+   }
+  ],
+  "G1": [
+   {
+    "wand": "Nord:52",
+    "start": [
+     253.05,
+     1.5
+    ],
+    "ende": [
+     260.96,
+     1.05
+    ],
+    "laenge_zellen": 8.105,
+    "relief_max_m": 0.02,
+    "stationen": 136,
+    "stationen_ohne_relief": 136,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:54",
+    "start": [
+     253.05,
+     16.94
+    ],
+    "ende": [
+     272.5,
+     8.5
+    ],
+    "laenge_zellen": 45.057,
+    "relief_max_m": 0.98,
+    "stationen": 762,
+    "stationen_ohne_relief": 762,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:55",
+    "start": [
+     268.5,
+     2.5
+    ],
+    "ende": [
+     277.96,
+     1.05
+    ],
+    "laenge_zellen": 10.084,
+    "relief_max_m": 0.11,
+    "stationen": 174,
+    "stationen_ohne_relief": 174,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:55",
+    "start": [
+     284.17,
+     1.05
+    ],
+    "ende": [
+     292.95,
+     21.5
+    ],
+    "laenge_zellen": 33.895,
+    "relief_max_m": 0.01,
+    "stationen": 587,
+    "stationen_ohne_relief": 587,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:56",
+    "start": [
+     273.5,
+     8.5
+    ],
+    "ende": [
+     274.5,
+     6.5
+    ],
+    "laenge_zellen": 2.431,
+    "relief_max_m": 0.54,
+    "stationen": 48,
+    "stationen_ohne_relief": 48,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:57",
+    "start": [
+     274.5,
+     7.5
+    ],
+    "ende": [
+     274.5,
+     8.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.39,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:58",
+    "start": [
+     283.5,
+     13.5
+    ],
+    "ende": [
+     283.5,
+     14.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:59",
+    "start": [
+     284.5,
+     1.5
+    ],
+    "ende": [
+     284.5,
+     2.5
+    ],
+    "laenge_zellen": 2.413,
+    "relief_max_m": 0.0,
+    "stationen": 44,
+    "stationen_ohne_relief": 44,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:60",
+    "start": [
+     284.5,
+     14.5
+    ],
+    "ende": [
+     285.5,
+     14.5
+    ],
+    "laenge_zellen": 1.0,
+    "relief_max_m": 0.0,
+    "stationen": 20,
+    "stationen_ohne_relief": 20,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   },
+   {
+    "wand": "Nord:61",
+    "start": [
+     285.5,
+     1.5
+    ],
+    "ende": [
+     292.95,
+     2.55
+    ],
+    "laenge_zellen": 7.895,
+    "relief_max_m": 0.01,
+    "stationen": 138,
+    "stationen_ohne_relief": 138,
+    "laeufe_gebaut": 0,
+    "grund": "Gelaende quer zur Linie flacher als 2 m (keine Stufe)"
+   }
+  ]
+ }
+}

@@ -131,6 +131,9 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     polygonOffset: nahtHilfe, polygonOffsetFactor: nahtHilfe ? 4 : 0, polygonOffsetUnits: nahtHilfe ? 4 : 0 });
   const wallMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x85827b : 0x69645d, side: THREE.DoubleSide, flatShading: false,
     polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
+  const wandVC = !clay && q.get('wandvc') !== '0';
+  const wallMaterialVC = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true, side: THREE.DoubleSide, flatShading: false,
+    polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
   const visibleHeights = new Float32Array(decodeBytes(DN.GB).buffer);
   const H = (x, z) => {
     const fx = Math.max(0, Math.min(x * rs, GX - 1.001)), fz = Math.max(0, Math.min(z * rs, GY - 1.001));
@@ -192,7 +195,10 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     const normals = t.normals_xyz_f32 ? decodeF32(t.normals_xyz_f32) : null;
     const group = new THREE.Group(); group.name = `waende_${tile}`;
     group.userData.ebene = 'waende'; group.userData.kachel = tile; wallRoot.add(group);
-    makeMesh(THREE, positions, indices, wallMaterial, `wand_${tile}`, group, normals);
+    // P10e: Wandkoerper in der Farbe der umliegenden Klippe (Gelaende-VC an derselben Stelle, gleiches
+    // Lambert-Material wie das Gelaende) statt fast schwarzem Einheitsgrau. ?wandvc=0 = alter Stand.
+    const wm = makeMesh(THREE, positions, indices, wandVC ? wallMaterialVC : wallMaterial, `wand_${tile}`, group, normals);
+    if (wandVC) wm.geometry.setAttribute('color', new THREE.BufferAttribute(tileColor(DN, positions, rs, NX, NY), 3));
     wallStats[tile] = { features: t.features, vertices: t.vertices, triangles: t.triangles };
   }
 

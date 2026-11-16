@@ -1,0 +1,1 @@
+pixel_abweichend_ohne_waende {'C6.png': 0, 'C6_nah_nord.png': 0, 'E6.png': 0, 'F6.png': 0, 'G6.png': 0, 'H6.png': 0, 'H6_nah_nord.png': 0}
