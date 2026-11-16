@@ -291,19 +291,66 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
         for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const g = (di && dj) ? 1 : (di || dj) ? 2 : 4; s += TS[k + dj * GX + di] * g; c += g; }
         B[k] = s / c; } TS.set(B); } }
     const imMesh = k => neu ? (ok(k) || RING[k] === 1) : ok(k);
+    // P12c: Alpha, Tiefenblende und Ufertoenung folgen einem Abstandsfeld zur Uferlinie statt den Maskenzellen (?wfeld=0 = P12b).
+    // Uferlinie = Nulllinie der Wassertiefe DS = Spiegel - Boden (Spiegel WR in der Maske, WE in Ring 1; Ring 2/3 und Land -0,05),
+    // je Rasterzelle per Marching Squares als Strecken (bilinear auf den Kanten interpoliert, also nicht rastergebunden).
+    // DIST = vorzeichenbehafteter euklidischer Abstand (m) jedes Wasser-/Randvertex zur naechsten Uferstrecke (Suche +-4 Zellen,
+    // gekappt auf 2 m), + auf der Wasserseite. Geometrie (Hoehen, Dreiecke), Maske und Spiegel bleiben wie P12b; kein Wasser entfernt.
+    const wfeld = neu && q.get('wfeld') !== '0';
+    const DIST = new Float32Array(N).fill(2);
+    if (wfeld) {
+      const DS = new Float32Array(N).fill(-0.05);
+      for (let k = 0; k < N; k++) DS[k] = ok(k) ? WR[k] - GL[k] : RING[k] === 1 ? WE[k] - GL[k] : -0.05;
+      const SEG = new Map(), relevant = k => ok(k) || RING[k] > 0;
+      for (let j = 0; j < GY - 1; j++) for (let i = 0; i < GX - 1; i++) {
+        const a = j * GX + i, b = a + 1, c = a + GX + 1, d = a + GX;
+        if (!relevant(a) && !relevant(b) && !relevant(c) && !relevant(d)) continue;
+        const ec = [[a, b, i, j, i + 1, j], [b, c, i + 1, j, i + 1, j + 1], [c, d, i + 1, j + 1, i, j + 1], [d, a, i, j + 1, i, j]], P = [];
+        for (const [u, v, x0, z0, x1, z1] of ec) { const du = DS[u], dv = DS[v];
+          if ((du > 0) !== (dv > 0)) { const f = du / (du - dv); P.push(x0 + (x1 - x0) * f, z0 + (z1 - z0) * f); } }
+        if (P.length >= 4) SEG.set(a, P.length === 4 ? [P] : [P.slice(0, 4), P.slice(4, 8)]);
+      }
+      const R = 4, cap = 2 * rs;
+      for (let k = 0; k < N; k++) { if (!relevant(k)) continue;
+        const i = k % GX, j = (k / GX) | 0; let best = cap;
+        for (let jj = Math.max(0, j - R); jj <= Math.min(GY - 2, j + R); jj++) for (let ii = Math.max(0, i - R); ii <= Math.min(GX - 2, i + R); ii++) {
+          const L = SEG.get(jj * GX + ii); if (!L) continue;
+          for (const [x1, z1, x2, z2] of L) { const dx = x2 - x1, dz = z2 - z1, l2 = dx * dx + dz * dz;
+            const t = l2 > 0 ? Math.max(0, Math.min(1, ((i - x1) * dx + (j - z1) * dz) / l2)) : 0;
+            const e = Math.hypot(i - x1 - t * dx, j - z1 - t * dz); if (e < best) best = e; } }
+        DIST[k] = (DS[k] > 0 ? 1 : -1) * best / rs; }
+    }
+    // Randblende je Fragment: DIST als Vertexattribut 'wdist' (nahezu linear, daher exakt interpolierbar); Alpha und Ufertoenung
+    // werden im Fragmentshader per smoothstep aus dem interpolierten Abstand gebildet -> Linie folgt dem Ufer, nicht den Dreiecken.
+    const matFeld = (m) => { m.onBeforeCompile = sh => {
+      sh.vertexShader = 'attribute float wdist;\nvarying float vWdist;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\n  vWdist = wdist;');
+      sh.fragmentShader = 'varying float vWdist;\n' + sh.fragmentShader.replace('#include <color_fragment>',
+        '#include <color_fragment>\n  diffuseColor.a *= smoothstep(0.0, 0.75, vWdist);\n  diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.56, 0.64, 0.66), 0.5 * (1.0 - smoothstep(0.0, 0.5, vWdist)));'); };
+      m.customProgramCacheKey = () => 'wfeld_p12c'; return m; };
     const hR = k => { if (!neu) return hRalt(k); if (ok(k)) return WR[k]; if (RING[k] === 1) return WE[k];
       return Math.min(RING[k] ? WE[k] : GL[k], GL[k] - 0.05); };
     const randAlpha = (k, a) => { if (!neu || ok(k)) return a; if (RING[k] !== 1) return 0; return 0.6 * a; };
     const mat = new THREE.MeshPhongMaterial({ vertexColors: true, transparent: true, depthWrite: false, shininess: 90, specular: 0x667788, side: THREE.DoubleSide, forceSinglePass: true });
+    if (wfeld) matFeld(mat);
+    const randSchaum = d => { const t = Math.min(1, Math.max(0, (d - 0.5) / 1.0)); return t * t * (3 - 2 * t); };
+    const wH = k => ok(k) ? WR[k] : RING[k] ? WE[k] : NaN;
+    const wNorm = k => { const i = k % GX, j = (k / GX) | 0, h0 = wH(k);
+      const hx1 = i + 1 < GX ? wH(k + 1) : NaN, hx0 = i > 0 ? wH(k - 1) : NaN, hz1 = j + 1 < GY ? wH(k + GX) : NaN, hz0 = j > 0 ? wH(k - GX) : NaN;
+      const gx = (isNaN(hx1) ? h0 : hx1) - (isNaN(hx0) ? h0 : hx0), dx = (isNaN(hx1) ? 0 : 1) + (isNaN(hx0) ? 0 : 1);
+      const gz = (isNaN(hz1) ? h0 : hz1) - (isNaN(hz0) ? h0 : hz0), dz = (isNaN(hz1) ? 0 : 1) + (isNaN(hz0) ? 0 : 1);
+      const nx = dx ? -gx / (dx / rs) : 0, nz = dz ? -gz / (dz / rs) : 0, l = Math.hypot(nx, 1, nz);
+      return [nx / l, 1 / l, nz / l]; };
     for (const tile of wahl) {
-      const [i0, j0, i1, j1] = bereich(tile), wp = [], wc = [], wi = [], map = new Map();
+      const [i0, j0, i1, j1] = bereich(tile), wp = [], wc = [], wi = [], wn = [], wd = [], map = new Map();
       const vx = k => { let m = map.get(k); if (m !== undefined) return m; m = wp.length / 3; map.set(k, m);
-        const i = k % GX, j = (k / GX) | 0, t = neu ? Math.min(1, TS[k] / 1.5) : ok(k) ? Math.min(1, Math.max(0, (WV[k] - GL[k]) / 1.5)) : 0;
-        wp.push(i / rs, hR(k), j / rs);
+        const i = k % GX, j = (k / GX) | 0, t0 = neu ? Math.min(1, TS[k] / 1.5) : ok(k) ? Math.min(1, Math.max(0, (WV[k] - GL[k]) / 1.5)) : 0;
+        const t = t0;
+        wp.push(i / rs, hR(k), j / rs); if (wfeld) { const n = wNorm(k); wn.push(n[0], n[1], n[2]); wd.push(DIST[k]); }
         const e = 1 - Math.min(1, t * 4), qd = n => ok(n) ? Math.abs(WV[n] - WV[k]) : 0;
-        const fo0 = ok(k) ? Math.min(1, Math.max(0, (qd(k + 1) + qd(k - 1) + qd(k + GX) + qd(k - GX) - 0.9) * 0.7)) : 0, fo = Math.min(fo0, 0.3);
+        const fo0 = ok(k) ? Math.min(1, Math.max(0, (qd(k + 1) + qd(k - 1) + qd(k + GX) + qd(k - GX) - 0.9) * 0.7)) : 0, fo = Math.min(fo0, 0.3) * (wfeld ? randSchaum(DIST[k]) : 1);   // P12c: kein Schaum im Uferstreifen (folgte dem Maskenraster -> Zaehnchen)
         wc.push((0.06 + 0.5 * e * e) * (1 - fo) + 0.70 * fo, (0.16 + 0.48 * e * e) * (1 - fo) + 0.76 * fo, (0.21 + 0.45 * e * e) * (1 - fo) + 0.80 * fo,
-          randAlpha(k, Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo)));
+          wfeld ? Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo)   // P12c: Randblende erst im Fragment (wdist)
+            : randAlpha(k, Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo)));
         return m; };
       for (let j = j0; j < j1; j++) for (let i = i0; i < i1; i++) { const a = j * GX + i, b = a + 1, c = a + GX, d = c + 1;
         if (imMesh(a) || imMesh(b) || imMesh(c) || imMesh(d)) wi.push(vx(a), vx(c), vx(d), vx(a), vx(d), vx(b)); }
@@ -311,6 +358,9 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
       if (!wi.length) continue;
       const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(wp, 3));
       g.setAttribute('color', new THREE.Float32BufferAttribute(wc, 4)); g.setIndex(wi); g.computeVertexNormals();
+      if (wfeld) { // P12c: Normalen kartenweit aus dem Spiegel (zentrale Differenzen auf WR/WE, ohne Randabsenkung von Ring 2/3):
+        // keine Kachelnaht im Wasser (vorher computeVertexNormals je Kachel -> Helligkeitslinie an Kachelgrenzen) und kein Glanzsaum am Rand.
+        g.setAttribute('normal', new THREE.Float32BufferAttribute(wn, 3)); g.setAttribute('wdist', new THREE.Float32BufferAttribute(wd, 1)); }
       const m = new THREE.Mesh(g, mat); m.name = `wasser_${tile}`; m.receiveShadow = true; m.renderOrder = 2;
       const grp = new THREE.Group(); grp.name = `wasser_${tile}`; grp.userData.ebene = 'wasser'; grp.userData.kachel = tile; grp.add(m); wasserRoot.add(grp);
     }

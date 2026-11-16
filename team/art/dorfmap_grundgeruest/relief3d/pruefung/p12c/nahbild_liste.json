@@ -1,0 +1,14 @@
+[
+ {"x":260,"z":259,"abstand":16,"azimut":0,"neigung":60,"out":"G7nord_nah.png","titel":"G7-Nordufer nah"},
+ {"x":260,"z":262,"abstand":60,"azimut":0,"neigung":45,"out":"G7nord_distanz.png","titel":"G7-Nordufer Distanz"},
+ {"x":246,"z":279,"abstand":14,"azimut":180,"neigung":60,"out":"F7G7sued_nah.png","titel":"F7/G7-Suedufer 246|279 nah"},
+ {"x":246,"z":276,"abstand":60,"azimut":180,"neigung":45,"out":"F7G7sued_distanz.png","titel":"F7/G7-Suedufer Distanz"},
+ {"x":218,"z":259,"abstand":14,"azimut":0,"neigung":60,"out":"E7rinne_nah.png","titel":"E7-Rinne x218 nah"},
+ {"x":218,"z":261,"abstand":55,"azimut":0,"neigung":45,"out":"E7rinne_distanz.png","titel":"E7-Rinne Distanz"},
+ {"x":201,"z":58,"abstand":14,"azimut":0,"neigung":60,"out":"E2west_nah.png","titel":"E2 Westufer nah"},
+ {"x":201,"z":60,"abstand":60,"azimut":0,"neigung":45,"out":"E2west_distanz.png","titel":"E2 Distanz"},
+ {"x":189,"z":118,"abstand":14,"azimut":0,"neigung":60,"out":"E3bach_nah.png","titel":"E3 Bach nah"},
+ {"x":189,"z":110,"abstand":60,"azimut":0,"neigung":50,"out":"E3bach_distanz.png","titel":"E3 Distanz"},
+ {"x":334,"z":279,"abstand":14,"azimut":300,"neigung":60,"out":"H7bucht_nah.png","titel":"H7 Bucht nah"},
+ {"x":330,"z":276,"abstand":60,"azimut":0,"neigung":45,"out":"H7bucht_distanz.png","titel":"H7 Distanz"}
+]
