@@ -169,17 +169,42 @@
    "kachel": "C4/D4",
    "max_m": 1.201,
    "vertices_geaendert": 1127
+  },
+  {
+   "id": "L3c_G7",
+   "kachel": "G7",
+   "max_wv_m": 0.856,
+   "max_m": 0.829,
+   "vertices_geaendert": 1558
+  },
+  {
+   "id": "L3c_C7",
+   "kachel": "C7",
+   "inseln_gefuellt": 2,
+   "insel_vertices": 42,
+   "max_wv_m": 0.46,
+   "max_m": 0.818,
+   "vertices_geaendert": 1500
+  },
+  {
+   "id": "L3c_H7",
+   "kachel": "H7",
+   "inseln_gefuellt": 0,
+   "insel_vertices": 0,
+   "max_wv_m": 0.895,
+   "max_m": 0.968,
+   "vertices_geaendert": 2014
   }
  ],
- "vertices_geaendert": 26316,
- "wv_vertices_geaendert": 2386,
- "wv_max_abs_m": 0.778,
+ "vertices_geaendert": 30977,
+ "wv_vertices_geaendert": 4917,
+ "wv_max_abs_m": 981.259,
  "max_abs_m": 3.223,
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "gb_sha256_nachher": "32e93914ba4e3c16f860a70991b7be850ee0924e707fe5a2ae2529b26a1994ef",
- "fw_vertices_geaendert": 6822,
- "objekte_angepasst": 248,
+ "gb_sha256_nachher": "12e39a858e88bc803ff7b1ae433440f5085ffec4baf0bd035ff9eb6015a47e02",
+ "fw_vertices_geaendert": 10844,
+ "objekte_angepasst": 284,
  "prototypen": {
   "D2": "unveraendert",
   "G1": "unveraendert",

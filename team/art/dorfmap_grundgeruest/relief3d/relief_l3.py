@@ -117,7 +117,7 @@ def anwenden(GB, D, stellen, rs, WV=None):
     W0 = schutz(D, GY, GX, rs); Wcache = {}
     neu = H.copy(); bericht = []
     wv = None if WV is None else WV.astype(np.float64).copy()
-    wasser = None if WV is None else WV > -900
+    wasser = None if WV is None else WV > -900   # L3c: kann durch "inseln_fuellen" wachsen (nur eingeschlossene Inseln)
     for s in stellen:
         if not s.get("aktiv", True):
             bericht.append({"id": s["id"], "aktiv": False}); continue
@@ -139,6 +139,22 @@ def anwenden(GB, D, stellen, rs, WV=None):
             E = np.where(kern, np.median(E[kern]), E)
             E = nd.gaussian_filter(E, 1.0 * rs, mode="nearest") if s.get("sigma_m") else E
         info = {"id": s["id"], "kachel": s.get("kachel")}
+        loch = np.zeros(E.shape, bool)
+        if s.get("inseln_fuellen") and wv is not None:
+            # L3c: kleine, ganz von Wasser umschlossene Landinseln (Rasterplatten im Fluss) werden Wasser.
+            # Nur Inseln, die vollstaendig im Kern der Stelle liegen (Gewicht > 0,99); Aussenkontur bleibt gleich.
+            lab, nl = nd.label(nd.binary_fill_holes(wasser) & ~wasser)
+            kern = w > 0.99; n_ins = 0
+            for k in np.unique(lab[sl][kern[sl] & (lab[sl] > 0)]):
+                zz, xx = np.nonzero(lab == k)
+                if kern[zz, xx].all() and len(zz) <= s.get("insel_max_vertices", 400):
+                    wasser[zz, xx] = True; n_ins += 1
+            if n_ins:
+                alt_land = (wv <= -900) & wasser
+                idx = nd.distance_transform_edt(alt_land | ~wasser, return_distances=False, return_indices=True)
+                wv[alt_land] = wv[idx[0][alt_land], idx[1][alt_land]]
+                loch = alt_land[sl]
+            info["inseln_gefuellt"] = n_ins; info["insel_vertices"] = int(loch.sum())
         if s.get("wasser") and wv is not None:
             wm = wasser[sl]
             if wm.any():
@@ -158,6 +174,23 @@ def anwenden(GB, D, stellen, rs, WV=None):
                     E = np.where(wm & rand, np.maximum(E, ziel), E)
                     E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
                     E = np.where(wm & rand, np.maximum(E, ziel), E)
+                if s.get("land_ufer_heben_m") is not None:
+                    # L3c: Landvertices am Grundrissrand, die unter dem Spiegel liegen, knapp ueber den Spiegel heben
+                    # -> Wasserrand wird von der Gelaende-Hoehenlinie gebildet statt von der Rastertreppe
+                    idx2 = nd.distance_transform_edt(~wm, return_distances=False, return_indices=True)
+                    Fn = neuw[idx2[0], idx2[1]]
+                    lrand = (~wm) & (nd.distance_transform_edt(~wm, sampling=1.0 / rs) <= s.get("land_ufer_band_m", 1.0))
+                    ziel = Fn + s["land_ufer_heben_m"]
+                    for _ in range(2):
+                        E = np.where(lrand, np.maximum(E, ziel), E)
+                        E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
+                    E = np.where(lrand, np.maximum(E, ziel), E)
+                if loch.any():
+                    ziel = neuw - s.get("bett_tiefe_m", 0.6)
+                    for _ in range(2):
+                        E = np.where(loch, np.minimum(E, ziel), E)
+                        E = nd.gaussian_filter(E, 0.5 * rs, mode="nearest")
+                    E = np.where(loch, np.minimum(E, ziel), E)
         alt = neu[sl].copy()
         neu[sl] = alt + w[sl] * (E - alt)
         d = neu[sl] - alt
@@ -249,7 +282,9 @@ def main():
     WV = np.frombuffer(base64.b64decode(D["WV"]), np.float32).reshape(GY, GX).copy()
     GBn, bericht, WVn = anwenden(GB, D, cfg["stellen"], rs, WV)
     wv_geaendert = WVn != WV
-    if not np.array_equal(WVn > -900, WV > -900): sys.exit("Wassergrundriss geaendert - Abbruch")
+    m_alt, m_neu = WV > -900, WVn > -900
+    if (m_alt & ~m_neu).any(): sys.exit("Wasser entfernt - Abbruch")
+    if (m_neu & ~(nd.binary_fill_holes(m_alt))).any(): sys.exit("Wassergrundriss ausserhalb eingeschlossener Inseln geaendert - Abbruch")
     delta = GBn.astype(np.float64) - GB.astype(np.float64)
     geaendert = GBn != GB
     d2n = _sha(GBn[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1])
