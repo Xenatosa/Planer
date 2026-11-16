@@ -1,0 +1,165 @@
+{
+ "stellen": [
+  {
+   "id": "01",
+   "kachel": "C3",
+   "max_m": 2.405,
+   "vertices_geaendert": 2144
+  },
+  {
+   "id": "02",
+   "kachel": "C3",
+   "max_m": 1.51,
+   "vertices_geaendert": 1465
+  },
+  {
+   "id": "03",
+   "kachel": "D1",
+   "max_m": 2.348,
+   "vertices_geaendert": 1401
+  },
+  {
+   "id": "04",
+   "kachel": "C3",
+   "max_m": 0.879,
+   "vertices_geaendert": 694
+  },
+  {
+   "id": "05",
+   "kachel": "D4",
+   "max_m": 2.405,
+   "vertices_geaendert": 1001
+  },
+  {
+   "id": "06",
+   "kachel": "C4",
+   "max_m": 1.605,
+   "vertices_geaendert": 700
+  },
+  {
+   "id": "06b",
+   "kachel": "C4",
+   "max_m": 1.523,
+   "vertices_geaendert": 734
+  },
+  {
+   "id": "07",
+   "kachel": "D6",
+   "max_m": 2.537,
+   "vertices_geaendert": 883
+  },
+  {
+   "id": "08",
+   "kachel": "B4",
+   "max_m": 1.29,
+   "vertices_geaendert": 688
+  },
+  {
+   "id": "09",
+   "kachel": "C5",
+   "max_m": 1.135,
+   "vertices_geaendert": 764
+  },
+  {
+   "id": "10",
+   "kachel": "E7",
+   "max_m": 0.006,
+   "vertices_geaendert": 57
+  },
+  {
+   "id": "11",
+   "kachel": "C4",
+   "max_m": 1.099,
+   "vertices_geaendert": 1059
+  },
+  {
+   "id": "12",
+   "kachel": "D6",
+   "max_m": 0.719,
+   "vertices_geaendert": 257
+  },
+  {
+   "id": "13",
+   "kachel": "G4",
+   "max_m": 2.004,
+   "vertices_geaendert": 660
+  },
+  {
+   "id": "14",
+   "kachel": "E1",
+   "max_m": 3.221,
+   "vertices_geaendert": 470
+  },
+  {
+   "id": "15",
+   "kachel": "C6",
+   "max_m": 1.014,
+   "vertices_geaendert": 689
+  },
+  {
+   "id": "16",
+   "kachel": "H6",
+   "max_m": 1.922,
+   "vertices_geaendert": 1006
+  },
+  {
+   "id": "17",
+   "kachel": "H3",
+   "max_m": 0.709,
+   "vertices_geaendert": 498
+  },
+  {
+   "id": "18",
+   "kachel": "H2",
+   "max_m": 1.241,
+   "vertices_geaendert": 1258
+  },
+  {
+   "id": "19",
+   "kachel": "G3",
+   "max_m": 1.028,
+   "vertices_geaendert": 1065
+  },
+  {
+   "id": "20",
+   "kachel": "E2",
+   "max_m": 0.087,
+   "vertices_geaendert": 290
+  },
+  {
+   "id": "21",
+   "kachel": "F6",
+   "max_m": 1.083,
+   "vertices_geaendert": 289
+  },
+  {
+   "id": "21b",
+   "kachel": "F6",
+   "max_m": 1.865,
+   "vertices_geaendert": 1023
+  },
+  {
+   "id": "22",
+   "kachel": "F1",
+   "max_m": 0.078,
+   "vertices_geaendert": 499
+  },
+  {
+   "id": "23",
+   "kachel": "G6",
+   "max_m": 1.195,
+   "vertices_geaendert": 948
+  }
+ ],
+ "vertices_geaendert": 20715,
+ "max_abs_m": 3.221,
+ "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "gb_sha256_nachher": "f439c4bd06e918afa7f1547ea87a7c758d8f1a3cfc65fd2b2f45f83639a2949c",
+ "objekte_angepasst": 201,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "neu vermascht (tile_mesh)"
+ }
+}
