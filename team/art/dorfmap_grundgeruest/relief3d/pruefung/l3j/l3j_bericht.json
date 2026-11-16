@@ -1,0 +1,47 @@
+{
+ "stellen": [
+  {
+   "id": "E3_trichter",
+   "neue_wasser_vertices": 13,
+   "wv_angehoben": 25,
+   "kanal_vertices": 75,
+   "land_band_vertices": 277,
+   "gb_max_m": 0.256,
+   "mittellinie_x": [
+    188.49,
+    189.13
+   ]
+  },
+  {
+   "id": "E3_hang_west",
+   "gb_vertices": 209,
+   "gb_max_m": 0.225
+  }
+ ],
+ "wasser_neu": 13,
+ "wasser_entfernt": 0,
+ "wasser_entfernt_komponenten": 0,
+ "wv_kanal_angehoben": 25,
+ "wasser_komponenten": [
+  7,
+  7
+ ],
+ "bett_ueber_spiegel": [
+  493,
+  493
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 277,
+ "gb_vertices": 367,
+ "gb_max_abs_m": 0.256,
+ "basis": "7250e3bfab72df1d60fc8c6e901ee83f5c57d85586e59d53b2799da65ce3cc66",
+ "nachher_sha256": "5ac12adbcd60504f9ca1b6891680dabd7770417cfec8e6777a650e27d81a5257",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 0,
+ "objekte_angepasst": 6,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}

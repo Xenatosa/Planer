@@ -54,6 +54,10 @@
 #      Schneegrenze ohne Bach -> Schnee; Basis-Hash = Stand nach 17, Sperrzonen D1/Mulde/D4-D5 rampe_5 im Skript, Rueckweg relief_l3i.py --aus mit
 #      pruefung/l3i/l3i_rueck.npz), html_payload_p3.py, waende_einsetzen.py. Nebenausgaben l3i_rueck.npz + l3i_bericht.json werden mitverglichen.
 #      L3I=0 laesst Schritt 18 weg; L3I folgt standardmaessig L3H.
+#  19 L3j (ERGEBNIS_L3j, QA P4g S1): relief_l3j.py (E3-Kanalanfang 190|97 als Trichter: Breite/Tiefe/Spiegel stetig vom Oberlauf auf den
+#      L3i-Kanal; Basis-Hash = Stand nach 18, Sperrzonen D1/Mulde/D4-D5 rampe_5 im Skript, Rueckweg relief_l3j.py --aus mit pruefung/l3j/l3j_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Nebenausgaben l3j_rueck.npz + l3j_bericht.json werden mitverglichen. L3J=0 laesst Schritt 19 weg;
+#      L3J folgt standardmaessig L3I.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -111,6 +115,9 @@ if [ "$L3H" != 0 ] && [ "$P2E" = 0 ]; then echo "L3H braucht Schritt 16 (P2E=0 u
 L3I=${L3I:-$L3H}
 if [ "$L3I" != 0 ] && [ "$L3H" = 0 ]; then echo "L3I braucht Schritt 17 (L3H=0 und L3I=1 geht nicht)"; exit 2; fi
 [ "$L3I" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3i/l3i_rueck.npz pruefung/l3i/l3i_bericht.json"
+L3J=${L3J:-$L3I}
+if [ "$L3J" != 0 ] && [ "$L3I" = 0 ]; then echo "L3J braucht Schritt 18 (L3I=0 und L3J=1 geht nicht)"; exit 2; fi
+[ "$L3J" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3j/l3j_rueck.npz pruefung/l3j/l3j_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -266,6 +273,14 @@ python3 relief_l3i.py > "$AUS/18_l3i.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/18_l3i.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/18_l3i.log" 2>&1
 z l3i $t
+fi
+# 19) L3j (ERGEBNIS_L3j): eigener Basis-Hash im Skript, Rueckweg pruefung/l3j/l3j_rueck.npz (relief_l3j.py --aus).
+if [ "$L3J" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3j.py > "$AUS/19_l3j.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/19_l3j.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/19_l3j.log" 2>&1
+z l3j $t
 fi
 z gesamt_bau $T0
 

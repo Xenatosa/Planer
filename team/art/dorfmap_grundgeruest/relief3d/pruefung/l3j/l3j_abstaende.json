@@ -1,0 +1,110 @@
+{
+ "geaenderte_vertices": 439,
+ "gb": 367,
+ "wv": 38,
+ "vc": 277,
+ "zellweite_m": 1.2,
+ "je_flaeche": {
+  "weg_vektor": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 2.5,
+   "kleinster_abstand_m": 3.0
+  },
+  "kreuzung": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 2.06,
+   "kleinster_abstand_m": 2.47
+  },
+  "rampenkern": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 55.32,
+   "kleinster_abstand_m": 66.38
+  },
+  "WEGA_wege_bruecken": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 1.0,
+   "kleinster_abstand_m": 1.2
+  },
+  "D2": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 13.95,
+   "kleinster_abstand_m": 16.74
+  }
+ },
+ "wasser": {
+  "gb_unter_wasser_geaendert": 59,
+  "maske_gleich": false,
+  "wv_gleich": false,
+  "komponenten": [
+   7,
+   7
+  ],
+  "fill_holes_gleich": false,
+  "bett_ueber_spiegel_vorher_nachher": [
+   493,
+   493
+  ]
+ },
+ "D2_gb_sha256": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "D2_slice_sha": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "box_geaendert_zellen": [
+  181.5,
+  87.0,
+  193.5,
+  98.0
+ ],
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 69.0,
+ "wasser_detail": {
+  "fill_holes_diff_vertices": 13,
+  "fill_holes_diff_box": [
+   187.5,
+   90.0,
+   190.5,
+   95.0
+  ],
+  "neues_wasser_gruppen_x_z_n": [
+   [
+    187.5,
+    90.2,
+    2
+   ],
+   [
+    190.0,
+    91.5,
+    1
+   ],
+   [
+    187.5,
+    93.5,
+    7
+   ],
+   [
+    190.5,
+    94.5,
+    3
+   ]
+  ],
+  "wasser_entfernt": 0,
+  "wv_alt_wasser_geaendert": 25,
+  "wv_alt_wasser_geaendert_box": [
+   188.0,
+   89.5
+  ]
+ },
+ "sperrzonen_l3j": {
+  "rampe_5_kleinster_abstand_zellen": 68.2,
+  "rampe_5_kleinster_abstand_m": 81.9,
+  "kachel_D4_D5_kleinster_abstand_zellen": 34.9,
+  "kachel_D1_kleinster_abstand_zellen": 47.0,
+  "aenderungen_in_D4_D5": 0,
+  "mulde_159_22_9_kleinster_abstand_zellen": 69.0,
+  "mulde_kleinster_abstand_m": 82.8,
+  "mulde_abstand_zum_sperrkreis_r20_zellen": 49.0
+ }
+}

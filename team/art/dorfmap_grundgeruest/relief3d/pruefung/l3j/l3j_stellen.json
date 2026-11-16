@@ -1,0 +1,64 @@
+{
+ "basis": "art/dorfmap-fertig @0a0b83a (Stand nach Schritt 18 L3i)",
+ "basis_gb_wv_vc_sha256": "7250e3bfab72df1d60fc8c6e901ee83f5c57d85586e59d53b2799da65ce3cc66",
+ "stellen": [
+  {
+   "id": "E3_trichter",
+   "art": "kanal",
+   "x0": 185.0,
+   "x1": 194.0,
+   "z0": 89.5,
+   "z1": 95.5,
+   "sigma_z_vertices": 5.0,
+   "halbbreite_start_zellen": 1.0,
+   "halbbreite_zellen": 1.75,
+   "spiegel_m": -1.3,
+   "spiegel_start_aus_oberlauf": true,
+   "tiefe_start_m": 0.15,
+   "tiefe_m": 0.5,
+   "rand_tiefe_m": 0.08,
+   "randzone_zellen": 1.0,
+   "band_zellen": 3.0,
+   "rand_hoehe_m": 0.04,
+   "neigung_m_je_zelle": 0.35,
+   "eps_m": 0.03,
+   "ton_kern": [
+    141,
+    149,
+    152
+   ],
+   "ton_rand": [
+    150,
+    159,
+    165
+   ],
+   "vc_sigma": 1.5,
+   "notiz": "L3j: Trichter am E3-Kanalanfang 190|97 ueber 6 Zellen (z 89,5-95,5): Breite linear Oberlauf -> 7 Vertices, Tiefe 0,15 -> 0,5 m, Spiegel stetig"
+  },
+  {
+   "id": "E3_hang_west",
+   "art": "hang_glatt",
+   "punkte": [
+    [
+     184.6,
+     91.0
+    ],
+    [
+     184.5,
+     92.8
+    ],
+    [
+     184.6,
+     94.5
+    ]
+   ],
+   "r_kern": 1.5,
+   "r_fade": 2.0,
+   "wasser_abstand": 1.0,
+   "sigma_vertices": 1.5,
+   "runden": 3,
+   "feinband": 1.0,
+   "notiz": "L3j: Westhang neben dem Trichter glaetten (G6 184,5|92,8 im ersten Lauf)"
+  }
+ ]
+}
