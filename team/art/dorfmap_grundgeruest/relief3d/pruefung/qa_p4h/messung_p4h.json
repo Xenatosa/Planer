@@ -1,0 +1,62 @@
+[
+{
+"n": "E3_trichter_8",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.18,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_trichter_12",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.18,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_trichter_22",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.18,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_trichter_60",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.18,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_trichter_von_nord",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.18,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "A1_G6fac_E3_189_119",
+"x": 189.5,
+"z": 119.5,
+"h_m": -0.22,
+"zacke_m": 0.14,
+"hang_max_grad": 32.6,
+"hang_mittel_grad": 13.4,
+"wand": false
+}
+]
