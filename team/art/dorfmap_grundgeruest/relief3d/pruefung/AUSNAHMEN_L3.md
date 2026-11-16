@@ -1,5 +1,8 @@
 # AUSNAHMEN L3 (Dorfmap, 16.11.2026)
 
+> **Korrektur (L3c, 16.11.2026):** Die Aussage „Wege … unverändert (Δ = 0,0 m)“ bzw. „Wegnetz vektor.json 0.0 m, Kreuzungsflächen 0.0 m“ war **falsch**. `relief_l3.schutz()` und die Messung haben die Meterangaben aus `vektor.json` als Zellen gelesen (1 Zelle = 1,2 m). Mit richtigem Maßstab waren **7 Vertices auf echten Wegflächen geändert**: Stelle 13 G4 (5 Vertices, max 0,284 m) und Stelle 18 H2 (2 Vertices, max 0,06 m). Kreuzungen, Rampenkerne und WEGA waren nicht betroffen (0). Der Fehler ist in L3c2 (art/dorfmap-L3c2) behoben und mit Test belegt (`relief_l3.schutz`, `pruefung/test_l3_schutz.py`). L3/L3b selbst bleiben eingefroren, weil P2b bitgenau darauf aufsetzt; der L3c-Nachschritt (`relief_l3.py --stufe-c`) setzt die 7 Vertices auf ihren Originalwert zurück. Siehe `ERGEBNIS_L3c2.md` und `l3c2_abstaende_je_stelle.json`.
+> Ebenfalls maßstabsbedingt falsch: „Rippen am Weg G017 (geschützt)“ bei Stelle 23. G017 liegt 22,7 Zellen entfernt. Die Rippen hat P2b (PR #21, Böschung rampe_4) behoben; L3c2 ändert in G6 nichts.
+
 Branch `art/dorfmap-L3`, Basis `art/dorfmap-fertig` @ c6a3db0. Regel (Fabian 16.11., „Optik ist alles“): Neue Gate-Treffer sind nur erlaubt, wenn sie im Nahbild unsichtbar sind. Jeder Treffer steht hier mit Messwert und Nahbild. Prüfer und Schwellen sind unverändert (SHA in `l3_sha_belege.json`).
 
 Nahbilder: P10-Viewer `alle_kacheln.html` (Stand L3), Clay, ohne Schatten (`nosh=1`), Blick nach Norden, Neigung 40°, Abstand 15 m, Ziel = Trefferpunkt (Bildmitte), 800×600.
