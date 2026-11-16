@@ -108,6 +108,8 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
   const S = 75; sun.shadow.camera.left = -S; sun.shadow.camera.right = S; sun.shadow.camera.top = S; sun.shadow.camera.bottom = -S;
   sun.shadow.camera.near = 1; sun.shadow.camera.far = 1200;
+  // P10b Darstellung (QA P4b Punkt 1): Schattenakne. Bias/NormalBias nur im Viewer; ?sbias= / ?snbias= zum Testen.
+  sun.shadow.bias = Number(q.get('sbias') ?? -0.0005); sun.shadow.normalBias = Number(q.get('snbias') ?? 0.08);
   scene.add(sun, sun.target);
 
   const terrainRoot = new THREE.Group(); terrainRoot.userData.ebene = 'gelaende'; scene.add(terrainRoot);
@@ -120,7 +122,13 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   rasterRoot.visible = q.get('raster') !== '0';
   const clay = /[?&]clay=1/.test(location.search);
   const terrainMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: THREE.DoubleSide });
-  const foundationMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x77746e : 0x746e64, side: THREE.DoubleSide });
+  // P10b Darstellung (QA P4b Punkt 2): Seiten/Boden jeder Kachel liegen an der Naht exakt auf der
+  // Oberkante der Nachbaroberflaeche (gleiche Tiefe) und gewinnen dort einzelne Pixel -> dunkle Haarlinie.
+  // polygonOffset schiebt nur Seiten/Boden in der Tiefe nach hinten; Geometrie/Hashes unveraendert.
+  // ?naht=0 schaltet die Hilfe ab (Vorher-Bild).
+  const nahtHilfe = q.get('naht') !== '0';
+  const foundationMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x77746e : 0x746e64, side: THREE.DoubleSide,
+    polygonOffset: nahtHilfe, polygonOffsetFactor: nahtHilfe ? 4 : 0, polygonOffsetUnits: nahtHilfe ? 4 : 0 });
   const wallMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x85827b : 0x69645d, side: THREE.DoubleSide, flatShading: false,
     polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
   const visibleHeights = new Float32Array(decodeBytes(DN.GB).buffer);

@@ -1,0 +1,57 @@
+[
+ {
+  "kachel": "F7",
+  "out": "F7_mit_wasser.png",
+  "titel": "F7 mit wasser (ohne Waende)"
+ },
+ {
+  "kachel": "G7",
+  "out": "G7_mit_wasser.png",
+  "titel": "G7 mit wasser (ohne Waende)"
+ },
+ {
+  "kachel": "H7",
+  "out": "H7_mit_wasser.png",
+  "titel": "H7 mit wasser (ohne Waende)"
+ },
+ {
+  "xz": "243,273",
+  "abstand": 18,
+  "azimut": 200,
+  "neigung": 40,
+  "out": "F7_knollen_243_273_mit_wasser.png",
+  "titel": "F7_knollen_243_273 mit wasser (ohne Waende)"
+ },
+ {
+  "xz": "243,273",
+  "abstand": 30,
+  "azimut": 20,
+  "neigung": 45,
+  "out": "F7_knollen_243_273_weit_mit_wasser.png",
+  "titel": "F7_knollen_243_273_weit mit wasser (ohne Waende)"
+ },
+ {
+  "xz": "310,272",
+  "abstand": 18,
+  "azimut": 200,
+  "neigung": 40,
+  "out": "H7_knollen_310_272_mit_wasser.png",
+  "titel": "H7_knollen_310_272 mit wasser (ohne Waende)"
+ },
+ {
+  "xz": "214,276",
+  "abstand": 18,
+  "azimut": 200,
+  "neigung": 40,
+  "out": "F7_stufe_214_276_mit_wasser.png",
+  "titel": "F7_stufe_214_276 mit wasser (ohne Waende)"
+ },
+ {
+  "xz": "272,265",
+  "abstand": 22,
+  "azimut": 200,
+  "neigung": 45,
+  "out": "G7_bett_272_265_mit_wasser.png",
+  "titel": "G7_bett_272_265 mit wasser (ohne Waende)"
+ }
+]

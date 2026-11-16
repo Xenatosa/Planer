@@ -5,6 +5,8 @@
 // Optionen: --html (Standard /tmp/p10b/alle_kacheln.html) --kachel K | --xz X,Z  --abstand m (78.6)
 //   --azimut Grad Blickrichtung (0=Nord/-z, 90=Ost/+x, 180=Sued, 270=West; Standard 35.54)
 //   --neigung Grad unter Horizont (90=senkrecht; Standard 45.5) --breite 1024 --hoehe 768
+//   --dir <ordner> (Ausgabeordner, ersetzt den Ordner von --out/Listenpfaden)
+//   --param 'naht=0&sbias=0&snbias=0' (Viewer-Parameter, Vorher-Bilder)
 //   --ohne wasser,wege,waende  --clay  --nur-kacheln C3,D3 (schneller laden)  --kein-rand  --titel "Text"
 //   --liste datei.json  (Array von {kachel|x,z,abstand,azimut,neigung,out,titel} -> mehrere Bilder in einem Lauf)
 const { chromium } = require('playwright'), path = require('path'), fs = require('fs');
@@ -18,8 +20,8 @@ const auftrag = o => {
   else if (o.x !== undefined) { r.x = +o.x; r.z = +o.z; }
   else throw new Error('--kachel oder --xz X,Z angeben');
   if (!o.out) throw new Error('--out <datei.png> angeben');
-  if (path.resolve(o.out).startsWith('/tmp/w3')) throw new Error('Ausgabe nach /tmp/w3 gesperrt');
-  return { blick: r, out: o.out, titel: o.titel };
+  if (path.resolve(o.dir || o.out).startsWith('/tmp/w3') || path.resolve(o.out).startsWith('/tmp/w3')) throw new Error('Ausgabe nach /tmp/w3 gesperrt');
+  return { blick: r, out: o.dir ? path.join(o.dir, path.basename(o.out)) : o.out, titel: o.titel };
 };
 (async () => {
   const liste = opt.liste ? JSON.parse(fs.readFileSync(opt.liste, 'utf8')).map(o => auftrag({ ...opt, ...o })) : [auftrag(opt)];
@@ -28,6 +30,7 @@ const auftrag = o => {
   if (opt.clay) qs.push('clay=1');
   if (opt.ohne) qs.push('ohne=' + opt.ohne);
   if (opt['nur-kacheln']) qs.push('kacheln=' + opt['nur-kacheln']);
+  if (opt.param) qs.push(...String(opt.param).split('&').filter(Boolean)); // z. B. --param 'naht=0&sbias=0'
   const b = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   const p = await b.newPage({ viewport: { width: zahl(opt.breite, 1024), height: zahl(opt.hoehe, 768) } });
   const t0 = Date.now();
