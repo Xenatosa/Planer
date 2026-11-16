@@ -168,18 +168,18 @@
    "id": "L3b_24",
    "kachel": "C4/D4",
    "max_m": 1.201,
-   "vertices_geaendert": 889
+   "vertices_geaendert": 1127
   }
  ],
- "vertices_geaendert": 26199,
+ "vertices_geaendert": 26316,
  "wv_vertices_geaendert": 2386,
  "wv_max_abs_m": 0.778,
  "max_abs_m": 3.223,
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "gb_sha256_nachher": "edef79423a701462b88eab47fa20ebb8bcb4e13e1cce7baa6ae4fc023f1ce6b7",
- "fw_vertices_geaendert": 5907,
- "objekte_angepasst": 240,
+ "gb_sha256_nachher": "32e93914ba4e3c16f860a70991b7be850ee0924e707fe5a2ae2529b26a1994ef",
+ "fw_vertices_geaendert": 6822,
+ "objekte_angepasst": 248,
  "prototypen": {
   "D2": "unveraendert",
   "G1": "unveraendert",
