@@ -1,0 +1,3461 @@
+{
+  "basis": {
+    "revision": "cc2a02b",
+    "branch": "art/dorfmap-L2",
+    "variante": 2
+  },
+  "zielstatus": "nicht erreicht: sichtbare Formfehler im Nahbild unveraendert",
+  "quellhinweis": "Regeln/R8/R9 vergleichen G; L2 aendert nur das sichtbare Hoehenfeld GB.",
+  "pruefer": {
+    "regeln": {
+      "summe_vorher": 570,
+      "summe_nachher": 570,
+      "delta": 0,
+      "trefferlisten_identisch": true,
+      "je_regel": [
+        {
+          "regel": "G2_spitze_oben",
+          "vorher": 3,
+          "nachher": 3,
+          "delta": 0
+        },
+        {
+          "regel": "G2_spitze_oben_fein",
+          "vorher": 8,
+          "nachher": 8,
+          "delta": 0
+        },
+        {
+          "regel": "G3_spitze_unten",
+          "vorher": 3,
+          "nachher": 3,
+          "delta": 0
+        },
+        {
+          "regel": "G3_spitze_unten_fein",
+          "vorher": 2,
+          "nachher": 2,
+          "delta": 0
+        },
+        {
+          "regel": "G5_beule_klippe",
+          "vorher": 68,
+          "nachher": 68,
+          "delta": 0
+        },
+        {
+          "regel": "G6_facette",
+          "vorher": 220,
+          "nachher": 220,
+          "delta": 0
+        },
+        {
+          "regel": "G7_wand_glatte_flaeche",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "G7b_wandkontur_feld",
+          "vorher": 24,
+          "nachher": 24,
+          "delta": 0
+        },
+        {
+          "regel": "G7b_wandkontur_kantenschaerfe",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "G7b_wandkontur_rauheit",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "G8_fluss_nicht_bis_rand",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "R1_blind",
+          "vorher": 24,
+          "nachher": 24,
+          "delta": 0
+        },
+        {
+          "regel": "R2_getrennt",
+          "vorher": 15,
+          "nachher": 15,
+          "delta": 0
+        },
+        {
+          "regel": "R3_laengs_m",
+          "vorher": 35,
+          "nachher": 35,
+          "delta": 0
+        },
+        {
+          "regel": "R3_quer_pct",
+          "vorher": 23,
+          "nachher": 23,
+          "delta": 0
+        },
+        {
+          "regel": "R3_woelb_m",
+          "vorher": 22,
+          "nachher": 22,
+          "delta": 0
+        },
+        {
+          "regel": "R5_loch",
+          "vorher": 17,
+          "nachher": 17,
+          "delta": 0
+        },
+        {
+          "regel": "R6_wasser_schnee",
+          "vorher": 4,
+          "nachher": 4,
+          "delta": 0
+        },
+        {
+          "regel": "T1_fleckrand",
+          "vorher": 94,
+          "nachher": 94,
+          "delta": 0
+        },
+        {
+          "regel": "T2_textur_abgeschnitten_bildpruefung_offen",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "T3_streifen_ringe_bildpruefung_offen",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "T4_graue_flussstreifen_bildpruefung_offen",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        },
+        {
+          "regel": "T5_textur_vs_clay_bildpruefung_offen",
+          "vorher": 1,
+          "nachher": 1,
+          "delta": 0
+        }
+      ],
+      "d2_treffer_vorher": 8,
+      "d2_treffer_nachher": 8,
+      "neue_d2_treffer": []
+    },
+    "r8": {
+      "summe_vorher": 48,
+      "summe_nachher": 48,
+      "delta": 0,
+      "trefferlisten_identisch": true,
+      "je_regel": [
+        {
+          "regel": "R8_gitter",
+          "vorher": 10,
+          "nachher": 10,
+          "delta": 0
+        },
+        {
+          "regel": "R8_quer",
+          "vorher": 5,
+          "nachher": 5,
+          "delta": 0
+        },
+        {
+          "regel": "R8_stufe",
+          "vorher": 9,
+          "nachher": 9,
+          "delta": 0
+        },
+        {
+          "regel": "R8a_wegende",
+          "vorher": 24,
+          "nachher": 24,
+          "delta": 0
+        }
+      ],
+      "d2_treffer_vorher": 0,
+      "d2_treffer_nachher": 0,
+      "neue_d2_treffer": []
+    },
+    "r9": {
+      "summe_vorher": 334,
+      "summe_nachher": 334,
+      "delta": 0,
+      "trefferlisten_identisch": true,
+      "je_regel": [
+        {
+          "regel": "R8b_delle",
+          "vorher": 25,
+          "nachher": 25,
+          "delta": 0
+        },
+        {
+          "regel": "R9_saegezahn",
+          "vorher": 34,
+          "nachher": 34,
+          "delta": 0
+        },
+        {
+          "regel": "R9w_wellen",
+          "vorher": 275,
+          "nachher": 275,
+          "delta": 0
+        }
+      ],
+      "d2_treffer_vorher": 0,
+      "d2_treffer_nachher": 0,
+      "neue_d2_treffer": []
+    }
+  },
+  "kacheln": {
+    "A1": {
+      "regeln": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "G6_facette": 4,
+            "G7b_wandkontur_feld": 1,
+            "R5_loch": 2,
+            "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+            "T3_streifen_ringe_bildpruefung_offen": 1,
+            "T4_graue_flussstreifen_bildpruefung_offen": 1,
+            "T5_textur_vs_clay_bildpruefung_offen": 1
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "G6_facette": 4,
+            "G7b_wandkontur_feld": 1,
+            "R5_loch": 2,
+            "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+            "T3_streifen_ringe_bildpruefung_offen": 1,
+            "T4_graue_flussstreifen_bildpruefung_offen": 1,
+            "T5_textur_vs_clay_bildpruefung_offen": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 1
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B1": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C1": {
+      "regeln": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 5,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 5,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 4
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D1": {
+      "regeln": {
+        "vorher": {
+          "summe": 36,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 5,
+            "R1_blind": 2,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 6,
+            "R3_quer_pct": 11,
+            "R3_woelb_m": 10
+          }
+        },
+        "nachher": {
+          "summe": 36,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 5,
+            "R1_blind": 2,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 6,
+            "R3_quer_pct": 11,
+            "R3_woelb_m": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R8_gitter": 2,
+            "R8_quer": 1,
+            "R8_stufe": 2,
+            "R8a_wegende": 3
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R8_gitter": 2,
+            "R8_quer": 1,
+            "R8_stufe": 2,
+            "R8a_wegende": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 26,
+          "je_regel": {
+            "R8b_delle": 2,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 23
+          }
+        },
+        "nachher": {
+          "summe": 26,
+          "je_regel": {
+            "R8b_delle": 2,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 23
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E1": {
+      "regeln": {
+        "vorher": {
+          "summe": 13,
+          "je_regel": {
+            "G6_facette": 7,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 2,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 13,
+          "je_regel": {
+            "G6_facette": 7,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 2,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F1": {
+      "regeln": {
+        "vorher": {
+          "summe": 16,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G5_beule_klippe": 4,
+            "G6_facette": 4,
+            "R1_blind": 1,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R6_wasser_schnee": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 16,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G5_beule_klippe": 4,
+            "G6_facette": 4,
+            "R1_blind": 1,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R6_wasser_schnee": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G1": {
+      "regeln": {
+        "vorher": {
+          "summe": 13,
+          "je_regel": {
+            "G3_spitze_unten_fein": 1,
+            "G6_facette": 4,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "R6_wasser_schnee": 3,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 13,
+          "je_regel": {
+            "G3_spitze_unten_fein": 1,
+            "G6_facette": 4,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "R6_wasser_schnee": 3,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H1": {
+      "regeln": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A2": {
+      "regeln": {
+        "vorher": {
+          "summe": 9,
+          "je_regel": {
+            "G5_beule_klippe": 2,
+            "G6_facette": 2,
+            "G7_wand_glatte_flaeche": 1,
+            "G7b_wandkontur_feld": 1,
+            "G8_fluss_nicht_bis_rand": 1,
+            "R5_loch": 2
+          }
+        },
+        "nachher": {
+          "summe": 9,
+          "je_regel": {
+            "G5_beule_klippe": 2,
+            "G6_facette": 2,
+            "G7_wand_glatte_flaeche": 1,
+            "G7b_wandkontur_feld": 1,
+            "G8_fluss_nicht_bis_rand": 1,
+            "R5_loch": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B2": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C2": {
+      "regeln": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 3
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D2": {
+      "regeln": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 7
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 7
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E2": {
+      "regeln": {
+        "vorher": {
+          "summe": 14,
+          "je_regel": {
+            "G6_facette": 8,
+            "T1_fleckrand": 6
+          }
+        },
+        "nachher": {
+          "summe": 14,
+          "je_regel": {
+            "G6_facette": 8,
+            "T1_fleckrand": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F2": {
+      "regeln": {
+        "vorher": {
+          "summe": 6,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 6,
+          "je_regel": {
+            "G6_facette": 1,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G2": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H2": {
+      "regeln": {
+        "vorher": {
+          "summe": 9,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G3_spitze_unten_fein": 1,
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 9,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G3_spitze_unten_fein": 1,
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "nachher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A3": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B3": {
+      "regeln": {
+        "vorher": {
+          "summe": 13,
+          "je_regel": {
+            "G6_facette": 7,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 5
+          }
+        },
+        "nachher": {
+          "summe": 13,
+          "je_regel": {
+            "G6_facette": 7,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C3": {
+      "regeln": {
+        "vorher": {
+          "summe": 45,
+          "je_regel": {
+            "G5_beule_klippe": 18,
+            "G6_facette": 15,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "R5_loch": 1
+          }
+        },
+        "nachher": {
+          "summe": 45,
+          "je_regel": {
+            "G5_beule_klippe": 18,
+            "G6_facette": 15,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "R5_loch": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 19,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 17
+          }
+        },
+        "nachher": {
+          "summe": 19,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 17
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D3": {
+      "regeln": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 1
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E3": {
+      "regeln": {
+        "vorher": {
+          "summe": 9,
+          "je_regel": {
+            "G6_facette": 5,
+            "R2_getrennt": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 9,
+          "je_regel": {
+            "G6_facette": 5,
+            "R2_getrennt": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 12
+          }
+        },
+        "nachher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 12
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F3": {
+      "regeln": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G3": {
+      "regeln": {
+        "vorher": {
+          "summe": 14,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 7,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 14,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 7,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H3": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 9,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 8
+          }
+        },
+        "nachher": {
+          "summe": 9,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 8
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A4": {
+      "regeln": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B4": {
+      "regeln": {
+        "vorher": {
+          "summe": 22,
+          "je_regel": {
+            "G2_spitze_oben_fein": 3,
+            "G6_facette": 15,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 22,
+          "je_regel": {
+            "G2_spitze_oben_fein": 3,
+            "G6_facette": 15,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 12,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 11
+          }
+        },
+        "nachher": {
+          "summe": 12,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 11
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C4": {
+      "regeln": {
+        "vorher": {
+          "summe": 32,
+          "je_regel": {
+            "G5_beule_klippe": 4,
+            "G6_facette": 16,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R2_getrennt": 2,
+            "R3_laengs_m": 2,
+            "R5_loch": 4,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 32,
+          "je_regel": {
+            "G5_beule_klippe": 4,
+            "G6_facette": 16,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R2_getrennt": 2,
+            "R3_laengs_m": 2,
+            "R5_loch": 4,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "R8a_wegende": 2
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "R8a_wegende": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 15,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 13
+          }
+        },
+        "nachher": {
+          "summe": 15,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 13
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D4": {
+      "regeln": {
+        "vorher": {
+          "summe": 23,
+          "je_regel": {
+            "G5_beule_klippe": 4,
+            "G6_facette": 6,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R3_laengs_m": 4,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3
+          }
+        },
+        "nachher": {
+          "summe": 23,
+          "je_regel": {
+            "G5_beule_klippe": 4,
+            "G6_facette": 6,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R3_laengs_m": 4,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "R8a_wegende": 2
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "R8a_wegende": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E4": {
+      "regeln": {
+        "vorher": {
+          "summe": 9,
+          "je_regel": {
+            "G6_facette": 5,
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 9,
+          "je_regel": {
+            "G6_facette": 5,
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R8b_delle": 4,
+            "R9w_wellen": 4
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R8b_delle": 4,
+            "R9w_wellen": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F4": {
+      "regeln": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R2_getrennt": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G4": {
+      "regeln": {
+        "vorher": {
+          "summe": 16,
+          "je_regel": {
+            "G5_beule_klippe": 7,
+            "G6_facette": 8,
+            "R2_getrennt": 1
+          }
+        },
+        "nachher": {
+          "summe": 16,
+          "je_regel": {
+            "G5_beule_klippe": 7,
+            "G6_facette": 8,
+            "R2_getrennt": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "nachher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H4": {
+      "regeln": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "nachher": {
+          "summe": 6,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A5": {
+      "regeln": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B5": {
+      "regeln": {
+        "vorher": {
+          "summe": 15,
+          "je_regel": {
+            "G6_facette": 13,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 15,
+          "je_regel": {
+            "G6_facette": 13,
+            "G7b_wandkontur_feld": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C5": {
+      "regeln": {
+        "vorher": {
+          "summe": 48,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G5_beule_klippe": 14,
+            "G6_facette": 17,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 3,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 4,
+            "R5_loch": 6,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 48,
+          "je_regel": {
+            "G2_spitze_oben_fein": 1,
+            "G5_beule_klippe": 14,
+            "G6_facette": 17,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 3,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 4,
+            "R5_loch": 6,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 3
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "nachher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 1,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D5": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E5": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "G6_facette": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "G6_facette": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R9w_wellen": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R9w_wellen": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F5": {
+      "regeln": {
+        "vorher": {
+          "summe": 14,
+          "je_regel": {
+            "G6_facette": 5,
+            "T1_fleckrand": 9
+          }
+        },
+        "nachher": {
+          "summe": 14,
+          "je_regel": {
+            "G6_facette": 5,
+            "T1_fleckrand": 9
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G5": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H5": {
+      "regeln": {
+        "vorher": {
+          "summe": 19,
+          "je_regel": {
+            "G6_facette": 10,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "nachher": {
+          "summe": 19,
+          "je_regel": {
+            "G6_facette": 10,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 2,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 2
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 12,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 11
+          }
+        },
+        "nachher": {
+          "summe": 12,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 11
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A6": {
+      "regeln": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "R9w_wellen": 5
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "R9w_wellen": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B6": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 2,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 2,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C6": {
+      "regeln": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "G6_facette": 6,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "G6_facette": 6,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 19,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 18
+          }
+        },
+        "nachher": {
+          "summe": 19,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 18
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D6": {
+      "regeln": {
+        "vorher": {
+          "summe": 16,
+          "je_regel": {
+            "G2_spitze_oben": 1,
+            "G6_facette": 4,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "R5_loch": 2
+          }
+        },
+        "nachher": {
+          "summe": 16,
+          "je_regel": {
+            "G2_spitze_oben": 1,
+            "G6_facette": 4,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 2,
+            "R3_quer_pct": 3,
+            "R3_woelb_m": 3,
+            "R5_loch": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "R8_gitter": 1,
+            "R8_quer": 1,
+            "R8_stufe": 1,
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 2,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 9
+          }
+        },
+        "nachher": {
+          "summe": 12,
+          "je_regel": {
+            "R8b_delle": 2,
+            "R9_saegezahn": 1,
+            "R9w_wellen": 9
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E6": {
+      "regeln": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "G6_facette": 2,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 5,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 4
+          }
+        },
+        "nachher": {
+          "summe": 5,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 4
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F6": {
+      "regeln": {
+        "vorher": {
+          "summe": 7,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "nachher": {
+          "summe": 7,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 3,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8_gitter": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8_gitter": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G6": {
+      "regeln": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "G2_spitze_oben_fein": 2,
+            "G6_facette": 6,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "G2_spitze_oben_fein": 2,
+            "G6_facette": 6,
+            "R2_getrennt": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 7
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H6": {
+      "regeln": {
+        "vorher": {
+          "summe": 18,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 9,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 5
+          }
+        },
+        "nachher": {
+          "summe": 18,
+          "je_regel": {
+            "G5_beule_klippe": 1,
+            "G6_facette": 9,
+            "G7b_wandkontur_feld": 1,
+            "R1_blind": 1,
+            "R3_laengs_m": 1,
+            "T1_fleckrand": 5
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R8a_wegende": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "nachher": {
+          "summe": 11,
+          "je_regel": {
+            "R9_saegezahn": 1,
+            "R9w_wellen": 10
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "A7": {
+      "regeln": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "G5_beule_klippe": 3
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "G5_beule_klippe": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R9w_wellen": 3
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R9w_wellen": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "B7": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "G6_facette": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "G6_facette": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "R9w_wellen": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "R9w_wellen": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "C7": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G6_facette": 1,
+            "R1_blind": 1,
+            "T1_fleckrand": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 3,
+          "je_regel": {
+            "R9w_wellen": 3
+          }
+        },
+        "nachher": {
+          "summe": 3,
+          "je_regel": {
+            "R9w_wellen": 3
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "D7": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "G5_beule_klippe": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "G5_beule_klippe": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "E7": {
+      "regeln": {
+        "vorher": {
+          "summe": 8,
+          "je_regel": {
+            "G3_spitze_unten": 2,
+            "G5_beule_klippe": 6
+          }
+        },
+        "nachher": {
+          "summe": 8,
+          "je_regel": {
+            "G3_spitze_unten": 2,
+            "G5_beule_klippe": 6
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "F7": {
+      "regeln": {
+        "vorher": {
+          "summe": 4,
+          "je_regel": {
+            "G2_spitze_oben": 2,
+            "G3_spitze_unten": 1,
+            "G6_facette": 1
+          }
+        },
+        "nachher": {
+          "summe": 4,
+          "je_regel": {
+            "G2_spitze_oben": 2,
+            "G3_spitze_unten": 1,
+            "G6_facette": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "G7": {
+      "regeln": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    },
+    "H7": {
+      "regeln": {
+        "vorher": {
+          "summe": 1,
+          "je_regel": {
+            "G5_beule_klippe": 1
+          }
+        },
+        "nachher": {
+          "summe": 1,
+          "je_regel": {
+            "G5_beule_klippe": 1
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r8": {
+        "vorher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "nachher": {
+          "summe": 0,
+          "je_regel": {}
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      },
+      "r9": {
+        "vorher": {
+          "summe": 2,
+          "je_regel": {
+            "R9w_wellen": 2
+          }
+        },
+        "nachher": {
+          "summe": 2,
+          "je_regel": {
+            "R9w_wellen": 2
+          }
+        },
+        "delta": 0,
+        "treffer_identisch": true
+      }
+    }
+  },
+  "lochscan": {
+    "hauptviewer": {
+      "meshes": 7,
+      "dreiecke": 1700454,
+      "offen_innen": 0,
+      "bb": [
+        0,
+        0,
+        336,
+        303
+      ],
+      "punkte": []
+    },
+    "56_kacheln_vorher": {
+      "summe": 0,
+      "je_kachel": {
+        "A1": 0,
+        "B1": 0,
+        "C1": 0,
+        "D1": 0,
+        "E1": 0,
+        "F1": 0,
+        "G1": 0,
+        "H1": 0,
+        "A2": 0,
+        "B2": 0,
+        "C2": 0,
+        "D2": 0,
+        "E2": 0,
+        "F2": 0,
+        "G2": 0,
+        "H2": 0,
+        "A3": 0,
+        "B3": 0,
+        "C3": 0,
+        "D3": 0,
+        "E3": 0,
+        "F3": 0,
+        "G3": 0,
+        "H3": 0,
+        "A4": 0,
+        "B4": 0,
+        "C4": 0,
+        "D4": 0,
+        "E4": 0,
+        "F4": 0,
+        "G4": 0,
+        "H4": 0,
+        "A5": 0,
+        "B5": 0,
+        "C5": 0,
+        "D5": 0,
+        "E5": 0,
+        "F5": 0,
+        "G5": 0,
+        "H5": 0,
+        "A6": 0,
+        "B6": 0,
+        "C6": 0,
+        "D6": 0,
+        "E6": 0,
+        "F6": 0,
+        "G6": 0,
+        "H6": 0,
+        "A7": 0,
+        "B7": 0,
+        "C7": 0,
+        "D7": 0,
+        "E7": 0,
+        "F7": 0,
+        "G7": 0,
+        "H7": 0
+      }
+    },
+    "56_kacheln_nachher": {
+      "summe": 0,
+      "je_kachel": {
+        "A1": 0,
+        "B1": 0,
+        "C1": 0,
+        "D1": 0,
+        "E1": 0,
+        "F1": 0,
+        "G1": 0,
+        "H1": 0,
+        "A2": 0,
+        "B2": 0,
+        "C2": 0,
+        "D2": 0,
+        "E2": 0,
+        "F2": 0,
+        "G2": 0,
+        "H2": 0,
+        "A3": 0,
+        "B3": 0,
+        "C3": 0,
+        "D3": 0,
+        "E3": 0,
+        "F3": 0,
+        "G3": 0,
+        "H3": 0,
+        "A4": 0,
+        "B4": 0,
+        "C4": 0,
+        "D4": 0,
+        "E4": 0,
+        "F4": 0,
+        "G4": 0,
+        "H4": 0,
+        "A5": 0,
+        "B5": 0,
+        "C5": 0,
+        "D5": 0,
+        "E5": 0,
+        "F5": 0,
+        "G5": 0,
+        "H5": 0,
+        "A6": 0,
+        "B6": 0,
+        "C6": 0,
+        "D6": 0,
+        "E6": 0,
+        "F6": 0,
+        "G6": 0,
+        "H6": 0,
+        "A7": 0,
+        "B7": 0,
+        "C7": 0,
+        "D7": 0,
+        "E7": 0,
+        "F7": 0,
+        "G7": 0,
+        "H7": 0
+      },
+      "relief_daten_sha256": "f15e76a00352a143b055b1fe7a735063058b8929e5cc489778d5abf60f327446",
+      "all_tile_mesh_build_sha256": "f15e76a00352a143b055b1fe7a735063058b8929e5cc489778d5abf60f327446"
+    },
+    "positivkontrolle_C3": {
+      "summe": 3,
+      "C3": 3
+    }
+  },
+  "t42u": {
+    "abweichungen": {
+      "hoehe_m": 0,
+      "ecke_nw_m": 0,
+      "ecke_so_m": 0,
+      "klippe_WAND_vs_steil": 0,
+      "skin_slot": 0,
+      "zell_id": 0,
+      "begehbar_auf_wand": 0,
+      "glb_dreiecke_summe": 0,
+      "glb_waende_vs_regel": 0
+    },
+    "summe": 0,
+    "glb": {
+      "waende": 33476,
+      "boden": 780988
+    },
+    "zellen": 101808,
+    "steile_zellen": 5857
+  },
+  "mesh_budget": {
+    "flaechen_dreiecke_all_56": 809088,
+    "wand_dreiecke": 45588,
+    "grenze": 1300000,
+    "unter_grenze": true,
+    "geschlossen_dreiecke_mit_kachelraendern": 1656256,
+    "naht": {
+      "abweichend": [],
+      "max_abs_m": 0.0,
+      "paare": 97
+    },
+    "hinweis": "56-Kachel-P10-Meshzaehlung, Terrain + Waende; keine Objekte/Viewer-LOD-Klassen.",
+    "neu_build_json_lod1": {
+      "budget_triangles": 1300000,
+      "sampling_m": 0.5,
+      "sampling_m_by_tile": {
+        "D1": 0.5,
+        "D2": 0.5,
+        "G1": 0.5
+      },
+      "terrain_closed_triangles": 88728,
+      "total_triangles": 134316,
+      "wall_triangles": 45588
+    },
+    "all_tile_terrain_und_waende_summe": 854676
+  },
+  "d2_hoehen": {
+    "G": {
+      "form": [
+        87,
+        85
+      ],
+      "sha256_vorher": "325f6fe2f41178f7e9c4b2198881438bc5ac70649ac4a0ee9836b463e6e1408c",
+      "sha256_nachher": "325f6fe2f41178f7e9c4b2198881438bc5ac70649ac4a0ee9836b463e6e1408c",
+      "bytegleich": true
+    },
+    "GB": {
+      "form": [
+        87,
+        85
+      ],
+      "sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+      "sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+      "bytegleich": true
+    }
+  },
+  "geschuetzte_hashes": {
+    "neu/zellen_relief.csv": {
+      "sha256": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa",
+      "erwartet": "99d30e55310453725aa1c9613900b5203f430f75f19745244fe3ebd650fc93fa",
+      "unveraendert": true
+    },
+    "neu/vektor.json": {
+      "sha256": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+      "erwartet": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+      "unveraendert": true
+    },
+    "neu/felder.json": {
+      "sha256": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+      "erwartet": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+      "unveraendert": true
+    }
+  },
+  "bytegleich_aus": {
+    "RELIEF_L2_0_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+    "relief_vorher_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+    "nach_abschalten_bytegleich": true,
+    "beleg": "RELIEF_L2=0-Build, sha256sum vor dem erneuten L2=1-Build verglichen."
+  },
+  "build": {
+    "RELIEF_L2": 1,
+    "RELIEF_L2_VAR": 2,
+    "relief_daten_sha256": "f15e76a00352a143b055b1fe7a735063058b8929e5cc489778d5abf60f327446",
+    "bundle_out": "/tmp/L2/bundle_r.js"
+  },
+  "hoehenfelder_global": {
+    "G": {
+      "sha256_vorher": "056b84f4f57045a905cdb7676b4dec94b71552c5c34e7c0c484c2155011965ff",
+      "sha256_nachher": "056b84f4f57045a905cdb7676b4dec94b71552c5c34e7c0c484c2155011965ff",
+      "bytegleich": true
+    },
+    "GB": {
+      "sha256_vorher": "e06281cc83d0ea11e78db740afdb2f295483b94c6f16dfef5851bd1236008cb0",
+      "sha256_nachher": "9378f9023eddee14d32e708030633dbabe3df7e0a654085e29c431ee98bbabe7",
+      "bytegleich": false
+    }
+  }
+}

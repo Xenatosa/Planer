@@ -1,0 +1,412 @@
+{
+  "version": 1,
+  "quelle": "pruefung/qa_p4b/LISTE_SICHTBAR.md",
+  "raster_m": 0.5,
+  "methode": "Variante 1: lokaler Median; Standard Variante 2: symmetrische 1D-Mittelung entlang der Grat-/Linienachse; feste Schutzbaender und weicher Auslauf.",
+  "stellen": [
+    {
+      "id": "01",
+      "kachel": "C3",
+      "ort": "94|97",
+      "muster": "Saegezahn-Ring am Mulden-/Kraterrand",
+      "median_kernel": 5,
+      "max_correction_m": 0.5,
+      "masken": [
+        {
+          "x_m": 94,
+          "z_m": 97,
+          "rx_m": 6,
+          "rz_m": 6
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "kachel": "C3",
+      "ort": "105-112|112-118",
+      "muster": "Saegezahn-Kamm auf Grat",
+      "median_kernel": 5,
+      "max_correction_m": 0.7,
+      "masken": [
+        {
+          "x_m": 108.5,
+          "z_m": 115,
+          "rx_m": 8,
+          "rz_m": 6
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 40
+    },
+    {
+      "id": "03",
+      "kachel": "D1",
+      "ort": "145-158|15-30",
+      "muster": "Treppen- und Rippenrillen am Hang",
+      "median_kernel": 7,
+      "max_correction_m": 1.0,
+      "masken": [
+        {
+          "x_m": 152,
+          "z_m": 22.5,
+          "rx_m": 8,
+          "rz_m": 8
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 50
+    },
+    {
+      "id": "04",
+      "kachel": "C3",
+      "ort": "114.8|120.7",
+      "muster": "Kamm auf linkem Grat",
+      "median_kernel": 5,
+      "max_correction_m": 0.7,
+      "masken": [
+        {
+          "x_m": 114.8,
+          "z_m": 120.7,
+          "rx_m": 4,
+          "rz_m": 4
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 55
+    },
+    {
+      "id": "05",
+      "kachel": "D4",
+      "ort": "135|139",
+      "muster": "Zahnkante am Blockrand",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 135,
+          "z_m": 139,
+          "rx_m": 5,
+          "rz_m": 5
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 40
+    },
+    {
+      "id": "06",
+      "kachel": "C4",
+      "ort": "112-121|158-168",
+      "muster": "Saegezahn auf kleinem Simsgrat",
+      "median_kernel": 5,
+      "max_correction_m": 0.55,
+      "masken": [
+        {
+          "x_m": 116.5,
+          "z_m": 163,
+          "rx_m": 6,
+          "rz_m": 6
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 45
+    },
+    {
+      "id": "07",
+      "kachel": "D6",
+      "ort": "150-160|226-229",
+      "muster": "Trapeztafeln am Wandfuss",
+      "median_kernel": 7,
+      "max_correction_m": 0.7,
+      "masken": [
+        {
+          "x_m": 155,
+          "z_m": 227.5,
+          "rx_m": 6,
+          "rz_m": 4
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "kachel": "B4",
+      "ort": "74-78|145-149",
+      "muster": "Zahnreihe an kleiner Stufe",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 76,
+          "z_m": 147,
+          "rx_m": 4,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 45
+    },
+    {
+      "id": "09",
+      "kachel": "C5",
+      "ort": "104-112|180-184",
+      "muster": "Saegezahn-Kamm in Rinnen-/Gratlinie",
+      "median_kernel": 5,
+      "max_correction_m": 0.7,
+      "masken": [
+        {
+          "x_m": 108,
+          "z_m": 182,
+          "rx_m": 5,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 10
+    },
+    {
+      "id": "10",
+      "kachel": "E7/F7",
+      "ort": "199-216|273-276",
+      "muster": "Gerade Stufenlinie im Flussbett",
+      "median_kernel": 5,
+      "max_correction_m": 0.45,
+      "masken": [
+        {
+          "x_m": 207.5,
+          "z_m": 274.5,
+          "rx_m": 9,
+          "rz_m": 3
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "kachel": "C4/C5",
+      "ort": "84-95|168-176",
+      "muster": "Gezackte Gratkante",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 89.5,
+          "z_m": 172,
+          "rx_m": 6,
+          "rz_m": 4
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 35
+    },
+    {
+      "id": "12",
+      "kachel": "D6",
+      "ort": "133-138|231-236",
+      "muster": "Saegezahnlinie am Hangrand",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 135.5,
+          "z_m": 233.5,
+          "rx_m": 4,
+          "rz_m": 4
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 45
+    },
+    {
+      "id": "13",
+      "kachel": "G4",
+      "ort": "274|133; 281|139",
+      "muster": "Kissenbloecke, Zickzack am Fuss",
+      "median_kernel": 5,
+      "max_correction_m": 0.55,
+      "masken": [
+        {
+          "x_m": 274,
+          "z_m": 133,
+          "rx_m": 2.5,
+          "rz_m": 2.5
+        },
+        {
+          "x_m": 281,
+          "z_m": 139,
+          "rx_m": 2.5,
+          "rz_m": 2.5
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "kachel": "E1",
+      "ort": "181|20",
+      "muster": "Splitter an Klippenecke",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 181,
+          "z_m": 20,
+          "rx_m": 3,
+          "rz_m": 4
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "kachel": "C6",
+      "ort": "97|221",
+      "muster": "Trichter/Mulde am Wandfuss",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 97,
+          "z_m": 221,
+          "rx_m": 4,
+          "rz_m": 4
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "kachel": "H6",
+      "ort": "315|226",
+      "muster": "Kammzaehne auf Wandkrone",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 315,
+          "z_m": 226,
+          "rx_m": 3,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 0
+    },
+    {
+      "id": "17",
+      "kachel": "H3",
+      "ort": "316|90",
+      "muster": "Knubbel am Terrassenrand",
+      "median_kernel": 5,
+      "max_correction_m": 0.45,
+      "masken": [
+        {
+          "x_m": 316,
+          "z_m": 90,
+          "rx_m": 3,
+          "rz_m": 3
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "kachel": "H2",
+      "ort": "322-330|65-69",
+      "muster": "Kammzaehne auf Grat und Randspitze",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 326,
+          "z_m": 67,
+          "rx_m": 5,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 27
+    },
+    {
+      "id": "19",
+      "kachel": "G3",
+      "ort": "285|108",
+      "muster": "Spitzen/Knick am Ruecken",
+      "median_kernel": 5,
+      "max_correction_m": 0.0,
+      "masken": [
+        {
+          "x_m": 285,
+          "z_m": 108,
+          "rx_m": 4,
+          "rz_m": 4
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "kachel": "E2",
+      "ort": "200|55-60",
+      "muster": "Zickzack an Bachuferkante",
+      "median_kernel": 5,
+      "max_correction_m": 0.45,
+      "masken": [
+        {
+          "x_m": 200,
+          "z_m": 57.5,
+          "rx_m": 5,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 0
+    },
+    {
+      "id": "21",
+      "kachel": "F6",
+      "ort": "Wandkrone; Naeherung 215|224",
+      "muster": "Kamm auf Wandkrone",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 215,
+          "z_m": 224,
+          "rx_m": 3,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 0
+    },
+    {
+      "id": "22",
+      "kachel": "F1",
+      "ort": "Wandkrone; Naeherung 212|18",
+      "muster": "Kamm auf Wandkrone",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 212,
+          "z_m": 18,
+          "rx_m": 4,
+          "rz_m": 4
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 0
+    },
+    {
+      "id": "23",
+      "kachel": "G6",
+      "ort": "283|226",
+      "muster": "Kerbe/Kammkante an Krone",
+      "median_kernel": 5,
+      "max_correction_m": 0.6,
+      "masken": [
+        {
+          "x_m": 283,
+          "z_m": 226,
+          "rx_m": 4,
+          "rz_m": 3
+        }
+      ],
+      "method": "line",
+      "richtung_grad": 20
+    }
+  ]
+}
