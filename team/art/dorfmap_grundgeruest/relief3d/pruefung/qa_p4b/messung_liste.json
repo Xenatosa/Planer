@@ -1,0 +1,492 @@
+[
+{
+"n": "C3_krater",
+"x": 94,
+"z": 97,
+"h_m": 1.44,
+"zacke_m": 0.83,
+"hang_max_grad": 71.8,
+"hang_mittel_grad": 38.9,
+"wand": true
+},
+{
+"n": "C3_kamm",
+"x": 108,
+"z": 115,
+"h_m": 12.41,
+"zacke_m": 0.81,
+"hang_max_grad": 54.4,
+"hang_mittel_grad": 19.4,
+"wand": true
+},
+{
+"n": "C3_kamm_links",
+"x": 114.8,
+"z": 120.7,
+"h_m": 10.65,
+"zacke_m": 1.66,
+"hang_max_grad": 81.9,
+"hang_mittel_grad": 34.4,
+"wand": true
+},
+{
+"n": "D1_rampe",
+"x": 152,
+"z": 17,
+"h_m": 8.66,
+"zacke_m": 0.7,
+"hang_max_grad": 68.0,
+"hang_mittel_grad": 27.7,
+"wand": true
+},
+{
+"n": "D1_rippen",
+"x": 151,
+"z": 28,
+"h_m": 6.04,
+"zacke_m": 1.79,
+"hang_max_grad": 80.6,
+"hang_mittel_grad": 29.8,
+"wand": true
+},
+{
+"n": "D4_kante",
+"x": 135,
+"z": 139,
+"h_m": 7.86,
+"zacke_m": 1.7,
+"hang_max_grad": 79.9,
+"hang_mittel_grad": 50.1,
+"wand": true
+},
+{
+"n": "C4_sims",
+"x": 118,
+"z": 162,
+"h_m": 3.81,
+"zacke_m": 0.72,
+"hang_max_grad": 69.8,
+"hang_mittel_grad": 14.8,
+"wand": true
+},
+{
+"n": "D6_tafeln",
+"x": 152,
+"z": 228,
+"h_m": -8.33,
+"zacke_m": 1.32,
+"hang_max_grad": 76.0,
+"hang_mittel_grad": 52.2,
+"wand": true
+},
+{
+"n": "D6_tafeln2",
+"x": 159,
+"z": 228,
+"h_m": -10.42,
+"zacke_m": 1.54,
+"hang_max_grad": 76.4,
+"hang_mittel_grad": 56.4,
+"wand": true
+},
+{
+"n": "B4_zahnreihe",
+"x": 76,
+"z": 147,
+"h_m": 9.24,
+"zacke_m": 0.89,
+"hang_max_grad": 74.5,
+"hang_mittel_grad": 41.5,
+"wand": true
+},
+{
+"n": "C5_kamm",
+"x": 106,
+"z": 182,
+"h_m": 2.88,
+"zacke_m": 0.95,
+"hang_max_grad": 70.8,
+"hang_mittel_grad": 26.5,
+"wand": true
+},
+{
+"n": "C4C5_grat",
+"x": 87,
+"z": 172,
+"h_m": 3.81,
+"zacke_m": 3.44,
+"hang_max_grad": 83.6,
+"hang_mittel_grad": 24.4,
+"wand": true
+},
+{
+"n": "D6_saege_W",
+"x": 135,
+"z": 234,
+"h_m": -9.68,
+"zacke_m": 0.65,
+"hang_max_grad": 65.7,
+"hang_mittel_grad": 17.8,
+"wand": true
+},
+{
+"n": "C6_trichter",
+"x": 97,
+"z": 221,
+"h_m": -10.11,
+"zacke_m": 0.53,
+"hang_max_grad": 59.8,
+"hang_mittel_grad": 32.2,
+"wand": true
+},
+{
+"n": "E1_splitter",
+"x": 181,
+"z": 20,
+"h_m": 13.06,
+"zacke_m": 2.72,
+"hang_max_grad": 84.8,
+"hang_mittel_grad": 26.4,
+"wand": true
+},
+{
+"n": "E2_ufer",
+"x": 200,
+"z": 57,
+"h_m": -1.42,
+"zacke_m": 0.26,
+"hang_max_grad": 43.1,
+"hang_mittel_grad": 22.0,
+"wand": false
+},
+{
+"n": "E7_stufe",
+"x": 203,
+"z": 275,
+"h_m": -19.37,
+"zacke_m": 0.6,
+"hang_max_grad": 38.3,
+"hang_mittel_grad": 14.5,
+"wand": false
+},
+{
+"n": "F7_stufe",
+"x": 214,
+"z": 276,
+"h_m": -19.35,
+"zacke_m": 0.61,
+"hang_max_grad": 49.6,
+"hang_mittel_grad": 24.0,
+"wand": true
+},
+{
+"n": "G3_grat",
+"x": 285,
+"z": 108,
+"h_m": 8.15,
+"zacke_m": 0.22,
+"hang_max_grad": 46.1,
+"hang_mittel_grad": 20.0,
+"wand": true
+},
+{
+"n": "G4_block_a",
+"x": 274,
+"z": 133,
+"h_m": 10.48,
+"zacke_m": 1.05,
+"hang_max_grad": 78.5,
+"hang_mittel_grad": 52.0,
+"wand": true
+},
+{
+"n": "G4_block_b",
+"x": 281,
+"z": 139,
+"h_m": 10.16,
+"zacke_m": 0.79,
+"hang_max_grad": 71.3,
+"hang_mittel_grad": 44.7,
+"wand": true
+},
+{
+"n": "H3_knubbel",
+"x": 316,
+"z": 90,
+"h_m": 11.2,
+"zacke_m": 0.48,
+"hang_max_grad": 60.2,
+"hang_mittel_grad": 17.2,
+"wand": true
+},
+{
+"n": "H6_kamm",
+"x": 315,
+"z": 226,
+"h_m": 3.97,
+"zacke_m": 1.14,
+"hang_max_grad": 65.8,
+"hang_mittel_grad": 24.3,
+"wand": true
+},
+{
+"n": "H2_rand",
+"x": 330,
+"z": 69,
+"h_m": 4.52,
+"zacke_m": 0.79,
+"hang_max_grad": 76.1,
+"hang_mittel_grad": 45.7,
+"wand": true
+},
+{
+"n": "F5_rille",
+"x": 213,
+"z": 195,
+"h_m": -1.64,
+"zacke_m": 0.36,
+"hang_max_grad": 49.7,
+"hang_mittel_grad": 22.0,
+"wand": true
+},
+{
+"n": "B1_kerbe",
+"x": 81,
+"z": 42,
+"h_m": 10.19,
+"zacke_m": 1.32,
+"hang_max_grad": 80.5,
+"hang_mittel_grad": 45.1,
+"wand": true
+},
+{
+"n": "G7_rinne",
+"x": 271,
+"z": 262,
+"h_m": -20.26,
+"zacke_m": 0.34,
+"hang_max_grad": 46.0,
+"hang_mittel_grad": 14.8,
+"wand": true
+},
+{
+"n": "C3_beule_alt",
+"x": 125.5,
+"z": 96.2,
+"h_m": 7.09,
+"zacke_m": 0.63,
+"hang_max_grad": 68.5,
+"hang_mittel_grad": 52.4,
+"wand": true
+},
+{
+"n": "C5_horn_alt",
+"x": 123.5,
+"z": 185.8,
+"h_m": 9.76,
+"zacke_m": 1.05,
+"hang_max_grad": 63.1,
+"hang_mittel_grad": 35.4,
+"wand": true
+},
+{
+"n": "A2_g5",
+"x": 15,
+"z": 48,
+"h_m": -11.3,
+"zacke_m": 0.56,
+"hang_max_grad": 48.5,
+"hang_mittel_grad": 23.6,
+"wand": true
+},
+{
+"n": "A7_g5",
+"x": 20,
+"z": 270,
+"h_m": -18.9,
+"zacke_m": 0.22,
+"hang_max_grad": 49.7,
+"hang_mittel_grad": 20.2,
+"wand": true
+},
+{
+"n": "B3_g6",
+"x": 79,
+"z": 126,
+"h_m": 0.2,
+"zacke_m": 0.16,
+"hang_max_grad": 43.1,
+"hang_mittel_grad": 17.3,
+"wand": false
+},
+{
+"n": "B4_g6",
+"x": 64,
+"z": 161,
+"h_m": -0.04,
+"zacke_m": 0.08,
+"hang_max_grad": 39.9,
+"hang_mittel_grad": 9.8,
+"wand": false
+},
+{
+"n": "C5_r5",
+"x": 95,
+"z": 177,
+"h_m": 6.47,
+"zacke_m": 1.63,
+"hang_max_grad": 79.9,
+"hang_mittel_grad": 37.0,
+"wand": true
+},
+{
+"n": "C5_g5",
+"x": 114,
+"z": 200,
+"h_m": 10.04,
+"zacke_m": 1.39,
+"hang_max_grad": 80.0,
+"hang_mittel_grad": 56.1,
+"wand": true
+},
+{
+"n": "C4_r5",
+"x": 99,
+"z": 139,
+"h_m": 3.08,
+"zacke_m": 1.14,
+"hang_max_grad": 76.8,
+"hang_mittel_grad": 29.0,
+"wand": true
+},
+{
+"n": "E6_g6",
+"x": 201,
+"z": 235,
+"h_m": -0.56,
+"zacke_m": 0.09,
+"hang_max_grad": 24.6,
+"hang_mittel_grad": 14.6,
+"wand": false
+},
+{
+"n": "F1_g5",
+"x": 223,
+"z": 41,
+"h_m": 10.62,
+"zacke_m": 2.16,
+"hang_max_grad": 83.4,
+"hang_mittel_grad": 47.2,
+"wand": true
+},
+{
+"n": "G3_g6",
+"x": 277,
+"z": 99,
+"h_m": 0.52,
+"zacke_m": 0.52,
+"hang_max_grad": 70.2,
+"hang_mittel_grad": 24.5,
+"wand": true
+},
+{
+"n": "H5_a",
+"x": 306,
+"z": 185,
+"h_m": 1.59,
+"zacke_m": 0.87,
+"hang_max_grad": 76.8,
+"hang_mittel_grad": 41.1,
+"wand": true
+},
+{
+"n": "H5_b",
+"x": 305,
+"z": 204,
+"h_m": 1.88,
+"zacke_m": 0.41,
+"hang_max_grad": 59.7,
+"hang_mittel_grad": 33.4,
+"wand": true
+},
+{
+"n": "G7_bett",
+"x": 258,
+"z": 281,
+"h_m": -16.0,
+"zacke_m": 0.07,
+"hang_max_grad": 20.1,
+"hang_mittel_grad": 1.2,
+"wand": false
+},
+{
+"n": "B3_flecken",
+"x": 64,
+"z": 115,
+"h_m": -6.65,
+"zacke_m": 0.29,
+"hang_max_grad": 54.3,
+"hang_mittel_grad": 22.9,
+"wand": true
+},
+{
+"n": "H6_fleck",
+"x": 304,
+"z": 247,
+"h_m": -16.06,
+"zacke_m": 0.0,
+"hang_max_grad": 0.6,
+"hang_mittel_grad": 0.5,
+"wand": false
+},
+{
+"n": "E6_band",
+"x": 178,
+"z": 231,
+"h_m": -0.17,
+"zacke_m": 0.27,
+"hang_max_grad": 53.6,
+"hang_mittel_grad": 17.9,
+"wand": true
+},
+{
+"n": "F7_knolle",
+"x": 243,
+"z": 273,
+"h_m": -19.93,
+"zacke_m": 0.18,
+"hang_max_grad": 41.1,
+"hang_mittel_grad": 15.5,
+"wand": false
+},
+{
+"n": "H7_bett",
+"x": 310,
+"z": 272,
+"h_m": -19.45,
+"zacke_m": 0.31,
+"hang_max_grad": 43.3,
+"hang_mittel_grad": 23.0,
+"wand": false
+},
+{
+"n": "G6_kerbe",
+"x": 283,
+"z": 226,
+"h_m": -3.13,
+"zacke_m": 0.65,
+"hang_max_grad": 69.7,
+"hang_mittel_grad": 32.2,
+"wand": true
+},
+{
+"n": "D5_splitter",
+"x": 162,
+"z": 208,
+"h_m": -0.01,
+"zacke_m": 0.0,
+"hang_max_grad": 0.6,
+"hang_mittel_grad": 0.2,
+"wand": false
+}
+]
