@@ -1,0 +1,162 @@
+{
+ "basis": "bfe8dce",
+ "regeln": {
+  "regeln": {
+   "vorher": 367,
+   "nachher": 367,
+   "je_regel": {
+    "G2_spitze_oben": [
+     2,
+     2
+    ],
+    "G2_spitze_oben_fein": [
+     9,
+     9
+    ],
+    "G3_spitze_unten_fein": [
+     2,
+     2
+    ],
+    "G5_beule_klippe": [
+     34,
+     34
+    ],
+    "G6_facette": [
+     212,
+     212
+    ],
+    "G7_wand_glatte_flaeche": [
+     1,
+     1
+    ],
+    "G7b_wandkontur_feld": [
+     29,
+     29
+    ],
+    "G7b_wandkontur_kantenschaerfe": [
+     1,
+     1
+    ],
+    "G7b_wandkontur_rauheit": [
+     1,
+     1
+    ],
+    "G8_fluss_nicht_bis_rand": [
+     1,
+     1
+    ],
+    "R1_blind": [
+     17,
+     17
+    ],
+    "R2_getrennt": [
+     8,
+     8
+    ],
+    "R3_laengs_m": [
+     21,
+     21
+    ],
+    "R3_quer_pct": [
+     8,
+     8
+    ],
+    "R3_woelb_m": [
+     8,
+     8
+    ],
+    "R5_loch": [
+     4,
+     4
+    ],
+    "R6_wasser_schnee": [
+     4,
+     4
+    ],
+    "T1_fleckrand": [
+     1,
+     1
+    ],
+    "T2_textur_abgeschnitten_bildpruefung_offen": [
+     1,
+     1
+    ],
+    "T3_streifen_ringe_bildpruefung_offen": [
+     1,
+     1
+    ],
+    "T4_graue_flussstreifen_bildpruefung_offen": [
+     1,
+     1
+    ],
+    "T5_textur_vs_clay_bildpruefung_offen": [
+     1,
+     1
+    ]
+   },
+   "treffer_neu": [],
+   "treffer_weg": []
+  },
+  "r8": {
+   "vorher": 31,
+   "nachher": 31,
+   "je_regel": {
+    "R8_gitter": [
+     6,
+     6
+    ],
+    "R8_quer": [
+     3,
+     3
+    ],
+    "R8_stufe": [
+     6,
+     6
+    ],
+    "R8a_wegende": [
+     16,
+     16
+    ]
+   },
+   "treffer_neu": [],
+   "treffer_weg": []
+  },
+  "r9": {
+   "vorher": 321,
+   "nachher": 321,
+   "je_regel": {
+    "R8b_delle": [
+     18,
+     18
+    ],
+    "R9_saegezahn": [
+     34,
+     34
+    ],
+    "R9w_wellen": [
+     269,
+     269
+    ]
+   },
+   "treffer_neu": [],
+   "treffer_weg": []
+  },
+  "w1": {
+   "vorher": 0,
+   "nachher": 0,
+   "je_regel": {},
+   "treffer_neu": [],
+   "treffer_weg": []
+  },
+  "w1_alle56": {
+   "vorher": 0,
+   "nachher": 0,
+   "je_regel": {},
+   "treffer_neu": [],
+   "treffer_weg": []
+  }
+ },
+ "loch_index_vorher": 0,
+ "loch_index_nachher": 0,
+ "d2_bitgleich": true
+}
