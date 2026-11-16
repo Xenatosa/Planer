@@ -1,297 +1,297 @@
 {
- "html": "/tmp/p10/alle_kacheln.html",
+ "html": "/tmp/p10b/alle_kacheln.html",
  "abstand": 1.6,
  "groesse": [
   1024,
   768
  ],
- "ladezeit_s": 6.138,
+ "ladezeit_s": 35.877,
  "bilder": {
   "A1": {
-   "datei": "/tmp/p10/nahbilder/A1.png",
-   "sekunden": 4.807,
-   "bytes": 464458
+   "datei": "/tmp/p10b/nahbilder/A1.png",
+   "sekunden": 6.351,
+   "bytes": 312176
   },
   "B1": {
-   "datei": "/tmp/p10/nahbilder/B1.png",
-   "sekunden": 2.882,
-   "bytes": 612604
+   "datei": "/tmp/p10b/nahbilder/B1.png",
+   "sekunden": 3.104,
+   "bytes": 416533
   },
   "C1": {
-   "datei": "/tmp/p10/nahbilder/C1.png",
-   "sekunden": 3.207,
-   "bytes": 663840
+   "datei": "/tmp/p10b/nahbilder/C1.png",
+   "sekunden": 3.145,
+   "bytes": 446787
   },
   "D1": {
-   "datei": "/tmp/p10/nahbilder/D1.png",
-   "sekunden": 2.427,
-   "bytes": 656551
+   "datei": "/tmp/p10b/nahbilder/D1.png",
+   "sekunden": 2.932,
+   "bytes": 463762
   },
   "E1": {
-   "datei": "/tmp/p10/nahbilder/E1.png",
-   "sekunden": 1.872,
-   "bytes": 688974
+   "datei": "/tmp/p10b/nahbilder/E1.png",
+   "sekunden": 2.414,
+   "bytes": 478230
   },
   "F1": {
-   "datei": "/tmp/p10/nahbilder/F1.png",
-   "sekunden": 1.632,
-   "bytes": 666322
+   "datei": "/tmp/p10b/nahbilder/F1.png",
+   "sekunden": 2.197,
+   "bytes": 456449
   },
   "G1": {
-   "datei": "/tmp/p10/nahbilder/G1.png",
-   "sekunden": 1.179,
-   "bytes": 581952
+   "datei": "/tmp/p10b/nahbilder/G1.png",
+   "sekunden": 1.877,
+   "bytes": 423974
   },
   "H1": {
-   "datei": "/tmp/p10/nahbilder/H1.png",
-   "sekunden": 0.882,
-   "bytes": 480253
+   "datei": "/tmp/p10b/nahbilder/H1.png",
+   "sekunden": 1.366,
+   "bytes": 298882
   },
   "A2": {
-   "datei": "/tmp/p10/nahbilder/A2.png",
-   "sekunden": 1.457,
-   "bytes": 615377
+   "datei": "/tmp/p10b/nahbilder/A2.png",
+   "sekunden": 4.451,
+   "bytes": 395915
   },
   "B2": {
-   "datei": "/tmp/p10/nahbilder/B2.png",
-   "sekunden": 2.299,
-   "bytes": 854366
+   "datei": "/tmp/p10b/nahbilder/B2.png",
+   "sekunden": 4.344,
+   "bytes": 524075
   },
   "C2": {
-   "datei": "/tmp/p10/nahbilder/C2.png",
-   "sekunden": 2.179,
-   "bytes": 924150
+   "datei": "/tmp/p10b/nahbilder/C2.png",
+   "sekunden": 5.093,
+   "bytes": 568897
   },
   "D2": {
-   "datei": "/tmp/p10/nahbilder/D2.png",
-   "sekunden": 2.833,
-   "bytes": 858022
+   "datei": "/tmp/p10b/nahbilder/D2.png",
+   "sekunden": 4.842,
+   "bytes": 589484
   },
   "E2": {
-   "datei": "/tmp/p10/nahbilder/E2.png",
-   "sekunden": 2.34,
-   "bytes": 852032
+   "datei": "/tmp/p10b/nahbilder/E2.png",
+   "sekunden": 22.849,
+   "bytes": 602403
   },
   "F2": {
-   "datei": "/tmp/p10/nahbilder/F2.png",
-   "sekunden": 2.184,
-   "bytes": 807155
+   "datei": "/tmp/p10b/nahbilder/F2.png",
+   "sekunden": 4.079,
+   "bytes": 576709
   },
   "G2": {
-   "datei": "/tmp/p10/nahbilder/G2.png",
-   "sekunden": 1.862,
-   "bytes": 848752
+   "datei": "/tmp/p10b/nahbilder/G2.png",
+   "sekunden": 3.595,
+   "bytes": 543573
   },
   "H2": {
-   "datei": "/tmp/p10/nahbilder/H2.png",
-   "sekunden": 1.309,
-   "bytes": 733074
+   "datei": "/tmp/p10b/nahbilder/H2.png",
+   "sekunden": 2.083,
+   "bytes": 445604
   },
   "A3": {
-   "datei": "/tmp/p10/nahbilder/A3.png",
-   "sekunden": 1.745,
-   "bytes": 766663
+   "datei": "/tmp/p10b/nahbilder/A3.png",
+   "sekunden": 3.007,
+   "bytes": 457286
   },
   "B3": {
-   "datei": "/tmp/p10/nahbilder/B3.png",
-   "sekunden": 2.117,
-   "bytes": 1017772
+   "datei": "/tmp/p10b/nahbilder/B3.png",
+   "sekunden": 3.817,
+   "bytes": 563402
   },
   "C3": {
-   "datei": "/tmp/p10/nahbilder/C3.png",
-   "sekunden": 2.726,
-   "bytes": 977984
+   "datei": "/tmp/p10b/nahbilder/C3.png",
+   "sekunden": 4.939,
+   "bytes": 653052
   },
   "D3": {
-   "datei": "/tmp/p10/nahbilder/D3.png",
-   "sekunden": 2.698,
-   "bytes": 855971
+   "datei": "/tmp/p10b/nahbilder/D3.png",
+   "sekunden": 4.671,
+   "bytes": 618959
   },
   "E3": {
-   "datei": "/tmp/p10/nahbilder/E3.png",
-   "sekunden": 2.64,
-   "bytes": 793920
+   "datei": "/tmp/p10b/nahbilder/E3.png",
+   "sekunden": 4.531,
+   "bytes": 584193
   },
   "F3": {
-   "datei": "/tmp/p10/nahbilder/F3.png",
-   "sekunden": 3.161,
-   "bytes": 803761
+   "datei": "/tmp/p10b/nahbilder/F3.png",
+   "sekunden": 3.213,
+   "bytes": 547754
   },
   "G3": {
-   "datei": "/tmp/p10/nahbilder/G3.png",
-   "sekunden": 3.345,
-   "bytes": 896027
+   "datei": "/tmp/p10b/nahbilder/G3.png",
+   "sekunden": 2.92,
+   "bytes": 549227
   },
   "H3": {
-   "datei": "/tmp/p10/nahbilder/H3.png",
-   "sekunden": 2.56,
-   "bytes": 690450
+   "datei": "/tmp/p10b/nahbilder/H3.png",
+   "sekunden": 2.056,
+   "bytes": 435815
   },
   "A4": {
-   "datei": "/tmp/p10/nahbilder/A4.png",
-   "sekunden": 7.772,
-   "bytes": 829710
+   "datei": "/tmp/p10b/nahbilder/A4.png",
+   "sekunden": 2.484,
+   "bytes": 461230
   },
   "B4": {
-   "datei": "/tmp/p10/nahbilder/B4.png",
-   "sekunden": 2.748,
-   "bytes": 1082512
+   "datei": "/tmp/p10b/nahbilder/B4.png",
+   "sekunden": 3.947,
+   "bytes": 624805
   },
   "C4": {
-   "datei": "/tmp/p10/nahbilder/C4.png",
-   "sekunden": 3.273,
-   "bytes": 1010529
+   "datei": "/tmp/p10b/nahbilder/C4.png",
+   "sekunden": 4.201,
+   "bytes": 658902
   },
   "D4": {
-   "datei": "/tmp/p10/nahbilder/D4.png",
-   "sekunden": 2.875,
-   "bytes": 887366
+   "datei": "/tmp/p10b/nahbilder/D4.png",
+   "sekunden": 4.29,
+   "bytes": 596605
   },
   "E4": {
-   "datei": "/tmp/p10/nahbilder/E4.png",
-   "sekunden": 2.405,
-   "bytes": 837947
+   "datei": "/tmp/p10b/nahbilder/E4.png",
+   "sekunden": 3.777,
+   "bytes": 576457
   },
   "F4": {
-   "datei": "/tmp/p10/nahbilder/F4.png",
-   "sekunden": 2.644,
-   "bytes": 779036
+   "datei": "/tmp/p10b/nahbilder/F4.png",
+   "sekunden": 3.535,
+   "bytes": 550295
   },
   "G4": {
-   "datei": "/tmp/p10/nahbilder/G4.png",
-   "sekunden": 2.102,
-   "bytes": 849943
+   "datei": "/tmp/p10b/nahbilder/G4.png",
+   "sekunden": 3.024,
+   "bytes": 567767
   },
   "H4": {
-   "datei": "/tmp/p10/nahbilder/H4.png",
-   "sekunden": 1.547,
-   "bytes": 720787
+   "datei": "/tmp/p10b/nahbilder/H4.png",
+   "sekunden": 2.102,
+   "bytes": 437426
   },
   "A5": {
-   "datei": "/tmp/p10/nahbilder/A5.png",
-   "sekunden": 1.693,
-   "bytes": 823952
+   "datei": "/tmp/p10b/nahbilder/A5.png",
+   "sekunden": 2.514,
+   "bytes": 450005
   },
   "B5": {
-   "datei": "/tmp/p10/nahbilder/B5.png",
-   "sekunden": 2.531,
-   "bytes": 999514
+   "datei": "/tmp/p10b/nahbilder/B5.png",
+   "sekunden": 3.537,
+   "bytes": 594866
   },
   "C5": {
-   "datei": "/tmp/p10/nahbilder/C5.png",
-   "sekunden": 3.051,
-   "bytes": 998993
+   "datei": "/tmp/p10b/nahbilder/C5.png",
+   "sekunden": 4.639,
+   "bytes": 663742
   },
   "D5": {
-   "datei": "/tmp/p10/nahbilder/D5.png",
-   "sekunden": 3.125,
-   "bytes": 863270
+   "datei": "/tmp/p10b/nahbilder/D5.png",
+   "sekunden": 4.116,
+   "bytes": 599516
   },
   "E5": {
-   "datei": "/tmp/p10/nahbilder/E5.png",
-   "sekunden": 2.695,
-   "bytes": 815173
+   "datei": "/tmp/p10b/nahbilder/E5.png",
+   "sekunden": 3.702,
+   "bytes": 568406
   },
   "F5": {
-   "datei": "/tmp/p10/nahbilder/F5.png",
-   "sekunden": 2.47,
-   "bytes": 843076
+   "datei": "/tmp/p10b/nahbilder/F5.png",
+   "sekunden": 3.277,
+   "bytes": 578574
   },
   "G5": {
-   "datei": "/tmp/p10/nahbilder/G5.png",
-   "sekunden": 2.495,
-   "bytes": 866714
+   "datei": "/tmp/p10b/nahbilder/G5.png",
+   "sekunden": 3.303,
+   "bytes": 549096
   },
   "H5": {
-   "datei": "/tmp/p10/nahbilder/H5.png",
-   "sekunden": 2.312,
-   "bytes": 756141
+   "datei": "/tmp/p10b/nahbilder/H5.png",
+   "sekunden": 2.273,
+   "bytes": 438289
   },
   "A6": {
-   "datei": "/tmp/p10/nahbilder/A6.png",
-   "sekunden": 2.204,
-   "bytes": 819404
+   "datei": "/tmp/p10b/nahbilder/A6.png",
+   "sekunden": 2.792,
+   "bytes": 470976
   },
   "B6": {
-   "datei": "/tmp/p10/nahbilder/B6.png",
-   "sekunden": 2.136,
-   "bytes": 957017
+   "datei": "/tmp/p10b/nahbilder/B6.png",
+   "sekunden": 3.358,
+   "bytes": 537166
   },
   "C6": {
-   "datei": "/tmp/p10/nahbilder/C6.png",
-   "sekunden": 2.61,
-   "bytes": 916061
+   "datei": "/tmp/p10b/nahbilder/C6.png",
+   "sekunden": 3.961,
+   "bytes": 543439
   },
   "D6": {
-   "datei": "/tmp/p10/nahbilder/D6.png",
-   "sekunden": 2.691,
-   "bytes": 892573
+   "datei": "/tmp/p10b/nahbilder/D6.png",
+   "sekunden": 4.061,
+   "bytes": 571994
   },
   "E6": {
-   "datei": "/tmp/p10/nahbilder/E6.png",
-   "sekunden": 2.39,
-   "bytes": 884539
+   "datei": "/tmp/p10b/nahbilder/E6.png",
+   "sekunden": 4.065,
+   "bytes": 592801
   },
   "F6": {
-   "datei": "/tmp/p10/nahbilder/F6.png",
-   "sekunden": 2.225,
-   "bytes": 865817
+   "datei": "/tmp/p10b/nahbilder/F6.png",
+   "sekunden": 3.621,
+   "bytes": 601802
   },
   "G6": {
-   "datei": "/tmp/p10/nahbilder/G6.png",
-   "sekunden": 2.045,
-   "bytes": 881416
+   "datei": "/tmp/p10b/nahbilder/G6.png",
+   "sekunden": 3.342,
+   "bytes": 574406
   },
   "H6": {
-   "datei": "/tmp/p10/nahbilder/H6.png",
-   "sekunden": 1.66,
-   "bytes": 764168
+   "datei": "/tmp/p10b/nahbilder/H6.png",
+   "sekunden": 2.368,
+   "bytes": 471273
   },
   "A7": {
-   "datei": "/tmp/p10/nahbilder/A7.png",
-   "sekunden": 1.615,
-   "bytes": 630608
+   "datei": "/tmp/p10b/nahbilder/A7.png",
+   "sekunden": 2.467,
+   "bytes": 388207
   },
   "B7": {
-   "datei": "/tmp/p10/nahbilder/B7.png",
-   "sekunden": 1.842,
-   "bytes": 767691
+   "datei": "/tmp/p10b/nahbilder/B7.png",
+   "sekunden": 2.972,
+   "bytes": 432184
   },
   "C7": {
-   "datei": "/tmp/p10/nahbilder/C7.png",
-   "sekunden": 1.952,
-   "bytes": 771933
+   "datei": "/tmp/p10b/nahbilder/C7.png",
+   "sekunden": 3.67,
+   "bytes": 418670
   },
   "D7": {
-   "datei": "/tmp/p10/nahbilder/D7.png",
-   "sekunden": 1.796,
-   "bytes": 756097
+   "datei": "/tmp/p10b/nahbilder/D7.png",
+   "sekunden": 4.101,
+   "bytes": 371274
   },
   "E7": {
-   "datei": "/tmp/p10/nahbilder/E7.png",
-   "sekunden": 1.688,
-   "bytes": 750128
+   "datei": "/tmp/p10b/nahbilder/E7.png",
+   "sekunden": 3.994,
+   "bytes": 379765
   },
   "F7": {
-   "datei": "/tmp/p10/nahbilder/F7.png",
-   "sekunden": 1.823,
-   "bytes": 748055
+   "datei": "/tmp/p10b/nahbilder/F7.png",
+   "sekunden": 3.55,
+   "bytes": 382098
   },
   "G7": {
-   "datei": "/tmp/p10/nahbilder/G7.png",
-   "sekunden": 1.544,
-   "bytes": 723634
+   "datei": "/tmp/p10b/nahbilder/G7.png",
+   "sekunden": 3.104,
+   "bytes": 392360
   },
   "H7": {
-   "datei": "/tmp/p10/nahbilder/H7.png",
-   "sekunden": 1.308,
-   "bytes": 570492
+   "datei": "/tmp/p10b/nahbilder/H7.png",
+   "sekunden": 2.155,
+   "bytes": 343706
   }
  },
  "karte": {
-  "datei": "/tmp/p10/nahbilder/karte.png",
-  "sekunden": 3.794,
-  "bytes": 694660
+  "datei": "/tmp/p10b/nahbilder/karte.png",
+  "sekunden": 6.613,
+  "bytes": 591637
  },
- "gesamt_s": 143.55
+ "gesamt_s": 254.755
 }

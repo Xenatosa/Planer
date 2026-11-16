@@ -102,6 +102,23 @@ Wege-Overlay aus `WEGA` (Vertex-Alpha, +0,05 m, Brücken als Boxen) und Wasser a
 Beides liegt in den Ebenen `wege`/`wasser`, nicht `gelaende` – der Lochscan ist davon nicht betroffen.
 `?ohne=wasser,wege,waende` blendet sie aus. Zahlen je Kachel: `ergebnis/darstellung.md`.
 
+## P10b – QA-P4b-Punkte (Darstellungshilfen, nur Viewer)
+
+Alle drei Punkte ändern nur Material-/Lichtparameter im eigenen Viewer, keine Geometrie. Die Hashes in
+`hash_vergleich.*` beziehen sich weiter auf die Geometrie aus `build_manifest` (Oberfläche, Seiten, Boden, Wände).
+
+1. **Schattenakne:** `sun.shadow.bias = -0.0005`, `sun.shadow.normalBias = 0.08` (Testparameter `?sbias=`, `?snbias=`).
+   Vorher-Bild: `nahbild.js ... --param 'sbias=0&snbias=0'`.
+2. **Haarlinien an Kachelnähten:** `naht_pruefung.py` vergleicht alle 97 Nachbarkanten bitweise (x, y, z) –
+   keine Abweichung, keine T-Junctions. Die Linien sind ein Render-Artefakt: Seiten- und Bodenflächen jeder Kachel
+   (`foundationMaterial`) liegen an der Naht in exakt gleicher Tiefe wie die Oberkante der Nachbaroberfläche und
+   gewinnen dort einzelne Pixel. Hilfe: `polygonOffset` (Faktor/Einheiten 4) nur auf dem Seiten-/Bodenmaterial.
+   Vorher-Bild: `--param 'naht=0'`.
+3. **Frei stehende Wandobjekte:** Analyse in `wand_herkunft.py` → `ergebnis/wand_herkunft.json` (nichts gelöscht).
+
+Wasserbilder F7/G7/H7 (mit und ohne Wasser, ohne Wandkörper): Liste `wasser_F7_G7_H7_liste.json`, erzeugt von `alles.sh`
+nach `<AUSGABE>/wasser_F7_G7_H7/`. Zweiter Kachelsatz ohne Wandkörper: `<AUSGABE>/nahbilder_ohne_waende/`.
+
 ## Grenzen
 
 - Der Lochscan sieht nur Meshes der Ebene `gelaende`. Jede Kachel ist ein geschlossener Rasterkörper

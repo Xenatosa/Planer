@@ -1,10 +1,10 @@
 # P10 Lochscan Positivkontrolle C3
 
-Basis: 3296de9 devui/dorfmap-p10 (Positivkontrolle, 1 Dreieck in C3 entfernt)
+Basis: e2009b3 devui/dorfmap-p10b (Positivkontrolle, 1 Dreieck in C3 entfernt)
 
 Regel: R5_loch = offene Kanten (nur 1 Dreieck) aller sichtbaren Meshes der Ebene `gelaende`, global 2 cm verschweisst, Kartenrand 0,6 ausgenommen (`pruefung/loch_o18g.js`, unveraendert).
 
-- Lauf `/tmp/p10/loch_kontrolle_roh.json`: 168 Meshes, 1.656.255 Dreiecke, offen_innen 3, bb [0, 0, 336, 301]
+- Lauf `/tmp/p10b/loch_kontrolle_roh.json`: 168 Meshes, 1.667.135 Dreiecke, offen_innen 3, bb [0, 0, 336, 303]
 
 **Summe R5_loch: 3**
 
