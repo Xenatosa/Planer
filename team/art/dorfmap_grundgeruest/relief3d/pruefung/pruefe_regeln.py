@@ -188,7 +188,7 @@ print('G7b',T7,json.dumps({'summe':len(T),'je_regel':S},ensure_ascii=False))
 # O18t S3: dokumentierte Ausnahmen (REGELN_VERPFLICHTEND.md, O18r/O18t). Treffer bleiben in summe/je_regel sichtbar, zusaetzlich markiert + summe_ohne_ausnahmen [A]
 def _kreuz(a,b):
     pa,pb=R[a][0],R[b][0];d=np.hypot(pa[:,None,0]-pb[None,::4,0],pa[:,None,1]-pb[None,::4,1]).min(1);return pa[d<2.0]
-_KP={(2,11):_kreuz(2,11),(3,5):_kreuz(3,5)}
+_KP={k:_kreuz(*k) for k in ((2,11),(3,5)) if max(k)<len(R)}   # P2: nur Absturzschutz bei <12 Rampen; _ausnahme() ist ohnehin aus, Zaehlung unveraendert [A]
 def _ausnahme(t_):
     return None   # t124u/t125u: KEINE Ausnahmen mehr (Fabian: 'keine Ausnahmen mit Begruendung'); alter Text unten nur Historie
     if t_['regel']=='T1_fleckrand':return 'O18u T1-Kalibrierung: Fleckrand ohne gerade Kante >=4,5 m'

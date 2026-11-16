@@ -50,109 +50,19 @@
       "bebaubar"
     ],
     "terrain_extensions": {
-      "fine_vertices": 1246,
-      "height_sha256": "646cacac7c5d1f671f6c5f82de5b30172d9e652be14a73965cc62a27cac8055a",
-      "vertices": 293
+      "fine_vertices": 0,
+      "height_sha256": null,
+      "vertices": 0
     },
     "tiles": {
       "D1": {
         "closed_triangles": 29576,
-        "height_sha256": "9619da5083720eb43f736043452b28f87dd2f9aa946dc2cb453b5ed972d02c6c",
+        "height_sha256": "6838b44c59453cfc01c8ec865482dba8ad351df9d639497ef3fe1f27ebda17fe",
         "terrain": {
-          "changed_vertices": 996,
-          "crossing_flat_vertices": 0,
-          "crossing_variant": "24",
-          "endpoint_runout_vertices": 524,
-          "endpoint_variant": "1",
-          "layers": [
-            "basishoehe_GB",
-            "rampenenden_lokaler_auslauf_ge4m_weich",
-            "rampenkreuzung_gemeinsame_ebene_weicher_rand",
-            "wand_abstandsschutz",
-            "kachelrand_fade_3m"
-          ],
-          "max_abs_delta_m": 2.928332,
-          "mean_abs_delta_m": 0.05026,
-          "profile_solver": {
-            "R8_gate_center_unrounded_map": [
-              152.54985704503775,
-              28.48954534572434
-            ],
-            "R8_gate_gitter_support_pairs": 273,
-            "R8_gate_metrics_solution": {
-              "R8_gitter_m": 0.020000000000032436,
-              "R8_quer_pct": 2.9999999999998255,
-              "R8_stufe_m": 0.0760688815826116
-            },
-            "R8_gate_quer_slope_limit_pct": 3.0,
-            "R8_gate_quer_supports": 112,
-            "R8_neighbor_pair_count": 1125,
-            "axis_supports": 359,
-            "axis_tolerance_m": 0.02,
-            "checker_spacing_map_units": 0.25,
-            "constraints": 10136,
-            "g_m_per_m": 0.45,
-            "joint_axis_mesh_max_abs_error_m": 0.020000000000031548,
-            "joint_axis_mesh_over_0_02_count": 0,
-            "joint_direct_mesh_supports": 1106,
-            "joint_max_fade_weight": 1.0,
-            "mesh_raster_spacing_map_units": 0.5,
-            "minimum_neighbor_step_m": 0.07606888158259212,
-            "mip_dual_bound_m": 0.07606887158259212,
-            "mip_gap": 0.0,
-            "objective_mode": "step",
-            "optimality_proven": true,
-            "plane_core_supports": 137,
-            "plane_gradient_x": -0.006979547780550047,
-            "plane_gradient_z": -0.02905212807069937,
-            "plane_height_m": 4.062933483386039,
-            "plane_radius_m": 2.0,
-            "plane_slope_limit_pct": 3.0,
-            "plane_slope_pct": 2.9878758887498984,
-            "plane_tolerance_m": 0.02,
-            "primal_feasible": true,
-            "primary_objective_value": 0.07606887158259212,
-            "primary_r3_long_indicator_sum": 6.0,
-            "primary_r3_quer_indicator_sum": 7.0,
-            "primary_r3_wob_indicator_sum": 7.0,
-            "r3_D1_limit": 6,
-            "r3_long_limit": 6,
-            "r3_quer_limit": 7,
-            "r3_quer_sections_D1_solution": 7,
-            "r3_sections_D1_solution": 6,
-            "r3_wob_limit": 7,
-            "r3_wob_sections_D1_solution": 7,
-            "relaxed_integrality": false,
-            "route_pair_count": 1075,
-            "same_route_arc_distance_factor": 1.25,
-            "same_route_pair_count": 218,
-            "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
-            "stage_limit_m": 0.116,
-            "status": "Optimal",
-            "status_code": 0,
-            "success": true,
-            "tie_break_movement_l1_m": 532.8705611482358,
-            "tie_break_reference_mesh": "GB source field",
-            "tie_break_reference_sha256": null,
-            "variables": 7858,
-            "worst_pair": {
-              "a": {
-                "height_m": 4.228218700610592,
-                "x": 153.5,
-                "z": 26.25
-              },
-              "b": {
-                "height_m": 4.15214981902798,
-                "x": 153.5,
-                "z": 26.5
-              },
-              "step_m": 0.0760688815826116
-            }
-          },
-          "ramp_crossing_flat_vertices": 1106,
-          "variant": "2",
-          "wand_protected_vertices": 3123,
-          "zone_flat_vertices": 0
+          "changed_vertices": 0,
+          "layers": [],
+          "max_abs_delta_m": 0.0,
+          "variant": "0"
         },
         "triangles": 14448,
         "vertices": 7395
@@ -164,32 +74,19 @@
           "changed_vertices": 0,
           "layers": [],
           "max_abs_delta_m": 0.0,
-          "variant": "2"
+          "variant": "0"
         },
         "triangles": 14448,
         "vertices": 7395
       },
       "G1": {
         "closed_triangles": 29576,
-        "height_sha256": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
+        "height_sha256": "b06ffb0e913947da5179a44e27a86dc168ec56a1b275e96ceed99181af062cb8",
         "terrain": {
-          "changed_vertices": 480,
-          "crossing_flat_vertices": 0,
-          "crossing_variant": "24",
-          "endpoint_runout_vertices": 497,
-          "endpoint_variant": "1",
-          "layers": [
-            "basishoehe_GB",
-            "rampenenden_lokaler_auslauf_ge4m_weich",
-            "wand_abstandsschutz",
-            "kachelrand_fade_3m"
-          ],
-          "max_abs_delta_m": 0.558914,
-          "mean_abs_delta_m": 0.00696,
-          "ramp_crossing_flat_vertices": 0,
-          "variant": "2",
-          "wand_protected_vertices": 5268,
-          "zone_flat_vertices": 0
+          "changed_vertices": 0,
+          "layers": [],
+          "max_abs_delta_m": 0.0,
+          "variant": "0"
         },
         "triangles": 14448,
         "vertices": 7395

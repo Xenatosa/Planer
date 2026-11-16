@@ -1,9 +1,9 @@
 {
-"summe": 334,
+"summe": 325,
 "je_regel": {
-"R8b_delle": 25,
+"R8b_delle": 22,
 "R9_saegezahn": 34,
-"R9w_wellen": 275
+"R9w_wellen": 269
 },
 "je_feld": {
 "A1": {
@@ -30,7 +30,7 @@
 },
 "B3": {
 "R9_saegezahn": 1,
-"R9w_wellen": 6
+"R9w_wellen": 7
 },
 "B4": {
 "R9_saegezahn": 1,
@@ -56,26 +56,21 @@
 "R9w_wellen": 3
 },
 "C3": {
-"R8b_delle": 1,
-"R9_saegezahn": 1,
-"R9w_wellen": 17
-},
-"C4": {
-"R8b_delle": 1,
 "R9_saegezahn": 1,
 "R9w_wellen": 13
 },
-"C5": {
-"R8b_delle": 1,
+"C4": {
+"R8b_delle": 2,
 "R9_saegezahn": 1,
-"R9w_wellen": 10
+"R9w_wellen": 14
+},
+"C5": {
+"R9_saegezahn": 1,
+"R9w_wellen": 15
 },
 "C6": {
 "R9_saegezahn": 1,
-"R9w_wellen": 18
-},
-"C7": {
-"R9w_wellen": 3
+"R9w_wellen": 14
 },
 "D1": {
 "R8b_delle": 2,
@@ -83,8 +78,7 @@
 "R9w_wellen": 23
 },
 "D3": {
-"R9_saegezahn": 1,
-"R9w_wellen": 1
+"R9_saegezahn": 1
 },
 "D4": {
 "R9_saegezahn": 1,
@@ -92,19 +86,19 @@
 },
 "D5": {
 "R9_saegezahn": 1,
-"R9w_wellen": 10
+"R9w_wellen": 7
 },
 "D6": {
 "R8b_delle": 2,
 "R9_saegezahn": 1,
-"R9w_wellen": 9
+"R9w_wellen": 11
 },
 "E1": {
 "R9_saegezahn": 1,
 "R9w_wellen": 7
 },
 "E3": {
-"R8b_delle": 12
+"R8b_delle": 10
 },
 "E4": {
 "R8b_delle": 4,
@@ -210,19 +204,11 @@
 },
 {
 "regel": "R8b_delle",
-"feld": "C3",
-"x": 122.0,
-"z": 118.0,
-"wert": 0.49,
-"abstand_weg": 0.0
-},
-{
-"regel": "R8b_delle",
 "feld": "E3",
 "x": 183.0,
 "z": 121.5,
 "wert": 0.39,
-"abstand_weg": 5.3
+"abstand_weg": 4.5
 },
 {
 "regel": "R8b_delle",
@@ -238,7 +224,7 @@
 "x": 181.5,
 "z": 123.0,
 "wert": 0.33,
-"abstand_weg": 5.3
+"abstand_weg": 4.0
 },
 {
 "regel": "R8b_delle",
@@ -246,7 +232,7 @@
 "x": 181.0,
 "z": 124.0,
 "wert": 0.34,
-"abstand_weg": 5.0
+"abstand_weg": 3.0
 },
 {
 "regel": "R8b_delle",
@@ -262,7 +248,7 @@
 "x": 180.5,
 "z": 124.5,
 "wert": 0.31,
-"abstand_weg": 5.1
+"abstand_weg": 2.5
 },
 {
 "regel": "R8b_delle",
@@ -278,23 +264,7 @@
 "x": 184.0,
 "z": 125.5,
 "wert": 0.35,
-"abstand_weg": 1.4
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
-"x": 183.5,
-"z": 126.5,
-"wert": 0.32,
-"abstand_weg": 1.6
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
-"x": 183.0,
-"z": 127.0,
-"wert": 0.34,
-"abstand_weg": 2.0
+"abstand_weg": 1.0
 },
 {
 "regel": "R8b_delle",
@@ -302,15 +272,23 @@
 "x": 179.0,
 "z": 127.5,
 "wert": 0.31,
-"abstand_weg": 3.0
+"abstand_weg": 0.0
 },
 {
 "regel": "R8b_delle",
 "feld": "E3",
 "x": 182.5,
-"z": 127.5,
-"wert": 0.35,
-"abstand_weg": 2.5
+"z": 128.0,
+"wert": 0.32,
+"abstand_weg": 0.0
+},
+{
+"regel": "R8b_delle",
+"feld": "C4",
+"x": 105.5,
+"z": 145.5,
+"wert": 3.2,
+"abstand_weg": 5.6
 },
 {
 "regel": "R8b_delle",
@@ -318,7 +296,7 @@
 "x": 182.0,
 "z": 129.0,
 "wert": 0.3,
-"abstand_weg": 3.0
+"abstand_weg": 0.0
 },
 {
 "regel": "R8b_delle",
@@ -326,15 +304,7 @@
 "x": 181.5,
 "z": 129.5,
 "wert": 0.33,
-"abstand_weg": 3.5
-},
-{
-"regel": "R8b_delle",
-"feld": "C4",
-"x": 106.5,
-"z": 145.5,
-"wert": 4.11,
-"abstand_weg": 0.0
+"abstand_weg": 0.5
 },
 {
 "regel": "R8b_delle",
@@ -342,7 +312,7 @@
 "x": 178.0,
 "z": 130.0,
 "wert": 0.31,
-"abstand_weg": 2.8
+"abstand_weg": 1.0
 },
 {
 "regel": "R8b_delle",
@@ -350,15 +320,15 @@
 "x": 181.0,
 "z": 130.5,
 "wert": 0.33,
-"abstand_weg": 4.3
+"abstand_weg": 1.5
 },
 {
 "regel": "R8b_delle",
-"feld": "C5",
-"x": 108.5,
-"z": 185.5,
-"wert": 0.31,
-"abstand_weg": 3.8
+"feld": "C4",
+"x": 124.5,
+"z": 158.5,
+"wert": 0.35,
+"abstand_weg": 4.7
 },
 {
 "regel": "R8b_delle",
@@ -416,14 +386,14 @@
 "feld": "B4",
 "x": 83.0,
 "z": 129.0,
-"wert": 55
+"wert": 57
 },
 {
 "regel": "R9_saegezahn",
 "feld": "B5",
 "x": 68.5,
 "z": 172.0,
-"wert": 48
+"wert": 57
 },
 {
 "regel": "R9_saegezahn",
@@ -449,30 +419,30 @@
 {
 "regel": "R9_saegezahn",
 "feld": "C3",
-"x": 123.5,
-"z": 93.5,
-"wert": 133
+"x": 124.5,
+"z": 93.0,
+"wert": 143
 },
 {
 "regel": "R9_saegezahn",
 "feld": "C4",
-"x": 115.0,
+"x": 115.2,
 "z": 129.0,
-"wert": 51
+"wert": 69
 },
 {
 "regel": "R9_saegezahn",
 "feld": "C5",
 "x": 117.0,
 "z": 172.0,
-"wert": 76
+"wert": 88
 },
 {
 "regel": "R9_saegezahn",
 "feld": "C6",
 "x": 85.2,
 "z": 215.5,
-"wert": 55
+"wert": 51
 },
 {
 "regel": "R9_saegezahn",
@@ -484,30 +454,30 @@
 {
 "regel": "R9_saegezahn",
 "feld": "D3",
-"x": 127.0,
-"z": 93.5,
-"wert": 13
+"x": 126.0,
+"z": 93.0,
+"wert": 11
 },
 {
 "regel": "R9_saegezahn",
 "feld": "D4",
-"x": 134.5,
-"z": 129.5,
-"wert": 32
+"x": 128.0,
+"z": 130.0,
+"wert": 49
 },
 {
 "regel": "R9_saegezahn",
 "feld": "D5",
-"x": 127.0,
-"z": 178.2,
-"wert": 14
+"x": 130.5,
+"z": 172.5,
+"wert": 42
 },
 {
 "regel": "R9_saegezahn",
 "feld": "D6",
 "x": 162.5,
 "z": 224.5,
-"wert": 22
+"wert": 23
 },
 {
 "regel": "R9_saegezahn",
@@ -1177,16 +1147,16 @@
 {
 "regel": "R9w_wellen",
 "feld": "C3",
-"x": 124.1,
-"z": 102.6,
-"wert": 0.69
+"x": 123.1,
+"z": 100.3,
+"wert": 0.61
 },
 {
 "regel": "R9w_wellen",
-"feld": "C3",
-"x": 85.9,
-"z": 114.5,
-"wert": 0.54
+"feld": "B3",
+"x": 83.9,
+"z": 119.1,
+"wert": 0.64
 },
 {
 "regel": "R9w_wellen",
@@ -1240,9 +1210,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C3",
-"x": 107.0,
-"z": 99.0,
-"wert": 0.51
+"x": 107.1,
+"z": 99.1,
+"wert": 0.5
 },
 {
 "regel": "R9w_wellen",
@@ -1256,21 +1226,14 @@
 "feld": "C3",
 "x": 98.9,
 "z": 99.4,
-"wert": 0.84
+"wert": 0.83
 },
 {
 "regel": "R9w_wellen",
 "feld": "C3",
-"x": 95.9,
+"x": 96.0,
 "z": 102.6,
-"wert": 0.7
-},
-{
-"regel": "R9w_wellen",
-"feld": "C3",
-"x": 124.1,
-"z": 101.3,
-"wert": 0.13
+"wert": 0.69
 },
 {
 "regel": "R9w_wellen",
@@ -1331,9 +1294,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C3",
-"x": 111.6,
-"z": 108.4,
-"wert": 0.5
+"x": 110.4,
+"z": 114.0,
+"wert": 0.58
 },
 {
 "regel": "R9w_wellen",
@@ -1358,13 +1321,6 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C3",
-"x": 110.3,
-"z": 116.0,
-"wert": 0.71
-},
-{
-"regel": "R9w_wellen",
 "feld": "G3",
 "x": 277.0,
 "z": 112.2,
@@ -1375,7 +1331,7 @@
 "feld": "C3",
 "x": 90.7,
 "z": 111.9,
-"wert": 0.66
+"wert": 0.65
 },
 {
 "regel": "R9w_wellen",
@@ -1394,22 +1350,15 @@
 {
 "regel": "R9w_wellen",
 "feld": "C3",
-"x": 93.0,
-"z": 122.1,
+"x": 92.9,
+"z": 122.0,
 "wert": 0.62
 },
 {
 "regel": "R9w_wellen",
-"feld": "D3",
-"x": 130.1,
-"z": 117.9,
-"wert": 0.35
-},
-{
-"regel": "R9w_wellen",
 "feld": "C3",
-"x": 109.3,
-"z": 119.0,
+"x": 109.5,
+"z": 119.1,
 "wert": 0.27
 },
 {
@@ -1418,6 +1367,20 @@
 "x": 284.0,
 "z": 132.9,
 "wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 135.0,
+"z": 130.8,
+"wert": 0.41
+},
+{
+"regel": "R9w_wellen",
+"feld": "C3",
+"x": 117.2,
+"z": 122.9,
+"wert": 0.63
 },
 {
 "regel": "R9w_wellen",
@@ -1432,13 +1395,6 @@
 "x": 269.7,
 "z": 123.9,
 "wert": 0.11
-},
-{
-"regel": "R9w_wellen",
-"feld": "C3",
-"x": 122.6,
-"z": 125.2,
-"wert": 0.29
 },
 {
 "regel": "R9w_wellen",
@@ -1457,23 +1413,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 105.5,
-"z": 129.8,
-"wert": 0.59
-},
-{
-"regel": "R9w_wellen",
-"feld": "C3",
-"x": 119.4,
-"z": 127.0,
-"wert": 0.31
-},
-{
-"regel": "R9w_wellen",
-"feld": "D4",
-"x": 129.4,
-"z": 132.6,
-"wert": 0.61
+"x": 104.9,
+"z": 129.9,
+"wert": 0.58
 },
 {
 "regel": "R9w_wellen",
@@ -1485,30 +1427,30 @@
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 119.6,
-"z": 130.5,
-"wert": 0.32
-},
-{
-"regel": "R9w_wellen",
-"feld": "C4",
-"x": 111.2,
-"z": 141.7,
-"wert": 0.69
+"x": 108.7,
+"z": 141.5,
+"wert": 0.8
 },
 {
 "regel": "R9w_wellen",
 "feld": "D4",
-"x": 139.9,
-"z": 137.6,
-"wert": 0.43
+"x": 126.4,
+"z": 134.4,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "D4",
+"x": 129.7,
+"z": 138.5,
+"wert": 0.55
 },
 {
 "regel": "R9w_wellen",
 "feld": "C4",
 "x": 84.2,
-"z": 137.1,
-"wert": 0.48
+"z": 137.2,
+"wert": 0.47
 },
 {
 "regel": "R9w_wellen",
@@ -1527,9 +1469,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 93.0,
-"z": 152.7,
-"wert": 0.55
+"x": 90.9,
+"z": 137.7,
+"wert": 0.31
 },
 {
 "regel": "R9w_wellen",
@@ -1541,30 +1483,16 @@
 {
 "regel": "R9w_wellen",
 "feld": "D4",
-"x": 133.0,
-"z": 139.3,
-"wert": 0.59
+"x": 131.9,
+"z": 139.0,
+"wert": 0.64
 },
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 85.7,
-"z": 144.3,
+"x": 91.3,
+"z": 141.4,
 "wert": 0.39
-},
-{
-"regel": "R9w_wellen",
-"feld": "C4",
-"x": 119.1,
-"z": 140.3,
-"wert": 0.15
-},
-{
-"regel": "R9w_wellen",
-"feld": "C4",
-"x": 90.6,
-"z": 157.5,
-"wert": 0.69
 },
 {
 "regel": "R9w_wellen",
@@ -1575,24 +1503,17 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "D4",
-"x": 128.6,
-"z": 142.3,
-"wert": 0.49
-},
-{
-"regel": "R9w_wellen",
-"feld": "B4",
-"x": 70.2,
-"z": 149.4,
-"wert": 0.6
-},
-{
-"regel": "R9w_wellen",
 "feld": "B4",
 "x": 49.9,
 "z": 158.0,
 "wert": 0.48
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 89.8,
+"z": 146.1,
+"wert": 0.43
 },
 {
 "regel": "R9w_wellen",
@@ -1604,16 +1525,16 @@
 {
 "regel": "R9w_wellen",
 "feld": "B4",
-"x": 75.9,
-"z": 155.6,
-"wert": 0.8
+"x": 77.6,
+"z": 166.6,
+"wert": 0.7
 },
 {
 "regel": "R9w_wellen",
 "feld": "D4",
-"x": 128.9,
-"z": 160.6,
-"wert": 0.82
+"x": 131.2,
+"z": 155.3,
+"wert": 0.64
 },
 {
 "regel": "R9w_wellen",
@@ -1639,9 +1560,16 @@
 {
 "regel": "R9w_wellen",
 "feld": "D4",
-"x": 140.6,
-"z": 158.1,
-"wert": 0.52
+"x": 137.9,
+"z": 164.2,
+"wert": 0.55
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 94.2,
+"z": 154.2,
+"wert": 0.44
 },
 {
 "regel": "R9w_wellen",
@@ -1666,10 +1594,24 @@
 },
 {
 "regel": "R9w_wellen",
+"feld": "B4",
+"x": 82.7,
+"z": 158.3,
+"wert": 0.34
+},
+{
+"regel": "R9w_wellen",
 "feld": "C4",
-"x": 120.3,
-"z": 158.1,
-"wert": 0.69
+"x": 120.5,
+"z": 157.8,
+"wert": 0.64
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 92.1,
+"z": 165.1,
+"wert": 0.49
 },
 {
 "regel": "R9w_wellen",
@@ -1688,9 +1630,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 96.3,
-"z": 163.0,
-"wert": 0.35
+"x": 125.3,
+"z": 161.6,
+"wert": 0.34
 },
 {
 "regel": "R9w_wellen",
@@ -1708,10 +1650,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C4",
-"x": 113.3,
-"z": 170.0,
-"wert": 0.69
+"feld": "C5",
+"x": 111.4,
+"z": 173.5,
+"wert": 0.79
 },
 {
 "regel": "R9w_wellen",
@@ -1719,13 +1661,6 @@
 "x": 178.0,
 "z": 161.2,
 "wert": 0.18
-},
-{
-"regel": "R9w_wellen",
-"feld": "D5",
-"x": 136.0,
-"z": 177.0,
-"wert": 1.41
 },
 {
 "regel": "R9w_wellen",
@@ -1740,6 +1675,13 @@
 "x": 300.1,
 "z": 164.9,
 "wert": 0.5
+},
+{
+"regel": "R9w_wellen",
+"feld": "C4",
+"x": 84.2,
+"z": 165.8,
+"wert": 0.43
 },
 {
 "regel": "R9w_wellen",
@@ -1758,51 +1700,51 @@
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 122.7,
-"z": 168.7,
-"wert": 0.24
+"x": 122.5,
+"z": 169.1,
+"wert": 0.23
 },
 {
 "regel": "R9w_wellen",
 "feld": "C4",
-"x": 119.5,
-"z": 169.1,
-"wert": 0.98
+"x": 119.4,
+"z": 169.3,
+"wert": 0.99
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 128.0,
+"z": 175.1,
+"wert": 0.76
 },
 {
 "regel": "R9w_wellen",
 "feld": "B4",
 "x": 64.5,
 "z": 168.8,
-"wert": 0.26
+"wert": 0.25
 },
 {
 "regel": "R9w_wellen",
-"feld": "D5",
-"x": 143.0,
-"z": 182.1,
-"wert": 0.38
-},
-{
-"regel": "R9w_wellen",
-"feld": "B5",
-"x": 80.7,
-"z": 179.9,
-"wert": 0.49
-},
-{
-"regel": "R9w_wellen",
-"feld": "D5",
-"x": 131.9,
-"z": 176.6,
-"wert": 0.26
+"feld": "C4",
+"x": 86.1,
+"z": 171.7,
+"wert": 0.36
 },
 {
 "regel": "R9w_wellen",
 "feld": "C5",
-"x": 117.1,
-"z": 179.8,
-"wert": 0.8
+"x": 125.0,
+"z": 173.1,
+"wert": 0.19
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 117.3,
+"z": 179.5,
+"wert": 0.68
 },
 {
 "regel": "R9w_wellen",
@@ -1814,9 +1756,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "D5",
-"x": 127.1,
-"z": 175.6,
-"wert": 0.87
+"x": 139.0,
+"z": 187.9,
+"wert": 0.89
 },
 {
 "regel": "R9w_wellen",
@@ -1827,31 +1769,24 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C5",
-"x": 98.0,
-"z": 183.0,
-"wert": 0.73
-},
-{
-"regel": "R9w_wellen",
 "feld": "B5",
-"x": 74.1,
-"z": 185.0,
-"wert": 0.61
+"x": 70.8,
+"z": 179.0,
+"wert": 0.55
 },
 {
 "regel": "R9w_wellen",
 "feld": "C5",
-"x": 121.2,
-"z": 184.4,
-"wert": 0.81
+"x": 121.1,
+"z": 187.7,
+"wert": 0.59
 },
 {
 "regel": "R9w_wellen",
-"feld": "D5",
-"x": 132.8,
-"z": 186.3,
-"wert": 0.43
+"feld": "C5",
+"x": 100.5,
+"z": 180.7,
+"wert": 0.59
 },
 {
 "regel": "R9w_wellen",
@@ -1862,17 +1797,31 @@
 },
 {
 "regel": "R9w_wellen",
+"feld": "C5",
+"x": 99.0,
+"z": 189.1,
+"wert": 0.54
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 134.2,
+"z": 183.0,
+"wert": 0.73
+},
+{
+"regel": "R9w_wellen",
+"feld": "B5",
+"x": 74.6,
+"z": 186.1,
+"wert": 0.55
+},
+{
+"regel": "R9w_wellen",
 "feld": "E5",
 "x": 178.8,
 "z": 181.5,
 "wert": 0.16
-},
-{
-"regel": "R9w_wellen",
-"feld": "C5",
-"x": 110.1,
-"z": 192.0,
-"wert": 0.52
 },
 {
 "regel": "R9w_wellen",
@@ -1890,13 +1839,6 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C5",
-"x": 93.8,
-"z": 189.8,
-"wert": 0.37
-},
-{
-"regel": "R9w_wellen",
 "feld": "B5",
 "x": 67.9,
 "z": 193.3,
@@ -1905,16 +1847,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "D5",
-"x": 131.4,
-"z": 192.5,
-"wert": 0.74
-},
-{
-"regel": "R9w_wellen",
-"feld": "B5",
-"x": 82.5,
-"z": 198.5,
-"wert": 0.46
+"x": 138.5,
+"z": 192.3,
+"wert": 0.57
 },
 {
 "regel": "R9w_wellen",
@@ -1925,10 +1860,17 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C5",
-"x": 96.5,
-"z": 198.5,
-"wert": 0.63
+"feld": "B5",
+"x": 82.8,
+"z": 198.8,
+"wert": 0.44
+},
+{
+"regel": "R9w_wellen",
+"feld": "D5",
+"x": 128.8,
+"z": 194.9,
+"wert": 0.5
 },
 {
 "regel": "R9w_wellen",
@@ -1946,6 +1888,13 @@
 },
 {
 "regel": "R9w_wellen",
+"feld": "C5",
+"x": 97.1,
+"z": 198.7,
+"wert": 0.58
+},
+{
+"regel": "R9w_wellen",
 "feld": "H5",
 "x": 307.2,
 "z": 207.0,
@@ -1953,17 +1902,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "D5",
-"x": 140.5,
-"z": 196.9,
-"wert": 0.14
-},
-{
-"regel": "R9w_wellen",
-"feld": "D5",
-"x": 138.4,
-"z": 197.3,
-"wert": 0.15
+"feld": "C5",
+"x": 115.6,
+"z": 198.7,
+"wert": 0.63
 },
 {
 "regel": "R9w_wellen",
@@ -1971,6 +1913,20 @@
 "x": 73.9,
 "z": 198.7,
 "wert": 0.11
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 110.2,
+"z": 198.5,
+"wert": 0.39
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 124.1,
+"z": 200.3,
+"wert": 0.53
 },
 {
 "regel": "R9w_wellen",
@@ -1989,7 +1945,14 @@
 {
 "regel": "R9w_wellen",
 "feld": "C5",
-"x": 110.4,
+"x": 122.1,
+"z": 204.7,
+"wert": 0.38
+},
+{
+"regel": "R9w_wellen",
+"feld": "C5",
+"x": 110.6,
 "z": 207.3,
 "wert": 0.77
 },
@@ -2191,9 +2154,9 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C6",
-"x": 123.7,
-"z": 229.5,
+"feld": "D6",
+"x": 129.7,
+"z": 230.2,
 "wert": 0.45
 },
 {
@@ -2233,10 +2196,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "D6",
-"x": 140.7,
-"z": 231.5,
-"wert": 0.45
+"feld": "C6",
+"x": 110.9,
+"z": 245.9,
+"wert": 0.36
 },
 {
 "regel": "R9w_wellen",
@@ -2247,17 +2210,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C6",
-"x": 123.2,
-"z": 233.1,
-"wert": 0.18
-},
-{
-"regel": "R9w_wellen",
 "feld": "D6",
-"x": 161.2,
-"z": 237.0,
-"wert": 0.71
+"x": 130.8,
+"z": 232.5,
+"wert": 0.16
 },
 {
 "regel": "R9w_wellen",
@@ -2268,17 +2224,24 @@
 },
 {
 "regel": "R9w_wellen",
+"feld": "D6",
+"x": 161.4,
+"z": 237.1,
+"wert": 0.71
+},
+{
+"regel": "R9w_wellen",
+"feld": "D6",
+"x": 132.5,
+"z": 234.0,
+"wert": 0.27
+},
+{
+"regel": "R9w_wellen",
 "feld": "F6",
 "x": 212.3,
 "z": 237.8,
 "wert": 1.25
-},
-{
-"regel": "R9w_wellen",
-"feld": "C6",
-"x": 120.8,
-"z": 236.7,
-"wert": 0.35
 },
 {
 "regel": "R9w_wellen",
@@ -2289,10 +2252,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "D6",
-"x": 133.2,
-"z": 236.0,
-"wert": 0.33
+"feld": "C6",
+"x": 120.2,
+"z": 236.1,
+"wert": 0.12
 },
 {
 "regel": "R9w_wellen",
@@ -2303,17 +2266,17 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C6",
-"x": 94.5,
-"z": 237.6,
-"wert": 0.11
+"feld": "D6",
+"x": 127.8,
+"z": 240.3,
+"wert": 0.64
 },
 {
 "regel": "R9w_wellen",
 "feld": "C6",
-"x": 122.9,
-"z": 239.7,
-"wert": 0.15
+"x": 94.5,
+"z": 237.6,
+"wert": 0.11
 },
 {
 "regel": "R9w_wellen",
@@ -2346,16 +2309,16 @@
 {
 "regel": "R9w_wellen",
 "feld": "D6",
-"x": 141.0,
-"z": 241.1,
-"wert": 0.54
+"x": 138.2,
+"z": 240.5,
+"wert": 0.5
 },
 {
 "regel": "R9w_wellen",
-"feld": "C6",
-"x": 98.2,
-"z": 248.7,
-"wert": 0.36
+"feld": "D6",
+"x": 143.0,
+"z": 241.2,
+"wert": 0.54
 },
 {
 "regel": "R9w_wellen",
@@ -2367,9 +2330,9 @@
 {
 "regel": "R9w_wellen",
 "feld": "C6",
-"x": 97.3,
-"z": 251.7,
-"wert": 0.43
+"x": 107.4,
+"z": 251.5,
+"wert": 0.27
 },
 {
 "regel": "R9w_wellen",
@@ -2377,13 +2340,6 @@
 "x": 336.0,
 "z": 245.8,
 "wert": 0.12
-},
-{
-"regel": "R9w_wellen",
-"feld": "D6",
-"x": 126.0,
-"z": 243.8,
-"wert": 0.37
 },
 {
 "regel": "R9w_wellen",
@@ -2412,13 +2368,6 @@
 "x": 12.1,
 "z": 249.1,
 "wert": 0.23
-},
-{
-"regel": "R9w_wellen",
-"feld": "C6",
-"x": 116.0,
-"z": 255.9,
-"wert": 0.37
 },
 {
 "regel": "R9w_wellen",
@@ -2471,24 +2420,10 @@
 },
 {
 "regel": "R9w_wellen",
-"feld": "C7",
-"x": 117.5,
-"z": 259.2,
-"wert": 0.36
-},
-{
-"regel": "R9w_wellen",
 "feld": "A6",
 "x": 3.2,
 "z": 255.4,
 "wert": 0.13
-},
-{
-"regel": "R9w_wellen",
-"feld": "C7",
-"x": 105.9,
-"z": 258.6,
-"wert": 0.14
 },
 {
 "regel": "R9w_wellen",
@@ -2531,13 +2466,6 @@
 "x": 22.8,
 "z": 263.5,
 "wert": 0.11
-},
-{
-"regel": "R9w_wellen",
-"feld": "C7",
-"x": 101.4,
-"z": 273.2,
-"wert": 0.12
 }
 ]
 }
