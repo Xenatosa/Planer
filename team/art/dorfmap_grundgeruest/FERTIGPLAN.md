@@ -1,4 +1,4 @@
-# FERTIGPLAN Dorfmap (Stand 16.11.2026, 07:30 Uhr MEZ)
+# FERTIGPLAN Dorfmap (Stand 16.11.2026, 07:15 Uhr MEZ)
 
 Branch `art/dorfmap-fertig` (Basis eb2cd86 = p3d36). Marker: [S] gemessen, [A] Annahme, [R] gerechnet, [F] Fabian.
 
@@ -14,7 +14,7 @@ Branch `art/dorfmap-fertig` (Basis eb2cd86 = p3d36). Marker: [S] gemessen, [A] A
 ## Ausgangsstand [S]
 - Gate-Befehl (Ordner `team/art/dorfmap_grundgeruest/relief3d`):
   `NODE_PATH=/tmp/w3/node_modules HTML=index.html OUT=/tmp/gate_loch.json RAND=0.6 node pruefung/loch_o18g.js && sh pruefung/export_gate.sh`
-  Laufzeit: Lochscan 2,8 s, Gate 10,4 s (gemessen 16.11. 07:2x Uhr MEZ). Ohne `NODE_PATH` scheitert der Lochscan (playwright fehlt) und das Gate zählt 571 statt 570 (`G1_lochscan_fehlt`). `export_gate.sh` nutzt eine vorhandene `/tmp/gate_loch.json` ungeprüft weiter; nach jeder Reliefänderung vorher löschen oder pro Lauf eigene Datei (`LOCHSCAN=…`) verwenden.
+  Laufzeit: Lochscan 2,8 s, Gate 10,4 s (gemessen 16.11. ca. 07:15 Uhr MEZ). Ohne `NODE_PATH` scheitert der Lochscan (playwright fehlt) und das Gate zählt 571 statt 570 (`G1_lochscan_fehlt`). `export_gate.sh` nutzt eine vorhandene `/tmp/gate_loch.json` ungeprüft weiter; nach jeder Reliefänderung vorher löschen oder pro Lauf eigene Datei (`LOCHSCAN=…`) verwenden.
 - Reproduziert: pruefe_regeln **570** (identisch zu `regeln_letzter_lauf.json` aus 31d2c97, alle Einzeltreffer gleich), r8 **48** (R8_stufe 9, R8_gitter 10, R8_quer 5, R8a_wegende 24), r9 **334** (R8b_delle 25, R9_saegezahn 34, R9w_wellen 275). r8-JSON hat nur neue Felder `limit_m`/`ausnahme`, Zählung gleich.
 - Geschützte Eingaben (SHA-256): `neu/zellen_relief.csv` 99d30e55…, `neu/vektor.json` aac6afff…, `neu/felder.json` e4e2ec8f…, D2-Höhe 749d3c4b… (seit p3d25 89c61ce unverändert).
 - Ohne Treffer in pruefe_regeln: A4, A5, A6, F3, G7. Auch ohne r8/r9-Treffer: nur A4, A5, F3, G7 (A6 hat 5× R9w).
@@ -110,7 +110,7 @@ Nur Treffer, die P4 als mit bloßem Auge unsichtbar belegt. Messwert von P5 nach
 ## Zeitplan
 | Datum | Schritt |
 |---|---|
-| 16.11. | L1 (≤ 2 h), Start P2–P7 parallel |
+| 16.11. | L1 (≤ 2 h, gestartet 07:17:55 MEZ, Branch art/dorfmap-L1), Start P2–P7 parallel |
 | bis 18.11. | P2–P7 fertig, PRs auf `art/dorfmap-fertig` |
 | 18./19.11. | L2 (≤ 2 h) auf dem Stand nach P2/P3/L1 |
 | 20.11. | P8 Sichtprüfung, P9 Gate |
