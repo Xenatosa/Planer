@@ -1,0 +1,473 @@
+Gate-Treffer je Kachel aus pruefung/regeln_letzter_lauf.json (Stand 8cd6d37), summe=378
+
+- (2):
+  G7b_wandkontur_rauheit (0,0: 0.623)
+  G7b_wandkontur_kantenschaerfe (0,0: 0.55)
+
+A1 (11):
+  R5_loch (15.5,38.5: 1.0)
+  R5_loch (17.0,38.5: 1.04)
+  G6_facette (15.7,32.1: 12)
+  G6_facette (13.2,32.9: 10)
+  G6_facette (34.0,33.6: 8)
+  G6_facette (37.9,34.2: 7)
+  T2_textur_abgeschnitten_bildpruefung_offen (0.0,0.0: Bildvergleich Clay/Textur noetig: BILD_T2=ok nach Sichtpruefung)
+  T3_streifen_ringe_bildpruefung_offen (0.0,0.0: Bildvergleich Clay/Textur noetig: BILD_T3=ok nach Sichtpruefung)
+  T4_graue_flussstreifen_bildpruefung_offen (0.0,0.0: Bildvergleich Clay/Textur noetig: BILD_T4=ok nach Sichtpruefung)
+  T5_textur_vs_clay_bildpruefung_offen (0.0,0.0: Bildvergleich Clay/Textur noetig: BILD_T5=ok nach Sichtpruefung)
+  G7b_wandkontur_feld (21,21: 0.523)
+
+A2 (9):
+  R5_loch (10.0,48.0: 1.06)
+  R5_loch (30.0,58.5: 1.07)
+  G5_beule_klippe (21.2,44.6: 1.05)
+  G5_beule_klippe (17.1,50.1: 1.09)
+  G6_facette (35.6,54.1: 12)
+  G6_facette (38.0,56.9: 14)
+  G7_wand_glatte_flaeche (5.3,55.4: 50)
+  G8_fluss_nicht_bis_rand (22.5,49.1: 876)
+  G7b_wandkontur_feld (21,64: 0.414)
+
+A7 (3):
+  G5_beule_klippe (25.8,262.1: 1.3)
+  G5_beule_klippe (22.5,264.5: 1.05)
+  G5_beule_klippe (24.2,264.5: 0.9)
+
+B1 (4):
+  R1_blind (65.5,35.4: 0)
+  R3_laengs_m (65.5,35.4: 0.116)
+  G6_facette (61.6,37.1: 31)
+  G7b_wandkontur_feld (63,21: 0.659)
+
+B2 (1):
+  G7b_wandkontur_feld (63,64: 0.491)
+
+B3 (8):
+  G6_facette (74.1,94.9: 7)
+  G6_facette (71.8,99.3: 7)
+  G6_facette (69.0,108.0: 6)
+  G6_facette (79.3,125.3: 99)
+  G6_facette (65.1,116.5: 11)
+  G6_facette (63.1,124.7: 13)
+  G6_facette (60.9,128.0: 11)
+  G7b_wandkontur_feld (63,107: 0.359)
+
+B4 (16):
+  G2_spitze_oben_fein (67.2,156.2: 0.55)
+  G2_spitze_oben_fein (66.2,157.2: 0.5)
+  G2_spitze_oben_fein (65.8,157.8: 0.48)
+  G6_facette (58.9,141.6: 13)
+  G6_facette (70.9,142.9: 7)
+  G6_facette (58.0,145.4: 11)
+  G6_facette (68.9,145.9: 7)
+  G6_facette (79.1,149.8: 36)
+  G6_facette (56.7,150.9: 16)
+  G6_facette (68.4,151.4: 7)
+  G6_facette (67.0,153.8: 6)
+  G6_facette (78.3,154.3: 13)
+  G6_facette (64.1,161.8: 44)
+  G6_facette (75.1,160.0: 9)
+  G6_facette (75.2,169.8: 8)
+  G7b_wandkontur_feld (63,150: 0.369)
+
+B5 (10):
+  G6_facette (52.2,176.1: 6)
+  G6_facette (58.1,176.4: 7)
+  G6_facette (73.0,185.1: 47)
+  G6_facette (83.8,187.0: 9)
+  G6_facette (69.3,200.7: 7)
+  G6_facette (74.6,207.0: 20)
+  G6_facette (67.5,209.6: 10)
+  G6_facette (77.8,210.2: 6)
+  G6_facette (79.7,210.7: 7)
+  G7b_wandkontur_feld (63,193: 0.434)
+
+B6 (2):
+  G6_facette (75.5,219.2: 7)
+  G6_facette (70.0,252.0: 7)
+
+B7 (1):
+  G6_facette (70.6,259.0: 21)
+
+C1 (7):
+  R2_getrennt (91.3,38.8: 60)
+  R3_laengs_m (116.9,43.0: 0.116)
+  G6_facette (123.2,31.5: 25)
+  G6_facette (93.6,31.9: 6)
+  G6_facette (97.1,32.0: 12)
+  G6_facette (101.3,32.5: 12)
+  G6_facette (111.0,34.2: 7)
+
+C2 (5):
+  R1_blind (118.9,43.3: 0)
+  G6_facette (109.4,75.0: 7)
+  G6_facette (103.5,76.5: 17)
+  G6_facette (84.8,84.4: 7)
+  G7b_wandkontur_feld (105,64: 0.635)
+
+C3 (17):
+  G5_beule_klippe (125.2,96.3: 1.88)
+  G5_beule_klippe (101.0,100.2: 0.99)
+  G6_facette (93.5,95.3: 10)
+  G6_facette (120.2,97.9: 6)
+  G6_facette (95.8,104.0: 65)
+  G6_facette (85.7,105.4: 30)
+  G6_facette (120.3,102.0: 9)
+  G6_facette (114.1,109.1: 11)
+  G6_facette (85.2,111.5: 17)
+  G6_facette (107.5,111.5: 11)
+  G6_facette (114.9,114.1: 37)
+  G6_facette (110.6,111.7: 14)
+  G6_facette (106.9,116.1: 14)
+  G6_facette (93.1,122.1: 8)
+  G6_facette (116.7,124.3: 9)
+  G6_facette (111.4,126.4: 7)
+  G7b_wandkontur_feld (105,107: 0.349)
+
+C4 (24):
+  R2_getrennt (125.9,165.4: 58)
+  G2_spitze_oben_fein (121.8,144.2: 0.47)
+  G5_beule_klippe (124.5,150.0: 0.67)
+  G5_beule_klippe (125.0,150.5: 0.61)
+  G6_facette (87.5,129.8: 6)
+  G6_facette (122.2,130.8: 13)
+  G6_facette (98.3,130.8: 11)
+  G6_facette (106.4,131.6: 9)
+  G6_facette (117.9,131.8: 7)
+  G6_facette (116.6,138.0: 9)
+  G6_facette (122.3,139.3: 6)
+  G6_facette (91.9,140.6: 9)
+  G6_facette (120.9,141.7: 7)
+  G6_facette (123.2,141.2: 6)
+  G6_facette (89.6,146.4: 17)
+  G6_facette (119.3,148.5: 8)
+  G6_facette (97.8,149.2: 10)
+  G6_facette (119.2,151.9: 8)
+  G6_facette (121.0,156.7: 25)
+  G6_facette (120.0,158.8: 6)
+  G6_facette (91.8,163.5: 31)
+  G6_facette (85.0,170.2: 43)
+  G6_facette (112.8,167.8: 29)
+  G7b_wandkontur_feld (105,150: 0.459)
+
+C5 (19):
+  R1_blind (117.1,185.4: 0)
+  G2_spitze_oben_fein (107.2,184.8: 0.59)
+  G5_beule_klippe (91.0,210.0: 0.77)
+  G6_facette (87.2,173.2: 13)
+  G6_facette (99.4,176.8: 50)
+  G6_facette (111.1,175.8: 16)
+  G6_facette (90.9,179.0: 6)
+  G6_facette (123.8,179.5: 8)
+  G6_facette (93.6,181.6: 18)
+  G6_facette (84.7,183.6: 7)
+  G6_facette (120.0,187.1: 11)
+  G6_facette (123.4,188.2: 18)
+  G6_facette (87.5,191.6: 17)
+  G6_facette (102.8,198.2: 8)
+  G6_facette (86.8,203.4: 15)
+  G6_facette (96.9,207.6: 6)
+  G6_facette (92.2,211.3: 6)
+  G6_facette (111.4,214.3: 6)
+  G7b_wandkontur_feld (105,193: 0.422)
+
+C6 (9):
+  R1_blind (113.3,228.6: 0)
+  G6_facette (99.5,218.7: 21)
+  G6_facette (95.5,220.0: 15)
+  G6_facette (97.2,219.9: 10)
+  G6_facette (120.6,221.5: 8)
+  G6_facette (93.1,223.1: 8)
+  G6_facette (103.6,223.8: 8)
+  G6_facette (92.8,227.5: 8)
+  G7b_wandkontur_feld (105,236: 0.753)
+
+D1 (37):
+  R1_blind (126.5,31.6: 0)
+  R1_blind (156.5,37.5: 0)
+  R2_getrennt (150.9,23.6: 116)
+  R3_laengs_m (126.5,31.6: 0.091)
+  R3_quer_pct (146.4,29.2: 77.3)
+  R3_woelb_m (146.4,29.2: 1.16)
+  R3_quer_pct (150.3,28.7: 99.1)
+  R3_laengs_m (150.3,28.7: 0.247)
+  R3_woelb_m (150.3,28.7: 1.793)
+  R3_quer_pct (154.3,28.2: 16.0)
+  R3_woelb_m (154.3,28.2: 0.153)
+  R3_laengs_m (148.5,2.5: 0.107)
+  R3_quer_pct (146.6,6.0: 12.7)
+  R3_woelb_m (146.6,6.0: 0.145)
+  R3_quer_pct (144.8,9.5: 14.6)
+  R3_woelb_m (144.8,9.5: 0.172)
+  R3_quer_pct (154.5,16.6: 19.0)
+  R3_woelb_m (154.5,16.6: 0.194)
+  R3_quer_pct (157.5,19.1: 17.9)
+  R3_woelb_m (157.5,19.1: 0.17)
+  R3_quer_pct (155.6,22.6: 6.0)
+  R3_quer_pct (153.7,26.1: 58.2)
+  R3_laengs_m (153.7,26.1: 1.378)
+  R3_woelb_m (153.7,26.1: 1.774)
+  R3_quer_pct (151.8,29.6: 99.3)
+  R3_laengs_m (151.8,29.6: 0.135)
+  R3_woelb_m (151.8,29.6: 1.56)
+  R3_quer_pct (150.4,33.1: 23.4)
+  R3_woelb_m (150.4,33.1: 0.233)
+  R3_laengs_m (153.7,35.4: 0.132)
+  G6_facette (144.5,3.5: 13)
+  G6_facette (150.5,5.9: 8)
+  G6_facette (165.6,15.7: 7)
+  G6_facette (145.6,19.2: 20)
+  G6_facette (143.0,21.3: 12)
+  G6_facette (157.4,24.2: 10)
+  G7b_wandkontur_feld (147,21: 0.639)
+
+D3 (2):
+  G6_facette (127.8,125.0: 7)
+  G7b_wandkontur_feld (147,107: 0.256)
+
+D4 (11):
+  R1_blind (135.4,146.8: 0)
+  R3_laengs_m (134.3,149.3: 0.112)
+  G5_beule_klippe (127.5,132.0: 0.75)
+  G5_beule_klippe (126.0,138.0: 0.84)
+  G5_beule_klippe (127.3,144.2: 0.85)
+  G5_beule_klippe (127.6,147.2: 1.48)
+  G6_facette (127.4,133.4: 6)
+  G6_facette (133.3,137.4: 10)
+  G6_facette (141.1,160.4: 8)
+  G6_facette (146.2,171.2: 8)
+  G7b_wandkontur_feld (147,150: 0.447)
+
+D5 (2):
+  G6_facette (126.8,198.0: 6)
+  G7b_wandkontur_feld (147,193: 0.251)
+
+D6 (4):
+  R2_getrennt (150.9,233.6: 86)
+  G2_spitze_oben (162.0,257.5: 0.45)
+  G6_facette (127.1,241.1: 6)
+  G7b_wandkontur_feld (147,236: 0.772)
+
+D7 (1):
+  G5_beule_klippe (167.0,260.5: 0.96)
+
+E1 (11):
+  R1_blind (175.1,25.7: 0)
+  R3_laengs_m (170.2,26.3: 0.101)
+  R3_laengs_m (174.2,25.8: 0.113)
+  G6_facette (185.2,23.8: 8)
+  G6_facette (188.5,28.1: 21)
+  G6_facette (175.8,29.6: 9)
+  G6_facette (189.3,30.8: 26)
+  G6_facette (200.9,31.3: 9)
+  G6_facette (206.7,32.4: 18)
+  G6_facette (183.1,39.1: 38)
+  G7b_wandkontur_feld (189,21: 0.74)
+
+E2 (8):
+  G6_facette (190.2,43.5: 6)
+  G6_facette (198.7,45.9: 7)
+  G6_facette (199.3,48.4: 8)
+  G6_facette (196.7,57.2: 6)
+  G6_facette (195.6,67.3: 8)
+  G6_facette (190.5,71.1: 7)
+  G6_facette (188.4,78.1: 9)
+  G6_facette (187.3,83.4: 8)
+
+E3 (6):
+  G6_facette (187.5,92.6: 15)
+  G6_facette (188.6,102.5: 23)
+  G6_facette (187.8,108.0: 6)
+  G6_facette (182.8,120.7: 12)
+  G6_facette (186.8,120.5: 6)
+  G6_facette (178.7,127.0: 10)
+
+E4 (5):
+  G6_facette (180.8,131.6: 6)
+  G6_facette (175.7,134.8: 9)
+  G6_facette (175.6,140.2: 9)
+  G6_facette (175.0,151.5: 7)
+  G6_facette (173.0,152.7: 6)
+
+E5 (1):
+  G6_facette (189.4,184.1: 8)
+
+E6 (4):
+  R1_blind (189.5,239.6: 0)
+  G6_facette (201.3,234.9: 40)
+  G6_facette (196.4,238.1: 7)
+  G7b_wandkontur_feld (189,236: 0.702)
+
+E7 (8):
+  G3_spitze_unten (199.0,275.0: 0.45)
+  G3_spitze_unten (207.0,275.0: 0.53)
+  G5_beule_klippe (168.5,259.0: 0.69)
+  G5_beule_klippe (169.4,259.9: 0.76)
+  G5_beule_klippe (170.5,260.5: 0.68)
+  G5_beule_klippe (171.0,261.0: 0.63)
+  G5_beule_klippe (175.0,262.2: 1.24)
+  G5_beule_klippe (174.0,263.5: 1.04)
+
+F1 (14):
+  R1_blind (227.3,36.9: 0)
+  R2_getrennt (249.7,28.6: 59)
+  R3_laengs_m (231.8,35.4: 0.094)
+  R3_laengs_m (228.0,36.7: 0.096)
+  R6_wasser_schnee (214.0,14.9: 361)
+  G2_spitze_oben_fein (227.0,27.2: 0.46)
+  G5_beule_klippe (214.5,30.0: 0.65)
+  G5_beule_klippe (222.5,41.0: 0.68)
+  G5_beule_klippe (223.0,41.5: 1.07)
+  G5_beule_klippe (223.5,42.2: 0.97)
+  G6_facette (211.0,9.2: 11)
+  G6_facette (211.5,18.0: 25)
+  G6_facette (249.0,21.0: 11)
+  G6_facette (218.9,30.6: 7)
+
+F2 (2):
+  G6_facette (211.8,43.1: 8)
+  G7b_wandkontur_feld (231,64: 0.687)
+
+F5 (5):
+  G6_facette (218.3,198.5: 27)
+  G6_facette (214.6,199.4: 10)
+  G6_facette (215.7,202.3: 6)
+  G6_facette (216.6,208.3: 6)
+  G6_facette (217.2,212.0: 7)
+
+F6 (6):
+  R1_blind (249.0,254.3: 0)
+  R3_laengs_m (249.0,254.3: 0.123)
+  G5_beule_klippe (215.0,223.5: 0.83)
+  G6_facette (245.2,224.2: 7)
+  G6_facette (217.8,224.8: 6)
+  G7b_wandkontur_feld (231,236: 0.566)
+
+F7 (4):
+  G2_spitze_oben (212.5,275.5: 0.52)
+  G2_spitze_oben (216.0,275.5: 0.57)
+  G3_spitze_unten (215.5,275.0: 0.48)
+  G6_facette (233.4,268.6: 11)
+
+G1 (10):
+  R1_blind (273.4,21.2: 0)
+  R3_laengs_m (273.4,21.2: 0.095)
+  R6_wasser_schnee (275.0,6.1: 6)
+  R6_wasser_schnee (273.1,7.3: 7)
+  R6_wasser_schnee (272.5,9.8: 22)
+  G3_spitze_unten_fein (289.5,29.2: 0.49)
+  G6_facette (271.7,11.1: 8)
+  G6_facette (277.4,21.5: 15)
+  G6_facette (278.3,31.2: 7)
+  G6_facette (282.9,34.1: 9)
+
+G2 (1):
+  R2_getrennt (270.9,62.2: 1588)
+
+G3 (11):
+  R1_blind (269.8,117.3: 0)
+  R3_laengs_m (271.6,119.3: 0.129)
+  G5_beule_klippe (275.9,114.1: 1.25)
+  G6_facette (276.6,98.8: 30)
+  G6_facette (288.7,101.8: 17)
+  G6_facette (286.4,103.8: 20)
+  G6_facette (289.7,103.4: 8)
+  G6_facette (276.8,110.8: 6)
+  G6_facette (272.7,116.3: 13)
+  G6_facette (268.9,124.6: 11)
+  G7b_wandkontur_feld (273,107: 0.818)
+
+G4 (20):
+  R2_getrennt (283.7,133.0: 59)
+  G5_beule_klippe (274.1,132.6: 2.21)
+  G5_beule_klippe (272.5,131.5: 0.94)
+  G5_beule_klippe (275.0,134.5: 0.71)
+  G5_beule_klippe (275.5,135.0: 0.74)
+  G5_beule_klippe (276.0,135.5: 0.83)
+  G5_beule_klippe (276.5,136.0: 0.87)
+  G5_beule_klippe (277.0,136.5: 0.91)
+  G5_beule_klippe (280.6,138.5: 1.49)
+  G5_beule_klippe (284.0,142.5: 0.74)
+  G6_facette (284.8,130.0: 8)
+  G6_facette (266.2,133.2: 27)
+  G6_facette (290.5,130.2: 6)
+  G6_facette (283.1,139.4: 7)
+  G6_facette (273.1,142.4: 7)
+  G6_facette (275.6,144.2: 9)
+  G6_facette (289.4,154.4: 24)
+  G6_facette (285.2,161.5: 8)
+  G6_facette (293.8,169.5: 8)
+  G7b_wandkontur_feld (273,150: 0.713)
+
+G6 (12):
+  R2_getrennt (271.7,238.1: 74)
+  R3_laengs_m (252.3,252.1: 0.12)
+  G2_spitze_oben_fein (254.8,233.5: 0.54)
+  G2_spitze_oben_fein (255.2,234.0: 0.48)
+  G6_facette (287.2,221.2: 10)
+  G6_facette (283.8,222.3: 10)
+  G6_facette (254.1,222.8: 6)
+  G6_facette (259.9,227.3: 9)
+  G6_facette (254.4,235.1: 9)
+  G6_facette (291.1,237.1: 9)
+  G6_facette (256.9,238.5: 13)
+  G6_facette (282.2,243.0: 6)
+
+H1 (2):
+  G6_facette (316.8,33.4: 12)
+  G7b_wandkontur_feld (315,21: 0.494)
+
+H2 (5):
+  G2_spitze_oben_fein (306.8,85.8: 0.5)
+  G3_spitze_unten_fein (306.5,85.5: 0.54)
+  G6_facette (309.4,81.5: 18)
+  G6_facette (318.8,83.5: 6)
+  G7b_wandkontur_feld (315,64: 0.524)
+
+H3 (3):
+  G6_facette (315.5,90.0: 58)
+  G6_facette (296.6,94.6: 7)
+  G7b_wandkontur_feld (315,107: 0.472)
+
+H4 (6):
+  R1_blind (298.2,149.2: 0)
+  R3_laengs_m (298.2,149.2: 0.124)
+  G6_facette (294.1,156.8: 6)
+  G6_facette (296.2,157.5: 6)
+  G6_facette (301.1,166.9: 8)
+  G7b_wandkontur_feld (315,150: 0.607)
+
+H5 (15):
+  R1_blind (316.4,190.5: 0)
+  R1_blind (320.0,214.0: 0)
+  R2_getrennt (317.6,201.4: 27)
+  R3_laengs_m (319.4,210.3: 0.103)
+  G6_facette (296.8,172.5: 6)
+  G6_facette (309.4,178.6: 8)
+  G6_facette (301.3,179.1: 9)
+  G6_facette (314.5,188.0: 14)
+  G6_facette (306.0,192.6: 24)
+  G6_facette (313.7,195.2: 9)
+  G6_facette (323.8,200.5: 6)
+  G6_facette (305.2,203.8: 6)
+  G6_facette (321.9,209.6: 7)
+  G6_facette (316.6,212.2: 20)
+  G7b_wandkontur_feld (315,193: 0.617)
+
+H6 (13):
+  R1_blind (295.3,222.9: 0)
+  R3_laengs_m (295.3,222.9: 0.115)
+  G5_beule_klippe (335.5,249.2: 1.38)
+  G6_facette (315.4,226.1: 36)
+  G6_facette (312.2,224.1: 8)
+  G6_facette (316.0,231.4: 14)
+  G6_facette (318.2,231.6: 14)
+  G6_facette (305.8,235.4: 16)
+  G6_facette (316.9,234.8: 9)
+  G6_facette (321.2,238.6: 9)
+  G6_facette (334.9,245.9: 8)
+  G6_facette (324.5,254.8: 6)
+  G7b_wandkontur_feld (315,236: 0.63)
+
+H7 (1):
+  G5_beule_klippe (331.8,278.0: 1.28)

@@ -1,0 +1,12 @@
+[{"n":"N01_E3_bruecke_stummel","x":189,"z":88,"d":18,"el":40},
+ {"n":"N02_E2_bretter","x":191,"z":76,"d":18,"el":40},
+ {"n":"N03_D2_bruecke_daneben","x":164,"z":60,"d":18,"el":40},
+ {"n":"N04_D4_milchstreifen","x":133,"z":155,"d":35,"el":35},
+ {"n":"N05_D5_milchfleck","x":135,"z":185,"d":35,"el":35},
+ {"n":"N06_G7_leiter_im_wasser","x":260,"z":270,"d":20,"el":40},
+ {"n":"N07_H7_flecken_im_wasser","x":322,"z":272,"d":25,"el":40},
+ {"n":"N08_C7_platte_im_wasser","x":97,"z":275,"d":20,"el":40},
+ {"n":"N09_G6_platten_im_wasser","x":272,"z":250,"d":22,"el":40},
+ {"n":"N10_E3_bachrand","x":190,"z":110,"d":18,"el":40},
+ {"n":"N11_E5_seerand_treppe","x":202,"z":195,"d":18,"el":40},
+ {"n":"N12_B6C6_naht_hang","x":84,"z":230,"d":20,"el":45}]
