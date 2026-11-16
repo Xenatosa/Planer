@@ -1,0 +1,35 @@
+{
+ "stellen": [
+  {
+   "id": "grat_84_129",
+   "gb_vertices": 113,
+   "gb_max_m": 2.379
+  }
+ ],
+ "wasser_neu": 0,
+ "wasser_entfernt": 0,
+ "wasser_entfernt_komponenten": 0,
+ "wv_kanal_angehoben": 0,
+ "wasser_komponenten": [
+  7,
+  7
+ ],
+ "bett_ueber_spiegel": [
+  493,
+  493
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 0,
+ "gb_vertices": 113,
+ "gb_max_abs_m": 2.379,
+ "basis": "5ac12adbcd60504f9ca1b6891680dabd7770417cfec8e6777a650e27d81a5257",
+ "nachher_sha256": "5914ca80fff6540367ec8f473cf4c49b06c8f4aabde42896057e8d9e45e92325",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 511,
+ "objekte_angepasst": 0,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}
