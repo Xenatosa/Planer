@@ -1,0 +1,35 @@
+{
+ "stellen": [
+  {
+   "id": "suedflanke_grat",
+   "gb_vertices": 191,
+   "gb_max_m": 0.702
+  }
+ ],
+ "wasser_neu": 0,
+ "wasser_entfernt": 0,
+ "wasser_entfernt_komponenten": 0,
+ "wv_kanal_angehoben": 0,
+ "wasser_komponenten": [
+  7,
+  7
+ ],
+ "bett_ueber_spiegel": [
+  493,
+  493
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 0,
+ "gb_vertices": 191,
+ "gb_max_abs_m": 0.702,
+ "basis": "5914ca80fff6540367ec8f473cf4c49b06c8f4aabde42896057e8d9e45e92325",
+ "nachher_sha256": "41e5ccd496c8b4e9605ebb0a174ff598a5121615fe4fe316a94b13d64f82ee79",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 834,
+ "objekte_angepasst": 0,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}
