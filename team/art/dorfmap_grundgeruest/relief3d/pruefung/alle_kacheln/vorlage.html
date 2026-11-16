@@ -1,0 +1,26 @@
+<!doctype html><html lang="de" data-core="relief-neu-mesh-alle-kacheln"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Relief-Neu Geländemesh · Alle 56 Kacheln (P10)</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;font:14px system-ui,sans-serif;color:#202322}
+#lade{position:absolute;inset:0;display:grid;place-items:center;background:#dce4e8;font-size:20px;z-index:3}
+#p,#info{position:absolute;z-index:2;background:#fffd;padding:10px;border-radius:6px;box-shadow:0 1px 6px #0003}
+#p{left:8px;top:8px;max-width:340px}#info{right:8px;top:8px;font:11px monospace;white-space:pre;max-height:90vh;overflow:auto}
+button{margin:1px;padding:3px 5px}label{display:block;margin:3px 0}.sel{font-weight:bold;background:#d4dfda}
+#raster button{width:34px}input[type=range]{width:110px;vertical-align:middle}
+</style></head><body>
+<div id="lade">Lade alle Kachelmeshes …</div>
+<div id="p"><b>Relief-Neubau · 3D-Mesh · alle Kacheln</b><br><span id="modus"></span><hr>
+Oberfläche 0,5 m · D1/G1/D2 wie index.html, übrige Kacheln aus GB<br>
+<div id="raster"></div>
+<button id="reset">Schräg</button><button id="voben">Oben</button><button id="vkarte">Ganze Karte</button><br>
+<label><input type="checkbox" data-l="gelaende" checked> Gelände</label>
+<label><input type="checkbox" data-l="waende" checked> separate Wände D1/G1</label>
+<label><input type="checkbox" data-l="raster" checked> Kachelrand</label>
+Licht Richtung <input id="az" type="range" min="0" max="360" value="315"><br>
+Licht Höhe <input id="el" type="range" min="5" max="90" value="35"><br>
+Licht Stärke <input id="st" type="range" min="0" max="150" value="90"><br>
+Maus: links drehen, rechts verschieben, Rad zoomen.<br>
+URL: ?tile=C3 · ?kacheln=C3,D3 (Teilmenge) · ?nosh=1 · ?clay=1 · ?raster=0
+</div><div id="info">3D Meshes</div>
+<script>/*__DATEN__*/</script><script>/*__JS__*/</script>
+</body></html>
