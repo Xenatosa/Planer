@@ -1,0 +1,8 @@
+[
+ {"x":201,"z":58,"abstand":20,"azimut":270,"neigung":45,"out":"E2_west_x201_z58.png","titel":"E2 Westufer, von Osten"},
+ {"x":201,"z":58,"abstand":14,"azimut":0,"neigung":60,"out":"E2_west_x201_z58_nah.png","titel":"E2 Westufer, steil"},
+ {"x":189,"z":100,"abstand":20,"azimut":0,"neigung":50,"out":"E3_bach_x189_z100.png","titel":"E3 Bach z 100"},
+ {"x":189,"z":118,"abstand":20,"azimut":0,"neigung":50,"out":"E3_bach_x189_z118.png","titel":"E3 Bach z 118"},
+ {"x":334,"z":279,"abstand":22,"azimut":0,"neigung":45,"out":"H7_bucht_x334_z279.png","titel":"H7 Bucht Suedost"},
+ {"x":334,"z":279,"abstand":14,"azimut":300,"neigung":60,"out":"H7_bucht_x334_z279_nah.png","titel":"H7 Bucht steil"}
+]

@@ -264,20 +264,49 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
         B[k] = Math.min(O[k], s / c); } O.set(B); }
       for (let k = 0; k < N; k++) if (ok(k)) WD[k] = WR[k] + O[k]; }
     const nb = k => [k + 1, k - 1, k + GX, k - GX, k + GX + 1, k + GX - 1, k - GX + 1, k - GX - 1].filter(n => n >= 0 && n < N && ok(n));
-    const hR = k => { if (ok(k)) return WD[k]; let s = 0, c = 0; for (const n of nb(k)) { s += WR[n]; c++; } return c ? Math.min(s / c, GL[k] + 0.02) : GL[k] + 0.02; };
+    const hRalt = k => { if (ok(k)) return WD[k]; let s = 0, c = 0; for (const n of nb(k)) { s += WR[n]; c++; } return c ? Math.min(s / c, GL[k] + 0.02) : GL[k] + 0.02; };
+    // P12b: Wasserrand weich statt geklemmt (?wrand=0 = alter Zustand). Bisher: Wasservertices auf WD (O5 senkt flache Randvertices
+    // unter den Boden) und trockene Randvertices auf min(mittl. WR, GL+0,02) mit Alpha 0,14. Die sichtbare Wasserkante lag damit
+    // fest auf den Vertices der 0,5er Wassermaske -> Treppen (E2-West, E3, H7). Jetzt:
+    //  - Wasservertices auf dem geglaetteten Spiegel WR (ohne O5-Absenkung), gleiche Maske, gleiche Farben;
+    //  - Ring 1 (trocken, Nachbar eines Wasservertex): Spiegel flach fortgesetzt (Mittel der WR-Nachbarn). Liegt der Boden dort
+    //    hoeher, schneidet das Gelaende den Spiegel entlang der echten Hoehenlinie (interpoliert, kein Raster); liegt er bis 0,3 m
+    //    tiefer, zeigt der Ring nur eine Tiefenblende (Alpha nach Wassertiefe, x0,6); tiefer (Klippe/Fall) wird er unter den Boden gelegt;
+    //  - Ring 2 (aeusserer Rand des Wassermeshes): unter den Boden (GL-0,05), Alpha 0.
+    //  Wassermaske WV, Spiegel WR und Flusslauf bleiben unveraendert; kein Wasser wird entfernt.
+    const wrand = q.get('wrand') ?? '1', neu = wrand !== '0';
+    const RING = new Uint8Array(N), WE = new Float32Array(WR);
+    if (neu) {
+      for (let k = 0; k < N; k++) if (!ok(k)) { let s = 0, c = 0; for (const n of nb(k)) { s += WR[n]; c++; } if (c) { RING[k] = 1; WE[k] = s / c; } }
+      const nb8 = k => { const i = k % GX, r = []; for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]]) { const ii = i + di, n = k + dj * GX + di; if (ii >= 0 && ii < GX && n >= 0 && n < N) r.push(n); } return r; };
+      for (let k = 0; k < N; k++) if (!ok(k) && !RING[k]) { let s = 0, c = 0; for (const n of nb8(k)) if (RING[n] === 1) { s += WE[n]; c++; } if (c) { RING[k] = 2; WE[k] = s / c; } }
+      for (let k = 0; k < N; k++) if (RING[k] === 1 && WE[k] - GL[k] > 0.3) RING[k] = 3;   // Klippe/Fall: Ring 1 wie Ring 2 behandeln
+    }
+    // Tiefenblende: Wassertiefe (Spiegel - Boden) je Vertex, 2x 3x3 weich gezeichnet (Gewichte 4/2/1), nur fuer Farbe/Alpha.
+    // Die Tiefe springt an der Maskengrenze (Bett 0,6 m unter Spiegel) -> ungeglaettet folgt der Farb-/Alpha-Uebergang dem Raster.
+    const TS = new Float32Array(N);
+    if (neu) { for (let k = 0; k < N; k++) TS[k] = ok(k) ? Math.max(0, WV[k] - GL[k]) : (RING[k] === 1 ? Math.max(0, WE[k] - GL[k]) : 0);
+      for (let it = 0; it < 2; it++) { const B = new Float32Array(TS); for (let j = 1; j < GY - 1; j++) for (let i = 1; i < GX - 1; i++) { const k = j * GX + i;
+        if (!ok(k) && RING[k] !== 1) continue; let s = 0, c = 0;
+        for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const g = (di && dj) ? 1 : (di || dj) ? 2 : 4; s += TS[k + dj * GX + di] * g; c += g; }
+        B[k] = s / c; } TS.set(B); } }
+    const imMesh = k => neu ? (ok(k) || RING[k] === 1) : ok(k);
+    const hR = k => { if (!neu) return hRalt(k); if (ok(k)) return WR[k]; if (RING[k] === 1) return WE[k];
+      return Math.min(RING[k] ? WE[k] : GL[k], GL[k] - 0.05); };
+    const randAlpha = (k, a) => { if (!neu || ok(k)) return a; if (RING[k] !== 1) return 0; return 0.6 * a; };
     const mat = new THREE.MeshPhongMaterial({ vertexColors: true, transparent: true, depthWrite: false, shininess: 90, specular: 0x667788, side: THREE.DoubleSide, forceSinglePass: true });
     for (const tile of wahl) {
       const [i0, j0, i1, j1] = bereich(tile), wp = [], wc = [], wi = [], map = new Map();
       const vx = k => { let m = map.get(k); if (m !== undefined) return m; m = wp.length / 3; map.set(k, m);
-        const i = k % GX, j = (k / GX) | 0, t = ok(k) ? Math.min(1, Math.max(0, (WV[k] - GL[k]) / 1.5)) : 0;
+        const i = k % GX, j = (k / GX) | 0, t = neu ? Math.min(1, TS[k] / 1.5) : ok(k) ? Math.min(1, Math.max(0, (WV[k] - GL[k]) / 1.5)) : 0;
         wp.push(i / rs, hR(k), j / rs);
         const e = 1 - Math.min(1, t * 4), qd = n => ok(n) ? Math.abs(WV[n] - WV[k]) : 0;
         const fo0 = ok(k) ? Math.min(1, Math.max(0, (qd(k + 1) + qd(k - 1) + qd(k + GX) + qd(k - GX) - 0.9) * 0.7)) : 0, fo = Math.min(fo0, 0.3);
         wc.push((0.06 + 0.5 * e * e) * (1 - fo) + 0.70 * fo, (0.16 + 0.48 * e * e) * (1 - fo) + 0.76 * fo, (0.21 + 0.45 * e * e) * (1 - fo) + 0.80 * fo,
-          Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo));
+          randAlpha(k, Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo)));
         return m; };
       for (let j = j0; j < j1; j++) for (let i = i0; i < i1; i++) { const a = j * GX + i, b = a + 1, c = a + GX, d = c + 1;
-        if (ok(a) || ok(b) || ok(c) || ok(d)) wi.push(vx(a), vx(c), vx(d), vx(a), vx(d), vx(b)); }
+        if (imMesh(a) || imMesh(b) || imMesh(c) || imMesh(d)) wi.push(vx(a), vx(c), vx(d), vx(a), vx(d), vx(b)); }
       (overlayStats[tile] = overlayStats[tile] || {}).wasser_dreiecke = wi.length / 3;
       if (!wi.length) continue;
       const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(wp, 3));
