@@ -1,0 +1,1280 @@
+[
+ {
+  "nr": 1,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "F1",
+  "x": 251.8,
+  "z": 24.2,
+  "wert": 0.5,
+  "nahbild": "ausnahmen/001_G3_spitze_unten_fein_F1_251.8_24.2.jpg"
+ },
+ {
+  "nr": 2,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "F1",
+  "x": 249.2,
+  "z": 25.2,
+  "wert": 0.6,
+  "nahbild": "ausnahmen/002_G3_spitze_unten_fein_F1_249.2_25.2.jpg"
+ },
+ {
+  "nr": 3,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "F1",
+  "x": 248.2,
+  "z": 26.2,
+  "wert": 0.59,
+  "nahbild": "ausnahmen/003_G3_spitze_unten_fein_F1_248.2_26.2.jpg"
+ },
+ {
+  "nr": 4,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "F1",
+  "x": 246.5,
+  "z": 26.8,
+  "wert": 0.46,
+  "nahbild": "ausnahmen/004_G3_spitze_unten_fein_F1_246.5_26.8.jpg"
+ },
+ {
+  "nr": 5,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "C1",
+  "x": 85.2,
+  "z": 38.2,
+  "wert": 0.5,
+  "nahbild": "ausnahmen/005_G3_spitze_unten_fein_C1_85.2_38.2.jpg"
+ },
+ {
+  "nr": 6,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "E6",
+  "x": 179.2,
+  "z": 231.8,
+  "wert": 0.48,
+  "nahbild": "ausnahmen/006_G3_spitze_unten_fein_E6_179.2_231.8.jpg"
+ },
+ {
+  "nr": 7,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "E6",
+  "x": 180.8,
+  "z": 232.2,
+  "wert": 0.5,
+  "nahbild": "ausnahmen/007_G3_spitze_unten_fein_E6_180.8_232.2.jpg"
+ },
+ {
+  "nr": 8,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "E6",
+  "x": 181.5,
+  "z": 232.8,
+  "wert": 0.82,
+  "nahbild": "ausnahmen/008_G3_spitze_unten_fein_E6_181.5_232.8.jpg"
+ },
+ {
+  "nr": 9,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "E6",
+  "x": 183.0,
+  "z": 233.2,
+  "wert": 0.59,
+  "nahbild": "ausnahmen/009_G3_spitze_unten_fein_E6_183.0_233.2.jpg"
+ },
+ {
+  "nr": 10,
+  "regel": "G3_spitze_unten_fein",
+  "feld": "E6",
+  "x": 184.0,
+  "z": 233.8,
+  "wert": 0.88,
+  "nahbild": "ausnahmen/010_G3_spitze_unten_fein_E6_184.0_233.8.jpg"
+ },
+ {
+  "nr": 11,
+  "regel": "G6_facette",
+  "feld": "G1",
+  "x": 267.0,
+  "z": 18.2,
+  "wert": 7,
+  "nahbild": "ausnahmen/011_G6_facette_G1_267.0_18.2.jpg"
+ },
+ {
+  "nr": 12,
+  "regel": "G6_facette",
+  "feld": "E1",
+  "x": 177.6,
+  "z": 18.9,
+  "wert": 14,
+  "nahbild": "ausnahmen/012_G6_facette_E1_177.6_18.9.jpg"
+ },
+ {
+  "nr": 13,
+  "regel": "G6_facette",
+  "feld": "G1",
+  "x": 263.6,
+  "z": 19.2,
+  "wert": 10,
+  "nahbild": "ausnahmen/013_G6_facette_G1_263.6_19.2.jpg"
+ },
+ {
+  "nr": 14,
+  "regel": "G6_facette",
+  "feld": "E1",
+  "x": 182.0,
+  "z": 22.8,
+  "wert": 8,
+  "nahbild": "ausnahmen/014_G6_facette_E1_182.0_22.8.jpg"
+ },
+ {
+  "nr": 15,
+  "regel": "G6_facette",
+  "feld": "D1",
+  "x": 127.5,
+  "z": 24.2,
+  "wert": 10,
+  "nahbild": "ausnahmen/015_G6_facette_D1_127.5_24.2.jpg"
+ },
+ {
+  "nr": 16,
+  "regel": "G6_facette",
+  "feld": "D1",
+  "x": 137.2,
+  "z": 24.6,
+  "wert": 6,
+  "nahbild": "ausnahmen/016_G6_facette_D1_137.2_24.6.jpg"
+ },
+ {
+  "nr": 17,
+  "regel": "G6_facette",
+  "feld": "C1",
+  "x": 124.6,
+  "z": 26.0,
+  "wert": 18,
+  "nahbild": "ausnahmen/017_G6_facette_C1_124.6_26.0.jpg"
+ },
+ {
+  "nr": 18,
+  "regel": "G6_facette",
+  "feld": "E1",
+  "x": 182.0,
+  "z": 25.8,
+  "wert": 6,
+  "nahbild": "ausnahmen/018_G6_facette_E1_182.0_25.8.jpg"
+ },
+ {
+  "nr": 19,
+  "regel": "G6_facette",
+  "feld": "G1",
+  "x": 283.1,
+  "z": 25.9,
+  "wert": 7,
+  "nahbild": "ausnahmen/019_G6_facette_G1_283.1_25.9.jpg"
+ },
+ {
+  "nr": 20,
+  "regel": "G6_facette",
+  "feld": "E1",
+  "x": 169.5,
+  "z": 27.2,
+  "wert": 8,
+  "nahbild": "ausnahmen/020_G6_facette_E1_169.5_27.2.jpg"
+ },
+ {
+  "nr": 21,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 234.0,
+  "z": 27.2,
+  "wert": 7,
+  "nahbild": "ausnahmen/021_G6_facette_F1_234.0_27.2.jpg"
+ },
+ {
+  "nr": 22,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 224.7,
+  "z": 28.1,
+  "wert": 10,
+  "nahbild": "ausnahmen/022_G6_facette_F1_224.7_28.1.jpg"
+ },
+ {
+  "nr": 23,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 231.1,
+  "z": 28.3,
+  "wert": 18,
+  "nahbild": "ausnahmen/023_G6_facette_F1_231.1_28.3.jpg"
+ },
+ {
+  "nr": 24,
+  "regel": "G6_facette",
+  "feld": "D1",
+  "x": 126.4,
+  "z": 29.4,
+  "wert": 15,
+  "nahbild": "ausnahmen/024_G6_facette_D1_126.4_29.4.jpg"
+ },
+ {
+  "nr": 25,
+  "regel": "G6_facette",
+  "feld": "G1",
+  "x": 274.7,
+  "z": 29.5,
+  "wert": 8,
+  "nahbild": "ausnahmen/025_G6_facette_G1_274.7_29.5.jpg"
+ },
+ {
+  "nr": 26,
+  "regel": "G6_facette",
+  "feld": "G1",
+  "x": 268.1,
+  "z": 30.2,
+  "wert": 18,
+  "nahbild": "ausnahmen/026_G6_facette_G1_268.1_30.2.jpg"
+ },
+ {
+  "nr": 27,
+  "regel": "G6_facette",
+  "feld": "H1",
+  "x": 299.0,
+  "z": 31.4,
+  "wert": 10,
+  "nahbild": "ausnahmen/027_G6_facette_H1_299.0_31.4.jpg"
+ },
+ {
+  "nr": 28,
+  "regel": "G6_facette",
+  "feld": "D1",
+  "x": 144.5,
+  "z": 34.6,
+  "wert": 22,
+  "nahbild": "ausnahmen/028_G6_facette_D1_144.5_34.6.jpg"
+ },
+ {
+  "nr": 29,
+  "regel": "G6_facette",
+  "feld": "H1",
+  "x": 304.1,
+  "z": 32.4,
+  "wert": 9,
+  "nahbild": "ausnahmen/029_G6_facette_H1_304.1_32.4.jpg"
+ },
+ {
+  "nr": 30,
+  "regel": "G6_facette",
+  "feld": "C1",
+  "x": 97.4,
+  "z": 36.4,
+  "wert": 7,
+  "nahbild": "ausnahmen/030_G6_facette_C1_97.4_36.4.jpg"
+ },
+ {
+  "nr": 31,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 220.6,
+  "z": 36.9,
+  "wert": 7,
+  "nahbild": "ausnahmen/031_G6_facette_F1_220.6_36.9.jpg"
+ },
+ {
+  "nr": 32,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 230.9,
+  "z": 39.2,
+  "wert": 14,
+  "nahbild": "ausnahmen/032_G6_facette_F1_230.9_39.2.jpg"
+ },
+ {
+  "nr": 33,
+  "regel": "G6_facette",
+  "feld": "E1",
+  "x": 202.7,
+  "z": 40.3,
+  "wert": 9,
+  "nahbild": "ausnahmen/033_G6_facette_E1_202.7_40.3.jpg"
+ },
+ {
+  "nr": 34,
+  "regel": "G6_facette",
+  "feld": "C1",
+  "x": 103.6,
+  "z": 40.0,
+  "wert": 7,
+  "nahbild": "ausnahmen/034_G6_facette_C1_103.6_40.0.jpg"
+ },
+ {
+  "nr": 35,
+  "regel": "G6_facette",
+  "feld": "H1",
+  "x": 317.7,
+  "z": 41.0,
+  "wert": 7,
+  "nahbild": "ausnahmen/035_G6_facette_H1_317.7_41.0.jpg"
+ },
+ {
+  "nr": 36,
+  "regel": "G6_facette",
+  "feld": "F1",
+  "x": 223.2,
+  "z": 42.9,
+  "wert": 12,
+  "nahbild": "ausnahmen/036_G6_facette_F1_223.2_42.9.jpg"
+ },
+ {
+  "nr": 37,
+  "regel": "G6_facette",
+  "feld": "C2",
+  "x": 94.2,
+  "z": 47.6,
+  "wert": 10,
+  "nahbild": "ausnahmen/037_G6_facette_C2_94.2_47.6.jpg"
+ },
+ {
+  "nr": 38,
+  "regel": "G6_facette",
+  "feld": "F2",
+  "x": 216.2,
+  "z": 50.0,
+  "wert": 8,
+  "nahbild": "ausnahmen/038_G6_facette_F2_216.2_50.0.jpg"
+ },
+ {
+  "nr": 39,
+  "regel": "G6_facette",
+  "feld": "C2",
+  "x": 106.5,
+  "z": 53.0,
+  "wert": 9,
+  "nahbild": "ausnahmen/039_G6_facette_C2_106.5_53.0.jpg"
+ },
+ {
+  "nr": 40,
+  "regel": "G6_facette",
+  "feld": "H2",
+  "x": 326.0,
+  "z": 74.3,
+  "wert": 9,
+  "nahbild": "ausnahmen/040_G6_facette_H2_326.0_74.3.jpg"
+ },
+ {
+  "nr": 41,
+  "regel": "G6_facette",
+  "feld": "H2",
+  "x": 329.0,
+  "z": 75.5,
+  "wert": 9,
+  "nahbild": "ausnahmen/041_G6_facette_H2_329.0_75.5.jpg"
+ },
+ {
+  "nr": 42,
+  "regel": "G6_facette",
+  "feld": "H2",
+  "x": 307.2,
+  "z": 84.0,
+  "wert": 10,
+  "nahbild": "ausnahmen/042_G6_facette_H2_307.2_84.0.jpg"
+ },
+ {
+  "nr": 43,
+  "regel": "G6_facette",
+  "feld": "G3",
+  "x": 291.5,
+  "z": 89.8,
+  "wert": 6,
+  "nahbild": "ausnahmen/043_G6_facette_G3_291.5_89.8.jpg"
+ },
+ {
+  "nr": 44,
+  "regel": "G6_facette",
+  "feld": "H3",
+  "x": 311.4,
+  "z": 91.4,
+  "wert": 8,
+  "nahbild": "ausnahmen/044_G6_facette_H3_311.4_91.4.jpg"
+ },
+ {
+  "nr": 45,
+  "regel": "G6_facette",
+  "feld": "H3",
+  "x": 308.0,
+  "z": 92.3,
+  "wert": 11,
+  "nahbild": "ausnahmen/045_G6_facette_H3_308.0_92.3.jpg"
+ },
+ {
+  "nr": 46,
+  "regel": "G6_facette",
+  "feld": "H3",
+  "x": 294.9,
+  "z": 97.8,
+  "wert": 37,
+  "nahbild": "ausnahmen/046_G6_facette_H3_294.9_97.8.jpg"
+ },
+ {
+  "nr": 47,
+  "regel": "G6_facette",
+  "feld": "H3",
+  "x": 296.2,
+  "z": 102.9,
+  "wert": 15,
+  "nahbild": "ausnahmen/047_G6_facette_H3_296.2_102.9.jpg"
+ },
+ {
+  "nr": 48,
+  "regel": "G6_facette",
+  "feld": "G3",
+  "x": 291.1,
+  "z": 106.4,
+  "wert": 16,
+  "nahbild": "ausnahmen/048_G6_facette_G3_291.1_106.4.jpg"
+ },
+ {
+  "nr": 49,
+  "regel": "G6_facette",
+  "feld": "H3",
+  "x": 294.4,
+  "z": 105.9,
+  "wert": 7,
+  "nahbild": "ausnahmen/049_G6_facette_H3_294.4_105.9.jpg"
+ },
+ {
+  "nr": 50,
+  "regel": "G6_facette",
+  "feld": "G3",
+  "x": 285.8,
+  "z": 107.5,
+  "wert": 19,
+  "nahbild": "ausnahmen/050_G6_facette_G3_285.8_107.5.jpg"
+ },
+ {
+  "nr": 51,
+  "regel": "G6_facette",
+  "feld": "G3",
+  "x": 288.4,
+  "z": 107.8,
+  "wert": 9,
+  "nahbild": "ausnahmen/051_G6_facette_G3_288.4_107.8.jpg"
+ },
+ {
+  "nr": 52,
+  "regel": "G6_facette",
+  "feld": "C3",
+  "x": 123.2,
+  "z": 110.6,
+  "wert": 6,
+  "nahbild": "ausnahmen/052_G6_facette_C3_123.2_110.6.jpg"
+ },
+ {
+  "nr": 53,
+  "regel": "G6_facette",
+  "feld": "G3",
+  "x": 266.7,
+  "z": 115.4,
+  "wert": 35,
+  "nahbild": "ausnahmen/053_G6_facette_G3_266.7_115.4.jpg"
+ },
+ {
+  "nr": 54,
+  "regel": "G6_facette",
+  "feld": "C3",
+  "x": 90.2,
+  "z": 112.7,
+  "wert": 6,
+  "nahbild": "ausnahmen/054_G6_facette_C3_90.2_112.7.jpg"
+ },
+ {
+  "nr": 55,
+  "regel": "G6_facette",
+  "feld": "E3",
+  "x": 186.8,
+  "z": 120.5,
+  "wert": 6,
+  "nahbild": "ausnahmen/055_G6_facette_E3_186.8_120.5.jpg"
+ },
+ {
+  "nr": 56,
+  "regel": "G6_facette",
+  "feld": "C3",
+  "x": 109.5,
+  "z": 127.6,
+  "wert": 28,
+  "nahbild": "ausnahmen/056_G6_facette_C3_109.5_127.6.jpg"
+ },
+ {
+  "nr": 57,
+  "regel": "G6_facette",
+  "feld": "C3",
+  "x": 107.9,
+  "z": 126.7,
+  "wert": 16,
+  "nahbild": "ausnahmen/057_G6_facette_C3_107.9_126.7.jpg"
+ },
+ {
+  "nr": 58,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 121.3,
+  "z": 130.2,
+  "wert": 13,
+  "nahbild": "ausnahmen/058_G6_facette_C4_121.3_130.2.jpg"
+ },
+ {
+  "nr": 59,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 88.0,
+  "z": 135.6,
+  "wert": 6,
+  "nahbild": "ausnahmen/059_G6_facette_C4_88.0_135.6.jpg"
+ },
+ {
+  "nr": 60,
+  "regel": "G6_facette",
+  "feld": "G4",
+  "x": 278.5,
+  "z": 136.5,
+  "wert": 12,
+  "nahbild": "ausnahmen/060_G6_facette_G4_278.5_136.5.jpg"
+ },
+ {
+  "nr": 61,
+  "regel": "G6_facette",
+  "feld": "D4",
+  "x": 126.8,
+  "z": 138.4,
+  "wert": 10,
+  "nahbild": "ausnahmen/061_G6_facette_D4_126.8_138.4.jpg"
+ },
+ {
+  "nr": 62,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 110.6,
+  "z": 138.1,
+  "wert": 7,
+  "nahbild": "ausnahmen/062_G6_facette_C4_110.6_138.1.jpg"
+ },
+ {
+  "nr": 63,
+  "regel": "G6_facette",
+  "feld": "G4",
+  "x": 285.2,
+  "z": 139.3,
+  "wert": 16,
+  "nahbild": "ausnahmen/063_G6_facette_G4_285.2_139.3.jpg"
+ },
+ {
+  "nr": 64,
+  "regel": "G6_facette",
+  "feld": "B4",
+  "x": 72.1,
+  "z": 141.6,
+  "wert": 17,
+  "nahbild": "ausnahmen/064_G6_facette_B4_72.1_141.6.jpg"
+ },
+ {
+  "nr": 65,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 91.8,
+  "z": 141.7,
+  "wert": 21,
+  "nahbild": "ausnahmen/065_G6_facette_C4_91.8_141.7.jpg"
+ },
+ {
+  "nr": 66,
+  "regel": "G6_facette",
+  "feld": "B4",
+  "x": 81.6,
+  "z": 143.1,
+  "wert": 8,
+  "nahbild": "ausnahmen/066_G6_facette_B4_81.6_143.1.jpg"
+ },
+ {
+  "nr": 67,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 88.5,
+  "z": 146.4,
+  "wert": 27,
+  "nahbild": "ausnahmen/067_G6_facette_C4_88.5_146.4.jpg"
+ },
+ {
+  "nr": 68,
+  "regel": "G6_facette",
+  "feld": "G4",
+  "x": 290.1,
+  "z": 146.0,
+  "wert": 13,
+  "nahbild": "ausnahmen/068_G6_facette_G4_290.1_146.0.jpg"
+ },
+ {
+  "nr": 69,
+  "regel": "G6_facette",
+  "feld": "D4",
+  "x": 139.6,
+  "z": 146.5,
+  "wert": 12,
+  "nahbild": "ausnahmen/069_G6_facette_D4_139.6_146.5.jpg"
+ },
+ {
+  "nr": 70,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 90.3,
+  "z": 147.3,
+  "wert": 7,
+  "nahbild": "ausnahmen/070_G6_facette_C4_90.3_147.3.jpg"
+ },
+ {
+  "nr": 71,
+  "regel": "G6_facette",
+  "feld": "D4",
+  "x": 128.4,
+  "z": 147.4,
+  "wert": 14,
+  "nahbild": "ausnahmen/071_G6_facette_D4_128.4_147.4.jpg"
+ },
+ {
+  "nr": 72,
+  "regel": "G6_facette",
+  "feld": "G4",
+  "x": 290.5,
+  "z": 149.1,
+  "wert": 8,
+  "nahbild": "ausnahmen/072_G6_facette_G4_290.5_149.1.jpg"
+ },
+ {
+  "nr": 73,
+  "regel": "G6_facette",
+  "feld": "D4",
+  "x": 140.9,
+  "z": 151.6,
+  "wert": 9,
+  "nahbild": "ausnahmen/073_G6_facette_D4_140.9_151.6.jpg"
+ },
+ {
+  "nr": 74,
+  "regel": "G6_facette",
+  "feld": "B4",
+  "x": 75.3,
+  "z": 158.6,
+  "wert": 14,
+  "nahbild": "ausnahmen/074_G6_facette_B4_75.3_158.6.jpg"
+ },
+ {
+  "nr": 75,
+  "regel": "G6_facette",
+  "feld": "C4",
+  "x": 84.0,
+  "z": 164.2,
+  "wert": 8,
+  "nahbild": "ausnahmen/075_G6_facette_C4_84.0_164.2.jpg"
+ },
+ {
+  "nr": 76,
+  "regel": "G6_facette",
+  "feld": "G4",
+  "x": 291.8,
+  "z": 165.7,
+  "wert": 10,
+  "nahbild": "ausnahmen/076_G6_facette_G4_291.8_165.7.jpg"
+ },
+ {
+  "nr": 77,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 99.5,
+  "z": 176.9,
+  "wert": 49,
+  "nahbild": "ausnahmen/077_G6_facette_C5_99.5_176.9.jpg"
+ },
+ {
+  "nr": 78,
+  "regel": "G6_facette",
+  "feld": "H5",
+  "x": 308.1,
+  "z": 175.3,
+  "wert": 20,
+  "nahbild": "ausnahmen/078_G6_facette_H5_308.1_175.3.jpg"
+ },
+ {
+  "nr": 79,
+  "regel": "G6_facette",
+  "feld": "B5",
+  "x": 67.5,
+  "z": 173.8,
+  "wert": 6,
+  "nahbild": "ausnahmen/079_G6_facette_B5_67.5_173.8.jpg"
+ },
+ {
+  "nr": 80,
+  "regel": "G6_facette",
+  "feld": "H5",
+  "x": 298.5,
+  "z": 175.5,
+  "wert": 11,
+  "nahbild": "ausnahmen/080_G6_facette_H5_298.5_175.5.jpg"
+ },
+ {
+  "nr": 81,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 94.0,
+  "z": 182.2,
+  "wert": 11,
+  "nahbild": "ausnahmen/081_G6_facette_C5_94.0_182.2.jpg"
+ },
+ {
+  "nr": 82,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 84.3,
+  "z": 183.2,
+  "wert": 6,
+  "nahbild": "ausnahmen/082_G6_facette_C5_84.3_183.2.jpg"
+ },
+ {
+  "nr": 83,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 97.0,
+  "z": 187.2,
+  "wert": 6,
+  "nahbild": "ausnahmen/083_G6_facette_C5_97.0_187.2.jpg"
+ },
+ {
+  "nr": 84,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 118.1,
+  "z": 188.0,
+  "wert": 17,
+  "nahbild": "ausnahmen/084_G6_facette_C5_118.1_188.0.jpg"
+ },
+ {
+  "nr": 85,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 115.5,
+  "z": 189.4,
+  "wert": 13,
+  "nahbild": "ausnahmen/085_G6_facette_C5_115.5_189.4.jpg"
+ },
+ {
+  "nr": 86,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 98.8,
+  "z": 189.0,
+  "wert": 6,
+  "nahbild": "ausnahmen/086_G6_facette_C5_98.8_189.0.jpg"
+ },
+ {
+  "nr": 87,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 113.1,
+  "z": 191.9,
+  "wert": 8,
+  "nahbild": "ausnahmen/087_G6_facette_C5_113.1_191.9.jpg"
+ },
+ {
+  "nr": 88,
+  "regel": "G6_facette",
+  "feld": "H5",
+  "x": 325.1,
+  "z": 196.9,
+  "wert": 14,
+  "nahbild": "ausnahmen/088_G6_facette_H5_325.1_196.9.jpg"
+ },
+ {
+  "nr": 89,
+  "regel": "G6_facette",
+  "feld": "D5",
+  "x": 126.8,
+  "z": 198.0,
+  "wert": 6,
+  "nahbild": "ausnahmen/089_G6_facette_D5_126.8_198.0.jpg"
+ },
+ {
+  "nr": 90,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 88.6,
+  "z": 207.9,
+  "wert": 17,
+  "nahbild": "ausnahmen/090_G6_facette_C5_88.6_207.9.jpg"
+ },
+ {
+  "nr": 91,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 105.9,
+  "z": 206.0,
+  "wert": 8,
+  "nahbild": "ausnahmen/091_G6_facette_C5_105.9_206.0.jpg"
+ },
+ {
+  "nr": 92,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 101.6,
+  "z": 209.1,
+  "wert": 33,
+  "nahbild": "ausnahmen/092_G6_facette_C5_101.6_209.1.jpg"
+ },
+ {
+  "nr": 93,
+  "regel": "G6_facette",
+  "feld": "C5",
+  "x": 102.8,
+  "z": 212.2,
+  "wert": 7,
+  "nahbild": "ausnahmen/093_G6_facette_C5_102.8_212.2.jpg"
+ },
+ {
+  "nr": 94,
+  "regel": "G6_facette",
+  "feld": "B6",
+  "x": 70.6,
+  "z": 215.1,
+  "wert": 9,
+  "nahbild": "ausnahmen/094_G6_facette_B6_70.6_215.1.jpg"
+ },
+ {
+  "nr": 95,
+  "regel": "G6_facette",
+  "feld": "G6",
+  "x": 293.5,
+  "z": 219.2,
+  "wert": 8,
+  "nahbild": "ausnahmen/095_G6_facette_G6_293.5_219.2.jpg"
+ },
+ {
+  "nr": 96,
+  "regel": "G6_facette",
+  "feld": "C6",
+  "x": 116.0,
+  "z": 221.2,
+  "wert": 8,
+  "nahbild": "ausnahmen/096_G6_facette_C6_116.0_221.2.jpg"
+ },
+ {
+  "nr": 97,
+  "regel": "G6_facette",
+  "feld": "G6",
+  "x": 283.5,
+  "z": 222.2,
+  "wert": 8,
+  "nahbild": "ausnahmen/097_G6_facette_G6_283.5_222.2.jpg"
+ },
+ {
+  "nr": 98,
+  "regel": "G6_facette",
+  "feld": "C6",
+  "x": 120.0,
+  "z": 225.1,
+  "wert": 9,
+  "nahbild": "ausnahmen/098_G6_facette_C6_120.0_225.1.jpg"
+ },
+ {
+  "nr": 99,
+  "regel": "G6_facette",
+  "feld": "C6",
+  "x": 111.4,
+  "z": 229.7,
+  "wert": 35,
+  "nahbild": "ausnahmen/099_G6_facette_C6_111.4_229.7.jpg"
+ },
+ {
+  "nr": 100,
+  "regel": "G6_facette",
+  "feld": "E6",
+  "x": 168.8,
+  "z": 227.4,
+  "wert": 17,
+  "nahbild": "ausnahmen/100_G6_facette_E6_168.8_227.4.jpg"
+ },
+ {
+  "nr": 101,
+  "regel": "G6_facette",
+  "feld": "G6",
+  "x": 280.5,
+  "z": 226.9,
+  "wert": 11,
+  "nahbild": "ausnahmen/101_G6_facette_G6_280.5_226.9.jpg"
+ },
+ {
+  "nr": 102,
+  "regel": "G6_facette",
+  "feld": "G6",
+  "x": 272.4,
+  "z": 227.1,
+  "wert": 7,
+  "nahbild": "ausnahmen/102_G6_facette_G6_272.4_227.1.jpg"
+ },
+ {
+  "nr": 103,
+  "regel": "G6_facette",
+  "feld": "C6",
+  "x": 124.0,
+  "z": 227.5,
+  "wert": 8,
+  "nahbild": "ausnahmen/103_G6_facette_C6_124.0_227.5.jpg"
+ },
+ {
+  "nr": 104,
+  "regel": "G6_facette",
+  "feld": "E6",
+  "x": 203.5,
+  "z": 230.0,
+  "wert": 16,
+  "nahbild": "ausnahmen/104_G6_facette_E6_203.5_230.0.jpg"
+ },
+ {
+  "nr": 105,
+  "regel": "G6_facette",
+  "feld": "G6",
+  "x": 270.8,
+  "z": 229.7,
+  "wert": 8,
+  "nahbild": "ausnahmen/105_G6_facette_G6_270.8_229.7.jpg"
+ },
+ {
+  "nr": 106,
+  "regel": "G6_facette",
+  "feld": "H6",
+  "x": 303.6,
+  "z": 231.2,
+  "wert": 6,
+  "nahbild": "ausnahmen/106_G6_facette_H6_303.6_231.2.jpg"
+ },
+ {
+  "nr": 107,
+  "regel": "G6_facette",
+  "feld": "E6",
+  "x": 204.5,
+  "z": 235.9,
+  "wert": 14,
+  "nahbild": "ausnahmen/107_G6_facette_E6_204.5_235.9.jpg"
+ },
+ {
+  "nr": 108,
+  "regel": "G6_facette",
+  "feld": "H6",
+  "x": 325.0,
+  "z": 238.5,
+  "wert": 25,
+  "nahbild": "ausnahmen/108_G6_facette_H6_325.0_238.5.jpg"
+ },
+ {
+  "nr": 109,
+  "regel": "G6_facette",
+  "feld": "H6",
+  "x": 329.9,
+  "z": 246.2,
+  "wert": 6,
+  "nahbild": "ausnahmen/109_G6_facette_H6_329.9_246.2.jpg"
+ },
+ {
+  "nr": 110,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "C1",
+  "x": 105,
+  "z": 21,
+  "wert": 0.467,
+  "nahbild": "ausnahmen/110_G7b_wandkontur_feld_C1_105_21.jpg"
+ },
+ {
+  "nr": 111,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "D1",
+  "x": 147,
+  "z": 21,
+  "wert": 0.463,
+  "nahbild": "ausnahmen/111_G7b_wandkontur_feld_D1_147_21.jpg"
+ },
+ {
+  "nr": 112,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "D3",
+  "x": 147,
+  "z": 107,
+  "wert": 0.256,
+  "nahbild": "ausnahmen/112_G7b_wandkontur_feld_D3_147_107.jpg"
+ },
+ {
+  "nr": 113,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "D6",
+  "x": 147,
+  "z": 236,
+  "wert": 0.397,
+  "nahbild": "ausnahmen/113_G7b_wandkontur_feld_D6_147_236.jpg"
+ },
+ {
+  "nr": 114,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "F1",
+  "x": 231,
+  "z": 21,
+  "wert": 0.527,
+  "nahbild": "ausnahmen/114_G7b_wandkontur_feld_F1_231_21.jpg"
+ },
+ {
+  "nr": 115,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "G1",
+  "x": 273,
+  "z": 21,
+  "wert": 0.616,
+  "nahbild": "ausnahmen/115_G7b_wandkontur_feld_G1_273_21.jpg"
+ },
+ {
+  "nr": 116,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "G3",
+  "x": 273,
+  "z": 107,
+  "wert": 0.487,
+  "nahbild": "ausnahmen/116_G7b_wandkontur_feld_G3_273_107.jpg"
+ },
+ {
+  "nr": 117,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "G4",
+  "x": 273,
+  "z": 150,
+  "wert": 0.611,
+  "nahbild": "ausnahmen/117_G7b_wandkontur_feld_G4_273_150.jpg"
+ },
+ {
+  "nr": 118,
+  "regel": "G7b_wandkontur_feld",
+  "feld": "G6",
+  "x": 273,
+  "z": 236,
+  "wert": 0.561,
+  "nahbild": "ausnahmen/118_G7b_wandkontur_feld_G6_273_236.jpg"
+ },
+ {
+  "nr": 119,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 107.5,
+  "z": 136.5,
+  "wert": 2.53,
+  "nahbild": "ausnahmen/119_R5_loch_C4_107.5_136.5.jpg"
+ },
+ {
+  "nr": 120,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 118.5,
+  "z": 131.0,
+  "wert": 1.8,
+  "nahbild": "ausnahmen/120_R5_loch_C4_118.5_131.0.jpg"
+ },
+ {
+  "nr": 121,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 118.5,
+  "z": 135.0,
+  "wert": 1.35,
+  "nahbild": "ausnahmen/121_R5_loch_C4_118.5_135.0.jpg"
+ },
+ {
+  "nr": 122,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 118.0,
+  "z": 135.5,
+  "wert": 1.21,
+  "nahbild": "ausnahmen/122_R5_loch_C4_118.0_135.5.jpg"
+ },
+ {
+  "nr": 123,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 117.5,
+  "z": 137.0,
+  "wert": 1.68,
+  "nahbild": "ausnahmen/123_R5_loch_C4_117.5_137.0.jpg"
+ },
+ {
+  "nr": 124,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 122.0,
+  "z": 136.5,
+  "wert": 1.03,
+  "nahbild": "ausnahmen/124_R5_loch_C4_122.0_136.5.jpg"
+ },
+ {
+  "nr": 125,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 95.0,
+  "z": 137.5,
+  "wert": 1.09,
+  "nahbild": "ausnahmen/125_R5_loch_C4_95.0_137.5.jpg"
+ },
+ {
+  "nr": 126,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 119.0,
+  "z": 137.5,
+  "wert": 1.1,
+  "nahbild": "ausnahmen/126_R5_loch_C4_119.0_137.5.jpg"
+ },
+ {
+  "nr": 127,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 96.5,
+  "z": 142.0,
+  "wert": 2.01,
+  "nahbild": "ausnahmen/127_R5_loch_C4_96.5_142.0.jpg"
+ },
+ {
+  "nr": 128,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 120.0,
+  "z": 138.5,
+  "wert": 1.29,
+  "nahbild": "ausnahmen/128_R5_loch_C4_120.0_138.5.jpg"
+ },
+ {
+  "nr": 129,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 95.0,
+  "z": 148.5,
+  "wert": 1.59,
+  "nahbild": "ausnahmen/129_R5_loch_C4_95.0_148.5.jpg"
+ },
+ {
+  "nr": 130,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 121.0,
+  "z": 156.5,
+  "wert": 1.75,
+  "nahbild": "ausnahmen/130_R5_loch_C4_121.0_156.5.jpg"
+ },
+ {
+  "nr": 131,
+  "regel": "R5_loch",
+  "feld": "C4",
+  "x": 121.5,
+  "z": 157.5,
+  "wert": 1.34,
+  "nahbild": "ausnahmen/131_R5_loch_C4_121.5_157.5.jpg"
+ },
+ {
+  "nr": 132,
+  "regel": "T1_fleckrand",
+  "feld": "D1",
+  "x": 146.7,
+  "z": 35.8,
+  "wert": 14,
+  "nahbild": "ausnahmen/132_T1_fleckrand_D1_146.7_35.8.jpg"
+ },
+ {
+  "nr": 133,
+  "regel": "T1_fleckrand",
+  "feld": "F1",
+  "x": 217.6,
+  "z": 36.5,
+  "wert": 12,
+  "nahbild": "ausnahmen/133_T1_fleckrand_F1_217.6_36.5.jpg"
+ },
+ {
+  "nr": 134,
+  "regel": "T1_fleckrand",
+  "feld": "F1",
+  "x": 219.2,
+  "z": 39.0,
+  "wert": 8,
+  "nahbild": "ausnahmen/134_T1_fleckrand_F1_219.2_39.0.jpg"
+ },
+ {
+  "nr": 135,
+  "regel": "T1_fleckrand",
+  "feld": "G3",
+  "x": 266.1,
+  "z": 115.6,
+  "wert": 19,
+  "nahbild": "ausnahmen/135_T1_fleckrand_G3_266.1_115.6.jpg"
+ },
+ {
+  "nr": 136,
+  "regel": "T1_fleckrand",
+  "feld": "E3",
+  "x": 178.5,
+  "z": 127.5,
+  "wert": 15,
+  "nahbild": "ausnahmen/136_T1_fleckrand_E3_178.5_127.5.jpg"
+ },
+ {
+  "nr": 137,
+  "regel": "T1_fleckrand",
+  "feld": "C4",
+  "x": 84.1,
+  "z": 155.3,
+  "wert": 18,
+  "nahbild": "ausnahmen/137_T1_fleckrand_C4_84.1_155.3.jpg"
+ },
+ {
+  "nr": 138,
+  "regel": "T1_fleckrand",
+  "feld": "B5",
+  "x": 77.5,
+  "z": 177.1,
+  "wert": 12,
+  "nahbild": "ausnahmen/138_T1_fleckrand_B5_77.5_177.1.jpg"
+ },
+ {
+  "nr": 139,
+  "regel": "T1_fleckrand",
+  "feld": "C5",
+  "x": 112.1,
+  "z": 191.9,
+  "wert": 9,
+  "nahbild": "ausnahmen/139_T1_fleckrand_C5_112.1_191.9.jpg"
+ },
+ {
+  "nr": 140,
+  "regel": "T1_fleckrand",
+  "feld": "C5",
+  "x": 112.6,
+  "z": 193.9,
+  "wert": 8,
+  "nahbild": "ausnahmen/140_T1_fleckrand_C5_112.6_193.9.jpg"
+ },
+ {
+  "nr": 141,
+  "regel": "T1_fleckrand",
+  "feld": "G6",
+  "x": 267.4,
+  "z": 236.6,
+  "wert": 9,
+  "nahbild": "ausnahmen/141_T1_fleckrand_G6_267.4_236.6.jpg"
+ },
+ {
+  "nr": 142,
+  "regel": "T1_fleckrand",
+  "feld": "D6",
+  "x": 165.8,
+  "z": 238.4,
+  "wert": 18,
+  "nahbild": "ausnahmen/142_T1_fleckrand_D6_165.8_238.4.jpg"
+ }
+]

@@ -1150,6 +1150,26 @@ for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
         _neu.append(o)
     _L[:]=_neu
 print('o18m_g11_gesetzt_entfernt',_g11)
+P2_G11={}
+if os.environ.get('P2_RAMPEN','1')!='0':   # P2: Raycast-Cache strahl_hoehe_t65u.json und Objekt-Hoehen stammen vom Gelaende MIT Rampen; Objekte, die jetzt >0,6 m neben der sichtbaren Flaeche liegen (Feinband sonst Grob, wie Gate-hv), auf die Flaeche setzen (Baeume +0,3 m wie strahl_hoehe) [A]
+    _FX=NX*FS+1;_FY=NY*FS+1;_vid=np.frombuffer(base64.b64decode(FW['vid']),np.uint32);_F=np.full((_FY,_FX),np.nan);_F[_vid//_FX,_vid%_FX]=np.frombuffer(base64.b64decode(FW['h']),np.float32)
+    _GA2=np.asarray(G_ANZ,float).reshape(GY,GX)
+    def _hvis(x,z):
+        fx,fy=x*FS,z*FS;i,j=int(fx),int(fy)
+        if 0<=i<_FX-1 and 0<=j<_FY-1 and np.isfinite(_F[j:j+2,i:i+2]).all():
+            u,v=fx-i,fy-j;q=_F[j:j+2,i:i+2];return float(q[0,0]*(1-u)*(1-v)+q[0,1]*u*(1-v)+q[1,0]*(1-u)*v+q[1,1]*u*v)
+        return float(nd.map_coordinates(_GA2,[[z*RS],[x*RS]],order=1,mode='nearest')[0])
+    for _k in ('baeume','felsen','findlinge','steine','felsbloecke'):
+        _c=0
+        for _i,o in enumerate(globals().get(_k,[])):
+            try:_x,_y,_z=float(o[0]),float(o[1]),float(o[2])
+            except Exception:continue
+            if not(0<=_x<NX and 0<=_z<NY):continue
+            _h=_hvis(_x,_z)
+            if abs(_y-_h)>0.6:
+                o=list(o) if not isinstance(o,list) else o;o[1]=round(_h+(0.3 if _k=='baeume' else 0.0),3);globals()[_k][_i]=o;_c+=1
+        P2_G11[_k]=_c
+print('p2_g11_cache_neu',P2_G11)
 def _t1_naht():   # O18w [Gate T1_harte_farbkante, 4 Naehte G2 284|75, C2 84|84, B2 82|86, B3 77|93]: gerade Farbkanten (dc>70, Lauf >=9 Ecken) im Umkreis 2 Ecken weichzeichnen (Gauss 1.5 Ecken), nur Land ausserhalb Wand [A]
     C=VC.reshape(GY,GX,3).astype(float);GA=np.asarray(G_ANZ,float).reshape(GY,GX);gy,gx=np.gradient(GA,1/RS);WAND_=np.hypot(gx,gy)>1.0;LAND_=WV.reshape(GY,GX)<=-900
     dc=np.linalg.norm(np.diff(C,axis=1)[:-1],axis=2)+np.linalg.norm(np.diff(C,axis=0)[:,:-1],axis=2)
