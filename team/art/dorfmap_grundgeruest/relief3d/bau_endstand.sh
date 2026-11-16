@@ -29,7 +29,7 @@
 #      html_payload_p3.py, waende_einsetzen.py. Nebenausgaben p2b_rueck.npz + p2b_bericht.json werden mitverglichen.
 #  11 L3c2 (81b6f94): relief_l3.py --stufe-c, gen_textur.py vc, pruefung/l3c_vc_lokal.py <Vorher-Stand>, html_payload_p3.py,
 #      waende_einsetzen.py. Nebenausgaben l3c_rueck.npz, l3c_bericht.json, l3c_vc_rueck.npz werden mitverglichen.
-#  12 L3d (ERGEBNIS_L3d): relief_l3d.py (E3-Westufer Rinne/Farbe lokal, Basis-Hash GB/WV/VC = Stand nach 11, Rueckweg
+#  12 L3d (ERGEBNIS_L3d): relief_l3d.py (QA-P4d-Platten/Bucht/Kerbe H7, E3-Westufer Rinne/Farbe lokal, Basis-Hash GB/WV/VC = Stand nach 11, Rueckweg
 #      relief_l3d.py --aus mit pruefung/l3d/l3d_rueck.npz), html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf
 #      (VC/FW.c schreibt relief_l3d.py selbst und nur in seiner Box). L3D=0 laesst Schritt 12 weg (Stand nach 11).
 #

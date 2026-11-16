@@ -1,8 +1,8 @@
 {
- "geaenderte_vertices": 1556,
- "gb": 945,
- "wv": 0,
- "vc": 1508,
+ "geaenderte_vertices": 2407,
+ "gb": 1791,
+ "wv": 148,
+ "vc": 1581,
  "zellweite_m": 1.2,
  "je_flaeche": {
   "weg_vektor": {
@@ -17,8 +17,8 @@
   },
   "rampenkern": {
    "geaenderte_vertices_darauf": 0,
-   "kleinster_abstand_zellen": 46.8,
-   "kleinster_abstand_m": 56.16
+   "kleinster_abstand_zellen": 21.47,
+   "kleinster_abstand_m": 25.77
   },
   "WEGA_wege_bruecken": {
    "geaenderte_vertices_darauf": 0,
@@ -32,14 +32,14 @@
   }
  },
  "wasser": {
-  "gb_unter_wasser_geaendert": 66,
-  "maske_gleich": true,
-  "wv_gleich": true,
+  "gb_unter_wasser_geaendert": 769,
+  "maske_gleich": false,
+  "wv_gleich": false,
   "komponenten": [
    9,
    9
   ],
-  "fill_holes_gleich": true,
+  "fill_holes_gleich": false,
   "bett_ueber_spiegel_vorher_nachher": [
    525,
    523
@@ -54,10 +54,87 @@
   "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
  ],
  "box_geaendert_zellen": [
-  181.5,
+  27.5,
   83.5,
-  194.5,
-  132.5
+  336.0,
+  281.5
  ],
- "sperr_D1_mulde_159_22.9_abstand_zellen": 65.6
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 65.6,
+ "wasser_lokal": {
+  "fill_holes_diff_vertices": 69,
+  "fill_holes_diff_box": [
+   331.5,
+   276.0,
+   336.0,
+   279.5
+  ],
+  "neues_wasser_gruppen_x_z_n": [
+   [
+    32.5,
+    262.5,
+    5
+   ],
+   [
+    29.5,
+    263.5,
+    5
+   ],
+   [
+    46.0,
+    265.5,
+    3
+   ],
+   [
+    301.2,
+    269.2,
+    6
+   ],
+   [
+    308.0,
+    269.0,
+    9
+   ],
+   [
+    129.0,
+    270.5,
+    3
+   ],
+   [
+    136.0,
+    270.5,
+    3
+   ],
+   [
+    217.8,
+    273.8,
+    6
+   ],
+   [
+    194.3,
+    276.4,
+    22
+   ],
+   [
+    202.0,
+    275.5,
+    3
+   ],
+   [
+    334.0,
+    277.9,
+    69
+   ],
+   [
+    237.5,
+    277.2,
+    9
+   ]
+  ],
+  "wasser_entfernt": 0,
+  "wv_alt_wasser_geaendert": 5,
+  "wv_alt_wasser_geaendert_box": [
+   334.0,
+   281.5
+  ]
+ }
 }

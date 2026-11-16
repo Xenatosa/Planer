@@ -43,3 +43,12 @@ for n,(x,z) in (('sperr_D1_mulde_159_22.9',(159,22.9)),):
     out[n+'_abstand_zellen']=round(float(np.hypot(xs/rs-x,zs/rs-z).min()),1)
 ws=[w for w in V['wege'] if w.get('id')=='rampe_2']
 print(json.dumps(out,indent=1))
+fd=nd.binary_fill_holes(mB)^nd.binary_fill_holes(mA);zz,xx=np.nonzero(fd)
+neu=mB&~mA;zn,xn=np.nonzero(neu)
+lab,n=nd.label(neu,np.ones((3,3)))
+gr=[]
+for k in range(1,n+1):
+    a,b=np.nonzero(lab==k);gr.append([round(b.mean()/rs,1),round(a.mean()/rs,1),int(len(a))])
+print(json.dumps({'fill_holes_diff_vertices':int(fd.sum()),'fill_holes_diff_box':[float(xx.min()/rs),float(zz.min()/rs),float(xx.max()/rs),float(zz.max()/rs)] if fd.any() else None,
+ 'neues_wasser_gruppen_x_z_n':gr,'wasser_entfernt':int((mA&~mB).sum()),
+ 'wv_alt_wasser_geaendert':int(((WA!=WB)&mA).sum()),'wv_alt_wasser_geaendert_box':[float(np.nonzero((WA!=WB)&mA)[1].min()/rs),float(np.nonzero((WA!=WB)&mA)[0].min()/rs)] if ((WA!=WB)&mA).any() else None}))

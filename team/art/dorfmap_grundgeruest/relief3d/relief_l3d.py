@@ -14,6 +14,9 @@ Stelle G7_nord (Wassermaske): Am Nordufer westlich x~265 endet die Maske WV>-900
   Nachbarwassers, Wasser liegt suedlich/oestlich = Nordufer) bzw. bis 0,25 m darueber, WV = Mittel der Wassernachbarn (Spiegel flach fortgesetzt). Die
   Maskentreppe liegt dann unter dem Gelaende, sichtbar ist die glatte Schnittlinie Spiegel/Gelaende. Kein Wasser entfernt,
   GB dort unveraendert, keine neuen Inseln/Loecher (fill_holes-Pruefung), Zusammenhang erhalten.
+Erweiterung QA P4d (PR #30): Stelle P4d_platten (Art "inseln": eingeschlossene Landinseln = helle Rasterplatten im Fluss
+  E7/F7/H7/A7-D7 werden Wasser, Huegel darunter abgesenkt, FW.h folgt), P4d_S5_bucht (Art "bucht": Landkuppe am Kartenrand H7
+  wird Wasser), P4d_S6_kerbe (Art "wv_glatt": Spiegel-Ausreisser = V-Kerbe am Kartenrand H7 auf Median der Nachbarn).
 Fest: D2 (Abbruch bei Aenderung), Wege/Kreuzungen/Rampenkerne/WEGA (relief_l3.feste_flaechen, richtiger Massstab): 0 Vertices.
 """
 import base64, gzip, hashlib, json, sys
@@ -74,6 +77,72 @@ def e3_farbe(VC, WV, s, rs):
     a = w * (1.0 - L3._ss((np.abs(sd) - band) / 2.0))
     out = V * (1 - a[..., None]) + neu * a[..., None]
     return np.clip(np.rint(out), 0, 255).astype(np.uint8), a
+
+def inseln(GB, WV, VC, s, rs, F):
+    """QA P4d S1-S4/S8: kleine, ganz von Wasser umschlossene Landinseln (Rasterplatten, ragen hell ueber den Spiegel) werden
+    Wasser. Nur Inseln, deren Schwerpunkt <= radius von einem Zielpunkt liegt. WV = Mittel des Wasserrings (flach), Huegel
+    unter Wasser wird auf das umgebende Bett abgesenkt (harmonisch, nie angehoben), Insel mind. bett_tiefe_m unter Spiegel,
+    VC der Inselvertices = Mittel des Rings. Aussenkontur des Flusses bleibt gleich."""
+    m = WV > -900; lab, n = nd.label(nd.binary_fill_holes(m) & ~m)
+    G = GB.astype(np.float64).copy(); W = WV.astype(np.float64).copy(); V = VC.copy(); wahl = []
+    for k in range(1, n + 1):
+        zz, xx = np.nonzero(lab == k); cx, cz = xx.mean() / rs, zz.mean() / rs
+        if len(zz) > s.get("insel_max_vertices", 60): continue
+        if not any(np.hypot(cx - p[0], cz - p[1]) <= s.get("radius", 4.0) for p in s["punkte"]): continue
+        I = lab == k
+        if (I & F).any(): continue
+        ring = nd.binary_dilation(I, iterations=2) & m & ~I
+        W[I] = W[ring].mean(); V[I] = np.rint(V[ring].mean(0)).astype(np.uint8)
+        zs, xs = np.nonzero(nd.binary_dilation(I, iterations=8)); sl = (slice(zs.min(), zs.max() + 1), slice(xs.min(), xs.max() + 1))
+        d = nd.distance_transform_edt(~I[sl]); R = d <= s.get("huegel_vertices", 4.0)
+        base = harmonisch(G[sl], R)
+        a = 1.0 - L3._ss((d - 2.0) / max(s.get("huegel_vertices", 4.0) - 2.0, 1e-6))
+        Gn = G[sl] * (1 - a) + np.minimum(G[sl], base) * a
+        Gn = np.minimum(Gn, G[sl])
+        Gn[I[sl]] = np.minimum(Gn[I[sl]], W[I].mean() - s.get("bett_tiefe_m", 0.5))
+        for _ in range(2):   # Klemmkante weich, nur absenken
+            g2 = nd.gaussian_filter(Gn, 1.0); Gn = np.where(R, np.minimum(Gn, g2 * a + Gn * (1 - a)), Gn)
+            Gn[I[sl]] = np.minimum(Gn[I[sl]], W[I].mean() - s.get("bett_tiefe_m", 0.5))
+        Gn[~(m[sl] | I[sl]) | F[sl]] = G[sl][~(m[sl] | I[sl]) | F[sl]]
+        G[sl] = Gn; wahl.append({"x": round(cx, 1), "z": round(cz, 1), "vertices": int(len(zz)), "wv": round(float(W[I].mean()), 3)})
+    return G, W, V, wahl
+
+def bucht(GB, WV, s, rs, F):
+    """QA P4d S5: Landkuppe am Kartenrand in der H7-Suedostbucht wird Wasser. Maske waechst (ohne Richtung) in der Box in
+    Land, das hoechstens ueber_spiegel_m ueber dem Nachbarspiegel liegt; dort GB auf Spiegel - bett_tiefe_m abgesenkt (nie angehoben)."""
+    GY, GX = GB.shape; m = WV > -900; wv = WV.astype(np.float64).copy(); bx = box_gewicht(s, GY, GX, rs) > 0.999
+    neu = np.zeros_like(m)
+    for _ in range(s.get("schritte", 10)):
+        mm = m | neu
+        nb = nd.convolve(mm.astype(float), np.ones((3, 3)), mode="constant")
+        sw = nd.convolve(np.where(mm, wv, 0.0), np.ones((3, 3)), mode="constant")
+        lvl = np.where(nb > 0, sw / np.maximum(nb, 1), -1e9)
+        kand = (~mm) & bx & ~F & (nb >= 3) & (GB < lvl + s.get("ueber_spiegel_m", 0.9))
+        if not kand.any(): break
+        wv[kand] = lvl[kand]; neu |= kand
+    loch = nd.binary_fill_holes(m | neu) & ~(m | neu) & ~(nd.binary_fill_holes(m) & ~m)   # Restinseln mitnehmen (keine neuen Inseln)
+    if loch.any():
+        if (loch & F).any() or (loch & ~nd.binary_dilation(bx, iterations=2)).any(): return np.zeros_like(m), WV.astype(np.float64), GB.astype(np.float64)
+        _, (iz, ix) = nd.distance_transform_edt(~(neu | m), return_indices=True); wv[loch] = wv[iz, ix][loch]; neu |= loch
+    G = GB.astype(np.float64).copy()
+    if neu.any():
+        ziel = np.where(neu, wv - s.get("bett_tiefe_m", 0.3), np.inf)
+        R = nd.binary_dilation(neu, iterations=2) & (m | neu) & ~F
+        Gn = np.where(neu, np.minimum(G, ziel), G)
+        for _ in range(2):
+            g2 = nd.gaussian_filter(Gn, 1.0); Gn = np.where(R, np.minimum(Gn, g2), Gn); Gn = np.where(neu, np.minimum(Gn, ziel), Gn)
+        G = Gn
+    return neu, wv, G
+
+def wv_glatt(WV, s, rs):
+    """QA P4d S6: Einzelne Spiegel-Ausreisser (V-Kerbe am Kartenrand H7 x=336, z~281,5: WV 0,8 m unter den Nachbarn)
+    durch den Median der Wassernachbarn ersetzen. Nur Wasservertices in der Box, Schwelle schwelle_m."""
+    GY, GX = WV.shape; m = WV > -900; bx = box_gewicht(s, GY, GX, rs) > 0.999; W = WV.astype(np.float64).copy()
+    Wn = np.where(m, W, np.nan); P = np.pad(Wn, 2, constant_values=np.nan)
+    st = np.stack([P[2 + a:2 + a + GY, 2 + b:2 + b + GX] for a in range(-2, 3) for b in range(-2, 3) if (a, b) != (0, 0)])
+    med = np.nanmedian(st, axis=0)
+    aus = m & bx & np.isfinite(med) & (np.abs(W - med) > s.get("schwelle_m", 0.3))
+    W[aus] = med[aus]; return W, aus
 
 def harmonisch(H, frei, it=400):
     E = H.copy(); E[frei] = H[~frei].mean() if (~frei).any() else 0.0
@@ -137,6 +206,7 @@ def main():
         for X in (D, N):
             X["WV"] = _b64(Wf); X["VC"] = _b64(Vf); X["GB"] = _b64(Gn); L3.objekte(X, delta, rs)
             c = np.frombuffer(base64.b64decode(X["FW"]["c"]), np.uint8).reshape(-1, 3).copy(); c[r["fc_idx"]] = r["fc_alt"]; X["FW"]["c"] = _b64(c)
+            if "fh_idx" in r.files and r["fh_idx"].size: L3.fw_setzen(X, r["fh_idx"], r["fh_alt"])
         L3.prototypen(N, Gn, Gn != GB)
         L3._schreibe(D, QUELLE, False); L3._schreibe(N, NEU, True); RUECK.unlink(); print(json.dumps({"l3d": "aus"})); return
     if RUECK.exists(): sys.exit("L3d schon aktiv")
@@ -144,13 +214,24 @@ def main():
     if D["VC"] != N["VC"] or D["WV"] != N["WV"] or D["FW"]["c"] != N["FW"]["c"]: sys.exit("relief_daten/relief_neu ungleich (VC/WV/FW.c)")
     F = L3.feste_flaechen(D, GY, GX, rs)
     x0, z0, x1, z1 = L3.D2_BOX; d2 = np.zeros((GY, GX), bool); d2[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1] = True
-    WVn = WV.astype(np.float64).copy(); VCn = VC.copy(); GBn = GB.astype(np.float64).copy(); bericht = []
+    WVn = WV.astype(np.float64).copy(); VCn = VC.copy(); GBn = GB.astype(np.float64).copy(); bericht = []; wv_frei = np.zeros(GB.shape, bool)
     for s in cfg["stellen"]:
         if not s.get("aktiv", True): bericht.append({"id": s["id"], "aktiv": False}); continue
         if s["art"] == "wassermaske":
             neu, wv = g7_maske(GBn.astype(np.float32), np.where(WVn > -900, WVn, -999.0).astype(np.float32), s, rs, F | d2)
             WVn[neu] = wv[neu]; bericht.append({"id": s["id"], "neue_wasser_vertices": int(neu.sum()), "wv_min": round(float(wv[neu].min()), 3) if neu.any() else None,
                                                 "gb_unter_spiegel_max_m": round(float((wv - GB)[neu].max()), 3) if neu.any() else None})
+        elif s["art"] == "inseln":
+            Gi, Wi, VCn, wahl = inseln(GBn, np.where(WVn > -900, WVn, -999.0), VCn, s, rs, F | d2)
+            nw = (Wi > -900) & ~(WVn > -900); WVn[nw] = Wi[nw]; GBn = Gi
+            bericht.append({"id": s["id"], "inseln": wahl, "neue_wasser_vertices": int(nw.sum())})
+        elif s["art"] == "bucht":
+            nw, wv, Gb = bucht(GBn, np.where(WVn > -900, WVn, -999.0), s, rs, F | d2)
+            WVn[nw] = wv[nw]; GBn = Gb
+            bericht.append({"id": s["id"], "neue_wasser_vertices": int(nw.sum())})
+        elif s["art"] == "wv_glatt":
+            Wg, aus = wv_glatt(np.where(WVn > -900, WVn, -999.0), s, rs); aus &= ~(F | d2); WVn[aus] = Wg[aus]; wv_frei |= aus
+            bericht.append({"id": s["id"], "wv_vertices": int(aus.sum()), "max_m": round(float(np.abs(Wg - WV)[aus].max()), 3) if aus.any() else 0.0})
         elif s["art"] == "farbe":
             Vn, a = e3_farbe(VCn, WV, s, rs); a[F | d2] = 0; Vn[(F | d2)] = VCn[(F | d2)]
             ge = (Vn != VCn).any(-1); VCn = Vn
@@ -164,19 +245,22 @@ def main():
     m0, m1 = WV > -900, WVn > -900
     if (m0 & ~m1).any(): sys.exit("Wasser entfernt - Abbruch")
     wv_ge = WVn != WV; vc_ge = (VCn != VC).any(-1)
-    if (wv_ge & ~(m1 & ~m0)).any(): sys.exit("WV auf altem Wasser geaendert - Abbruch")
+    if (wv_ge & ~(m1 & ~m0) & ~wv_frei).any(): sys.exit("WV auf altem Wasser geaendert - Abbruch")
     if ((wv_ge | vc_ge) & (F | d2)).any(): sys.exit("feste Flaeche/D2 beruehrt - Abbruch")
     lab0, n0 = nd.label(m0, np.ones((3, 3))); lab1, n1 = nd.label(m1, np.ones((3, 3)))
     loch = nd.binary_fill_holes(m1) & ~m1 & ~(nd.binary_fill_holes(m0) & ~m0)
     if loch.any(): sys.exit(f"neue eingeschlossene Landinseln: {int(loch.sum())} - Abbruch")
     info = {"stellen": bericht, "wasser_neu": int((m1 & ~m0).sum()), "wasser_entfernt": 0, "wasser_komponenten": [int(n0), int(n1)],
-            "fill_holes_neu_nur_neue_vertices": bool(((nd.binary_fill_holes(m1) ^ nd.binary_fill_holes(m0)) == (m1 & ~m0)).all()),
+            "fill_holes_aussenkontur_gleich": bool((nd.binary_fill_holes(m1) == nd.binary_fill_holes(m0)).all()), "fill_holes_neu_nur_neue_vertices": bool(((nd.binary_fill_holes(m1) ^ nd.binary_fill_holes(m0)) == (m1 & ~m0)).all()),
             "vc_vertices": int(vc_ge.sum()), "gb_vertices": int(gb_ge.sum()), "gb_max_abs_m": round(float(np.abs(GBn.astype(float) - GB).max()), 3), "basis": cfg["basis_gb_wv_vc_sha256"], "nachher_sha256": _sha(GBn, WVn, VCn)}
     c, fidx, falt = fw_c_aus_vc(D, VCn, vc_ge); info["fw_c_punkte"] = int(fidx.size)
+    hidx, halt, fh_neu = L3.fw_folgen(D, GBn.astype(np.float64) - GB.astype(np.float64), rs); info["fw_h_punkte"] = int(hidx.size)
     if "--trocken" in arg: print(json.dumps(info, indent=1)); return
     widx = np.flatnonzero(wv_ge.reshape(-1)); vidx = np.flatnonzero(vc_ge.reshape(-1)); gidx = np.flatnonzero(gb_ge.reshape(-1))
-    np.savez_compressed(RUECK, gb_idx=gidx, gb_alt=GB.reshape(-1)[gidx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx], vc_idx=vidx, vc_alt=VC.reshape(-1, 3)[vidx], fc_idx=fidx, fc_alt=falt)
-    for X in (D, N): X["WV"] = _b64(WVn); X["VC"] = _b64(VCn); X["FW"]["c"] = _b64(c); X["GB"] = _b64(GBn)
+    np.savez_compressed(RUECK, gb_idx=gidx, gb_alt=GB.reshape(-1)[gidx], wv_idx=widx, wv_alt=WV.reshape(-1)[widx], vc_idx=vidx, vc_alt=VC.reshape(-1, 3)[vidx], fc_idx=fidx, fc_alt=falt, fh_idx=hidx, fh_alt=halt)
+    for X in (D, N):
+        X["WV"] = _b64(WVn); X["VC"] = _b64(VCn); X["FW"]["c"] = _b64(c); X["GB"] = _b64(GBn)
+        if hidx.size: X["FW"]["h"] = fh_neu
     delta = GBn.astype(np.float64) - GB.astype(np.float64)
     info["objekte_angepasst"] = L3.objekte(D, delta, rs); L3.objekte(N, delta, rs)
     info["prototypen"] = L3.prototypen(N, GBn, gb_ge)

@@ -1,6 +1,87 @@
 {
  "stellen": [
   {
+   "id": "P4d_platten",
+   "inseln": [
+    {
+     "x": 32.5,
+     "z": 262.5,
+     "vertices": 5,
+     "wv": -18.343
+    },
+    {
+     "x": 29.5,
+     "z": 263.5,
+     "vertices": 5,
+     "wv": -18.092
+    },
+    {
+     "x": 46.0,
+     "z": 265.5,
+     "vertices": 3,
+     "wv": -18.325
+    },
+    {
+     "x": 301.2,
+     "z": 269.2,
+     "vertices": 6,
+     "wv": -18.297
+    },
+    {
+     "x": 308.0,
+     "z": 269.0,
+     "vertices": 9,
+     "wv": -18.107
+    },
+    {
+     "x": 129.0,
+     "z": 270.5,
+     "vertices": 3,
+     "wv": -18.049
+    },
+    {
+     "x": 136.0,
+     "z": 270.5,
+     "vertices": 3,
+     "wv": -17.994
+    },
+    {
+     "x": 217.8,
+     "z": 273.8,
+     "vertices": 6,
+     "wv": -18.037
+    },
+    {
+     "x": 194.3,
+     "z": 276.4,
+     "vertices": 22,
+     "wv": -18.078
+    },
+    {
+     "x": 202.0,
+     "z": 275.5,
+     "vertices": 3,
+     "wv": -18.111
+    },
+    {
+     "x": 237.5,
+     "z": 277.2,
+     "vertices": 9,
+     "wv": -18.291
+    }
+   ],
+   "neue_wasser_vertices": 74
+  },
+  {
+   "id": "P4d_S5_bucht",
+   "neue_wasser_vertices": 69
+  },
+  {
+   "id": "P4d_S6_kerbe",
+   "wv_vertices": 5,
+   "max_m": 0.864
+  },
+  {
    "id": "E3_west",
    "vc_vertices": 1508,
    "vc_max_aenderung": 22
@@ -10,20 +91,22 @@
    "aktiv": false
   }
  ],
- "wasser_neu": 0,
+ "wasser_neu": 143,
  "wasser_entfernt": 0,
  "wasser_komponenten": [
   9,
   9
  ],
- "fill_holes_neu_nur_neue_vertices": true,
- "vc_vertices": 1508,
- "gb_vertices": 945,
- "gb_max_abs_m": 0.275,
+ "fill_holes_aussenkontur_gleich": false,
+ "fill_holes_neu_nur_neue_vertices": false,
+ "vc_vertices": 1581,
+ "gb_vertices": 1791,
+ "gb_max_abs_m": 1.021,
  "basis": "df1b605dbb071dba25482447c5b341ff673935c48a0faae649b684687be3e6c4",
- "nachher_sha256": "7ef3a9b998f78b38bd786c853680d81579c07e7a2ab4dcaa2bffe4d3fb8ac652",
- "fw_c_punkte": 0,
- "objekte_angepasst": 23,
+ "nachher_sha256": "f793b7ecee23762f9e5f2aa3f0c4637419fd88c0b63f1c1556a09069dd6dab20",
+ "fw_c_punkte": 40,
+ "fw_h_punkte": 571,
+ "objekte_angepasst": 24,
  "prototypen": {
   "D2": "unveraendert",
   "G1": "unveraendert",
