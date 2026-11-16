@@ -50,3 +50,5 @@ Neu: siehe Ausnahmen. alles.sh: /tmp/p2c_p10_nachher (Hash D1/G1/D2 identisch, N
 
 ## Nahbilder (vorher 2633f1d / nachher P2c; Farbe | Ton)
 `nahbilder/`: 03_D1_zickzack (Zickzack-Wand weg), T37_G7b_D1, Mulde_D1_159_23 (Mulde weg), NEU_G6_D1_157_16, NEU_G6_D1_146_19, NEU_G6_D1_157_23, NEU_G6_D1_152_24, NEU_G6_D1_166_16, R3_D1_rampe8_kehre_talseite.
+
+**Aufwand (Auflage Aufseher):** Kosten 0 €, Codex nein (lokal im Executor, ohne Codex/agy), Laufzeit ca. 1,0 h (16.11.2026 12:29–13:27 Europe/Berlin, inkl. einer Unterbrechung und Fortsetzung).

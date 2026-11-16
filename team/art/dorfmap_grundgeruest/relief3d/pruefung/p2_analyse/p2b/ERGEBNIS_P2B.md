@@ -58,3 +58,5 @@ Entfallen: G6 145,6\|19,2, 157,4\|24,2 (T17), 185,2\|23,8, 287,2\|221,2, 283,8\|
 - L3-Einheitenfehler (vektor-Meter als Zellen) in `relief_l3.schutz()`.
 - P2b noch nicht in `bau_endstand.sh`.
 - Kachelbilder vorher/nachher: `kacheln/` (D1, E1, E2, G6, D4, D5).
+
+**Aufwand (Auflage Aufseher):** Kosten 0 €, Codex nein (lokal im Executor, ohne Codex/agy), Laufzeit ca. 1,1 h (16.11.2026 11:25–12:29 Europe/Berlin, inkl. Neuaufsatz auf d5b17e2).
