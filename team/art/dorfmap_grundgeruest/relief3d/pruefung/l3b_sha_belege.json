@@ -1,0 +1,94 @@
+{
+ "basis": "8cd6d37 (origin/art/dorfmap-fertig)",
+ "felder_relief_daten": {
+  "FW": "geaendert",
+  "G": "gleich",
+  "GB": "geaendert",
+  "VC": "geaendert",
+  "WEGA": "gleich",
+  "WV": "geaendert",
+  "baeume": "geaendert",
+  "bruecken": "gleich",
+  "felsbloecke": "gleich",
+  "felsen": "gleich",
+  "felsmesh": "gleich",
+  "findlinge": "gleich",
+  "geroell": "geaendert",
+  "gras": "gleich",
+  "haeuser": "gleich",
+  "nx": "gleich",
+  "ny": "gleich",
+  "rampenwege": "gleich",
+  "reihenfolge": "gleich",
+  "rs": "gleich",
+  "spalten": "gleich",
+  "sprung": "gleich",
+  "start": "gleich",
+  "steine": "geaendert",
+  "ug": "gleich",
+  "wandfuss": "gleich",
+  "wandhoehen": "gleich",
+  "wandwinkel": "gleich",
+  "wege": "gleich"
+ },
+ "wassergrundriss_sha256_vorher": "c897e44c4f8fd1346d45008890f7b7219bb18c4e9597bb7f10706165818e21c5",
+ "wassergrundriss_sha256_nachher": "c897e44c4f8fd1346d45008890f7b7219bb18c4e9597bb7f10706165818e21c5",
+ "wv_vertices_geaendert": 2386,
+ "wv_nur_auf_wasser": true,
+ "wv_max_abs_m": 0.778,
+ "gb_vertices_geaendert": 7292,
+ "gb_max_m": 1.201,
+ "d2_gb_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "d2_tile_height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+ "wege_0m": {
+  "kreuzungsflaechen_vertices": 17644,
+  "max_delta_kreuzung_m": 0.0,
+  "vektor_wege_vertices": 19272,
+  "max_delta_vektor_wege_m": 0.0
+ },
+ "naehe_rampen_wege": {
+  "rampen_innerhalb_5m": [],
+  "vektor_wege_innerhalb_rand_plus_5m": []
+ },
+ "sha256_nachher": {
+  "relief_daten.json.gz": "35e40810ded5286e1b802e07799104dc605645300bcb7163ec7f416da803f6bb",
+  "neu/relief_neu.json.gz": "8f4e50381e4122200576eb6fc19ffc9dc0190a3a6cb47d2f8a1aeef15d135024",
+  "index.html": "7cd7e2d28a0776ce9586562e8315805190d8789e7c2d81af3aef2cb6f5028db6",
+  "neu/index.html": "7cd7e2d28a0776ce9586562e8315805190d8789e7c2d81af3aef2cb6f5028db6",
+  "neu/vektor.json": "aac6afff89ecba5298377080b6442da03515721ccda68acff287fdc5b8652d1e",
+  "neu/felder.json": "e4e2ec8f5f4b7b7bb825f8fdda6c0400b5525e9c8c31153f7d9b10d4185e3435",
+  "pruefung/pruefe_regeln.py": "f9ef4a470703480d5b7d94ee0e6de9e664289addc426723cfdc8bbf579dd4481",
+  "pruefung/export_gate.sh": "a505281cf71e80e4d46257b151bf9319a390a7f7a9a9c9a84e7db958630873d0",
+  "pruefung/loch_o18g.js": "2d1119eced25d7a408f4d4fd5884df1fb7d873f7c099c37d8fb14525f40dd049",
+  "relief_l3.py": "5f593ef676eada30af1adcf8f7d9f89c060ff21f9cb469d12f2a8c7a593051f7",
+  "pruefung/l3_stellen.json": "8186f502d21ba5b2fb10f462c94077989415de707c1c781731bfc51e1f783f05"
+ },
+ "geaenderte_dateien_vs_8cd6d37": [
+  "team/art/dorfmap_grundgeruest/relief3d/index.html",
+  "team/art/dorfmap_grundgeruest/relief3d/neu/index.html",
+  "team/art/dorfmap_grundgeruest/relief3d/neu/relief_neu.json.gz",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_bericht.json",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_rueck.npz",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/l3_stellen.json",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/regeln_letzter_lauf.json",
+  "team/art/dorfmap_grundgeruest/relief3d/pruefung/w1_alle56_letzter_lauf.json",
+  "team/art/dorfmap_grundgeruest/relief3d/relief_daten.json.gz",
+  "team/art/dorfmap_grundgeruest/relief3d/relief_l3.py"
+ ],
+ "pruefer_unveraendert": true,
+ "l3_aus_roundtrip": {
+  "an": [
+   "919e1ee224c3de144611dbc607b24ead1af432621d98b89da7cd526bb6fa9990",
+   "relief_daten.json.gz",
+   "96905b9104ee8c6eb0d1c816f25a8d8ad5df20b1a900be9954b29e886d7a8b13",
+   "neu/relief_neu.json.gz"
+  ],
+  "aus": [
+   "b87cdf56f55c9ac4517a2d1b364c868ec615d230d6977fff463aa53c64131fa7",
+   "relief_daten.json.gz",
+   "6564a834766108fc94d82a8dde85a494959fd3656a50b1f5f9a84157504ef0e6",
+   "neu/relief_neu.json.gz"
+  ],
+  "wieder_an_bytegleich": true
+ }
+}

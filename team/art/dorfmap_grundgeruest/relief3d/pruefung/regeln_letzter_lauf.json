@@ -1,6 +1,6 @@
 {
-"summe": 371,
-"summe_ohne_ausnahmen": 371,
+"summe": 374,
+"summe_ohne_ausnahmen": 374,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -11,10 +11,10 @@
 "R5_loch": 4,
 "R6_wasser_schnee": 4,
 "G2_spitze_oben": 2,
-"G2_spitze_oben_fein": 8,
+"G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
-"G5_beule_klippe": 34,
-"G6_facette": 212,
+"G5_beule_klippe": 35,
+"G6_facette": 213,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
 "T1_fleckrand": 1,
@@ -665,6 +665,14 @@
 },
 {
 "regel": "G2_spitze_oben_fein",
+"feld": "C4",
+"x": 123.2,
+"z": 156.0,
+"wert": 0.63,
+"nachbarn": 3
+},
+{
+"regel": "G2_spitze_oben_fein",
 "feld": "B4",
 "x": 67.2,
 "z": 156.2,
@@ -800,9 +808,16 @@
 {
 "regel": "G5_beule_klippe",
 "feld": "D4",
-"x": 126.8,
+"x": 127.0,
 "z": 132.0,
-"wert": 0.84
+"wert": 0.67
+},
+{
+"regel": "G5_beule_klippe",
+"feld": "C4",
+"x": 124.5,
+"z": 133.0,
+"wert": 0.63
 },
 {
 "regel": "G5_beule_klippe",
@@ -863,9 +878,9 @@
 {
 "regel": "G5_beule_klippe",
 "feld": "C4",
-"x": 125.8,
-"z": 148.6,
-"wert": 1.82
+"x": 125.2,
+"z": 149.8,
+"wert": 1.65
 },
 {
 "regel": "G5_beule_klippe",
@@ -1577,9 +1592,9 @@
 {
 "regel": "G6_facette",
 "feld": "C4",
-"x": 122.2,
-"z": 130.8,
-"wert": 13
+"x": 122.1,
+"z": 131.0,
+"wert": 16
 },
 {
 "regel": "G6_facette",
@@ -1627,8 +1642,15 @@
 "regel": "G6_facette",
 "feld": "D4",
 "x": 127.4,
-"z": 133.4,
-"wert": 6
+"z": 133.3,
+"wert": 7
+},
+{
+"regel": "G6_facette",
+"feld": "C4",
+"x": 123.5,
+"z": 134.8,
+"wert": 14
 },
 {
 "regel": "G6_facette",
@@ -1656,7 +1678,7 @@
 "feld": "D4",
 "x": 127.0,
 "z": 137.2,
-"wert": 8
+"wert": 7
 },
 {
 "regel": "G6_facette",
@@ -1767,8 +1789,8 @@
 "regel": "G6_facette",
 "feld": "C4",
 "x": 119.3,
-"z": 149.9,
-"wert": 23
+"z": 150.0,
+"wert": 22
 },
 {
 "regel": "G6_facette",
@@ -1830,7 +1852,7 @@
 "regel": "G6_facette",
 "feld": "C4",
 "x": 121.0,
-"z": 156.7,
+"z": 156.6,
 "wert": 25
 },
 {
@@ -2580,7 +2602,7 @@
 "feld": "C4",
 "x": 105,
 "z": 150,
-"wert": 0.414
+"wert": 0.408
 },
 {
 "regel": "G7b_wandkontur_feld",

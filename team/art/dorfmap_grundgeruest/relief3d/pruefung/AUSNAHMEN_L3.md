@@ -6,6 +6,8 @@ Nahbilder: P10-Viewer `alle_kacheln.html` (Stand L3), Clay, ohne Schatten (`nosh
 
 ## A. Neue Gate-Treffer (40), alle im Nahbild unsichtbar
 
+> **Korrektur 16.11. (L3b, nach QA P4c / PR #18):** T11–T15 an der Naht C4/D4 sind sichtbar (leicht), nicht unsichtbar. Die Form wurde in L3b nachgezogen (`L3b_24`, Nahbilder `l3b_nahbilder/paare/stelle_24_*` und `stelle_25_*`). Die gerade Helligkeitslinie auf x = 126 bei gleicher Höhe ist ein Normalen-Sprung an der Kachelnaht und liegt bei Dev UI (nicht angefasst).
+
 Herkunft: Die Ersatzstücke ersetzen Zickzack-Klippen durch glatte, steile Hänge. `G5_beule_klippe` und `G6_facette` messen dort jetzt die neue Hangkrümmung bzw. Flächenneigung; viele Treffer sind die verschobenen Gegenstücke entfallener Treffer (entfallen: 59, neu: 40; Summe pruefe_regeln 397 → 378).
 
 | Nr | Regel | Kachel | x\|z (m) | Messwert | Urteil Nahbild | Bild |
@@ -20,11 +22,11 @@ Herkunft: Die Ersatzstücke ersetzen Zickzack-Klippen durch glatte, steile Häng
 | T08 | `G5_beule_klippe` | G4 | 276.5\|136.0 | 0.87 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T08_G5_G4_276.5_136.0.jpg) |
 | T09 | `G5_beule_klippe` | G4 | 277.0\|136.5 | 0.91 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T09_G5_G4_277.0_136.5.jpg) |
 | T10 | `G5_beule_klippe` | G4 | 280.6\|138.5 | 1.49 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T10_G5_G4_280.6_138.5.jpg) |
-| T11 | `G5_beule_klippe` | D4 | 126.0\|138.0 | 0.84 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T11_G5_D4_126.0_138.0.jpg) |
-| T12 | `G5_beule_klippe` | D4 | 127.3\|144.2 | 0.85 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T12_G5_D4_127.3_144.2.jpg) |
-| T13 | `G5_beule_klippe` | D4 | 127.6\|147.2 | 1.48 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T13_G5_D4_127.6_147.2.jpg) |
-| T14 | `G5_beule_klippe` | C4 | 124.5\|150.0 | 0.67 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T14_G5_C4_124.5_150.0.jpg) |
-| T15 | `G5_beule_klippe` | C4 | 125.0\|150.5 | 0.61 | unsichtbar: glatter, runder Hang ohne Beule/Kante | [Nahbild](l3_nahbilder/neue_treffer/T15_G5_C4_125.0_150.5.jpg) |
+| T11 | `G5_beule_klippe` | D4 | 126.0\|138.0 | 0.84 | **KORREKTUR (QA P4c): sichtbar, leicht** – unruhige, wolkige Gratzone an der Naht C4/D4; meine Bewertung „unsichtbar“ war falsch. Behoben in L3b (Stelle L3b_24), siehe `ERGEBNIS_L3b.md` | [Nahbild](l3_nahbilder/neue_treffer/T11_G5_D4_126.0_138.0.jpg) |
+| T12 | `G5_beule_klippe` | D4 | 127.3\|144.2 | 0.85 | **KORREKTUR (QA P4c): sichtbar, leicht** – unruhige, wolkige Gratzone an der Naht C4/D4; meine Bewertung „unsichtbar“ war falsch. Behoben in L3b (Stelle L3b_24), siehe `ERGEBNIS_L3b.md` | [Nahbild](l3_nahbilder/neue_treffer/T12_G5_D4_127.3_144.2.jpg) |
+| T13 | `G5_beule_klippe` | D4 | 127.6\|147.2 | 1.48 | **KORREKTUR (QA P4c): sichtbar, leicht** – unruhige, wolkige Gratzone an der Naht C4/D4; meine Bewertung „unsichtbar“ war falsch. Behoben in L3b (Stelle L3b_24), siehe `ERGEBNIS_L3b.md` | [Nahbild](l3_nahbilder/neue_treffer/T13_G5_D4_127.6_147.2.jpg) |
+| T14 | `G5_beule_klippe` | C4 | 124.5\|150.0 | 0.67 | **KORREKTUR (QA P4c): sichtbar, leicht** – unruhige, wolkige Gratzone an der Naht C4/D4; meine Bewertung „unsichtbar“ war falsch. Behoben in L3b (Stelle L3b_24), siehe `ERGEBNIS_L3b.md` | [Nahbild](l3_nahbilder/neue_treffer/T14_G5_C4_124.5_150.0.jpg) |
+| T15 | `G5_beule_klippe` | C4 | 125.0\|150.5 | 0.61 | **KORREKTUR (QA P4c): sichtbar, leicht** – unruhige, wolkige Gratzone an der Naht C4/D4; meine Bewertung „unsichtbar“ war falsch. Behoben in L3b (Stelle L3b_24), siehe `ERGEBNIS_L3b.md` | [Nahbild](l3_nahbilder/neue_treffer/T15_G5_C4_125.0_150.5.jpg) |
 | T16 | `G6_facette` | D1 | 145.6\|19.2 | 20 | unsichtbar: glatte Fläche, keine Facette sichtbar | [Nahbild](l3_nahbilder/neue_treffer/T16_G6_D1_145.6_19.2.jpg) |
 | T17 | `G6_facette` | D1 | 157.4\|24.2 | 10 | unsichtbar: glatte Fläche, keine Facette sichtbar | [Nahbild](l3_nahbilder/neue_treffer/T17_G6_D1_157.4_24.2.jpg) |
 | T18 | `G6_facette` | C3 | 93.5\|95.3 | 10 | unsichtbar: glatte Fläche, keine Facette sichtbar | [Nahbild](l3_nahbilder/neue_treffer/T18_G6_C3_93.5_95.3.jpg) |
