@@ -1,0 +1,999 @@
+{
+ "felder": {
+  "A1": {
+   "Hoehen": 7,
+   "Wege": 0,
+   "Texturen": 4,
+   "R8": 0,
+   "R9": 2,
+   "Sonstige": 0,
+   "gesamt": 13
+  },
+  "B1": {
+   "Hoehen": 3,
+   "Wege": 1,
+   "Texturen": 0,
+   "R8": 1,
+   "R9": 3,
+   "Sonstige": 0,
+   "gesamt": 8
+  },
+  "C1": {
+   "Hoehen": 6,
+   "Wege": 1,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 5,
+   "Sonstige": 0,
+   "gesamt": 12
+  },
+  "D1": {
+   "Hoehen": 33,
+   "Wege": 3,
+   "Texturen": 0,
+   "R8": 8,
+   "R9": 26,
+   "Sonstige": 0,
+   "gesamt": 70
+  },
+  "E1": {
+   "Hoehen": 10,
+   "Wege": 1,
+   "Texturen": 2,
+   "R8": 1,
+   "R9": 8,
+   "Sonstige": 0,
+   "gesamt": 22
+  },
+  "F1": {
+   "Hoehen": 11,
+   "Wege": 3,
+   "Texturen": 2,
+   "R8": 1,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 24
+  },
+  "G1": {
+   "Hoehen": 6,
+   "Wege": 4,
+   "Texturen": 3,
+   "R8": 1,
+   "R9": 8,
+   "Sonstige": 0,
+   "gesamt": 22
+  },
+  "H1": {
+   "Hoehen": 2,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 9
+  },
+  "A2": {
+   "Hoehen": 9,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 16
+  },
+  "B2": {
+   "Hoehen": 1,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 8
+  },
+  "C2": {
+   "Hoehen": 4,
+   "Wege": 1,
+   "Texturen": 2,
+   "R8": 1,
+   "R9": 4,
+   "Sonstige": 0,
+   "gesamt": 12
+  },
+  "D2": {
+   "Hoehen": 0,
+   "Wege": 1,
+   "Texturen": 7,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 8
+  },
+  "E2": {
+   "Hoehen": 8,
+   "Wege": 0,
+   "Texturen": 6,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 14
+  },
+  "F2": {
+   "Hoehen": 2,
+   "Wege": 0,
+   "Texturen": 4,
+   "R8": 0,
+   "R9": 3,
+   "Sonstige": 0,
+   "gesamt": 9
+  },
+  "G2": {
+   "Hoehen": 0,
+   "Wege": 1,
+   "Texturen": 3,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 4
+  },
+  "H2": {
+   "Hoehen": 5,
+   "Wege": 0,
+   "Texturen": 4,
+   "R8": 0,
+   "R9": 6,
+   "Sonstige": 0,
+   "gesamt": 15
+  },
+  "A3": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 1,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 1
+  },
+  "B3": {
+   "Hoehen": 8,
+   "Wege": 0,
+   "Texturen": 5,
+   "R8": 0,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 20
+  },
+  "C3": {
+   "Hoehen": 43,
+   "Wege": 2,
+   "Texturen": 0,
+   "R8": 4,
+   "R9": 19,
+   "Sonstige": 0,
+   "gesamt": 68
+  },
+  "D3": {
+   "Hoehen": 8,
+   "Wege": 0,
+   "Texturen": 3,
+   "R8": 0,
+   "R9": 2,
+   "Sonstige": 0,
+   "gesamt": 13
+  },
+  "E3": {
+   "Hoehen": 5,
+   "Wege": 1,
+   "Texturen": 3,
+   "R8": 0,
+   "R9": 12,
+   "Sonstige": 0,
+   "gesamt": 21
+  },
+  "F3": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 0
+  },
+  "G3": {
+   "Hoehen": 9,
+   "Wege": 1,
+   "Texturen": 4,
+   "R8": 3,
+   "R9": 11,
+   "Sonstige": 0,
+   "gesamt": 28
+  },
+  "H3": {
+   "Hoehen": 3,
+   "Wege": 0,
+   "Texturen": 1,
+   "R8": 0,
+   "R9": 9,
+   "Sonstige": 0,
+   "gesamt": 13
+  },
+  "A4": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 0
+  },
+  "B4": {
+   "Hoehen": 19,
+   "Wege": 0,
+   "Texturen": 3,
+   "R8": 0,
+   "R9": 12,
+   "Sonstige": 0,
+   "gesamt": 34
+  },
+  "C4": {
+   "Hoehen": 27,
+   "Wege": 4,
+   "Texturen": 1,
+   "R8": 2,
+   "R9": 15,
+   "Sonstige": 0,
+   "gesamt": 49
+  },
+  "D4": {
+   "Hoehen": 21,
+   "Wege": 2,
+   "Texturen": 0,
+   "R8": 2,
+   "R9": 7,
+   "Sonstige": 0,
+   "gesamt": 32
+  },
+  "E4": {
+   "Hoehen": 5,
+   "Wege": 0,
+   "Texturen": 4,
+   "R8": 0,
+   "R9": 8,
+   "Sonstige": 0,
+   "gesamt": 17
+  },
+  "F4": {
+   "Hoehen": 0,
+   "Wege": 1,
+   "Texturen": 2,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 3
+  },
+  "G4": {
+   "Hoehen": 15,
+   "Wege": 1,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 6,
+   "Sonstige": 0,
+   "gesamt": 22
+  },
+  "H4": {
+   "Hoehen": 5,
+   "Wege": 1,
+   "Texturen": 1,
+   "R8": 4,
+   "R9": 6,
+   "Sonstige": 0,
+   "gesamt": 17
+  },
+  "A5": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 0
+  },
+  "B5": {
+   "Hoehen": 14,
+   "Wege": 0,
+   "Texturen": 1,
+   "R8": 0,
+   "R9": 11,
+   "Sonstige": 0,
+   "gesamt": 26
+  },
+  "C5": {
+   "Hoehen": 43,
+   "Wege": 4,
+   "Texturen": 1,
+   "R8": 5,
+   "R9": 12,
+   "Sonstige": 0,
+   "gesamt": 65
+  },
+  "D5": {
+   "Hoehen": 4,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 11,
+   "Sonstige": 0,
+   "gesamt": 15
+  },
+  "E5": {
+   "Hoehen": 1,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 1,
+   "Sonstige": 0,
+   "gesamt": 2
+  },
+  "F5": {
+   "Hoehen": 5,
+   "Wege": 0,
+   "Texturen": 9,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 14
+  },
+  "G5": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 4,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 4
+  },
+  "H5": {
+   "Hoehen": 12,
+   "Wege": 3,
+   "Texturen": 4,
+   "R8": 5,
+   "R9": 12,
+   "Sonstige": 0,
+   "gesamt": 36
+  },
+  "A6": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 5,
+   "Sonstige": 0,
+   "gesamt": 5
+  },
+  "B6": {
+   "Hoehen": 2,
+   "Wege": 0,
+   "Texturen": 2,
+   "R8": 0,
+   "R9": 3,
+   "Sonstige": 0,
+   "gesamt": 7
+  },
+  "C6": {
+   "Hoehen": 7,
+   "Wege": 1,
+   "Texturen": 3,
+   "R8": 3,
+   "R9": 19,
+   "Sonstige": 0,
+   "gesamt": 33
+  },
+  "D6": {
+   "Hoehen": 15,
+   "Wege": 1,
+   "Texturen": 0,
+   "R8": 4,
+   "R9": 12,
+   "Sonstige": 0,
+   "gesamt": 32
+  },
+  "E6": {
+   "Hoehen": 3,
+   "Wege": 1,
+   "Texturen": 1,
+   "R8": 1,
+   "R9": 5,
+   "Sonstige": 0,
+   "gesamt": 11
+  },
+  "F6": {
+   "Hoehen": 6,
+   "Wege": 1,
+   "Texturen": 0,
+   "R8": 1,
+   "R9": 8,
+   "Sonstige": 0,
+   "gesamt": 16
+  },
+  "G6": {
+   "Hoehen": 9,
+   "Wege": 1,
+   "Texturen": 1,
+   "R8": 0,
+   "R9": 8,
+   "Sonstige": 0,
+   "gesamt": 19
+  },
+  "H6": {
+   "Hoehen": 12,
+   "Wege": 1,
+   "Texturen": 5,
+   "R8": 1,
+   "R9": 11,
+   "Sonstige": 0,
+   "gesamt": 30
+  },
+  "A7": {
+   "Hoehen": 3,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 3,
+   "Sonstige": 0,
+   "gesamt": 6
+  },
+  "B7": {
+   "Hoehen": 1,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 1,
+   "Sonstige": 0,
+   "gesamt": 2
+  },
+  "C7": {
+   "Hoehen": 1,
+   "Wege": 1,
+   "Texturen": 2,
+   "R8": 0,
+   "R9": 3,
+   "Sonstige": 0,
+   "gesamt": 7
+  },
+  "D7": {
+   "Hoehen": 1,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 1
+  },
+  "E7": {
+   "Hoehen": 8,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 8
+  },
+  "F7": {
+   "Hoehen": 4,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 4
+  },
+  "G7": {
+   "Hoehen": 0,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 0,
+   "Sonstige": 0,
+   "gesamt": 0
+  },
+  "H7": {
+   "Hoehen": 1,
+   "Wege": 0,
+   "Texturen": 0,
+   "R8": 0,
+   "R9": 2,
+   "Sonstige": 0,
+   "gesamt": 3
+  }
+ },
+ "regeln_je_feld": {
+  "A1": {
+   "R5_loch": 2,
+   "G6_facette": 4,
+   "T2_textur_abgeschnitten_bildpruefung_offen": 1,
+   "T3_streifen_ringe_bildpruefung_offen": 1,
+   "T4_graue_flussstreifen_bildpruefung_offen": 1,
+   "T5_textur_vs_clay_bildpruefung_offen": 1,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 1
+  },
+  "B1": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "G6_facette": 1,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 2
+  },
+  "C1": {
+   "R2_getrennt": 1,
+   "R3_laengs_m": 1,
+   "G6_facette": 5,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 4
+  },
+  "D1": {
+   "R1_blind": 2,
+   "R2_getrennt": 1,
+   "R3_laengs_m": 6,
+   "R3_quer_pct": 11,
+   "R3_woelb_m": 10,
+   "G5_beule_klippe": 1,
+   "G6_facette": 5,
+   "R8_stufe": 2,
+   "R8_gitter": 2,
+   "R8_quer": 1,
+   "R8a_wegende": 3,
+   "R8b_delle": 2,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 23
+  },
+  "E1": {
+   "R1_blind": 1,
+   "R3_laengs_m": 2,
+   "G6_facette": 7,
+   "T1_fleckrand": 2,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 7
+  },
+  "F1": {
+   "R1_blind": 1,
+   "R2_getrennt": 1,
+   "R3_laengs_m": 2,
+   "R6_wasser_schnee": 1,
+   "G2_spitze_oben_fein": 1,
+   "G5_beule_klippe": 4,
+   "G6_facette": 4,
+   "T1_fleckrand": 2,
+   "R8a_wegende": 1,
+   "R8b_delle": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 5
+  },
+  "G1": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "R6_wasser_schnee": 3,
+   "G3_spitze_unten_fein": 1,
+   "G6_facette": 4,
+   "T1_fleckrand": 3,
+   "R8a_wegende": 1,
+   "R8b_delle": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "H1": {
+   "G6_facette": 1,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "A2": {
+   "R5_loch": 2,
+   "G5_beule_klippe": 2,
+   "G6_facette": 2,
+   "G7_wand_glatte_flaeche": 1,
+   "G8_fluss_nicht_bis_rand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "B2": {
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "C2": {
+   "R1_blind": 1,
+   "G6_facette": 3,
+   "T1_fleckrand": 2,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 3
+  },
+  "D2": {
+   "R2_getrennt": 1,
+   "T1_fleckrand": 7
+  },
+  "E2": {
+   "G6_facette": 8,
+   "T1_fleckrand": 6
+  },
+  "F2": {
+   "G6_facette": 1,
+   "T1_fleckrand": 4,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 2
+  },
+  "G2": {
+   "R2_getrennt": 1,
+   "T1_fleckrand": 3
+  },
+  "H2": {
+   "G2_spitze_oben_fein": 1,
+   "G3_spitze_unten_fein": 1,
+   "G6_facette": 2,
+   "T1_fleckrand": 4,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 5
+  },
+  "A3": {
+   "T1_fleckrand": 1
+  },
+  "B3": {
+   "G6_facette": 7,
+   "T1_fleckrand": 5,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "C3": {
+   "R1_blind": 1,
+   "R2_getrennt": 1,
+   "R3_quer_pct": 3,
+   "R3_laengs_m": 2,
+   "R3_woelb_m": 3,
+   "R5_loch": 1,
+   "G5_beule_klippe": 18,
+   "G6_facette": 15,
+   "G7b_wandkontur_feld": 1,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8_quer": 1,
+   "R8a_wegende": 1,
+   "R8b_delle": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 17
+  },
+  "D3": {
+   "R3_quer_pct": 3,
+   "R3_woelb_m": 3,
+   "R3_laengs_m": 2,
+   "T1_fleckrand": 3,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 1
+  },
+  "E3": {
+   "R2_getrennt": 1,
+   "G6_facette": 5,
+   "T1_fleckrand": 3,
+   "R8b_delle": 12
+  },
+  "F3": {},
+  "G3": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "G5_beule_klippe": 1,
+   "G6_facette": 7,
+   "T1_fleckrand": 4,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 10
+  },
+  "H3": {
+   "G6_facette": 2,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 8
+  },
+  "A4": {},
+  "B4": {
+   "G2_spitze_oben_fein": 3,
+   "G6_facette": 15,
+   "T1_fleckrand": 3,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 11
+  },
+  "C4": {
+   "R1_blind": 2,
+   "R2_getrennt": 2,
+   "R3_laengs_m": 2,
+   "R5_loch": 4,
+   "G5_beule_klippe": 4,
+   "G6_facette": 16,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 2,
+   "R8b_delle": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 13
+  },
+  "D4": {
+   "R1_blind": 2,
+   "R3_laengs_m": 4,
+   "R3_quer_pct": 3,
+   "R3_woelb_m": 3,
+   "G5_beule_klippe": 4,
+   "G6_facette": 6,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 2,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 6
+  },
+  "E4": {
+   "G6_facette": 5,
+   "T1_fleckrand": 4,
+   "R8b_delle": 4,
+   "R9w_wellen": 4
+  },
+  "F4": {
+   "R2_getrennt": 1,
+   "T1_fleckrand": 2
+  },
+  "G4": {
+   "R2_getrennt": 1,
+   "G5_beule_klippe": 7,
+   "G6_facette": 8,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 5
+  },
+  "H4": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "G6_facette": 3,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8_quer": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 5
+  },
+  "A5": {},
+  "B5": {
+   "G6_facette": 13,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 10
+  },
+  "C5": {
+   "R1_blind": 3,
+   "R2_getrennt": 1,
+   "R3_laengs_m": 4,
+   "R5_loch": 6,
+   "G2_spitze_oben_fein": 1,
+   "G5_beule_klippe": 14,
+   "G6_facette": 17,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8a_wegende": 3,
+   "R8b_delle": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 10
+  },
+  "D5": {
+   "G6_facette": 3,
+   "G7b_wandkontur_feld": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 10
+  },
+  "E5": {
+   "G6_facette": 1,
+   "R9w_wellen": 1
+  },
+  "F5": {
+   "G6_facette": 5,
+   "T1_fleckrand": 9
+  },
+  "G5": {
+   "T1_fleckrand": 4
+  },
+  "H5": {
+   "R1_blind": 2,
+   "R2_getrennt": 1,
+   "R3_laengs_m": 1,
+   "G6_facette": 10,
+   "T1_fleckrand": 4,
+   "G7b_wandkontur_feld": 1,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8_quer": 1,
+   "R8a_wegende": 2,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 11
+  },
+  "A6": {
+   "R9w_wellen": 5
+  },
+  "B6": {
+   "G6_facette": 2,
+   "T1_fleckrand": 2,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 2
+  },
+  "C6": {
+   "R1_blind": 1,
+   "G6_facette": 6,
+   "T1_fleckrand": 3,
+   "G7b_wandkontur_feld": 1,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 18
+  },
+  "D6": {
+   "R2_getrennt": 1,
+   "R3_quer_pct": 3,
+   "R3_laengs_m": 2,
+   "R3_woelb_m": 3,
+   "R5_loch": 2,
+   "G2_spitze_oben": 1,
+   "G6_facette": 4,
+   "R8_stufe": 1,
+   "R8_gitter": 1,
+   "R8_quer": 1,
+   "R8a_wegende": 1,
+   "R8b_delle": 2,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 9
+  },
+  "E6": {
+   "R1_blind": 1,
+   "G6_facette": 2,
+   "T1_fleckrand": 1,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 4
+  },
+  "F6": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "G5_beule_klippe": 1,
+   "G6_facette": 3,
+   "G7b_wandkontur_feld": 1,
+   "R8_gitter": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 7
+  },
+  "G6": {
+   "R2_getrennt": 1,
+   "R3_laengs_m": 1,
+   "G2_spitze_oben_fein": 2,
+   "G6_facette": 6,
+   "T1_fleckrand": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 7
+  },
+  "H6": {
+   "R1_blind": 1,
+   "R3_laengs_m": 1,
+   "G5_beule_klippe": 1,
+   "G6_facette": 9,
+   "T1_fleckrand": 5,
+   "G7b_wandkontur_feld": 1,
+   "R8a_wegende": 1,
+   "R9_saegezahn": 1,
+   "R9w_wellen": 10
+  },
+  "A7": {
+   "G5_beule_klippe": 3,
+   "R9w_wellen": 3
+  },
+  "B7": {
+   "G6_facette": 1,
+   "R9w_wellen": 1
+  },
+  "C7": {
+   "R1_blind": 1,
+   "G6_facette": 1,
+   "T1_fleckrand": 2,
+   "R9w_wellen": 3
+  },
+  "D7": {
+   "G5_beule_klippe": 1
+  },
+  "E7": {
+   "G3_spitze_unten": 2,
+   "G5_beule_klippe": 6
+  },
+  "F7": {
+   "G2_spitze_oben": 2,
+   "G3_spitze_unten": 1,
+   "G6_facette": 1
+  },
+  "G7": {},
+  "H7": {
+   "G5_beule_klippe": 1,
+   "R9w_wellen": 2
+  }
+ },
+ "kartenweit": [
+  {
+   "quelle": "regeln",
+   "regel": "G7b_wandkontur_rauheit",
+   "feld": "-",
+   "familie": "Hoehen"
+  },
+  {
+   "quelle": "regeln",
+   "regel": "G7b_wandkontur_kantenschaerfe",
+   "feld": "-",
+   "familie": "Hoehen"
+  }
+ ],
+ "dateien": {
+  "regeln": {
+   "pfad": "regeln_letzter_lauf.json",
+   "summe": 570,
+   "len_treffer": 570,
+   "summe_je_regel": 570,
+   "im_raster": 568,
+   "kartenweit": 2,
+   "je_familie": {
+    "Hoehen": 429,
+    "Wege": 43,
+    "Texturen": 98
+   },
+   "ok": true
+  },
+  "r8": {
+   "pfad": "r8_letzter_lauf.json",
+   "summe": 48,
+   "len_treffer": 48,
+   "summe_je_regel": 48,
+   "im_raster": 48,
+   "kartenweit": 0,
+   "je_familie": {
+    "R8": 48
+   },
+   "ok": true
+  },
+  "r9": {
+   "pfad": "r9_letzter_lauf.json",
+   "summe": 334,
+   "len_treffer": 334,
+   "summe_je_regel": 334,
+   "im_raster": 334,
+   "kartenweit": 0,
+   "je_familie": {
+    "R9": 334
+   },
+   "ok": true
+  }
+ },
+ "gesamt": 952,
+ "je_familie": {
+  "Hoehen": 429,
+  "Wege": 43,
+  "Texturen": 98,
+  "R8": 48,
+  "R9": 334,
+  "Sonstige": 0
+ }
+}
