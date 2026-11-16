@@ -1,0 +1,142 @@
+[
+{
+"n": "E3_kanal_12",
+"x": 190,
+"z": 102,
+"h_m": -1.8,
+"zacke_m": 0.16,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_kanal_22",
+"x": 190,
+"z": 102,
+"h_m": -1.8,
+"zacke_m": 0.16,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "E3_kanal_60",
+"x": 190,
+"z": 102,
+"h_m": -1.8,
+"zacke_m": 0.16,
+"hang_max_grad": 29.6,
+"hang_mittel_grad": 17.9,
+"wand": false
+},
+{
+"n": "G1_krater_12",
+"x": 272.5,
+"z": 10,
+"h_m": 13.68,
+"zacke_m": 0.04,
+"hang_max_grad": 9.1,
+"hang_mittel_grad": 2.7,
+"wand": false
+},
+{
+"n": "G1_krater_22",
+"x": 272.5,
+"z": 10,
+"h_m": 13.68,
+"zacke_m": 0.04,
+"hang_max_grad": 9.1,
+"hang_mittel_grad": 2.7,
+"wand": false
+},
+{
+"n": "G1_krater_60",
+"x": 272.5,
+"z": 10,
+"h_m": 13.68,
+"zacke_m": 0.04,
+"hang_max_grad": 9.1,
+"hang_mittel_grad": 2.7,
+"wand": false
+},
+{
+"n": "G1_gate_273_21",
+"x": 273.4,
+"z": 21.2,
+"h_m": 12.44,
+"zacke_m": 0.22,
+"hang_max_grad": 34.3,
+"hang_mittel_grad": 11.9,
+"wand": false
+},
+{
+"n": "A12_G7_260_270",
+"x": 260,
+"z": 270,
+"h_m": -18.41,
+"zacke_m": 0.23,
+"hang_max_grad": 47.2,
+"hang_mittel_grad": 24.9,
+"wand": true
+},
+{
+"n": "E3_hals_190_97",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.2,
+"hang_max_grad": 32.1,
+"hang_mittel_grad": 18.3,
+"wand": false
+},
+{
+"n": "E3_hals_22",
+"x": 190,
+"z": 97,
+"h_m": -1.8,
+"zacke_m": 0.2,
+"hang_max_grad": 32.1,
+"hang_mittel_grad": 18.3,
+"wand": false
+},
+{
+"n": "G1_ring_272_9",
+"x": 272.5,
+"z": 9,
+"h_m": 13.67,
+"zacke_m": 0.04,
+"hang_max_grad": 9.4,
+"hang_mittel_grad": 2.5,
+"wand": false
+},
+{
+"n": "G1_ring_272_8",
+"x": 272.5,
+"z": 8,
+"h_m": 13.66,
+"zacke_m": 0.04,
+"hang_max_grad": 9.4,
+"hang_mittel_grad": 2.5,
+"wand": false
+},
+{
+"n": "A12_260_270",
+"x": 260,
+"z": 270,
+"h_m": -18.41,
+"zacke_m": 0.23,
+"hang_max_grad": 47.2,
+"hang_mittel_grad": 24.9,
+"wand": true
+},
+{
+"n": "A12_G6_264_268.8",
+"x": 264,
+"z": 268.8,
+"h_m": -17.67,
+"zacke_m": 0.19,
+"hang_max_grad": 43.9,
+"hang_mittel_grad": 25.7,
+"wand": false
+}
+]
