@@ -396,7 +396,9 @@
    "fw_folgen": true,
    "weg_rand_m": 5.0,
    "rampe_m": 5.0,
-   "wasser": true
+   "wasser": true,
+   "inseln_fuellen": true,
+   "bett_tiefe_m": 0.6
   },
   {
    "id": "L3c_C7",
@@ -454,7 +456,9 @@
    "fw_folgen": true,
    "weg_rand_m": 5.0,
    "rampe_m": 5.0,
-   "wasser": true
+   "wasser": true,
+   "inseln_fuellen": true,
+   "bett_tiefe_m": 0.6
   }
  ]
 }

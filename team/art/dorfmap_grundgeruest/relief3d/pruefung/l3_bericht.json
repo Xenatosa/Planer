@@ -173,6 +173,8 @@
   {
    "id": "L3c_G7",
    "kachel": "G7",
+   "inseln_gefuellt": 0,
+   "insel_vertices": 0,
    "max_wv_m": 0.856,
    "max_m": 0.829,
    "vertices_geaendert": 1558
@@ -198,19 +200,21 @@
   {
    "id": "L3c_G7b",
    "kachel": "G7/H7",
+   "inseln_gefuellt": 1,
+   "insel_vertices": 5,
    "max_wv_m": 0.399,
-   "max_m": 0.868,
-   "vertices_geaendert": 2959
+   "max_m": 0.582,
+   "vertices_geaendert": 2973
   }
  ],
- "vertices_geaendert": 33624,
- "wv_vertices_geaendert": 6350,
+ "vertices_geaendert": 33626,
+ "wv_vertices_geaendert": 6355,
  "wv_max_abs_m": 981.259,
  "max_abs_m": 3.223,
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "gb_sha256_nachher": "15b65a64f1c45e1d5c8c155d23ddc75e7c9fcb8179396de5ba5225d8c9022c06",
- "fw_vertices_geaendert": 11831,
+ "gb_sha256_nachher": "f26aef499ff8135a375328f774a51dfcb7e4a5475bb94a690076093f5faea3e2",
+ "fw_vertices_geaendert": 11832,
  "objekte_angepasst": 296,
  "prototypen": {
   "D2": "unveraendert",
