@@ -41,25 +41,87 @@ sys.path.insert(0, str(R))
 
 from neu import mesh as M  # noqa: E402
 from neu.wand import build_wall_manifest  # noqa: E402
+from neu import wand as WD  # noqa: E402
 
 BUCHST = "ABCDEFGH"
 
 
-def kachel_grenzen(nx: int, ny: int) -> dict[str, tuple[int, int, int, int]]:
-    """Wie TILE_BOUNDS/pruefe_regeln.feld: Spalte 42 Zellen, Zeile 43 Zellen."""
+def kachel_grenzen(nx: int, ny: int, randzeilen: bool = True) -> dict[str, tuple[int, int, int, int]]:
+    """Wie TILE_BOUNDS/pruefe_regeln.feld: Spalte 42 Zellen, Zeile 43 Zellen.
+
+    P10b: pruefe_regeln.feld() ordnet z >= 301 per np.clip(z//43, 0, 6) der Zeile 7 zu. Die
+    Zellreihen z 301-302 (ny = 303) werden deshalb an die Kacheln der Zeile 7 angehaengt
+    (z1 = ny), statt wie in P10 wegzufallen. randzeilen=False = alter P10-Stand (z1 = 301)."""
     out = {}
     for iz in range(7):
         for ix in range(8):
             x0, z0 = ix * 42, iz * 43
-            out[f"{BUCHST[ix]}{iz + 1}"] = (x0, z0, min(nx, x0 + 42), min(ny, z0 + 43))
+            z1 = ny if (iz == 6 and randzeilen) else min(ny, z0 + 43)
+            out[f"{BUCHST[ix]}{iz + 1}"] = (x0, z0, min(nx, x0 + 42), z1)
     return out
+
+
+def waende_alle(vektor_pfad: Path, terrain_tiles: dict, kacheln: list[str], original: dict) -> dict:
+    """Wandkoerper fuer alle Kacheln mit denselben Funktionen wie neu.wand.build_wall_manifest()
+    (Schleifenrumpf 1:1, Standardvarianten WANDVAR=1, RELIEF_WANDFUSS_VAR=2), nur mit Kachelliste.
+    D2 bleibt wie in der Pipeline wandfrei; was dort unterdrueckt wird, steht in 'd2_unterdrueckt'."""
+    variant = int(os.environ.get("WANDVAR", str(WD.DEFAULT_VARIANT)))
+    foot_variant = int(os.environ.get("RELIEF_WANDFUSS_VAR", "2"))
+    vector = json.loads(vektor_pfad.read_text(encoding="utf-8"))
+    out: dict[str, dict] = {}
+    for tile in kacheln:
+        bounds = M.TILE_BOUNDS[tile]
+        terrain = WD._terrain_heights(terrain_tiles, tile) if foot_variant in (1, 2) else None
+        pieces, network_chunks, features, used_widths = [], [], 0, []
+        normals = np.empty((0, 3), dtype="<f4")
+        for wall in vector.get("waende", []):
+            nominal = float(wall.get("breite_min_m", 0.0))
+            width = max(nominal, 2.4 if variant == 0 else nominal)
+            for points, top, bottom in WD._chunks(wall, bounds, width, variant):
+                used_widths.append(width)
+                if terrain is not None:
+                    network_chunks.append((points, np.maximum(top, bottom), width))
+                else:
+                    positions, indices = WD._solid(points, np.maximum(top, bottom), np.minimum(top, bottom), width, variant)
+                    if len(indices):
+                        pieces.append((positions, indices)); features += 1
+        if terrain is not None and network_chunks:
+            positions, indices, features, _lowered, normals = WD._network_solid(
+                network_chunks, terrain[0], terrain[1], tile, embed_m=0.15, split_on_terrain=foot_variant == 2)
+            if len(indices):
+                pieces = [(positions, indices)]
+        if pieces:
+            positions = np.concatenate([p for p, _ in pieces]).astype("<f4", copy=False)
+            parts, off = [], 0
+            for p_, ix_ in pieces:
+                parts.append(ix_ + off); off += len(p_)
+            indices = np.concatenate(parts).astype("<u4", copy=False)
+        else:
+            positions, indices = np.empty((0, 3), dtype="<f4"), np.empty((0,), dtype="<u4")
+        out[tile] = {
+            "vertices_xyz_f32": _b64(positions.reshape(-1)), "indices_u32": _b64(indices),
+            "normals_xyz_f32": _b64(normals.reshape(-1)),
+            "vertices": int(len(positions)), "triangles": int(len(indices) // 3),
+            "features": int(features), "chunks": len(network_chunks) if terrain is not None else features,
+            "min_width_m": min(used_widths) if used_widths else None,
+            "mesh_sha256": hashlib.sha256(positions.tobytes() + indices.tobytes()).hexdigest(),
+        }
+    # Kontrolle gegen die Pipeline (D1/G1) und D2-Regel der Pipeline.
+    for t in ("D1", "G1"):
+        if out[t]["mesh_sha256"] != original["tiles"][t]["mesh_sha256"]:
+            raise RuntimeError(f"Wandmesh {t} weicht von neu.wand.build_wall_manifest ab")
+    d2 = out.pop("D2")
+    out["D2"] = dict(original["tiles"]["D2"])
+    return {"tiles": out, "d2_unterdrueckt": {k: d2[k] for k in ("vertices", "triangles", "features", "chunks")},
+            "d2_unterdrueckt_mesh": d2}
 
 
 def _b64(a: np.ndarray) -> str:
     return base64.b64encode(a.tobytes(order="C")).decode("ascii")
 
 
-def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = None, name: str = "alle_kacheln") -> dict:
+def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = None, name: str = "alle_kacheln",
+         randzeilen: bool = True, wegprofile: bool = True, alle_waende: bool = True) -> dict:
     t0 = time.time()
     relief = R / "relief_daten.json.gz"
     source = M.load_relief(relief)
@@ -81,7 +143,7 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
         feld[iz, ix] = P[:, 1]
         ext_n = len(P)
 
-    grenzen = kachel_grenzen(nx, ny)
+    grenzen = kachel_grenzen(nx, ny, randzeilen)
     # Kachelgrenzen der Prototypen muessen mit der Rasterformel uebereinstimmen.
     for t, b in M.TILE_BOUNDS.items():
         if tuple(b) != grenzen[t]:
@@ -93,8 +155,12 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
     for t, b in grenzen.items():
         M.TILE_BOUNDS.setdefault(t, b)
 
+    vector = json.loads((R / "neu" / "vektor.json").read_text(encoding="utf-8"))
+    with np.load(R / "neu" / "felder.npz", allow_pickle=False) as arch:
+        fields = {n: arch[n] for n in arch.files}
     tiles: dict[str, dict] = {}
     kontrolle = {}
+    profile = {}
     for t, (x0, z0, x1, z1) in grenzen.items():
         if t in proto:
             item = dict(manifest["tiles"][t])
@@ -106,17 +172,26 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
             kontrolle[t] = bool(np.array_equal(P, P2) and np.array_equal(I, I2))
             item["verfahren"] = "neu.mesh.build_manifest (Prototyp)"
         else:
-            slab = feld[z0 * rs: z1 * rs + 1, x0 * rs: x1 * rs + 1]
+            slab = feld[z0 * rs: z1 * rs + 1, x0 * rs: x1 * rs + 1].copy()
+            gb = source.heights[z0 * rs: z1 * rs + 1, x0 * rs: x1 * rs + 1]
+            if wegprofile:
+                # Dieselbe Pipeline-Funktion wie fuer D1/G1 (Variante 2, Wegende 1, Kreuzung 24);
+                # ihre Aenderung gegenueber GB wird auf das Feld gelegt.
+                h, pinfo = M.terrain_heights(source, t, vector, fields, manifest["terrain_variant"])
+                d = h.astype(np.float64) - gb
+                if pinfo["changed_vertices"]:
+                    slab = (slab.astype(np.float64) + d).astype("<f4")
+                    profile[t] = {k: pinfo[k] for k in ("changed_vertices", "max_abs_delta_m", "layers")}
             P, I = M.tile_mesh(source, t, slab)
             item = {
                 "bounds": [x0, z0, x1, z1], "samples_per_m": rs, "sampling_m": 1.0 / rs,
-                "surface_mode": "locked_visible_GB_bytes" + ("+terrain_extensions" if
-                                                                   (slab != source.heights[z0 * rs: z1 * rs + 1, x0 * rs: x1 * rs + 1]).any() else ""),
+                "surface_mode": "locked_visible_GB_bytes" + ("+wegprofil" if t in profile else "") + (
+                    "+terrain_extensions" if ext_n and (feld[z0 * rs: z1 * rs + 1, x0 * rs: x1 * rs + 1] != gb).any() else ""),
                 "vertices_xyz_f32": _b64(P), "indices_u32": _b64(I),
                 "vertices": int(len(P)), "triangles": int(len(I) // 3),
                 "height_sha256": hashlib.sha256(P[:, 1].tobytes()).hexdigest(),
                 "mesh_sha256": hashlib.sha256(P.tobytes() + I.tobytes()).hexdigest(),
-                "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+                "verfahren": "neu.mesh.terrain_heights + tile_mesh auf GB" if t in profile else "neu.mesh.tile_mesh auf GB (wie D2)",
             }
         cols, rows = (x1 - x0) * rs, (z1 - z0) * rs
         item["closed_triangles"] = item["triangles"] * 2 + 2 * 2 * (cols + rows)
@@ -166,9 +241,53 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
         it["testloch_entfernt"] = entfernt
         it["surface_mode"] += "+TESTLOCH"
 
+    # 4) Waende fuer alle Kacheln (gleiche Funktionen wie neu/wand.py), D2 wie Pipeline wandfrei.
+    tw = time.time()
+    if alle_waende:
+        wa = waende_alle(R / "neu" / "vektor.json", tiles, list(grenzen), waende)
+        waende_paket = {**{k: v for k, v in waende.items() if k != "tiles"}, "tiles": wa["tiles"],
+                        "d2_unterdrueckt": wa["d2_unterdrueckt"], "d2_unterdrueckt_mesh": wa["d2_unterdrueckt_mesh"]}
+    else:
+        waende_paket = waende
+    t_waende = time.time() - tw
+
+    # 5) Kennzahlen je Kachel: Wege (WEGA, vektor.json wege), Wasser (WV, vektor.json wasser),
+    #    Waende (vektor.json waende -> Wandkoerper), Klippenzellen aus der Zellquelle.
+    wega = np.frombuffer(base64.b64decode(source.data["WEGA"]), dtype=np.uint8).reshape(source.heights.shape)
+    wv = np.frombuffer(base64.b64decode(source.data["WV"]), dtype="<f4").reshape(source.heights.shape)
+    import csv as _csv
+    klippe = {}
+    with (R.parent / "raster_c20_z25_zellen.csv").open(encoding="utf-8-sig", newline="") as fh:
+        for row in _csv.DictReader(fh):
+            if row["klippe"] in ("WAND", "KANTE"):
+                tt = BUCHST[min(int(row["cx"]) // 42, 7)] + str(min(int(row["cy"]) // 43, 6) + 1)
+                klippe.setdefault(tt, {"WAND": 0, "KANTE": 0})[row["klippe"]] += 1
+    def _schneidet(poly, b):
+        x0, z0, x1, z1 = b
+        P_ = np.asarray(poly, dtype=np.float64) / M.CELL_M
+        return bool(len(P_) and (P_[:, 0].max() >= x0) and (P_[:, 0].min() <= x1) and (P_[:, 1].max() >= z0) and (P_[:, 1].min() <= z1))
+    kennzahlen = {}
+    for t, (x0, z0, x1, z1) in grenzen.items():
+        sl = (slice(z0 * rs, z1 * rs + 1), slice(x0 * rs, x1 * rs + 1))
+        wt = waende_paket["tiles"].get(t, {})
+        kennzahlen[t] = {
+            "wega_vertices": int(np.count_nonzero(wega[sl])),
+            "wv_vertices": int(np.count_nonzero(wv[sl] > -900)),
+            "vektor_wege": sum(_schneidet(w["mittellinie_m"], (x0, z0, x1, z1)) for w in vector["wege"]),
+            "vektor_wasser": sum(_schneidet(w["polygon_m"], (x0, z0, x1, z1)) for w in vector["wasser"]),
+            "wand_chunks": sum(len(list(WD._chunks(w, (x0, z0, x1, z1), float(w["breite_min_m"]), int(waende["variant"]))))
+                               for w in vector["waende"]),
+            "wand_dreiecke": int(wt.get("triangles", 0)),
+            "klippe_WAND_zellen": klippe.get(t, {}).get("WAND", 0),
+            "klippe_KANTE_zellen": klippe.get(t, {}).get("KANTE", 0),
+            "wegprofil_vertices": profile.get(t, {}).get("changed_vertices", 0) if t not in proto
+            else manifest["terrain"][t]["changed_vertices"],
+        }
+
     paket = {
         "nx": nx, "ny": ny, "rs": rs, "GB": source.data.get("GB") or source.data["G"],
-        "VC": source.data["VC"], "start": source.data.get("start"),
+        "VC": source.data["VC"], "WV": source.data["WV"], "WEGA": source.data["WEGA"],
+        "start": source.data.get("start"), "bruecken": source.data.get("bruecken", []),
         "alle_kacheln": {
             "format": "p10-alle-kacheln-v1",
             "quelle": "relief_daten.json.gz",
@@ -177,7 +296,8 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
             "terrain_extensions_angewendet": ext_n,
             "reihenfolge": list(grenzen),
             "tiles": tiles,
-            "waende": waende,
+            "waende": waende_paket,
+            "kennzahlen": kennzahlen,
         },
     }
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -192,12 +312,15 @@ def baue(out_dir: Path, mit_erweiterung: bool = True, testloch: str | None = Non
         "terrain_extensions_angewendet": ext_n,
         "flaechen_dreiecke": sum(t["triangles"] for t in tiles.values()),
         "geschlossen_dreiecke": sum(t["closed_triangles"] for t in tiles.values()),
-        "wand_dreiecke": sum(t["triangles"] for t in waende["tiles"].values()),
+        "wand_dreiecke": sum(t["triangles"] for t in waende_paket["tiles"].values()),
         "naht": naht,
+        "randzeilen_z301_303": randzeilen, "wegprofile_andere_kacheln": profile,
+        "waende_d2_unterdrueckt": waende_paket.get("d2_unterdrueckt"),
+        "kennzahlen": kennzahlen,
         "paket_bytes": len(gz),
         "kacheln_info": {t: {k: v for k, v in it.items() if k not in ("vertices_xyz_f32", "indices_u32")}
                          for t, it in tiles.items()},
-        "dauer_s": {"prototyp": round(t_proto, 2), "gesamt": round(time.time() - t0, 2)},
+        "dauer_s": {"prototyp": round(t_proto, 2), "waende": round(t_waende, 2), "gesamt": round(time.time() - t0, 2)},
     }
     return info
 
@@ -225,6 +348,10 @@ def main() -> None:
     ap.add_argument("--out", default=os.environ.get("P10_OUT", "/tmp/p10"))
     ap.add_argument("--ohne-erweiterung", action="store_true")
     ap.add_argument("--ohne-html", action="store_true")
+    ap.add_argument("--nur-html", action="store_true", help="nur HTML aus vorhandenem <out>/<name>.json.gz neu bauen (Viewer-Aenderungen)")
+    ap.add_argument("--ohne-randzeilen", action="store_true", help="Zeile 7 wie P10 nur bis z=301")
+    ap.add_argument("--ohne-wegprofile", action="store_true", help="kein terrain_heights() fuer Nicht-Prototyp-Kacheln")
+    ap.add_argument("--ohne-alle-waende", action="store_true", help="Waende nur D1/G1 wie P10")
     ap.add_argument("--testloch", metavar="KACHEL", help="Positivkontrolle: entfernt 1 Dreieck in KACHEL, schreibt alle_kacheln_testloch_<KACHEL>.*")
     a = ap.parse_args()
     out = Path(a.out)
@@ -232,7 +359,11 @@ def main() -> None:
         raise SystemExit("Ausgabe nach /tmp/w3 ist gesperrt (laufende Jobs).")
     t = time.time()
     name = f"alle_kacheln_testloch_{a.testloch}" if a.testloch else "alle_kacheln"
-    info = baue(out, not a.ohne_erweiterung, a.testloch, name)
+    if a.nur_html:
+        print(json.dumps({"html_bytes": baue_html(out, name)}))
+        return
+    info = baue(out, not a.ohne_erweiterung, a.testloch, name,
+                not a.ohne_randzeilen, not a.ohne_wegprofile, not a.ohne_alle_waende)
     if not a.ohne_html:
         th = time.time()
         info["html_bytes"] = baue_html(out, name)
@@ -240,6 +371,7 @@ def main() -> None:
     info["dauer_s"]["gesamt"] = round(time.time() - t, 2)
     (out / f"{name}_build.json").write_text(json.dumps(info, ensure_ascii=False, indent=1, sort_keys=True) + "\n")
     kurz = {k: info[k] for k in ("kacheln", "prototyp_mit_tile_mesh_identisch", "terrain_extensions_angewendet",
+                                  "wegprofile_andere_kacheln", "waende_d2_unterdrueckt", "wand_dreiecke",
                                   "flaechen_dreiecke", "geschlossen_dreiecke", "naht", "paket_bytes", "dauer_s")}
     kurz["html_bytes"] = info.get("html_bytes")
     print(json.dumps(kurz, ensure_ascii=False))
