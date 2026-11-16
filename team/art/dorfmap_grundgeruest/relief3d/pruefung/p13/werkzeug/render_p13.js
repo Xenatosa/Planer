@@ -23,6 +23,10 @@ const E = process.env, { chromium } = require('playwright'), path = require('pat
       if (mode === 'magenta' && art === 'wand') o.material = basic(0x00ffff);
       if (mode === 'front' && art === 'top') { o.material = o.material.clone(); o.material.side = THREE.FrontSide; }
       if (mode === 'nofund' && art === 'fund') o.visible = false;
+      if (mode === 'wasserbasic' && art === 'wasser') o.material = new THREE.MeshBasicMaterial({ color: 0x00ffff, side: THREE.DoubleSide });
+      if (mode === 'wasserfront' && art === 'wasser') { o.material = o.material.clone(); o.material.side = THREE.FrontSide; }
+      if (mode === 'wasserback' && art === 'wasser') { o.material = o.material.clone(); o.material.side = THREE.BackSide; }
+      if (mode === 'wegebasic' && art === 'wege') o.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     });
     for (const m of add) { m.matrixWorldAutoUpdate = false; m.matrixWorld.copy(m.matrix); scene.add(m); }
     return st;
@@ -33,7 +37,7 @@ const E = process.env, { chromium } = require('playwright'), path = require('pat
     window.__test.kam([x + d * Math.cos(e) * Math.sin(a), y + d * Math.sin(e), z + d * Math.cos(e) * Math.cos(a)], [x, y, z]); window.__test.renderOnce();
   }, [x, z, d, el, az]);
   for (const s of (E.SHOTS || 'B4_Q2,G3_U,H2_U').split(',')) {
-    const [t, v] = s.split('_');
+    const [t, v] = s.split('_'); if (s.startsWith('P:')) { const [, x, z, d, el, az] = s.split(':').map(Number); await kam(x, z, d, el, az); await p.screenshot({ path: path.join(dir, s.replace(/:/g, '_') + '.png') }); continue; }
     if (v === 'U') await p.evaluate(t => { window.__test.focus(t, 1.6); window.__test.renderOnce(); }, t);
     else { const c = 'ABCDEFGH'.indexOf(t[0]), r = +t.slice(1) - 1, x0 = c * 42, z0 = r * 43, i = +v[1] - 1;
       const Q = [[x0 + 10.5, z0 + 10.75], [x0 + 31.5, z0 + 10.75], [x0 + 10.5, z0 + 32.25], [x0 + 31.5, z0 + 32.25]]; await kam(Q[i][0], Q[i][1], 30, 35, 0); }

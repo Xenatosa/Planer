@@ -112,9 +112,14 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
   const terrainRoot = new THREE.Group(); terrainRoot.userData.ebene = 'gelaende'; scene.add(terrainRoot);
   const wallRoot = new THREE.Group(); wallRoot.userData.ebene = 'waende'; scene.add(wallRoot);
   const clay = /[?&]clay=1/.test(location.search);
+  // P13 Silhouetten (wie pruefung/alle_kacheln/viewer_alle.js): DoubleSide liess an Grat-/Hangsilhouetten einzelne
+  // Pixel der dunkel beleuchteten Rueckseiten durch (gepunktete dunkle Haarlinie). Oberflaeche = Hoehenfeld, alle
+  // Dreiecke nach oben -> FrontSide; Schatten weiter beidseitig. ?silh=0 = alter Stand.
+  const silh = !/[?&]silh=0/.test(location.search);
   const terrainMaterial = new THREE.MeshLambertMaterial({
-    color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: THREE.DoubleSide,
+    color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: silh ? THREE.FrontSide : THREE.DoubleSide,
   });
+  if (silh) terrainMaterial.shadowSide = THREE.DoubleSide;
   const foundationMaterial = new THREE.MeshLambertMaterial({
     color: clay ? 0x77746e : 0x746e64, side: THREE.DoubleSide,
   });

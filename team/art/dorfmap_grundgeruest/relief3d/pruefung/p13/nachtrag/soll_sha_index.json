@@ -1,0 +1,13 @@
+{
+ "index.html": {
+  "alt_9d04f67": "f356c5a3dc2326be75d3a4bd136192dc98598192166b7f92e7d137ca188bac08",
+  "neu_p13": "69bbf5caa1886ec47418d8abb84be367dee10573e1f4591a24667b79b093a2df"
+ },
+ "neu/index.html": {
+  "alt_9d04f67": "f356c5a3dc2326be75d3a4bd136192dc98598192166b7f92e7d137ca188bac08",
+  "neu_p13": "69bbf5caa1886ec47418d8abb84be367dee10573e1f4591a24667b79b093a2df"
+ },
+ "grund": "neu/viewer.js (Relief-Neu-Viewer, den main.js Zeile 19 fuer index.html aufruft): Gelaende FrontSide + shadowSide DoubleSide, ?silh=0. Bundle per Pipeline (bau_endstand.sh UEBERNEHMEN=1, Schritt 4 baue_html mit esbuild 0.24.2/three 0.170.0 aus /tmp/relief3d_bau_node, danach payload/waende-Schritte bis 20 L3k). Alle anderen 41 Ausgaben im selben Lauf gleich.",
+ "lauf_uebernehmen": "41 gleich, 2 abweichend (index.html, neu/index.html)",
+ "lauf_leer": "ENDBAU BITGLEICH 43/43 (522 s)"
+}

@@ -1,0 +1,102 @@
+{
+ "basis": "9d04f67",
+ "metrik": "Luminanz < Median5x5 - 30 und Median5x5 > 120, 960x680 nativ, SwiftShader, nosh=1, Kritiker-Kameras (QA p4h)",
+ "silh0_vs_basis_9d04f67": {
+  "datei_bytegleich": 15,
+  "von": 15
+ },
+ "summe_vorher": 4025,
+ "summe_nachher": 353,
+ "bilder": [
+  {
+   "bild": "B4_Q2",
+   "dunkel_vorher": 562,
+   "dunkel_nachher": 17,
+   "geaenderte_pixel": 1835
+  },
+  {
+   "bild": "B4_Q3",
+   "dunkel_vorher": 308,
+   "dunkel_nachher": 23,
+   "geaenderte_pixel": 908
+  },
+  {
+   "bild": "B4_Q4",
+   "dunkel_vorher": 512,
+   "dunkel_nachher": 33,
+   "geaenderte_pixel": 1866
+  },
+  {
+   "bild": "C4_U",
+   "dunkel_vorher": 373,
+   "dunkel_nachher": 41,
+   "geaenderte_pixel": 1153
+  },
+  {
+   "bild": "C4_Q1",
+   "dunkel_vorher": 443,
+   "dunkel_nachher": 34,
+   "geaenderte_pixel": 1032
+  },
+  {
+   "bild": "B5_U",
+   "dunkel_vorher": 262,
+   "dunkel_nachher": 43,
+   "geaenderte_pixel": 781
+  },
+  {
+   "bild": "C5_U",
+   "dunkel_vorher": 329,
+   "dunkel_nachher": 68,
+   "geaenderte_pixel": 1023
+  },
+  {
+   "bild": "H3_U",
+   "dunkel_vorher": 208,
+   "dunkel_nachher": 4,
+   "geaenderte_pixel": 495
+  },
+  {
+   "bild": "H4_U",
+   "dunkel_vorher": 143,
+   "dunkel_nachher": 11,
+   "geaenderte_pixel": 279
+  },
+  {
+   "bild": "G3_U",
+   "dunkel_vorher": 153,
+   "dunkel_nachher": 7,
+   "geaenderte_pixel": 399
+  },
+  {
+   "bild": "G3_Q2",
+   "dunkel_vorher": 250,
+   "dunkel_nachher": 0,
+   "geaenderte_pixel": 611
+  },
+  {
+   "bild": "G4_U",
+   "dunkel_vorher": 124,
+   "dunkel_nachher": 5,
+   "geaenderte_pixel": 263
+  },
+  {
+   "bild": "G4_Q2",
+   "dunkel_vorher": 192,
+   "dunkel_nachher": 31,
+   "geaenderte_pixel": 449
+  },
+  {
+   "bild": "H2_U",
+   "dunkel_vorher": 59,
+   "dunkel_nachher": 5,
+   "geaenderte_pixel": 214
+  },
+  {
+   "bild": "D3_U",
+   "dunkel_vorher": 107,
+   "dunkel_nachher": 31,
+   "geaenderte_pixel": 460
+  }
+ ]
+}

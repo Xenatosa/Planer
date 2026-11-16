@@ -1,0 +1,44 @@
+{
+ "basis": {
+  "meshes": {
+   "terrain_surface_D1": "ea714b0fcade",
+   "terrain_sides_D1": "f7d987f57676",
+   "terrain_bottom_D1": "025543f47777",
+   "terrain_surface_G1": "10cb3a76da7a",
+   "terrain_sides_G1": "e43aa726ae4c",
+   "terrain_bottom_G1": "c4f549087344",
+   "terrain_surface_D2": "b0e123bd685e",
+   "terrain_sides_D2": "08b26ca55671",
+   "terrain_bottom_D2": "5316846364a7"
+  },
+  "konsole": []
+ },
+ "p13": {
+  "meshes": {
+   "terrain_surface_D1": "ea714b0fcade",
+   "terrain_sides_D1": "f7d987f57676",
+   "terrain_bottom_D1": "025543f47777",
+   "terrain_surface_G1": "10cb3a76da7a",
+   "terrain_sides_G1": "e43aa726ae4c",
+   "terrain_bottom_G1": "c4f549087344",
+   "terrain_surface_D2": "b0e123bd685e",
+   "terrain_sides_D2": "08b26ca55671",
+   "terrain_bottom_D2": "5316846364a7"
+  },
+  "konsole": []
+ },
+ "p13_silh0": {
+  "meshes": {
+   "terrain_surface_D1": "ea714b0fcade",
+   "terrain_sides_D1": "f7d987f57676",
+   "terrain_bottom_D1": "025543f47777",
+   "terrain_surface_G1": "10cb3a76da7a",
+   "terrain_sides_G1": "e43aa726ae4c",
+   "terrain_bottom_G1": "c4f549087344",
+   "terrain_surface_D2": "b0e123bd685e",
+   "terrain_sides_D2": "08b26ca55671",
+   "terrain_bottom_D2": "5316846364a7"
+  },
+  "konsole": []
+ }
+}
