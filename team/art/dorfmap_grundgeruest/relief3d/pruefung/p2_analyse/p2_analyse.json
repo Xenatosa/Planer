@@ -1,0 +1,685 @@
+{
+ "R1": [
+  {
+   "weg": "rampe_0",
+   "wo": "anfang",
+   "feld": "B1",
+   "x": 65.5,
+   "z": 35.4,
+   "laenge_zellen": 54.0,
+   "naechster_netzabstand_zellen": 61.1,
+   "naechste_zelle": [
+    126,
+    31
+   ],
+   "h_ende": 13.23,
+   "h_naechste": 12.47
+  },
+  {
+   "weg": "rampe_0",
+   "wo": "ende",
+   "feld": "C2",
+   "x": 118.9,
+   "z": 43.3,
+   "laenge_zellen": 54.0,
+   "naechster_netzabstand_zellen": 14.0,
+   "naechste_zelle": [
+    126,
+    31
+   ],
+   "h_ende": -0.01,
+   "h_naechste": 12.47
+  },
+  {
+   "weg": "rampe_1",
+   "wo": "anfang",
+   "feld": "G1",
+   "x": 273.4,
+   "z": 21.2,
+   "laenge_zellen": 48.8,
+   "naechster_netzabstand_zellen": 9.3,
+   "naechste_zelle": [
+    273,
+    30
+   ],
+   "h_ende": 12.44,
+   "h_naechste": 0.11
+  },
+  {
+   "weg": "rampe_1",
+   "wo": "ende",
+   "feld": "F1",
+   "x": 227.3,
+   "z": 36.9,
+   "laenge_zellen": 48.8,
+   "naechster_netzabstand_zellen": 18.8,
+   "naechste_zelle": [
+    245,
+    41
+   ],
+   "h_ende": 0.49,
+   "h_naechste": 0.01
+  },
+  {
+   "weg": "rampe_2",
+   "wo": "anfang",
+   "feld": "D1",
+   "x": 126.5,
+   "z": 31.6,
+   "laenge_zellen": 49.0,
+   "naechster_netzabstand_zellen": 14.3,
+   "naechste_zelle": [
+    118,
+    43
+   ],
+   "h_ende": 12.47,
+   "h_naechste": 0.04
+  },
+  {
+   "weg": "rampe_2",
+   "wo": "ende",
+   "feld": "E1",
+   "x": 175.1,
+   "z": 25.7,
+   "laenge_zellen": 49.0,
+   "naechster_netzabstand_zellen": 6.4,
+   "naechste_zelle": [
+    172,
+    31
+   ],
+   "h_ende": 0.37,
+   "h_naechste": 0.19
+  },
+  {
+   "weg": "rampe_3",
+   "wo": "anfang",
+   "feld": "E6",
+   "x": 189.5,
+   "z": 239.6,
+   "laenge_zellen": 77.0,
+   "naechster_netzabstand_zellen": 50.1,
+   "naechste_zelle": [
+    216,
+    197
+   ],
+   "h_ende": -1.72,
+   "h_naechste": -0.83
+  },
+  {
+   "weg": "rampe_3",
+   "wo": "ende",
+   "feld": "C6",
+   "x": 113.3,
+   "z": 228.6,
+   "laenge_zellen": 77.0,
+   "naechster_netzabstand_zellen": 17.0,
+   "naechste_zelle": [
+    125,
+    240
+   ],
+   "h_ende": -12.53,
+   "h_naechste": -11.14
+  },
+  {
+   "weg": "rampe_4",
+   "wo": "anfang",
+   "feld": "H6",
+   "x": 295.3,
+   "z": 222.9,
+   "laenge_zellen": 56.0,
+   "naechster_netzabstand_zellen": 25.9,
+   "naechste_zelle": [
+    319,
+    213
+   ],
+   "h_ende": -1.7,
+   "h_naechste": 7.12
+  },
+  {
+   "weg": "rampe_4",
+   "wo": "ende",
+   "feld": "F6",
+   "x": 249.0,
+   "z": 254.3,
+   "laenge_zellen": 56.0,
+   "naechster_netzabstand_zellen": 48.9,
+   "naechste_zelle": [
+    246,
+    205
+   ],
+   "h_ende": -15.86,
+   "h_naechste": 0.0
+  },
+  {
+   "weg": "rampe_5",
+   "wo": "anfang",
+   "feld": "D6",
+   "x": 135.2,
+   "z": 230.8,
+   "laenge_zellen": 52.0,
+   "naechster_netzabstand_zellen": 0.8,
+   "naechste_zelle": [
+    135,
+    231
+   ],
+   "h_ende": -9.44,
+   "h_naechste": -9.09
+  },
+  {
+   "weg": "rampe_5",
+   "wo": "ende",
+   "feld": "C7",
+   "x": 100.0,
+   "z": 269.1,
+   "laenge_zellen": 52.0,
+   "naechster_netzabstand_zellen": 42.8,
+   "naechste_zelle": [
+    113,
+    228
+   ],
+   "h_ende": -15.9,
+   "h_naechste": -12.53
+  },
+  {
+   "weg": "rampe_6",
+   "wo": "anfang",
+   "feld": "C5",
+   "x": 87.6,
+   "z": 180.1,
+   "laenge_zellen": 41.0,
+   "naechster_netzabstand_zellen": 8.8,
+   "naechste_zelle": [
+    89,
+    171
+   ],
+   "h_ende": 10.29,
+   "h_naechste": 3.81
+  },
+  {
+   "weg": "rampe_6",
+   "wo": "ende",
+   "feld": "C5",
+   "x": 124.5,
+   "z": 198.0,
+   "laenge_zellen": 41.0,
+   "naechster_netzabstand_zellen": 14.3,
+   "naechste_zelle": [
+    117,
+    185
+   ],
+   "h_ende": 0.25,
+   "h_naechste": 8.83
+  },
+  {
+   "weg": "rampe_7",
+   "wo": "anfang",
+   "feld": "C5",
+   "x": 117.1,
+   "z": 185.4,
+   "laenge_zellen": 42.8,
+   "naechster_netzabstand_zellen": 7.6,
+   "naechste_zelle": [
+    114,
+    192
+   ],
+   "h_ende": 8.84,
+   "h_naechste": 2.9
+  },
+  {
+   "weg": "rampe_7",
+   "wo": "ende",
+   "feld": "D4",
+   "x": 135.4,
+   "z": 146.8,
+   "laenge_zellen": 42.8,
+   "naechster_netzabstand_zellen": 15.5,
+   "naechste_zelle": [
+    127,
+    133
+   ],
+   "h_ende": 0.33,
+   "h_naechste": 8.83
+  },
+  {
+   "weg": "rampe_8",
+   "wo": "anfang",
+   "feld": "C4",
+   "x": 92.6,
+   "z": 135.5,
+   "laenge_zellen": 36.0,
+   "naechster_netzabstand_zellen": 27.8,
+   "naechste_zelle": [
+    119,
+    128
+   ],
+   "h_ende": 10.38,
+   "h_naechste": 5.45
+  },
+  {
+   "weg": "rampe_8",
+   "wo": "ende",
+   "feld": "C4",
+   "x": 89.5,
+   "z": 171.4,
+   "laenge_zellen": 36.0,
+   "naechster_netzabstand_zellen": 9.1,
+   "naechste_zelle": [
+    89,
+    180
+   ],
+   "h_ende": 3.81,
+   "h_naechste": 10.11
+  },
+  {
+   "weg": "rampe_9",
+   "wo": "anfang",
+   "feld": "H4",
+   "x": 298.2,
+   "z": 149.2,
+   "laenge_zellen": 42.8,
+   "naechster_netzabstand_zellen": 18.0,
+   "naechste_zelle": [
+    290,
+    165
+   ],
+   "h_ende": 11.76,
+   "h_naechste": 0.21
+  },
+  {
+   "weg": "rampe_9",
+   "wo": "ende",
+   "feld": "G3",
+   "x": 269.8,
+   "z": 117.3,
+   "laenge_zellen": 42.8,
+   "naechster_netzabstand_zellen": 17.4,
+   "naechste_zelle": [
+    258,
+    130
+   ],
+   "h_ende": 0.3,
+   "h_naechste": 0.0
+  },
+  {
+   "weg": "rampe_10",
+   "wo": "anfang",
+   "feld": "H5",
+   "x": 316.4,
+   "z": 190.5,
+   "laenge_zellen": 23.8,
+   "naechster_netzabstand_zellen": 14.2,
+   "naechste_zelle": [
+    302,
+    187
+   ],
+   "h_ende": 10.98,
+   "h_naechste": 0.01
+  },
+  {
+   "weg": "rampe_10",
+   "wo": "ende",
+   "feld": "H5",
+   "x": 320.0,
+   "z": 214.0,
+   "laenge_zellen": 23.8,
+   "naechster_netzabstand_zellen": 25.9,
+   "naechste_zelle": [
+    295,
+    222
+   ],
+   "h_ende": 7.07,
+   "h_naechste": -1.69
+  },
+  {
+   "weg": "rampe_11",
+   "wo": "anfang",
+   "feld": "D1",
+   "x": 148.5,
+   "z": 2.5,
+   "laenge_zellen": 47.5,
+   "naechster_netzabstand_zellen": 26.0,
+   "naechste_zelle": [
+    148,
+    28
+   ],
+   "h_ende": 12.91,
+   "h_naechste": 6.72
+  },
+  {
+   "weg": "rampe_11",
+   "wo": "ende",
+   "feld": "D1",
+   "x": 156.5,
+   "z": 37.5,
+   "laenge_zellen": 47.5,
+   "naechster_netzabstand_zellen": 9.0,
+   "naechste_zelle": [
+    156,
+    28
+   ],
+   "h_ende": 0.51,
+   "h_naechste": 4.98
+  },
+  {
+   "weg": "rampe_12",
+   "wo": "anfang",
+   "feld": "D4",
+   "x": 127.5,
+   "z": 133.5,
+   "laenge_zellen": 37.0,
+   "naechster_netzabstand_zellen": 15.3,
+   "naechste_zelle": [
+    135,
+    146
+   ],
+   "h_ende": 8.83,
+   "h_naechste": 0.31
+  },
+  {
+   "weg": "rampe_12",
+   "wo": "ende",
+   "feld": "C3",
+   "x": 122.7,
+   "z": 119.5,
+   "laenge_zellen": 37.0,
+   "naechster_netzabstand_zellen": 29.9,
+   "naechste_zelle": [
+    135,
+    146
+   ],
+   "h_ende": 0.69,
+   "h_naechste": 0.31
+  }
+ ],
+ "R2": [
+  {
+   "feld": "D1",
+   "x": 150.9,
+   "z": 23.6,
+   "zellen": 116,
+   "luecke_zur_hauptkomponente_zellen": 93.6,
+   "an_stelle": [
+    156,
+    37
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_2",
+    "rampe_11"
+   ]
+  },
+  {
+   "feld": "F1",
+   "x": 249.7,
+   "z": 28.6,
+   "zellen": 59,
+   "luecke_zur_hauptkomponente_zellen": 84.3,
+   "an_stelle": [
+    227,
+    36
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_1"
+   ]
+  },
+  {
+   "feld": "G2",
+   "x": 270.9,
+   "z": 62.2,
+   "zellen": 1588,
+   "luecke_zur_hauptkomponente_zellen": 41.2,
+   "an_stelle": [
+    224,
+    79
+   ],
+   "typen": [
+    1,
+    3
+   ],
+   "rampen": []
+  },
+  {
+   "feld": "D2",
+   "x": 166.9,
+   "z": 81.5,
+   "zellen": 1227,
+   "luecke_zur_hauptkomponente_zellen": 9.0,
+   "an_stelle": [
+    176,
+    127
+   ],
+   "typen": [
+    1,
+    3
+   ],
+   "rampen": []
+  },
+  {
+   "feld": "C1",
+   "x": 91.3,
+   "z": 38.8,
+   "zellen": 60,
+   "luecke_zur_hauptkomponente_zellen": 106.7,
+   "an_stelle": [
+    118,
+    43
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_0"
+   ]
+  },
+  {
+   "feld": "E3",
+   "x": 200.2,
+   "z": 110.2,
+   "zellen": 38,
+   "luecke_zur_hauptkomponente_zellen": 15.3,
+   "an_stelle": [
+    197,
+    113
+   ],
+   "typen": [
+    1
+   ],
+   "rampen": []
+  },
+  {
+   "feld": "G4",
+   "x": 283.7,
+   "z": 133.0,
+   "zellen": 59,
+   "luecke_zur_hauptkomponente_zellen": 12.0,
+   "an_stelle": [
+    284,
+    134
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_9"
+   ]
+  },
+  {
+   "feld": "C3",
+   "x": 125.3,
+   "z": 125.4,
+   "zellen": 43,
+   "luecke_zur_hauptkomponente_zellen": 54.0,
+   "an_stelle": [
+    131,
+    129
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_12"
+   ]
+  },
+  {
+   "feld": "F4",
+   "x": 249.3,
+   "z": 129.1,
+   "zellen": 94,
+   "luecke_zur_hauptkomponente_zellen": 5.4,
+   "an_stelle": [
+    245,
+    130
+   ],
+   "typen": [
+    1
+   ],
+   "rampen": []
+  },
+  {
+   "feld": "C4",
+   "x": 90.5,
+   "z": 153.0,
+   "zellen": 40,
+   "luecke_zur_hauptkomponente_zellen": 92.1,
+   "an_stelle": [
+    92,
+    142
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_8"
+   ]
+  },
+  {
+   "feld": "C4",
+   "x": 125.9,
+   "z": 165.4,
+   "zellen": 58,
+   "luecke_zur_hauptkomponente_zellen": 49.0,
+   "an_stelle": [
+    135,
+    147
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_7"
+   ]
+  },
+  {
+   "feld": "C5",
+   "x": 105.5,
+   "z": 188.5,
+   "zellen": 52,
+   "luecke_zur_hauptkomponente_zellen": 69.1,
+   "an_stelle": [
+    124,
+    197
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_6"
+   ]
+  },
+  {
+   "feld": "H5",
+   "x": 317.6,
+   "z": 201.4,
+   "zellen": 27,
+   "luecke_zur_hauptkomponente_zellen": 14.3,
+   "an_stelle": [
+    316,
+    190
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_10"
+   ]
+  },
+  {
+   "feld": "G6",
+   "x": 271.7,
+   "z": 238.1,
+   "zellen": 74,
+   "luecke_zur_hauptkomponente_zellen": 29.4,
+   "an_stelle": [
+    295,
+    222
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_4"
+   ]
+  },
+  {
+   "feld": "D6",
+   "x": 136.1,
+   "z": 240.7,
+   "zellen": 151,
+   "luecke_zur_hauptkomponente_zellen": 49.9,
+   "an_stelle": [
+    189,
+    239
+   ],
+   "typen": [
+    2
+   ],
+   "rampen": [
+    "rampe_3",
+    "rampe_5"
+   ]
+  }
+ ],
+ "R6": [
+  {
+   "feld": "F1",
+   "x": 214.0,
+   "z": 14.9,
+   "fein_zellen": 361,
+   "h_min": 11.35,
+   "h_max": 12.75,
+   "wv_mittel": 12.51
+  },
+  {
+   "feld": "G1",
+   "x": 275.0,
+   "z": 6.1,
+   "fein_zellen": 6,
+   "h_min": 12.84,
+   "h_max": 13.01,
+   "wv_mittel": 12.84
+  },
+  {
+   "feld": "G1",
+   "x": 273.1,
+   "z": 7.3,
+   "fein_zellen": 7,
+   "h_min": 12.55,
+   "h_max": 12.99,
+   "wv_mittel": 12.84
+  },
+  {
+   "feld": "G1",
+   "x": 272.5,
+   "z": 9.8,
+   "fein_zellen": 22,
+   "h_min": 12.39,
+   "h_max": 13.05,
+   "wv_mittel": 12.86
+  }
+ ]
+}
