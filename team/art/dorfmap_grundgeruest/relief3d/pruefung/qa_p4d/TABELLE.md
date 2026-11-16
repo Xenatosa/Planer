@@ -59,9 +59,11 @@ Maßstab: stark = im 30-m-Quadranten oder in der Übersicht klar; leicht = nur b
 | D7 | leicht | kleine Plättchen im Fluss ≈135|269 (Q1) |
 | E7 | stark | helle polygonale Platte im Fluss ≈193|276 (~4 m) + kleine ≈202|275 (nah/E7_platte_gross) |
 | F7 | stark | Platten im Fluss ≈218|274 und ≈237|275 mit Treppenrand (nah/F7_platte_219, nah/F7_platte_240); gerade Linie weg |
-| G7 | leicht | Leiter/Treppen im Wasser weg; ein kleines Plättchen ≈255|282; Nordufer West nur Notiz (L3d) |
+| G7 | leicht | Leiter/Treppen im Wasser weg; zwei kleine helle Kiesel im Fluss ≈280–283\|266 (Korrektur P4e, Nahbild qa_p4e/bilder_bfe8dce/vn/G7_NO_kiesel_281_266.jpg, oben = Stand 2771f70); Nordufer West nur Notiz (L3d) |
 | H7 | stark | zwei eckige Blöcke im Fluss ≈303|268 und ≈308|268 (nah/H7_bloecke); weiche weiße Kuppe Südostbucht ≈333|276 (Grenzfall); Wasser-Kerbe am Kartenrand x=336, z≈283 (nah/H7_rand_336) |
 
 **Zählung:** sauber 46, leicht 7 (D4, D5, A7, B7, C7, D7, G7), stark 3 (E7, F7, H7).
 
 Hinweis zur Selbstprüfung: Die hellen Flecken, die in den Übersichten von A6, C6, E6, F6, G6 im Hintergrund zu sehen sind, liegen außerhalb des gelben Kachelrahmens im Fluss der Reihe 7 (Gegenprobe `nah/E6_flecken`, `nah/G6_flecken`, `nah/A6_flecken` zeigen an der Kachelstelle nichts). Sie werden deshalb bei Reihe 7 gezählt.
+
+**Korrektur (P4e, 16.11.2026):** Der ursprüngliche G7-Eintrag „Plättchen ≈255|282“ war aus der Übersicht geschätzt und falsch. Das Plättchen lag westlich außerhalb des G7-Rahmens (vermutlich F7-Platte ≈237|275). G7 bleibt trotzdem *leicht*, weil im Stand 2771f70 zwei kleine Kiesel im Fluss bei ≈280–283|266 lagen (der helle Fleck im NO der G7-Übersicht). Sie waren in P4d übersehen worden und sind in bfe8dce weg.

@@ -15,7 +15,7 @@ Neue Nahbilder (nur jetzt): `bilder_2771f70/nah/<name>.jpg`. Koordinaten x|z in 
 | S5 | H7 Südostbucht ≈333\|276 | weiche weiße Kuppe im Wasser, wirkt wie Schneefels | leicht (Grenzfall) | vn/H7_suedost_bucht, vn/H7_suedost_weit | zacke 0,35 |
 | S6 | H7 Kartenrand x=336, z≈280–286 | Wasserfläche endet mit V-Kerbe/ragt über den Rand | leicht | nah/H7_rand_336 | – |
 | S7 | D4/D5 rampe_5 ≈133\|155 bis ≈135\|185 | milchiges Band/Fleck, unverändert seit P4c | leicht | vn/N04_D4_milchstreifen, vn/N05_D5_milchfleck | zacke 0,10 / 0,0 (Farbe, keine Geometrie) |
-| S8 | A7, B7, C7 ≈124\|268, D7 ≈135\|269, G7 ≈255\|282 | kleine helle Plättchen im Fluss (gleiche Art wie S1–S4, kleiner) | leicht | nah/C7_flecken, kacheln/A7…G7 | – |
+| S8 | A7, B7, C7 ≈124\|268, D7 ≈135\|269, G7 ≈280–283\|266 (korrigiert in P4e, vorher fälschlich ≈255\|282) | kleine helle Plättchen im Fluss (gleiche Art wie S1–S4, kleiner) | leicht | nah/C7_flecken, kacheln/A7…G7 | – |
 | S9 | G6 rampe_4-Unterrand ≈268\|242 | rechts leichte Restzacken, nur im Ton | leicht (Farbe unauffällig) | vn/rampe4_unterrand_268 | zacke 0,47, hang 46,3° |
 | S10 | E2/E3-Brücken, Ostufer | Ufer weicher, Ostseite noch leicht treppig | leicht | vn/N01_E3_bruecke_stummel, vn/N02_E2_bretter | zacke 0,06–0,25 |
 
@@ -47,3 +47,7 @@ S1–S4 und S8 sind dieselbe Fehlerart: Geländezellen im Flussbett ragen als fl
 - Die P4c-Brückenstummel „bei z 87“ liegen tatsächlich bei z≈84; im Nahbild `E2_bruecke_184_87`/`193_87` steht die Brücke am oberen Bildrand, nicht im Zentrum. Brückenzellen laut `relief_daten.json.gz` (bruecken): E2 z 74,5–75,5 (x 186,5–197,5), E3 z≈127.
 - Platten: Zentrum E7 193|276 und F7 218|274 bestätigt (Fehler im Fadenkreuz). F7-Platte liegt ≈3 m westlich des P4c-Punkts 240|276 (→ ≈237|275). H7-Blöcke liegen ≈3 m nördlich des Punkts 307|271 (→ z≈268).
 - Die Flecken in den Übersichten von A6/C6/E6/F6/G6 liegen außerhalb des Kachelrahmens (Fluss Reihe 7); Gegenprobe an der Kachelstelle ohne Befund.
+
+## Korrektur (P4e)
+
+„G7 ≈255|282“ in S8 war ein Schätzfehler aus der Übersicht ohne Nahbild. Das Plättchen lag westlich außerhalb des G7-Rahmens (vermutlich F7-Platte ≈237|275). Die echte G7-Stelle sind zwei kleine Kiesel im Fluss bei ≈280–283|266. Nahbild: `../qa_p4e/bilder_bfe8dce/vn/G7_NO_kiesel_281_266.jpg` (oben 2771f70, unten bfe8dce: weg).
