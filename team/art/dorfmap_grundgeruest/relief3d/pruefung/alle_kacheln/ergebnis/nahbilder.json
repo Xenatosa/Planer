@@ -1,0 +1,297 @@
+{
+ "html": "/tmp/p10/alle_kacheln.html",
+ "abstand": 1.6,
+ "groesse": [
+  1024,
+  768
+ ],
+ "ladezeit_s": 6.138,
+ "bilder": {
+  "A1": {
+   "datei": "/tmp/p10/nahbilder/A1.png",
+   "sekunden": 4.807,
+   "bytes": 464458
+  },
+  "B1": {
+   "datei": "/tmp/p10/nahbilder/B1.png",
+   "sekunden": 2.882,
+   "bytes": 612604
+  },
+  "C1": {
+   "datei": "/tmp/p10/nahbilder/C1.png",
+   "sekunden": 3.207,
+   "bytes": 663840
+  },
+  "D1": {
+   "datei": "/tmp/p10/nahbilder/D1.png",
+   "sekunden": 2.427,
+   "bytes": 656551
+  },
+  "E1": {
+   "datei": "/tmp/p10/nahbilder/E1.png",
+   "sekunden": 1.872,
+   "bytes": 688974
+  },
+  "F1": {
+   "datei": "/tmp/p10/nahbilder/F1.png",
+   "sekunden": 1.632,
+   "bytes": 666322
+  },
+  "G1": {
+   "datei": "/tmp/p10/nahbilder/G1.png",
+   "sekunden": 1.179,
+   "bytes": 581952
+  },
+  "H1": {
+   "datei": "/tmp/p10/nahbilder/H1.png",
+   "sekunden": 0.882,
+   "bytes": 480253
+  },
+  "A2": {
+   "datei": "/tmp/p10/nahbilder/A2.png",
+   "sekunden": 1.457,
+   "bytes": 615377
+  },
+  "B2": {
+   "datei": "/tmp/p10/nahbilder/B2.png",
+   "sekunden": 2.299,
+   "bytes": 854366
+  },
+  "C2": {
+   "datei": "/tmp/p10/nahbilder/C2.png",
+   "sekunden": 2.179,
+   "bytes": 924150
+  },
+  "D2": {
+   "datei": "/tmp/p10/nahbilder/D2.png",
+   "sekunden": 2.833,
+   "bytes": 858022
+  },
+  "E2": {
+   "datei": "/tmp/p10/nahbilder/E2.png",
+   "sekunden": 2.34,
+   "bytes": 852032
+  },
+  "F2": {
+   "datei": "/tmp/p10/nahbilder/F2.png",
+   "sekunden": 2.184,
+   "bytes": 807155
+  },
+  "G2": {
+   "datei": "/tmp/p10/nahbilder/G2.png",
+   "sekunden": 1.862,
+   "bytes": 848752
+  },
+  "H2": {
+   "datei": "/tmp/p10/nahbilder/H2.png",
+   "sekunden": 1.309,
+   "bytes": 733074
+  },
+  "A3": {
+   "datei": "/tmp/p10/nahbilder/A3.png",
+   "sekunden": 1.745,
+   "bytes": 766663
+  },
+  "B3": {
+   "datei": "/tmp/p10/nahbilder/B3.png",
+   "sekunden": 2.117,
+   "bytes": 1017772
+  },
+  "C3": {
+   "datei": "/tmp/p10/nahbilder/C3.png",
+   "sekunden": 2.726,
+   "bytes": 977984
+  },
+  "D3": {
+   "datei": "/tmp/p10/nahbilder/D3.png",
+   "sekunden": 2.698,
+   "bytes": 855971
+  },
+  "E3": {
+   "datei": "/tmp/p10/nahbilder/E3.png",
+   "sekunden": 2.64,
+   "bytes": 793920
+  },
+  "F3": {
+   "datei": "/tmp/p10/nahbilder/F3.png",
+   "sekunden": 3.161,
+   "bytes": 803761
+  },
+  "G3": {
+   "datei": "/tmp/p10/nahbilder/G3.png",
+   "sekunden": 3.345,
+   "bytes": 896027
+  },
+  "H3": {
+   "datei": "/tmp/p10/nahbilder/H3.png",
+   "sekunden": 2.56,
+   "bytes": 690450
+  },
+  "A4": {
+   "datei": "/tmp/p10/nahbilder/A4.png",
+   "sekunden": 7.772,
+   "bytes": 829710
+  },
+  "B4": {
+   "datei": "/tmp/p10/nahbilder/B4.png",
+   "sekunden": 2.748,
+   "bytes": 1082512
+  },
+  "C4": {
+   "datei": "/tmp/p10/nahbilder/C4.png",
+   "sekunden": 3.273,
+   "bytes": 1010529
+  },
+  "D4": {
+   "datei": "/tmp/p10/nahbilder/D4.png",
+   "sekunden": 2.875,
+   "bytes": 887366
+  },
+  "E4": {
+   "datei": "/tmp/p10/nahbilder/E4.png",
+   "sekunden": 2.405,
+   "bytes": 837947
+  },
+  "F4": {
+   "datei": "/tmp/p10/nahbilder/F4.png",
+   "sekunden": 2.644,
+   "bytes": 779036
+  },
+  "G4": {
+   "datei": "/tmp/p10/nahbilder/G4.png",
+   "sekunden": 2.102,
+   "bytes": 849943
+  },
+  "H4": {
+   "datei": "/tmp/p10/nahbilder/H4.png",
+   "sekunden": 1.547,
+   "bytes": 720787
+  },
+  "A5": {
+   "datei": "/tmp/p10/nahbilder/A5.png",
+   "sekunden": 1.693,
+   "bytes": 823952
+  },
+  "B5": {
+   "datei": "/tmp/p10/nahbilder/B5.png",
+   "sekunden": 2.531,
+   "bytes": 999514
+  },
+  "C5": {
+   "datei": "/tmp/p10/nahbilder/C5.png",
+   "sekunden": 3.051,
+   "bytes": 998993
+  },
+  "D5": {
+   "datei": "/tmp/p10/nahbilder/D5.png",
+   "sekunden": 3.125,
+   "bytes": 863270
+  },
+  "E5": {
+   "datei": "/tmp/p10/nahbilder/E5.png",
+   "sekunden": 2.695,
+   "bytes": 815173
+  },
+  "F5": {
+   "datei": "/tmp/p10/nahbilder/F5.png",
+   "sekunden": 2.47,
+   "bytes": 843076
+  },
+  "G5": {
+   "datei": "/tmp/p10/nahbilder/G5.png",
+   "sekunden": 2.495,
+   "bytes": 866714
+  },
+  "H5": {
+   "datei": "/tmp/p10/nahbilder/H5.png",
+   "sekunden": 2.312,
+   "bytes": 756141
+  },
+  "A6": {
+   "datei": "/tmp/p10/nahbilder/A6.png",
+   "sekunden": 2.204,
+   "bytes": 819404
+  },
+  "B6": {
+   "datei": "/tmp/p10/nahbilder/B6.png",
+   "sekunden": 2.136,
+   "bytes": 957017
+  },
+  "C6": {
+   "datei": "/tmp/p10/nahbilder/C6.png",
+   "sekunden": 2.61,
+   "bytes": 916061
+  },
+  "D6": {
+   "datei": "/tmp/p10/nahbilder/D6.png",
+   "sekunden": 2.691,
+   "bytes": 892573
+  },
+  "E6": {
+   "datei": "/tmp/p10/nahbilder/E6.png",
+   "sekunden": 2.39,
+   "bytes": 884539
+  },
+  "F6": {
+   "datei": "/tmp/p10/nahbilder/F6.png",
+   "sekunden": 2.225,
+   "bytes": 865817
+  },
+  "G6": {
+   "datei": "/tmp/p10/nahbilder/G6.png",
+   "sekunden": 2.045,
+   "bytes": 881416
+  },
+  "H6": {
+   "datei": "/tmp/p10/nahbilder/H6.png",
+   "sekunden": 1.66,
+   "bytes": 764168
+  },
+  "A7": {
+   "datei": "/tmp/p10/nahbilder/A7.png",
+   "sekunden": 1.615,
+   "bytes": 630608
+  },
+  "B7": {
+   "datei": "/tmp/p10/nahbilder/B7.png",
+   "sekunden": 1.842,
+   "bytes": 767691
+  },
+  "C7": {
+   "datei": "/tmp/p10/nahbilder/C7.png",
+   "sekunden": 1.952,
+   "bytes": 771933
+  },
+  "D7": {
+   "datei": "/tmp/p10/nahbilder/D7.png",
+   "sekunden": 1.796,
+   "bytes": 756097
+  },
+  "E7": {
+   "datei": "/tmp/p10/nahbilder/E7.png",
+   "sekunden": 1.688,
+   "bytes": 750128
+  },
+  "F7": {
+   "datei": "/tmp/p10/nahbilder/F7.png",
+   "sekunden": 1.823,
+   "bytes": 748055
+  },
+  "G7": {
+   "datei": "/tmp/p10/nahbilder/G7.png",
+   "sekunden": 1.544,
+   "bytes": 723634
+  },
+  "H7": {
+   "datei": "/tmp/p10/nahbilder/H7.png",
+   "sekunden": 1.308,
+   "bytes": 570492
+  }
+ },
+ "karte": {
+  "datei": "/tmp/p10/nahbilder/karte.png",
+  "sekunden": 3.794,
+  "bytes": 694660
+ },
+ "gesamt_s": 143.55
+}

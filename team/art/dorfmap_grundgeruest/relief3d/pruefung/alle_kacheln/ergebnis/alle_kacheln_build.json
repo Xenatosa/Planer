@@ -1,0 +1,987 @@
+{
+ "dauer_s": {
+  "gesamt": 33.3,
+  "html": 0.25,
+  "prototyp": 27.21
+ },
+ "flaechen_dreiecke": 809088,
+ "geschlossen_dreiecke": 1656256,
+ "html_bytes": 12026470,
+ "kacheln": 56,
+ "kacheln_info": {
+  "A1": {
+   "bounds": [
+    0,
+    0,
+    42,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "47d4d4ea5751da4bd2f2140f3425c3befcc1bab55420c16a8a2ee40ec612eec8",
+   "mesh_sha256": "559a1109b201ac6758674a0d7a1f02bdf446958e7256a63210e05490dffccded",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A2": {
+   "bounds": [
+    0,
+    43,
+    42,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "1010bbdb10276cd8fb8f2674cc900b2d4656a9e21014899b285dad8415671e6e",
+   "mesh_sha256": "9dd2fcf6d3f5fa8dd352dd8b3a1721c1c17fa51b58c0cac8c024432f3d86816c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A3": {
+   "bounds": [
+    0,
+    86,
+    42,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b0422d58de2cc522e6a4acc94476ce63f4602d12c53164c740c21249cf168b72",
+   "mesh_sha256": "0088cc908a6d5291c6ee352387638bcf88838e938b7e4e1a651d1e84f195947a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A4": {
+   "bounds": [
+    0,
+    129,
+    42,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d5217754d6ba4031ecc6a34d9a2f78c907311ff22958d5673e62532670a96b7c",
+   "mesh_sha256": "366604829eedbffe12cc5ecba508c366cfba504ebfad2f87f8751688da12b156",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A5": {
+   "bounds": [
+    0,
+    172,
+    42,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a1f85197917f812ad6f0800b2d00b74faa3d20877b52e225950f5b4f53246240",
+   "mesh_sha256": "2c85856586744deb33f36cc9f8550e9013859f015aa3e5bd428125f15fd1977f",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A6": {
+   "bounds": [
+    0,
+    215,
+    42,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "c8a41a08ae87aeeb445353c6ffa4d3d65f3e1cd178c19f86ac90430d117b32f9",
+   "mesh_sha256": "a1f1d4479d851e3aaa454bb2cab0d3a53d753e065525c7dcb7f42cda2a33b460",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "A7": {
+   "bounds": [
+    0,
+    258,
+    42,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "cc96de296e444d978c877b055399019835004e581e3aa9234edec0b4365828a4",
+   "mesh_sha256": "3b2097f1c82872108bc0f8549a78c96951ea274079a39c8dd60abc75f86db3f9",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B1": {
+   "bounds": [
+    42,
+    0,
+    84,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d5a480affa03657910bd32aa5b7c070616873dbdda230e54939fb66dd0a9b6bf",
+   "mesh_sha256": "33de94343ae5b5e05531fef9b02ef11f1a6c112ccbc6e22773c717e6c9732ce0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B2": {
+   "bounds": [
+    42,
+    43,
+    84,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b1a54fff434321f086fe8066945752fab95332b999560ccaa711a1a6fb5acd0d",
+   "mesh_sha256": "116f8832c7795a74646f487d2b2afc3ee0d047daf76925a0849cb0222e298fc4",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B3": {
+   "bounds": [
+    42,
+    86,
+    84,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d230d69e495612a78949e7c0f16759548e1098c8ca572ddfbb83edffad1175d3",
+   "mesh_sha256": "0adf007d49fe7253f496ffa535f5f16d66916681bd6c30c3119e63f9f657c37e",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B4": {
+   "bounds": [
+    42,
+    129,
+    84,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "5ad4b4725cd50a431670c585a5a8da02fea90e660fcc3f5232014e427ce4f2a5",
+   "mesh_sha256": "3d2afc1172b7aadb3aef3240651622e5a6fddea6c4fd648adbe5e4c19c5476c9",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B5": {
+   "bounds": [
+    42,
+    172,
+    84,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "067942f652dfa263b767ff13e9f0e6a05102c01c6ae4dcc2b6ae2d45f2139865",
+   "mesh_sha256": "69277326f12cde02b32e49165d1f447599fb34e1f22e04f48a957f8b7edac977",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B6": {
+   "bounds": [
+    42,
+    215,
+    84,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "8f8f570b292a2cd97abbf030ea7cd94acb0134dcf9003e0f03bf16613e8a29a0",
+   "mesh_sha256": "aea2d162c34c9a248c5daf2fb6f2185161ad6e1c8be923ad9c3445541b26b2a8",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "B7": {
+   "bounds": [
+    42,
+    258,
+    84,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "54c9a586789f8e609795f7568489e3429d3f1f8c1fead14d893f539b65848a3a",
+   "mesh_sha256": "c74003f809dc831070e1ef756af9fc452659e9466f5d427ded6a39def1f32372",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C1": {
+   "bounds": [
+    84,
+    0,
+    126,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "59034076d313f082e529fdce00c7fe77f172715207d748da7eaf9d83cbc3d3f0",
+   "mesh_sha256": "45b3840ce7ea56e4b8c0d4e62647c3d8138833255a3b5d7aaa7759d7aff221d6",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes+terrain_extensions",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C2": {
+   "bounds": [
+    84,
+    43,
+    126,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "52516cbd116d8f4d460d2f3f70ec6e12f9a4909dd8b06e000da5042568969650",
+   "mesh_sha256": "3eea14f7f71763e516bba0752faaeb4c5b567cd83b9fe2cbd427361bd86120bf",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C3": {
+   "bounds": [
+    84,
+    86,
+    126,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a11941d05bc5c99e5d3ab2c646ee93b160570dd67ec0084cbde9869e8209dff4",
+   "mesh_sha256": "c0c2eaf675e1c69af7aa6b8344452063f45ef83fe3ef26bb7f43d74cb637519f",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C4": {
+   "bounds": [
+    84,
+    129,
+    126,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "2c792f93f1da6a301e16a92e3af731a131b8c9cf22932e0d7e11ad1ee797ccc3",
+   "mesh_sha256": "b91ef62aab69af1ffb935595bcd6e5bf1201b223dc893908c8bf96a6cd215a70",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C5": {
+   "bounds": [
+    84,
+    172,
+    126,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b7c24141bc13e23e47eaeb957140ea5b0281dd7956be01d210cf25b76553ec52",
+   "mesh_sha256": "c9772ed1812e62b769988f28b8379078c5c01c1141975932484298dd3b76157a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C6": {
+   "bounds": [
+    84,
+    215,
+    126,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "e248e054cad07b62113fb887965a13432891dd14af5e05bcfc5f1a12a11271e8",
+   "mesh_sha256": "e95392fbe8a664c2e264ae8118f80603f17cbcb80a72f4860d68e82b145b2fa6",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "C7": {
+   "bounds": [
+    84,
+    258,
+    126,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "dbf62dcf08599b752c500e51868f8ab98efb088c5aa89a52dbafcbf4365a2afe",
+   "mesh_sha256": "459f83f06277cbd56fda71d5a685e03e901b77113ae6601fb4a3a599d639c94a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D1": {
+   "bounds": [
+    126,
+    0,
+    168,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "9619da5083720eb43f736043452b28f87dd2f9aa946dc2cb453b5ed972d02c6c",
+   "mesh_sha256": "924d57ae784760cfb5080c5945f8cfa337f040d6bcfee8cb73f5600061a6eb81",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "GB_with_local_profiles",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "D2": {
+   "bounds": [
+    126,
+    43,
+    168,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+   "mesh_sha256": "cbaaa85b2716137aa1960d867f96d0280432181e9a067129234f47aa5f794145",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "D3": {
+   "bounds": [
+    126,
+    86,
+    168,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "569f691ca4421b0ab41d9a9b7b5798f2af86ff05f5997eb31ab9266d1c07ebfe",
+   "mesh_sha256": "f7e4ec3a05953caa6b219eaa6ffff9fc1703b57dbf5fd0b075139775e70797ff",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D4": {
+   "bounds": [
+    126,
+    129,
+    168,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "ca82f7ac9330c1603c605da57b85f6a6b857256f568ef6fca1f569e9762b9916",
+   "mesh_sha256": "215dee0266294c8da17ffbbb9fde54f86b4731fb48af8f8372ab0a2f20726915",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D5": {
+   "bounds": [
+    126,
+    172,
+    168,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "0f17283e50a07d645e2d80fe929b83224bf6a6a3c0ca0a2dba4a0e056af9b5b8",
+   "mesh_sha256": "484146b3ddbe80f1a5012f9d2f95aec82439f4593fce0ad2ff4f7d5a8794dde2",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D6": {
+   "bounds": [
+    126,
+    215,
+    168,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "1ec34706d10057d0066a21d1cfce1bd0e7104c21ce2eb8f36dab0d8f6238568f",
+   "mesh_sha256": "e5c2b2ef4c814ef2cd35b90079108971f855681f602618537c1b045d9ff2e393",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "D7": {
+   "bounds": [
+    126,
+    258,
+    168,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "c7304ffa3dadd767f19ab103c4baae045d28bb057b70674386760101f80f0f43",
+   "mesh_sha256": "b8cbe1d7158522f187e24e18d9f133b1d897d6551edcdee2470b9825a491942c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E1": {
+   "bounds": [
+    168,
+    0,
+    210,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "0e34df496ad5108166b1da68dda50c775765151034c378b314286b3521f947e4",
+   "mesh_sha256": "f868bd6880efa71fcf001d9f10be6e6b8deaf5bbd6d01db548db4deab539a196",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E2": {
+   "bounds": [
+    168,
+    43,
+    210,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "2613096be4c0975b63a127e2ac5b176efdb61ab42d8c83818f29e06ffc8f4957",
+   "mesh_sha256": "90ef7e44fcdf27df6120ea4a2273c7525833bbc60f3b4aea29c28879ecc18063",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E3": {
+   "bounds": [
+    168,
+    86,
+    210,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "de34cb09cfd67d6917f8f89cafb91efb4182a19b5363c74d4fa2a55254dd986b",
+   "mesh_sha256": "18b4cb896a6574dff51b5cc5b3b2b436dbedfd46ef9a09623d48181bb0d47c3b",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E4": {
+   "bounds": [
+    168,
+    129,
+    210,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "7550c6dfcd95aaeab601f7192dd59a3f34a6cec7e9319ae854ca5835fcd97280",
+   "mesh_sha256": "2f04b62a3323a0d450e833c4f1e94056a5dd10e98b33a1a97527d08828880ea7",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E5": {
+   "bounds": [
+    168,
+    172,
+    210,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "dda67930812b803dfbb14d60be79dadfe6660995d7dd3a893b6463c350b08a30",
+   "mesh_sha256": "b88adb03a83fba7d00a3319ed53c4d73ad0df30829a7b299410a70fed869dde2",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E6": {
+   "bounds": [
+    168,
+    215,
+    210,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "4fd7436a2b456485fcc25687575ee9ba787d780dc1fecd6e7c06362958d6e411",
+   "mesh_sha256": "95707ffcce8763df5117e11d6631dd34110ac3348ee25063c12e0ce93b7ab6b8",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "E7": {
+   "bounds": [
+    168,
+    258,
+    210,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "dccef4eceef94f9788e2042a81f66fcebef83b70f0c93a7a031844ad43d7a25d",
+   "mesh_sha256": "24b72ccf64728bd3f53db40b11426d424f8078786af19b645efd20a1cc2bfa9b",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F1": {
+   "bounds": [
+    210,
+    0,
+    252,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "b998f94beb8aaa0edaa3861508275dc35fe8be309220c74d28c49f8131cc5a25",
+   "mesh_sha256": "254bf4fb01b223ef99c23614ae4f396673c74cbb721b3b42a8315a6f348ba974",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F2": {
+   "bounds": [
+    210,
+    43,
+    252,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d4c2448da7575e8ee58575277c74e844bda1ec7f2dee6af1eb349177762dab36",
+   "mesh_sha256": "d8552f593f1aa69ce7a127916e379dc6ed17a40cbecdf5b602bb38706c8aa4c0",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F3": {
+   "bounds": [
+    210,
+    86,
+    252,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a32bc2f03cc6d0d220e7baa902d0f01854c8982ce9f2864cd10f68037e8f1f5c",
+   "mesh_sha256": "2882b5438dfcc585909ba5be62db7d5218372edc7404e4dff9df02148c05d238",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F4": {
+   "bounds": [
+    210,
+    129,
+    252,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a32bc2f03cc6d0d220e7baa902d0f01854c8982ce9f2864cd10f68037e8f1f5c",
+   "mesh_sha256": "3cc5326de8d7ae0d464a362c7ef33ac575114dac557e168a05bd5abc62509ef4",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F5": {
+   "bounds": [
+    210,
+    172,
+    252,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a3c5a1f049fd2ac9c2a5428270b09927846ecea87c86987eb1b766654991e423",
+   "mesh_sha256": "8097e10ca10a12720962e54a7a0ac6408534e3a03759fcc8cda62296068c6fae",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F6": {
+   "bounds": [
+    210,
+    215,
+    252,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d11a0f8fce0650d9eb2816964bdf7ca50766cc14fb5db3c35b584614699aace2",
+   "mesh_sha256": "802fb6bf5ca9c8f741aafe8f4aeadcdafe8d1b10a1131047b145fb27f1150d38",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "F7": {
+   "bounds": [
+    210,
+    258,
+    252,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "5d463ec7243d425e4d236fac99a4269e5b3cce31c323cb74b27fa9a1430fb43e",
+   "mesh_sha256": "945bd40ad5e49d09cf25a8a7bf1f9c8e0a301229c5b17308f2edb6ae3e78bded",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G1": {
+   "bounds": [
+    252,
+    0,
+    294,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "38afeb304c9aefec48cbfdc8a90fe11c7fa08e3080147730deb9be5d666a4bfb",
+   "mesh_sha256": "91609b79150f323ed2010e391195d41b8a8949ae39cd7a8f3724ff5f13861e34",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "GB_with_local_profiles",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.build_manifest (Prototyp)",
+   "vertices": 7395
+  },
+  "G2": {
+   "bounds": [
+    252,
+    43,
+    294,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "f42d0d2f752d1f271d767d70a6b016010edeb188709a5414cfcd6f323f657dee",
+   "mesh_sha256": "c00b862482a623baa36b4302f6da8d0c6798d5d7ce4b0b5d32b42a77eb54ad96",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G3": {
+   "bounds": [
+    252,
+    86,
+    294,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "d53d68bdc5812e53055ace26c720d67ae9c1ff57a0ec96b813e7f908b9df8697",
+   "mesh_sha256": "85d71463130d480c37990d63bc225b052c146d506560c35a9756109f18e60c66",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G4": {
+   "bounds": [
+    252,
+    129,
+    294,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "cf7c1b2159c32db9b5337577a3469c16bcdd20b4ac61e6c5c5a1a90aac79cc80",
+   "mesh_sha256": "b788a4089e47b28ac0b08e024c414060dd88152265fce167645b9bf0c3cdb065",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G5": {
+   "bounds": [
+    252,
+    172,
+    294,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "9d0af40e1eee27616b37a985124c8fc1a3fb8f8bcb0800643d6eb0afdd58c1a3",
+   "mesh_sha256": "80529032172d654dd7111bc0a9ec5d8a9d689520c36fb21e04112ed3a36097bf",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G6": {
+   "bounds": [
+    252,
+    215,
+    294,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "20cb8c107c295b8be83079ef9a8cc0a68fefc15f4651f26953606a1e3eb9782b",
+   "mesh_sha256": "eb76ab0caa9f4eca01c2c2a0b892219a978cf06c81b7921d4ea9023cc1cd0b9a",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "G7": {
+   "bounds": [
+    252,
+    258,
+    294,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "a3bcc54c41f04a68f9d020fe7f4c2eed749276bcb4ada9d67362aa69bc3eb2d0",
+   "mesh_sha256": "e36d347fba3fa8edc991931135bda0623a41e096b70358450ffdbc4ad0bf9375",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H1": {
+   "bounds": [
+    294,
+    0,
+    336,
+    43
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "7d97d8dedb83bf8ed6b1d986f53d9ef676322c0f284ce02c49471c33b955d6d2",
+   "mesh_sha256": "f8dd46379a88402831d08e28e4519eec2fad459e84d243b83dba1cf6e4895d6c",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H2": {
+   "bounds": [
+    294,
+    43,
+    336,
+    86
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "760ab7ac0447eec4571745f920a7b282f34961d19366656ffa2d9dc056ba9525",
+   "mesh_sha256": "067ab339a805aa2591b6bfa2ee688230cb97b8c30810c57085f342ecbf965345",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H3": {
+   "bounds": [
+    294,
+    86,
+    336,
+    129
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "407f27ea818664306675642f2765c068ca60e41798dc60a99e542d16257f63a8",
+   "mesh_sha256": "8ce60c78a3dd32695d731fdd75275f5b1fd41999c8d650ee2fcc2d55f0a10da1",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H4": {
+   "bounds": [
+    294,
+    129,
+    336,
+    172
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "52e941f08aed0e7febc3253ef9028987511bc99efc92677fd214293b54f76ad2",
+   "mesh_sha256": "35f3d79426bda8d06ec92e5960a585c3e0484c9b4e83b1cfbdfa1214f7e3e89d",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H5": {
+   "bounds": [
+    294,
+    172,
+    336,
+    215
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "961cd2bbc58696552c840f62e4c5154fa4e6054d351dfb22b68cdc458e7c74c2",
+   "mesh_sha256": "273a8eba9a2a9df96ef196d586a9d823ea0bae593d9891cc584aadf348e13715",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H6": {
+   "bounds": [
+    294,
+    215,
+    336,
+    258
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "ebeb78781942d6059d978b9e50ee9a0a7832ce7ee5323b4d3c443f6196836033",
+   "mesh_sha256": "8a982ef1365c6a62bca616335bb3d2b3a6667dd73988edbe58400bb1eb42767f",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  },
+  "H7": {
+   "bounds": [
+    294,
+    258,
+    336,
+    301
+   ],
+   "closed_triangles": 29576,
+   "height_sha256": "4e89ae6f1a12fd11bdc5cc4e2fd3b6dec208eea0d26abbb7f6f3e72bd490b42d",
+   "mesh_sha256": "428884c74b6442f9f8b48efc2bb6bbce4d91d0b6b9a0686bcc9017fef55c5751",
+   "samples_per_m": 2,
+   "sampling_m": 0.5,
+   "surface_mode": "locked_visible_GB_bytes",
+   "triangles": 14448,
+   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "vertices": 7395
+  }
+ },
+ "naht": {
+  "abweichend": [],
+  "max_abs_m": 0.0,
+  "paare": 97
+ },
+ "name": "alle_kacheln",
+ "paket_bytes": 8482254,
+ "prototyp_kacheln": [
+  "D1",
+  "D2",
+  "G1"
+ ],
+ "prototyp_mit_tile_mesh_identisch": {
+  "D1": true,
+  "D2": true,
+  "G1": true
+ },
+ "quelle": "relief_daten.json.gz",
+ "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
+ "terrain_extensions_angewendet": 293,
+ "testloch": null,
+ "wand_dreiecke": 45588
+}

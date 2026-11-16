@@ -213,7 +213,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   const presets = {
     schraeg: () => focus(currentTile),
     oben: () => { const [x, y, z] = tileCenter(currentTile); setCamera([x, y + 85, z + 0.1], [x, y, z]); },
-    karte: () => { sun.shadow.camera.left = sun.shadow.camera.bottom = -260; sun.shadow.camera.right = sun.shadow.camera.top = 260;
+    karte: () => { rasterRoot.children.forEach(l => { l.visible = false; }); sun.shadow.camera.left = sun.shadow.camera.bottom = -260; sun.shadow.camera.right = sun.shadow.camera.top = 260;
       sun.shadow.camera.updateProjectionMatrix(); sun.target.position.set(NX / 2, 0, NY / 2); sun.target.updateMatrixWorld();
       const az = 315 * Math.PI / 180, el = 35 * Math.PI / 180;
       sun.position.set(NX / 2 + 430 * Math.cos(el) * Math.sin(az), 430 * Math.sin(el), NY / 2 - 430 * Math.cos(el) * Math.cos(az));
