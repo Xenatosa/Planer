@@ -1,0 +1,50 @@
+{
+ "F7_nord": {
+  "vorher": {
+   "linienstuecke": 9,
+   "davon_kurz_unter_12_punkte": 9,
+   "max_m_zellen": 0.0,
+   "p95_zellen": 0.0,
+   "mittel_zellen": 0.0
+  },
+  "nachher": {
+   "linienstuecke": 4,
+   "davon_kurz_unter_12_punkte": 3,
+   "max_m_zellen": 0.089,
+   "p95_zellen": 0.069,
+   "mittel_zellen": 0.024
+  }
+ },
+ "G7_nord": {
+  "vorher": {
+   "linienstuecke": 6,
+   "davon_kurz_unter_12_punkte": 5,
+   "max_m_zellen": 0.295,
+   "p95_zellen": 0.148,
+   "mittel_zellen": 0.066
+  },
+  "nachher": {
+   "linienstuecke": 2,
+   "davon_kurz_unter_12_punkte": 0,
+   "max_m_zellen": 0.124,
+   "p95_zellen": 0.1,
+   "mittel_zellen": 0.039
+  }
+ },
+ "G7_plaettchen": {
+  "vorher": {
+   "linienstuecke": 10,
+   "davon_kurz_unter_12_punkte": 10,
+   "max_m_zellen": 0.0,
+   "p95_zellen": 0.0,
+   "mittel_zellen": 0.0
+  },
+  "nachher": {
+   "linienstuecke": 10,
+   "davon_kurz_unter_12_punkte": 10,
+   "max_m_zellen": 0.0,
+   "p95_zellen": 0.0,
+   "mittel_zellen": 0.0
+  }
+ }
+}
