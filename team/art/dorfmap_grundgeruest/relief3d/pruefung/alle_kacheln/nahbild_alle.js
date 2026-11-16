@@ -2,7 +2,7 @@
 // Aufruf (im Ordner relief3d):
 //   NODE_PATH=/tmp/w3/node_modules HTML=/tmp/p10/alle_kacheln.html DIR=/tmp/p10/nahbilder \
 //   [KACHELN=C3,D1] [ABSTAND=1.6] [B=1024 H=768] [CLAY=1] [KARTE=0] node pruefung/alle_kacheln/nahbild_alle.js
-// Schreibt DIR/<Kachel>.png, DIR/karte.png (ganze Karte, KARTE=0 aus) und DIR/nahbilder.json.
+// Schreibt DIR/darstellung.json (Dreiecke je Kachel und Ebene), DIR/<Kachel>.png, DIR/karte.png (ganze Karte, KARTE=0 aus) und DIR/nahbilder.json.
 const E = process.env, { chromium } = require('playwright'), path = require('path'), fs = require('fs');
 (async () => {
   const dir = E.DIR || '/tmp/p10/nahbilder';
@@ -20,6 +20,8 @@ const E = process.env, { chromium } = require('playwright'), path = require('pat
   await p.evaluate(() => { window.__test.stopRender(); const d = document.createElement('div'); d.id = 'nbl'; document.body.appendChild(d); });
   const ladezeit = (Date.now() - t0) / 1000;
   const alle = await p.evaluate(() => window.__test.kacheln);
+  if (await p.evaluate(() => !!window.__test.darstellung))
+    fs.writeFileSync(path.join(dir, 'darstellung.json'), JSON.stringify(await p.evaluate(() => window.__test.darstellung()), null, 1));
   const wahl = E.KACHELN ? E.KACHELN.split(',').map(s => s.trim().toUpperCase()) : alle;
   const log = { html: E.HTML || '/tmp/p10/alle_kacheln.html', abstand: k, groesse: [B, H], ladezeit_s: ladezeit, bilder: {} };
   for (const t of wahl) {

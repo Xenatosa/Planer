@@ -1,10 +1,10 @@
 # P10 Lochscan alle 56 Kacheln
 
-Basis: 3296de9 devui/dorfmap-p10
+Basis: e2009b3 devui/dorfmap-p10b
 
 Regel: R5_loch = offene Kanten (nur 1 Dreieck) aller sichtbaren Meshes der Ebene `gelaende`, global 2 cm verschweisst, Kartenrand 0,6 ausgenommen (`pruefung/loch_o18g.js`, unveraendert).
 
-- Lauf `/tmp/p10/loch_alle_roh.json`: 168 Meshes, 1.656.256 Dreiecke, offen_innen 0, bb [0, 0, 336, 301]
+- Lauf `/tmp/p10b/loch_alle_roh.json`: 168 Meshes, 1.667.136 Dreiecke, offen_innen 0, bb [0, 0, 336, 303]
 
 **Summe R5_loch: 0**
 

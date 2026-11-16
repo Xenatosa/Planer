@@ -1,12 +1,13 @@
 {
  "dauer_s": {
-  "gesamt": 33.3,
-  "html": 0.25,
-  "prototyp": 27.21
+  "gesamt": 282.77,
+  "html": 0.37,
+  "prototyp": 25.52,
+  "waende": 243.9
  },
- "flaechen_dreiecke": 809088,
- "geschlossen_dreiecke": 1656256,
- "html_bytes": 12026470,
+ "flaechen_dreiecke": 814464,
+ "geschlossen_dreiecke": 1667136,
+ "html_bytes": 20706424,
  "kacheln": 56,
  "kacheln_info": {
   "A1": {
@@ -116,17 +117,17 @@
     0,
     258,
     42,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "cc96de296e444d978c877b055399019835004e581e3aa9234edec0b4365828a4",
-   "mesh_sha256": "3b2097f1c82872108bc0f8549a78c96951ea274079a39c8dd60abc75f86db3f9",
+   "closed_triangles": 30936,
+   "height_sha256": "325791fc91e8bb949f39b75bd913858b3ab6b58eb6f2fe32d4dba7ddd8ebfa01",
+   "mesh_sha256": "fc17e51e02aac025c41bae0e2db2d58c9642762d8906faabe739ea826a99e997",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "B1": {
    "bounds": [
@@ -235,17 +236,17 @@
     42,
     258,
     84,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "54c9a586789f8e609795f7568489e3429d3f1f8c1fead14d893f539b65848a3a",
-   "mesh_sha256": "c74003f809dc831070e1ef756af9fc452659e9466f5d427ded6a39def1f32372",
+   "closed_triangles": 30936,
+   "height_sha256": "ae406bcb2701e508e5bccfb55632ca6d1f969736a9d52160864d470e036f72af",
+   "mesh_sha256": "c68882206c53bcba37c3b0b208435ed4e487705110b0fe05453a0b5326643f26",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "C1": {
    "bounds": [
@@ -354,17 +355,17 @@
     84,
     258,
     126,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "dbf62dcf08599b752c500e51868f8ab98efb088c5aa89a52dbafcbf4365a2afe",
-   "mesh_sha256": "459f83f06277cbd56fda71d5a685e03e901b77113ae6601fb4a3a599d639c94a",
+   "closed_triangles": 30936,
+   "height_sha256": "8afd802d0f2ecfe22497f3b2cfd5c2546513bbf917f3e87c7f06071152ab5598",
+   "mesh_sha256": "c044592007bfb3ec54b7f189378fe9d8daba2d31f1609325fc815454d087d5e7",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "D1": {
    "bounds": [
@@ -459,13 +460,13 @@
     258
    ],
    "closed_triangles": 29576,
-   "height_sha256": "1ec34706d10057d0066a21d1cfce1bd0e7104c21ce2eb8f36dab0d8f6238568f",
-   "mesh_sha256": "e5c2b2ef4c814ef2cd35b90079108971f855681f602618537c1b045d9ff2e393",
+   "height_sha256": "2cbf2d86cc15c90968a7337f8857288a9936cf58e372afba7f6e7f04a1416fe1",
+   "mesh_sha256": "3508afb0bf250ef5a9623715fb322f624e281725f8b49600fd09accacd3f7ee9",
    "samples_per_m": 2,
    "sampling_m": 0.5,
-   "surface_mode": "locked_visible_GB_bytes",
+   "surface_mode": "locked_visible_GB_bytes+wegprofil",
    "triangles": 14448,
-   "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
+   "verfahren": "neu.mesh.terrain_heights + tile_mesh auf GB",
    "vertices": 7395
   },
   "D7": {
@@ -473,17 +474,17 @@
     126,
     258,
     168,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "c7304ffa3dadd767f19ab103c4baae045d28bb057b70674386760101f80f0f43",
-   "mesh_sha256": "b8cbe1d7158522f187e24e18d9f133b1d897d6551edcdee2470b9825a491942c",
+   "closed_triangles": 30936,
+   "height_sha256": "47eb43c0ff856a63c8c47943d12a7bdb70fe0442ae85d2ea9e4365c075f5d835",
+   "mesh_sha256": "57a43c6bd5452c951d1df31994c93c7e8e496cd77e58062dd52e482b5ef2015e",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "E1": {
    "bounds": [
@@ -592,17 +593,17 @@
     168,
     258,
     210,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "dccef4eceef94f9788e2042a81f66fcebef83b70f0c93a7a031844ad43d7a25d",
-   "mesh_sha256": "24b72ccf64728bd3f53db40b11426d424f8078786af19b645efd20a1cc2bfa9b",
+   "closed_triangles": 30936,
+   "height_sha256": "5d01891b7f7ead5175d4bb97150dfe2970491820a878a67bb287fd44c4c2c6b7",
+   "mesh_sha256": "b86fc422b934474da2088622d894d6b216e7edaafdcb3a96f7ff601dfbeeb700",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "F1": {
    "bounds": [
@@ -711,17 +712,17 @@
     210,
     258,
     252,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "5d463ec7243d425e4d236fac99a4269e5b3cce31c323cb74b27fa9a1430fb43e",
-   "mesh_sha256": "945bd40ad5e49d09cf25a8a7bf1f9c8e0a301229c5b17308f2edb6ae3e78bded",
+   "closed_triangles": 30936,
+   "height_sha256": "8c0a1a8bdea8821d191ec539caae7782d11e379ee1bb4d43e8958d34b6f502a4",
+   "mesh_sha256": "180c4394a1a1fc64d353df6ed1cdf9c61d18de550d559fec91b4905275c8b237",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "G1": {
    "bounds": [
@@ -830,17 +831,17 @@
     252,
     258,
     294,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "a3bcc54c41f04a68f9d020fe7f4c2eed749276bcb4ada9d67362aa69bc3eb2d0",
-   "mesh_sha256": "e36d347fba3fa8edc991931135bda0623a41e096b70358450ffdbc4ad0bf9375",
+   "closed_triangles": 30936,
+   "height_sha256": "4cec8509d2bd45920beaddd7fb4a17688709b68dc0682ebd78d2d6eef8d01122",
+   "mesh_sha256": "f2dafbf7d50a2d7ac8ed08358e668bb4120732cb5aa885efe144b88a010e6e80",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
   },
   "H1": {
    "bounds": [
@@ -949,17 +950,635 @@
     294,
     258,
     336,
-    301
+    303
    ],
-   "closed_triangles": 29576,
-   "height_sha256": "4e89ae6f1a12fd11bdc5cc4e2fd3b6dec208eea0d26abbb7f6f3e72bd490b42d",
-   "mesh_sha256": "428884c74b6442f9f8b48efc2bb6bbce4d91d0b6b9a0686bcc9017fef55c5751",
+   "closed_triangles": 30936,
+   "height_sha256": "b9f1fe6a4e15fcd4b9f234ac267e4b37c7846d6f723e84da709f9256d3274b36",
+   "mesh_sha256": "05f95cc5fca44bf2cc12fbbc5491a5cfd2265d1273906fcfa79305b3f602c5c0",
    "samples_per_m": 2,
    "sampling_m": 0.5,
    "surface_mode": "locked_visible_GB_bytes",
-   "triangles": 14448,
+   "triangles": 15120,
    "verfahren": "neu.mesh.tile_mesh auf GB (wie D2)",
-   "vertices": 7395
+   "vertices": 7735
+  }
+ },
+ "kennzahlen": {
+  "A1": {
+   "klippe_KANTE_zellen": 52,
+   "klippe_WAND_zellen": 463,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 9,
+   "wand_dreiecke": 15680,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 95
+  },
+  "A2": {
+   "klippe_KANTE_zellen": 7,
+   "klippe_WAND_zellen": 21,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 3420,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 975
+  },
+  "A3": {
+   "klippe_KANTE_zellen": 16,
+   "klippe_WAND_zellen": 88,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 3340,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 647
+  },
+  "A4": {
+   "klippe_KANTE_zellen": 5,
+   "klippe_WAND_zellen": 12,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 817
+  },
+  "A5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 30,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 892
+  },
+  "A6": {
+   "klippe_KANTE_zellen": 14,
+   "klippe_WAND_zellen": 225,
+   "vektor_wasser": 22,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1493
+  },
+  "A7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 15,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 1836,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1469
+  },
+  "B1": {
+   "klippe_KANTE_zellen": 47,
+   "klippe_WAND_zellen": 454,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 9,
+   "wand_dreiecke": 10564,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 31,
+   "vektor_wasser": 42,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 2184,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1004
+  },
+  "B3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 1,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 638
+  },
+  "B4": {
+   "klippe_KANTE_zellen": 28,
+   "klippe_WAND_zellen": 516,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 5576,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B5": {
+   "klippe_KANTE_zellen": 1,
+   "klippe_WAND_zellen": 125,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "B6": {
+   "klippe_KANTE_zellen": 12,
+   "klippe_WAND_zellen": 196,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 51
+  },
+  "B7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 9548,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1508
+  },
+  "C1": {
+   "klippe_KANTE_zellen": 69,
+   "klippe_WAND_zellen": 567,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 3,
+   "wand_dreiecke": 3396,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 30,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 2112,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C3": {
+   "klippe_KANTE_zellen": 78,
+   "klippe_WAND_zellen": 633,
+   "vektor_wasser": 40,
+   "vektor_wege": 0,
+   "wand_chunks": 1,
+   "wand_dreiecke": 4324,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C4": {
+   "klippe_KANTE_zellen": 21,
+   "klippe_WAND_zellen": 580,
+   "vektor_wasser": 37,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 21900,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C5": {
+   "klippe_KANTE_zellen": 46,
+   "klippe_WAND_zellen": 862,
+   "vektor_wasser": 33,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 11292,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C6": {
+   "klippe_KANTE_zellen": 73,
+   "klippe_WAND_zellen": 972,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 2,
+   "wand_dreiecke": 8032,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "C7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 62,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 11,
+   "wand_dreiecke": 18120,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1495
+  },
+  "D1": {
+   "klippe_KANTE_zellen": 39,
+   "klippe_WAND_zellen": 628,
+   "vektor_wasser": 34,
+   "vektor_wege": 1,
+   "wand_chunks": 7,
+   "wand_dreiecke": 19920,
+   "wega_vertices": 148,
+   "wegprofil_vertices": 996,
+   "wv_vertices": 0
+  },
+  "D2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 38,
+   "vektor_wege": 4,
+   "wand_chunks": 2,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1776,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "D3": {
+   "klippe_KANTE_zellen": 3,
+   "klippe_WAND_zellen": 16,
+   "vektor_wasser": 38,
+   "vektor_wege": 3,
+   "wand_chunks": 4,
+   "wand_dreiecke": 5596,
+   "wega_vertices": 1200,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "D4": {
+   "klippe_KANTE_zellen": 30,
+   "klippe_WAND_zellen": 315,
+   "vektor_wasser": 40,
+   "vektor_wege": 2,
+   "wand_chunks": 17,
+   "wand_dreiecke": 28284,
+   "wega_vertices": 181,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 674
+  },
+  "D5": {
+   "klippe_KANTE_zellen": 33,
+   "klippe_WAND_zellen": 148,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 15,
+   "wand_dreiecke": 23556,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 666
+  },
+  "D6": {
+   "klippe_KANTE_zellen": 42,
+   "klippe_WAND_zellen": 1008,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 13160,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 490,
+   "wv_vertices": 154
+  },
+  "D7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 16,
+   "vektor_wege": 0,
+   "wand_chunks": 12,
+   "wand_dreiecke": 28512,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1670
+  },
+  "E1": {
+   "klippe_KANTE_zellen": 43,
+   "klippe_WAND_zellen": 974,
+   "vektor_wasser": 30,
+   "vektor_wege": 2,
+   "wand_chunks": 7,
+   "wand_dreiecke": 16004,
+   "wega_vertices": 300,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 19
+  },
+  "E2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 33,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1935,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 413
+  },
+  "E3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 33,
+   "vektor_wege": 8,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1091,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 348
+  },
+  "E4": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 35,
+   "vektor_wege": 9,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2550,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 940
+  },
+  "E5": {
+   "klippe_KANTE_zellen": 12,
+   "klippe_WAND_zellen": 52,
+   "vektor_wasser": 48,
+   "vektor_wege": 3,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 484,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1006
+  },
+  "E6": {
+   "klippe_KANTE_zellen": 55,
+   "klippe_WAND_zellen": 1073,
+   "vektor_wasser": 34,
+   "vektor_wege": 0,
+   "wand_chunks": 3,
+   "wand_dreiecke": 9068,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 163
+  },
+  "E7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 23,
+   "vektor_wege": 0,
+   "wand_chunks": 3,
+   "wand_dreiecke": 13392,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1469
+  },
+  "F1": {
+   "klippe_KANTE_zellen": 67,
+   "klippe_WAND_zellen": 948,
+   "vektor_wasser": 26,
+   "vektor_wege": 3,
+   "wand_chunks": 10,
+   "wand_dreiecke": 24012,
+   "wega_vertices": 139,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 361
+  },
+  "F2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 30,
+   "vektor_wasser": 29,
+   "vektor_wege": 4,
+   "wand_chunks": 1,
+   "wand_dreiecke": 928,
+   "wega_vertices": 1719,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F3": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 29,
+   "vektor_wege": 5,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 555,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F4": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 30,
+   "vektor_wege": 9,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 3465,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "F5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 42,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1989,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 270
+  },
+  "F6": {
+   "klippe_KANTE_zellen": 33,
+   "klippe_WAND_zellen": 649,
+   "vektor_wasser": 35,
+   "vektor_wege": 0,
+   "wand_chunks": 4,
+   "wand_dreiecke": 3456,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 943
+  },
+  "F7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 23,
+   "vektor_wege": 0,
+   "wand_chunks": 13,
+   "wand_dreiecke": 28420,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1948
+  },
+  "G1": {
+   "klippe_KANTE_zellen": 38,
+   "klippe_WAND_zellen": 933,
+   "vektor_wasser": 17,
+   "vektor_wege": 5,
+   "wand_chunks": 13,
+   "wand_dreiecke": 25668,
+   "wega_vertices": 1031,
+   "wegprofil_vertices": 480,
+   "wv_vertices": 35
+  },
+  "G2": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 18,
+   "vektor_wege": 6,
+   "wand_chunks": 3,
+   "wand_dreiecke": 4052,
+   "wega_vertices": 2220,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G3": {
+   "klippe_KANTE_zellen": 28,
+   "klippe_WAND_zellen": 338,
+   "vektor_wasser": 18,
+   "vektor_wege": 4,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 545,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G4": {
+   "klippe_KANTE_zellen": 6,
+   "klippe_WAND_zellen": 401,
+   "vektor_wasser": 18,
+   "vektor_wege": 14,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2686,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G5": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 25,
+   "vektor_wege": 7,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 2257,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "G6": {
+   "klippe_KANTE_zellen": 52,
+   "klippe_WAND_zellen": 736,
+   "vektor_wasser": 25,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 271
+  },
+  "G7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 24,
+   "vektor_wege": 0,
+   "wand_chunks": 5,
+   "wand_dreiecke": 11240,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1681
+  },
+  "H1": {
+   "klippe_KANTE_zellen": 42,
+   "klippe_WAND_zellen": 1162,
+   "vektor_wasser": 5,
+   "vektor_wege": 2,
+   "wand_chunks": 6,
+   "wand_dreiecke": 16760,
+   "wega_vertices": 190,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H2": {
+   "klippe_KANTE_zellen": 29,
+   "klippe_WAND_zellen": 93,
+   "vektor_wasser": 6,
+   "vektor_wege": 3,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 1781,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H3": {
+   "klippe_KANTE_zellen": 49,
+   "klippe_WAND_zellen": 584,
+   "vektor_wasser": 6,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H4": {
+   "klippe_KANTE_zellen": 36,
+   "klippe_WAND_zellen": 617,
+   "vektor_wasser": 6,
+   "vektor_wege": 1,
+   "wand_chunks": 1,
+   "wand_dreiecke": 6348,
+   "wega_vertices": 24,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H5": {
+   "klippe_KANTE_zellen": 40,
+   "klippe_WAND_zellen": 556,
+   "vektor_wasser": 12,
+   "vektor_wege": 4,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 455,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H6": {
+   "klippe_KANTE_zellen": 32,
+   "klippe_WAND_zellen": 475,
+   "vektor_wasser": 12,
+   "vektor_wege": 0,
+   "wand_chunks": 0,
+   "wand_dreiecke": 0,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 0
+  },
+  "H7": {
+   "klippe_KANTE_zellen": 0,
+   "klippe_WAND_zellen": 0,
+   "vektor_wasser": 13,
+   "vektor_wege": 0,
+   "wand_chunks": 12,
+   "wand_dreiecke": 21288,
+   "wega_vertices": 0,
+   "wegprofil_vertices": 0,
+   "wv_vertices": 1678
   }
  },
  "naht": {
@@ -968,7 +1587,7 @@
   "paare": 97
  },
  "name": "alle_kacheln",
- "paket_bytes": 8482254,
+ "paket_bytes": 14986993,
  "prototyp_kacheln": [
   "D1",
   "D2",
@@ -980,8 +1599,27 @@
   "G1": true
  },
  "quelle": "relief_daten.json.gz",
+ "randzeilen_z301_303": true,
  "source_relief_sha256": "5e8fdb51c3f3dff9ad2c03c32c7a39ee1a4f97a3bc0942d47a352b1d0b4f0e88",
  "terrain_extensions_angewendet": 293,
  "testloch": null,
- "wand_dreiecke": 45588
+ "waende_d2_unterdrueckt": {
+  "chunks": 2,
+  "features": 1,
+  "triangles": 2428,
+  "vertices": 2088
+ },
+ "wand_dreiecke": 420988,
+ "wegprofile_andere_kacheln": {
+  "D6": {
+   "changed_vertices": 490,
+   "layers": [
+    "basishoehe_GB",
+    "rampenkreuzung_gemeinsame_ebene_weicher_rand",
+    "wand_abstandsschutz",
+    "kachelrand_fade_3m"
+   ],
+   "max_abs_delta_m": 0.751347
+  }
+ }
 }

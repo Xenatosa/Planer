@@ -2,6 +2,10 @@
 // unveraenderte Kopien aus neu/viewer.js (renderNeuCore), damit Oberflaeche, Seiten und Boden
 // je Kachel exakt wie in index.html entstehen. Unterschied: Kachelliste aus dem Paket statt
 // fest D1/G1/D2, Kachelrand-Linie (Ebene 'raster') und Licht/Schatten folgen der Fokus-Kachel.
+// P10b: Waende fuer alle Kacheln (Paket, neu/wand.py-Funktionen), Wege-Overlay aus WEGA und Wasser
+// aus WV nach dem Rasterverfahren von main.js (Legacy-Viewer, Pfad ?wneu=0), Bruecken wie main.js,
+// je Kachel als eigene Meshes in den Ebenen 'wege' und 'wasser' (nicht 'gelaende' -> Lochscan
+// unveraendert). Kamera-API __test.blick({kachel|x,z, abstand, azimut, neigung}).
 
 const decodeBytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 const decodeF32 = s => new Float32Array(decodeBytes(s).buffer);
@@ -104,15 +108,27 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
   const S = 75; sun.shadow.camera.left = -S; sun.shadow.camera.right = S; sun.shadow.camera.top = S; sun.shadow.camera.bottom = -S;
   sun.shadow.camera.near = 1; sun.shadow.camera.far = 1200;
+  // P10b Darstellung (QA P4b Punkt 1): Schattenakne. Bias/NormalBias nur im Viewer; ?sbias= / ?snbias= zum Testen.
+  sun.shadow.bias = Number(q.get('sbias') ?? -0.0005); sun.shadow.normalBias = Number(q.get('snbias') ?? 0.08);
   scene.add(sun, sun.target);
 
   const terrainRoot = new THREE.Group(); terrainRoot.userData.ebene = 'gelaende'; scene.add(terrainRoot);
   const wallRoot = new THREE.Group(); wallRoot.userData.ebene = 'waende'; scene.add(wallRoot);
   const rasterRoot = new THREE.Group(); rasterRoot.userData.ebene = 'raster'; scene.add(rasterRoot);
+  const wegeRoot = new THREE.Group(); wegeRoot.userData.ebene = 'wege'; scene.add(wegeRoot);
+  const wasserRoot = new THREE.Group(); wasserRoot.userData.ebene = 'wasser'; scene.add(wasserRoot);
+  const ohne = new Set((q.get('ohne') || '').split(',').filter(Boolean));
+  wegeRoot.visible = !ohne.has('wege'); wasserRoot.visible = !ohne.has('wasser'); wallRoot.visible = !ohne.has('waende');
   rasterRoot.visible = q.get('raster') !== '0';
   const clay = /[?&]clay=1/.test(location.search);
   const terrainMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x92918c : 0xffffff, vertexColors: !clay, side: THREE.DoubleSide });
-  const foundationMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x77746e : 0x746e64, side: THREE.DoubleSide });
+  // P10b Darstellung (QA P4b Punkt 2): Seiten/Boden jeder Kachel liegen an der Naht exakt auf der
+  // Oberkante der Nachbaroberflaeche (gleiche Tiefe) und gewinnen dort einzelne Pixel -> dunkle Haarlinie.
+  // polygonOffset schiebt nur Seiten/Boden in der Tiefe nach hinten; Geometrie/Hashes unveraendert.
+  // ?naht=0 schaltet die Hilfe ab (Vorher-Bild).
+  const nahtHilfe = q.get('naht') !== '0';
+  const foundationMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x77746e : 0x746e64, side: THREE.DoubleSide,
+    polygonOffset: nahtHilfe, polygonOffsetFactor: nahtHilfe ? 4 : 0, polygonOffsetUnits: nahtHilfe ? 4 : 0 });
   const wallMaterial = new THREE.MeshLambertMaterial({ color: clay ? 0x85827b : 0x69645d, side: THREE.DoubleSide, flatShading: false,
     polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 });
   const visibleHeights = new Float32Array(decodeBytes(DN.GB).buffer);
@@ -122,10 +138,21 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     return (visibleHeights[k] * (1 - u) + visibleHeights[k + 1] * u) * (1 - v) +
       (visibleHeights[k + GX] * (1 - u) + visibleHeights[k + GX + 1] * u) * v;
   };
+  // Gesamt-Hoehenfeld wie main.js Zeile 109: GB, ueberschrieben mit den Vertexhoehen aller Kachelmeshes.
+  const Gf = new Float32Array(visibleHeights), tilePos = {};
+  for (const tile of alle) {
+    const P = decodeF32(manifest.tiles[tile].vertices_xyz_f32); tilePos[tile] = P;
+    for (let k = 0; k < P.length; k += 3) Gf[Math.round(P[k + 2] * rs) * GX + Math.round(P[k] * rs)] = P[k + 1];
+  }
+  const HG = (x, z) => {
+    const fx = Math.max(0, Math.min(x * rs, GX - 1.001)), fz = Math.max(0, Math.min(z * rs, GY - 1.001));
+    const ix = Math.floor(fx), iz = Math.floor(fz), u = fx - ix, v = fz - iz, k = iz * GX + ix;
+    return (Gf[k] * (1 - u) + Gf[k + 1] * u) * (1 - v) + (Gf[k + GX] * (1 - u) + Gf[k + GX + 1] * u) * v;
+  };
   const tileStats = {}, tileTop = {};
   for (const tile of wahl) {
     const t = manifest.tiles[tile], bounds = t.bounds;
-    const positions = decodeF32(t.vertices_xyz_f32), indices = decodeU32(t.indices_u32);
+    const positions = tilePos[tile], indices = decodeU32(t.indices_u32);
     if (positions.length / 3 !== t.vertices || indices.length / 3 !== t.triangles) throw new Error(`Meshzaehlung stimmt nicht: ${tile}`);
     const tileGroup = new THREE.Group(); tileGroup.name = `terrain_${tile}`;
     tileGroup.userData.ebene = 'gelaende'; tileGroup.userData.kachel = tile;
@@ -155,9 +182,10 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     if (tileGroup.children.length !== 3) throw new Error('Kachelgruppe unvollstaendig ' + tile);
   }
   const wallStats = {};
-  for (const tile of Object.keys(manifest.waende?.tiles || {})) {
+  const wandQuellen = Object.entries(manifest.waende?.tiles || {});
+  if (q.get('d2wand') === '1' && manifest.waende?.d2_unterdrueckt_mesh) wandQuellen.push(['D2', manifest.waende.d2_unterdrueckt_mesh]);
+  for (const [tile, t] of wandQuellen) {
     if (!wahl.includes(tile)) continue;
-    const t = manifest.waende.tiles[tile];
     if (!t || !t.triangles) continue;
     const positions = decodeF32(t.vertices_xyz_f32), indices = decodeU32(t.indices_u32);
     if (positions.length / 3 !== t.vertices || indices.length / 3 !== t.triangles) throw new Error(`Wandmeshzaehlung stimmt nicht: ${tile}`);
@@ -166,6 +194,80 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     group.userData.ebene = 'waende'; group.userData.kachel = tile; wallRoot.add(group);
     makeMesh(THREE, positions, indices, wallMaterial, `wand_${tile}`, group, normals);
     wallStats[tile] = { features: t.features, vertices: t.vertices, triangles: t.triangles };
+  }
+
+  // ---- Wege-Overlay (main.js "Wege-Overlay: weicher Rand ueber Vertex-Alpha", LS=1) ----
+  const hash = (a, b) => { const v = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453; return v - Math.floor(v); };
+  const overlayStats = {};
+  const bereich = tile => { const b = manifest.tiles[tile].bounds; return [b[0] * rs, b[1] * rs, b[2] * rs, b[3] * rs]; };
+  if (DN.WEGA) {
+    const A = decodeBytes(DN.WEGA);
+    if (A.length !== GX * GY) throw new Error('WEGA hat eine unerwartete Laenge');
+    const mat = new THREE.MeshLambertMaterial({ vertexColors: true, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 });
+    for (const tile of wahl) {
+      const [i0, j0, i1, j1] = bereich(tile), wp = [], wc = [], wi = [], map = new Map();
+      const vx = k => { let m = map.get(k); if (m === undefined) { m = wp.length / 3; map.set(k, m); const i = k % GX, j = (k / GX) | 0, h = hash(i, j);
+        wp.push(i / rs, Gf[k] + 0.05, j / rs); const a = A[k] / 255, e = a * a, sa = Math.min(1, Math.max(0, (a - 0.22) / 0.3)), ka = sa * sa * (3 - 2 * sa);
+        wc.push(0.62 - 0.30 * e + 0.04 * h, 0.58 - 0.30 * e + 0.03 * h, 0.54 - 0.30 * e + 0.02 * h, 0.88 * ka); } return m; };
+      for (let j = j0; j < j1; j++) for (let i = i0; i < i1; i++) { const a = j * GX + i, b = a + 1, c = a + GX, d = c + 1;
+        if (A[a] | A[b] | A[c] | A[d]) wi.push(vx(a), vx(c), vx(d), vx(a), vx(d), vx(b)); }
+      overlayStats[tile] = { wege_dreiecke: wi.length / 3 };
+      if (!wi.length) continue;
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(wp, 3));
+      g.setAttribute('color', new THREE.Float32BufferAttribute(wc, 4)); g.setIndex(wi); g.computeVertexNormals();
+      const m = new THREE.Mesh(g, mat); m.name = `wege_${tile}`; m.receiveShadow = true; m.renderOrder = 1;
+      const grp = new THREE.Group(); grp.name = `wege_${tile}`; grp.userData.ebene = 'wege'; grp.userData.kachel = tile; grp.add(m); wegeRoot.add(grp);
+    }
+  }
+  // Bruecken wie main.js (Box 1 x 0,25 x 1 je Eintrag), nur in geladenen Kacheln.
+  const kachelVon = (x, z) => 'ABCDEFGH'[Math.min(7, Math.max(0, Math.floor(x / 42)))] + (Math.min(6, Math.max(0, Math.floor(z / 43))) + 1);
+  const br = (DN.bruecken || []).filter(([x, , z]) => wahl.includes(kachelVon(x, z)));
+  if (br.length) {
+    const bm = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 0.25, 1), new THREE.MeshLambertMaterial({ color: 0x7a5230 }), br.length);
+    const o = new THREE.Object3D(); br.forEach(([x, y, z], n) => { o.position.set(x, y, z); o.updateMatrix(); bm.setMatrixAt(n, o.matrix); });
+    bm.castShadow = true; bm.name = 'bruecken'; const grp = new THREE.Group(); grp.userData.ebene = 'wege'; grp.add(bm); wegeRoot.add(grp);
+  }
+  // ---- Wasser (main.js Raster-Wassernetz, Pfad ?wneu=0: Spiegelglaettung O4, Randabsenkung O5 E1, Farben/Alpha/Schaum) ----
+  if (DN.WV) {
+    const WV = decodeF32(DN.WV), N = GX * GY, ok = k => WV[k] > -900, GL = Gf;
+    if (WV.length !== N) throw new Error('WV hat eine unerwartete Laenge');
+    const WR = new Float32Array(WV);
+    { let A = new Float32Array(WV);
+      for (let it = 0; it < 3; it++) { const B = new Float32Array(A); for (let j = 1; j < GY - 1; j++) for (let i = 1; i < GX - 1; i++) { const k = j * GX + i; if (!ok(k)) continue; const v = [];
+        for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const n = k + dj * GX + di; if (n != k && ok(n) && A[n] > A[k] + 0.3) v.push(A[n]); }
+        if (v.length >= 5) { v.sort((x, y) => x - y); B[k] = v[v.length >> 1]; } } A = B; }
+      for (let it = 0; it < 16; it++) { const B = new Float32Array(A); for (let j = 1; j < GY - 1; j++) for (let i = 1; i < GX - 1; i++) { const k = j * GX + i; if (!ok(k)) continue; let s = 0, c = 0;
+        for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const n = k + dj * GX + di; if (ok(n)) { s += A[n]; c++; } }
+        B[k] = Math.min(WV[k] + 0.3, Math.max(WV[k] - 0.6, s / c)); } A = B; }
+      WR.set(A); }
+    const WD = new Float32Array(WR);
+    { const O = new Float32Array(N); for (let k = 0; k < N; k++) if (ok(k)) { const d = WR[k] - GL[k]; if (d < 0.12) { const t = Math.min(1, Math.max(0, (0.12 - d) / 0.12)), w = t * t * (3 - 2 * t); O[k] = w * (GL[k] - 0.15 - WR[k]); } }
+      for (let it = 0; it < 2; it++) { const B = new Float32Array(O); for (let j = 1; j < GY - 1; j++) for (let i = 1; i < GX - 1; i++) { const k = j * GX + i; if (!ok(k)) continue; let s = 0, c = 0;
+        for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) { const n = k + dj * GX + di; if (ok(n)) { const g = (di && dj) ? 1 : (di || dj) ? 2 : 4; s += O[n] * g; c += g; } }
+        B[k] = Math.min(O[k], s / c); } O.set(B); }
+      for (let k = 0; k < N; k++) if (ok(k)) WD[k] = WR[k] + O[k]; }
+    const nb = k => [k + 1, k - 1, k + GX, k - GX, k + GX + 1, k + GX - 1, k - GX + 1, k - GX - 1].filter(n => n >= 0 && n < N && ok(n));
+    const hR = k => { if (ok(k)) return WD[k]; let s = 0, c = 0; for (const n of nb(k)) { s += WR[n]; c++; } return c ? Math.min(s / c, GL[k] + 0.02) : GL[k] + 0.02; };
+    const mat = new THREE.MeshPhongMaterial({ vertexColors: true, transparent: true, depthWrite: false, shininess: 90, specular: 0x667788, side: THREE.DoubleSide, forceSinglePass: true });
+    for (const tile of wahl) {
+      const [i0, j0, i1, j1] = bereich(tile), wp = [], wc = [], wi = [], map = new Map();
+      const vx = k => { let m = map.get(k); if (m !== undefined) return m; m = wp.length / 3; map.set(k, m);
+        const i = k % GX, j = (k / GX) | 0, t = ok(k) ? Math.min(1, Math.max(0, (WV[k] - GL[k]) / 1.5)) : 0;
+        wp.push(i / rs, hR(k), j / rs);
+        const e = 1 - Math.min(1, t * 4), qd = n => ok(n) ? Math.abs(WV[n] - WV[k]) : 0;
+        const fo0 = ok(k) ? Math.min(1, Math.max(0, (qd(k + 1) + qd(k - 1) + qd(k + GX) + qd(k - GX) - 0.9) * 0.7)) : 0, fo = Math.min(fo0, 0.3);
+        wc.push((0.06 + 0.5 * e * e) * (1 - fo) + 0.70 * fo, (0.16 + 0.48 * e * e) * (1 - fo) + 0.76 * fo, (0.21 + 0.45 * e * e) * (1 - fo) + 0.80 * fo,
+          Math.max(0.14 + 0.76 * Math.pow(Math.min(1, t * 1.15), 0.8), 0.35 * fo));
+        return m; };
+      for (let j = j0; j < j1; j++) for (let i = i0; i < i1; i++) { const a = j * GX + i, b = a + 1, c = a + GX, d = c + 1;
+        if (ok(a) || ok(b) || ok(c) || ok(d)) wi.push(vx(a), vx(c), vx(d), vx(a), vx(d), vx(b)); }
+      (overlayStats[tile] = overlayStats[tile] || {}).wasser_dreiecke = wi.length / 3;
+      if (!wi.length) continue;
+      const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(wp, 3));
+      g.setAttribute('color', new THREE.Float32BufferAttribute(wc, 4)); g.setIndex(wi); g.computeVertexNormals();
+      const m = new THREE.Mesh(g, mat); m.name = `wasser_${tile}`; m.receiveShadow = true; m.renderOrder = 2;
+      const grp = new THREE.Group(); grp.name = `wasser_${tile}`; grp.userData.ebene = 'wasser'; grp.userData.kachel = tile; grp.add(m); wasserRoot.add(grp);
+    }
   }
 
   // Fokus-Hoehe: Mittelwert der Kacheloberflaeche (robuster als ein Punkt bei Klippen).
@@ -177,8 +279,9 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   };
   let currentTile = wahl.includes('D1') ? 'D1' : wahl[0];
   const render = () => { if (renderer) renderer.render(scene, camera); };
+  let lichtZiel = null;
   const light = () => {
-    const [cx, cy, cz] = tileCenter(currentTile);
+    const [cx, cy, cz] = lichtZiel || tileCenter(currentTile);
     const az = Number(document.getElementById('az')?.value ?? 315) * Math.PI / 180;
     const el = Number(document.getElementById('el')?.value ?? 35) * Math.PI / 180;
     sun.target.position.set(cx, cy, cz);
@@ -189,7 +292,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   const schattenKachel = () => { sun.shadow.camera.left = sun.shadow.camera.bottom = -S; sun.shadow.camera.right = sun.shadow.camera.top = S; sun.shadow.camera.updateProjectionMatrix(); };
   // Schraegsicht wie neu/viewer.js focus(): Kamera (x-20, y+35, z+28) auf Kachelmitte; Abstand-Faktor k.
   const focus = (tile, k = 1) => {
-    currentTile = tile;
+    currentTile = tile; lichtZiel = null;
     document.querySelectorAll('[data-tile]').forEach(b => b.classList.toggle('sel', b.dataset.tile === tile));
     rasterRoot.children.forEach(l => { l.visible = l.name === `rand_${tile}`; });
     schattenKachel();
@@ -207,6 +310,8 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     if (c.dataset.l === 'gelaende') terrainRoot.visible = c.checked;
     if (c.dataset.l === 'waende') wallRoot.visible = c.checked;
     if (c.dataset.l === 'raster') rasterRoot.visible = c.checked;
+    if (c.dataset.l === 'wege') wegeRoot.visible = c.checked;
+    if (c.dataset.l === 'wasser') wasserRoot.visible = c.checked;
     render();
   });
   ['az', 'el', 'st'].forEach(id => { const e = document.getElementById(id); if (e) e.oninput = () => { light(); render(); }; });
@@ -229,12 +334,31 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     let s = ''; for (let i = 0; i < bytes.length; i += 32768) s += String.fromCharCode(...bytes.subarray(i, i + 32768));
     return btoa(s);
   };
+  // Blick auf eine Stelle: Ziel = Kachelmitte (kachel) oder Punkt (x, z) auf dem Gelaende.
+  // azimut = Blickrichtung in Grad (0 = Nord/-z, 90 = Ost/+x, 180 = Sued/+z, 270 = West/-x),
+  // neigung = Grad unter der Horizontalen (90 = senkrecht von oben), abstand = Kameraabstand zum Ziel.
+  // Standard entspricht focus(): azimut 35,5, neigung 45,5, abstand 49,1 x 1,6.
+  const blick = ({ kachel, x, z, abstand = 78.6, azimut = 35.54, neigung = 45.5, rand = true } = {}) => {
+    let ziel;
+    if (kachel) { kachel = kachel.toUpperCase(); if (!tileTop[kachel]) throw new Error('Kachel nicht geladen: ' + kachel); ziel = tileCenter(kachel); }
+    else { if (!Number.isFinite(x) || !Number.isFinite(z)) throw new Error('blick braucht kachel oder x und z'); ziel = [x, HG(x, z), z]; }
+    const t = kachel || kachelVon(ziel[0], ziel[2]);
+    currentTile = tileTop[t] ? t : currentTile;
+    rasterRoot.children.forEach(l => { l.visible = rand && l.name === `rand_${t}`; });
+    const a = azimut * Math.PI / 180, n = neigung * Math.PI / 180, d = abstand;
+    const pos = [ziel[0] - Math.sin(a) * Math.cos(n) * d, ziel[1] + Math.sin(n) * d, ziel[2] + Math.cos(a) * Math.cos(n) * d];
+    schattenKachel(); lichtZiel = ziel; setCamera(pos, ziel); light(); render();
+    return { kachel: t, ziel: ziel.map(v => +v.toFixed(2)), kamera: pos.map(v => +v.toFixed(2)), abstand, azimut, neigung };
+  };
   window.__szene = scene;
-  window.__info = () => ({ kacheln: wahl.length, terrain: tileStats, waende: wallStats });
+  window.__info = () => ({ kacheln: wahl.length, terrain: tileStats, waende: wallStats, overlays: overlayStats });
   window.__test = {
     bereit: true, kacheln: wahl.slice(), start: DN.start || { x: 147, z: 30 }, wandfuss: { x: 140, z: 35 },
     setModus: mode => { if (mode !== 'neu') throw new Error('Der Kern-Viewer enthaelt nur den neuen Prototyp'); },
-    setView: name => (presets[name] || presets.schraeg)(), focus, kam: (p, t) => setCamera(p, t), H,
+    setView: name => (presets[name] || presets.schraeg)(), focus, blick, kam: (p, t) => setCamera(p, t), H, HG,
+    darstellung: () => Object.fromEntries(wahl.map(t => [t, { gelaende_dreiecke: tileStats[t].triangles, surface_mode: tileStats[t].surfaceMode,
+      wand_dreiecke: wallStats[t]?.triangles || 0, wege_dreiecke: overlayStats[t]?.wege_dreiecke || 0, wasser_dreiecke: overlayStats[t]?.wasser_dreiecke || 0,
+      bruecken: br.filter(([x, , z]) => kachelVon(x, z) === t).length }])),
     dump: () => {
       scene.updateMatrixWorld(true);
       const out = [];
@@ -252,7 +376,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     stopRender: () => { if (renderer) renderer.setAnimationLoop(null); }, renderOnce: render,
     setLight: (az, el, st) => { document.getElementById('az').value = az; document.getElementById('el').value = el; document.getElementById('st').value = st; light(); render(); },
   };
-  document.getElementById('info').textContent = `3D Meshes: ${wahl.length} Kacheln\nFlaechendreiecke: ${Object.values(tileStats).reduce((s, t) => s + t.triangles, 0).toLocaleString('de-DE')}\nWaende: ${Object.keys(wallStats).join(', ') || '-'}`;
+  document.getElementById('info').textContent = `3D Meshes: ${wahl.length} Kacheln\nFlaechendreiecke: ${Object.values(tileStats).reduce((s, t) => s + t.triangles, 0).toLocaleString('de-DE')}\nWandkoerper: ${Object.keys(wallStats).length} Kacheln\nWege-Overlay: ${Object.values(overlayStats).filter(o => o.wege_dreiecke).length} Kacheln\nWasser: ${Object.values(overlayStats).filter(o => o.wasser_dreiecke).length} Kacheln`;
   const queryTile = q.get('tile');
   if (queryTile && presets[queryTile.toUpperCase()]) focus(queryTile.toUpperCase()); else focus(currentTile);
   if (renderer && !/[?&]manual=1/.test(location.search)) renderer.setAnimationLoop(() => { controls.update(); render(); });

@@ -1,18 +1,18 @@
 {
  "titel": "P10 Lochscan alle 56 Kacheln",
- "basis": "3296de9 devui/dorfmap-p10",
+ "basis": "e2009b3 devui/dorfmap-p10b",
  "regel": "R5_loch (offene Innenkanten, loch_o18g.js unveraendert)",
  "laeufe": [
   {
-   "datei": "/tmp/p10/loch_alle_roh.json",
+   "datei": "/tmp/p10b/loch_alle_roh.json",
    "meshes": 168,
-   "dreiecke": 1656256,
+   "dreiecke": 1667136,
    "offen_innen": 0,
    "bb": [
     0,
     0,
     336,
-    301
+    303
    ]
   }
  ],

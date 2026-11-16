@@ -1,18 +1,18 @@
 {
  "titel": "P10 Lochscan Positivkontrolle C3",
- "basis": "3296de9 devui/dorfmap-p10 (Positivkontrolle, 1 Dreieck in C3 entfernt)",
+ "basis": "e2009b3 devui/dorfmap-p10b (Positivkontrolle, 1 Dreieck in C3 entfernt)",
  "regel": "R5_loch (offene Innenkanten, loch_o18g.js unveraendert)",
  "laeufe": [
   {
-   "datei": "/tmp/p10/loch_kontrolle_roh.json",
+   "datei": "/tmp/p10b/loch_kontrolle_roh.json",
    "meshes": 168,
-   "dreiecke": 1656255,
+   "dreiecke": 1667135,
    "offen_innen": 3,
    "bb": [
     0,
     0,
     336,
-    301
+    303
    ]
   }
  ],

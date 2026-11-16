@@ -1,6 +1,6 @@
-# P10 – 3D-Mesh und Lochscan für alle 56 Kacheln (A–H × 1–7)
+# P10/P10b – 3D-Mesh, Lochscan und Nahbilder für alle 56 Kacheln (A–H × 1–7)
 
-Basis: `art/dorfmap-fertig` @ `038528c`. Nur neue Dateien in diesem Ordner; Relief-, Höhen-, Prüfer- und
+Basis: P10 `art/dorfmap-fertig` @ `038528c`, P10b @ `dc8c174`. Nur neue Dateien in diesem Ordner; Relief-, Höhen-, Prüfer- und
 Gate-Dateien bleiben unverändert. Alle Artefakte gehen nach `/tmp/p10` (nicht `/tmp/w3/bundle_r.js`,
 nicht `/tmp/gate_loch.json`).
 
@@ -8,7 +8,7 @@ nicht `/tmp/gate_loch.json`).
 
 ```sh
 # alles in einem Lauf (Build, Hash-Vergleich, Lochscan + Positivkontrolle C3, 56 Nahbilder, Übersicht)
-sh pruefung/alle_kacheln/alles.sh /tmp/p10
+sh pruefung/alle_kacheln/alles.sh /tmp/p10b   # P10b: ~10 min (Wände ~4 min)
 # Einzelschritte
 python3 pruefung/alle_kacheln/baue_alle_kacheln.py --out /tmp/p10          # Paket + HTML (~30 s)
 NODE_PATH=/tmp/w3/node_modules REF=index.html NEU=/tmp/p10/alle_kacheln.html \
@@ -58,10 +58,70 @@ Viewer `neu/viewer.js` baut je Kachel Oberfläche + Seiten + Boden (geschlossene
 Ergebnisse dieses Stands: `ergebnis/` (Berichte, Übersichtsbild, Kartenbild). Die 56 Einzel-PNGs sind
 nicht eingecheckt (56 PNGs, 1024 × 768, zusammen ≈ 44 MB; Kopie unter `/workspace/p10_nahbilder/`) und werden mit obigem Befehl in ~2 min neu erzeugt.
 
+
+## P10b – Ergänzungen
+
+**Nahbild für eine Stelle** (`nahbild.js`, ein Browserlauf, ~5–12 s je Aufruf):
+
+```sh
+export NODE_PATH=/tmp/w3/node_modules
+# ganze Kachel, Standardblick (wie focus(): Azimut 35,5°, Neigung 45,5°, Abstand 78,6)
+node pruefung/alle_kacheln/nahbild.js --kachel C3 --out /tmp/p10b/c3.png
+# Punkt x|z (Rastermeter wie Gate-Trefferlisten), Blick nach Norden, flach, nah
+node pruefung/alle_kacheln/nahbild.js --xz 140,35 --abstand 30 --azimut 0 --neigung 30 --out /tmp/p10b/d1_wandfuss.png
+# senkrecht von oben, nur Gelände (ohne Overlays), Clay, schneller mit Teilmenge
+node pruefung/alle_kacheln/nahbild.js --xz 147,236 --abstand 60 --neigung 90 --ohne wasser,wege,waende --clay --nur-kacheln D6,C6,E6,D5,D7 --out /tmp/p10b/d6_oben.png
+# mehrere Stellen in einem Lauf (JSON-Liste mit kachel|x,z, abstand, azimut, neigung, out, titel)
+node pruefung/alle_kacheln/nahbild.js --liste /tmp/p10b/stellen.json
+```
+Azimut = Blickrichtung (0 = Nord/−z, 90 = Ost/+x, 180 = Süd/+z, 270 = West/−x), Neigung = Grad unter der
+Horizontalen (90 = senkrecht), Abstand = Kamera–Ziel. Das Ziel liegt auf der Geländehöhe am Punkt.
+Im Viewer selbst: `window.__test.blick({kachel:'C3'})` bzw. `blick({x:140, z:35, abstand:30, azimut:0, neigung:30})`.
+
+**Zellreihen z 301–303:** `ny = 303`, Zeilen à 43 Zellen ergeben 7 × 43 = 301. Die Reihen z = 301 und 302 gehören
+zur Karte (`SPEC.md`: Raster 336 × 303, letzte Zeile 10 px = 0,4 m hoch; `PRUEFPROTOKOLL.md`: Randzeile 302 übernimmt
+Werte der Zeile 301), und `pruefe_regeln.feld()` ordnet sie per `np.clip(z//43, 0, 6)` der Zeile 7 zu. Deshalb
+reichen die Kacheln A7–H7 jetzt bis z = 303 (45 statt 43 Zellen, 8 280 statt 7 395 Vertices); `--ohne-randzeilen`
+stellt den P10-Stand her. Die letzte Reihe ist im 0,5-m-Höhengitter wie jede andere 1 m breit (so liegt sie in GB vor).
+
+**Wegprofile:** Für die 53 Nicht-Prototyp-Kacheln wird jetzt auch `neu.mesh.terrain_heights()` (gleiche Varianten
+wie D1/G1) aufgerufen. Nur D6 ändert sich (490 Vertices, max. 0,75 m, Ebene `rampenkreuzung_gemeinsame_ebene_weicher_rand`);
+alle anderen 52 bleiben auf GB (+ C1-Erweiterung). Ränder bleiben durch den 3-m-Kachelrand-Fade auf GB (Naht 0,0 m).
+`--ohne-wegprofile` schaltet das ab.
+
+**Wandkörper:** `waende_alle()` führt den Schleifenrumpf von `neu.wand.build_wall_manifest()` mit denselben
+privaten Funktionen (`_chunks`, `_network_solid`, `_terrain_heights`) für alle Kacheln aus; D1/G1 werden gegen die
+Pipeline-Hashes geprüft. D2 bleibt wie in der Pipeline wandfrei (die unterdrückten 2 Abschnitte zeigt `?d2wand=1`).
+Laufzeit ≈ 4 min (`--ohne-alle-waende` = P10-Stand).
+
+**Wege/Wasser:** In `index.html` (Kern-Viewer) gibt es für D1/G1/D2 keine eigenen Wege- oder Wassermeshes – beides
+ist dort nur Vertexfarbe (VC) bzw. bei D1/G1 Geländeprofil. Damit Wege und Wasser auf allen Kacheln sichtbar sind,
+zeichnet `viewer_alle.js` sie aus `relief_daten.json.gz` nach dem Verfahren des Legacy-Viewers `main.js`:
+Wege-Overlay aus `WEGA` (Vertex-Alpha, +0,05 m, Brücken als Boxen) und Wasser aus `WV` im Raster-Wassernetz
+(Pfad `?wneu=0`: Spiegelglättung, Randabsenkung, Farben/Alpha/Schaum; ohne den Shader- und Konturflächen-Teil).
+Beides liegt in den Ebenen `wege`/`wasser`, nicht `gelaende` – der Lochscan ist davon nicht betroffen.
+`?ohne=wasser,wege,waende` blendet sie aus. Zahlen je Kachel: `ergebnis/darstellung.md`.
+
+## P10b – QA-P4b-Punkte (Darstellungshilfen, nur Viewer)
+
+Alle drei Punkte ändern nur Material-/Lichtparameter im eigenen Viewer, keine Geometrie. Die Hashes in
+`hash_vergleich.*` beziehen sich weiter auf die Geometrie aus `build_manifest` (Oberfläche, Seiten, Boden, Wände).
+
+1. **Schattenakne:** `sun.shadow.bias = -0.0005`, `sun.shadow.normalBias = 0.08` (Testparameter `?sbias=`, `?snbias=`).
+   Vorher-Bild: `nahbild.js ... --param 'sbias=0&snbias=0'`.
+2. **Haarlinien an Kachelnähten:** `naht_pruefung.py` vergleicht alle 97 Nachbarkanten bitweise (x, y, z) –
+   keine Abweichung, keine T-Junctions. Die Linien sind ein Render-Artefakt: Seiten- und Bodenflächen jeder Kachel
+   (`foundationMaterial`) liegen an der Naht in exakt gleicher Tiefe wie die Oberkante der Nachbaroberfläche und
+   gewinnen dort einzelne Pixel. Hilfe: `polygonOffset` (Faktor/Einheiten 4) nur auf dem Seiten-/Bodenmaterial.
+   Vorher-Bild: `--param 'naht=0'`.
+3. **Frei stehende Wandobjekte:** Analyse in `wand_herkunft.py` → `ergebnis/wand_herkunft.json` (nichts gelöscht).
+
+Wasserbilder F7/G7/H7 (mit und ohne Wasser, ohne Wandkörper): Liste `wasser_F7_G7_H7_liste.json`, erzeugt von `alles.sh`
+nach `<AUSGABE>/wasser_F7_G7_H7/`. Zweiter Kachelsatz ohne Wandkörper: `<AUSGABE>/nahbilder_ohne_waende/`.
+
 ## Grenzen
 
 - Der Lochscan sieht nur Meshes der Ebene `gelaende`. Jede Kachel ist ein geschlossener Rasterkörper
   (Oberfläche + Seiten + Boden); ein R5-Treffer entsteht nur bei fehlenden/entarteten Dreiecken. Optische
   „Löcher“ (Spalten zwischen Kacheln, Senken, Klippen) erfasst er nicht – dafür Nahtprüfung und Nahbilder.
-- Separate Wände gibt es nur für D1/G1 (wie in index.html); Objekte, Wasser und Wege sind im Kern-Viewer
-  nicht enthalten.
+- Objekte (Bäume, Felsen, Häuser) und die Rampen-Bänder (`rampenwege`) sind nicht dargestellt.

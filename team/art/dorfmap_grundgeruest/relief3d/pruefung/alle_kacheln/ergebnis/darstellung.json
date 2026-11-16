@@ -1,0 +1,450 @@
+{
+ "A1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 15680,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 218,
+  "bruecken": 0
+ },
+ "B1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 10564,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "C1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes+terrain_extensions",
+  "wand_dreiecke": 3396,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "GB_with_local_profiles",
+  "wand_dreiecke": 19920,
+  "wege_dreiecke": 296,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "E1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 16004,
+  "wege_dreiecke": 634,
+  "wasser_dreiecke": 54,
+  "bruecken": 0
+ },
+ "F1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 24012,
+  "wege_dreiecke": 278,
+  "wasser_dreiecke": 888,
+  "bruecken": 0
+ },
+ "G1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "GB_with_local_profiles",
+  "wand_dreiecke": 25668,
+  "wege_dreiecke": 2164,
+  "wasser_dreiecke": 124,
+  "bruecken": 0
+ },
+ "H1": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 16760,
+  "wege_dreiecke": 404,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 3420,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 2190,
+  "bruecken": 0
+ },
+ "B2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 2184,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 2258,
+  "bruecken": 0
+ },
+ "C2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 2112,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 3814,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "E2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 4166,
+  "wasser_dreiecke": 1050,
+  "bruecken": 9
+ },
+ "F2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 928,
+  "wege_dreiecke": 3576,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "G2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 4052,
+  "wege_dreiecke": 4652,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "H2": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 3880,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 3340,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 1420,
+  "bruecken": 0
+ },
+ "B3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 1404,
+  "bruecken": 0
+ },
+ "C3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 4324,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 5596,
+  "wege_dreiecke": 2576,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "E3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 2374,
+  "wasser_dreiecke": 910,
+  "bruecken": 10
+ },
+ "F3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 1196,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "G3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 1142,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "H3": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 1796,
+  "bruecken": 0
+ },
+ "B4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 5576,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "C4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 21900,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 28284,
+  "wege_dreiecke": 396,
+  "wasser_dreiecke": 1348,
+  "bruecken": 0
+ },
+ "E4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 5414,
+  "wasser_dreiecke": 2024,
+  "bruecken": 1
+ },
+ "F4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 7420,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "G4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 5710,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "H4": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 6348,
+  "wege_dreiecke": 48,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 1968,
+  "bruecken": 0
+ },
+ "B5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "C5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 11292,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 23556,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 1358,
+  "bruecken": 0
+ },
+ "E5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 1054,
+  "wasser_dreiecke": 2182,
+  "bruecken": 0
+ },
+ "F5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 4312,
+  "wasser_dreiecke": 656,
+  "bruecken": 0
+ },
+ "G5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 4866,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "H5": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 966,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3194,
+  "bruecken": 0
+ },
+ "B6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 130,
+  "bruecken": 0
+ },
+ "C6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 8032,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "D6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes+wegprofil",
+  "wand_dreiecke": 13160,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 316,
+  "bruecken": 0
+ },
+ "E6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 9068,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 360,
+  "bruecken": 0
+ },
+ "F6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 3456,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 2126,
+  "bruecken": 0
+ },
+ "G6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 564,
+  "bruecken": 0
+ },
+ "H6": {
+  "gelaende_dreiecke": 14448,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 0,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 0,
+  "bruecken": 0
+ },
+ "A7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 1836,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3124,
+  "bruecken": 0
+ },
+ "B7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 9548,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3230,
+  "bruecken": 0
+ },
+ "C7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 18120,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3230,
+  "bruecken": 0
+ },
+ "D7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 28512,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3504,
+  "bruecken": 0
+ },
+ "E7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 13392,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3178,
+  "bruecken": 0
+ },
+ "F7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 28420,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 4142,
+  "bruecken": 0
+ },
+ "G7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 11240,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3468,
+  "bruecken": 0
+ },
+ "H7": {
+  "gelaende_dreiecke": 15120,
+  "surface_mode": "locked_visible_GB_bytes",
+  "wand_dreiecke": 21288,
+  "wege_dreiecke": 0,
+  "wasser_dreiecke": 3642,
+  "bruecken": 0
+ }
+}
