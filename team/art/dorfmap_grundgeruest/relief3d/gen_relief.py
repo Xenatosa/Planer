@@ -1197,6 +1197,12 @@ if os.environ.get('P2_D2_LOCK','1')!='0' and os.path.exists('p2_d2_referenz.npz'
     assert hashlib.sha256(_gr.astype('<f4').tobytes()).hexdigest().startswith('749d3c4b'),'p2_d2_referenz.npz passt nicht zu D2-Hash 749d3c4b'
     _GA=np.asarray(G_ANZ).reshape(GY,GX);_VA=VC.reshape(GY,GX,3);_sl=(slice(43*RS,86*RS+1),slice(126*RS,168*RS+1))
     P2_D2={'gb_ecken':int((_GA[_sl]!=_gr).sum()),'gb_max_m':round(float(np.abs(_GA[_sl].astype(float)-_gr).max()),4),'vc_ecken':int((_VA[_sl]!=_vr).any(-1).sum())}
+    _UB=int(round(float(os.environ.get('P2_D2_UEBERGANG','4'))*RS))   # P2: Differenz Referenz-neu an der D2-Kante ausserhalb D2 linear ueber 4 Zellen (8 Ecken) ausbauen, keine harte Stufe [A]
+    _m=np.zeros((GY,GX),bool);_m[_sl]=True;_dd,(_iy,_ix)=nd.distance_transform_edt(~_m,return_indices=True)
+    _dl=np.zeros((GY,GX));_dl[_sl]=_gr.astype(float)-_GA[_sl].astype(float);_wt=np.clip(1-_dd/(_UB+1),0,1)*(~_m)*(_dd<=_UB)
+    _vd=np.zeros((GY,GX,3));_vd[_sl]=_vr.astype(float)-_VA[_sl].astype(float)
+    _GA[...]=(_GA.astype(float)+_dl[_iy,_ix]*_wt).astype(_GA.dtype);_VA[...]=np.clip(np.round(_VA.astype(float)+_vd[_iy,_ix]*_wt[...,None]),0,255).astype(np.uint8)
+    P2_D2['uebergang_ecken']=int(((_wt>0)&(np.abs(_dl[_iy,_ix])>0)).sum());P2_D2['uebergang_zellen']=_UB/RS
     _GA[_sl]=_gr.astype(_GA.dtype);_VA[_sl]=_vr
     P2_D2['gb_sha']=hashlib.sha256(np.ascontiguousarray(_GA[_sl]).astype('<f4').tobytes()).hexdigest()
 print('p2_d2_lock',P2_D2)
