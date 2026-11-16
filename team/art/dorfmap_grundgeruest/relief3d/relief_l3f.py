@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""L3f (16.11.2026): Rest E3-Westufer (~188|100 / 190|106 und entlang des Ufers).
+"""L3f (16.11.2026): Rest E3-Westufer (~188|100 / 190|106 und entlang des Ufers) und Nachtrag F7/G7-Suedufer ~246|279 (helle Lichtspitzen).
 Abschaltbarer Nachschritt NACH L3e (bau_endstand.sh Schritt 14), eigener Basis-Hash und Rueckweg.
   python3 relief_l3f.py            anwenden (nur wenn GB/WV/VC dem Stand nach L3e = 1778473 entsprechen)
   python3 relief_l3f.py --trocken  nur rechnen und berichten
@@ -11,7 +11,8 @@ Ursache (gemessen, pruefung/l3f/l3f_ursache.json + Nahbilder diag_*): Die Zickza
 Art "boeschung": im Band |Abstand zur Maske| <= band_vertices wird GB weich (Gewicht, Box-Fade, Abstand zu festen Flaechen) zum
   Gauss-geglaetteten GB hin gemischt (Mischung ueber ein Abstandsfeld zum Ufer, nicht ueber Zellklassen). Wassermaske, WV und VC bleiben
   bitgleich; das Bett wird nie angehoben; Vorzeichen bleiben: Bett unter dem Spiegel bleibt >= eps darunter, Ufer-Land darueber bleibt >= eps darueber.
-Stand: alle Versuche gescheitert (ERGEBNIS_L3f.md), Stellen "aktiv": false -> Schritt 14 schreibt nichts (bitgleich zu L3e).
+Stand: E3-West alle Versuche gescheitert (ERGEBNIS_L3f.md, "aktiv": false). Nachtrag FG7_sued (Art "ufer" wie L3e): Landecken knapp ueber
+  dem Spiegel am Suedufer werden Wasser bzw. liegen auf dem Profil; Maske waechst nur (kein Wasser entfernt, keine Loecher).
 Fest: D2, Wege/Kreuzungen/Rampenkerne/WEGA (relief_l3.feste_flaechen, richtiger Massstab): 0 Vertices.
 """
 import json, sys, gzip
@@ -92,6 +93,29 @@ def main():
     WVn = WV.astype(np.float64).copy(); VCn = VC.copy(); GBn = GB.astype(np.float64).copy(); bericht = []; A = np.zeros(GB.shape)
     for s in cfg["stellen"]:
         if not s.get("aktiv", True): bericht.append({"id": s["id"], "aktiv": False}); continue
+        if s["art"] == "ufer":
+            # wie L3e (Weg A): Maske waechst bis zur glatten Kurve (nur Wachstum), Boeschung auf Profil durch den Spiegel
+            nw, wv, G, rest, aa = L3E.ufer(GBn, np.where(WVn > -900, WVn, -999.0), s, rs, F | d2)
+            WVn[nw] = wv[nw]; d = np.abs(G - GBn); GBn = G; A = np.maximum(A, aa)
+            ne = 0
+            if s.get("ecken_fuellen"):
+                # Versuch 2 (Nachtrag FG7): Treppenecken der Maske (Land mit >= min_nachbarn Wasser-Nachbarn, knapp ueber dem Spiegel)
+                # werden Wasser; Bett unter den Spiegel. Nur Wachstum, nur in der Box, nie auf fester Flaeche/D2.
+                e = s["ecken_fuellen"]; box = np.zeros(GBn.shape, bool)
+                box[int(s["z0"] * rs):int(s["z1"] * rs) + 1, int(s["x0"] * rs):int(s["x1"] * rs) + 1] = True
+                G = GBn.copy()
+                for _ in range(e.get("runden", 3)):
+                    ok = WVn > -900; P = np.pad(np.where(ok, WVn, 0.0), 1); O = np.pad(ok, 1)
+                    PM = np.pad(np.where(ok, WVn, -999.0), 1); H, W_ = GBn.shape
+                    nb = [(dj, di) for dj in (-1, 0, 1) for di in (-1, 0, 1) if dj or di]
+                    cnt = sum(O[1 + dj:1 + dj + H, 1 + di:1 + di + W_].astype(int) for dj, di in nb)
+                    sm = sum(P[1 + dj:1 + dj + H, 1 + di:1 + di + W_] for dj, di in nb)
+                    mx = np.max([PM[1 + dj:1 + dj + H, 1 + di:1 + di + W_] for dj, di in nb], 0)
+                    sel = box & ~ok & ~(F | d2) & (cnt >= e.get("min_nachbarn", 4)) & (G < mx + e.get("hoehe_max_m", 0.35))
+                    if not sel.any(): break
+                    wvn = sm / np.maximum(cnt, 1); WVn[sel] = wvn[sel]; G[sel] = np.minimum(G[sel], wvn[sel] - e.get("tiefe_m", 0.3)); ne += int(sel.sum())
+                dd = np.abs(G - GBn); A = np.maximum(A, (dd > 1e-6).astype(float)); GBn = G; d = np.maximum(d, dd)
+            bericht.append({"id": s["id"], "neue_wasser_vertices": int(nw.sum()) + ne, "davon_ecken": ne, "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3), "altes_wasser_landseitig": rest})
         if s["art"] == "ufer_fest":
             G, aa, nn = ufer_fest(GBn, np.where(WVn > -900, WVn, -999.0), s, rs, F | d2)
             d = np.abs(G - GBn); GBn = G; A = np.maximum(A, aa * s.get("fw_glatt", 1.0))

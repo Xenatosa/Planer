@@ -1,0 +1,46 @@
+{
+ "messung": "F7/G7 Lichtspitzen (Dev-UI-Kamera F7G7sued_distanz 246|276 Az 180 Abstand 60 Neigung 45)",
+ "ort": "Nordufer ~240-252|265-271 (kameranah), nicht Suedufer 246|279",
+ "sichtbar_mit": {
+  "farbe": true,
+  "clay": true,
+  "nosh": true,
+  "ohne_waende": true,
+  "ohne_wege": true,
+  "ohne_wasser": false
+ },
+ "unveraendert_nach": [
+  "Versuch 1 Suedufer-Maske/Profil",
+  "Versuch 2 Nordufer-Maske/Profil/Treppenecken"
+ ],
+ "wv_randring_mittel_m": -18.686,
+ "wv_innen_mittel_m": -18.258,
+ "wv_randring_unter_innen_m": 0.429,
+ "wr_minus_wv_randring_max_m": 0.3,
+ "beispiel_zeile_z270": {
+  "247.0": -18.43,
+  "247.5": -18.44,
+  "248.0": -18.41,
+  "248.5": -18.34,
+  "249.0": -18.25,
+  "249.5": -18.16,
+  "250.0": -18.09,
+  "250.5": -18.04,
+  "251.0": -18.01,
+  "251.5": -18.0,
+  "252.0": -18.01,
+  "252.5": -18.03,
+  "253.0": -18.07,
+  "253.5": -18.13,
+  "254.0": -18.21,
+  "254.5": -18.32,
+  "255.0": -18.44,
+  "255.5": -18.55
+ },
+ "ursache": "Spiegelhoehen WV am Nordufer: Randring der Wasser-Vertices ~0,4 m unter dem Innenwasser (-18,7..-18,8 gegen -18,38), treppenfoermig entlang des Maskenrasters; die geglaettete Wasseroberflaeche (WR, Klemme WV-0,6..+0,3) knickt dort in Zacken -> helle Spitzen. Liegt auf altem Wasser (WV dort ist laut Auftrag unveraendert zu lassen).",
+ "optionen_grundgeruest": [
+  "WV-Randring am Nordufer 240-256|262-272 auf den Innenspiegel anheben (Wasserdaten, braucht Freigabe)",
+  "Viewer: WR-Glaettung am Rand ohne Treppe (Dev UI)",
+  "belassen"
+ ]
+}

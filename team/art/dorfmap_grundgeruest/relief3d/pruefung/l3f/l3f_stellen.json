@@ -1,5 +1,5 @@
 {
- "basis": "art/dorfmap-L3e @1778473 (nach L3e, Schritt 13)",
+ "basis": "art/dorfmap-fertig @cffe940 (nach L3e Schritt 13 + P12c-Viewer; Reliefdaten = 1778473)",
  "basis_gb_wv_vc_sha256": "b3fbd2017359873dde8f7a7d9def6be38ecaf12369cf9b59076a0e7ac9e9f437",
  "stellen": [
   {
@@ -70,6 +70,48 @@
    "z0": 90,
    "z1": 128,
    "fade_m": 3.0
+  },
+  {
+   "id": "FG7_sued",
+   "art": "ufer",
+   "notiz": "F7/G7-Suedufer ~246|279: 4-5 helle Lichtspitzen = Landecken knapp ueber dem Spiegel (Dev UI / P12c)",
+   "x0": 234,
+   "x1": 259,
+   "z0": 271,
+   "z1": 286,
+   "fade_m": 1.5,
+   "neigung_min_m": 0.45,
+   "linear_vertices": 1.0,
+   "tiefe_min_m": 0.8,
+   "ecken_fuellen": {
+    "min_nachbarn": 4,
+    "hoehe_max_m": 0.35,
+    "tiefe_m": 0.3,
+    "runden": 3
+   },
+   "aktiv": false,
+   "ergebnis": "Versuch 1 (Maske+Profil am Suedufer, 88 neue Wasser-Vertices inkl. 37 Treppenecken): Lichtspitzen unveraendert - sie liegen nicht am Suedufer (Dev-UI-Kamera F7G7sued_distanz schaut mit Azimut 180 von Norden, die Spitzen sitzen am kameranahen Nordufer)."
+  },
+  {
+   "id": "FG7_nord",
+   "art": "ufer",
+   "notiz": "Die Lichtspitzen der Dev-UI-Kamera F7G7sued_distanz (246|276, Azimut 180) liegen am Nordufer (Treppenecken 240-252|265-271), nicht am Suedufer.",
+   "x0": 236,
+   "x1": 256,
+   "z0": 261,
+   "z1": 272.5,
+   "fade_m": 1.5,
+   "neigung_min_m": 0.45,
+   "linear_vertices": 1.0,
+   "tiefe_min_m": 0.8,
+   "ecken_fuellen": {
+    "min_nachbarn": 4,
+    "hoehe_max_m": 0.35,
+    "tiefe_m": 0.3,
+    "runden": 3
+   },
+   "aktiv": false,
+   "ergebnis": "Versuch 2 (Maske+Profil+Treppenecken am Nordufer 240-252|265-271, 58 neue Wasser-Vertices): Uferlinie verschiebt sich, die Lichtspitzen bleiben ortsfest im Wasser. Ursache liegt in WV (Spiegelhoehen auf altem Wasser), nicht in Landhoehen/Maske -> gescheitert, keine Ausnahme."
   }
  ],
  "hinweis": "Versuche a-d mit relief_l3f.py waehrend L3f (Code-Stand je Versuch: a Bett bis Spiegel-eps anhebbar, b Bett nie angehoben (min(G, G0)), c Art ufer_fest, d Bett bis tiefe_min_m=0,35 m unter Spiegel). Der eingecheckte Code entspricht d; a = d mit tiefe_min_m 0,005."
