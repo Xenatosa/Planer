@@ -134,6 +134,16 @@ def main():
                 ton = np.asarray(s["vc_ton"], float); Vf = VCn.astype(float); Vf = Vf + wc[..., None] * (ton - Vf)
                 VCn = np.clip(np.round(Vf), 0, 255).astype(np.uint8)
             bericht.append({"id": s["id"], "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3), "vc_vertices": int((VCn != VC).any(-1).sum())})
+        if s["art"] == "hang_glatt":
+            # Freigabe L3h (2): Talhang neben einer Rinnenverbreiterung glaetten (G6-Facetten): nur Land, Abstand zum Wasser >= wasser_abstand,
+            # weiche Kreise um die Punkte, mehrfach Gauss (sigma) eingeblendet; Feinband folgt (A). Nie auf fester Flaeche/D2/Sperrzone.
+            ok = WVn > -900; w = np.zeros(GB.shape)
+            for px, pz in s["punkte"]: w = np.maximum(w, 1.0 - L3._ss((np.hypot(xx - px, zz - pz) - s.get("r_kern", 1.5)) / s.get("r_fade", 2.0)))
+            w *= L3._ss((nd.distance_transform_edt(~ok) - s.get("wasser_abstand", 1.0)) / 1.0); w[F | d2 | sperr_d1 | ok] = 0.0
+            G = GBn.copy()
+            for _ in range(s.get("runden", 3)): G = G + w * (nd.gaussian_filter(G, s.get("sigma_vertices", 1.5)) - G)
+            d = np.abs(G - GBn); GBn = G; A = np.maximum(A, (w > 1e-3) * s.get("feinband", 1.0))
+            bericht.append({"id": s["id"], "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3)})
         if s["art"] == "wv_ring":
             # L3g (1): aeusserer WV-Ring deutlich unter dem Innenniveau (auf dem Maskenraster gestuft) -> auf das geglaettete Innenmittel heben.
             # Maske/Uferlinie bleiben; nur Anheben; nie ueber das benachbarte Gelaende (3x3 Land-Minimum - eps), sonst bleibt der Wert.

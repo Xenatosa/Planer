@@ -1,5 +1,5 @@
 {
- "hinweis": "NICHT UEBERNOMMEN (Gate schlechter). Stelle E3_nord_rinne jeweils vor E3_bett in l3h_stellen.json einfuegen.",
+ "hinweis": "m1 mit Freigabe (2) als E3_nord_rinne + E3_nord_hang in l3h_stellen.json UEBERNOMMEN (Gate 363); m2 nicht uebernommen.",
  "m1": {
   "id": "E3_nord_rinne",
   "art": "ufer",

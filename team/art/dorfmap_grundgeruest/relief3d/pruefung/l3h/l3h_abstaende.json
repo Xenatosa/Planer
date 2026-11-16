@@ -1,8 +1,8 @@
 {
- "geaenderte_vertices": 2008,
- "gb": 1334,
- "wv": 47,
- "vc": 1694,
+ "geaenderte_vertices": 2525,
+ "gb": 2192,
+ "wv": 97,
+ "vc": 1737,
  "zellweite_m": 1.2,
  "je_flaeche": {
   "weg_vektor": {
@@ -27,12 +27,12 @@
   },
   "D2": {
    "geaenderte_vertices_darauf": 0,
-   "kleinster_abstand_zellen": 17.95,
-   "kleinster_abstand_m": 21.54
+   "kleinster_abstand_zellen": 17.07,
+   "kleinster_abstand_m": 20.48
   }
  },
  "wasser": {
-  "gb_unter_wasser_geaendert": 488,
+  "gb_unter_wasser_geaendert": 505,
   "maske_gleich": false,
   "wv_gleich": false,
   "komponenten": [
@@ -56,19 +56,34 @@
  "box_geaendert_zellen": [
   168.5,
   89.5,
-  193.0,
+  196.5,
   155.5
  ],
  "sperr_D1_mulde_159_22.9_abstand_zellen": 72.1,
  "wasser_detail": {
-  "fill_holes_diff_vertices": 47,
+  "fill_holes_diff_vertices": 97,
   "fill_holes_diff_box": [
    173.5,
-   134.0,
-   179.5,
+   98.0,
+   191.0,
    153.5
   ],
   "neues_wasser_gruppen_x_z_n": [
+   [
+    190.8,
+    100.8,
+    12
+   ],
+   [
+    188.3,
+    103.9,
+    26
+   ],
+   [
+    190.3,
+    106.7,
+    12
+   ],
    [
     176.5,
     134.0,
@@ -144,6 +159,15 @@
   "rampe_5_kleinster_abstand_m": 40.3,
   "kachel_D4_D5_kleinster_abstand_zellen": 0.5,
   "kachel_D1_kleinster_abstand_zellen": 50.2,
-  "aenderungen_in_D4_D5": 0
+  "aenderungen_in_D4_D5": 0,
+  "mulde_159_22_9_kleinster_abstand_zellen": 72.1,
+  "mulde_kleinster_abstand_m": 86.6,
+  "mulde_abstand_zum_sperrkreis_r20_zellen": 52.1,
+  "geaendert_box": [
+   168.5,
+   196.5,
+   89.5,
+   155.5
+  ]
  }
 }
