@@ -1,6 +1,6 @@
 {
- "basis": "art/dorfmap-fertig @cffe940 (nach L3e Schritt 13 + P12c-Viewer; Reliefdaten = 1778473)",
- "basis_gb_wv_vc_sha256": "b3fbd2017359873dde8f7a7d9def6be38ecaf12369cf9b59076a0e7ac9e9f437",
+ "basis": "art/dorfmap-fertig @8c1fc80 (Stand nach Schritt 14 P2d); L3g-Stellen aktiv",
+ "basis_gb_wv_vc_sha256": "1bcf797196f463885851b5f2b84123c0a64303756d96adda9b517aca521bba26",
  "stellen": [
   {
    "id": "E3_west_a",
@@ -112,6 +112,41 @@
    },
    "aktiv": false,
    "ergebnis": "Versuch 2 (Maske+Profil+Treppenecken am Nordufer 240-252|265-271, 58 neue Wasser-Vertices): Uferlinie verschiebt sich, die Lichtspitzen bleiben ortsfest im Wasser. Ursache liegt in WV (Spiegelhoehen auf altem Wasser), nicht in Landhoehen/Maske -> gescheitert, keine Ausnahme."
+  },
+  {
+   "id": "L3g_E3_breit",
+   "art": "ufer",
+   "aktiv": true,
+   "x0": 179,
+   "x1": 198,
+   "z0": 89,
+   "z1": 124,
+   "fade_m": 5.0,
+   "sigma_vertices": 3.0,
+   "versatz_vertices": 1.5,
+   "band_vertices": 8.0,
+   "neigung_min_m": 0.15,
+   "linear_vertices": 2.5,
+   "tiefe_min_m": 0.3,
+   "notiz": "L3g (2) v2: Rinne breiter (Versatz 1,5 V.) und flacher (Kern 2,5 V., Neigung 0,15 m/V, Band 8 V., Fade 5 Zellen); v1 (Versatz 2, Band 6, Fade 3) gab 4 neue G6 in E3"
+  },
+  {
+   "id": "L3g_WV_ring",
+   "art": "wv_ring",
+   "aktiv": true,
+   "kartenweit": false,
+   "innen_ab_vertices": 3.0,
+   "sigma_vertices": 3.0,
+   "schwelle_m": 0.15,
+   "min_cluster": 10,
+   "eps_m": 0.02,
+   "kappen": true,
+   "notiz": "L3g (1): aeusserer WV-Ring F7/G7-Nordufer auf geglaettetes Innenmittel, gedeckelt auf Nachbargelaende - 2 cm und max. 0,4 m Hebung (v1 ohne Deckelung hob nur die Haelfte -> neue Spitzen). Kartenweit nur gemessen: l3g_wv_karte_probelauf.json (Nahbilder zeigten an 172|259 und 285|269 neue helle Splitter -> nicht uebernommen)",
+   "max_hebung_m": 0.4,
+   "x0": 236,
+   "x1": 256,
+   "z0": 261,
+   "z1": 272
   }
  ],
  "hinweis": "Versuche a-d mit relief_l3f.py waehrend L3f (Code-Stand je Versuch: a Bett bis Spiegel-eps anhebbar, b Bett nie angehoben (min(G, G0)), c Art ufer_fest, d Bett bis tiefe_min_m=0,35 m unter Spiegel). Der eingecheckte Code entspricht d; a = d mit tiefe_min_m 0,005."

@@ -1,0 +1,140 @@
+{
+ "geaenderte_vertices": 1884,
+ "gb": 1809,
+ "wv": 214,
+ "vc": 0,
+ "zellweite_m": 1.2,
+ "je_flaeche": {
+  "weg_vektor": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "kreuzung": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 1.5,
+   "kleinster_abstand_m": 1.8
+  },
+  "rampenkern": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 9.19,
+   "kleinster_abstand_m": 11.03
+  },
+  "WEGA_wege_bruecken": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 0.5,
+   "kleinster_abstand_m": 0.6
+  },
+  "D2": {
+   "geaenderte_vertices_darauf": 0,
+   "kleinster_abstand_zellen": 15.01,
+   "kleinster_abstand_m": 18.01
+  }
+ },
+ "wasser": {
+  "gb_unter_wasser_geaendert": 289,
+  "maske_gleich": false,
+  "wv_gleich": false,
+  "komponenten": [
+   9,
+   9
+  ],
+  "fill_holes_gleich": false,
+  "bett_ueber_spiegel_vorher_nachher": [
+   515,
+   512
+  ]
+ },
+ "D2_gb_sha256": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "D2_slice_sha": [
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
+  "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6"
+ ],
+ "box_geaendert_zellen": [
+  175.5,
+  84.5,
+  253.0,
+  272.0
+ ],
+ "sperr_D1_mulde_159_22.9_abstand_zellen": 66.3,
+ "wasser_detail": {
+  "fill_holes_diff_vertices": 139,
+  "fill_holes_diff_box": [
+   180.0,
+   88.0,
+   190.5,
+   125.0
+  ],
+  "neues_wasser_gruppen_x_z_n": [
+   [
+    189.2,
+    89.0,
+    5
+   ],
+   [
+    187.9,
+    92.5,
+    15
+   ],
+   [
+    190.0,
+    95.5,
+    15
+   ],
+   [
+    188.5,
+    98.0,
+    1
+   ],
+   [
+    189.0,
+    101.0,
+    9
+   ],
+   [
+    190.5,
+    100.0,
+    1
+   ],
+   [
+    190.5,
+    104.0,
+    1
+   ],
+   [
+    190.0,
+    105.0,
+    1
+   ],
+   [
+    189.0,
+    106.0,
+    1
+   ],
+   [
+    188.5,
+    107.0,
+    1
+   ],
+   [
+    188.1,
+    115.8,
+    39
+   ],
+   [
+    184.3,
+    117.4,
+    50
+   ]
+  ],
+  "wasser_entfernt": 0,
+  "wv_alt_wasser_geaendert": 75,
+  "wv_alt_wasser_geaendert_box": [
+   236.0,
+   264.5
+  ]
+ }
+}

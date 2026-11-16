@@ -18,22 +18,39 @@
   },
   {
    "id": "FG7_sued",
-   "neue_wasser_vertices": 88,
-   "davon_ecken": 37,
-   "gb_vertices": 821,
-   "gb_max_m": 0.729,
-   "altes_wasser_landseitig": 0
+   "aktiv": false
   },
   {
    "id": "FG7_nord",
-   "neue_wasser_vertices": 58,
-   "davon_ecken": 25,
-   "gb_vertices": 552,
-   "gb_max_m": 0.621,
+   "aktiv": false
+  },
+  {
+   "id": "L3g_E3_breit",
+   "neue_wasser_vertices": 139,
+   "davon_ecken": 0,
+   "gb_vertices": 1792,
+   "gb_max_m": 0.416,
    "altes_wasser_landseitig": 0
+  },
+  {
+   "id": "L3g_WV_ring",
+   "kandidaten": 83,
+   "angehoben": 75,
+   "bleibt_wegen_gelaende": 8,
+   "stellen": [
+    {
+     "x": 246.0,
+     "z": 268.7,
+     "ring_vertices": 83,
+     "angehoben": 75,
+     "ring_minus_innen_vorher_m": -0.394,
+     "ring_minus_innen_nachher_m": -0.167,
+     "max_hebung_m": 0.4
+    }
+   ]
   }
  ],
- "wasser_neu": 146,
+ "wasser_neu": 139,
  "wasser_entfernt": 0,
  "wasser_komponenten": [
   9,
@@ -41,16 +58,17 @@
  ],
  "bett_ueber_spiegel": [
   515,
-  513
+  512
  ],
+ "wv_ring_vertices": 75,
  "vc_vertices": 0,
- "gb_vertices": 1204,
- "gb_max_abs_m": 0.915,
- "basis": "b3fbd2017359873dde8f7a7d9def6be38ecaf12369cf9b59076a0e7ac9e9f437",
- "nachher_sha256": "b31a6b4fe248010bb83939abcb0365da7b0b5cc66ec31f96e69bd593ec722fc5",
+ "gb_vertices": 1809,
+ "gb_max_abs_m": 0.416,
+ "basis": "1bcf797196f463885851b5f2b84123c0a64303756d96adda9b517aca521bba26",
+ "nachher_sha256": "830c2304f7b4b1d2b7b4bd12c3afc7cd696805db8c821ebdb92b04f1b920e7bd",
  "fw_c_punkte": 0,
- "fw_h_punkte": 600,
- "objekte_angepasst": 12,
+ "fw_h_punkte": 0,
+ "objekte_angepasst": 24,
  "prototypen": {
   "D2": "unveraendert",
   "G1": "unveraendert",

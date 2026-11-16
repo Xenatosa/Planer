@@ -1,0 +1,207 @@
+{
+ "hinweis": "Kartenweiter Probelauf L3g v2 (kappen, max_hebung 0,4 m, eps 2 cm) - Messwerte ring_minus_innen vorher/nachher je Stelle; uebernommen wurde nur F7/G7-Nordufer (Box 236-256|261-272)",
+ "kandidaten": 996,
+ "angehoben_im_probelauf": 802,
+ "stellen": [
+  {
+   "x": 70.5,
+   "z": 271.2,
+   "ring_vertices": 150,
+   "angehoben": 119,
+   "ring_minus_innen_vorher_m": -0.391,
+   "ring_minus_innen_nachher_m": -0.194,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 317.7,
+   "z": 275.0,
+   "ring_vertices": 120,
+   "angehoben": 106,
+   "ring_minus_innen_vorher_m": -0.374,
+   "ring_minus_innen_nachher_m": -0.195,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 284.8,
+   "z": 269.3,
+   "ring_vertices": 102,
+   "angehoben": 83,
+   "ring_minus_innen_vorher_m": -0.371,
+   "ring_minus_innen_nachher_m": -0.164,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "neue helle Streifen am Nordufer (Nahbild C284_269) -> nicht uebernommen"
+  },
+  {
+   "x": 145.0,
+   "z": 263.4,
+   "ring_vertices": 101,
+   "angehoben": 80,
+   "ring_minus_innen_vorher_m": -0.469,
+   "ring_minus_innen_nachher_m": -0.256,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 244.0,
+   "z": 269.2,
+   "ring_vertices": 98,
+   "angehoben": 90,
+   "ring_minus_innen_vorher_m": -0.381,
+   "ring_minus_innen_nachher_m": -0.147,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "F7/G7-Lichtspitzen weg (bis auf einen schwachen Punkt) -> uebernommen"
+  },
+  {
+   "x": 114.1,
+   "z": 271.1,
+   "ring_vertices": 47,
+   "angehoben": 44,
+   "ring_minus_innen_vorher_m": -0.403,
+   "ring_minus_innen_nachher_m": -0.143,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 253.6,
+   "z": 273.5,
+   "ring_vertices": 47,
+   "angehoben": 45,
+   "ring_minus_innen_vorher_m": -0.341,
+   "ring_minus_innen_nachher_m": -0.143,
+   "max_hebung_m": 0.397,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 171.9,
+   "z": 258.7,
+   "ring_vertices": 46,
+   "angehoben": 37,
+   "ring_minus_innen_vorher_m": -0.418,
+   "ring_minus_innen_nachher_m": -0.198,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "neuer heller Splitter an der Inselspitze (Nahbild R172_nah) -> nicht uebernommen"
+  },
+  {
+   "x": 9.7,
+   "z": 270.2,
+   "ring_vertices": 42,
+   "angehoben": 27,
+   "ring_minus_innen_vorher_m": -0.223,
+   "ring_minus_innen_nachher_m": -0.083,
+   "max_hebung_m": 0.273,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 83.4,
+   "z": 269.2,
+   "ring_vertices": 41,
+   "angehoben": 29,
+   "ring_minus_innen_vorher_m": -0.22,
+   "ring_minus_innen_nachher_m": -0.065,
+   "max_hebung_m": 0.273,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 215.2,
+   "z": 11.1,
+   "ring_vertices": 32,
+   "angehoben": 30,
+   "ring_minus_innen_vorher_m": -0.312,
+   "ring_minus_innen_nachher_m": -0.139,
+   "max_hebung_m": 0.368,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 150.1,
+   "z": 271.1,
+   "ring_vertices": 26,
+   "angehoben": 18,
+   "ring_minus_innen_vorher_m": -0.208,
+   "ring_minus_innen_nachher_m": -0.069,
+   "max_hebung_m": 0.27,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 219.7,
+   "z": 224.0,
+   "ring_vertices": 24,
+   "angehoben": 9,
+   "ring_minus_innen_vorher_m": -0.495,
+   "ring_minus_innen_nachher_m": -0.384,
+   "max_hebung_m": 0.4,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 285.9,
+   "z": 261.2,
+   "ring_vertices": 23,
+   "angehoben": 13,
+   "ring_minus_innen_vorher_m": -0.178,
+   "ring_minus_innen_nachher_m": -0.101,
+   "max_hebung_m": 0.185,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 40.4,
+   "z": 260.4,
+   "ring_vertices": 20,
+   "angehoben": 12,
+   "ring_minus_innen_vorher_m": -0.217,
+   "ring_minus_innen_nachher_m": -0.1,
+   "max_hebung_m": 0.238,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 12.0,
+   "z": 275.0,
+   "ring_vertices": 18,
+   "angehoben": 13,
+   "ring_minus_innen_vorher_m": -0.204,
+   "ring_minus_innen_nachher_m": -0.056,
+   "max_hebung_m": 0.247,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 221.9,
+   "z": 264.5,
+   "ring_vertices": 17,
+   "angehoben": 14,
+   "ring_minus_innen_vorher_m": -0.224,
+   "ring_minus_innen_nachher_m": -0.09,
+   "max_hebung_m": 0.241,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 1.8,
+   "z": 252.8,
+   "ring_vertices": 16,
+   "angehoben": 15,
+   "ring_minus_innen_vorher_m": -0.263,
+   "ring_minus_innen_nachher_m": -0.116,
+   "max_hebung_m": 0.305,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 43.2,
+   "z": 268.9,
+   "ring_vertices": 15,
+   "angehoben": 12,
+   "ring_minus_innen_vorher_m": -0.224,
+   "ring_minus_innen_nachher_m": -0.1,
+   "max_hebung_m": 0.229,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  },
+  {
+   "x": 192.0,
+   "z": 268.5,
+   "ring_vertices": 11,
+   "angehoben": 6,
+   "ring_minus_innen_vorher_m": -0.197,
+   "ring_minus_innen_nachher_m": -0.089,
+   "max_hebung_m": 0.216,
+   "bewertung_nahbild": "Nahbild C<x>_<z> ohne sichtbaren Gewinn/Verlust -> nicht uebernommen (nur Messwert)"
+  }
+ ]
+}

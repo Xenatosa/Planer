@@ -1,6 +1,6 @@
 {
-"summe": 368,
-"summe_ohne_ausnahmen": 368,
+"summe": 367,
+"summe_ohne_ausnahmen": 367,
 "ausnahmen": 0,
 "je_regel": {
 "R1_blind": 17,
@@ -14,7 +14,7 @@
 "G2_spitze_oben_fein": 9,
 "G3_spitze_unten_fein": 2,
 "G5_beule_klippe": 34,
-"G6_facette": 213,
+"G6_facette": 212,
 "G7_wand_glatte_flaeche": 1,
 "G8_fluss_nicht_bis_rand": 1,
 "T1_fleckrand": 1,
@@ -1349,13 +1349,6 @@
 },
 {
 "regel": "G6_facette",
-"feld": "E3",
-"x": 189.0,
-"z": 102.7,
-"wert": 16
-},
-{
-"regel": "G6_facette",
 "feld": "C3",
 "x": 85.7,
 "z": 105.4,
@@ -1469,9 +1462,9 @@
 {
 "regel": "G6_facette",
 "feld": "E3",
-"x": 183.2,
-"z": 119.9,
-"wert": 6
+"x": 189.5,
+"z": 119.5,
+"wert": 7
 },
 {
 "regel": "G6_facette",

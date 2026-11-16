@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""L3f (16.11.2026): Rest E3-Westufer (~188|100 / 190|106 und entlang des Ufers) und Nachtrag F7/G7-Suedufer ~246|279 (helle Lichtspitzen).
-Abschaltbarer Nachschritt NACH L3e (bau_endstand.sh Schritt 14), eigener Basis-Hash und Rueckweg.
-  python3 relief_l3f.py            anwenden (nur wenn GB/WV/VC dem Stand nach L3e = 1778473 entsprechen)
+"""L3f/L3g (16.11.2026): E3-Westufer (~188|100 / 190|106) und F7/G7-Lichtspitzen (Nordufer ~240-252|265-271) + kartenweite WV-Randstufen.
+Abschaltbarer Nachschritt NACH P2d (bau_endstand.sh Schritt 15), eigener Basis-Hash und Rueckweg.
+  python3 relief_l3f.py            anwenden (nur wenn GB/WV/VC dem Stand nach Schritt 14 = art/dorfmap-fertig 8c1fc80 entsprechen)
   python3 relief_l3f.py --trocken  nur rechnen und berichten
   python3 relief_l3f.py --aus      rueckgaengig (pruefung/l3f/l3f_rueck.npz)
 Ursache (gemessen, pruefung/l3f/l3f_ursache.json + Nahbilder diag_*): Die Zickzacklinie am E3-Westufer steckt NICHT in der Farbe.
@@ -13,6 +13,8 @@ Art "boeschung": im Band |Abstand zur Maske| <= band_vertices wird GB weich (Gew
   bitgleich; das Bett wird nie angehoben; Vorzeichen bleiben: Bett unter dem Spiegel bleibt >= eps darunter, Ufer-Land darueber bleibt >= eps darueber.
 Stand: E3-West alle Versuche gescheitert (ERGEBNIS_L3f.md, "aktiv": false). Nachtrag FG7_sued (Art "ufer" wie L3e): Landecken knapp ueber
   dem Spiegel am Suedufer werden Wasser bzw. liegen auf dem Profil; Maske waechst nur (kein Wasser entfernt, keine Loecher).
+L3g (freigegeben von Grundgeruest): Art "wv_ring" hebt den aeusseren WV-Ring (deutlich unter dem geglaetteten Innenniveau) an, nie ueber das
+  Nachbargelaende, Maske bleibt; Art "ufer" mit Versatz verbreitert/verflacht die E3-Rinne (nur Wasser hinzu).
 Fest: D2, Wege/Kreuzungen/Rampenkerne/WEGA (relief_l3.feste_flaechen, richtiger Massstab): 0 Vertices.
 """
 import json, sys, gzip
@@ -91,6 +93,8 @@ def main():
     F = L3.feste_flaechen(D, GY, GX, rs)
     x0, z0, x1, z1 = L3.D2_BOX; d2 = np.zeros((GY, GX), bool); d2[z0 * rs:z1 * rs + 1, x0 * rs:x1 * rs + 1] = True
     WVn = WV.astype(np.float64).copy(); VCn = VC.copy(); GBn = GB.astype(np.float64).copy(); bericht = []; A = np.zeros(GB.shape)
+    RING = np.zeros(GB.shape, bool); zz, xx = np.mgrid[0:GY, 0:GX] / float(rs)
+    sperr_d1 = np.hypot(xx - 159.0, zz - 22.9) <= 20.0   # Sperrzone D1 Mulde 159|22,9 (Radius 20 Zellen); Rampenkerne stecken in F
     for s in cfg["stellen"]:
         if not s.get("aktiv", True): bericht.append({"id": s["id"], "aktiv": False}); continue
         if s["art"] == "ufer":
@@ -116,6 +120,31 @@ def main():
                     wvn = sm / np.maximum(cnt, 1); WVn[sel] = wvn[sel]; G[sel] = np.minimum(G[sel], wvn[sel] - e.get("tiefe_m", 0.3)); ne += int(sel.sum())
                 dd = np.abs(G - GBn); A = np.maximum(A, (dd > 1e-6).astype(float)); GBn = G; d = np.maximum(d, dd)
             bericht.append({"id": s["id"], "neue_wasser_vertices": int(nw.sum()) + ne, "davon_ecken": ne, "gb_vertices": int((d > 1e-5).sum()), "gb_max_m": round(float(d.max()), 3), "altes_wasser_landseitig": rest})
+        if s["art"] == "wv_ring":
+            # L3g (1): aeusserer WV-Ring deutlich unter dem Innenniveau (auf dem Maskenraster gestuft) -> auf das geglaettete Innenmittel heben.
+            # Maske/Uferlinie bleiben; nur Anheben; nie ueber das benachbarte Gelaende (3x3 Land-Minimum - eps), sonst bleibt der Wert.
+            ok = WVn > -900; dist = nd.distance_transform_edt(ok); inn = ok & (dist >= s.get("innen_ab_vertices", 3.0))
+            sg = s.get("sigma_vertices", 3.0); w = nd.gaussian_filter(inn.astype(float), sg)
+            Rr = nd.gaussian_filter(np.where(inn, WVn, 0.0), sg) / np.maximum(w, 1e-9)
+            landmin = nd.minimum_filter(np.where(ok, 1e9, GBn), size=3); eps = s.get("eps_m", 0.02)
+            box = np.ones(GB.shape, bool) if s.get("kartenweit") else ((xx >= s["x0"]) & (xx <= s["x1"]) & (zz >= s["z0"]) & (zz <= s["z1"]))
+            kand = box & ok & (dist < s.get("innen_ab_vertices", 3.0)) & (w > 0.05) & (WVn < Rr - s.get("schwelle_m", 0.15)) & ~(F | d2 | sperr_d1)
+            lab, n = nd.label(kand, np.ones((3, 3)))
+            if n:
+                gr = nd.sum(kand, lab, range(1, n + 1)); kand &= np.isin(lab, 1 + np.flatnonzero(gr >= s.get("min_cluster", 10)))
+            if s.get("kappen"): ziel = np.minimum(Rr, landmin - eps); sel = kand & (ziel > WVn + 0.01)
+            if s.get("max_hebung_m"): ziel = np.minimum(ziel, WVn + s["max_hebung_m"])   # grosse Spruenge (Inselspitzen) nur teilweise
+            else: ziel = Rr; sel = kand & (ziel <= landmin - eps)
+            liste = []
+            lab, n = nd.label(kand, np.ones((3, 3)))
+            for k in range(1, n + 1):
+                q = lab == k; qs = q & sel
+                liste.append({"x": round(float(xx[q].mean()), 1), "z": round(float(zz[q].mean()), 1), "ring_vertices": int(q.sum()), "angehoben": int(qs.sum()),
+                              "ring_minus_innen_vorher_m": round(float((WVn - Rr)[q].mean()), 3),
+                              "ring_minus_innen_nachher_m": round(float((np.where(sel, ziel, WVn) - Rr)[q].mean()), 3),
+                              "max_hebung_m": round(float((ziel - WVn)[qs].max()), 3) if qs.any() else 0.0})
+            WVn[sel] = ziel[sel]; RING |= sel
+            bericht.append({"id": s["id"], "kandidaten": int(kand.sum()), "angehoben": int(sel.sum()), "bleibt_wegen_gelaende": int((kand & ~sel).sum()), "stellen": liste})
         if s["art"] == "ufer_fest":
             G, aa, nn = ufer_fest(GBn, np.where(WVn > -900, WVn, -999.0), s, rs, F | d2)
             d = np.abs(G - GBn); GBn = G; A = np.maximum(A, aa * s.get("fw_glatt", 1.0))
@@ -130,7 +159,10 @@ def main():
     if (m0 & ~m1).any(): sys.exit("Wasser entfernt - Abbruch")
     if (GBn[m1] >= WVn[m1]).sum() > (GB[m0] >= WV[m0]).sum(): sys.exit("mehr Bett ueber dem Spiegel als vorher - Abbruch")
     wv_ge = WVn != WV; vc_ge = (VCn != VC).any(-1)
-    if (wv_ge & ~(m1 & ~m0)).any(): sys.exit("WV auf altem Wasser geaendert - Abbruch")
+    if (wv_ge & ~(m1 & ~m0) & ~RING).any(): sys.exit("WV auf altem Wasser ausserhalb wv_ring geaendert - Abbruch")
+    if (RING & (WVn < WV)).any(): sys.exit("wv_ring hat WV gesenkt - Abbruch")
+    lm = nd.minimum_filter(np.where(m1, 1e9, GBn.astype(np.float64)), size=3)
+    if (RING & (WVn >= lm)).any(): sys.exit("wv_ring ueber benachbartem Gelaende - Abbruch")
     if ((wv_ge | vc_ge) & (F | d2)).any(): sys.exit("feste Flaeche/D2 beruehrt - Abbruch")
     lab0, n0 = nd.label(m0, np.ones((3, 3))); lab1, n1 = nd.label(m1, np.ones((3, 3)))
     loch = nd.binary_fill_holes(m1) & ~m1 & ~(nd.binary_fill_holes(m0) & ~m0)
@@ -138,7 +170,7 @@ def main():
     if n1 != n0: sys.exit(f"Wasserkomponenten {n0} -> {n1} - Abbruch")
     info = {"stellen": bericht, "wasser_neu": int((m1 & ~m0).sum()), "wasser_entfernt": 0, "wasser_komponenten": [int(n0), int(n1)],
             "bett_ueber_spiegel": [int((GB[m0] >= WV[m0]).sum()), int((GBn[m1] >= WVn[m1]).sum())],
-            "vc_vertices": int(vc_ge.sum()), "gb_vertices": int(gb_ge.sum()), "gb_max_abs_m": round(float(np.abs(GBn.astype(float) - GB).max()), 3),
+            "wv_ring_vertices": int(RING.sum()), "vc_vertices": int(vc_ge.sum()), "gb_vertices": int(gb_ge.sum()), "gb_max_abs_m": round(float(np.abs(GBn.astype(float) - GB).max()), 3),
             "basis": cfg["basis_gb_wv_vc_sha256"], "nachher_sha256": _sha(GBn, WVn, VCn)}
     c, fidx, falt = L3D.fw_c_aus_vc(D, VCn, vc_ge); info["fw_c_punkte"] = int(fidx.size)
     hidx, halt, fh_neu = L3E.fw_ufer(D, GB, GBn, A, rs); info["fw_h_punkte"] = int(hidx.size)

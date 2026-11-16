@@ -1,7 +1,7 @@
 {
-"summe": 325,
+"summe": 321,
 "je_regel": {
-"R8b_delle": 22,
+"R8b_delle": 18,
 "R9_saegezahn": 34,
 "R9w_wellen": 269
 },
@@ -98,7 +98,7 @@
 "R9w_wellen": 7
 },
 "E3": {
-"R8b_delle": 10
+"R8b_delle": 6
 },
 "E4": {
 "R8b_delle": 4,
@@ -205,34 +205,10 @@
 {
 "regel": "R8b_delle",
 "feld": "E3",
-"x": 183.0,
-"z": 121.5,
-"wert": 0.39,
-"abstand_weg": 4.5
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
 "x": 185.5,
-"z": 121.5,
-"wert": 0.38,
-"abstand_weg": 2.5
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
-"x": 181.5,
 "z": 123.0,
-"wert": 0.33,
-"abstand_weg": 4.0
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
-"x": 181.0,
-"z": 124.0,
 "wert": 0.34,
-"abstand_weg": 3.0
+"abstand_weg": 2.5
 },
 {
 "regel": "R8b_delle",
@@ -241,14 +217,6 @@
 "z": 124.0,
 "wert": 0.35,
 "abstand_weg": 1.8
-},
-{
-"regel": "R8b_delle",
-"feld": "E3",
-"x": 180.5,
-"z": 124.5,
-"wert": 0.31,
-"abstand_weg": 2.5
 },
 {
 "regel": "R8b_delle",
