@@ -1,0 +1,2409 @@
+{
+ "wand_py_einheit": "Meter als Zellen (vor P10c)",
+ "einheit": {
+  "mittellinie_m_max_x": 402.69,
+  "mittellinie_m_max_z": 311.49,
+  "karte_zellen_nx_ny": [
+   336,
+   303
+  ],
+  "karte_meter": [
+   403.2,
+   363.59999999999997
+  ],
+  "befund": "mittellinie_m reicht bis ~403 x 311 = Kartengroesse in Metern (336x303 Zellen * 1,2 m); _chunks clippt sie aber gegen Zellgrenzen (TILE_BOUNDS) und der Viewer zeichnet sie als Zellkoordinaten."
+ },
+ "waende_gesamt": 260,
+ "abstand_quelle_gezeichnet": {
+  "median": 53.38,
+  "max": 82.69
+ },
+ "abstand_quelle_meter_durch_1_2": {
+  "median": 0.23,
+  "max": 0.26
+ },
+ "waende_gezeichnet_ganz_ausserhalb_karte": 97,
+ "index_html_D1_G1": {
+  "D1": {
+   "stuecke": 7,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 5,
+   "liste": [
+    {
+     "wand": "Nord:19",
+     "laenge_zellen": 38.3,
+     "enden_an_clipkante": 2,
+     "start": [
+      127.3,
+      18.6
+     ],
+     "ende": [
+      127.3,
+      31.2
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:20",
+     "laenge_zellen": 4.43,
+     "enden_an_clipkante": 1,
+     "start": [
+      127.3,
+      38.4
+     ],
+     "ende": [
+      127.8,
+      34.2
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:21",
+     "laenge_zellen": 15.03,
+     "enden_an_clipkante": 1,
+     "start": [
+      140.7,
+      41.7
+     ],
+     "ende": [
+      136.2,
+      30.6
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:22",
+     "laenge_zellen": 2.91,
+     "enden_an_clipkante": 0,
+     "start": [
+      127.8,
+      35.4
+     ],
+     "ende": [
+      127.8,
+      36.6
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:24",
+     "laenge_zellen": 1.2,
+     "enden_an_clipkante": 0,
+     "start": [
+      137.4,
+      29.4
+     ],
+     "ende": [
+      137.4,
+      30.6
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:25",
+     "laenge_zellen": 2.91,
+     "enden_an_clipkante": 0,
+     "start": [
+      142.2,
+      35.4
+     ],
+     "ende": [
+      142.2,
+      36.6
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:26",
+     "laenge_zellen": 28.15,
+     "enden_an_clipkante": 1,
+     "start": [
+      143.4,
+      35.4
+     ],
+     "ende": [
+      166.7,
+      24.1
+     ],
+     "oben_mittel": 7.58,
+     "unten_mittel": -1.02
+    }
+   ]
+  },
+  "G1": {
+   "stuecke": 13,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 7,
+   "liste": [
+    {
+     "wand": "Nord:38",
+     "laenge_zellen": 6.37,
+     "enden_an_clipkante": 2,
+     "start": [
+      253.3,
+      5.9
+     ],
+     "ende": [
+      257.5,
+      1.3
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:41",
+     "laenge_zellen": 11.88,
+     "enden_an_clipkante": 1,
+     "start": [
+      253.3,
+      39.0
+     ],
+     "ende": [
+      261.0,
+      39.0
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:42",
+     "laenge_zellen": 7.06,
+     "enden_an_clipkante": 0,
+     "start": [
+      257.4,
+      23.4
+     ],
+     "ende": [
+      258.6,
+      25.8
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:43",
+     "laenge_zellen": 5.81,
+     "enden_an_clipkante": 0,
+     "start": [
+      258.6,
+      29.4
+     ],
+     "ende": [
+      259.8,
+      25.8
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:44",
+     "laenge_zellen": 19.7,
+     "enden_an_clipkante": 0,
+     "start": [
+      259.8,
+      11.4
+     ],
+     "ende": [
+      261.0,
+      25.8
+     ],
+     "oben_mittel": 7.35,
+     "unten_mittel": -1.25
+    },
+    {
+     "wand": "Nord:45",
+     "laenge_zellen": 4.45,
+     "enden_an_clipkante": 1,
+     "start": [
+      262.2,
+      41.7
+     ],
+     "ende": [
+      262.2,
+      39.0
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:46",
+     "laenge_zellen": 25.53,
+     "enden_an_clipkante": 0,
+     "start": [
+      263.4,
+      39.0
+     ],
+     "ende": [
+      265.8,
+      21.0
+     ],
+     "oben_mittel": 3.33,
+     "unten_mittel": -5.27
+    },
+    {
+     "wand": "Nord:48",
+     "laenge_zellen": 1.2,
+     "enden_an_clipkante": 0,
+     "start": [
+      265.8,
+      22.2
+     ],
+     "ende": [
+      267.0,
+      22.2
+     ],
+     "oben_mittel": 0.0,
+     "unten_mittel": -8.6
+    },
+    {
+     "wand": "Nord:50",
+     "laenge_zellen": 2.9,
+     "enden_an_clipkante": 0,
+     "start": [
+      271.8,
+      25.8
+     ],
+     "ende": [
+      271.8,
+      27.0
+     ],
+     "oben_mittel": 0.0,
+     "unten_mittel": -8.6
+    },
+    {
+     "wand": "Nord:51",
+     "laenge_zellen": 14.94,
+     "enden_an_clipkante": 0,
+     "start": [
+      273.0,
+      25.8
+     ],
+     "ende": [
+      277.8,
+      15.0
+     ],
+     "oben_mittel": 4.58,
+     "unten_mittel": -4.02
+    },
+    {
+     "wand": "Nord:52",
+     "laenge_zellen": 19.66,
+     "enden_an_clipkante": 2,
+     "start": [
+      276.1,
+      1.3
+     ],
+     "ende": [
+      292.7,
+      1.7
+     ],
+     "oben_mittel": 8.6,
+     "unten_mittel": 0.0
+    },
+    {
+     "wand": "Nord:53",
+     "laenge_zellen": 2.9,
+     "enden_an_clipkante": 0,
+     "start": [
+      277.8,
+      23.4
+     ],
+     "ende": [
+      277.8,
+      24.6
+     ],
+     "oben_mittel": 0.0,
+     "unten_mittel": -8.6
+    },
+    {
+     "wand": "Nord:54",
+     "laenge_zellen": 14.26,
+     "enden_an_clipkante": 1,
+     "start": [
+      279.0,
+      24.6
+     ],
+     "ende": [
+      292.7,
+      23.3
+     ],
+     "oben_mittel": 0.0,
+     "unten_mittel": -8.6
+    }
+   ]
+  }
+ },
+ "alle_56_summe": {
+  "kacheln_mit_wand": 35,
+  "stuecke": 201,
+  "kurz_unter_5": 75,
+  "enden_an_clipkante": 108
+ },
+ "alle_56_je_kachel": {
+  "A1": {
+   "stuecke": 9,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 3,
+   "klippenzellen": 515
+  },
+  "B1": {
+   "stuecke": 9,
+   "kurz_unter_5": 5,
+   "enden_an_clipkante": 6,
+   "klippenzellen": 501
+  },
+  "C1": {
+   "stuecke": 3,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 636
+  },
+  "D1": {
+   "stuecke": 7,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 5,
+   "klippenzellen": 667
+  },
+  "E1": {
+   "stuecke": 7,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 1017
+  },
+  "F1": {
+   "stuecke": 10,
+   "kurz_unter_5": 3,
+   "enden_an_clipkante": 5,
+   "klippenzellen": 1015
+  },
+  "G1": {
+   "stuecke": 13,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 7,
+   "klippenzellen": 971
+  },
+  "H1": {
+   "stuecke": 6,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 6,
+   "klippenzellen": 1204
+  },
+  "A2": {
+   "stuecke": 2,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 28
+  },
+  "B2": {
+   "stuecke": 4,
+   "kurz_unter_5": 3,
+   "enden_an_clipkante": 3,
+   "klippenzellen": 31
+  },
+  "C2": {
+   "stuecke": 2,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 30
+  },
+  "D2": {
+   "stuecke": 2,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 0
+  },
+  "F2": {
+   "stuecke": 1,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 30
+  },
+  "G2": {
+   "stuecke": 3,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 0
+  },
+  "A3": {
+   "stuecke": 2,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 104
+  },
+  "C3": {
+   "stuecke": 1,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 711
+  },
+  "D3": {
+   "stuecke": 4,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 19
+  },
+  "B4": {
+   "stuecke": 1,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 0,
+   "klippenzellen": 544
+  },
+  "C4": {
+   "stuecke": 4,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 601
+  },
+  "D4": {
+   "stuecke": 17,
+   "kurz_unter_5": 8,
+   "enden_an_clipkante": 7,
+   "klippenzellen": 345
+  },
+  "H4": {
+   "stuecke": 1,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 653
+  },
+  "C5": {
+   "stuecke": 4,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 908
+  },
+  "D5": {
+   "stuecke": 15,
+   "kurz_unter_5": 6,
+   "enden_an_clipkante": 3,
+   "klippenzellen": 181
+  },
+  "C6": {
+   "stuecke": 2,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 3,
+   "klippenzellen": 1045
+  },
+  "D6": {
+   "stuecke": 4,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 1050
+  },
+  "E6": {
+   "stuecke": 3,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 1128
+  },
+  "F6": {
+   "stuecke": 4,
+   "kurz_unter_5": 3,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 682
+  },
+  "A7": {
+   "stuecke": 1,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 0
+  },
+  "B7": {
+   "stuecke": 4,
+   "kurz_unter_5": 2,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 0
+  },
+  "C7": {
+   "stuecke": 11,
+   "kurz_unter_5": 5,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 62
+  },
+  "D7": {
+   "stuecke": 12,
+   "kurz_unter_5": 5,
+   "enden_an_clipkante": 7,
+   "klippenzellen": 0
+  },
+  "E7": {
+   "stuecke": 3,
+   "kurz_unter_5": 0,
+   "enden_an_clipkante": 3,
+   "klippenzellen": 0
+  },
+  "F7": {
+   "stuecke": 13,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 4,
+   "klippenzellen": 0
+  },
+  "G7": {
+   "stuecke": 5,
+   "kurz_unter_5": 1,
+   "enden_an_clipkante": 2,
+   "klippenzellen": 0
+  },
+  "H7": {
+   "stuecke": 12,
+   "kurz_unter_5": 4,
+   "enden_an_clipkante": 1,
+   "klippenzellen": 0
+  }
+ },
+ "klippe_ohne_wand": {
+  "H2": 122,
+  "B3": 1,
+  "G3": 366,
+  "H3": 633,
+  "A4": 17,
+  "G4": 407,
+  "B5": 126,
+  "E5": 64,
+  "H5": 596,
+  "A6": 239,
+  "B6": 208,
+  "G6": 788,
+  "H6": 507
+ },
+ "wand_ohne_klippe": {
+  "D2": 2,
+  "G2": 3,
+  "A7": 1,
+  "B7": 4,
+  "D7": 12,
+  "E7": 3,
+  "F7": 13,
+  "G7": 5,
+  "H7": 12
+ },
+ "hinweis_D2": "D2-Stuecke werden von build_wall_manifest bewusst verworfen (D2 wandfrei)",
+ "je_wand": [
+  {
+   "wand": "Nord:0",
+   "punkte": 138,
+   "abstand_quelle_gezeichnet_median": 5.25250931920303,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:1",
+   "punkte": 24,
+   "abstand_quelle_gezeichnet_median": 5.617139482866762,
+   "abstand_quelle_meter_durch_1_2_median": 0.2480569880017287,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:2",
+   "punkte": 26,
+   "abstand_quelle_gezeichnet_median": 2.386077338820532,
+   "abstand_quelle_meter_durch_1_2_median": 0.21667868772941073,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:3",
+   "punkte": 44,
+   "abstand_quelle_gezeichnet_median": 4.632917832630781,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:4",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 6.596362773292727,
+   "abstand_quelle_meter_durch_1_2_median": 0.1588820052105253,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:5",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 3.1400636936215176,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333333195,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:6",
+   "punkte": 60,
+   "abstand_quelle_gezeichnet_median": 6.568886149455654,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:7",
+   "punkte": 80,
+   "abstand_quelle_gezeichnet_median": 7.7171709218327535,
+   "abstand_quelle_meter_durch_1_2_median": 0.24701520425522674,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:8",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 8.246127658381507,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451074608,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:9",
+   "punkte": 133,
+   "abstand_quelle_gezeichnet_median": 5.6083509162676375,
+   "abstand_quelle_meter_durch_1_2_median": 0.24521229464373864,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:10",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 8.67619152047717,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320837317,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:11",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 8.575546629807336,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200556442,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:12",
+   "punkte": 95,
+   "abstand_quelle_gezeichnet_median": 13.629746879527886,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004545313,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:13",
+   "punkte": 6,
+   "abstand_quelle_gezeichnet_median": 13.119271551821225,
+   "abstand_quelle_meter_durch_1_2_median": 0.15200000000000102,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:14",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 12.665701717630961,
+   "abstand_quelle_meter_durch_1_2_median": 0.25208356749300204,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:15",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 13.620614032486586,
+   "abstand_quelle_meter_durch_1_2_median": 0.1865945490431077,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:16",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 13.730890278488326,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451074075,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:17",
+   "punkte": 200,
+   "abstand_quelle_gezeichnet_median": 8.501152862994525,
+   "abstand_quelle_meter_durch_1_2_median": 0.2099904759744962,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:18",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 13.194272567054519,
+   "abstand_quelle_meter_durch_1_2_median": 0.21252799300997904,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:19",
+   "punkte": 204,
+   "abstand_quelle_gezeichnet_median": 16.482098606288538,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999929,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:20",
+   "punkte": 38,
+   "abstand_quelle_gezeichnet_median": 21.481011276697714,
+   "abstand_quelle_meter_durch_1_2_median": 0.24403040851045105,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:21",
+   "punkte": 127,
+   "abstand_quelle_gezeichnet_median": 20.306156701847854,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:22",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 21.84559942610275,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451074783,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:23",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 23.084626919229173,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200556442,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:24",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 23.337951923851424,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333333195,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:25",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 24.153515726125,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451075308,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:26",
+   "punkte": 213,
+   "abstand_quelle_gezeichnet_median": 22.103102343562536,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:27",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 29.009307612902596,
+   "abstand_quelle_meter_durch_1_2_median": 0.15888200521051177,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:28",
+   "punkte": 34,
+   "abstand_quelle_gezeichnet_median": 29.338371421104085,
+   "abstand_quelle_meter_durch_1_2_median": 0.22538976577453504,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:29",
+   "punkte": 61,
+   "abstand_quelle_gezeichnet_median": 27.673862096931835,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:30",
+   "punkte": 79,
+   "abstand_quelle_gezeichnet_median": 26.804663773306327,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:31",
+   "punkte": 32,
+   "abstand_quelle_gezeichnet_median": 33.45862161334186,
+   "abstand_quelle_meter_durch_1_2_median": 0.2543488964220457,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:32",
+   "punkte": 68,
+   "abstand_quelle_gezeichnet_median": 34.76254314101245,
+   "abstand_quelle_meter_durch_1_2_median": 0.237641022722628,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:33",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 34.468085529065974,
+   "abstand_quelle_meter_durch_1_2_median": 0.18663594156529645,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:34",
+   "punkte": 43,
+   "abstand_quelle_gezeichnet_median": 35.54734775057065,
+   "abstand_quelle_meter_durch_1_2_median": 0.22779013855350091,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:35",
+   "punkte": 33,
+   "abstand_quelle_gezeichnet_median": 36.111217093861576,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:36",
+   "punkte": 157,
+   "abstand_quelle_gezeichnet_median": 37.22928954465824,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:37",
+   "punkte": 49,
+   "abstand_quelle_gezeichnet_median": 39.128128806397065,
+   "abstand_quelle_meter_durch_1_2_median": 0.22779013855349914,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:38",
+   "punkte": 113,
+   "abstand_quelle_gezeichnet_median": 37.2550667695013,
+   "abstand_quelle_meter_durch_1_2_median": 0.24403040851046665,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:39",
+   "punkte": 58,
+   "abstand_quelle_gezeichnet_median": 38.81867311102366,
+   "abstand_quelle_meter_durch_1_2_median": 0.2515889265632285,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:40",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 41.567663213127595,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436681,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:41",
+   "punkte": 56,
+   "abstand_quelle_gezeichnet_median": 39.1383819840955,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:42",
+   "punkte": 26,
+   "abstand_quelle_gezeichnet_median": 42.43889029101336,
+   "abstand_quelle_meter_durch_1_2_median": 0.21505885649758902,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:43",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 42.78569619884667,
+   "abstand_quelle_meter_durch_1_2_median": 0.2277901385535313,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:44",
+   "punkte": 69,
+   "abstand_quelle_gezeichnet_median": 41.90011933157229,
+   "abstand_quelle_meter_durch_1_2_median": 0.2597051747227488,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:45",
+   "punkte": 76,
+   "abstand_quelle_gezeichnet_median": 41.805266894057425,
+   "abstand_quelle_meter_durch_1_2_median": 0.25054714281672996,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:46",
+   "punkte": 91,
+   "abstand_quelle_gezeichnet_median": 43.31951061588763,
+   "abstand_quelle_meter_durch_1_2_median": 0.2543488964220466,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:47",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 44.12640932593543,
+   "abstand_quelle_meter_durch_1_2_median": 0.16492422502472048,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:48",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 44.05564663014263,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333332484,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:49",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 44.91169112825748,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333332484,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:50",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 45.17301462156364,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436681,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:51",
+   "punkte": 52,
+   "abstand_quelle_gezeichnet_median": 46.30043196342774,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:52",
+   "punkte": 157,
+   "abstand_quelle_gezeichnet_median": 30.827422856930497,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:53",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 46.108032109384176,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436681,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:54",
+   "punkte": 284,
+   "abstand_quelle_gezeichnet_median": 34.861263980222226,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:55",
+   "punkte": 247,
+   "abstand_quelle_gezeichnet_median": 44.24759880490691,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:56",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 54.84161820617763,
+   "abstand_quelle_meter_durch_1_2_median": 0.22017377774534824,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:57",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 54.91101893062992,
+   "abstand_quelle_meter_durch_1_2_median": 0.20316666666666627,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Nord:58",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 56.42189845263982,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436471,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:59",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 56.57544741316677,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436462,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:60",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 56.57437582510301,
+   "abstand_quelle_meter_durch_1_2_median": 0.2030833333333817,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:61",
+   "punkte": 211,
+   "abstand_quelle_gezeichnet_median": 37.90118731649443,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:62",
+   "punkte": 55,
+   "abstand_quelle_gezeichnet_median": 59.35596010511496,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:63",
+   "punkte": 151,
+   "abstand_quelle_gezeichnet_median": 56.52415412900932,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:64",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 59.43635777030756,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436459,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:65",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 58.78709232960924,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004544724,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:66",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 63.83300206580211,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451076373,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:67",
+   "punkte": 42,
+   "abstand_quelle_gezeichnet_median": 64.44270022979771,
+   "abstand_quelle_meter_durch_1_2_median": 0.24760614732184713,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:68",
+   "punkte": 50,
+   "abstand_quelle_gezeichnet_median": 61.97543689982356,
+   "abstand_quelle_meter_durch_1_2_median": 0.25272159102769576,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:69",
+   "punkte": 47,
+   "abstand_quelle_gezeichnet_median": 63.369551047802105,
+   "abstand_quelle_meter_durch_1_2_median": 0.2543488964220396,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Nord:70",
+   "punkte": 73,
+   "abstand_quelle_gezeichnet_median": 62.5000799999488,
+   "abstand_quelle_meter_durch_1_2_median": 0.252083567492997,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:0",
+   "punkte": 129,
+   "abstand_quelle_gezeichnet_median": 43.52026108607348,
+   "abstand_quelle_meter_durch_1_2_median": 0.24521229464370967,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:1",
+   "punkte": 46,
+   "abstand_quelle_gezeichnet_median": 47.0852738041512,
+   "abstand_quelle_meter_durch_1_2_median": 0.23986633445299077,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:2",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 46.35191473930718,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200557446,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:3",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 46.52246769035366,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200557446,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:4",
+   "punkte": 89,
+   "abstand_quelle_gezeichnet_median": 43.97203656871034,
+   "abstand_quelle_meter_durch_1_2_median": 0.24521229464373595,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:5",
+   "punkte": 133,
+   "abstand_quelle_gezeichnet_median": 51.303995945735075,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:6",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 52.1684710595718,
+   "abstand_quelle_meter_durch_1_2_median": 0.1736579145107523,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:7",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 52.28422921876155,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004545107,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:8",
+   "punkte": 44,
+   "abstand_quelle_gezeichnet_median": 46.3231946897196,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346126,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:9",
+   "punkte": 28,
+   "abstand_quelle_gezeichnet_median": 47.77986524231237,
+   "abstand_quelle_meter_durch_1_2_median": 0.2515889265632276,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:10",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 48.77976166655531,
+   "abstand_quelle_meter_durch_1_2_median": 0.1736579145107452,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:11",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 49.39675033839795,
+   "abstand_quelle_meter_durch_1_2_median": 0.1736579145107452,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:12",
+   "punkte": 55,
+   "abstand_quelle_gezeichnet_median": 46.08541936187626,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:13",
+   "punkte": 27,
+   "abstand_quelle_gezeichnet_median": 48.98341626959065,
+   "abstand_quelle_meter_durch_1_2_median": 0.21600000000000819,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:14",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 49.4600710125855,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004543928,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:15",
+   "punkte": 47,
+   "abstand_quelle_gezeichnet_median": 45.97809275307102,
+   "abstand_quelle_meter_durch_1_2_median": 0.24403040851046906,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:16",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 54.236985766172516,
+   "abstand_quelle_meter_durch_1_2_median": 0.17472263734271173,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:17",
+   "punkte": 243,
+   "abstand_quelle_gezeichnet_median": 47.58181000350868,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563347147,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:18",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 49.142403145641765,
+   "abstand_quelle_meter_durch_1_2_median": 0.21252799300998365,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:19",
+   "punkte": 25,
+   "abstand_quelle_gezeichnet_median": 51.03156684416027,
+   "abstand_quelle_meter_durch_1_2_median": 0.2217545251949342,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:20",
+   "punkte": 6,
+   "abstand_quelle_gezeichnet_median": 51.474632191584305,
+   "abstand_quelle_meter_durch_1_2_median": 0.15200000000000813,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:21",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 55.21287791856174,
+   "abstand_quelle_meter_durch_1_2_median": 0.20451169825275717,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:22",
+   "punkte": 24,
+   "abstand_quelle_gezeichnet_median": 54.24133550918412,
+   "abstand_quelle_meter_durch_1_2_median": 0.24805698800173065,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:23",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 52.97820132835366,
+   "abstand_quelle_meter_durch_1_2_median": 0.20975407262590762,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:24",
+   "punkte": 68,
+   "abstand_quelle_gezeichnet_median": 48.886868386964196,
+   "abstand_quelle_meter_durch_1_2_median": 0.2505471428167314,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:25",
+   "punkte": 194,
+   "abstand_quelle_gezeichnet_median": 51.30005068221485,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:26",
+   "punkte": 137,
+   "abstand_quelle_gezeichnet_median": 44.0197934043312,
+   "abstand_quelle_meter_durch_1_2_median": 0.2543488964220134,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:27",
+   "punkte": 139,
+   "abstand_quelle_gezeichnet_median": 51.668365563466416,
+   "abstand_quelle_meter_durch_1_2_median": 0.2500000000000284,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:28",
+   "punkte": 26,
+   "abstand_quelle_gezeichnet_median": 51.899926083294744,
+   "abstand_quelle_meter_durch_1_2_median": 0.2500000000000142,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:29",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 54.40068243097362,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451074797,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:30",
+   "punkte": 13,
+   "abstand_quelle_gezeichnet_median": 53.33235415767805,
+   "abstand_quelle_meter_durch_1_2_median": 0.2520835674930121,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:31",
+   "punkte": 56,
+   "abstand_quelle_gezeichnet_median": 58.30996446386159,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:32",
+   "punkte": 66,
+   "abstand_quelle_gezeichnet_median": 59.43376384195276,
+   "abstand_quelle_meter_durch_1_2_median": 0.2475623470719462,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:33",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 60.20514928143607,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333332484,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:34",
+   "punkte": 44,
+   "abstand_quelle_gezeichnet_median": 59.01847097547848,
+   "abstand_quelle_meter_durch_1_2_median": 0.25321623195751664,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:35",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 60.94804537140652,
+   "abstand_quelle_meter_durch_1_2_median": 0.15888200521051143,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:36",
+   "punkte": 69,
+   "abstand_quelle_gezeichnet_median": 58.00215513237417,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:37",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 59.438563536015266,
+   "abstand_quelle_meter_durch_1_2_median": 0.1865945490431137,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:38",
+   "punkte": 116,
+   "abstand_quelle_gezeichnet_median": 56.378438810691776,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:39",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 63.70196229316645,
+   "abstand_quelle_meter_durch_1_2_median": 0.1701770320055845,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:40",
+   "punkte": 17,
+   "abstand_quelle_gezeichnet_median": 62.341158154144026,
+   "abstand_quelle_meter_durch_1_2_median": 0.2543488964220693,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:41",
+   "punkte": 33,
+   "abstand_quelle_gezeichnet_median": 62.010482984734125,
+   "abstand_quelle_meter_durch_1_2_median": 0.25434889642204134,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:42",
+   "punkte": 51,
+   "abstand_quelle_gezeichnet_median": 59.67997989275803,
+   "abstand_quelle_meter_durch_1_2_median": 0.2520835674930121,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:43",
+   "punkte": 61,
+   "abstand_quelle_gezeichnet_median": 61.625,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:44",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 63.95613717072038,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320836176,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:45",
+   "punkte": 43,
+   "abstand_quelle_gezeichnet_median": 61.069302841689606,
+   "abstand_quelle_meter_durch_1_2_median": 0.25434889642207453,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:46",
+   "punkte": 133,
+   "abstand_quelle_gezeichnet_median": 69.50961643082198,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563348823,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:47",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 70.54119806892987,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320836176,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:48",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 70.21477800470498,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414361835,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:49",
+   "punkte": 33,
+   "abstand_quelle_gezeichnet_median": 70.23403733233627,
+   "abstand_quelle_meter_durch_1_2_median": 0.2510942856334626,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:50",
+   "punkte": 67,
+   "abstand_quelle_gezeichnet_median": 70.43138504956438,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:51",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 70.48149136475473,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320839002,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:52",
+   "punkte": 29,
+   "abstand_quelle_gezeichnet_median": 70.95698595663433,
+   "abstand_quelle_meter_durch_1_2_median": 0.19654312857207581,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:53",
+   "punkte": 46,
+   "abstand_quelle_gezeichnet_median": 68.74098082337196,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:54",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 71.49900232206042,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320836176,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:55",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 72.21149492982401,
+   "abstand_quelle_meter_durch_1_2_median": 0.2030833333333817,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:56",
+   "punkte": 80,
+   "abstand_quelle_gezeichnet_median": 71.5126894777396,
+   "abstand_quelle_meter_durch_1_2_median": 0.25434889642203873,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:57",
+   "punkte": 32,
+   "abstand_quelle_gezeichnet_median": 69.8919593449624,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Suedgrat:58",
+   "punkte": 41,
+   "abstand_quelle_gezeichnet_median": 71.24696484763405,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:59",
+   "punkte": 131,
+   "abstand_quelle_gezeichnet_median": 70.18898511946162,
+   "abstand_quelle_meter_durch_1_2_median": 0.2500000000000284,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:60",
+   "punkte": 29,
+   "abstand_quelle_gezeichnet_median": 73.28260366553579,
+   "abstand_quelle_meter_durch_1_2_median": 0.24999999999997158,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:61",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 73.38078767633938,
+   "abstand_quelle_meter_durch_1_2_median": 0.19303212887439422,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:62",
+   "punkte": 24,
+   "abstand_quelle_gezeichnet_median": 74.59411725837974,
+   "abstand_quelle_meter_durch_1_2_median": 0.2523494163565614,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:63",
+   "punkte": 43,
+   "abstand_quelle_gezeichnet_median": 72.24970588175432,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:64",
+   "punkte": 148,
+   "abstand_quelle_gezeichnet_median": 66.73520029223515,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:65",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 74.41303649227062,
+   "abstand_quelle_meter_durch_1_2_median": 0.17966666666666242,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:66",
+   "punkte": 13,
+   "abstand_quelle_gezeichnet_median": 79.70759060465949,
+   "abstand_quelle_meter_durch_1_2_median": 0.2520835674930121,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Suedgrat:67",
+   "punkte": 75,
+   "abstand_quelle_gezeichnet_median": 75.11613815525928,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Krater:0",
+   "punkte": 399,
+   "abstand_quelle_gezeichnet_median": 24.939739874345122,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:1",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 36.342608317235566,
+   "abstand_quelle_meter_durch_1_2_median": 0.2044289132083759,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:2",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 36.1703003166963,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436471,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:3",
+   "punkte": 415,
+   "abstand_quelle_gezeichnet_median": 34.753575519074296,
+   "abstand_quelle_meter_durch_1_2_median": 0.2500000000000142,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:4",
+   "punkte": 35,
+   "abstand_quelle_gezeichnet_median": 29.635451742802907,
+   "abstand_quelle_meter_durch_1_2_median": 0.252083567493002,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:5",
+   "punkte": 171,
+   "abstand_quelle_gezeichnet_median": 29.643549045281343,
+   "abstand_quelle_meter_durch_1_2_median": 0.24403040851045868,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:6",
+   "punkte": 147,
+   "abstand_quelle_gezeichnet_median": 30.34512151895259,
+   "abstand_quelle_meter_durch_1_2_median": 0.24521229464374136,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:7",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 30.146479738944915,
+   "abstand_quelle_meter_durch_1_2_median": 0.18467656911654026,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:8",
+   "punkte": 95,
+   "abstand_quelle_gezeichnet_median": 27.550367141110854,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:9",
+   "punkte": 30,
+   "abstand_quelle_gezeichnet_median": 43.11489514677493,
+   "abstand_quelle_meter_durch_1_2_median": 0.25054714281672996,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:10",
+   "punkte": 99,
+   "abstand_quelle_gezeichnet_median": 31.260518229869447,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:11",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 35.52547704422841,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414366717,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:12",
+   "punkte": 47,
+   "abstand_quelle_gezeichnet_median": 33.59072170942446,
+   "abstand_quelle_meter_durch_1_2_median": 0.2510942856334458,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:13",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 35.50802661815274,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451075752,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:14",
+   "punkte": 34,
+   "abstand_quelle_gezeichnet_median": 38.093331257224236,
+   "abstand_quelle_meter_durch_1_2_median": 0.25348975950994124,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:15",
+   "punkte": 15,
+   "abstand_quelle_gezeichnet_median": 34.82441672160496,
+   "abstand_quelle_meter_durch_1_2_median": 0.2045116982527398,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:16",
+   "punkte": 6,
+   "abstand_quelle_gezeichnet_median": 35.36936089742528,
+   "abstand_quelle_meter_durch_1_2_median": 0.15199999999999392,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:17",
+   "punkte": 24,
+   "abstand_quelle_gezeichnet_median": 38.60759475033571,
+   "abstand_quelle_meter_durch_1_2_median": 0.2188772625974739,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:18",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 41.17479541073662,
+   "abstand_quelle_meter_durch_1_2_median": 0.18467656911652747,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:19",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 42.48898985855042,
+   "abstand_quelle_meter_durch_1_2_median": 0.16492422502469153,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:20",
+   "punkte": 111,
+   "abstand_quelle_gezeichnet_median": 39.06407212977163,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563348823,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:21",
+   "punkte": 96,
+   "abstand_quelle_gezeichnet_median": 35.08977178699241,
+   "abstand_quelle_meter_durch_1_2_median": 0.25158892656324006,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:22",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 31.469667935966523,
+   "abstand_quelle_meter_durch_1_2_median": 0.20316666666666094,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:23",
+   "punkte": 38,
+   "abstand_quelle_gezeichnet_median": 36.35202111949963,
+   "abstand_quelle_meter_durch_1_2_median": 0.2470152042552245,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:24",
+   "punkte": 35,
+   "abstand_quelle_gezeichnet_median": 36.15345923379947,
+   "abstand_quelle_meter_durch_1_2_median": 0.20884864602013126,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:25",
+   "punkte": 60,
+   "abstand_quelle_gezeichnet_median": 37.81754200411636,
+   "abstand_quelle_meter_durch_1_2_median": 0.2475623470719694,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:26",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 39.34845815556183,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436681,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:27",
+   "punkte": 34,
+   "abstand_quelle_gezeichnet_median": 35.640810476826516,
+   "abstand_quelle_meter_durch_1_2_median": 0.24760614732186798,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:28",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 39.97123966053593,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200556442,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:29",
+   "punkte": 22,
+   "abstand_quelle_gezeichnet_median": 39.68264232421761,
+   "abstand_quelle_meter_durch_1_2_median": 0.198730521041378,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:30",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 38.33457968988312,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200556442,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:31",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 38.79363521313774,
+   "abstand_quelle_meter_durch_1_2_median": 0.20451169825275717,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:32",
+   "punkte": 34,
+   "abstand_quelle_gezeichnet_median": 39.174827326589124,
+   "abstand_quelle_meter_durch_1_2_median": 0.25054714281671586,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:33",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 40.26781964795215,
+   "abstand_quelle_meter_durch_1_2_median": 0.16492422502469153,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:34",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 40.40420770167385,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333332484,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:35",
+   "punkte": 61,
+   "abstand_quelle_gezeichnet_median": 32.89772028575841,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Krater:36",
+   "punkte": 26,
+   "abstand_quelle_gezeichnet_median": 37.00620316773697,
+   "abstand_quelle_meter_durch_1_2_median": 0.2347072032337547,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Ostgrat:0",
+   "punkte": 205,
+   "abstand_quelle_gezeichnet_median": 50.957859582305865,
+   "abstand_quelle_meter_durch_1_2_median": 0.2500000000000142,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "Ostgrat:1",
+   "punkte": 99,
+   "abstand_quelle_gezeichnet_median": 58.69386680054397,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:2",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 62.31465933510346,
+   "abstand_quelle_meter_durch_1_2_median": 0.20451169825275392,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:3",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 61.18026063494664,
+   "abstand_quelle_meter_durch_1_2_median": 0.1785556441436471,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:4",
+   "punkte": 88,
+   "abstand_quelle_gezeichnet_median": 62.757488539218826,
+   "abstand_quelle_meter_durch_1_2_median": 0.25272159102775066,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:5",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 61.37703153460583,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200557446,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:6",
+   "punkte": 6,
+   "abstand_quelle_gezeichnet_median": 63.55185185416776,
+   "abstand_quelle_meter_durch_1_2_median": 0.15200000000000102,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:7",
+   "punkte": 32,
+   "abstand_quelle_gezeichnet_median": 63.659901351748324,
+   "abstand_quelle_meter_durch_1_2_median": 0.19096090614386618,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:8",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 63.6220010633114,
+   "abstand_quelle_meter_durch_1_2_median": 0.204428913208365,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:9",
+   "punkte": 61,
+   "abstand_quelle_gezeichnet_median": 63.88357085354576,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:10",
+   "punkte": 104,
+   "abstand_quelle_gezeichnet_median": 63.24621723324279,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563347413,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:11",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 64.32213458872457,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320836176,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:12",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 64.62275141155781,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333332484,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:13",
+   "punkte": 208,
+   "abstand_quelle_gezeichnet_median": 56.56602588756488,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:14",
+   "punkte": 20,
+   "abstand_quelle_gezeichnet_median": 65.39091901103586,
+   "abstand_quelle_meter_durch_1_2_median": 0.18957577527555822,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:15",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 64.61658920409823,
+   "abstand_quelle_meter_durch_1_2_median": 0.1952520834010844,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:16",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 65.54687339118475,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:17",
+   "punkte": 32,
+   "abstand_quelle_gezeichnet_median": 64.57081202453054,
+   "abstand_quelle_meter_durch_1_2_median": 0.25158892656322596,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:18",
+   "punkte": 125,
+   "abstand_quelle_gezeichnet_median": 64.4021140820703,
+   "abstand_quelle_meter_durch_1_2_median": 0.25261526522010813,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:19",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 64.97189087240679,
+   "abstand_quelle_meter_durch_1_2_median": 0.17173993458417963,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:20",
+   "punkte": 17,
+   "abstand_quelle_gezeichnet_median": 65.29510892861734,
+   "abstand_quelle_meter_durch_1_2_median": 0.22528204544526542,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:21",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 66.6771457058253,
+   "abstand_quelle_meter_durch_1_2_median": 0.18467656911653219,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:22",
+   "punkte": 88,
+   "abstand_quelle_gezeichnet_median": 66.44892402383041,
+   "abstand_quelle_meter_durch_1_2_median": 0.25348208082108803,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:23",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 64.75624004680941,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414365668,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:24",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 64.43619685060565,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004545518,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:25",
+   "punkte": 15,
+   "abstand_quelle_gezeichnet_median": 66.31779637744309,
+   "abstand_quelle_meter_durch_1_2_median": 0.204428913208365,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:26",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 65.93546378520442,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004545518,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:27",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 66.96773171729798,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:28",
+   "punkte": 107,
+   "abstand_quelle_gezeichnet_median": 66.64870591391856,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:29",
+   "punkte": 35,
+   "abstand_quelle_gezeichnet_median": 72.7323914865997,
+   "abstand_quelle_meter_durch_1_2_median": 0.20999047597450268,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:30",
+   "punkte": 40,
+   "abstand_quelle_gezeichnet_median": 63.07614597868579,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:31",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 73.12474542478272,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451075846,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:32",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 68.91319874551328,
+   "abstand_quelle_meter_durch_1_2_median": 0.18467656911653219,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:33",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 68.93472738939353,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414367767,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:34",
+   "punkte": 15,
+   "abstand_quelle_gezeichnet_median": 72.52709838398336,
+   "abstand_quelle_meter_durch_1_2_median": 0.20451169825275392,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:35",
+   "punkte": 108,
+   "abstand_quelle_gezeichnet_median": 62.97320156644404,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:36",
+   "punkte": 94,
+   "abstand_quelle_gezeichnet_median": 70.29439390688356,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:37",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 69.87787039800226,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414365668,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:38",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 65.14992773104152,
+   "abstand_quelle_meter_durch_1_2_median": 0.2079999999999984,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:39",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 65.13732704502083,
+   "abstand_quelle_meter_durch_1_2_median": 0.21599999999999397,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:40",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 65.2849065238656,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451075913,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:41",
+   "punkte": 85,
+   "abstand_quelle_gezeichnet_median": 68.13609869195622,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:42",
+   "punkte": 12,
+   "abstand_quelle_gezeichnet_median": 70.60010382341966,
+   "abstand_quelle_meter_durch_1_2_median": 0.17365791451075846,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:43",
+   "punkte": 76,
+   "abstand_quelle_gezeichnet_median": 64.71674934508854,
+   "abstand_quelle_meter_durch_1_2_median": 0.2475623470719749,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:44",
+   "punkte": 16,
+   "abstand_quelle_gezeichnet_median": 64.8213342009507,
+   "abstand_quelle_meter_durch_1_2_median": 0.1717399345841848,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:45",
+   "punkte": 22,
+   "abstand_quelle_gezeichnet_median": 64.25982990463993,
+   "abstand_quelle_meter_durch_1_2_median": 0.2440304085104632,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:46",
+   "punkte": 60,
+   "abstand_quelle_gezeichnet_median": 71.51237017246935,
+   "abstand_quelle_meter_durch_1_2_median": 0.25321623195750265,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:47",
+   "punkte": 137,
+   "abstand_quelle_gezeichnet_median": 70.79505632457679,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:48",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 73.04872655536164,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:49",
+   "punkte": 7,
+   "abstand_quelle_gezeichnet_median": 75.19587754657833,
+   "abstand_quelle_meter_durch_1_2_median": 0.17017703200556442,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:50",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 66.23610230597325,
+   "abstand_quelle_meter_durch_1_2_median": 0.1846765691165395,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:51",
+   "punkte": 21,
+   "abstand_quelle_gezeichnet_median": 66.34470589278392,
+   "abstand_quelle_meter_durch_1_2_median": 0.2510942856334741,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:52",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 71.786488979473,
+   "abstand_quelle_meter_durch_1_2_median": 0.20316666666667516,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:53",
+   "punkte": 46,
+   "abstand_quelle_gezeichnet_median": 71.46944401079236,
+   "abstand_quelle_meter_durch_1_2_median": 0.24403040851045935,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:54",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 66.20045317065433,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333333906,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:55",
+   "punkte": 27,
+   "abstand_quelle_gezeichnet_median": 65.7280761927504,
+   "abstand_quelle_meter_durch_1_2_median": 0.24521229464373595,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:56",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 67.60685269527049,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:57",
+   "punkte": 115,
+   "abstand_quelle_gezeichnet_median": 65.96400533624377,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:58",
+   "punkte": 9,
+   "abstand_quelle_gezeichnet_median": 75.5434353534442,
+   "abstand_quelle_meter_durch_1_2_median": 0.20442891320839002,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:59",
+   "punkte": 13,
+   "abstand_quelle_gezeichnet_median": 67.08509941268629,
+   "abstand_quelle_meter_durch_1_2_median": 0.18888968341336693,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:60",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 74.36356634804439,
+   "abstand_quelle_meter_durch_1_2_median": 0.2520835674930121,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:61",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 67.56345263054577,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:62",
+   "punkte": 57,
+   "abstand_quelle_gezeichnet_median": 67.34519781305866,
+   "abstand_quelle_meter_durch_1_2_median": 0.2510942856334458,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:63",
+   "punkte": 19,
+   "abstand_quelle_gezeichnet_median": 74.448535232132,
+   "abstand_quelle_meter_durch_1_2_median": 0.19654312857206846,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:64",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 75.38217170763922,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414363753,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:65",
+   "punkte": 17,
+   "abstand_quelle_gezeichnet_median": 67.78358715795439,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414366717,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:66",
+   "punkte": 10,
+   "abstand_quelle_gezeichnet_median": 74.80553967650582,
+   "abstand_quelle_meter_durch_1_2_median": 0.18471796163872825,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:67",
+   "punkte": 35,
+   "abstand_quelle_gezeichnet_median": 74.6931054381862,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:68",
+   "punkte": 76,
+   "abstand_quelle_gezeichnet_median": 67.95499815702433,
+   "abstand_quelle_meter_durch_1_2_median": 0.24701520425524492,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:69",
+   "punkte": 36,
+   "abstand_quelle_gezeichnet_median": 65.4965995618712,
+   "abstand_quelle_meter_durch_1_2_median": 0.24805698800173015,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:70",
+   "punkte": 29,
+   "abstand_quelle_gezeichnet_median": 66.64308384971392,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "Ostgrat:71",
+   "punkte": 11,
+   "abstand_quelle_gezeichnet_median": 75.29323093744883,
+   "abstand_quelle_meter_durch_1_2_median": 0.17855564414365668,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "unbenannt:0",
+   "punkte": 30,
+   "abstand_quelle_gezeichnet_median": 21.30145597988286,
+   "abstand_quelle_meter_durch_1_2_median": 0.2330000000000001,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:1",
+   "punkte": 48,
+   "abstand_quelle_gezeichnet_median": 17.282239327861475,
+   "abstand_quelle_meter_durch_1_2_median": 0.25054714281672974,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:2",
+   "punkte": 114,
+   "abstand_quelle_gezeichnet_median": 27.415179349334757,
+   "abstand_quelle_meter_durch_1_2_median": 0.21506551004544813,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:3",
+   "punkte": 45,
+   "abstand_quelle_gezeichnet_median": 31.465854509293077,
+   "abstand_quelle_meter_durch_1_2_median": 0.24999999999997158,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:4",
+   "punkte": 94,
+   "abstand_quelle_gezeichnet_median": 53.41797939045992,
+   "abstand_quelle_meter_durch_1_2_median": 0.21523605116540603,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "unbenannt:5",
+   "punkte": 24,
+   "abstand_quelle_gezeichnet_median": 36.96304861990523,
+   "abstand_quelle_meter_durch_1_2_median": 0.2499999999999858,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:6",
+   "punkte": 127,
+   "abstand_quelle_gezeichnet_median": 39.08146736446829,
+   "abstand_quelle_meter_durch_1_2_median": 0.25109428563346,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:7",
+   "punkte": 13,
+   "abstand_quelle_gezeichnet_median": 51.054676573258206,
+   "abstand_quelle_meter_durch_1_2_median": 0.18888968341338033,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:8",
+   "punkte": 85,
+   "abstand_quelle_gezeichnet_median": 43.58004130333059,
+   "abstand_quelle_meter_durch_1_2_median": 0.25,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:9",
+   "punkte": 5,
+   "abstand_quelle_gezeichnet_median": 65.39373058634904,
+   "abstand_quelle_meter_durch_1_2_median": 0.20308333333335327,
+   "ausserhalb_karte_gezeichnet": true
+  },
+  {
+   "wand": "unbenannt:10",
+   "punkte": 1,
+   "abstand_quelle_gezeichnet_median": 59.20692527061338,
+   "abstand_quelle_meter_durch_1_2_median": 0.0,
+   "ausserhalb_karte_gezeichnet": false
+  },
+  {
+   "wand": "unbenannt:11",
+   "punkte": 28,
+   "abstand_quelle_gezeichnet_median": 82.69115303432704,
+   "abstand_quelle_meter_durch_1_2_median": 0.24999999999997158,
+   "ausserhalb_karte_gezeichnet": true
+  }
+ ]
+}

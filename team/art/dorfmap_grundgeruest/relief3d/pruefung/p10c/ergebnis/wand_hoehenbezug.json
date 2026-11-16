@@ -1,0 +1,51 @@
+{
+ "GB_max": 14.0,
+ "GB_min": -20.367799758911133,
+ "familien": {
+  "Nord": {
+   "waende": 71,
+   "punkte": 4161,
+   "hoehe_oben_median": 8.6,
+   "oben_minus_GB_max_fenster_median": -5.4,
+   "oben_minus_GB_min_fenster_median": -5.0,
+   "anteil_oben_unter_GB_krone": 1.0,
+   "anteil_oben_ueber_GB_fuss_8m": 0.066
+  },
+  "Suedgrat": {
+   "waende": 68,
+   "punkte": 3257,
+   "hoehe_oben_median": 0.0,
+   "oben_minus_GB_max_fenster_median": 0.89,
+   "oben_minus_GB_min_fenster_median": 15.58,
+   "anteil_oben_unter_GB_krone": 0.068,
+   "anteil_oben_ueber_GB_fuss_8m": 0.832
+  },
+  "Krater": {
+   "waende": 37,
+   "punkte": 2173,
+   "hoehe_oben_median": 0.0,
+   "oben_minus_GB_max_fenster_median": -9.34,
+   "oben_minus_GB_min_fenster_median": -1.78,
+   "anteil_oben_unter_GB_krone": 1.0,
+   "anteil_oben_ueber_GB_fuss_8m": 0.0
+  },
+  "Ostgrat": {
+   "waende": 72,
+   "punkte": 2768,
+   "hoehe_oben_median": 6.54,
+   "oben_minus_GB_max_fenster_median": -5.3,
+   "oben_minus_GB_min_fenster_median": -3.65,
+   "anteil_oben_unter_GB_krone": 1.0,
+   "anteil_oben_ueber_GB_fuss_8m": 0.0
+  },
+  "unbenannt": {
+   "waende": 12,
+   "punkte": 614,
+   "hoehe_oben_median": 0.0,
+   "oben_minus_GB_max_fenster_median": 0.93,
+   "oben_minus_GB_min_fenster_median": 7.61,
+   "anteil_oben_unter_GB_krone": 0.235,
+   "anteil_oben_ueber_GB_fuss_8m": 0.342
+  }
+ }
+}

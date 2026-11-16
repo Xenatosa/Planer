@@ -1,0 +1,58 @@
+{
+ "serialisierung_bytegleich": true,
+ "tiles": {
+  "D1": {
+   "alt_sha256": "f6bf913146145b57fc265c46ec95e9ffdf5d5141e02408b3cbb85bb1baed6db8",
+   "neu_sha256": "9a9290710ae39c86be9f9695d1aad82499dd509ad7687b43f5857850a5172fc2",
+   "gleich": false,
+   "alt_dreiecke": 19920,
+   "neu_dreiecke": 16544,
+   "alt_features": 1,
+   "neu_features": 1,
+   "alt_vertices": 17176,
+   "neu_vertices": 13876
+  },
+  "G1": {
+   "alt_sha256": "7eb137e59af31ecab13e4315cac30afa4ad148fecbaa3a7f779b02e30e0862a7",
+   "neu_sha256": "ed2ceab5913663848c135555d4adcedb6095139c9a4ae0eed521b5d1d159acf1",
+   "gleich": false,
+   "alt_dreiecke": 25668,
+   "neu_dreiecke": 25004,
+   "alt_features": 3,
+   "neu_features": 3,
+   "alt_vertices": 21772,
+   "neu_vertices": 21070
+  },
+  "D2": {
+   "alt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "neu_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "gleich": true,
+   "alt_dreiecke": 0,
+   "neu_dreiecke": 0,
+   "alt_features": 0,
+   "neu_features": 0,
+   "alt_vertices": 0,
+   "neu_vertices": 0
+  }
+ },
+ "foot_vertices_lowered": [
+  12009,
+  10391
+ ],
+ "lod1": {
+  "sampling_m": 0.5,
+  "sampling_m_by_tile": {
+   "D2": 0.5,
+   "G1": 0.5,
+   "D1": 0.5
+  },
+  "terrain_closed_triangles": 88728,
+  "wall_triangles": 41548,
+  "total_triangles": 130276,
+  "budget_triangles": 1300000
+ },
+ "relief_neu_sha256": [
+  "08013ee71ba126d4b29b0ce53b651b2570742edbacf9d839ab3ad2eb5d458eb5",
+  "c48df62115f9f0324d497e78ebc12c2ee602faae27578672a9788dd1b6a6d656"
+ ]
+}
