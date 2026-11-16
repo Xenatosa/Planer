@@ -1,6 +1,6 @@
 # P2d – rampe_5-Band (D4/D5) und Brückenanschlüsse E2/E3 (QA-Befund P4d)
 
-**Kosten 0 €, Codex nein, Laufzeit ~1,9 h (15:45–17:40 MEZ, inkl. Unterbrechung)**
+**Kosten 0 €, Codex nein, Laufzeit ~1,7 h (15:45–17:25 MEZ, inkl. Unterbrechung)**
 
 Basis: art/dorfmap-fertig **1778473** (nach L3d-Merge #31 und L3e). Der Auftrag nannte 2771f70. Die Basis ist während der Arbeit zweimal weitergerückt (b3698e0 L3d, 1778473 L3e). Deshalb wurde P2d auf 1778473 neu aufgesetzt: Basis-Hash im Skript angepasst, Gate-Vorher neu gemessen, P2d-Ergebniswerte identisch. Branch **wege/dorfmap-p2d-v2** (neuer Name statt Force-Push; der Zwischenstand wege/dorfmap-p2d @4804c27 auf b3698e0 ist überholt).
 
