@@ -13,9 +13,11 @@ PRUEF = os.path.dirname(HIER)
 SPALTEN = "ABCDEFGH"
 ZEILEN = range(1, 8)
 FELDER = [f"{s}{z}" for z in ZEILEN for s in SPALTEN]
-FAMILIEN = ["Hoehen", "Wege", "Texturen", "R8", "R9", "Sonstige"]
-KURZ = {"Hoehen": "H", "Wege": "W", "Texturen": "T", "R8": "R8", "R9": "R9", "Sonstige": "S"}
-QUELLEN = [("regeln", "regeln_letzter_lauf.json"), ("r8", "r8_letzter_lauf.json"), ("r9", "r9_letzter_lauf.json")]
+FAMILIEN = ["Hoehen", "Wege", "Texturen", "R8", "R9", "Wandkoerper", "Sonstige"]
+KURZ = {"Hoehen": "H", "Wege": "W", "Texturen": "T", "R8": "R8", "R9": "R9", "Wandkoerper": "W1", "Sonstige": "S"}
+QUELLEN = [("regeln", "regeln_letzter_lauf.json"), ("r8", "r8_letzter_lauf.json"), ("r9", "r9_letzter_lauf.json"),
+           ("w1", "w1_letzter_lauf.json")]  # P10d: w1 optional (fehlt in Staenden vor P10d)
+OPTIONAL = {"w1"}
 
 
 def familie(quelle, regel):
@@ -23,6 +25,8 @@ def familie(quelle, regel):
         return "R8"
     if quelle == "r9":
         return "R9"
+    if quelle == "w1":
+        return "Wandkoerper"
     if regel.startswith(("G", "R3_", "R5_")):
         return "Hoehen"
     if regel.startswith(("R1_", "R2_", "R6_")):
@@ -40,6 +44,8 @@ def lade(ordner, pfade=None):
     kartenweit = []
     dateien, fehler = {}, []
     for q, _ in QUELLEN:
+        if q in OPTIONAL and (not pfade.get(q) or not os.path.exists(pfade[q])):
+            continue
         d = json.load(open(pfade[q], encoding="utf-8"))
         tr = d.get("treffer", [])
         summe = d.get("summe")
@@ -152,7 +158,7 @@ table.d{{border-collapse:collapse;margin-top:14px}}table.d td,table.d th{{border
 <h1>{html.escape(titel)}</h1><p>{html.escape(kopf)}</p><div>{knoepfe}</div>
 <table class="k"><tr><th></th>{''.join(f'<th>{s}</th>' for s in SPALTEN)}</tr>{''.join(zellen)}</table>
 <p>Legende: grün = 0, gelb → rot = steigende Trefferzahl (Skala bis Maximum der Auswahl){' · Vergleich: grün = weniger, rot = mehr' if vorher else ''}.
-Kürzel: H Höhen (G*, R3, R5) · W Wege (R1, R2, R6) · T Texturen (T*) · R8 (r8-Datei) · R9 (r9-Datei inkl. R8b) · S Sonstige. Tooltip je Kachel zeigt die Einzelregeln.</p>
+Kürzel: H Höhen (G*, R3, R5) · W Wege (R1, R2, R6) · T Texturen (T*) · R8 (r8-Datei) · R9 (r9-Datei inkl. R8b) · W1 Wandkörper (w1-Datei) · S Sonstige. Tooltip je Kachel zeigt die Einzelregeln.</p>
 <h3>Kartenweit (ohne Kachel)</h3><ul>{kw}</ul>
 <table class="d"><tr><th>Quelle</th><th>Datei</th><th>summe</th><th>im Raster</th><th>kartenweit</th><th>je Familie</th><th>Prüfung</th></tr>{zeilen_dat}</table>
 <script>{js}</script></html>"""
@@ -202,7 +208,7 @@ def schreibe_png(stand, pfad, titel, kopf, vorher=None):
     y = ob + 7 * zh + 14
     leg = ("Vergleich: grün = weniger Treffer, rot = mehr" if vorher else
            "Farbe: grün = 0, gelb → rot = mehr Treffer (max %d)" % maxn)
-    d.text((li, y), leg + ". H Höhen (G*, R3, R5) · W Wege (R1, R2, R6) · T Texturen · R8 · R9 (inkl. R8b) · S Sonstige",
+    d.text((li, y), leg + ". H Höhen (G*, R3, R5) · W Wege (R1, R2, R6) · T Texturen · R8 · R9 (inkl. R8b) · W1 Wandkörper · S Sonstige",
            font=font(13), fill=(210, 210, 210))
     sumz = "  |  ".join(f"{q}: {v['summe']} ({v['im_raster']} Raster + {v['kartenweit']} kartenweit) {'OK' if v['ok'] else 'FEHLER'}"
                         for q, v in stand["dateien"].items())
@@ -227,14 +233,17 @@ def main():
     ap.add_argument("--regeln", default=os.path.join(PRUEF, "regeln_letzter_lauf.json"))
     ap.add_argument("--r8", default=os.path.join(PRUEF, "r8_letzter_lauf.json"))
     ap.add_argument("--r9", default=os.path.join(PRUEF, "r9_letzter_lauf.json"))
+    ap.add_argument("--w1", default=os.path.join(PRUEF, "w1_letzter_lauf.json"), help="P10d W1 (optional)")
     ap.add_argument("--aus", default=HIER, help="Ausgabeordner")
     ap.add_argument("--vorher", help="Ordner mit den drei JSONs des Vorher-Stands (Vergleich)")
     a = ap.parse_args()
     os.makedirs(a.aus, exist_ok=True)
-    stand = lade(None, {"regeln": a.regeln, "r8": a.r8, "r9": a.r9})
+    stand = lade(None, {"regeln": a.regeln, "r8": a.r8, "r9": a.r9, "w1": a.w1})
     zeit = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
     kopf = (f"Commit {commit()} · erzeugt {zeit} · regeln {stand['dateien']['regeln']['summe']} · "
-            f"r8 {stand['dateien']['r8']['summe']} · r9 {stand['dateien']['r9']['summe']} · gesamt {stand['gesamt']}")
+            f"r8 {stand['dateien']['r8']['summe']} · r9 {stand['dateien']['r9']['summe']} · "
+            + (f"w1 {stand['dateien']['w1']['summe']} · " if "w1" in stand["dateien"] else "")
+            + f"gesamt {stand['gesamt']}")
     schreibe_html(stand, os.path.join(a.aus, "trefferkarte.html"), "Trefferkarte Dorfmap", kopf)
     json.dump(json_aus(stand), open(os.path.join(a.aus, "trefferkarte.json"), "w", encoding="utf-8"),
               ensure_ascii=False, indent=1)

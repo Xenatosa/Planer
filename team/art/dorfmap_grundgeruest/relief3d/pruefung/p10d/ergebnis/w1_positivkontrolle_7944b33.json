@@ -1,0 +1,4863 @@
+{
+ "summe": 601,
+ "je_regel": {
+  "W1a_ausserhalb_karte": 0,
+  "W1b_ueber_krone": 140,
+  "W1c_schwebend": 0,
+  "W1d_quellabstand": 461
+ },
+ "je_feld": {
+  "D1": {
+   "W1b_ueber_krone": 84,
+   "W1d_quellabstand": 207
+  },
+  "G1": {
+   "W1b_ueber_krone": 56,
+   "W1d_quellabstand": 254
+  }
+ },
+ "quelle": "/tmp/p10d/relief_neu_7944b33.json.gz",
+ "format": "relief_neu",
+ "gelaende_vertices_aus_quelle": 22185,
+ "schwellen_A": {
+  "krone_m": 0.5,
+  "krone_radius_zellen": 1.5,
+  "schweben_m": 0.5,
+  "quellabstand_zellen": 1.0,
+  "quellabstand_vertex_grenze_zellen": 1.52
+ },
+ "je_kachel": {
+  "D1": {
+   "vertices": 17176,
+   "max_ueber_krone_m": 8.535,
+   "max_luecke_unterkante_m": -0.15,
+   "max_quellabstand_zellen": 19.924,
+   "vertices_ueber_gelaende_0_1m": 3646,
+   "W1a_ausserhalb_karte_vertices": 0,
+   "W1b_ueber_krone_vertices": 2996,
+   "W1c_schwebend_vertices": 0,
+   "W1d_quellabstand_vertices": 15814
+  },
+  "G1": {
+   "vertices": 21772,
+   "max_ueber_krone_m": 8.6,
+   "max_luecke_unterkante_m": -0.15,
+   "max_quellabstand_zellen": 25.051,
+   "vertices_ueber_gelaende_0_1m": 2070,
+   "W1a_ausserhalb_karte_vertices": 0,
+   "W1b_ueber_krone_vertices": 2044,
+   "W1c_schwebend_vertices": 0,
+   "W1d_quellabstand_vertices": 17194
+  }
+ },
+ "treffer": [
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 126,
+   "z": 38,
+   "wert": 1.299,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 127,
+   "z": 38,
+   "wert": 1.853,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 127,
+   "z": 39,
+   "wert": 5.106,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 128,
+   "z": 38,
+   "wert": 2.283,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 140,
+   "z": 40,
+   "wert": 8.164,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 140,
+   "z": 41,
+   "wert": 8.535,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 140,
+   "z": 42,
+   "wert": 8.455,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 36,
+   "wert": 1.745,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 37,
+   "wert": 5.964,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 38,
+   "wert": 7.326,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 39,
+   "wert": 7.865,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 40,
+   "wert": 8.325,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 41,
+   "wert": 8.447,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 141,
+   "z": 42,
+   "wert": 8.459,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 36,
+   "wert": 2.608,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 37,
+   "wert": 6.394,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 38,
+   "wert": 7.556,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 39,
+   "wert": 8.044,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 40,
+   "wert": 8.296,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 142,
+   "z": 41,
+   "wert": 8.367,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 143,
+   "z": 35,
+   "wert": 0.61,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 143,
+   "z": 36,
+   "wert": 3.122,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 144,
+   "z": 35,
+   "wert": 0.834,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 144,
+   "z": 36,
+   "wert": 2.286,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 145,
+   "z": 34,
+   "wert": 0.769,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 145,
+   "z": 35,
+   "wert": 1.731,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 145,
+   "z": 36,
+   "wert": 4.351,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 146,
+   "z": 33,
+   "wert": 0.741,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 146,
+   "z": 34,
+   "wert": 1.505,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 146,
+   "z": 35,
+   "wert": 5.368,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 147,
+   "z": 32,
+   "wert": 0.935,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 147,
+   "z": 33,
+   "wert": 1.266,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 147,
+   "z": 34,
+   "wert": 4.141,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 147,
+   "z": 35,
+   "wert": 5.347,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 148,
+   "z": 31,
+   "wert": 1.102,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 148,
+   "z": 32,
+   "wert": 1.378,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 148,
+   "z": 33,
+   "wert": 4.141,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 148,
+   "z": 34,
+   "wert": 4.141,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 149,
+   "z": 30,
+   "wert": 1.506,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 149,
+   "z": 31,
+   "wert": 1.539,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 149,
+   "z": 32,
+   "wert": 4.141,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 149,
+   "z": 33,
+   "wert": 4.141,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 150,
+   "z": 29,
+   "wert": 4.028,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 150,
+   "z": 30,
+   "wert": 4.319,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 150,
+   "z": 31,
+   "wert": 4.511,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 150,
+   "z": 32,
+   "wert": 4.663,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 151,
+   "z": 28,
+   "wert": 4.18,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 151,
+   "z": 29,
+   "wert": 4.444,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 151,
+   "z": 30,
+   "wert": 4.424,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 151,
+   "z": 31,
+   "wert": 4.442,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 152,
+   "z": 28,
+   "wert": 4.357,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 152,
+   "z": 29,
+   "wert": 4.471,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 152,
+   "z": 30,
+   "wert": 2.997,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 153,
+   "z": 27,
+   "wert": 4.075,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 153,
+   "z": 28,
+   "wert": 4.388,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 153,
+   "z": 29,
+   "wert": 3.109,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 153,
+   "z": 30,
+   "wert": 2.997,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 154,
+   "z": 27,
+   "wert": 3.923,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 154,
+   "z": 28,
+   "wert": 4.187,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 154,
+   "z": 29,
+   "wert": 2.997,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 155,
+   "z": 26,
+   "wert": 3.276,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 155,
+   "z": 27,
+   "wert": 3.623,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 155,
+   "z": 28,
+   "wert": 3.718,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 156,
+   "z": 26,
+   "wert": 3.338,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 156,
+   "z": 27,
+   "wert": 3.555,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 156,
+   "z": 28,
+   "wert": 3.353,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 157,
+   "z": 26,
+   "wert": 3.513,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 157,
+   "z": 27,
+   "wert": 3.603,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 158,
+   "z": 26,
+   "wert": 3.572,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 158,
+   "z": 27,
+   "wert": 3.735,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 159,
+   "z": 26,
+   "wert": 3.883,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 159,
+   "z": 27,
+   "wert": 3.951,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 160,
+   "z": 26,
+   "wert": 4.078,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 160,
+   "z": 27,
+   "wert": 4.182,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 161,
+   "z": 26,
+   "wert": 4.328,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 161,
+   "z": 27,
+   "wert": 4.432,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 162,
+   "z": 25,
+   "wert": 4.67,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 162,
+   "z": 26,
+   "wert": 4.697,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 162,
+   "z": 27,
+   "wert": 4.697,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 163,
+   "z": 25,
+   "wert": 4.996,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 163,
+   "z": 26,
+   "wert": 4.981,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 163,
+   "z": 27,
+   "wert": 4.862,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 164,
+   "z": 25,
+   "wert": 2.64,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "D1",
+   "x": 164,
+   "z": 26,
+   "wert": 4.838,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 18,
+   "wert": 4.98,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 19,
+   "wert": 4.177,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 30,
+   "wert": 4.006,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 31,
+   "wert": 4.809,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 37,
+   "wert": 8.851,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 126,
+   "z": 38,
+   "wert": 9.413,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 17,
+   "wert": 4.865,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 18,
+   "wert": 4.966,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 19,
+   "wert": 3.97,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 30,
+   "wert": 4.968,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 31,
+   "wert": 5.514,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 32,
+   "wert": 6.233,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 33,
+   "wert": 6.839,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 34,
+   "wert": 7.636,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 35,
+   "wert": 8.324,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 36,
+   "wert": 9.065,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 37,
+   "wert": 9.575,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 38,
+   "wert": 10.072,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 127,
+   "z": 39,
+   "wert": 9.81,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 17,
+   "wert": 4.49,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 18,
+   "wert": 3.94,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 19,
+   "wert": 3.425,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 31,
+   "wert": 6.004,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 32,
+   "wert": 6.648,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 33,
+   "wert": 7.355,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 34,
+   "wert": 8.238,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 35,
+   "wert": 8.855,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 36,
+   "wert": 9.526,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 37,
+   "wert": 10.194,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 128,
+   "z": 38,
+   "wert": 10.195,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 17,
+   "wert": 4.143,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 18,
+   "wert": 3.533,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 19,
+   "wert": 2.954,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 33,
+   "wert": 8.218,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 34,
+   "wert": 8.845,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 35,
+   "wert": 9.481,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 129,
+   "z": 36,
+   "wert": 9.474,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 17,
+   "wert": 4.103,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 18,
+   "wert": 3.483,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 19,
+   "wert": 2.863,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 33,
+   "wert": 8.848,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 34,
+   "wert": 9.734,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 130,
+   "z": 35,
+   "wert": 9.465,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 17,
+   "wert": 4.103,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 18,
+   "wert": 4.0,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 19,
+   "wert": 2.955,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 20,
+   "wert": 2.0,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 33,
+   "wert": 9.297,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 131,
+   "z": 34,
+   "wert": 10.493,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 132,
+   "z": 18,
+   "wert": 3.738,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 132,
+   "z": 19,
+   "wert": 3.0,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 132,
+   "z": 20,
+   "wert": 1.975,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 132,
+   "z": 33,
+   "wert": 9.927,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 132,
+   "z": 34,
+   "wert": 11.06,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 133,
+   "z": 19,
+   "wert": 2.68,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 133,
+   "z": 20,
+   "wert": 2.0,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 133,
+   "z": 33,
+   "wert": 10.256,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 133,
+   "z": 34,
+   "wert": 11.472,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 20,
+   "wert": 1.677,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 30,
+   "wert": 7.999,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 31,
+   "wert": 8.973,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 32,
+   "wert": 9.936,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 33,
+   "wert": 10.79,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 134,
+   "z": 34,
+   "wert": 11.488,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 29,
+   "wert": 6.969,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 30,
+   "wert": 7.975,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 31,
+   "wert": 8.996,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 32,
+   "wert": 9.995,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 33,
+   "wert": 10.953,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 135,
+   "z": 34,
+   "wert": 11.02,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 136,
+   "z": 27,
+   "wert": 5.035,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 136,
+   "z": 28,
+   "wert": 6.005,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 136,
+   "z": 29,
+   "wert": 7.033,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 136,
+   "z": 30,
+   "wert": 7.775,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 136,
+   "z": 31,
+   "wert": 8.609,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 26,
+   "wert": 4.315,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 27,
+   "wert": 5.213,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 28,
+   "wert": 6.157,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 29,
+   "wert": 7.095,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 30,
+   "wert": 8.208,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 31,
+   "wert": 9.173,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 137,
+   "z": 32,
+   "wert": 9.243,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 23,
+   "wert": 1.664,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 25,
+   "wert": 4.049,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 26,
+   "wert": 4.764,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 27,
+   "wert": 5.547,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 28,
+   "wert": 6.275,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 29,
+   "wert": 7.154,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 30,
+   "wert": 8.42,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 31,
+   "wert": 9.394,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 32,
+   "wert": 10.373,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 138,
+   "z": 33,
+   "wert": 10.497,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 22,
+   "wert": 1.874,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 23,
+   "wert": 2.713,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 24,
+   "wert": 3.512,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 25,
+   "wert": 4.316,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 26,
+   "wert": 5.225,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 27,
+   "wert": 5.387,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 31,
+   "wert": 9.639,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 32,
+   "wert": 10.665,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 33,
+   "wert": 11.632,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 139,
+   "z": 34,
+   "wert": 11.76,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 22,
+   "wert": 2.372,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 23,
+   "wert": 3.192,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 24,
+   "wert": 3.858,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 25,
+   "wert": 4.651,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 26,
+   "wert": 4.978,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 32,
+   "wert": 10.955,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 33,
+   "wert": 11.969,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 34,
+   "wert": 12.975,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 35,
+   "wert": 12.984,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 40,
+   "wert": 18.547,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 41,
+   "wert": 19.412,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 140,
+   "z": 42,
+   "wert": 19.924,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 33,
+   "wert": 12.336,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 34,
+   "wert": 13.332,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 35,
+   "wert": 14.133,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 36,
+   "wert": 14.804,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 37,
+   "wert": 15.622,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 38,
+   "wert": 16.937,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 39,
+   "wert": 17.877,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 40,
+   "wert": 18.79,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 41,
+   "wert": 19.694,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 141,
+   "z": 42,
+   "wert": 19.883,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 34,
+   "wert": 13.619,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 35,
+   "wert": 14.694,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 36,
+   "wert": 15.461,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 37,
+   "wert": 16.314,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 38,
+   "wert": 17.347,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 39,
+   "wert": 18.288,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 40,
+   "wert": 19.06,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 142,
+   "z": 41,
+   "wert": 19.295,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 143,
+   "z": 34,
+   "wert": 14.026,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 143,
+   "z": 35,
+   "wert": 14.67,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 143,
+   "z": 36,
+   "wert": 15.401,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 144,
+   "z": 34,
+   "wert": 14.569,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 144,
+   "z": 35,
+   "wert": 15.121,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 144,
+   "z": 36,
+   "wert": 15.711,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 145,
+   "z": 34,
+   "wert": 14.88,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 145,
+   "z": 35,
+   "wert": 16.103,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 145,
+   "z": 36,
+   "wert": 16.095,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 146,
+   "z": 33,
+   "wert": 14.606,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 146,
+   "z": 34,
+   "wert": 15.399,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 146,
+   "z": 35,
+   "wert": 16.12,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 147,
+   "z": 32,
+   "wert": 13.826,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 147,
+   "z": 33,
+   "wert": 14.697,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 147,
+   "z": 34,
+   "wert": 15.502,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 147,
+   "z": 35,
+   "wert": 15.72,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 148,
+   "z": 31,
+   "wert": 12.412,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 148,
+   "z": 32,
+   "wert": 13.285,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 148,
+   "z": 33,
+   "wert": 14.113,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 148,
+   "z": 34,
+   "wert": 14.272,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 149,
+   "z": 30,
+   "wert": 11.069,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 149,
+   "z": 31,
+   "wert": 11.874,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 149,
+   "z": 32,
+   "wert": 12.707,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 149,
+   "z": 33,
+   "wert": 12.866,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 150,
+   "z": 29,
+   "wert": 9.675,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 150,
+   "z": 30,
+   "wert": 10.464,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 150,
+   "z": 31,
+   "wert": 11.303,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 150,
+   "z": 32,
+   "wert": 11.462,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 151,
+   "z": 28,
+   "wert": 8.25,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 151,
+   "z": 29,
+   "wert": 9.072,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 151,
+   "z": 30,
+   "wert": 9.955,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 151,
+   "z": 31,
+   "wert": 10.061,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 152,
+   "z": 28,
+   "wert": 7.608,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 152,
+   "z": 29,
+   "wert": 8.583,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 152,
+   "z": 30,
+   "wert": 8.612,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 153,
+   "z": 27,
+   "wert": 6.116,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 153,
+   "z": 28,
+   "wert": 6.918,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 153,
+   "z": 29,
+   "wert": 7.969,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 153,
+   "z": 30,
+   "wert": 8.095,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 154,
+   "z": 27,
+   "wert": 5.512,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 154,
+   "z": 28,
+   "wert": 6.596,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 154,
+   "z": 29,
+   "wert": 6.969,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 155,
+   "z": 26,
+   "wert": 4.193,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 155,
+   "z": 27,
+   "wert": 5.15,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 155,
+   "z": 28,
+   "wert": 6.194,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 156,
+   "z": 26,
+   "wert": 4.009,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 156,
+   "z": 27,
+   "wert": 5.012,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 156,
+   "z": 28,
+   "wert": 5.611,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 157,
+   "z": 26,
+   "wert": 3.998,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 157,
+   "z": 27,
+   "wert": 4.62,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 158,
+   "z": 26,
+   "wert": 3.38,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 158,
+   "z": 27,
+   "wert": 4.62,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 159,
+   "z": 26,
+   "wert": 3.38,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 159,
+   "z": 27,
+   "wert": 4.62,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 160,
+   "z": 26,
+   "wert": 3.493,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 160,
+   "z": 27,
+   "wert": 4.691,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 161,
+   "z": 26,
+   "wert": 3.969,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 161,
+   "z": 27,
+   "wert": 5.101,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 162,
+   "z": 25,
+   "wert": 4.039,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 162,
+   "z": 26,
+   "wert": 4.767,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 162,
+   "z": 27,
+   "wert": 5.386,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 163,
+   "z": 25,
+   "wert": 4.821,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 163,
+   "z": 26,
+   "wert": 5.312,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 163,
+   "z": 27,
+   "wert": 5.387,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 164,
+   "z": 25,
+   "wert": 5.704,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 164,
+   "z": 26,
+   "wert": 6.064,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 165,
+   "z": 23,
+   "wert": 5.852,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 165,
+   "z": 24,
+   "wert": 6.253,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 165,
+   "z": 25,
+   "wert": 6.594,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 165,
+   "z": 26,
+   "wert": 6.493,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 166,
+   "z": 23,
+   "wert": 5.765,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 166,
+   "z": 24,
+   "wert": 6.384,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 166,
+   "z": 25,
+   "wert": 6.796,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 167,
+   "z": 23,
+   "wert": 5.109,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "D1",
+   "x": 167,
+   "z": 24,
+   "wert": 6.019,
+   "zellfeld": "D1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 252,
+   "z": 38,
+   "wert": 8.367,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 252,
+   "z": 39,
+   "wert": 8.421,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 253,
+   "z": 38,
+   "wert": 8.331,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 253,
+   "z": 39,
+   "wert": 8.514,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 254,
+   "z": 38,
+   "wert": 8.318,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 254,
+   "z": 39,
+   "wert": 8.522,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 255,
+   "z": 38,
+   "wert": 8.325,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 255,
+   "z": 39,
+   "wert": 8.538,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 256,
+   "z": 38,
+   "wert": 8.357,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 256,
+   "z": 39,
+   "wert": 8.555,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 257,
+   "z": 38,
+   "wert": 8.396,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 257,
+   "z": 39,
+   "wert": 8.57,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 258,
+   "z": 38,
+   "wert": 8.424,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 258,
+   "z": 39,
+   "wert": 8.58,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 259,
+   "z": 38,
+   "wert": 8.443,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 259,
+   "z": 39,
+   "wert": 8.587,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 260,
+   "z": 38,
+   "wert": 8.583,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 260,
+   "z": 39,
+   "wert": 8.591,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 261,
+   "z": 38,
+   "wert": 8.588,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 261,
+   "z": 39,
+   "wert": 8.597,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 261,
+   "z": 40,
+   "wert": 8.599,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 261,
+   "z": 41,
+   "wert": 8.488,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 261,
+   "z": 42,
+   "wert": 8.488,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 262,
+   "z": 38,
+   "wert": 8.592,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 262,
+   "z": 39,
+   "wert": 8.598,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 262,
+   "z": 40,
+   "wert": 8.6,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 262,
+   "z": 41,
+   "wert": 8.6,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 262,
+   "z": 42,
+   "wert": 8.488,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 263,
+   "z": 37,
+   "wert": 8.459,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 263,
+   "z": 38,
+   "wert": 8.595,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 263,
+   "z": 39,
+   "wert": 8.597,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 263,
+   "z": 40,
+   "wert": 8.488,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 264,
+   "z": 37,
+   "wert": 8.57,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 264,
+   "z": 38,
+   "wert": 8.576,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 264,
+   "z": 39,
+   "wert": 8.487,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 265,
+   "z": 36,
+   "wert": 8.458,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 265,
+   "z": 37,
+   "wert": 8.574,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 265,
+   "z": 38,
+   "wert": 8.465,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 266,
+   "z": 35,
+   "wert": 8.432,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 266,
+   "z": 36,
+   "wert": 8.574,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 266,
+   "z": 37,
+   "wert": 8.576,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 266,
+   "z": 38,
+   "wert": 8.486,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 32,
+   "wert": 7.816,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 33,
+   "wert": 8.34,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 34,
+   "wert": 8.4,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 35,
+   "wert": 8.562,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 36,
+   "wert": 8.577,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 267,
+   "z": 37,
+   "wert": 8.465,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 31,
+   "wert": 2.986,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 32,
+   "wert": 7.68,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 33,
+   "wert": 8.48,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 34,
+   "wert": 8.525,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 35,
+   "wert": 8.569,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 268,
+   "z": 36,
+   "wert": 8.48,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 269,
+   "z": 32,
+   "wert": 4.294,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1b_ueber_krone",
+   "feld": "G1",
+   "x": 269,
+   "z": 33,
+   "wert": 5.113,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 252,
+   "z": 5,
+   "wert": 3.839,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 252,
+   "z": 6,
+   "wert": 4.437,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 252,
+   "z": 38,
+   "wert": 19.122,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 252,
+   "z": 39,
+   "wert": 19.889,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 253,
+   "z": 4,
+   "wert": 2.977,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 253,
+   "z": 5,
+   "wert": 3.883,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 253,
+   "z": 6,
+   "wert": 4.501,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 253,
+   "z": 38,
+   "wert": 19.017,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 253,
+   "z": 39,
+   "wert": 20.189,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 3,
+   "wert": 1.987,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 4,
+   "wert": 2.975,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 5,
+   "wert": 3.982,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 6,
+   "wert": 4.06,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 38,
+   "wert": 19.298,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 254,
+   "z": 39,
+   "wert": 20.446,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 255,
+   "z": 3,
+   "wert": 1.975,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 255,
+   "z": 4,
+   "wert": 2.963,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 255,
+   "z": 5,
+   "wert": 3.077,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 255,
+   "z": 38,
+   "wert": 19.625,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 255,
+   "z": 39,
+   "wert": 20.748,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 3,
+   "wert": 1.963,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 4,
+   "wert": 2.077,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 22,
+   "wert": 6.047,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 23,
+   "wert": 6.972,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 24,
+   "wert": 7.969,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 25,
+   "wert": 8.173,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 38,
+   "wert": 19.998,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 256,
+   "z": 39,
+   "wert": 21.093,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 22,
+   "wert": 6.107,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 23,
+   "wert": 7.22,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 24,
+   "wert": 8.126,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 25,
+   "wert": 9.166,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 26,
+   "wert": 9.355,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 29,
+   "wert": 12.412,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 38,
+   "wert": 20.413,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 257,
+   "z": 39,
+   "wert": 21.478,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 23,
+   "wert": 6.89,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 24,
+   "wert": 8.385,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 25,
+   "wert": 9.412,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 26,
+   "wert": 10.394,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 27,
+   "wert": 10.566,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 28,
+   "wert": 12.106,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 29,
+   "wert": 13.284,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 30,
+   "wert": 13.277,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 38,
+   "wert": 20.912,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 258,
+   "z": 39,
+   "wert": 21.902,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 10,
+   "wert": 4.025,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 11,
+   "wert": 4.0,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 12,
+   "wert": 3.0,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 13,
+   "wert": 2.0,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 25,
+   "wert": 9.769,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 26,
+   "wert": 10.687,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 27,
+   "wert": 11.593,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 28,
+   "wert": 12.627,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 29,
+   "wert": 13.214,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 38,
+   "wert": 21.383,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 259,
+   "z": 39,
+   "wert": 22.362,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 10,
+   "wert": 3.752,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 11,
+   "wert": 3.465,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 12,
+   "wert": 2.595,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 13,
+   "wert": 1.975,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 25,
+   "wert": 9.998,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 26,
+   "wert": 10.993,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 27,
+   "wert": 11.865,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 28,
+   "wert": 12.607,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 38,
+   "wert": 22.146,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 260,
+   "z": 39,
+   "wert": 23.011,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 25,
+   "wert": 9.881,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 26,
+   "wert": 10.695,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 38,
+   "wert": 22.117,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 39,
+   "wert": 23.06,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 40,
+   "wert": 23.871,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 41,
+   "wert": 24.81,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 261,
+   "z": 42,
+   "wert": 25.051,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 17,
+   "wert": 2.12,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 18,
+   "wert": 3.099,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 19,
+   "wert": 3.237,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 24,
+   "wert": 8.984,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 25,
+   "wert": 9.819,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 26,
+   "wert": 10.389,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 38,
+   "wert": 21.78,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 39,
+   "wert": 22.706,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 40,
+   "wert": 23.684,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 41,
+   "wert": 24.54,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 262,
+   "z": 42,
+   "wert": 25.049,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 16,
+   "wert": 1.751,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 17,
+   "wert": 2.373,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 18,
+   "wert": 3.25,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 19,
+   "wert": 4.143,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 20,
+   "wert": 4.206,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 23,
+   "wert": 7.713,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 24,
+   "wert": 8.525,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 25,
+   "wert": 9.401,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 37,
+   "wert": 20.481,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 38,
+   "wert": 21.508,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 39,
+   "wert": 22.472,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 263,
+   "z": 40,
+   "wert": 22.789,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 17,
+   "wert": 1.923,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 18,
+   "wert": 2.985,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 19,
+   "wert": 3.707,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 20,
+   "wert": 4.333,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 22,
+   "wert": 6.302,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 23,
+   "wert": 7.176,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 24,
+   "wert": 7.956,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 37,
+   "wert": 20.305,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 38,
+   "wert": 21.292,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 264,
+   "z": 39,
+   "wert": 21.632,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 19,
+   "wert": 3.113,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 20,
+   "wert": 4.237,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 21,
+   "wert": 4.858,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 22,
+   "wert": 5.772,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 23,
+   "wert": 6.599,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 36,
+   "wert": 19.105,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 37,
+   "wert": 20.008,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 265,
+   "z": 38,
+   "wert": 20.628,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 20,
+   "wert": 3.291,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 21,
+   "wert": 4.184,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 22,
+   "wert": 5.347,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 35,
+   "wert": 18.01,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 36,
+   "wert": 19.004,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 37,
+   "wert": 20.009,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 266,
+   "z": 38,
+   "wert": 20.475,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 21,
+   "wert": 3.693,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 22,
+   "wert": 4.933,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 32,
+   "wert": 14.951,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 33,
+   "wert": 15.907,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 34,
+   "wert": 16.864,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 35,
+   "wert": 17.793,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 36,
+   "wert": 18.815,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 267,
+   "z": 37,
+   "wert": 19.477,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 21,
+   "wert": 3.993,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 22,
+   "wert": 4.977,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 23,
+   "wert": 5.859,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 30,
+   "wert": 12.729,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 31,
+   "wert": 13.814,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 32,
+   "wert": 14.775,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 33,
+   "wert": 15.698,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 34,
+   "wert": 16.633,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 35,
+   "wert": 17.524,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 268,
+   "z": 36,
+   "wert": 18.238,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 22,
+   "wert": 4.991,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 23,
+   "wert": 5.963,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 24,
+   "wert": 6.592,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 28,
+   "wert": 10.395,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 29,
+   "wert": 11.632,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 30,
+   "wert": 12.481,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 31,
+   "wert": 13.501,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 32,
+   "wert": 14.489,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 269,
+   "z": 33,
+   "wert": 14.597,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 23,
+   "wert": 5.425,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 24,
+   "wert": 6.639,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 25,
+   "wert": 7.068,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 26,
+   "wert": 8.256,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 27,
+   "wert": 9.424,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 28,
+   "wert": 10.406,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 29,
+   "wert": 11.37,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 30,
+   "wert": 12.205,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 270,
+   "z": 31,
+   "wert": 13.262,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 24,
+   "wert": 6.296,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 25,
+   "wert": 7.227,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 26,
+   "wert": 8.209,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 27,
+   "wert": 9.042,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 28,
+   "wert": 10.082,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 271,
+   "z": 29,
+   "wert": 11.086,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 272,
+   "z": 25,
+   "wert": 6.976,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 272,
+   "z": 26,
+   "wert": 7.958,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 272,
+   "z": 27,
+   "wert": 8.785,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 273,
+   "z": 25,
+   "wert": 6.8,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 273,
+   "z": 26,
+   "wert": 7.757,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 274,
+   "z": 25,
+   "wert": 6.8,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 274,
+   "z": 26,
+   "wert": 7.42,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 275,
+   "z": 25,
+   "wert": 6.867,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 275,
+   "z": 26,
+   "wert": 7.493,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 276,
+   "z": 3,
+   "wert": 1.953,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 276,
+   "z": 4,
+   "wert": 2.389,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 276,
+   "z": 24,
+   "wert": 5.993,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 276,
+   "z": 25,
+   "wert": 6.881,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 276,
+   "z": 26,
+   "wert": 7.501,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 3,
+   "wert": 1.957,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 4,
+   "wert": 2.914,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 14,
+   "wert": 1.925,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 15,
+   "wert": 2.358,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 16,
+   "wert": 2.0,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 20,
+   "wert": 1.962,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 21,
+   "wert": 2.938,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 22,
+   "wert": 3.987,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 23,
+   "wert": 4.974,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 24,
+   "wert": 5.958,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 25,
+   "wert": 6.989,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 277,
+   "z": 26,
+   "wert": 7.282,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 3,
+   "wert": 1.791,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 4,
+   "wert": 3.031,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 15,
+   "wert": 1.847,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 16,
+   "wert": 1.87,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 20,
+   "wert": 1.92,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 21,
+   "wert": 2.92,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 22,
+   "wert": 3.92,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 23,
+   "wert": 4.969,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 24,
+   "wert": 5.681,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 278,
+   "z": 25,
+   "wert": 6.395,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 2,
+   "wert": 1.712,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 3,
+   "wert": 2.352,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 4,
+   "wert": 3.031,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 23,
+   "wert": 4.98,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 24,
+   "wert": 5.6,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 279,
+   "z": 25,
+   "wert": 6.268,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 2,
+   "wert": 1.993,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 3,
+   "wert": 2.878,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 4,
+   "wert": 2.893,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 23,
+   "wert": 5.076,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 24,
+   "wert": 5.686,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 280,
+   "z": 25,
+   "wert": 6.262,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 281,
+   "z": 2,
+   "wert": 1.998,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 281,
+   "z": 3,
+   "wert": 2.614,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 281,
+   "z": 23,
+   "wert": 5.359,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 281,
+   "z": 24,
+   "wert": 5.934,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 281,
+   "z": 25,
+   "wert": 6.453,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 282,
+   "z": 3,
+   "wert": 2.0,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 282,
+   "z": 23,
+   "wert": 5.572,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 282,
+   "z": 24,
+   "wert": 6.128,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 282,
+   "z": 25,
+   "wert": 6.704,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 283,
+   "z": 23,
+   "wert": 5.367,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 283,
+   "z": 24,
+   "wert": 5.93,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 283,
+   "z": 25,
+   "wert": 6.534,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 284,
+   "z": 23,
+   "wert": 4.984,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 284,
+   "z": 24,
+   "wert": 5.458,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 284,
+   "z": 25,
+   "wert": 6.021,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 285,
+   "z": 23,
+   "wert": 4.454,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 285,
+   "z": 24,
+   "wert": 5.001,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 285,
+   "z": 25,
+   "wert": 5.59,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 286,
+   "z": 3,
+   "wert": 1.62,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 286,
+   "z": 23,
+   "wert": 4.104,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 286,
+   "z": 24,
+   "wert": 4.705,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 286,
+   "z": 25,
+   "wert": 5.315,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 287,
+   "z": 3,
+   "wert": 1.62,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 287,
+   "z": 23,
+   "wert": 3.98,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 287,
+   "z": 24,
+   "wert": 4.6,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 287,
+   "z": 25,
+   "wert": 5.135,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 288,
+   "z": 3,
+   "wert": 1.62,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 288,
+   "z": 23,
+   "wert": 3.589,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 288,
+   "z": 24,
+   "wert": 3.942,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 288,
+   "z": 25,
+   "wert": 4.401,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 289,
+   "z": 23,
+   "wert": 2.814,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 289,
+   "z": 24,
+   "wert": 3.25,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 289,
+   "z": 25,
+   "wert": 3.791,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 290,
+   "z": 23,
+   "wert": 2.233,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 290,
+   "z": 24,
+   "wert": 2.788,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 290,
+   "z": 25,
+   "wert": 3.393,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 291,
+   "z": 23,
+   "wert": 1.969,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 291,
+   "z": 24,
+   "wert": 2.993,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 291,
+   "z": 25,
+   "wert": 3.244,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 292,
+   "z": 23,
+   "wert": 1.983,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 292,
+   "z": 24,
+   "wert": 2.49,
+   "zellfeld": "G1"
+  },
+  {
+   "regel": "W1d_quellabstand",
+   "feld": "G1",
+   "x": 293,
+   "z": 23,
+   "wert": 1.877,
+   "zellfeld": "G1"
+  }
+ ]
+}

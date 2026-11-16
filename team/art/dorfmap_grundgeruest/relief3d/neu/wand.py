@@ -126,6 +126,122 @@ def _chunks(wall: dict[str, Any], bounds: tuple[int, int, int, int], width: floa
     return result
 
 
+# P10d: Wandhoehen an das sichtbare Gelaende binden (vektor.json bleibt unveraendert).
+TOP_EMBED_M = 0.15          # Oberkante liegt so tief unter der lokalen Gelaendekrone (kein Z-Fighting mit dem Plateau)
+CREST_MARGIN_CELLS = 0.5    # Nachbarschaft quer zur Wandlinie: halbe Wandbreite + dieser Rand (Zellen)
+CREST_SAMPLES = 11          # Stuetzstellen quer zur Linie je Station
+MIN_PIECE_CELLS = 1.0       # kuerzere Stuecke (Schnittreste) werden nicht als Koerper gebaut
+CREST_SMOOTH_CELLS = 1.5    # Glaettung der Krone entlang der Linie (+- Zellen)
+MAX_ABOVE_GROUND_M = 1.0  # [A] Kappe hoechstens so weit ueber dem Gelaende darunter
+MIN_RUN_CELLS = 3.0         # [A] Laeufe nach der Relief-Teilung kuerzer als 3 Zellen (3,6 m) = einzelne dunkle Kloetze, nicht bauen
+MIN_RELIEF_M = 2.0          # [A] Stationen ohne Gelaendestufe (Krone - Fuss < 2 m) werden nicht als Koerper gebaut
+
+
+def _station_normals(points: np.ndarray) -> np.ndarray:
+    edges = np.diff(points, axis=0)
+    lengths = np.linalg.norm(edges, axis=1)
+    tangents = edges / np.maximum(lengths[:, None], 1e-12)
+    seg = np.column_stack((-tangents[:, 1], tangents[:, 0]))
+    out = np.empty_like(points)
+    out[0], out[-1] = seg[0], seg[-1]
+    if len(points) > 2:
+        mid = seg[:-1] + seg[1:]
+        ln = np.linalg.norm(mid, axis=1)
+        bad = ln < 1e-8
+        mid[bad] = seg[1:][bad]
+        out[1:-1] = mid / np.maximum(np.linalg.norm(mid, axis=1)[:, None], 1e-12)
+    return out
+
+
+def terrain_crest_foot(
+    points: np.ndarray, width_cells: float, heights: np.ndarray, rs: int, tile: str,
+    margin_cells: float = CREST_MARGIN_CELLS, samples: int = CREST_SAMPLES,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Lokale Gelaendekrone (max) und lokaler Gelaendefuss (min) je Station.
+
+    Abgetastet wird das gerenderte Gelaende-Mesh (``_sample_grid``, gleiche Dreiecksdiagonale) auf
+    einer Strecke quer zur Wandlinie von -(Breite/2 + Rand) bis +(Breite/2 + Rand), Breite und Rand in
+    Zellen. Damit sieht jede Station genau den Gelaendestreifen, den ihr Wandkoerper ueberdeckt, plus
+    einen kleinen Rand fuer die Kappenrundung und die Interpolation zwischen den Stationen."""
+    normals = _station_normals(points)
+    offsets = np.linspace(-(width_cells * 0.5 + margin_cells), width_cells * 0.5 + margin_cells, samples)
+    sx = points[:, 0:1] + normals[:, 0:1] * offsets[None, :]
+    sz = points[:, 1:2] + normals[:, 1:2] * offsets[None, :]
+    ground = _sample_grid(heights, rs, tile, sx.ravel(), sz.ravel()).reshape(sx.shape)
+    return ground.max(axis=1), ground.min(axis=1)
+
+
+def smooth_crest(points: np.ndarray, crest: np.ndarray, window_cells: float = CREST_SMOOTH_CELLS) -> np.ndarray:
+    """Untere Huelle der Krone entlang der Linie: gleitendes Minimum, dann gleitendes Mittel (je +-window
+    Zellen Bogenlaenge), nie hoeher als die lokale Krone. Nimmt die Zacken, wenn die Linie ueber die
+    Kante hin und her pendelt (H6), ohne die Oberkante ueber das Gelaende zu heben."""
+    if len(points) < 3 or window_cells <= 0:
+        return crest
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(points, axis=0), axis=1))]
+    lo = np.searchsorted(s, s - window_cells, side="left")
+    hi = np.searchsorted(s, s + window_cells, side="right")
+    m = np.array([crest[a:b].min() for a, b in zip(lo, hi)])
+    avg = np.array([m[a:b].mean() for a, b in zip(lo, hi)])
+    return np.minimum(crest, avg)
+
+
+def piece_length_cells(points: np.ndarray) -> float:
+    return float(np.sum(np.linalg.norm(np.diff(points, axis=0), axis=1))) if len(points) > 1 else 0.0
+
+
+def bind_chunk_to_terrain(
+    points: np.ndarray, top: np.ndarray, bottom: np.ndarray, width_cells: float,
+    terrain: tuple[np.ndarray, int] | None, tile: str,
+) -> tuple[list[tuple[np.ndarray, np.ndarray]], dict[str, Any]]:
+    """P10d: Oberkante je Station = lokale Gelaendekrone - TOP_EMBED_M.
+
+    Die Unterkante bindet ``_network_solid`` je Kappenvertex an das Gelaende darunter (Gelaende - 0,15 m,
+    Variante 2 zusaetzlich an jeder Dreieckskante geteilt) - sie liegt damit immer am lokalen
+    Gelaendefuss bzw. darunter und kann nicht schweben.
+    Nicht gebaut (Daten in vektor.json bleiben unveraendert, nur nicht gerendert):
+      * ganze Stuecke kuerzer als MIN_PIECE_CELLS (Schnittreste),
+      * Stationen, deren Gelaende quer zur Linie weniger als MIN_RELIEF_M Hoehenunterschied hat
+        (Krone - Fuss): dort gibt es keine Gelaendestufe, die Wand laege flach im/auf dem Gelaende und
+        erschiene nur als dunkler Streifen bzw. flimmernde Punkte; verbleibende Laeufe < MIN_PIECE_CELLS ebenso.
+    Rueckgabe: Liste der zu bauenden Laeufe (Punkte in Zellen, Oberkante in m) und Info fuer die Liste."""
+    length = piece_length_cells(points)
+    info: dict[str, Any] = {"laenge_zellen": round(length, 3)}
+    if length < MIN_PIECE_CELLS:
+        info["grund"] = f"kuerzer als {MIN_PIECE_CELLS:g} Zelle (Schnittrest)"
+        return [], info
+    if terrain is None:
+        return [(points, np.maximum(top, bottom))], info
+    crest, foot = terrain_crest_foot(points, width_cells, terrain[0], terrain[1], tile)
+    crest = smooth_crest(points, crest)
+    relief = crest - foot
+    keep = relief >= MIN_RELIEF_M
+    runs: list[tuple[np.ndarray, np.ndarray]] = []
+    dropped_len = 0.0
+    i = 0
+    n = len(points)
+    while i < n:
+        j = i
+        while j < n and keep[j] == keep[i]:
+            j += 1
+        seg = points[i:j]
+        if keep[i] and j - i >= 2 and piece_length_cells(seg) >= max(MIN_PIECE_CELLS, MIN_RUN_CELLS):
+            runs.append((seg, crest[i:j] - TOP_EMBED_M))
+        else:
+            # Laenge des nicht gebauten Abschnitts inkl. halber Nachbarkanten
+            a, b = max(i - 1, 0), min(j, n - 1)
+            dropped_len += piece_length_cells(points[a:b + 1]) if b > a else 0.0
+        i = j
+    info["relief_max_m"] = round(float(relief.max()), 2)
+    info["stationen"] = int(n)
+    info["stationen_ohne_relief"] = int((~keep).sum())
+    info["laeufe_gebaut"] = len(runs)
+    if not runs:
+        info["grund"] = (f"Gelaende quer zur Linie flacher als {MIN_RELIEF_M:g} m (keine Stufe)" if not keep.any()
+                         else f"nur Laeufe < {MIN_RUN_CELLS:g} Zellen mit Stufe (einzelne Kloetze)")
+    elif dropped_len > 0:
+        info["grund"] = f"teilweise: Abschnitte flacher als {MIN_RELIEF_M:g} m oder Laeufe < {MIN_RUN_CELLS:g} Zellen"
+    return runs, info
+
 def _offsets(points: np.ndarray, width: float, variant: int) -> np.ndarray:
     half = width * 0.5
     edges = np.diff(points, axis=0)
@@ -474,6 +590,7 @@ def _network_solid(
     tile: str,
     embed_m: float,
     split_on_terrain: bool = False,
+    max_above_ground_m: float | None = None,
 ) -> tuple[np.ndarray, np.ndarray, int, int, np.ndarray]:
     """Extrude joined wall footprints with a terrain-sampled continuous foot."""
     if not chunks:
@@ -540,6 +657,11 @@ def _network_solid(
         for point, value in boundary_top_values.items():
             top[index_by_point[point]] = value
         ground = _sample_grid(heights, terrain_rs, tile, points_xz[:, 0], points_xz[:, 1])
+        if max_above_ground_m is None:
+            max_above_ground_m = MAX_ABOVE_GROUND_M
+        if max_above_ground_m is not None:
+            # P10d: kein Kappenvertex hoeher als Gelaende darunter + max_above_ground_m (keine Finnen/Gesimse).
+            top = np.minimum(top, ground + max_above_ground_m)
         bottom = np.minimum(ground - embed_m, top - 0.01)
         foot_samples += int(np.count_nonzero(ground > bottom + 1e-6))
         count = len(points_xz)
@@ -645,6 +767,7 @@ def build_wall_manifest(
     vector = json.loads(vector_path.read_text(encoding="utf-8"))
     tile_data: dict[str, Any] = {}
     lowered_total = 0
+    skipped: dict[str, list[dict[str, Any]]] = {}
     for tile in ("D1", "G1", "D2"):
         bounds = TILE_BOUNDS[tile]
         terrain = _terrain_heights(terrain_tiles or {}, tile) if foot_variant in (1, 2) else None
@@ -661,9 +784,16 @@ def build_wall_manifest(
             # Geometry is built in cells like the terrain mesh; widths stay reported in metres.
             width_cells = width / CELL_M
             for points, top, bottom in _chunks(wall, bounds, width, variant):
+                runs, info = bind_chunk_to_terrain(points, top, bottom, width_cells, terrain, tile)
+                if "grund" in info:
+                    skipped.setdefault(tile, []).append({"wand": f"{wall.get('name')}:{wall.get('teil')}",
+                                                         "start": [round(float(v), 2) for v in points[0]],
+                                                         "ende": [round(float(v), 2) for v in points[-1]], **info})
+                if not runs:
+                    continue
                 used_widths.append(width)
                 if terrain is not None:
-                    network_chunks.append((points, np.maximum(top, bottom), width_cells))
+                    network_chunks.extend((run_points, run_top, width_cells) for run_points, run_top in runs)
                 else:
                     positions, indices = _solid(
                         points, np.maximum(top, bottom), np.minimum(top, bottom), width_cells, variant,
@@ -706,4 +836,7 @@ def build_wall_manifest(
             "foot_embed_m": 0.15
             if foot_variant in (1, 2) and terrain_tiles else 0.0,
             "foot_vertices_lowered": int(lowered_total),
+            "top_binding": "lokale_gelaendekrone_minus_0_15m" if terrain_tiles and foot_variant in (1, 2) else "profil",
+            "top_embed_m": TOP_EMBED_M, "crest_margin_cells": CREST_MARGIN_CELLS, "min_piece_cells": MIN_PIECE_CELLS,
+            "nicht_gerendert": {t: v for t, v in skipped.items() if t != "D2"},
             "tiles": tile_data}

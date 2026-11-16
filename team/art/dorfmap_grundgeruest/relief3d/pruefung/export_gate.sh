@@ -7,5 +7,6 @@ ROT=0
 LOCHSCAN=/tmp/gate_loch.json python3 pruefung/pruefe_regeln.py relief_daten.json.gz pruefung/regeln_letzter_lauf.json || ROT=1
 python3 pruefung/r8_kreuzung.py relief_daten.json.gz pruefung/r8_letzter_lauf.json || ROT=1   # t120u-t122u R8/R8a kartenweit
 python3 pruefung/r9_form.py relief_daten.json.gz pruefung/r9_letzter_lauf.json || ROT=1       # t122u/t123u R8b Delle, R9 Saegezahn, R9w Wellen
+python3 pruefung/w1_wand.py index.html pruefung/w1_letzter_lauf.json || ROT=1                # P10d W1 Wandkoerper am Gelaende
 [ $ROT = 0 ] || { echo "GATE ROT: kein Export/ZIP"; exit 1; }
 echo "GATE GRUEN"
