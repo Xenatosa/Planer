@@ -39,6 +39,9 @@
 #  14 P2d (ERGEBNIS_P2D): relief_p2d.py (S7 rampe_5/O16-Band Farbe+Mikrorelief, S10 Bruecken E2/E3 Ostende; Basis-GB-Hash
 #      = Stand nach 13, Sperrbereich L3d/L3e), gen_textur.py vc, p2d_vc_lokal.py <Vorher-Stand>, html_payload_p3.py, waende_einsetzen.py.
 #      Nebenausgaben p2d_rueck.npz + p2d_bericht.json werden mitverglichen. Setzt Schritt 12+13 voraus (P2D=0 laesst 14 weg).
+#  15 L3f (ERGEBNIS_L3f): relief_l3f.py (E3-Westufer + Nachtrag F7/G7; Basis-Hash = Stand nach 14, Rueckweg relief_l3f.py --aus mit pruefung/l3f/l3f_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Stand L3f: alle Versuche gescheitert, keine Stelle aktiv -> relief_l3f.py schreibt nichts,
+#      keine Nebenausgaben, Ergebnis bitgleich zu Schritt 14. L3F=0 laesst Schritt 15 weg; L3F folgt standardmaessig P2D.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -84,6 +87,9 @@ if [ "$L3E" != 0 ] && [ "${L3D:-1}" = 0 ]; then echo "L3E braucht Schritt 12 (L3
 P2D=${P2D:-$L3E}
 if [ "$P2D" != 0 ] && [ "$L3E" = 0 ]; then echo "P2D braucht Schritt 13 (L3E=0 und P2D=1 geht nicht)"; exit 2; fi
 [ "$P2D" = 0 ] || AUSGABEN="$AUSGABEN pruefung/p2_analyse/p2d/p2d_rueck.npz pruefung/p2_analyse/p2d/p2d_bericht.json"
+L3F=${L3F:-$P2D}
+if [ "$L3F" != 0 ] && [ "$P2D" = 0 ]; then echo "L3F braucht Schritt 14 (P2D=0 und L3F=1 geht nicht)"; exit 2; fi
+# L3f: solange keine Stelle aktiv ist, entstehen keine Nebenausgaben (l3f_rueck.npz/l3f_bericht.json) -> nichts zu ergaenzen.
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -207,6 +213,14 @@ python3 pruefung/p2_analyse/p2d/p2d_vc_lokal.py "$V4/relief_daten.json.gz" "$V4/
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/14_p2d.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/14_p2d.log" 2>&1
 z p2d $t
+fi
+# 15) L3f (ERGEBNIS_L3f): eigener Basis-Hash im Skript, Rueckweg pruefung/l3f/l3f_rueck.npz (relief_l3f.py --aus).
+if [ "$L3F" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3f.py > "$AUS/15_l3f.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/15_l3f.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/15_l3f.log" 2>&1
+z l3f $t
 fi
 z gesamt_bau $T0
 

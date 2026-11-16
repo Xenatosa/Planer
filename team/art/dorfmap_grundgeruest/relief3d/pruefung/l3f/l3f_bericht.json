@@ -1,0 +1,32 @@
+{
+ "stellen": [
+  {
+   "id": "E3_west",
+   "gb_vertices": 1305,
+   "gb_max_m": 0.292
+  }
+ ],
+ "wasser_neu": 0,
+ "wasser_entfernt": 0,
+ "wasser_komponenten": [
+  9,
+  9
+ ],
+ "bett_ueber_spiegel": [
+  515,
+  515
+ ],
+ "vc_vertices": 0,
+ "gb_vertices": 1308,
+ "gb_max_abs_m": 0.292,
+ "basis": "b3fbd2017359873dde8f7a7d9def6be38ecaf12369cf9b59076a0e7ac9e9f437",
+ "nachher_sha256": "af6120b1f11fbf505a5135e961244f5b176f8ccd057a45bce29701fb82be8264",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 45,
+ "objekte_angepasst": 20,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}
