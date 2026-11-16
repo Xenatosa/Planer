@@ -1,9 +1,9 @@
 # P12b-v3 – Wasserrand im 56-Kachel-Viewer weich statt geklemmt
 
-Branch `devui/dorfmap-p12b-v3`, baut auf #28 auf (P12-v3, `5b3b479`, Basis `art/dorfmap-fertig` @ `a3eaefe`).
+Branch `devui/dorfmap-p12b-v4`, Basis `art/dorfmap-fertig` @ `9742a92` (#28 gemergt); Cherry-Pick von `c53ea45` (v3) ohne Konflikte.
 Code aus dem alten Branch `devui/dorfmap-p12b` (61ce08a) übernommen, nur `pruefung/alle_kacheln/viewer_alle.js`.
 
-Kosten: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: bau_endstand 592 s (Box ausgelastet; sonst ~400 s) / Arbeitszeit ca. 30 min
+Kosten: 0 € zusätzlich, Codex: nein (Dev UI selbst), Laufzeit: bau_endstand 389 s / Arbeitszeit ca. 30 min
 
 ## Ursache
 `viewer_alle.js` baute das Wassernetz aus der Maske WV so: Wasservertices auf WD (O5 senkt flaches Wasser < 0,12 m unter den
@@ -24,10 +24,10 @@ Das Klemmen steht auch im Legacy-Pfad von `main.js` (Raster-Wasser), der in inde
 und nicht erreicht wird; `neu/viewer.js` zeichnet kein Wasser. index.html, neu/index.html und das Bundle bleiben unverändert.
 
 ## Nachweise
-- Gate (ohne NODE_PATH) je Regel und Trefferliste identisch zu P12-v3/a3eaefe: 372 / 31 / 325 / W1 0 / W1-56 0, Lochscan 0.
+- Gate (ohne NODE_PATH) je Regel und Trefferliste identisch zu 9742a92: 372 / 31 / 325 / W1 0 / W1-56 0, Lochscan 0.
 - D2 bitgleich: index.html unverändert (ebeb46a1/6835acf2/b33d5a64); 56-Kachel-Viewer: Gelände D1/G1/D2 (Positionen, Indizes,
   Farben) identisch zu index.html (`hash_vergleich_D1G1D2.json`, alle_identisch true).
-- bau_endstand.sh: ENDBAU BITGLEICH, 25/25 aus leerem Ordner, 592 s (Soll-sha256 unverändert gegenüber #28, `sha256_bau_p12b.txt`).
+- bau_endstand.sh: ENDBAU BITGLEICH, 25/25 aus leerem Ordner, 389 s auf 9742a92 (Soll-sha256 unverändert gegenüber 9742a92, `sha256_bau_p12b.txt`).
 
 ## Nahbilder `/workspace/p12b_nahbilder/` (Farbe, nosh=1; vorher = `?wrand=0` = Stand d301315, nachher, ohne Wasser)
 - E2-Westufer: Rastertreppe am Wasserrand → weiche, fast gerade Kante.
