@@ -1,6 +1,6 @@
-# P2 Wegnetz v2 – Ergebnis (Basis art/dorfmap-fertig @7944b33 = 2cdd6d9 + P10b-Werkzeuge, Reliefdaten gleich)
+# P2 Wegnetz v2 – Ergebnis (Basis art/dorfmap-fertig @d181fa6 = 2cdd6d9 + P10b/P10c, Reliefdaten gleich)
 
-Branch `wege/dorfmap-p2-v2`. Cherry-Picks: a0c8697, 93398fc, bee3f99 (Analyse), danach v2-Commit.
+Branch `wege/dorfmap-p2-v3`. v2 lag auf 7944b33, dann kam P10c dazu (Konflikt index.html/neu). Deshalb gibt es einen neuen Branch statt eines Force-Push. Cherry-Picks: a0c8697, 93398fc, bee3f99 (Analyse), danach v2-Commit.
 Ersetzt PR #9 (wege/dorfmap-p2-gen, Basis dc8c174).
 
 ## Was v2 anders macht [S]
@@ -19,12 +19,13 @@ python3 gen_relief.py
 RELIEF_NEU=1 RELIEF_GELAENDE_VAR=0 python3 gen_relief.py
 python3 gen_textur.py vc                                   # P3: T1/FW.c
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py  # index.html Nutzlast
+python3 pruefung/p10c/waende_einsetzen.py                 # P10c-Waende in relief_neu/index.html
 Gate: loch_o18g.js (eigene Datei /tmp/p2v2_gate_loch.json), pruefe_regeln.py, r8_kreuzung.py, r9_form.py
 RELIEF_GELAENDE_VAR=0 sh pruefung/alle_kacheln/alles.sh /tmp/p2v2_p10_{vorher,nachher}
 ```
 `RELIEF_GELAENDE_VAR=0`: Kreuzungsvariante 24 braucht die alten Gate-Nummern rampe_2/rampe_11. Auf der Basis bricht die Standard-Variante ohnehin ab, weil die p3d17-Quelle nicht passt (siehe ERGEBNIS_P3). Vorher und nachher wurden deshalb gleich gebaut.
 
-## Gate vorher (7944b33) → nachher
+## Gate vorher (d181fa6, laut P10c gleich 2cdd6d9) → nachher
 regeln 476 → 397, r8 48 → 33, r9 334 → 325, Trefferkarte 858 → 755, lochscan offen_innen 0 → 0, T1 0 → 0, G11 0 → 0.
 
 | Familie | vorher 2cdd6d9 | nachher | |
@@ -77,4 +78,4 @@ z 40–46, x 120–174: keine G2/G3/G6-Treffer vorher und nachher.
 | R6 | 4 | – | liegt beim Dorfmap-Bot | – |
 
 ## Nahbilder
-Betroffene Kacheln: `nahbilder_vorher/`, `nahbilder_nachher/` (alle_kacheln, beide mit RELIEF_GELAENDE_VAR=0). C4: `c4_vorher_nachher.jpg` (Rinne weg, rampe_7 bleibt), D4: `d4_vorher_nachher.jpg` (Pfeil-Wegenden der X069 weg, keine neue Rinne sichtbar). alle_kacheln-Lochscan 56 Kacheln: vorher 0, nachher 0. Vorher-Lauf: Hashvergleich D1/G1 gegen index.html der Basis schlägt fehl (Basis-index.html mit Variante 24 gebaut), deshalb Nahbilder/Lochscan dort einzeln nachgezogen. Trefferkarte: `trefferkarte/vergleich.html|png`.
+Betroffene Kacheln: `nahbilder_vorher/`, `nahbilder_nachher/` (alle_kacheln, beide mit RELIEF_GELAENDE_VAR=0). C4: `c4_vorher_nachher.jpg` (Rinne weg, rampe_7 bleibt), D4: `d4_vorher_nachher.jpg` (Pfeil-Wegenden der X069 weg, keine neue Rinne sichtbar). alle_kacheln-Lochscan 56 Kacheln: vorher 0, nachher 0. Werkzeug P10c, beide Läufe. Vorher-Lauf: Der Hashvergleich D1/G1 gegen index.html der Basis schlägt fehl, weil die Basis-index.html mit Variante 24 gebaut ist. Nahbilder und Lochscan wurden dort deshalb einzeln nachgezogen. Nachher: Hashvergleich alle identisch, Wände identisch. Trefferkarte: `trefferkarte/vergleich.html|png`.
