@@ -92,6 +92,8 @@ Pruefskript: `p3_nahbilder/werkzeug/sha_p3.py` (Ausgabe vorher und nachher zeile
 - **Nach jedem Relief-Neubau durch L1/L2:** `python3 gen_textur.py vc` und danach `python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py` laufen lassen (idempotent), sonst kommen T1 und die Feinbandkanten zurueck.
 - `/tmp/w3` (gemeinsame Node-Werkzeuge fuer `export_gate.sh` und den L1-Lauf) ist beim Box-Neustart gegen 07:45 MEZ verschwunden. P3 laeuft deshalb mit eigenem `/workspace/.p3_node`.
 - Die Form-Befunde aus AUSNAHMEN_P3.md gehen an P1.
+- Abgleich mit `art/dorfmap-fertig` @ dc8c174 (P10 alle_kacheln): `git merge-tree` meldet keinen Konflikt. P10 baut aus GB (Hoehen bitgleich), deshalb aendern sich die Hoehen- und Mesh-Hashes nicht. Die Vertexfarben der P10-Kacheln kommen aber aus der neuen VC. Nach dem Merge `pruefung/alle_kacheln/alles.sh` neu laufen lassen, damit Farbvergleich und Nahbilder den P3-Stand zeigen.
+- Repo: `art/dorfmap-fertig` liegt in **Xenatosa/Planer** (origin dieses Worktrees), nicht in Xenatosa/epodarien. Der PR geht deshalb nach Planer.
 
 ## Wiederholen
 ```
