@@ -1,0 +1,17 @@
+{
+ "bereich": "E3-West x 180-196, z 95-124 (Basis 1778473)",
+ "bachbreite_wasservertices_je_zeile": {
+  "min": 1,
+  "median": 4.0,
+  "max": 8
+ },
+ "bachachse_zickzack_zellen": {
+  "max_abw_von_geglaettet": 0.412,
+  "mittel": 0.114
+ },
+ "bett_tiefe_unter_spiegel_m_median": 0.35,
+ "uferkante_sprung_m_landvertex_zu_wasservertex_median": 0.4,
+ "test_vc_gauss3": "Linie bleibt (Nahbilder *_tvc)",
+ "test_gb_gauss2": "Linie weg, aber Bett angehoben -> Bach fast unsichtbar (Nahbilder *_tgb)",
+ "folgerung": "Zacke = Schattierung der Bachrinne (1–8 Wasservertices breit, Median 4, Bett ~0,3 m unter Spiegel genau auf den Maskenvertices): Rinnenachse und Boeschungsknick folgen dem 0,5-Zellen-Raster der Maske. VC ist glatt und nicht die Ursache."
+}

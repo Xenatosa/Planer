@@ -36,6 +36,9 @@
 #      Gelaende = Spiegel, Basis-Hash GB/WV/VC = Stand nach 12, Rueckweg relief_l3e.py --aus mit pruefung/l3e/l3e_rueck.npz),
 #      html_payload_p3.py, waende_einsetzen.py. Kein gen_textur-Lauf, VC unveraendert. L3E=0 laesst Schritt 13 weg (Stand nach 12);
 #      L3E folgt standardmaessig L3D (Schritt 13 setzt den Stand nach 12 voraus).
+#  14 L3f (ERGEBNIS_L3f): relief_l3f.py (E3-Westufer; Basis-Hash = Stand nach 13, Rueckweg relief_l3f.py --aus mit pruefung/l3f/l3f_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Stand L3f: alle Versuche gescheitert, keine Stelle aktiv -> relief_l3f.py schreibt nichts,
+#      keine Nebenausgaben, Ergebnis bitgleich zu Schritt 13. L3F=0 laesst Schritt 14 weg; L3F folgt standardmaessig L3E.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -78,6 +81,9 @@ pruefung/l3c_rueck.npz pruefung/l3c_bericht.json pruefung/l3c_vc_rueck.npz"
 L3E=${L3E:-${L3D:-1}}
 if [ "$L3E" != 0 ] && [ "${L3D:-1}" = 0 ]; then echo "L3E braucht Schritt 12 (L3D=0 und L3E=1 geht nicht)"; exit 2; fi
 [ "$L3E" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3e/l3e_rueck.npz pruefung/l3e/l3e_bericht.json"
+L3F=${L3F:-$L3E}
+if [ "$L3F" != 0 ] && [ "$L3E" = 0 ]; then echo "L3F braucht Schritt 13 (L3E=0 und L3F=1 geht nicht)"; exit 2; fi
+# L3f: solange keine Stelle aktiv ist, entstehen keine Nebenausgaben (l3f_rueck.npz/l3f_bericht.json) -> nichts zu ergaenzen.
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -191,6 +197,14 @@ python3 relief_l3e.py > "$AUS/13_l3e.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/13_l3e.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/13_l3e.log" 2>&1
 z l3e $t
+fi
+# 14) L3f (ERGEBNIS_L3f): eigener Basis-Hash im Skript, Rueckweg pruefung/l3f/l3f_rueck.npz (relief_l3f.py --aus).
+if [ "$L3F" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3f.py > "$AUS/14_l3f.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/14_l3f.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/14_l3f.log" 2>&1
+z l3f $t
 fi
 z gesamt_bau $T0
 
