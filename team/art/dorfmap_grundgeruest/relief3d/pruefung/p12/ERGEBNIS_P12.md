@@ -47,6 +47,13 @@ scheitert der Scan oder bleibt die Datei leer → `GATE ABBRUCH` mit Log-Auszug,
 Beleg: ohne NODE_PATH läuft das Gate (G1 0); mit `NODE_BAU=<leer>` bricht es sichtbar ab (exit 2). `test_export_gate_lochscan.sh` grün.
 
 ## D2
+**D2: Positionen bitgleich, Nahtnormalen bewusst geändert (3bf24e5f → db48c52f)** (vom Eigner bestätigt).
+
+Beleg Inneres pixelgleich (`pruefung/p12/d2_innen_bild.js`, Bilder in `pruefung/p12/ergebnis/` und `/workspace/p12_nahbilder/d2_innen_*`):
+D2-Fläche abseits der Naht (Kamera 147/y+22/54 → Ziel 147/74, Naht z = 43 hinter der Kamera), index.html@a3eaefe vs. @d301315,
+gleiche Kamera, 1024 × 768: **0 abweichende Pixel** mit Schatten und mit `nosh=1`. Positivkontrolle mit Blick auf die Naht D1|D2:
+2558 abweichende Pixel (max. 1 Tonwert), d. h. der Vergleich erkennt die Nahtänderung.
+
 Positionen surface/sides/bottom = `ebeb46a1` / `6835acf2` / `b33d5a64` (unverändert). **Geändert sind nur die Normalen von
 terrain_surface_D2** (`3bf24e5f` → `db48c52f`, 85 Randvertices der Naht D1|D2), ebenso D1 surface (`77eafb20` → `50b32f1f`).
 G1, sides, bottom unverändert. `?nahtnormalen=0` = Basis a3eaefe (Hash). Details `d2_hashes.json`.
