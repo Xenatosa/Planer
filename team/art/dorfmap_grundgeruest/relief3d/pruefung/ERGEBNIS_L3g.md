@@ -1,6 +1,6 @@
 # ERGEBNIS L3g – F7/G7-Lichtspitzen (WV-Randring) + E3-West einfachere Rinne – Basis art/dorfmap-L3f2 @ 00735fb (auf 8c1fc80)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 17:44–18:26
+Kosten: 0 € · Codex: nein · Laufzeit: 17:44–18:23
 
 art/dorfmap-fertig vor Beginn geprüft: steht auf 8c1fc80. Weiter auf art/dorfmap-L3f2 (normale Commits, kein Force-Push), geliefert in PR #35.
 Freigaben von Grundgerüst: (1) WV-Randring am Nordufer anheben (kartenweit dieselbe Stufung, wo sichtbar), (2) E3-Rinne breiter/flacher, Maske darf nur wachsen.
