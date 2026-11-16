@@ -1,0 +1,508 @@
+{
+ "label": "8e374b0",
+ "relief3d": "/workspace/wt_qa_dorfmap_p4/team/art/dorfmap_grundgeruest/relief3d",
+ "daten": "/workspace/wt_qa_dorfmap_p4/team/art/dorfmap_grundgeruest/relief3d/relief_daten.json.gz",
+ "treffer_datei": "/workspace/wt_qa_dorfmap_p4/team/art/dorfmap_grundgeruest/relief3d/pruefung/regeln_letzter_lauf.json",
+ "gesamt": {
+  "G6_facette": 220,
+  "G5_beule_klippe": 68
+ },
+ "je_kachel": {
+  "G6_facette": {
+   "C5": 17,
+   "C3": 15,
+   "C4": 16,
+   "D4": 6,
+   "B4": 15
+  },
+  "G5_beule_klippe": {
+   "C5": 14,
+   "C3": 18,
+   "C4": 4,
+   "D4": 4,
+   "B4": 0
+  }
+ },
+ "n": 5,
+ "abstand_m": 3.0,
+ "kameras": {
+  "A": "Sueden, 35 Grad, 35 m, Textur",
+  "B": "Sueden, 60 Grad, 16 m, Textur",
+  "C": "wie B, Clay"
+ },
+ "stichproben": [
+  {
+   "id": "G6_C5_1",
+   "regel": "G6_facette",
+   "kachel": "C5",
+   "x": 115.4,
+   "z": 181.6,
+   "wert": 17,
+   "rang_wert": 1,
+   "anzahl_kachel": 17,
+   "bild": "bilder_8e374b0/G6_C5_1.jpg"
+  },
+  {
+   "id": "G6_C5_2",
+   "regel": "G6_facette",
+   "kachel": "C5",
+   "x": 86.8,
+   "z": 203.7,
+   "wert": 13,
+   "rang_wert": 2,
+   "anzahl_kachel": 17,
+   "bild": "bilder_8e374b0/G6_C5_2.jpg"
+  },
+  {
+   "id": "G6_C5_3",
+   "regel": "G6_facette",
+   "kachel": "C5",
+   "x": 93.5,
+   "z": 172.6,
+   "wert": 13,
+   "rang_wert": 3,
+   "anzahl_kachel": 17,
+   "bild": "bilder_8e374b0/G6_C5_3.jpg"
+  },
+  {
+   "id": "G6_C5_4",
+   "regel": "G6_facette",
+   "kachel": "C5",
+   "x": 120.5,
+   "z": 185.0,
+   "wert": 13,
+   "rang_wert": 4,
+   "anzahl_kachel": 17,
+   "bild": "bilder_8e374b0/G6_C5_4.jpg"
+  },
+  {
+   "id": "G6_C5_5",
+   "regel": "G6_facette",
+   "kachel": "C5",
+   "x": 84.8,
+   "z": 179.0,
+   "wert": 11,
+   "rang_wert": 5,
+   "anzahl_kachel": 17,
+   "bild": "bilder_8e374b0/G6_C5_5.jpg"
+  },
+  {
+   "id": "G6_C3_1",
+   "regel": "G6_facette",
+   "kachel": "C3",
+   "x": 85.7,
+   "z": 105.4,
+   "wert": 31,
+   "rang_wert": 1,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_C3_1.jpg"
+  },
+  {
+   "id": "G6_C3_2",
+   "regel": "G6_facette",
+   "kachel": "C3",
+   "x": 114.8,
+   "z": 120.7,
+   "wert": 25,
+   "rang_wert": 2,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_C3_2.jpg"
+  },
+  {
+   "id": "G6_C3_3",
+   "regel": "G6_facette",
+   "kachel": "C3",
+   "x": 85.0,
+   "z": 111.9,
+   "wert": 20,
+   "rang_wert": 3,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_C3_3.jpg"
+  },
+  {
+   "id": "G6_C3_4",
+   "regel": "G6_facette",
+   "kachel": "C3",
+   "x": 106.5,
+   "z": 116.3,
+   "wert": 18,
+   "rang_wert": 4,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_C3_4.jpg"
+  },
+  {
+   "id": "G6_C3_5",
+   "regel": "G6_facette",
+   "kachel": "C3",
+   "x": 110.6,
+   "z": 111.7,
+   "wert": 14,
+   "rang_wert": 5,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_C3_5.jpg"
+  },
+  {
+   "id": "G6_C4_1",
+   "regel": "G6_facette",
+   "kachel": "C4",
+   "x": 112.7,
+   "z": 167.3,
+   "wert": 26,
+   "rang_wert": 1,
+   "anzahl_kachel": 16,
+   "bild": "bilder_8e374b0/G6_C4_1.jpg"
+  },
+  {
+   "id": "G6_C4_2",
+   "regel": "G6_facette",
+   "kachel": "C4",
+   "x": 86.4,
+   "z": 169.5,
+   "wert": 17,
+   "rang_wert": 2,
+   "anzahl_kachel": 16,
+   "bild": "bilder_8e374b0/G6_C4_2.jpg"
+  },
+  {
+   "id": "G6_C4_3",
+   "regel": "G6_facette",
+   "kachel": "C4",
+   "x": 96.3,
+   "z": 164.4,
+   "wert": 15,
+   "rang_wert": 3,
+   "anzahl_kachel": 16,
+   "bild": "bilder_8e374b0/G6_C4_3.jpg"
+  },
+  {
+   "id": "G6_C4_4",
+   "regel": "G6_facette",
+   "kachel": "C4",
+   "x": 116.4,
+   "z": 136.7,
+   "wert": 13,
+   "rang_wert": 4,
+   "anzahl_kachel": 16,
+   "bild": "bilder_8e374b0/G6_C4_4.jpg"
+  },
+  {
+   "id": "G6_C4_5",
+   "regel": "G6_facette",
+   "kachel": "C4",
+   "x": 120.4,
+   "z": 156.6,
+   "wert": 13,
+   "rang_wert": 5,
+   "anzahl_kachel": 16,
+   "bild": "bilder_8e374b0/G6_C4_5.jpg"
+  },
+  {
+   "id": "G6_D4_1",
+   "regel": "G6_facette",
+   "kachel": "D4",
+   "x": 133.9,
+   "z": 130.2,
+   "wert": 22,
+   "rang_wert": 1,
+   "anzahl_kachel": 6,
+   "bild": "bilder_8e374b0/G6_D4_1.jpg"
+  },
+  {
+   "id": "G6_D4_2",
+   "regel": "G6_facette",
+   "kachel": "D4",
+   "x": 139.5,
+   "z": 168.2,
+   "wert": 12,
+   "rang_wert": 2,
+   "anzahl_kachel": 6,
+   "bild": "bilder_8e374b0/G6_D4_2.jpg"
+  },
+  {
+   "id": "G6_D4_3",
+   "regel": "G6_facette",
+   "kachel": "D4",
+   "x": 132.0,
+   "z": 147.0,
+   "wert": 9,
+   "rang_wert": 3,
+   "anzahl_kachel": 6,
+   "bild": "bilder_8e374b0/G6_D4_3.jpg"
+  },
+  {
+   "id": "G6_D4_4",
+   "regel": "G6_facette",
+   "kachel": "D4",
+   "x": 131.4,
+   "z": 133.9,
+   "wert": 7,
+   "rang_wert": 4,
+   "anzahl_kachel": 6,
+   "bild": "bilder_8e374b0/G6_D4_4.jpg"
+  },
+  {
+   "id": "G6_D4_5",
+   "regel": "G6_facette",
+   "kachel": "D4",
+   "x": 140.8,
+   "z": 162.0,
+   "wert": 6,
+   "rang_wert": 5,
+   "anzahl_kachel": 6,
+   "bild": "bilder_8e374b0/G6_D4_5.jpg"
+  },
+  {
+   "id": "G6_B4_1",
+   "regel": "G6_facette",
+   "kachel": "B4",
+   "x": 78.6,
+   "z": 151.9,
+   "wert": 48,
+   "rang_wert": 1,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_B4_1.jpg"
+  },
+  {
+   "id": "G6_B4_2",
+   "regel": "G6_facette",
+   "kachel": "B4",
+   "x": 64.1,
+   "z": 161.0,
+   "wert": 42,
+   "rang_wert": 2,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_B4_2.jpg"
+  },
+  {
+   "id": "G6_B4_3",
+   "regel": "G6_facette",
+   "kachel": "B4",
+   "x": 82.2,
+   "z": 160.1,
+   "wert": 18,
+   "rang_wert": 3,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_B4_3.jpg"
+  },
+  {
+   "id": "G6_B4_4",
+   "regel": "G6_facette",
+   "kachel": "B4",
+   "x": 56.7,
+   "z": 150.9,
+   "wert": 16,
+   "rang_wert": 4,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_B4_4.jpg"
+  },
+  {
+   "id": "G6_B4_5",
+   "regel": "G6_facette",
+   "kachel": "B4",
+   "x": 58.9,
+   "z": 141.6,
+   "wert": 13,
+   "rang_wert": 5,
+   "anzahl_kachel": 15,
+   "bild": "bilder_8e374b0/G6_B4_5.jpg"
+  },
+  {
+   "id": "G5_C5_1",
+   "regel": "G5_beule_klippe",
+   "kachel": "C5",
+   "x": 113.5,
+   "z": 200.5,
+   "wert": 2.63,
+   "rang_wert": 1,
+   "anzahl_kachel": 14,
+   "bild": "bilder_8e374b0/G5_C5_1.jpg"
+  },
+  {
+   "id": "G5_C5_2",
+   "regel": "G5_beule_klippe",
+   "kachel": "C5",
+   "x": 123.5,
+   "z": 185.8,
+   "wert": 0.91,
+   "rang_wert": 4,
+   "anzahl_kachel": 14,
+   "bild": "bilder_8e374b0/G5_C5_2.jpg"
+  },
+  {
+   "id": "G5_C5_3",
+   "regel": "G5_beule_klippe",
+   "kachel": "C5",
+   "x": 124.0,
+   "z": 189.2,
+   "wert": 0.88,
+   "rang_wert": 5,
+   "anzahl_kachel": 14,
+   "bild": "bilder_8e374b0/G5_C5_3.jpg"
+  },
+  {
+   "id": "G5_C5_4",
+   "regel": "G5_beule_klippe",
+   "kachel": "C5",
+   "x": 120.8,
+   "z": 189.0,
+   "wert": 0.87,
+   "rang_wert": 6,
+   "anzahl_kachel": 14,
+   "bild": "bilder_8e374b0/G5_C5_4.jpg"
+  },
+  {
+   "id": "G5_C5_5",
+   "regel": "G5_beule_klippe",
+   "kachel": "C5",
+   "x": 91.0,
+   "z": 210.0,
+   "wert": 0.8,
+   "rang_wert": 8,
+   "anzahl_kachel": 14,
+   "bild": "bilder_8e374b0/G5_C5_5.jpg"
+  },
+  {
+   "id": "G5_C3_1",
+   "regel": "G5_beule_klippe",
+   "kachel": "C3",
+   "x": 125.5,
+   "z": 96.2,
+   "wert": 2.27,
+   "rang_wert": 1,
+   "anzahl_kachel": 18,
+   "bild": "bilder_8e374b0/G5_C3_1.jpg"
+  },
+  {
+   "id": "G5_C3_2",
+   "regel": "G5_beule_klippe",
+   "kachel": "C3",
+   "x": 108.9,
+   "z": 107.4,
+   "wert": 1.29,
+   "rang_wert": 2,
+   "anzahl_kachel": 18,
+   "bild": "bilder_8e374b0/G5_C3_2.jpg"
+  },
+  {
+   "id": "G5_C3_3",
+   "regel": "G5_beule_klippe",
+   "kachel": "C3",
+   "x": 113.1,
+   "z": 106.1,
+   "wert": 1.25,
+   "rang_wert": 3,
+   "anzahl_kachel": 18,
+   "bild": "bilder_8e374b0/G5_C3_3.jpg"
+  },
+  {
+   "id": "G5_C3_4",
+   "regel": "G5_beule_klippe",
+   "kachel": "C3",
+   "x": 103.5,
+   "z": 114.2,
+   "wert": 1.04,
+   "rang_wert": 5,
+   "anzahl_kachel": 18,
+   "bild": "bilder_8e374b0/G5_C3_4.jpg"
+  },
+  {
+   "id": "G5_C3_5",
+   "regel": "G5_beule_klippe",
+   "kachel": "C3",
+   "x": 101.0,
+   "z": 99.5,
+   "wert": 0.96,
+   "rang_wert": 7,
+   "anzahl_kachel": 18,
+   "bild": "bilder_8e374b0/G5_C3_5.jpg"
+  },
+  {
+   "id": "G5_C4_1",
+   "regel": "G5_beule_klippe",
+   "kachel": "C4",
+   "x": 118.8,
+   "z": 166.1,
+   "wert": 1.18,
+   "rang_wert": 1,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_C4_1.jpg"
+  },
+  {
+   "id": "G5_C4_2",
+   "regel": "G5_beule_klippe",
+   "kachel": "C4",
+   "x": 124.5,
+   "z": 150.5,
+   "wert": 0.65,
+   "rang_wert": 4,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_C4_2.jpg"
+  },
+  {
+   "id": "G5_C4_3",
+   "regel": "G5_beule_klippe",
+   "kachel": "C4",
+   "x": 117.5,
+   "z": 168.0,
+   "wert": 0.86,
+   "rang_wert": 2,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_C4_3.jpg"
+  },
+  {
+   "id": "G5_C4_4",
+   "regel": "G5_beule_klippe",
+   "kachel": "C4",
+   "x": 120.5,
+   "z": 165.5,
+   "wert": 0.69,
+   "rang_wert": 3,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_C4_4.jpg"
+  },
+  {
+   "id": "G5_D4_1",
+   "regel": "G5_beule_klippe",
+   "kachel": "D4",
+   "x": 127.2,
+   "z": 147.5,
+   "wert": 1.4,
+   "rang_wert": 1,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_D4_1.jpg"
+  },
+  {
+   "id": "G5_D4_2",
+   "regel": "G5_beule_klippe",
+   "kachel": "D4",
+   "x": 135.0,
+   "z": 139.0,
+   "wert": 1.01,
+   "rang_wert": 2,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_D4_2.jpg"
+  },
+  {
+   "id": "G5_D4_3",
+   "regel": "G5_beule_klippe",
+   "kachel": "D4",
+   "x": 126.0,
+   "z": 137.5,
+   "wert": 0.61,
+   "rang_wert": 4,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_D4_3.jpg"
+  },
+  {
+   "id": "G5_D4_4",
+   "regel": "G5_beule_klippe",
+   "kachel": "D4",
+   "x": 135.5,
+   "z": 139.5,
+   "wert": 0.78,
+   "rang_wert": 3,
+   "anzahl_kachel": 4,
+   "bild": "bilder_8e374b0/G5_D4_4.jpg"
+  }
+ ]
+}
