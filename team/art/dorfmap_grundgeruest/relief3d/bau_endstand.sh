@@ -52,9 +52,10 @@ NODE_BAU=${NODE_BAU:-/tmp/relief3d_bau_node}
 T0=$(date +%s)
 z() { echo "ZEIT $1 $(( $(date +%s) - $2 )) s"; }
 
-# 0) gepinnte Werkzeuge (nur eigener Ordner; /tmp/w3 wird nicht benutzt)
+# 0) gepinnte Werkzeuge (nur eigener Ordner; /tmp/w3 wird nicht benutzt). P12: playwright 1.65.1 fuer den Gate-Lochscan.
 if [ "$("$NODE_BAU/node_modules/.bin/esbuild" --version 2>/dev/null)" != "0.24.2" ] || \
-   ! grep -q '"version": "0.170.0"' "$NODE_BAU/node_modules/three/package.json" 2>/dev/null; then
+   ! grep -q '"version": "0.170.0"' "$NODE_BAU/node_modules/three/package.json" 2>/dev/null || \
+   ! grep -q '"version": "1.65.1"' "$NODE_BAU/node_modules/playwright/package.json" 2>/dev/null; then
   mkdir -p "$NODE_BAU"; cp "$R/bau/package.json" "$R/bau/package-lock.json" "$NODE_BAU/"
   (cd "$NODE_BAU" && npm ci --no-audit --no-fund --silent)
 fi

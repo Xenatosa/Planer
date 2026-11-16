@@ -1,9 +1,10 @@
 {
   "name": "relief3d-bau-endstand",
   "private": true,
-  "description": "P11: gepinnte Bau-Werkzeuge fuer das Viewer-Bundle in index.html (siehe bau_endstand.sh)",
+  "description": "P11: gepinnte Bau-Werkzeuge fuer das Viewer-Bundle in index.html (siehe bau_endstand.sh); P12: playwright fuer den Lochscan in export_gate.sh (Browser aus ~/.cache/ms-playwright)",
   "dependencies": {
     "esbuild": "0.24.2",
-    "three": "0.170.0"
+    "three": "0.170.0",
+    "playwright": "1.65.1"
   }
 }

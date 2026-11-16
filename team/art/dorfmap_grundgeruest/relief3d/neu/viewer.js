@@ -1,4 +1,5 @@
 // Renderer adapter for the opt-in tiled core in the shared main.js entry.
+import { nahtNormalen } from './naht_normalen.js';
 
 const decodeBytes = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 const decodeF32 = s => new Float32Array(decodeBytes(s).buffer);
@@ -128,7 +129,7 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
     return (visibleHeights[k] * (1 - u) + visibleHeights[k + 1] * u) * (1 - v) +
       (visibleHeights[k + GX] * (1 - u) + visibleHeights[k + GX + 1] * u) * v;
   };
-  const tileStats = {};
+  const tileStats = {}, nahtKacheln = [];
   for (const tile of ['D1', 'G1', 'D2']) {
     const t = manifest.tiles[tile], bounds = t.bounds;
     const positions = decodeF32(t.vertices_xyz_f32), indices = decodeU32(t.indices_u32);
@@ -138,6 +139,7 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
     terrainRoot.add(tileGroup);
     const colors = tileColor(DN, positions, rs, NX, NY);
     const top = makeMesh(THREE, positions, indices, terrainMaterial, `terrain_surface_${tile}`, tileGroup);
+    nahtKacheln.push({ name: tile, positions, indices, bounds, normals: top.geometry.attributes.normal.array });
     if (!clay) top.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     const sealed = foundationGeometry(THREE, positions, indices, bounds, t.samples_per_m);
     const side = new THREE.Mesh(sealed.sideGeo, foundationMaterial); side.name = `terrain_sides_${tile}`;
@@ -147,6 +149,9 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
     tileStats[tile] = { vertices: t.vertices, triangles: t.triangles, closedTriangles: t.closed_triangles,
       samplingM: t.sampling_m, surfaceMode: t.surface_mode };
   }
+  // P12: Normalen an der Kachelnaht D1/D2 gemeinsam rechnen (sonst harte Helligkeitslinie bei z=43).
+  // Nur Randvertices aendern sich; Positionen/Indizes unveraendert. ?nahtnormalen=0 = alter Stand.
+  window.__nahtNormalen = /[?&]nahtnormalen=0/.test(location.search) ? null : nahtNormalen(nahtKacheln, rs);
 
   const wallStats = {};
   for (const tile of ['D1', 'G1']) {

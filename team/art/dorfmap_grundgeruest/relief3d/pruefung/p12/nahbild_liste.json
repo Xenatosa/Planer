@@ -1,0 +1,7 @@
+[
+ {"x":126,"z":140,"abstand":22,"azimut":0,"neigung":35,"out":"C4D4_x126_z140.png","titel":"Naht C4/D4 x=126, z 140, von Sueden"},
+ {"x":126,"z":150,"abstand":18,"azimut":0,"neigung":30,"out":"C4D4_x126_z150.png","titel":"Naht C4/D4 x=126, z 150, von Sueden"},
+ {"x":126,"z":146,"abstand":24,"azimut":270,"neigung":35,"out":"C4D4_x126_ost.png","titel":"Naht C4/D4 x=126, von Osten"},
+ {"x":84,"z":224,"abstand":20,"azimut":0,"neigung":35,"out":"B6C6_x84_z224.png","titel":"Naht B6/C6 x=84, z 224, von Sueden"},
+ {"x":84,"z":224,"abstand":22,"azimut":90,"neigung":35,"out":"B6C6_x84_west.png","titel":"Naht B6/C6 x=84, von Westen"}
+]

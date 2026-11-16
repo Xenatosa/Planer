@@ -10,7 +10,22 @@ GATE_TMP=$(mktemp -d "${TMPDIR:-/tmp}/export_gate.XXXXXX") || exit 2
 trap 'rm -rf "$GATE_TMP"' EXIT
 trap 'exit 2' HUP INT TERM
 GATE_LOCH_JSON=${GATE_LOCH_JSON:-${LOCHSCAN:-$GATE_TMP/gate_loch.json}}
-[ -f "$GATE_LOCH_JSON" ] || HTML=index.html OUT="$GATE_LOCH_JSON" RAND=0.6 node pruefung/loch_o18g.js >/dev/null 2>&1
+# P12: Lochscan braucht playwright (+ Chromium aus ~/.cache/ms-playwright). Ohne NODE_PATH ist der Scan frueher stumm
+# gescheitert (G1_lochscan_fehlt=1). Jetzt: NODE_PATH standardmaessig auf die gepinnte Bau-Toolchain
+# (/tmp/relief3d_bau_node, bau/package.json, npm ci), fehlt dort playwright oder scheitert der Scan -> laut abbrechen (exit 2).
+if [ ! -f "$GATE_LOCH_JSON" ]; then
+  export NODE_PATH="${NODE_PATH:-${NODE_BAU:-/tmp/relief3d_bau_node}/node_modules}"
+  if ! node -e "require.resolve('playwright')" >/dev/null 2>&1; then
+    echo "GATE ABBRUCH: playwright nicht gefunden (NODE_PATH=$NODE_PATH). Toolchain anlegen:" >&2
+    echo "  mkdir -p /tmp/relief3d_bau_node && cp bau/package.json bau/package-lock.json /tmp/relief3d_bau_node/ && (cd /tmp/relief3d_bau_node && npm ci)" >&2
+    echo "  oder NODE_PATH=<node_modules mit playwright> bzw. LOCHSCAN=<fertiger Lochscan> setzen" >&2
+    exit 2
+  fi
+  if ! HTML=index.html OUT="$GATE_LOCH_JSON" RAND=0.6 node pruefung/loch_o18g.js > "$GATE_TMP/lochscan.log" 2>&1 || [ ! -s "$GATE_LOCH_JSON" ]; then
+    echo "GATE ABBRUCH: Lochscan (pruefung/loch_o18g.js) fehlgeschlagen, NODE_PATH=$NODE_PATH:" >&2; tail -n 20 "$GATE_TMP/lochscan.log" >&2
+    exit 2
+  fi
+fi
 ROT=0
 LOCHSCAN="$GATE_LOCH_JSON" python3 pruefung/pruefe_regeln.py relief_daten.json.gz pruefung/regeln_letzter_lauf.json || ROT=1
 python3 pruefung/r8_kreuzung.py relief_daten.json.gz pruefung/r8_letzter_lauf.json || ROT=1   # t120u-t122u R8/R8a kartenweit
