@@ -1,0 +1,82 @@
+[
+{
+"x": 201,
+"z": 58,
+"abstand": 20,
+"azimut": 270,
+"neigung": 45,
+"out": "E2_west_x201_z58.png",
+"titel": "E2 Westufer, von Osten"
+},
+{
+"x": 201,
+"z": 58,
+"abstand": 14,
+"azimut": 0,
+"neigung": 60,
+"out": "E2_west_x201_z58_nah.png",
+"titel": "E2 Westufer, steil"
+},
+{
+"x": 189,
+"z": 100,
+"abstand": 20,
+"azimut": 0,
+"neigung": 50,
+"out": "E3_bach_x189_z100.png",
+"titel": "E3 Bach z 100"
+},
+{
+"x": 189,
+"z": 118,
+"abstand": 20,
+"azimut": 0,
+"neigung": 50,
+"out": "E3_bach_x189_z118.png",
+"titel": "E3 Bach z 118"
+},
+{
+"x": 334,
+"z": 279,
+"abstand": 22,
+"azimut": 0,
+"neigung": 45,
+"out": "H7_bucht_x334_z279.png",
+"titel": "H7 Bucht Suedost"
+},
+{
+"x": 334,
+"z": 279,
+"abstand": 14,
+"azimut": 300,
+"neigung": 60,
+"out": "H7_bucht_x334_z279_nah.png",
+"titel": "H7 Bucht steil"
+},
+{
+"kachel": "G7",
+"abstand": 78.6,
+"azimut": 35.54,
+"neigung": 45.5,
+"out": "G7_kachel.png",
+"titel": "G7 Kachelansicht"
+},
+{
+"x": 271,
+"z": 262,
+"abstand": 30,
+"azimut": 0,
+"neigung": 60,
+"out": "G7_ufer_x271_z262.png",
+"titel": "G7 Ufer x271 z262"
+},
+{
+"x": 268,
+"z": 258.5,
+"abstand": 14,
+"azimut": 0,
+"neigung": 65,
+"out": "G7_nordufer_x268_z258_nah.png",
+"titel": "G7 Nordufer steil nah"
+}
+]
