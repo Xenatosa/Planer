@@ -437,6 +437,24 @@
    "weg_rand_m": 5.0,
    "rampe_m": 5.0,
    "wasser": true
+  },
+  {
+   "id": "L3c_G7b",
+   "kachel": "G7/H7",
+   "x_m": 282,
+   "z_m": 265,
+   "rx_m": 16,
+   "rz_m": 8,
+   "fade_m": 3.0,
+   "schliessen_m": 1.5,
+   "sigma_m": 0.8,
+   "land_ufer_heben_m": 0.08,
+   "notiz": "L3c: Fortsetzung der hellen Linien/Rillen im Wasser oestlich G7 (x 266-298)",
+   "aktiv": true,
+   "fw_folgen": true,
+   "weg_rand_m": 5.0,
+   "rampe_m": 5.0,
+   "wasser": true
   }
  ]
 }

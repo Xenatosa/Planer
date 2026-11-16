@@ -194,17 +194,24 @@
    "max_wv_m": 0.895,
    "max_m": 0.968,
    "vertices_geaendert": 2014
+  },
+  {
+   "id": "L3c_G7b",
+   "kachel": "G7/H7",
+   "max_wv_m": 0.399,
+   "max_m": 0.868,
+   "vertices_geaendert": 2959
   }
  ],
- "vertices_geaendert": 30977,
- "wv_vertices_geaendert": 4917,
+ "vertices_geaendert": 33624,
+ "wv_vertices_geaendert": 6350,
  "wv_max_abs_m": 981.259,
  "max_abs_m": 3.223,
  "d2_gb_sha256_vorher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
  "d2_gb_sha256_nachher": "749d3c4b637cf513c35d42c144e9a645ac96b5107f33f017d439d6286cb480f6",
- "gb_sha256_nachher": "12e39a858e88bc803ff7b1ae433440f5085ffec4baf0bd035ff9eb6015a47e02",
- "fw_vertices_geaendert": 10844,
- "objekte_angepasst": 284,
+ "gb_sha256_nachher": "15b65a64f1c45e1d5c8c155d23ddc75e7c9fcb8179396de5ba5225d8c9022c06",
+ "fw_vertices_geaendert": 11831,
+ "objekte_angepasst": 296,
  "prototypen": {
   "D2": "unveraendert",
   "G1": "unveraendert",
