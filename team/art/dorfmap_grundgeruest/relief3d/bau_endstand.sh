@@ -66,6 +66,10 @@
 #      Krone geglaettet; Basis-Hash = Stand nach 20, Sperrzonen im Skript, Rueckweg relief_l3l.py --aus mit pruefung/l3l/l3l_rueck.npz),
 #      html_payload_p3.py, waende_einsetzen.py. Nebenausgaben l3l_rueck.npz + l3l_bericht.json werden mitverglichen. L3L=0 laesst Schritt 21 weg;
 #      L3L folgt standardmaessig L3K.
+#  22 L3m (ERGEBNIS_L3m, P13b): relief_l3m.py (dunkle Linie am Ufer des E3-Kanals x~188 | z~97: nasse Uferecken in der Farbe weich zum trockenen
+#      Ufer aufgehellt; Basis-Hash = Stand nach 21, Sperrzonen im Skript, Rueckweg relief_l3m.py --aus mit pruefung/l3m/l3m_rueck.npz),
+#      html_payload_p3.py, waende_einsetzen.py. Nebenausgaben l3m_rueck.npz + l3m_bericht.json werden mitverglichen. L3M=0 laesst Schritt 22 weg;
+#      L3M folgt standardmaessig L3L.
 #
 # Gelaendevariante: RELIEF_GELAENDE_VAR=0 ist die Variante des Endstands (P2 9ace686, manifest terrain_variant "0").
 #
@@ -132,6 +136,9 @@ if [ "$L3K" != 0 ] && [ "$L3J" = 0 ]; then echo "L3K braucht Schritt 19 (L3J=0 u
 L3L=${L3L:-$L3K}
 if [ "$L3L" != 0 ] && [ "$L3K" = 0 ]; then echo "L3L braucht Schritt 20 (L3K=0 und L3L=1 geht nicht)"; exit 2; fi
 [ "$L3L" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3l/l3l_rueck.npz pruefung/l3l/l3l_bericht.json"
+L3M=${L3M:-$L3L}
+if [ "$L3M" != 0 ] && [ "$L3L" = 0 ]; then echo "L3M braucht Schritt 21 (L3L=0 und L3M=1 geht nicht)"; exit 2; fi
+[ "$L3M" = 0 ] || AUSGABEN="$AUSGABEN pruefung/l3m/l3m_rueck.npz pruefung/l3m/l3m_bericht.json"
 
 # 1) Arbeitskopie: versionierte Quelldateien (ohne Pruefbilder/-seiten, pruefung/ nur .json/.py, ohne Ausgaben); _alt nur lesend verlinkt
 W="$AUS/dorfmap_grundgeruest"; mkdir -p "$W/relief3d"
@@ -311,6 +318,14 @@ python3 relief_l3l.py > "$AUS/21_l3l.log" 2>&1
 python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/21_l3l.log" 2>&1
 python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/21_l3l.log" 2>&1
 z l3l $t
+fi
+# 22) L3m (ERGEBNIS_L3m): eigener Basis-Hash im Skript, Rueckweg pruefung/l3m/l3m_rueck.npz (relief_l3m.py --aus).
+if [ "$L3M" != 0 ]; then
+t=$(date +%s)
+python3 relief_l3m.py > "$AUS/22_l3m.log" 2>&1
+python3 pruefung/p3_nahbilder/werkzeug/html_payload_p3.py >> "$AUS/22_l3m.log" 2>&1
+python3 pruefung/p10c/waende_einsetzen.py >> "$AUS/22_l3m.log" 2>&1
+z l3m $t
 fi
 z gesamt_bau $T0
 

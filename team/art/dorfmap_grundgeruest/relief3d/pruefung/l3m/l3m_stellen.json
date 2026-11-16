@@ -1,0 +1,19 @@
+{
+ "basis": "art/dorfmap-fertig @087c124 (Stand nach Schritt 21 L3l, P13 gemergt)",
+ "basis_gb_wv_vc_sha256": "41e5ccd496c8b4e9605ebb0a174ff598a5121615fe4fe316a94b13d64f82ee79",
+ "stellen": [
+  {
+   "id": "E3_ufer_farbe",
+   "art": "ufer_farbe",
+   "box": [
+    183.0,
+    195.0,
+    86.0,
+    112.0
+   ],
+   "anteil_rand": 0.7,
+   "anteil_innen": 0.3,
+   "notiz": "L3m Schritt 1: nur Farbe - nasse Uferecken des E3-Kanals (L3i/L3j) zur Farbe des trockenen Ufers aufhellen"
+  }
+ ]
+}

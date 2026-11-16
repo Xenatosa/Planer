@@ -1,0 +1,36 @@
+{
+ "stellen": [
+  {
+   "id": "E3_ufer_farbe",
+   "vc_vertices": 234,
+   "rand": 122,
+   "innen": 112
+  }
+ ],
+ "wasser_neu": 0,
+ "wasser_entfernt": 0,
+ "wasser_entfernt_komponenten": 0,
+ "wv_kanal_angehoben": 0,
+ "wasser_komponenten": [
+  7,
+  7
+ ],
+ "bett_ueber_spiegel": [
+  493,
+  493
+ ],
+ "wv_ring_vertices": 0,
+ "vc_vertices": 234,
+ "gb_vertices": 0,
+ "gb_max_abs_m": 0.0,
+ "basis": "41e5ccd496c8b4e9605ebb0a174ff598a5121615fe4fe316a94b13d64f82ee79",
+ "nachher_sha256": "8d14a7098e32a025acb0c287511be809869d5a863392d77f4cfae730853f9271",
+ "fw_c_punkte": 0,
+ "fw_h_punkte": 0,
+ "objekte_angepasst": 0,
+ "prototypen": {
+  "D2": "unveraendert",
+  "G1": "unveraendert",
+  "D1": "unveraendert"
+ }
+}
