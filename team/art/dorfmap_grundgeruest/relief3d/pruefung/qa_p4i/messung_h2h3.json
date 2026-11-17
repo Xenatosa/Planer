@@ -1,0 +1,52 @@
+[
+{
+"n": "H2_300_90",
+"x": 300,
+"z": 90,
+"h_m": 7.98,
+"zacke_m": 0.69,
+"hang_max_grad": 73.5,
+"hang_mittel_grad": 36.2,
+"wand": true
+},
+{
+"n": "H2_290_98",
+"x": 290,
+"z": 98,
+"h_m": 4.38,
+"zacke_m": 0.49,
+"hang_max_grad": 71.0,
+"hang_mittel_grad": 45.7,
+"wand": true
+},
+{
+"n": "H2_280_112",
+"x": 280,
+"z": 112,
+"h_m": 9.66,
+"zacke_m": 0.74,
+"hang_max_grad": 57.7,
+"hang_mittel_grad": 21.6,
+"wand": true
+},
+{
+"n": "H3_E3_193_119",
+"x": 193,
+"z": 119,
+"h_m": -0.01,
+"zacke_m": 0.13,
+"hang_max_grad": 27.8,
+"hang_mittel_grad": 2.9,
+"wand": false
+},
+{
+"n": "H3_D3_1545_97",
+"x": 154.5,
+"z": 97,
+"h_m": 0.0,
+"zacke_m": 0.0,
+"hang_max_grad": 0.0,
+"hang_mittel_grad": 0.0,
+"wand": false
+}
+]
