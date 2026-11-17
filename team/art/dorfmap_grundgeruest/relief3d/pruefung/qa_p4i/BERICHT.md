@@ -145,3 +145,6 @@ Messung im GB-Höhenfeld (0,5-m-Raster, `stufe_e3_messung.txt`):
 `punkte_p4i.json`, `punkte_zusatz.json`, `punkte_notch.json`, `punkte_h2h3.json`, `punkte_h3rand.json`, `punkte_a14.json`, `messung_p4i.json`, `messung_h2h3.json`, `stufe_e3_messung.txt`, `pixdiff.json`, `silh_komp.json`, `VORSCHLAG_AUSNAHME_E3.md`, `bilder_80489c5/` (nah, vn, h2h3, silh, uebersicht). Die Skripte sind Kopien aus qa_p4h; `rendere_kacheln.js` hat zusätzlich `SILH0=1`.
 
 Eigene Gegenprüfung: Alle Koordinaten stammen aus zentrierten Nahbildern oder aus dem Höhenfeld bzw. der WEGA-Maske, nicht aus der Übersicht geschätzt. Die H3-Punkte des Kritikers lagen neben dem Weg; ich habe sie korrigiert (s. 6). Die C4-Facette ≈87|126 habe ich vorher/jetzt verglichen.
+
+## Nachtrag 17.11.2026 (Entscheidung Grundgerüst)
+Kamera-Mindestabstand 25 m wird festgelegt und erzwungen (P14). A18/A19 in AUSNAHMEN_FINAL.md mit dieser Bedingung vermerkt (bei näherem Zoom Sollte-Befunde); A20 E3-Uferstufe in AUSNAHMEN_FINAL.md übernommen. Damit gilt 56 sauber / 0 / 0 ohne Vorbehalt, solange P14 umgesetzt ist.
