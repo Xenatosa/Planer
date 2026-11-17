@@ -1,0 +1,89 @@
+{
+ "alle56_p14": {
+  "terrain_surface_D2": {
+   "pos": "ebeb46a1",
+   "nor": "52eb1840",
+   "side": 0,
+   "shadowSide": 2
+  },
+  "terrain_sides_D2": {
+   "pos": "6835acf2",
+   "nor": "98f2e596",
+   "side": 2,
+   "shadowSide": null
+  },
+  "terrain_bottom_D2": {
+   "pos": "b33d5a64",
+   "nor": "18aaf4e1",
+   "side": 2,
+   "shadowSide": null
+  },
+  "konsole": []
+ },
+ "alle56_basis_80489c5": {
+  "terrain_surface_D2": {
+   "pos": "ebeb46a1",
+   "nor": "52eb1840",
+   "side": 0,
+   "shadowSide": 2
+  },
+  "terrain_sides_D2": {
+   "pos": "6835acf2",
+   "nor": "98f2e596",
+   "side": 2,
+   "shadowSide": null
+  },
+  "terrain_bottom_D2": {
+   "pos": "b33d5a64",
+   "nor": "18aaf4e1",
+   "side": 2,
+   "shadowSide": null
+  },
+  "konsole": []
+ },
+ "index_html_pos_idx": {
+  "basis": {
+   "meshes": {
+    "terrain_surface_D1": "ea714b0fcade",
+    "terrain_sides_D1": "f7d987f57676",
+    "terrain_bottom_D1": "025543f47777",
+    "terrain_surface_G1": "10cb3a76da7a",
+    "terrain_sides_G1": "e43aa726ae4c",
+    "terrain_bottom_G1": "c4f549087344",
+    "terrain_surface_D2": "b0e123bd685e",
+    "terrain_sides_D2": "08b26ca55671",
+    "terrain_bottom_D2": "5316846364a7"
+   },
+   "konsole": []
+  },
+  "p13": {
+   "meshes": {
+    "terrain_surface_D1": "ea714b0fcade",
+    "terrain_sides_D1": "f7d987f57676",
+    "terrain_bottom_D1": "025543f47777",
+    "terrain_surface_G1": "10cb3a76da7a",
+    "terrain_sides_G1": "e43aa726ae4c",
+    "terrain_bottom_G1": "c4f549087344",
+    "terrain_surface_D2": "b0e123bd685e",
+    "terrain_sides_D2": "08b26ca55671",
+    "terrain_bottom_D2": "5316846364a7"
+   },
+   "konsole": []
+  },
+  "p13_silh0": {
+   "meshes": {
+    "terrain_surface_D1": "ea714b0fcade",
+    "terrain_sides_D1": "f7d987f57676",
+    "terrain_bottom_D1": "025543f47777",
+    "terrain_surface_G1": "10cb3a76da7a",
+    "terrain_sides_G1": "e43aa726ae4c",
+    "terrain_bottom_G1": "c4f549087344",
+    "terrain_surface_D2": "b0e123bd685e",
+    "terrain_sides_D2": "08b26ca55671",
+    "terrain_bottom_D2": "5316846364a7"
+   },
+   "konsole": []
+  }
+ },
+ "bitgleich": true
+}
