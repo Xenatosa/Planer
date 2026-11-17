@@ -104,7 +104,10 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 1800);
   const controls = new OrbitControls(camera, renderer ? renderer.domElement : document.body);
   controls.enableDamping = true; controls.dampingFactor = 0.08;
-  controls.maxPolarAngle = Math.PI / 2 - 0.015; controls.minDistance = 2; controls.screenSpacePanning = true;
+  // P14: Mindestabstand der Nutzersteuerung 25 m [A] (Entscheidung Dorfmap-Grundgeruest 17.11.2026, Ausnahmen A18/A19).
+  // Programmkameras (setCamera: Presets, __test.kam fuer Pruef-/Nahbilder 8/15 m) bleiben ungeklemmt. ?nah=1 = alter Wert 2 m.
+  const MIN_NUTZER = /[?&]nah=1/.test(location.search) ? 2 : 25, MIN_PROGRAMM = 2;
+  controls.maxPolarAngle = Math.PI / 2 - 0.015; controls.minDistance = MIN_NUTZER; controls.screenSpacePanning = true;
   scene.add(new THREE.HemisphereLight(0xe2edf6, 0x6d675c, 1.5));
   const sun = new THREE.DirectionalLight(0xfff2dc, 2.0);
   sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
@@ -390,7 +393,8 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
     sun.position.set(cx + 430 * Math.cos(el) * Math.sin(az), cy + 430 * Math.sin(el), cz - 430 * Math.cos(el) * Math.cos(az));
     sun.target.updateMatrixWorld(); sun.intensity = Number(document.getElementById('st')?.value ?? 90) / 48;
   };
-  const setCamera = (p, t) => { camera.position.set(...p); controls.target.set(...t); controls.update(); render(); };
+  const setCamera = (p, t) => { camera.position.set(...p); controls.target.set(...t);
+    controls.minDistance = MIN_PROGRAMM; controls.update(); controls.minDistance = MIN_NUTZER; render(); };
   const schattenKachel = () => { sun.shadow.camera.left = sun.shadow.camera.bottom = -S; sun.shadow.camera.right = sun.shadow.camera.top = S; sun.shadow.camera.updateProjectionMatrix(); };
   // Schraegsicht wie neu/viewer.js focus(): Kamera (x-20, y+35, z+28) auf Kachelmitte; Abstand-Faktor k.
   const focus = (tile, k = 1) => {
@@ -457,7 +461,7 @@ export async function renderAlleKacheln({ THREE, OrbitControls, DN, stufe }) {
   window.__test = {
     bereit: true, kacheln: wahl.slice(), start: DN.start || { x: 147, z: 30 }, wandfuss: { x: 140, z: 35 },
     setModus: mode => { if (mode !== 'neu') throw new Error('Der Kern-Viewer enthaelt nur den neuen Prototyp'); },
-    setView: name => (presets[name] || presets.schraeg)(), focus, blick, kam: (p, t) => setCamera(p, t), H, HG,
+    setView: name => (presets[name] || presets.schraeg)(), focus, blick, kam: (p, t) => setCamera(p, t), H, HG, abstand: () => camera.position.distanceTo(controls.target), minAbstand: () => controls.minDistance,
     darstellung: () => Object.fromEntries(wahl.map(t => [t, { gelaende_dreiecke: tileStats[t].triangles, surface_mode: tileStats[t].surfaceMode,
       wand_dreiecke: wallStats[t]?.triangles || 0, wege_dreiecke: overlayStats[t]?.wege_dreiecke || 0, wasser_dreiecke: overlayStats[t]?.wasser_dreiecke || 0,
       bruecken: br.filter(([x, , z]) => kachelVon(x, z) === t).length }])),

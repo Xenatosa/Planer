@@ -1,0 +1,44 @@
+{
+ "56_kachel_viewer": {
+  "alle56_p14": {
+   "start": 40.22437072223752,
+   "minDistance": 25,
+   "nach_60_wheel_rein": 25,
+   "nach_10_wheel_raus": 194.53412555048988,
+   "programmkamera_8_6m": 8.602325267042628,
+   "nach_programm_plus_1_wheel": 25,
+   "konsole": []
+  },
+  "alle56_p14_nah1": {
+   "start": 40.22437072223752,
+   "minDistance": 2,
+   "nach_60_wheel_rein": 2,
+   "nach_10_wheel_raus": 15.562730044039245,
+   "programmkamera_8_6m": 8.602325267042628,
+   "nach_programm_plus_1_wheel": 8.1722090036905,
+   "konsole": []
+  }
+ },
+ "index_html": {
+  "index_p14": {
+   "start": 40.22437072223752,
+   "minDistance": 25,
+   "nach_60_wheel_rein": 25,
+   "nach_10_wheel_raus": 194.53412555048988,
+   "programmkamera_8_6m": 8.602325267042628,
+   "nach_programm_plus_1_wheel": 25,
+   "konsole": []
+  },
+  "index_p14_nah1": {
+   "start": 40.22437072223752,
+   "minDistance": 2,
+   "nach_60_wheel_rein": 2,
+   "nach_10_wheel_raus": 15.562730044039245,
+   "programmkamera_8_6m": 8.602325267042628,
+   "nach_programm_plus_1_wheel": 8.1722090036905,
+   "konsole": []
+  }
+ },
+ "methode": "Playwright, ohne manual=1 (Animationsschleife mit controls.update), Start 40,2 m per Programmkamera, 60 x mouse.wheel(0,-400) auf dem Canvas, dann 10 x +400; danach Programmkamera 8,6 m und 1 Wheel-Schritt",
+ "hinweis": "Nach einer Programmkamera unter 25 m springt der erste Nutzer-Zoom auf 25 m (Klemmung greift beim naechsten Nutzer-Update)."
+}

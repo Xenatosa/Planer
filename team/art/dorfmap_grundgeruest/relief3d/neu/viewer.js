@@ -98,7 +98,10 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.maxPolarAngle = Math.PI / 2 - 0.015;
-  controls.minDistance = 2;
+  // P14: Mindestabstand der Nutzersteuerung 25 m [A] (Entscheidung Dorfmap-Grundgeruest 17.11.2026, Ausnahmen A18/A19).
+  // Programmkameras (setCamera: Presets, __test.kam fuer Pruef-/Nahbilder) bleiben ungeklemmt. ?nah=1 = alter Wert 2 m.
+  const MIN_NUTZER = /[?&]nah=1/.test(location.search) ? 2 : 25, MIN_PROGRAMM = 2;
+  controls.minDistance = MIN_NUTZER;
   controls.screenSpacePanning = true;
   scene.add(new THREE.HemisphereLight(0xe2edf6, 0x6d675c, 1.5));
   const sun = new THREE.DirectionalLight(0xfff2dc, 2.0);
@@ -178,7 +181,8 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
   };
   let currentTile = 'D1';
   const setCamera = (p, t) => {
-    camera.position.set(...p); controls.target.set(...t); controls.update(); render();
+    camera.position.set(...p); controls.target.set(...t);
+    controls.minDistance = MIN_PROGRAMM; controls.update(); controls.minDistance = MIN_NUTZER; render();
   };
   const focus = tile => {
     currentTile = tile;
@@ -228,7 +232,7 @@ export async function renderNeuCore({ THREE, OrbitControls, DN, stufe }) {
     bereit: true, start: DN.start || { x: 147, z: 30 }, wandfuss: { x: 140, z: 35 },
     setModus: mode => { if (mode !== 'neu') throw new Error('Der Kern-Viewer enthaelt nur den neuen Prototyp'); },
     setView: name => (presets[name] || presets.schraeg)(),
-    kam: (p, t) => setCamera(p, t), H,
+    kam: (p, t) => setCamera(p, t), H, abstand: () => camera.position.distanceTo(controls.target), minAbstand: () => controls.minDistance,
     dump: () => {
       scene.updateMatrixWorld(true);
       const out = [];

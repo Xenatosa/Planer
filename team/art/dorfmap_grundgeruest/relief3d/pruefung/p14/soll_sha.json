@@ -1,0 +1,14 @@
+{
+ "basis": "80489c5",
+ "index.html": {
+  "alt": "34b5a9e7499e3b1947d9e36dcd4a7dd140c18e7c811402b8e6f7deb700bbf5da",
+  "neu": "fae60249d9156426c34c24fa4eaa3d4634f63ea67dae5df463d510626aadfb0f"
+ },
+ "neu/index.html": {
+  "alt": "34b5a9e7499e3b1947d9e36dcd4a7dd140c18e7c811402b8e6f7deb700bbf5da",
+  "neu": "fae60249d9156426c34c24fa4eaa3d4634f63ea67dae5df463d510626aadfb0f"
+ },
+ "grund": "Bundle enthaelt neu/viewer.js (Relief-Neu-Viewer, den main.js Zeile 19 fuer index.html aufruft und der dort die OrbitControls setzt): minDistance Nutzer 25 m, Programmkamera 2 m, ?nah=1, Testhaken __test.abstand/minAbstand. main.js unveraendert (Pipeline baut main.js@6e58af0; dessen oc.minDistance=3 in Zeile 44 liegt hinter dem Return in Zeile 19 und ist fuer index.html nicht erreichbar).",
+ "erzeugt": "UEBERNEHMEN=1 sh bau_endstand.sh (esbuild 0.24.2 / three 0.170.0, alle Pipeline-Schritte); 45 Ausgaben gleich, 2 abweichend (index.html, neu/index.html)",
+ "lauf_leer": "ENDBAU BITGLEICH 47/47 (758 s)"
+}

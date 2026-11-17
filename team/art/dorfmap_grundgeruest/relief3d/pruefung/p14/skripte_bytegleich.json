@@ -1,0 +1,111 @@
+{
+ "befund": "Alle Skripte setzen die Kamera ueber window.__test.kam/focus -> setCamera -> controls.update(); update() klemmt auf minDistance. P14 setzt minDistance in setCamera fuer die Programmkamera kurz auf 2 m (alter Wert) und danach wieder auf 25 m; Skripte unveraendert.",
+ "bilder": [
+  {
+   "skript": "pruefung/qa_p4h/rendere_kacheln.js (PUNKTE, Kritiker/QA)",
+   "html": "56-Kachel-HTML",
+   "bild": "B4grat_d15.png",
+   "sha_80489c5": "9e60edea60c911df7fbfec5d7d7a5efa18e8e80dd1d91d48ad19a90ffc0c5552",
+   "sha_p14": "9e60edea60c911df7fbfec5d7d7a5efa18e8e80dd1d91d48ad19a90ffc0c5552",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/qa_p4h/rendere_kacheln.js (PUNKTE, Kritiker/QA)",
+   "html": "56-Kachel-HTML",
+   "bild": "E3_d8.png",
+   "sha_80489c5": "96de9c619f3fa5b5b600f226cfa8b0d8baa1c655dbd3b42b6c871d4a0f1a6ddc",
+   "sha_p14": "96de9c619f3fa5b5b600f226cfa8b0d8baa1c655dbd3b42b6c871d4a0f1a6ddc",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/qa_p4h/rendere_kacheln.js (PUNKTE, Kritiker/QA)",
+   "html": "56-Kachel-HTML",
+   "bild": "G7_d15.png",
+   "sha_80489c5": "1bf0fc3ae4374d1620ef5f3f31a74aae90211a96c9e760911a87c9c33e7f27ff",
+   "sha_p14": "1bf0fc3ae4374d1620ef5f3f31a74aae90211a96c9e760911a87c9c33e7f27ff",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/alle_kacheln/nahbild.js --liste (P12c-Werkzeug)",
+   "html": "56-Kachel-HTML",
+   "bild": "nb_218_d15.png",
+   "sha_80489c5": "0f9c3a6a2c85da0b7a15264b134ca88ce031fbd1731de26e1c70121d001af451",
+   "sha_p14": "0f9c3a6a2c85da0b7a15264b134ca88ce031fbd1731de26e1c70121d001af451",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/alle_kacheln/nahbild.js --liste (P12c-Werkzeug)",
+   "html": "56-Kachel-HTML",
+   "bild": "nb_82_d8.png",
+   "sha_80489c5": "a1d44f5de5237339a5464dfafb1b9edca1921b420abe8a68e2e2c04bd10ae96f",
+   "sha_p14": "a1d44f5de5237339a5464dfafb1b9edca1921b420abe8a68e2e2c04bd10ae96f",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "56-Kachel-HTML",
+   "bild": "B4_Q2.png",
+   "sha_80489c5": "be4e4200fb49b0ce05a3c777348d62e6f3543b08a286f21cf9979c42c6b47141",
+   "sha_p14": "be4e4200fb49b0ce05a3c777348d62e6f3543b08a286f21cf9979c42c6b47141",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "56-Kachel-HTML",
+   "bild": "P_190_97_8_35_0.png",
+   "sha_80489c5": "96de9c619f3fa5b5b600f226cfa8b0d8baa1c655dbd3b42b6c871d4a0f1a6ddc",
+   "sha_p14": "96de9c619f3fa5b5b600f226cfa8b0d8baa1c655dbd3b42b6c871d4a0f1a6ddc",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "56-Kachel-HTML",
+   "bild": "P_84_129_15_35_0.png",
+   "sha_80489c5": "199081f65a699c154a6ef343e306f60e60553f73a44681d4108a429671870d06",
+   "sha_p14": "199081f65a699c154a6ef343e306f60e60553f73a44681d4108a429671870d06",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "index.html",
+   "bild": "D1_Q1.png",
+   "sha_80489c5": "754149956f02592a5caa83fb30ee898fc2b9acc46165b781ba6b668f311876cc",
+   "sha_p14": "754149956f02592a5caa83fb30ee898fc2b9acc46165b781ba6b668f311876cc",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "index.html",
+   "bild": "G1_Q3.png",
+   "sha_80489c5": "4131fa911c16a1b90030441d26fbc8921de2fc61b72ad4c74e1522db57bcdf15",
+   "sha_p14": "4131fa911c16a1b90030441d26fbc8921de2fc61b72ad4c74e1522db57bcdf15",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "index.html",
+   "bild": "P_140_35_15_20_300.png",
+   "sha_80489c5": "a093387e0e6324cced68a86f96528a5155edbe6096c54ee31380e4bee1d6eff3",
+   "sha_p14": "a093387e0e6324cced68a86f96528a5155edbe6096c54ee31380e4bee1d6eff3",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "index.html",
+   "bild": "P_147_21.5_8_35_0.png",
+   "sha_80489c5": "8f97ed0b777880867c24d330fca60754e08f7f94b4b00b98be3e3edcb57861ae",
+   "sha_p14": "8f97ed0b777880867c24d330fca60754e08f7f94b4b00b98be3e3edcb57861ae",
+   "bytegleich": true
+  },
+  {
+   "skript": "pruefung/p13/werkzeug/render_p13.js",
+   "html": "index.html",
+   "bild": "P_147_64.5_15_35_0.png",
+   "sha_80489c5": "4afc1dea877c36a6679db8167bec786454ec74539542bca1e1f67bb1fc4f541f",
+   "sha_p14": "4afc1dea877c36a6679db8167bec786454ec74539542bca1e1f67bb1fc4f541f",
+   "bytegleich": true
+  }
+ ],
+ "alle_bytegleich": true,
+ "anzahl": 13
+}

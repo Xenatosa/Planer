@@ -37,6 +37,7 @@ Marker: [S] gemessen/Quelle · [A] Annahme · [R] gerechnet · [F] Entscheidung.
 - **Sprites und Gebäude:** Flache 2D-Sprites haben keine Rückseite. Nötig: 3D-Modelle oder Sprites aus mehreren Winkeln (z. B. 8 Richtungen).
 - **Licht und Schatten:** Gemalte Schatten in c20 passen nur zu einer Richtung. Nötig: echtes Licht in der Engine und neutrale Textur.
 - **Zoom-Grenzen:** Mindest- und Höchstabstand und ein Mindest-Neigungswinkel festlegen [A, offen], damit man nicht unter die Karte schaut.
+  - Mindestabstand 25 m [A], Entscheidung Dorfmap-Grundgerüst vom 17.11.2026, Begründung Ausnahmen A18/A19, neu zu bewerten, sobald Gebäude auf der Karte stehen.
 - **Kartenrand:** Kamera am Rand begrenzen, außen Kulisse (Berge/Nebel) zeigen.
 
 ## 5. Engine-Format für Unity
@@ -71,6 +72,7 @@ Marker: [S] gemessen/Quelle · [A] Annahme · [R] gerechnet · [F] Entscheidung.
   - Wie gehen Wege über Hänge und Stufen (Treppen/Rampen)?
 - **Game Designer:**
   - Zoom-Grenzen und Mindestwinkel der Kamera?
+    - Mindestabstand 25 m [A], Entscheidung Dorfmap-Grundgerüst vom 17.11.2026, Begründung Ausnahmen A18/A19, neu zu bewerten, sobald Gebäude auf der Karte stehen.
   - Ausblenden von Wänden ja/nein?
   - Bauen außerhalb der Senke erlaubt?
   - 3D-Gebäude oder Sprites aus mehreren Winkeln?
