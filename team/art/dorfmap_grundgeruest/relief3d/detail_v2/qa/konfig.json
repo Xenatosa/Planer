@@ -1,0 +1,318 @@
+{
+ "_hinweis": "Format verbindlich: Entscheidungen Grundgeruest 19.11.2026 (PLAN_QA_DV2.md Abschn. 8, inkl. Runde 2: wege.geojson rolle/klasse, kreuzungen art, Bett Klasse 4 + Spiegelmodell, UV2 ab r 10 m). Offen: zonen.geojson (P1c, bauzone_plan).",
+ "welt_m": [
+  336,
+  303
+ ],
+ "kachel_m": [
+  42,
+  43
+ ],
+ "mesh_manifest": "mesh/manifest.json",
+ "modelle_ordner": "modelle",
+ "vektor_ordner": "vektor",
+ "daten_ordner": "daten",
+ "constraint_quellen": [
+  {
+   "datei": "wege.geojson",
+   "filter": {
+    "rolle": [
+     "rand_links",
+     "rand_rechts"
+    ]
+   }
+  },
+  {
+   "datei": "kreuzungen.geojson",
+   "filter": {
+    "art": [
+     "weg_kreuzung",
+     "weg_platz"
+    ]
+   }
+  },
+  {
+   "datei": "ufer.geojson",
+   "filter": {
+    "typ": "uferlinie"
+   }
+  },
+  {
+   "datei": "kanten.geojson",
+   "pflicht": false
+  },
+  {
+   "datei": "grat.geojson",
+   "pflicht": false
+  }
+ ],
+ "q3_quellen": [
+  {
+   "datei": "wege.geojson",
+   "filter": {
+    "rolle": [
+     "rand_links",
+     "rand_rechts"
+    ]
+   }
+  },
+  {
+   "datei": "ufer.geojson",
+   "filter": {
+    "typ": "uferlinie"
+   }
+  },
+  {
+   "datei": "bach_mitte.geojson",
+   "pflicht": false
+  },
+  {
+   "datei": "kanten.geojson",
+   "pflicht": false
+  },
+  {
+   "datei": "grat.geojson",
+   "pflicht": false
+  },
+  {
+   "datei": "zonen.geojson",
+   "pflicht": false,
+   "filter": {
+    "layer": "flaechentyp"
+   },
+   "zonenringe": true
+  },
+  {
+   "datei": "zonen.geojson",
+   "pflicht": false,
+   "filter": {
+    "layer": "untergrund"
+   },
+   "zonenringe": true
+  }
+ ],
+ "mittellinien": {
+  "datei": "wege.geojson",
+  "filter": {
+   "rolle": "mittellinie"
+  },
+  "breite_prop": "breite",
+  "id_prop": "id",
+  "klasse_prop": "klasse"
+ },
+ "kreuzungen": {
+  "datei": "kreuzungen.geojson",
+  "filter": {
+   "art": [
+    "weg_kreuzung",
+    "weg_platz"
+   ]
+  }
+ },
+ "wasser": {
+  "datei": "wasser.geojson",
+  "filter": {
+   "typ": "wasser"
+  },
+  "spiegel_prop": "spiegel_m"
+ },
+ "uferlinie": {
+  "datei": "ufer.geojson",
+  "filter": {
+   "typ": "uferlinie"
+  }
+ },
+ "bauzone": {
+  "datei": "zonen.geojson",
+  "filter": {
+   "layer": "bauzone_plan"
+  },
+  "prop": "bauzone_plan",
+  "zellen_csv": "../neu/zellen_relief.csv",
+  "zellen_spalten": [
+   "cx",
+   "cy",
+   "bauzone_plan"
+  ],
+  "zellen_soll": 31893,
+  "_hinweis_zellen": "Runde 5 (#61): Features mit properties.zellen -> Zellsumme = zellen_soll und Zellmenge deckungsgleich mit zellen_csv (relativ zur Wurzel detail_v2); ohne zellen Rueckfall Flaechenvariante"
+ },
+ "bruecken": {
+  "E2": {
+   "id": "bruecke_E2",
+   "x": [
+    186,
+    197
+   ],
+   "z": [
+    73,
+    75
+   ]
+  },
+  "E3W": {
+   "id": "bruecke_E3W",
+   "x": [
+    174,
+    186
+   ],
+   "z": [
+    126,
+    128
+   ]
+  }
+ },
+ "orte": {
+  "dorfkern": [
+   209,
+   118
+  ],
+  "bruecke_e2": [
+   192,
+   74.5
+  ],
+  "bach_e3": [
+   189,
+   100
+  ],
+  "grat_g3": [
+   300,
+   90
+  ],
+  "klippen_c3": [
+   104,
+   115
+  ]
+ },
+ "q1_augenhoehen": [
+  1.7,
+  5.0
+ ],
+ "q13_hoehen": [
+  1.7,
+  5,
+  12,
+  30
+ ],
+ "schwellen": {
+  "q2_hausdorff_m": 0.02,
+  "q3_glatt_m": 0.03,
+  "q3_knick_grad": 15,
+  "q3_fenster_m": 1.0,
+  "q4_gefaelle": 0.02,
+  "q4_rest_m": 0.02,
+  "q5_delle_m": 0.03,
+  "q5_band_m": 3.0,
+  "q5_radius_m": 1.0,
+  "q6_einsenkung_m": [
+   0.03,
+   0.05
+  ],
+  "q6_quer": 0.035,
+  "q6_laengs_grad": 20,
+  "q7_dh_m": 0.01,
+  "q7_bereich": [
+   126,
+   43,
+   168,
+   86
+  ],
+  "q8_ufer_m": 0.05,
+  "q8_boeschung_m": 2.5,
+  "q8_mono_tol_m": 0.001,
+  "q9_begehbar_abstand_m": 0.5,
+  "q9_band_abstand_m": 0.2,
+  "q9_fern_abstand_m": 1.0,
+  "q9_fern_ab_weg_m": 30,
+  "q9_diagonal_faktor": 1.4284,
+  "q9_band_breite_m": 1.5,
+  "q9_min_winkel": 20,
+  "q9_dreiecke_gesamt": 1600000,
+  "q9_dreiecke_kachel": 60000,
+  "q10_verzerrung": 0.1,
+  "q11_dh_m": 0.02,
+  "q11_punkte": 10000,
+  "q11_flaeche_anteil": 0.995,
+  "q12_spalt_m": 0.02,
+  "q12_stufe_m": 0.05,
+  "q14_weg_m": 0.3,
+  "q14_wasser_rel": 0.03,
+  "q14_bauzone_rel": 0.01,
+  "q9_wegband_abstand_m": 0.25,
+  "q10_uv0_bis_grad": 25,
+  "q8_spalt_m": 0.002,
+  "q10_kurve_radius_m": 10,
+  "q3_abtastung_m": 0.05,
+  "q8_ueberlappung_m": 0.1
+ },
+ "wegnetz": {
+  "datei": "wege.geojson",
+  "filter": {
+   "rolle": "netz"
+  }
+ },
+ "wasser_modell": {
+  "klasse": 4,
+  "id_praefix": "wasser"
+ },
+ "q14_wasser_referenz": {
+  "datei": "wasser.geojson",
+  "filter": {
+   "typ": "wasser"
+  },
+  "_hinweis": "Referenzflaeche zur Laufzeit = Vereinigung der Polygone (Entscheidung QA 19.11. Runde 3; Stand aa78160 ~6630,17 m2)"
+ },
+ "q3_zonen": {
+  "_hinweis": "F11 Runde 4 + F13 Runde 5: nur Kartenrand (inkl. Ecken) und +-stoss_fenster_m um Stosspunkte (>= 3 Zonen; Kartenrand zaehlt als 'ausserhalb', d. h. 2 Zonen + Rand) ausgenommen; Bruecken-Stosspunkte hart (Platzhalter P5); Stosspunkte je Layer",
+  "kartenrand_tol_m": 0.01,
+  "stoss_fenster_m": 0.5,
+  "stoss_tol_m": 0.01,
+  "hart_typen": [
+   "bruecke"
+  ]
+ },
+ "q14_ausnahmen": [
+  {
+   "id": "A-DV2-02",
+   "wege": [
+    "G002_anb/0",
+    "G008/2",
+    "G010/2",
+    "G014/1"
+   ],
+   "quelle": "AUSNAHMEN_DV2.md A-DV2-02; wege.geojson meta.verfahren.ausgelassen (P1a)",
+   "bedingung": "nur gueltig, wenn in P6 bei 1,7 m keine sichtbare Luecke im Wegnetz entsteht"
+  }
+ ],
+ "q3_ausschluss": {
+  "_hinweis": "Runde 5: Logikschichten nie in Q3 (nur sichtbare Geometrie)",
+  "layer": [
+   "bauzone_plan",
+   "slot"
+  ]
+ },
+ "q3_bruecke_p5": {
+  "_hinweis": "F14 Runde 6 / F17 Runde 7: bis P5 aus - Bruecken-Gruppe = offener Befund P5; ab P5 aktiv: Mess-Ausschluss (keine t2029u-Ausnahme) von Knick und Abweichung nur im +-fenster_m-Fenster um die 4 Deckend-Ecken je Bruecke; Laengsseiten hart fuer beides",
+  "aktiv": false,
+  "datei": "zonen.geojson",
+  "filter": {
+   "layer": "flaechentyp",
+   "typ": "bruecke"
+  },
+  "fenster_m": 0.5,
+  "befreit": [
+   "knick",
+   "abweichung"
+  ]
+ },
+ "q3_wegenden": {
+  "_hinweis": "F15 Runde 6 + F16 Runde 7 (auch stoss_nah): runde Wegenden als Ausnahme A-DV2-01 (Sichtpruefung 1,7 m; sichtbar -> andere Endgeometrie im Mesh, P2)",
+  "aktiv": true,
+  "ausnahme": "A-DV2-01",
+  "gruppen": [
+   "sonst",
+   "stoss_nah"
+  ],
+  "ende_m": 3.0,
+  "abw_max_m": 0.048
+ }
+}
