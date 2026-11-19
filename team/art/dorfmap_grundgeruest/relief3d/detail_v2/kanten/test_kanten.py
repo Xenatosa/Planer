@@ -556,11 +556,76 @@ def test_q3_both_metrics_hard_3cm_15deg():
           "max %.2f cm" % (100 * max([b[3] for b in wasser if b[2] != "knick"], default=0)))
     assert not uebrig, ("flaechentyp Q3 ausserhalb Tripelpunkte/bekannter Quellen", uebrig)
     assert sorted(wegenden) == BEKANNTE_WEGENDEN_LISTE, sorted(set(wegenden) ^ set(BEKANNTE_WEGENDEN_LISTE))
-    # Der Wasserumriss ist nur dann "bekannte Quelle", wenn die Quelle selbst verletzt:
-    ufer = json.loads((VECTOR / "ufer.geojson").read_text(encoding="utf-8"))["features"]
-    uferlinien = [shape(f["geometry"]) for f in ufer if f["properties"].get("typ") == "uferlinie"]
-    if wasser:
-        assert qa_verstoesse(uferlinien)[0] > 0.03
+    # P1c2: Mit #60 (Wasser/Ufer gleichmaessig 0,05 m) ist die Ausnahme Wasserumriss entfallen.
+    assert not wasser, ("Wasserumriss-Verstoesse (seit #60 nicht mehr erlaubt)", wasser[:10])
+
+
+def fein_ring_q3(coords):
+    """Verbindliche QA-q3-Messart (ab 19.11. 18:08): Linie nach Bogenlaenge auf 0,05 m
+    abtasten, gleitendes 1-m-Mittel (21 Punkte, Ring zyklisch); Knick an Stuetzpunkten.
+    Rueckgabe Liste (x, z, wert, art) der Verstoesse > 3 cm bzw. > 15 Grad."""
+    p = np.asarray(coords, float)
+    if np.allclose(p[0], p[-1]):
+        p = p[:-1]
+    q = np.vstack([p, p[:1]])
+    seg = np.linalg.norm(np.diff(q, axis=0), axis=1)
+    s = np.r_[0, np.cumsum(seg)]
+    n = max(int(np.ceil(s[-1] / 0.05)), 3)
+    ss = np.arange(n) * (s[-1] / n)
+    xy = np.column_stack([np.interp(ss, s, q[:, 0]), np.interp(ss, s, q[:, 1])])
+    pad = np.vstack([xy[-10:], xy, xy[:10]])
+    m = np.column_stack([np.convolve(pad[:, k], np.ones(21) / 21, "valid") for k in range(2)])
+    a = np.linalg.norm(xy - m, axis=1)
+    v1 = p - np.roll(p, 1, 0)
+    v2 = np.roll(p, -1, 0) - p
+    n1, n2 = np.linalg.norm(v1, axis=1), np.linalg.norm(v2, axis=1)
+    ok = (n1 > 1e-9) & (n2 > 1e-9)
+    k = np.where(ok, np.degrees(np.arccos(np.clip((v1 * v2).sum(1) / np.where(ok, n1 * n2, 1), -1, 1))), 0)
+    return ([(xy[i, 0], xy[i, 1], a[i], "abw") for i in np.where(a > 0.03)[0]]
+            + [(p[i, 0], p[i, 1], k[i], "knick") for i in np.where(k > 15.0)[0]])
+
+
+def zonen_q3_gruppen():
+    """Jeden q3-Fund (feine Messart) auf allen Polygonringen von zonen.geojson einer
+    Gruppe zuordnen: a Tripelpunkt (>= 3 Zonen, Abstand <= 0,75 m), b Wegende
+    (A-DV2-01, Wegende-Zone), c Kartenrand (<= 0,75 m), d Sonstiges."""
+    features = read("zonen.geojson")
+    trip = {}
+    for layer in ("flaechentyp", "untergrund"):
+        ex, _ = output_tripoints(features, layer)
+        trip[layer] = [tuple(e[:2]) for e in ex]
+    zones = wegende_zonen()
+    funde = []
+    for f in features:
+        pr = f["properties"]
+        for poly in polygon_parts(shape(f["geometry"])):
+            for ring in [poly.exterior, *poly.interiors]:
+                for x, z, v, art in fein_ring_q3(ring.coords):
+                    pt = Point(x, z)
+                    if FRAME.distance(pt) <= 0.75:
+                        g = "c"
+                    elif trip.get(pr["layer"]) and min((x - a) ** 2 + (z - b) ** 2 for a, b in trip[pr["layer"]]) <= 0.75 ** 2:
+                        g = "a"
+                    elif any(zz.covers(pt) for _, zz in zones):
+                        g = "b"
+                    else:
+                        g = "d"
+                    funde.append((pr["id"], pr["layer"], round(x, 2), round(z, 2), art, round(float(v), 4), g))
+    return funde
+
+
+def test_zonen_q3_fein_alle_ringe_nur_gruppen_a_b_c():
+    funde = zonen_q3_gruppen()
+    zus = Counter((f[1], f[6]) for f in funde)
+    mx = {}
+    for f in funde:
+        if f[4] == "abw":
+            mx[(f[1], f[6])] = max(mx.get((f[1], f[6]), 0), f[5])
+    print("ZONEN_Q3_FEIN", dict(zus), {k: round(100 * v, 2) for k, v in mx.items()})
+    sonst = [f for f in funde if f[6] == "d"]
+    assert not sonst, ("q3-Funde Gruppe d (Sonstiges)", sonst[:20])
+    # Bauzone und Slots: keine Funde (Bauzone glatt, Slots als Punkte)
+    assert not [f for f in funde if f[1] in ("bauzone_plan", "slot")]
 
 
 def test_zone_exceptions_are_only_true_tripoints_and_four_corners():

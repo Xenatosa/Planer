@@ -606,31 +606,11 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
     bz = np.zeros((ny, nx), dtype=np.int8)
     for idx, row in cell_rows.items():
         bz[idx // nx, idx % nx] = int(row["bauzone_plan"] or 0)
-    bz_labels = [("ausserhalb",), ("bauzone",)]
-    bz_codes = bz.copy()
-    bz_original = component_cell_geometries(bz_codes, bz_labels)
-    bz_parts = [p for g in bz_original.values() for p in polygon_parts(g)]
-    bz_smooth = smooth_coverage(bz_parts, dp=0.2, sample_step=0.2)
+    # P1c2: Bauzone als glatte Flaeche (SDF sigma 1 m, Oeffnen/Schliessen r 2,5 m,
+    # adaptive Ringglaettung, Flaeche per runder Pufferung auf die Zellzahl kalibriert).
     target_area = float(np.count_nonzero(bz))
-    inside_source = bz_original.get(("bauzone",), Polygon())
-    outside_source = bz_original.get(("ausserhalb",), Polygon())
-    inside_parts = []
-    for poly in bz_smooth:
-        if poly.intersection(inside_source).area >= poly.intersection(outside_source).area:
-            inside_parts.append(poly)
-    inside_union = unary_union(inside_parts) if inside_parts else Polygon()
-    # Replace the smoothed area by a signed buffer calibrated to the exact cell count.
-    if not inside_union.is_empty and target_area > 0:
-        lo, hi = -4.0, 4.0
-        for _ in range(30):
-            mid = (lo + hi) / 2
-            if inside_union.buffer(mid, join_style="round").area > target_area:
-                hi = mid
-            else:
-                lo = mid
-        calibrated = inside_union.buffer((lo + hi) / 2, join_style="round")
-    else:
-        calibrated = inside_union
+    calibrated, bz_q3_ok = zk.glatte_maske(bz > 0, target_area, 1.0, 2.5)
+    calibrated = zk.clean(calibrated.intersection(zk.RECT))
     bz_area = float(calibrated.area)
     for poly in polygon_parts(calibrated):
         typ, under = majority_at_geometry(poly, types, substrates)
@@ -651,13 +631,19 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
             if len(pts) == 0:
                 continue
             mask_i = cc == i
-            # Exact union of source cells; slots are a separate point/polygon layer.
+            # P1c2: Slots sind Platzierungspunkte. Die Zellvereinigung (Treppenumriss,
+            # nicht Q3-faehig) wird nicht mehr als Polygon ausgegeben, sondern verlustfrei
+            # als Punkt (Flaechenschwerpunkt) mit Zellliste und Flaeche.
             geom = unary_union([box(float(x), float(y), float(x + 1), float(y + 1)) for y, x in pts])
             if not geom.is_valid:
                 geom = make_valid(geom)
             main_type, under = majority_at_geometry(geom, types, substrates)
-            out.append(feature(geom, {"layer": "slot", "typ": typ, "klasse": CLASS_CODES[main_type], "untergrund": under,
-                                      "id": f"{typ}_{i:04d}", "quelle": "raster_c20_z25_overlay_plaetze_wege.csv"}))
+            c = geom.centroid
+            out.append(feature(Point(round(c.x, 4), round(c.y, 4)),
+                               {"layer": "slot", "typ": typ, "klasse": CLASS_CODES[main_type], "untergrund": under,
+                                "id": f"{typ}_{i:04d}", "quelle": "raster_c20_z25_overlay_plaetze_wege.csv",
+                                "flaeche_m2": float(len(pts)),
+                                "zellen": [[int(x), int(y)] for y, x in sorted(map(tuple, pts))]}))
     expansion = json.loads(EXTENSION.read_text(encoding="utf-8"))
     for item in expansion.get("plaetze", []):
         x, y = float(item["cx"]) + 0.5, float(item["cy"]) + 0.5
@@ -694,6 +680,7 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
                  "untergrund_info": under_info,
                  "untergrund_inseln_entfallen": list(zk.BOGEN_INSELN_ENTFALLEN),
                  "bruecken_schnitt": list(zk.BRUECKEN_SCHNITT),
+                 "bauzone_q3_ok": bool(bz_q3_ok),
                  "fels_ringe_entfallen": list(zk.RING_DROPPED)}
 
 

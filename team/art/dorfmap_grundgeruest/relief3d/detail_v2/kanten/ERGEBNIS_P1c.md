@@ -141,3 +141,86 @@ Echte 3+-Label-Knoten und Zonenwechsel am Kartenrand. Die Kartenrand-Bögen selb
 ### Bekannte Quelle Wegenden (52)
 
 `G001#0:ende`, `G001_anb#0:ende`, `G002#0:anfang`, `G002#0:ende`, `G003#0:anfang`, `G003#0:ende`, `G003_anb#0:anfang`, `G003_anb#0:ende`, `G004#1:ende`, `G004_anb#0:anfang`, `G004_anb#0:ende`, `G005#1:ende`, `G006#0:anfang`, `G006#0:ende`, `G006_anb#0:ende`, `G007#0:anfang`, `G007#1:anfang`, `G008#1:ende`, `G008_anb#0:anfang`, `G008_anb#0:ende`, `G009#1:anfang`, `G009#1:ende`, `G010#0:anfang`, `G011#0:ende`, `G011#1:anfang`, `G012#0:anfang`, `G012#0:ende`, `G013#0:ende`, `G014#0:ende`, `G015#0:ende`, `G015#1:ende`, `G016#1:ende`, `G017#0:ende`, `G018_anb#0:ende`, `G019_anb#0:anfang`, `G902a#0:ende`, `G903b#0:anfang`, `G903b#0:ende`, `haus_A11#0:anfang`, `haus_A11#0:ende`, `haus_A25#0:anfang`, `haus_A25#0:ende`, `haus_A31D#0:anfang`, `haus_B28#0:anfang`, `haus_B29D#0:anfang`, `haus_B29D#0:ende`, `haus_D02#0:anfang`, `haus_D02#0:ende`, `haus_D08#0:anfang`, `haus_E04D#0:anfang`, `haus_E07#0:anfang`, `haus_E07#0:ende`
+
+---
+
+## P1c2 – Zonen auf Basis #60, q3-Fundgruppen (Branch `art/dv2-zonen2`)
+
+Kosten: 0 EUR, ohne Codex, 18:06-18:25 (Europe/Berlin)
+
+Basis ist `art/dv2-vektor-wasser-q3` @ d563688 (PR #60, Wasser/Ufer gleichmäßig auf 0,05 m abgetastet, Geometrie wie #58); der Branch enthält #57.
+
+### 1) Ausnahme „Wasserumriss“ entfällt
+
+Nach dem Neugenerieren gibt es auf den Flächentyp-Bögen 0 Verstöße am Wasserumriss (vorher 52 Messpunkte, bis 3,30 cm). Der Test verlangt jetzt hart, dass diese Gruppe leer ist. Die Uferlinien messen nach der QA-Messart 2,90 cm. Als Ausnahme bleiben nur die 52 Wegenden (A-DV2-01, unverändert).
+
+### 2) q3-Funde in `zonen.geojson`, Gruppen a–d
+
+Messart (QA, verbindlich ab 18:08): Jeder Polygonring wird nach Bogenlänge auf 0,05 m abgetastet, dann folgt ein gleitendes 1-m-Mittel (Ring zyklisch); Grenze 3 cm, Knick 15°. Ein „Ort“ fasst alle Messpunkte zusammen, die zum selben Tripelpunkt, Wegende oder Randpunkt gehören.
+
+Zuordnung:
+- c = höchstens 0,75 m vom Kartenrand
+- sonst a = höchstens 0,75 m von einem Knoten mit ≥ 3 Zonen
+- sonst b = in einer Wegende-Zone
+- sonst d
+
+| Ebene | Gruppe | Orte | max. Abweichung | max. Knick |
+|---|---|---:|---:|---:|
+| Flächentyp | a Tripelpunkt | 33 | 25,6 cm | 166,6° |
+| Flächentyp | b Wegende (A-DV2-01) | 51 | 4,77 cm | – |
+| Flächentyp | c Kartenrand | 28 | 22,1 cm | 116,6° |
+| Untergrund | a Tripelpunkt | 36 | 24,6 cm | 147,2° |
+| Untergrund | c Kartenrand | 20 | 23,6 cm | 134,2° |
+| Bauzone, Slots | – | 0 | – | – |
+| **alle** | **d Sonstiges** | **0** | – | – |
+
+Zum Vergleich das alte Stützpunktmittel: `q3` aus #55 @ 38fa7ec findet jetzt 77 Ringe mit Funden, max. 27,0 cm.
+
+Korrektur zu meinem P1c-Bericht: Dort hatte ich „31 Funde“ genannt. Das war falsch, denn ich hatte nur die ersten 40 Einträge der Befundliste gezählt. Tatsächlich waren es 832 Befunde, davon die meisten Slot- und Bauzonen-Ringe. Die „bis 25 cm“ von Art Umgebung stimmen.
+
+Was ich konstruktiv behoben habe (Gruppe d war vorher 780 Ringe):
+- **Slots** (723 Treppenpolygone aus 1-m-Zellen) werden jetzt als **Punkte** ausgegeben: Flächenschwerpunkt plus `zellen` (vollständige Zellliste) und `flaeche_m2`. Es geht keine Information verloren, und es entsteht keine Linie mehr.
+- **Bauzone** (vorher Treppen-/Pufferpolygon) ist jetzt glatt.
+  - Verfahren: SDF mit σ 1 m, Öffnen und Schließen mit r 2,5 m, adaptive Ringglättung, Fläche per runder Pufferung auf 31 893 Zellen kalibriert (−0,00005 %).
+  - [R] Dabei sind 22 kleine Quellteile entfallen: 17 mit 1–2 m² sowie 20 m² bei 133,7|127,7, 71 m² bei 139,2|151,6, 12 m² bei 251,4|234,4 und 7 m² bei 254,6|239,1. Außerdem sind 38 von 41 Löchern entfallen.
+  - Die symmetrische Differenz zu den Zellen beträgt 5,6 %. Die Fläche bleibt durch die Kalibrierung bei ±1 %.
+  - Mit r 2,0 oder 1,6 m waren Löcher nicht q3-fähig.
+- **Kartenecken und Randkeile**: Das Schließen von Weg und Ufer mit Außenband hat die vier Kartenecken mit Weg gefüllt und an Uferbändern zum Rand tangentiale Keile erzeugt (Knick 178,9°). Ersatz: Die Fläche wird an den Kartenkanten gespiegelt. Ecken bleiben dadurch frei, und Grenzen treffen den Rand ohne Keil. Danach gibt es 63 statt 68 Flächentyp-Polygone.
+
+Sichtprüfung:
+- **Gruppe a**: [`nahbild_tripelpunkte.jpg`](nahbild_tripelpunkte.jpg) zeigt Ausschnitte von 16 m (~19 px/m) an den vier größten a-Orten (193,97|76,26, 220,94|201,91, 192,82|110,54, 267,8|15,1). Dort entstehen keine Zacken. Es sind echte Ecken von Flächengrenzen: Ein ausgerundetes Wegende oder eine Wegflanke trifft unter einem Winkel auf den Uferbandrand, bzw. drei glatte Untergrundbögen treffen sich in einem Y-Knoten. Die großen Werte entstehen, weil die 1-m-Mittelung des Rings über die Ecke läuft.
+- **Gruppe c**: [`nahbild_kartenrand.jpg`](nahbild_kartenrand.jpg) zeigt die Kartenecke 0|0 (jetzt frei) und drei Randübergänge. Zonengrenzen enden schräg am Rand, Knick ≤ 134°, ohne Keile.
+
+### 3) Tests, Gate
+
+- `pytest test_kanten.py`: **8 passed**, ohne xfail und ohne skip.
+  - Neu: `test_zonen_q3_fein_alle_ringe_nur_gruppen_a_b_c` prüft alle Ringe von `zonen.geojson` mit der feinen Messart und verlangt Gruppe d = 0, Bauzone und Slots ohne Funde.
+  - Die Ausnahme Wasserumriss muss leer sein.
+- Q3 der gemeinsamen Bögen (QA / fein):
+  - kanten 2,37 / 2,20 cm, 7,6°
+  - grat 2,82 / 2,62 cm, 3,4°
+  - Untergrund 2,94 / 2,73 cm, 3,5°
+  - Flächentyp außerhalb der Wegenden ≤ 3,0 cm; Maximum an Wegenden 9,01 / 5,61 cm
+- Flächen:
+  - Wasser 0,00 %
+  - Ufer −0,80 %
+  - Brücke +0,29 % (gegen Rechtecke −0,63 %)
+  - Weg +0,71 % (nur berichtet)
+  - Bauzone −0,00005 %
+- SHA-256:
+  - `zonen.geojson` `0a67f16bcf2bbb6cc957fda3b4650935e3dd53ff0d23ab1c0453f6e598a88c75`
+  - `kanten.geojson` und `grat.geojson` unverändert
+- Gate über `export_gate.sh` mit Lochscan: **359 / R8 31 / R9 321, W1 0, Loch 0**. Die O17-Referenz `/tmp/o18m/o17.json.gz` wurde nach dem Box-Reset nach den Anweisungen in `pruefe_regeln.py` aus `f65298b` neu erzeugt; G7b-Werte unverändert. Schwellen wurden nicht geändert.
+
+### 4) Bilder
+
+- `../tag1_vektoren.jpg`
+- `uebersicht_zonen.jpg`
+- `nahbild_72_154.jpg`
+- `nahbild_tripelpunkte.jpg`
+- `nahbild_kartenrand.jpg`
+- `uebersicht_kanten.jpg`
+- `nahbild_g3h3.jpg`
+- `nahbild_b3c3.jpg`
+
+Alle sind kleiner als 1 MB und wurden angesehen. `e2_vorher_nachher.jpg` stammt unverändert aus P1c.

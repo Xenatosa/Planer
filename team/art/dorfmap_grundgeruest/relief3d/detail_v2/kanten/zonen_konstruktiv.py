@@ -161,9 +161,32 @@ def schliessen(g, r=R_RUND):
 AUSSEN = box(-10, -10, NX + 10, NY + 10).difference(RECT)
 
 
+def _gespiegelt(gi, rand):
+    """gi plus Spiegelbilder an den vier Kartenkanten und den vier Ecken (nur Randstreifen)."""
+    from shapely import affinity
+    teile = [gi]
+    for sx, ox in ((1, None), (-1, 0.0), (-1, float(NX))):
+        for sy, oy in ((1, None), (-1, 0.0), (-1, float(NY))):
+            if sx == 1 and sy == 1:
+                continue
+            fx0 = 0.0 if ox is None else ox
+            fy0 = 0.0 if oy is None else oy
+            streifen = box(-10 if ox is None else fx0 - rand, -10 if oy is None else fy0 - rand,
+                           NX + 10 if ox is None else fx0 + rand, NY + 10 if oy is None else fy0 + rand)
+            teil = gi.intersection(streifen)
+            if teil.is_empty:
+                continue
+            teile.append(affinity.scale(teil, xfact=sx, yfact=sy, origin=(fx0, fy0)))
+    return unary_union(teile)
+
+
 def schliessen_rand(g, r=R_RUND):
-    """Schliessen mit Aussenband: am Kartenrand wird nichts abgerundet."""
-    return schliessen(unary_union([g.intersection(RECT), AUSSEN]), r).intersection(RECT)
+    """Schliessen am Kartenrand ohne Randartefakte (P1c2): statt eines Aussenbands
+    (fuellte die vier Kartenecken und erzeugte zum Rand tangentiale Keile) wird die
+    Flaeche an den Kartenkanten gespiegelt; Grenzen treffen den Rand dadurch
+    rechtwinklig, Ecken bleiben unberuehrt."""
+    gi = g.intersection(RECT)
+    return clean(schliessen(_gespiegelt(gi, 2 * r + 1.0), r).intersection(RECT))
 
 
 def oeffnen(g, r=R_RUND):
@@ -688,3 +711,55 @@ def bogen_adaptiv(c, closed: bool):
             break
     BOGEN_LOG.append(best[:4] + (round(float(best[4][:, 0].mean()), 1), round(float(best[4][:, 1].mean()), 1)))
     return best[4], (best[2] <= 0.0295 and best[3] <= 14.5)
+
+
+def ring_fein(coords):
+    """Verbindliche QA-Messart (ab 19.11. 18:08): Ring nach Bogenlaenge auf 0,05 m
+    abtasten, gleitendes 1-m-Mittel (21 Punkte, zyklisch); Knick an Stuetzpunkten."""
+    p = np.asarray(coords, float)
+    if np.allclose(p[0], p[-1]):
+        p = p[:-1]
+    q = np.vstack([p, p[:1]])
+    seg = np.hypot(*np.diff(q, axis=0).T)
+    s = np.r_[0, np.cumsum(seg)]
+    n = max(int(np.ceil(s[-1] / 0.05)), 3)
+    ss = np.arange(n) * (s[-1] / n)
+    xy = np.column_stack([np.interp(ss, s, q[:, 0]), np.interp(ss, s, q[:, 1])])
+    pad = np.vstack([xy[-10:], xy, xy[:10]])
+    m = np.column_stack([np.convolve(pad[:, k], np.ones(21) / 21, "valid") for k in range(2)])
+    v1 = p - np.roll(p, 1, 0)
+    v2 = np.roll(p, -1, 0) - p
+    c = (v1 * v2).sum(1) / (np.hypot(*v1.T) * np.hypot(*v2.T) + 1e-15)
+    return float(np.hypot(*(xy - m).T).max()), float(np.degrees(np.arccos(np.clip(c, -1, 1))).max())
+
+
+def _ringe_ok(geom):
+    """Alle Ringe (aussen und innen) halten Q3 (feine Messart, mit Reserve)."""
+    for poly in polys(geom):
+        for r in [poly.exterior, *poly.interiors]:
+            a_, k_ = ring_fein(r.coords)
+            if a_ > 0.0295 or k_ > 14.5:
+                return False
+    return True
+
+
+def glatte_maske(mask_cells: np.ndarray, ziel_m2: float, sigma_m: float = 1.0, r_m: float = 0.0):
+    """Zellmaske -> glatte Flaeche: SDF-Gauss (Kontur 0), optional Oeffnen/Schliessen r,
+    adaptive Ringglaettung, dann Flaeche per runder Pufferung auf ziel_m2 kalibriert.
+    Rueckgabe (Geometrie, q3_ok)."""
+    g = sdf_smooth_region(mask_cells, sigma_m, 0.5, clip=False)
+    if r_m > 0:
+        g = schliessen(oeffnen(g, r_m), r_m)
+    g = ringe_glaetten(g, sigma_m)
+    if g.is_empty:
+        return g, False
+    lo, hi = -1.0, 1.0
+    for _ in range(40):
+        mid = 0.5 * (lo + hi)
+        if g.buffer(mid, quad_segs=64, join_style="round").area > ziel_m2:
+            hi = mid
+        else:
+            lo = mid
+    d = round(0.5 * (lo + hi), 4)
+    out = clean(g.buffer(d, quad_segs=64, join_style="round")) if abs(d) > 1e-4 else g
+    return out, _ringe_ok(out)
