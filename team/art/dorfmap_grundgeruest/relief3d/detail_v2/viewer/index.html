@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Dorfmap Detail v2 – Viewer</title>
+<style>
+ html,body{margin:0;height:100%;overflow:hidden;background:#b8c7d2;font:13px/1.35 system-ui,sans-serif;touch-action:none}
+ canvas{display:block}
+ #hud{position:fixed;z-index:2;left:8px;top:8px;padding:6px 8px;background:rgba(20,24,28,.6);color:#fff;border-radius:4px;white-space:pre;pointer-events:none}
+ #lade{position:fixed;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);padding:10px 14px;background:rgba(20,24,28,.75);color:#fff;border-radius:6px}
+ #knopf{position:fixed;z-index:3;right:10px;top:10px;padding:8px 12px;border:0;border-radius:5px;background:rgba(20,24,28,.7);color:#fff;font:inherit}
+ #stick{display:none;position:fixed;z-index:2;width:100px;height:100px;border-radius:50%;border:2px solid rgba(255,255,255,.7);pointer-events:none}
+</style>
+</head>
+<body>
+<div id="hud">Viewer v2</div>
+<div id="lade">Lade Manifest …</div>
+<button id="knopf">Orbit (O)</button>
+<div id="stick"></div>
+<script src="viewer_v2.js"></script>
+</body>
+</html>
