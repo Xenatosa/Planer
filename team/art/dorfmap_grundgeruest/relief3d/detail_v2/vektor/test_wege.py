@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """P1a Abnahme fuer wege.geojson / kreuzungen.geojson (aus relief3d/):  python3 detail_v2/vektor/test_wege.py [--json AUS.json]
-Q3  Zackenamplitude jeder Randlinie gegen ihre 1-m-Glaettung <= 3 cm (Linie auf 0,05 m nachgetastet, gleitendes Mittel 1 m
-    Bogenlaenge, 0,5 m an offenen Enden ausgenommen), Knick zwischen Nachbarsegmenten (0,25-m-Abtastung) <= 15 Grad.
+Q3  Zackenamplitude jeder Randlinie gegen ihre 1-m-Glaettung <= 3 cm, hart mit ZWEI Methoden:
+    A (fein): Linie auf 0,05 m nachgetastet, gleitendes Mittel 1 m Bogenlaenge, 0,5 m an offenen Enden ausgenommen;
+    B (QA): gleitendes 1-m-Mittel ueber die Stuetzpunkte der Linie selbst (0,25 m -> +-2 Punkte), Enden ausgenommen,
+      Kreuzungsringe zyklisch. B ist bei Kurven strenger (Kreisbogen R: A ~ 4,2 cm/R, B ~ 6,25 cm/R).
+    Knick zwischen Nachbarsegmenten (0,25-m-Abtastung) <= 15 Grad.
     Geprueft: alle Randlinien (rand_links/rand_rechts) und Kreuzungsumrisse; zusaetzlich getrennt der sichtbare Teil
     (Randlinie ausserhalb der Kreuzungen).
 Q14 Mittellinie <= 0,3 m vom alten Verlauf (vektor.json /1,2), beidseitig (Hausdorff).
@@ -35,6 +38,18 @@ def zacken(P, ring=False):
     if len(Q) <= 2 * k + 1: return 0.0
     c = np.cumsum(np.vstack([[0, 0], Q]), 0); M = (c[2 * k + 1:] - c[:-2 * k - 1]) / (2 * k + 1)
     return float(np.hypot(*(Q[k:len(Q) - k] - M).T).max())
+
+def zacken_b(P, ring=False):
+    P = np.asarray(P, float)
+    if ring and np.allclose(P[0], P[-1]): P = P[:-1]
+    n = len(P)
+    if n < 3: return 0.0
+    k = max(1, int(round(0.5 / np.hypot(*np.diff(P, axis=0).T).mean())))
+    if ring:
+        idx = (np.arange(n)[:, None] + np.arange(-k, k + 1)[None]) % n; return float(np.hypot(*(P - P[idx].mean(1)).T).max())
+    if n <= 2 * k + 1: return 0.0
+    c = np.cumsum(np.vstack([[0, 0], P]), 0); M = (c[2 * k + 1:] - c[:-2 * k - 1]) / (2 * k + 1)
+    return float(np.hypot(*(P[k:n - k] - M).T).max())
 
 def knick(P, ring=False):
     P = np.asarray(P, float)
@@ -76,11 +91,12 @@ def main():
     W = json.load(open(H / "wege.geojson")); K = json.load(open(H / "kreuzungen.geojson"))
     V = json.load(open(R / "neu" / "vektor.json"))
     kp = [shape(f["geometry"]) for f in K["features"]]; Kall = unary_union(kp)
-    erg = {"rand": [], "kreuzung": [], "sichtbar": []}; fehler = []
+    erg = {"rand": [], "kreuzung": [], "sichtbar": []}; erg_b = {"rand": [], "kreuzung": []}; fehler = []
     for f in W["features"]:
         if f["properties"]["rolle"] in ("rand_links", "rand_rechts"):
             g = shape(f["geometry"]); P = np.asarray(g.coords)
             erg["rand"].append((zacken(P), knick(P), f["properties"]["id"], f["properties"]["teil"], f["properties"]["rolle"]))
+            erg_b["rand"].append((zacken_b(P), f["properties"]["id"], f["properties"]["teil"], f["properties"]["rolle"]))
             vis = g.difference(Kall)
             for v in getattr(vis, "geoms", [vis]):
                 if v.is_empty or v.geom_type != "LineString" or v.length < 0.3: continue
@@ -88,12 +104,20 @@ def main():
     for f, g in zip(K["features"], kp):
         if not g.is_valid: fehler.append(f"Kreuzung {f['properties']['id']} ungueltig")
         P = np.asarray(g.exterior.coords); erg["kreuzung"].append((zacken(P, True), knick(P, True), f["properties"]["id"], 0, "umriss"))
+        erg_b["kreuzung"].append((zacken_b(P, True), f["properties"]["id"], 0, "umriss"))
     out = {}
     for k, L in erg.items():
         z = max(L, key=lambda t: t[0]); kn = max(L, key=lambda t: t[1])
         out[k] = {"linien": len(L), "zacken_max_m": round(z[0], 4), "zacken_max_bei": z[2:], "knick_max_grad": round(kn[1], 2), "knick_max_bei": kn[2:],
                   "zacken_ueber": sum(t[0] > ZACK_MAX for t in L), "knick_ueber": sum(t[1] > KNICK_MAX for t in L),
                   "zacken_p95_m": round(float(np.percentile([t[0] for t in L], 95)), 4), "knick_p95_grad": round(float(np.percentile([t[1] for t in L], 95)), 2)}
+    for k, L in erg.items():
+        out[k]["zacken_top5_A_cm"] = [[round(t[0] * 100, 2)] + list(t[2:]) for t in sorted(L, key=lambda t: -t[0])[:5]]
+        out[k]["zacken_ueber_2_7cm_A"] = sum(t[0] > 0.027 for t in L)
+    for k, L in erg_b.items():
+        L = sorted(L, key=lambda t: -t[0])
+        out[k + "_methodeB"] = {"linien": len(L), "zacken_max_m": round(L[0][0], 4), "zacken_max_bei": L[0][1:], "zacken_ueber": sum(t[0] > ZACK_MAX for t in L),
+                                "zacken_ueber_2_7cm": sum(t[0] > 0.027 for t in L), "zacken_top5_cm": [[round(t[0] * 100, 2)] + list(t[1:]) for t in L[:5]]}
     # Mittellinie gegen alt
     alt = {}
     for w in V["wege"]:
@@ -182,7 +206,7 @@ def main():
     for f in K["features"]:
         C = np.asarray(shape(f["geometry"]).exterior.coords); ue.append((float(shp.distance(ziel_k, shp.points(C)).max()), f["properties"]["id"]))
     ue.sort(reverse=True)
-    out["kreuzung_ueberstand"] = {"max_m": round(ue[0][0], 3), "bei": ue[0][1], "p50_m": round(float(np.median([u for u, _ in ue])), 3), "grenze_m": 1.5, "grund": "Eckradius >= 1,85 m (Zacken <= 3 cm) bei 2-3 m breiten Wegen"}
+    out["kreuzung_ueberstand"] = {"max_m": round(ue[0][0], 3), "bei": ue[0][1], "p50_m": round(float(np.median([u for u, _ in ue])), 3), "grenze_m": 1.5, "grund": "Dorfmap-Entscheid zu #56; Eckradius >= 2,35 m (Zacken B <= 2,7 cm) bei 2-3 m breiten Wegen"}
     out["platzanschluss"] = {"kriterium": "Wegende <= 1,5 m an Platzzelle: Bandkappe (Band im Kreis Breite/2+0,3 m um das Ende) ueberlappt Platz oder Kreuzung >= 0,05 m2 (keine Luecke)",
                              "wegenden_am_platz": nah, "min_ueberlappung_m2": round(min(ueberlapp), 3) if ueberlapp else None, "nicht_angeschlossen": offen_platz}
     # Randvollstaendigkeit: je Weg genau eine rand_links und eine rand_rechts, je >= 40 % der Mittellinienlaenge
@@ -202,7 +226,8 @@ def main():
         if a_ > 1.15: unvoll.append((pid, teil, "band_klumpen", round(a_, 2)))
     out["randvollstaendigkeit"] = {"min_randlaenge_zu_mittellinie": round(qmin, 3), "max_bandflaeche_zu_soll": round(amax, 3), "maengel": unvoll}
     out["formal"] = {"fehler": fehler, "netz_gueltig": bool(netz.is_valid)}
-    ok = (out["rand"]["zacken_max_m"] <= ZACK_MAX and out["rand"]["knick_max_grad"] <= KNICK_MAX and out["kreuzung"]["zacken_max_m"] <= ZACK_MAX
+    ok = (out["rand_methodeB"]["zacken_max_m"] <= ZACK_MAX and out["kreuzung_methodeB"]["zacken_max_m"] <= ZACK_MAX
+          and out["rand"]["zacken_max_m"] <= ZACK_MAX and out["rand"]["knick_max_grad"] <= KNICK_MAX and out["kreuzung"]["zacken_max_m"] <= ZACK_MAX
           and out["kreuzung"]["knick_max_grad"] <= KNICK_MAX and out["mittellinie"]["max_abweichung_m"] <= MITTE_MAX and not offen
           and out["luecken"]["wega_komponenten_mit_mehr_als_einem_netzteil"] == 0 and not fehler and not offen_platz and not unvoll and ue[0][0] <= 1.5)
     out["bestanden"] = bool(ok)
