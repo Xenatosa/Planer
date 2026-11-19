@@ -291,7 +291,7 @@
   ]
  },
  "q3_bruecke_p5": {
-  "_hinweis": "F14 Runde 6: bis P5 aus - Bruecken-Gruppe = offener Befund P5; ab P5 aktiv: 4 Deckecken je Bruecke (Deckenden = Baukanten) mit Fenster wie Kreuzungspolygone, Laengsseiten hart (befreit: Knick und Abweichung im Eckfenster, sonst haelt keine 90-Grad-Ecke - Rueckfrage Grundgeruest)",
+  "_hinweis": "F14 Runde 6 / F17 Runde 7: bis P5 aus - Bruecken-Gruppe = offener Befund P5; ab P5 aktiv: Mess-Ausschluss (keine t2029u-Ausnahme) von Knick und Abweichung nur im +-fenster_m-Fenster um die 4 Deckend-Ecken je Bruecke; Laengsseiten hart fuer beides",
   "aktiv": false,
   "datei": "zonen.geojson",
   "filter": {
@@ -301,15 +301,16 @@
   "fenster_m": 0.5,
   "befreit": [
    "knick",
-   "abw"
+   "abweichung"
   ]
  },
  "q3_wegenden": {
-  "_hinweis": "F15 Runde 6: runde Wegenden als Ausnahme A-DV2-01 (Sichtpruefung 1,7 m; sichtbar -> andere Endgeometrie im Mesh, P2)",
+  "_hinweis": "F15 Runde 6 + F16 Runde 7 (auch stoss_nah): runde Wegenden als Ausnahme A-DV2-01 (Sichtpruefung 1,7 m; sichtbar -> andere Endgeometrie im Mesh, P2)",
   "aktiv": true,
   "ausnahme": "A-DV2-01",
   "gruppen": [
-   "sonst"
+   "sonst",
+   "stoss_nah"
   ],
   "ende_m": 3.0,
   "abw_max_m": 0.048

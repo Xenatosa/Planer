@@ -437,6 +437,25 @@ def baue(ziel, fehler=None):
             if fehler == 'Q3_bruecke_p5_laengs': oben[:, 1] += 0.12 * 0.5 * (1 + np.cos(np.pi * np.clip((oben[:, 0] - 114) / 0.6, -1, 1)))
             rr = np.vstack([unten, np.c_[np.full_like(zs_, 118.0), zs_], oben, np.c_[np.full_like(zs_, 110.0), zs_[::-1] + 0.05]])
             zfc['features'].append(feat({'type': 'Polygon', 'coordinates': [np.vstack([rr, rr[:1]]).round(4).tolist()]}, id='flaechentyp_br01', layer='flaechentyp', typ='bruecke', klasse=5))
+        elif fehler.startswith('Q3_wegende_stoss'):   # F16: 3 Sektoren (Stoss in 120|100) + Ring-Zone r 5-8 m; Delle auf der Sektorgrenze 0,5-1,4 m vom Stoss
+            C = np.array([120.0, 100.0]); grenzen = (np.pi, np.pi / 3, -np.pi / 3)
+            def radial(a):   # Mitte -> r 5, Delle (amp 0,07, Halbbreite 0,45 m) bei 0,95 m nur auf der Grenze Richtung Wegende
+                t = np.arange(0, 5.0001, 0.05); P = C + np.c_[np.cos(a), np.sin(a)] * t[:, None]
+                if a == np.pi: P += np.array([-np.sin(a), np.cos(a)]) * (0.07 * 0.5 * (1 + np.cos(np.pi * np.clip((t - 0.95) / 0.45, -1, 1))))[:, None]
+                return P
+            def bogen(a0, a1, r=5.0):
+                a1 = a1 if a1 > a0 else a1 + 2 * np.pi; n = max(int(r * (a1 - a0) / 0.05), 2)
+                return C + r * np.c_[np.cos(np.linspace(a0, a1, n + 1)), np.sin(np.linspace(a0, a1, n + 1))]
+            for n_, (a0, a1) in enumerate(((grenzen[2], grenzen[1]), (grenzen[1], grenzen[0]), (grenzen[0], grenzen[2]))):
+                ring_ = np.vstack([radial(a0), bogen(a0, a1)[1:], radial(a1)[::-1][1:]])
+                zfc['features'].append(feat({'type': 'Polygon', 'coordinates': [ring_.round(5).tolist()]}, id=f'flaechentyp_s{n_}', layer='flaechentyp', typ='grund', klasse=0))
+            innen = np.vstack([bogen(grenzen[2], grenzen[1])[:-1], bogen(grenzen[1], grenzen[0])[:-1], bogen(grenzen[0], grenzen[2])[:-1]])
+            aussen = bogen(0, 2 * np.pi - 1e-9, 8.0)
+            zfc['features'].append(feat({'type': 'Polygon', 'coordinates': [np.vstack([aussen[:-1], aussen[:1]]).round(5).tolist(), np.vstack([innen, innen[:1]]).round(5).tolist()]},
+                                        id='flaechentyp_r1', layer='flaechentyp', typ='fels', klasse=3))
+            wp = ziel / 'vektor' / 'wege.geojson'; wfc = json.loads(wp.read_text())   # Weg W6, Ende (118|100) = 1,25 m vor der Delle
+            wfc['features'].append(feat({'type': 'LineString', 'coordinates': [[110.0, 100.0], [118.0, 100.0]]}, id='W6', rolle='mittellinie', klasse='HAUSWEG', breite=2.0, teil=0))
+            wp.write_text(json.dumps(wfc))
         else:                                  # runde Grund-Zone r 5 m mit Delle (0,12 m, Halbbreite 0,6 m -> ~4,1 cm / 13 Grad)
             ang = np.pi if fehler in ('Q3_wegende', 'Q3_wegende_gross') else 0.0; amp = 0.20 if fehler == 'Q3_wegende_gross' else 0.12
             t = np.linspace(0, 2 * np.pi, int(2 * np.pi * 5 / 0.05), endpoint=False); P = np.c_[120 + 5 * np.cos(t), 100 + 5 * np.sin(t)]
@@ -448,6 +467,7 @@ def baue(ziel, fehler=None):
         zp.write_text(json.dumps(zfc))
     kd = dict(k); kd['bruecken'] = {'E2': k['bruecken']['E2']}
     kd['schwellen'] = dict(k['schwellen'])
+    if fehler == 'Q3_wegende_stoss_hart': kd['q3_wegenden'] = dict(k['q3_wegenden'], gruppen=['sonst'])   # Gegenprobe: ohne F16 bleibt stoss_nah hart
     if (fehler or '').startswith('Q3_bruecke_p5'): kd['q3_bruecke_p5'] = dict(k['q3_bruecke_p5'], aktiv=True)
     if fehler == 'Q14_ausnahme': kd['q14_ausnahmen'] = [{'id': 'A-TEST', 'wege': ['W9/0']}]
     if zellen_soll is not None:

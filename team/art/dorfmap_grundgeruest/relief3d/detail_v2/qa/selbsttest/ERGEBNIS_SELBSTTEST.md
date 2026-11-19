@@ -1,6 +1,6 @@
 # Selbsttest QA detail_v2 (P6)
 
-Lauf: 2026-11-19 18:56 CET · Dauer 111 s · Ergebnis: **BESTANDEN**
+Lauf: 2026-11-19 19:02 CET · Dauer 113 s · Ergebnis: **BESTANDEN**
 
 Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 inkl. Runde 2: Bett Kl. 4 geschlossen, Spiegelmodell, wege/kreuzungen im #56-Schema), gebaut von `selbsttest/baue_dummy.py` nach `/tmp/dv2_qa/dummy/`.
 
@@ -50,6 +50,7 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 i
 | Q3_bruecke_p5_laengs | Q3 | fehler | fehler | ja | P5-Regel an: Deckecken frei, aber Delle 4 cm auf der Laengsseite des Brueckenrechtecks bleibt hart -> {"datei": "zonen.geojson", "id": "flaechentyp_br01", "quelle": "vektor", "abw_m": 0.0494, "knick_grad": 13.4, "x": 113.98, "z": 63.12, "gruppe": "brue |
 | Q3_wegende_weit | Q3 | fehler | fehler | ja | Delle ~4,1 cm an Grund-Zone, aber > 3 m vor jedem Wegende -> hart -> {"datei": "zonen.geojson", "id": "flaechentyp_gr01", "quelle": "vektor", "abw_m": 0.0422, "knick_grad": 12.9, "x": 124.88, "z": 100.0, "gruppe": "sons |
 | Q3_wegende_gross | Q3 | fehler | fehler | ja | Delle ~6 cm (> 4,8 cm) 2 m vor Wegende W5 -> hart -> {"datei": "zonen.geojson", "id": "flaechentyp_gr01", "quelle": "vektor", "abw_m": 0.0728, "knick_grad": 21.7, "x": 115.2, "z": 99.98, "gruppe": "sonst |
+| Q3_wegende_stoss_hart | Q3 | fehler | fehler | ja | Gegenprobe zu F16: gleiche Delle, aber konfig q3_wegenden.gruppen nur [sonst] -> stoss_nah-Abschnitt bleibt hart -> {"datei": "zonen.geojson", "id": "flaechentyp_s1", "quelle": "vektor", "abw_m": 0.0392, "knick_grad": 13.7, "x": 119.06, "z": 99.93, "gruppe": "stoss_ |
 | Q14_wasser | Q14 | fehler | fehler | ja | Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 % -> {"art": "wasserflaeche", "spiegel_sichtbar_m2": 395.6, "referenz_m2": 361.199999999999, "rel": 0.0952, "klasse4_m2": 361.2} |
 | Q10_kurve | Q10 | ok | ok | ja | enge S-Kurve W4 (r ~4 m) mit 15 % UV2-Stauchung: nur gekennzeichnet, nicht blockierend -> {"uv2_enge_kurve_dreiecke": 700, "uv2_enge_kurve_ueber_10pct_gekennzeichnet": 280, "uv2_enge_kurve_max_abw": 0.1499, "kurvenradius_min_m": 5.05, "uv2_ |
 | Q14_ohne_zonen | Q14 | offen | offen | ja | zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden -> {"bauzone_format": null, "bauzone_zellen": null, "wege_ausnahme": [], "bauzone": "Eingabe fehlt: zonen.geojson (P1c)"} |
@@ -58,6 +59,7 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 i
 | Q3_bruecke | Q3 | offen | offen | ja | F14: Brueckenrechteck (Platzhalter) - Ecken 90 Grad = offener Befund P5 (nicht ok, nicht Ausnahme) -> {"p5_regel": "aus (Bruecken-Befunde offen bis P5)", "bruecke_offen_p5": {"abschnitte": 4, "ringe": {"flaechentyp_br01": {"abw_max_cm": 18.5, "knick_ma |
 | Q3_bruecke_p5 | Q3 | ok | ok | ja | F14 P5-Regel an (konfig q3_bruecke_p5.aktiv): 4 Deckecken je +-0,5 m frei, Laengsseiten glatt -> ok -> {"p5_regel": "aktiv", "p5_deckecken": [[110.0, 60.0], [110.0, 63.0], [118.0, 63.0], [118.0, 60.0]], "bruecke_offen_p5": {"abschnitte": 0, "ringe": {}} |
 | Q3_wegende | Q3 | ok | ok | ja | F15: Delle ~4,1 cm (Knick 13 Grad) an Grund-Zone 2 m vor Wegende W5 -> Ausnahme A-DV2-01 -> {"p5_regel": "aus (Bruecken-Befunde offen bis P5)", "bruecke_offen_p5": {"abschnitte": 0, "ringe": {}}, "wegenden_ausnahme": {"id": "A-DV2-01", "absch |
+| Q3_wegende_stoss | Q3 | ok | ok | ja | F16: Delle ~3,9 cm / 13,7 Grad 0,5-1,4 m hinter einem Stosspunkt (3 Sektoren + Ring-Zone), 1,25-2,5 m vor Wegende W6 -> stoss_nah-Abschnitt Ausnahme A-DV2-01 -> {"p5_regel": "aus (Bruecken-Befunde offen bis P5)", "bruecke_offen_p5": {"abschnitte": 0, "ringe": {}}, "wegenden_ausnahme": {"id": "A-DV2-01", "absch |
 | Q14_ausnahme | Q14 | ok | ok | ja | W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler -> {"bauzone_format": "flaeche", "bauzone_zellen": null, "wege_ausnahme": ["W9/0 (A-TEST)"], "bauzone": "vorhanden"} |
 | leer | Runner | exit 2 | exit 2 | ja | fehlende Eingaben -> offen |
 | Q5 | Runner | exit 1 | exit 1 | ja | Fehler -> Exit 1 |

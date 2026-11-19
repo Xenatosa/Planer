@@ -8,7 +8,7 @@ QA Runde 6 (F14 Brücke offen bis P5, F15 Wegenden-Ausnahme A-DV2-01). Vollstän
 |---|---|---|---|
 | bruecke | 13 | 40 | **offen P5** (F14), Befund mit `offen: P5` |
 | sonst (Wegenden) | 10 | 98 | Ausnahme A-DV2-01 (F15), 0 Rest |
-| stoss_nah | 6 | 13 | **hart → Befund P1c** |
+| stoss_nah | 6 | 13 | Runde 6: hart → Befund P1c; **Runde 7 (F16): Ausnahme A-DV2-01, 0 Rest** |
 | kartenrand_nah | 0 | 0 | – (F13) |
 
 ## stoss_nah: 13 Abschnitte
@@ -65,3 +65,23 @@ Bogenlänge = Abstand des Abschnitts (erster–letzter Abtastpunkt) zum nächste
 | flaechentyp_00058 | 1 | 3.1 |
 
 Mesh-Kantenzüge (altes Mesh, folgt den Zonen nicht, nur Bericht): {"ringe": 107, "ringe_je_gruppe": {"kartenrand_nah": 12, "sonst": 95}}.
+
+## Runde 7 (F16): stoss_nah-Abschnitte unter A-DV2-01
+
+Die Vorgabe „hart“ ist zurückgezogen. Die 13 Abschnitte fallen jetzt mit denselben Grenzen unter A-DV2-01 wie die `sonst`-Wegenden: ganzer Abschnitt ≤ 3 m vor einem Wegende, ≤ 4,8 cm, Knick ≤ 15°. Gegenprobe auf bf9f62d: 13 von 13 ausgenommen, Rest 0. Abstand Wegende = Abstand des größten Ausschlags zum nächsten Mittellinien-Ende.
+
+| Ring | Typ | x | z | Abw. cm | Knick ° | Stoßpunkt x | z | Bogenabstand min–max m | Abstand Wegende m |
+|---|---|---|---|---|---|---|---|---|---|
+| flaechentyp_00011 | weg | 193.89 | 77.5 | 3.1 | 6.3 | 193.795 | 76.914 | 0.545–0.995 | 1.47 |
+| flaechentyp_00012 | weg | 208.34 | 191.5 | 4.8 | 9.8 | 208.341 | 192.363 | 0.547–0.997 | 0.96 |
+| flaechentyp_00012 | weg | 218.32 | 201.32 | 3.0 | 6.3 | 217.824 | 201.292 | 0.502–0.502 | 1.47 |
+| flaechentyp_00012 | weg | 221.38 | 202.75 | 3.5 | 7.8 | 220.943 | 201.911 | 0.851–0.951 | 1.21 |
+| flaechentyp_00012 | weg | 296.09 | 167.86 | 3.5 | 7.5 | 296.063 | 168.458 | 0.504–0.954 | 1.30 |
+| flaechentyp_00012 | weg | 295.81 | 167.28 | 3.5 | 7.3 | 295.035 | 166.829 | 0.516–0.966 | 1.30 |
+| flaechentyp_00012 | weg | 192.24 | 111.26 | 4.7 | 10.1 | 192.815 | 110.545 | 0.533–1.383 | 0.96 |
+| flaechentyp_00015 | ufer | 192.24 | 111.25 | 4.7 | 10.1 | 192.815 | 110.545 | 0.527–1.377 | 0.96 |
+| flaechentyp_00018 | ufer | 208.34 | 191.5 | 4.8 | 9.8 | 208.341 | 192.363 | 0.547–0.997 | 0.96 |
+| flaechentyp_00037 | fels | 295.54 | 167.03 | 3.5 | 8.0 | 295.035 | 166.829 | 0.549–0.999 | 1.30 |
+| flaechentyp_00037 | fels | 295.97 | 167.52 | 3.5 | 7.6 | 296.063 | 168.458 | 0.52–0.97 | 1.30 |
+| flaechentyp_00052 | grund | 193.89 | 77.51 | 3.1 | 6.3 | 193.795 | 76.914 | 0.507–0.957 | 1.48 |
+| flaechentyp_00052 | grund | 221.41 | 202.78 | 3.6 | 7.3 | 220.943 | 201.911 | 0.841–0.991 | 1.20 |

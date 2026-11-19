@@ -52,7 +52,7 @@ python3 detail_v2/qa/pruefe_alle.py --wurzel relief3d/detail_v2 \
 
 ## 4. Stand Do 19.11. (Selbsttest)
 
-Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. Runde 6: 67 Fälle BESTANDEN (111 s); neu: Q3_bruecke (offen P5), Q3_bruecke_p5 (P5-Regel an → ok), Q3_bruecke_p5_laengs, Q3_wegende (Ausnahme A-DV2-01), Q3_wegende_weit, Q3_wegende_gross (beide hart). Stand Runde 5: Der saubere Dummy besteht alle 14 Regeln, jede der 26 Fehlervarianten reißt ihre Regel (neu: Q14_zelle_fehlt). Dazu kommen 5 Sonderfälle (enge Kurve nur gekennzeichnet, fehlende Zonen = offen, Q14-Ausnahme = ok mit Ausnahme-Befund, Bauzone im Zellformat = ok, Logikschichten nicht in Q3), Exit 2/1, die Q14-Referenz aus der Datei, 5 Q3-Einheitstests (Kreis 0,25 vs. 0,05 m, DP = dicht, Delle, Zickzack, Ecke), 4 F11-Tests (Kartenrand, Stoßfenster, Knick knapp außerhalb, Brückenecke) und 2 F13-Tests (Kartenrand-Stoß im Fenster, mit Brücke hart). Ergebnis: 61 Fälle, 105 s. Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
+Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. Runde 7: 69 Fälle BESTANDEN (neu: Q3_wegende_stoss, Q3_wegende_stoss_hart). Runde 6: 67 Fälle; neu: Q3_bruecke (offen P5), Q3_bruecke_p5 (P5-Regel an → ok), Q3_bruecke_p5_laengs, Q3_wegende (Ausnahme A-DV2-01), Q3_wegende_weit, Q3_wegende_gross (beide hart). Stand Runde 5: Der saubere Dummy besteht alle 14 Regeln, jede der 26 Fehlervarianten reißt ihre Regel (neu: Q14_zelle_fehlt). Dazu kommen 5 Sonderfälle (enge Kurve nur gekennzeichnet, fehlende Zonen = offen, Q14-Ausnahme = ok mit Ausnahme-Befund, Bauzone im Zellformat = ok, Logikschichten nicht in Q3), Exit 2/1, die Q14-Referenz aus der Datei, 5 Q3-Einheitstests (Kreis 0,25 vs. 0,05 m, DP = dicht, Delle, Zickzack, Ecke), 4 F11-Tests (Kartenrand, Stoßfenster, Knick knapp außerhalb, Brückenecke) und 2 F13-Tests (Kartenrand-Stoß im Fenster, mit Brücke hart). Ergebnis: 61 Fälle, 105 s. Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
 
 Skalierung und Gegenprobe am alten Mesh im verbindlichen Format: siehe Abschnitt 8 (Q1 21 s, Gesamt 25 s für 7 Regeln auf 0,81 Mio. Dreiecken).
 
@@ -195,6 +195,25 @@ Selbsttest Runde 4: **56 Fälle BESTANDEN** (95–100 s).
    - `Q3_wegende`: ~4,1 cm, 2 m vor Wegende → Ausnahme, ok.
    - `Q3_wegende_weit`: > 3 m → fehler.
    - `Q3_wegende_gross`: ~7 cm → fehler.
+
+**Runde 7 (Entscheidung Grundgerüst, eingearbeitet 19.11. ab 18:59 MEZ, Basis 8c9ff35):**
+
+1. **F16 – stoss_nah unter A-DV2-01.** Die Wegenden-Ausnahme in Q3 gilt jetzt auch für die Gruppe `stoss_nah`, mit denselben Grenzen: ganzer Abschnitt ≤ 3 m vor Wegende, ≤ 4,8 cm, Knick ≤ 15° (konfig `q3_wegenden.gruppen` = [`sonst`, `stoss_nah`]). Die frühere Vorgabe „hart, Befund P1c“ (Runde 6, Punkt 3) ist zurückgezogen. Die Liste der 13 Abschnitte (Ring, x/z, Abweichung, Knick, Stoßpunkt, Bogenabstand, Abstand Wegende) steht in `gegenprobe/R6_zonen_bf9f62d.md`. `AUSNAHMEN_DV2.md` trägt Grundgerüst selbst nach. `werte.wegenden_ausnahme.je_gruppe` zählt die Abschnitte je Gruppe.
+2. **F17 – P5-Regel als Mess-Ausschluss.** konfig `q3_bruecke_p5.befreit` = [`knick`, `abweichung`], nur im ± 0,5-m-Fenster um die 4 Deckend-Ecken je Brücke; die Längsseiten bleiben für beides hart. Das ist ein **Mess-Ausschluss** (Deckenden = echte Baukanten), **keine Ausnahme nach t2029u**. Die Regel bleibt standardmäßig aus (`aktiv: false`) bis P5.
+3. **Selbsttest Runde 7: 69 Fälle BESTANDEN.** Neu ist ein Fall mit drei Sektoren und einer Ring-Zone, eine Delle sitzt 0,5–1,4 m hinter einem Stoßpunkt, 1,25–2,5 m vor Wegende W6:
+   - `Q3_wegende_stoss`: Der stoss_nah-Abschnitt wird Ausnahme → ok.
+   - `Q3_wegende_stoss_hart`: Dieselbe Delle mit `gruppen` nur [`sonst`] → fehler.
+   - `Q3_bruecke_p5` prüft jetzt `befreit` [`knick`, `abweichung`].
+4. **Gegenprobe gemergter Stand bf9f62d.** Q3-Zonenringe (Vektor) nach Gruppe:
+
+   | Gruppe | Ringe | Abschnitte | Ergebnis |
+   |---|---|---|---|
+   | `stoss_nah` | – | 13 | Ausnahme A-DV2-01, **0 Rest** |
+   | `sonst` (Wegenden) | – | 98 | Ausnahme A-DV2-01, 0 Rest |
+   | `bruecke` | 13 | – | offen P5 |
+   | `kartenrand_nah` | 0 | – | – |
+
+   Vektor-Rest: 0 Ringe. Q3 gesamt am alten Mesh weiter `fehler`: Wege-Mesh-Kantenzüge und Mesh-Zonenzüge (altes Mesh folgt den Zonen nicht).
 
 **D2-Regel** (Entscheidung New Bot 19.11.2026 über Grundgerüst) unverändert: |Δh| ≤ 1 cm an den alten D2-Vertices, Lage und Form erhalten.
 

@@ -191,21 +191,22 @@ def q3(ctx):
         if kreuz is not None and len(R): knick = np.where(contains_xy(kreuz, R[:, 0], R[:, 1]), 0, knick)
         if len(deck) and len(R):
             dd = np.hypot(R[:, None, 0] - deck[None, :, 0], R[:, None, 1] - deck[None, :, 1]).min(1) <= p5.get('fenster_m', 0.5)
-            if 'knick' in p5.get('befreit', ['knick']): knick = np.where(dd, 0, knick)
-            if 'abw' in p5.get('befreit', []): abw = np.where(dd, 0, abw)
+            bf = set(p5.get('befreit', ['knick']))                 # F17: Mess-Ausschluss nur im Eckfenster (keine t2029u-Ausnahme)
+            if 'knick' in bf: knick = np.where(dd, 0, knick)
+            if bf & {'abweichung', 'abw'}: abw = np.where(dd, 0, abw)
         gruppe = None
         if zone is not None and len(R):                         # F11/F13: Kartenrand + Stossfenster ausgenommen, sonst hart
             aus, gruppe = zonen_maske(R, pl, geschl, zone, karte_rand, zk)
             abw = np.where(aus, 0, abw); knick = np.where(aus, 0, knick); w['zonen_ausgenommen_punkte'] += int(aus.sum())
             ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
-            if len(enden):                                      # F15: Abschnitt nur als Ganzes ausgenommen
-                for b_ in [b_ for g_ in we.get('gruppen', ['sonst']) for b_ in abschnitte(np.nonzero(ub & (gruppe == g_))[0], len(R), geschl)]:
+            if len(enden):                                      # F15/F16: Abschnitt nur als Ganzes ausgenommen (Gruppen sonst, stoss_nah)
+                for g_, b_ in [(g_, b_) for g_ in we.get('gruppen', ['sonst']) for b_ in abschnitte(np.nonzero(ub & (gruppe == g_))[0], len(R), geschl)]:
                     de = np.hypot(R[b_, None, 0] - enden[None, :, 0], R[b_, None, 1] - enden[None, :, 1]).min(1)
                     if de.max() <= we.get('ende_m', 3.0) and abw[b_].max() <= we.get('abw_max_m', 0.048) + 1e-9 \
                        and knick[b_].max() <= S['q3_knick_grad']:
                         e = w['wegenden_ausnahme']; e['abschnitte'] += 1
-                        r_ = e['ringe'].setdefault(pid + (' (mesh)' if mesh else ''), {'abschnitte': 0, 'abw_max_cm': 0.0, 'quelle': 'mesh' if mesh else 'vektor'})
-                        r_['abschnitte'] += 1; r_['abw_max_cm'] = max(r_['abw_max_cm'], _r(abw[b_].max() * 100, 1))
+                        r_ = e['ringe'].setdefault(pid + (' (mesh)' if mesh else ''), {'abschnitte': 0, 'abw_max_cm': 0.0, 'quelle': 'mesh' if mesh else 'vektor', 'gruppen': {}})
+                        r_['abschnitte'] += 1; r_['gruppen'][g_] = r_['gruppen'].get(g_, 0) + 1; e.setdefault('je_gruppe', {}); e['je_gruppe'][g_] = e['je_gruppe'].get(g_, 0) + 1; r_['abw_max_cm'] = max(r_['abw_max_cm'], _r(abw[b_].max() * 100, 1))
                         abw[b_] = 0; knick[b_] = 0; gruppe[b_] = 'wegende_ausnahme'
             if not p5.get('aktiv'):                             # F14: Bruecken-Gruppe bis P5 als offener Befund
                 ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
@@ -283,7 +284,7 @@ def q3(ctx):
     w['zonen_regel'] = ('F11/F13 (Grundgeruest 19.11.): Zonenringe (layer flaechentyp, untergrund; bauzone_plan und slot nie in Q3) - ausgenommen NUR Abschnitte auf dem Kartenrand (inkl. Ecken, Toleranz '
                         f"{zk.get('kartenrand_tol_m')} m) und +-{zk.get('stoss_fenster_m')} m Bogenlaenge um Stosspunkte mit >= 3 Zonen (Kartenrand zaehlt als Zone 'ausserhalb'); Stosspunkte mit "
                         f"{zk.get('hart_typen')} (Brueckenrechteck, Platzhalter P5) bleiben hart. Sichtpruefung 1,7 m Pflicht (zackiger Stosspunkt = Befund).")
-    w['wegenden_ausnahme']['regel'] = (f"F15: A-DV2-01, nur Gruppe {we.get('gruppen')}, ganzer Abschnitt <= {we.get('ende_m')} m vor einem Mittellinien-Ende "
+    w['wegenden_ausnahme']['regel'] = (f"F15/F16: A-DV2-01, nur Gruppen {we.get('gruppen')}, ganzer Abschnitt <= {we.get('ende_m')} m vor einem Mittellinien-Ende "
                                        f"UND abw <= {we.get('abw_max_m')} m, Knick <= {S['q3_knick_grad']} Grad; alles andere hart") if we.get('aktiv') else 'aus'
     r = erg('Q3', not bef, w, bef + offen_p5,
                'Neuabtastung 0,05 m nach Bogenlaenge (lin. Interpolation, Endpunkte bleiben), gleitendes 1-m-Mittel, Abstand Abtastpunkt -> gemittelte Linie <= 3 cm hart fuer alle Linien '

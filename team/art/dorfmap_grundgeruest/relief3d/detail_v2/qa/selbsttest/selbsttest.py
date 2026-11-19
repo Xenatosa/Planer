@@ -40,6 +40,7 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q3_bruecke_p5_laengs': ('Q3', 'P5-Regel an: Deckecken frei, aber Delle 4 cm auf der Laengsseite des Brueckenrechtecks bleibt hart', 'flaechentyp_br01'),
     'Q3_wegende_weit': ('Q3', 'Delle ~4,1 cm an Grund-Zone, aber > 3 m vor jedem Wegende -> hart', 'flaechentyp_gr01'),
     'Q3_wegende_gross': ('Q3', 'Delle ~6 cm (> 4,8 cm) 2 m vor Wegende W5 -> hart', 'flaechentyp_gr01'),
+    'Q3_wegende_stoss_hart': ('Q3', 'Gegenprobe zu F16: gleiche Delle, aber konfig q3_wegenden.gruppen nur [sonst] -> stoss_nah-Abschnitt bleibt hart', 'stoss_nah'),
     'Q14_wasser': ('Q14', 'Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 %'),
 }
 
@@ -190,6 +191,8 @@ def main():
          lambda x: x['status'] == 'ok' and len(x['werte'].get('p5_deckecken', [])) == 4 and not x['werte']['bruecke_offen_p5']['ringe']),
         ('Q3_wegende', 'Q3', 'ok', 'F15: Delle ~4,1 cm (Knick 13 Grad) an Grund-Zone 2 m vor Wegende W5 -> Ausnahme A-DV2-01',
          lambda x: x['status'] == 'ok' and x['werte']['wegenden_ausnahme']['abschnitte'] >= 1 and list(x['werte']['wegenden_ausnahme']['ringe']) == ['flaechentyp_gr01']),
+        ('Q3_wegende_stoss', 'Q3', 'ok', 'F16: Delle ~3,9 cm / 13,7 Grad 0,5-1,4 m hinter einem Stosspunkt (3 Sektoren + Ring-Zone), 1,25-2,5 m vor Wegende W6 -> stoss_nah-Abschnitt Ausnahme A-DV2-01',
+         lambda x: x['status'] == 'ok' and x['werte']['wegenden_ausnahme'].get('je_gruppe', {}).get('stoss_nah', 0) >= 1),
         ('Q14_ausnahme', 'Q14', 'ok', 'W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler',
          lambda x: x['status'] == 'ok' and x['werte']['wege_ausnahme'] == ['W9/0 (A-TEST)'] and any(b.get('ausnahme') == 'A-TEST' for b in x['befunde']))):
         baue_dummy.baue(tmp / v, v)
