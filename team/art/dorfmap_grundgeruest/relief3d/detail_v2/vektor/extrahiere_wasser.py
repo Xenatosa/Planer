@@ -11,6 +11,9 @@ Verfahren:
   2. Marching Squares (skimage.measure.find_contours, Level 0).
   3. Die Rasterkontur folgt noch der 0,5-m-Treppe (E2/E3). Darum je Ring: gleichmaessig 0,1 m abtasten, laengs gaussgeglaettet
      (sigma 0,6 m, geschlossen), dann Douglas-Peucker 0,05 m und Chaikin 2x (Plan 3.1).
+  3b. P1b2 (QA misst Q3 mit gleitendem 1-m-Mittel): je Gewaesser Kruemmungsradius >= 1,6 m nur durch Hinzufuegen von Wasser
+     (sparsame Kreise R 1,6 an zu engen Spitzen und an nassen Ecken > 0,27 m ausserhalb, dann Schliessen R 1,6, Union mit Original),
+     siehe ausrunden(); ersetzt die Kapseln aus P1b.
   4. Polygone: Ringe nach Verschachtelung (gerade Tiefe = Ufer aussen, ungerade = Insel) zu Polygonen mit Loechern; shapely make_valid nur falls noetig.
   5. Uferband = landseitiger Puffer 2,5 m minus Wasser. Uferlinien tragen die Spiegelhoehe je Punkt (spiegel_m).
   6. Bach-Mittellinien: Wasser bei 0,25 m gerastert, skeletonize, Skelett in Polylinien zerlegt (Aeste < 2 m weg), geglaettet wie 3.,
@@ -24,6 +27,7 @@ import numpy as np
 from scipy import ndimage as nd
 from skimage import measure, morphology, draw
 import shapely
+import shapely.ops
 from shapely.geometry import Polygon, LineString, MultiPolygon, mapping, Point
 from shapely.ops import unary_union
 
@@ -40,8 +44,10 @@ AST_MIN_M = 2.0
 LOCH_MIN_M2 = 0.25
 RAND_PAD = 4                          # Gitterpunkte (= 2 m)
 KAPSEL_R = 0.3
+AUSRUND_R = 1.6                       # P1b2: Mindest-Kruemmungsradius der Uferlinien
+AUSRUND_PRUEF = 1.7                   # Pruefradius mit Reserve
 SCHLIESS_R = 0.6                      # Ausrundung der Kapselansaetze
-ABDECK_TOL = 0.25                     # halbe Rasterzelle: so weit darf eine nasse Ecke neben der glatten Linie liegen
+ABDECK_TOL = 0.3                      # P1b2-Vorgabe: kein nasser Rasterpunkt > 0,3 m ausserhalb
 
 
 def lade(paket):
@@ -205,45 +211,81 @@ def linemerge_teile(g):
     return [x for x in getattr(m, "geoms", [m])]
 
 
-def abdecken(polys, nass):
-    """Kein Wasser entfernen: Die Glaettung zieht 1 Ecke breite Wasserzipfel (0,5 m) ein. Nasse Ecken, die weiter als eine halbe
-    Zelle neben dem Wasser liegen, werden samt Verbindung zum naechsten nassen Nachbarn als Kapsel (Radius 0,3 m = Zipfelbreite)
-    angefuegt; ein morphologisches Schliessen (Radius 0,6 m) rundet die Ansaetze tangential aus, damit kein Knick entsteht."""
+def sparsamer_kreis(g, q, c0):
+    """Kreis R, der die enge Stelle q sicher enthaelt (|c-q| = R-3 cm) und dabei moeglichst wenig Land ueberdeckt:
+    Mittelpunktsrichtung um die Innennormale (c0) in 15-Grad-Schritten bis +-75 Grad variiert, kleinste Landflaeche gewinnt.
+    (Ein symmetrisch tangentialer Kreis ragt an schraegen Bachkoepfen weit ueber das Gegenufer; das Schliessen fuellt dann
+    die ganze Ecke dazwischen.)"""
+    n = c0 - q; n /= max(np.hypot(*n), 1e-12); lokal = g.intersection(Point(*q).buffer(2.5 * AUSRUND_R))
+    best = None
+    for th in np.radians(np.arange(-75, 76, 15)):
+        cs, sn = np.cos(th), np.sin(th); d = np.array([n[0] * cs - n[1] * sn, n[0] * sn + n[1] * cs])
+        k = Point(*(q + (AUSRUND_R - 0.03) * d)).buffer(AUSRUND_R, quad_segs=64)
+        land = k.difference(lokal).area
+        if best is None or land < best[0] - 1e-9: best = (land, k)
+    return best[1]
+
+
+def enge_konvexe_stellen(poly, rmin, mit_punkt=False):
+    """Punkte (5 cm Abtastung), an denen der Umkreisradius ueber +-0,5 m Bogenlaenge < rmin ist und das Wasser dort
+    nach aussen gewoelbt ist (Sehnenmitte liegt im Wasser). Rueckgabe: Kreismittelpunkte R nach innen versetzt."""
+    from shapely import contains_xy
+    mitten, punkte = [], []
+    for ring in [poly.exterior] + list(poly.interiors):
+        Q = resample(np.asarray(ring.coords)[:-1], 0.05, True)
+        if len(Q) < 30: continue
+        A, C = np.roll(Q, 10, axis=0), np.roll(Q, -10, axis=0)
+        u, v = Q - A, C - A
+        kreuz = np.abs(u[:, 0] * v[:, 1] - u[:, 1] * v[:, 0])
+        r = np.hypot(*u.T) * np.hypot(*(C - Q).T) * np.hypot(*v.T) / np.maximum(2 * kreuz, 1e-12)
+        M = 0.5 * (A + C)
+        eng = (r < rmin) & contains_xy(poly, M[:, 0], M[:, 1])
+        if not eng.any(): continue
+        n = M[eng] - Q[eng]; n /= np.maximum(np.hypot(*n.T), 1e-12)[:, None]
+        mitten.append(Q[eng] + AUSRUND_R * n); punkte.append(Q[eng])
+    leer = np.zeros((0, 2))
+    if mit_punkt: return (np.vstack(mitten), np.vstack(punkte)) if mitten else (leer, leer)
+    return np.vstack(mitten) if mitten else leer
+
+
+def ausrunden(polys, nass):
+    """P1b2: QA misst Q3 mit dem gleitenden 1-m-Mittel; ein Kreis bleibt darunter erst ab R ~1,45 m. Darum je Gewaesser
+    Kruemmungsradius >= AUSRUND_R herstellen, nur durch Hinzufuegen von Wasser (Original bleibt Teilmenge):
+      a) nasse Ecken, die > 0,2 m ausserhalb liegen (1 Ecke breite Zipfel, die die Glaettung eingezogen hat): Kreis R durch den
+         Punkt 0,2 m vor der Ecke, Mittelpunkt R Richtung Ufer -> kleinste runde Beule, die die Ecke erreicht;
+      b) konvex zu enge Stellen (Bachenden, Tropfenspitzen): Kreis R tangential an die Spitze (Mittelpunkt R nach innen);
+      c) konkav zu enge Stellen und die Ansaetze von a/b: morphologisches Schliessen Buffer(+R)·Buffer(-R) je Gewaesser.
+    Wiederholt, bis weder a) noch b) etwas findet."""
+    zz, xx = np.nonzero(nass); P = np.column_stack([xx / RS, zz / RS]); pts = shapely.points(P[:, 0], P[:, 1])
     wu = unary_union(polys)
-    zz, xx = np.nonzero(nass); pts = shapely.points(xx / RS, zz / RS)
-    weg = shapely.distance(wu, pts) > 0.8 * ABDECK_TOL
-    if not weg.any(): return polys
-    menge = set(zip(zz[weg], xx[weg])); kaps = []
-    for (r, c) in menge:
-        kaps.append(Point(c / RS, r / RS).buffer(KAPSEL_R, quad_segs=32))
-        for dr in (-1, 0, 1):
-            for dc in (-1, 0, 1):
-                rr, cc = r + dr, c + dc
-                if (dr or dc) and 0 <= rr < nass.shape[0] and 0 <= cc < nass.shape[1] and nass[rr, cc]:
-                    kaps.append(LineString([(c / RS, r / RS), (cc / RS, rr / RS)]).buffer(KAPSEL_R, quad_segs=32))
-    # je Gewaesser einzeln schliessen (global wuerden Teiche < 1,2 m Abstand verschmelzen)
-    kaps_u = unary_union(kaps); kaps_t = list(getattr(kaps_u, "geoms", [kaps_u]))
-    zu = {i: [] for i in range(len(polys))}
-    for k in kaps_t:
-        i = int(np.argmin([p.distance(k) for p in polys])); zu[i].append(k)
-    teile = []
-    for i, p in enumerate(polys):
-        if not zu[i]: teile.append(p); continue
-        teile.append(unary_union([p] + zu[i]).buffer(SCHLIESS_R, quad_segs=32).buffer(-SCHLIESS_R, quad_segs=32))
-    neu = shapely.GeometryCollection(teile)
-    # Schliessen wirkt nur in Einbuchtungen mit Radius < 0,6 m; glatte Linien (Radius >= 0,6 m) bleiben dabei unveraendert.
+    # nasse Ecken dem naechsten Gewaesser zuordnen
+    d_all = np.vstack([shapely.distance(p, pts) for p in polys]); zu = d_all.argmin(axis=0)
     out = []
-    for g in getattr(neu, "geoms", [neu]):
-        if g.geom_type != "Polygon" or g.area < 1e-3: continue
+    for gi, p in enumerate(polys):
+        g = p; meine = pts[zu == gi]; Pm = P[zu == gi]
+        for it in range(6):
+            kreise = []
+            d = shapely.distance(g, meine); weg = d > 0.9 * ABDECK_TOL
+            for (x, z), pt in zip(Pm[weg], meine[weg]):
+                q = np.asarray(shapely.ops.nearest_points(g.boundary, pt)[0].coords[0])
+                dv = q - np.array([x, z]); dv /= max(np.hypot(*dv), 1e-9)
+                c = np.array([x, z]) + 0.25 * dv + AUSRUND_R * dv
+                kreise.append(Point(*c).buffer(AUSRUND_R, quad_segs=64))
+            m, qs = enge_konvexe_stellen(g, AUSRUND_PRUEF, mit_punkt=True)
+            for c0, q in zip(m[::3], qs[::3]):
+                kreise.append(sparsamer_kreis(g, q, c0))
+            if not kreise and it > 0: break
+            g2 = unary_union([g] + kreise).buffer(AUSRUND_R, quad_segs=64).buffer(-AUSRUND_R, quad_segs=64)
+            g2 = unary_union([g2, p])
+            if g2.geom_type != "Polygon": g2 = max(getattr(g2, "geoms", [g2]), key=lambda q: q.area)
+            g = g2
         ringe_ = []
         for ring in [g.exterior] + list(g.interiors):
-            R = np.asarray(ring.coords)[:-1]
-            Q = resample(R, 0.05, True)
-            Q = np.asarray(LineString(np.vstack([Q, Q[:1]])).simplify(0.001, preserve_topology=False).coords)
-            ringe_.append(Q)
-        p = Polygon(ringe_[0], [h for h in ringe_[1:] if len(h) >= 4])
-        if not p.is_valid: p = shapely.make_valid(p)
-        out.extend([x for x in getattr(p, "geoms", [p]) if x.geom_type == "Polygon"])
+            Q = resample(np.asarray(ring.coords)[:-1], 0.05, True)
+            ringe_.append(np.asarray(LineString(np.vstack([Q, Q[:1]])).simplify(0.001, preserve_topology=False).coords))
+        q = Polygon(ringe_[0], [h for h in ringe_[1:] if len(h) >= 4])
+        if not q.is_valid: q = shapely.make_valid(q)
+        out.append(q)
     return out
 
 
@@ -312,8 +354,8 @@ def zacke_gleitmittel(C, closed):
     """Nur Bericht: Abstand zum gleitenden 1-m-Mittel (bei Kurvenradius < ~1,4 m auch fuer glatte Kreise > 3 cm)."""
     Q = resample(C, 0.05, closed)
     if len(Q) < 25: return 0.0
-    w = int(round(1.0 / 0.05)) | 1
-    k = np.ones(w) / w
+    w = int(round(1.0 / 0.05)) | 1                  # 21 Punkte = genau 1 m Bogenlaenge
+    k = np.ones(w); k[0] = k[-1] = 0.5; k /= k.sum()  # Trapezgewichte = stetiges Mittel ueber 1 m (nicht Punktzahl)
     if closed:
         pad = np.vstack([Q[-w:], Q, Q[:w]])
         Gl = np.column_stack([np.convolve(pad[:, i], k, "same")[w:-w] for i in range(2)]); ref = Q
@@ -329,13 +371,13 @@ def fc(features):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--paket", default="/tmp/dv2_wasser/alle_kacheln.json.gz"); ap.add_argument("--aus", default=str(HIER))
+    ap = argparse.ArgumentParser(); ap.add_argument("--paket", default="/tmp/dv2_wasser/alle_kacheln.json.gz"); ap.add_argument("--aus", default=str(HIER)); ap.add_argument("--vorher", default=None, help="altes ufer.geojson fuer das Vorher-Nahbild")
     a = ap.parse_args(); aus = Path(a.aus)
     GB, WV = lade(a.paket)
     nass, S, DS = ds_feld(GB, WV)
     polys = polygone(ringe(DS))
     karte = shapely.box(0, 0, (GB.shape[1] - 1) / RS, (GB.shape[0] - 1) / RS)
-    polys = abdecken(polys, nass)
+    polys = ausrunden(polys, nass)
     polys = [p.intersection(karte) for p in polys]
     polys = [g for p in polys for g in getattr(p, "geoms", [p]) if g.geom_type == "Polygon" and not g.is_empty]
     rand = karte.exterior.buffer(1e-6)
@@ -372,6 +414,10 @@ def main():
         for k, L in enumerate(linien):
             g = glatte_linie(L, False, sigma_m=0.5)
             if g is None or len(g) < 2: continue
+            for _ in range(30):                          # Q3 auch fuer Mittellinien (gleitendes 1-m-Mittel) mit Reserve
+                if zacke_gleitmittel(g, False) <= 0.025: break
+                g = gauss_linie(resample(g, 0.05, False), 0.3 / 0.05, False)
+            if not p.buffer(1e-6).contains(LineString(g)): g = np.asarray(LineString(g).intersection(p).coords) if LineString(g).intersection(p).geom_type == "LineString" else g
             D, ox, oz = dfeld
             br = 2 * nd.map_coordinates(D, [(g[:, 1] - oz) / SKEL_PX, (g[:, 0] - ox) / SKEL_PX], order=1, mode="nearest")
             bf.append({"type": "Feature", "geometry": {"type": "LineString", "coordinates": np.round(g, 4).tolist()},
@@ -379,10 +425,13 @@ def main():
                                       "spiegel_m": np.round(bilinear(S, g[:, 0], g[:, 1]), 3).tolist()}})
     for name, f in (("wasser.geojson", wf), ("ufer.geojson", uf), ("bach_mitte.geojson", bf)):
         (aus / name).write_text(json.dumps(fc(f), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    import sys as _sys; _sys.path.insert(0, str(HIER))
+    from abtasten_gleichmaessig import bearbeite as _gleichmaessig   # P1b3: 0,05 m gleichmaessig, ohne DP
+    _gleichmaessig(aus)
     bericht = messe(aus, a.paket)
     (aus / "extrahiere_wasser_bericht.json").write_text(json.dumps(bericht, indent=1, ensure_ascii=False), encoding="utf-8")
-    bild(a.paket, aus)
-    print(json.dumps({k: v for k, v in bericht.items() if k != "je_linie_schlechteste"}, ensure_ascii=False))
+    bild(a.paket, aus, a.vorher)
+    print(json.dumps({k: v for k, v in bericht.items() if k not in ("uferlinien_einzeln", "mittellinien_schlechteste")}, ensure_ascii=False))
 
 
 def ist_flaeche(nass, x0=None, x1=None, z0=None, z1=None):
@@ -416,20 +465,29 @@ def messe(aus, paket):
     r["nasse_ecken_abgedeckt_prozent"] = round(100 * float((dist <= ABDECK_TOL).mean()), 3)
     r["nasse_ecke_max_abstand_m"] = round(float(dist.max()), 3)
     r["nasse_ecken_ueber_toleranz"] = int((dist > ABDECK_TOL).sum())
-    worst = []; zmax = kmax = gmax = 0.0
+    # Q3 (QA-Messung): gleitendes 1-m-Mittel ueber Bogenlaenge; Savitzky-Golay nur Zusatzinfo
+    je = []
     for f in [x for x in U if x["properties"]["typ"] == "uferlinie"] + B:
         C = np.asarray(f["geometry"]["coordinates"]); closed = bool(f["properties"].get("geschlossen"))
         if closed and np.allclose(C[0], C[-1]): C = C[:-1]
-        z, k = zacke_knick(C, closed); zmax = max(zmax, z); kmax = max(kmax, k)
-        gm = zacke_gleitmittel(C, closed); gmax = max(gmax, gm)
-        worst.append((z, k, f["properties"]["id"]))
-    r["zacke_max_m"] = round(zmax, 4); r["knick_max_grad"] = round(kmax, 2); r["zacke_gleitmittel_max_m_nur_bericht"] = round(gmax, 4)
-    worst.sort(reverse=True); r["je_linie_schlechteste"] = [{"id": w[2], "zacke_m": round(w[0], 4), "knick_grad": round(w[1], 2)} for w in worst[:10]]
-    r["schwellen"] = {"zacke_m": 0.03, "knick_grad": 15.0, "flaeche_prozent": 3.0}
+        sg, k = zacke_knick(C, closed); gm = zacke_gleitmittel(C, closed)
+        je.append({"id": f["properties"]["id"], "typ": f["properties"]["typ"], "zacke_gleitmittel_m": round(gm, 4),
+                   "knick_grad": round(k, 2), "zacke_sg_m_info": round(sg, 4), "laenge_m": round(float(np.hypot(*np.diff(C, axis=0).T).sum()), 1)})
+    uf_ = [e for e in je if e["typ"] == "uferlinie"]; bm = [e for e in je if e["typ"] == "bach_mitte"]
+    r["ufer_zacke_gleitmittel_max_m"] = max(e["zacke_gleitmittel_m"] for e in uf_)
+    r["ufer_knick_max_grad"] = max(e["knick_grad"] for e in uf_)
+    r["mitte_zacke_gleitmittel_max_m"] = max(e["zacke_gleitmittel_m"] for e in bm) if bm else 0.0
+    r["mitte_knick_max_grad"] = max(e["knick_grad"] for e in bm) if bm else 0.0
+    r["zacke_sg_max_m_info"] = max(e["zacke_sg_m_info"] for e in je)
+    sp = [f["properties"]["spiegel_m_median"] for f in json.load(open(aus / "wasser.geojson"))["features"]]
+    r["ueberlappung_max_m2"] = round(max([W[a].intersection(W[b]).area for a in range(len(W)) for b in range(a + 1, len(W))] or [0.0]), 6)
+    r["uferlinien_einzeln"] = uf_
+    r["mittellinien_schlechteste"] = sorted(bm, key=lambda e: -e["zacke_gleitmittel_m"])[:8]
+    r["schwellen"] = {"zacke_gleitmittel_m": 0.03, "knick_grad": 15.0, "flaeche_prozent": 3.0, "nass_aussen_m": 0.3}
     return r
 
 
-def bild(paket, aus):
+def bild(paket, aus, vorher=None):
     """Uebersicht: neue Linien ueber der alten Draufsicht (Vertex-Farben VC des Pakets, orthografisch) + Ausschnitte E2/E3
     mit den alten nassen Gitterpunkten als Punkte."""
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -439,10 +497,16 @@ def bild(paket, aus):
     GB, WV = lade(paket); nass = WV > -900
     U = json.load(open(aus / "ufer.geojson"))["features"]; B = json.load(open(aus / "bach_mitte.geojson"))["features"]
     ext = [0, (nx - 1) / RS, (ny - 1) / RS, 0]
-    fig = plt.figure(figsize=(15, 8.2), dpi=100)
-    ausschn = [("Gesamt", None), ("E2", (168, 210, 43, 86)), ("E3", (168, 210, 86, 129))]
-    ax0 = fig.add_axes([0.0, 0.0, 0.5, 1.0]); a2 = fig.add_axes([0.5, 0.5, 0.5, 0.5]); a3 = fig.add_axes([0.5, 0.0, 0.5, 0.5])
-    for ax, (name, box_) in zip([ax0, a2, a3], ausschn):
+    fig = plt.figure(figsize=(16, 8.4), dpi=100)
+    ausschn = [("Gesamt", None), ("E2", (168, 210, 43, 86)), ("E3", (168, 210, 86, 129)),
+               ("E2-Nordrand vorher (gruen gestrichelt, P1b) / nachher (rot, P1b2)", (191, 207, 37, 51))]
+    ax0 = fig.add_axes([0.0, 0.0, 0.46, 1.0]); a2 = fig.add_axes([0.46, 0.5, 0.27, 0.5]); a3 = fig.add_axes([0.46, 0.0, 0.27, 0.5])
+    a4 = fig.add_axes([0.73, 0.2, 0.27, 0.6])
+    if vorher and Path(vorher).exists():
+        for f in json.load(open(vorher))["features"]:
+            if f["properties"]["typ"] == "uferlinie":
+                a4.plot(*shape(f["geometry"]).xy, color="#00c000", lw=1.6, ls="--")
+    for ax, (name, box_) in zip([ax0, a2, a3, a4], ausschn):
         ax.imshow(VC, extent=ext, interpolation="nearest")
         for f in U:
             g = shape(f["geometry"])
@@ -459,8 +523,8 @@ def bild(paket, aus):
         for f in B:
             ax.plot(*shape(f["geometry"]).xy, color="#00e5ff", lw=0.5 if box_ is None else 1.6)
         ax.set_xticks([]); ax.set_yticks([])
-        ax.text(0.01, 0.99, name + (" (rot Uferlinie, gelb Uferband 2,5 m, cyan Mittellinie, blau alte nasse Ecken)" if box_ else ""),
-                transform=ax.transAxes, va="top", fontsize=8, color="w", bbox=dict(fc="k", alpha=0.6, lw=0))
+        ax.text(0.01, 0.99, name + (" (rot Uferlinie, gelb Uferband 2,5 m, cyan Mittellinie, blau alte nasse Ecken)" if box_ and len(name) < 4 else ""),
+                transform=ax.transAxes, va="top", fontsize=7, color="w", bbox=dict(fc="k", alpha=0.6, lw=0))
     fig.savefig(aus / "uebersicht_wasser.jpg", dpi=100, pil_kwargs={"quality": 80})
     plt.close(fig)
 

@@ -2,83 +2,191 @@
  "polygone_wasser": 7,
  "uferlinien": 11,
  "uferbaender": 7,
- "bach_mittellinien": 32,
+ "bach_mittellinien": 23,
  "alle_polygone_valid": true,
  "flaeche_ist_m2": 6461.25,
- "flaeche_vektor_m2": 6547.84,
- "flaeche_abw_prozent": 1.34,
+ "flaeche_vektor_m2": 6630.17,
+ "flaeche_abw_prozent": 2.614,
  "flaeche_E2": {
   "ist_m2": 102.5,
-  "vektor_m2": 102.25,
-  "abw_prozent": -0.245
+  "vektor_m2": 105.5,
+  "abw_prozent": 2.928
  },
  "flaeche_E3": {
   "ist_m2": 148.25,
-  "vektor_m2": 151.54,
-  "abw_prozent": 2.22
+  "vektor_m2": 151.55,
+  "abw_prozent": 2.224
  },
- "nasse_ecken_innen_prozent": 99.304,
+ "nasse_ecken_innen_prozent": 99.307,
  "nasse_ecken_abgedeckt_prozent": 100.0,
- "nasse_ecke_max_abstand_m": 0.198,
+ "nasse_ecke_max_abstand_m": 0.27,
  "nasse_ecken_ueber_toleranz": 0,
- "zacke_max_m": 0.024,
- "knick_max_grad": 10.52,
- "zacke_gleitmittel_max_m_nur_bericht": 0.1315,
- "je_linie_schlechteste": [
-  {
-   "id": "W01_U2",
-   "zacke_m": 0.024,
-   "knick_grad": 10.32
-  },
-  {
-   "id": "W07_U0",
-   "zacke_m": 0.0239,
-   "knick_grad": 10.38
-  },
+ "ufer_zacke_gleitmittel_max_m": 0.0265,
+ "ufer_knick_max_grad": 3.98,
+ "mitte_zacke_gleitmittel_max_m": 0.0247,
+ "mitte_knick_max_grad": 3.44,
+ "zacke_sg_max_m_info": 0.0112,
+ "ueberlappung_max_m2": 0.0,
+ "uferlinien_einzeln": [
   {
    "id": "W01_U0",
-   "zacke_m": 0.0237,
-   "knick_grad": 10.52
-  },
-  {
-   "id": "W01_U3",
-   "zacke_m": 0.0231,
-   "knick_grad": 9.8
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 2.9,
+   "zacke_sg_m_info": 0.0088,
+   "laenge_m": 1439.8
   },
   {
    "id": "W01_U1",
-   "zacke_m": 0.0217,
-   "knick_grad": 9.76
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0265,
+   "knick_grad": 2.76,
+   "zacke_sg_m_info": 0.0083,
+   "laenge_m": 58.5
   },
   {
-   "id": "W04_U0",
-   "zacke_m": 0.0161,
-   "knick_grad": 9.8
+   "id": "W01_U2",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0184,
+   "knick_grad": 2.7,
+   "zacke_sg_m_info": 0.0109,
+   "laenge_m": 362.3
   },
   {
-   "id": "W05_U0",
-   "zacke_m": 0.0161,
-   "knick_grad": 9.91
+   "id": "W01_U3",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 2.76,
+   "zacke_sg_m_info": 0.0074,
+   "laenge_m": 25.1
   },
   {
-   "id": "W03_U0",
-   "zacke_m": 0.0159,
-   "knick_grad": 9.84
+   "id": "W01_U4",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0265,
+   "knick_grad": 3.98,
+   "zacke_sg_m_info": 0.0024,
+   "laenge_m": 21.9
   },
   {
    "id": "W02_U0",
-   "zacke_m": 0.0107,
-   "knick_grad": 8.29
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0265,
+   "knick_grad": 3.74,
+   "zacke_sg_m_info": 0.0048,
+   "laenge_m": 64.8
   },
   {
-   "id": "W02_M0",
-   "zacke_m": 0.0087,
-   "knick_grad": 3.53
+   "id": "W03_U0",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 2.87,
+   "zacke_sg_m_info": 0.0112,
+   "laenge_m": 69.7
+  },
+  {
+   "id": "W04_U0",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 3.85,
+   "zacke_sg_m_info": 0.007,
+   "laenge_m": 26.5
+  },
+  {
+   "id": "W05_U0",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 3.85,
+   "zacke_sg_m_info": 0.0069,
+   "laenge_m": 14.9
+  },
+  {
+   "id": "W06_U0",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 3.85,
+   "zacke_sg_m_info": 0.0065,
+   "laenge_m": 14.3
+  },
+  {
+   "id": "W07_U0",
+   "typ": "uferlinie",
+   "zacke_gleitmittel_m": 0.0262,
+   "knick_grad": 3.78,
+   "zacke_sg_m_info": 0.0071,
+   "laenge_m": 12.8
+  }
+ ],
+ "mittellinien_schlechteste": [
+  {
+   "id": "W01_M11",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0247,
+   "knick_grad": 3.25,
+   "zacke_sg_m_info": 0.0018,
+   "laenge_m": 23.0
+  },
+  {
+   "id": "W01_M7",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0243,
+   "knick_grad": 1.95,
+   "zacke_sg_m_info": 0.0018,
+   "laenge_m": 22.0
+  },
+  {
+   "id": "W01_M5",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0241,
+   "knick_grad": 1.9,
+   "zacke_sg_m_info": 0.0008,
+   "laenge_m": 264.6
+  },
+  {
+   "id": "W04_M0",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0235,
+   "knick_grad": 2.03,
+   "zacke_sg_m_info": 0.0033,
+   "laenge_m": 6.1
+  },
+  {
+   "id": "W01_M1",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0228,
+   "knick_grad": 1.72,
+   "zacke_sg_m_info": 0.0009,
+   "laenge_m": 44.5
+  },
+  {
+   "id": "W03_M1",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0228,
+   "knick_grad": 2.54,
+   "zacke_sg_m_info": 0.0052,
+   "laenge_m": 7.5
+  },
+  {
+   "id": "W01_M18",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0227,
+   "knick_grad": 2.87,
+   "zacke_sg_m_info": 0.0017,
+   "laenge_m": 12.7
+  },
+  {
+   "id": "W01_M9",
+   "typ": "bach_mitte",
+   "zacke_gleitmittel_m": 0.0225,
+   "knick_grad": 3.44,
+   "zacke_sg_m_info": 0.0019,
+   "laenge_m": 42.0
   }
  ],
  "schwellen": {
-  "zacke_m": 0.03,
+  "zacke_gleitmittel_m": 0.03,
   "knick_grad": 15.0,
-  "flaeche_prozent": 3.0
+  "flaeche_prozent": 3.0,
+  "nass_aussen_m": 0.3
  }
 }

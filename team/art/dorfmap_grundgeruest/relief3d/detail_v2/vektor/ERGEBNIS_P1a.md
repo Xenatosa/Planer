@@ -53,7 +53,11 @@ Plan: DETAIL_V2_PLAN.md 3.1, 5, 9 (P1a). Basis art/dorfmap-fertig d2d4824. Nur n
 | r8_kreuzung.py | 31 (21 Kreuzungen) | – | 31 |
 | r9_form.py | 321 | – | 321 |
 
-Die +1 bei pruefe_regeln ist `G1_lochscan_fehlt` (Umgebungsprüfung, Lochscan-Datei fehlt in /tmp) und tritt auf der unveränderten Basis d2d4824 genauso auf. `git diff d2d4824 --stat`: nur neue Dateien unter detail_v2/vektor/.
+**Korrektur (19.11., Aufseher):** Die 360 stammen aus dem direkten Aufruf von pruefe_regeln.py ohne LOCHSCAN. Über export_gate.sh mit GATE_LOCH_JSON ergeben d2d4824 und dieser Stand 359. Siehe ERGEBNIS_P1a2.md. Ursprünglicher Text: Die +1 bei pruefe_regeln ist `G1_lochscan_fehlt` (Umgebungsprüfung, Lochscan-Datei fehlt in /tmp) und tritt auf der unveränderten Basis d2d4824 genauso auf. `git diff d2d4824 --stat`: nur neue Dateien unter detail_v2/vektor/.
+
+## Entscheidungen Dorfmap (19.11., nach Review #56)
+- Kreuzungsüberstand bis 1,5 m ok (R8 eben gilt darin); E2-Lücke → Brückenmodul P5; Wegenden bleiben ungekürzt; ERG01–03 ok.
+- QA Q3 (gleitendes 1-m-Mittel über die Stützpunkte) fand Zacken > 3 cm → Nachbesserung siehe ERGEBNIS_P1a2.md (dort auch neue Messwerte; die Werte oben sind Stand #56).
 
 ## Vereinfachungen / Restrisiken
 - WEGA aus relief_daten.json.gz (Gitter rs = 2, A ≥ 128), nicht aus index.html: index.html trägt nur D1/D2/G1-Payload. Gleicher Datenstand.

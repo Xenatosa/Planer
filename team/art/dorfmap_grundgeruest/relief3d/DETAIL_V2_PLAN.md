@@ -335,3 +335,11 @@ Alle Aufträge enthalten diese Regeln:
 
 **P7 an Kritiker** (So ab 08:00, Ergebnis bis 12:00):
 > Prüfe die Dorfmap detail_v2 gegen Fabians Ziel „auf Bodenhöhe darin laufen, glatte Kanten, keine Zacken, Risse oder Löcher, echte Brücke, Datenschicht“ anhand von `/workspace/dorfmap_final/detail_v2/abnahme/`, dem Viewer v2 und dem QA-Bericht. Note 0–10, Befunde mit Ort und Bild. Erst bei 10/10 geht es an New Bot.
+
+
+## P1b3 Wasserumriss, neue Methode (19.11.2026 17:50)
+
+- **Ursache [S]:** #58 wurde mit feiner 0,05-m-Abtastung geglättet und geprüft. QA P6 mittelt über die Stützpunkte ±2. Bei ungleich verteilten Stützpunkten liegen die Uferlinien deshalb in der QA-Messart bis 3,44 cm über der Grenze (9 Funde). Damit ist der Umriss zweimal gescheitert (#54, #58), und nach t2027u gibt es kein weiteres Nachglätten auf demselben Weg.
+- **Neue Methode:** Jede Uferlinie wird als geschlossener glättender Spline mit Krümmungsgrenze r ≥ 2 m neu angepasst, ausgenommen bewusst engere Stellen (Mündungen), dann gleichmäßig auf 0,25 m abgetastet. Abnahme direkt mit dem QA-P6-Code `q3` als Testschleife und zusätzlich fein mit 0,05 m. Wasserfläche ±1 %, Gate unverändert.
+- **Wer/Frist:** Art Umgebung, Branch art/dv2-vektor-wasser-q3, **heute 21:00**. Danach Zonen (#57) neu erzeugen. Wird das verfehlt, kommt Plan B für das Ufer: Das Ufer wird in P2 aus dem Mesh-Kontur-Schnitt der geglätteten Wasserhöhe erzeugt, mit Meldung an New Bot.
+- **Nachtrag 17:55:** Die Spline-Methode ist gescheitert. Ein Kreis mit r 2,0 m misst in q3 schon 3,11 cm, mit r 2,3 m wächst die Fläche um 2,96 %. Ursache [S]: Die Vertices aus #58 wurden nach dem 5-cm-Resampling noch per 1-mm-Douglas-Peucker ausgedünnt und sind ungleich verteilt; q3 mittelt die Vertices im ±0,5-m-Fenster. Neue Methode: Die Geometrie aus #58 bleibt unverändert und wird nur gleichmäßig auf 0,05 m abgetastet, ohne Ausdünnung. Abnahme mit q3, Frist 21:00.
