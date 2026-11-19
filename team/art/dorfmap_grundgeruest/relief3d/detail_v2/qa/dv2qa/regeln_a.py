@@ -187,9 +187,9 @@ def q4(ctx):
     from shapely import contains_xy
     S = ctx.k['schwellen']; o = ctx.ortung(('gelaende',))
     n = ctx.netz(('gelaende',)); V = n['V']
-    bef, worst_g, worst_r, anz = [], 0.0, 0.0, 0
+    bef, worst_g, worst_r, anz, je_art = [], 0.0, 0.0, 0, {}
     for g, pr in ctx.polygone(ctx.k['kreuzungen']['datei']):
-        anz += 1
+        anz += 1; je_art[str(pr.get('art'))] = je_art.get(str(pr.get('art')), 0) + 1
         m = contains_xy(g, V[:, 0], V[:, 2]); P = V[m]
         x0, z0, x1, z1 = g.bounds
         gx, gz = np.meshgrid(np.arange(x0, x1, 0.1), np.arange(z0, z1, 0.1))
@@ -202,8 +202,8 @@ def q4(ctx):
         worst_g = max(worst_g, gef); worst_r = max(worst_r, rest)
         if gef > S['q4_gefaelle'] or rest > S['q4_rest_m']:
             c0 = g.centroid
-            bef.append({'id': pr.get('id'), 'gefaelle': _r(gef), 'rest_m': _r(rest), 'x': _r(c0.x, 2), 'z': _r(c0.y, 2)})
-    return erg('Q4', not bef and anz > 0, {'kreuzungen': anz, 'gefaelle_max': _r(worst_g), 'rest_max_m': _r(worst_r),
+            bef.append({'id': pr.get('id'), 'art': pr.get('art'), 'gefaelle': _r(gef), 'rest_m': _r(rest), 'x': _r(c0.x, 2), 'z': _r(c0.y, 2)})
+    return erg('Q4', not bef and anz > 0, {'kreuzungen': anz, 'je_art': je_art, 'gefaelle_max': _r(worst_g), 'rest_max_m': _r(worst_r),
                                            'schwellen': [S['q4_gefaelle'], S['q4_rest_m']]}, bef,
                'Ebenen-Fit ueber Mesh-Vertices + 0,1-m-Abtastung im Kreuzungspolygon.')
 
@@ -220,7 +220,9 @@ def q5(ctx):
     S = ctx.k['schwellen']; o = ctx.ortung(('gelaende',))
     bp = ctx.k['mittellinien']['breite_prop']
     ml = _mittellinien(ctx)
-    weg = union_all([LineString(pl).buffer(float(pr.get(bp, 2.0)) / 2, cap_style='flat') for pl, pr in ml])
+    nq = ctx.k.get('wegnetz')
+    netz = [g for g, _ in ctx.polygone(nq['datei'], nq.get('filter'), pflicht=False)] if nq else []
+    weg = union_all(netz) if netz else union_all([LineString(pl).buffer(float(pr.get(bp, 2.0)) / 2, cap_style='flat') for pl, pr in ml])
     band = weg.buffer(S['q5_band_m']).difference(weg)
     wasser = union_all([g for g, _ in ctx.polygone(ctx.k['wasser']['datei'], pflicht=False)] or [LineString([(0, 0), (0, 0.001)]).buffer(0)])
     bef, worst, n_ges = [], 0.0, 0
@@ -246,4 +248,4 @@ def q5(ctx):
                 bef.append({'x': _r(cx[i], 2), 'z': _r(cz[i], 2), 'tiefe_m': _r(tiefe[i])})
     return erg('Q5', not bef, {'kandidaten': n_ges, 'tiefe_max_m': _r(worst), 'schwelle_m': S['q5_delle_m'],
                                'band_m': S['q5_band_m']}, bef,
-               'Lokale Minima (0,1-m-Raster, 0,7-m-Fenster) im Band 0-3 m neben Wegen; Tiefe = tiefster Punkt eines 1-m-Rings minus Minimum; Wasser ausgenommen.')
+               'Lokale Minima (0,1-m-Raster, 0,7-m-Fenster) im Band 0-3 m neben der Wegflaeche (wege.geojson rolle=netz, sonst Mittellinie+Breite); Tiefe = tiefster Punkt eines 1-m-Rings minus Minimum; Wasser ausgenommen.')

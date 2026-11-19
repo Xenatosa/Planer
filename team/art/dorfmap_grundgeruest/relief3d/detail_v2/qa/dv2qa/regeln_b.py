@@ -104,70 +104,117 @@ def _ufer(ctx):
 
 
 def q8(ctx):
-    """Ufer: Schnittlinie Wasser/Land vs. Uferspline <= 5 cm, Boeschung monoton, Wasser nie ueber der Krone.
-    Wasser = Klasse 4 im Gelaendemesh (Entscheidung Grundgeruest 19.11.). Schnittlinie = gemeinsame Kanten Klasse 4 |
-    andere Klasse plus exakte Kontur (Land-Dreiecke = lokaler Spiegel)."""
-    from shapely import linestrings, points, distance, union_all, LineString, contains_xy, STRtree
-    from scipy.spatial import cKDTree
-    from .geom import kanten_von
+    """Ufer nach Entscheidung Grundgeruest 19.11. (Runde 2): Gelaendemesh geschlossen inkl. Bachbett (Klasse 4),
+    Wasseroberflaeche = eigenes Modell (modelle[], klasse 4, Spiegel aus spiegel_m).
+    (a) Spalt: jeder Randpunkt des Spiegelmodells (5 cm) liegt im Ufer, d. h. Gelaende >= Spiegel - Toleranz
+        (sonst sieht man von oben zwischen Spiegelkante und Boeschung ins Bett/auf trockenes Bett).
+    (b) Schnitt: je Uferstation (10 cm) wechselt Gelaende - Spiegel entlang der Normalen (-2 m Wasser .. +2,5 m Land) von < 0
+        auf >= 0; fehlt der Wechsel und liegt der Spiegel ueberall unter dem Gelaende -> 'spiegel unter uferkante ohne schnitt'.
+    (c) Schnittlinie Spiegel/Gelaende (exakte Kontur) vs. Uferlinie <= 5 cm, beidseitig.
+    (d) Boeschung landeinwaerts monoton (1 mm), Krone > spiegel_m."""
+    from shapely import linestrings, points, distance, union_all, LineString, contains_xy, STRtree, box
     S = ctx.k['schwellen']; n = ctx.netz(('gelaende',)); V, T = n['V'], n['T']; o = ctx.ortung(('gelaende',))
     ufer = _ufer(ctx)
     if not ufer: raise Fehlt('keine Uferlinien (ufer.geojson typ=uferlinie)')
+    if any(u[3] is None for u in ufer): raise Fehlt('spiegel_m je Uferpunkt fehlt')
+    w = {'uferlinien': len(ufer), 'spiegelmodelle': [], 'spiegel_randpunkte': 0, 'spalt_punkte': 0, 'spalt_max_m': 0.0,
+         'stationen': 0, 'ohne_schnitt': 0, 'ohne_spiegel': 0, 'schnitt_abstand_max_m': 0.0, 'kontursegmente': 0,
+         'kontur_ufer_max_m': 0.0, 'ufer_kontur_max_m': 0.0, 'spiegel_vs_spiegel_m_max_m': 0.0, 'nicht_monoton': 0, 'ueber_krone': 0, 'profile': 0}
+    bef = []
+    try:
+        wo = ctx.wasser_ortung()
+    except Fehlt as e:
+        return erg('Q8', False, w, [{'fehler': str(e)}])
+    w['spiegelmodelle'] = ctx.wasser_ids()
+    karte = union_all([box(*kd['bounds']) for kd in ctx.kacheln.values()]).boundary
     wpol = [g for g, _ in ctx.polygone(ctx.k['wasser']['datei'], ctx.k['wasser'].get('filter'))]
     wasser = union_all(wpol) if wpol else None
-    up = np.vstack([u[0] for u in ufer]); us_sp = np.concatenate([u[3] if u[3] is not None else np.full(len(u[0]), np.nan) for u in ufer])
-    if np.isnan(us_sp).any(): raise Fehlt('spiegel_m je Uferpunkt fehlt')
-    kd = cKDTree(up)
-    ul = union_all([LineString(u[0]) for u in ufer]); nah = ul.buffer(3.0)
-    # (a) Klassengrenze Wasser | Land
-    w4 = n['klasse'] == 'wasser'
-    e = np.sort(np.vstack([T[:, [0, 1]], T[:, [1, 2]], T[:, [2, 0]]]), 1); wt = np.tile(w4, 3)
-    order = np.lexsort((wt, e[:, 1], e[:, 0])); es, ws = e[order], wt[order]
-    gleich = (es[1:] == es[:-1]).all(1) & (ws[1:] != ws[:-1])
-    grenz = es[1:][gleich]
-    segA = np.stack([V[grenz[:, 0]][:, [0, 2]], V[grenz[:, 1]][:, [0, 2]]], 1) if len(grenz) else np.zeros((0, 2, 2))
-    # (b) Kontur Land-Dreiecke = lokaler Spiegel
-    cen = V[T].mean(1)[:, [0, 2]]
-    land = ~w4 & contains_xy(nah, cen[:, 0], cen[:, 1])
-    _, ii = kd.query(cen[land]); TL = T[land]
-    segB = _konturen_lokal(V, TL, us_sp[ii])
-    segs = np.concatenate([segA, segB]) if len(segA) + len(segB) else np.zeros((0, 2, 2))
+    ul = union_all([LineString(u[0]) for u in ufer])
+    # (a) Spiegelrand im Ufer
+    nw = ctx.netz((), 'wasser'); Vw, Tw = nw['V'], nw['T']
+    e = np.sort(kanten_von(Tw), 1); u, c = np.unique(e, axis=0, return_counts=True); rk = u[c == 1]
+    pts = []
+    for i, j in rk:
+        A, B = Vw[i], Vw[j]; k = max(int(np.ceil(np.hypot(*(B - A)[[0, 2]]) / 0.05)), 1)
+        t = np.linspace(0, 1, k + 1)[:, None]; pts.append(A + (B - A) * t)
+    R = np.unique(np.round(np.vstack(pts), 6), axis=0) if pts else np.zeros((0, 3))
+    if len(R):
+        R = R[distance(points(R[:, [0, 2]]), karte) > 1e-3]           # Kartenrand (Bach laeuft hinaus) ausgenommen
+        ht, _ = o.hoehe(R[:, 0], R[:, 2]); sp = R[:, 1] - ht
+        spalt = ~np.isnan(ht) & (sp > S['q8_spalt_m'])
+        w['spiegel_randpunkte'] = int(len(R)); w['spalt_punkte'] = int(spalt.sum()); w['spalt_max_m'] = float(np.nanmax(sp)) if len(sp) else 0.0
+        for i in np.nonzero(spalt)[0][np.argsort(-sp[spalt])][:8]:
+            bef.append({'art': 'spalt spiegel/ufer', 'x': _r(R[i, 0], 2), 'z': _r(R[i, 2], 2), 'spiegel_ueber_gelaende_m': _r(sp[i])})
+    # (c) Kontur Gelaende = Spiegelmodell auf Gelaende-Dreiecken
+    from scipy.spatial import cKDTree
+    hs, _ = wo.hoehe(V[:, 0], V[:, 2])
+    fehlt = np.isnan(hs)                                          # Spiegelebene bis 1 m ueber die Modellkante fortsetzen (Kontur auch bei Spalt)
+    if fehlt.any():
+        dk, jk = cKDTree(Vw[:, [0, 2]]).query(V[fehlt][:, [0, 2]], distance_upper_bound=1.0)
+        hs[np.nonzero(fehlt)[0][np.isfinite(dk)]] = Vw[jk[np.isfinite(dk)], 1]
+    dv = V[:, 1] - hs; dv[np.abs(dv) < 5e-4] = 0.0                  # Vertices auf der Wasserlinie (float32) = 0
+    TT = T[~np.isnan(dv[T]).any(1)]
+    segs = _kontur_v(V, TT, dv)
     segs = segs[np.hypot(*(segs[:, 1] - segs[:, 0]).T) > 1e-6] if len(segs) else segs
-    w = {'uferlinien': len(ufer), 'grenzkanten_wasser_land': int(len(segA)), 'kontursegmente': int(len(segB)),
-         'kontur_ufer_max_m': 0.0, 'ufer_kontur_max_m': 0.0, 'nicht_monoton': 0, 'ueber_krone': 0, 'profile': 0}
-    bef = []
+    w['kontursegmente'] = int(len(segs))
     if len(segs) == 0:
-        return erg('Q8', False, w, [{'fehler': 'keine Schnittlinie Wasser/Land im Mesh'}])
-    sl = linestrings(segs); tree = STRtree(sl)
-    sp_pts = segs.reshape(-1, 2); in_nah = contains_xy(ul.buffer(1.0), sp_pts[:, 0], sp_pts[:, 1])
-    d1 = distance(points(sp_pts), ul); d1 = np.where(in_nah, d1, d1)
+        bef.append({'fehler': 'keine Schnittlinie Spiegel/Gelaende'})
+        sl = tree = None; sp_pts = np.zeros((0, 2)); d1 = np.zeros(1)
+    else:
+        sl = linestrings(segs); tree = STRtree(sl)
+        sp_pts = segs.reshape(-1, 2)
+        sp_pts = sp_pts[distance(points(sp_pts), karte) > 0.5]
+        d1 = distance(points(sp_pts), ul) if len(sp_pts) else np.zeros(1)
     bp = ctx.k['mittellinien']['breite_prop']
     wz = [LineString(pl).buffer(float(pr.get(bp, 2.0)) / 2 + 0.4, cap_style='flat') for pl, pr in _mittellinien_opt(ctx)]
     wz += [g.buffer(0.4) for g, _ in ctx.polygone(ctx.k['kreuzungen']['datei'], pflicht=False)]
     wegzone = union_all(wz) if wz else None
+    off = np.round(np.arange(-2.0, S['q8_boeschung_m'] + 1e-9, 0.05), 3); i0 = int(np.argmin(np.abs(off)))
     for pl, geschl, pr, spv in ufer:
         us = abtasten(pl, 0.1)
         dd = np.r_[0, np.cumsum(np.hypot(*np.diff(pl, axis=0).T))]; ds = np.r_[0, np.cumsum(np.hypot(*np.diff(us, axis=0).T))]
         spl = np.interp(ds, dd, spv)
-        ii, jj = tree.query_nearest(points(us), return_distance=False)
-        d2 = np.full(len(us), np.inf); np.minimum.at(d2, ii, distance(points(us[ii]), sl[jj]))
+        rand = distance(points(us), karte) < 0.5
+        d2 = np.full(len(us), 9.99)
+        if tree is not None:
+            ii, jj = tree.query_nearest(points(us), return_distance=False)
+            d2[:] = np.inf; np.minimum.at(d2, ii, distance(points(us[ii]), sl[jj]))
+        d2[rand] = 0
         w['ufer_kontur_max_m'] = max(w['ufer_kontur_max_m'], float(d2.max()))
         if d2.max() > S['q8_ufer_m']:
             k = int(np.argmax(d2)); bef.append({'ufer': pr.get('id'), 'art': 'ufer->schnittlinie', 'abstand_m': _r(d2[k]), 'x': _r(us[k, 0], 2), 'z': _r(us[k, 1], 2)})
         tg = np.gradient(us, axis=0); tg /= np.hypot(*tg.T)[:, None] + 1e-15; nr = np.c_[-tg[:, 1], tg[:, 0]]
         if wasser is not None:
             probe = us + 0.3 * nr; nr[contains_xy(wasser.buffer(1e-3), probe[:, 0], probe[:, 1])] *= -1
-        else:                                                   # ohne Polygon: Seite mit niedrigerem Gelaende = Wasser
+        else:
             h1, _ = o.hoehe(*(us + 0.5 * nr).T); h2, _ = o.hoehe(*(us - 0.5 * nr).T); nr[np.nan_to_num(h1) < np.nan_to_num(h2)] *= -1
-        off = np.arange(0, S['q8_boeschung_m'] + 1e-9, 0.1)
         Q = us[:, None] + off[None, :, None] * nr[:, None]
         h, _ = o.hoehe(Q[..., 0].ravel(), Q[..., 1].ravel()); h = h.reshape(len(us), len(off))
+        hw, _ = wo.hoehe(Q[..., 0].ravel(), Q[..., 1].ravel()); hw = hw.reshape(len(us), len(off))
+        # (b) Schnitt je Station
+        dlt = h - hw; gedeckt = ~np.isnan(dlt)
+        wech = gedeckt[:, :-1] & gedeckt[:, 1:] & (dlt[:, :-1] < 0) & (dlt[:, 1:] >= 0)
+        hat = wech.any(1); ohne_sp = ~gedeckt.any(1) & ~rand
+        ohne = ~hat & gedeckt.any(1) & ~rand & (np.where(gedeckt, dlt, np.inf).min(1) >= 0)
+        w['stationen'] += int((~rand).sum()); w['ohne_schnitt'] += int(ohne.sum()); w['ohne_spiegel'] += int(ohne_sp.sum())
+        if hat.any():
+            k = np.argmax(wech, 1); a0 = dlt[np.arange(len(us)), k]; a1 = dlt[np.arange(len(us)), k + 1]
+            pos = off[k] + (off[k + 1] - off[k]) * a0 / (a0 - a1 + 1e-15)
+            dk = np.where(hat & ~rand, np.abs(pos), 0); w['schnitt_abstand_max_m'] = max(w['schnitt_abstand_max_m'], float(dk.max()))
+        sv = hw[:, i0 - 6]                                           # Spiegelhoehe 30 cm wasserseitig
+        dsv = np.abs(sv - spl); dsv = dsv[~np.isnan(dsv) & ~rand]
+        if len(dsv): w['spiegel_vs_spiegel_m_max_m'] = max(w['spiegel_vs_spiegel_m_max_m'], float(dsv.max()))
+        for i in np.nonzero(ohne)[0][:5]: bef.append({'ufer': pr.get('id'), 'art': 'spiegel unter uferkante ohne schnitt', 'x': _r(us[i, 0], 2), 'z': _r(us[i, 1], 2), 'spiegel_m': _r(np.nanmax(hw[i])), 'gelaende_min_m': _r(np.nanmin(h[i]))})
+        for i in np.nonzero(ohne_sp)[0][:5]: bef.append({'ufer': pr.get('id'), 'art': 'kein spiegel am ufer', 'x': _r(us[i, 0], 2), 'z': _r(us[i, 1], 2)})
+        # (d) Boeschung landeinwaerts
+        hl = h[:, i0:].copy(); Ql = Q[:, i0:]
         if wegzone is not None:
-            inw = contains_xy(wegzone, Q[..., 0], Q[..., 1]); inw = np.maximum.accumulate(inw, axis=1); h = np.where(inw, np.nan, h)
-        ok = ~np.isnan(h[:, :2]).any(1); w['profile'] += int(ok.sum())
-        nm = ok & (np.nan_to_num(np.diff(h, axis=1), nan=0) < -S['q8_mono_tol_m']).any(1)
+            inw = contains_xy(wegzone, Ql[..., 0], Ql[..., 1]); inw = np.maximum.accumulate(inw, axis=1); hl = np.where(inw, np.nan, hl)
+        hl = hl[:, ::2]                                              # 10-cm-Schritte
+        ok = ~np.isnan(hl[:, :2]).any(1); w['profile'] += int(ok.sum())
+        nm = ok & (np.nan_to_num(np.diff(hl, axis=1), nan=0) < -S['q8_mono_tol_m']).any(1)
         with np.errstate(all='ignore'):
-            krone = ok & (np.nanmax(np.where(np.isnan(h), -np.inf, h), 1) <= spl)
+            krone = ok & (np.nanmax(np.where(np.isnan(hl), -np.inf, hl), 1) <= spl)
         w['nicht_monoton'] += int(nm.sum()); w['ueber_krone'] += int(krone.sum())
         for i in np.nonzero(nm)[0][:5]: bef.append({'ufer': pr.get('id'), 'art': 'boeschung nicht monoton', 'x': _r(us[i, 0], 2), 'z': _r(us[i, 1], 2)})
         for i in np.nonzero(krone)[0][:5]: bef.append({'ufer': pr.get('id'), 'art': 'wasser ueber krone', 'x': _r(us[i, 0], 2), 'z': _r(us[i, 1], 2)})
@@ -175,8 +222,43 @@ def q8(ctx):
     if d1.max() > S['q8_ufer_m']:
         k = int(np.argmax(d1)); bef.append({'art': 'schnittlinie->ufer', 'abstand_m': _r(d1[k]), 'x': _r(sp_pts[k, 0], 2), 'z': _r(sp_pts[k, 1], 2)})
     w = {k: _r(v) if isinstance(v, float) else v for k, v in w.items()}
-    return erg('Q8', not bef, {**w, 'schwelle_m': S['q8_ufer_m']}, bef,
-               'Schnittlinie = Kanten Klasse 4 | Land + exakte Kontur der Land-Dreiecke auf lokalem Spiegel (spiegel_m je Uferpunkt) vs. Uferlinie, beidseitig; Profile alle 10 cm, 0-2,5 m landeinwaerts (enden am Wegband), monoton (1 mm); Krone > Spiegel.')
+    return erg('Q8', not bef, {**w, 'schwellen_m': {'ufer': S['q8_ufer_m'], 'spalt': S['q8_spalt_m']}}, bef,
+               'Spiegelmodell (manifest.modelle klasse 4) vs. geschlossenes Gelaende inkl. Bett: Spiegelrand 5 cm im Ufer (Gelaende >= Spiegel - 2 mm, sonst Spalt); '
+               'je Uferstation 10 cm Vorzeichenwechsel Gelaende-Spiegel (-2..+2,5 m), sonst ohne Schnitt; Kontur Gelaende=Spiegel vs. Uferlinie <= 5 cm beidseitig; '
+               'Boeschung 0-2,5 m landeinwaerts monoton (endet am Wegband), Krone > spiegel_m. Kartenrand ausgenommen. spiegel_vs_spiegel_m nur Bericht.')
+
+
+def _kontur_v(V, T, hv):
+    """Kontur hv = 0 (hv je Vertex) -> Segmente k x 2 x 2 (XZ)."""
+    h = hv[T]
+    s = np.sign(h); s[s == 0] = 1
+    segs = []
+    for (a, b), (c, d) in (((0, 1), (1, 2)), ((1, 2), (2, 0)), ((2, 0), (0, 1))):
+        m = (s[:, a] * s[:, b] < 0) & (s[:, c] * s[:, d] < 0)
+        if not m.any(): continue
+        def p(i, j):
+            ta = h[m, i] / (h[m, i] - h[m, j]); A = V[T[m, i]][:, [0, 2]]; B = V[T[m, j]][:, [0, 2]]
+            return A + (B - A) * ta[:, None]
+        segs.append(np.stack([p(a, b), p(c, d)], 1))
+    return np.concatenate(segs) if segs else np.zeros((0, 2, 2))
+
+
+def _kurvenradien(ctx):
+    """Mittellinien je 0,25 m abgetastet; Radius je Punkt = kleinster Umkreisradius (Punkte +-1 m) im Umkreis +-1,5 m Bogenlaenge."""
+    from scipy.ndimage import minimum_filter1d
+    pts, rad = [], []
+    for pl, _ in _mittellinien_opt(ctx):
+        s = abtasten(pl, 0.25)
+        if len(s) < 9: continue
+        a, b, c = s[:-8], s[4:-4], s[8:]
+        la = np.hypot(*(b - a).T); lb = np.hypot(*(c - b).T); lc = np.hypot(*(c - a).T)
+        cr = np.abs((b - a)[:, 0] * (c - a)[:, 1] - (b - a)[:, 1] * (c - a)[:, 0])
+        r = np.where(cr > 1e-9, la * lb * lc / (2 * cr + 1e-30), np.inf)
+        r = np.r_[np.full(4, r[0]), r, np.full(4, r[-1])]
+        r = minimum_filter1d(r, size=13, mode='nearest')
+        pts.append(s); rad.append(r)
+    if not pts: return np.zeros((0, 2)), np.zeros(0)
+    return np.vstack(pts), np.concatenate(rad)
 
 
 def _mittellinien_opt(ctx):
@@ -324,11 +406,24 @@ def q10(ctx):
         nb = kd.query_ball_point(cc, 2.0)
         med = np.array([np.median(nv[b]) for b in nb]); vrel[i] = nv / (med + 1e-15)
         zu2[i] = (np.abs(nu - 1) > S['q10_verzerrung']) | (cosw[i] > S['q10_verzerrung']) | (np.abs(vrel[i] - 1) > S['q10_verzerrung'])
+    # Kurvenradius der naechsten Mittellinie (Entscheidung Grundgeruest 19.11. Runde 2): UV2 <= 10 % gilt ab r >= 10 m,
+    # darunter nur kennzeichnen und als Zahl berichten (nicht blockierend; nur ok, solange auf dem Clay-Bild nichts sichtbar ist).
+    radius = np.full(len(T), np.inf)
+    if wg.any():
+        rs, rr = _kurvenradien(ctx)
+        if len(rs):
+            i = np.nonzero(wg)[0]; dd, jj = cKDTree(rs).query(P[i].mean(1)[:, [0, 2]]); radius[i] = rr[jj]
+    eng = wg & (radius < S['q10_kurve_radius_m'])
+    zu2_eng = zu2 & eng; zu2 = zu2 & ~eng
     w.update({'gespiegelt_uv0': int(gesp0.sum()), 'davon_triplanar': int((gesp0 & tri).sum()), 'gespiegelt_uv1': int(gesp1.sum()),
               'uv1_abweichend': int(uv1_falsch.sum()), 'nan_uv0': int(nan0.sum()), 'nan_uv1': int(nan1.sum()), 'nan_uv2': int(nan2.sum()),
               'spruenge_uv0': int(sprung.sum()), 'triplanar_dreiecke': int(tri.sum()),
               'verzerrung_uv0_max_bis25': _r(float(verz0[flach].max()) if flach.any() else 0), 'verzerrung_uv0_ueber_10pct': int(zu0.sum()),
               'wegband_dreiecke': int(weg.sum()), 'wegband_ohne_uv2': int(weg_ohne.sum()), 'uv2_ueber_10pct': int(zu2.sum()),
+              'kurve_eng_schwelle_m': S['q10_kurve_radius_m'], 'uv2_enge_kurve_dreiecke': int(eng.sum()), 'uv2_enge_kurve_ueber_10pct_gekennzeichnet': int(zu2_eng.sum()),
+              'uv2_enge_kurve_max_abw': _r(float(np.nanmax(np.abs(g_u[zu2_eng] - 1))) if zu2_eng.any() else 0),
+              'kurvenradius_min_m': _r(float(radius[wg].min()) if wg.any() and np.isfinite(radius[wg]).any() else None, 2),
+              'enge_kurven_orte': [{'x': _r(P[j, :, 0].mean(), 2), 'z': _r(P[j, :, 2].mean(), 2), 'r_m': _r(radius[j], 2), 'grad_u': _r(g_u[j])} for j in np.nonzero(zu2_eng)[0][:5]],
               'uv2_laengs_max_abw': _r(float(np.nanmax(np.abs(g_u - 1))) if wg.any() else None), 'max_neigung_grad': _r(float(neig.max()), 1)})
     def ort(m, art, extra=None):
         return [{'art': art, 'x': _r(P[i, :, 0].mean(), 2), 'z': _r(P[i, :, 2].mean(), 2), **({k: _r(v[i]) for k, v in (extra or {}).items()})} for i in np.nonzero(m)[0][:8]]
@@ -337,4 +432,5 @@ def q10(ctx):
     bef += ort(weg_ohne, 'wegband_ohne_uv2') + ort(zu2, 'uv2_verzerrung', {'grad_u': g_u, 'scherung_cos': cosw, 'quer_rel': vrel})
     return erg('Q10', not bef, w, bef,
                'UV0: Spiegelung (Vorzeichen UV- vs. XZ-Flaeche), NaN, Spruenge an positionsgleichen Ecken (> 1 mm) ueberall; Verzerrung |1 - A_UV0/A_3D| <= 10 % nur Neigung <= 25 Grad und Klasse != fels_klippe. '
-               'UV2 (Klasse weg): |grad u| = 1 +- 10 % (Bogenlaenge), Scherung cos <= 0,1, |grad v| +- 10 % zum Median im 2-m-Umkreis (quer 0-1).')
+               'UV2 (Klasse weg): |grad u| = 1 +- 10 % (Bogenlaenge), Scherung cos <= 0,1, |grad v| +- 10 % zum Median im 2-m-Umkreis (quer 0-1); '
+               'blockierend nur bei Kurvenradius der naechsten Mittellinie >= 10 m, darunter gekennzeichnet (uv2_enge_kurve_*), nicht blockierend - nur ok, solange auf dem Clay-Bild (Q13) nichts sichtbar ist.')

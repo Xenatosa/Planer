@@ -26,8 +26,8 @@ python3 detail_v2/qa/pruefe_alle.py --wurzel relief3d/detail_v2 \
 |---|---|
 | Mesh | `detail_v2/mesh/manifest.json` = `{version:1, einheit:"m", ursprung:"weltecke", karte:{breite:336,tiefe:303}, klassen:{0 grund,1 weg,2 ufer,3 fels_klippe,4 wasser,5 bruecke}, attribute:{flaeche:"_FLAECHE"}, uv:{TEXCOORD_0 welt_xz_m, TEXCOORD_1 karte_norm, TEXCOORD_2 wegband}, kacheln:[{id, glb:"kacheln/A1.glb", bbox, dreiecke, klassen_anteil}], modelle:[{id:"bruecke_E2", glb:"modelle/bruecke_E2.glb", klasse:5}]}`. GLB in Welt-Metern ohne Node-Transform, y oben. Kacheln 42 × 43 m, Zeile 7 bis z = 303 (`kachelGrenzen()`). |
 | Dreiecksklasse | Vertex-Attribut `_FLAECHE` (0–5), Dreiecke klassenrein, Vertices an Klassengrenzen dupliziert. QA verschweißt nach Position (Toleranz 0,1 mm), gemischte Dreiecke = Fehler (Q1). |
-| Wasser / Wände | Wasser = Klasse 4 im Geländemesh. Wände/Grat ab Sa als `modelle[]`. |
-| Vektoren | `vektor/*.geojson` in Viewer-Metern, Unterscheidung über `typ` (ersatzweise `art`). Real aus #54: `wasser.geojson` (`typ:"wasser"`, `spiegel_m_median`, `flaeche_m2`), `ufer.geojson` (`typ:"uferlinie"`, `seite`, `gewaesser`, `spiegel_m` je Punkt, `geschlossen`; `typ:"uferband"`), `bach_mitte.geojson`. Noch angenommen bis P1a/P1c: `wege.geojson` `typ:"mitte"` (`id`, `breite_m`) / `typ:"rand"`, `kreuzungen.geojson` Polygone, `zonen.geojson` Bauzone über `bauzone_plan`. |
+| Wasser / Wände | Geländemesh geschlossen inkl. Bachbett: Klasse 4 = Bett-Dreiecke unter dem Spiegel, mit dem Ufer verbunden. Wasseroberfläche = eigenes Modell in `modelle[]` (`klasse:4`, Spiegel aus `spiegel_m`), nicht Teil von Q1 (Abschn. 8, Runde 2). Wände/Grat ab Sa als `modelle[]`. |
+| Vektoren | `vektor/*.geojson` in Viewer-Metern, Unterscheidung über `typ` (ersatzweise `art`). Real aus #54: `wasser.geojson` (`typ:"wasser"`, `spiegel_m_median`, `flaeche_m2`), `ufer.geojson` (`typ:"uferlinie"`, `seite`, `gewaesser`, `spiegel_m` je Punkt, `geschlossen`; `typ:"uferband"`), `bach_mitte.geojson`. Real aus #56: `wege.geojson` über `rolle` = `mittellinie` / `rand_links` / `rand_rechts` (LineString), `band` (Polygon), `netz` (MultiPolygon, Vereinigung); `klasse` = GASSE / ANBINDUNG / HAUSWEG; dazu `id`, `breite`, `teil`. `kreuzungen.geojson`: `art` = `weg_kreuzung` (38) / `weg_platz` (50), `id`, `weg_ids`, `platz_ids`, `flaeche`. Noch angenommen bis P1c (heute bis 19:00): `zonen.geojson` mit `klasse`/`untergrund`/`id`, Bauzone über `bauzone_plan`. |
 | Datenschicht | Echte Module aus `daten/`: `manifest.mjs` `ladeMesh(manifest)` → `gelaende`, `query.mjs` `ladeDatenschicht(daten, {gelaende})` → `queryPoint`, `quellen()`, `pruefeDreiecksklasse()`; Tests `daten/test/*.test.mjs`. |
 | Abnahmebilder | `<ort>_clay_<h>m.jpg` (h 1,7/5/12/30) und `<ort>_wire_5m.jpg`, Orte `dorfkern 209|118`, `bruecke_e2 192|74,5`, `bach_e3 189|100`, `grat_g3 300|90`, `klippen_c3 104|115` (Kraterwand), dazu `QUELLEN.txt`. |
 
@@ -35,24 +35,24 @@ python3 detail_v2/qa/pruefe_alle.py --wurzel relief3d/detail_v2 \
 
 | Regel | Eingabe | Messmethode | Schwelle (Plan Abschn. 5) |
 |---|---|---|---|
-| Q1 Geschlossen | Mesh aller Kacheln, Manifest | Manifest-Schema; Klassenreinheit; Verschweißen nach Position (0,1 mm, Klassengrenz-Duplikate = verbunden); Kantenzählung: keine Kante > 2 Dreiecke, Randkanten nur auf dem Außenrand der Manifest-Kacheln; Naht: Vertexmengen beider Kacheln je Schnittlinie bitgleich; Strahlscan an den 5 Orten aus 1,7 m und 5 m, 360 × 1°, 14 Neigungen (Bodentreffer 1–60 m), Schritt 5 cm, Loch = unbedeckter Kartenpunkt, an dem der Strahl unter die zuletzt gesehene Geländehöhe fällt | 0 Mehrfachkanten, 0 Innenrandkanten, 0 Nahtabweichungen, 0 Strahllöcher |
+| Q1 Geschlossen | Mesh aller Kacheln, Manifest | Manifest-Schema; Klassenreinheit; Verschweißen nach Position (0,1 mm, Klassengrenz-Duplikate = verbunden); Kantenzählung: keine Kante > 2 Dreiecke, Randkanten nur auf dem Außenrand der Manifest-Kacheln; Naht: Vertexmengen beider Kacheln je Schnittlinie bitgleich; Strahlscan an den 5 Orten aus 1,7 m und 5 m, 360 × 1°, 14 Neigungen (Bodentreffer 1–60 m), Schritt 5 cm, Loch = unbedeckter Kartenpunkt, an dem der Strahl unter die zuletzt gesehene Geländehöhe fällt. Geländemesh inkl. Bett (Klasse 4); Wasserspiegel-Modell zählt nicht (verdeckt kein Loch), Brückenmodelle schon | 0 Mehrfachkanten, 0 Innenrandkanten, 0 Nahtabweichungen, 0 Strahllöcher |
 | Q2 Constraint-Treue | Constraint-Linien (konfig `constraint_quellen`), Mesh | Linie alle 5 cm abgetastet → nächste parallele Mesh-Kante (≤ 0,1 m, < 20°); zurück: Kanten mit beiden Enden ≤ 0,1 m → Abstand zur Linie; Maximum beider = Hausdorff (fehlende Kante = 9,99) | ≤ 2 cm |
 | Q3 Glätte | Ränder Weg/Ufer/Kante/Grat/Zone | Stützpunkt vs. gleitende 1-m-Mittelung (an Enden symmetrisch verkürzt), Knick zwischen Nachbarsegmenten; Punkte in Kreuzungspolygonen ausgenommen (Annahme, siehe Frage 6). Grat-Silhouette: Sa per Bild (Q13) | ≤ 3 cm, ≤ 15° |
-| Q4 Kreuzungen | `kreuzungen.geojson`, Mesh | Ebenen-Fit über Mesh-Vertices + 0,1-m-Abtastung im Polygon | Gefälle ≤ 2 %, Rest ≤ 2 cm |
-| Q5 Dellen | Weg-Mittellinien + Breite, Mesh | 0,1-m-Höhenraster im Band 0–3 m neben dem Weg (ohne Wasser); lokale Minima (0,7-m-Fenster); Tiefe = tiefster Punkt eines 1-m-Rings minus Minimum | ≤ 3 cm |
+| Q4 Kreuzungen | `kreuzungen.geojson` (`art` weg_kreuzung + weg_platz, beide geprüft, Zählung je `art`), Mesh | Ebenen-Fit über Mesh-Vertices + 0,1-m-Abtastung im Polygon | Gefälle ≤ 2 %, Rest ≤ 2 cm |
+| Q5 Dellen | Wegfläche `rolle=netz` (ersatzweise Mittellinie + `breite`), Mesh | 0,1-m-Höhenraster im Band 0–3 m neben der Wegfläche (ohne Wasser); lokale Minima (0,7-m-Fenster); Tiefe = tiefster Punkt eines 1-m-Rings minus Minimum | ≤ 3 cm |
 | Q6 Wegprofil | Mittellinien, Mesh | Stationen alle 1 m: Einsenkung = Mittel der Schultern bei ±(b/2 + 0,7 m) minus Mitte; Quergefälle = Geradenfit über die Breite; Längsneigung aus Mittenhöhe. Kreuzungen (+1,5 m), Enden, Wasser (+1 m) ausgenommen | 3–5 cm, ≤ 3,5 %, ≤ 20° |
 | Q7 D2 | `referenz/d2_alt.npz` (7 395 alte D2-Vertices), Mesh | Neue Geländehöhe an jedem alten Vertex (Dreiecksinterpolation); alle abgedeckt; Kachel D2 = 126–168 \| 43–86 (Umriss). Lage/Form: eine verschobene Form erzeugt Δh an den alten Vertices (Selbsttest: 0,6 m Wegversatz → 3,7 cm) | \|Δh\| ≤ 1 cm (neue D2-Regel, s. o.) |
-| Q8 Ufer | `ufer.geojson` (`spiegel_m` je Punkt), `wasser.geojson`, Mesh | Schnittlinie = Kanten Klasse 4 \| Land plus exakte Kontur der Land-Dreiecke auf dem lokalen Spiegel vs. Uferlinie, beidseitig; Profile alle 10 cm, 0–2,5 m landeinwärts, enden am Wegband; monoton (1 mm Toleranz); Krone > Spiegel | ≤ 5 cm, monoton, Wasser nie über Krone |
+| Q8 Ufer | `ufer.geojson` (`spiegel_m` je Punkt), `wasser.geojson`, Geländemesh inkl. Bett, Spiegelmodell (`modelle[]` klasse 4) | (a) Spalt: Rand des Spiegelmodells alle 5 cm, Gelände dort ≥ Spiegel − 2 mm (Kante steckt im Ufer, von oben kein Spalt); (b) Schnitt: je Uferstation (10 cm) Vorzeichenwechsel Gelände − Spiegel entlang der Normalen (−2 m Wasser bis +2,5 m Land), sonst „Spiegel unter Uferkante ohne Schnitt“; (c) exakte Kontur Gelände = Spiegelmodell vs. Uferlinie beidseitig; (d) Profile 0–2,5 m landeinwärts monoton (1 mm), enden am Wegband; Krone > `spiegel_m`. Kartenrand ausgenommen; Spiegel vs. `spiegel_m` nur Bericht | Spalt 0, Schnitt an jeder Station, ≤ 5 cm, monoton, Wasser nie über Krone |
 | Q9 Netzqualität | Mesh, Constraint-Linien, Mittellinien | Kantenlänge im Grundriss je Dreieck; Band = Schwerpunkt ≤ 1,5 m von Constraint-Linie; fern = > 30 m von Wegen; Min-Winkel im Grundriss außer Dreiecken an Constraint-Ecken (Linienenden, Knicke > 10°, Schnittpunkte Linie×Linie und Linie×Kachelrand); Normale y > 0; Budgets | Kante ≤ Punktabstand × √2 (+1 %): Band 0,2 → 0,286, Wegband 0,25 → 0,357, sonst 0,5 → 0,714, fern 1,0 → 1,428 m, alle Klassen gemessen (Entscheidung 4); Winkel ≥ 20°; ≤ 1,6 Mio. gesamt, ≤ 60 000 je Kachel |
-| Q10 UV | Mesh UV0/UV1/UV2 | Überall: 0 Spiegelungen, 0 NaN, 0 Sprünge an positionsgleichen Ecken (> 1 mm), UV1 = (x/336, z/303) ± 1e-5. UV0-Verzerrung \|1 − A_UV0/A_3D\| nur Neigung ≤ 25° und Klasse ≠ 3; Triplanar-Zone (Klasse 3 oder > 25°) nur Stetigkeit. UV2 (Klasse 1): \|∇u\| = 1 ± 10 %, Scherung cos ≤ 0,1, \|∇v\| ± 10 % zum Median im 2-m-Umkreis | 0 / 0 / 0, ≤ 10 % (Entscheidung 5) |
-| Q11 Datenschicht | `daten/manifest.mjs` + `query.mjs` (echt), PNGs, Mesh | Node-Harness über `ladeMesh` + `ladeDatenschicht`: 10 000 Zufallspunkte (Seed 611) in den Kacheln, Brückenfußabdrücke + 1 m ausgenommen; Höhe vs. Mesh; Flächentyp vs. `_FLAECHE`-Klasse; zusätzlich P4-`pruefeDreiecksklasse`; alle 6 Felder; `node --test daten/test/*.test.mjs` | ≤ 2 cm, ≥ 99,5 %, Tests grün |
+| Q10 UV | Mesh UV0/UV1/UV2 | Überall: 0 Spiegelungen, 0 NaN, 0 Sprünge an positionsgleichen Ecken (> 1 mm), UV1 = (x/336, z/303) ± 1e-5. UV0-Verzerrung \|1 − A_UV0/A_3D\| nur Neigung ≤ 25° und Klasse ≠ 3; Triplanar-Zone (Klasse 3 oder > 25°) nur Stetigkeit. UV2 (Klasse 1): \|∇u\| = 1 ± 10 %, Scherung cos ≤ 0,1, \|∇v\| ± 10 % zum Median im 2-m-Umkreis; Kurvenradius der nächsten Mittellinie (Umkreisradius über ±1 m, Minimum im ±1,5-m-Fenster) < 10 m → nur kennzeichnen (`uv2_enge_kurve_*`), nicht blockierend | 0 / 0 / 0, ≤ 10 % (Entscheidung 5); UV2 blockierend erst ab r ≥ 10 m (Runde 2) |
+| Q11 Datenschicht | `daten/manifest.mjs` + `query.mjs` (echt), PNGs, Mesh | Node-Harness über `ladeMesh` + `ladeDatenschicht`: 10 000 Zufallspunkte (Seed 611) in den Kacheln, Brückenfußabdrücke + 1 m ausgenommen; Höhe vs. sichtbare Oberfläche (Gelände, über Wasser der Spiegel, wo er über dem Bett liegt); Flächentyp vs. `_FLAECHE`-Klasse (über Wasser `wasser`); zusätzlich P4-`pruefeDreiecksklasse`; alle 6 Felder; `node --test daten/test/*.test.mjs` | ≤ 2 cm, ≥ 99,5 %, Tests grün |
 | Q12 Brücken | `modelle/bruecke_*.glb`, Mesh | Teile über Namen; Spalt = Auflager-Unterkante − Gelände; Stufe = Deckoberkante am Ende vs. Gelände 15 cm davor; Geländer 1,0 ± 0,1 m | Bohlen, Träger, Pfosten, Geländer, Auflager; Spalt ≤ 2 cm; Stufe ≤ 5 cm |
 | Q13 Abnahmebilder | `--abnahme` Ordner | 5 Orte × 4 Höhen Clay + 5 × Wire 5 m; JPEG; Qualität aus Quantisierungstabelle ± 2; jeder Name in `QUELLEN.txt` | 25 JPG q90 + QUELLEN.txt |
-| Q14 Layout | `referenz/referenz_alt.json`, Vektoren, Mesh | Hausdorff je Weg-ID (`id[/teil]`) alt vs. neu; Wasser = Mesh-Fläche Klasse 4 (Grundriss) vs. 6547,84 m² (`wasser.geojson` #54); Bauzone = `zonen.geojson` `bauzone_plan` vs. 31 927 m²; alte Wasserquellen nur im Bericht | ≤ 0,3 m; ±3 %; ±1 % |
+| Q14 Layout | `referenz/referenz_alt.json`, Vektoren (`rolle=mittellinie`), Mesh, Spiegelmodell | Hausdorff je Weg-ID (`id/teil`) alt vs. neu; Wasser **maßgeblich = sichtbare Spiegelmodell-Fläche** (0,1-m-Zellen, in denen der Spiegel über dem Gelände liegt) vs. 6547,84 m² (`wasser.geojson` #54); Spiegelmodell gesamt und Klasse-4-Bett nur Bericht; Bauzone = `zonen.geojson` `bauzone_plan` vs. 31 927 m², fehlt die Datei → „Eingabe fehlt“, Status `offen` (nicht bestanden); alte Wasserquellen nur im Bericht | ≤ 0,3 m; ±3 %; ±1 % |
 
 ## 4. Stand Do 19.11. (Selbsttest)
 
-Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. 15:26 MEZ nach Abschnitt 8: Dummy im verbindlichen Format; der saubere Dummy besteht alle 14, jede der 20 Fehlervarianten reißt ihre Regel (41 Fälle, 59 s). Dazu Exit 2 bei fehlenden Eingaben, Exit 1 bei Fehler und 3 Kurven-Einheitstests (Kreis glatt, Zickzack und 90°-Ecke erkannt). Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
+Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. 15:44 MEZ nach Abschnitt 8 inkl. Runde 2: Dummy im verbindlichen Format; der saubere Dummy besteht alle 14, jede der 23 Fehlervarianten reißt ihre Regel, dazu 2 Sonderfälle (enge Kurve nur gekennzeichnet, fehlende Zonen = offen): 47 Fälle, 78 s. Dazu Exit 2 bei fehlenden Eingaben, Exit 1 bei Fehler und 3 Kurven-Einheitstests (Kreis glatt, Zickzack und 90°-Ecke erkannt). Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
 
 Skalierung und Gegenprobe am alten Mesh im verbindlichen Format: siehe Abschnitt 8 (Q1 21 s, Gesamt 25 s für 7 Regeln auf 0,81 Mio. Dreiecken).
 
@@ -69,15 +69,18 @@ Grenzen des Dummys: Constraint-Linien liegen achsparallel auf dem 0,2-m-Raster, 
 
 ## 6. Risiken
 
-1. **Weg-/Zonen-Attribute** (P1a/P1c noch nicht geliefert): `typ:"mitte"/"rand"`, `bauzone_plan` angenommen; Abweichung = nur `konfig.json`.
-2. **Wasser-Variante im Mesh:** Dummy und Q1 setzen Wasser als flache Klasse-4-Fläche, verbunden mit dem Ufer, voraus. Führt P2 die Wasserfläche 1 m *unter* das Ufer (überlappend, nicht verbunden), meldet Q1 deren Ränder als Innenrandkanten → dann mit Grundgerüst klären (Fehlalarm vs. echter Riss).
-3. **Q10-UV2** misst |∇u| = 1 ± 10 % auch in Kurven; am Außenrand enger Kurven (R < ~10 m) ist das geometrisch > 10 %. Treffer dort kennzeichnen statt wegdefinieren.
+1. **Zonen-Attribute** (P1c bis 19:00): `zonen.geojson` mit `klasse`/`untergrund`/`id`, Bauzone über `bauzone_plan` angenommen (Q14 akzeptiert Property `bauzone_plan` = true oder `klasse`/`id`/`typ` = `bauzone_plan`); Abweichung = nur `konfig.json`/Q14-Filter.
+2. **Datenschicht über dem Spiegelmodell:** `query.mjs` `baueGelaende` behandelt jedes Modell als Deck (`deckAn`), also auch den Wasserspiegel. Wo der Spiegel unter dem Ufer steckt (Überlappung), liefert `queryPoint` die Spiegelhöhe *unter* dem Gelände und Fläche `wasser`. Q11 vergleicht mit der sichtbaren Oberfläche und meldet das ab 2 cm. Bei kleiner Überlappung (Dummy 5 cm → 1,3 cm) unkritisch, bei großer ein echter Befund für P4 → Frage an Grundgerüst/P4 (Abschn. 8, Runde 2).
+3. **Q10-UV2 in engen Kurven** (< 10 m): nur gekennzeichnet; ok nur, solange auf dem Clay-Bild nichts sichtbar ist → Sa an den Orten mit `uv2_enge_kurve_*` gezielt prüfen.
 4. **Laufzeit:** Auf 0,8 Mio. Dreiecken dauern alle Regeln < 1 min. Bei 1,6 Mio. erwartet ~2–3 min, unkritisch.
 5. **Erstes Mesh verspätet** (Fr ~10–12 Uhr): Dann Lauf am Teilstand (Manifest mit den vorhandenen Kacheln; Q1 wertet Ränder nur am Außenrand der vorhandenen Kacheln).
 
 ## 7. Offene Fragen an Grundgerüst
 
-Alle acht Fragen vom Do sind beantwortet (Abschnitt 8). Offen sind nur noch Lieferungen: `wege.geojson`/`kreuzungen.geojson` (P1a) und `zonen.geojson` (P1c) mit den angenommenen Attributen `typ:"mitte"/"rand"` bzw. `bauzone_plan`. Bis dahin sind Q2–Q6, Q9 und Q14 auf echten Daten `offen`. Das Mesh (P2) kommt auf `art/dv2-mesh`, Grundgerüst meldet.
+Alle Fragen der Runden 1 und 2 sind beantwortet (Abschnitt 8). Offen: `zonen.geojson` (P1c, heute bis 19:00). Neue Fragen aus Runde 2:
+
+- **F9 Q14-Wasser:** Ist mit „Spiegelmodell-Fläche“ die *sichtbare* Fläche gemeint (Spiegel über dem Gelände, so umgesetzt) oder die Grundrissfläche des ganzen Modells inkl. des Teils, der im Ufer steckt? Die ganze Fläche wächst mit der Überlappung (Dummy: 5 cm Überlappung = +2,4 %) und kippt dann leicht über ±3 %.
+- **F10 Datenschicht über Wasser:** Soll `queryPoint` über Wasser die Spiegelhöhe liefern (so macht es `query.mjs` heute für jedes Modell) und im Überlappungsstreifen das Gelände? Heute kommt dort die Spiegelhöhe unter dem Gelände (Risiko 2).
 
 ## 8. Entscheidungen Grundgerüst 19.11.2026 (verbindlich, eingearbeitet 19.11. ab 15:16 MEZ)
 
@@ -89,6 +92,32 @@ Alle acht Fragen vom Do sind beantwortet (Abschnitt 8). Offen sind nur noch Lief
 6. **Q3:** Kreuzungspolygone vom Knick-Grenzwert ausgenommen; R8 (eben) gilt dort weiter (Q4).
 7. **Q14:** Referenz `wasser.geojson` aus #54 (6547,84 m²), Mesh-Wasserfläche (Klasse 4) ± 3 %. Alte Quellen (DS > 0 6 338, WV-Punkte 6 461,25, WASSER_EIS 6 912, vektor.json 6 695 m²) nur im Bericht.
 8. **C3** = Kraterwand, Abnahmepunkt 104|115.
+
+**Runde 2 (Grundgerüst 19.11.2026, eingearbeitet 19.11. 15:31–15:48 MEZ), Antworten wörtlich zusammengefasst:**
+
+- (a) `wege.geojson` (#56): Unterscheidung über `rolle` = `mittellinie` / `rand_links` / `rand_rechts` (LineString), `band` (Polygon), `netz` (MultiPolygon, Vereinigung); `klasse` = GASSE / ANBINDUNG / HAUSWEG; weiter `id`, `breite`, `teil`. `kreuzungen.geojson`: `art` = `weg_kreuzung` (38) / `weg_platz` (50), `id`, `weg_ids`, `platz_ids`, `flaeche`. Zonen (P1c) kommen heute bis 19:00 mit `klasse`/`untergrund`/`id`; Name bleibt `bauzone_plan`. Bis dahin Annahme lassen; Q14-Bauzone toleriert die fehlende Datei mit der Meldung „Eingabe fehlt“, nicht als bestanden.
+  → konfig: Constraints/Q3 = `rolle` ∈ {rand_links, rand_rechts}; Mittellinien `rolle=mittellinie`, Breite `breite`; Wegfläche (Q5) `rolle=netz`; Kreuzungen `art` ∈ {weg_kreuzung, weg_platz}. Q14 Status `offen` + Befund „Eingabe fehlt: zonen.geojson (P1c)“.
+- (b) Geländemesh geschlossen inkl. Bachbett unter Wasser (Klasse 4 = Bett-Dreiecke, mit dem Ufer verbunden) → Q1 auf dem Geländemesh inkl. Bett. Wasseroberfläche = eigenes Modell in `modelle[]` (Spiegel aus `spiegel_m`), **nicht** Teil von Q1. Q8 prüft den Anschluss Spiegel/Ufer: von oben kein Spalt sichtbar, Spiegel schneidet das Ufer. Q14-Wasser: Spiegelmodell-Fläche und Klasse-4-Fläche, beide berichten; Referenz 6547,84 m² ± 3 %; **maßgeblich: Spiegelmodell, da sichtbar**.
+  → `welt.py`: Wassermodelle = `modelle[]` mit `klasse 4` (oder id `wasser*`), aus Q1-Strahlscan und Brückenlogik heraus. Q8 neu (Spalt, Schnitt, Kontur, Profile). Q14: sichtbare Spiegelfläche maßgeblich (Frage F9). Q11 vergleicht mit der sichtbaren Oberfläche (Frage F10).
+- (c) UV2 ≤ 10 % gilt ab Kurvenradius 10 m; darunter kennzeichnen und als Zahl berichten, nicht blockierend (nur ok, solange auf dem Clay-Bild nichts sichtbar ist).
+  → Q10: `uv2_enge_kurve_dreiecke`, `uv2_enge_kurve_ueber_10pct_gekennzeichnet`, `uv2_enge_kurve_max_abw`, `kurvenradius_min_m`, `enge_kurven_orte`.
+
+Selbsttest Runde 2: **47 Fälle BESTANDEN** (78 s). Neu: Dummy mit geschlossenem Bett (Klasse 4, 0,27 m unter dem Spiegel) und separatem Spiegelmodell `wasser_W01` (5 cm im Ufer), `wege.geojson`/`kreuzungen.geojson` im #56-Schema (mittellinie/rand_links/rand_rechts/band/netz, `art=weg_kreuzung`). Neue Fälle:
+- Q1_bett: Loch im Bett unter dem Spiegel wird gefunden; der Spiegel verdeckt nichts.
+- Q8_spalt: Spalt Spiegel/Ufer gefunden (Spiegelkante 15 cm vor dem Ufer, 3,7 cm über dem Bett).
+- Q8_ohne_schnitt: Spiegel 0,4 m tief, unter der Uferkante ohne Schnitt gefunden (1 702/1 702 Stationen).
+- Q10_kurve: enge S-Kurve (r ≈ 5 m) mit 15 % UV2-Stauchung → Status ok, 280 Dreiecke gekennzeichnet.
+- Q14_wasser: sichtbare Spiegelfläche +9,5 % gefunden.
+- Q14_ohne_zonen: Status `offen` mit „Eingabe fehlt“.
+- Sauber: Spalt 0; sichtbare Spiegelfläche = Bett Klasse 4 = Referenz (361,2 m²).
+
+**Gegenprobe echtes `wege.geojson`/`kreuzungen.geojson` (#56) + altes Mesh** (d2d4824 im neuen Format, 814 464 Dreiecke; Q2–Q6/Q9 in 55 s). Alle sechs reißen erwartungsgemäß, weil das alte Mesh die neuen Linien nicht kennt. Die Zahlen sind die Basis für Fr:
+- Q2: 221 Linien (122 Wegränder, 88 Kreuzungsumrisse, 11 Uferlinien), davon 210 ohne passende Mesh-Kante (9,99).
+- Q3 (reine Vektorprüfung, unabhängig vom Mesh): 133 Linien, 13 über Schwelle. Wege: G003_anb 3,45 cm und G903a 3,12 cm (knapp über 3 cm, Knick < 15°). Uferlinien #54: 11 Linien mit 6,6–13,6 cm Abweichung von der 1-m-Mittelung, Knick ≤ 10,5° → Hinweis an P1a/P1b.
+- Q4: 88 Kreuzungen (38 weg_kreuzung, 50 weg_platz), 22 nicht eben (Rest bis 0,94 m, Gefälle bis 23,6 %).
+- Q5: 442 770 Kandidaten, 1 Delle 6,05 cm bei 324|38,5.
+- Q6: 1 455 m Mittellinie, davon 254 Stationen außerhalb Kreuzung/Ende/Wasser gewertet und 252 mit Befund (altes Mesh nicht eingesenkt: Einsenkung −0,09 bis 1,99 m, quer bis 49 %).
+- Q9: 111 688 Kanten zu lang (altes 0,5-m-Raster, 0,707 m gegen 0,286 m im Band).
 
 **D2-Regel** (Entscheidung New Bot 19.11.2026 über Grundgerüst) unverändert: |Δh| ≤ 1 cm an den alten D2-Vertices, Lage und Form erhalten.
 

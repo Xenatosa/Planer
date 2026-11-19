@@ -1,5 +1,5 @@
 {
- "_hinweis": "Format verbindlich: Entscheidung Grundgeruest 19.11.2026 (PLAN_QA_DV2.md Abschn. 8). Offen nur noch Weg-/Zonen-Attribute (P1a/P1c): typ mitte/rand, bauzone_plan.",
+ "_hinweis": "Format verbindlich: Entscheidungen Grundgeruest 19.11.2026 (PLAN_QA_DV2.md Abschn. 8, inkl. Runde 2: wege.geojson rolle/klasse, kreuzungen art, Bett Klasse 4 + Spiegelmodell, UV2 ab r 10 m). Offen: zonen.geojson (P1c, bauzone_plan).",
  "welt_m": [
   336,
   303
@@ -16,11 +16,20 @@
   {
    "datei": "wege.geojson",
    "filter": {
-    "typ": "rand"
+    "rolle": [
+     "rand_links",
+     "rand_rechts"
+    ]
    }
   },
   {
-   "datei": "kreuzungen.geojson"
+   "datei": "kreuzungen.geojson",
+   "filter": {
+    "art": [
+     "weg_kreuzung",
+     "weg_platz"
+    ]
+   }
   },
   {
    "datei": "ufer.geojson",
@@ -41,7 +50,10 @@
   {
    "datei": "wege.geojson",
    "filter": {
-    "typ": "rand"
+    "rolle": [
+     "rand_links",
+     "rand_rechts"
+    ]
    }
   },
   {
@@ -66,13 +78,20 @@
  "mittellinien": {
   "datei": "wege.geojson",
   "filter": {
-   "typ": "mitte"
+   "rolle": "mittellinie"
   },
-  "breite_prop": "breite_m",
-  "id_prop": "id"
+  "breite_prop": "breite",
+  "id_prop": "id",
+  "klasse_prop": "klasse"
  },
  "kreuzungen": {
-  "datei": "kreuzungen.geojson"
+  "datei": "kreuzungen.geojson",
+  "filter": {
+   "art": [
+    "weg_kreuzung",
+    "weg_platz"
+   ]
+  }
  },
  "wasser": {
   "datei": "wasser.geojson",
@@ -193,6 +212,18 @@
   "q14_bauzone_rel": 0.01,
   "q9_wegband_abstand_m": 0.25,
   "q10_uv0_bis_grad": 25,
-  "q14_wasser_referenz_m2": 6547.84
+  "q14_wasser_referenz_m2": 6547.84,
+  "q8_spalt_m": 0.002,
+  "q10_kurve_radius_m": 10
+ },
+ "wegnetz": {
+  "datei": "wege.geojson",
+  "filter": {
+   "rolle": "netz"
+  }
+ },
+ "wasser_modell": {
+  "klasse": 4,
+  "id_praefix": "wasser"
  }
 }

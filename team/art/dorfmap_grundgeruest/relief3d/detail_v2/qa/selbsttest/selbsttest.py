@@ -13,6 +13,7 @@ from dv2qa.geom import glaettung_abw
 
 FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q1': ('Q1', '3 m2 Dreiecke bei 205|110 entfernt + 1 Nahtvertex E2 um 1 mm angehoben'),
+    'Q1_bett': ('Q1', 'Loch r 0,5 m im Bachbett (Klasse 4) unter dem Spiegelmodell - Spiegel ist nicht Teil von Q1', 'innenrand'),
     'Q1_luecke': ('Q1', 'echte Naht-Luecke: Weg-Duplikate am Klassenrand z=99 (x 150-153) um 1 cm verschoben'),
     'Q2': ('Q2', 'Mesh-Vertices auf Wegrand z=73,6 (x 140-145) um 4 cm verschoben'),
     'Q3': ('Q3', 'Wegrand W1 rechts x 150-153 Zickzack +-5 cm'),
@@ -21,7 +22,9 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q6': ('Q6', 'Weg W4 x 150-156 nicht eingesenkt'),
     'Q7': ('Q7', 'D2-Flaeche x140-150 z50-60 um 1,5 cm angehoben (> 1 cm)'),
     'Q7_lage': ('Q7', 'D2-Lage/Form: Weg W1 im D2-Bereich um 0,6 m nach Norden verschoben'),
-    'Q8': ('Q8', 'Wasserspiegel in wasser.geojson +10 cm (Schnittlinie wandert vom Uferspline weg)'),
+    'Q8': ('Q8', 'Spiegelmodell +10 cm (Schnittlinie wandert vom Uferspline weg)'),
+    'Q8_spalt': ('Q8', 'Spalt Spiegel/Ufer: linke Spiegelkante 15 cm vor dem Ufer (Kante ueber dem Bett)', 'spalt spiegel/ufer'),
+    'Q8_ohne_schnitt': ('Q8', 'Spiegel 0,4 m tiefer = unter Bett und Uferkante, schneidet das Ufer nicht', 'spiegel unter uferkante ohne schnitt'),
     'Q9': ('Q9', '5 Dreiecke in D3 mit umgedrehter Windung (Normale nach unten)'),
     'Q10': ('Q10', 'Kachel E3: UV0 gespiegelt (u = -x), UV1 um 0,001 versetzt'),
     'Q10_triplanar': ('Q10', 'Triplanar-Zone (Felskegel, Klasse 3, ~40 Grad): UV0 mit NaN und 5-cm-Spruengen an Duplikaten'),
@@ -31,7 +34,7 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q12': ('Q12', 'Bruecke E2 ohne Gelaender/Handlauf, Widerlager 5 cm ueber Gelaende'),
     'Q13': ('Q13', '2 der 25 Abnahmebilder fehlen'),
     'Q14': ('Q14', 'Mittellinie W4 0,5 m versetzt, Bauzone +2 % Radius'),
-    'Q14_wasser': ('Q14', 'Mesh: 0,4-m-Uferstreifen als Klasse 4 (+9,5 % Wasserflaeche)'),
+    'Q14_wasser': ('Q14', 'Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 %'),
 }
 
 
@@ -58,16 +61,36 @@ def main():
     for q, x in r['regeln'].items():
         good = x['status'] == 'ok'; ok_ges &= good
         zeilen.append(('sauber', q, 'ok', x['status'], good, json.dumps(x['werte'], ensure_ascii=False)[:160]))
+    q8 = r['regeln']['Q8']['werte']
+    good = q8['spalt_punkte'] == 0 and q8['ohne_schnitt'] == 0 and q8['spiegel_randpunkte'] > 0 and r['regeln']['Q14']['werte']['wasser_rel'] is not None and abs(r['regeln']['Q14']['werte']['wasser_rel']) < 0.01
+    ok_ges &= good
+    zeilen.append(('sauber', 'Q8/Q14-Spiegel', 'ok', f"{q8['spiegel_randpunkte']} Randpkt., Spalt {q8['spalt_punkte']}", good,
+                   f"Spiegelmodell 5 cm im Ufer, Schnitt an jeder Station; sichtbar {r['regeln']['Q14']['werte']['wasser_spiegel_sichtbar_m2']} m2 vs. Bett Kl. 4 {r['regeln']['Q14']['werte']['wasser_klasse4_bett_m2']} m2"))
     q1 = r['regeln']['Q1']['werte']
     good = q1['duplikate_verschweisst'] > 0 and q1['randkanten_innen'] == 0 and q1['strahl_loecher'] == 0; ok_ges &= good
     zeilen.append(('sauber', 'Q1-Duplikate', 'kein Loch', f"{q1['duplikate_verschweisst']} dupl., {q1['randkanten_innen']} Rand", good,
                    'positionsgleiche Klassengrenz-Duplikate werden verschweisst, 0 Innenrandkanten, 0 Strahlloecher'))
-    for v, (q, txt) in FEHLER.items():
+    for v, (q, txt, *kw) in FEHLER.items():
         baue_dummy.baue(tmp / v, v)
         x = lauf(v, {q})['regeln'][q]
-        good = x['status'] == 'fehler' and not any('ausnahme' in b for b in x['befunde']); ok_ges &= good
+        good = x['status'] == 'fehler' and not any('ausnahme' in b for b in x['befunde'])
         bf = x['befunde'][0] if x['befunde'] else {}
+        if kw:   # erwartete Befundart muss dabei sein
+            treffer = [b for b in x['befunde'] if kw[0] in json.dumps(b, ensure_ascii=False)]
+            good = good and bool(treffer); bf = treffer[0] if treffer else bf
+        ok_ges &= good
         zeilen.append((v, q, 'fehler', x['status'], good, txt + ' -> ' + json.dumps(bf, ensure_ascii=False)[:150]))
+    # Sonderfaelle mit Soll != fehler
+    for v, q, soll, txt, pruef in (
+        ('Q10_kurve', 'Q10', 'ok', 'enge S-Kurve W4 (r ~4 m) mit 15 % UV2-Stauchung: nur gekennzeichnet, nicht blockierend',
+         lambda x: x['status'] == 'ok' and x['werte']['uv2_enge_kurve_ueber_10pct_gekennzeichnet'] > 0 and x['werte']['uv2_ueber_10pct'] == 0),
+        ('Q14_ohne_zonen', 'Q14', 'offen', 'zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden',
+         lambda x: x['status'] == 'offen' and any('Eingabe fehlt' in str(b.get('fehler', '')) for b in x['befunde']))):
+        baue_dummy.baue(tmp / v, v)
+        x = lauf(v, {q})['regeln'][q]
+        good = bool(pruef(x)); ok_ges &= good
+        w = x['werte']; det = {k: w.get(k) for k in ('uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
+        zeilen.append((v, q, soll, x['status'], good, txt + ' -> ' + json.dumps(det, ensure_ascii=False)[:150]))
     # Exit-2: leerer Ordner
     leer = tmp / 'leer'; leer.mkdir(parents=True, exist_ok=True)
     p = subprocess.run([sys.executable, str(QA / 'pruefe_alle.py'), '--wurzel', str(leer), '--nur', 'Q1,Q7'], capture_output=True, text=True)
@@ -96,7 +119,7 @@ def main():
     print(f"SELBSTTEST {'BESTANDEN' if ok_ges else 'NICHT BESTANDEN'} ({len(zeilen)} Faelle, {dauer:.0f} s)")
     if a.md:
         md = ['# Selbsttest QA detail_v2 (P6)', '', f"Lauf: {time.strftime('%Y-%m-%d %H:%M %Z')} · Dauer {dauer:.0f} s · Ergebnis: **{'BESTANDEN' if ok_ges else 'NICHT BESTANDEN'}**", '',
-              'Dummy: 4 Kacheln D2/E2/D3/E3 im angenommenen Format (PLAN_QA_DV2.md Abschn. 2), gebaut von `selbsttest/baue_dummy.py` nach `/tmp/dv2_qa/dummy/`.', '',
+              'Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 inkl. Runde 2: Bett Kl. 4 geschlossen, Spiegelmodell, wege/kreuzungen im #56-Schema), gebaut von `selbsttest/baue_dummy.py` nach `/tmp/dv2_qa/dummy/`.', '',
               '| Fall | Regel | Soll | Ist | ok | Detail |', '|---|---|---|---|---|---|']
         md += [f"| {z[0]} | {z[1]} | {z[2]} | {z[3]} | {'ja' if z[4] else '**nein**'} | {z[5].replace('|', '/')} |" for z in zeilen]
         Path(a.md).write_text('\n'.join(md) + '\n')

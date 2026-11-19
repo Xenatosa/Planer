@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Dummy-Datensatz im angenommenen detail_v2-Format (PLAN_QA_DV2.md Abschn. 2) fuer den QA-Selbsttest.
+"""Dummy-Datensatz im verbindlichen detail_v2-Format (PLAN_QA_DV2.md Abschn. 8) fuer den QA-Selbsttest.
+Seit Runde 2 (19.11.): Gelaende geschlossen inkl. Bachbett (Klasse 4 unter dem Spiegel), Wasserspiegel als eigenes Modell
+modelle[wasser_W01] (klasse 4, 5 cm ins Ufer gezogen); wege.geojson/kreuzungen.geojson im echten Schema (#56).
 4 Kacheln D2/E2/D3/E3 (x 126-210, z 43-129). Sauber + je eine Fehlervariante pro Regel (--fehler Q5 ...).
 Netz: zweistufiger Quadtree (0,4 m Grund, 0,2 m in Baendern +-1,5 m um Constraint-Linien und um den Schnitt z=86),
 alle Constraint-Linien liegen auf dem 0,2-m-Raster (Dummy-Vereinfachung, echte Kurven testet selbsttest.py separat)."""
@@ -59,7 +61,7 @@ def hoehe(x, z, fehler=None, d2_toleranz=True):
     h = h_grund(x, z)
     dx = np.abs(x - XC)
     h = h - np.where(dx < WB, D * (1 - (dx / WB) ** 2), 0)
-    h = np.where(dx < HW, SPIEGEL, h)                     # Wasser = Klasse 4 im Gelaendemesh, flach auf dem Spiegel
+    # Bachbett (Klasse 4) setzt die Boeschungsparabel unter dem Spiegel fort: Gelaende geschlossen, Tiefe Mitte 0,27 m unter Spiegel
     h = h + FELS_H * np.clip(1 - np.maximum(np.abs(x - FELS_C[0]), np.abs(z - FELS_C[1])) / 3.0, 0, 1)   # Felskegel (> 25 Grad)
     f = senk_faktor(x, z)
     if fehler == 'Q6':   # Weg W4 auf x 150-156 nicht eingesenkt
@@ -210,6 +212,22 @@ def bruecke(fehler=None):
     return [{'name': k, 'prims': [{'pos': v, 'idx': f}]} for k, (v, f) in teile.items()]
 
 
+def spiegel_modell(fehler=None):
+    """Wasserspiegel als eigenes Modell (klasse 4): Streifen ueber dem Bett, 5 cm ins Ufer gezogen; Fehlervarianten:
+    Q8 +10 cm, Q8_spalt linke Kante 15 cm zu kurz (Spalt), Q8_ohne_schnitt 0,4 m tiefer (unter dem Bett), Q14_wasser +5 cm (Kante 0,5 m)."""
+    y = SPIEGEL + {'Q8': 0.1, 'Q8_ohne_schnitt': -0.4, 'Q14_wasser': 0.05}.get(fehler, 0.0)
+    ue = 0.5 if fehler == 'Q14_wasser' else 0.05
+    xl = XC - HW + 0.15 if fehler == 'Q8_spalt' else XC - HW - ue; xr = XC + HW + ue
+    zs = np.arange(Z0, Z1 + 1e-9, 1.0); n = len(zs)
+    pos = np.vstack([np.c_[np.full(n, xl), np.full(n, y), zs], np.c_[np.full(n, xr), np.full(n, y), zs]])
+    idx = []
+    for i in range(n - 1): idx += [(i, n + i, n + i + 1), (i, n + i + 1, i + 1)]
+    I = np.array(idx); P2 = pos[:, [0, 2]]; a = P2[I[:, 1]] - P2[I[:, 0]]; b = P2[I[:, 2]] - P2[I[:, 0]]
+    sa = a[:, 0] * b[:, 1] - a[:, 1] * b[:, 0]; I[sa > 0] = I[sa > 0][:, [0, 2, 1]]
+    return {'pos': pos, 'idx': I, 'flaeche': np.full(len(pos), 4.0), 'normal': np.tile([0, 1, 0], (len(pos), 1)),
+            'uv0': pos[:, [0, 2]].copy(), 'uv1': np.c_[pos[:, 0] / 336, pos[:, 2] / 303]}
+
+
 def schreibe_png16(pfad, arr):
     from PIL import Image
     Image.fromarray(arr.astype(np.uint16)).save(pfad)
@@ -258,18 +276,18 @@ def baue(ziel, fehler=None):
     V = np.c_[P[:, 0], H, P[:, 1]]
     cen = P[T].mean(1)
     kl = klasse(cen[:, 0], cen[:, 1])
-    if fehler == 'Q14_wasser':   # 0,4 m Uferstreifen als Wasser klassifiziert (+9,5 % Flaeche)
-        kl[(np.abs(cen[:, 0] - (XC - HW - 0.2)) < 0.2) & (kl == 2)] = 4
     chart = np.where(kl == 1, weg_chart(cen[:, 0], cen[:, 1]), -1)
     kid = np.array([kachel_id(x, z) for x, z in cen])
-    if fehler == 'Q1':
-        weg = np.hypot(cen[:, 0] - 205, cen[:, 1] - 110) < 0.5; T, kl, kid, cen, chart = T[~weg], kl[~weg], kid[~weg], cen[~weg], chart[~weg]
+    if fehler in ('Q1', 'Q1_bett'):   # Q1_bett: Loch im Bachbett unter dem Spiegel (Spiegel darf es nicht verdecken)
+        mx, mz = (205, 110) if fehler == 'Q1' else (XC, 110)
+        weg = np.hypot(cen[:, 0] - mx, cen[:, 1] - mz) < 0.5; T, kl, kid, cen, chart = T[~weg], kl[~weg], kid[~weg], cen[~weg], chart[~weg]
     if fehler == 'Q9':
         sel = np.nonzero(kid == 'D3')[0][:5]; T = T.copy(); T[sel] = T[sel][:, [0, 2, 1]]
     manifest = {'version': 1, 'einheit': 'm', 'ursprung': 'weltecke', 'karte': {'breite': 336, 'tiefe': 303},
                 'klassen': {str(i): k for i, k in enumerate(KLASSEN)}, 'attribute': {'flaeche': '_FLAECHE'},
                 'uv': {'TEXCOORD_0': 'welt_xz_m', 'TEXCOORD_1': 'karte_norm', 'TEXCOORD_2': 'wegband'}, 'kacheln': [],
-                'modelle': [{'id': 'bruecke_E2', 'glb': 'modelle/bruecke_E2.glb', 'klasse': 5}]}
+                'modelle': [{'id': 'bruecke_E2', 'glb': 'modelle/bruecke_E2.glb', 'klasse': 5},
+                            {'id': 'wasser_W01', 'glb': 'modelle/wasser_W01.glb', 'klasse': 4}]}
     kach = {'D2': (126, 43, 168, 86), 'E2': (168, 43, 210, 86), 'D3': (126, 86, 168, 129), 'E3': (168, 86, 210, 129)}
     ges = {}; dup = 0
     for k, bd in kach.items():
@@ -286,7 +304,9 @@ def baue(ziel, fehler=None):
             if fehler == 'Q1_luecke' and c == 1 and ch == 3:   # echte Luecke: Weg-Duplikate am Rand z=99 (x 150-153) 1 cm verschoben
                 m = (np.abs(Vk[:, 2] - 99.0) < 1e-6) & (Vk[:, 0] >= 150) & (Vk[:, 0] <= 153); Vk[m, 2] += 0.01
             pos.append(Vk); flae.append(np.full(len(Vk), c, float))
-            uv2.append(weg_uv2(ch, Vk[:, 0], Vk[:, 2]) if ch >= 0 else np.zeros((len(Vk), 2)))
+            u2k = weg_uv2(ch, Vk[:, 0], Vk[:, 2]) if ch >= 0 else np.zeros((len(Vk), 2))
+            if fehler == 'Q10_kurve' and ch == 3: u2k[:, 0] += 0.15 * np.clip(Vk[:, 0] - 152.5, 0, 3)   # 15 % Stauchung in enger Kurve (r < 10 m)
+            uv2.append(u2k)
             idx.append(remap[ts]); basis += len(used)
         Vk = np.vstack(pos); fl = np.concatenate(flae); u2 = np.vstack(uv2); I = np.vstack(idx)
         dup += len(Vk) - len(np.unique(np.round(Vk, 5), axis=0))
@@ -306,13 +326,21 @@ def baue(ziel, fehler=None):
     for t in teile:
         for p in t['prims']: p['flaeche'] = np.full(len(p['pos']), 5.0)
     schreibe_glb(ziel / 'mesh' / 'modelle' / 'bruecke_E2.glb', teile)
-    # ---- Vektoren (Attribute wie #54: typ statt art)
-    wf = []
+    schreibe_glb(ziel / 'mesh' / 'modelle' / 'wasser_W01.glb', [{'name': 'wasser_W01', 'prims': [spiegel_modell(fehler)]}])
+    # ---- Vektoren: wege.geojson / kreuzungen.geojson im echten Schema (#56): rolle mittellinie|rand_links|rand_rechts|band|netz
+    from shapely.geometry import Polygon, mapping
+    from shapely import union_all
+    wf, baender = [], []
+    kx0, kz0, kx1, kz1 = KREUZ
     for wid, pl, b in WEGE:
         mitte = np.array(pl)
         if fehler == 'Q14' and wid == 'W4': mitte = mitte + [0, 0.5]
-        wf.append(feat({'type': 'LineString', 'coordinates': mitte.tolist()}, typ='mitte', id=wid, breite_m=b))
+        if fehler == 'Q10_kurve' and wid == 'W4':   # enge S-Kurve (r ~ 4 m) x 152-156 nur in der Mittellinie
+            xs = np.round(np.arange(130, 186.001, 0.25), 3); mitte = np.c_[xs, 100 + np.where((xs > 152) & (xs < 156), 0.2 * np.sin(np.pi * (xs - 152) / 4) ** 2, 0)]
+        basis = dict(id=wid, teil=0, klasse='GASSE', breite=b)
+        wf.append(feat({'type': 'LineString', 'coordinates': mitte.tolist()}, rolle='mittellinie', **basis))
         (ax, az), (bx, bz) = pl
+        rr = {}
         for sg in (-1, 1):
             if az == bz:
                 xs = np.round(np.arange(ax, bx + 1e-9, F), 6); r = np.c_[xs, np.full_like(xs, az + sg * b / 2)]
@@ -320,11 +348,18 @@ def baue(ziel, fehler=None):
                 zs = np.round(np.arange(az, bz + 1e-9, F), 6); r = np.c_[np.full_like(zs, ax + sg * b / 2), zs]
             if fehler == 'Q3' and wid == 'W1' and sg == 1:
                 m = (r[:, 0] >= 150) & (r[:, 0] <= 153); r[m, 1] += np.where(np.arange(m.sum()) % 2, 0.05, -0.05)
-            wf.append(feat({'type': 'LineString', 'coordinates': r.tolist()}, typ='rand', id=f'{wid}_{"lr"[sg > 0]}'))
+            rolle = 'rand_links' if sg < 0 else 'rand_rechts'; rr[rolle] = r
+            wf.append(feat({'type': 'LineString', 'coordinates': r.tolist()}, rolle=rolle, **basis))
+        band = Polygon(np.vstack([rr['rand_links'], rr['rand_rechts'][::-1]])); baender.append(band)
+        wf.append(feat(mapping(band), rolle='band', **basis))
+    kpoly = Polygon([(kx0, kz0), (kx1, kz0), (kx1, kz1), (kx0, kz1)])
+    netz = union_all(baender + [kpoly])
+    netz_g = mapping(netz) if netz.geom_type == 'MultiPolygon' else {'type': 'MultiPolygon', 'coordinates': [mapping(netz)['coordinates']]}
+    wf.append(feat(json.loads(json.dumps(netz_g)), rolle='netz', teile=len(getattr(netz, 'geoms', [netz]))))
     (ziel / 'vektor' / 'wege.geojson').write_text(json.dumps(fc(wf)))
-    kx0, kz0, kx1, kz1 = KREUZ
-    (ziel / 'vektor' / 'kreuzungen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [[[kx0, kz0], [kx1, kz0], [kx1, kz1], [kx0, kz1], [kx0, kz0]]]}, id='K1')])))
-    sp = SPIEGEL + (0.1 if fehler == 'Q8' else 0)
+    (ziel / 'vektor' / 'kreuzungen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [[[kx0, kz0], [kx1, kz0], [kx1, kz1], [kx0, kz1], [kx0, kz0]]]},
+        id='K001', art='weg_kreuzung', weg_ids=['W2', 'W3'], platz_ids=[], flaeche=round(kpoly.area, 3))])))
+    sp = SPIEGEL
     wpoly = [[XC - HW, Z0], [XC + HW, Z0], [XC + HW, Z1], [XC - HW, Z1], [XC - HW, Z0]]
     (ziel / 'vektor' / 'wasser.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [wpoly]}, id='W01', typ='wasser', spiegel_m_median=sp, flaeche_m2=2 * HW * (Z1 - Z0))])))
     zs = np.round(np.arange(Z0, Z1 + 1e-9, F), 6)
@@ -332,8 +367,10 @@ def baue(ziel, fehler=None):
         id=f'W01_U{i}', typ='uferlinie', gewaesser='W01', seite='aussen', geschlossen=False, spiegel_m=[round(sp, 4)] * len(zs)) for i, s_ in enumerate((-1, 1))])))
     ang = np.linspace(0, 2 * np.pi, 151)
     r = BAU_R * (1.02 if fehler == 'Q14' else 1.0)
-    ring = np.c_[BAU_C[0] + r * np.cos(ang), BAU_C[1] + r * np.sin(ang)]; ring[-1] = ring[0]
-    (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [ring.tolist()]}, id='Z1', typ='grund', bauzone_plan=True)])))
+    if fehler == 'Q14_ohne_zonen': r = None
+    ring = np.c_[BAU_C[0] + (r or 1) * np.cos(ang), BAU_C[1] + (r or 1) * np.sin(ang)]; ring[-1] = ring[0]
+    if r is not None:
+        (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [ring.tolist()]}, id='Z1', klasse='grund', untergrund='erde', bauzone_plan=True)])))
     for n in ('kanten.geojson', 'grat.geojson'): (ziel / 'vektor' / n).write_text(json.dumps(fc([])))
     # ---- Datenschicht: echte Module aus art/dorfmap-fertig + Dummy-Masken (0,1 m/px, 3360 x 3030)
     dsrc = Path(__file__).resolve().parents[2] / 'daten'
@@ -351,7 +388,7 @@ def baue(ziel, fehler=None):
     gx, gz = np.meshgrid(np.arange(126, 168.001, 0.5), np.arange(43, 86.001, 0.5))
     hd = hoehe(gx.ravel(), gz.ravel(), None, d2_toleranz=False)
     np.savez_compressed(ziel / 'referenz' / 'd2_alt.npz', xyz=np.c_[gx.ravel(), hd, gz.ravel()].astype(np.float32))
-    ref = {'quelle': 'Dummy (baue_dummy.py)', 'wege': [{'id': w, 'pl': [list(p) for p in pl]} for w, pl, _ in WEGE],
+    ref = {'quelle': 'Dummy (baue_dummy.py)', 'wege': [{'id': w, 'teil': 0, 'pl': [list(p) for p in pl]} for w, pl, _ in WEGE],
            'bauzone_m2': float(0.5 * BAU_R ** 2 * 150 * np.sin(2 * np.pi / 150)), 'wasser_alternativen_m2': {'dummy': 2 * HW * (Z1 - Z0)}}
     (ziel / 'referenz' / 'referenz_alt.json').write_text(json.dumps(ref))
     # ---- Abnahme (Q13)

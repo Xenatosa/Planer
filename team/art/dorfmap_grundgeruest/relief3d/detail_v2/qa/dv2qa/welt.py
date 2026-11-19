@@ -2,7 +2,9 @@
 Format verbindlich nach Entscheidung Grundgeruest 19.11.2026 (PLAN_QA_DV2.md Abschn. 8):
 mesh/manifest.json {version:1, einheit:"m", ursprung:"weltecke", karte, klassen{0..5}, attribute{flaeche:"_FLAECHE"}, uv,
 kacheln:[{id, glb, bbox, dreiecke, klassen_anteil}], modelle:[{id, glb, klasse}]}; Dreiecke klassenrein ueber das
-Vertex-Attribut _FLAECHE, Vertices an Klassengrenzen dupliziert; Wasser = Klasse 4 im Gelaendemesh."""
+Vertex-Attribut _FLAECHE, Vertices an Klassengrenzen dupliziert.
+Nachtrag 19.11. (Grundgeruest, P6 #55 Runde 2): Gelaendemesh geschlossen inkl. Bachbett (Klasse 4 = Bett-Dreiecke);
+Wasseroberflaeche = eigenes Modell in modelle[] (klasse 4), NICHT Teil des Gelaendes/Q1."""
 import json
 from pathlib import Path
 import numpy as np
@@ -112,7 +114,8 @@ class Kontext:
         key = ('netz', arten, modelle, klassen)
         if key in self._cache: return self._cache[key]
         prims = [p for kd in self.kacheln.values() for p in kd['prims'] if p['art'] in arten]
-        if modelle: prims += [p for m in self.modelle().values() for p in m]
+        if modelle == 'wasser': prims += [p for mid in self.wasser_ids() for p in self.modelle()[mid]]
+        elif modelle: prims += [p for mid, m in self.modelle().items() if mid not in self.wasser_ids() for p in m]
         if not prims: raise Fehlt(f'keine Primitive der Art {arten}')
         P = np.vstack([p['pos'] for p in prims])
         off = np.cumsum([0] + [len(p['pos']) for p in prims])
@@ -136,6 +139,21 @@ class Kontext:
         if key not in self._cache:
             n = self.netz(arten, modelle); self._cache[key] = Ortung(n['V'], n['T'])
         return self._cache[key]
+
+    def wasser_ortung(self):
+        """Ortung nur ueber die Wasserspiegel-Modelle (Fehlt, wenn keins vorhanden)."""
+        if not self.wasser_ids(): raise Fehlt('kein Wasserspiegel-Modell (manifest.modelle klasse 4)')
+        return self.ortung((), 'wasser')
+
+    def wasser_ids(self):
+        """Wasserspiegel-Modelle: manifest.modelle mit klasse 4 (oder id mit Praefix aus konfig wasser_modell.id_praefix)."""
+        wk = self.k.get('wasser_modell', {}); kl = wk.get('klasse', 4); pf = wk.get('id_praefix', 'wasser')
+        ids = []
+        try: eintraege = self.manifest.get('modelle', [])
+        except Fehlt: eintraege = []
+        for m in eintraege:
+            if (m.get('klasse') == kl or str(m.get('id', '')).lower().startswith(pf)) and m['id'] in self.modelle(): ids.append(m['id'])
+        return ids
 
     def modelle(self):
         """{id: [prims]} aus manifest.modelle (+ optional Ordner 'modelle_ordner')."""

@@ -50,6 +50,13 @@ def q11(ctx):
     aus = json.loads(ap.read_text()); res = aus['punkte']
     o = ctx.ortung(('gelaende',)); h, t = o.hoehe(P[:, 0], P[:, 1])
     n = ctx.netz(('gelaende',)); kl = np.where(t >= 0, n['klasse'][np.maximum(t, 0)], '')
+    # Wasserspiegel-Modell (Entscheidung 19.11. Runde 2): sichtbare Oberflaeche = Spiegel, wo er ueber dem Bett liegt
+    try:
+        hw, _ = ctx.wasser_ortung().hoehe(P[:, 0], P[:, 1])
+        ueber = ~np.isnan(hw) & (np.isnan(h) | (hw > h)); h = np.where(ueber, hw, h); kl = np.where(ueber, 'wasser', kl)
+        spiegel_pkt = int(ueber.sum())
+    except Fehlt:
+        spiegel_pkt = None
     qh = np.array([x.get('hoehe') if isinstance(x, dict) and x.get('hoehe') is not None else np.nan for x in res], float)
     qf = np.array([_klasse_name(x.get('flaeche')) if isinstance(x, dict) else '' for x in res])
     dh = np.abs(qh - h); gueltig = ~np.isnan(h)
@@ -73,8 +80,8 @@ def q11(ctx):
     return erg('Q11', not bef, {'punkte': int(len(P)), 'dh_max_m': _r(np.nanmax(dh[gueltig]) if gueltig.any() else np.nan), 'ueber_2cm': int(len(fehl_h)),
                                 'flaeche_gleich': _r(gleich, 5), 'felder_vollstaendig': felder, 'tests_gruen': tests_ok, 'test_dateien': len(dateien),
                                 'quellen': aus.get('quellen'), 'p4_pruefeDreiecksklasse_quote': dk.get('quote'),
-                                'p4_gemischte_dreiecke': (aus.get('pruefung') or {}).get('gemischte_dreiecke')}, bef,
-               'Echte Datenschicht (ladeMesh + ladeDatenschicht) an 10 000 Zufallspunkten (Seed 611), Brueckenfussabdruecke +1 m ausgenommen; Hoehe vs. Python-Ortung im Mesh; Flaeche vs. _FLAECHE-Klasse; node --test daten/test/*.test.mjs.')
+                                'p4_gemischte_dreiecke': (aus.get('pruefung') or {}).get('gemischte_dreiecke'), 'punkte_auf_spiegel': spiegel_pkt}, bef,
+               'Echte Datenschicht (ladeMesh + ladeDatenschicht) an 10 000 Zufallspunkten (Seed 611), Brueckenfussabdruecke +1 m ausgenommen; Hoehe vs. Python-Ortung (sichtbare Oberflaeche: Gelaende, ueber Wasser der Spiegel); Flaeche vs. _FLAECHE-Klasse; node --test daten/test/*.test.mjs.')
 
 
 def q12(ctx):
@@ -158,44 +165,74 @@ def q13(ctx):
                'Soll: 5 Orte x Clay 1,7/5/12/30 m + Wire 5 m = 25 JPG q90 (Name <ort>_clay_<h>m.jpg / <ort>_wire_5m.jpg) + QUELLEN.txt mit jedem Dateinamen.')
 
 
+def _spiegel_flaechen(ctx):
+    """-> (Grundrissflaeche Spiegelmodell gesamt, sichtbarer Teil: 0,1-m-Zellmitten mit Spiegel > Gelaende) oder (None, None)."""
+    try:
+        wo = ctx.wasser_ortung()
+    except Fehlt:
+        return None, None
+    nw = ctx.netz((), 'wasser'); P = nw['V'][nw['T']][:, :, [0, 2]]
+    a_ = P[:, 1] - P[:, 0]; b_ = P[:, 2] - P[:, 0]; ges = float(np.abs(a_[:, 0] * b_[:, 1] - a_[:, 1] * b_[:, 0]).sum() / 2)
+    o = ctx.ortung(('gelaende',)); x0, z0 = P.reshape(-1, 2).min(0); x1, z1 = P.reshape(-1, 2).max(0)
+    sicht = 0
+    for zs in np.arange(np.floor(z0 * 10) / 10, z1, 20.0):
+        gx, gz = np.meshgrid(np.arange(np.floor(x0 * 10) / 10 + 0.05, x1, 0.1), np.arange(zs + 0.05, min(zs + 20, z1), 0.1))
+        hw, _ = wo.hoehe(gx.ravel(), gz.ravel()); hg, _ = o.hoehe(gx.ravel(), gz.ravel())
+        sicht += int((~np.isnan(hw) & ((hw > hg) | np.isnan(hg))).sum())
+    return ges, sicht * 0.01
+
+
 def q14(ctx):
     from shapely import LineString, union_all
     S = ctx.k['schwellen']
     if ctx.referenz is None or not (ctx.referenz / 'referenz_alt.json').exists(): raise Fehlt('referenz/referenz_alt.json fehlt')
     ref = json.loads((ctx.referenz / 'referenz_alt.json').read_text())
     idp = ctx.k['mittellinien']['id_prop']
-    neu = {}
+    neu, je_id = {}, {}
     for pl, pr in _mittellinien(ctx):
         key = str(pr.get(idp)) + ('/' + str(pr['teil']) if 'teil' in pr else '')
-        neu.setdefault(key, []).append(LineString(pl))
+        neu.setdefault(key, []).append(LineString(pl)); je_id.setdefault(str(pr.get(idp)), []).append(LineString(pl))
+    def rkey(wg): return wg['id'] + ('/' + str(wg['teil']) if 'teil' in wg else '')
     bef, worst, fehlt = [], 0.0, []
     for wg in ref['wege']:
-        key = wg['id'] + ('/' + str(wg['teil']) if 'teil' in wg else '')
-        if key not in neu: fehlt.append(key); continue
-        alt = LineString(wg['pl']); nn = union_all(neu[key])
+        key = rkey(wg); ziel = neu.get(key) if 'teil' in wg else je_id.get(wg['id'])
+        if not ziel: fehlt.append(key); continue
+        alt = LineString(wg['pl']); nn = union_all(ziel)
         hd = alt.hausdorff_distance(nn); worst = max(worst, hd)
         if hd > S['q14_weg_m']:
             bef.append({'weg': key, 'hausdorff_m': _r(hd, 3)})
     for k in fehlt[:20]: bef.append({'weg': k, 'fehler': 'Mittellinie fehlt in wege.geojson'})
-    zus = sorted(set(neu) - {w['id'] + ('/' + str(w['teil']) if 'teil' in w else '') for w in ref['wege']})
+    bekannt = {rkey(w) for w in ref['wege']} | {w['id'] for w in ref['wege'] if 'teil' not in w}
+    zus = sorted(k for k in neu if k not in bekannt and k.split('/')[0] not in bekannt)
     n = ctx.netz(('gelaende',)); Pw = n['V'][n['T'][n['klasse'] == 'wasser']][:, :, [0, 2]]
     a_ = Pw[:, 1] - Pw[:, 0]; b_ = Pw[:, 2] - Pw[:, 0]
-    wa = float(np.abs(a_[:, 0] * b_[:, 1] - a_[:, 1] * b_[:, 0]).sum() / 2)          # Mesh-Wasserflaeche Klasse 4 (Grundriss)
+    wk4 = float(np.abs(a_[:, 0] * b_[:, 1] - a_[:, 1] * b_[:, 0]).sum() / 2)         # Klasse-4-Bett (Grundriss), nur Bericht
     wref = float(S['q14_wasser_referenz_m2'])
+    sp_ges, sp_sicht = _spiegel_flaechen(ctx)                                        # massgeblich: sichtbarer Spiegel
     bz_p = []
-    for g, pr in ctx.polygone(ctx.k['bauzone']['datei'], pflicht=False):
-        v = pr.get('bauzone_plan', pr.get('typ'))
-        if v is True or v == 1 or v == 'bauzone_plan' or (isinstance(v, str) and v.lower() in ('ja', 'true', '1')): bz_p.append(g)
-    bz = union_all(bz_p).area if bz_p else 0.0
-    rw = wa / wref - 1; rb = bz / ref['bauzone_m2'] - 1
-    if abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'mesh_klasse4_m2': _r(wa, 1), 'referenz_m2': wref, 'rel': _r(rw)})
-    if abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
     zonen_da = (ctx.wurzel / ctx.k['vektor_ordner'] / ctx.k['bauzone']['datei']).exists()
-    if not zonen_da: bef = [b for b in bef if b.get('art') != 'bauzone']
+    for g, pr in ctx.polygone(ctx.k['bauzone']['datei'], pflicht=False):
+        v = pr.get(ctx.k['bauzone'].get('prop', 'bauzone_plan'))
+        if v is True or v == 1 or (isinstance(v, str) and v.lower() in ('ja', 'true', '1')) or \
+           'bauzone_plan' in (str(pr.get('klasse', '')).lower(), str(pr.get('id', '')).lower(), str(pr.get('typ', '')).lower()): bz_p.append(g)
+    bz = union_all(bz_p).area if bz_p else 0.0
+    rw = (sp_sicht / wref - 1) if sp_sicht is not None else None; rb = bz / ref['bauzone_m2'] - 1
+    if sp_sicht is None: bef.append({'art': 'wasserflaeche', 'fehler': 'kein Wasserspiegel-Modell (manifest.modelle klasse 4)', 'klasse4_m2': _r(wk4, 1)})
+    elif abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'spiegel_sichtbar_m2': _r(sp_sicht, 1), 'referenz_m2': wref, 'rel': _r(rw), 'klasse4_m2': _r(wk4, 1)})
+    if zonen_da and abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
+    if zonen_da and not bz_p: bef.append({'art': 'bauzone', 'fehler': 'zonen.geojson ohne bauzone_plan'})
     r = erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt), 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
-                                'wasser_mesh_m2': _r(wa, 2), 'wasser_referenz_m2': wref, 'wasser_rel': _r(rw), 'bauzone_m2': _r(bz, 1), 'bauzone_rel': _r(rb),
+                                'wasser_massgeblich': 'spiegel_sichtbar_m2 (Spiegelmodell, sichtbarer Teil = Spiegel ueber Gelaende)',
+                                'wasser_spiegel_sichtbar_m2': _r(sp_sicht, 2), 'wasser_spiegel_modell_gesamt_m2': _r(sp_ges, 2), 'wasser_klasse4_bett_m2': _r(wk4, 2),
+                                'wasser_referenz_m2': wref, 'wasser_rel': _r(rw), 'wasser_klasse4_rel': _r(wk4 / wref - 1),
+                                'bauzone': ('Eingabe fehlt: ' + ctx.k['bauzone']['datei'] + ' (P1c)') if not zonen_da else 'vorhanden',
+                                'bauzone_m2': _r(bz, 1) if zonen_da else None, 'bauzone_rel': _r(rb) if zonen_da else None,
                                 'wasser_alte_quellen_nur_bericht_m2': ref.get('wasser_alternativen_m2'), 'referenz': ref.get('quelle')}, bef,
-               'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu; Wasser = Mesh-Flaeche Klasse 4 vs. wasser.geojson #54 (6547,84 m2, Entscheidung Grundgeruest 19.11.); Bauzone = zonen.geojson bauzone_plan vs. 31 927 m2.')
-    if not zonen_da and r['status'] == 'ok':
-        r['status'] = 'offen'; r['notiz'] += ' Bauzone offen: zonen.geojson fehlt (P1c).'
+               'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu (rolle=mittellinie); Wasser massgeblich = sichtbare Spiegelmodell-Flaeche '
+               '(0,1-m-Raster: Spiegel ueber Gelaende) vs. wasser.geojson #54 6547,84 m2 +-3 %, Klasse-4-Bett und Spiegel gesamt nur Bericht; '
+               'Bauzone = zonen.geojson bauzone_plan vs. 31 927 m2 +-1 %.')
+    if not zonen_da:
+        r['notiz'] += ' Bauzone: Eingabe fehlt (zonen.geojson, P1c) - nicht bestanden, offen.'
+        r['befunde'].append({'art': 'bauzone', 'fehler': 'Eingabe fehlt: zonen.geojson (P1c)'}); r['befunde_anzahl'] += 1
+        if r['status'] == 'ok': r['status'] = 'offen'
     return r
