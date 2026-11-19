@@ -81,6 +81,14 @@
     "layer": "flaechentyp"
    },
    "zonenringe": true
+  },
+  {
+   "datei": "zonen.geojson",
+   "pflicht": false,
+   "filter": {
+    "layer": "untergrund"
+   },
+   "zonenringe": true
   }
  ],
  "mittellinien": {
@@ -119,7 +127,15 @@
   "filter": {
    "layer": "bauzone_plan"
   },
-  "prop": "bauzone_plan"
+  "prop": "bauzone_plan",
+  "zellen_csv": "../neu/zellen_relief.csv",
+  "zellen_spalten": [
+   "cx",
+   "cy",
+   "bauzone_plan"
+  ],
+  "zellen_soll": 31893,
+  "_hinweis_zellen": "Runde 5 (#61): Features mit properties.zellen -> Zellsumme = zellen_soll und Zellmenge deckungsgleich mit zellen_csv (relativ zur Wurzel detail_v2); ohne zellen Rueckfall Flaechenvariante"
  },
  "bruecken": {
   "E2": {
@@ -246,7 +262,7 @@
   "_hinweis": "Referenzflaeche zur Laufzeit = Vereinigung der Polygone (Entscheidung QA 19.11. Runde 3; Stand aa78160 ~6630,17 m2)"
  },
  "q3_zonen": {
-  "_hinweis": "F11 Grundgeruest 19.11.: nur Kartenrand (inkl. Ecken) und +-stoss_fenster_m um Stosspunkte >= 3 Zonen ausgenommen; Bruecken-Stosspunkte hart (Platzhalter P5)",
+  "_hinweis": "F11 Runde 4 + F13 Runde 5: nur Kartenrand (inkl. Ecken) und +-stoss_fenster_m um Stosspunkte (>= 3 Zonen; Kartenrand zaehlt als 'ausserhalb', d. h. 2 Zonen + Rand) ausgenommen; Bruecken-Stosspunkte hart (Platzhalter P5); Stosspunkte je Layer",
   "kartenrand_tol_m": 0.01,
   "stoss_fenster_m": 0.5,
   "stoss_tol_m": 0.01,
@@ -266,5 +282,12 @@
    "quelle": "AUSNAHMEN_DV2.md A-DV2-02; wege.geojson meta.verfahren.ausgelassen (P1a)",
    "bedingung": "nur gueltig, wenn in P6 bei 1,7 m keine sichtbare Luecke im Wegnetz entsteht"
   }
- ]
+ ],
+ "q3_ausschluss": {
+  "_hinweis": "Runde 5: Logikschichten nie in Q3 (nur sichtbare Geometrie)",
+  "layer": [
+   "bauzone_plan",
+   "slot"
+  ]
+ }
 }

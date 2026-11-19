@@ -1,6 +1,6 @@
 # Selbsttest QA detail_v2 (P6)
 
-Lauf: 2026-11-19 18:37 CET · Dauer 95 s · Ergebnis: **BESTANDEN**
+Lauf: 2026-11-19 18:46 CET · Dauer 105 s · Ergebnis: **BESTANDEN**
 
 Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 inkl. Runde 2: Bett Kl. 4 geschlossen, Spiegelmodell, wege/kreuzungen im #56-Schema), gebaut von `selbsttest/baue_dummy.py` nach `/tmp/dv2_qa/dummy/`.
 
@@ -8,7 +8,7 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 i
 |---|---|---|---|---|---|
 | sauber | Q1 | ok | ok | ja | {"kanten": 251302, "vertices_roh": 88254, "duplikate_verschweisst": 4185, "gemischte_dreiecke": 0, "manifest_fehler": 0, "kanten_mehr_als_2": 0, "randkanten_inn |
 | sauber | Q2 | ok | ok | ja | {"linien": 11, "hausdorff_max_m": 0.0, "schwelle_m": 0.02} |
-| sauber | Q3 | ok | ok | ja | {"linien": 10, "abw_max_m": 0.0, "knick_max_grad": 0.0001, "mesh_kantenzuege": 10, "mesh_abw_max_m": 0.0, "mesh_knick_max_grad": 0.0001, "zonen_stosspunkte_anza |
+| sauber | Q3 | ok | ok | ja | {"linien": 10, "abw_max_m": 0.0, "knick_max_grad": 0.0001, "mesh_kantenzuege": 10, "mesh_abw_max_m": 0.0, "mesh_knick_max_grad": 0.0001, "ausgeschlossen_logiksc |
 | sauber | Q4 | ok | ok | ja | {"kreuzungen": 1, "je_art": {"weg_kreuzung": 1}, "gefaelle_max": 0.0, "rest_max_m": 0.0, "schwellen": [0.02, 0.02]} |
 | sauber | Q5 | ok | ok | ja | {"kandidaten": 4446, "tiefe_max_m": 0.0125, "schwelle_m": 0.03, "band_m": 3.0} |
 | sauber | Q6 | ok | ok | ja | {"stationen": 169, "einsenkung_min_m": 0.0398, "einsenkung_max_m": 0.0401, "quer_max": 0.0125, "laengs_max_grad": 1.1458, "schwellen": [0.03, 0.05, 0.035, 20]} |
@@ -46,10 +46,13 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 i
 | Q13 | Q13 | fehler | fehler | ja | 2 der 25 Abnahmebilder fehlen -> {"datei": "dorfkern_clay_30m.jpg", "fehler": "fehlt"} |
 | Q14 | Q14 | fehler | fehler | ja | Mittellinie W4 0,5 m versetzt, Bauzone +2 % Radius -> {"weg": "W4/0", "hausdorff_m": 0.5} |
 | Q14_fehlt | Q14 | fehler | fehler | ja | Referenz-Teilstueck W8/0 fehlt in wege.geojson, nicht in q14_ausnahmen -> bleibt hart -> {"weg": "W8/0", "fehler": "Mittellinie fehlt in wege.geojson"} |
+| Q14_zelle_fehlt | Q14 | fehler | fehler | ja | Bauzone Zellformat (#61): 1 Zelle aus der CSV fehlt in zonen.geojson -> {"art": "bauzone", "fehler": "1 Zellen aus der CSV fehlen in zonen.geojson", "zellen": [[206, 117]]} |
 | Q14_wasser | Q14 | fehler | fehler | ja | Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 % -> {"art": "wasserflaeche", "spiegel_sichtbar_m2": 395.6, "referenz_m2": 361.199999999999, "rel": 0.0952, "klasse4_m2": 361.2} |
 | Q10_kurve | Q10 | ok | ok | ja | enge S-Kurve W4 (r ~4 m) mit 15 % UV2-Stauchung: nur gekennzeichnet, nicht blockierend -> {"uv2_enge_kurve_dreiecke": 700, "uv2_enge_kurve_ueber_10pct_gekennzeichnet": 280, "uv2_enge_kurve_max_abw": 0.1499, "kurvenradius_min_m": 5.05, "uv2_ |
-| Q14_ohne_zonen | Q14 | offen | offen | ja | zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden -> {"wege_ausnahme": [], "bauzone": "Eingabe fehlt: zonen.geojson (P1c)"} |
-| Q14_ausnahme | Q14 | ok | ok | ja | W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler -> {"wege_ausnahme": ["W9/0 (A-TEST)"], "bauzone": "vorhanden"} |
+| Q14_ohne_zonen | Q14 | offen | offen | ja | zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden -> {"bauzone_format": null, "bauzone_zellen": null, "wege_ausnahme": [], "bauzone": "Eingabe fehlt: zonen.geojson (P1c)"} |
+| Q14_zellen | Q14 | ok | ok | ja | Bauzone Zellformat (#61, 2 Komponenten + Slot-Punkt): Zellsumme = Soll, Zellmenge deckungsgleich mit CSV -> {"bauzone_format": "zellen", "bauzone_zellen": {"komponenten": 2, "zellen_summe": 112, "zellen_eindeutig": 112, "zellen_doppelt": 0, "zellen_soll": 11 |
+| Q3_logik | Q3 | ok | ok | ja | zackige Slot- und Bauzonen-Polygone + Zellpunkte in zonen.geojson, Q3-Quelle ohne Layer-Filter: Logikschichten ausgeschlossen -> {"ausgeschlossen_logikschicht": 2} |
+| Q14_ausnahme | Q14 | ok | ok | ja | W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler -> {"bauzone_format": "flaeche", "bauzone_zellen": null, "wege_ausnahme": ["W9/0 (A-TEST)"], "bauzone": "vorhanden"} |
 | leer | Runner | exit 2 | exit 2 | ja | fehlende Eingaben -> offen |
 | Q5 | Runner | exit 1 | exit 1 | ja | Fehler -> Exit 1 |
 | repo | Q14-Referenz | ~6630,17 | 6630.17 | ja | Referenz zur Laufzeit aus wasser.geojson (konfig q14_wasser_referenz, Runde 3), Stand art/dorfmap-fertig aa78160 |
@@ -59,6 +62,8 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im verbindlichen Format (PLAN_QA_DV2.md Abschn. 8 i
 | einheit | Q3-Geometrie | ok | ok | ja | (c) Zickzack +-5 cm gefunden: abw 4.54 cm, Knick 53.1 Grad |
 | einheit | Q3-Geometrie | ok | ok | ja | (c) 90-Grad-Ecke gefunden: Knick 90.0 Grad, abw 18.5 cm |
 | einheit | Q3-Geometrie | ok | ok | ja | F11 Kartenrand-Abschnitt + Kartenecke ausgenommen: Ring B, Ecke (20/10): roh abw 18.5 cm / Knick 90 Grad, ausgenommen 11/11 Punkte (Gruppe kartenrand) |
-| einheit | Q3-Geometrie | ok | ok | ja | F11 Stosspunkt-Fenster +-0,5 m ausgenommen: 1 Stosspunkt [(10.0, 5.0, ['A', 'B', 'C'])]; Ring B roh Knick 90 Grad an (10/5), im Fenster ausgenommen, kein Rest-Befund im Fenster |
+| einheit | Q3-Geometrie | ok | ok | ja | F11 Stosspunkt-Fenster +-0,5 m ausgenommen: Stosspunkt [(10.0, 5.0, ['A', 'B', 'C'])] (dazu 3 am Kartenrand, F13); Ring B roh Knick 90 Grad an (10/5), im Fenster ausgenommen, kein Rest-Befund im Fenster |
 | einheit | Q3-Geometrie | ok | ok | ja | F11 Knick knapp ausserhalb des Fensters gefunden: Buckel 5 cm bei 0,65 m Bogenlaenge vom Stosspunkt: abw 4.3 cm, Knick 53 Grad, Gruppe ['stoss_nah'] |
 | einheit | Q3-Geometrie | ok | ok | ja | F11 Brueckenecke bleibt hart: C typ bruecke: Stosspunkt (10/5) ausgenommen=False, Ring B Knick 90 Grad gefunden, Gruppe ['bruecke'] |
+| einheit | Q3-Geometrie | ok | ok | ja | F13 Kartenrand-Stoss (2 Zonen + Rand) im Fenster ausgenommen: ohne Rand 0 Stosspunkte, mit Rand 2: [(10.0, 0.0, ['A', 'B', 'ausserhalb']), (10.0, 10.0, ['A', 'B', 'ausserhalb'])]; Ring B roh abw 18.5 cm an (10/10) ausgenommen, Ring B ohne Rest-Befund |
+| einheit | Q3-Geometrie | ok | ok | ja | F13 Kartenrand-Stoss mit Bruecke bleibt hart: B typ bruecke: 2 Stosspunkte hart, Ring B an (10/10) gefunden (abw 15.1 cm) |

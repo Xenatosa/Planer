@@ -370,7 +370,29 @@ def baue(ziel, fehler=None):
     r = BAU_R * (1.02 if fehler == 'Q14' else 1.0)
     if fehler == 'Q14_ohne_zonen': r = None
     ring = np.c_[BAU_C[0] + (r or 1) * np.cos(ang), BAU_C[1] + (r or 1) * np.sin(ang)]; ring[-1] = ring[0]
-    if r is not None:
+    zellen_soll = None
+    if r is not None and fehler in ('Q14_zellen', 'Q14_zelle_fehlt', 'Q3_logik'):
+        # Runde 5 (#61): Bauzone als Punkt-Logikschicht mit zellen [[cx, cy]] (1-m-Zellen, Mitte im Kreis), 2 Komponenten; Slots gleich aufgebaut
+        from shapely.geometry import Polygon as _P
+        from shapely import contains_xy
+        cx, cy = np.meshgrid(np.arange(int(BAU_C[0] - BAU_R) - 2, int(BAU_C[0] + BAU_R) + 3), np.arange(int(BAU_C[1] - BAU_R) - 2, int(BAU_C[1] + BAU_R) + 3))
+        cx, cy = cx.ravel(), cy.ravel(); drin = contains_xy(_P(ring), cx + 0.5, cy + 0.5)
+        Z = np.c_[cx[drin], cy[drin]].tolist(); zellen_soll = len(Z)
+        with open(ziel / 'zellen_relief.csv', 'w') as fcsv:
+            fcsv.write('cx,cy,bauzone_plan\n'); fcsv.writelines(f'{a},{b},{int(d)}\n' for a, b, d in zip(cx, cy, drin))
+        if fehler == 'Q14_zelle_fehlt': Z = Z[:-1]                    # eine Zelle fehlt in zonen.geojson
+        h = len(Z) // 2; fs = []
+        for i, part in enumerate((Z[:h], Z[h:])):
+            m = np.mean(part, 0) + 0.5
+            fs.append(feat({'type': 'Point', 'coordinates': m.tolist()}, id=f'bauzone_plan_{i:05d}', klasse=0, layer='bauzone_plan', typ='bauzone', untergrund='SCHNEE', zellen=part, flaeche_m2=float(len(part))))
+        fs.append(feat({'type': 'Point', 'coordinates': [150.5, 80.5]}, id='slot_bau_0001', klasse=0, layer='slot', typ='slot_bau', untergrund='SCHNEE', zellen=[[150, 80], [151, 80]], flaeche_m2=2.0))
+        if fehler == 'Q3_logik':   # Logikschichten als zackige Polygone - Q3 darf sie nie pruefen
+            xs = np.arange(140, 150.01, 0.2); zick = np.c_[xs, 90 + np.where(np.arange(len(xs)) % 2, 0.1, -0.1)]
+            poly = np.vstack([zick, [[150, 95], [140, 95]], zick[:1]]).tolist()
+            fs.append(feat({'type': 'Polygon', 'coordinates': [poly]}, id='slot_bau_0002', klasse=0, layer='slot', typ='slot_bau'))
+            fs.append(feat({'type': 'Polygon', 'coordinates': [poly]}, id='bauzone_plan_99999', klasse=0, layer='bauzone_plan', typ='bauzone'))
+        (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc(fs)))
+    elif r is not None:
         (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [ring.tolist()]}, id='bauzone_plan_00001', klasse=0, layer='bauzone_plan', typ='bauzone', untergrund='SCHNEE')])))
     for n in ('kanten.geojson', 'grat.geojson'): (ziel / 'vektor' / n).write_text(json.dumps(fc([])))
     # ---- Datenschicht: echte Module aus art/dorfmap-fertig + Dummy-Masken (0,1 m/px, 3360 x 3030)
@@ -408,7 +430,11 @@ def baue(ziel, fehler=None):
     (ziel / 'abnahme' / 'QUELLEN.txt').write_text('Dummy-Abnahmebilder (Rauschen) fuer den QA-Selbsttest\n' + '\n'.join(namen) + '\n')
     kd = dict(k); kd['bruecken'] = {'E2': k['bruecken']['E2']}
     kd['schwellen'] = dict(k['schwellen'])
-    if fehler == 'Q14_ausnahme': kd['q14_ausnahmen'] = [{'id': 'A-TEST', 'wege': ['W9/0']}]   # Q14-Referenz kommt zur Laufzeit aus vektor/wasser.geojson des Dummys
+    if fehler == 'Q14_ausnahme': kd['q14_ausnahmen'] = [{'id': 'A-TEST', 'wege': ['W9/0']}]
+    if zellen_soll is not None:
+        kd['bauzone'] = dict(k['bauzone'], zellen_csv='zellen_relief.csv', zellen_soll=zellen_soll)
+    if fehler == 'Q3_logik':   # zusaetzliche Q3-Quelle ohne Layer-Filter: Ausschluss muss ueber q3_ausschluss greifen
+        kd['q3_quellen'] = k['q3_quellen'] + [{'datei': 'zonen.geojson', 'pflicht': False}]   # Q14-Referenz kommt zur Laufzeit aus vektor/wasser.geojson des Dummys
     (ziel / 'konfig_dummy.json').write_text(json.dumps(kd, indent=1))
     return {'vertices_welt': int(len(V)), 'duplikate': int(dup), 'dreiecke': ges}
 

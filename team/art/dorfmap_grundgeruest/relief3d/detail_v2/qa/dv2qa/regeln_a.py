@@ -188,15 +188,27 @@ def q3(ctx):
                 b['gruppe'] = str(gruppe[i]); b['gruppen_punkte'] = {g: int((ub & (gruppe == g)).sum()) for g in np.unique(gruppe[ub])}
             bef.append(b)
     linien = []
-    zonen_q = [q for q in ctx.k['q3_quellen'] if q.get('zonenringe')]
-    zringe = [(pl, g, pr) for q in zonen_q for pl, g, pr in ctx.linien(q)]
-    stoss = zonen_stosspunkte(zringe, zk) if zringe else []
-    w['zonen_stosspunkte_anzahl'] = len(stoss); w['zonen_stosspunkte_ausgenommen'] = sum(1 for x in stoss if x['ausgenommen'])
-    w['zonen_ausgenommen_punkte'] = 0
+    aus_layer = set(ctx.k.get('q3_ausschluss', {}).get('layer', []))   # Runde 5: Logikschichten (bauzone_plan, slot) nie in Q3
+    w['ausgeschlossen_logikschicht'] = 0
+    quellen = []
     for q in ctx.k['q3_quellen']:
+        ls = []
         for pl, geschl, pr in ctx.linien(q):
+            if pr.get('layer') in aus_layer: w['ausgeschlossen_logikschicht'] += 1; continue
+            ls.append((pl, geschl, pr))
+        quellen.append((q, ls))
+    stoss_je, stoss = [], []
+    for q, ls in quellen:                                              # Stosspunkte je Zonen-Layer (flaechentyp, untergrund)
+        st = zonen_stosspunkte(ls, zk, karte_rand) if q.get('zonenringe') and ls else []
+        for d in st: d['layer'] = (q.get('filter') or {}).get('layer')
+        stoss_je.append(st); stoss += st
+    w['zonen_stosspunkte_anzahl'] = len(stoss); w['zonen_stosspunkte_ausgenommen'] = sum(1 for x in stoss if x['ausgenommen'])
+    w['zonen_stosspunkte_kartenrand'] = sum(1 for x in stoss if x['kartenrand'])
+    w['zonen_ausgenommen_punkte'] = 0
+    for (q, ls), st in zip(quellen, stoss_je):
+        for pl, geschl, pr in ls:
             w['linien'] += 1; linien.append((pl, geschl, q['datei'], pr.get('id')))
-            pruefe(pl, geschl, q['datei'], pr.get('id'), zone=({'stoss': stoss, 'pr': pr} if q.get('zonenringe') else None))
+            pruefe(pl, geschl, q['datei'], pr.get('id'), zone=({'stoss': st, 'pr': pr} if q.get('zonenringe') else None))
     # Mesh-Kantenzuege: Mesh-Vertices <= 2 cm an der Linie, nach Bogenlaenge der Linie geordnet -> dieselbe Messung
     try:
         n = ctx.netz(('gelaende',)); V = n['V'][:, [0, 2]]
@@ -222,17 +234,17 @@ def q3(ctx):
     w['zonen_rest'] = {'ringe': len(zb), 'ringe_je_gruppe': {g: sum(1 for b in zb if b['gruppe'] == g) for g in sorted({b['gruppe'] for b in zb})},
                        'punkte_je_gruppe': {g: sum(b['gruppen_punkte'].get(g, 0) for b in zb) for g in sorted({k for b in zb for k in b['gruppen_punkte']})}}
     w['zonen_stosspunkte'] = stoss
-    w['zonen_regel'] = ('F11 (Grundgeruest 19.11.): Zonenringe layer=flaechentyp - ausgenommen NUR Abschnitte auf dem Kartenrand (inkl. Ecken, Toleranz '
-                        f"{zk.get('kartenrand_tol_m')} m) und +-{zk.get('stoss_fenster_m')} m Bogenlaenge um Stosspunkte mit >= 3 Zonen; Stosspunkte mit "
+    w['zonen_regel'] = ('F11/F13 (Grundgeruest 19.11.): Zonenringe (layer flaechentyp, untergrund; bauzone_plan und slot nie in Q3) - ausgenommen NUR Abschnitte auf dem Kartenrand (inkl. Ecken, Toleranz '
+                        f"{zk.get('kartenrand_tol_m')} m) und +-{zk.get('stoss_fenster_m')} m Bogenlaenge um Stosspunkte mit >= 3 Zonen (Kartenrand zaehlt als Zone 'ausserhalb'); Stosspunkte mit "
                         f"{zk.get('hart_typen')} (Brueckenrechteck, Platzhalter P5) bleiben hart. Sichtpruefung 1,7 m Pflicht (zackiger Stosspunkt = Befund).")
     return erg('Q3', not bef, w, bef,
                'Neuabtastung 0,05 m nach Bogenlaenge (lin. Interpolation, Endpunkte bleiben), gleitendes 1-m-Mittel, Abstand Abtastpunkt -> gemittelte Linie <= 3 cm hart fuer alle Linien '
                '(Vektor und Mesh-Kantenzug = Mesh-Vertices <= 2 cm an der Linie); Knick <= 15 Grad (Sehnen vor/nach dem Punkt), in Kreuzungspolygonen ausgenommen (Q4/R8 gilt dort).')
 
 
-def zonen_stosspunkte(ringe, zk):
+def zonen_stosspunkte(ringe, zk, karte_rand=None):
     """Stosspunkte der Zonenringe: Ringstuetzpunkte, an denen >= 3 verschiedene Zonen (Polygon-id) innerhalb stoss_tol_m
-    zusammenstossen; benachbarte Kandidaten (< 0,05 m) zu einem Punkt zusammengefasst.
+    zusammenstossen; F13 (Runde 5): der Kartenrand zaehlt als Zone 'ausserhalb' (2 Zonen + Rand = Stosspunkt); benachbarte Kandidaten (< 0,05 m) zu einem Punkt zusammengefasst.
     -> [{'x', 'z', 'zonen': [id], 'typen': [typ], 'ausgenommen': bool}] (hart, wenn ein Typ in hart_typen)."""
     from shapely import STRtree, points, LineString
     from scipy.spatial import cKDTree
@@ -252,7 +264,9 @@ def zonen_stosspunkte(ringe, zk):
     if not len(a): return []
     ab = np.unique(np.c_[a, gz[b]], axis=0); a, b = ab[:, 0], ab[:, 1]
     cnt = np.bincount(a, minlength=len(P))                     # a/b eindeutig je (Punkt, Zone)
-    kand = np.nonzero(cnt >= 3)[0]
+    from shapely import distance as _dist
+    rand = (_dist(points(P), karte_rand) <= zk.get('kartenrand_tol_m', 0.01)) if karte_rand is not None else np.zeros(len(P), bool)
+    kand = np.nonzero(cnt + rand >= 3)[0]
     if not len(kand): return []
     zon = {i: set() for i in kand}
     for i, j in zip(a, b):
@@ -271,7 +285,8 @@ def zonen_stosspunkte(ringe, zk):
     out = []
     for g in grp.values():
         z = sorted(set().union(*[zon[i] for i in g]), key=str); c = P[g].mean(0); t = sorted({str(typ[i]) for i in z})
-        out.append({'x': _r(c[0], 3), 'z': _r(c[1], 3), 'zonen': z, 'typen': t, 'ausgenommen': not (set(t) & hart)})
+        kr = bool(rand[g].any())
+        out.append({'x': _r(c[0], 3), 'z': _r(c[1], 3), 'zonen': z + (['ausserhalb'] if kr else []), 'typen': t, 'kartenrand': kr, 'ausgenommen': not (set(t) & hart)})
     return sorted(out, key=lambda d: (d['x'], d['z']))
 
 

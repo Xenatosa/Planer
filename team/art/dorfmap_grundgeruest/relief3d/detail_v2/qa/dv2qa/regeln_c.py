@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from .geom import KLASSEN
 from .regeln_a import erg, _r, _mittellinien
-from .welt import Fehlt
+from .welt import Fehlt, _passt
 
 NODE_HARNESS = r'''
 // Q11-Harness: nutzt die echte Datenschicht (daten/manifest.mjs ladeMesh, daten/query.mjs ladeDatenschicht).
@@ -182,6 +182,38 @@ def _spiegel_flaechen(ctx):
     return ges, sicht * 0.01
 
 
+def _bauzone_zellen(ctx):
+    """Runde 5 (#61): Bauzone als Punkt-Logikschicht (Features layer=bauzone_plan mit properties.zellen [[cx, cy], ...]).
+    -> None, wenn kein Feature 'zellen' traegt (dann Rueckfall Flaechenvariante), sonst {'werte', 'befunde', 'offen'}.
+    Soll: Zellsumme = konfig bauzone.zellen_soll und Zellmenge deckungsgleich mit zellen_csv (Spalte bauzone_plan != 0)."""
+    import csv
+    bk = ctx.k['bauzone']; feats = [f for f in ctx.geojson(bk['datei'], pflicht=False) if _passt((f.get('properties') or {}), bk.get('filter'))]
+    zf = [f['properties'] for f in feats if 'zellen' in (f.get('properties') or {})]
+    if not zf: return None
+    Z = [tuple(int(v) for v in c) for pr in zf for c in pr['zellen']]
+    menge = set(Z); dopp = len(Z) - len(menge)
+    fl = sum(float(pr.get('flaeche_m2', 0) or 0) for pr in zf)
+    w = {'komponenten': len(zf), 'zellen_summe': len(Z), 'zellen_eindeutig': len(menge), 'zellen_doppelt': dopp, 'zellen_soll': bk['zellen_soll'],
+         'flaeche_m2_summe': _r(fl, 1), 'abgleich': bk['zellen_csv']}
+    bef, offen = [], False
+    if len(Z) != bk['zellen_soll']: bef.append({'art': 'bauzone', 'fehler': f"Zellsumme {len(Z)} statt Soll {bk['zellen_soll']}"})
+    if dopp: bef.append({'art': 'bauzone', 'fehler': f'{dopp} Zellen doppelt (mehreren Komponenten zugeordnet)'})
+    for pr in zf:
+        if 'flaeche_m2' in pr and abs(float(pr['flaeche_m2']) - len(pr['zellen'])) > 1e-6:
+            bef.append({'art': 'bauzone', 'id': pr.get('id'), 'fehler': f"flaeche_m2 {pr['flaeche_m2']} != {len(pr['zellen'])} Zellen"})
+    csvp = (ctx.wurzel / bk['zellen_csv']).resolve()
+    if not csvp.exists():
+        offen = True; w['abgleich'] = f"Eingabe fehlt: {bk['zellen_csv']}"
+    else:
+        sp = bk.get('zellen_spalten', ['cx', 'cy', 'bauzone_plan'])
+        soll = {(int(r[sp[0]]), int(r[sp[1]])) for r in csv.DictReader(open(csvp)) if r[sp[2]] not in ('0', '', None)}
+        fehlt = sorted(soll - menge); zu = sorted(menge - soll)
+        w.update({'csv_zellen': len(soll), 'fehlende_zellen': len(fehlt), 'zusaetzliche_zellen': len(zu), 'deckungsgleich': not fehlt and not zu})
+        if fehlt: bef.append({'art': 'bauzone', 'fehler': f'{len(fehlt)} Zellen aus der CSV fehlen in zonen.geojson', 'zellen': fehlt[:20]})
+        if zu: bef.append({'art': 'bauzone', 'fehler': f'{len(zu)} Zellen in zonen.geojson, nicht in der CSV', 'zellen': zu[:20]})
+    return {'werte': w, 'befunde': bef, 'offen': offen}
+
+
 def q14(ctx):
     from shapely import LineString, union_all
     S = ctx.k['schwellen']
@@ -218,23 +250,28 @@ def q14(ctx):
     sp_ges, sp_sicht = _spiegel_flaechen(ctx)                                        # massgeblich: sichtbarer Spiegel
     bz_p = []
     zonen_da = (ctx.wurzel / ctx.k['vektor_ordner'] / ctx.k['bauzone']['datei']).exists()
-    for g, pr in ctx.polygone(ctx.k['bauzone']['datei'], ctx.k['bauzone'].get('filter'), pflicht=False):
+    bzz = _bauzone_zellen(ctx) if zonen_da else None                                 # Runde 5: Punkt-Logikschicht mit zellen (#61)
+    for g, pr in ([] if bzz else ctx.polygone(ctx.k['bauzone']['datei'], ctx.k['bauzone'].get('filter'), pflicht=False)):
         if ctx.k['bauzone'].get('filter'): bz_p.append(g); continue
         v = pr.get(ctx.k['bauzone'].get('prop', 'bauzone_plan'))
         if v is True or v == 1 or (isinstance(v, str) and v.lower() in ('ja', 'true', '1')) or \
            'bauzone_plan' in (str(pr.get('klasse', '')).lower(), str(pr.get('id', '')).lower(), str(pr.get('typ', '')).lower()): bz_p.append(g)
     bz = union_all(bz_p).area if bz_p else 0.0
-    rw = (sp_sicht / wref - 1) if sp_sicht is not None else None; rb = bz / ref['bauzone_m2'] - 1
+    rw = (sp_sicht / wref - 1) if sp_sicht is not None else None; rb = (bz / ref['bauzone_m2'] - 1) if not bzz else None
     if sp_sicht is None: bef.append({'art': 'wasserflaeche', 'fehler': 'kein Wasserspiegel-Modell (manifest.modelle klasse 4)', 'klasse4_m2': _r(wk4, 1)})
     elif abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'spiegel_sichtbar_m2': _r(sp_sicht, 1), 'referenz_m2': wref, 'rel': _r(rw), 'klasse4_m2': _r(wk4, 1)})
-    if zonen_da and abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
-    if zonen_da and not bz_p: bef.append({'art': 'bauzone', 'fehler': 'zonen.geojson ohne bauzone_plan'})
+    if bzz: bef += bzz['befunde']
+    else:
+        if zonen_da and abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
+        if zonen_da and not bz_p: bef.append({'art': 'bauzone', 'fehler': 'zonen.geojson ohne bauzone_plan'})
     r = erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt_hart), 'wege_ausnahme': [b['weg'] + ' (' + b['ausnahme'] + ')' for b in aus_bef], 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
                                 'wasser_massgeblich': 'spiegel_sichtbar_m2 (Spiegelmodell, sichtbarer Teil = Spiegel ueber Gelaende)',
                                 'wasser_spiegel_sichtbar_m2': _r(sp_sicht, 2), 'wasser_spiegel_modell_gesamt_m2': _r(sp_ges, 2), 'wasser_klasse4_bett_m2': _r(wk4, 2),
                                 'wasser_referenz_m2': _r(wref, 2), 'wasser_referenz_quelle': rq['datei'] + ' (Vereinigung, zur Laufzeit)', 'wasser_rel': _r(rw), 'wasser_klasse4_rel': _r(wk4 / wref - 1),
                                 'bauzone': ('Eingabe fehlt: ' + ctx.k['bauzone']['datei'] + ' (P1c)') if not zonen_da else 'vorhanden',
-                                'bauzone_m2': _r(bz, 1) if zonen_da else None, 'bauzone_rel': _r(rb) if zonen_da else None,
+                                'bauzone_format': ('zellen' if bzz else 'flaeche') if zonen_da else None,
+                                'bauzone_m2': _r(bz, 1) if zonen_da and not bzz else None, 'bauzone_rel': _r(rb) if zonen_da and not bzz else None,
+                                'bauzone_zellen': bzz['werte'] if bzz else None,
                                 'wasser_alte_quellen_nur_bericht_m2': ref.get('wasser_alternativen_m2'), 'referenz': ref.get('quelle')}, bef,
                'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu (rolle=mittellinie); Wasser massgeblich = sichtbare Spiegelmodell-Flaeche '
                '(0,1-m-Raster: Spiegel ueber Gelaende) vs. Flaeche wasser.geojson zur Laufzeit +-3 % (Runde 3), Klasse-4-Bett und Spiegel gesamt nur Bericht; '
@@ -242,6 +279,11 @@ def q14(ctx):
     if aus_bef:
         r['befunde'] += aus_bef; r['befunde_anzahl'] += len(aus_bef)
         r['notiz'] += f" Ausnahmen (nicht blockierend): {len(aus_bef)} Teilstueck(e) laut konfig q14_ausnahmen."
+    if bzz:
+        r['notiz'] += ' Bauzone (Runde 5): Zellformat - Zellmenge deckungsgleich mit ' + ctx.k['bauzone']['zellen_csv'] + ' (Spalte bauzone_plan = 1), Soll ' + str(ctx.k['bauzone']['zellen_soll']) + ' Zellen.'
+        if bzz['offen']:
+            r['befunde'].append({'art': 'bauzone', 'fehler': f"Eingabe fehlt: {ctx.k['bauzone']['zellen_csv']} (Zellabgleich nicht moeglich)"}); r['befunde_anzahl'] += 1
+            if r['status'] == 'ok': r['status'] = 'offen'
     if not zonen_da:
         r['notiz'] += ' Bauzone: Eingabe fehlt (zonen.geojson, P1c) - nicht bestanden, offen.'
         r['befunde'].append({'art': 'bauzone', 'fehler': 'Eingabe fehlt: zonen.geojson (P1c)'}); r['befunde_anzahl'] += 1

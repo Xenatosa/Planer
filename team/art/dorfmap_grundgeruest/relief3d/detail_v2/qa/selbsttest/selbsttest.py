@@ -36,6 +36,7 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q13': ('Q13', '2 der 25 Abnahmebilder fehlen'),
     'Q14': ('Q14', 'Mittellinie W4 0,5 m versetzt, Bauzone +2 % Radius'),
     'Q14_fehlt': ('Q14', 'Referenz-Teilstueck W8/0 fehlt in wege.geojson, nicht in q14_ausnahmen -> bleibt hart', 'Mittellinie fehlt'),
+    'Q14_zelle_fehlt': ('Q14', 'Bauzone Zellformat (#61): 1 Zelle aus der CSV fehlt in zonen.geojson', 'fehlen in zonen.geojson'),
     'Q14_wasser': ('Q14', 'Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 %'),
 }
 
@@ -96,7 +97,7 @@ def einheit_f11():
             m = np.abs(A[:, 0] - 10) < 1e-9; A[m, 0] -= 0.05 * np.clip(1 - np.abs(A[m, 1] - delle) / 0.1, 0, 1)
         return [(A, True, {'id': 'A', 'typ': 'grund'}), (ring(10, 20, 5, 10), True, {'id': 'B', 'typ': 'weg'}), (ring(10, 20, 0, 5), True, {'id': 'C', 'typ': typ_c})]
     def mess(zr, wen):
-        st = zonen_stosspunkte(zr, zk)
+        st = zonen_stosspunkte(zr, zk, rand)
         pl, g, pr = [z for z in zr if z[2]['id'] == wen][0]
         R, abw, knick = form_abw(pl, 1.0, True, 0.05)
         aus, gr = zonen_maske(R, pl, True, {'stoss': st, 'pr': pr}, rand, zk)
@@ -109,17 +110,33 @@ def einheit_f11():
                 f"Ring B, Ecke (20|10): roh abw {abw[ecke_rand].max()*100:.1f} cm / Knick {knick[ecke_rand].max():.0f} Grad, ausgenommen {int(aus[ecke_rand].sum())}/{int(ecke_rand.sum())} Punkte (Gruppe kartenrand)"))
     sp = [d for d in st if abs(d['x'] - 10) < 0.02 and abs(d['z'] - 5) < 0.02]
     fen = np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.3
-    out.append(('F11 Stosspunkt-Fenster +-0,5 m ausgenommen', len(st) == 1 and len(sp) == 1 and sp[0]['ausgenommen'] and sp[0]['zonen'] == ['A', 'B', 'C']
+    out.append(('F11 Stosspunkt-Fenster +-0,5 m ausgenommen', len(sp) == 1 and sp[0]['ausgenommen'] and sp[0]['zonen'] == ['A', 'B', 'C']
                 and bool(aus[fen].all()) and knick[fen].max() > 15 and not ub[np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.5].any(),
-                f"{len(st)} Stosspunkt {[(d['x'], d['z'], d['zonen']) for d in st]}; Ring B roh Knick {knick[fen].max():.0f} Grad an (10|5), im Fenster ausgenommen, kein Rest-Befund im Fenster"))
+                f"Stosspunkt {[(d['x'], d['z'], d['zonen']) for d in sp]} (dazu {len(st) - 1} am Kartenrand, F13); Ring B roh Knick {knick[fen].max():.0f} Grad an (10|5), im Fenster ausgenommen, kein Rest-Befund im Fenster"))
     st, R, abw, knick, aus, gr, ub = mess(zonen(delle=5.65), 'A')
     bu = (np.abs(R[:, 1] - 5.65) < 0.15) & (np.abs(R[:, 0] - 10) < 0.1)
     out.append(('F11 Knick knapp ausserhalb des Fensters gefunden', bool(ub[bu].any()) and not aus[bu].any(),
                 f"Buckel 5 cm bei 0,65 m Bogenlaenge vom Stosspunkt: abw {abw[bu].max()*100:.1f} cm, Knick {knick[bu].max():.0f} Grad, Gruppe {sorted(set(gr[bu & ub]))}"))
     st, R, abw, knick, aus, gr, ub = mess(zonen(typ_c='bruecke'), 'B')
     fen = np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.3
-    out.append(('F11 Brueckenecke bleibt hart', len(st) == 1 and not st[0]['ausgenommen'] and bool(ub[fen].any()) and not aus[fen].any(),
-                f"C typ bruecke: Stosspunkt (10|5) ausgenommen={st[0]['ausgenommen'] if st else None}, Ring B Knick {knick[fen].max():.0f} Grad gefunden, Gruppe {sorted(set(gr[fen & ub]))}"))
+    sp = [d for d in st if abs(d['x'] - 10) < 0.02 and abs(d['z'] - 5) < 0.02]
+    out.append(('F11 Brueckenecke bleibt hart', len(sp) == 1 and not sp[0]['ausgenommen'] and bool(ub[fen].any()) and not aus[fen].any(),
+                f"C typ bruecke: Stosspunkt (10|5) ausgenommen={sp[0]['ausgenommen'] if sp else None}, Ring B Knick {knick[fen].max():.0f} Grad gefunden, Gruppe {sorted(set(gr[fen & ub]))}"))
+    # F13 (Runde 5): 2 Zonen treffen auf den Kartenrand = Stosspunkt (Zone, Zone, ausserhalb) -> Fenster; Bruecke bleibt hart
+    zr = [(ring(0, 10, 0, 10), True, {'id': 'A', 'typ': 'grund'}), (ring(10, 20, 0, 10), True, {'id': 'B', 'typ': 'weg'})]
+    st = zonen_stosspunkte(zr, zk, rand); st0 = zonen_stosspunkte(zr, zk)
+    pl, g, pr = zr[1]; R, abw, knick = form_abw(pl, 1.0, True, 0.05)
+    aus, gr = zonen_maske(R, pl, True, {'stoss': st, 'pr': pr}, rand, zk)
+    t = np.hypot(R[:, 0] - 10, R[:, 1] - 10) <= 0.5
+    ub = ((abw > 0.03) | (knick > 15)) & ~aus
+    out.append(('F13 Kartenrand-Stoss (2 Zonen + Rand) im Fenster ausgenommen', len(st0) == 0 and len(st) == 2 and all(d['kartenrand'] and d['ausgenommen'] and 'ausserhalb' in d['zonen'] for d in st)
+                and bool(aus[t].all()) and abw[t].max() > 0.03 and not ub.any(),
+                f"ohne Rand {len(st0)} Stosspunkte, mit Rand {len(st)}: {[(d['x'], d['z'], d['zonen']) for d in st]}; Ring B roh abw {abw[t].max()*100:.1f} cm an (10|10) ausgenommen, Ring B ohne Rest-Befund"))
+    zr[1] = (zr[1][0], True, {'id': 'B', 'typ': 'bruecke'})
+    st = zonen_stosspunkte(zr, zk, rand); aus, gr = zonen_maske(R, pl, True, {'stoss': st, 'pr': zr[1][2]}, rand, zk)
+    ub = ((abw > 0.03) | (knick > 15)) & ~aus
+    out.append(('F13 Kartenrand-Stoss mit Bruecke bleibt hart', len(st) == 2 and not any(d['ausgenommen'] for d in st) and bool(ub[t].any()),
+                f"B typ bruecke: {len(st)} Stosspunkte hart, Ring B an (10|10) gefunden (abw {abw[t & ub].max()*100:.1f} cm)"))
     return out
 
 
@@ -160,12 +177,16 @@ def main():
          lambda x: x['status'] == 'ok' and x['werte']['uv2_enge_kurve_ueber_10pct_gekennzeichnet'] > 0 and x['werte']['uv2_ueber_10pct'] == 0),
         ('Q14_ohne_zonen', 'Q14', 'offen', 'zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden',
          lambda x: x['status'] == 'offen' and any('Eingabe fehlt' in str(b.get('fehler', '')) for b in x['befunde'])),
+        ('Q14_zellen', 'Q14', 'ok', 'Bauzone Zellformat (#61, 2 Komponenten + Slot-Punkt): Zellsumme = Soll, Zellmenge deckungsgleich mit CSV',
+         lambda x: x['status'] == 'ok' and x['werte']['bauzone_format'] == 'zellen' and x['werte']['bauzone_zellen']['deckungsgleich'] and x['werte']['bauzone_zellen']['komponenten'] == 2),
+        ('Q3_logik', 'Q3', 'ok', 'zackige Slot- und Bauzonen-Polygone + Zellpunkte in zonen.geojson, Q3-Quelle ohne Layer-Filter: Logikschichten ausgeschlossen',
+         lambda x: x['status'] == 'ok' and x['werte']['ausgeschlossen_logikschicht'] >= 2),
         ('Q14_ausnahme', 'Q14', 'ok', 'W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler',
          lambda x: x['status'] == 'ok' and x['werte']['wege_ausnahme'] == ['W9/0 (A-TEST)'] and any(b.get('ausnahme') == 'A-TEST' for b in x['befunde']))):
         baue_dummy.baue(tmp / v, v)
         x = lauf(v, {q})['regeln'][q]
         good = bool(pruef(x)); ok_ges &= good
-        w = x['werte']; det = {k: w.get(k) for k in ('wege_ausnahme', 'uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
+        w = x['werte']; det = {k: w.get(k) for k in ('bauzone_format', 'bauzone_zellen', 'ausgeschlossen_logikschicht', 'wege_ausnahme', 'uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
         zeilen.append((v, q, soll, x['status'], good, txt + ' -> ' + json.dumps(det, ensure_ascii=False)[:150]))
     # Exit-2: leerer Ordner
     leer = tmp / 'leer'; leer.mkdir(parents=True, exist_ok=True)
