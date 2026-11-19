@@ -26,6 +26,10 @@ from skimage.graph import route_through_array
 from skimage.measure import find_contours
 from skimage.morphology import skeletonize
 
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+import zonen_konstruktiv as zk  # noqa: E402
+
 
 HERE = Path(__file__).resolve().parent
 RELIEF = HERE.parents[1]
@@ -38,6 +42,15 @@ TARGETS = ((300.0, 90.0, "G3H3"), (290.0, 98.0, "G3H3"), (84.0, 129.0, "B3C3"))
 SURFACE_PRIORITY = ("wasser", "bruecke", "weg", "ufer", "fels", "grund")
 CLASS_CODES = {"grund": 0, "weg": 1, "ufer": 2, "fels": 3, "wasser": 4, "bruecke": 5}
 SMOOTH_COVERAGE_STATUS = []
+VEKTOR_QUELLE = RELIEF / "detail_v2" / "vektor"
+QUELLE_FLAECHENTYP = {
+    "wasser": "wasser.geojson (P1b2 #58)",
+    "bruecke": "Platzhalter P5: Komponenten Wegnetz x Uferband (ohne Wasser), die E2 x186-197 z73-75 bzw. E3-West x174-186 z126-128 schneiden",
+    "weg": "wege.geojson rolle=netz (P1a2 #59), Schliessen r=1,6 m",
+    "ufer": "ufer.geojson typ=uferband vereinigt mit Wasser, Schliessen r=1,6 m, minus Wasser",
+    "fels": "zellen_relief.csv FELS/KLIPPE_*: SDF 0,1 m, Gauss sigma 1 m, Kontur 0, Oeffnen/Schliessen r=2 m, Ringglaettung adaptiv",
+    "grund": "Rest des Rechtecks 0..336 x 0..303",
+}
 
 
 def compact_json(path: Path, obj: dict) -> None:
@@ -549,95 +562,45 @@ def classify_coverage(polys, originals):
 
 def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
     types, substrates, codes, labels, slivers, raw_type_counts = surface_layer(cells, cell_rows, overlay_rows)
-    original = component_cell_geometries(codes, labels)
-    comps = []
-    for label, geom in original.items():
-        comps.extend(polygon_parts(geom))
-    smoothed = smooth_coverage(comps, dp=0.28, sample_step=0.20)
-    surface_by_type = classify_coverage(smoothed, original)
-    # Calibrate the three small/high-priority classes after smoothing. Buffer
-    # correction is applied to the shared class geometry, then all lower-priority
-    # faces are cut against it so the final partition remains exact and shared.
-    bounds = box(0, 0, nx, ny)
-    source_counts = raw_type_counts
-    calibrated = {}
-    claimed = Polygon()
-    for typ in SURFACE_PRIORITY[:-1]:
-        base = surface_by_type.get(typ, original.get(typ, Polygon()))
-        if base.is_empty:
-            calibrated[typ] = Polygon()
-            continue
-        if typ in ("wasser", "bruecke", "ufer"):
-            target = float(source_counts[typ])
-            lo, hi = -8.0, 8.0
-            for _ in range(32):
-                mid = (lo + hi) * 0.5
-                candidate = base.buffer(mid, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
-                if candidate.area > target:
-                    hi = mid
-                else:
-                    lo = mid
-            selected = base.buffer((lo + hi) * 0.5, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
-            # A class must remain represented even if the raw-smoothed face was
-            # nearly erased; fall back to its unsmoothed source before calibration.
-            if selected.area < target * 0.97 and typ in original:
-                base = original[typ]
-                lo, hi = -8.0, 8.0
-                for _ in range(32):
-                    mid = (lo + hi) * 0.5
-                    candidate = base.buffer(mid, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
-                    if candidate.area > target:
-                        hi = mid
-                    else:
-                        lo = mid
-                selected = base.buffer((lo + hi) * 0.5, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
-        else:
-            selected = base.intersection(bounds).difference(claimed)
-        calibrated[typ] = selected
-        claimed = unary_union([claimed, selected])
-    # The ground class is the exact remainder of the map rectangle.
-    higher = unary_union(list(calibrated.values())) if calibrated else Polygon()
-    calibrated["grund"] = bounds.difference(higher)
+    # Nacharbeit 19.11. (Methodenwechsel, t2027u): keine Zellpolygonisierung mehr.
+    # Flaechentyp konstruktiv aus den gemergten glatten Vektoren + SDF-Fels,
+    # Untergrund per Multi-Label-Glaettung mit partitionserhaltender Bogenglaettung.
+    surf, _raw = zk.flaechentyp_partition(VEKTOR_QUELLE, substrates)
+    surf = zk.knoten_neu(surf)
+    surf = zk.boegen_bereinigen(surf)
     out = []
     type_area = Counter()
     surface_polys = []
     for typ in SURFACE_PRIORITY:
-        surface_polys.extend((typ, p) for p in polygon_parts(calibrated[typ]))
+        surface_polys.extend((typ, p) for p in zk.polys(surf.get(typ)))
     for typ, poly in sorted(surface_polys, key=lambda v: (SURFACE_PRIORITY.index(v[0]), round(v[1].bounds[1], 5), round(v[1].bounds[0], 5), round(v[1].area, 5))):
         x0, y0, x1, y1 = poly.bounds
         ix0, iy0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
         ix1, iy1 = min(nx, int(math.ceil(x1))), min(ny, int(math.ceil(y1)))
         xs, ys = np.arange(ix0, ix1) + 0.5, np.arange(iy0, iy1) + 0.5
+        counts = Counter()
         if len(xs) and len(ys):
             xx, yy = np.meshgrid(xs, ys)
             inside = contains_xy(poly, xx, yy)
             counts = Counter(substrates[iy0:iy1, ix0:ix1][inside].tolist())
-        else:
-            counts = Counter()
         if not counts:
             rp = poly.representative_point(); x = max(0, min(nx - 1, int(rp.x))); y = max(0, min(ny - 1, int(rp.y)))
             counts[str(substrates[y, x])] = 1
         under = sorted(counts.items(), key=lambda v: (-v[1], v[0]))[0][0]
         type_area[typ] += poly.area
         out.append(feature_from_polygon(poly, {"layer": "flaechentyp", "typ": typ, "klasse": CLASS_CODES[typ], "untergrund": under,
-                                               "untergrund_anteile": [{"name": k, "zellen": int(v)} for k, v in sorted(counts.items())],
-                                               "quelle": "zellen_relief.csv + raster_c20_z25_overlay_plaetze_wege.csv"}))
-
-    # The substrate layer is a second complete coverage, classified directly
-    # from zellen_relief.csv and smoothed with the same shared-boundary method.
-    under_labels = sorted(set(str(v) for v in substrates.ravel()))
-    under_lut = {v: i for i, v in enumerate(under_labels)}
-    under_codes = np.fromiter((under_lut[str(v)] for v in substrates.ravel()), dtype=np.int16).reshape(ny, nx)
-    under_original = component_cell_geometries(under_codes, under_labels)
-    under_comps = [p for geom in under_original.values() for p in polygon_parts(geom)]
-    under_smoothed = smooth_coverage(under_comps, dp=0.28, sample_step=0.20)
-    under_by_label = classify_coverage(under_smoothed, under_original)
+                                               "quelle": QUELLE_FLAECHENTYP[typ]}))
+    under_regions, _assigned, under_info = zk.untergrund_partition_v2(substrates)
+    under_by_label = under_regions
+    under_labels = sorted(under_regions)
     for under in under_labels:
-        for poly in sorted(polygon_parts(under_by_label.get(under, Polygon())), key=lambda p: (round(p.bounds[1], 5), round(p.bounds[0], 5), round(p.area, 5))):
+        for poly in sorted(zk.polys(under_regions[under]), key=lambda p: (round(p.bounds[1], 5), round(p.bounds[0], 5), round(p.area, 5))):
             typ, _ = majority_at_geometry(poly, types, substrates)
             out.append(feature_from_polygon(poly, {"layer": "untergrund", "typ": under,
                                                    "klasse": CLASS_CODES[typ], "untergrund": under,
-                                                   "quelle": "zellen_relief.csv: untergrund"}))
+                                                   "quelle": "zellen_relief.csv: untergrund (Wasser/Fels -> naechster Untergrund), "
+                                                             "Indikator 0,1 m Gauss sigma %.2f m, argmax, Inseln < %.0f m2 -> Nachbar, "
+                                                             "Bogenglaettung adaptiv" % (zk.UNTER_SIGMA_M, zk.UNTER_INSEL_M2)}))
 
     # Bauzone is an independent layer and is smoothed as a two-class coverage.
     bz = np.zeros((ny, nx), dtype=np.int8)
@@ -728,7 +691,10 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
                  "bauzone_feature_count": len([f for f in out if f["properties"].get("typ") == "bauzone"]),
                  "slot_feature_count": len([f for f in out if f["properties"].get("layer") == "slot"]),
                  "surface_features": len([f for f in out if f["properties"].get("layer") == "flaechentyp"]),
-                 "sliver_cells_reassigned": int(slivers)}
+                 "untergrund_info": under_info,
+                 "untergrund_inseln_entfallen": list(zk.BOGEN_INSELN_ENTFALLEN),
+                 "bruecken_schnitt": list(zk.BRUECKEN_SCHNITT),
+                 "fels_ringe_entfallen": list(zk.RING_DROPPED)}
 
 
 def line_feature(line: LineString, props: dict, get_height) -> dict:
@@ -754,9 +720,6 @@ def build_edges(cell_rows, nx, ny, rs, gb, get_height):
     # WAND is the exported wall face; KANTE marks the source edge cells. The source snapshot
     # has no WAND_OBEN/WAND_FUSS values, so upper/lower are derived from each named mask's GB range.
     names = sorted({r["wand_name"] for r in cell_rows.values() if r["wand_name"]})
-    wall_radius = 7
-    wy, wx = np.ogrid[-wall_radius:wall_radius + 1, -wall_radius:wall_radius + 1]
-    wall_disk = wx * wx + wy * wy <= wall_radius * wall_radius
     for name in names:
         source_mask = np.zeros((ny, nx), dtype=bool)
         for idx, row in cell_rows.items():
@@ -767,28 +730,33 @@ def build_edges(cell_rows, nx, ny, rs, gb, get_height):
         ys, xs = np.where(source_mask)
         vals = get_height(np.column_stack((xs + 0.5, ys + 0.5)))
         mid = float(np.median(vals))
-        # The 7 m disk opening/closing is a deliberate broad generalization:
-        # smaller kernels left sub-30 cm raster crenellations and >15 degree
-        # corners. Preserve the named wall and height split, and record omitted
-        # short contours rather than returning visibly jagged fragments.
-        mask = ndi.binary_closing(ndi.binary_opening(source_mask, structure=wall_disk), structure=wall_disk)
-        if not mask.any():
-            omitted_short += 1
-            continue
-        for raw in contour_cell_mask(mask):
-            # Split an enclosing contour around its high and low half at the median GB level.
-            p = np.asarray(raw.coords)
-            hp = get_height(p)
-            typ = "klippe_oben" if float(np.median(hp)) >= mid else "klippe_unten"
-            smooth = smooth_line(raw, dp=0.1, step=0.20, chaikin_n=1, lowpass_m=1.5)
-            if smooth is None:
-                continue
-            if smooth.length < 3.0:
+        # Nacharbeit: dieselbe SDF-Glaettung wie die Felsflaeche statt 7-m-Opening
+        # (Kontur 0 des Gauss-geglaetteten SDF, Oeffnen/Schliessen r=2 m,
+        # adaptive Ringglaettung); Komponenten < 4 m2 und Linien < 3 m entfallen.
+        region = zk.sdf_smooth_region(source_mask, zk.FELS_SIGMA_M, zk.MIN_AREA, clip=False)
+        region = zk.schliessen(zk.oeffnen(region, zk.FELS_OEFFNEN_M), zk.FELS_SCHLIESSEN_M)
+        region = zk.ringe_glaetten(region, zk.FELS_RING_SIGMA_M)
+        rings = []
+        for poly in zk.polys(region):
+            if poly.area < zk.MIN_AREA:
                 omitted_short += 1
                 continue
-            feat = line_feature(smooth, {"typ": typ, "wand_name": name,
-                                         "quelle": "zellen_relief.csv: KLIPPE_WAND/KANTE + GB"}, get_height)
-            features.append(feat); q3_lines.append(smooth)
+            rings.append(LineString(poly.exterior.coords))
+            rings.extend(LineString(r.coords) for r in poly.interiors)
+        if not rings:
+            omitted_short += 1
+            continue
+        for ring in rings:
+            for raw in linestring_parts(line_merge(ring.intersection(box(0, 0, nx, ny)))):
+                if raw.length < 3.0:
+                    omitted_short += 1
+                    continue
+                p = np.asarray(raw.coords)
+                hp = get_height(p)
+                typ = "klippe_oben" if float(np.median(hp)) >= mid else "klippe_unten"
+                feat = line_feature(raw, {"typ": typ, "wand_name": name,
+                                          "quelle": "zellen_relief.csv: KLIPPE_WAND/KANTE + GB; SDF sigma 1 m, r=2 m, Ringglaettung"}, get_height)
+                features.append(feat); q3_lines.append(LineString(feat["geometry"]["coordinates"]))
 
     # GB slope mask, sampled from the viewer field at 0.5 m. A fixed 2.5 m
     # binary opening/closing removes sub-cell notches and loops before the
@@ -907,6 +875,8 @@ def build_grats(cell_rows, nx, ny, rs, gb, get_height):
 
 def build(out_dir: Path):
     SMOOTH_COVERAGE_STATUS.clear()
+    for log in (zk.RING_LOG, zk.RING_DROPPED, zk.BOGEN_LOG, zk.BOGEN_INSELN_ENTFALLEN):
+        log.clear()
     nx, ny, rs, gb, cells, cell_rows, overlay_rows = read_inputs()
     get_height = height_sampler(gb, rs)
     edge_features, edge_lines, edge_omitted_short = build_edges(cell_rows, nx, ny, rs, gb, get_height)
