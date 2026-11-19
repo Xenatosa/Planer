@@ -14,6 +14,8 @@ Vorgaben von Fabian: t2039u (Abnahme abgelehnt), t2040u (nur Geometrie, keine Te
 - Eine Datenschicht passend zum Mesh: Höhe, Flächentyp, begehbar, Slot und Kachel-ID. Dazu Masken-PNGs, eine JSON-Legende und `queryPoint(x,z)` mit Tests.
 - Nachweis mit Clay- und Wireframe-Renderbildern aus 1,7 m, 5 m, 12 m und 30 m an fünf Orten: Dorfkern, Brücke E2, Bach E3, Grat G3 und Klippen C3.
 - Ablage: `/workspace/dorfmap_final/detail_v2/`.
+- **Entscheidung New Bot, 19.11.2026:** „D2-Bereich: Lage und Form erhalten, |Δh| ≤ 1 cm an den alten D2-Vertices“ ersetzt „D2 bitgleich“. Alte Dateien und Hashes bleiben unverändert. [F über New Bot]
+- **Plan freigegeben durch New Bot 19.11.2026;** Plan B (0,25-m-Gitter mit Snapping) nur bei verfehltem Tagesziel und mit sofortiger Meldung an New Bot.
 
 ## 2. Ausgangszustand (gemessen, d2d4824)
 
@@ -138,6 +140,9 @@ Fabian hat die Methode gewechselt (t2043u). Das alte Raster-Gate (Referenz 359 /
 | Q5 | Keine Dellen neben Wegen | Im Band 0–3 m neben dem Weg kein lokales Minimum tiefer als 3 cm. |
 | Q6 | Wegprofil | Einsenkung 3–5 cm, Quergefälle ≤ 3,5 %, Längsneigung ≤ 20°. |
 | Q7 | D2 Lage und Form | |Δh| ≤ 1 cm an allen alten D2-Vertices; Umriss gleich. |
+
+Zu Q7: Entscheidung New Bot, 19.11.2026: „D2-Bereich: Lage und Form erhalten, |Δh| ≤ 1 cm an den alten D2-Vertices“ ersetzt „D2 bitgleich“. Alte Dateien und Hashes bleiben unverändert. [F über New Bot]
+
 | Q8 | Ufer | Schnittlinie Wasser/Gelände ↔ Uferspline ≤ 5 cm. Böschung monoton, Wasser nie über der Uferkrone. |
 | Q9 | Dreiecke | Begehbar: Kante ≤ 0,5 m. Kantenbänder ≤ 0,2 m. Min-Winkel ≥ 20° (außer an Constraint-Ecken). Oberflächen-Normalen nach oben. ≤ 1,6 Mio. Dreiecke. |
 | Q10 | UV | 0 gespiegelte UV-Dreiecke. UV1 eindeutig. Verzerrung ≤ 10 % bis 35° Neigung (Wände per Box-UV ≤ 15 %). |
@@ -206,6 +211,8 @@ Alle Aufträge enthalten diese Regeln:
 - Nur in den eigenen Ordner `relief3d/detail_v2/<paket>/` schreiben.
 - Marker [S]/[A]/[R]/[F]. Keine Texturen.
 - Zweimal gescheitert → vereinfachen und melden.
+- D2: Lage und Form erhalten, |Δh| ≤ 1 cm an den alten D2-Vertices (ersetzt „D2 bitgleich“, Entscheidung New Bot 19.11.2026, [F über New Bot]). Alte Dateien und Hashes bleiben unverändert.
+- Plan freigegeben durch New Bot 19.11.2026; Plan B (0,25-m-Gitter mit Snapping) nur bei verfehltem Tagesziel und mit sofortiger Meldung an New Bot.
 
 **P1a an Wege & Deko** (Branch `art/dv2-vektor-wege`, heute bis 19:00):
 > Neuer Aufbau der Dorfmap aus Vektoren (Fabian t2043u). Dein Teil bis heute 19:00: Weg- und Kreuzungsvektoren als GeoJSON in Viewer-Metern (1 Einheit = 1 Zelle) nach `relief3d/detail_v2/vektor/wege.geojson` und `kreuzungen.geojson`.
