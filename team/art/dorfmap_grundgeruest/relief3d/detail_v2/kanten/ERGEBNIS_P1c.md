@@ -224,3 +224,82 @@ Sichtprüfung:
 - `nahbild_b3c3.jpg`
 
 Alle sind kleiner als 1 MB und wurden angesehen. `e2_vorher_nachher.jpg` stammt unverändert aus P1c.
+
+## P1c3 – Bauzone als Zellliste, QA F11, Messung gegen QA 33d0d86
+
+### 1) Bauzone verlustfrei
+
+Korrektur zu P1c2: Die dort geglättete Bauzonen-Kontur hat Löcher (Hindernisse) eingeebnet. Das ist zurückgenommen. Die Karte bleibt unverändert.
+
+- Die Bauzone ist jetzt eine unsichtbare Logikschicht auf dem 1-m-Raster, genau wie die Slots.
+- `zonen.geojson` enthält je Zusammenhangskomponente (4er-Nachbarschaft) ein `Point`-Feature am Schwerpunkt der Zellmitten. Properties:
+  - `layer=bauzone_plan`, `typ=bauzone`
+  - `zellen`: sortierte Liste von [x, z]
+  - `flaeche_m2` = Anzahl der Zellen
+  - `mittelpunkt`
+  - `quelle="zellen_relief.csv: bauzone_plan"`
+- Ergebnis: **31.893 Zellen** (Soll 31.893) in 25 Komponenten. Die Zellmenge ist identisch mit `neu/zellen_relief.csv`, alle 41 Löcher bleiben erhalten. Eine Kontur wird nicht gemessen und auch nicht als `vorschau=true` ausgegeben.
+- Eine eigene Bauzonen-Maske gibt es in `daten/` nicht; `baue_masken.py` erzeugt nur Flächentyp-, Untergrund- und Höhenraster.
+- Die Glättungshilfen (`glatte_maske`, `ring_fein`, `_ringe_ok`) wurden aus `zonen_konstruktiv.py` entfernt.
+- Q3 gilt nur für sichtbare Geometrie: Flächentyp, Untergrund, Kanten, Grat und Linien.
+
+### 2) P4-Datenschicht
+
+- `query.mjs` liest `zonen.geojson` nicht.
+- `baue_masken.py` (`lies_features`) liest die Datei und brach bisher ab (`untergrund 'WASSER_EIS'`). Außerdem wären Untergrund-Polygone mit `klasse` ins Flächenraster geflossen.
+- Lösung ohne Änderung an `daten/` durch ein angepasstes Property-Schema:
+  - **Flächentyp-Polygone:** `klasse` (0–5), dazu `untergrund_mehrheit` nur informativ, kein `untergrund`.
+  - **Untergrund-Polygone:** `untergrund` ∈ {Schnee, Wald, Boden, Sand}, dazu `klasse_mehrheit` nur informativ, keine `klasse`.
+  - `SCHATTEN` wird nach `gen_relief.py` (`ug2[ug=='SCHATTEN']='SCHNEE'`) als `Schnee` ausgegeben. `typ` behält das Quelllabel, die Partition ist unverändert.
+- `baue_masken.py` rasterisiert nur Polygone, daher stören die Bauzonen- und Slot-Punkte nicht.
+- Neuer Test `test_p4_datenschicht_liest_zonen` ruft `daten/baue_masken.lies_features` direkt auf.
+- P4-Tests:
+  - `node --test`: 23 Tests, 19 bestanden, 3 übersprungen, 1 todo, **0 fehlgeschlagen**
+  - `baue_masken.py --selbsttest`: ok
+
+### 3) QA F11 und Messung gegen QA 33d0d86
+
+Verbindlich (QA F11): **Von Q3 ausgenommen sind nur Kartenrand und ±0,5 m um Stoßpunkte von ≥3 Zonen.** Die Ecken der Brückenrechtecke sind nicht ausgenommen.
+
+Gemessen wurde mit `form_abw` aus `origin/art/dv2-qa` @ 33d0d86: Abtastung 0,05 m, gleitendes 1-m-Mittel, Sehnenknick. Die Funktion ist wortgleich nach `kanten/qa_form_abw.py` kopiert und wird von `test_kanten.py` direkt benutzt.
+
+Ausnahmeradius in den Tests jetzt 0,5 m (`R_AUSNAHME`). Gruppen:
+- a: Stoßpunkt von ≥3 Zonen
+- b: Wegende A-DV2-01 (P1a)
+- c: Kartenrand
+- d: sonstige
+
+| Schicht | a | b | c | d | max. Abweichung |
+|---|---:|---:|---:|---:|---|
+| Flächentyp | 1.143 | 4.554 | 930 | **0** | a 25,58 cm · b 5,5 cm · c 22,11 cm |
+| Untergrund | 1.435 | – | 650 | **0** | a 23,25 cm · c 23,59 cm |
+
+Die Werte sind Verstoßpunkte (Abweichung > 3 cm oder Knick > 15°).
+
+- Kanten, Grat und Untergrund-Bögen nach QA 33d0d86:
+  - Kanten 2,18 cm / 7,7°
+  - Grat 2,61 cm / 6,2°
+  - Untergrund 2,73 cm / 6,9°
+  - alle innerhalb der Grenzen
+- Das q3-Werkzeug von QA meldet nur die Flächentyp-Ringe von `zonen.geojson`; Wege, Ufer, Bach, Kanten und Grat haben 0 Funde.
+- Gruppe b (Wegenden) ist nach F11 **nicht ausgenommen** und bleibt als bekannte Quelle P1a offen.
+- **Brückenecken:** 8 Rechteckecken (E2 x186–197 z73–75, E3-West x174–186 z126–128), Umkreis 1 m: **0 Funde**. Kein P5-Platzhalter nötig. Die Brückengeometrie entsteht konstruktiv aus Wegnetz × Uferband und hat dort keine Rechteckecken.
+
+Hinweise an QA:
+- **Q14** in 33d0d86 liest die Bauzone als Polygone (`ctx.polygone`, Layer `bauzone_plan`). Mit der Zellliste würde Q14 „ohne bauzone_plan“ melden. Q14 sollte `zellen`/`flaeche_m2` der Punkt-Features lesen; es lief hier nicht, weil `mesh/manifest.json` fehlt.
+- Der echte P4-Build (`baue_masken.py --out … --ohne-mesh`) bricht schon vorher an `vektor/wege.geojson` ab (`klasse 'GASSE' nicht 0-5`). Die Datei stammt nicht aus P1c.
+
+### 4) Tests, Gate, Bilder
+
+- `test_kanten.py`: **11 bestanden**, darunter:
+  - `test_bauzone_exakt_31893_zellen_verlustfrei`
+  - `test_p4_datenschicht_liest_zonen`
+  - `test_qa33d0d86_q3_kanten_grat_untergrundboegen`
+  - Gruppentest mit d = 0
+- Gate (`export_gate.sh` mit Lochscan RAND 0,6): **359 / R8 31 / R9 321, W1 0, Loch 0**. „GATE ROT: kein Export/ZIP“ ist erwartet. `pruefung/w1_alle56_letzter_lauf.json` wurde wiederhergestellt.
+- `zonen.geojson`:
+  - 63 Flächentyp-Polygone, 46 Untergrund-Polygone, 25 Bauzonen-Punkte, 859 Slot-Punkte
+  - SHA-256 `1c7e5d8ac2356279074895f250673f2bb6cf84277068ddb10238ad933eecaa90`
+- Die Bilder wurden neu gerendert. Die sichtbare Geometrie ist unverändert, die Bilder sind bytegleich.
+
+Kosten: 0 EUR, ohne Codex, 18:23–18:45 (Europe/Berlin).

@@ -63,6 +63,11 @@ def geojson(features: list[dict]) -> dict:
     return {"type": "FeatureCollection", "features": features}
 
 
+# P4-Schema kennt nur Schnee/Wald/Boden/Sand. SCHATTEN ist beschatteter Schnee
+# (gen_relief.py: ug2[ug=='SCHATTEN']='SCHNEE'); typ behaelt den Quellwert.
+UNTERGRUND_P4 = {"SCHNEE": "Schnee", "SCHATTEN": "Schnee", "WALD": "Wald", "BODEN": "Boden", "SAND": "Sand"}
+
+
 def feature(geom, props: dict) -> dict:
     return {"type": "Feature", "geometry": mapping(geom), "properties": props}
 
@@ -588,16 +593,20 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
             counts[str(substrates[y, x])] = 1
         under = sorted(counts.items(), key=lambda v: (-v[1], v[0]))[0][0]
         type_area[typ] += poly.area
-        out.append(feature_from_polygon(poly, {"layer": "flaechentyp", "typ": typ, "klasse": CLASS_CODES[typ], "untergrund": under,
-                                               "quelle": QUELLE_FLAECHENTYP[typ]}))
+        # P4-Schema (baue_masken.py): "untergrund" nur Schnee/Wald/Boden/Sand und nur auf der
+        # Untergrund-Ebene; hier informativ als untergrund_mehrheit (Rohwert der Zellen).
+        out.append(feature_from_polygon(poly, {"layer": "flaechentyp", "typ": typ, "klasse": CLASS_CODES[typ],
+                                               "untergrund_mehrheit": under, "quelle": QUELLE_FLAECHENTYP[typ]}))
     under_regions, _assigned, under_info = zk.untergrund_partition_v2(substrates)
     under_by_label = under_regions
     under_labels = sorted(under_regions)
     for under in under_labels:
         for poly in sorted(zk.polys(under_regions[under]), key=lambda p: (round(p.bounds[1], 5), round(p.bounds[0], 5), round(p.area, 5))):
             typ, _ = majority_at_geometry(poly, types, substrates)
+            # Kein "klasse" (sonst rastert baue_masken.py die Untergrundflaeche in flaeche.png).
             out.append(feature_from_polygon(poly, {"layer": "untergrund", "typ": under,
-                                                   "klasse": CLASS_CODES[typ], "untergrund": under,
+                                                   "klasse_mehrheit": CLASS_CODES[typ],
+                                                   "untergrund": UNTERGRUND_P4[under],
                                                    "quelle": "zellen_relief.csv: untergrund (Wasser/Fels -> naechster Untergrund), "
                                                              "Indikator 0,1 m Gauss sigma %.2f m, argmax, Inseln < %.0f m2 -> Nachbar, "
                                                              "Bogenglaettung adaptiv" % (zk.UNTER_SIGMA_M, zk.UNTER_INSEL_M2)}))
@@ -606,16 +615,25 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
     bz = np.zeros((ny, nx), dtype=np.int8)
     for idx, row in cell_rows.items():
         bz[idx // nx, idx % nx] = int(row["bauzone_plan"] or 0)
-    # P1c2: Bauzone als glatte Flaeche (SDF sigma 1 m, Oeffnen/Schliessen r 2,5 m,
-    # adaptive Ringglaettung, Flaeche per runder Pufferung auf die Zellzahl kalibriert).
+    # P1c2 (Entscheidung 18:23): Bauzone ist wie die Slots eine unsichtbare Logikschicht auf dem
+    # 1-m-Raster (Gebaeude rasten auf Zellen ein): exakt die Quellzellen, verlustfrei, Loecher
+    # (Hindernisse) bleiben erhalten. Ein Punkt-Feature je 4-Zusammenhangskomponente mit
+    # Schwerpunkt, Zellliste und Flaeche; keine Umrisslinie.
+    from scipy.ndimage import label as bz_label
+    bz_cc, bz_n = bz_label(bz > 0, structure=np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=np.uint8))
+    bz_area = 0.0
+    bz_ids = []
+    for i in range(1, bz_n + 1):
+        pts = np.argwhere(bz_cc == i)
+        cx, cy = float(pts[:, 1].mean() + 0.5), float(pts[:, 0].mean() + 0.5)
+        sx, sy = min(nx - 1, int(cx)), min(ny - 1, int(cy))
+        bz_area += float(len(pts))
+        out.append(feature(Point(round(cx, 4), round(cy, 4)), {
+            "layer": "bauzone_plan", "typ": "bauzone", "klasse": CLASS_CODES[str(types[sy, sx])],
+            "untergrund": str(substrates[sy, sx]), "quelle": "zellen_relief.csv: bauzone_plan",
+            "flaeche_m2": float(len(pts)), "mittelpunkt": "Schwerpunkt der Zellmitten",
+            "zellen": [[int(x), int(y)] for y, x in sorted(map(tuple, pts))]}))
     target_area = float(np.count_nonzero(bz))
-    calibrated, bz_q3_ok = zk.glatte_maske(bz > 0, target_area, 1.0, 2.5)
-    calibrated = zk.clean(calibrated.intersection(zk.RECT))
-    bz_area = float(calibrated.area)
-    for poly in polygon_parts(calibrated):
-        typ, under = majority_at_geometry(poly, types, substrates)
-        out.append(feature_from_polygon(poly, {"layer": "bauzone_plan", "typ": "bauzone", "klasse": CLASS_CODES[typ],
-                                               "untergrund": under, "quelle": "zellen_relief.csv"}))
 
     # Build overlay slot polygons from connected source-cell runs, retaining ids.
     slot_arrays = {"slot_bau": np.zeros((ny, nx), bool), "slot_deko": np.zeros((ny, nx), bool)}
@@ -657,7 +675,8 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
     seen_ids = set()
     for i, f in enumerate(out):
         props = f["properties"]
-        if "klasse" not in props or "untergrund" not in props:
+        # P4-Schema: Flaechentyp ohne "untergrund", Untergrund-Ebene ohne "klasse" (bewusst).
+        if props.get("layer") not in ("flaechentyp", "untergrund") and ("klasse" not in props or "untergrund" not in props):
             typ, under = majority_at_geometry(shape(f["geometry"]), types, substrates)
             props.setdefault("klasse", CLASS_CODES[typ]); props.setdefault("untergrund", under)
         ident = str(props.get("id") or f"{props.get('layer', 'feature')}_{i:05d}")
@@ -680,7 +699,7 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
                  "untergrund_info": under_info,
                  "untergrund_inseln_entfallen": list(zk.BOGEN_INSELN_ENTFALLEN),
                  "bruecken_schnitt": list(zk.BRUECKEN_SCHNITT),
-                 "bauzone_q3_ok": bool(bz_q3_ok),
+                 "bauzone_als_zellen": True,
                  "fels_ringe_entfallen": list(zk.RING_DROPPED)}
 
 

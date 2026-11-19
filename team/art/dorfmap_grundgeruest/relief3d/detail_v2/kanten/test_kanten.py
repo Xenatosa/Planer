@@ -263,7 +263,7 @@ def source_tripoints(grid):
 
 
 def output_tripoints(features, layer):
-    key = "typ" if layer == "flaechentyp" else "untergrund"
+    key = "typ"  # Untergrund: typ = Quelllabel (SCHATTEN und SCHNEE tragen beide untergrund "Schnee")
     selected = [f for f in features if f["properties"].get("layer") == layer]
     geoms = [shape(f["geometry"]) for f in selected]
     labels = [f["properties"][key] for f in selected]
@@ -338,19 +338,25 @@ def test_geojson_files_and_feature_contract():
     for f in zone_features:
         p = f["properties"]
         ids.append(p["id"])
-        assert type(p["klasse"]) is int and 0 <= p["klasse"] <= 5
-        assert isinstance(p["untergrund"], str) and p["untergrund"]
         if p["layer"] == "flaechentyp":
+            # P4-Schema: klasse nur auf Flaechentyp-Polygonen, kein "untergrund"
+            assert type(p["klasse"]) is int and 0 <= p["klasse"] <= 5
+            assert "untergrund" not in p
             assert p["typ"] in CLASS_CODES
             assert p["klasse"] == CLASS_CODES[p["typ"]]
         elif p["layer"] == "untergrund":
-            assert p["typ"] == p["untergrund"]
+            # P4-Schema: untergrund Schnee/Wald/Boden/Sand, kein "klasse" (sonst flaeche.png verfaelscht)
+            assert "klasse" not in p
+            assert p["untergrund"] in ("Schnee", "Wald", "Boden", "Sand")
             assert shape(f["geometry"]).geom_type in ("Polygon", "MultiPolygon")
         elif p["layer"] == "slot":
             assert p.get("typ") in {"slot_bau", "slot_deko"}
             assert p.get("quelle")
+            assert shape(f["geometry"]).geom_type == "Point"
         elif p["layer"] == "bauzone_plan":
             assert p["typ"] == "bauzone"
+            assert shape(f["geometry"]).geom_type == "Point"
+            assert p["flaeche_m2"] == len(p["zellen"])
         else:
             raise AssertionError(f"unbekannte zonen-Ebene: {p['layer']}")
     assert len(ids) == len(set(ids)), "id muss innerhalb der FeatureCollection eindeutig sein"
@@ -412,8 +418,8 @@ def flaechen_abweichungen():
     out["bruecke_vs_rechtecke"] = (areas["bruecke"], ref["bruecke_rechtecke"].area,
                                    areas["bruecke"] / ref["bruecke_rechtecke"].area - 1)
     _, bauzone_cells = source_type_counts()
-    bz = [shape(f["geometry"]) for f in features if f["properties"].get("layer") == "bauzone_plan"]
-    out["bauzone"] = (unary_union(bz).area, float(bauzone_cells), unary_union(bz).area / bauzone_cells - 1)
+    bz = sum(f["properties"]["flaeche_m2"] for f in features if f["properties"].get("layer") == "bauzone_plan")
+    out["bauzone"] = (bz, float(bauzone_cells), bz / bauzone_cells - 1)
     return out
 
 
@@ -424,6 +430,47 @@ def test_surface_and_bauzone_area_tolerances():
     for typ in ("wasser", "ufer", "bruecke"):
         assert abs(dev[typ][2]) <= 0.03, (typ, dev[typ])
     assert abs(dev["bauzone"][2]) <= 0.01, dev["bauzone"]
+
+
+def bauzone_quellzellen():
+    zellen = set()
+    with (RELIEF / "neu" / "zellen_relief.csv").open(encoding="utf-8", newline="") as f:
+        for r in csv.DictReader(f):
+            if int(r["bauzone_plan"] or 0):
+                zellen.add((int(r["cx"]), int(r["cy"])))
+    return zellen
+
+
+def test_bauzone_exakt_31893_zellen_verlustfrei():
+    """P1c2: Bauzone = unsichtbare Logikschicht auf dem 1-m-Raster, exakt die Quellzellen
+    (keine Teile, keine Loecher verloren), ein Feature je 4-Zusammenhangskomponente."""
+    from scipy.ndimage import label
+    feats = [f for f in read("zonen.geojson") if f["properties"].get("layer") == "bauzone_plan"]
+    liste = [tuple(c) for f in feats for c in f["properties"]["zellen"]]
+    quelle = bauzone_quellzellen()
+    assert len(liste) == len(set(liste)) == len(quelle) == 31893
+    assert set(liste) == quelle
+    m = np.zeros((303, 336), bool)
+    for x, y in quelle:
+        m[y, x] = True
+    _, n = label(m, structure=np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]]))
+    assert len(feats) == n
+    loecher = label(~m)[1] - 1
+    print("BAUZONE", len(liste), "Zellen,", n, "Komponenten,", loecher, "Loecher (in der Zellliste erhalten)")
+
+
+def test_p4_datenschicht_liest_zonen():
+    """baue_masken.py (P4) muss zonen.geojson lesen koennen: untergrund nur Schnee/Wald/Boden/Sand,
+    flaeche-Klassen nur aus Flaechentyp-Polygonen, Bauzone/Slots als Punkte (nicht gerastert)."""
+    sys.path.insert(0, str(RELIEF / "detail_v2" / "daten"))
+    import baue_masken as bm
+    feats = bm.lies_features(VECTOR / "zonen.geojson")
+    mit_klasse = [f for f in feats if f["klasse"] is not None]
+    mit_ug = [f for f in feats if f["untergrund"] is not None]
+    ft = [f for f in read("zonen.geojson") if f["properties"]["layer"] == "flaechentyp"]
+    ug = [f for f in read("zonen.geojson") if f["properties"]["layer"] == "untergrund"]
+    assert len(mit_klasse) == len(ft) and len(mit_ug) == len(ug)
+    assert len(feats) == len(ft) + len(ug)
 
 
 def test_real_grat_anchor_distances_and_continuity():
@@ -585,10 +632,42 @@ def fein_ring_q3(coords):
             + [(p[i, 0], p[i, 1], k[i], "knick") for i in np.where(k > 15.0)[0]])
 
 
+R_AUSNAHME = 0.5  # QA F11
+
+
+def qa_ring_q3(coords):
+    """QA-q3 (33d0d86, form_abw wortgleich in qa_form_abw.py) auf einem Ring: Verstoesse
+    (x, z, wert, art) > 3 cm bzw. Knick > 15 Grad (Sehnenknick, 0,05 m Abtastung)."""
+    from qa_form_abw import form_abw
+    R, abw, kn = form_abw(np.asarray(coords, float), 1.0, True, 0.05)
+    return ([(R[i, 0], R[i, 1], abw[i], "abw") for i in np.where(abw > 0.03)[0]]
+            + [(R[i, 0], R[i, 1], kn[i], "knick") for i in np.where(kn > 15.0)[0]])
+
+
+def test_qa33d0d86_q3_kanten_grat_untergrundboegen():
+    """QA-q3 33d0d86 direkt auf kanten, grat (offene Linien) und den gemeinsamen
+    Untergrund-/Flaechentyp-Boegen (Bogenenden = Stosspunkte, +-0,5 m ausgenommen)."""
+    from qa_form_abw import form_abw
+    feats = read("zonen.geojson")
+    for name, lines, guard in (("kanten", [shape(f["geometry"]) for f in read("kanten.geojson")], 0.0),
+                               ("grat", [shape(f["geometry"]) for f in read("grat.geojson")], 0.0),
+                               ("untergrund", shared_boundary_arcs(feats, "untergrund"), R_AUSNAHME)):
+        amax = kmax = 0.0
+        for g in lines:
+            c = np.asarray(g.coords, float)
+            R, abw, kn = form_abw(c, 1.0, g.is_ring, 0.05)
+            s = np.r_[0, np.cumsum(np.hypot(*np.diff(R, axis=0).T))]
+            ok = np.ones(len(R), bool) if g.is_ring or guard == 0 else (s >= guard) & (s <= s[-1] - guard)
+            amax = max(amax, float(abw[ok].max(initial=0))); kmax = max(kmax, float(kn[ok].max(initial=0)))
+        print("QA33d0d86", name, "%.2f cm %.1f Grad" % (100 * amax, kmax))
+        assert amax <= 0.03 and kmax <= 15.0, (name, amax, kmax)
+
+
 def zonen_q3_gruppen():
     """Jeden q3-Fund (feine Messart) auf allen Polygonringen von zonen.geojson einer
-    Gruppe zuordnen: a Tripelpunkt (>= 3 Zonen, Abstand <= 0,75 m), b Wegende
-    (A-DV2-01, Wegende-Zone), c Kartenrand (<= 0,75 m), d Sonstiges."""
+    Gruppe zuordnen (QA F11: ausgenommen nur Kartenrand und +-0,5 m um Stosspunkte von
+    >= 3 Zonen): a Tripelpunkt (<= 0,5 m), b Wegende (A-DV2-01, Wegende-Zone),
+    c Kartenrand (<= 0,5 m), d Sonstiges."""
     features = read("zonen.geojson")
     trip = {}
     for layer in ("flaechentyp", "untergrund"):
@@ -600,11 +679,11 @@ def zonen_q3_gruppen():
         pr = f["properties"]
         for poly in polygon_parts(shape(f["geometry"])):
             for ring in [poly.exterior, *poly.interiors]:
-                for x, z, v, art in fein_ring_q3(ring.coords):
+                for x, z, v, art in qa_ring_q3(ring.coords):
                     pt = Point(x, z)
-                    if FRAME.distance(pt) <= 0.75:
+                    if FRAME.distance(pt) <= R_AUSNAHME:
                         g = "c"
-                    elif trip.get(pr["layer"]) and min((x - a) ** 2 + (z - b) ** 2 for a, b in trip[pr["layer"]]) <= 0.75 ** 2:
+                    elif trip.get(pr["layer"]) and min((x - a) ** 2 + (z - b) ** 2 for a, b in trip[pr["layer"]]) <= R_AUSNAHME ** 2:
                         g = "a"
                     elif any(zz.covers(pt) for _, zz in zones):
                         g = "b"
@@ -621,10 +700,13 @@ def test_zonen_q3_fein_alle_ringe_nur_gruppen_a_b_c():
     for f in funde:
         if f[4] == "abw":
             mx[(f[1], f[6])] = max(mx.get((f[1], f[6]), 0), f[5])
-    print("ZONEN_Q3_FEIN", dict(zus), {k: round(100 * v, 2) for k, v in mx.items()})
+    eck = [(186, 73), (197, 73), (186, 75), (197, 75), (174, 126), (186, 126), (174, 128), (186, 128)]
+    brueckenecken = [f for f in funde if min((f[2] - a) ** 2 + (f[3] - b) ** 2 for a, b in eck) <= 1.0]
+    print("BRUECKENECKEN (<= 1 m)", len(brueckenecken))
+    print("ZONEN_Q3_QA33d0d86", dict(zus), {k: round(100 * v, 2) for k, v in mx.items()})
     sonst = [f for f in funde if f[6] == "d"]
     assert not sonst, ("q3-Funde Gruppe d (Sonstiges)", sonst[:20])
-    # Bauzone und Slots: keine Funde (Bauzone glatt, Slots als Punkte)
+    # Bauzone und Slots: keine Funde (beide als Punkte mit Zellliste)
     assert not [f for f in funde if f[1] in ("bauzone_plan", "slot")]
 
 
