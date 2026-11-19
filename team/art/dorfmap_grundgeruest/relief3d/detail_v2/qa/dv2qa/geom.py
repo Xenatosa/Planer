@@ -1,7 +1,7 @@
 """Geometrie-Helfer: Punktortung auf Dreiecksnetzen (XZ), Hoeheninterpolation, Polylinien."""
 import numpy as np
 
-KLASSEN = ['grund', 'weg', 'ufer', 'fels', 'wasser', 'bruecke']   # = Codes flaeche.png 0..5 (Plan 3.3)
+KLASSEN = ['grund', 'weg', 'ufer', 'fels_klippe', 'wasser', 'bruecke']   # manifest.klassen 0..5 = _FLAECHE = flaeche.png (Entscheidung Grundgeruest 19.11.)
 
 
 class Ortung:

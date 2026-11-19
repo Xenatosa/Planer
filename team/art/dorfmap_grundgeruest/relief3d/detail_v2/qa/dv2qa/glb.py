@@ -46,7 +46,7 @@ def lies_glb(pfad):
             at = p['attributes']
             d = {'mesh': m.get('name', ''), 'knoten': knotname.get(mi, ''), 'extras': {**m.get('extras', {}), **p.get('extras', {})},
                  'pos': acc(at['POSITION']).astype(np.float64)}
-            for k, key in (('normal', 'NORMAL'), ('uv0', 'TEXCOORD_0'), ('uv1', 'TEXCOORD_1'), ('uv2', 'TEXCOORD_2')):
+            for k, key in (('normal', 'NORMAL'), ('uv0', 'TEXCOORD_0'), ('uv1', 'TEXCOORD_1'), ('uv2', 'TEXCOORD_2'), ('flaeche', '_FLAECHE')):
                 if key in at: d[k] = acc(at[key]).astype(np.float64)
             d['idx'] = (acc(p['indices']).astype(np.int64).reshape(-1, 3) if 'indices' in p
                         else np.arange(len(d['pos'])).reshape(-1, 3))
@@ -77,9 +77,10 @@ def schreibe_glb(pfad, meshes):
         pr = []
         for p in m['prims']:
             at = {'POSITION': add(np.asarray(p['pos'], np.float32), 'VEC3', 34962, True)}
-            for k, key in (('normal', 'NORMAL'), ('uv0', 'TEXCOORD_0'), ('uv1', 'TEXCOORD_1'), ('uv2', 'TEXCOORD_2')):
+            for k, key in (('normal', 'NORMAL'), ('uv0', 'TEXCOORD_0'), ('uv1', 'TEXCOORD_1'), ('uv2', 'TEXCOORD_2'), ('flaeche', '_FLAECHE')):
                 if k in p and p[k] is not None:
-                    at[key] = add(np.asarray(p[k], np.float32), 'VEC3' if k == 'normal' else 'VEC2', 34962)
+                    typ = 'VEC3' if k == 'normal' else 'SCALAR' if k == 'flaeche' else 'VEC2'
+                    at[key] = add(np.asarray(p[k], np.float32), typ, 34962)
             e = {'attributes': at, 'indices': add(np.asarray(p['idx'], np.uint32).reshape(-1), 'SCALAR', 34963), 'mode': 4}
             if p.get('extras'): e['extras'] = p['extras']
             pr.append(e)

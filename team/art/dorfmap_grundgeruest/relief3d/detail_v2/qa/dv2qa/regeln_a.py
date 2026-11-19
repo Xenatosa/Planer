@@ -16,8 +16,9 @@ def _r(v, n=4):
 # ------------------------------------------------------------------ Q1
 def q1(ctx):
     S = ctx.k['schwellen']
-    n = ctx.netz(('gelaende', 'wand'))
+    n = ctx.netz(('gelaende',))
     V, T = n['V'], n['T']
+    mf = ctx.manifest_fehler()
     e = kanten_von(T)
     u, cnt = np.unique(e, axis=0, return_counts=True)
     mehr = u[cnt > 2]
@@ -58,20 +59,23 @@ def q1(ctx):
     befunde += [{'art': 'innenrand', 'x': _r(V[k[0], 0], 2), 'z': _r(V[k[0], 2], 2)} for k in innen_rand[:10]]
     befunde += [{'art': 'naht', **x} for x in naht]
     befunde += [{'art': 'loch_strahl', **x} for x in loch['befunde'][:10]]
-    ok = len(mehr) == 0 and len(innen_rand) == 0 and not naht and loch['loecher'] == 0
-    return erg('Q1', ok, {'kanten': int(len(u)), 'kanten_mehr_als_2': int(len(mehr)), 'randkanten_innen': int(len(innen_rand)),
+    befunde += [{'art': 'manifest', 'fehler': x} for x in mf]
+    if n['gemischt']: befunde.append({'art': 'gemischte_dreiecke', 'anzahl': n['gemischt']})
+    ok = len(mehr) == 0 and len(innen_rand) == 0 and not naht and loch['loecher'] == 0 and not mf and n['gemischt'] == 0
+    return erg('Q1', ok, {'kanten': int(len(u)), 'vertices_roh': int(len(n['P_roh'])), 'duplikate_verschweisst': n['duplikate'],
+                          'gemischte_dreiecke': n['gemischt'], 'manifest_fehler': len(mf), 'kanten_mehr_als_2': int(len(mehr)), 'randkanten_innen': int(len(innen_rand)),
                           'naht_abweichend': len(naht), 'strahlen': loch['strahlen'], 'strahl_loecher': loch['loecher'],
                           'orte_gescannt': loch['orte']}, befunde,
-               'Randkanten nur am Aussenrand der Manifest-Kacheln erlaubt; Naht = float32-bitgleiche Vertexmengen je Schnittlinie.')
+               'Verschweissen nach Position (Toleranz 0,1 mm; duplizierte Klassengrenz-Vertices gelten als verbunden); Randkanten nur am Aussenrand der Manifest-Kacheln; Naht = float32-bitgleiche Vertexmengen je Kachelschnitt; Manifest-Schema und Klassenreinheit (Entscheidung Grundgeruest 19.11.).')
 
 
 def _strahlscan(ctx, n):
     """360 Azimute x 14 Neigungen je Ort/Augenhoehe; Schritt 5 cm; Loch = unbedecktes Kartenstueck, an dem der Strahl
     unter die zuletzt gesehene Gelaendehoehe faellt (= man saehe durchs Netz)."""
     try:
-        o = ctx.ortung(('gelaende', 'wand'), modelle=True)
+        o = ctx.ortung(('gelaende',), modelle=True)
     except Fehlt:
-        o = ctx.ortung(('gelaende', 'wand'))
+        o = ctx.ortung(('gelaende',))
     B = np.array([kd['bounds'] for kd in ctx.kacheln.values()], float)
     def in_karte(x, z):
         r = np.zeros(len(x), bool)

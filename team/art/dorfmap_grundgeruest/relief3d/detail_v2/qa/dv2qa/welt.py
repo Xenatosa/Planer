@@ -1,4 +1,8 @@
-"""Laedt einen detail_v2-Datensatz (Formatannahmen: PLAN_QA_DV2.md Abschnitt 2) in einen Kontext."""
+"""Laedt einen detail_v2-Datensatz in einen Kontext.
+Format verbindlich nach Entscheidung Grundgeruest 19.11.2026 (PLAN_QA_DV2.md Abschn. 8):
+mesh/manifest.json {version:1, einheit:"m", ursprung:"weltecke", karte, klassen{0..5}, attribute{flaeche:"_FLAECHE"}, uv,
+kacheln:[{id, glb, bbox, dreiecke, klassen_anteil}], modelle:[{id, glb, klasse}]}; Dreiecke klassenrein ueber das
+Vertex-Attribut _FLAECHE, Vertices an Klassengrenzen dupliziert; Wasser = Klasse 4 im Gelaendemesh."""
 import json
 from pathlib import Path
 import numpy as np
@@ -7,27 +11,49 @@ from .geom import KLASSEN, Ortung
 
 QA = Path(__file__).resolve().parents[1]
 STANDARD_KONFIG = QA / 'konfig.json'
+ALIAS = {'typ': 'art', 'art': 'typ'}
 
 
 def lade_konfig(pfad=None):
-    k = json.loads(Path(pfad or STANDARD_KONFIG).read_text())
-    return k
+    return json.loads(Path(pfad or STANDARD_KONFIG).read_text())
 
 
-def _klasse(prim):
-    e = prim['extras']
-    for k in ('klasse', 'flaeche'):
-        if k in e:
-            v = e[k]
-            return KLASSEN[v] if isinstance(v, int) else str(v)
-    nm = prim['mesh'] or prim['knoten']
-    for k in KLASSEN:
-        if nm.endswith('_' + k): return k
-    return 'grund'
+def kachel_grenzen(kid):
+    i = 'ABCDEFGH'.index(kid[0]); j = int(kid[1:]) - 1
+    return [42 * i, 43 * j, 42 * (i + 1), 303 if j == 6 else 43 * (j + 1)]
 
 
 class Fehlt(Exception):
     """Eingabe fehlt -> Regel 'offen' (Exit 2)."""
+
+
+def _passt(pr, filt):
+    for k, v in (filt or {}).items():
+        val = pr.get(k, pr.get(ALIAS.get(k, ''), None))
+        vv = v if isinstance(v, list) else [v]
+        if val not in vv: return False
+    return True
+
+
+def verschweisse(P, tol=1e-4):
+    """Positionsgleiche Vertices (Toleranz tol) zu einem Index zusammenfassen -> (V_rep, inv)."""
+    from scipy.spatial import cKDTree
+    q = np.round(P / tol).astype(np.int64)
+    _, first, inv = np.unique(q, axis=0, return_index=True, return_inverse=True)
+    inv = inv.ravel(); R = P[first]
+    pairs = cKDTree(R).query_pairs(tol, output_type='ndarray')
+    if len(pairs):                                             # Rundungsgrenzen: Union-Find
+        par = np.arange(len(R))
+        def f(a):
+            while par[a] != a: par[a] = par[par[a]]; a = par[a]
+            return a
+        for a, b in pairs:
+            ra, rb = f(a), f(b)
+            if ra != rb: par[max(ra, rb)] = min(ra, rb)
+        root = np.array([f(a) for a in range(len(R))])
+        u, neu = np.unique(root, return_inverse=True)
+        R = R[u]; inv = neu[inv]
+    return R, inv
 
 
 class Kontext:
@@ -37,7 +63,10 @@ class Kontext:
         self.abnahme = Path(abnahme) if abnahme else None
         self._cache = {}
 
-    # ---------- Mesh ----------
+    @property
+    def mesh_dir(self):
+        return (self.wurzel / self.k['mesh_manifest']).parent
+
     @property
     def manifest(self):
         if 'manifest' not in self._cache:
@@ -46,53 +75,59 @@ class Kontext:
             self._cache['manifest'] = json.loads(p.read_text())
         return self._cache['manifest']
 
+    def manifest_fehler(self):
+        m = self.manifest; f = []
+        for k, soll in (('version', 1), ('einheit', 'm'), ('ursprung', 'weltecke')):
+            if m.get(k) != soll: f.append(f'{k}={m.get(k)!r} statt {soll!r}')
+        if m.get('karte') != {'breite': 336, 'tiefe': 303}: f.append(f"karte={m.get('karte')}")
+        kl = {int(a): b for a, b in (m.get('klassen') or {}).items()}
+        if kl != dict(enumerate(KLASSEN)): f.append(f'klassen={kl}')
+        if (m.get('attribute') or {}).get('flaeche') != '_FLAECHE': f.append(f"attribute={m.get('attribute')}")
+        for kd in m.get('kacheln', []):
+            if list(map(float, kd.get('bbox', []))) != list(map(float, kachel_grenzen(kd['id']))):
+                f.append(f"{kd['id']}: bbox {kd.get('bbox')} statt {kachel_grenzen(kd['id'])}")
+        return f
+
     @property
     def kacheln(self):
-        """{id: {'bounds', 'prims': [...] }} – Primitive mit Feld 'art' (gelaende|wasser|wand) und 'klasse'."""
+        """{id: {'bounds', 'prims'}}; Primitive mit 'art' (gelaende) und 'klasse' je Dreieck (aus _FLAECHE)."""
         if 'kacheln' not in self._cache:
             out = {}
-            kl = self.manifest['kacheln']
-            if isinstance(kl, dict): kl = [{'id': k, **v} for k, v in kl.items()]      # P3-README: Liste oder Objekt
-            for kd in kl:
-                datei = kd.get('datei') or kd.get('file') or kd.get('glb') or kd.get('uri') or f"{kd['id']}.glb"
-                if 'bounds' not in kd:
-                    i = 'ABCDEFGH'.index(kd['id'][0]); j = int(kd['id'][1:]) - 1
-                    kd = {**kd, 'bounds': [42 * i, 43 * j, 42 * (i + 1), 303 if j == 6 else 43 * (j + 1)]}
-                p = (self.wurzel / self.k['mesh_manifest']).parent / datei
+            attr = (self.manifest.get('attribute') or {}).get('flaeche', '_FLAECHE')
+            for kd in self.manifest['kacheln']:
+                datei = kd.get('glb') or kd.get('datei') or f"{kd['id']}.glb"
+                p = self.mesh_dir / datei
                 if not p.exists(): raise Fehlt(f'{p} fehlt')
                 _, prims = glb.lies_glb(p)
                 for pr in prims:
-                    nm = (pr['mesh'] or pr['knoten']).lower()
-                    pr['art'] = ('wasser' if nm.startswith('wasser') else 'wand' if nm.startswith('wand')
-                                 else 'modell' if nm.startswith('bruecke') else 'gelaende')
-                    pr['klasse'] = _klasse(pr) if pr['art'] == 'gelaende' else pr['art']
-                    pr['kachel'] = kd['id']
-                out[kd['id']] = {'bounds': kd['bounds'], 'prims': prims, 'dreiecke_manifest': kd.get('dreiecke')}
+                    pr['art'] = 'gelaende'; pr['kachel'] = kd['id']
+                    pr['tri_klasse'], pr['gemischt'] = _tri_klasse(pr)
+                out[kd['id']] = {'bounds': kd.get('bbox') or kd.get('bounds') or kachel_grenzen(kd['id']), 'prims': prims,
+                                 'dreiecke_manifest': kd.get('dreiecke')}
             self._cache['kacheln'] = out
         return self._cache['kacheln']
 
-    def netz(self, arten=('gelaende',), modelle=False):
-        """Verschweisstes Netz (float32-bitgleiche Positionen) -> dict V, T, klasse(T), kachel(T), uv0/uv1/uv2 je Ecke."""
-        key = ('netz', arten, modelle)
+    def netz(self, arten=('gelaende',), modelle=False, klassen=None):
+        """Verschweisstes Netz (Position, Toleranz 1e-4 m) -> dict V, T, klasse(T), kachel(T), uv0/uv1/uv2 je Ecke (NaN wo fehlend)."""
+        key = ('netz', arten, modelle, klassen)
         if key in self._cache: return self._cache[key]
         prims = [p for kd in self.kacheln.values() for p in kd['prims'] if p['art'] in arten]
         if modelle: prims += [p for m in self.modelle().values() for p in m]
         if not prims: raise Fehlt(f'keine Primitive der Art {arten}')
-        P32 = np.vstack([p['pos32'] for p in prims]).astype(np.float32)
-        off = np.cumsum([0] + [len(p['pos32']) for p in prims])
+        P = np.vstack([p['pos'] for p in prims])
+        off = np.cumsum([0] + [len(p['pos']) for p in prims])
         T = np.vstack([p['idx'] + o for p, o in zip(prims, off[:-1])])
-        key32 = np.ascontiguousarray(P32).view(np.dtype((np.void, 12))).ravel()
-        _, first, inv = np.unique(key32, return_index=True, return_inverse=True)
-        V = P32[first].astype(np.float64)
-        TT = inv.ravel()[T]
-        def ecke(name, dim=2):
-            if not all(name in p for p in prims): return None
-            A = np.vstack([p[name] for p in prims]); return A[T]
-        kl = np.concatenate([[p['klasse']] * len(p['idx']) for p in prims])
+        kl = np.concatenate([p['tri_klasse'] for p in prims])
         kc = np.concatenate([[p.get('kachel', 'modell')] * len(p['idx']) for p in prims])
-        art = np.concatenate([[p['art']] * len(p['idx']) for p in prims])
-        r = {'V': V, 'T': TT, 'klasse': kl, 'kachel': kc, 'art': art, 'uv0': ecke('uv0'), 'uv1': ecke('uv1'), 'uv2': ecke('uv2'),
-             'roh': prims}
+        hat = {n: np.concatenate([[n in p] * len(p['idx']) for p in prims]) for n in ('uv0', 'uv1', 'uv2')}
+        if klassen is not None:
+            m = np.isin(kl, klassen); T, kl, kc = T[m], kl[m], kc[m]; hat = {a: b[m] for a, b in hat.items()}
+        def ecke(name):
+            A = np.vstack([p[name] if name in p else np.full((len(p['pos']), 2), np.nan) for p in prims]); return A[T]
+        V, inv = verschweisse(P)
+        r = {'V': V, 'T': inv[T], 'T_roh': T, 'P_roh': P, 'klasse': kl, 'kachel': kc, 'hat': hat,
+             'uv0': ecke('uv0'), 'uv1': ecke('uv1'), 'uv2': ecke('uv2'), 'roh': prims,
+             'duplikate': int(len(P) - len(V)), 'gemischt': int(sum(p.get('gemischt', 0) for p in prims))}
         self._cache[key] = r
         return r
 
@@ -103,21 +138,19 @@ class Kontext:
         return self._cache[key]
 
     def modelle(self):
+        """{id: [prims]} aus manifest.modelle (+ optional Ordner 'modelle_ordner')."""
         if 'modelle' not in self._cache:
             out = {}
-            d = self.wurzel / self.k['modelle_ordner']
-            dateien = sorted(d.glob('*.glb')) if d.exists() else []
-            try:                                                   # P3-README: Manifest 'zusatz' (z. B. Bruecken)
-                mdir = (self.wurzel / self.k['mesh_manifest']).parent
-                dateien += [mdir / z['datei'] for z in self.manifest.get('zusatz', []) if (mdir / z['datei']).exists()]
-            except Fehlt:
-                pass
-            for p in dateien:
+            eintraege = []
+            try: eintraege = [(m['id'], self.mesh_dir / m['glb'], m.get('klasse')) for m in self.manifest.get('modelle', [])]
+            except Fehlt: pass
+            for mid, p, klasse in eintraege:
+                if not p.exists(): continue
                 _, prims = glb.lies_glb(p)
                 for pr in prims:
-                    nm = (pr['knoten'] or pr['mesh']).lower(); pr['art'] = 'wand' if 'wand' in p.stem.lower() else 'modell'
-                    pr['klasse'] = pr['art']; pr['teil'] = nm; pr['kachel'] = 'modell'
-                out[p.stem] = prims
+                    pr['teil'] = (pr['knoten'] or pr['mesh']).lower(); pr['art'] = 'modell'; pr['kachel'] = 'modell'
+                    tk, g = _tri_klasse(pr, klasse if klasse is not None else 5); pr['tri_klasse'], pr['gemischt'] = tk, g
+                out[mid] = prims
             self._cache['modelle'] = out
         return self._cache['modelle']
 
@@ -130,22 +163,22 @@ class Kontext:
         return json.loads(p.read_text()).get('features', [])
 
     def linien(self, quelle):
-        """quelle = {'datei', 'filter'?: {prop: wert|[werte]}, 'raender'?: bool} -> Liste (np.array n x 2, geschlossen, props)."""
+        """quelle = {'datei', 'filter'?: {prop: wert|[werte]} (typ<->art austauschbar), 'raender'?: bool}
+        -> Liste (np.array n x 2, geschlossen, props)."""
         out = []
         for f in self.geojson(quelle['datei'], pflicht=quelle.get('pflicht', True)):
             pr = f.get('properties') or {}
-            ok = True
-            for k, v in (quelle.get('filter') or {}).items():
-                vv = v if isinstance(v, list) else [v]
-                if pr.get(k) not in vv: ok = False
-            if not ok: continue
-            g = f['geometry']; t = g['type']; c = g['coordinates']
-            if t == 'LineString': out.append((np.array(c, float), False, pr))
-            elif t == 'MultiLineString': out += [(np.array(x, float), False, pr) for x in c]
-            elif t in ('Polygon', 'MultiPolygon') and quelle.get('raender', True):
-                polys = [c] if t == 'Polygon' else c
-                for poly in polys:
-                    for ring in poly: out.append((np.array(ring, float), True, pr))
+            if not _passt(pr, quelle.get('filter')): continue
+            g = f['geometry']; t = g['type']; c = g['coordinates'] if 'coordinates' in g else None
+            geoms = g['geometries'] if t == 'GeometryCollection' else [g]
+            for gg in geoms:
+                t = gg['type']; c = gg['coordinates']
+                if t == 'LineString':
+                    a = np.array(c, float); out.append((a, bool(len(a) > 2 and np.allclose(a[0], a[-1])), pr))
+                elif t == 'MultiLineString': out += [(np.array(x, float), False, pr) for x in c]
+                elif t in ('Polygon', 'MultiPolygon') and quelle.get('raender', True):
+                    for poly in ([c] if t == 'Polygon' else c):
+                        for ring in poly: out.append((np.array(ring, float), True, pr))
         return out
 
     def polygone(self, datei, filter=None, pflicht=True):
@@ -153,7 +186,7 @@ class Kontext:
         out = []
         for f in self.geojson(datei, pflicht):
             pr = f.get('properties') or {}
-            if filter and any(pr.get(k) not in (v if isinstance(v, list) else [v]) for k, v in filter.items()): continue
+            if not _passt(pr, filter): continue
             g = shape(f['geometry'])
             if g.geom_type in ('Polygon', 'MultiPolygon'): out.append((g, pr))
         return out
@@ -165,9 +198,16 @@ class Kontext:
                 out.append((pl, geschl, pr, q['datei']))
         return out
 
-    # ---------- Datenschicht ----------
-    def png(self, name):
-        from PIL import Image
-        p = self.wurzel / self.k['daten_ordner'] / name
-        if not p.exists(): raise Fehlt(f'{p} fehlt')
-        return np.array(Image.open(p))
+
+def name_in(p, n):
+    return n in p
+
+
+def _tri_klasse(pr, standard=0):
+    """Dreiecksklasse aus _FLAECHE je Vertex; gemischte Dreiecke zaehlen (Verstoss 'klassenrein')."""
+    if 'flaeche' not in pr:
+        return np.full(len(pr['idx']), KLASSEN[standard], dtype=object).astype(str), 0
+    f = np.round(pr['flaeche']).astype(int)[pr['idx']]
+    gemischt = int((~((f[:, 0] == f[:, 1]) & (f[:, 1] == f[:, 2]))).sum())
+    k = np.clip(f[:, 0], 0, 5)
+    return np.array(KLASSEN)[k], gemischt

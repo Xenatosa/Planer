@@ -7,15 +7,19 @@ from .regeln_a import erg, _r, _mittellinien
 from .welt import Fehlt
 
 NODE_HARNESS = r'''
+// Q11-Harness: nutzt die echte Datenschicht (daten/manifest.mjs ladeMesh, daten/query.mjs ladeDatenschicht).
 import { pathToFileURL } from 'node:url';
 import { readFileSync, writeFileSync } from 'node:fs';
-const [, , modPfad, datenDir, punkte, aus] = process.argv;
-const m = await import(pathToFileURL(modPfad).href);
-for (const f of ['lade', 'laden', 'init']) { if (typeof m[f] === 'function') { await m[f](datenDir); break; } }
+const [, , datenDir, manifestPfad, punkte, aus] = process.argv;
+const q = await import(pathToFileURL(datenDir + '/query.mjs').href);
+const mm = await import(pathToFileURL(datenDir + '/manifest.mjs').href);
+const mesh = await mm.ladeMesh(manifestPfad);
+const ds = await q.ladeDatenschicht(datenDir, { gelaende: mesh.gelaende });
 const P = JSON.parse(readFileSync(punkte, 'utf8'));
 const out = [];
-for (const [x, z] of P) { let r; try { r = await m.queryPoint(x, z); } catch (e) { r = { fehler: String(e) }; } out.push(r); }
-writeFileSync(aus, JSON.stringify(out));
+for (const [x, z] of P) { let r; try { r = ds.queryPoint(x, z); r = { ...r, slot: r.slot === null ? null : 1 }; } catch (e) { r = { fehler: String(e) }; } out.push(r); }
+let dk = null; try { dk = q.pruefeDreiecksklasse(ds, mesh.gelaende, 10000, 611); dk = { ...dk, beispiele: (dk.beispiele || []).slice(0, 5) }; } catch (e) { dk = { fehler: String(e) }; }
+writeFileSync(aus, JSON.stringify({ punkte: out, quellen: ds.quellen(), pruefung: mesh.pruefung, dreiecksklasse: dk }));
 '''
 
 
@@ -25,56 +29,52 @@ def _klasse_name(v):
 
 
 def q11(ctx):
+    '''Datenschicht vs. Mesh (Entscheidung Grundgeruest 19.11.: query.mjs baueMeshIndex/ladeDatenschicht + manifest.mjs ladeMesh nutzen).'''
     S = ctx.k['schwellen']; d = ctx.wurzel / ctx.k['daten_ordner']
-    mod = d / 'query.mjs'
-    if not mod.exists(): raise Fehlt(f'{mod} fehlt')
+    for f in ('query.mjs', 'manifest.mjs'):
+        if not (d / f).exists(): raise Fehlt(f'{d / f} fehlt')
     rng = np.random.default_rng(611)
     B = np.array([kd['bounds'] for kd in ctx.kacheln.values()], float)
     k = rng.integers(0, len(B), S['q11_punkte'])
     P = np.c_[rng.uniform(B[k, 0], B[k, 2]), rng.uniform(B[k, 1], B[k, 3])]
-    for br in ctx.k['bruecken'].values():                      # Brueckenfussabdruck: queryPoint darf Deckhoehe liefern
+    for br in ctx.k['bruecken'].values():
         m = (P[:, 0] >= br['x'][0] - 1) & (P[:, 0] <= br['x'][1] + 1) & (P[:, 1] >= br['z'][0] - 1) & (P[:, 1] <= br['z'][1] + 1)
         P = P[~m]
     tmp = Path(os.environ.get('DV2QA_TMP', '/tmp/dv2_qa')); tmp.mkdir(parents=True, exist_ok=True)
     hp = tmp / 'q11_harness.mjs'; hp.write_text(NODE_HARNESS)
     pp = tmp / 'q11_punkte.json'; pp.write_text(json.dumps(P.round(4).tolist())); ap = tmp / 'q11_aus.json'
-    r = subprocess.run(['node', str(hp), str(mod.resolve()), str(d.resolve()), str(pp), str(ap)], capture_output=True, text=True, timeout=600)
+    r = subprocess.run(['node', str(hp), str(d.resolve()), str((ctx.wurzel / ctx.k['mesh_manifest']).resolve()), str(pp), str(ap)],
+                       capture_output=True, text=True, timeout=900)
     if r.returncode != 0:
-        return erg('Q11', False, {'node_exit': r.returncode}, [{'fehler': 'queryPoint-Harness', 'stderr': r.stderr[-400:]}])
-    res = json.loads(ap.read_text())
+        return erg('Q11', False, {'node_exit': r.returncode}, [{'fehler': 'Datenschicht-Harness', 'stderr': r.stderr[-500:]}])
+    aus = json.loads(ap.read_text()); res = aus['punkte']
     o = ctx.ortung(('gelaende',)); h, t = o.hoehe(P[:, 0], P[:, 1])
     n = ctx.netz(('gelaende',)); kl = np.where(t >= 0, n['klasse'][np.maximum(t, 0)], '')
-    try:
-        ow = ctx.ortung(('wasser',)); hw, tw = ow.hoehe(P[:, 0], P[:, 1]); unter = (tw >= 0) & (hw > h)
-        kl = np.where(unter, 'wasser', kl)
-    except Fehlt:
-        pass
-    qh = np.array([x.get('hoehe', np.nan) if isinstance(x, dict) else np.nan for x in res], float)
+    qh = np.array([x.get('hoehe') if isinstance(x, dict) and x.get('hoehe') is not None else np.nan for x in res], float)
     qf = np.array([_klasse_name(x.get('flaeche')) if isinstance(x, dict) else '' for x in res])
     dh = np.abs(qh - h); gueltig = ~np.isnan(h)
     fehl_h = np.nonzero(gueltig & ~(dh <= S['q11_dh_m'] + 1e-9))[0]
     gleich = float((qf[gueltig] == kl[gueltig]).mean()) if gueltig.any() else 0
     felder = all(isinstance(x, dict) and all(f in x for f in ('hoehe', 'flaeche', 'untergrund', 'begehbar', 'slot', 'kachel')) for x in res)
-    # node --test
     td = d / 'test'
-    if td.exists():
-        dateien = sorted(str(x) for x in td.rglob('*.test.mjs')) + sorted(str(x) for x in td.rglob('*.test.js'))
-        if dateien:
-            tr = subprocess.run(['node', '--test', *dateien], capture_output=True, text=True, timeout=600, cwd=str(d))
-            tests_ok = tr.returncode == 0; tests = (tr.stdout + tr.stderr)[-400:]
-        else:
-            tests_ok = False; tests = 'keine *.test.mjs in test/'
+    dateien = sorted(str(x) for x in td.rglob('*.test.mjs')) if td.exists() else []
+    if dateien:
+        tr = subprocess.run(['node', '--test', *dateien], capture_output=True, text=True, timeout=900, cwd=str(d))
+        tests_ok = tr.returncode == 0; tests = (tr.stdout + tr.stderr)[-400:]
     else:
-        tests_ok = False; tests = 'test/ fehlt'
+        tests_ok, tests = False, 'keine *.test.mjs in daten/test/'
     bef = [{'art': 'hoehe', 'x': _r(P[i, 0], 2), 'z': _r(P[i, 1], 2), 'query_m': _r(qh[i]), 'mesh_m': _r(h[i]), 'dh_m': _r(dh[i])} for i in fehl_h[np.argsort(-np.nan_to_num(dh[fehl_h], nan=9))][:10]]
     if gleich < S['q11_flaeche_anteil']:
         falsch = np.nonzero(gueltig & (qf != kl))[0]
         bef += [{'art': 'flaeche', 'anteil_gleich': _r(gleich, 5)}] + [{'art': 'flaeche_pkt', 'x': _r(P[i, 0], 2), 'z': _r(P[i, 1], 2), 'query': qf[i], 'mesh': kl[i]} for i in falsch[:5]]
     if not felder: bef.append({'art': 'felder', 'fehler': 'queryPoint liefert nicht alle Felder {hoehe, flaeche, untergrund, begehbar, slot, kachel}'})
     if not tests_ok: bef.append({'art': 'node --test', 'ausgabe': tests})
+    dk = aus.get('dreiecksklasse') or {}
     return erg('Q11', not bef, {'punkte': int(len(P)), 'dh_max_m': _r(np.nanmax(dh[gueltig]) if gueltig.any() else np.nan), 'ueber_2cm': int(len(fehl_h)),
-                                'flaeche_gleich': _r(gleich, 5), 'felder_vollstaendig': felder, 'tests_gruen': tests_ok}, bef,
-               '10 000 Zufallspunkte (Seed 611) in den Manifest-Kacheln, Brueckenfussabdruecke +1 m ausgenommen; Sollklasse = Dreiecksklasse bzw. wasser, wenn Wassermesh ueber Gelaende.')
+                                'flaeche_gleich': _r(gleich, 5), 'felder_vollstaendig': felder, 'tests_gruen': tests_ok, 'test_dateien': len(dateien),
+                                'quellen': aus.get('quellen'), 'p4_pruefeDreiecksklasse_quote': dk.get('quote'),
+                                'p4_gemischte_dreiecke': (aus.get('pruefung') or {}).get('gemischte_dreiecke')}, bef,
+               'Echte Datenschicht (ladeMesh + ladeDatenschicht) an 10 000 Zufallspunkten (Seed 611), Brueckenfussabdruecke +1 m ausgenommen; Hoehe vs. Python-Ortung im Mesh; Flaeche vs. _FLAECHE-Klasse; node --test daten/test/*.test.mjs.')
 
 
 def q12(ctx):
@@ -82,9 +82,9 @@ def q12(ctx):
     pflicht = {'bohle': ['bohle'], 'traeger': ['traeger'], 'pfosten': ['pfosten'], 'gelaender': ['gelaender', 'handlauf'], 'auflager': ['widerlager', 'auflager']}
     bef, w = [], {}
     for name, br in ctx.k['bruecken'].items():
-        prims = next((v for k, v in mods.items() if k.lower() == br['datei'].lower()), None)   # Gross/klein egal (P3: bruecke_e2.glb)
+        prims = next((v for k, v in mods.items() if k.lower() == br['id'].lower()), None)
         if prims is None:
-            bef.append({'bruecke': name, 'fehler': f"modelle/{br['datei']}.glb fehlt"}); continue
+            bef.append({'bruecke': name, 'fehler': f"manifest.modelle[id={br['id']}] fehlt"}); continue
         teile = {k: [p for p in prims if any(s in p['teil'] for s in v)] for k, v in pflicht.items()}
         fehlt = [k for k, v in teile.items() if not v]
         ww = {'teile': {k: len(v) for k, v in teile.items()}}
@@ -178,12 +178,24 @@ def q14(ctx):
             bef.append({'weg': key, 'hausdorff_m': _r(hd, 3)})
     for k in fehlt[:20]: bef.append({'weg': k, 'fehler': 'Mittellinie fehlt in wege.geojson'})
     zus = sorted(set(neu) - {w['id'] + ('/' + str(w['teil']) if 'teil' in w else '') for w in ref['wege']})
-    wa = union_all([g for g, _ in ctx.polygone(ctx.k['wasser']['datei'])]).area
-    bz_p = [g for g, _ in ctx.polygone(ctx.k['bauzone']['datei'], ctx.k['bauzone']['filter'])]
+    n = ctx.netz(('gelaende',)); Pw = n['V'][n['T'][n['klasse'] == 'wasser']][:, :, [0, 2]]
+    a_ = Pw[:, 1] - Pw[:, 0]; b_ = Pw[:, 2] - Pw[:, 0]
+    wa = float(np.abs(a_[:, 0] * b_[:, 1] - a_[:, 1] * b_[:, 0]).sum() / 2)          # Mesh-Wasserflaeche Klasse 4 (Grundriss)
+    wref = float(S['q14_wasser_referenz_m2'])
+    bz_p = []
+    for g, pr in ctx.polygone(ctx.k['bauzone']['datei'], pflicht=False):
+        v = pr.get('bauzone_plan', pr.get('typ'))
+        if v is True or v == 1 or v == 'bauzone_plan' or (isinstance(v, str) and v.lower() in ('ja', 'true', '1')): bz_p.append(g)
     bz = union_all(bz_p).area if bz_p else 0.0
-    rw = wa / ref['wasser_m2'] - 1; rb = bz / ref['bauzone_m2'] - 1
-    if abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'neu_m2': _r(wa, 1), 'alt_m2': ref['wasser_m2'], 'rel': _r(rw)})
+    rw = wa / wref - 1; rb = bz / ref['bauzone_m2'] - 1
+    if abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'mesh_klasse4_m2': _r(wa, 1), 'referenz_m2': wref, 'rel': _r(rw)})
     if abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
-    return erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt), 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
-                                'wasser_rel': _r(rw), 'bauzone_rel': _r(rb), 'referenz': ref.get('quelle')}, bef,
-               'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu; Wasser = Vereinigung wasser.geojson vs. alte WV-Flaeche; Bauzone = zonen.geojson[bauzone] vs. alt.')
+    zonen_da = (ctx.wurzel / ctx.k['vektor_ordner'] / ctx.k['bauzone']['datei']).exists()
+    if not zonen_da: bef = [b for b in bef if b.get('art') != 'bauzone']
+    r = erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt), 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
+                                'wasser_mesh_m2': _r(wa, 2), 'wasser_referenz_m2': wref, 'wasser_rel': _r(rw), 'bauzone_m2': _r(bz, 1), 'bauzone_rel': _r(rb),
+                                'wasser_alte_quellen_nur_bericht_m2': ref.get('wasser_alternativen_m2'), 'referenz': ref.get('quelle')}, bef,
+               'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu; Wasser = Mesh-Flaeche Klasse 4 vs. wasser.geojson #54 (6547,84 m2, Entscheidung Grundgeruest 19.11.); Bauzone = zonen.geojson bauzone_plan vs. 31 927 m2.')
+    if not zonen_da and r['status'] == 'ok':
+        r['status'] = 'offen'; r['notiz'] += ' Bauzone offen: zonen.geojson fehlt (P1c).'
+    return r
