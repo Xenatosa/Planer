@@ -72,8 +72,8 @@ QA-Messart ist `glaettung_abw` aus origin/art/dv2-qa @ 38fa7ec (`dv2qa/geom.py`)
 
 \* Diese Maxima liegen ausschließlich an **bekannten Quellen**, die der Generator nicht verändert. Sie sind im Test einzeln aufgezählt und werden exakt verglichen. Außerhalb davon halten alle Flächentyp-Bögen beide Messarten ≤ 3,0 cm und ≤ 15°.
 
-- **Wegenden (52, `wege.geojson` #59)**: Die runden Wegkappen sind schmaler als 3,2 m. Ein Kreis mit r < 1,6 m kann das 3-cm-Maß des 1-m-Mittels geometrisch nicht halten; mit der QA-Messart braucht es r ≥ 2 m. Weiterleiten an P1a.
-- **Wasserumriss (52 Messpunkte, `wasser.geojson` #58)**: Die Uferlinien der Quelle verletzen die QA-Messart selbst (`ufer.geojson` Uferlinien bis 3,44 cm; QA-P6 meldet 9 Befunde in `ufer.geojson`). In den Zonen treten bis 3,30 cm auf, höchstens 2 cm neben dem Quellumriss. Der Test verlangt dazu, dass die Quelle selbst > 3 cm misst. Weiterleiten an P1b2.
+- **Wegenden (52, `wege.geojson` #59)**: Die runden Wegkappen sind schmaler als 3,2 m. Ein Kreis mit r < 1,6 m kann das 3-cm-Maß des 1-m-Mittels geometrisch nicht halten; mit der QA-Messart braucht es r ≥ 2 m. **Einzige Fassung (19.11. 17:50):** vorläufiger Ausnahme-Kandidat in `detail_v2/AUSNAHMEN_DV2.md` (A-DV2-01). Er gilt nur, wenn die Wegenden in der P6-Sichtprüfung bei 1,7 m unsichtbar sind; dann mit Messwert und Nahbild. Sind sie sichtbar, müssen sie weg: Dann bekommen die Wegenden eine andere Endgeometrie (Aufweitung auf ≥ 4 m oder auslaufendes Ende in P2), keine Ausnahme.
+- **Wasserumriss (52 Messpunkte, `wasser.geojson` #58)**: Die Uferlinien der Quelle verletzen die QA-Messart selbst (`ufer.geojson` Uferlinien bis 3,44 cm; QA-P6 meldet 9 Befunde in `ufer.geojson`). In den Zonen treten bis 3,30 cm auf, höchstens 2 cm neben dem Quellumriss. Der Test verlangt dazu, dass die Quelle selbst > 3 cm misst. **Einzige Fassung:** Zweites Scheitern des Wasserumrisses → nach t2027u kein drittes Nachglätten auf demselben Weg. Neu als P1b3 mit benannter Ursache, neuer Methode und Frist, siehe `DETAIL_V2_PLAN.md` Abschnitt P1b3.
 
 **QA-P6 Q3 direkt auf den Dateien** (Regel `q3` aus dv2qa @ 38fa7ec mit `konfig.json`):
 
@@ -117,7 +117,7 @@ Die alte Kalibrierung auf Zellzählungen (z. B. Brücke 20 Zellen, Ufer 2.902 Ze
 
 ## Offene Punkte / Risiken
 
-- [R] Wegenden (P1a) und der Wasserumriss unter der QA-Messart (P1b2) sind Quellthemen. Solange sie offen sind, bleiben die Flächentyp-Maxima an diesen Stellen über 3 cm. Nach einer Quellkorrektur einfach neu generieren; die Ausnahmeliste im Test muss dann kürzer werden.
+- [R] Wegenden (Ausnahme-Kandidat A-DV2-01, Entscheid in P6 bei 1,7 m) und der Wasserumriss (P1b3, neue Methode) sind Quellthemen. Solange sie offen sind, bleiben die Flächentyp-Maxima an diesen Stellen über 3 cm. Nach einer Quellkorrektur einfach neu generieren; die Ausnahmeliste im Test muss dann kürzer werden.
 - [R] Grat-Anker 1,5 / 3,54 / 3,51 m > 1 m (siehe oben).
 - [A] Die Brücken bleiben Platzhalter-Ableitungen (Auswahlfenster plus Schnitt bei E3-West) und sind keine modellierten Brückendecks.
 - [S] Es wurden keine Altdateien außerhalb von `detail_v2/kanten/` und `detail_v2/vektor/{kanten,zonen}.geojson` geändert. Neu ist nur `detail_v2/tag1_vektoren.jpg` (wie beauftragt).
