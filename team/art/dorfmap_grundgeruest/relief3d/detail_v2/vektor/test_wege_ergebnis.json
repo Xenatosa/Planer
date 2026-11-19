@@ -1,0 +1,124 @@
+{
+ "rand": {
+  "linien": 122,
+  "zacken_max_m": 0.0289,
+  "zacken_max_bei": [
+   "G018",
+   0,
+   "rand_rechts"
+  ],
+  "knick_max_grad": 8.59,
+  "knick_max_bei": [
+   "G018",
+   0,
+   "rand_rechts"
+  ],
+  "zacken_ueber": 0,
+  "knick_ueber": 0,
+  "zacken_p95_m": 0.0239,
+  "knick_p95_grad": 7.21
+ },
+ "kreuzung": {
+  "linien": 88,
+  "zacken_max_m": 0.0274,
+  "zacken_max_bei": [
+   "K024",
+   0,
+   "umriss"
+  ],
+  "knick_max_grad": 7.86,
+  "knick_max_bei": [
+   "K046",
+   0,
+   "umriss"
+  ],
+  "zacken_ueber": 0,
+  "knick_ueber": 0,
+  "zacken_p95_m": 0.0273,
+  "knick_p95_grad": 7.82
+ },
+ "sichtbar": {
+  "linien": 211,
+  "zacken_max_m": 0.0273,
+  "zacken_max_bei": [
+   "G018",
+   0,
+   "rand_links"
+  ],
+  "knick_max_grad": 8.05,
+  "knick_max_bei": [
+   "G018",
+   0,
+   "rand_links"
+  ],
+  "zacken_ueber": 0,
+  "knick_ueber": 0,
+  "zacken_p95_m": 0.0224,
+  "knick_p95_grad": 6.57
+ },
+ "mittellinie": {
+  "max_abweichung_m": 0.2459,
+  "bei": [
+   "G018",
+   0
+  ]
+ },
+ "ergaenzungen": {
+  "ERG01": {
+   "klasse": "HAUSWEG",
+   "laenge_m": 19.22,
+   "max_abstand_zu_wega_m": 0.333
+  },
+  "ERG02": {
+   "klasse": "GASSE",
+   "laenge_m": 6.5,
+   "max_abstand_zu_wega_m": 0.25
+  },
+  "ERG03": {
+   "klasse": "ANBINDUNG",
+   "laenge_m": 6.07,
+   "max_abstand_zu_wega_m": 0.315
+  }
+ },
+ "luecken": {
+  "offene_wegenden": [],
+  "netz_teile": 2,
+  "wega_komponenten": 2,
+  "wega_komponenten_mit_mehr_als_einem_netzteil": 0,
+  "wega_komponenten_ohne_netz": 0,
+  "netzteile_ohne_wega": 0,
+  "wega_knoten": 14258,
+  "wega_knoten_ausserhalb_netz": 194,
+  "groesster_ausserhalb_cluster_knoten": 19,
+  "wega_abdeckung": 0.9864
+ },
+ "rand_offset": {
+  "p50_m": 0.0028,
+  "p95_m": 0.0681,
+  "max_m": 1.165,
+  "anteil_unter_2cm": 0.8654
+ },
+ "kreuzung_ueberstand": {
+  "max_m": 1.392,
+  "bei": "K063",
+  "p50_m": 0.604,
+  "grenze_m": 1.5,
+  "grund": "Eckradius >= 1,85 m (Zacken <= 3 cm) bei 2-3 m breiten Wegen"
+ },
+ "platzanschluss": {
+  "kriterium": "Wegende <= 1,5 m an Platzzelle: Bandkappe (Band im Kreis Breite/2+0,3 m um das Ende) ueberlappt Platz oder Kreuzung >= 0,05 m2 (keine Luecke)",
+  "wegenden_am_platz": 30,
+  "min_ueberlappung_m2": 0.087,
+  "nicht_angeschlossen": []
+ },
+ "randvollstaendigkeit": {
+  "min_randlaenge_zu_mittellinie": 0.486,
+  "max_bandflaeche_zu_soll": 1.044,
+  "maengel": []
+ },
+ "formal": {
+  "fehler": [],
+  "netz_gueltig": true
+ },
+ "bestanden": true
+}

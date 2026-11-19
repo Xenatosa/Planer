@@ -1,0 +1,355 @@
+{
+ "mesh": "/tmp/dv2_viewer/dummy_mesh",
+ "quelle": "DUMMY aus relief_daten.json.gz (GB/WV/WEGA), Schritt 1 m - kein echtes Mesh, ohne TEXCOORD_2",
+ "ladezeit": {
+  "gesamt_ms": 184,
+  "manifest_ms": 30,
+  "kacheln_ms": 108,
+  "bodenindex_ms": 28,
+  "query_ms": 0,
+  "erstes_bild_ms": 27
+ },
+ "dreiecke": 203628,
+ "bytes": 7342404,
+ "erg": [
+  {
+   "name": "alle Kacheln geladen",
+   "ok": true,
+   "wert": 56
+  },
+  {
+   "name": "Dreiecke = Manifest (+ Modelle)",
+   "ok": true,
+   "wert": {
+    "viewer": 203628,
+    "manifest": 203616,
+    "modelle": 12
+   }
+  },
+  {
+   "name": "Budget je Kachel <= 60000, gesamt <= 1,6 Mio.",
+   "ok": true,
+   "wert": 3780
+  },
+  {
+   "name": "Manifest im verbindlichen Format (Felder, Pfade, bbox = Schnitt)",
+   "ok": true,
+   "wert": {
+    "fehler": [],
+    "viewer": []
+   }
+  },
+  {
+   "name": "glb: kein Draco/Transform, POSITION in bbox, TEXCOORD_0 = Welt-XZ, TEXCOORD_1 = x/336,z/303",
+   "ok": true,
+   "wert": {
+    "bboxFehler": 0,
+    "uvFehler": 0
+   }
+  },
+  {
+   "name": "_FLAECHE: u8 0-5 je Vertex, Dreiecke klassenrein, klassen_anteil stimmt",
+   "ok": true,
+   "wert": {
+    "flFehler": 0,
+    "gemischtN": 0,
+    "anteilFehler": 0
+   }
+  },
+  {
+   "name": "Viewer liest _FLAECHE (Dreiecke je Klasse = glb, 0 gemischt, alle Meshes mit _FLAECHE)",
+   "ok": true,
+   "wert": {
+    "viewer": {
+     "grund": 151876,
+     "weg": 10992,
+     "ufer": 7598,
+     "fels_klippe": 18085,
+     "wasser": 15065,
+     "bruecke": 12
+    },
+    "glb": {
+     "grund": 151876,
+     "weg": 10992,
+     "ufer": 7598,
+     "fels_klippe": 18085,
+     "wasser": 15065,
+     "bruecke": 12
+    },
+    "modelle": 1
+   }
+  },
+  {
+   "name": "Strahl: Hoehe und Klasse = Brute-Force aus glb (62 Punkte)",
+   "ok": true,
+   "wert": []
+  },
+  {
+   "name": "Ladezeit gemessen",
+   "ok": true,
+   "wert": {
+    "gesamt_ms": 184,
+    "manifest_ms": 30,
+    "kacheln_ms": 108,
+    "bodenindex_ms": 28,
+    "query_ms": 0,
+    "erstes_bild_ms": 27
+   }
+  },
+  {
+   "name": "Bodenstrahl = Raster an Gitterpunkten (|dh| < 1 mm)",
+   "ok": true,
+   "wert": 0
+  },
+  {
+   "name": "Boden ueberall abfragbar (keine Loecher)",
+   "ok": true,
+   "wert": {
+    "n": 45248,
+    "leer": 0
+   }
+  },
+  {
+   "name": "lauf: Kamera 1,7 m ueber Grund",
+   "ok": true,
+   "wert": {
+    "y": 1.7,
+    "boden": 0
+   }
+  },
+  {
+   "name": "Schattenkarte folgt der Kamera",
+   "ok": true,
+   "wert": {
+    "s1": [
+     204.9,
+     0,
+     129.3
+    ],
+    "s2": [
+     162,
+     0,
+     60
+    ],
+    "halb": 40
+   }
+  },
+  {
+   "name": "Tempo: 3 m/s gehen, 7 m/s mit Shift, Hoehe gehalten",
+   "ok": true,
+   "wert": {
+    "x1": 212,
+    "x2": 219
+   }
+  },
+  {
+   "name": "Begehbarkeit wasser: gesperrt (Klasse 4), Laeufer haelt davor",
+   "ok": true,
+   "wert": {
+    "sperre": [
+     215.5,
+     1.5
+    ],
+    "halt_x": 214.85,
+    "klasse_halt": 2,
+    "neigung_halt": 19.2,
+    "sperrungen": 51
+   }
+  },
+  {
+   "name": "Begehbarkeit fels: gesperrt (Klasse 3), Laeufer haelt davor",
+   "ok": true,
+   "wert": {
+    "sperre": [
+     150.5,
+     7.5
+    ],
+    "halt_x": 149.4,
+    "klasse_halt": 0,
+    "neigung_halt": 20.6,
+    "sperrungen": 54
+   }
+  },
+  {
+   "name": "Begehbarkeit steil: gesperrt (Neigung 35.1°), Laeufer haelt davor",
+   "ok": true,
+   "wert": {
+    "sperre": [
+     161.5,
+     21.5
+    ],
+    "halt_x": 161,
+    "klasse_halt": 0,
+    "neigung_halt": 35,
+    "sperrungen": 50
+   }
+  },
+  {
+   "name": "Bruecke: Strahl trifft Deck (Klasse 5, y 0,30) vor Wasser (Klasse 4 darunter)",
+   "ok": true,
+   "wert": {
+    "deck": {
+     "y": 0.30000001192092896,
+     "k": 5,
+     "netz": "bruecke_E2"
+    },
+    "darunter": {
+     "y": -0.839,
+     "k": 4
+    }
+   }
+  },
+  {
+   "name": "Bruecke: Laeufer quert den Bach ueber das Deck (1,7 m ueber Deck)",
+   "ok": true,
+   "wert": {
+    "ende_x": 201,
+    "schritte_auf_deck": 37
+   }
+  },
+  {
+   "name": "neben der Bruecke (z 71): Wasser stoppt den Laeufer",
+   "ok": true,
+   "wert": {
+    "halt_x": 190.95,
+    "wasser_ab_x": 191.25
+   }
+  },
+  {
+   "name": "kam: Orbit-Abstand 5 m und 1 m moeglich (< 25 m)",
+   "ok": true,
+   "wert": {
+    "a5": 5.408,
+    "a1": 1.1,
+    "min": 0.3
+   }
+  },
+  {
+   "name": "Standardbild 1,7 m hat Gelaende",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.568,
+    "streuung": 11.9
+   }
+  },
+  {
+   "name": "Clay 1,7 m Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.569,
+    "streuung": 25.8,
+    "bild": "/tmp/dv2_viewer/bilder/clay_1m7_dorfkern.jpg"
+   }
+  },
+  {
+   "name": "Clay 5 m Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.653,
+    "streuung": 26.7,
+    "ueber_grund": 5,
+    "bild": "/tmp/dv2_viewer/bilder/clay_5m_dorfkern.jpg"
+   }
+  },
+  {
+   "name": "?wire=1&kachelrand=1: Linien da, Bild ok",
+   "ok": true,
+   "wert": {
+    "linien": 58,
+    "nicht_himmel": 0.896,
+    "streuung": 59,
+    "bild": "/tmp/dv2_viewer/bilder/wire_rand_5m_E3E4.jpg"
+   }
+  },
+  {
+   "name": "Clay 5 m Grat G3 Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.836,
+    "streuung": 20.2,
+    "bild": "/tmp/dv2_viewer/bilder/clay_5m_grat_g3.jpg"
+   }
+  },
+  {
+   "name": "Schattenkarte wirkt (dunklere Pixel mit Schatten)",
+   "ok": true,
+   "wert": {
+    "anteil": 0.0086
+   }
+  },
+  {
+   "name": "?klassen=1: Wasser blau, Bruecke/Weg braun sichtbar",
+   "ok": true,
+   "wert": {
+    "blau": 0.113,
+    "braun": 0.184,
+    "bild": "/tmp/dv2_viewer/bilder/klassen_5m_bruecke_e2.jpg"
+   }
+  },
+  {
+   "name": "queryPoint (P4) eingehaengt: geladen, Kachel E3, Hoehe weiter aus dem Strahl",
+   "ok": true,
+   "wert": {
+    "quellen": {
+     "hoehe": null,
+     "flaeche": null,
+     "untergrund": null,
+     "begehbar": null,
+     "slot": "slot.png",
+     "slots": "slots.json",
+     "kachel": "analytisch"
+    },
+    "begehbar_quelle": "mesh"
+   }
+  },
+  {
+   "name": "WASD: W laeuft nach Norden, 1,7 m gehalten",
+   "ok": true,
+   "wert": {
+    "x": 209,
+    "z": 111.66,
+    "blick": 0,
+    "ueber_grund": 1.7
+   }
+  },
+  {
+   "name": "WASD: D laeuft nach Osten",
+   "ok": true,
+   "wert": {
+    "x": 219.89
+   }
+  },
+  {
+   "name": "Taste O -> Orbit, Mausrad zoomt unter 25 m",
+   "ok": true,
+   "wert": {
+    "start": 10.14,
+    "nach_rad": 0.86
+   }
+  },
+  {
+   "name": "Knopf -> zurueck Laufen (1,7 m)",
+   "ok": true,
+   "wert": "lauf"
+  },
+  {
+   "name": "Touch links: Stick laeuft (1,7 m)",
+   "ok": true,
+   "wert": {
+    "z": 115.76
+   }
+  },
+  {
+   "name": "Touch rechts: schaut (Gier aendert sich)",
+   "ok": true,
+   "wert": {
+    "blick": 16.1
+   }
+  },
+  {
+   "name": "keine Konsolen-/Seitenfehler",
+   "ok": true,
+   "wert": []
+  }
+ ]
+}
