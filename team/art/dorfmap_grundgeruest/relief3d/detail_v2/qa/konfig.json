@@ -63,6 +63,10 @@
    }
   },
   {
+   "datei": "bach_mitte.geojson",
+   "pflicht": false
+  },
+  {
    "datei": "kanten.geojson",
    "pflicht": false
   },
@@ -72,7 +76,10 @@
   },
   {
    "datei": "zonen.geojson",
-   "pflicht": false
+   "pflicht": false,
+   "filter": {
+    "layer": "flaechentyp"
+   }
   }
  ],
  "mittellinien": {
@@ -108,6 +115,9 @@
  },
  "bauzone": {
   "datei": "zonen.geojson",
+  "filter": {
+   "layer": "bauzone_plan"
+  },
   "prop": "bauzone_plan"
  },
  "bruecken": {
@@ -212,9 +222,10 @@
   "q14_bauzone_rel": 0.01,
   "q9_wegband_abstand_m": 0.25,
   "q10_uv0_bis_grad": 25,
-  "q14_wasser_referenz_m2": 6547.84,
   "q8_spalt_m": 0.002,
-  "q10_kurve_radius_m": 10
+  "q10_kurve_radius_m": 10,
+  "q3_abtastung_m": 0.05,
+  "q8_ueberlappung_m": 0.1
  },
  "wegnetz": {
   "datei": "wege.geojson",
@@ -225,5 +236,12 @@
  "wasser_modell": {
   "klasse": 4,
   "id_praefix": "wasser"
+ },
+ "q14_wasser_referenz": {
+  "datei": "wasser.geojson",
+  "filter": {
+   "typ": "wasser"
+  },
+  "_hinweis": "Referenzflaeche zur Laufzeit = Vereinigung der Polygone (Entscheidung QA 19.11. Runde 3; Stand aa78160 ~6630,17 m2)"
  }
 }

@@ -214,9 +214,10 @@ def bruecke(fehler=None):
 
 def spiegel_modell(fehler=None):
     """Wasserspiegel als eigenes Modell (klasse 4): Streifen ueber dem Bett, 5 cm ins Ufer gezogen; Fehlervarianten:
-    Q8 +10 cm, Q8_spalt linke Kante 15 cm zu kurz (Spalt), Q8_ohne_schnitt 0,4 m tiefer (unter dem Bett), Q14_wasser +5 cm (Kante 0,5 m)."""
+    Q8 +10 cm, Q8_spalt linke Kante 15 cm zu kurz (Spalt), Q8_ohne_schnitt 0,4 m tiefer (unter dem Bett), Q14_wasser +5 cm (Kante 0,5 m),
+    Q8_ueberlappung Kanten 0,3 m ins Ufer (> 10 cm)."""
     y = SPIEGEL + {'Q8': 0.1, 'Q8_ohne_schnitt': -0.4, 'Q14_wasser': 0.05}.get(fehler, 0.0)
-    ue = 0.5 if fehler == 'Q14_wasser' else 0.05
+    ue = {'Q14_wasser': 0.5, 'Q8_ueberlappung': 0.3}.get(fehler, 0.05)
     xl = XC - HW + 0.15 if fehler == 'Q8_spalt' else XC - HW - ue; xr = XC + HW + ue
     zs = np.arange(Z0, Z1 + 1e-9, 1.0); n = len(zs)
     pos = np.vstack([np.c_[np.full(n, xl), np.full(n, y), zs], np.c_[np.full(n, xr), np.full(n, y), zs]])
@@ -370,7 +371,7 @@ def baue(ziel, fehler=None):
     if fehler == 'Q14_ohne_zonen': r = None
     ring = np.c_[BAU_C[0] + (r or 1) * np.cos(ang), BAU_C[1] + (r or 1) * np.sin(ang)]; ring[-1] = ring[0]
     if r is not None:
-        (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [ring.tolist()]}, id='Z1', klasse='grund', untergrund='erde', bauzone_plan=True)])))
+        (ziel / 'vektor' / 'zonen.geojson').write_text(json.dumps(fc([feat({'type': 'Polygon', 'coordinates': [ring.tolist()]}, id='bauzone_plan_00001', klasse=0, layer='bauzone_plan', typ='bauzone', untergrund='SCHNEE')])))
     for n in ('kanten.geojson', 'grat.geojson'): (ziel / 'vektor' / n).write_text(json.dumps(fc([])))
     # ---- Datenschicht: echte Module aus art/dorfmap-fertig + Dummy-Masken (0,1 m/px, 3360 x 3030)
     dsrc = Path(__file__).resolve().parents[2] / 'daten'
@@ -404,7 +405,7 @@ def baue(ziel, fehler=None):
         Image.fromarray((rng.random((48, 64, 3)) * 255).astype(np.uint8)).save(ziel / 'abnahme' / n, quality=90)
     (ziel / 'abnahme' / 'QUELLEN.txt').write_text('Dummy-Abnahmebilder (Rauschen) fuer den QA-Selbsttest\n' + '\n'.join(namen) + '\n')
     kd = dict(k); kd['bruecken'] = {'E2': k['bruecken']['E2']}
-    kd['schwellen'] = dict(k['schwellen']); kd['schwellen']['q14_wasser_referenz_m2'] = round(2 * HW * (Z1 - Z0), 4)
+    kd['schwellen'] = dict(k['schwellen'])   # Q14-Referenz kommt zur Laufzeit aus vektor/wasser.geojson des Dummys
     (ziel / 'konfig_dummy.json').write_text(json.dumps(kd, indent=1))
     return {'vertices_welt': int(len(V)), 'duplikate': int(dup), 'dreiecke': ges}
 

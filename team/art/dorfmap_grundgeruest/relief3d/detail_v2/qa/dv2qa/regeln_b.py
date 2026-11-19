@@ -118,7 +118,7 @@ def q8(ctx):
     if not ufer: raise Fehlt('keine Uferlinien (ufer.geojson typ=uferlinie)')
     if any(u[3] is None for u in ufer): raise Fehlt('spiegel_m je Uferpunkt fehlt')
     w = {'uferlinien': len(ufer), 'spiegelmodelle': [], 'spiegel_randpunkte': 0, 'spalt_punkte': 0, 'spalt_max_m': 0.0,
-         'stationen': 0, 'ohne_schnitt': 0, 'ohne_spiegel': 0, 'schnitt_abstand_max_m': 0.0, 'kontursegmente': 0,
+         'ueberlappung_max_m': 0.0, 'ueberlappung_p95_m': 0.0, 'ueberlappung_zu_gross': 0, 'stationen': 0, 'ohne_schnitt': 0, 'ohne_spiegel': 0, 'schnitt_abstand_max_m': 0.0, 'kontursegmente': 0,
          'kontur_ufer_max_m': 0.0, 'ufer_kontur_max_m': 0.0, 'spiegel_vs_spiegel_m_max_m': 0.0, 'nicht_monoton': 0, 'ueber_krone': 0, 'profile': 0}
     bef = []
     try:
@@ -133,7 +133,7 @@ def q8(ctx):
     # (a) Spiegelrand im Ufer
     nw = ctx.netz((), 'wasser'); Vw, Tw = nw['V'], nw['T']
     e = np.sort(kanten_von(Tw), 1); u, c = np.unique(e, axis=0, return_counts=True); rk = u[c == 1]
-    pts = []
+    pts = []; R_im_ufer = np.zeros((0, 3))
     for i, j in rk:
         A, B = Vw[i], Vw[j]; k = max(int(np.ceil(np.hypot(*(B - A)[[0, 2]]) / 0.05)), 1)
         t = np.linspace(0, 1, k + 1)[:, None]; pts.append(A + (B - A) * t)
@@ -142,6 +142,7 @@ def q8(ctx):
         R = R[distance(points(R[:, [0, 2]]), karte) > 1e-3]           # Kartenrand (Bach laeuft hinaus) ausgenommen
         ht, _ = o.hoehe(R[:, 0], R[:, 2]); sp = R[:, 1] - ht
         spalt = ~np.isnan(ht) & (sp > S['q8_spalt_m'])
+        R_im_ufer = R[~np.isnan(ht) & ~spalt]
         w['spiegel_randpunkte'] = int(len(R)); w['spalt_punkte'] = int(spalt.sum()); w['spalt_max_m'] = float(np.nanmax(sp)) if len(sp) else 0.0
         for i in np.nonzero(spalt)[0][np.argsort(-sp[spalt])][:8]:
             bef.append({'art': 'spalt spiegel/ufer', 'x': _r(R[i, 0], 2), 'z': _r(R[i, 2], 2), 'spiegel_ueber_gelaende_m': _r(sp[i])})
@@ -165,6 +166,14 @@ def q8(ctx):
         sp_pts = segs.reshape(-1, 2)
         sp_pts = sp_pts[distance(points(sp_pts), karte) > 0.5]
         d1 = distance(points(sp_pts), ul) if len(sp_pts) else np.zeros(1)
+        # Ueberlappung (Runde 3): Spiegelrand im Ufer hoechstens q8_ueberlappung_m waagerecht hinter der Wasserlinie
+        if len(R_im_ufer):
+            ii, jj = tree.query_nearest(points(R_im_ufer[:, [0, 2]]), return_distance=False)
+            ue = np.full(len(R_im_ufer), np.inf); np.minimum.at(ue, ii, distance(points(R_im_ufer[ii][:, [0, 2]]), sl[jj]))
+            w['ueberlappung_max_m'] = float(ue.max()); w['ueberlappung_p95_m'] = float(np.percentile(ue, 95))
+            zu = ue > S['q8_ueberlappung_m'] + 1e-6; w['ueberlappung_zu_gross'] = int(zu.sum())
+            for i in np.nonzero(zu)[0][np.argsort(-ue[zu])][:8]:
+                bef.append({'art': 'ueberlappung spiegel/ufer', 'x': _r(R_im_ufer[i, 0], 2), 'z': _r(R_im_ufer[i, 2], 2), 'ueberlappung_m': _r(ue[i])})
     bp = ctx.k['mittellinien']['breite_prop']
     wz = [LineString(pl).buffer(float(pr.get(bp, 2.0)) / 2 + 0.4, cap_style='flat') for pl, pr in _mittellinien_opt(ctx)]
     wz += [g.buffer(0.4) for g, _ in ctx.polygone(ctx.k['kreuzungen']['datei'], pflicht=False)]
@@ -222,8 +231,8 @@ def q8(ctx):
     if d1.max() > S['q8_ufer_m']:
         k = int(np.argmax(d1)); bef.append({'art': 'schnittlinie->ufer', 'abstand_m': _r(d1[k]), 'x': _r(sp_pts[k, 0], 2), 'z': _r(sp_pts[k, 1], 2)})
     w = {k: _r(v) if isinstance(v, float) else v for k, v in w.items()}
-    return erg('Q8', not bef, {**w, 'schwellen_m': {'ufer': S['q8_ufer_m'], 'spalt': S['q8_spalt_m']}}, bef,
-               'Spiegelmodell (manifest.modelle klasse 4) vs. geschlossenes Gelaende inkl. Bett: Spiegelrand 5 cm im Ufer (Gelaende >= Spiegel - 2 mm, sonst Spalt); '
+    return erg('Q8', not bef, {**w, 'schwellen_m': {'ufer': S['q8_ufer_m'], 'spalt': S['q8_spalt_m'], 'ueberlappung': S['q8_ueberlappung_m']}}, bef,
+               'Spiegelmodell (manifest.modelle klasse 4) vs. geschlossenes Gelaende inkl. Bett: Spiegelrand 5 cm im Ufer (Gelaende >= Spiegel - 2 mm, sonst Spalt) und hoechstens 10 cm waagerecht hinter der Wasserlinie (Ueberlappung, Runde 3); '
                'je Uferstation 10 cm Vorzeichenwechsel Gelaende-Spiegel (-2..+2,5 m), sonst ohne Schnitt; Kontur Gelaende=Spiegel vs. Uferlinie <= 5 cm beidseitig; '
                'Boeschung 0-2,5 m landeinwaerts monoton (endet am Wegband), Krone > spiegel_m. Kartenrand ausgenommen. spiegel_vs_spiegel_m nur Bericht.')
 

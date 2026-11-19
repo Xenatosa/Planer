@@ -9,7 +9,7 @@ QA = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(QA)); sys.path.insert(0, str(QA / 'selbsttest'))
 import baue_dummy
 from pruefe_alle import laufe
-from dv2qa.geom import glaettung_abw
+from dv2qa.geom import glaettung_abw, form_abw
 
 FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q1': ('Q1', '3 m2 Dreiecke bei 205|110 entfernt + 1 Nahtvertex E2 um 1 mm angehoben'),
@@ -24,6 +24,7 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q7_lage': ('Q7', 'D2-Lage/Form: Weg W1 im D2-Bereich um 0,6 m nach Norden verschoben'),
     'Q8': ('Q8', 'Spiegelmodell +10 cm (Schnittlinie wandert vom Uferspline weg)'),
     'Q8_spalt': ('Q8', 'Spalt Spiegel/Ufer: linke Spiegelkante 15 cm vor dem Ufer (Kante ueber dem Bett)', 'spalt spiegel/ufer'),
+    'Q8_ueberlappung': ('Q8', 'Spiegelkanten 0,3 m ins Ufer gezogen (Ueberlappung > 10 cm, kein Spalt)', 'ueberlappung spiegel/ufer'),
     'Q8_ohne_schnitt': ('Q8', 'Spiegel 0,4 m tiefer = unter Bett und Uferkante, schneidet das Ufer nicht', 'spiegel unter uferkante ohne schnitt'),
     'Q9': ('Q9', '5 Dreiecke in D3 mit umgedrehter Windung (Normale nach unten)'),
     'Q10': ('Q10', 'Kachel E3: UV0 gespiegelt (u = -x), UV1 um 0,001 versetzt'),
@@ -39,13 +40,39 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
 
 
 def einheit():
+    """Q3-Einheitstests (Runde 3: abtastunabhaengige Messung form_abw, Neuabtastung 0,05 m, Fenster 1 m)."""
+    from shapely import LineString
     out = []
-    t = np.linspace(0, 2 * np.pi, 400); kreis = np.c_[5 * np.cos(t), 5 * np.sin(t)]
-    a, k = glaettung_abw(kreis, 1.0, True); out.append(('Kreis r=5 m glatt', a.max() <= 0.03 and k.max() <= 15, f'abw {a.max():.4f} m, knick {k.max():.1f} Grad'))
-    x = np.arange(0, 10, 0.2); zz = np.c_[x, np.where(np.arange(len(x)) % 2, 0.05, -0.05)]
-    a, k = glaettung_abw(zz, 1.0); out.append(('Zickzack +-5 cm erkannt', a.max() > 0.03 or k.max() > 15, f'abw {a.max():.4f} m, knick {k.max():.1f} Grad'))
+    def kreis(r, d):
+        n = int(round(2 * np.pi * r / d)); t = np.linspace(0, 2 * np.pi, n, endpoint=False); k = np.c_[r * np.cos(t), r * np.sin(t)]
+        return np.vstack([k, k[:1]])
+    # (a) Kreis r 2,0 m mit 0,25 m und 0,05 m Stuetzpunktabstand
+    w = {}
+    for d in (0.25, 0.05):
+        _, a, k = form_abw(kreis(2.0, d), 1.0, True, 0.05); a_alt, k_alt = glaettung_abw(kreis(2.0, d), 1.0, True)
+        w[d] = (a.max(), k.max(), a_alt.max(), k_alt.max())
+    dif = abs(w[0.25][0] - w[0.05][0])
+    out.append(('(a) Kreis r 2,0 m: 0,25 vs. 0,05 m', dif <= 0.005 and max(w[0.25][0], w[0.05][0]) <= 0.03,
+                f"neu abw {w[0.25][0]*100:.2f} / {w[0.05][0]*100:.2f} cm (Diff {dif*1000:.1f} mm, Sehnenpfeil 0,25-m-Polygon {2*(1-np.cos(0.0625))*1000:.1f} mm), "
+                f"Knick {w[0.25][1]:.1f}/{w[0.05][1]:.1f} Grad; alt abw {w[0.25][2]*100:.2f} / {w[0.05][2]*100:.2f} cm (Diff {abs(w[0.25][2]-w[0.05][2])*1000:.1f} mm)"))
+    # (b) ungleich verteilte DP-Stuetzpunkte auf derselben Form wie dicht
+    x = np.arange(0, 20.0001, 0.01); dicht = np.c_[x, 1.5 * np.sin(x / 3) + 0.4 * np.sin(x / 1.3)]
+    dp = np.array(LineString(dicht).simplify(0.003).coords)
+    sp = np.hypot(*np.diff(dp, axis=0).T)
+    _, a1, k1 = form_abw(dicht, 1.0, False, 0.05); _, a2, k2 = form_abw(dp, 1.0, False, 0.05)
+    a1o, _ = glaettung_abw(dicht, 1.0); a2o, _ = glaettung_abw(dp, 1.0)
+    dif = abs(a1.max() - a2.max())
+    out.append(('(b) DP-Stuetzpunkte = dicht', dif <= 0.003 and (a1.max() <= 0.03) == (a2.max() <= 0.03),
+                f"{len(dp)} DP-Punkte (Abstand {sp.min():.2f}-{sp.max():.2f} m) vs. {len(dicht)} dicht: neu {a2.max()*100:.2f} / {a1.max()*100:.2f} cm (Diff {dif*1000:.1f} mm); alt {a2o.max()*100:.2f} / {a1o.max()*100:.2f} cm"))
+    # (c) echte Delle 5 cm (Breite 0,4 m) und Zickzack +-5 cm / 90-Grad-Ecke werden gefunden - dicht und DP
+    xd = np.arange(0, 10.0001, 0.01); delle = np.c_[xd, -0.05 * np.clip(1 - np.abs(xd - 5) / 0.2, 0, 1)]
+    dd = np.array(LineString(delle).simplify(0.003).coords)
+    _, ad, _ = form_abw(delle, 1.0, False, 0.05); _, add_, _ = form_abw(dd, 1.0, False, 0.05)
+    out.append(('(c) Delle 5 cm gefunden (dicht + DP)', ad.max() > 0.03 and add_.max() > 0.03, f'abw dicht {ad.max()*100:.2f} cm, DP ({len(dd)} Punkte) {add_.max()*100:.2f} cm'))
+    xz = np.arange(0, 10, 0.2); zz = np.c_[xz, np.where(np.arange(len(xz)) % 2, 0.05, -0.05)]
+    _, a, k = form_abw(zz); out.append(('(c) Zickzack +-5 cm gefunden', a.max() > 0.03 or k.max() > 15, f'abw {a.max()*100:.2f} cm, Knick {k.max():.1f} Grad'))
     ecke = np.array([[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]], float)
-    a, k = glaettung_abw(ecke, 1.0); out.append(('90-Grad-Ecke erkannt', k.max() > 15, f'knick {k.max():.1f} Grad'))
+    _, a, k = form_abw(ecke); out.append(('(c) 90-Grad-Ecke gefunden', k.max() > 15, f'Knick {k.max():.1f} Grad, abw {a.max()*100:.1f} cm'))
     return out
 
 
@@ -104,11 +131,11 @@ def main():
     from shapely.geometry import shape
     from shapely import union_all
     wg = QA.parent / 'vektor' / 'wasser.geojson'
-    kref = _j.loads((QA / 'konfig.json').read_text())['schwellen']['q14_wasser_referenz_m2']
+    kq = _j.loads((QA / 'konfig.json').read_text())['q14_wasser_referenz']
     if wg.exists():
-        fl = union_all([shape(f['geometry']) for f in _j.loads(wg.read_text())['features']]).area
-        good = abs(fl - 6547.84) < 0.01 and kref == 6547.84
-        zeilen.append(('repo', 'Q14-Referenz', '6547,84', f'{fl:.2f} / konfig {kref}', good, 'Flaeche wasser.geojson #54 und Referenz in konfig.json'))
+        fl = union_all([shape(f['geometry']) for f in _j.loads(wg.read_text())['features'] if f['properties'].get('typ') == kq['filter']['typ']]).area
+        good = abs(fl - 6630.17) < 0.05 and kq['datei'] == 'wasser.geojson'
+        zeilen.append(('repo', 'Q14-Referenz', '~6630,17', f'{fl:.2f}', good, 'Referenz zur Laufzeit aus wasser.geojson (konfig q14_wasser_referenz, Runde 3), Stand art/dorfmap-fertig aa78160'))
     else:
         good = False; zeilen.append(('repo', 'Q14-Referenz', '6547,84', 'fehlt', False, 'vektor/wasser.geojson fehlt'))
     ok_ges &= good

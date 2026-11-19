@@ -1,6 +1,6 @@
 """Q1-Q5 (Topologie/Loecher, Constraint-Treue, Glaette, Kreuzungen, Dellen)."""
 import numpy as np
-from .geom import Ortung, abtasten, glaettung_abw, kanten_von
+from .geom import Ortung, abtasten, glaettung_abw, kanten_von, form_abw
 from .welt import Fehlt
 
 
@@ -158,28 +158,52 @@ def q2(ctx):
 
 # ------------------------------------------------------------------ Q3
 def q3(ctx):
-    S = ctx.k['schwellen']
-    kz = [g for g, _ in ctx.polygone(ctx.k['kreuzungen']['datei'], pflicht=False)]
+    """Glaette (Entscheidung QA/Grundgeruest 19.11. Runde 3): jede Linie - Vektorquellen und Mesh-Kantenzuege gleich -
+    zuerst gleichmaessig auf q3_abtastung_m (0,05 m) nach Bogenlaenge neu abgetastet, dann gleitendes q3_fenster_m-Mittel;
+    Abweichung <= 3 cm hart fuer alle Linien; Knick <= 15 Grad ausser in Kreuzungspolygonen (R8/Q4 gilt dort)."""
     from shapely import union_all, contains_xy
+    S = ctx.k['schwellen']; h, fen = S['q3_abtastung_m'], S['q3_fenster_m']
+    kz = [g for g, _ in ctx.polygone(ctx.k['kreuzungen']['datei'], pflicht=False)]
     kreuz = union_all([g.buffer(0.05) for g in kz]) if kz else None
-    worst_a, worst_k, bef, n_lin = 0.0, 0.0, [], 0
+    w = {'linien': 0, 'abw_max_m': 0.0, 'knick_max_grad': 0.0, 'mesh_kantenzuege': 0, 'mesh_abw_max_m': 0.0, 'mesh_knick_max_grad': 0.0}
+    bef = []
+    def pruefe(pl, geschl, quelle, pid, mesh=False):
+        R, abw, knick = form_abw(pl, fen, geschl, h)
+        if kreuz is not None and len(R): knick = np.where(contains_xy(kreuz, R[:, 0], R[:, 1]), 0, knick)
+        a = float(abw.max()) if len(abw) else 0.0; k = float(knick.max()) if len(knick) else 0.0
+        pre = 'mesh_' if mesh else ''
+        w[pre + 'abw_max_m'] = max(w[pre + 'abw_max_m'], a); w[pre + 'knick_max_grad'] = max(w[pre + 'knick_max_grad'], k)
+        if a > S['q3_glatt_m'] or k > S['q3_knick_grad']:
+            i = int(np.argmax(abw)) if a > S['q3_glatt_m'] else int(np.argmax(knick))
+            bef.append({'datei': quelle, 'id': pid, 'quelle': 'mesh' if mesh else 'vektor', 'abw_m': _r(a), 'knick_grad': _r(k, 1), 'x': _r(R[i, 0], 2), 'z': _r(R[i, 1], 2)})
+    linien = []
     for q in ctx.k['q3_quellen']:
         for pl, geschl, pr in ctx.linien(q):
-            n_lin += 1
-            abw, knick = glaettung_abw(pl, S['q3_fenster_m'], geschl)
-            inner = pl[:-1] if geschl and np.allclose(pl[0], pl[-1]) else pl
-            kp = inner if geschl else inner[1:-1]
-            if kreuz is not None and len(kp):
-                frei = ~contains_xy(kreuz, kp[:, 0], kp[:, 1]); knick = np.where(frei, knick, 0)
-                frei_a = ~contains_xy(kreuz, inner[:, 0], inner[:, 1]); abw = np.where(frei_a, abw, 0)
-            a = float(abw.max()) if len(abw) else 0; k = float(knick.max()) if len(knick) else 0
-            worst_a = max(worst_a, a); worst_k = max(worst_k, k)
-            if a > S['q3_glatt_m'] or k > S['q3_knick_grad']:
-                i = int(np.argmax(abw)) if a > S['q3_glatt_m'] else int(np.argmax(knick)) + (0 if geschl else 1)
-                bef.append({'datei': q['datei'], 'id': pr.get('id'), 'abw_m': _r(a), 'knick_grad': _r(k, 1), 'x': _r(inner[i % len(inner), 0], 2), 'z': _r(inner[i % len(inner), 1], 2)})
-    return erg('Q3', not bef, {'linien': n_lin, 'abw_max_m': _r(worst_a), 'knick_max_grad': _r(worst_k, 1),
-                               'schwellen': [S['q3_glatt_m'], S['q3_knick_grad']], 'grat_silhouette': 'Sa per Bild (Q13)'}, bef,
-               'Stuetzpunkte vs. gleitende 1-m-Mittelung; Knick zwischen Nachbarsegmenten; Punkte in Kreuzungspolygonen ausgenommen (Annahme).')
+            w['linien'] += 1; linien.append((pl, geschl, q['datei'], pr.get('id'))); pruefe(pl, geschl, q['datei'], pr.get('id'))
+    # Mesh-Kantenzuege: Mesh-Vertices <= 2 cm an der Linie, nach Bogenlaenge der Linie geordnet -> dieselbe Messung
+    try:
+        n = ctx.netz(('gelaende',)); V = n['V'][:, [0, 2]]
+    except Fehlt:
+        n = None; w['mesh_kantenzuege'] = 'offen (kein Mesh)'
+    if n is not None and linien:
+        from shapely import STRtree, points, LineString
+        pts = points(V); tree = STRtree(pts)
+        for pl, geschl, quelle, pid in linien:
+            L = LineString(pl)
+            idx = tree.query(L, predicate='dwithin', distance=S['q2_hausdorff_m'])
+            if len(idx) < 5: continue
+            from shapely import line_locate_point
+            t = line_locate_point(L, pts[idx])
+            o = np.argsort(t); kette = V[idx[o]]
+            kette = kette[np.r_[True, np.hypot(*np.diff(kette, axis=0).T) > 1e-6]]
+            if len(kette) < 3: continue
+            w['mesh_kantenzuege'] += 1; pruefe(kette, geschl, quelle, pid, mesh=True)
+    w = {k: _r(v) if isinstance(v, float) else v for k, v in w.items()}
+    w['schwellen'] = {'abw_m': S['q3_glatt_m'], 'knick_grad': S['q3_knick_grad'], 'abtastung_m': h, 'fenster_m': fen}
+    w['grat_silhouette'] = 'Sa per Bild (Q13)'
+    return erg('Q3', not bef, w, bef,
+               'Neuabtastung 0,05 m nach Bogenlaenge (lin. Interpolation, Endpunkte bleiben), gleitendes 1-m-Mittel, Abstand Abtastpunkt -> gemittelte Linie <= 3 cm hart fuer alle Linien '
+               '(Vektor und Mesh-Kantenzug = Mesh-Vertices <= 2 cm an der Linie); Knick <= 15 Grad (Sehnen vor/nach dem Punkt), in Kreuzungspolygonen ausgenommen (Q4/R8 gilt dort).')
 
 
 # ------------------------------------------------------------------ Q4
