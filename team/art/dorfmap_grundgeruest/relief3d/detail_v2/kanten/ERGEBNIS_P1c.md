@@ -302,4 +302,4 @@ Hinweise an QA:
   - SHA-256 `1c7e5d8ac2356279074895f250673f2bb6cf84277068ddb10238ad933eecaa90`
 - Die Bilder wurden neu gerendert. Die sichtbare Geometrie ist unverändert, die Bilder sind bytegleich.
 
-Kosten: 0 EUR, ohne Codex, 18:23–18:45 (Europe/Berlin).
+Kosten: 0 EUR, ohne Codex, 18:23–18:40 (Europe/Berlin).
