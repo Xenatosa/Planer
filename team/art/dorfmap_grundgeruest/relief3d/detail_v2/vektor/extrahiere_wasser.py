@@ -425,6 +425,9 @@ def main():
                                       "spiegel_m": np.round(bilinear(S, g[:, 0], g[:, 1]), 3).tolist()}})
     for name, f in (("wasser.geojson", wf), ("ufer.geojson", uf), ("bach_mitte.geojson", bf)):
         (aus / name).write_text(json.dumps(fc(f), ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    import sys as _sys; _sys.path.insert(0, str(HIER))
+    from abtasten_gleichmaessig import bearbeite as _gleichmaessig   # P1b3: 0,05 m gleichmaessig, ohne DP
+    _gleichmaessig(aus)
     bericht = messe(aus, a.paket)
     (aus / "extrahiere_wasser_bericht.json").write_text(json.dumps(bericht, indent=1, ensure_ascii=False), encoding="utf-8")
     bild(a.paket, aus, a.vorher)
