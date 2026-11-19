@@ -37,6 +37,9 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q14': ('Q14', 'Mittellinie W4 0,5 m versetzt, Bauzone +2 % Radius'),
     'Q14_fehlt': ('Q14', 'Referenz-Teilstueck W8/0 fehlt in wege.geojson, nicht in q14_ausnahmen -> bleibt hart', 'Mittellinie fehlt'),
     'Q14_zelle_fehlt': ('Q14', 'Bauzone Zellformat (#61): 1 Zelle aus der CSV fehlt in zonen.geojson', 'fehlen in zonen.geojson'),
+    'Q3_bruecke_p5_laengs': ('Q3', 'P5-Regel an: Deckecken frei, aber Delle 4 cm auf der Laengsseite des Brueckenrechtecks bleibt hart', 'flaechentyp_br01'),
+    'Q3_wegende_weit': ('Q3', 'Delle ~4,1 cm an Grund-Zone, aber > 3 m vor jedem Wegende -> hart', 'flaechentyp_gr01'),
+    'Q3_wegende_gross': ('Q3', 'Delle ~6 cm (> 4,8 cm) 2 m vor Wegende W5 -> hart', 'flaechentyp_gr01'),
     'Q14_wasser': ('Q14', 'Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 %'),
 }
 
@@ -181,12 +184,18 @@ def main():
          lambda x: x['status'] == 'ok' and x['werte']['bauzone_format'] == 'zellen' and x['werte']['bauzone_zellen']['deckungsgleich'] and x['werte']['bauzone_zellen']['komponenten'] == 2),
         ('Q3_logik', 'Q3', 'ok', 'zackige Slot- und Bauzonen-Polygone + Zellpunkte in zonen.geojson, Q3-Quelle ohne Layer-Filter: Logikschichten ausgeschlossen',
          lambda x: x['status'] == 'ok' and x['werte']['ausgeschlossen_logikschicht'] >= 2),
+        ('Q3_bruecke', 'Q3', 'offen', 'F14: Brueckenrechteck (Platzhalter) - Ecken 90 Grad = offener Befund P5 (nicht ok, nicht Ausnahme)',
+         lambda x: x['status'] == 'offen' and any(b.get('offen') == 'P5' and b['id'] == 'flaechentyp_br01' for b in x['befunde']) and 'flaechentyp_br01' in x['werte']['bruecke_offen_p5']['ringe']),
+        ('Q3_bruecke_p5', 'Q3', 'ok', 'F14 P5-Regel an (konfig q3_bruecke_p5.aktiv): 4 Deckecken je +-0,5 m frei, Laengsseiten glatt -> ok',
+         lambda x: x['status'] == 'ok' and len(x['werte'].get('p5_deckecken', [])) == 4 and not x['werte']['bruecke_offen_p5']['ringe']),
+        ('Q3_wegende', 'Q3', 'ok', 'F15: Delle ~4,1 cm (Knick 13 Grad) an Grund-Zone 2 m vor Wegende W5 -> Ausnahme A-DV2-01',
+         lambda x: x['status'] == 'ok' and x['werte']['wegenden_ausnahme']['abschnitte'] >= 1 and list(x['werte']['wegenden_ausnahme']['ringe']) == ['flaechentyp_gr01']),
         ('Q14_ausnahme', 'Q14', 'ok', 'W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler',
          lambda x: x['status'] == 'ok' and x['werte']['wege_ausnahme'] == ['W9/0 (A-TEST)'] and any(b.get('ausnahme') == 'A-TEST' for b in x['befunde']))):
         baue_dummy.baue(tmp / v, v)
         x = lauf(v, {q})['regeln'][q]
         good = bool(pruef(x)); ok_ges &= good
-        w = x['werte']; det = {k: w.get(k) for k in ('bauzone_format', 'bauzone_zellen', 'ausgeschlossen_logikschicht', 'wege_ausnahme', 'uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
+        w = x['werte']; det = {k: w.get(k) for k in ('p5_regel', 'p5_deckecken', 'bruecke_offen_p5', 'wegenden_ausnahme', 'bauzone_format', 'bauzone_zellen', 'ausgeschlossen_logikschicht', 'wege_ausnahme', 'uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
         zeilen.append((v, q, soll, x['status'], good, txt + ' -> ' + json.dumps(det, ensure_ascii=False)[:150]))
     # Exit-2: leerer Ordner
     leer = tmp / 'leer'; leer.mkdir(parents=True, exist_ok=True)

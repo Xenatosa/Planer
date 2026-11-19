@@ -52,7 +52,7 @@ python3 detail_v2/qa/pruefe_alle.py --wurzel relief3d/detail_v2 \
 
 ## 4. Stand Do 19.11. (Selbsttest)
 
-Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. Runde 5: Der saubere Dummy besteht alle 14 Regeln, jede der 26 Fehlervarianten reißt ihre Regel (neu: Q14_zelle_fehlt). Dazu kommen 5 Sonderfälle (enge Kurve nur gekennzeichnet, fehlende Zonen = offen, Q14-Ausnahme = ok mit Ausnahme-Befund, Bauzone im Zellformat = ok, Logikschichten nicht in Q3), Exit 2/1, die Q14-Referenz aus der Datei, 5 Q3-Einheitstests (Kreis 0,25 vs. 0,05 m, DP = dicht, Delle, Zickzack, Ecke), 4 F11-Tests (Kartenrand, Stoßfenster, Knick knapp außerhalb, Brückenecke) und 2 F13-Tests (Kartenrand-Stoß im Fenster, mit Brücke hart). Ergebnis: 61 Fälle, 105 s. Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
+Alle 14 Regeln als Skript fertig und selbstgetestet. Stand 19.11. Runde 6: 67 Fälle BESTANDEN (111 s); neu: Q3_bruecke (offen P5), Q3_bruecke_p5 (P5-Regel an → ok), Q3_bruecke_p5_laengs, Q3_wegende (Ausnahme A-DV2-01), Q3_wegende_weit, Q3_wegende_gross (beide hart). Stand Runde 5: Der saubere Dummy besteht alle 14 Regeln, jede der 26 Fehlervarianten reißt ihre Regel (neu: Q14_zelle_fehlt). Dazu kommen 5 Sonderfälle (enge Kurve nur gekennzeichnet, fehlende Zonen = offen, Q14-Ausnahme = ok mit Ausnahme-Befund, Bauzone im Zellformat = ok, Logikschichten nicht in Q3), Exit 2/1, die Q14-Referenz aus der Datei, 5 Q3-Einheitstests (Kreis 0,25 vs. 0,05 m, DP = dicht, Delle, Zickzack, Ecke), 4 F11-Tests (Kartenrand, Stoßfenster, Knick knapp außerhalb, Brückenecke) und 2 F13-Tests (Kartenrand-Stoß im Fenster, mit Brücke hart). Ergebnis: 61 Fälle, 105 s. Details: `selbsttest/ERGEBNIS_SELBSTTEST.md`.
 
 Skalierung und Gegenprobe am alten Mesh im verbindlichen Format: siehe Abschnitt 8 (Q1 21 s, Gesamt 25 s für 7 Regeln auf 0,81 Mio. Dreiecken).
 
@@ -168,6 +168,33 @@ Selbsttest Runde 4: **56 Fälle BESTANDEN** (95–100 s).
    - Q3-Rest: 17 Ringe (alle `flaechentyp`, `untergrund` 0). Nach Gruppe (Ort des größten Ausschlags): `bruecke` 13, `sonst` 3, `stoss_nah` 1, `kartenrand_nah` 0. Abschnitte über Schwelle: `sonst` 98, `bruecke` 40, `stoss_nah` 13.
    - **Abweichung von der Erwartung (0 „sonst“, 0 Brückenecken):** Die 40 Brückenabschnitte sind die Rechteck-Ecken der Brücken bei 175–190 | 73–130 (bis 24,2 cm / 141°; Ringe flaechentyp_00007/08/09 Brücke, 00010/00012 Weg, 00015–00018 Ufer, 00052/54/55/56 Grund). Alle 98 `sonst`-Abschnitte liegen ≤ 3 m an einem Mittellinien-Ende (Median 1,3 m), also an runden Wegenden (Kandidat A-DV2-01): 3,0–4,8 cm, Knick ≤ 11°, Ringe 00010/11/12 (Weg), 00015/18 (Ufer), 00037 (Fels), 00052/54/56/58 (Grund).
    - Q14 Bauzone: 25 Komponenten, 31 893 Zellen, 0 doppelt, deckungsgleich mit `neu/zellen_relief.csv` (0 fehlend, 0 zusätzlich).
+
+**Runde 6 (Entscheidung Grundgerüst, eingearbeitet 19.11. ab 18:48 MEZ, Basis a60ea22 + Merge origin/art/dorfmap-fertig bf9f62d mit #61):**
+
+1. **F14 – Brücken bis P5 offen.** Die Q3-Abschnitte der Gruppe `bruecke` (Brückenrechteck = Platzhalter) zählen bis P5 als **offener Befund „P5“**: Befund mit `offen: P5`, Q3-Status `offen`, wenn sonst nichts reißt. Das ist weder eine Ausnahme noch ok. `werte.bruecke_offen_p5` listet die Ringe. Nach P5 wird neu gemessen.
+   - **P5-Regel vorbereitet** (konfig `q3_bruecke_p5`, `aktiv: false` bis das Brückenmodell da ist): Die Deckenden sind echte Baukanten. Die 4 Ecken je Brücke (kleinstes gedrehtes Rechteck der Brückenfläche, Quelle `datei`/`filter`, nach P5 auf das Modell umstellbar) sind im Fenster ± 0,5 m frei, wie Kreuzungspolygone. Längsseiten und alles andere bleiben hart, und mit `aktiv` gibt es keinen P5-Status mehr. `befreit` = [`knick`, `abw`]: Im Eckfenster sind Knick **und** Abweichung frei, weil eine 90-Grad-Ecke sonst über die Abweichung (≈ 18 cm) weiter reißt. Soll nur der Knick frei sein, genügt `befreit: ["knick"]` (Rückfrage an Grundgerüst).
+2. **F15 – Wegenden unter A-DV2-01.** Die 98 Abschnitte (3,0–4,8 cm, ≤ 3 m vor Wegende) stehen in `AUSNAHMEN_DV2.md` unter A-DV2-01, je Ring zusammengefasst mit Verweis auf `gegenprobe/R5_zonen_5dabe976.md`. Bedingung: Sichtprüfung bei 1,7 m; sind sie sichtbar, bekommen die Wegenden im Mesh (P2) eine andere Endgeometrie. Q3 führt sie eng begrenzt als Ausnahme (konfig `q3_wegenden`): nur Gruppe `sonst`, und nur der ganze Abschnitt (zusammenhängend, gleiche Gruppe, 1 Abtastpunkt Lücke erlaubt), wenn er vollständig ≤ 3,0 m vor einem Mittellinien-Ende liegt UND die Abweichung ≤ 4,8 cm UND der Knick ≤ 15° ist. Alles andere bleibt hart. `werte.wegenden_ausnahme` zählt Abschnitte je Ring.
+3. **stoss_nah (13 Abschnitte, 6 Ringe):** Alle liegen **außerhalb** des ± 0,5-m-Fensters (kürzester Bogenabstand zum Stoßpunkt 0,502–0,851 m; jeder Abschnitt beginnt direkt hinter der Fenstergrenze). Die Fensterlogik ist korrekt: Im Selbsttest F11/F13 hinterlässt eine 90-Grad-Ecke außerhalb des Fensters keinen Rest. Alle 13 liegen 0,96–1,48 m vor einem Wegende: Dort beginnt die runde Wegend-Kurve direkt am Stoßpunkt. **Befund für P1c.** Sie bleiben hart (nicht unter F15, weil nur die Gruppe `sonst` freigegeben ist). Liste: `gegenprobe/R6_zonen_bf9f62d.md`.
+4. **Gegenprobe gemergter Stand bf9f62d** (Zonen = 5dabe976). Q3-Zonenringe (Vektor) nach Gruppe:
+
+   | Gruppe | Ringe | Abschnitte | Behandlung |
+   |---|---|---|---|
+   | `bruecke` | 13 | 40 | offen P5 |
+   | `sonst` (Wegenden) | 10 | 98 | Ausnahme A-DV2-01, 0 Rest |
+   | `stoss_nah` | 6 | 13 | hart, Befund P1c |
+   | `kartenrand_nah` | 0 | 0 | – |
+
+   Weitere Ergebnisse:
+   - 117 Stoßpunkte.
+   - Q14-Bauzone deckungsgleich.
+   - Q3 gesamt am alten Mesh `fehler`: Wege-Mesh-Kantenzüge und die stoss_nah-Abschnitte.
+5. **Selbsttest Runde 6: 67 Fälle BESTANDEN** (111 s).
+   - `Q3_bruecke`: Rechteck → offen P5.
+   - `Q3_bruecke_p5`: P5-Regel an → 4 Deckecken frei, ok.
+   - `Q3_bruecke_p5_laengs`: Delle auf der Längsseite → fehler.
+   - `Q3_wegende`: ~4,1 cm, 2 m vor Wegende → Ausnahme, ok.
+   - `Q3_wegende_weit`: > 3 m → fehler.
+   - `Q3_wegende_gross`: ~7 cm → fehler.
 
 **D2-Regel** (Entscheidung New Bot 19.11.2026 über Grundgerüst) unverändert: |Δh| ≤ 1 cm an den alten D2-Vertices, Lage und Form erhalten.
 

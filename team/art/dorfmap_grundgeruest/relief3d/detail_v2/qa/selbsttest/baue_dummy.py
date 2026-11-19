@@ -428,8 +428,27 @@ def baue(ziel, fehler=None):
         if fehler == 'Q13' and i in (3, 7): continue
         Image.fromarray((rng.random((48, 64, 3)) * 255).astype(np.uint8)).save(ziel / 'abnahme' / n, quality=90)
     (ziel / 'abnahme' / 'QUELLEN.txt').write_text('Dummy-Abnahmebilder (Rauschen) fuer den QA-Selbsttest\n' + '\n'.join(namen) + '\n')
+    # ---- Runde 6 (F14/F15): Zonenringe ausserhalb des Mesh-Bereichs (x < 126), damit nur die Vektorregel greift
+    if (fehler or '').startswith(('Q3_bruecke', 'Q3_wegende')):
+        zp = ziel / 'vektor' / 'zonen.geojson'; zfc = json.loads(zp.read_text()) if zp.exists() else fc([])
+        if fehler.startswith('Q3_bruecke'):    # Brueckenrechteck 8 x 3 m (Platzhalter), Laengsseiten x-Richtung
+            xs = np.linspace(110, 118, 161)[:-1]; zs_ = np.linspace(60, 63, 61)[:-1]
+            unten = np.c_[xs, np.full_like(xs, 60.0)]; oben = np.c_[xs[::-1] + 0.05, np.full_like(xs, 63.0)]
+            if fehler == 'Q3_bruecke_p5_laengs': oben[:, 1] += 0.12 * 0.5 * (1 + np.cos(np.pi * np.clip((oben[:, 0] - 114) / 0.6, -1, 1)))
+            rr = np.vstack([unten, np.c_[np.full_like(zs_, 118.0), zs_], oben, np.c_[np.full_like(zs_, 110.0), zs_[::-1] + 0.05]])
+            zfc['features'].append(feat({'type': 'Polygon', 'coordinates': [np.vstack([rr, rr[:1]]).round(4).tolist()]}, id='flaechentyp_br01', layer='flaechentyp', typ='bruecke', klasse=5))
+        else:                                  # runde Grund-Zone r 5 m mit Delle (0,12 m, Halbbreite 0,6 m -> ~4,1 cm / 13 Grad)
+            ang = np.pi if fehler in ('Q3_wegende', 'Q3_wegende_gross') else 0.0; amp = 0.20 if fehler == 'Q3_wegende_gross' else 0.12
+            t = np.linspace(0, 2 * np.pi, int(2 * np.pi * 5 / 0.05), endpoint=False); P = np.c_[120 + 5 * np.cos(t), 100 + 5 * np.sin(t)]
+            d = np.angle(np.exp(1j * (t - ang))) * 5; P -= (P - [120, 100]) / 5 * (amp * 0.5 * (1 + np.cos(np.pi * np.clip(d / 0.6, -1, 1))))[:, None]
+            zfc['features'].append(feat({'type': 'Polygon', 'coordinates': [np.vstack([P, P[:1]]).round(4).tolist()]}, id='flaechentyp_gr01', layer='flaechentyp', typ='grund', klasse=0))
+            wp = ziel / 'vektor' / 'wege.geojson'; wfc = json.loads(wp.read_text())   # kurzer Weg W5, Ende (113|100) = 2 m vor der Delle bei (115|100)
+            wfc['features'].append(feat({'type': 'LineString', 'coordinates': [[106.0, 100.0], [113.0, 100.0]]}, id='W5', rolle='mittellinie', klasse='HAUSWEG', breite=2.0, teil=0))
+            wp.write_text(json.dumps(wfc))
+        zp.write_text(json.dumps(zfc))
     kd = dict(k); kd['bruecken'] = {'E2': k['bruecken']['E2']}
     kd['schwellen'] = dict(k['schwellen'])
+    if (fehler or '').startswith('Q3_bruecke_p5'): kd['q3_bruecke_p5'] = dict(k['q3_bruecke_p5'], aktiv=True)
     if fehler == 'Q14_ausnahme': kd['q14_ausnahmen'] = [{'id': 'A-TEST', 'wege': ['W9/0']}]
     if zellen_soll is not None:
         kd['bauzone'] = dict(k['bauzone'], zellen_csv='zellen_relief.csv', zellen_soll=zellen_soll)

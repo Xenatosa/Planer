@@ -170,13 +170,54 @@ def q3(ctx):
     zk = ctx.k.get('q3_zonen', {})
     from shapely import box
     karte_rand = box(0, 0, *ctx.k['welt_m']).boundary
+    # F14 (Runde 6): Bruecken-Deckecken ab P5 (konfig q3_bruecke_p5.aktiv, Standard aus) - Fenster wie Kreuzungspolygone
+    p5 = ctx.k.get('q3_bruecke_p5', {}); deck = np.zeros((0, 2))
+    if p5.get('aktiv'):
+        deck = bruecken_deckecken(ctx, p5); w['p5_deckecken'] = [[_r(x, 2), _r(z, 2)] for x, z in deck]
+    w['p5_regel'] = 'aktiv' if p5.get('aktiv') else 'aus (Bruecken-Befunde offen bis P5)'
+    # F15 (Runde 6): Wegenden-Ausnahme A-DV2-01 (nur Gruppe sonst, <= ende_m vor Wegende UND abw <= abw_max_m, Knick-Grenze bleibt)
+    we = ctx.k.get('q3_wegenden', {}); enden = np.zeros((0, 2))
+    if we.get('aktiv'):
+        for pl_, pr_ in _mittellinien(ctx): enden = np.vstack([enden, pl_[:1], pl_[-1:]])
+    w['wegenden_ausnahme'] = {'id': we.get('ausnahme'), 'abschnitte': 0, 'ringe': {}}
+    w['bruecke_offen_p5'] = {'abschnitte': 0, 'ringe': {}}
+    def abschnitte(m, n, geschl):
+        if not len(m): return []
+        br = np.split(m, np.nonzero(np.diff(m) > 2)[0] + 1)          # 1 Abtastpunkt Luecke bleibt ein Abschnitt
+        if geschl and len(br) > 1 and br[0][0] == 0 and br[-1][-1] == n - 1: br = [np.r_[br[-1], br[0]]] + br[1:-1]
+        return br
     def pruefe(pl, geschl, quelle, pid, mesh=False, zone=None):
         R, abw, knick = form_abw(pl, fen, geschl, h)
         if kreuz is not None and len(R): knick = np.where(contains_xy(kreuz, R[:, 0], R[:, 1]), 0, knick)
+        if len(deck) and len(R):
+            dd = np.hypot(R[:, None, 0] - deck[None, :, 0], R[:, None, 1] - deck[None, :, 1]).min(1) <= p5.get('fenster_m', 0.5)
+            if 'knick' in p5.get('befreit', ['knick']): knick = np.where(dd, 0, knick)
+            if 'abw' in p5.get('befreit', []): abw = np.where(dd, 0, abw)
         gruppe = None
-        if zone is not None and len(R):                         # F11: Kartenrand + Stossfenster ausgenommen, sonst hart
+        if zone is not None and len(R):                         # F11/F13: Kartenrand + Stossfenster ausgenommen, sonst hart
             aus, gruppe = zonen_maske(R, pl, geschl, zone, karte_rand, zk)
             abw = np.where(aus, 0, abw); knick = np.where(aus, 0, knick); w['zonen_ausgenommen_punkte'] += int(aus.sum())
+            ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
+            if len(enden):                                      # F15: Abschnitt nur als Ganzes ausgenommen
+                for b_ in [b_ for g_ in we.get('gruppen', ['sonst']) for b_ in abschnitte(np.nonzero(ub & (gruppe == g_))[0], len(R), geschl)]:
+                    de = np.hypot(R[b_, None, 0] - enden[None, :, 0], R[b_, None, 1] - enden[None, :, 1]).min(1)
+                    if de.max() <= we.get('ende_m', 3.0) and abw[b_].max() <= we.get('abw_max_m', 0.048) + 1e-9 \
+                       and knick[b_].max() <= S['q3_knick_grad']:
+                        e = w['wegenden_ausnahme']; e['abschnitte'] += 1
+                        r_ = e['ringe'].setdefault(pid + (' (mesh)' if mesh else ''), {'abschnitte': 0, 'abw_max_cm': 0.0, 'quelle': 'mesh' if mesh else 'vektor'})
+                        r_['abschnitte'] += 1; r_['abw_max_cm'] = max(r_['abw_max_cm'], _r(abw[b_].max() * 100, 1))
+                        abw[b_] = 0; knick[b_] = 0; gruppe[b_] = 'wegende_ausnahme'
+            if not p5.get('aktiv'):                             # F14: Bruecken-Gruppe bis P5 als offener Befund
+                ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
+                mb = ub & (gruppe == 'bruecke')
+                if mb.any():
+                    i = int(np.nonzero(mb)[0][np.argmax(abw[mb])])
+                    e = w['bruecke_offen_p5']; e['abschnitte'] += len(abschnitte(np.nonzero(mb)[0], len(R), geschl))
+                    e['ringe'][pid + (' (mesh)' if mesh else '')] = {'abw_max_cm': _r(abw[mb].max() * 100, 1), 'knick_max_grad': _r(knick[mb].max(), 1), 'x': _r(R[i, 0], 2), 'z': _r(R[i, 1], 2), 'quelle': 'mesh' if mesh else 'vektor'}
+                    offen_p5.append({'datei': quelle, 'id': pid, 'quelle': 'mesh' if mesh else 'vektor', 'offen': 'P5', 'gruppe': 'bruecke',
+                                     'abw_m': _r(abw[mb].max()), 'knick_grad': _r(knick[mb].max(), 1), 'x': _r(R[i, 0], 2), 'z': _r(R[i, 1], 2),
+                                     'hinweis': 'Brueckenrechteck (Platzhalter) - offener Befund bis P5, danach neu messen'})
+                    abw = np.where(mb, 0, abw); knick = np.where(mb, 0, knick)
         a = float(abw.max()) if len(abw) else 0.0; k = float(knick.max()) if len(knick) else 0.0
         pre = 'mesh_' if mesh else ''
         w[pre + 'abw_max_m'] = max(w[pre + 'abw_max_m'], a); w[pre + 'knick_max_grad'] = max(w[pre + 'knick_max_grad'], k)
@@ -187,6 +228,7 @@ def q3(ctx):
                 ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
                 b['gruppe'] = str(gruppe[i]); b['gruppen_punkte'] = {g: int((ub & (gruppe == g)).sum()) for g in np.unique(gruppe[ub])}
             bef.append(b)
+    offen_p5 = []
     linien = []
     aus_layer = set(ctx.k.get('q3_ausschluss', {}).get('layer', []))   # Runde 5: Logikschichten (bauzone_plan, slot) nie in Q3
     w['ausgeschlossen_logikschicht'] = 0
@@ -208,7 +250,9 @@ def q3(ctx):
     for (q, ls), st in zip(quellen, stoss_je):
         for pl, geschl, pr in ls:
             w['linien'] += 1; linien.append((pl, geschl, q['datei'], pr.get('id')))
-            pruefe(pl, geschl, q['datei'], pr.get('id'), zone=({'stoss': st, 'pr': pr} if q.get('zonenringe') else None))
+            zo = {'stoss': st, 'pr': pr} if q.get('zonenringe') else None
+            linien[-1] = linien[-1] + (zo,)
+            pruefe(pl, geschl, q['datei'], pr.get('id'), zone=zo)
     # Mesh-Kantenzuege: Mesh-Vertices <= 2 cm an der Linie, nach Bogenlaenge der Linie geordnet -> dieselbe Messung
     try:
         n = ctx.netz(('gelaende',)); V = n['V'][:, [0, 2]]
@@ -217,7 +261,7 @@ def q3(ctx):
     if n is not None and linien:
         from shapely import STRtree, points, LineString
         pts = points(V); tree = STRtree(pts)
-        for pl, geschl, quelle, pid in linien:
+        for pl, geschl, quelle, pid, zo in linien:
             L = LineString(pl)
             idx = tree.query(L, predicate='dwithin', distance=S['q2_hausdorff_m'])
             if len(idx) < 5: continue
@@ -226,20 +270,37 @@ def q3(ctx):
             o = np.argsort(t); kette = V[idx[o]]
             kette = kette[np.r_[True, np.hypot(*np.diff(kette, axis=0).T) > 1e-6]]
             if len(kette) < 3: continue
-            w['mesh_kantenzuege'] += 1; pruefe(kette, geschl, quelle, pid, mesh=True)
+            w['mesh_kantenzuege'] += 1; pruefe(kette, geschl, quelle, pid, mesh=True, zone=zo)
     w = {k: _r(v) if isinstance(v, float) else v for k, v in w.items()}
     w['schwellen'] = {'abw_m': S['q3_glatt_m'], 'knick_grad': S['q3_knick_grad'], 'abtastung_m': h, 'fenster_m': fen}
     w['grat_silhouette'] = 'Sa per Bild (Q13)'
-    zb = [b for b in bef if 'gruppe' in b]
+    zb = [b for b in bef if 'gruppe' in b and b['quelle'] == 'vektor']     # Vektor-Zonenringe; Mesh-Zonenzuege separat
+    zm = [b for b in bef if 'gruppe' in b and b['quelle'] == 'mesh']
+    w['zonen_rest_mesh'] = {'ringe': len(zm), 'ringe_je_gruppe': {g: sum(1 for b in zm if b['gruppe'] == g) for g in sorted({b['gruppe'] for b in zm})}}
     w['zonen_rest'] = {'ringe': len(zb), 'ringe_je_gruppe': {g: sum(1 for b in zb if b['gruppe'] == g) for g in sorted({b['gruppe'] for b in zb})},
                        'punkte_je_gruppe': {g: sum(b['gruppen_punkte'].get(g, 0) for b in zb) for g in sorted({k for b in zb for k in b['gruppen_punkte']})}}
     w['zonen_stosspunkte'] = stoss
     w['zonen_regel'] = ('F11/F13 (Grundgeruest 19.11.): Zonenringe (layer flaechentyp, untergrund; bauzone_plan und slot nie in Q3) - ausgenommen NUR Abschnitte auf dem Kartenrand (inkl. Ecken, Toleranz '
                         f"{zk.get('kartenrand_tol_m')} m) und +-{zk.get('stoss_fenster_m')} m Bogenlaenge um Stosspunkte mit >= 3 Zonen (Kartenrand zaehlt als Zone 'ausserhalb'); Stosspunkte mit "
                         f"{zk.get('hart_typen')} (Brueckenrechteck, Platzhalter P5) bleiben hart. Sichtpruefung 1,7 m Pflicht (zackiger Stosspunkt = Befund).")
-    return erg('Q3', not bef, w, bef,
+    w['wegenden_ausnahme']['regel'] = (f"F15: A-DV2-01, nur Gruppe {we.get('gruppen')}, ganzer Abschnitt <= {we.get('ende_m')} m vor einem Mittellinien-Ende "
+                                       f"UND abw <= {we.get('abw_max_m')} m, Knick <= {S['q3_knick_grad']} Grad; alles andere hart") if we.get('aktiv') else 'aus'
+    r = erg('Q3', not bef, w, bef + offen_p5,
                'Neuabtastung 0,05 m nach Bogenlaenge (lin. Interpolation, Endpunkte bleiben), gleitendes 1-m-Mittel, Abstand Abtastpunkt -> gemittelte Linie <= 3 cm hart fuer alle Linien '
                '(Vektor und Mesh-Kantenzug = Mesh-Vertices <= 2 cm an der Linie); Knick <= 15 Grad (Sehnen vor/nach dem Punkt), in Kreuzungspolygonen ausgenommen (Q4/R8 gilt dort).')
+    if offen_p5:
+        r['notiz'] += f" F14: {len(offen_p5)} Bruecken-Befund(e) offen bis P5 (nicht ok, nicht Ausnahme)."
+        if r['status'] == 'ok': r['status'] = 'offen'
+    return r
+
+
+def bruecken_deckecken(ctx, p5):
+    """F14 (ab P5): 4 Deckecken je Bruecke = Ecken des kleinsten gedrehten Rechtecks um die Bruecken-Grundflaeche
+    (Quelle konfig q3_bruecke_p5: datei/filter, Standard zonen.geojson flaechentyp typ=bruecke; nach P5 auf das Brueckenmodell umstellbar)."""
+    out = []
+    for g, _ in ctx.polygone(p5.get('datei', 'zonen.geojson'), p5.get('filter'), pflicht=False):
+        out += list(g.minimum_rotated_rectangle.exterior.coords)[:4]
+    return np.array(out, float).reshape(-1, 2)
 
 
 def zonen_stosspunkte(ringe, zk, karte_rand=None):

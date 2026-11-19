@@ -31,6 +31,8 @@ def laufe(wurzel, referenz=None, abnahme=None, nur=None, konfig=None, still=Fals
         if not still and r['werte'].get('zonen_stosspunkte') is not None:   # F11: Stosspunktliste (Sichtpruefung 1,7 m in P6 Pflicht)
             sp = r['werte']['zonen_stosspunkte']
             print(f"     Q3 Zonen-Stosspunkte (>= 3 Zonen): {len(sp)}, davon ausgenommen (+-Fenster) {sum(d['ausgenommen'] for d in sp)}, hart (Bruecke) {sum(not d['ausgenommen'] for d in sp)}, am Kartenrand (F13) {sum(d.get('kartenrand', False) for d in sp)}; Rest {json.dumps(r['werte'].get('zonen_rest'), ensure_ascii=False)}")
+            we, bp = r['werte'].get('wegenden_ausnahme', {}), r['werte'].get('bruecke_offen_p5', {})
+            print(f"     Q3 F15 Wegenden-Ausnahme {we.get('id')}: {we.get('abschnitte')} Abschnitte in {len(we.get('ringe', {}))} Ringen; F14 Bruecke offen bis P5: {bp.get('abschnitte')} Abschnitte, Ringe {sorted(bp.get('ringe', {}))}; P5-Regel {r['werte'].get('p5_regel')}")
             for d in sp: print(f"       {d['x']:9.3f} | {d['z']:9.3f}  {d.get('layer') or '':11s} {'ausgenommen' if d['ausgenommen'] else 'HART       '}  {','.join(d['typen'])}  {','.join(map(str, d['zonen']))}")
     st = [r['status'] for r in out['regeln'].values()]
     out['gesamt'] = 'fehler' if 'fehler' in st else 'offen' if 'offen' in st else 'ok'
