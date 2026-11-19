@@ -1,15 +1,16 @@
 {
  "mesh": "/tmp/dv2_viewer/dummy_dicht",
- "quelle": "DUMMY aus GB (relief_daten.json.gz), Schritt 0.5 m - kein echtes Mesh",
+ "quelle": "DUMMY aus relief_daten.json.gz (GB/WV/WEGA), Schritt 0.5 m - kein echtes Mesh, ohne TEXCOORD_2",
  "ladezeit": {
-  "gesamt_ms": 295,
-  "manifest_ms": 33,
-  "kacheln_ms": 202,
-  "bodenindex_ms": 50,
-  "erstes_bild_ms": 33
+  "gesamt_ms": 286,
+  "manifest_ms": 25,
+  "kacheln_ms": 212,
+  "bodenindex_ms": 65,
+  "query_ms": 0,
+  "erstes_bild_ms": 31
  },
- "dreiecke": 814464,
- "bytes": 26511036,
+ "dreiecke": 814476,
+ "bytes": 27872204,
  "gruen": true,
- "pruefungen": 23
+ "pruefungen": 36
 }
