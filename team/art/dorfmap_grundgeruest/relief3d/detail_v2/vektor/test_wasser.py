@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Abnahme P1b (DETAIL_V2_PLAN Q3, Q14): prueft wasser.geojson, ufer.geojson, bach_mitte.geojson.
+"""Abnahme P1b/P1b2 (DETAIL_V2_PLAN Q3, Q14): prueft wasser.geojson, ufer.geojson, bach_mitte.geojson.
 
   python3 detail_v2/vektor/test_wasser.py            (oder: pytest detail_v2/vektor/test_wasser.py)
 Mit Paket (DV2_PAKET=/tmp/dv2_wasser/alle_kacheln.json.gz, Standard) wird die Ist-Flaeche aus WV neu gezaehlt und zusaetzlich
-geprueft, dass jede nasse Ecke im Vektorwasser liegt (Toleranz halbe Zelle 0,25 m). Ohne Paket gelten die festgehaltenen Ist-Werte.
+geprueft, dass keine nasse Ecke > 0,3 m ausserhalb des Vektorwassers liegt (P1b2-Vorgabe). Ohne Paket gelten die festgehaltenen Ist-Werte.
 Eigene Messung (unabhaengig vom Extraktor):
-  Zacke = max. Abstand der Linie (5 cm abgetastet) zu ihrer 1-m-Glaettung (Savitzky-Golay, 1 m Fenster, Ordnung 2) <= 3 cm
+  Zacke = max. Abstand der Linie (5 cm abgetastet) zu ihrem GLEITENDEN 1-m-MITTEL ueber die Bogenlaenge (QA-Messung,
+          Trapezgewichte = stetiges Mittel ueber genau 1 m, nicht Punktzahl) <= 3 cm; gilt fuer Ufer- UND Mittellinien.
+          Savitzky-Golay (1 m, Ordnung 2) wird nur als Zusatzinfo ausgegeben.
   Knick = max. Richtungsaenderung zwischen Nachbarsegmenten <= 15 Grad
-  Flaeche gesamt, E2, E3 je +-3 % zum Ist; alle Polygone shapely is_valid; Gewaesser ueberlappen nicht.
+  Flaeche gesamt, E2, E3 je +-3 % zum Ist; alle Polygone shapely is_valid; Gewaesser (verschiedener Spiegel) ueberlappen nicht.
 """
 import base64, gzip, json, os, sys
 from pathlib import Path
@@ -19,7 +21,7 @@ from scipy.signal import savgol_filter
 
 HIER = Path(__file__).resolve().parent
 PAKET = Path(os.environ.get("DV2_PAKET", "/tmp/dv2_wasser/alle_kacheln.json.gz"))
-ZACKE_MAX, KNICK_MAX, FLAECHE_PROZ, ABDECK_TOL = 0.03, 15.0, 3.0, 0.25
+ZACKE_MAX, KNICK_MAX, FLAECHE_PROZ, ABDECK_TOL = 0.03, 15.0, 3.0, 0.3
 IST_FEST = {"gesamt": 6461.25, "E2": 102.5, "E3": 148.25}     # nasse Ecken x 0,25 m2, Stand art/dorfmap-fertig d2d4824
 KACHELN = {"E2": (168, 43, 210, 86), "E3": (168, 86, 210, 129)}
 
@@ -39,6 +41,20 @@ def abtasten(C, step, zu):
 
 
 def zacke(C, zu):
+    """Abstand zum gleitenden 1-m-Mittel (Bogenlaenge)."""
+    Q = abtasten(C, 0.05, zu)
+    if len(Q) < 25: return 0.0
+    k = np.ones(21); k[0] = k[-1] = 0.5; k /= k.sum()
+    if zu:
+        pad = np.vstack([Q[-21:], Q, Q[:21]])
+        G = np.column_stack([np.convolve(pad[:, i], k, "same")[21:-21] for i in range(2)]); ref = Q
+    else:
+        G = np.column_stack([np.convolve(Q[:, i], k, "valid") for i in range(2)]); ref = Q[10:len(Q) - 10]
+    return float(np.hypot(*(ref - G).T).max())
+
+
+def zacke_sg(C, zu):
+    """nur Zusatzinfo"""
     Q = abtasten(C, 0.05, zu)
     if len(Q) < 25: return 0.0
     G = np.column_stack([savgol_filter(Q[:, i], 21, 2, mode="wrap" if zu else "interp") for i in range(2)])
@@ -85,12 +101,12 @@ def test_attribute_je_punkt():
 
 
 def test_polygone_valid_und_getrennt():
-    W = [shape(f["geometry"]) for f in lade("wasser.geojson")]
+    F = lade("wasser.geojson"); W = [shape(f["geometry"]) for f in F]
     bander = [shape(f["geometry"]) for f in lade("ufer.geojson") if f["properties"]["typ"] == "uferband"]
     assert W and all(g.is_valid for g in W) and all(g.is_valid for g in bander)
     for a in range(len(W)):
         for b in range(a + 1, len(W)):
-            assert W[a].intersection(W[b]).area < 1e-6, (a, b)
+            assert W[a].intersection(W[b]).area < 1e-6, (F[a]["properties"]["id"], F[b]["properties"]["id"])
     wu = unary_union(W)
     for g in bander: assert g.intersection(wu).area < 1e-4          # Band liegt landseitig
 
@@ -123,6 +139,11 @@ if __name__ == "__main__":
             try: fn(); print("OK  ", name)
             except AssertionError as ex: fehler += 1; print("FAIL", name, ex)
     L = linien(); W = [shape(f["geometry"]) for f in lade("wasser.geojson")]
-    print(json.dumps({"linien": len(L), "polygone": len(W), "zacke_max_m": round(max(zacke(C, zu) for _, C, zu, _ in L), 4),
-                      "knick_max_grad": round(max(knick(C, zu) for _, C, zu, _ in L), 2), "paket": PAKET.exists()}))
+    U = [x for x in L if x[3]["typ"] == "uferlinie"]; M = [x for x in L if x[3]["typ"] == "bach_mitte"]
+    for i, C, zu, _ in U: print(f"  {i:8s} Zacke gleitendes Mittel {100 * zacke(C, zu):.2f} cm  Knick {knick(C, zu):.2f} Grad")
+    print(json.dumps({"uferlinien": len(U), "mittellinien": len(M), "polygone": len(W),
+                      "ufer_zacke_max_m": round(max(zacke(C, zu) for _, C, zu, _ in U), 4),
+                      "mitte_zacke_max_m": round(max(zacke(C, zu) for _, C, zu, _ in M), 4),
+                      "knick_max_grad": round(max(knick(C, zu) for _, C, zu, _ in L), 2),
+                      "zacke_sg_max_m_info": round(max(zacke_sg(C, zu) for _, C, zu, _ in L), 4), "paket": PAKET.exists()}))
     sys.exit(1 if fehler else 0)
