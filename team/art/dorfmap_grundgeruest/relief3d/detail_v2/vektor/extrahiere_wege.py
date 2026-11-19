@@ -13,7 +13,10 @@ Verfahren (DETAIL_V2_PLAN 3.1):
   Bandumriss zyklisch Gauss-geglaettet (sigma 0,3 m); Randlinien = Bandumriss ohne Endkappen (links/rechts), 0,25 m abgetastet. Wegnetz = Union der Baender + Kreuzungen.
   Innenrundung [A]: Schliessen mit r (2,2 m, sonst kleiner), Fuellflaechen breiter als 2*1,7 m (Innenraum von U-/Schleifenwegen) und
   Muendungs-Fuellungen an der eigenen Endkappe werden wieder freigegeben (sonst wurde z. B. G015/G018 zu einem Klumpen ohne Innenrand).
-  Kreuzungen [A]: Polygon um e (0-2 m) erweitert, mit dem Bandnetz (+Saum 0-1,0 m) geschnitten, Ecken gerundet (r 2,0/1,85 m),
+  P1a2 (QA Q3) [A]: Zacken werden zusaetzlich nach QA-Methode B gemessen (gleitendes 1-m-Mittel ueber die 0,25-m-Stuetzpunkte,
+  Kreisbogen R: ~6,25 cm/R statt ~4,2 cm/R fein). Daher Innenrundung bis 2,6 m, Ring-sigma bis 1,0 m, Innenraum-Einzug bis
+  0,7 m bei U-/Schleifenwegen, lokales Nachglaetten (ring_lokal), Kreuzungsradius >= 2,35 m; Ziel beide Methoden <= 2,7 cm.
+  Kreuzungen [A]: Polygon um e (0-3 m) erweitert, mit dem Bandnetz (+Saum 0-2,0 m) geschnitten, Ecken gerundet (r 2,6/2,45 m),
   Variante mit kleinstem Ueberstand ueber Bandnetz/Platz bei >= 90 % Abdeckung; Chaikin 2x, alle 0,25 m abgetastet.
   Das Bandnetz laeuft darunter durch (keine Luecke).
   Wegenden: Teilstuecke, die nicht frei im Gelaende enden, werden bis in die naechste Kreuzung bzw. das Nachbar-Teilstueck
@@ -32,8 +35,11 @@ from skimage.graph import route_through_array
 R = Path(__file__).resolve().parents[2]          # relief3d/
 AUS = Path(__file__).resolve().parent
 ZW = 1.2                                          # m pro Zelle in vektor.json
-DP_M = 0.05; SCHRITT_M = 0.25; RUND_M = 2.2; RUND_K_M = 2.0; KR_RAND_M = 0.6; KR_R = (2.0, 1.85); KR_E = (0.0, 0.5, 1.0, 1.5, 2.0); KR_SAUM = (0.0, 0.3, 0.6, 1.0); ERG_MIN = 40; RING_SIGMA_M = 0.3
-RUND_STUFEN = (2.2, 1.8, 1.4, 1.0, 0.7, 0.5, 0.0); FREI_RHO = 1.7; RING_SIGMEN = (0.3, 0.45, 0.6)
+DP_M = 0.05; SCHRITT_M = 0.25; RUND_M = 2.6; RUND_K_M = 2.0; KR_RAND_M = 0.6; KR_R = (2.6, 2.45); KR_E = (0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0); KR_SAUM = (0.0, 0.3, 0.6, 1.0, 1.5, 2.0); ERG_MIN = 40; RING_SIGMA_M = 0.3
+RUND_STUFEN = (2.6, 2.2, 1.8, 1.4, 1.0, 0.7, 0.5, 0.0); FREI_RHO = 1.7; RING_SIGMEN = (0.3, 0.45, 0.6, 0.8, 1.0)
+KR_UEBER_MAX = 1.45  # Kreuzungsueberstand ueber Bandnetz/Platz: Grenze 1,5 m (Dorfmap-Entscheid zu #56), 5 cm Reserve
+EINZUG_STUFEN = (0.0, 0.3, 0.5, 0.7)
+ZACK_ZIEL_M = 0.027   # Ziel mit Reserve zur Abnahme 3,0 cm, beide Messmethoden (A fein, B QA-Stuetzpunktmittel)
 KLASSEN = (("GASSE", 3.0), ("ANBINDUNG", 3.2 / 1.2), ("HAUSWEG", 2.0))
 VOR_SIGMA_M = (1.5, 1.25, 1.0, 0.75, 0.5, 0.35, 0.25, 0.0); MITTE_MAX_M = 0.25
 
@@ -122,23 +128,31 @@ def runden(g, r=RUND_M):
     # Schliessen, Oeffnen, Schliessen: konvexe UND konkave Ecken (auch neu entstandene Einschnuerungs-Spitzen) mit Radius r
     return g.buffer(r, quad_segs=32).buffer(-2 * r, quad_segs=32).buffer(2 * r, quad_segs=32).buffer(-r, quad_segs=32)
 
-def schliessen_frei(M, h, rr):
+def schliessen_frei(M, h, rr, plus=0.0):
     """Band = Rohband (Offset +-h) geschlossen mit rr (Innenecken enger Kurven ausrunden), dann
     (a) Fuellflaechen breiter als 2*FREI_RHO (Innenraum von U-/Schleifenwegen) per Oeffnung wieder freigeben,
     (b) entsteht dabei ein neues Loch (die Fuellung schliesst die Muendung zwischen Wegende und eigenem Schenkel),
-        die an eine Endkappe grenzenden Restfuellungen (> 0,5 m2) ebenfalls freigeben.
+        die an eine Endkappe grenzenden Restfuellungen (> 0,5 m2) ebenfalls freigeben,
+    (c) plus > 0: der freigegebene Innenraum wird um plus erweitert (Innenrand lokal eingezogen). Ein Innenraum mit
+        Inkreisradius ~1,8 m hat zwangslaeufig Randradien < 2,1 m (Zacken B > 3 cm); Einzug vergroessert ihn.
     Gibt None zurueck, wenn trotzdem ein neues Loch bleibt."""
     g = LineString(M).buffer(h, quad_segs=32)
     if rr <= 0: return groesste(g)
     c = groesste(g.buffer(rr, quad_segs=32).buffer(-rr, quad_segs=32)); zu = c.difference(g)
     if zu.is_empty: return c
+    F = []
     frei = zu.buffer(-FREI_RHO, quad_segs=32).buffer(FREI_RHO, quad_segs=32)
-    if not frei.is_empty and frei.area > 1e-3: c = groesste(c.difference(frei).buffer(0))
-    if len(c.interiors) == 0: return c
-    rest = zu.difference(frei); kap = unary_union([Point(M[0]).buffer(h + 0.1), Point(M[-1]).buffer(h + 0.1)])
-    mund = [q for q in getattr(rest, "geoms", [rest]) if q.area > 0.5 and q.intersects(kap)]
-    if mund: c = groesste(c.difference(unary_union(mund)).buffer(0))
-    return c if len(c.interiors) == 0 else None
+    if not frei.is_empty and frei.area > 1e-3: c = groesste(c.difference(frei).buffer(0)); F.append(frei)
+    if len(c.interiors):
+        rest = zu.difference(frei); kap = unary_union([Point(M[0]).buffer(h + 0.1), Point(M[-1]).buffer(h + 0.1)])
+        mund = [q for q in getattr(rest, "geoms", [rest]) if q.area > 0.5 and q.intersects(kap)]
+        if mund: c = groesste(c.difference(unary_union(mund)).buffer(0)); F += mund
+    if len(c.interiors): return None
+    if plus > 0:
+        if not F: return None
+        c = groesste(c.difference(unary_union(F).buffer(plus, quad_segs=32)).buffer(0))
+        if len(c.interiors) or not c.contains(LineString(M).buffer(0.2)): return None
+    return c
 
 def groesste(g):
     if isinstance(g, MultiPolygon): return max(g.geoms, key=lambda p: p.area)
@@ -175,31 +189,90 @@ def ring_glaetten(poly, sigma=RING_SIGMA_M):
 
 def band_von(e):
     """Band je Weg: groesster Innenrundungsradius aus RUND_STUFEN und kleinstes Ring-sigma aus RING_SIGMEN, bei dem beide
-    Randlinien die Eigenpruefung (Knick <= 14 Grad, Zacken <= 2,9 cm, also mit Reserve zur Abnahme) bestehen; sonst die beste Variante."""
+    Randlinien die Eigenpruefung (Knick <= 14 Grad, Zacken A und B <= 2,7 cm, Reserve zur Abnahme 3,0 cm) bestehen;
+    reicht das nicht, Innenraum-Einzug EINZUG_STUFEN (nur U-/Schleifenwege); sonst die beste Variante."""
     h = e["breite"] / 2; best = None
-    for rr in RUND_STUFEN:
-        c = schliessen_frei(e["M"], h, rr)
-        if c is None: continue
-        for sg in RING_SIGMEN:
-            band = ring_glaetten(c, sg); R = raender(band, e["M"], h)
-            note = max([rand_note(P) for _, P in R] + [9.0 if len(R) != 2 else 0.0])
-            if best is None or note < best[0]: best = (note, band, rr, sg)
-            if note <= 1.0: break
-        if best[0] <= 1.0: break
-    e["guete"], e["band"], e["rund_r"], e["ring_sigma"] = round(best[0], 3), best[1], best[2], best[3]
+    for plus in EINZUG_STUFEN:
+        for rr in RUND_STUFEN:
+            c = schliessen_frei(e["M"], h, rr, plus)
+            if c is None: continue
+            for sg in RING_SIGMEN:
+                band = ring_glaetten(c, sg); R = raender(band, e["M"], h)
+                note = max([rand_note(P) for _, P in R] + [9.0 if len(R) != 2 else 0.0])
+                if best is None or note < best[0]: best = (note, band, rr, sg, plus)
+                if note <= 1.0: break
+            if best and best[0] <= 1.0: break
+        if best and best[0] <= 1.0: break
+    e["lokal"] = False
+    if best[0] > 1.0:
+        band, _ = ring_lokal(best[1], e["M"], h); R = raender(band, e["M"], h)
+        note = max([rand_note(P) for _, P in R] + [9.0 if len(R) != 2 else 0.0])
+        if note < best[0]: best = (note, band) + best[2:]; e["lokal"] = True
+    e["guete"], e["band"], e["rund_r"], e["ring_sigma"], e["einzug"] = round(best[0], 3), best[1], best[2], best[3], best[4]
     return e
 
-def rand_note(P, knick_max=14.0, zack_max=0.029):
-    """max(Knick/knick_max, Zacken/zack_max) - wie test_wege.py (Zacken gegen 1-m-Mittel, 0,5 m Endausschluss); <= 1 = gut."""
-    P = np.asarray(P)
+def _abw_b(P):
+    """je Stuetzpunkt Abstand zum gleitenden Mittel (+-2 Punkte), Enden 0."""
+    P = np.asarray(P, float); n = len(P); d = np.zeros(n)
+    if n <= 5: return d
+    c = np.cumsum(np.vstack([[0, 0], P]), 0); M = (c[5:] - c[:-5]) / 5; d[2:n - 2] = np.hypot(*(P[2:n - 2] - M).T); return d
+
+def ring_lokal(band, M, h, ziel=0.9, runden_max=15):
+    """[A] Lokales Nachglaetten: nur um Stuetzpunkte, deren Zacken (A oder B) > ziel * ZACK_ZIEL_M sind, wird der Bandumriss
+    mit Gauss sigma 0,5 m gemischt (Gewicht exp(-(d/0,75 m)^2)), wiederholt bis die Randlinien die Eigenpruefung bestehen.
+    Wirkt wie ein kleiner Eckabschnitt an der Aussenseite enger Kurven; der Rest des Bandes bleibt unveraendert."""
+    Q = abtasten(np.asarray(band.exterior.coords), 0.05, ring=True)[:-1]; n = len(Q)
+    k = 10; x = np.arange(-30, 31); g = np.exp(-0.5 * (x / k) ** 2); g /= g.sum(); idx = (np.arange(n)[:, None] + x[None]) % n
+    for _ in range(runden_max):
+        b = groesste(Polygon(Q).buffer(0)); R = raender(b, M, h)
+        if len(R) == 2 and max(rand_note(P) for _, P in R) <= 1.0: return b, True
+        schlecht = []
+        for _, P in R:
+            P = np.asarray(P); d = _abw_b(P)
+            Qa = abtasten(P, 0.05); na = 21
+            if len(Qa) > na:
+                c = np.cumsum(np.vstack([[0, 0], Qa]), 0); Ma = (c[na:] - c[:-na]) / na; da = np.hypot(*(Qa[10:len(Qa) - 10] - Ma).T)
+                schlecht += list(Qa[10:len(Qa) - 10][da > ziel * ZACK_ZIEL_M])
+            schlecht += list(P[d > ziel * ZACK_ZIEL_M])
+        if not schlecht: return b, False
+        dd = shp.distance(shp.multipoints(np.asarray(schlecht)), shp.points(Q)); w = np.exp(-(dd / 0.75) ** 2)
+        G = (Q[idx] * g[None, :, None]).sum(1); Q = Q + w[:, None] * (G - Q)
+    b = groesste(Polygon(Q).buffer(0)); R = raender(b, M, h)
+    return b, len(R) == 2 and max(rand_note(P) for _, P in R) <= 1.0
+
+def zacken_a(P, ring=False):
+    """Methode A: 0,05 m nachgetastet, kontinuierliches gleitendes 1-m-Mittel, 0,5 m Endausschluss."""
+    P = np.asarray(P, float)
+    if ring and np.allclose(P[0], P[-1]): P = P[:-1]
+    Q = abtasten(np.vstack([P, P[:1]]) if ring else P, 0.05, ring=ring); n = 21
+    if ring:
+        Q = Q[:-1]; m = len(Q); idx = (np.arange(m)[:, None] + np.arange(-10, 11)[None]) % m
+        return float(np.hypot(*(Q - Q[idx].mean(1)).T).max())
+    if len(Q) <= n: return 0.0
+    c = np.cumsum(np.vstack([[0, 0], Q]), 0); M = (c[n:] - c[:-n]) / n
+    return float(np.hypot(*(Q[10:len(Q) - 10] - M).T).max())
+
+def zacken_b(P, ring=False):
+    """Methode B (QA Q3): gleitendes 1-m-Mittel ueber die Stuetzpunkte der Linie selbst (+-k Punkte, k = round(0,5 m / Abstand))."""
+    P = np.asarray(P, float)
+    if ring and np.allclose(P[0], P[-1]): P = P[:-1]
+    n = len(P)
+    if n < 3: return 0.0
+    k = max(1, int(round(0.5 / np.hypot(*np.diff(P, axis=0).T).mean())))
+    if ring:
+        idx = (np.arange(n)[:, None] + np.arange(-k, k + 1)[None]) % n; return float(np.hypot(*(P - P[idx].mean(1)).T).max())
+    if n <= 2 * k + 1: return 0.0
+    c = np.cumsum(np.vstack([[0, 0], P]), 0); M = (c[2 * k + 1:] - c[:-2 * k - 1]) / (2 * k + 1)
+    return float(np.hypot(*(P[k:n - k] - M).T).max())
+
+def rand_note(P, knick_max=14.0, zack_max=ZACK_ZIEL_M, ring=False):
+    """max(Knick/knick_max, ZackenA/zack_max, ZackenB/zack_max); <= 1 = gut (Ziel 2,7 cm, Abnahme 3,0 cm)."""
+    P = np.asarray(P, float)
     if len(P) < 3: return 0.0
-    d = np.diff(P, axis=0); a = np.arctan2(d[:, 1], d[:, 0]); k = np.degrees(np.abs((np.diff(a) + np.pi) % (2 * np.pi) - np.pi))
+    Q = np.vstack([P, P[1:2]]) if ring else P
+    d = np.diff(Q, axis=0); a = np.arctan2(d[:, 1], d[:, 0]); k = np.degrees(np.abs((np.diff(a) + np.pi) % (2 * np.pi) - np.pi))
     nk = k.max() / knick_max if k.size else 0.0
-    Q = abtasten(P, 0.05); n = 21
-    if len(Q) <= n + 20: return nk
-    S = np.vstack([np.convolve(Q[:, j], np.ones(n) / n, mode="valid") for j in (0, 1)]).T; Qm = Q[n // 2: n // 2 + len(S)]
-    z = np.hypot(*(Qm - S).T)[10:-10]
-    return max(nk, (z.max() / zack_max) if z.size else 0.0)
+    return max(nk, zacken_a(P, ring) / zack_max, zacken_b(P, ring) / zack_max)
 
 def ergaenzungen(wege, kpolys, M, rs):
     """[A] Abgleich WEGA >= 0,5: Wegstuecke, die in vektor.json fehlen (Skelett-Bruchstuecke, E3-Bruecke), aus der WEGA-Maske
@@ -247,22 +320,42 @@ def platz_flaeche():
     return unary_union([Polygon([(x, y), (x + 1, y), (x + 1, y + 1), (x, y + 1)]) for x, y in pl])
 
 def kreuzung_einpassen(P, netz_baender, ziel):
-    """[A, Methodenwechsel] Rohpolygon um e erweitert, auf Bandnetz (+Saum) beschnitten, mit r gerundet (Schliessen/Oeffnen).
-    Gesucht ueber r in KR_R (>= 1,85 m, sonst Zacken > 2,9 cm nach Chaikin), e in KR_E, Saum in KR_SAUM: die Variante mit dem kleinsten Ueberstand
-    ueber Bandnetz/Platz (ziel), die >= 90 % von P-geschnitten-Bandnetz abdeckt (bei Gleichstand +-5 cm die mit groesserem r).
-    Grund: die vektor.json-Polygone sind oft schmaler als 2r (z. B. 1 m breite Rechtecke), Rundung allein loescht sie;
-    der fruehere Rueckfall 'P + 2 m' stand bis 2,4 m ueber."""
+    """[A, Methodenwechsel] Kreuzungsplatte = Rohform, mit r gerundet (Schliessen/Oeffnen), Chaikin 2x, 0,25 m abgetastet.
+    Durchgang 1, Rohform = P um e erweitert, mit Bandnetz + Saum geschnitten; r in KR_R (>= 2,45 m: ein Kreisbogen r hat bei
+    0,25-m-Stuetzpunkten Zacken B ~ 6,25 cm / r, Ziel <= 2,7 cm), e in KR_E, Saum in KR_SAUM.
+    Durchgang 2 (nur wenn 1 kein Ziel erreicht): Rohform = (P um e erweitert, geschnitten mit Bandnetz) um t verdickt,
+    damit schmale Platten mittig auf dem Weg liegen (Ueberstand ~ t statt einseitig); dort auch r 2,35 m.
+    Wahl: Stufe 0 = Zacken-Note <= 1, Ueberstand <= KR_UEBER_MAX, Abdeckung von P-geschnitten-Bandnetz >= 90 %;
+    Stufe 1 = wie 0, Abdeckung >= 50 % (grosse Quellpolygone mit Armen: die Platte deckt den Kern, die Arme bleiben Band); innerhalb der Stufe kleinster Ueberstand. Sonst die Variante mit der besten Gesamtnote.
+    Grund: die vektor.json-Polygone sind oft schmaler als 2r (z. B. 1 m breite Rechtecke), Rundung allein loescht sie."""
     ref = P.intersection(netz_baender); best = None
+
+    def probe(roh, r, info):
+        nonlocal best
+        roh = groesste(roh)
+        if roh.is_empty: return
+        g = groesste(runden(roh, r))
+        if g.is_empty: return
+        G = groesste(glatter_ring(g).buffer(0)); C = np.asarray(G.exterior.coords)
+        nt = rand_note(C, ring=True); o = float(shp.distance(ziel, shp.points(C)).max())
+        cov = G.intersection(ref).area / ref.area if ref.area > 0 else 1.0
+        ok = nt <= 1.0 and o <= KR_UEBER_MAX
+        stufe = 0 if (ok and cov >= 0.9) else 1 if (ok and cov >= 0.5) else 2
+        key = (stufe, o if stufe < 2 else max(nt, o / KR_UEBER_MAX, 0.9 / max(cov, 1e-6)))
+        if best is None or key < best[0]:
+            best = (key, G, dict(info, r=r, ueberstand_m=round(o, 3), note=round(nt, 3), abdeckung=round(cov, 3), stufe=stufe))
+
     for r in KR_R:
         for e in KR_E:
             for saum in KR_SAUM:
-                roh = groesste(P.buffer(e, quad_segs=32).intersection(netz_baender.buffer(saum, quad_segs=32)))
-                if roh.is_empty: continue
-                g = groesste(runden(roh, r))
-                if g.is_empty or (ref.area > 0 and g.intersection(ref).area < 0.9 * ref.area): continue
-                C = abtasten(np.asarray(g.exterior.coords), SCHRITT_M, ring=True); o = float(shp.distance(ziel, shp.points(C)).max())
-                if best is None or o < best[0] - 0.05: best = (o, g, {"r": r, "erweiterung": e, "saum": saum, "ueberstand_m": round(o, 3)})
-    if best is None: raise RuntimeError("Kreuzung nicht einpassbar")
+                probe(P.buffer(e, quad_segs=32).intersection(netz_baender.buffer(saum, quad_segs=32)), r, {"durchgang": 1, "erweiterung": e, "saum": saum})
+    if best[0][0] > 0:
+        for r in KR_R + (2.35,):
+            for e in KR_E:
+                kern = P.buffer(e, quad_segs=32).intersection(netz_baender)
+                for t in (0.25, 0.5, 0.75, 1.0, 1.25, 1.35, 1.45):
+                    probe(kern.buffer(t, quad_segs=32), r, {"durchgang": 2, "erweiterung": e, "verdickung": t})
+    if best is None: raise RuntimeError(f"Kreuzung nicht einpassbar: Flaeche {P.area:.2f}, P^Netz {ref.area:.2f}")
     return best[1], best[2]
 
 def main():
@@ -299,7 +392,7 @@ def main():
     for e in wege:
         w = e["w"]; h = e["breite"] / 2; L = LineString(e["M"])
         props = {"id": w["id"], "teil": w["teil"], "klasse": w["klasse"], "breite": round(2 * h, 4), "breite_m_quelle": w["breite_m"],
-                 "frei_anfang": e["frei"][0], "frei_ende": e["frei"][1], "vorglaettung_sigma_m": e["sigma"], "innenrundung_r": e["rund_r"], "ring_sigma_m": e["ring_sigma"], "rand_eigennote": e["guete"],
+                 "frei_anfang": e["frei"][0], "frei_ende": e["frei"][1], "vorglaettung_sigma_m": e["sigma"], "innenrundung_r": e["rund_r"], "ring_sigma_m": e["ring_sigma"], "rand_eigennote": e["guete"], "innenraum_einzug_m": e["einzug"], "lokal_nachgeglaettet": e["lokal"],
                  "quelle": "WEGA-Ergaenzung" if e.get("ergaenzung") else "vektor.json"}
         if e.get("ergaenzung"): props["ergaenzung"] = e["ergaenzung"]
         feats.append({"type": "Feature", "properties": dict(props, rolle="mittellinie"), "geometry": mapping(L)})
@@ -310,7 +403,7 @@ def main():
     kfeats = []; kpolys = []
     for k, P in kr:
         g, saum = kreuzung_einpassen(P, netz_baender, ziel)
-        G = groesste(glatter_ring(g).buffer(0))
+        G = g   # schon geglaettet (Chaikin 2x, 0,25 m, ggf. lokal nachgeglaettet)
         kpolys.append(G)
         kfeats.append({"type": "Feature", "properties": {"id": k["id"], "art": k["art"], "weg_ids": k["weg_ids"], "platz_ids": k["platz_ids"],
                        "hoehe_m_quelle": k["hoehe_m"], "flaeche": round(G.area, 3), "einpassung": saum}, "geometry": mapping(G)})
