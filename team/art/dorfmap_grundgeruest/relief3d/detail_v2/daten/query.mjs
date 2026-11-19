@@ -5,6 +5,7 @@
 // Raster: 0,1 m/px, 3360 x 3030, px = floor(x*10), py = floor(z*10) (deckungsgleich mit UV1 = (x/336, z/303)).
 //
 // Herkunft der Werte (Zielstand Fr):
+//   Q11-Klasse Mesh-Dreiecksklasse aus glTF-Attribut _FLAECHE (glb.mjs, pruefeDreiecksklasse)
 //   hoehe      exakt aus dem Mesh-Dreieck (Gitterindex, baryzentrisch); ersatzweise hoehe.png (nur wenn gesetzt)
 //   flaeche    flaeche.png (8 bit, Klassen-Index)       begehbar  begehbar.png (1 bit)
 //   untergrund untergrund.png (8 bit) [A]              slot      slot.png (16 bit Bitfeld)
@@ -64,9 +65,13 @@ export function dekodiereSlot(wert, slotsById) {
 
 /**
  * Gitterindex fuer ein Dreiecksnetz (Positionen x,y,z; y = Hoehe).
- * hoeheAus(x, z) liefert die baryzentrisch interpolierte Hoehe der obersten nach oben zeigenden Flaeche oder null.
+ * flaechen (optional): je Vertex die Klasse 0-5 aus dem glTF-Attribut _FLAECHE (P2) [F ueber Grundgeruest 19.11.2026].
+ * hoeheAus(x, z):  baryzentrisch interpolierte Hoehe der obersten Flaeche oder null.
+ * klasseAus(x, z): Dreiecksklasse der obersten Flaeche (alle 3 Vertices gleich) oder null;
+ *                  ein gemischtes Dreieck liefert -1 (Verstoss gegen "klassenrein").
  */
-export function baueMeshIndex(positionen, indizes, zelle_m = 1) {
+export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null) {
+  if (flaechen && flaechen.length * 3 !== positionen.length) throw new Error('_FLAECHE: Laenge passt nicht zu POSITION');
   const gx = Math.ceil(NX / zelle_m), gz = Math.ceil(NY / zelle_m);
   const zahl = new Uint32Array(gx * gz + 1);
   const nT = indizes.length / 3;
@@ -81,33 +86,78 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1) {
   const liste = new Uint32Array(zahl[gx * gz]), pos = zahl.slice(0, gx * gz);
   for (let t = 0; t < nT; t++) bb(t, (k) => { liste[pos[k]++] = t; });
   const EPS = 1e-9;
+  function oberstes(x, z) {
+    const i = Math.min(gx - 1, Math.floor(x / zelle_m)), j = Math.min(gz - 1, Math.floor(z / zelle_m)), k = j * gx + i;
+    let best = null, bt = -1;
+    for (let n = zahl[k]; n < zahl[k + 1]; n++) {
+      const t = liste[n], P = positionen;
+      const a = indizes[3 * t] * 3, b = indizes[3 * t + 1] * 3, c = indizes[3 * t + 2] * 3;
+      const ax = P[a], az = P[a + 2], bx = P[b], bz = P[b + 2], cx = P[c], cz = P[c + 2];
+      const d = (bz - cz) * (ax - cx) + (cx - bx) * (az - cz);
+      if (Math.abs(d) < 1e-12) continue; // senkrechtes Dreieck (Wand) hat keine Draufsicht
+      const l1 = ((bz - cz) * (x - cx) + (cx - bx) * (z - cz)) / d;
+      const l2 = ((cz - az) * (x - cx) + (ax - cx) * (z - cz)) / d;
+      const l3 = 1 - l1 - l2;
+      if (l1 < -EPS || l2 < -EPS || l3 < -EPS) continue;
+      const y = l1 * P[a + 1] + l2 * P[b + 1] + l3 * P[c + 1];
+      if (best === null || y > best) { best = y; bt = t; }
+    }
+    return { y: best, t: bt };
+  }
   return {
     dreiecke: nT,
-    hoeheAus(x, z) {
-      const i = Math.min(gx - 1, Math.floor(x / zelle_m)), j = Math.min(gz - 1, Math.floor(z / zelle_m)), k = j * gx + i;
-      let best = null;
-      for (let n = zahl[k]; n < zahl[k + 1]; n++) {
-        const t = liste[n], P = positionen;
-        const a = indizes[3 * t] * 3, b = indizes[3 * t + 1] * 3, c = indizes[3 * t + 2] * 3;
-        const ax = P[a], az = P[a + 2], bx = P[b], bz = P[b + 2], cx = P[c], cz = P[c + 2];
-        const d = (bz - cz) * (ax - cx) + (cx - bx) * (az - cz);
-        if (Math.abs(d) < 1e-12) continue; // senkrechtes Dreieck (Wand) hat keine Draufsicht
-        const l1 = ((bz - cz) * (x - cx) + (cx - bx) * (z - cz)) / d;
-        const l2 = ((cz - az) * (x - cx) + (ax - cx) * (z - cz)) / d;
-        const l3 = 1 - l1 - l2;
-        if (l1 < -EPS || l2 < -EPS || l3 < -EPS) continue;
-        const y = l1 * P[a + 1] + l2 * P[b + 1] + l3 * P[c + 1];
-        if (best === null || y > best) best = y;
+    hoeheAus(x, z) { return oberstes(x, z).y; },
+    klasseAus(x, z) {
+      if (!flaechen) return null;
+      const { t } = oberstes(x, z);
+      if (t < 0) return null;
+      const k0 = flaechen[indizes[3 * t]], k1 = flaechen[indizes[3 * t + 1]], k2 = flaechen[indizes[3 * t + 2]];
+      return k0 === k1 && k1 === k2 ? k0 : -1;
+    },
+    /** Anzahl nicht klassenreiner Dreiecke (Soll 0). */
+    gemischteDreiecke() {
+      if (!flaechen) return null;
+      let n = 0;
+      for (let t = 0; t < nT; t++) {
+        const k0 = flaechen[indizes[3 * t]];
+        if (k0 !== flaechen[indizes[3 * t + 1]] || k0 !== flaechen[indizes[3 * t + 2]]) n++;
       }
-      return best;
+      return n;
     },
   };
+}
+
+/** Deterministischer Zufall (mulberry32) fuer reproduzierbare Stichproben. */
+export function zufall(seed = 1) {
+  let a = seed >>> 0;
+  return () => { a = (a + 0x6d2b79f5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+
+/**
+ * Q11 Flaechentyp: flaeche.png (ueber queryPoint) gegen die Dreiecksklasse _FLAECHE des Mesh an n Zufallspunkten.
+ * Punkte ohne Mesh-Treffer zaehlen als "ohne_treffer" und nicht in die Quote. Soll: quote >= 0,995.
+ */
+export function pruefeDreiecksklasse(datenschicht, meshIndex, n = 10000, seed = 11) {
+  const r = zufall(seed);
+  let gleich = 0, ungleich = 0, ohne = 0, gemischt = 0;
+  const beispiele = [];
+  for (let k = 0; k < n; k++) {
+    const x = r() * NX, z = r() * NY;
+    const km = meshIndex.klasseAus(x, z);
+    if (km === null) { ohne++; continue; }
+    if (km === -1) { gemischt++; ungleich++; continue; }
+    const f = datenschicht.queryPoint(x, z).flaeche;
+    if (f === FLAECHE[km]) gleich++;
+    else { ungleich++; if (beispiele.length < 20) beispiele.push({ x, z, png: f, mesh: FLAECHE[km] }); }
+  }
+  const quote = gleich + ungleich ? gleich / (gleich + ungleich) : null;
+  return { n, gleich, ungleich, gemischt, ohne_treffer: ohne, quote, ok: quote !== null && quote >= 0.995, beispiele };
 }
 
 /**
  * Datenschicht aus geladenen Quellen bauen. Alle Quellen optional:
  *   { flaeche, begehbar, untergrund, slot, hoehe: {breite,hoehe,daten}, hoeheSkala: {offset_m, skala_m},
- *     mesh: {positionen, indizes}, slots: slots.json-Objekt }
+ *     mesh: {positionen, indizes, flaechen?}, slots: slots.json-Objekt }
  */
 export function erzeugeDatenschicht(q = {}) {
   for (const k of ['flaeche', 'begehbar', 'untergrund', 'slot', 'hoehe']) {
@@ -117,7 +167,7 @@ export function erzeugeDatenschicht(q = {}) {
   }
   if (q.hoehe && !(q.hoeheSkala && Number.isFinite(q.hoeheSkala.offset_m) && Number.isFinite(q.hoeheSkala.skala_m)))
     throw new Error('hoehe.png ohne offset_m/skala_m');
-  const meshIndex = q.mesh ? baueMeshIndex(q.mesh.positionen, q.mesh.indizes) : null;
+  const meshIndex = q.mesh ? baueMeshIndex(q.mesh.positionen, q.mesh.indizes, 1, q.mesh.flaechen || null) : null;
   const slotsById = q.slots ? new Map(q.slots.slots.map((s) => [s.id, s])) : null;
   const lies = (r, px, py) => r.daten[py * BREITE_PX + px];
 
@@ -147,6 +197,7 @@ export function erzeugeDatenschicht(q = {}) {
 
   return {
     queryPoint,
+    meshIndex,
     quellen: () => ({
       hoehe: meshIndex ? 'mesh' : q.hoehe ? 'hoehe.png' : null,
       flaeche: q.flaeche ? 'flaeche.png' : null, untergrund: q.untergrund ? 'untergrund.png' : null,

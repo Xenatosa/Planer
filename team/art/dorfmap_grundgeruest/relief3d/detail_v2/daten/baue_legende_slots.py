@@ -33,7 +33,7 @@ NX, NY = 336, 303            # Zellen = Meter [S]
 PX_PRO_M = 10                # 0,1 m/px [F ueber Plan 3.3]
 W, H = NX * PX_PRO_M, NY * PX_PRO_M
 
-# slot.png 16 bit: Bitbelegung [A] (Vorschlag Tools, Freigabe Grundgeruest offen)
+# slot.png 16 bit: Bitbelegung abgestimmt [F ueber Grundgeruest 19.11.2026]
 BIT_ID = 0x0FFF              # Bits 0-11: Slot-ID (0 = kein Slot)
 BIT_DEKO_BAUM = 1 << 12      # Zelle deko_baum_ok=1 (Alt-Abgleich)
 BIT_DEKO_FELS = 1 << 13      # Zelle deko_fels_ok=1 (Alt-Abgleich)
@@ -160,10 +160,12 @@ def baue() -> tuple[dict, dict, dict]:
         "dateien": {
             "flaeche.png": {"format": "PNG 8 bit Graustufe, 1 Kanal, Wert = Klassen-Index", "status": "offen (Fr, aus Vektoren+Mesh)"},
             "begehbar.png": {"format": "PNG 1 bit Graustufe, 1 = begehbar", "status": "offen (Fr)"},
-            "slot.png": {"format": "PNG 16 bit Graustufe, Bitfeld s. slot_bits", "status": "Skript fertig, PNG nicht committet (s. STATUS.md)"},
+            "slot.png": {"format": "PNG 16 bit Graustufe, Bitfeld s. slot_bits", "status": "fertig, committet (zellbasiert, Freigabe Grundgeruest 19.11.2026)"},
             "hoehe.png": {"format": "PNG 16 bit Graustufe, hoehe_m = offset_m + wert * skala_m", "offset_m": None, "skala_m": None,
                           "status": "offen (Fr, aus Mesh gerastert); offset/skala werden beim Rastern eingetragen"},
-            "untergrund.png": {"format": "PNG 8 bit Graustufe, Wert = untergrund-Code", "status": "offen (Fr) [A] Zusatzdatei, im Plan nicht genannt"},
+            "untergrund.png": {"format": "PNG 8 bit Graustufe, Wert = untergrund-Code (s. untergrund.codes)",
+                               "quelle": "zonen.geojson Property untergrund (Polygone); 1-m-Fallback zellen_relief.csv nur falls fehlend",
+                               "status": "abgestimmt als Zusatzdatei [F ueber Grundgeruest 19.11.2026], Erzeugung Fr"},
         },
         "flaeche": {
             "prioritaet": ["wasser", "bruecke", "weg", "ufer", "fels_klippe", "grund"],
@@ -177,9 +179,12 @@ def baue() -> tuple[dict, dict, dict]:
                 {"wert": 5, "name": "bruecke", "label": "Bruecke", "farbe": "#8a4a20"},
             ],
             "farben_hinweis": "Farben nur fuer Debug-/Legendenbilder, keine Texturen [A]",
+            "quelle": "detail_v2/vektor/*.geojson: FeatureCollection, Viewer-Meter, Properties klasse (0-5), untergrund, id [F ueber Grundgeruest 19.11.2026]",
+            "mesh_attribut": "P2-glTF: Vertex-Attribut _FLAECHE (0-5), Dreiecke an Kanten klassenrein, Klassenliste im manifest [F ueber Grundgeruest 19.11.2026]",
         },
         "untergrund": {
-            "hinweis": "Untertyp der Flaeche (v. a. grund). Alt-Werte aus zellen_relief.csv untergrund [S]; Zuordnung [A]",
+            "hinweis": "Untertyp der Flaeche. Quelle zonen.geojson Property untergrund (Schnee/Wald/Boden/Sand) [F ueber Grundgeruest]; 0 wo flaeche wasser/fels_klippe/bruecke [A]; Alt-Werte zellen_relief.csv nur Fallback [S]",
+        "status": "abgestimmt",
             "codes": [
                 {"wert": 0, "name": None, "label": "kein Untertyp (Wasser, Fels/Klippe, Bruecke)", "farbe": "#000000"},
                 {"wert": 1, "name": "schnee", "label": "Schnee", "farbe": "#f2f4f8", "alt": ["SCHNEE"]},
@@ -198,7 +203,8 @@ def baue() -> tuple[dict, dict, dict]:
             "reserviert": 1 << 15,
             "id_bereiche": {"platz": [ID_PLATZ_START, ID_PLATZ_START + n_platz - 1],
                             "deko": [ID_DEKO_START, ID_DEKO_START + n_deko - 1]},
-            "hinweis": "Bitbelegung [A] Vorschlag Tools; deko_baum_ok/deko_fels_ok sind Zell-Eignungen (1 m) und gelten auch ausserhalb von Slots",
+            "status": "abgestimmt (Grundgeruest 19.11.2026): Bit 0-11 ID, 12 Baum, 13 Fels, 14 Bauplatz-Zelle, 15 reserviert (immer 0)",
+            "hinweis": "deko_baum_ok/deko_fels_ok sind Zell-Eignungen (1 m) und gelten auch ausserhalb von Slots",
         },
         "slots": {
             "datei": "slots.json",

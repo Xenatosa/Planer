@@ -30,7 +30,7 @@
   },
   "slot.png": {
    "format": "PNG 16 bit Graustufe, Bitfeld s. slot_bits",
-   "status": "Skript fertig, PNG nicht committet (s. STATUS.md)"
+   "status": "fertig, committet (zellbasiert, Freigabe Grundgeruest 19.11.2026)"
   },
   "hoehe.png": {
    "format": "PNG 16 bit Graustufe, hoehe_m = offset_m + wert * skala_m",
@@ -39,8 +39,9 @@
    "status": "offen (Fr, aus Mesh gerastert); offset/skala werden beim Rastern eingetragen"
   },
   "untergrund.png": {
-   "format": "PNG 8 bit Graustufe, Wert = untergrund-Code",
-   "status": "offen (Fr) [A] Zusatzdatei, im Plan nicht genannt"
+   "format": "PNG 8 bit Graustufe, Wert = untergrund-Code (s. untergrund.codes)",
+   "quelle": "zonen.geojson Property untergrund (Polygone); 1-m-Fallback zellen_relief.csv nur falls fehlend",
+   "status": "abgestimmt als Zusatzdatei [F ueber Grundgeruest 19.11.2026], Erzeugung Fr"
   }
  },
  "flaeche": {
@@ -91,10 +92,13 @@
     "farbe": "#8a4a20"
    }
   ],
-  "farben_hinweis": "Farben nur fuer Debug-/Legendenbilder, keine Texturen [A]"
+  "farben_hinweis": "Farben nur fuer Debug-/Legendenbilder, keine Texturen [A]",
+  "quelle": "detail_v2/vektor/*.geojson: FeatureCollection, Viewer-Meter, Properties klasse (0-5), untergrund, id [F ueber Grundgeruest 19.11.2026]",
+  "mesh_attribut": "P2-glTF: Vertex-Attribut _FLAECHE (0-5), Dreiecke an Kanten klassenrein, Klassenliste im manifest [F ueber Grundgeruest 19.11.2026]"
  },
  "untergrund": {
-  "hinweis": "Untertyp der Flaeche (v. a. grund). Alt-Werte aus zellen_relief.csv untergrund [S]; Zuordnung [A]",
+  "hinweis": "Untertyp der Flaeche. Quelle zonen.geojson Property untergrund (Schnee/Wald/Boden/Sand) [F ueber Grundgeruest]; 0 wo flaeche wasser/fels_klippe/bruecke [A]; Alt-Werte zellen_relief.csv nur Fallback [S]",
+  "status": "abgestimmt",
   "codes": [
    {
     "wert": 0,
@@ -179,7 +183,8 @@
     1627
    ]
   },
-  "hinweis": "Bitbelegung [A] Vorschlag Tools; deko_baum_ok/deko_fels_ok sind Zell-Eignungen (1 m) und gelten auch ausserhalb von Slots"
+  "status": "abgestimmt (Grundgeruest 19.11.2026): Bit 0-11 ID, 12 Baum, 13 Fels, 14 Bauplatz-Zelle, 15 reserviert (immer 0)",
+  "hinweis": "deko_baum_ok/deko_fels_ok sind Zell-Eignungen (1 m) und gelten auch ausserhalb von Slots"
  },
  "slots": {
   "datei": "slots.json",

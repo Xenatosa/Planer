@@ -1,5 +1,5 @@
 // node --test test/  (aus relief3d/detail_v2/daten/)
-// Stand Do 19.11.2026: Geruest-Tests gruen; Tests, die echte Masken/Mesh brauchen, sind skip/todo (s. STATUS.md).
+// Stand Do 19.11.2026: Geruest-Tests gruen, slot.png committet; Tests, die echte Masken/Mesh brauchen, sind skip/todo (s. STATUS.md).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
@@ -8,8 +8,9 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
   kachelId, kachelGrenzen, weltZuPixel, weltZuUv1, dekodiereSlot, baueMeshIndex, erzeugeDatenschicht,
-  ladeDatenschicht, FLAECHE, UNTERGRUND, SLOT_BITS, BREITE_PX, HOEHE_PX,
+  ladeDatenschicht, pruefeDreiecksklasse, FLAECHE, UNTERGRUND, SLOT_BITS, BREITE_PX, HOEHE_PX,
 } from '../query.mjs';
+import { leseGlb, fuegeZusammen } from '../glb.mjs';
 import { decodePng } from '../png.mjs';
 
 const HIER = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -77,6 +78,10 @@ test('legende.json passt zu query.mjs', () => {
   assert.equal(legende.slot_bits.deko_baum_ok, SLOT_BITS.deko_baum_ok);
   assert.equal(legende.slot_bits.deko_fels_ok, SLOT_BITS.deko_fels_ok);
   assert.equal(legende.slot_bits.bauplatz_zelle, SLOT_BITS.bauplatz_zelle);
+  assert.equal(legende.slot_bits.reserviert, 1 << 15);
+  assert.match(legende.slot_bits.status, /^abgestimmt/);
+  assert.ok(legende.dateien['untergrund.png']);
+  assert.match(legende.dateien['slot.png'].status, /committet/);
   assert.deepEqual(legende.kacheln.schnitte_x, [0, 42, 84, 126, 168, 210, 252, 294, 336]);
   assert.deepEqual(legende.kacheln.schnitte_z, [0, 43, 86, 129, 172, 215, 258, 303]);
 });
@@ -167,7 +172,7 @@ test('ladeDatenschicht liest den Ordner (heute: keine Masken vorhanden -> null)'
   if (!MASKEN_DA) assert.equal(r.flaeche, null);
 });
 
-test('slot.png (0,1 m) an festen Punkten', { skip: SLOT_PNG ? false : 'slot.png nicht vorhanden (wird nicht committet; DV2_SLOT_PNG=/tmp/dv2_daten/slot.png setzen)' }, async () => {
+test('slot.png (0,1 m) an festen Punkten', { skip: SLOT_PNG ? false : 'slot.png fehlt (python3 baue_legende_slots.py --slot-png slot.png)' }, async () => {
   const slot = await decodePng(readFileSync(SLOT_PNG));
   const d = erzeugeDatenschicht({ slot, slots });
   const s = d.queryPoint(...P.d2_mitte).slot;
@@ -192,4 +197,65 @@ test('Masken an festen Punkten (flaeche/begehbar/untergrund)', { skip: MASKEN_DA
 
 test('Hoehe an festen Punkten aus Mesh', { skip: MESH_DA ? false : 'wartet auf P2 Mesh (Fr ~10-12)' }, () => {});
 test('Q11: Hoehe vs. Mesh-Strahl <= 2 cm an 10 000 Zufallspunkten', { todo: 'Fr nach P2; unabhaengiger Strahl (three.js Raycaster) gegen queryPoint' });
-test('Q11: Flaechentyp = Dreiecksklasse >= 99,5 %', { todo: 'Fr nach P2; braucht Dreiecksklasse im Mesh (Format mit P2 klaeren)' });
+test('Q11: Flaechentyp = Dreiecksklasse >= 99,5 % (echtes Mesh)', { skip: MESH_DA && MASKEN_DA ? false : 'wartet auf P2-Mesh mit _FLAECHE + flaeche.png (Fr)' }, () => {
+  // Fr: Kachel-.glb laut manifest mit leseGlb lesen, fuegeZusammen, baueMeshIndex(..., flaechen),
+  // pruefeDreiecksklasse(datenschicht, meshIndex, 10000) -> ok; gemischteDreiecke() === 0.
+  assert.fail('Manifest-Format von P2 noch nicht eingebunden');
+});
+
+// --- Vorbereitung Dreiecksklasse ueber glTF-Attribut _FLAECHE (Entscheidung Grundgeruest 19.11.2026) ---
+function baueGlb(primitives) {
+  // primitives: [{pos: Float32Array, idx: Uint16Array|Uint32Array, fl: Uint8Array}]
+  const teile = [], acc = [], views = [], prims = []; let off = 0;
+  const add = (arr, ct, typ, count, target) => {
+    const b = Buffer.from(arr.buffer, arr.byteOffset, arr.byteLength), pad = (4 - (b.length % 4)) % 4;
+    views.push({ buffer: 0, byteOffset: off, byteLength: b.length, ...(target ? { target } : {}) });
+    acc.push({ bufferView: views.length - 1, componentType: ct, count, type: typ });
+    teile.push(b, Buffer.alloc(pad)); off += b.length + pad; return acc.length - 1;
+  };
+  for (const p of primitives) {
+    const a = { POSITION: add(p.pos, 5126, 'VEC3', p.pos.length / 3, 34962) };
+    if (p.fl) a._FLAECHE = add(p.fl, 5121, 'SCALAR', p.fl.length, 34962);
+    prims.push({ attributes: a, indices: add(p.idx, p.idx instanceof Uint16Array ? 5123 : 5125, 'SCALAR', p.idx.length, 34963), mode: 4 });
+  }
+  const bin = Buffer.concat(teile);
+  const gltf = { asset: { version: '2.0' }, buffers: [{ byteLength: bin.length }], bufferViews: views, accessors: acc,
+    meshes: [{ primitives: prims }], nodes: [{ mesh: 0 }], scenes: [{ nodes: [0] }], scene: 0 };
+  let js = Buffer.from(JSON.stringify(gltf)); js = Buffer.concat([js, Buffer.alloc((4 - (js.length % 4)) % 4, 0x20)]);
+  const kopf = Buffer.alloc(12); kopf.writeUInt32LE(0x46546c67, 0); kopf.writeUInt32LE(2, 4); kopf.writeUInt32LE(12 + 8 + js.length + 8 + bin.length, 8);
+  const ch = (typ, d) => { const h = Buffer.alloc(8); h.writeUInt32LE(d.length, 0); h.writeUInt32LE(typ, 4); return Buffer.concat([h, d]); };
+  return Buffer.concat([kopf, ch(0x4e4f534a, js), ch(0x004e4942, bin)]);
+}
+// Kartenhaelfte als Rechteck aus 2 Dreiecken, Klasse k an allen Vertices
+const haelfte = (x0, x1, k) => ({
+  pos: new Float32Array([x0, 1, 0, x1, 1, 0, x1, 2, 303, x0, 2, 303]), idx: new Uint16Array([0, 1, 2, 0, 2, 3]), fl: new Uint8Array([k, k, k, k]) });
+
+test('glb.mjs liest POSITION, Indizes und _FLAECHE (2 Primitives, zusammengefuehrt)', () => {
+  const m = leseGlb(baueGlb([haelfte(0, 168, 0), haelfte(168, 336, 4)]));
+  assert.equal(m.positionen.length, 24); assert.deepEqual(Array.from(m.indizes), [0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7]);
+  assert.deepEqual(Array.from(m.flaechen), [0, 0, 0, 0, 4, 4, 4, 4]);
+  const z = fuegeZusammen([m, leseGlb(baueGlb([haelfte(0, 10, 1)]))]);
+  assert.equal(z.indizes[12], 8); assert.equal(z.flaechen.length, 12);
+  assert.throws(() => leseGlb(baueGlb([{ ...haelfte(0, 1, 0), fl: new Uint8Array([7, 7, 7, 7]) }])), /nicht 0-5/);
+});
+
+test('Dreiecksklasse ueber _FLAECHE: klasseAus, gemischte Dreiecke, Q11-Quote gegen flaeche-Raster', () => {
+  const m = leseGlb(baueGlb([haelfte(0, 168, 0), haelfte(168, 336, 4)]));
+  const mi = baueMeshIndex(m.positionen, m.indizes, 1, m.flaechen);
+  assert.equal(mi.klasseAus(10, 10), 0); assert.equal(mi.klasseAus(200, 10), 4);
+  assert.equal(mi.gemischteDreiecke(), 0);
+  // flaeche-Raster: links grund, rechts wasser -> 100 %
+  const daten = new Uint8Array(BREITE_PX * HOEHE_PX);
+  for (let y = 0; y < HOEHE_PX; y++) daten.fill(4, y * BREITE_PX + 1680, (y + 1) * BREITE_PX);
+  const d = erzeugeDatenschicht({ flaeche: { breite: BREITE_PX, hoehe: HOEHE_PX, daten }, mesh: m });
+  const r = pruefeDreiecksklasse(d, d.meshIndex, 10000);
+  assert.equal(r.quote, 1); assert.ok(r.ok); assert.equal(r.ohne_treffer, 0);
+  // Raster um 2 m verschoben -> ~0,6 % falsch -> nicht ok
+  const d2 = new Uint8Array(BREITE_PX * HOEHE_PX);
+  for (let y = 0; y < HOEHE_PX; y++) d2.fill(4, y * BREITE_PX + 1700, (y + 1) * BREITE_PX);
+  const r2 = pruefeDreiecksklasse(erzeugeDatenschicht({ flaeche: { breite: BREITE_PX, hoehe: HOEHE_PX, daten: d2 } }), mi, 10000);
+  assert.ok(!r2.ok && r2.quote < 0.995 && r2.quote > 0.98, `quote ${r2.quote}`);
+  // gemischtes Dreieck wird erkannt
+  const g = baueMeshIndex(new Float32Array([0, 0, 0, 10, 0, 0, 0, 0, 10]), new Uint32Array([0, 1, 2]), 1, new Uint8Array([0, 1, 0]));
+  assert.equal(g.klasseAus(1, 1), -1); assert.equal(g.gemischteDreiecke(), 1);
+});
