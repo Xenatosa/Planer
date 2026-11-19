@@ -161,9 +161,32 @@ def schliessen(g, r=R_RUND):
 AUSSEN = box(-10, -10, NX + 10, NY + 10).difference(RECT)
 
 
+def _gespiegelt(gi, rand):
+    """gi plus Spiegelbilder an den vier Kartenkanten und den vier Ecken (nur Randstreifen)."""
+    from shapely import affinity
+    teile = [gi]
+    for sx, ox in ((1, None), (-1, 0.0), (-1, float(NX))):
+        for sy, oy in ((1, None), (-1, 0.0), (-1, float(NY))):
+            if sx == 1 and sy == 1:
+                continue
+            fx0 = 0.0 if ox is None else ox
+            fy0 = 0.0 if oy is None else oy
+            streifen = box(-10 if ox is None else fx0 - rand, -10 if oy is None else fy0 - rand,
+                           NX + 10 if ox is None else fx0 + rand, NY + 10 if oy is None else fy0 + rand)
+            teil = gi.intersection(streifen)
+            if teil.is_empty:
+                continue
+            teile.append(affinity.scale(teil, xfact=sx, yfact=sy, origin=(fx0, fy0)))
+    return unary_union(teile)
+
+
 def schliessen_rand(g, r=R_RUND):
-    """Schliessen mit Aussenband: am Kartenrand wird nichts abgerundet."""
-    return schliessen(unary_union([g.intersection(RECT), AUSSEN]), r).intersection(RECT)
+    """Schliessen am Kartenrand ohne Randartefakte (P1c2): statt eines Aussenbands
+    (fuellte die vier Kartenecken und erzeugte zum Rand tangentiale Keile) wird die
+    Flaeche an den Kartenkanten gespiegelt; Grenzen treffen den Rand dadurch
+    rechtwinklig, Ecken bleiben unberuehrt."""
+    gi = g.intersection(RECT)
+    return clean(schliessen(_gespiegelt(gi, 2 * r + 1.0), r).intersection(RECT))
 
 
 def oeffnen(g, r=R_RUND):
@@ -688,3 +711,4 @@ def bogen_adaptiv(c, closed: bool):
             break
     BOGEN_LOG.append(best[:4] + (round(float(best[4][:, 0].mean()), 1), round(float(best[4][:, 1].mean()), 1)))
     return best[4], (best[2] <= 0.0295 and best[3] <= 14.5)
+
