@@ -140,9 +140,6 @@ Fabian hat die Methode gewechselt (t2043u). Das alte Raster-Gate (Referenz 359 /
 | Q5 | Keine Dellen neben Wegen | Im Band 0–3 m neben dem Weg kein lokales Minimum tiefer als 3 cm. |
 | Q6 | Wegprofil | Einsenkung 3–5 cm, Quergefälle ≤ 3,5 %, Längsneigung ≤ 20°. |
 | Q7 | D2 Lage und Form | |Δh| ≤ 1 cm an allen alten D2-Vertices; Umriss gleich. |
-
-Zu Q7: Entscheidung New Bot, 19.11.2026: „D2-Bereich: Lage und Form erhalten, |Δh| ≤ 1 cm an den alten D2-Vertices“ ersetzt „D2 bitgleich“. Alte Dateien und Hashes bleiben unverändert. [F über New Bot]
-
 | Q8 | Ufer | Schnittlinie Wasser/Gelände ↔ Uferspline ≤ 5 cm. Böschung monoton, Wasser nie über der Uferkrone. |
 | Q9 | Dreiecke | Begehbar: Kante ≤ 0,5 m. Kantenbänder ≤ 0,2 m. Min-Winkel ≥ 20° (außer an Constraint-Ecken). Oberflächen-Normalen nach oben. ≤ 1,6 Mio. Dreiecke. |
 | Q10 | UV | 0 gespiegelte UV-Dreiecke. UV1 eindeutig. Verzerrung ≤ 10 % bis 35° Neigung (Wände per Box-UV ≤ 15 %). |
@@ -150,6 +147,8 @@ Zu Q7: Entscheidung New Bot, 19.11.2026: „D2-Bereich: Lage und Form erhalten, 
 | Q12 | Brücke | Bohlen, Geländer und Auflager vorhanden. Spalt zum Gelände ≤ 2 cm. Stufe Weg↔Brücke ≤ 5 cm. |
 | Q13 | Abnahmebilder | 5 Orte × 4 Höhen (1,7 / 5 / 12 / 30 m) Clay plus je 1 Wireframe aus 5 m. Ehrlich, ohne Schönen. JPG q90 unter `detail_v2/abnahme/`. |
 | Q14 | Layout gleich | Weg-Mittellinien ≤ 0,3 m vom alten Verlauf. Wasserfläche ±3 %. Bauzone ±1 %. |
+
+Zu Q7: Entscheidung New Bot, 19.11.2026: „D2-Bereich: Lage und Form erhalten, |Δh| ≤ 1 cm an den alten D2-Vertices“ ersetzt „D2 bitgleich“. Alte Dateien und Hashes bleiben unverändert. [F über New Bot]
 
 ## 6. Ausnahmeliste neu bewertet (Bodenkamera 1,7 m, Clay)
 
