@@ -35,6 +35,7 @@ FEHLER = {  # Variante -> (Regel, Beschreibung)
     'Q12': ('Q12', 'Bruecke E2 ohne Gelaender/Handlauf, Widerlager 5 cm ueber Gelaende'),
     'Q13': ('Q13', '2 der 25 Abnahmebilder fehlen'),
     'Q14': ('Q14', 'Mittellinie W4 0,5 m versetzt, Bauzone +2 % Radius'),
+    'Q14_fehlt': ('Q14', 'Referenz-Teilstueck W8/0 fehlt in wege.geojson, nicht in q14_ausnahmen -> bleibt hart', 'Mittellinie fehlt'),
     'Q14_wasser': ('Q14', 'Spiegelmodell +5 cm und 0,5 m ins Ufer: sichtbare Spiegelflaeche ~+9 %'),
 }
 
@@ -73,6 +74,52 @@ def einheit():
     _, a, k = form_abw(zz); out.append(('(c) Zickzack +-5 cm gefunden', a.max() > 0.03 or k.max() > 15, f'abw {a.max()*100:.2f} cm, Knick {k.max():.1f} Grad'))
     ecke = np.array([[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]], float)
     _, a, k = form_abw(ecke); out.append(('(c) 90-Grad-Ecke gefunden', k.max() > 15, f'Knick {k.max():.1f} Grad, abw {a.max()*100:.1f} cm'))
+    out += einheit_f11()
+    return out
+
+
+def einheit_f11():
+    """F11 (Runde 4): Zonenringe - Kartenrand und +-0,5 m um Stosspunkte (>= 3 Zonen) ausgenommen, alles andere hart.
+    Karte 20 x 10 m: A = [0,10]x[0,10], B = [10,20]x[5,10], C = [10,20]x[0,5]; Stosspunkt (10|5)."""
+    from shapely import box
+    from dv2qa.regeln_a import zonen_stosspunkte, zonen_maske
+    zk = {'kartenrand_tol_m': 0.01, 'stoss_fenster_m': 0.5, 'stoss_tol_m': 0.01, 'hart_typen': ['bruecke']}
+    rand = box(0, 0, 20, 10).boundary
+    def ring(x0, x1, z0, z1, d=0.05):
+        e = [(x0, z0), (x1, z0), (x1, z1), (x0, z1), (x0, z0)]; P = []
+        for (ax, az), (bx, bz) in zip(e[:-1], e[1:]):
+            n = int(round(max(abs(bx - ax), abs(bz - az)) / d)); t = np.arange(n) / n; P.append(np.c_[ax + t * (bx - ax), az + t * (bz - az)])
+        return np.vstack(P)
+    def zonen(typ_c='grund', delle=None):
+        A = ring(0, 10, 0, 10)
+        if delle is not None:     # Buckel 5 cm (x-Richtung) auf A-Ostkante bei z = delle (Breite 0,2 m)
+            m = np.abs(A[:, 0] - 10) < 1e-9; A[m, 0] -= 0.05 * np.clip(1 - np.abs(A[m, 1] - delle) / 0.1, 0, 1)
+        return [(A, True, {'id': 'A', 'typ': 'grund'}), (ring(10, 20, 5, 10), True, {'id': 'B', 'typ': 'weg'}), (ring(10, 20, 0, 5), True, {'id': 'C', 'typ': typ_c})]
+    def mess(zr, wen):
+        st = zonen_stosspunkte(zr, zk)
+        pl, g, pr = [z for z in zr if z[2]['id'] == wen][0]
+        R, abw, knick = form_abw(pl, 1.0, True, 0.05)
+        aus, gr = zonen_maske(R, pl, True, {'stoss': st, 'pr': pr}, rand, zk)
+        ub = ((abw > 0.03) | (knick > 15)) & ~aus
+        return st, R, abw, knick, aus, gr, ub
+    out = []
+    st, R, abw, knick, aus, gr, ub = mess(zonen(), 'B')
+    ecke_rand = np.hypot(R[:, 0] - 20, R[:, 1] - 10) < 0.3          # Kartenecke (20|10), Abschnitt auf dem Kartenrand
+    out.append(('F11 Kartenrand-Abschnitt + Kartenecke ausgenommen', bool(aus[ecke_rand].all()) and abw[ecke_rand].max() > 0.03 and not ub[ecke_rand].any(),
+                f"Ring B, Ecke (20|10): roh abw {abw[ecke_rand].max()*100:.1f} cm / Knick {knick[ecke_rand].max():.0f} Grad, ausgenommen {int(aus[ecke_rand].sum())}/{int(ecke_rand.sum())} Punkte (Gruppe kartenrand)"))
+    sp = [d for d in st if abs(d['x'] - 10) < 0.02 and abs(d['z'] - 5) < 0.02]
+    fen = np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.3
+    out.append(('F11 Stosspunkt-Fenster +-0,5 m ausgenommen', len(st) == 1 and len(sp) == 1 and sp[0]['ausgenommen'] and sp[0]['zonen'] == ['A', 'B', 'C']
+                and bool(aus[fen].all()) and knick[fen].max() > 15 and not ub[np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.5].any(),
+                f"{len(st)} Stosspunkt {[(d['x'], d['z'], d['zonen']) for d in st]}; Ring B roh Knick {knick[fen].max():.0f} Grad an (10|5), im Fenster ausgenommen, kein Rest-Befund im Fenster"))
+    st, R, abw, knick, aus, gr, ub = mess(zonen(delle=5.65), 'A')
+    bu = (np.abs(R[:, 1] - 5.65) < 0.15) & (np.abs(R[:, 0] - 10) < 0.1)
+    out.append(('F11 Knick knapp ausserhalb des Fensters gefunden', bool(ub[bu].any()) and not aus[bu].any(),
+                f"Buckel 5 cm bei 0,65 m Bogenlaenge vom Stosspunkt: abw {abw[bu].max()*100:.1f} cm, Knick {knick[bu].max():.0f} Grad, Gruppe {sorted(set(gr[bu & ub]))}"))
+    st, R, abw, knick, aus, gr, ub = mess(zonen(typ_c='bruecke'), 'B')
+    fen = np.hypot(R[:, 0] - 10, R[:, 1] - 5) <= 0.3
+    out.append(('F11 Brueckenecke bleibt hart', len(st) == 1 and not st[0]['ausgenommen'] and bool(ub[fen].any()) and not aus[fen].any(),
+                f"C typ bruecke: Stosspunkt (10|5) ausgenommen={st[0]['ausgenommen'] if st else None}, Ring B Knick {knick[fen].max():.0f} Grad gefunden, Gruppe {sorted(set(gr[fen & ub]))}"))
     return out
 
 
@@ -112,11 +159,13 @@ def main():
         ('Q10_kurve', 'Q10', 'ok', 'enge S-Kurve W4 (r ~4 m) mit 15 % UV2-Stauchung: nur gekennzeichnet, nicht blockierend',
          lambda x: x['status'] == 'ok' and x['werte']['uv2_enge_kurve_ueber_10pct_gekennzeichnet'] > 0 and x['werte']['uv2_ueber_10pct'] == 0),
         ('Q14_ohne_zonen', 'Q14', 'offen', 'zonen.geojson fehlt (P1c): Bauzone "Eingabe fehlt", nicht bestanden',
-         lambda x: x['status'] == 'offen' and any('Eingabe fehlt' in str(b.get('fehler', '')) for b in x['befunde']))):
+         lambda x: x['status'] == 'offen' and any('Eingabe fehlt' in str(b.get('fehler', '')) for b in x['befunde'])),
+        ('Q14_ausnahme', 'Q14', 'ok', 'W9/0 fehlt, steht aber in q14_ausnahmen (wie A-DV2-02): Ausnahme statt Fehler',
+         lambda x: x['status'] == 'ok' and x['werte']['wege_ausnahme'] == ['W9/0 (A-TEST)'] and any(b.get('ausnahme') == 'A-TEST' for b in x['befunde']))):
         baue_dummy.baue(tmp / v, v)
         x = lauf(v, {q})['regeln'][q]
         good = bool(pruef(x)); ok_ges &= good
-        w = x['werte']; det = {k: w.get(k) for k in ('uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
+        w = x['werte']; det = {k: w.get(k) for k in ('wege_ausnahme', 'uv2_enge_kurve_dreiecke', 'uv2_enge_kurve_ueber_10pct_gekennzeichnet', 'uv2_enge_kurve_max_abw', 'kurvenradius_min_m', 'uv2_ueber_10pct', 'bauzone') if k in w}
         zeilen.append((v, q, soll, x['status'], good, txt + ' -> ' + json.dumps(det, ensure_ascii=False)[:150]))
     # Exit-2: leerer Ordner
     leer = tmp / 'leer'; leer.mkdir(parents=True, exist_ok=True)

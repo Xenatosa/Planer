@@ -167,19 +167,36 @@ def q3(ctx):
     kreuz = union_all([g.buffer(0.05) for g in kz]) if kz else None
     w = {'linien': 0, 'abw_max_m': 0.0, 'knick_max_grad': 0.0, 'mesh_kantenzuege': 0, 'mesh_abw_max_m': 0.0, 'mesh_knick_max_grad': 0.0}
     bef = []
-    def pruefe(pl, geschl, quelle, pid, mesh=False):
+    zk = ctx.k.get('q3_zonen', {})
+    from shapely import box
+    karte_rand = box(0, 0, *ctx.k['welt_m']).boundary
+    def pruefe(pl, geschl, quelle, pid, mesh=False, zone=None):
         R, abw, knick = form_abw(pl, fen, geschl, h)
         if kreuz is not None and len(R): knick = np.where(contains_xy(kreuz, R[:, 0], R[:, 1]), 0, knick)
+        gruppe = None
+        if zone is not None and len(R):                         # F11: Kartenrand + Stossfenster ausgenommen, sonst hart
+            aus, gruppe = zonen_maske(R, pl, geschl, zone, karte_rand, zk)
+            abw = np.where(aus, 0, abw); knick = np.where(aus, 0, knick); w['zonen_ausgenommen_punkte'] += int(aus.sum())
         a = float(abw.max()) if len(abw) else 0.0; k = float(knick.max()) if len(knick) else 0.0
         pre = 'mesh_' if mesh else ''
         w[pre + 'abw_max_m'] = max(w[pre + 'abw_max_m'], a); w[pre + 'knick_max_grad'] = max(w[pre + 'knick_max_grad'], k)
         if a > S['q3_glatt_m'] or k > S['q3_knick_grad']:
             i = int(np.argmax(abw)) if a > S['q3_glatt_m'] else int(np.argmax(knick))
-            bef.append({'datei': quelle, 'id': pid, 'quelle': 'mesh' if mesh else 'vektor', 'abw_m': _r(a), 'knick_grad': _r(k, 1), 'x': _r(R[i, 0], 2), 'z': _r(R[i, 1], 2)})
+            b = {'datei': quelle, 'id': pid, 'quelle': 'mesh' if mesh else 'vektor', 'abw_m': _r(a), 'knick_grad': _r(k, 1), 'x': _r(R[i, 0], 2), 'z': _r(R[i, 1], 2)}
+            if gruppe is not None:
+                ub = (abw > S['q3_glatt_m']) | (knick > S['q3_knick_grad'])
+                b['gruppe'] = str(gruppe[i]); b['gruppen_punkte'] = {g: int((ub & (gruppe == g)).sum()) for g in np.unique(gruppe[ub])}
+            bef.append(b)
     linien = []
+    zonen_q = [q for q in ctx.k['q3_quellen'] if q.get('zonenringe')]
+    zringe = [(pl, g, pr) for q in zonen_q for pl, g, pr in ctx.linien(q)]
+    stoss = zonen_stosspunkte(zringe, zk) if zringe else []
+    w['zonen_stosspunkte_anzahl'] = len(stoss); w['zonen_stosspunkte_ausgenommen'] = sum(1 for x in stoss if x['ausgenommen'])
+    w['zonen_ausgenommen_punkte'] = 0
     for q in ctx.k['q3_quellen']:
         for pl, geschl, pr in ctx.linien(q):
-            w['linien'] += 1; linien.append((pl, geschl, q['datei'], pr.get('id'))); pruefe(pl, geschl, q['datei'], pr.get('id'))
+            w['linien'] += 1; linien.append((pl, geschl, q['datei'], pr.get('id')))
+            pruefe(pl, geschl, q['datei'], pr.get('id'), zone=({'stoss': stoss, 'pr': pr} if q.get('zonenringe') else None))
     # Mesh-Kantenzuege: Mesh-Vertices <= 2 cm an der Linie, nach Bogenlaenge der Linie geordnet -> dieselbe Messung
     try:
         n = ctx.netz(('gelaende',)); V = n['V'][:, [0, 2]]
@@ -201,9 +218,94 @@ def q3(ctx):
     w = {k: _r(v) if isinstance(v, float) else v for k, v in w.items()}
     w['schwellen'] = {'abw_m': S['q3_glatt_m'], 'knick_grad': S['q3_knick_grad'], 'abtastung_m': h, 'fenster_m': fen}
     w['grat_silhouette'] = 'Sa per Bild (Q13)'
+    zb = [b for b in bef if 'gruppe' in b]
+    w['zonen_rest'] = {'ringe': len(zb), 'ringe_je_gruppe': {g: sum(1 for b in zb if b['gruppe'] == g) for g in sorted({b['gruppe'] for b in zb})},
+                       'punkte_je_gruppe': {g: sum(b['gruppen_punkte'].get(g, 0) for b in zb) for g in sorted({k for b in zb for k in b['gruppen_punkte']})}}
+    w['zonen_stosspunkte'] = stoss
+    w['zonen_regel'] = ('F11 (Grundgeruest 19.11.): Zonenringe layer=flaechentyp - ausgenommen NUR Abschnitte auf dem Kartenrand (inkl. Ecken, Toleranz '
+                        f"{zk.get('kartenrand_tol_m')} m) und +-{zk.get('stoss_fenster_m')} m Bogenlaenge um Stosspunkte mit >= 3 Zonen; Stosspunkte mit "
+                        f"{zk.get('hart_typen')} (Brueckenrechteck, Platzhalter P5) bleiben hart. Sichtpruefung 1,7 m Pflicht (zackiger Stosspunkt = Befund).")
     return erg('Q3', not bef, w, bef,
                'Neuabtastung 0,05 m nach Bogenlaenge (lin. Interpolation, Endpunkte bleiben), gleitendes 1-m-Mittel, Abstand Abtastpunkt -> gemittelte Linie <= 3 cm hart fuer alle Linien '
                '(Vektor und Mesh-Kantenzug = Mesh-Vertices <= 2 cm an der Linie); Knick <= 15 Grad (Sehnen vor/nach dem Punkt), in Kreuzungspolygonen ausgenommen (Q4/R8 gilt dort).')
+
+
+def zonen_stosspunkte(ringe, zk):
+    """Stosspunkte der Zonenringe: Ringstuetzpunkte, an denen >= 3 verschiedene Zonen (Polygon-id) innerhalb stoss_tol_m
+    zusammenstossen; benachbarte Kandidaten (< 0,05 m) zu einem Punkt zusammengefasst.
+    -> [{'x', 'z', 'zonen': [id], 'typen': [typ], 'ausgenommen': bool}] (hart, wenn ein Typ in hart_typen)."""
+    from shapely import STRtree, points, LineString
+    from scipy.spatial import cKDTree
+    tol = zk.get('stoss_tol_m', 0.01); hart = set(zk.get('hart_typen', []))
+    je = {}
+    for pl, g, pr in ringe: je.setdefault(pr.get('id'), [pr, []])[1].append(pl)
+    ids = list(je); typ = {i: je[i][0].get('typ') for i in ids}
+    geoms, gz = [], []                                          # Ringe in Stuecke zu 32 Segmenten (schnelle Baumabfrage)
+    for n, i in enumerate(ids):
+        for pl in je[i][1]:
+            r = np.vstack([pl, pl[:1]])
+            for s in range(0, len(r) - 1, 32):
+                geoms.append(LineString(r[s:s + 33])); gz.append(n)
+    gz = np.array(gz)
+    P = np.unique(np.round(np.vstack([pl for pl, _, _ in ringe]), 4), axis=0)
+    a, b = STRtree(geoms).query(points(P), predicate='dwithin', distance=tol)
+    if not len(a): return []
+    ab = np.unique(np.c_[a, gz[b]], axis=0); a, b = ab[:, 0], ab[:, 1]
+    cnt = np.bincount(a, minlength=len(P))                     # a/b eindeutig je (Punkt, Zone)
+    kand = np.nonzero(cnt >= 3)[0]
+    if not len(kand): return []
+    zon = {i: set() for i in kand}
+    for i, j in zip(a, b):
+        if i in zon: zon[i].add(ids[j])
+    par = np.arange(len(kand)); pos = {k: n for n, k in enumerate(kand)}
+    for x, y in cKDTree(P[kand]).query_pairs(0.05):
+        rx, ry = x, y
+        while par[rx] != rx: rx = par[rx]
+        while par[ry] != ry: ry = par[ry]
+        par[max(rx, ry)] = min(rx, ry)
+    grp = {}
+    for n in range(len(kand)):
+        r = n
+        while par[r] != r: r = par[r]
+        grp.setdefault(r, []).append(kand[n])
+    out = []
+    for g in grp.values():
+        z = sorted(set().union(*[zon[i] for i in g]), key=str); c = P[g].mean(0); t = sorted({str(typ[i]) for i in z})
+        out.append({'x': _r(c[0], 3), 'z': _r(c[1], 3), 'zonen': z, 'typen': t, 'ausgenommen': not (set(t) & hart)})
+    return sorted(out, key=lambda d: (d['x'], d['z']))
+
+
+def zonen_maske(R, pl, geschl, zone, karte_rand, zk):
+    """-> (ausgenommen[n], gruppe[n]) fuer die Abtastpunkte R eines Zonenrings (F11).
+    ausgenommen: auf dem Kartenrand (<= kartenrand_tol_m) oder <= stoss_fenster_m Bogenlaenge um einen ausgenommenen Stosspunkt.
+    gruppe (fuer den Bericht): kartenrand | stossfenster | kartenrand_nah (<= 1 m) | bruecke (Ring einer Bruecken-Zone oder
+    <= 1 m um einen harten Stosspunkt) | stoss_nah (<= 1 m um Stosspunkt) | sonst."""
+    from shapely import points, distance, LineString, line_locate_point
+    tol = zk.get('kartenrand_tol_m', 0.01); fen = zk.get('stoss_fenster_m', 0.5); stol = zk.get('stoss_tol_m', 0.01)
+    hart = set(zk.get('hart_typen', []))
+    dr = distance(points(R), karte_rand); rand = dr <= tol
+    ring = np.vstack([pl, pl[:1]]) if geschl and not np.allclose(pl[0], pl[-1]) else pl
+    L = LineString(ring); Lt = L.length
+    # R (neu_abtasten) startet an pl[0] und ist gleichmaessig nach Bogenlaenge abgetastet
+    sR = np.arange(len(R)) * (Lt / len(R)) if geschl else np.linspace(0, Lt, len(R))
+    fenster = np.zeros(len(R), bool); nah_ok = np.zeros(len(R), bool); nah_hart = np.zeros(len(R), bool)
+    st = zone['stoss']
+    if st:
+        S = np.array([[d['x'], d['z']] for d in st]); dS = distance(points(S), L)
+        for d, p in zip(np.array(st)[dS <= stol + 1e-3], S[dS <= stol + 1e-3]):
+            sj = float(line_locate_point(L, points(p)))
+            ds = np.abs(sR - sj)
+            if geschl: ds = np.minimum(ds, Lt - ds)
+            if d['ausgenommen']: fenster |= ds <= fen + 1e-9; nah_ok |= ds <= 1.0
+            else: nah_hart |= ds <= 1.0
+    aus = rand | fenster
+    br = str(zone['pr'].get('typ')) in hart
+    gruppe = np.full(len(R), 'sonst', dtype=object)
+    gruppe[nah_ok & ~aus] = 'stoss_nah'
+    gruppe[(nah_hart | br) & ~aus] = 'bruecke'
+    gruppe[(dr <= 1.0) & ~aus] = 'kartenrand_nah'
+    gruppe[fenster] = 'stossfenster'; gruppe[rand] = 'kartenrand'
+    return aus, gruppe
 
 
 # ------------------------------------------------------------------ Q4

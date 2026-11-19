@@ -391,6 +391,8 @@ def baue(ziel, fehler=None):
     np.savez_compressed(ziel / 'referenz' / 'd2_alt.npz', xyz=np.c_[gx.ravel(), hd, gz.ravel()].astype(np.float32))
     ref = {'quelle': 'Dummy (baue_dummy.py)', 'wege': [{'id': w, 'teil': 0, 'pl': [list(p) for p in pl]} for w, pl, _ in WEGE],
            'bauzone_m2': float(0.5 * BAU_R ** 2 * 150 * np.sin(2 * np.pi / 150)), 'wasser_alternativen_m2': {'dummy': 2 * HW * (Z1 - Z0)}}
+    if fehler == 'Q14_ausnahme': ref['wege'].append({'id': 'W9', 'teil': 0, 'pl': [[150.5, 80.5]]})   # Ein-Punkt-Teilstueck, als Ausnahme gefuehrt
+    if fehler == 'Q14_fehlt': ref['wege'].append({'id': 'W8', 'teil': 0, 'pl': [[150.5, 80.5]]})      # fehlt, keine Ausnahme -> hart
     (ziel / 'referenz' / 'referenz_alt.json').write_text(json.dumps(ref))
     # ---- Abnahme (Q13)
     from PIL import Image
@@ -405,7 +407,8 @@ def baue(ziel, fehler=None):
         Image.fromarray((rng.random((48, 64, 3)) * 255).astype(np.uint8)).save(ziel / 'abnahme' / n, quality=90)
     (ziel / 'abnahme' / 'QUELLEN.txt').write_text('Dummy-Abnahmebilder (Rauschen) fuer den QA-Selbsttest\n' + '\n'.join(namen) + '\n')
     kd = dict(k); kd['bruecken'] = {'E2': k['bruecken']['E2']}
-    kd['schwellen'] = dict(k['schwellen'])   # Q14-Referenz kommt zur Laufzeit aus vektor/wasser.geojson des Dummys
+    kd['schwellen'] = dict(k['schwellen'])
+    if fehler == 'Q14_ausnahme': kd['q14_ausnahmen'] = [{'id': 'A-TEST', 'wege': ['W9/0']}]   # Q14-Referenz kommt zur Laufzeit aus vektor/wasser.geojson des Dummys
     (ziel / 'konfig_dummy.json').write_text(json.dumps(kd, indent=1))
     return {'vertices_welt': int(len(V)), 'duplikate': int(dup), 'dreiecke': ges}
 

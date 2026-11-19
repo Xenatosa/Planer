@@ -201,7 +201,11 @@ def q14(ctx):
         hd = alt.hausdorff_distance(nn); worst = max(worst, hd)
         if hd > S['q14_weg_m']:
             bef.append({'weg': key, 'hausdorff_m': _r(hd, 3)})
-    for k in fehlt[:20]: bef.append({'weg': k, 'fehler': 'Mittellinie fehlt in wege.geojson'})
+    aus = {wk: a['id'] for a in ctx.k.get('q14_ausnahmen', []) for wk in a.get('wege', [])}   # F12: benannte Ausnahmen (A-DV2-02)
+    aus_bef = [{'weg': k, 'ausnahme': aus[k], 'hinweis': 'fehlt in wege.geojson - als Ausnahme gefuehrt (AUSNAHMEN_DV2.md), Sichtpruefung 1,7 m in P6'}
+               for k in fehlt if k in aus]
+    fehlt_hart = [k for k in fehlt if k not in aus]
+    for k in fehlt_hart[:20]: bef.append({'weg': k, 'fehler': 'Mittellinie fehlt in wege.geojson'})
     bekannt = {rkey(w) for w in ref['wege']} | {w['id'] for w in ref['wege'] if 'teil' not in w}
     zus = sorted(k for k in neu if k not in bekannt and k.split('/')[0] not in bekannt)
     n = ctx.netz(('gelaende',)); Pw = n['V'][n['T'][n['klasse'] == 'wasser']][:, :, [0, 2]]
@@ -225,7 +229,7 @@ def q14(ctx):
     elif abs(rw) > S['q14_wasser_rel']: bef.append({'art': 'wasserflaeche', 'spiegel_sichtbar_m2': _r(sp_sicht, 1), 'referenz_m2': wref, 'rel': _r(rw), 'klasse4_m2': _r(wk4, 1)})
     if zonen_da and abs(rb) > S['q14_bauzone_rel']: bef.append({'art': 'bauzone', 'neu_m2': _r(bz, 1), 'alt_m2': ref['bauzone_m2'], 'rel': _r(rb)})
     if zonen_da and not bz_p: bef.append({'art': 'bauzone', 'fehler': 'zonen.geojson ohne bauzone_plan'})
-    r = erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt), 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
+    r = erg('Q14', not bef, {'wege_alt': len(ref['wege']), 'wege_fehlend': len(fehlt_hart), 'wege_ausnahme': [b['weg'] + ' (' + b['ausnahme'] + ')' for b in aus_bef], 'wege_zusaetzlich': len(zus), 'hausdorff_max_m': _r(worst, 3),
                                 'wasser_massgeblich': 'spiegel_sichtbar_m2 (Spiegelmodell, sichtbarer Teil = Spiegel ueber Gelaende)',
                                 'wasser_spiegel_sichtbar_m2': _r(sp_sicht, 2), 'wasser_spiegel_modell_gesamt_m2': _r(sp_ges, 2), 'wasser_klasse4_bett_m2': _r(wk4, 2),
                                 'wasser_referenz_m2': _r(wref, 2), 'wasser_referenz_quelle': rq['datei'] + ' (Vereinigung, zur Laufzeit)', 'wasser_rel': _r(rw), 'wasser_klasse4_rel': _r(wk4 / wref - 1),
@@ -235,6 +239,9 @@ def q14(ctx):
                'Hausdorff je Weg-ID (id[/teil]) alt (vektor.json/1,2) vs. neu (rolle=mittellinie); Wasser massgeblich = sichtbare Spiegelmodell-Flaeche '
                '(0,1-m-Raster: Spiegel ueber Gelaende) vs. Flaeche wasser.geojson zur Laufzeit +-3 % (Runde 3), Klasse-4-Bett und Spiegel gesamt nur Bericht; '
                'Bauzone = zonen.geojson layer=bauzone_plan vs. 31 927 m2 +-1 %.')
+    if aus_bef:
+        r['befunde'] += aus_bef; r['befunde_anzahl'] += len(aus_bef)
+        r['notiz'] += f" Ausnahmen (nicht blockierend): {len(aus_bef)} Teilstueck(e) laut konfig q14_ausnahmen."
     if not zonen_da:
         r['notiz'] += ' Bauzone: Eingabe fehlt (zonen.geojson, P1c) - nicht bestanden, offen.'
         r['befunde'].append({'art': 'bauzone', 'fehler': 'Eingabe fehlt: zonen.geojson (P1c)'}); r['befunde_anzahl'] += 1

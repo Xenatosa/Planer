@@ -79,7 +79,8 @@
    "pflicht": false,
    "filter": {
     "layer": "flaechentyp"
-   }
+   },
+   "zonenringe": true
   }
  ],
  "mittellinien": {
@@ -243,5 +244,27 @@
    "typ": "wasser"
   },
   "_hinweis": "Referenzflaeche zur Laufzeit = Vereinigung der Polygone (Entscheidung QA 19.11. Runde 3; Stand aa78160 ~6630,17 m2)"
- }
+ },
+ "q3_zonen": {
+  "_hinweis": "F11 Grundgeruest 19.11.: nur Kartenrand (inkl. Ecken) und +-stoss_fenster_m um Stosspunkte >= 3 Zonen ausgenommen; Bruecken-Stosspunkte hart (Platzhalter P5)",
+  "kartenrand_tol_m": 0.01,
+  "stoss_fenster_m": 0.5,
+  "stoss_tol_m": 0.01,
+  "hart_typen": [
+   "bruecke"
+  ]
+ },
+ "q14_ausnahmen": [
+  {
+   "id": "A-DV2-02",
+   "wege": [
+    "G002_anb/0",
+    "G008/2",
+    "G010/2",
+    "G014/1"
+   ],
+   "quelle": "AUSNAHMEN_DV2.md A-DV2-02; wege.geojson meta.verfahren.ausgelassen (P1a)",
+   "bedingung": "nur gueltig, wenn in P6 bei 1,7 m keine sichtbare Luecke im Wegnetz entsteht"
+  }
+ ]
 }
