@@ -11,6 +11,9 @@ import {
   ladeDatenschicht, pruefeDreiecksklasse, FLAECHE, UNTERGRUND, SLOT_BITS, BREITE_PX, HOEHE_PX,
 } from '../query.mjs';
 import { leseGlb, fuegeZusammen } from '../glb.mjs';
+import { ladeMesh, pruefeManifest } from '../manifest.mjs';
+import { begehbarRegel, baueGelaende } from '../query.mjs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { decodePng } from '../png.mjs';
 
 const HIER = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -19,7 +22,8 @@ const slots = JSON.parse(readFileSync(path.join(HIER, 'slots.json'), 'utf8'));
 const hat = (n) => existsSync(path.join(HIER, n));
 const SLOT_PNG = process.env.DV2_SLOT_PNG || (hat('slot.png') ? path.join(HIER, 'slot.png') : null);
 const MASKEN_DA = hat('flaeche.png') && hat('begehbar.png');
-const MESH_DA = !!process.env.DV2_MESH; // Fr: Pfad zum P2-Mesh (manifest.json)
+const MANIFEST = process.env.DV2_MANIFEST || path.join(HIER, '..', 'mesh', 'manifest.json'); // P2
+const MESH_DA = existsSync(MANIFEST);
 
 // Feste Punkte (Auftrag P4 / Plan Abschnitt 9)
 const P = {
@@ -197,10 +201,13 @@ test('Masken an festen Punkten (flaeche/begehbar/untergrund)', { skip: MASKEN_DA
 
 test('Hoehe an festen Punkten aus Mesh', { skip: MESH_DA ? false : 'wartet auf P2 Mesh (Fr ~10-12)' }, () => {});
 test('Q11: Hoehe vs. Mesh-Strahl <= 2 cm an 10 000 Zufallspunkten', { todo: 'Fr nach P2; unabhaengiger Strahl (three.js Raycaster) gegen queryPoint' });
-test('Q11: Flaechentyp = Dreiecksklasse >= 99,5 % (echtes Mesh)', { skip: MESH_DA && MASKEN_DA ? false : 'wartet auf P2-Mesh mit _FLAECHE + flaeche.png (Fr)' }, () => {
-  // Fr: Kachel-.glb laut manifest mit leseGlb lesen, fuegeZusammen, baueMeshIndex(..., flaechen),
-  // pruefeDreiecksklasse(datenschicht, meshIndex, 10000) -> ok; gemischteDreiecke() === 0.
-  assert.fail('Manifest-Format von P2 noch nicht eingebunden');
+test('Q11: Flaechentyp = Dreiecksklasse >= 99,5 % (echtes Mesh ueber manifest.json)', { skip: MESH_DA && MASKEN_DA ? false : 'wartet auf P2 mesh/manifest.json + flaeche.png (Fr)' }, async () => {
+  const m = await ladeMesh(MANIFEST);
+  assert.ok(m.pruefung.vollstaendig, 'nicht alle 56 Kacheln im manifest');
+  assert.equal(m.pruefung.gemischte_dreiecke, 0, 'Dreiecke nicht klassenrein');
+  const d = await ladeDatenschicht(HIER);
+  const r = pruefeDreiecksklasse(d, m.gelaende, 10000);
+  assert.ok(r.ok, `Quote ${r.quote} (${r.ungleich} ungleich, Beispiele ${JSON.stringify(r.beispiele.slice(0, 5))})`);
 });
 
 // --- Vorbereitung Dreiecksklasse ueber glTF-Attribut _FLAECHE (Entscheidung Grundgeruest 19.11.2026) ---
@@ -215,7 +222,7 @@ function baueGlb(primitives) {
   };
   for (const p of primitives) {
     const a = { POSITION: add(p.pos, 5126, 'VEC3', p.pos.length / 3, 34962) };
-    if (p.fl) a._FLAECHE = add(p.fl, 5121, 'SCALAR', p.fl.length, 34962);
+    if (p.fl) a._FLAECHE = add(p.fl, p.fl instanceof Float32Array ? 5126 : 5121, 'SCALAR', p.fl.length, 34962);
     prims.push({ attributes: a, indices: add(p.idx, p.idx instanceof Uint16Array ? 5123 : 5125, 'SCALAR', p.idx.length, 34963), mode: 4 });
   }
   const bin = Buffer.concat(teile);
@@ -258,4 +265,103 @@ test('Dreiecksklasse ueber _FLAECHE: klasseAus, gemischte Dreiecke, Q11-Quote ge
   // gemischtes Dreieck wird erkannt
   const g = baueMeshIndex(new Float32Array([0, 0, 0, 10, 0, 0, 0, 0, 10]), new Uint32Array([0, 1, 2]), 1, new Uint8Array([0, 1, 0]));
   assert.equal(g.klasseAus(1, 1), -1); assert.equal(g.gemischteDreiecke(), 1);
+});
+
+// --- Fake-Manifest (2 Kacheln + Bruecke) fuer Loader, Neigungsregel, Deck-Hoehe ---
+// Quad mit Aufwaerts-Wicklung (glTF CCW von oben): Dreiecke (p0,p3,p1), (p1,p3,p2); y(x,z) = f
+function quads(liste) {
+  const pos = [], idx = [], fl = [];
+  for (const [x0, z0, x1, z1, f, k] of liste) {
+    const b = pos.length / 3;
+    for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, f(x, z), z); fl.push(k); }
+    idx.push(b, b + 3, b + 1, b + 1, b + 3, b + 2);
+  }
+  return { pos: new Float32Array(pos), idx: new Uint32Array(idx), fl: new Uint8Array(fl) };
+}
+const STEIL = Math.tan((40 * Math.PI) / 180), FLACH30 = Math.tan((30 * Math.PI) / 180);
+function fakeMesh(dir, { flFloat = false, verfaelschen = null } = {}) {
+  mkdirSync(path.join(dir, 'kacheln'), { recursive: true }); mkdirSync(path.join(dir, 'modelle'), { recursive: true });
+  // A1: Grund flach x0-20, Hang 40 Grad x20-25, Hang 30 Grad x25-30, Wasser x30-42 (y=-0.3); A2: Weg flach
+  const a1 = quads([[0, 0, 20, 43, () => 0, 0], [20, 0, 25, 43, (x) => (x - 20) * STEIL, 0], [25, 0, 30, 43, (x) => (x - 25) * FLACH30, 0], [30, 0, 42, 43, () => -0.3, 4]]);
+  if (flFloat) a1.fl = Float32Array.from(a1.fl);
+  const a2 = quads([[0, 43, 42, 86, () => 0.1, 1]]);
+  // Bruecke ueber dem Wasser x32-40, z10-13: Traeger-Oberseite 0.45, Bohlen 0.5, Handlauf 1.5 (z10.0-10.1), ohne _FLAECHE
+  const br = quads([[33, 10.5, 39, 12.5, () => 0.45, 5], [32, 10, 40, 13, () => 0.5, 5], [32, 10, 40, 10.1, () => 1.5, 5]]);
+  writeFileSync(path.join(dir, 'kacheln', 'A1.glb'), baueGlb([a1]));
+  writeFileSync(path.join(dir, 'kacheln', 'A2.glb'), baueGlb([a2]));
+  writeFileSync(path.join(dir, 'modelle', 'bruecke_E2.glb'), baueGlb([{ pos: br.pos, idx: br.idx }]));
+  const m = { version: 1, einheit: 'm', ursprung: 'weltecke', karte: { breite: 336, tiefe: 303 },
+    klassen: { 0: 'grund', 1: 'weg', 2: 'ufer', 3: 'fels_klippe', 4: 'wasser', 5: 'bruecke' }, attribute: { flaeche: '_FLAECHE' },
+    uv: { TEXCOORD_0: 'welt_xz_m', TEXCOORD_1: 'karte_norm', TEXCOORD_2: 'wegband' },
+    kacheln: [{ id: 'A1', glb: 'kacheln/A1.glb', bbox: [0, 0, 42, 43], dreiecke: 8, klassen_anteil: { 0: 0.714, 4: 0.286 } },
+              { id: 'A2', glb: 'kacheln/A2.glb', bbox: [0, 43, 42, 86], dreiecke: 2, klassen_anteil: { 1: 1 } }],
+    modelle: [{ id: 'bruecke_E2', glb: 'modelle/bruecke_E2.glb', klasse: 5 }] };
+  if (verfaelschen) verfaelschen(m);
+  writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(m));
+  return path.join(dir, 'manifest.json');
+}
+const tmp = () => mkdtempSync('/tmp/dv2_daten_test_');
+
+test('manifest.mjs: Schemapruefung', () => {
+  const ok = { version: 1, einheit: 'm', ursprung: 'weltecke', karte: { breite: 336, tiefe: 303 },
+    klassen: { 0: 'grund', 1: 'weg', 2: 'ufer', 3: 'fels_klippe', 4: 'wasser', 5: 'bruecke' }, attribute: { flaeche: '_FLAECHE' }, uv: {},
+    kacheln: [{ id: 'A1', glb: 'kacheln/A1.glb', bbox: [0, 0, 42, 43], dreiecke: 2 }], modelle: [] };
+  assert.deepEqual(pruefeManifest(ok), { fehler: [], vollstaendig: false });
+  const kaputt = (f) => { const m = structuredClone(ok); f(m); return pruefeManifest(m).fehler.join(' | '); };
+  assert.match(kaputt((m) => { m.einheit = 'zelle'; }), /einheit/);
+  assert.match(kaputt((m) => { m.karte.tiefe = 363.6; }), /karte/);
+  assert.match(kaputt((m) => { m.klassen['5'] = 'steg'; }), /klassen/);
+  assert.match(kaputt((m) => { m.kacheln[0].bbox = [0, 0, 42, 42]; }), /bbox/);
+  assert.match(kaputt((m) => { m.kacheln[0].glb = '../x.glb'; }), /glb-Pfad/);
+  assert.match(kaputt((m) => { m.kacheln.push({ ...m.kacheln[0] }); }), /doppelt/);
+  assert.match(kaputt((m) => { m.kacheln[0].id = 'I9'; }), /id I9/);
+  assert.match(kaputt((m) => { m.modelle.push({ id: 'b', glb: 'm.glb', klasse: 9 }); }), /modelle/);
+});
+
+test('ladeMesh: Fake-Manifest (2 Kacheln + Bruecke), _FLAECHE uint8 und float', async () => {
+  for (const flFloat of [false, true]) {
+    const dir = tmp();
+    try {
+      const m = await ladeMesh(fakeMesh(dir, { flFloat }));
+      assert.equal(m.pruefung.vollstaendig, false); assert.equal(m.pruefung.gemischte_dreiecke, 0);
+      assert.equal(m.kacheln.indizes.length / 3, 10); assert.equal(m.modelle.length, 1);
+      const g = m.gelaende;
+      assert.equal(g.klasseAus(5, 5), 0); assert.equal(g.klasseAus(35, 30), 4); assert.equal(g.klasseAus(10, 50), 1);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }
+  const dir = tmp();
+  try {
+    await assert.rejects(ladeMesh(fakeMesh(dir, { verfaelschen: (m) => { m.kacheln[0].dreiecke = 9; } })), /dreiecke passt nicht/);
+    await assert.rejects(ladeMesh(fakeMesh(dir, { verfaelschen: (m) => { m.ursprung = 'mitte'; } })), /ursprung/);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('begehbar-Regel: Klasse nicht 3/4 und Neigung <= 35 Grad', async () => {
+  assert.equal(begehbarRegel(0, 35), true); assert.equal(begehbarRegel(0, 35.1), false);
+  assert.equal(begehbarRegel(3, 0), false); assert.equal(begehbarRegel(4, 0), false); assert.equal(begehbarRegel(5, 2), true);
+  assert.equal(begehbarRegel(null, 0), null);
+  const dir = tmp();
+  try {
+    const { gelaende: g } = await ladeMesh(fakeMesh(dir));
+    assert.ok(Math.abs(g.neigungAus(22, 20) - 40) < 0.01); assert.equal(g.begehbarAus(22, 20), false);
+    assert.ok(Math.abs(g.neigungAus(27, 20) - 30) < 0.01); assert.equal(g.begehbarAus(27, 20), true);
+    assert.equal(g.begehbarAus(5, 5), true); assert.equal(g.begehbarAus(35, 30), false); // Wasser
+    const d = erzeugeDatenschicht({ gelaende: g });
+    assert.equal(d.queryPoint(22, 20).begehbar, false); assert.equal(d.quellen().begehbar, 'mesh-regel');
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('Bruecken-Deck: Hoehe = Bohlen (nicht Wasser, Traeger oder Handlauf), Klasse 5, begehbar', async () => {
+  const dir = tmp();
+  try {
+    const { gelaende: g } = await ladeMesh(fakeMesh(dir));
+    for (const [x, z] of [[36, 11.5], [32.5, 10.7], [36, 10.05]]) {     // Traeger darunter / nur Deck / Handlauf darueber
+      assert.ok(Math.abs(g.hoeheAus(x, z) - 0.5) < 1e-6, `${x}|${z}: ${g.hoeheAus(x, z)}`);
+      assert.equal(g.klasseAus(x, z), 5); assert.equal(g.begehbarAus(x, z), true);
+    }
+    assert.ok(Math.abs(g.hoeheAus(35, 20) + 0.3) < 1e-6); assert.equal(g.klasseAus(35, 20), 4); // daneben Wasser
+    assert.equal(g.deckAus(35, 20), null);
+    // Bohlenfuge: Punkt knapp neben der Deckkante (1 cm) findet das Deck ueber die Fugensuche
+    const f = g.deckAus(40.01, 11.5); assert.ok(f && f.fuge && Math.abs(f.y - 0.5) < 1e-6);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });

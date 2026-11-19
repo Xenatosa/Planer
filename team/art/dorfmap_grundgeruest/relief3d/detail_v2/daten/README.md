@@ -21,6 +21,8 @@ Stand und offene Punkte: [STATUS.md](STATUS.md). Marker: [S] gemessen/Quelle, [A
 | `baue_masken.py` | `flaeche/begehbar/untergrund/hoehe.png` aus Vektoren + Mesh | Schema abgestimmt (klasse/untergrund/id); hoehe.png Fr |
 | `query.mjs` | `queryPoint(x,z)` → `{hoehe, flaeche, untergrund, begehbar, slot, kachel}`, ESM Node + Browser | Gerüst, Kachel/Maßstab/Slot/Mesh-Index fertig |
 | `glb.mjs` | glb-Leser (POSITION, Indizes, `_FLAECHE`), Kacheln zusammenführen | fertig (synthetisch getestet) |
+| `manifest.mjs` | `mesh/manifest.json` prüfen + laden → Gelände inkl. Brücken-Deck | fertig (synthetisch getestet) |
+| `mesh_raster.py` | Mesh → 0,1-m-Raster (Höhe, Neigung, Klasse, Deck), Python | fertig (synthetisch + Benchmark) |
 | `png.mjs` | PNG-Decoder ohne Abhängigkeiten (Graustufe 1/8/16 bit, indiziert 8 bit) | fertig |
 | `test/query.test.mjs` | `node --test` | s. STATUS.md |
 | `slot.png` | Slot-Bitfeld 16 bit | fertig, committet |
@@ -29,7 +31,7 @@ Stand und offene Punkte: [STATUS.md](STATUS.md). Marker: [S] gemessen/Quelle, [A
 ## Masken-Formate
 
 - `flaeche.png` 8 bit: 0 Grund, 1 Weg, 2 Ufer, 3 Fels/Klippe, 4 Wasser, 5 Brücke. Priorität Wasser > Brücke > Weg > Ufer > Fels/Klippe > Grund.
-- `begehbar.png` 1 bit (1 = begehbar).
+- `begehbar.png` 1 bit (1 = begehbar): Klasse ∉ {3, 4} und Neigung ≤ 35°; Brücke: Deck. Abgleich `begehbar_3d` nur als Bericht.
 - `slot.png` 16 bit Bitfeld (abgestimmt Grundgerüst 19.11.): Bits 0–11 Slot-ID (0 = kein Slot; 1–99 Plätze, 1001–1627 Deko), Bit 12 `deko_baum_ok`, Bit 13 `deko_fels_ok`, Bit 14 Bauplatz-Zelle, Bit 15 reserviert.
 - `hoehe.png` 16 bit, `hoehe_m = offset_m + wert · skala_m` (Werte in `legende.json` → `dateien.hoehe.png`). `query.mjs` nimmt die Höhe bevorzugt exakt aus dem Mesh.
 - `untergrund.png` 8 bit (Zusatzdatei, abgestimmt): 0 keiner, 1 Schnee, 2 Wald, 3 Boden, 4 Sand.
@@ -38,7 +40,9 @@ Stand und offene Punkte: [STATUS.md](STATUS.md). Marker: [S] gemessen/Quelle, [A
 
 ```js
 import { ladeDatenschicht } from './query.mjs';
-const d = await ladeDatenschicht('relief3d/detail_v2/daten', { mesh: { positionen, indizes } }); // Browser: URL
+import { ladeMesh } from './manifest.mjs';
+const { gelaende } = await ladeMesh('relief3d/detail_v2/mesh/manifest.json');      // Browser: URL
+const d = await ladeDatenschicht('relief3d/detail_v2/daten', { gelaende });
 d.queryPoint(209, 118); // {hoehe, flaeche, untergrund, begehbar, slot, kachel:'E3'}
 d.quellen();            // welche Quellen geladen sind; fehlende Quelle -> Wert null
 ```

@@ -33,10 +33,16 @@
    "status": "fertig, committet (zellbasiert, Freigabe Grundgeruest 19.11.2026)"
   },
   "hoehe.png": {
-   "format": "PNG 16 bit Graustufe, hoehe_m = offset_m + wert * skala_m",
+   "format": "PNG 16 bit Graustufe, hoehe_m = offset_m + wert * skala_m (skala 1 mm)",
    "offset_m": null,
    "skala_m": null,
-   "status": "offen (Fr, aus Mesh gerastert); offset/skala werden beim Rastern eingetragen"
+   "werte_in": "masken_meta.json -> hoehe (von baue_masken.py geschrieben; query.mjs liest sie dort)",
+   "status": "Skript fertig (mesh_raster.py), Erzeugung Fr nach P2"
+  },
+  "mesh/manifest.json": {
+   "schema": "version 1, einheit m, ursprung weltecke, karte 336x303, klassen 0-5, attribute.flaeche=_FLAECHE, uv, kacheln[id,glb,bbox,dreiecke,klassen_anteil], modelle[id,glb,klasse]",
+   "quelle": "Grundgeruest 19.11.2026 [F]",
+   "loader": "manifest.mjs (JS), mesh_raster.py (Python)"
   },
   "untergrund.png": {
    "format": "PNG 8 bit Graustufe, Wert = untergrund-Code (s. untergrund.codes)",
@@ -165,7 +171,10 @@
    "0": "nicht begehbar",
    "1": "begehbar"
   },
-  "regel": "offen: aus Mesh-Neigung + Flaeche (Wasser/Fels nicht begehbar, Bruecke begehbar); Alt-Abgleich begehbar_3d [A]"
+  "regel": "klasse nicht in {3 fels_klippe, 4 wasser} UND Neigung <= 35 Grad [F ueber Grundgeruest 19.11.2026]",
+  "bruecke": "im Fussabdruck von manifest.modelle (klasse 5): Hoehe/Neigung vom Deck, nicht vom Wasser [F]; Deck = hoechste Aufwaertsflaeche <= tiefste + 0,5 m [A]",
+  "ohne_mesh": "Pixel ohne Mesh-Treffer = 0",
+  "abgleich": "zellen_relief.csv begehbar_3d nur als Bericht, Abweichung > 1 % = Warnung (abgleich_begehbar_3d.json)"
  },
  "slot_bits": {
   "id_maske": 4095,

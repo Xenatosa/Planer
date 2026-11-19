@@ -86,9 +86,10 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
   const liste = new Uint32Array(zahl[gx * gz]), pos = zahl.slice(0, gx * gz);
   for (let t = 0; t < nT; t++) bb(t, (k) => { liste[pos[k]++] = t; });
   const EPS = 1e-9;
-  function oberstes(x, z) {
+  /** alle Dreiecke unter/ueber (x, z): [{y, t, ny}] (ny = y-Komponente der Einheitsnormale, Vorzeichen nach Wicklung) */
+  function treffer(x, z) {
     const i = Math.min(gx - 1, Math.floor(x / zelle_m)), j = Math.min(gz - 1, Math.floor(z / zelle_m)), k = j * gx + i;
-    let best = null, bt = -1;
+    const out = [];
     for (let n = zahl[k]; n < zahl[k + 1]; n++) {
       const t = liste[n], P = positionen;
       const a = indizes[3 * t] * 3, b = indizes[3 * t + 1] * 3, c = indizes[3 * t + 2] * 3;
@@ -99,20 +100,38 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
       const l2 = ((cz - az) * (x - cx) + (ax - cx) * (z - cz)) / d;
       const l3 = 1 - l1 - l2;
       if (l1 < -EPS || l2 < -EPS || l3 < -EPS) continue;
-      const y = l1 * P[a + 1] + l2 * P[b + 1] + l3 * P[c + 1];
-      if (best === null || y > best) { best = y; bt = t; }
+      out.push({ y: l1 * P[a + 1] + l2 * P[b + 1] + l3 * P[c + 1], t, ny: normaleY(t) });
     }
-    return { y: best, t: bt };
+    return out;
   }
+  function normaleY(t) {
+    const P = positionen, a = indizes[3 * t] * 3, b = indizes[3 * t + 1] * 3, c = indizes[3 * t + 2] * 3;
+    const ux = P[b] - P[a], uy = P[b + 1] - P[a + 1], uz = P[b + 2] - P[a + 2];
+    const vx = P[c] - P[a], vy = P[c + 1] - P[a + 1], vz = P[c + 2] - P[a + 2];
+    const nx = uy * vz - uz * vy, ny = uz * vx - ux * vz, nz = ux * vy - uy * vx;
+    const l = Math.hypot(nx, ny, nz);
+    return l > 0 ? ny / l : 0;
+  }
+  function oberstes(x, z) {
+    let best = null, bt = -1, bny = 0;
+    for (const h of treffer(x, z)) if (best === null || h.y > best) { best = h.y; bt = h.t; bny = h.ny; }
+    return { y: best, t: bt, ny: bny };
+  }
+  const klasseVon = (t) => {
+    const k0 = flaechen[indizes[3 * t]], k1 = flaechen[indizes[3 * t + 1]], k2 = flaechen[indizes[3 * t + 2]];
+    return k0 === k1 && k1 === k2 ? k0 : -1;
+  };
   return {
     dreiecke: nT,
+    treffer,
+    klasseVon: (t) => (flaechen ? klasseVon(t) : null),
     hoeheAus(x, z) { return oberstes(x, z).y; },
+    /** Neigung der obersten Flaeche in Grad (0 = waagrecht; Wicklung egal) oder null. */
+    neigungAus(x, z) { const o = oberstes(x, z); return o.t < 0 ? null : neigungGrad(o.ny); },
     klasseAus(x, z) {
       if (!flaechen) return null;
       const { t } = oberstes(x, z);
-      if (t < 0) return null;
-      const k0 = flaechen[indizes[3 * t]], k1 = flaechen[indizes[3 * t + 1]], k2 = flaechen[indizes[3 * t + 2]];
-      return k0 === k1 && k1 === k2 ? k0 : -1;
+      return t < 0 ? null : klasseVon(t);
     },
     /** Anzahl nicht klassenreiner Dreiecke (Soll 0). */
     gemischteDreiecke() {
@@ -124,6 +143,66 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
       }
       return n;
     },
+  };
+}
+
+export const BEGEHBAR_MAX_NEIGUNG_GRAD = 35;      // [F ueber Grundgeruest 19.11.2026]
+export const NICHT_BEGEHBAR_KLASSEN = [3, 4];        // fels_klippe, wasser
+export const DECK_FENSTER_M = 0.5;                   // [A] Deck = hoechste Aufwaertsflaeche <= tiefste + 0,5 m
+export const DECK_NY_MIN = 0.5;                      // [A] Aufwaertsflaeche: Normale y >= 0,5 (<= 60 Grad), Wicklung nach glTF (CCW aussen)
+export const FUGE_SUCHE_M = 0.02;                    // [A] Bohlenfuge 1 cm: Nachbarpunkte +-2 cm
+
+export function neigungGrad(ny) { return (Math.acos(Math.min(1, Math.abs(ny))) * 180) / Math.PI; }
+
+/** begehbar = Klasse nicht in {3,4} UND Neigung <= 35 Grad [F ueber Grundgeruest 19.11.2026]. klasse = Index 0-5. */
+export function begehbarRegel(klasse, neigung) {
+  if (klasse === null || klasse === undefined || klasse < 0 || neigung === null || neigung === undefined) return null;
+  return !NICHT_BEGEHBAR_KLASSEN.includes(klasse) && neigung <= BEGEHBAR_MAX_NEIGUNG_GRAD + 1e-9;
+}
+
+/**
+ * Gelaende aus Kachel-Mesh + Modellen (Bruecken aus manifest.modelle).
+ * Im Bereich eines Modells gilt das Deck: unter den nach oben zeigenden Modellflaechen am Punkt die hoechste,
+ * die hoechstens DECK_FENSTER_M ueber der tiefsten liegt (Bohle statt Traeger darunter, nicht Gelaender/Pfosten darueber) [A].
+ * Faellt der Punkt in eine Bohlenfuge, werden Nachbarpunkte +-FUGE_SUCHE_M versucht.
+ * kacheln: {positionen, indizes, flaechen}; modelle: [{id, klasse, mesh: {positionen, indizes}}]
+ */
+export function baueGelaende(kacheln, modelle = []) {
+  const gi = baueMeshIndex(kacheln.positionen, kacheln.indizes, 1, kacheln.flaechen || null);
+  const mi = modelle.map((m) => ({ id: m.id, klasse: m.klasse, idx: baueMeshIndex(m.mesh.positionen, m.mesh.indizes, 1) }));
+  function deckAn(x, z) {
+    for (const m of mi) {
+      const h = m.idx.treffer(x, z).filter((e) => e.ny >= DECK_NY_MIN);
+      if (!h.length) continue;
+      const tief = Math.min(...h.map((e) => e.y));
+      let best = null;
+      for (const e of h) if (e.y <= tief + DECK_FENSTER_M + 1e-9 && (!best || e.y > best.y)) best = e;
+      return { y: best.y, klasse: m.klasse, neigung: neigungGrad(best.ny), modell: m.id };
+    }
+    return null;
+  }
+  function deckAus(x, z) {
+    const d = deckAn(x, z);
+    if (d) return d;
+    for (const [dx, dz] of [[FUGE_SUCHE_M, 0], [-FUGE_SUCHE_M, 0], [0, FUGE_SUCHE_M], [0, -FUGE_SUCHE_M]]) {
+      const xx = x + dx, zz = z + dz;
+      if (xx < 0 || zz < 0 || xx > NX || zz > NY) continue;
+      const e = deckAn(xx, zz);
+      if (e) return { ...e, fuge: true };
+    }
+    return null;
+  }
+  return {
+    dreiecke: gi.dreiecke + mi.reduce((s, m) => s + m.idx.dreiecke, 0),
+    deckAus,
+    hoeheAus(x, z) { const d = deckAus(x, z); return d ? d.y : gi.hoeheAus(x, z); },
+    klasseAus(x, z) { const d = deckAus(x, z); return d ? d.klasse : gi.klasseAus(x, z); },
+    neigungAus(x, z) { const d = deckAus(x, z); return d ? d.neigung : gi.neigungAus(x, z); },
+    begehbarAus(x, z) {
+      const d = deckAus(x, z);
+      return d ? begehbarRegel(d.klasse, d.neigung) : begehbarRegel(gi.klasseAus(x, z), gi.neigungAus(x, z));
+    },
+    gemischteDreiecke: () => gi.gemischteDreiecke(),
   };
 }
 
@@ -157,7 +236,7 @@ export function pruefeDreiecksklasse(datenschicht, meshIndex, n = 10000, seed = 
 /**
  * Datenschicht aus geladenen Quellen bauen. Alle Quellen optional:
  *   { flaeche, begehbar, untergrund, slot, hoehe: {breite,hoehe,daten}, hoeheSkala: {offset_m, skala_m},
- *     mesh: {positionen, indizes, flaechen?}, slots: slots.json-Objekt }
+ *     mesh: {positionen, indizes, flaechen?} ODER gelaende: baueGelaende(...) / ladeMesh(...).gelaende, slots: slots.json-Objekt }
  */
 export function erzeugeDatenschicht(q = {}) {
   for (const k of ['flaeche', 'begehbar', 'untergrund', 'slot', 'hoehe']) {
@@ -167,7 +246,7 @@ export function erzeugeDatenschicht(q = {}) {
   }
   if (q.hoehe && !(q.hoeheSkala && Number.isFinite(q.hoeheSkala.offset_m) && Number.isFinite(q.hoeheSkala.skala_m)))
     throw new Error('hoehe.png ohne offset_m/skala_m');
-  const meshIndex = q.mesh ? baueMeshIndex(q.mesh.positionen, q.mesh.indizes, 1, q.mesh.flaechen || null) : null;
+  const meshIndex = q.gelaende ? q.gelaende : q.mesh ? baueMeshIndex(q.mesh.positionen, q.mesh.indizes, 1, q.mesh.flaechen || null) : null;
   const slotsById = q.slots ? new Map(q.slots.slots.map((s) => [s.id, s])) : null;
   const lies = (r, px, py) => r.daten[py * BREITE_PX + px];
 
@@ -189,7 +268,7 @@ export function erzeugeDatenschicht(q = {}) {
       hoehe,
       flaeche: q.flaeche ? (FLAECHE[lies(q.flaeche, px, py)] ?? null) : null,
       untergrund: q.untergrund ? (UNTERGRUND[lies(q.untergrund, px, py)] ?? null) : null,
-      begehbar: q.begehbar ? lies(q.begehbar, px, py) === 1 : null,
+      begehbar: q.begehbar ? lies(q.begehbar, px, py) === 1 : (meshIndex && meshIndex.begehbarAus ? meshIndex.begehbarAus(x, z) : null),
       slot: q.slot ? dekodiereSlot(lies(q.slot, px, py), slotsById) : null,
       kachel: kachelId(x, z),
     };
@@ -201,7 +280,7 @@ export function erzeugeDatenschicht(q = {}) {
     quellen: () => ({
       hoehe: meshIndex ? 'mesh' : q.hoehe ? 'hoehe.png' : null,
       flaeche: q.flaeche ? 'flaeche.png' : null, untergrund: q.untergrund ? 'untergrund.png' : null,
-      begehbar: q.begehbar ? 'begehbar.png' : null, slot: q.slot ? 'slot.png' : null,
+      begehbar: q.begehbar ? 'begehbar.png' : meshIndex && meshIndex.begehbarAus ? 'mesh-regel' : null, slot: q.slot ? 'slot.png' : null,
       slots: slotsById ? 'slots.json' : null, kachel: 'analytisch',
     }),
   };
@@ -209,7 +288,7 @@ export function erzeugeDatenschicht(q = {}) {
 
 /**
  * Laedt die vorhandenen Dateien aus basis (Node: Ordnerpfad, Browser: URL). Fehlende Dateien -> Quelle null.
- * Mesh (P2-.glb) wird separat uebergeben: ladeDatenschicht(basis, {mesh}).
+ * Mesh: ladeDatenschicht(basis, {gelaende: (await ladeMesh(manifest)).gelaende}) (manifest.mjs).
  */
 export async function ladeDatenschicht(basis, extra = {}) {
   const { decodePng } = await import('./png.mjs');
@@ -230,7 +309,8 @@ export async function ladeDatenschicht(basis, extra = {}) {
   const json = async (n) => { const b = await holen(n); return b ? JSON.parse(new TextDecoder().decode(b)) : null; };
   const png = async (n) => { const b = await holen(n); return b ? decodePng(b) : null; };
   const legende = await json('legende.json');
-  const hs = legende && legende.dateien && legende.dateien['hoehe.png'];
+  const mm = await json('masken_meta.json');  // von baue_masken.py: hoehe offset/skala
+  const hs = (mm && mm.hoehe) || (legende && legende.dateien && legende.dateien['hoehe.png']);
   const q = {
     flaeche: await png('flaeche.png'), begehbar: await png('begehbar.png'), untergrund: await png('untergrund.png'),
     slot: await png('slot.png'), hoehe: await png('hoehe.png'), slots: await json('slots.json'), ...extra,

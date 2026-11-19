@@ -9,9 +9,13 @@ Gerastert werden alle (Multi)Polygon-Features aus detail_v2/vektor/*.geojson:
     Pixelmitten-Regel; nicht abgedeckte Pixel = 0 (Grund).
   - untergrund.png: Features mit Property untergrund (zonen.geojson); fehlt sie ueberall -> 1-m-Fallback aus
     zellen_relief.csv (im Lauf ausgewiesen). Wo flaeche wasser/fels_klippe/bruecke ist -> 0 [A].
-  - begehbar.png: vorerst nur aus der Flaeche (wasser, fels_klippe -> 0, sonst 1) [A]; Neigungsgrenze aus dem
-    Mesh folgt mit P2 (Fr). Linien-/Punkt-Features (Mittellinien, Kanten) werden nicht gerastert.
-  - hoehe.png: aus P2-Mesh (Fr), hier noch nicht implementiert.
+  - Mesh (mesh/manifest.json, mesh_raster.py): Hoehe/Neigung je Pixel; Bruecken aus manifest.modelle setzen im
+    Deck-Fussabdruck flaeche = 5 (ueberschreibt Wasser), Hoehe = Deck, untergrund = 0 [F ueber Grundgeruest].
+  - begehbar.png: Klasse nicht in {3,4} UND Neigung <= 35 Grad [F]; Pixel ohne Mesh-Treffer = 0 (gezaehlt).
+    Mit --ohne-mesh nur aus der Flaeche (ausgewiesen). Linien-/Punkt-Features werden nicht gerastert.
+  - hoehe.png: 16 bit, hoehe_m = offset_m + wert * skala_m (skala 1 mm), Werte in masken_meta.json.
+  - Bericht: Abgleich begehbar (1-m-Mehrheit) gegen zellen_relief.csv begehbar_3d, Abweichung > 1 % = WARNUNG
+    (keine harte Regel) -> abgleich_begehbar_3d.json.
 
 Aufruf:
     python3 baue_masken.py --pruefe-quellen
@@ -51,14 +55,17 @@ QUELLEN = {
 MESH_MANIFEST = DV2 / "mesh" / "manifest.json"                           # P2 (Fr)
 
 
-def pruefe_quellen(vektor: Path, mesh: bool = True) -> list[str]:
+sys.path.insert(0, str(HIER))
+
+
+def pruefe_quellen(vektor: Path, manifest: Path | None = MESH_MANIFEST) -> list[str]:
     fehlt = []
     for k, n in QUELLEN.items():
         ok = (vektor / n).exists(); fehlt += [] if ok else [k]
         print(f"{'ok   ' if ok else 'FEHLT'} {k:14s} {vektor / n}")
-    if mesh:
-        ok = MESH_MANIFEST.exists(); fehlt += [] if ok else ["mesh_manifest"]
-        print(f"{'ok   ' if ok else 'FEHLT'} {'mesh_manifest':14s} {MESH_MANIFEST}")
+    if manifest is not None:
+        ok = manifest.exists(); fehlt += [] if ok else ["mesh_manifest"]
+        print(f"{'ok   ' if ok else 'FEHLT'} {'mesh_manifest':14s} {manifest}")
     return fehlt
 
 
@@ -165,29 +172,85 @@ def schreibe_png(arr: np.ndarray, ziel: Path, bit: int) -> None:
     assert (chk.astype(soll.dtype) == soll).all(), f"Rueckleseprobe {ziel.name} fehlgeschlagen"
 
 
-def baue(vektor: Path, out: Path) -> dict:
+def abgleich_begehbar_3d(be: np.ndarray) -> dict:
+    """1-m-Zelle begehbar, wenn >= 50 % ihrer 100 Pixel begehbar; Vergleich mit zellen_relief.csv begehbar_3d (nur Bericht)."""
+    import csv
+    alt = np.zeros((NY, NX), np.uint8)
+    with (RELIEF / "zellen_relief.csv").open(newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            alt[int(r["cy"]), int(r["cx"])] = r["begehbar_3d"] == "1"
+    neu = be.reshape(NY, PX_PRO_M, NX, PX_PRO_M).mean((1, 3)) >= 0.5
+    ab = neu != alt.astype(bool)
+    anteil = float(ab.mean())
+    je_kachel = {}
+    for j in range(7):
+        for i in range(8):
+            z1 = NY if j == 6 else 43 * (j + 1)
+            n = int(ab[43 * j:z1, 42 * i:42 * (i + 1)].sum())
+            if n: je_kachel["ABCDEFGH"[i] + str(j + 1)] = n
+    zz, xx = np.nonzero(ab)
+    return {"regel": "Bericht, keine harte Regel [F ueber Grundgeruest]; Zelle begehbar wenn >= 50 % Pixel",
+            "zellen": NX * NY, "abweichend": int(ab.sum()), "anteil": round(anteil, 5),
+            "neu_begehbar_alt_nicht": int((neu & ~alt.astype(bool)).sum()), "alt_begehbar_neu_nicht": int((~neu & alt.astype(bool)).sum()),
+            "warnung": anteil > 0.01, "je_kachel": je_kachel,
+            "beispiele": [[int(x), int(z)] for x, z in zip(xx[:200], zz[:200])]}
+
+
+def schreibe_hoehe(h: np.ndarray, ziel: Path) -> dict:
+    ok = ~np.isnan(h)
+    skala = 0.001
+    off = float(np.floor(np.nanmin(h) * 1000) / 1000) if ok.any() else 0.0
+    while ok.any() and (np.nanmax(h) - off) / skala > 65535:
+        skala *= 2
+    w = np.zeros(h.shape, np.uint16)
+    w[ok] = np.round((h[ok] - off) / skala).astype(np.uint16)
+    schreibe_png(w, ziel, 16)
+    rest = float(np.nanmax(np.abs(off + w[ok] * skala - h[ok]))) if ok.any() else 0.0
+    return {"offset_m": off, "skala_m": skala, "max_quantisierung_m": round(rest, 6), "ohne_wert_px": int((~ok).sum())}
+
+
+def baue(vektor: Path, out: Path, manifest: Path | None = None) -> dict:
     feats = []
     for n in sorted(vektor.glob("*.geojson")):
         feats += lies_features(n)
     if not any(f["klasse"] is not None for f in feats):
         raise ValueError("kein Polygon-Feature mit Property klasse gefunden")
     fl = rastere_flaeche(feats)
-    ug, ug_quelle = rastere_untergrund(feats, fl)
-    be = begehbar_aus_flaeche(fl)
+    info = {"features": len(feats)}
     out.mkdir(parents=True, exist_ok=True)
+    if manifest is not None:
+        import mesh_raster as MR
+        m = MR.lade_mesh(manifest)
+        r = MR.rastere(m)
+        fl[r["deck_maske"]] = KLASSE["bruecke"]
+        be = MR.begehbar_regel(fl, r["neigung"]).astype(np.uint8)
+        info.update({"mesh": {"kacheln": len(m["manifest"]["kacheln"]), "vollstaendig": m["vollstaendig"],
+                              "gemischte_dreiecke": m["gemischte_dreiecke"], "ohne_mesh_px": r["ohne_mesh_px"], "deck": r["deck"]},
+                     "begehbar_regel": "klasse nicht in {3,4} und neigung <= 35 Grad; ohne Mesh-Treffer 0",
+                     "hoehe": schreibe_hoehe(r["hoehe"], out / "hoehe.png")})
+    else:
+        be = begehbar_aus_flaeche(fl)
+        info["begehbar_regel"] = "OHNE MESH: nur Flaeche (Neigung fehlt)"
+    ug, ug_quelle = rastere_untergrund(feats, fl)
     schreibe_png(fl, out / "flaeche.png", 8)
     schreibe_png(ug, out / "untergrund.png", 8)
     schreibe_png(be, out / "begehbar.png", 1)
-    anteil = {KLASSE_NAME[k]: round(float((fl == k).mean()), 5) for k in KLASSE_NAME}
-    return {"features": len(feats), "flaeche_anteil": anteil, "untergrund_quelle": ug_quelle,
-            "begehbar_regel": "nur Flaeche (Neigung aus Mesh fehlt)"}
+    info["flaeche_anteil"] = {KLASSE_NAME[k]: round(float((fl == k).mean()), 5) for k in KLASSE_NAME}
+    info["untergrund_quelle"] = ug_quelle
+    ab = abgleich_begehbar_3d(be)
+    (out / "abgleich_begehbar_3d.json").write_text(json.dumps(ab, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    info["abgleich_begehbar_3d"] = {k: ab[k] for k in ("abweichend", "anteil", "warnung")}
+    if ab["warnung"]:
+        print(f"WARNUNG begehbar vs. begehbar_3d: {ab['anteil']:.2%} der Zellen abweichend (> 1 %), s. abgleich_begehbar_3d.json", file=sys.stderr)
+    (out / "masken_meta.json").write_text(json.dumps(info, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return info
 
 
 def selbsttest() -> None:
     fc = lambda feats: {"type": "FeatureCollection", "features": [
         {"type": "Feature", "properties": p, "geometry": {"type": "Polygon", "coordinates": [c]}} for p, c in feats]}
     box = lambda x0, z0, x1, z1: [[x0, z0], [x1, z0], [x1, z1], [x0, z1], [x0, z0]]
-    with tempfile.TemporaryDirectory(prefix="dv2_daten_selbst_") as t:
+    with tempfile.TemporaryDirectory(prefix="dv2_daten_selbst_", dir="/tmp") as t:
         v = Path(t) / "vektor"; v.mkdir()
         (v / "zonen.geojson").write_text(json.dumps(fc([
             ({"id": "z1", "klasse": 0, "untergrund": "Schnee"}, box(0, 0, NX, NY)),
@@ -223,7 +286,104 @@ def selbsttest() -> None:
             lies_features(v / "kaputt.geojson"); raise AssertionError("Einheitenfehler nicht erkannt")
         except ValueError as e:
             assert "ausserhalb" in str(e)
+        (v / "kaputt.geojson").unlink()
+        selbsttest_mesh(Path(t), v)
     print("selbsttest ok")
+
+
+def _glb(prims: list[dict]) -> bytes:
+    """Minimaler glb-Schreiber fuer den Selbsttest: prims = [{pos (n,3) float32, idx (m,) uint32, fl (n,) uint8|float32|None}]."""
+    import struct
+    binb, views, accs, gp = bytearray(), [], [], []
+
+    def add(arr, ct, typ, target):
+        b = arr.tobytes(); views.append({"buffer": 0, "byteOffset": len(binb), "byteLength": len(b), "target": target})
+        accs.append({"bufferView": len(views) - 1, "componentType": ct, "count": len(arr) if arr.ndim == 1 else arr.shape[0], "type": typ})
+        binb.extend(b + b"\0" * ((4 - len(b) % 4) % 4)); return len(accs) - 1
+    for p in prims:
+        a = {"POSITION": add(p["pos"].astype(np.float32), 5126, "VEC3", 34962)}
+        if p.get("fl") is not None:
+            a["_FLAECHE"] = add(p["fl"], 5126 if p["fl"].dtype == np.float32 else 5121, "SCALAR", 34962)
+        gp.append({"attributes": a, "indices": add(p["idx"].astype(np.uint32), 5125, "SCALAR", 34963), "mode": 4})
+    js = json.dumps({"asset": {"version": "2.0"}, "buffers": [{"byteLength": len(binb)}], "bufferViews": views, "accessors": accs,
+                     "meshes": [{"primitives": gp}], "nodes": [{"mesh": 0}], "scenes": [{"nodes": [0]}], "scene": 0}).encode()
+    js += b" " * ((4 - len(js) % 4) % 4)
+    return (struct.pack("<III", 0x46546C67, 2, 12 + 8 + len(js) + 8 + len(binb)) + struct.pack("<II", len(js), 0x4E4F534A) + js
+            + struct.pack("<II", len(binb), 0x004E4942) + bytes(binb))
+
+
+def _quads(liste) -> dict:
+    """Quads mit Aufwaerts-Wicklung (glTF CCW von oben): (p0,p3,p1), (p1,p3,p2)."""
+    pos, idx, fl = [], [], []
+    for x0, z0, x1, z1, f, k in liste:
+        b = len(pos)
+        for x, z in [(x0, z0), (x1, z0), (x1, z1), (x0, z1)]:
+            pos.append((x, f(x, z), z)); fl.append(k)
+        idx += [b, b + 3, b + 1, b + 1, b + 3, b + 2]
+    return {"pos": np.array(pos, np.float32), "idx": np.array(idx, np.uint32), "fl": np.array(fl, np.uint8)}
+
+
+def selbsttest_mesh(t: Path, vektor: Path) -> None:
+    """Fake-Manifest (2 Kacheln + Bruecke), gleiche Geometrie wie test/query.test.mjs."""
+    import math
+    from PIL import Image
+    st, f30 = math.tan(math.radians(40)), math.tan(math.radians(30))
+    md = t / "mesh"; (md / "kacheln").mkdir(parents=True); (md / "modelle").mkdir()
+    a1 = _quads([(0, 0, 20, 43, lambda x, z: 0, 0), (20, 0, 25, 43, lambda x, z: (x - 20) * st, 0),
+                 (25, 0, 30, 43, lambda x, z: (x - 25) * f30, 0), (30, 0, 42, 43, lambda x, z: -0.3, 4)])
+    a1["fl"] = a1["fl"].astype(np.float32)                         # float-_FLAECHE pruefen
+    a2 = _quads([(0, 43, 42, 86, lambda x, z: 0.1, 1)])
+    br = _quads([(33, 10.5, 39, 12.5, lambda x, z: 0.45, 5), (32, 10, 40, 13, lambda x, z: 0.5, 5), (32, 10, 40, 10.1, lambda x, z: 1.5, 5)])
+    br["fl"] = None
+    (md / "kacheln" / "A1.glb").write_bytes(_glb([a1])); (md / "kacheln" / "A2.glb").write_bytes(_glb([a2]))
+    (md / "modelle" / "bruecke_E2.glb").write_bytes(_glb([br]))
+    man = {"version": 1, "einheit": "m", "ursprung": "weltecke", "karte": {"breite": 336, "tiefe": 303},
+           "klassen": {"0": "grund", "1": "weg", "2": "ufer", "3": "fels_klippe", "4": "wasser", "5": "bruecke"},
+           "attribute": {"flaeche": "_FLAECHE"}, "uv": {"TEXCOORD_0": "welt_xz_m", "TEXCOORD_1": "karte_norm", "TEXCOORD_2": "wegband"},
+           "kacheln": [{"id": "A1", "glb": "kacheln/A1.glb", "bbox": [0, 0, 42, 43], "dreiecke": 8},
+                       {"id": "A2", "glb": "kacheln/A2.glb", "bbox": [0, 43, 42, 86], "dreiecke": 2}],
+           "modelle": [{"id": "bruecke_E2", "glb": "modelle/bruecke_E2.glb", "klasse": 5}]}
+    (md / "manifest.json").write_text(json.dumps(man))
+    # Vektoren passend: Wasser x30-42 z0-43, Weg in A2
+    for n in list(vektor.glob("*.geojson")):
+        n.unlink()
+    poly = lambda x0, z0, x1, z1: [[x0, z0], [x1, z0], [x1, z1], [x0, z1], [x0, z0]]
+    feats = [({"id": "g", "klasse": 0, "untergrund": "Schnee"}, poly(0, 0, NX, NY)), ({"id": "w", "klasse": 4}, poly(30, 0, 42, 43)),
+             ({"id": "s", "klasse": 1}, poly(0, 43, 42, 86))]
+    (vektor / "zonen.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": [
+        {"type": "Feature", "properties": p, "geometry": {"type": "Polygon", "coordinates": [c]}} for p, c in feats]}))
+    out = t / "out_mesh"
+    info = baue(vektor, out, md / "manifest.json")
+    fl = np.array(Image.open(out / "flaeche.png")); be = np.array(Image.open(out / "begehbar.png")).astype(bool)
+    ug = np.array(Image.open(out / "untergrund.png")); hw = np.array(Image.open(out / "hoehe.png")).astype(float)
+    hm = info["hoehe"]; h = hm["offset_m"] + hw * hm["skala_m"]
+    px = lambda a, x, z: a[int(z * 10), int(x * 10)]
+    assert info["mesh"]["gemischte_dreiecke"] == 0 and not info["mesh"]["vollstaendig"]
+    assert px(fl, 5, 5) == 0 and px(be, 5, 5) and abs(px(h, 5, 5)) < 1e-3
+    assert not px(be, 22, 20) and abs(px(h, 22.05, 20.05) - 2.05 * st) < 2e-3      # 40 Grad: nicht begehbar
+    assert px(be, 27, 20)                                                         # 30 Grad: begehbar
+    assert px(fl, 35, 30) == 4 and not px(be, 35, 30) and abs(px(h, 35, 30) + 0.3) < 1e-3
+    for x, z in [(36.05, 11.55), (32.55, 10.75), (36.05, 10.05)]:                  # Deck statt Traeger/Handlauf/Wasser
+        assert px(fl, x, z) == 5 and px(be, x, z) and abs(px(h, x, z) - 0.5) < 1e-3 and px(ug, x, z) == 0, (x, z, px(h, x, z))
+    assert px(fl, 10, 50) == 1 and px(be, 10, 50)
+    assert px(be, 100, 100) == 0 and info["mesh"]["ohne_mesh_px"] > 0            # ausserhalb der Fake-Kacheln kein Mesh
+    ab = json.loads((out / "abgleich_begehbar_3d.json").read_text())
+    assert {"abweichend", "anteil", "warnung", "je_kachel"} <= ab.keys() and ab["warnung"] is True   # Fake-Karte weicht ab
+    meta = json.loads((out / "masken_meta.json").read_text())
+    assert meta["hoehe"]["skala_m"] == 0.001 and meta["mesh"]["deck"][0]["id"] == "bruecke_E2"
+    # Schema-/Dreiecksfehler
+    import mesh_raster as MR
+    man["kacheln"][0]["dreiecke"] = 9; (md / "manifest.json").write_text(json.dumps(man))
+    try:
+        MR.lade_mesh(md / "manifest.json"); raise AssertionError("dreiecke-Fehler nicht erkannt")
+    except ValueError as e:
+        assert "dreiecke" in str(e)
+    man["kacheln"][0]["dreiecke"] = 8; man["einheit"] = "zelle"; (md / "manifest.json").write_text(json.dumps(man))
+    try:
+        MR.lade_mesh(md / "manifest.json"); raise AssertionError("Schemafehler nicht erkannt")
+    except ValueError as e:
+        assert "einheit" in str(e)
+    print("selbsttest_mesh ok", json.dumps({k: info[k] for k in ("hoehe", "abgleich_begehbar_3d")}))
 
 
 def main() -> None:
@@ -233,18 +393,17 @@ def main() -> None:
     ap.add_argument("--vektor", type=Path, default=DV2 / "vektor")
     ap.add_argument("--out", type=Path)
     ap.add_argument("--ohne-mesh", action="store_true", help="flaeche/untergrund/begehbar ohne Mesh (kein hoehe.png)")
+    ap.add_argument("--manifest", type=Path, default=MESH_MANIFEST)
     a = ap.parse_args()
     if a.selbsttest:
         selbsttest(); return
-    fehlt = pruefe_quellen(a.vektor, mesh=not a.ohne_mesh)
+    fehlt = pruefe_quellen(a.vektor, None if a.ohne_mesh else a.manifest)
     if a.pruefe_quellen or not a.out:
         sys.exit(2 if fehlt else 0)
     if fehlt:
         print(f"Abbruch: Quellen fehlen {fehlt} (s. STATUS.md). Keine Masken erzeugt.", file=sys.stderr)
         sys.exit(2)
-    print(json.dumps(baue(a.vektor, a.out), ensure_ascii=False, indent=1))
-    if not a.ohne_mesh:
-        raise NotImplementedError("hoehe.png + Neigung fuer begehbar aus P2-Mesh: Fr nach P2")
+    print(json.dumps(baue(a.vektor, a.out, None if a.ohne_mesh else a.manifest), ensure_ascii=False, indent=1))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 // Minimaler glb-Leser fuer die P2-Kacheln (ESM, Node + Browser, keine Abhaengigkeiten).
 // Liest je Mesh-Primitive POSITION (float VEC3), Indizes (u8/u16/u32, sonst 0..n-1) und das
-// Vertex-Attribut _FLAECHE (SCALAR, u8/u16/u32/float; Klasse 0-5) [F ueber Grundgeruest 19.11.2026].
+// Vertex-Attribut _FLAECHE (Name aus manifest.attribute.flaeche; SCALAR, uint8 oder float, Klasse 0-5) [F ueber Grundgeruest 19.11.2026].
 // Node-Transformationen werden NICHT angewandt (P2 exportiert in Welt-Metern) - Abweichung -> Fehler.
 // Ergebnis: {positionen: Float32Array, indizes: Uint32Array, flaechen: Uint8Array|null}
 
@@ -20,7 +20,7 @@ function accessor(gltf, bin, i) {
   return out;
 }
 
-export function leseGlb(input) {
+export function leseGlb(input, attribut = '_FLAECHE') {
   const u8 = input instanceof Uint8Array ? input : new Uint8Array(input);
   const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
   if (dv.getUint32(0, true) !== 0x46546c67) throw new Error('keine glb-Datei');
@@ -41,15 +41,18 @@ export function leseGlb(input) {
     if ((pr.mode ?? 4) !== 4) continue;
     const pos = accessor(gltf, bin, pr.attributes.POSITION), nv = pos.length / 3;
     const idx = pr.indices !== undefined ? accessor(gltf, bin, pr.indices) : Uint32Array.from({ length: nv }, (_, i) => i);
-    const hatF = pr.attributes._FLAECHE !== undefined;
-    if (mitF === null) mitF = hatF; else if (mitF !== hatF) throw new Error('glb: _FLAECHE nur an einem Teil der Primitives');
+    const hatF = pr.attributes[attribut] !== undefined;
+    if (mitF === null) mitF = hatF; else if (mitF !== hatF) throw new Error(`glb: ${attribut} nur an einem Teil der Primitives`);
     P.push(pos); I.push(Uint32Array.from(idx, (v) => v + basis));
-    if (hatF) F.push(Uint8Array.from(accessor(gltf, bin, pr.attributes._FLAECHE), (v) => Math.round(v)));
+    if (hatF) {
+      const roh = accessor(gltf, bin, pr.attributes[attribut]);
+      for (const v of roh) if (!(Math.abs(v - Math.round(v)) < 1e-3) || v < -1e-3 || v > 5 + 1e-3) throw new Error(`glb: ${attribut}-Wert ${v} nicht 0-5`);
+      F.push(Uint8Array.from(roh, (v) => Math.round(v)));
+    }
     basis += nv;
   }
   const cat = (L, T) => { const o = new T(L.reduce((s, a) => s + a.length, 0)); let p = 0; for (const a of L) { o.set(a, p); p += a.length; } return o; };
   const flaechen = mitF ? cat(F, Uint8Array) : null;
-  if (flaechen) for (const v of flaechen) if (v > 5) throw new Error(`glb: _FLAECHE-Wert ${v} nicht 0-5`);
   return { positionen: cat(P, Float32Array), indizes: cat(I, Uint32Array), flaechen };
 }
 
