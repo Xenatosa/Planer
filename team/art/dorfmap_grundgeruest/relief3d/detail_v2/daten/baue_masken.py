@@ -14,6 +14,15 @@ Gerastert werden alle (Multi)Polygon-Features aus detail_v2/vektor/*.geojson:
   - begehbar.png: Klasse nicht in {3,4} UND Neigung <= 35 Grad [F]; Pixel ohne Mesh-Treffer = 0 (gezaehlt).
     Mit --ohne-mesh nur aus der Flaeche (ausgewiesen). Linien-/Punkt-Features werden nicht gerastert.
   - hoehe.png: 16 bit, hoehe_m = offset_m + wert * skala_m (skala 1 mm), Werte in masken_meta.json.
+  - wege.geojson: klasse ist dort der Weg-TYP aus P1a (GASSE/ANBINDUNG/HAUSWEG ...), keine Flaechenklasse [F Befund
+    Grundgeruest 19.11.]: nicht-numerische klasse -> Flaechenklasse 1 (Weg), Typ bleibt als weg_typ erhalten
+    (weg_typ.png + masken_meta.weg_typen); unbekannter Typ -> 1 mit WARNUNG. In allen anderen Dateien: Fehler.
+  - zonen.geojson (Schema #61): Punkte mit Property zellen ([cx, cz], 1 m, Ursprung Weltecke) und flaeche_m2.
+    typ bauzone -> bauzone.png (1 bit), typ slot_bau/slot_deko -> slot_zonen.png (8 bit: 0 frei, 1 Bau, 2 Deko),
+    Abgleich gegen slot.png/slots.json -> abgleich_slots.json (nur Bericht).
+  - F10 [F Grundgeruest 19.11.]: Wasserspiegel zaehlt nur, wo er UEBER dem Gelaende liegt. Mit Mesh: Pixel mit
+    flaeche = wasser, deren oberste Mesh-Flaeche kein Wasser ist (Spiegel steckt im Ufer), bekommen Klasse und
+    Hoehe des Gelaendes (mesh_raster.rastere waehlt Wasser nur bei y_wasser > y_gelaende). Ohne Mesh nicht pruefbar.
   - Bericht: Abgleich begehbar (1-m-Mehrheit) gegen zellen_relief.csv begehbar_3d, Abweichung > 1 % = WARNUNG
     (keine harte Regel) -> abgleich_begehbar_3d.json.
 
@@ -46,6 +55,9 @@ UNTERGRUND = {"schnee": 1, "wald": 2, "boden": 3, "sand": 4}
 UNTERGRUND_ALT = {"SCHNEE": 1, "WALD": 2, "BODEN": 3, "SAND": 4}
 OHNE_UNTERGRUND = (KLASSE["wasser"], KLASSE["fels_klippe"], KLASSE["bruecke"])
 NICHT_BEGEHBAR = (KLASSE["wasser"], KLASSE["fels_klippe"])
+WEG_DATEI = "wege.geojson"
+WEG_TYPEN = ["HAUSWEG", "ANBINDUNG", "GASSE"]       # bekannte P1a-Typen, niedrigste Prioritaet zuerst (weg_typ.png 1..3)
+SLOT_ZONEN = {"slot_bau": 1, "slot_deko": 2}
 
 QUELLEN = {
     "wege": "wege.geojson", "kreuzungen": "kreuzungen.geojson",          # P1a
@@ -89,7 +101,11 @@ def lies_features(pfad: Path) -> list[dict]:
         x0, z0, x1, z1 = geom.bounds
         if x0 < -RAND_TOL_M or z0 < -RAND_TOL_M or x1 > NX + RAND_TOL_M or z1 > NY + RAND_TOL_M:
             raise ValueError(f"{pfad.name} id={fid}: ausserhalb 0-{NX}|0-{NY} m (bounds {geom.bounds}) - Einheit pruefen (1,2-m-Zellen?)")
-        kl = p.get("klasse")
+        kl, weg_typ = p.get("klasse"), None
+        if pfad.name == WEG_DATEI and isinstance(kl, str) and not kl.strip().lstrip("-").isdigit():
+            weg_typ, kl = kl, KLASSE["weg"]                # Weg-Typ (P1a) -> Flaechenklasse Weg
+            if weg_typ not in WEG_TYPEN:
+                print(f"WARNUNG {pfad.name} id={fid}: unbekannter Weg-Typ {weg_typ!r} -> klasse 1 (weg)", file=sys.stderr)
         if kl is not None:
             if isinstance(kl, bool) or not isinstance(kl, int) or kl not in KLASSE_NAME:
                 raise ValueError(f"{pfad.name} id={fid}: klasse {kl!r} nicht 0-5")
@@ -98,8 +114,92 @@ def lies_features(pfad: Path) -> list[dict]:
             if str(ug).lower() not in UNTERGRUND:
                 raise ValueError(f"{pfad.name} id={fid}: untergrund {ug!r} nicht Schnee/Wald/Boden/Sand")
             ug = UNTERGRUND[str(ug).lower()]
-        out.append({"id": fid, "quelle": pfad.name, "geom": geom, "klasse": kl, "untergrund": ug})
+        out.append({"id": fid, "quelle": pfad.name, "geom": geom, "klasse": kl, "untergrund": ug, "weg_typ": weg_typ})
     return out
+
+
+def lies_zellen_punkte(pfad: Path) -> list[dict]:
+    """Punkt-Features mit Property zellen (Schema #61): [{id, typ, zellen: ndarray (n,2) [cx, cz]}].
+    Prueft Zellformat, Kartenbereich, Doppelte und flaeche_m2 = Zellzahl (1 m^2 je Zelle)."""
+    if not pfad.exists():
+        return []
+    d = json.loads(pfad.read_text(encoding="utf-8"))
+    out = []
+    for n, f in enumerate(d.get("features", [])):
+        p = f.get("properties") or {}
+        if (f.get("geometry") or {}).get("type") != "Point" or "zellen" not in p:
+            continue
+        fid = p.get("id", f"#{n}")
+        z = np.asarray(p["zellen"])
+        if z.ndim != 2 or z.shape[1] != 2 or z.dtype.kind not in "iu":
+            raise ValueError(f"{pfad.name} id={fid}: zellen nicht [[cx, cz], ...] ganzzahlig")
+        if (z < 0).any() or (z[:, 0] >= NX).any() or (z[:, 1] >= NY).any():
+            raise ValueError(f"{pfad.name} id={fid}: Zelle ausserhalb 0-{NX - 1}|0-{NY - 1}")
+        if len(np.unique(z, axis=0)) != len(z):
+            raise ValueError(f"{pfad.name} id={fid}: Zelle doppelt")
+        if "flaeche_m2" in p and abs(float(p["flaeche_m2"]) - len(z)) > 1e-6:
+            raise ValueError(f"{pfad.name} id={fid}: flaeche_m2 {p['flaeche_m2']} != {len(z)} Zellen")
+        out.append({"id": fid, "typ": p.get("typ"), "zellen": z})
+    return out
+
+
+def zellen_maske_1m(zellen: list[np.ndarray]) -> np.ndarray:
+    m = np.zeros((NY, NX), bool)
+    for z in zellen:
+        m[z[:, 1], z[:, 0]] = True
+    return m
+
+
+def auf_px(m1: np.ndarray) -> np.ndarray:
+    return np.kron(m1.astype(np.uint8), np.ones((PX_PRO_M, PX_PRO_M), np.uint8))
+
+
+def rastere_weg_typ(features: list[dict], flaeche: np.ndarray) -> tuple[np.ndarray, dict]:
+    typen = list(WEG_TYPEN) + sorted({f["weg_typ"] for f in features if f["weg_typ"] and f["weg_typ"] not in WEG_TYPEN})
+    out = np.zeros((H, W), np.uint8)
+    for n, t in enumerate(typen, 1):                   # GASSE zuletzt = gewinnt bei Ueberlappung
+        for f in features:
+            if f["weg_typ"] == t:
+                male(out, f["geom"], n)
+    out[flaeche != KLASSE["weg"]] = 0                  # nur wo die Flaeche Weg ist (Wasser/Bruecke gewinnen)
+    return out, {str(n): t for n, t in enumerate(typen, 1)}
+
+
+def abgleich_slots(punkte: list[dict], slot_png: Path, slots_json: Path) -> dict:
+    """Bericht: Slot-Zellen aus zonen.geojson gegen slot.png (Bit 14 Bauplatz-Zelle, ID-Bits) und slots.json."""
+    from PIL import Image
+    sp = np.array(Image.open(slot_png)).astype(np.uint16)[PX_PRO_M // 2::PX_PRO_M, PX_PRO_M // 2::PX_PRO_M]  # Zellmitten
+    sj = {s["id"]: s for s in json.loads(slots_json.read_text(encoding="utf-8"))["slots"]}
+    sid = sp & 0x0FFF
+    art = np.vectorize(lambda i: sj[i]["art"] if i in sj else "", otypes=[object])(sid)
+    soll = {"slot_bau": (sp & (1 << 14)) > 0, "slot_deko": art == "deko"}
+    ber = {"regel": "Bericht; Zelle = 1 m, slot.png an Zellmitten gelesen; slot_bau ~ Bit 14 (Bauplatz-Zelle), slot_deko ~ ID mit art deko"}
+    for typ, s_m in soll.items():
+        ps = [p for p in punkte if p["typ"] == typ]
+        ist = zellen_maske_1m([p["zellen"] for p in ps])
+        nur_z, nur_s = ist & ~s_m, s_m & ~ist
+        # je Punkt: welche slots.json-ID deckt die Zellen? (Mehrheit), eindeutig?
+        zuord, mehrdeutig, ohne = {}, [], []
+        for p in ps:
+            ids = sid[p["zellen"][:, 1], p["zellen"][:, 0]]
+            ids = ids[ids > 0]
+            if not len(ids):
+                ohne.append(p["id"]); continue
+            w, c = np.unique(ids, return_counts=True)
+            zuord[p["id"]] = int(w[c.argmax()])
+            if len(w) > 1: mehrdeutig.append(p["id"])
+        doppelt = sorted({i for i in zuord.values() if list(zuord.values()).count(i) > 1})
+        sj_art = {"slot_bau": ("bauplatz",), "slot_deko": ("deko",)}[typ]
+        ids_soll = {i for i, s in sj.items() if s["art"] in sj_art}
+        ber[typ] = {"punkte": len(ps), "zellen_zonen": int(ist.sum()), "zellen_slot_png": int(s_m.sum()),
+                    "gleich": int((ist & s_m).sum()), "nur_zonen": int(nur_z.sum()), "nur_slot_png": int(nur_s.sum()),
+                    "beispiele_nur_zonen": [[int(x), int(z)] for z, x in zip(*np.nonzero(nur_z))][:20],
+                    "beispiele_nur_slot_png": [[int(x), int(z)] for z, x in zip(*np.nonzero(nur_s))][:20],
+                    "slots_json_ids_soll": len(ids_soll), "slots_json_ids_getroffen": len(set(zuord.values()) & ids_soll),
+                    "ids_fehlend": sorted(ids_soll - set(zuord.values()))[:50],
+                    "punkte_ohne_slot_id": ohne[:50], "punkte_mehrere_ids": mehrdeutig[:50], "ids_mehrfach": doppelt[:50]}
+    ber["abweichung"] = any(ber[t]["nur_zonen"] or ber[t]["nur_slot_png"] for t in soll)
+    return ber
 
 
 def pixelmitten(bbox_m):
@@ -216,12 +316,19 @@ def baue(vektor: Path, out: Path, manifest: Path | None = None) -> dict:
     if not any(f["klasse"] is not None for f in feats):
         raise ValueError("kein Polygon-Feature mit Property klasse gefunden")
     fl = rastere_flaeche(feats)
-    info = {"features": len(feats)}
+    wt = {}
+    for f in feats:
+        if f["weg_typ"]: wt[f["weg_typ"]] = wt.get(f["weg_typ"], 0) + 1
+    info = {"features": len(feats), "weg_typen": {"regel": "wege.geojson klasse = Weg-Typ -> Flaechenklasse 1", "polygone": wt}}
     out.mkdir(parents=True, exist_ok=True)
     if manifest is not None:
         import mesh_raster as MR
         m = MR.lade_mesh(manifest)
         r = MR.rastere(m)
+        # F10: Wasser aus den Vektoren gilt nur, wo das Mesh dort Wasser oben hat (Spiegel ueber Gelaende)
+        f10 = (fl == KLASSE["wasser"]) & (r["klasse"] >= 0) & (r["klasse"] != KLASSE["wasser"]) & ~r["deck_maske"]  # Deck folgt unten
+        fl[f10] = r["klasse"][f10]
+        info["f10_wasser_zu_gelaende_px"] = int(f10.sum()); info["f10_quelle"] = r.get("f10", {})
         fl[r["deck_maske"]] = KLASSE["bruecke"]
         be = MR.begehbar_regel(fl, r["neigung"]).astype(np.uint8)
         info.update({"mesh": {"kacheln": len(m["manifest"]["kacheln"]), "vollstaendig": m["vollstaendig"],
@@ -231,10 +338,37 @@ def baue(vektor: Path, out: Path, manifest: Path | None = None) -> dict:
     else:
         be = begehbar_aus_flaeche(fl)
         info["begehbar_regel"] = "OHNE MESH: nur Flaeche (Neigung fehlt)"
+        info["f10"] = "OHNE MESH nicht anwendbar (keine Gelaendehoehe); wirkt im Lauf mit Mesh"
     ug, ug_quelle = rastere_untergrund(feats, fl)
     schreibe_png(fl, out / "flaeche.png", 8)
     schreibe_png(ug, out / "untergrund.png", 8)
     schreibe_png(be, out / "begehbar.png", 1)
+    wtp, wt_leg = rastere_weg_typ(feats, fl)
+    schreibe_png(wtp, out / "weg_typ.png", 8)
+    info["weg_typen"]["legende"] = wt_leg
+    info["weg_typen"]["anteil"] = {t: round(float((wtp == int(n)).mean()), 5) for n, t in wt_leg.items()}
+    punkte = lies_zellen_punkte(vektor / "zonen.geojson")
+    bz = [p["zellen"] for p in punkte if p["typ"] == "bauzone"]
+    if bz:
+        bm = zellen_maske_1m(bz)
+        schreibe_png(auf_px(bm), out / "bauzone.png", 1)
+        info["bauzone"] = {"punkte": len(bz), "zellen": int(bm.sum()), "zellen_summe": int(sum(len(z) for z in bz))}
+    sz = [p for p in punkte if p["typ"] in SLOT_ZONEN]
+    if sz:
+        sm = np.zeros((NY, NX), np.uint8)
+        for typ, v in SLOT_ZONEN.items():
+            m1 = zellen_maske_1m([p["zellen"] for p in sz if p["typ"] == typ])
+            if (sm[m1] > 0).any(): raise ValueError(f"zonen.geojson: {typ}-Zellen ueberlappen andere Slot-Zellen")
+            sm[m1] = v
+        schreibe_png(np.kron(sm, np.ones((PX_PRO_M, PX_PRO_M), np.uint8)), out / "slot_zonen.png", 8)
+        info["slot_zonen"] = {t: {"punkte": sum(p["typ"] == t for p in sz), "zellen": int((sm == v).sum())} for t, v in SLOT_ZONEN.items()}
+        if (HIER / "slot.png").exists():
+            ab_s = abgleich_slots(punkte, HIER / "slot.png", HIER / "slots.json")
+            (out / "abgleich_slots.json").write_text(json.dumps(ab_s, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+            info["abgleich_slots"] = {t: {k: ab_s[t][k] for k in ("punkte", "zellen_zonen", "zellen_slot_png", "nur_zonen", "nur_slot_png", "slots_json_ids_soll", "slots_json_ids_getroffen")} for t in SLOT_ZONEN}
+            info["abgleich_slots"]["abweichung"] = ab_s["abweichung"]
+    if not punkte:
+        info["zellen_punkte"] = "keine Punkte mit zellen in zonen.geojson (Schema #61 fehlt?) -> keine bauzone/slot_zonen"
     info["flaeche_anteil"] = {KLASSE_NAME[k]: round(float((fl == k).mean()), 5) for k in KLASSE_NAME}
     info["untergrund_quelle"] = ug_quelle
     ab = abgleich_begehbar_3d(be)
@@ -252,11 +386,21 @@ def selbsttest() -> None:
     box = lambda x0, z0, x1, z1: [[x0, z0], [x1, z0], [x1, z1], [x0, z1], [x0, z0]]
     with tempfile.TemporaryDirectory(prefix="dv2_daten_selbst_", dir="/tmp") as t:
         v = Path(t) / "vektor"; v.mkdir()
-        (v / "zonen.geojson").write_text(json.dumps(fc([
+        (v / "zonen.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": fc([
             ({"id": "z1", "klasse": 0, "untergrund": "Schnee"}, box(0, 0, NX, NY)),
             ({"id": "z2", "klasse": 0, "untergrund": "Wald"}, box(50, 50, 60, 60)),
-            ({"id": "f1", "klasse": 3}, box(10, 10, 20, 20))])))
-        (v / "wege.geojson").write_text(json.dumps(fc([({"id": "w1", "klasse": 1}, box(15, 0, 16, 303))])))
+            ({"id": "f1", "klasse": 3}, box(10, 10, 20, 20))])["features"] + [
+            {"type": "Feature", "properties": {"id": "bz1", "typ": "bauzone", "zellen": [[1, 1], [2, 1]], "flaeche_m2": 2.0},
+             "geometry": {"type": "Point", "coordinates": [2.0, 1.5]}},
+            {"type": "Feature", "properties": {"id": "sb1", "typ": "slot_bau", "zellen": [[3, 3]], "flaeche_m2": 1.0},
+             "geometry": {"type": "Point", "coordinates": [3.5, 3.5]}},
+            {"type": "Feature", "properties": {"id": "sd1", "typ": "slot_deko", "zellen": [[4, 4], [5, 4]], "flaeche_m2": 2.0},
+             "geometry": {"type": "Point", "coordinates": [5.0, 4.5]}}]}))
+        # wege.geojson: klasse = Weg-Typ (P1a) -> Flaeche 1, Typ in weg_typ.png; unbekannter Typ -> 1 + Warnung
+        (v / "wege.geojson").write_text(json.dumps(fc([({"id": "w1", "klasse": 1}, box(15, 0, 16, 303)),
+                                                      ({"id": "g1", "klasse": "GASSE"}, box(60, 0, 62, 10)),
+                                                      ({"id": "h1", "klasse": "HAUSWEG"}, box(61, 5, 64, 10)),
+                                                      ({"id": "n1", "klasse": "NEUTYP"}, box(70, 0, 71, 10))])))
         (v / "wasser.geojson").write_text(json.dumps(fc([({"id": "a1", "klasse": 4}, box(15.2, 12, 40, 18))])))
         (v / "linien.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": [
             {"type": "Feature", "properties": {"id": "l1"}, "geometry": {"type": "LineString", "coordinates": [[0, 0], [5, 5]]}}]}))
@@ -274,6 +418,25 @@ def selbsttest() -> None:
         assert px(ug, 15.5, 5) == 1                                 # Weg behaelt Untergrund [A]
         assert bool(px(be, 5, 5)) and not bool(px(be, 30, 15)) and not bool(px(be, 12, 12))
         assert info["untergrund_quelle"].startswith("Polygone")
+        wt = np.array(Image.open(Path(t) / "out" / "weg_typ.png")); leg = {v_: int(k) for k, v_ in info["weg_typen"]["legende"].items()}
+        assert px(fl, 60.5, 2) == 1 and px(fl, 70.5, 2) == 1 and px(fl, 63, 7) == 1
+        assert px(wt, 60.5, 2) == leg["GASSE"] and px(wt, 61.5, 7) == leg["GASSE"] and px(wt, 63, 7) == leg["HAUSWEG"]  # GASSE gewinnt
+        assert px(wt, 70.5, 2) == leg["NEUTYP"] and px(wt, 15.5, 5) == 0 and px(wt, 5, 5) == 0
+        assert info["weg_typen"]["polygone"] == {"GASSE": 1, "HAUSWEG": 1, "NEUTYP": 1}
+        bz = np.array(Image.open(Path(t) / "out" / "bauzone.png")).astype(bool); sz = np.array(Image.open(Path(t) / "out" / "slot_zonen.png"))
+        assert px(bz, 1.05, 1.05) and px(bz, 2.95, 1.95) and not px(bz, 3.05, 1.5) and not px(bz, 0.95, 1.5) and bz.sum() == 200
+        assert px(sz, 3.5, 3.5) == 1 and px(sz, 4.5, 4.5) == 2 and px(sz, 5.95, 4.05) == 2 and px(sz, 6.05, 4.5) == 0 and (sz > 0).sum() == 300
+        assert info["bauzone"]["zellen"] == 2 and info["slot_zonen"]["slot_deko"]["zellen"] == 2
+        assert info["abgleich_slots"]["abweichung"] is True                     # Fake-Zellen weichen von slot.png ab
+        # GASSE ausserhalb wege.geojson und falsches flaeche_m2/Zellformat bleiben Fehler
+        for feats_, msg in [([{"type": "Feature", "properties": {"id": "x", "klasse": "GASSE"}, "geometry": {"type": "Polygon", "coordinates": [box(1, 1, 2, 2)]}}], "klasse"),
+                            ([{"type": "Feature", "properties": {"id": "x", "typ": "bauzone", "zellen": [[1, 1]], "flaeche_m2": 2}, "geometry": {"type": "Point", "coordinates": [1, 1]}}], "flaeche_m2"),
+                            ([{"type": "Feature", "properties": {"id": "x", "typ": "bauzone", "zellen": [[1, 400]]}, "geometry": {"type": "Point", "coordinates": [1, 1]}}], "ausserhalb")]:
+            (v / "kaputt.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": feats_}))
+            try:
+                lies_features(v / "kaputt.geojson"); lies_zellen_punkte(v / "kaputt.geojson"); raise AssertionError(f"{msg}-Fehler nicht erkannt")
+            except ValueError as e:
+                assert msg in str(e), e
         # Schemafehler werden erkannt
         for p, msg in [({"id": "x", "klasse": 7}, "klasse"), ({"id": "y", "klasse": 0, "untergrund": "Eis"}, "untergrund")]:
             (v / "kaputt.geojson").write_text(json.dumps(fc([(p, box(1, 1, 2, 2))])))
@@ -332,7 +495,8 @@ def selbsttest_mesh(t: Path, vektor: Path) -> None:
     a1 = _quads([(0, 0, 20, 43, lambda x, z: 0, 0), (20, 0, 25, 43, lambda x, z: (x - 20) * st, 0),
                  (25, 0, 30, 43, lambda x, z: (x - 25) * f30, 0), (30, 0, 42, 43, lambda x, z: -0.3, 4)])
     a1["fl"] = a1["fl"].astype(np.float32)                         # float-_FLAECHE pruefen
-    a2 = _quads([(0, 43, 42, 86, lambda x, z: 0.1, 1)])
+    # A2: Weg 0,1 m; F10: Spiegel 0,05 m steckt im Weg (x 0-10) -> Gelaende; Spiegel 0,2 m ueber Weg (x 20-30) -> Wasser
+    a2 = _quads([(0, 43, 42, 86, lambda x, z: 0.1, 1), (0, 43, 10, 86, lambda x, z: 0.05, 4), (20, 43, 30, 86, lambda x, z: 0.2, 4)])
     br = _quads([(33, 10.5, 39, 12.5, lambda x, z: 0.45, 5), (32, 10, 40, 13, lambda x, z: 0.5, 5), (32, 10, 40, 10.1, lambda x, z: 1.5, 5)])
     br["fl"] = None
     (md / "kacheln" / "A1.glb").write_bytes(_glb([a1])); (md / "kacheln" / "A2.glb").write_bytes(_glb([a2]))
@@ -341,7 +505,7 @@ def selbsttest_mesh(t: Path, vektor: Path) -> None:
            "klassen": {"0": "grund", "1": "weg", "2": "ufer", "3": "fels_klippe", "4": "wasser", "5": "bruecke"},
            "attribute": {"flaeche": "_FLAECHE"}, "uv": {"TEXCOORD_0": "welt_xz_m", "TEXCOORD_1": "karte_norm", "TEXCOORD_2": "wegband"},
            "kacheln": [{"id": "A1", "glb": "kacheln/A1.glb", "bbox": [0, 0, 42, 43], "dreiecke": 8},
-                       {"id": "A2", "glb": "kacheln/A2.glb", "bbox": [0, 43, 42, 86], "dreiecke": 2}],
+                       {"id": "A2", "glb": "kacheln/A2.glb", "bbox": [0, 43, 42, 86], "dreiecke": 6}],
            "modelle": [{"id": "bruecke_E2", "glb": "modelle/bruecke_E2.glb", "klasse": 5}]}
     (md / "manifest.json").write_text(json.dumps(man))
     # Vektoren passend: Wasser x30-42 z0-43, Weg in A2
@@ -349,7 +513,8 @@ def selbsttest_mesh(t: Path, vektor: Path) -> None:
         n.unlink()
     poly = lambda x0, z0, x1, z1: [[x0, z0], [x1, z0], [x1, z1], [x0, z1], [x0, z0]]
     feats = [({"id": "g", "klasse": 0, "untergrund": "Schnee"}, poly(0, 0, NX, NY)), ({"id": "w", "klasse": 4}, poly(30, 0, 42, 43)),
-             ({"id": "s", "klasse": 1}, poly(0, 43, 42, 86))]
+             ({"id": "s", "klasse": 1}, poly(0, 43, 42, 86)), ({"id": "f10a", "klasse": 4}, poly(0, 43, 10, 86)),
+             ({"id": "f10b", "klasse": 4}, poly(20, 43, 30, 86))]
     (vektor / "zonen.geojson").write_text(json.dumps({"type": "FeatureCollection", "features": [
         {"type": "Feature", "properties": p, "geometry": {"type": "Polygon", "coordinates": [c]}} for p, c in feats]}))
     out = t / "out_mesh"
@@ -366,6 +531,10 @@ def selbsttest_mesh(t: Path, vektor: Path) -> None:
     for x, z in [(36.05, 11.55), (32.55, 10.75), (36.05, 10.05)]:                  # Deck statt Traeger/Handlauf/Wasser
         assert px(fl, x, z) == 5 and px(be, x, z) and abs(px(h, x, z) - 0.5) < 1e-3 and px(ug, x, z) == 0, (x, z, px(h, x, z))
     assert px(fl, 10, 50) == 1 and px(be, 10, 50)
+    # F10: Spiegel im Gelaende -> Gelaende-Klasse/-Hoehe; Spiegel ueber Gelaende -> Wasser
+    assert px(fl, 5, 50) == 1 and px(be, 5, 50) and abs(px(h, 5, 50) - 0.1) < 1e-3, (px(fl, 5, 50), px(h, 5, 50))
+    assert px(fl, 25, 50) == 4 and not px(be, 25, 50) and abs(px(h, 25, 50) - 0.2) < 1e-3
+    assert info["f10_wasser_zu_gelaende_px"] == 100 * 430 and info["f10_quelle"]["spiegel_im_gelaende_px"] == 100 * 430
     assert px(be, 100, 100) == 0 and info["mesh"]["ohne_mesh_px"] > 0            # ausserhalb der Fake-Kacheln kein Mesh
     ab = json.loads((out / "abgleich_begehbar_3d.json").read_text())
     assert {"abweichend", "anteil", "warnung", "je_kachel"} <= ab.keys() and ab["warnung"] is True   # Fake-Karte weicht ab

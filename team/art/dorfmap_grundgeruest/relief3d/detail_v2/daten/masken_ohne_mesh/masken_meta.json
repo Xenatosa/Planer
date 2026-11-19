@@ -1,0 +1,73 @@
+{
+ "features": 273,
+ "weg_typen": {
+  "regel": "wege.geojson klasse = Weg-Typ -> Flaechenklasse 1",
+  "polygone": {
+   "GASSE": 40,
+   "ANBINDUNG": 11,
+   "HAUSWEG": 10
+  },
+  "legende": {
+   "1": "HAUSWEG",
+   "2": "ANBINDUNG",
+   "3": "GASSE"
+  },
+  "anteil": {
+   "HAUSWEG": 0.0023,
+   "ANBINDUNG": 0.00301,
+   "GASSE": 0.03394
+  }
+ },
+ "begehbar_regel": "OHNE MESH: nur Flaeche (Neigung fehlt)",
+ "f10": "OHNE MESH nicht anwendbar (keine Gelaendehoehe); wirkt im Lauf mit Mesh",
+ "bauzone": {
+  "punkte": 25,
+  "zellen": 31893,
+  "zellen_summe": 31893
+ },
+ "slot_zonen": {
+  "slot_bau": {
+   "punkte": 97,
+   "zellen": 3292
+  },
+  "slot_deko": {
+   "punkte": 626,
+   "zellen": 627
+  }
+ },
+ "abgleich_slots": {
+  "slot_bau": {
+   "punkte": 97,
+   "zellen_zonen": 3292,
+   "zellen_slot_png": 3292,
+   "nur_zonen": 0,
+   "nur_slot_png": 0,
+   "slots_json_ids_soll": 97,
+   "slots_json_ids_getroffen": 97
+  },
+  "slot_deko": {
+   "punkte": 626,
+   "zellen_zonen": 627,
+   "zellen_slot_png": 627,
+   "nur_zonen": 0,
+   "nur_slot_png": 0,
+   "slots_json_ids_soll": 627,
+   "slots_json_ids_getroffen": 626
+  },
+  "abweichung": false
+ },
+ "flaeche_anteil": {
+  "grund": 0.63784,
+  "weg": 0.05263,
+  "ufer": 0.05058,
+  "fels_klippe": 0.19351,
+  "wasser": 0.06512,
+  "bruecke": 0.00033
+ },
+ "untergrund_quelle": "Polygone (46 Features)",
+ "abgleich_begehbar_3d": {
+  "abweichend": 31151,
+  "anteil": 0.30598,
+  "warnung": true
+ }
+}

@@ -22,6 +22,24 @@ Basis `art/dorfmap-fertig` @ d2d4824, Branch `art/dv2-daten`. Marker: [S] gemess
 3. Brücke (5) begehbar auf dem Deck, Höhe = Deck: Modelle aus `manifest.modelle` gelten in ihrem Fußabdruck für Höhe, Neigung und Fläche (überschreibt Wasser). Deck-Regel [A]: unter den Aufwärtsflächen (Normale y ≥ 0,5, glTF-Wicklung CCW) die höchste, die höchstens 0,5 m über der tiefsten liegt → Bohle statt Träger darunter, nicht Handlauf/Pfosten darüber. Bohlenfugen (1 cm): JS sucht ±2 cm, Python schließt den Fußabdruck um 1 px und übernimmt die Höhe des nächsten Deckpixels. **Voraussetzung an P5:** Modelle mit korrekter Außen-Wicklung, Deck ≤ 0,5 m über Trägeroberseite.
 4. Abgleich mit `begehbar_3d` nur als Bericht: `abgleich_begehbar_3d.json` (1-m-Zelle begehbar bei ≥ 50 % Pixel), Abweichung > 1 % → Warnung auf stderr + `warnung: true`, keine harte Regel.
 
+## Folge-PR Do 19.11.2026 abends: Befund Grundgerüst (GASSE, Zellen-Masken, F10) [F über Grundgerüst]
+
+Branch `art/dv2-daten-masken` von `art/dorfmap-fertig` @ bf9f62d (#52 und #61 gemergt). **Kostenzeile:** 0 €, kein Codex, Laufzeit Do 19.11.2026 18:39–18:52 Europe/Berlin (Epochen Tools, Box-CPU).
+
+1. **Weg-Typ statt Flächenklasse:** In `wege.geojson` ist `klasse` der P1a-Weg-Typ (GASSE 40, ANBINDUNG 11, HAUSWEG 10 Band-Polygone). `lies_features()` bildet nicht-numerische `klasse` **nur in wege.geojson** auf Flächenklasse 1 ab und behält den Typ als `weg_typ` → `weg_typ.png` (1 HAUSWEG, 2 ANBINDUNG, 3 GASSE; GASSE gewinnt bei Überlappung; nur wo `flaeche` = Weg) und `masken_meta.weg_typen`. Unbekannter Typ → 1 mit WARNUNG; in anderen Dateien bleibt nicht-numerische `klasse` ein Fehler. Quelldatei unverändert.
+2. **Bauzone/Slots aus Zelllisten (#61):** `lies_zellen_punkte()` liest Punkte mit `zellen` [[cx, cz]] (geprüft: ganzzahlig, im Kartenbereich, ohne Doppelte, `flaeche_m2` = Zellzahl) → `bauzone.png` (1 bit, 25 Punkte, 31 893 Zellen) und `slot_zonen.png` (1 Bau, 2 Deko). Abgleich gegen `slot.png`/`slots.json` → `abgleich_slots.json`: Bau 3 292 = 3 292 Zellen, 97/97 IDs, 0 Abweichungen; Deko 627 = 627 Zellen, 0 Abweichungen, aber 626 Punkte für 627 Slots: `slot_deko_0532` fasst das bekannte Nachbarpaar (2 Zellen, IDs inkl. 1538) zusammen. #61 hatte `baue_masken.py` **nicht** geändert (nur zonen.geojson/kanten-Skripte) – nichts doppelt gebaut.
+3. **F10:** Wasserspiegel zählt nur, wo er über dem Gelände liegt. `mesh_raster.rastere()` führt oberste Wasser- und oberste Gelände-Fläche getrennt (Wasser nur bei y_wasser > y_gelände, Gleichstand → Gelände); `baue_masken.py` setzt Vektor-Wasser dort auf die Mesh-Gelände-Klasse (`f10_wasser_zu_gelaende_px`). `query.mjs`: `baueMeshIndex` gleiche Regel (`f10Aus()`), `queryPoint` ersetzt `flaeche.png`=Wasser durch die Mesh-Klasse, `flaecheRoh()` für Q11 (ehrlicher Rastervergleich). Ohne Mesh nicht anwendbar (in `masken_meta` ausgewiesen).
+4. **Masken ohne Mesh committet** in `masken_ohne_mesh/` (zusammen ≈ 0,3 MB, wie `slot.png` klein; Quellen-Blobs in `QUELLE.md`).
+
+**Klassenanteile (ohne Mesh) [S]:** Grund 63,78 %, Weg 5,26 %, Ufer 5,06 %, Fels/Klippe 19,35 %, Wasser 6,51 %, Brücke 0,03 %. Untergrund aus 46 Polygonen.
+**Befunde:**
+- Fels/Klippe 19,35 % ist deutlich mehr als die 13 296 Fels-/Wand-Zellen der alten Daten: 11 545 neue Fels-Zellen sind dort SCHNEE ohne Klippe, aber `untergrund_c20` = KLIPPE_WAND/KANTE, `begehbar` 0, `begehbar_3d` 1. #61 baut Fels aus c20 – bitte entscheiden, ob Fels/Klippe (nicht begehbar) für diese Zellen gewollt ist.
+- Abgleich begehbar (ohne Neigung) gegen `begehbar_3d`: 30,6 % abweichend (19 426 neu begehbar/alt nicht, 11 725 umgekehrt) → WARNUNG; mit Mesh-Neigung Fr neu.
+- Brücken in den Vektoren sind P5-Platzhalter (34 m²); Fixpunkt `bruecke_e2` (192|74,5) ist ohne Mesh Ufer, die Brücke gilt Fr über das Deck.
+
+**Tests (frischer Lauf 18:49):** `node --test` 25 Tests: 21 grün, 3 skip, 1 todo, 0 rot (neu: F10 synthetisch; Masken ohne Mesh an festen Punkten inkl. aller 4 058 Slot-Zellen aus slots.json gegen `slot_zonen.png`). `python3 baue_masken.py --selbsttest` ok (neu: GASSE/HAUSWEG/unbekannter Typ, Fehler bei GASSE außerhalb wege.geojson, Zellpunkte, F10 mit Fake-Mesh). `baue_legende_slots.py --pruefe` aktuell.
+**Offen (Fr ab Mittag, nach `art/dv2-mesh`):** `hoehe.png`, Masken mit Mesh (F10 wirkt dann real), Q11-Tests.
+
 ## Fertig (Do)
 
 - `legende.json`: Flächenklassen 0–5 mit Farben und Priorität, Untertyp `untergrund` (Schnee, Wald, Boden, Sand + Alt-Zuordnung), Slot-Bitfeld, Maßstab, Kachelschema (56 Kacheln, Schnitte x = 42·i, z = 43·j, Zeile 7 bis 303), Quellen mit Git-Blob + SHA-256.
