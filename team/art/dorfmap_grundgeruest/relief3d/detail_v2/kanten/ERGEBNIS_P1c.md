@@ -2,7 +2,7 @@
 
 **Stand:** 19.11.2026 · Branch `art/dv2-vektor-kanten` · PR #57 → `art/dorfmap-fertig`
 
-Kosten: 0 EUR, Codex 14:48-16:28 (1 h 40), Nacharbeit ohne Codex 16:30-17:45 (Europe/Berlin)
+Kosten: 0 EUR, Codex 14:48-16:28 (1 h 40), Nacharbeit ohne Codex 16:30-17:42 (Europe/Berlin)
 
 ## Warum die Methode gewechselt wurde
 
