@@ -1,0 +1,84 @@
+{
+ "polygone_wasser": 7,
+ "uferlinien": 11,
+ "uferbaender": 7,
+ "bach_mittellinien": 32,
+ "alle_polygone_valid": true,
+ "flaeche_ist_m2": 6461.25,
+ "flaeche_vektor_m2": 6547.84,
+ "flaeche_abw_prozent": 1.34,
+ "flaeche_E2": {
+  "ist_m2": 102.5,
+  "vektor_m2": 102.25,
+  "abw_prozent": -0.245
+ },
+ "flaeche_E3": {
+  "ist_m2": 148.25,
+  "vektor_m2": 151.54,
+  "abw_prozent": 2.22
+ },
+ "nasse_ecken_innen_prozent": 99.304,
+ "nasse_ecken_abgedeckt_prozent": 100.0,
+ "nasse_ecke_max_abstand_m": 0.198,
+ "nasse_ecken_ueber_toleranz": 0,
+ "zacke_max_m": 0.024,
+ "knick_max_grad": 10.52,
+ "zacke_gleitmittel_max_m_nur_bericht": 0.1315,
+ "je_linie_schlechteste": [
+  {
+   "id": "W01_U2",
+   "zacke_m": 0.024,
+   "knick_grad": 10.32
+  },
+  {
+   "id": "W07_U0",
+   "zacke_m": 0.0239,
+   "knick_grad": 10.38
+  },
+  {
+   "id": "W01_U0",
+   "zacke_m": 0.0237,
+   "knick_grad": 10.52
+  },
+  {
+   "id": "W01_U3",
+   "zacke_m": 0.0231,
+   "knick_grad": 9.8
+  },
+  {
+   "id": "W01_U1",
+   "zacke_m": 0.0217,
+   "knick_grad": 9.76
+  },
+  {
+   "id": "W04_U0",
+   "zacke_m": 0.0161,
+   "knick_grad": 9.8
+  },
+  {
+   "id": "W05_U0",
+   "zacke_m": 0.0161,
+   "knick_grad": 9.91
+  },
+  {
+   "id": "W03_U0",
+   "zacke_m": 0.0159,
+   "knick_grad": 9.84
+  },
+  {
+   "id": "W02_U0",
+   "zacke_m": 0.0107,
+   "knick_grad": 8.29
+  },
+  {
+   "id": "W02_M0",
+   "zacke_m": 0.0087,
+   "knick_grad": 3.53
+  }
+ ],
+ "schwellen": {
+  "zacke_m": 0.03,
+  "knick_grad": 15.0,
+  "flaeche_prozent": 3.0
+ }
+}
