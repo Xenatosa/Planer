@@ -22,17 +22,17 @@
  "nasse_ecke_max_abstand_m": 0.27,
  "nasse_ecken_ueber_toleranz": 0,
  "ufer_zacke_gleitmittel_max_m": 0.0265,
- "ufer_knick_max_grad": 4.01,
+ "ufer_knick_max_grad": 3.98,
  "mitte_zacke_gleitmittel_max_m": 0.0247,
- "mitte_knick_max_grad": 3.47,
+ "mitte_knick_max_grad": 3.44,
  "zacke_sg_max_m_info": 0.0112,
  "ueberlappung_max_m2": 0.0,
  "uferlinien_einzeln": [
   {
    "id": "W01_U0",
    "typ": "uferlinie",
-   "zacke_gleitmittel_m": 0.0265,
-   "knick_grad": 3.8,
+   "zacke_gleitmittel_m": 0.0264,
+   "knick_grad": 2.9,
    "zacke_sg_m_info": 0.0088,
    "laenge_m": 1439.8
   },
@@ -40,7 +40,7 @@
    "id": "W01_U1",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0265,
-   "knick_grad": 3.69,
+   "knick_grad": 2.76,
    "zacke_sg_m_info": 0.0083,
    "laenge_m": 58.5
   },
@@ -48,7 +48,7 @@
    "id": "W01_U2",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0184,
-   "knick_grad": 3.8,
+   "knick_grad": 2.7,
    "zacke_sg_m_info": 0.0109,
    "laenge_m": 362.3
   },
@@ -56,7 +56,7 @@
    "id": "W01_U3",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 3.74,
+   "knick_grad": 2.76,
    "zacke_sg_m_info": 0.0074,
    "laenge_m": 25.1
   },
@@ -64,15 +64,15 @@
    "id": "W01_U4",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0265,
-   "knick_grad": 3.75,
+   "knick_grad": 3.98,
    "zacke_sg_m_info": 0.0024,
-   "laenge_m": 21.8
+   "laenge_m": 21.9
   },
   {
    "id": "W02_U0",
    "typ": "uferlinie",
-   "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 3.73,
+   "zacke_gleitmittel_m": 0.0265,
+   "knick_grad": 3.74,
    "zacke_sg_m_info": 0.0048,
    "laenge_m": 64.8
   },
@@ -80,7 +80,7 @@
    "id": "W03_U0",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 4.01,
+   "knick_grad": 2.87,
    "zacke_sg_m_info": 0.0112,
    "laenge_m": 69.7
   },
@@ -88,7 +88,7 @@
    "id": "W04_U0",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 3.76,
+   "knick_grad": 3.85,
    "zacke_sg_m_info": 0.007,
    "laenge_m": 26.5
   },
@@ -96,7 +96,7 @@
    "id": "W05_U0",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 3.86,
+   "knick_grad": 3.85,
    "zacke_sg_m_info": 0.0069,
    "laenge_m": 14.9
   },
@@ -104,15 +104,15 @@
    "id": "W06_U0",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0264,
-   "knick_grad": 3.87,
+   "knick_grad": 3.85,
    "zacke_sg_m_info": 0.0065,
-   "laenge_m": 14.2
+   "laenge_m": 14.3
   },
   {
    "id": "W07_U0",
    "typ": "uferlinie",
    "zacke_gleitmittel_m": 0.0262,
-   "knick_grad": 3.74,
+   "knick_grad": 3.78,
    "zacke_sg_m_info": 0.0071,
    "laenge_m": 12.8
   }
@@ -122,7 +122,7 @@
    "id": "W01_M11",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0247,
-   "knick_grad": 3.31,
+   "knick_grad": 3.25,
    "zacke_sg_m_info": 0.0018,
    "laenge_m": 23.0
   },
@@ -130,7 +130,7 @@
    "id": "W01_M7",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0243,
-   "knick_grad": 1.9,
+   "knick_grad": 1.95,
    "zacke_sg_m_info": 0.0018,
    "laenge_m": 22.0
   },
@@ -138,15 +138,15 @@
    "id": "W01_M5",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0241,
-   "knick_grad": 1.82,
-   "zacke_sg_m_info": 0.0007,
+   "knick_grad": 1.9,
+   "zacke_sg_m_info": 0.0008,
    "laenge_m": 264.6
   },
   {
    "id": "W04_M0",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0235,
-   "knick_grad": 2.02,
+   "knick_grad": 2.03,
    "zacke_sg_m_info": 0.0033,
    "laenge_m": 6.1
   },
@@ -154,7 +154,7 @@
    "id": "W01_M1",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0228,
-   "knick_grad": 1.66,
+   "knick_grad": 1.72,
    "zacke_sg_m_info": 0.0009,
    "laenge_m": 44.5
   },
@@ -162,7 +162,7 @@
    "id": "W03_M1",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0228,
-   "knick_grad": 2.71,
+   "knick_grad": 2.54,
    "zacke_sg_m_info": 0.0052,
    "laenge_m": 7.5
   },
@@ -170,15 +170,15 @@
    "id": "W01_M18",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0227,
-   "knick_grad": 2.84,
-   "zacke_sg_m_info": 0.0016,
+   "knick_grad": 2.87,
+   "zacke_sg_m_info": 0.0017,
    "laenge_m": 12.7
   },
   {
    "id": "W01_M9",
    "typ": "bach_mitte",
    "zacke_gleitmittel_m": 0.0225,
-   "knick_grad": 3.47,
+   "knick_grad": 3.44,
    "zacke_sg_m_info": 0.0019,
    "laenge_m": 42.0
   }
