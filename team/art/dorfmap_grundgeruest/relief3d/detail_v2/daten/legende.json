@@ -1,0 +1,261 @@
+{
+ "schema": "dv2-datenschicht/1",
+ "stand": "P4 Do-Geruest; Masken aus Vektoren/Mesh folgen Fr (s. STATUS.md)",
+ "massstab": {
+  "einheit": "1 Viewer-Einheit = 1 Zelle = 1 m [S]",
+  "px_pro_m": 10,
+  "m_pro_px": 0.1,
+  "raster_px": [
+   3360,
+   3030
+  ],
+  "welt_m": [
+   336,
+   303
+  ],
+  "ursprung": "(0,0) = Weltecke x=0, z=0; px = floor(x*10), py = floor(z*10); Zeile py waechst mit z",
+  "uv1": "UV1 = (x/336, z/303); px = u*3360, py = v*3030 (deckungsgleich)",
+  "pixelmitte_m": "x = (px+0.5)/10, z = (py+0.5)/10",
+  "rand": "x=336 bzw. z=303 (Kartenrand) wird auf das letzte Pixel geklemmt; ausserhalb [0,336]x[0,303] = Fehler",
+  "vektor_json_umrechnung": "neu/vektor.json rechnet 1,2 m/Zelle (zellweite_m): Werte durch 1,2 teilen [S]"
+ },
+ "dateien": {
+  "flaeche.png": {
+   "format": "PNG 8 bit Graustufe, 1 Kanal, Wert = Klassen-Index",
+   "status": "offen (Fr, aus Vektoren+Mesh)"
+  },
+  "begehbar.png": {
+   "format": "PNG 1 bit Graustufe, 1 = begehbar",
+   "status": "offen (Fr)"
+  },
+  "slot.png": {
+   "format": "PNG 16 bit Graustufe, Bitfeld s. slot_bits",
+   "status": "Skript fertig, PNG nicht committet (s. STATUS.md)"
+  },
+  "hoehe.png": {
+   "format": "PNG 16 bit Graustufe, hoehe_m = offset_m + wert * skala_m",
+   "offset_m": null,
+   "skala_m": null,
+   "status": "offen (Fr, aus Mesh gerastert); offset/skala werden beim Rastern eingetragen"
+  },
+  "untergrund.png": {
+   "format": "PNG 8 bit Graustufe, Wert = untergrund-Code",
+   "status": "offen (Fr) [A] Zusatzdatei, im Plan nicht genannt"
+  }
+ },
+ "flaeche": {
+  "prioritaet": [
+   "wasser",
+   "bruecke",
+   "weg",
+   "ufer",
+   "fels_klippe",
+   "grund"
+  ],
+  "prioritaet_quelle": "Plan 3.1 / Auftrag P4: Wasser > Bruecke > Weg > Ufer > Fels/Klippe > Grund [F ueber Plan]",
+  "klassen": [
+   {
+    "wert": 0,
+    "name": "grund",
+    "label": "Wiese/Grund",
+    "farbe": "#c8d8b0"
+   },
+   {
+    "wert": 1,
+    "name": "weg",
+    "label": "Weg",
+    "farbe": "#b08a5a"
+   },
+   {
+    "wert": 2,
+    "name": "ufer",
+    "label": "Ufer",
+    "farbe": "#d8c890"
+   },
+   {
+    "wert": 3,
+    "name": "fels_klippe",
+    "label": "Fels/Klippe",
+    "farbe": "#7a7a80"
+   },
+   {
+    "wert": 4,
+    "name": "wasser",
+    "label": "Wasser",
+    "farbe": "#3a78c8"
+   },
+   {
+    "wert": 5,
+    "name": "bruecke",
+    "label": "Bruecke",
+    "farbe": "#8a4a20"
+   }
+  ],
+  "farben_hinweis": "Farben nur fuer Debug-/Legendenbilder, keine Texturen [A]"
+ },
+ "untergrund": {
+  "hinweis": "Untertyp der Flaeche (v. a. grund). Alt-Werte aus zellen_relief.csv untergrund [S]; Zuordnung [A]",
+  "codes": [
+   {
+    "wert": 0,
+    "name": null,
+    "label": "kein Untertyp (Wasser, Fels/Klippe, Bruecke)",
+    "farbe": "#000000"
+   },
+   {
+    "wert": 1,
+    "name": "schnee",
+    "label": "Schnee",
+    "farbe": "#f2f4f8",
+    "alt": [
+     "SCHNEE"
+    ]
+   },
+   {
+    "wert": 2,
+    "name": "wald",
+    "label": "Wald",
+    "farbe": "#3c6a3c",
+    "alt": [
+     "WALD"
+    ]
+   },
+   {
+    "wert": 3,
+    "name": "boden",
+    "label": "Boden",
+    "farbe": "#8a6a4a",
+    "alt": [
+     "BODEN"
+    ]
+   },
+   {
+    "wert": 4,
+    "name": "sand",
+    "label": "Sand",
+    "farbe": "#e0cc90",
+    "alt": [
+     "SAND"
+    ]
+   }
+  ],
+  "alt_ohne_untertyp": {
+   "WASSER_EIS": "flaeche wasser",
+   "FELS": "flaeche fels_klippe",
+   "KLIPPE_WAND": "flaeche fels_klippe",
+   "KLIPPE_KANTE": "flaeche fels_klippe"
+  },
+  "alt_zaehlung_zellen": {
+   "SCHNEE": 79045,
+   "WALD": 11154,
+   "WASSER_EIS": 6912,
+   "FELS": 2112,
+   "KLIPPE_WAND": 1142,
+   "BODEN": 896,
+   "SAND": 527,
+   "KLIPPE_KANTE": 20
+  }
+ },
+ "begehbar": {
+  "werte": {
+   "0": "nicht begehbar",
+   "1": "begehbar"
+  },
+  "regel": "offen: aus Mesh-Neigung + Flaeche (Wasser/Fels nicht begehbar, Bruecke begehbar); Alt-Abgleich begehbar_3d [A]"
+ },
+ "slot_bits": {
+  "id_maske": 4095,
+  "deko_baum_ok": 4096,
+  "deko_fels_ok": 8192,
+  "bauplatz_zelle": 16384,
+  "reserviert": 32768,
+  "id_bereiche": {
+   "platz": [
+    1,
+    99
+   ],
+   "deko": [
+    1001,
+    1627
+   ]
+  },
+  "hinweis": "Bitbelegung [A] Vorschlag Tools; deko_baum_ok/deko_fels_ok sind Zell-Eignungen (1 m) und gelten auch ausserhalb von Slots"
+ },
+ "slots": {
+  "datei": "slots.json",
+  "quelle_bauplaetze": "Overlay platz (99 Plaetze) + bauplatz (3292 Zellen) [S]",
+  "quelle_deko": "Overlay dekoplaetze_netz (627 Zellen = 627 Slots), Eignung deko_baum_ok/deko_fels_ok aus zellen_relief.csv [S]",
+  "zaehlung": {
+   "plaetze_gesamt": 99,
+   "bauplaetze": 97,
+   "plaetze_ohne_bauplatzzelle": [
+    "D15D",
+    "D16"
+   ],
+   "deko_slots": 627,
+   "bauplatz_zellen": 3292
+  },
+  "abgleich": {
+   "plaetze": {
+    "ist": 99,
+    "soll_meta": 99,
+    "ok": true
+   },
+   "dekoplaetze_netz": {
+    "ist": 627,
+    "soll_meta": 627,
+    "ok": true
+   },
+   "bauplatz_zellen": {
+    "ist": 3292,
+    "soll_plan_abschnitt_2": 3292,
+    "ok": true
+   }
+  }
+ },
+ "kacheln": {
+  "schema": "56 Kacheln A-H x 1-7; Buchstabe = Spalte in x, Zahl = Zeile in z [S baue_alle_kacheln.py]",
+  "spalte_m": 42,
+  "zeile_m": 43,
+  "schnitte_x": [
+   0,
+   42,
+   84,
+   126,
+   168,
+   210,
+   252,
+   294,
+   336
+  ],
+  "schnitte_z": [
+   0,
+   43,
+   86,
+   129,
+   172,
+   215,
+   258,
+   303
+  ],
+  "regel": "Spalte = min(floor(x/42),7) -> A..H; Zeile = min(floor(z/43),6)+1; Zeile 7 reicht bis z=303 (z 301-303 angehaengt, P10b) [S]",
+  "schnittlinie": "Punkt genau auf x=42*i bzw. z=43*j gehoert zur hoeheren Kachel; Kartenrand x=336/z=303 zur letzten [A]"
+ },
+ "quellen": {
+  "overlay": {
+   "pfad": "team/art/dorfmap_grundgeruest/raster_c20_z25_overlay_plaetze_wege.csv",
+   "git_blob": "996a818df38e9c69307016e958a1236d781a24e2",
+   "sha256": "0c78f8ead82573fcf4d820141fe96afc639efff03bf5b8708b6f97b94b68b714"
+  },
+  "zellen_relief": {
+   "pfad": "team/art/dorfmap_grundgeruest/relief3d/zellen_relief.csv",
+   "git_blob": "3095a63bdf903808cca50626c6beddd1257a6731",
+   "sha256": "36f6763bab5ed57a2838b966d8f1b444c22f8c1f2ad59d79069b8566d6c6a283"
+  },
+  "meta": {
+   "pfad": "team/art/dorfmap_grundgeruest/raster_c20_z25_meta.json",
+   "git_blob": "ee7fb9c970f9af80b3f0735cb952dc15786329e1",
+   "sha256": "24775d9cdc04a3c3e8746fd65818a92aa35aaa0a28fd88df9ce83fd57fe1d80a"
+  }
+ }
+}
