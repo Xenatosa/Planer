@@ -1,13 +1,13 @@
 {
  "rand": {
   "linien": 122,
-  "zacken_max_m": 0.0289,
+  "zacken_max_m": 0.0218,
   "zacken_max_bei": [
    "G018",
    0,
    "rand_rechts"
   ],
-  "knick_max_grad": 8.59,
+  "knick_max_grad": 7.14,
   "knick_max_bei": [
    "G018",
    0,
@@ -15,46 +15,231 @@
   ],
   "zacken_ueber": 0,
   "knick_ueber": 0,
-  "zacken_p95_m": 0.0239,
-  "knick_p95_grad": 7.21
+  "zacken_p95_m": 0.0205,
+  "knick_p95_grad": 5.99,
+  "zacken_top5_A_cm": [
+   [
+    2.18,
+    "G018",
+    0,
+    "rand_rechts"
+   ],
+   [
+    2.12,
+    "G009",
+    1,
+    "rand_rechts"
+   ],
+   [
+    2.12,
+    "G015",
+    0,
+    "rand_links"
+   ],
+   [
+    2.12,
+    "G903a",
+    0,
+    "rand_links"
+   ],
+   [
+    2.07,
+    "G003_anb",
+    0,
+    "rand_rechts"
+   ]
+  ],
+  "zacken_ueber_2_7cm_A": 0
  },
  "kreuzung": {
   "linien": 88,
-  "zacken_max_m": 0.0274,
+  "zacken_max_m": 0.0216,
   "zacken_max_bei": [
-   "K024",
+   "K044",
    0,
    "umriss"
   ],
-  "knick_max_grad": 7.86,
+  "knick_max_grad": 6.2,
   "knick_max_bei": [
-   "K046",
+   "K050",
    0,
    "umriss"
   ],
   "zacken_ueber": 0,
   "knick_ueber": 0,
-  "zacken_p95_m": 0.0273,
-  "knick_p95_grad": 7.82
+  "zacken_p95_m": 0.0215,
+  "knick_p95_grad": 6.14,
+  "zacken_top5_A_cm": [
+   [
+    2.16,
+    "K044",
+    0,
+    "umriss"
+   ],
+   [
+    2.16,
+    "K011",
+    0,
+    "umriss"
+   ],
+   [
+    2.15,
+    "K050",
+    0,
+    "umriss"
+   ],
+   [
+    2.15,
+    "K013",
+    0,
+    "umriss"
+   ],
+   [
+    2.15,
+    "K004",
+    0,
+    "umriss"
+   ]
+  ],
+  "zacken_ueber_2_7cm_A": 0
  },
  "sichtbar": {
-  "linien": 211,
-  "zacken_max_m": 0.0273,
+  "linien": 160,
+  "zacken_max_m": 0.0209,
   "zacken_max_bei": [
-   "G018",
+   "G903a",
    0,
    "rand_links"
   ],
-  "knick_max_grad": 8.05,
+  "knick_max_grad": 6.16,
   "knick_max_bei": [
-   "G018",
+   "G003_anb",
    0,
-   "rand_links"
+   "rand_rechts"
   ],
   "zacken_ueber": 0,
   "knick_ueber": 0,
-  "zacken_p95_m": 0.0224,
-  "knick_p95_grad": 6.57
+  "zacken_p95_m": 0.0193,
+  "knick_p95_grad": 5.57,
+  "zacken_top5_A_cm": [
+   [
+    2.09,
+    "G903a",
+    0,
+    "rand_links"
+   ],
+   [
+    2.09,
+    "G003_anb",
+    0,
+    "rand_rechts"
+   ],
+   [
+    2.01,
+    "haus_E07",
+    0,
+    "rand_rechts"
+   ],
+   [
+    1.96,
+    "G016",
+    1,
+    "rand_rechts"
+   ],
+   [
+    1.94,
+    "G018",
+    0,
+    "rand_links"
+   ]
+  ],
+  "zacken_ueber_2_7cm_A": 0
+ },
+ "rand_methodeB": {
+  "linien": 122,
+  "zacken_max_m": 0.027,
+  "zacken_max_bei": [
+   "G018",
+   0,
+   "rand_rechts"
+  ],
+  "zacken_ueber": 0,
+  "zacken_ueber_2_7cm": 0,
+  "zacken_top5_cm": [
+   [
+    2.7,
+    "G018",
+    0,
+    "rand_rechts"
+   ],
+   [
+    2.65,
+    "G903a",
+    0,
+    "rand_links"
+   ],
+   [
+    2.63,
+    "G003_anb",
+    0,
+    "rand_rechts"
+   ],
+   [
+    2.62,
+    "G009",
+    1,
+    "rand_rechts"
+   ],
+   [
+    2.62,
+    "G015",
+    0,
+    "rand_links"
+   ]
+  ]
+ },
+ "kreuzung_methodeB": {
+  "linien": 88,
+  "zacken_max_m": 0.0267,
+  "zacken_max_bei": [
+   "K004",
+   0,
+   "umriss"
+  ],
+  "zacken_ueber": 0,
+  "zacken_ueber_2_7cm": 0,
+  "zacken_top5_cm": [
+   [
+    2.67,
+    "K004",
+    0,
+    "umriss"
+   ],
+   [
+    2.67,
+    "K043",
+    0,
+    "umriss"
+   ],
+   [
+    2.67,
+    "K011",
+    0,
+    "umriss"
+   ],
+   [
+    2.66,
+    "K013",
+    0,
+    "umriss"
+   ],
+   [
+    2.65,
+    "K005",
+    0,
+    "umriss"
+   ]
+  ]
  },
  "mittellinie": {
   "max_abweichung_m": 0.2459,
@@ -88,22 +273,22 @@
   "wega_komponenten_ohne_netz": 0,
   "netzteile_ohne_wega": 0,
   "wega_knoten": 14258,
-  "wega_knoten_ausserhalb_netz": 194,
+  "wega_knoten_ausserhalb_netz": 164,
   "groesster_ausserhalb_cluster_knoten": 19,
-  "wega_abdeckung": 0.9864
+  "wega_abdeckung": 0.9885
  },
  "rand_offset": {
-  "p50_m": 0.0028,
-  "p95_m": 0.0681,
-  "max_m": 1.165,
-  "anteil_unter_2cm": 0.8654
+  "p50_m": 0.0044,
+  "p95_m": 0.1352,
+  "max_m": 1.579,
+  "anteil_unter_2cm": 0.7851
  },
  "kreuzung_ueberstand": {
-  "max_m": 1.392,
-  "bei": "K063",
-  "p50_m": 0.604,
+  "max_m": 1.45,
+  "bei": "K004",
+  "p50_m": 1.005,
   "grenze_m": 1.5,
-  "grund": "Eckradius >= 1,85 m (Zacken <= 3 cm) bei 2-3 m breiten Wegen"
+  "grund": "Dorfmap-Entscheid zu #56; Eckradius >= 2,35 m (Zacken B <= 2,7 cm) bei 2-3 m breiten Wegen"
  },
  "platzanschluss": {
   "kriterium": "Wegende <= 1,5 m an Platzzelle: Bandkappe (Band im Kreis Breite/2+0,3 m um das Ende) ueberlappt Platz oder Kreuzung >= 0,05 m2 (keine Luecke)",
@@ -112,8 +297,8 @@
   "nicht_angeschlossen": []
  },
  "randvollstaendigkeit": {
-  "min_randlaenge_zu_mittellinie": 0.486,
-  "max_bandflaeche_zu_soll": 1.044,
+  "min_randlaenge_zu_mittellinie": 0.457,
+  "max_bandflaeche_zu_soll": 1.072,
   "maengel": []
  },
  "formal": {
