@@ -1,67 +1,289 @@
-# Ergebnis P1c – Grat-, Klippen- und Zonenvektoren
+# Ergebnis P1c – Nachbesserung (C1)
 
-**Stand:** 19.11.2026 · Branch `art/dv2-vektor-kanten` · Basis `d2d48248bda33e8d78c86f8e4afb6f1e70934e9e`
+**Stand:** 19.11.2026 · Branch `art/dv2-vektor-kanten` · PR #57 → `art/dorfmap-fertig`
 
-Kosten: 0 EUR · Laufzeit Start 19.11.2026 14:48, Ende 19.11.2026 15:38 (Europe/Berlin)
+Kosten: 0 EUR · Laufzeit Start 19.11.2026 14:48, Ende 19.11.2026 16:28 (Europe/Berlin)
 
-## Gelieferte Dateien
+## Lieferstand
 
-- `../vektor/kanten.geojson` – 57 Linien: 13 `klippe_oben`, 17 `klippe_unten`, 27 `steil55`.
-- `../vektor/grat.geojson` – 30 Linien: 2 `G3H3`, 1 `B3C3`, 20 `Ostgrat`, 7 `Kraterring_G1`.
-- `../vektor/zonen.geojson` – 256 Flächentyp-Polygone, 10 Bauzonen-Polygone und 859 Slot-Features (233 Bau-, 626 Deko; darin 136 Erweiterungsplätze als Punkte).
-- Skript, Test und Bildskript liegen in diesem Ordner. GeoJSON-Linien führen ihre GB-Höhen je Stützpunkt als `hoehen_m`; Zonenflächen tragen `untergrund` und `untergrund_anteile`.
+- `../vektor/kanten.geojson`: 11 Linien (1 `klippe_oben`, 6 `klippe_unten`, 4 `steil55`). Die Wandmasken wurden mit einem 7-m-Disk-Opening/Closing generalisiert, weil kleinere Filter die Q3-Grenzen deutlich verfehlten. Das entfernt zahlreiche kurze/scharfe Wandkonturen; siehe Risiko.
+- `../vektor/grat.geojson`: vier durchgehende Hessian-Ridge-Linien: G3/H3 (eine zusammenhängende Linie), B3/C3, Ostgrat und Kraterring G1. Schleifen und eigenständige Fragmente unter 3 m werden verworfen.
+- `../vektor/zonen.geojson`: 214 Flächentyp-Polygone, 1.230 Untergrund-Polygone, 25 Bauzonen-Polygone und 859 Bau-/Deko-Slots; insgesamt 2.328 Features. Jedes Feature hat eindeutige `id`, `klasse` (0 Grund, 1 Weg, 2 Ufer, 3 Fels/Klippe, 4 Wasser, 5 Brücke) und `untergrund`-Properties. Beide Flächenebenen bilden jeweils eine gültige, lücken- und überlappungsfreie Partition des Rechtecks `0..336 × 0..303`.
+- Neu gerenderte JPGs: [Übersicht](uebersicht_kanten.jpg), [G3/H3](nahbild_g3h3.jpg), [B3/C3](nahbild_b3c3.jpg). Alle wurden angesehen; Qualität 85, jeweils unter 1 MB.
 
-## Koordinaten und Verfahren
+## Verfahren und Koordinaten
 
-- [S] `neu.mesh.tile_mesh()` setzt Viewer-X/Z auf Rasterindex geteilt durch `rs`; `GB` hat `rs=2` und 673×607 Werte für 336×303 m. Die Viewer-Gitterpunkte liegen auf `x=0…336`, `z=0…303`. Der Extraktor liest `GB` aus `relief_daten.json.gz`, das auch `index.html` speist.
-- [A] Eine CSV-Zelle `(cx,cy)` belegt `[cx,cx+1]×[cy,cy+1]`; ihr Mittelpunkt ist `(cx+0,5, cy+0,5)`. GeoJSON verwendet `[x,z]` in Metern und lässt Höhe als eigene Property stehen. Die drei Fabian-Anker werden unverändert an ihren vorgegebenen Viewer-Koordinaten gehalten.
-- Klippen: Konturen der Zellmasken `KLIPPE_WAND/KANTE`, DP 0,1 m, Catmull-Rom und gleichmäßige Ausgabe ≤0,1 m. Die Quellspalte `klippe` enthält im aktuellen Stand nur `WAND`/`KANTE`; Ober-/Unterkante wurden deshalb anhand der GB-Höhenlage relativ zum Median des jeweiligen `wand_name` abgeleitet. Fünf kurze Konturen unter 3 m wurden ausgelassen.
-- Steilheit: Neigung aus GB bei 0,5-m-Abstand, geglättetes Neigungsfeld, direkte 55°-Isolinien, danach DP/Catmull-Rom. Die Höhenwerte werden bikubisch interpoliert und auf die umgebenden 2×2 GB-Werte begrenzt.
-- Grate: Hessian-Eigenrichtungen, Ridge-Maske, Skelett und Polylinien. Es entstanden 692 Skelettpfade, davon 298 Kandidaten für benannte Gratbereiche. [F] Die drei Pflichtstellen sind enthalten. Die Ankerlinien laufen als lokale Hessian-Tangentenspuren; der nächste rohe Ridge-/Klippenpfad liegt dazu 1,50 m, 3,54 m und 3,35 m entfernt. Das ist eine explizite Anpassung an die Pflichtkoordinaten, keine Messung, dass dort bereits ein natürlicher Kronenridge verläuft.
-- Zonen: Zellklassen nach Wasser > Brücke > Weg > Ufer > Fels > Grund; `coverage_simplify`, gemeinsame Liniengeometrie, Catmull-Rom und Polygonisierung. 90 isolierte 1–3-Zell-Specks aus den Klassen Grund/Fels wurden vor dem Glätten der Nachbarklasse zugeordnet [A]. Bau-/Deko-Slots kommen aus dem Overlay; Erweiterungsplätze aus `overlay_plaetze_erweiterung.json` sind Punkte mit Stand/ID.
+- [S] Viewer-GB aus `relief_daten.json.gz`; `rs=2`, 673×607 Werte für 336×303 m. Viewer-Koordinaten sind `x=grid_x/2`, `z=grid_z/2`.
+- [A] Eine Zelle `(cx,cy)` belegt `[cx,cx+1]×[cy,cy+1]`, Mittelpunkt `(cx+0.5,cy+0.5)`; GeoJSON-Koordinaten sind `[x,z]` in Meter-Einheiten. Höhen liegen je Stützpunkt in `hoehen_m`.
+- Linien: DP, Resampling und Gaussfilter; Grate aus Hessian-Ridge-Maske und Skelettgraph. G3/H3 ist der kürzeste Graphpfad im zusammenhängenden echten Ridge-Netz zwischen den nächsten Skelettpunkten zu den beiden Fabian-Kontrollen. Es wurden keine Kontrollpunkte in die Krone hineingezogen.
+- [S] Gemessene Abstände der echten Krone: `300|90` → 1,500 m; `290|98` → 3,536 m; `84|129` → 3,509 m. Die Anforderung ≤1 m wird damit an allen drei Stellen verfehlt; Abstände stehen auch als `anker_abstaende_m` im GeoJSON.
+- Zonen: Priorität Wasser > Brücke > Weg > Ufer > Fels > Grund. 207 isolierte 1–3-Zell-Specks wurden Nachbarklassen zugeordnet; Flächen der Klassen Wasser, Brücke und Ufer wurden danach gegen die unveränderten CSV-Zellzählungen kalibriert. Die Untergrund-Ebene verwendet die Spalte `untergrund` separat.
+- [A]/[R] `klippe` enthält im Quellstand `WAND`/`KANTE`, nicht `WAND_OBEN`/`WAND_FUSS`; Ober-/Unterkante beruhen weiter auf GB-Höhen relativ zum Wandmedian. Der 7-m-Filter ist eine deutliche Verallgemeinerung und lässt kleine Wandkonturen weg.
 
-## Messwerte
+## Messwerte und Abnahme
 
-### Q3 Glättung
-
-Die Abweichung ist die maximale Distanz zur gleitenden 1-m-Mittelung der ausgegebenen Linie bzw. Polygonringe. Knicke zählen alle inneren Segmentwinkel über 15°; für Zonen sind echte Tripunkt-/Kartenecken zusätzlich gezählt, aber nicht von der Roh-Maximalzahl abgezogen.
-
-| Datei | max. Abweichung | max. Knick | Knicke >15° | Ergebnis |
+| Bereich | Features | max. Abweichung zur 1-m-Mittelung | max. Knick | Status |
 |---|---:|---:|---:|---|
-| `kanten.geojson` | 0,211 m | 69,40° | 169 | **Q3 verfehlt** |
-| `grat.geojson` | 0,166 m | 37,45° | 3 | **Q3 verfehlt** |
-| Zonen-Flächentypen | 0,254 m | 152,33° | 1 423 roh | **Q3 verfehlt** |
+| `kanten.geojson` | 11 Linien | 0,0291 m | 7,62° | Q3 erfüllt |
+| `grat.geojson` | 4 Linien | 0,0261 m | 3,38° | Q3 erfüllt |
+| Flächentyp-Grenzen | 214 Polygone / 403 gemeinsame Bögen | 0,2124 m | 112,25° | Q3 verfehlt |
+| Untergrund-Grenzen | 1.230 Polygone / 2.768 gemeinsame Bögen | 0,2175 m | 112,01° | Q3 verfehlt |
 
-Bei den Zonen wurden 238 Tripunkt-Koordinaten sowie 4 Kartenecken gefunden. 657 der Winkel über 15° liegen an diesen Ecken; 766 bleiben außerhalb davon. Die drei Q3-Messwerte liegen über den Grenzwerten 0,03 m/15°. `test_kanten.py` markiert diesen Abnahmepunkt deshalb als `xfail`; er ist nicht bestanden.
-
-### Flächen und Pflichtstellen
+Die Zonen-Q3-Werte verletzen 3 cm/15°. Die strikte Prüfung hat **keinen xfail und keinen skip**. Es gibt 8 Flächentyp- und 35 Untergrund-Bogenenden, an denen nur zwei Labels statt eines echten Tripunkts zusammentreffen; sie werden nicht als Winkel-Ausnahme zugelassen. Zulässige Tripunkt-/Randübergangskoordinaten und die vier Kartenecken sind im Appendix einzeln aufgelistet. Deshalb ist der Q3-Test rot; P1c ist weiterhin nicht vollständig abgenommen.
 
 | Flächentyp | GeoJSON-Fläche | Quellzellen | Abweichung |
 |---|---:|---:|---:|
-| Grund | 68 791,91 m² | 68 491 | +0,44 % |
-| Weg | 2 813,67 m² | 2 825 | −0,40 % |
-| Ufer | 2 759,21 m² | 2 902 | −4,92 % |
-| Fels/Klippe | 20 699,63 m² | 20 875 | −0,84 % |
-| Wasser | 6 732,23 m² | 6 695 | +0,56 % |
-| Brücke | 11,35 m² | 20 | −43,25 % |
+| Grund | 68.584,51 m² | 68.491 | +0,14 % |
+| Weg | 2.808,24 m² | 2.825 | −0,59 % |
+| Ufer | 2.902,00 m² | 2.902 | 0,00 % |
+| Fels/Klippe | 20.798,25 m² | 20.875 | −0,37 % |
+| Wasser | 6.695,00 m² | 6.695 | 0,00 % |
+| Brücke | 20,00 m² | 20 | 0,00 % |
 
-- Bauzone: CSV-Zählung 31 893 Zellen; GeoJSON 31 893,000006 m²; Abweichung <0,0001 %. Die Plan-Referenz im Plantext nennt 31 927; die aktuelle Quell-CSV enthält 31 893.
-- Pflichtstellen: `300|90` → 0,00 m; `290|98` → 0,00 m; `84|129` → 0,00 m.
-- Flächentyp-Deckung: 256 gültige Polygone, paarweise keine Überlappung; Union ist exakt `0..336 × 0..303` (Flächenfehler 0 m²). Alle Polygongeometrien sind gültig.
+Bauzone: 31.893 Quellzellen, 31.893,000 m², Abweichung <0,0001 % (Plantext nennt 31.927; aktuelle CSV zählt 31.893). Testlauf: **5 passed, 2 failed**; die Fehlschläge prüfen die harte Zonen-Q3-Grenze und unzulässige Nicht-Tripunkt-Endpunkte. Determinismus: zwei Generatorläufe erzeugen identische SHA-256.
 
-### Prüfungen und Regression
+- `kanten.geojson`: `208763283f594d7980d961874f5a6f9e15cfeb47cef78fb96da1ea368ecfef7c`
+- `grat.geojson`: `5e130f8b7c7a39ef4d0b2705175a3487182ff773e52b297b5985a055e2a1cfb4`
+- `zonen.geojson`: `92ebad516b26f190e5c0f344f9a59177e1c378a655a9f75e9593cbd275708062`
 
-- `python3 -m pytest -q detail_v2/kanten/test_kanten.py`: **5 passed, 1 xfailed**. Determinismus geprüft: zwei erneute Extraktionen stimmen für alle drei Dateien bytegenau mit den eingecheckten GeoJSON-SHAs überein.
-- SHA-256: `kanten.geojson` `44001e280f8f44352b3c91c597bceb4524e70cf4e61508d86777971b6f1c3df1`; `grat.geojson` `3cd4e4bb52d6d23bc43e3473c8568c08ecf6416fe3987914238e3d0cab130c2f`; `zonen.geojson` `0c13658404aebec974975f79f71e5c45cf5795dcbe02f84be821a83339911d9c`.
-- Legacy-Gate unverändert: 359 / 31 / 321, W1 = 0, Loch = 0. Ausgabe `GATE ROT: kein Export/ZIP` ist für diesen Regressionstest erwartbar. Gate-seitig geänderte Datei `pruefung/w1_alle56_letzter_lauf.json` wurde zurückgesetzt; der Arbeitsbaum enthält sonst nur neue P1c-Pfade.
-- Bildkontrolle: [Übersicht](uebersicht_kanten.jpg), [G3/H3-Nahbild](nahbild_g3h3.jpg), [B3/C3-Nahbild](nahbild_b3c3.jpg). JPGs: 1008×963 / 229 383 B, 450×486 / 41 166 B, 450×486 / 42 179 B; Qualität 85.
+Altes Gate (Regression, unveränderte Altdateien): **359 / 31 / 321**, W1=0, Loch=0. `pruefung/w1_alle56_letzter_lauf.json` wurde nach dem Gate wiederhergestellt.
 
-## Annahmen, Risiken und offene Punkte
+## Risiken / offene Punkte
 
-- [F] Die drei Anker bleiben exakt bei den beauftragten Koordinaten.
-- [A] Zellmittelpunktkonvention `(cx+0,5,cy+0,5)` folgt dem 1-m-Zellpolygonraster; GB-Gitterpunkte selbst liegen auf ganzzahligen Weltkoordinaten.
-- [A] Da `klippe` nicht `WAND_OBEN/WAND_FUSS` ausweist, ersetzt die Höhenmedian-Heuristik deren Quellunterscheidung nur näherungsweise.
-- [R] Q3 ist klar verfehlt; die Kanten/Grate/Zonengrenzen benötigen eine weitere Glättungsrunde, ohne Bauzonen- oder Wasserflächen zu verschieben.
-- [R] Die kleine Brückenklasse schrumpft bei der gemeinsamen Linienglättung um 43,25 %; Wasser bleibt mit +0,56 % innerhalb ±3 %, Ufer liegt bei −4,92 %.
-- [R] Die Pflichtankerlinien laufen durch Hessian-Tangenten an den vorgegebenen Punkten, obwohl die nächstliegenden detektierten Quellpfade 1,50–3,54 m entfernt liegen. Die Bild-Nahansichten zeigen diese Stelle zur späteren Freigabe.
-- [S] Es wurden keine bestehenden Relief-, Viewer-, Gate-, D2- oder Prüferdateien geändert. Keine Texturen oder Splat-Masken wurden erzeugt.
+- [R] Zonen-Q3 bleibt deutlich verfehlt; acht bzw. 35 nicht-tripunktartige Endpunkte sind offen. Die Grenzbögen brauchen einen erneuten topologischen Glättungsansatz.
+- [R] Die 7-m-Generalisation erfüllt Q3 für die ausgegebenen Klippenlinien, bildet aber nicht mehr jede kleine Wandkontur ab.
+- [R] G3/H3 sowie B3/C3 liegen weiter als 1 m von den Pflichtpunkten entfernt. Das sind gemessene Abstände zum Hessian-Skelett, keine künstlich erzwungenen Treffer.
+- [S] Keine bestehenden Viewer-, Relief-, D2-, Gate- oder Prüferdateien wurden geändert. Keine Texturen oder Splat-Masken erzeugt.
+
+## Appendix: einzeln enumerierte zulässige Zonen-Ausnahmepunkte
+
+Die Mengen enthalten echte 3+-Label-Knoten, Zonenwechsel am Kartenrand (Außenfläche als drittes Label) und die vier Kartenecken. Jeder Koordinatenwert ist Viewer-Meter `x|z`.
+
+### Flächentyp-Grenzen (250 Punkte)
+
+0|26, 0|34, 0|44, 10.017|44.982, 10.974|38.001, 11.015|41.019, 12.024|37.999, 12.024|38.015
+19.98|39.015, 22|0, 22.99|37.976, 24.02|38.016, 24.024|38, 26.976|38, 26.976|38.016, 28.026|38
+37.02|269.984, 38.981|269.984, 49.993|257.977, 51.023|258.993, 51.028|259.008, 56.979|258.016, 60.023|150.009, 62.015|147.02
+65.976|43, 66.008|42.976, 67|168.974, 67.999|163.026, 68.016|42.981, 68.024|170.008, 69.025|161.992, 70.979|42.987
+70.999|159.026, 71.984|154.019, 71.984|154.98, 72|154.024, 72|154.976, 72.017|65.982, 73.001|149.976, 73.984|200.019
+73.984|200.981, 74|144.024, 74.025|143.992, 75.999|141.026, 77.024|54.993, 80.024|134.99, 119|22.024, 122.026|19.999
+122.031|19.983, 140.032|211.014, 140.979|5.013, 140.993|5.023, 142.008|5.023, 144.978|210.989, 149|0, 152|0
+158.001|19.975, 158.01|21.024, 158.017|19.975, 161.969|17.016, 161.974|17, 163.024|17.001, 165.032|211.014, 166.98|260.987
+168.014|208.03, 170.981|258.984, 172.977|204.991, 173.777|127.07, 173.934|129.212, 173.976|0, 174.024|206.01, 174.024|206.027
+174.984|210.981, 175|210.976, 175.993|4.023, 176.019|2.978, 176.021|0.016, 176.023|2.993, 176.024|0, 176.024|211.999
+177.976|2.008, 177.977|1.991, 178|4.026, 178.016|4.031, 178.975|0.016, 178.976|0, 180.024|0, 184.781|128.096
+184.976|6.024, 184.992|6.024, 186|6.024, 186.095|125.777, 187.067|129.213, 187.223|126.072, 187.993|38.977, 188.977|9.993
+189.009|38.977, 189.024|38.982, 190.01|10.024, 190.026|10.023, 193.976|38, 193.98|38.016, 195.01|37.976, 196.978|7.019
+196.993|7.023, 198.024|7, 198.213|75.066, 198.223|73, 202.993|225.023, 204.026|224, 204.033|223.984, 211.007|28.023
+211.022|28.017, 211.993|9.977, 212|11.024, 212|16.976, 212.009|9.975, 212.009|191.977, 213|0, 213.984|19.019
+213.999|247.026, 214|19.024, 215.001|19.024, 216|0, 216|10.026, 216.023|8.991, 216.023|239.991, 216.023|240.008
+216.024|9.008, 217.977|238.009, 217.979|9.012, 217.988|238.021, 217.992|9.023, 218.024|197, 218.984|0.979, 219.007|236.977
+219.024|9.001, 223.976|10, 223.984|219.019, 224|219.024, 224.01|11.024, 224.027|11.024, 224.976|47, 225.024|219
+226|45.974, 228|0, 228.027|44.976, 230.983|12.024, 230.999|12.024, 232|0, 233.007|40.029, 233.013|42.979
+233.979|42.013, 234.025|10.992, 234.026|10.976, 237.978|9.011, 237.991|9.023, 239.007|9.023, 241|0, 253.992|10.023
+258.026|7, 258.033|6.984, 261.973|6.024, 261.99|6.024, 263.024|6, 264|0, 267|0, 268.019|266.984
+268.024|267, 268.024|268, 268.976|267, 268.98|266.984, 269.976|7.999, 271.001|8.024, 271.017|8.024, 271.993|8.024
+272.01|8.024, 272.976|27, 273.991|3.977, 274.024|6.008, 274.028|5.992, 274.976|268, 275.021|4.016, 275.023|25.993
+275.024|4, 276.976|4, 276.976|4.016, 277.969|6.984, 277.974|7, 278.009|3.977, 279.023|7.007, 294.976|5
+294.993|10.023, 296.024|8.992, 296.025|8.976, 297.024|4, 297.024|4.016, 298.976|4, 298.979|4.016, 299.975|6.986
+299.976|7.001, 300.023|2.993, 301.009|9.023, 308.992|13.023, 310.008|13.023, 310.021|13.012, 315.983|10.031, 315.999|10.026
+316.976|36.999, 317.023|9.993, 319.008|35.975, 319.025|35.974, 319.976|205.008, 320.022|276.011, 321.007|204.977, 321.021|204.987
+323.979|203.987, 323.993|203.977, 324.985|272.02, 325.024|204, 325.976|204, 326.967|34.016, 326.974|34, 327.025|206.984
+327.025|268.984, 327.999|202.975, 328.024|34.007, 329.019|264.016, 329.023|262.993, 329.024|264, 329.976|198, 329.976|204.024
+329.992|204.024, 330.981|268.984, 331.009|197.977, 331.023|201.992, 331.024|197.983, 331.992|201.023, 333.013|199.979, 333.023|199.993
+335.984|267.976, 336|4, 336|11, 336|37, 336|82, 336|97, 336|199, 336|203
+336|267.976, 336|269.024
+
+### Untergrund-Grenzen (1.528 Punkte)
+
+0|26, 0|31, 0|34, 0|35, 0|44, 0|50, 0|71, 0|84
+0|85, 0|89, 0|100, 0|103, 0|106, 0|184, 0|187, 0|251
+0|254, 0|289, 2|30, 2|49, 2|94, 2|98, 3|34, 3|78
+3|81, 3|91, 3|109, 4|33, 4|48, 4|106, 4|115, 5|32
+5|43, 5|81, 5|105, 5|114, 5|221, 5|245, 6|104, 6|111
+6|239, 6|240, 7|95, 7|104, 7|105, 7|233, 7|234, 8|41
+8|94, 8|227, 8|253, 9|40, 9|45, 9|216, 10|31, 10|38
+10|43, 10|45, 10|105, 11|27, 11|30, 11|41, 12|27, 12|29
+12|38, 12|86, 13|105, 14|28, 14|86, 14|106, 15|0, 15|6
+15|24, 15|25, 15|37, 16|23, 16|27, 16|36, 16|86, 18|24
+18|26, 18|37, 18|38, 18|86, 19|0, 19|1, 19|23, 19|27
+19|139, 19|272, 20|0, 20|1, 20|2, 20|28, 20|39, 20|144
+21|86, 22|0, 22|28, 22|39, 22|163, 23|27, 23|38, 23|163
+24|38, 24|86, 24|119, 24|160, 25|19, 25|26, 25|87, 25|113
+25|158, 25|159, 26|25, 26|114, 26|242, 26|273, 27|9, 27|15
+27|38, 27|103, 27|158, 27|201, 27|241, 28|201, 29|15, 29|99
+29|200, 29|240, 30|8, 30|14, 31|231, 31|274, 32|24, 32|230
+32|274, 33|18, 33|229, 34|19, 34|28, 35|20, 35|29, 35|229
+35|248, 35|272, 36|30, 36|260, 36|262, 36|271, 37|23, 37|133
+37|247, 37|259, 37|269, 37|270, 38|21, 38|22, 38|229, 39|21
+39|22, 39|30, 39|228, 39|258, 40|20, 40|257, 40|270, 41|27
+41|132, 41|256, 42|29, 43|227, 44|27, 44|28, 44|226, 45|28
+45|262, 46|29, 46|226, 47|236, 47|255, 48|29, 48|226, 48|237
+48|256, 49|131, 49|225, 49|238, 49|256, 50|29, 50|224, 50|238
+51|30, 51|259, 51|260, 52|31, 52|32, 52|224, 52|259, 53|225
+54|226, 54|240, 54|258, 54|259, 55|131, 56|24, 57|32, 57|136
+57|173, 57|259, 58|31, 58|175, 58|270, 59|131, 60|44, 60|94
+60|150, 61|95, 61|130, 62|27, 62|130, 62|132, 62|147, 63|5
+63|9, 63|30, 63|129, 64|27, 64|29, 65|26, 66|25, 66|31
+67|25, 67|27, 67|42, 67|45, 67|191, 68|24, 68|28, 68|29
+68|43, 68|164, 68|192, 69|163, 70|28, 70|162, 71|27, 71|32
+71|43, 71|161, 72|67, 72|154, 72|155, 73|33, 73|42, 73|65
+73|66, 74|25, 74|26, 74|63, 74|64, 74|200, 74|201, 75|24
+75|27, 75|61, 75|62, 75|273, 76|60, 76|141, 76|273, 77|55
+77|58, 77|140, 78|139, 79|33, 79|138, 80|32, 80|137, 83|32
+83|215, 84|28, 84|247, 85|246, 86|28, 86|32, 86|215, 86|217
+86|245, 87|218, 87|244, 87|271, 88|243, 89|121, 89|219, 89|242
+90|27, 90|120, 90|219, 90|240, 90|241, 91|32, 91|105, 91|120
+91|121, 91|177, 91|239, 92|104, 92|153, 92|177, 92|239, 93|103
+93|120, 93|152, 93|178, 93|240, 94|117, 94|119, 94|122, 94|123
+94|151, 94|179, 94|213, 94|219, 95|32, 95|102, 95|116, 95|121
+95|150, 95|180, 95|212, 95|241, 96|24, 96|99, 96|101, 96|115
+96|120, 96|123, 96|181, 96|211, 96|220, 96|242, 97|98, 97|114
+97|187, 97|211, 98|18, 98|31, 98|113, 98|120, 98|188, 98|212
+98|214, 98|221, 98|243, 98|244, 99|16, 99|18, 99|112, 99|122
+99|189, 99|222, 99|225, 99|245, 100|15, 100|30, 100|97, 100|98
+100|120, 100|121, 100|222, 100|230, 101|23, 101|119, 101|190, 101|203
+101|214, 101|224, 101|225, 101|226, 101|245, 101|246, 101|247, 102|15
+102|16, 102|24, 102|30, 102|110, 102|111, 102|213, 102|220, 102|225
+103|16, 103|98, 103|109, 104|93, 104|94, 104|97, 104|108, 104|118
+104|190, 104|204, 104|264, 105|24, 105|30, 105|93, 105|107, 105|213
+105|247, 106|16, 106|94, 106|95, 106|106, 106|136, 106|246, 107|25
+107|95, 107|105, 107|118, 107|190, 107|205, 107|245, 108|15, 108|16
+108|26, 108|28, 108|104, 108|118, 108|191, 108|205, 108|214, 108|215
+109|32, 109|96, 109|97, 109|98, 109|191, 109|216, 110|15, 110|16
+110|33, 110|217, 110|230, 110|245, 111|16, 111|17, 111|28, 111|33
+111|96, 111|118, 111|134, 111|188, 111|229, 112|18, 112|27, 112|32
+112|96, 112|187, 112|190, 112|218, 112|228, 112|245, 112|246, 112|247
+113|26, 113|27, 113|97, 113|186, 113|219, 113|227, 114|25, 114|26
+114|31, 114|102, 114|118, 114|130, 114|185, 114|220, 114|246, 115|19
+115|23, 115|26, 115|27, 115|101, 115|102, 115|103, 115|117, 115|235
+115|246, 115|247, 115|270, 116|45, 116|104, 116|166, 116|181, 116|184
+116|205, 116|225, 116|244, 116|245, 116|246, 116|269, 117|19, 117|105
+117|117, 117|135, 117|165, 117|183, 117|243, 117|244, 117|245, 118|20
+118|26, 118|106, 118|131, 118|133, 118|177, 118|207, 118|208, 118|209
+118|226, 118|242, 118|244, 119|23, 119|25, 119|107, 119|117, 119|176
+119|243, 120|130, 120|149, 120|165, 120|202, 120|203, 121|21, 121|22
+121|97, 121|129, 121|148, 121|166, 121|226, 121|227, 122|20, 122|21
+122|96, 122|119, 122|121, 122|148, 122|184, 123|37, 123|55, 123|95
+123|121, 123|122, 123|123, 123|124, 123|125, 123|133, 123|135, 123|136
+123|149, 123|166, 123|185, 123|226, 123|227, 124|20, 124|47, 124|94
+124|122, 124|125, 124|126, 124|136, 124|149, 124|162, 124|186, 125|19
+125|48, 125|127, 125|135, 125|187, 125|200, 125|205, 125|225, 125|226
+125|251, 126|127, 126|128, 126|132, 126|148, 126|161, 126|187, 126|188
+126|224, 127|94, 127|126, 127|127, 127|130, 127|131, 127|132, 127|134
+127|148, 127|157, 127|160, 128|55, 128|95, 128|149, 128|156, 128|250
+129|96, 129|117, 129|149, 129|150, 129|154, 129|155, 129|175, 129|222
+129|223, 130|144, 130|153, 130|154, 130|176, 130|180, 131|18, 131|30
+131|118, 131|119, 131|130, 131|131, 131|140, 131|141, 131|145, 131|153
+131|176, 131|177, 131|221, 131|222, 131|251, 132|17, 132|30, 132|127
+132|132, 132|138, 132|143, 132|145, 132|146, 132|177, 132|251, 133|15
+133|16, 133|137, 133|146, 133|147, 133|178, 133|219, 133|220, 133|221
+134|14, 134|132, 134|133, 134|148, 134|179, 134|180, 134|218, 134|219
+135|13, 135|131, 135|133, 135|134, 135|136, 135|149, 135|170, 135|181
+135|218, 136|12, 136|131, 136|137, 136|151, 136|168, 136|182, 136|218
+136|251, 137|138, 137|183, 137|251, 137|265, 138|139, 138|140, 138|164
+139|11, 139|28, 139|141, 139|157, 140|5, 140|6, 140|7, 140|10
+140|32, 140|142, 140|211, 141|4, 141|5, 141|6, 141|143, 141|192
+142|6, 142|28, 142|193, 142|217, 142|264, 143|6, 143|27, 143|194
+144|26, 144|119, 145|26, 145|140, 145|141, 145|195, 145|211, 145|216
+146|125, 146|139, 146|196, 146|215, 146|216, 147|5, 147|25, 147|122
+147|123, 147|124, 147|139, 147|217, 148|0, 148|1, 148|2, 148|4
+148|24, 148|141, 148|197, 148|217, 148|218, 149|0, 149|1, 149|24
+149|218, 149|262, 150|0, 150|138, 150|261, 151|4, 151|198, 151|218
+152|0, 152|199, 153|200, 153|242, 154|259, 155|26, 155|239, 155|258
+156|5, 156|200, 156|201, 157|6, 157|199, 157|200, 157|201, 158|7
+158|20, 158|25, 159|7, 159|8, 159|236, 160|20, 160|22, 160|23
+160|197, 160|199, 160|219, 161|19, 161|197, 161|199, 162|17, 162|199
+162|254, 163|197, 163|198, 163|219, 163|253, 164|8, 165|7, 165|19
+165|211, 166|218, 166|253, 166|259, 166|260, 167|6, 167|21, 167|259
+167|261, 168|198, 168|208, 168|259, 169|6, 171|6, 171|23, 171|259
+172|6, 172|7, 172|199, 172|218, 173|229, 173|254, 174|7, 174|200
+174|206, 174|218, 174|254, 175|2, 175|6, 175|201, 175|208, 175|209
+175|211, 175|230, 176|0, 176|3, 176|5, 176|202, 176|218, 176|231
+177|203, 177|210, 178|2, 178|4, 178|7, 178|30, 178|204, 178|211
+178|212, 178|219, 178|220, 179|0, 179|1, 179|8, 179|205, 180|0
+180|29, 180|206, 180|210, 180|221, 180|231, 181|210, 181|222, 183|30
+184|8, 185|6, 185|7, 185|223, 186|7, 186|9, 187|37, 187|224
+188|10, 188|34, 188|36, 188|37, 188|38, 188|225, 189|36, 189|37
+189|38, 189|39, 190|10, 190|11, 190|36, 190|225, 190|226, 192|226
+193|11, 194|38, 195|10, 195|224, 195|225, 195|236, 196|6, 196|9
+196|225, 196|226, 196|237, 197|7, 197|8, 197|227, 198|35, 201|7
+201|237, 202|6, 202|36, 202|227, 203|7, 203|33, 203|226, 204|36
+204|224, 204|225, 204|290, 205|7, 205|8, 205|289, 206|222, 206|288
+207|8, 208|7, 209|287, 210|5, 210|6, 210|220, 210|224, 211|4
+211|28, 211|35, 211|224, 212|2, 212|3, 212|10, 212|18, 212|20
+212|32, 212|33, 212|35, 213|0, 213|1, 213|10, 213|32, 213|33
+213|250, 214|2, 214|3, 214|19, 214|36, 214|249, 214|281, 215|19
+215|29, 215|30, 215|31, 215|241, 216|0, 216|9, 216|10, 216|26
+216|27, 216|28, 216|42, 216|240, 216|283, 217|10, 217|28, 217|42
+217|43, 217|249, 218|0, 218|1, 218|9, 218|10, 218|28, 218|42
+218|238, 219|0, 219|27, 219|225, 219|226, 219|230, 220|41, 220|229
+220|236, 220|283, 221|10, 221|39, 221|228, 222|234, 222|279, 223|39
+223|40, 224|11, 224|12, 224|36, 224|219, 224|220, 224|283, 225|40
+226|36, 226|41, 226|46, 226|47, 226|279, 227|13, 227|42, 227|46
+228|0, 228|45, 230|14, 231|12, 231|13, 231|14, 232|0, 232|1
+232|12, 232|13, 232|44, 233|2, 233|12, 233|13, 233|37, 233|40
+233|43, 233|220, 234|11, 234|12, 234|221, 235|2, 235|11, 235|271
+236|222, 237|223, 238|9, 238|10, 238|31, 239|10, 239|223, 240|11
+241|0, 241|1, 241|11, 241|222, 242|10, 242|11, 244|11, 244|222
+244|270, 245|10, 245|223, 247|32, 248|10, 250|30, 251|30, 251|227
+251|247, 252|10, 252|226, 252|246, 253|10, 253|11, 253|245, 254|10
+254|11, 254|244, 255|10, 255|226, 256|8, 256|9, 256|10, 257|7
+257|8, 257|9, 257|28, 257|29, 257|226, 258|6, 258|7, 258|8
+259|225, 260|26, 260|276, 261|276, 262|6, 262|7, 263|23, 263|24
+264|0, 264|276, 265|24, 265|224, 266|7, 266|223, 267|0, 267|222
+267|242, 267|253, 268|7, 268|8, 268|25, 268|241, 268|242, 268|243
+268|253, 268|267, 268|268, 269|26, 269|222, 269|267, 269|276, 270|8
+270|27, 270|223, 270|242, 270|243, 271|8, 271|9, 271|224, 271|242
+272|7, 272|8, 272|28, 272|242, 273|6, 273|27, 273|224, 274|5
+274|6, 274|7, 274|26, 274|227, 275|4, 275|7, 275|109, 275|224
+275|228, 275|254, 275|267, 275|268, 276|108, 277|4, 277|7, 277|8
+277|110, 278|7, 278|8, 278|107, 278|108, 278|109, 278|114, 278|228
+278|245, 279|106, 279|107, 279|108, 279|117, 279|222, 279|227, 280|8
+280|102, 280|113, 280|114, 280|116, 280|226, 281|8, 281|101, 281|113
+281|241, 282|7, 282|112, 283|6, 283|110, 283|111, 283|143, 284|5
+284|100, 284|103, 284|144, 284|147, 284|148, 285|7, 285|99, 285|110
+285|111, 285|112, 285|259, 286|8, 286|107, 286|113, 286|221, 286|260
+287|99, 287|105, 287|147, 287|220, 288|9, 288|98, 288|122, 289|114
+289|117, 289|123, 289|150, 289|262, 290|115, 290|124, 290|161, 290|236
+291|10, 291|11, 291|98, 291|101, 291|150, 291|219, 291|238, 292|125
+292|149, 292|235, 293|11, 293|12, 294|11, 294|12, 294|93, 294|120
+295|11, 295|92, 295|126, 295|162, 295|218, 295|235, 296|6, 296|9
+296|10, 296|91, 296|127, 296|128, 296|130, 297|4, 297|9, 297|133
+297|148, 297|149, 298|8, 298|90, 298|132, 298|235, 298|264, 299|4
+299|89, 299|123, 299|133, 299|143, 299|149, 299|214, 299|217, 299|232
+300|7, 300|8, 300|93, 300|144, 300|145, 300|149, 300|231, 301|8
+301|9, 301|10, 301|89, 301|92, 301|134, 301|135, 301|148, 301|213
+302|90, 302|134, 302|135, 302|213, 302|265, 303|11, 303|151, 303|203
+303|204, 303|217, 303|231, 304|202, 304|218, 304|232, 305|89, 305|98
+305|151, 305|205, 305|219, 305|233, 305|235, 306|12, 306|13, 306|144
+306|150, 306|289, 307|99, 307|197, 307|199, 307|289, 308|14, 308|89
+308|98, 308|145, 308|146, 308|149, 308|200, 308|219, 309|14, 309|89
+309|97, 309|197, 309|219, 309|223, 310|13, 310|14, 310|96, 310|220
+310|224, 311|14, 311|141, 311|145, 311|186, 311|198, 311|274, 312|13
+312|88, 312|146, 312|198, 312|199, 312|201, 313|87, 313|96, 313|146
+313|147, 313|149, 313|199, 313|202, 313|207, 313|224, 314|86, 314|96
+314|150, 314|191, 314|202, 314|224, 314|276, 314|277, 315|83, 315|85
+315|95, 315|151, 315|200, 315|201, 315|225, 315|227, 316|10, 316|11
+316|12, 316|82, 316|152, 316|171, 316|228, 316|236, 317|81, 317|108
+317|148, 317|172, 317|192, 317|199, 317|229, 317|237, 318|9, 318|10
+318|37, 318|80, 318|113, 318|114, 318|163, 318|173, 318|230, 319|36
+319|79, 319|164, 319|173, 319|198, 319|237, 320|78, 320|114, 320|197
+320|236, 320|276, 321|75, 321|114, 321|115, 321|151, 321|165, 321|197
+321|205, 322|74, 322|82, 322|166, 322|175, 322|204, 322|236, 322|277
+322|303, 323|73, 323|95, 323|176, 323|237, 324|83, 324|94, 324|95
+324|177, 324|188, 324|204, 324|272, 324|278, 325|9, 325|84, 325|95
+325|186, 325|187, 325|273, 325|303, 326|10, 326|13, 326|72, 326|73
+326|85, 326|95, 326|178, 326|185, 326|186, 327|34, 327|71, 327|72
+327|94, 327|109, 327|117, 327|179, 327|207, 327|250, 327|269, 328|13
+328|110, 328|114, 328|185, 328|198, 328|204, 328|207, 328|251, 328|269
+328|273, 329|12, 329|84, 329|116, 329|184, 329|252, 329|264, 330|71
+330|81, 330|83, 330|184, 330|204, 330|253, 330|269, 330|272, 330|282
+331|103, 331|116, 331|185, 331|187, 331|198, 331|203, 331|210, 331|269
+331|271, 331|272, 332|71, 332|104, 332|116, 332|188, 332|197, 332|262
+332|272, 332|273, 332|284, 333|11, 333|70, 333|83, 333|105, 333|106
+333|111, 333|189, 333|197, 333|200, 333|205, 333|263, 333|273, 333|276
+334|112, 334|190, 334|195, 334|273, 336|4, 336|9, 336|11, 336|12
+336|37, 336|69, 336|79, 336|82, 336|83, 336|97, 336|182, 336|190
+336|199, 336|203, 336|207, 336|209, 336|249, 336|252, 336|256, 336|261
+336|263, 336|268, 336|272, 336|274, 336|276, 336|278, 336|280, 336|286

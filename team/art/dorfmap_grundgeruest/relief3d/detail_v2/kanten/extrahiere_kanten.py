@@ -22,6 +22,7 @@ from shapely import contains_xy, coverage_simplify, get_parts, line_merge, make_
 from shapely.geometry import LineString, MultiLineString, Point, Polygon, box, mapping, shape
 from shapely.ops import polygonize
 from shapely.strtree import STRtree
+from skimage.graph import route_through_array
 from skimage.measure import find_contours
 from skimage.morphology import skeletonize
 
@@ -35,6 +36,7 @@ EXTENSION = ROOT / "overlay_plaetze_erweiterung.json"
 RELIEF_GZ = RELIEF / "relief_daten.json.gz"
 TARGETS = ((300.0, 90.0, "G3H3"), (290.0, 98.0, "G3H3"), (84.0, 129.0, "B3C3"))
 SURFACE_PRIORITY = ("wasser", "bruecke", "weg", "ufer", "fels", "grund")
+CLASS_CODES = {"grund": 0, "weg": 1, "ufer": 2, "fels": 3, "wasser": 4, "bruecke": 5}
 SMOOTH_COVERAGE_STATUS = []
 
 
@@ -126,39 +128,45 @@ def chaikin(points: np.ndarray, iterations: int = 2, closed: bool = False) -> np
 
 
 def smooth_line(line: LineString, dp: float, step: float = 0.20,
-                chaikin_n: int = 0, lowpass_m: float = 2.0) -> LineString | None:
+                chaikin_n: int = 0, lowpass_m: float = 1.2) -> LineString | None:
+    """DP-simplify, sample every 5 cm, Gaussian-smooth and re-sample evenly.
+
+    Open endpoints remain fixed. Closed rings use cyclic filtering. Shared
+    coverage boundaries are passed as whole arcs between graph junctions, so
+    the fixed endpoints are common to all adjacent faces.
+    """
     if line.length < 0.75:
         return None
     simplified = line.simplify(dp, preserve_topology=True)
     if simplified.geom_type != "LineString" or len(simplified.coords) < 3:
         simplified = line
-    p = np.asarray(simplified.coords, dtype=float)
-    closed = np.linalg.norm(p[0] - p[-1]) < 1e-7
-    if chaikin_n:
-        p = chaikin(p, chaikin_n, closed)
-    p = catmull_rom(p, step=min(step, 0.10), closed=closed)
-    # An arc-length low-pass removes the residual 0.5/1 m raster tooth.
-    # Endpoints are fixed for a shared planar graph; closed rings wrap.
-    if closed and len(p) > 3 and np.linalg.norm(p[0] - p[-1]) < 1e-7:
-        p = p[:-1]
-    if len(p) >= 12:
-        sigma_samples = lowpass_m / 0.10
-        mode = "wrap" if closed else "nearest"
-        p0, p1 = p[0].copy(), p[-1].copy()
-        p = ndi.gaussian_filter1d(p, sigma=sigma_samples, axis=0, mode=mode)
-        if not closed:
-            p[0], p[-1] = p0, p1
+    path = LineString(simplified.coords)
+    p0 = np.asarray(path.coords[0], dtype=float)
+    p1 = np.asarray(path.coords[-1], dtype=float)
+    closed = np.linalg.norm(p0 - p1) < 1e-7
+    length = path.length
     if closed:
-        p = np.vstack((p, p[:1]))
-    # Re-parameterize after filtering so output segments remain <= 0.1 m.
-    path = LineString(p)
-    ds = min(step, 0.10)
-    sampled = [path.interpolate(float(s)).coords[0] for s in np.arange(0.0, path.length, ds)]
-    if closed:
-        sampled.append(sampled[0])
+        p = np.asarray(path.coords[:-1], dtype=float)
+        n = max(8, int(math.ceil(length / 0.05)))
+        s = np.arange(n, dtype=float) * (length / n)
+        p = np.asarray([path.interpolate(float(v)).coords[0] for v in s])
+        p = ndi.gaussian_filter1d(p, sigma=max(lowpass_m / 0.05, 1.0), axis=0, mode="wrap")
+        filtered = LineString(np.vstack((p, p[:1])))
+        nout = max(8, int(math.ceil(filtered.length / min(step, 0.25))))
+        so = np.arange(nout, dtype=float) * (filtered.length / nout)
+        out = np.asarray([filtered.interpolate(float(v)).coords[0] for v in so])
+        out = np.vstack((out, out[:1]))
     else:
-        sampled.append(path.coords[-1])
-    p = round_xy(np.asarray(sampled))
+        n = max(2, int(math.ceil(length / 0.05)))
+        s = np.linspace(0.0, length, n + 1)
+        p = np.asarray([path.interpolate(float(v)).coords[0] for v in s])
+        p = ndi.gaussian_filter1d(p, sigma=max(lowpass_m / 0.05, 1.0), axis=0, mode="nearest")
+        p[0], p[-1] = p0, p1
+        filtered = LineString(p)
+        nout = max(1, int(math.ceil(filtered.length / min(step, 0.25))))
+        so = np.linspace(0.0, filtered.length, nout + 1)
+        out = np.asarray([filtered.interpolate(float(v)).coords[0] for v in so])
+    p = round_xy(out)
     if len(p) < 2:
         return None
     result = LineString(p)
@@ -320,49 +328,6 @@ def hessian_ridges(gb: np.ndarray, rs: int) -> list[np.ndarray]:
     return extract_skeleton_paths(skeletonize(candidate), rs)
 
 
-def hessian_tangent_trace(gb: np.ndarray, rs: int, anchor: tuple[float, float], span: float = 12.0) -> LineString:
-    """Trace the Hessian principal direction from a prescribed ridge control point."""
-    h = ndi.gaussian_filter(gb.astype(float), sigma=1.5, mode="nearest")
-    dz, dx = np.gradient(h, 1 / rs, 1 / rs)
-    hzz, hzx = np.gradient(dz, 1 / rs, 1 / rs)
-    hxz, hxx = np.gradient(dx, 1 / rs, 1 / rs)
-    cross = (hxz + hzx) * 0.5
-    theta = 0.5 * np.arctan2(2 * cross, hxx - hzz)
-    tx, tz = np.cos(theta), np.sin(theta)
-
-    def tangent(pt, previous):
-        v = np.array([ndi.map_coordinates(tx, [[pt[1] * rs], [pt[0] * rs]], order=1, mode="nearest")[0],
-                      ndi.map_coordinates(tz, [[pt[1] * rs], [pt[0] * rs]], order=1, mode="nearest")[0]])
-        n = np.linalg.norm(v)
-        v = v / n if n else np.array([1.0, 0.0])
-        return -v if np.dot(v, previous) < 0 else v
-
-    origin = np.asarray(anchor, dtype=float)
-    result = []
-    ds = 0.20
-    nstep = int(span / ds)
-    for direction in (-1, 1):
-        pt = origin.copy()
-        v0 = tangent(pt, np.array([1.0, 0.0]))
-        prev = direction * v0
-        side = [pt.copy()]
-        for _ in range(nstep):
-            v = tangent(pt, prev)
-            if direction < 0 and np.dot(v, prev) < 0:
-                v = -v
-            if direction > 0 and np.dot(v, prev) < 0:
-                v = -v
-            pt = pt + ds * v
-            side.append(pt.copy())
-            prev = v
-        if direction < 0:
-            result = list(reversed(side))[:-1]
-        else:
-            result.extend(side)
-    result[len(result) // 2] = origin
-    return LineString(result)
-
-
 def component_cell_geometries(codes: np.ndarray, labels: list[tuple]) -> dict[tuple, object]:
     """Union horizontal same-label cell runs; avoids one box per source cell."""
     shapes = defaultdict(list)
@@ -509,12 +474,14 @@ def surface_layer(cells, cell_rows, overlay_rows):
                 types[y, x] = "bruecke"
             if row["wasser_eis"] == "1" or under == "WASSER_EIS":
                 types[y, x] = "wasser"
-    # Remove isolated 1-3 cell specks from the broad ground/rock classes before
-    # smoothing; they are raster noise and cannot form a camera-visible terrain zone.
+    raw_counts = Counter(types.ravel().tolist())
+    # Reassign isolated 1-3 cell specks before smoothing. The surface classes
+    # are area-calibrated back to their unmodified source counts below, so this
+    # removes sub-cell islands without making small classes disappear globally.
     from scipy.ndimage import label as cc_label
     slivers = 0
     priority = {name: i for i, name in enumerate(SURFACE_PRIORITY)}
-    for source_type in ("fels", "grund"):
+    for source_type in sorted(raw_counts):
         labels_cc, count = cc_label(types == source_type, structure=np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=np.uint8))
         for component in range(1, count + 1):
             yy, xx = np.where(labels_cc == component)
@@ -533,7 +500,7 @@ def surface_layer(cells, cell_rows, overlay_rows):
     labels = sorted(set(types.ravel().tolist()))
     lut = {v: i for i, v in enumerate(labels)}
     codes = np.fromiter((lut[v] for v in types.ravel().tolist()), dtype=np.int16).reshape(ny, nx)
-    return types, substrates, codes, labels, slivers
+    return types, substrates, codes, labels, slivers, raw_counts
 
 
 def feature_from_polygon(poly, props):
@@ -542,31 +509,101 @@ def feature_from_polygon(poly, props):
     return feature(poly, props)
 
 
+def majority_at_geometry(geom, types, substrates):
+    ny, nx = types.shape
+    x0, y0, x1, y1 = geom.bounds
+    ix0, iy0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
+    ix1, iy1 = min(nx, int(math.ceil(x1))), min(ny, int(math.ceil(y1)))
+    if ix1 > ix0 and iy1 > iy0:
+        xs, ys = np.arange(ix0, ix1) + 0.5, np.arange(iy0, iy1) + 0.5
+        xx, yy = np.meshgrid(xs, ys)
+        inside = contains_xy(geom, xx, yy)
+        if inside.any():
+            t = Counter(types[iy0:iy1, ix0:ix1][inside].tolist())
+            u = Counter(substrates[iy0:iy1, ix0:ix1][inside].tolist())
+            typ = min(t, key=lambda v: (-t[v], v))
+            under = min(u, key=lambda v: (-u[v], v))
+            return typ, under
+    rp = geom.representative_point()
+    x, y = min(nx - 1, max(0, int(rp.x))), min(ny - 1, max(0, int(rp.y)))
+    return str(types[y, x]), str(substrates[y, x])
+
+
+def classify_coverage(polys, originals):
+    labels = sorted(originals, key=str)
+    geoms = [originals[k] for k in labels]
+    tree = STRtree(geoms)
+    result = defaultdict(list)
+    for poly in polys:
+        candidates = tree.query(poly)
+        best, area = None, -1.0
+        for idx in candidates:
+            idx = int(idx)
+            overlap = poly.intersection(geoms[idx]).area
+            if overlap > area + 1e-9 or (abs(overlap - area) <= 1e-9 and (best is None or str(labels[idx]) < str(labels[best]))):
+                best, area = idx, overlap
+        if best is not None:
+            result[labels[best]].append(poly)
+    return {k: unary_union(v) for k, v in result.items()}
+
+
 def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
-    types, substrates, codes, labels, slivers = surface_layer(cells, cell_rows, overlay_rows)
+    types, substrates, codes, labels, slivers, raw_type_counts = surface_layer(cells, cell_rows, overlay_rows)
     original = component_cell_geometries(codes, labels)
     comps = []
     for label, geom in original.items():
         comps.extend(polygon_parts(geom))
     smoothed = smooth_coverage(comps, dp=0.28, sample_step=0.20)
-    tree = STRtree(list(original.values()))
-    orig_vals = list(original.values())
+    surface_by_type = classify_coverage(smoothed, original)
+    # Calibrate the three small/high-priority classes after smoothing. Buffer
+    # correction is applied to the shared class geometry, then all lower-priority
+    # faces are cut against it so the final partition remains exact and shared.
+    bounds = box(0, 0, nx, ny)
+    source_counts = raw_type_counts
+    calibrated = {}
+    claimed = Polygon()
+    for typ in SURFACE_PRIORITY[:-1]:
+        base = surface_by_type.get(typ, original.get(typ, Polygon()))
+        if base.is_empty:
+            calibrated[typ] = Polygon()
+            continue
+        if typ in ("wasser", "bruecke", "ufer"):
+            target = float(source_counts[typ])
+            lo, hi = -8.0, 8.0
+            for _ in range(32):
+                mid = (lo + hi) * 0.5
+                candidate = base.buffer(mid, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
+                if candidate.area > target:
+                    hi = mid
+                else:
+                    lo = mid
+            selected = base.buffer((lo + hi) * 0.5, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
+            # A class must remain represented even if the raw-smoothed face was
+            # nearly erased; fall back to its unsmoothed source before calibration.
+            if selected.area < target * 0.97 and typ in original:
+                base = original[typ]
+                lo, hi = -8.0, 8.0
+                for _ in range(32):
+                    mid = (lo + hi) * 0.5
+                    candidate = base.buffer(mid, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
+                    if candidate.area > target:
+                        hi = mid
+                    else:
+                        lo = mid
+                selected = base.buffer((lo + hi) * 0.5, quad_segs=12, join_style="round").intersection(bounds).difference(claimed)
+        else:
+            selected = base.intersection(bounds).difference(claimed)
+        calibrated[typ] = selected
+        claimed = unary_union([claimed, selected])
+    # The ground class is the exact remainder of the map rectangle.
+    higher = unary_union(list(calibrated.values())) if calibrated else Polygon()
+    calibrated["grund"] = bounds.difference(higher)
     out = []
     type_area = Counter()
-    for poly in sorted(smoothed, key=lambda p: (round(p.bounds[1], 5), round(p.bounds[0], 5), round(p.area, 5))):
-        candidates = tree.query(poly)
-        best, best_area = None, -1.0
-        for idx in candidates:
-            idx = int(idx)
-            area = poly.intersection(orig_vals[idx]).area
-            if area > best_area:
-                best, best_area = idx, area
-        if best is None:
-            rp = poly.representative_point(); x = max(0, min(nx - 1, int(rp.x))); y = max(0, min(ny - 1, int(rp.y)))
-            typ = str(types[y, x])
-        else:
-            # STRtree is over dict insertion order; labels use identical key order.
-            typ = list(original.keys())[best]
+    surface_polys = []
+    for typ in SURFACE_PRIORITY:
+        surface_polys.extend((typ, p) for p in polygon_parts(calibrated[typ]))
+    for typ, poly in sorted(surface_polys, key=lambda v: (SURFACE_PRIORITY.index(v[0]), round(v[1].bounds[1], 5), round(v[1].bounds[0], 5), round(v[1].area, 5))):
         x0, y0, x1, y1 = poly.bounds
         ix0, iy0 = max(0, int(math.floor(x0))), max(0, int(math.floor(y0)))
         ix1, iy1 = min(nx, int(math.ceil(x1))), min(ny, int(math.ceil(y1)))
@@ -582,9 +619,25 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
             counts[str(substrates[y, x])] = 1
         under = sorted(counts.items(), key=lambda v: (-v[1], v[0]))[0][0]
         type_area[typ] += poly.area
-        out.append(feature_from_polygon(poly, {"layer": "flaechentyp", "typ": typ, "untergrund": under,
+        out.append(feature_from_polygon(poly, {"layer": "flaechentyp", "typ": typ, "klasse": CLASS_CODES[typ], "untergrund": under,
                                                "untergrund_anteile": [{"name": k, "zellen": int(v)} for k, v in sorted(counts.items())],
                                                "quelle": "zellen_relief.csv + raster_c20_z25_overlay_plaetze_wege.csv"}))
+
+    # The substrate layer is a second complete coverage, classified directly
+    # from zellen_relief.csv and smoothed with the same shared-boundary method.
+    under_labels = sorted(set(str(v) for v in substrates.ravel()))
+    under_lut = {v: i for i, v in enumerate(under_labels)}
+    under_codes = np.fromiter((under_lut[str(v)] for v in substrates.ravel()), dtype=np.int16).reshape(ny, nx)
+    under_original = component_cell_geometries(under_codes, under_labels)
+    under_comps = [p for geom in under_original.values() for p in polygon_parts(geom)]
+    under_smoothed = smooth_coverage(under_comps, dp=0.28, sample_step=0.20)
+    under_by_label = classify_coverage(under_smoothed, under_original)
+    for under in under_labels:
+        for poly in sorted(polygon_parts(under_by_label.get(under, Polygon())), key=lambda p: (round(p.bounds[1], 5), round(p.bounds[0], 5), round(p.area, 5))):
+            typ, _ = majority_at_geometry(poly, types, substrates)
+            out.append(feature_from_polygon(poly, {"layer": "untergrund", "typ": under,
+                                                   "klasse": CLASS_CODES[typ], "untergrund": under,
+                                                   "quelle": "zellen_relief.csv: untergrund"}))
 
     # Bauzone is an independent layer and is smoothed as a two-class coverage.
     bz = np.zeros((ny, nx), dtype=np.int8)
@@ -617,7 +670,9 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
         calibrated = inside_union
     bz_area = float(calibrated.area)
     for poly in polygon_parts(calibrated):
-        out.append(feature_from_polygon(poly, {"layer": "bauzone_plan", "typ": "bauzone", "quelle": "zellen_relief.csv"}))
+        typ, under = majority_at_geometry(poly, types, substrates)
+        out.append(feature_from_polygon(poly, {"layer": "bauzone_plan", "typ": "bauzone", "klasse": CLASS_CODES[typ],
+                                               "untergrund": under, "quelle": "zellen_relief.csv"}))
 
     # Build overlay slot polygons from connected source-cell runs, retaining ids.
     slot_arrays = {"slot_bau": np.zeros((ny, nx), bool), "slot_deko": np.zeros((ny, nx), bool)}
@@ -637,16 +692,36 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
             geom = unary_union([box(float(x), float(y), float(x + 1), float(y + 1)) for y, x in pts])
             if not geom.is_valid:
                 geom = make_valid(geom)
-            out.append(feature(geom, {"layer": "slot", "typ": typ, "id": f"{typ}_{i:04d}",
-                                      "quelle": "raster_c20_z25_overlay_plaetze_wege.csv"}))
+            main_type, under = majority_at_geometry(geom, types, substrates)
+            out.append(feature(geom, {"layer": "slot", "typ": typ, "klasse": CLASS_CODES[main_type], "untergrund": under,
+                                      "id": f"{typ}_{i:04d}", "quelle": "raster_c20_z25_overlay_plaetze_wege.csv"}))
     expansion = json.loads(EXTENSION.read_text(encoding="utf-8"))
     for item in expansion.get("plaetze", []):
         x, y = float(item["cx"]) + 0.5, float(item["cy"]) + 0.5
-        out.append(feature(Point(x, y), {"layer": "slot", "typ": "slot_bau", "id": f"{item['stand']}_{item['id']}",
+        px, py = int(item["cx"]), int(item["cy"])
+        px, py = min(nx - 1, max(0, px)), min(ny - 1, max(0, py))
+        main_type, under = str(types[py, px]), str(substrates[py, px])
+        out.append(feature(Point(x, y), {"layer": "slot", "typ": "slot_bau", "klasse": CLASS_CODES[main_type], "untergrund": under,
+                                         "id": f"{item['stand']}_{item['id']}",
                                          "quelle": "overlay_plaetze_erweiterung.json", "stand": item["stand"],
                                          "gebiet": item.get("gebiet", "")}))
-    type_counts = Counter(types.ravel().tolist())
+    seen_ids = set()
+    for i, f in enumerate(out):
+        props = f["properties"]
+        if "klasse" not in props or "untergrund" not in props:
+            typ, under = majority_at_geometry(shape(f["geometry"]), types, substrates)
+            props.setdefault("klasse", CLASS_CODES[typ]); props.setdefault("untergrund", under)
+        ident = str(props.get("id") or f"{props.get('layer', 'feature')}_{i:05d}")
+        candidate = ident
+        suffix = 1
+        while candidate in seen_ids:
+            suffix += 1
+            candidate = f"{ident}_{suffix}"
+        props["id"] = candidate
+        seen_ids.add(candidate)
+    type_counts = raw_type_counts
     return out, {"type_area": dict(sorted(type_area.items())), "type_cells": dict(sorted(type_counts.items())),
+                 "substrate_area": {k: float(v.area) for k, v in under_by_label.items()},
                  "bauzone_cells": int(target_area), "bauzone_area": float(bz_area),
                  "bauzone_delta_pct": (bz_area / target_area - 1) * 100 if target_area else 0,
                  "zone_feature_count": len([f for f in out if f["properties"].get("layer") == "flaechentyp"]),
@@ -659,28 +734,11 @@ def build_zone_features(cells, cell_rows, overlay_rows, nx, ny):
 def line_feature(line: LineString, props: dict, get_height) -> dict:
     # Fixed-distance emission is done after all smoothing, since filtering changes
     # the original Catmull-Rom parameter spacing.
-    if "anker_pflicht" in props:
-        anchor = np.asarray(props["anker_pflicht"], dtype=float)
-        projected_s = line.project(Point(anchor))
-        projected = np.asarray(line.interpolate(projected_s).coords[0])
-        delta = anchor - projected
-        line = LineString(np.asarray(line.coords) + delta)
-        closed = False
-        anchor_s = projected_s
-    else:
-        anchor = None
-        closed = np.linalg.norm(np.asarray(line.coords[0]) - np.asarray(line.coords[-1])) < 1e-7
-        anchor_s = None
+    closed = np.linalg.norm(np.asarray(line.coords[0]) - np.asarray(line.coords[-1])) < 1e-7
     step = 0.10
-    distances = np.arange(0.0, line.length, step)
-    extra = [line.length]
-    if anchor_s is not None:
-        extra.append(anchor_s)
-    distances = np.unique(np.r_[distances, extra])
+    distances = np.linspace(0.0, line.length, max(1, int(math.ceil(line.length / step))) + 1)
     coords = np.array([line.interpolate(float(s)).coords[0] for s in distances])
-    if anchor is not None:
-        coords[int(np.argmin(np.abs(distances - anchor_s)))] = anchor
-    elif closed and len(coords) > 1:
+    if closed and len(coords) > 1:
         coords[-1] = coords[0]
     coords = round_xy(coords)
     h = get_height(coords)
@@ -696,22 +754,33 @@ def build_edges(cell_rows, nx, ny, rs, gb, get_height):
     # WAND is the exported wall face; KANTE marks the source edge cells. The source snapshot
     # has no WAND_OBEN/WAND_FUSS values, so upper/lower are derived from each named mask's GB range.
     names = sorted({r["wand_name"] for r in cell_rows.values() if r["wand_name"]})
+    wall_radius = 7
+    wy, wx = np.ogrid[-wall_radius:wall_radius + 1, -wall_radius:wall_radius + 1]
+    wall_disk = wx * wx + wy * wy <= wall_radius * wall_radius
     for name in names:
-        mask = np.zeros((ny, nx), dtype=bool)
+        source_mask = np.zeros((ny, nx), dtype=bool)
         for idx, row in cell_rows.items():
             if row["wand_name"] == name and row["klippe"] in ("WAND", "KANTE") and row["untergrund"] in ("KLIPPE_WAND", "KLIPPE_KANTE"):
-                mask[idx // nx, idx % nx] = True
-        if not mask.any():
+                source_mask[idx // nx, idx % nx] = True
+        if not source_mask.any():
             continue
-        ys, xs = np.where(mask)
+        ys, xs = np.where(source_mask)
         vals = get_height(np.column_stack((xs + 0.5, ys + 0.5)))
         mid = float(np.median(vals))
+        # The 7 m disk opening/closing is a deliberate broad generalization:
+        # smaller kernels left sub-30 cm raster crenellations and >15 degree
+        # corners. Preserve the named wall and height split, and record omitted
+        # short contours rather than returning visibly jagged fragments.
+        mask = ndi.binary_closing(ndi.binary_opening(source_mask, structure=wall_disk), structure=wall_disk)
+        if not mask.any():
+            omitted_short += 1
+            continue
         for raw in contour_cell_mask(mask):
             # Split an enclosing contour around its high and low half at the median GB level.
             p = np.asarray(raw.coords)
             hp = get_height(p)
             typ = "klippe_oben" if float(np.median(hp)) >= mid else "klippe_unten"
-            smooth = smooth_line(raw, dp=0.1, step=0.20, chaikin_n=1)
+            smooth = smooth_line(raw, dp=0.1, step=0.20, chaikin_n=1, lowpass_m=1.5)
             if smooth is None:
                 continue
             if smooth.length < 3.0:
@@ -721,99 +790,118 @@ def build_edges(cell_rows, nx, ny, rs, gb, get_height):
                                          "quelle": "zellen_relief.csv: KLIPPE_WAND/KANTE + GB"}, get_height)
             features.append(feat); q3_lines.append(smooth)
 
-    # GB slope mask, sampled from the viewer field at 0.5 m. Smooth only the derived angle.
+    # GB slope mask, sampled from the viewer field at 0.5 m. A fixed 2.5 m
+    # binary opening/closing removes sub-cell notches and loops before the
+    # contour is traced; the resulting contour is then Gaussian-smoothed.
     h = ndi.gaussian_filter(gb.astype(float), sigma=0.7, mode="nearest")
     dz, dx = np.gradient(h, 1 / rs, 1 / rs)
     slope = np.degrees(np.arctan(np.hypot(dx, dz)))
     slope = ndi.gaussian_filter(slope, sigma=0.55, mode="nearest")
-    for raw in contour_node_field(slope, 55.0, rs):
-        smooth = smooth_line(raw, dp=0.1, step=0.20, chaikin_n=1, lowpass_m=2.0)
+    radius = int(round(2.5 * rs))
+    yy, xx = np.ogrid[-radius:radius + 1, -radius:radius + 1]
+    disk = xx * xx + yy * yy <= radius * radius
+    steep_mask = ndi.binary_closing(ndi.binary_opening(slope > 55.0, structure=disk), structure=disk)
+    for raw in contour_node_mask(steep_mask, rs):
+        smooth = smooth_line(raw, dp=0.1, step=0.20, chaikin_n=1, lowpass_m=1.5)
         if smooth is None:
             continue
-        if smooth.length < 3.0:
-            omitted_short += 1
-            continue
-        features.append(line_feature(smooth, {"typ": "steil55", "quelle": "GB Neigung > 55 Grad"}, get_height))
-        q3_lines.append(smooth)
+        candidates = []
+        if smooth.is_ring:
+            rounded = Polygon(smooth.coords).buffer(-2.5, quad_segs=12).buffer(2.5, quad_segs=12)
+            for poly in polygon_parts(rounded):
+                candidates.append(LineString(poly.exterior.coords))
+                candidates.extend(LineString(r.coords) for r in poly.interiors)
+        else:
+            candidates.append(smooth)
+        for line in candidates:
+            if line.length < 3.0:
+                omitted_short += 1
+                continue
+            features.append(line_feature(line, {"typ": "steil55", "quelle": "GB Neigung > 55 Grad; Masken-Oeffnung 2.5 m"}, get_height))
+            q3_lines.append(line)
     return features, q3_lines, omitted_short
 
 
 def build_grats(cell_rows, nx, ny, rs, gb, get_height):
     paths = hessian_ridges(gb, rs)
-    # Prefer ridge skeleton paths in the named window; fall back to the GB contour of
-    # KLIPPE_WAND when the Hessian has no stable path in a required anchor window.
-    all_named_masks = {}
-    for name in sorted({r["wand_name"] for r in cell_rows.values() if r["wand_name"]}):
-        m = np.zeros((ny, nx), dtype=bool)
-        for idx, row in cell_rows.items():
-            if row["wand_name"] == name and row["untergrund"] == "KLIPPE_WAND":
-                m[idx // nx, idx % nx] = True
-        all_named_masks[name] = m
     candidates = []
     for path in paths:
         if len(path) < 3:
             continue
         line = LineString(path)
-        if line.length >= 3.0:
+        # Closed skeleton loops in this field are detector artifacts, not
+        # through-going crown lines. Drop them with all sub-3 m fragments.
+        if line.length >= 3.0 and not line.is_ring:
             candidates.append(line)
     output = []
-    used = set()
+    # A short skeleton segment can be a bridge between two longer branches.
+    # Do not emit it on its own, but retain it while tracing a single connected
+    # G3/H3 route through the graph.
+    route_paths = [LineString(p) for p in paths if len(p) >= 3 and not LineString(p).is_ring]
+    mask = np.zeros_like(gb, dtype=bool)
+    for line in route_paths:
+        q = np.rint(np.asarray(line.coords) * rs).astype(int)
+        good = (q[:, 0] >= 0) & (q[:, 0] < mask.shape[1]) & (q[:, 1] >= 0) & (q[:, 1] < mask.shape[0])
+        mask[q[good, 1], q[good, 0]] = True
+    components, _ = ndi.label(mask, structure=np.ones((3, 3), dtype=np.uint8))
+    yy, xx = np.where(mask)
+    points = np.asarray([(x / rs, y / rs) for y, x in zip(yy, xx)])
 
-    def nearest_path(point, bounds=None, name=None):
-        ranked = []
-        for i, line in enumerate(candidates):
-            rp = line.interpolate(line.project(point))
-            x, z = rp.x, rp.y
-            if bounds and not (bounds[0] <= x <= bounds[2] and bounds[1] <= z <= bounds[3]):
-                continue
-            ranked.append((line.distance(point), i, line))
-        if ranked:
-            return min(ranked, key=lambda v: (v[0], -v[2].length))[2]
-        if name in all_named_masks:
-            raw = contour_cell_mask(all_named_masks[name])
-            ls = [l for l in raw if l.length > 3]
-            if ls:
-                return min(ls, key=lambda l: (l.distance(point), -l.length))
-        return None
+    def snap(point):
+        d2 = np.sum((points - np.asarray(point)) ** 2, axis=1)
+        k = int(np.argmin(d2))
+        return int(yy[k]), int(xx[k]), float(math.sqrt(d2[k]))
 
-    # Required Fabian points become exact controls. They are connected to the nearest
-    # GB Hessian skeleton or named cliff crown; this records the source discrepancy honestly.
-    for x, z, name in TARGETS:
-        target = Point(x, z)
-        bounds = (x - 20, z - 20, x + 20, z + 20)
-        base = nearest_path(target, bounds, "Ostgrat" if name == "G3H3" else "Krater")
-        source_distance = float(base.distance(target)) if base is not None else None
-        # The plan's exact anchors lie inside the source wall mask rather than on
-        # a detected Hessian skeleton; trace the local Hessian principal direction
-        # through each [F] control and retain the measured source offset as metadata.
-        raw = hessian_tangent_trace(gb, rs, (x, z), span=12.0)
-        line = smooth_line(raw, dp=0.12, step=0.15, chaikin_n=1)
-        if line is None:
-            continue
-        output.append(line_feature(line, {"name": name, "typ": "grat", "anker_pflicht": [x, z],
-                                           "anker_basisabstand_m": round(source_distance, 3) if source_distance is not None else None,
-                                           "quelle": "GB Hessian-Ridge-Tangente; Pflichtanker [F]"}, get_height))
-        used.add(name)
+    # G3/H3 is one graph route between the two nearest valid Hessian skeleton
+    # nodes. The Fabian coordinates are measurements only; the line is never
+    # translated or seeded at a non-ridge control point.
+    g3_targets = [t for t in TARGETS if t[2] == "G3H3"]
+    if len(g3_targets) == 2:
+        a, b = g3_targets
+        ay, ax, ad = snap(a[:2]); by, bx, bd = snap(b[:2])
+        if components[ay, ax] == components[by, bx] and components[ay, ax] > 0:
+            cost = np.where(mask, 1.0, 1e8)
+            route, _ = route_through_array(cost, (ay, ax), (by, bx), fully_connected=True, geometric=True)
+            raw = LineString([(x / rs, y / rs) for y, x in route])
+            line = smooth_line(raw, dp=0.05, step=0.20, lowpass_m=1.2)
+            line = smooth_line(line, dp=0.05, step=0.10, lowpass_m=1.2) if line is not None else None
+            if line is not None and line.length >= 3.0:
+                distances = {f"{int(x)}|{int(z)}": round(float(line.distance(Point(x, z))), 4)
+                             for x, z, _ in g3_targets}
+                output.append(line_feature(line, {"name": "G3H3", "typ": "grat",
+                                                   "anker_abstaende_m": distances,
+                                                   "quelle": "GB Hessian-Ridge-Skelett, kuerzester Pfad im zusammenhaengenden Ridge-Netz"}, get_height))
 
-    # Named Hessian paths for Ostgrat and Kraterring G1, with no cell-grid resampling.
+    # B3/C3 uses the nearest remaining real Hessian path. Its actual offset is
+    # stored and reported when the field has no crown within the 1 m target.
+    bx, bz, _ = next(t for t in TARGETS if t[2] == "B3C3")
+    bp = Point(bx, bz)
+    bbase = min(candidates, key=lambda l: (l.distance(bp), -l.length)) if candidates else None
+    if bbase is not None:
+        line = smooth_line(bbase, dp=0.05, step=0.20, lowpass_m=1.2)
+        line = smooth_line(line, dp=0.05, step=0.10, lowpass_m=1.2) if line is not None else None
+        if line is not None and line.length >= 3.0:
+            output.append(line_feature(line, {"name": "B3C3", "typ": "grat",
+                                               "anker_abstaende_m": {"84|129": round(float(line.distance(bp)), 4)},
+                                               "quelle": "GB Hessian-Ridge-Skelett; naechster tatsaechlicher Pfad"}, get_height))
+
+    # Keep one longest through-going crown per named field window; discard the
+    # short branch fragments and closed skeleton loops above.
     windows = {"Ostgrat": (270, 75, 336, 205), "Kraterring_G1": (252, 0, 294, 43)}
-    for name, (x0, z0, x1, z1) in windows.items():
-        named = []
-        for line in candidates:
-            if line.intersection(box(x0, z0, x1, z1)).length >= 2.0:
-                named.append(line)
-        named.sort(key=lambda l: (-l.length, tuple(round(v, 4) for v in l.coords[0])))
-        if not named and name == "Ostgrat":
-            named = [l for l in contour_cell_mask(all_named_masks.get("Ostgrat", np.zeros((ny, nx), bool))) if l.length > 4]
-        # Cap general skeleton noise; retain every meaningful long ridge trace in each window.
-        for idx, base in enumerate(named[:20]):
-            smooth = smooth_line(base, dp=0.25, step=0.20, chaikin_n=1, lowpass_m=5.0)
-            if smooth is None:
-                continue
-            output.append(line_feature(smooth, {"name": name, "typ": "grat",
-                                                 "quelle": "GB Hessian-Ridge -> Skelett -> Polylinie"}, get_height))
+    for name, bounds in windows.items():
+        clip = box(*bounds)
+        named = [l for l in candidates if l.intersection(clip).length >= 2.0]
+        if not named:
+            continue
+        base = min(named, key=lambda l: (-l.length, tuple(round(v, 4) for v in l.coords[0])))
+        line = smooth_line(base, dp=0.05, step=0.20, lowpass_m=1.2)
+        line = smooth_line(line, dp=0.05, step=0.10, lowpass_m=1.2) if line is not None else None
+        if line is not None and line.length >= 3.0:
+            output.append(line_feature(line, {"name": name, "typ": "grat",
+                                               "quelle": "GB Hessian-Ridge -> Skelett -> durchgehende Polylinie"}, get_height))
     lines = [LineString(f["geometry"]["coordinates"]) for f in output]
     return output, lines, {"hessian_skeleton_paths": len(paths), "hessian_lines_candidate": len(candidates),
+                           "closed_loops_dropped": sum(LineString(p).is_ring for p in paths if len(p) >= 3),
                            "grat_features": len(output)}
 
 
