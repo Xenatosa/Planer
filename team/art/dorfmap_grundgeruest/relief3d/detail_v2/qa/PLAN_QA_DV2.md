@@ -24,7 +24,7 @@ python3 detail_v2/qa/pruefe_alle.py --wurzel relief3d/detail_v2 \
 
 | Eingabe | Annahme |
 |---|---|
-| Mesh | `detail_v2/mesh/manifest.json` = `{format, einheit:"m", welt:[336,303], kacheln:[{id, datei, bounds:[x0,z0,x1,z1], dreiecke}]}`; je Kachel eine `.glb` in **Weltkoordinaten** (Knoten ohne Transform), y oben, 1 Einheit = 1 m. |
+| Mesh | `detail_v2/mesh/manifest.json` (tolerant wie P3-README PR #53: `kacheln` als Liste oder Objekt, Datei aus `datei|file|glb|uri`, fehlende `bounds` aus der Kachel-ID mit Zeile 7 bis 303, `zusatz`-GLBs als Modelle, Meshes `bruecke*` = Modell) = `{format, einheit:"m", welt:[336,303], kacheln:[{id, datei, bounds:[x0,z0,x1,z1], dreiecke}]}`; je Kachel eine `.glb` in **Weltkoordinaten** (Knoten ohne Transform), y oben, 1 Einheit = 1 m. |
 | Dreiecksklasse | Je Klasse ein Primitive im Mesh `gelaende`, Klasse in `extras.klasse` (Name oder Code 0–5 wie `flaeche.png`) oder Meshname `gelaende_<klasse>`. Fehlt sie: `grund`. |
 | Wasser / Wände | Mesh `wasser*` bzw. `wand*` in der Kachel-GLB; Wand-Lofts alternativ `modelle/wand*.glb`. |
 | UV | `TEXCOORD_0` = Welt-XZ (m), `TEXCOORD_1` = (x/336, z/303), `TEXCOORD_2` nur Weg. |

@@ -51,13 +51,20 @@ class Kontext:
         """{id: {'bounds', 'prims': [...] }} – Primitive mit Feld 'art' (gelaende|wasser|wand) und 'klasse'."""
         if 'kacheln' not in self._cache:
             out = {}
-            for kd in self.manifest['kacheln']:
-                p = (self.wurzel / self.k['mesh_manifest']).parent / kd['datei']
+            kl = self.manifest['kacheln']
+            if isinstance(kl, dict): kl = [{'id': k, **v} for k, v in kl.items()]      # P3-README: Liste oder Objekt
+            for kd in kl:
+                datei = kd.get('datei') or kd.get('file') or kd.get('glb') or kd.get('uri') or f"{kd['id']}.glb"
+                if 'bounds' not in kd:
+                    i = 'ABCDEFGH'.index(kd['id'][0]); j = int(kd['id'][1:]) - 1
+                    kd = {**kd, 'bounds': [42 * i, 43 * j, 42 * (i + 1), 303 if j == 6 else 43 * (j + 1)]}
+                p = (self.wurzel / self.k['mesh_manifest']).parent / datei
                 if not p.exists(): raise Fehlt(f'{p} fehlt')
                 _, prims = glb.lies_glb(p)
                 for pr in prims:
                     nm = (pr['mesh'] or pr['knoten']).lower()
-                    pr['art'] = 'wasser' if nm.startswith('wasser') else 'wand' if nm.startswith('wand') else 'gelaende'
+                    pr['art'] = ('wasser' if nm.startswith('wasser') else 'wand' if nm.startswith('wand')
+                                 else 'modell' if nm.startswith('bruecke') else 'gelaende')
                     pr['klasse'] = _klasse(pr) if pr['art'] == 'gelaende' else pr['art']
                     pr['kachel'] = kd['id']
                 out[kd['id']] = {'bounds': kd['bounds'], 'prims': prims, 'dreiecke_manifest': kd.get('dreiecke')}
@@ -99,7 +106,13 @@ class Kontext:
         if 'modelle' not in self._cache:
             out = {}
             d = self.wurzel / self.k['modelle_ordner']
-            for p in sorted(d.glob('*.glb')) if d.exists() else []:
+            dateien = sorted(d.glob('*.glb')) if d.exists() else []
+            try:                                                   # P3-README: Manifest 'zusatz' (z. B. Bruecken)
+                mdir = (self.wurzel / self.k['mesh_manifest']).parent
+                dateien += [mdir / z['datei'] for z in self.manifest.get('zusatz', []) if (mdir / z['datei']).exists()]
+            except Fehlt:
+                pass
+            for p in dateien:
                 _, prims = glb.lies_glb(p)
                 for pr in prims:
                     nm = (pr['knoten'] or pr['mesh']).lower(); pr['art'] = 'wand' if 'wand' in p.stem.lower() else 'modell'

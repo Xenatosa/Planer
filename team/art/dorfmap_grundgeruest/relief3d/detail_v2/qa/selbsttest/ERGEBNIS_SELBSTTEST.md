@@ -1,6 +1,6 @@
 # Selbsttest QA detail_v2 (P6)
 
-Lauf: 2026-11-19 15:08 CET · Dauer 66 s · Ergebnis: **BESTANDEN**
+Lauf: 2026-11-19 15:14 CET · Dauer 62 s · Ergebnis: **BESTANDEN**
 
 Dummy: 4 Kacheln D2/E2/D3/E3 im angenommenen Format (PLAN_QA_DV2.md Abschn. 2), gebaut von `selbsttest/baue_dummy.py` nach `/tmp/dv2_qa/dummy/`.
 
@@ -20,7 +20,7 @@ Dummy: 4 Kacheln D2/E2/D3/E3 im angenommenen Format (PLAN_QA_DV2.md Abschn. 2), 
 | sauber | Q12 | ok | ok | ja | {"E2": {"teile": {"bohle": 1, "traeger": 1, "pfosten": 1, "gelaender": 2, "auflager": 1}, "spalt_max_m": 0.0, "stufe_max_m": 0.0, "gelaender_hoehe_m": 1.0}} |
 | sauber | Q13 | ok | ok | ja | {"soll": 25, "vorhanden": 25, "qualitaet": [90]} |
 | sauber | Q14 | ok | ok | ja | {"wege_alt": 4, "wege_fehlend": 0, "wege_zusaetzlich": 0, "hausdorff_max_m": 0.0, "wasser_rel": -0.0, "bauzone_rel": 0.0, "referenz": "Dummy (baue_dummy.py)"} |
-| Q1 | Q1 | fehler | fehler | ja | 3 m2 Dreiecke bei 205/110 entfernt + 1 Nahtvertex E2 um 1 mm angehoben -> {"art": "innenrand", "x": 205.2, "z": 110.6} |
+| Q1 | Q1 | fehler | fehler | ja | 3 m2 Dreiecke bei 205/110 entfernt + 1 Nahtvertex E2 um 1 mm angehoben -> {"art": "innenrand", "x": 168.0, "z": 49.8} |
 | Q2 | Q2 | fehler | fehler | ja | Mesh-Vertices auf Wegrand z=73,6 (x 140-145) um 4 cm verschoben -> {"datei": "wege.geojson", "id": "W1_l", "hausdorff_m": 0.04, "x": 140.25, "z": 73.6} |
 | Q3 | Q3 | fehler | fehler | ja | Wegrand W1 rechts x 150-153 Zickzack +-5 cm -> {"datei": "wege.geojson", "id": "W1_r", "abw_m": 0.05, "knick_grad": 53.1, "x": 150.2, "z": 75.65} |
 | Q4 | Q4 | fehler | fehler | ja | Buckel 5 cm in Kreuzung K1 -> {"id": "K1", "gefaelle": 0.0001, "rest_m": 0.0467, "x": 200.0, "z": 74.6} |

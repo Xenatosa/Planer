@@ -82,7 +82,7 @@ def q12(ctx):
     pflicht = {'bohle': ['bohle'], 'traeger': ['traeger'], 'pfosten': ['pfosten'], 'gelaender': ['gelaender', 'handlauf'], 'auflager': ['widerlager', 'auflager']}
     bef, w = [], {}
     for name, br in ctx.k['bruecken'].items():
-        prims = mods.get(br['datei'])
+        prims = next((v for k, v in mods.items() if k.lower() == br['datei'].lower()), None)   # Gross/klein egal (P3: bruecke_e2.glb)
         if prims is None:
             bef.append({'bruecke': name, 'fehler': f"modelle/{br['datei']}.glb fehlt"}); continue
         teile = {k: [p for p in prims if any(s in p['teil'] for s in v)] for k, v in pflicht.items()}
