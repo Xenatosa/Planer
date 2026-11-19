@@ -365,3 +365,75 @@ test('Bruecken-Deck: Hoehe = Bohlen (nicht Wasser, Traeger oder Handlauf), Klass
     const f = g.deckAus(40.01, 11.5); assert.ok(f && f.fuge && Math.abs(f.y - 0.5) < 1e-6);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });
+
+// --- F10 (Grundgeruest 19.11.): Wasserspiegel zaehlt nur ueber dem Gelaende ---
+function quadsF10(liste) {
+  // [x0, z0, x1, z1, y, klasse] -> Aufwaerts-Wicklung (p0,p3,p1), (p1,p3,p2) wie baue_masken._quads
+  const pos = [], idx = [], fl = [];
+  for (const [x0, z0, x1, z1, y, k] of liste) {
+    const b = pos.length / 3;
+    for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, y, z); fl.push(k); }
+    idx.push(b, b + 3, b + 1, b + 1, b + 3, b + 2);
+  }
+  return { positionen: new Float32Array(pos), indizes: new Uint32Array(idx), flaechen: new Uint8Array(fl) };
+}
+
+test('F10: Spiegel im Ufer -> Ufer/Gelaendehoehe; Spiegel ueber Gelaende -> Wasser; Gleichstand -> Gelaende', () => {
+  // Ufer 0,05 m (x 0-10) und -0,5 m (x 10-20); Wasserspiegel 0,0 m ueber x 0-30; x 20-30 nur Wasser; x 30-40 Ufer = Spiegel
+  const m = quadsF10([[0, 0, 10, 10, 0.05, 2], [10, 0, 20, 10, -0.5, 2], [0, 0, 30, 10, 0.0, 4], [30, 0, 40, 10, 0.0, 2], [30, 0, 40, 10, 0.0, 4]]);
+  const mi = baueMeshIndex(m.positionen, m.indizes, 1, m.flaechen);
+  assert.equal(mi.klasseAus(5, 5), 2); assert.ok(Math.abs(mi.hoeheAus(5, 5) - 0.05) < 1e-6); assert.equal(mi.f10Aus(5, 5), true);
+  assert.equal(mi.klasseAus(15, 5), 4); assert.ok(Math.abs(mi.hoeheAus(15, 5)) < 1e-6); assert.equal(mi.f10Aus(15, 5), false);
+  assert.equal(mi.klasseAus(25, 5), 4);                                   // nur Wasser
+  assert.equal(mi.klasseAus(35, 5), 2); assert.equal(mi.f10Aus(35, 5), true);   // Gleichstand -> Gelaende
+  // queryPoint: flaeche.png sagt ueberall Wasser (Vektor-Polygon), Mesh entscheidet nach F10
+  const daten = new Uint8Array(BREITE_PX * HOEHE_PX).fill(4);
+  const d = erzeugeDatenschicht({ flaeche: { breite: BREITE_PX, hoehe: HOEHE_PX, daten }, mesh: m });
+  assert.equal(d.queryPoint(5, 5).flaeche, 'ufer'); assert.ok(Math.abs(d.queryPoint(5, 5).hoehe - 0.05) < 1e-6);
+  assert.equal(d.queryPoint(5, 5).begehbar, true);                       // Ufer, flach
+  assert.equal(d.queryPoint(15, 5).flaeche, 'wasser'); assert.ok(Math.abs(d.queryPoint(15, 5).hoehe) < 1e-6);
+  assert.equal(d.queryPoint(15, 5).begehbar, null);                      // ohne begehbar.png und ohne Gelaende-Regel: nichts vorgetaeuscht
+  assert.equal(d.flaecheRoh(5, 5), 'wasser');                            // Q11 vergleicht das rohe Raster
+  // mit Gelaende (baueGelaende): begehbar ueber die Regel
+  const g = baueGelaende(m, []);
+  const d2 = erzeugeDatenschicht({ flaeche: { breite: BREITE_PX, hoehe: HOEHE_PX, daten }, gelaende: g });
+  assert.equal(d2.queryPoint(5, 5).flaeche, 'ufer'); assert.equal(d2.queryPoint(5, 5).begehbar, true);
+  assert.equal(d2.queryPoint(15, 5).flaeche, 'wasser'); assert.equal(d2.queryPoint(15, 5).begehbar, false);
+});
+
+// --- Masken ohne Mesh (Vorlauf aus P1-Vektoren + zonen.geojson #61), committet in masken_ohne_mesh/ ---
+const MOM = process.env.DV2_MASKEN_OHNE_MESH || path.join(HIER, 'masken_ohne_mesh');
+const MOM_DA = existsSync(path.join(MOM, 'flaeche.png'));
+test('Masken ohne Mesh an festen Punkten (flaeche/begehbar/untergrund/weg_typ/bauzone/slot_zonen)', { skip: MOM_DA ? false : 'masken_ohne_mesh/ fehlt (baue_masken.py --ohne-mesh)' }, async () => {
+  const lies = async (n) => decodePng(readFileSync(path.join(MOM, n)));
+  const meta = JSON.parse(readFileSync(path.join(MOM, 'masken_meta.json'), 'utf8'));
+  const [flaeche, begehbar, untergrund, slot] = [await lies('flaeche.png'), await lies('begehbar.png'), await lies('untergrund.png'), await decodePng(readFileSync(SLOT_PNG))];
+  const wt = await lies('weg_typ.png'), bz = await lies('bauzone.png'), sz = await lies('slot_zonen.png');
+  const d = erzeugeDatenschicht({ flaeche, begehbar, untergrund, slot, slots });
+  const at = (r, x, z) => { const { px, py } = weltZuPixel(x, z); return r.daten[py * BREITE_PX + px]; };
+  const q = (p) => d.queryPoint(...p);
+  assert.deepEqual([q(P.dorfkern).flaeche, q(P.dorfkern).begehbar, q(P.dorfkern).untergrund], ['grund', true, 'schnee']);
+  assert.deepEqual([q(P.e3_wasser).flaeche, q(P.e3_wasser).begehbar, q(P.e3_wasser).untergrund], ['wasser', false, null]);
+  assert.deepEqual([q(P.nordwand).flaeche, q(P.nordwand).begehbar], ['fels_klippe', false]);
+  assert.equal(q(P.d2_mitte).begehbar, true);
+  assert.equal(d.queryPoint(188.0, 73.35).flaeche, 'bruecke');            // Bruecken-Platzhalter E2 (P5 folgt mit Mesh)
+  // Weg-Typ: Flaeche 1 + Typ aus wege.geojson
+  const leg = meta.weg_typen.legende, gasse = Number(Object.keys(leg).find((k) => leg[k] === 'GASSE'));
+  let nGasse = 0;
+  for (let i = 0; i < wt.daten.length; i++) if (wt.daten[i]) { assert.equal(flaeche.daten[i], 1); if (wt.daten[i] === gasse) nGasse++; }
+  assert.ok(nGasse > 0.02 * wt.daten.length, `GASSE-Anteil ${nGasse / wt.daten.length}`);
+  // Bauzone / Slot-Zonen aus der Zellliste: Dorfkern + D2-Mitte in der Bauzone, D2-Mitte = Bau-Slot
+  assert.equal(at(bz, ...P.dorfkern), 1); assert.equal(at(bz, ...P.e3_wasser), 0);
+  assert.equal(at(sz, ...P.d2_mitte), 1);
+  // jede Slot-Zelle aus slots.json: Bau-Zelle (Bit 14) -> 1, Deko -> 2 (Zellmitte)
+  for (const e of slots.slots) for (const [cx, cz] of e.zellen_liste) {
+    const s = q([cx + 0.5, cz + 0.5]).slot, v = at(sz, cx + 0.5, cz + 0.5);
+    if (e.art === 'deko') assert.equal(v, 2, `${e.name} ${cx}|${cz}`);
+    else assert.equal(v, s.bauplatz_zelle ? 1 : 0, `${e.name} ${cx}|${cz}`);
+  }
+  assert.equal(meta.bauzone.zellen, 31893);
+  assert.equal(meta.abgleich_slots.abweichung, false);
+  // Klassenanteile: keine leere Klasse, Grund dominiert
+  for (const k of ['grund', 'weg', 'ufer', 'fels_klippe', 'wasser', 'bruecke']) assert.ok(meta.flaeche_anteil[k] > 0, k);
+  assert.ok(meta.flaeche_anteil.grund > 0.5);
+});

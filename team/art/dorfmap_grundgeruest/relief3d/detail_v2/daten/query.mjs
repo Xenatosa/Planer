@@ -7,6 +7,7 @@
 // Herkunft der Werte (Zielstand Fr):
 //   Q11-Klasse Mesh-Dreiecksklasse aus glTF-Attribut _FLAECHE (glb.mjs, pruefeDreiecksklasse)
 //   hoehe      exakt aus dem Mesh-Dreieck (Gitterindex, baryzentrisch); ersatzweise hoehe.png (nur wenn gesetzt)
+//   F10        Wasserspiegel zaehlt nur ueber dem Gelaende (Spiegel im Ufer -> Gelaende-Klasse/-Hoehe)
 //   flaeche    flaeche.png (8 bit, Klassen-Index)       begehbar  begehbar.png (1 bit)
 //   untergrund untergrund.png (8 bit) [A]              slot      slot.png (16 bit Bitfeld)
 //   kachel     analytisch (A-H x 1-7, 42 x 43 m)
@@ -112,10 +113,17 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
     const l = Math.hypot(nx, ny, nz);
     return l > 0 ? ny / l : 0;
   }
+  // F10 [F Grundgeruest 19.11.2026]: Wasser-Dreiecke (_FLAECHE 4) zaehlen nur, wo sie echt UEBER der obersten
+  // Nicht-Wasser-Flaeche liegen; steckt der Spiegel im Ufer (oder Gleichstand), gewinnen Gelaende-Klasse und -Hoehe.
+  const istWasser = (t) => !!flaechen && flaechen[indizes[3 * t]] === WASSER_KLASSE && flaechen[indizes[3 * t + 1]] === WASSER_KLASSE && flaechen[indizes[3 * t + 2]] === WASSER_KLASSE;
   function oberstes(x, z) {
-    let best = null, bt = -1, bny = 0;
-    for (const h of treffer(x, z)) if (best === null || h.y > best) { best = h.y; bt = h.t; bny = h.ny; }
-    return { y: best, t: bt, ny: bny };
+    let w = null, g = null;
+    for (const h of treffer(x, z)) {
+      if (istWasser(h.t)) { if (w === null || h.y > w.y) w = h; }
+      else if (g === null || h.y > g.y) g = h;
+    }
+    const o = w && (!g || w.y > g.y) ? w : g;
+    return o ? { y: o.y, t: o.t, ny: o.ny, f10: !!(w && g && o === g) } : { y: null, t: -1, ny: 0, f10: false };
   }
   const klasseVon = (t) => {
     const k0 = flaechen[indizes[3 * t]], k1 = flaechen[indizes[3 * t + 1]], k2 = flaechen[indizes[3 * t + 2]];
@@ -126,6 +134,8 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
     treffer,
     klasseVon: (t) => (flaechen ? klasseVon(t) : null),
     hoeheAus(x, z) { return oberstes(x, z).y; },
+    /** true, wenn am Punkt ein Wasserspiegel im Gelaende steckt (F10 hat das Gelaende gewaehlt). */
+    f10Aus(x, z) { return oberstes(x, z).f10; },
     /** Neigung der obersten Flaeche in Grad (0 = waagrecht; Wicklung egal) oder null. */
     neigungAus(x, z) { const o = oberstes(x, z); return o.t < 0 ? null : neigungGrad(o.ny); },
     klasseAus(x, z) {
@@ -146,6 +156,7 @@ export function baueMeshIndex(positionen, indizes, zelle_m = 1, flaechen = null)
   };
 }
 
+export const WASSER_KLASSE = 4;                      // F10: Wasserspiegel nur ueber dem Gelaende
 export const BEGEHBAR_MAX_NEIGUNG_GRAD = 35;      // [F ueber Grundgeruest 19.11.2026]
 export const NICHT_BEGEHBAR_KLASSEN = [3, 4];        // fels_klippe, wasser
 export const DECK_FENSTER_M = 0.5;                   // [A] Deck = hoechste Aufwaertsflaeche <= tiefste + 0,5 m
@@ -225,7 +236,7 @@ export function pruefeDreiecksklasse(datenschicht, meshIndex, n = 10000, seed = 
     const km = meshIndex.klasseAus(x, z);
     if (km === null) { ohne++; continue; }
     if (km === -1) { gemischt++; ungleich++; continue; }
-    const f = datenschicht.queryPoint(x, z).flaeche;
+    const f = datenschicht.flaecheRoh ? datenschicht.flaecheRoh(x, z) : datenschicht.queryPoint(x, z).flaeche;   // roh: ohne F10-Korrektur
     if (f === FLAECHE[km]) gleich++;
     else { ungleich++; if (beispiele.length < 20) beispiele.push({ x, z, png: f, mesh: FLAECHE[km] }); }
   }
@@ -264,18 +275,33 @@ export function erzeugeDatenschicht(q = {}) {
     let hoehe = null;
     if (meshIndex) hoehe = meshIndex.hoeheAus(x, z);
     else if (q.hoehe) hoehe = hoeheAusPng(x, z);
+    let flaeche = q.flaeche ? (FLAECHE[lies(q.flaeche, px, py)] ?? null) : null;
+    let begehbar = q.begehbar ? lies(q.begehbar, px, py) === 1 : (meshIndex && meshIndex.begehbarAus ? meshIndex.begehbarAus(x, z) : null);
+    // F10: flaeche.png sagt Wasser, das Mesh hat dort aber Gelaende ueber dem Spiegel -> Gelaende-Klasse (Hoehe ist schon Gelaende)
+    if (flaeche === 'wasser' && meshIndex && meshIndex.klasseAus) {
+      const k = meshIndex.klasseAus(x, z);
+      if (k !== null && k >= 0 && k !== WASSER_KLASSE) {
+        flaeche = FLAECHE[k];
+        if (meshIndex.begehbarAus) begehbar = meshIndex.begehbarAus(x, z);
+        else if (meshIndex.neigungAus) begehbar = begehbarRegel(k, meshIndex.neigungAus(x, z));
+      }
+    }
     return {
       hoehe,
-      flaeche: q.flaeche ? (FLAECHE[lies(q.flaeche, px, py)] ?? null) : null,
+      flaeche,
       untergrund: q.untergrund ? (UNTERGRUND[lies(q.untergrund, px, py)] ?? null) : null,
-      begehbar: q.begehbar ? lies(q.begehbar, px, py) === 1 : (meshIndex && meshIndex.begehbarAus ? meshIndex.begehbarAus(x, z) : null),
+      begehbar,
       slot: q.slot ? dekodiereSlot(lies(q.slot, px, py), slotsById) : null,
       kachel: kachelId(x, z),
     };
   }
 
+  /** flaeche.png ohne F10-Korrektur (fuer Q11: Raster gegen Mesh ehrlich vergleichen). */
+  function flaecheRoh(x, z) { const { px, py } = weltZuPixel(x, z); return q.flaeche ? (FLAECHE[lies(q.flaeche, px, py)] ?? null) : null; }
+
   return {
     queryPoint,
+    flaecheRoh,
     meshIndex,
     quellen: () => ({
       hoehe: meshIndex ? 'mesh' : q.hoehe ? 'hoehe.png' : null,

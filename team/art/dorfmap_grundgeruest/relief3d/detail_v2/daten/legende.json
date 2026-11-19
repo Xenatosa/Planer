@@ -22,11 +22,11 @@
  "dateien": {
   "flaeche.png": {
    "format": "PNG 8 bit Graustufe, 1 Kanal, Wert = Klassen-Index",
-   "status": "offen (Fr, aus Vektoren+Mesh)"
+   "status": "Vorlauf ohne Mesh committet (masken_ohne_mesh/); endgueltig Fr mit Mesh (F10, Bruecken-Deck)"
   },
   "begehbar.png": {
    "format": "PNG 1 bit Graustufe, 1 = begehbar",
-   "status": "offen (Fr)"
+   "status": "Vorlauf ohne Mesh (nur Flaeche) committet; Fr mit Neigung <= 35 Grad"
   },
   "slot.png": {
    "format": "PNG 16 bit Graustufe, Bitfeld s. slot_bits",
@@ -47,7 +47,22 @@
   "untergrund.png": {
    "format": "PNG 8 bit Graustufe, Wert = untergrund-Code (s. untergrund.codes)",
    "quelle": "zonen.geojson Property untergrund (Polygone); 1-m-Fallback zellen_relief.csv nur falls fehlend",
-   "status": "abgestimmt als Zusatzdatei [F ueber Grundgeruest 19.11.2026], Erzeugung Fr"
+   "status": "abgestimmt [F]; Vorlauf ohne Mesh in masken_ohne_mesh/ (Do 19.11., Vektoren art/dorfmap-fertig @ aa78160 + zonen.geojson aus #61 @ 5dabe97)"
+  },
+  "weg_typ.png": {
+   "format": "PNG 8 bit Graustufe, 0 = kein Weg, sonst Weg-Typ-Index; Zuordnung in masken_meta.json weg_typen.legende (Stand: 1 HAUSWEG, 2 ANBINDUNG, 3 GASSE)",
+   "quelle": "wege.geojson Property klasse = Weg-Typ P1a (Befund Grundgeruest 19.11.: Typ -> Flaechenklasse 1, Typ als eigenes Feld); nur wo flaeche = weg",
+   "status": "Vorlauf ohne Mesh in masken_ohne_mesh/ (Do 19.11., Vektoren art/dorfmap-fertig @ aa78160 + zonen.geojson aus #61 @ 5dabe97)"
+  },
+  "bauzone.png": {
+   "format": "PNG 1 bit, 1 = Zelle in Bauzone (bauzone_plan)",
+   "quelle": "zonen.geojson Punkte typ bauzone, Property zellen [[cx, cz], ...] (1 m, Schema #61)",
+   "status": "Vorlauf ohne Mesh in masken_ohne_mesh/ (Do 19.11., Vektoren art/dorfmap-fertig @ aa78160 + zonen.geojson aus #61 @ 5dabe97)"
+  },
+  "slot_zonen.png": {
+   "format": "PNG 8 bit, 0 frei, 1 Bau-Slot-Zelle, 2 Deko-Slot-Zelle",
+   "quelle": "zonen.geojson Punkte typ slot_bau/slot_deko mit zellen (Schema #61); Abgleich gegen slot.png -> abgleich_slots.json",
+   "status": "Vorlauf ohne Mesh in masken_ohne_mesh/ (Do 19.11., Vektoren art/dorfmap-fertig @ aa78160 + zonen.geojson aus #61 @ 5dabe97)"
   }
  },
  "flaeche": {

@@ -1,0 +1,40 @@
+{
+ "regel": "Bericht; Zelle = 1 m, slot.png an Zellmitten gelesen; slot_bau ~ Bit 14 (Bauplatz-Zelle), slot_deko ~ ID mit art deko",
+ "slot_bau": {
+  "punkte": 97,
+  "zellen_zonen": 3292,
+  "zellen_slot_png": 3292,
+  "gleich": 3292,
+  "nur_zonen": 0,
+  "nur_slot_png": 0,
+  "beispiele_nur_zonen": [],
+  "beispiele_nur_slot_png": [],
+  "slots_json_ids_soll": 97,
+  "slots_json_ids_getroffen": 97,
+  "ids_fehlend": [],
+  "punkte_ohne_slot_id": [],
+  "punkte_mehrere_ids": [],
+  "ids_mehrfach": []
+ },
+ "slot_deko": {
+  "punkte": 626,
+  "zellen_zonen": 627,
+  "zellen_slot_png": 627,
+  "gleich": 627,
+  "nur_zonen": 0,
+  "nur_slot_png": 0,
+  "beispiele_nur_zonen": [],
+  "beispiele_nur_slot_png": [],
+  "slots_json_ids_soll": 627,
+  "slots_json_ids_getroffen": 626,
+  "ids_fehlend": [
+   1538
+  ],
+  "punkte_ohne_slot_id": [],
+  "punkte_mehrere_ids": [
+   "slot_deko_0532"
+  ],
+  "ids_mehrfach": []
+ },
+ "abweichung": false
+}

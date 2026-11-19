@@ -4,6 +4,8 @@
 Gleiche Regeln wie manifest.mjs / query.mjs:
   - manifest-Schema laut Grundgeruest 19.11.2026 [F]; _FLAECHE uint8 oder float (ganzzahlig 0-5).
   - Gelaende: je Pixelmitte die oberste Flaeche (Hoehe, Klasse, Neigung). Senkrechte Dreiecke zaehlen nicht.
+    F10: Wasser-Dreiecke (_FLAECHE 4) zaehlen nur, wo sie echt UEBER der obersten Nicht-Wasser-Flaeche liegen
+    (Gleichstand -> Gelaende); steckt der Spiegel im Ufer, gewinnen Gelaende-Klasse und -Hoehe.
   - Bruecken (manifest.modelle): Deck = hoechste Aufwaertsflaeche (Normale y >= 0,5) <= tiefste + 0,5 m [A];
     Deck-Fussabdruck 1 px geschlossen (Bohlenfugen 1 cm), Fugenpixel bekommen die Hoehe des naechsten Deckpixels [A].
   - begehbar = Klasse nicht in {3,4} UND Neigung <= 35 Grad [F].
@@ -23,6 +25,7 @@ BUCHST = "ABCDEFGH"
 BEGEHBAR_MAX_NEIGUNG = 35.0
 NICHT_BEGEHBAR = (3, 4)
 DECK_FENSTER_M, DECK_NY_MIN = 0.5, 0.5
+WASSER = 4                                             # F10 [F Grundgeruest 19.11.]: Spiegel zaehlt nur ueber dem Gelaende
 KOMP = {5121: np.uint8, 5123: np.uint16, 5125: np.uint32, 5126: np.float32}
 ANZ = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
 
@@ -155,13 +158,22 @@ def treffer(pos: np.ndarray, idx: np.ndarray, block: int = 200_000):
 def rastere(mesh: dict) -> dict:
     from scipy import ndimage
     g = mesh["gelaende"]
-    hy = np.full(W * H, -np.inf); ht = np.full(W * H, -1, np.int64); hn = np.zeros(W * H)
+    f3 = g["fl"][g["idx"]]
+    ist_wasser = (f3 == WASSER).all(1)                 # klassenreines Wasser-Dreieck = Wasserspiegel
+    # F10: oberste Wasser- und oberste Gelaende-Flaeche getrennt; Wasser nur, wenn y_wasser > y_gelaende
+    sp = {k: (np.full(W * H, -np.inf), np.full(W * H, -1, np.int64), np.zeros(W * H)) for k in (0, 1)}
     for pix, y, t, ny in treffer(g["pos"], g["idx"]):
         o = np.argsort(y, kind="stable"); pix, y, t, ny = pix[o], y[o], t[o], ny[o]
-        m = y > hy[pix]
-        hy[pix[m]] = y[m]; ht[pix[m]] = t[m]; hn[pix[m]] = ny[m]
+        w = ist_wasser[t]
+        for k, sel in ((1, w), (0, ~w)):
+            hy_, ht_, hn_ = sp[k]; pp, yy, tt, nn = pix[sel], y[sel], t[sel], ny[sel]
+            m = yy > hy_[pp]
+            hy_[pp[m]] = yy[m]; ht_[pp[m]] = tt[m]; hn_[pp[m]] = nn[m]
+    (gy, gt, gn), (wy, wt, wn) = sp[0], sp[1]
+    nimm_w = (wt >= 0) & ((gt < 0) | (wy > gy))
+    hy = np.where(nimm_w, wy, gy); ht = np.where(nimm_w, wt, gt); hn = np.where(nimm_w, wn, gn)
+    f10_px = int(((wt >= 0) & (gt >= 0) & ~nimm_w).sum())
     getroffen = ht >= 0
-    f3 = g["fl"][g["idx"]]
     kl = np.full(W * H, -1, np.int16)
     rein = (f3[:, 0] == f3[:, 1]) & (f3[:, 1] == f3[:, 2])
     kl[getroffen] = np.where(rein[ht[getroffen]], f3[ht[getroffen], 0].astype(np.int16), np.int16(-1))
@@ -193,7 +205,8 @@ def rastere(mesh: dict) -> dict:
         deck_info.append({"id": md["id"], "deck_px": int(maske.sum()), "fugen_px": int(fuge.sum())})
     return {"hoehe": hoehe.reshape(H, W), "klasse": kl.reshape(H, W), "neigung": neig.reshape(H, W), "deck": deck_info,
             "deck_maske": deck_maske.reshape(H, W),
-            "ohne_mesh_px": int((~getroffen).sum())}
+            "ohne_mesh_px": int((~getroffen).sum()),
+            "f10": {"regel": "Wasserspiegel nur, wo y_wasser > y_gelaende; sonst Gelaende-Klasse/-Hoehe", "spiegel_im_gelaende_px": f10_px}}
 
 
 def begehbar_regel(klasse: np.ndarray, neigung: np.ndarray) -> np.ndarray:

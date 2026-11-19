@@ -26,7 +26,7 @@ Stand und offene Punkte: [STATUS.md](STATUS.md). Marker: [S] gemessen/Quelle, [A
 | `png.mjs` | PNG-Decoder ohne Abhängigkeiten (Graustufe 1/8/16 bit, indiziert 8 bit) | fertig |
 | `test/query.test.mjs` | `node --test` | s. STATUS.md |
 | `slot.png` | Slot-Bitfeld 16 bit | fertig, committet |
-| `flaeche.png`, `begehbar.png`, `hoehe.png`, `untergrund.png` | Masken | Fr |
+| `flaeche.png`, `begehbar.png`, `untergrund.png`, `weg_typ.png`, `bauzone.png`, `slot_zonen.png` | Masken; Vorlauf ohne Mesh in `masken_ohne_mesh/` (Do 19.11.) | `hoehe.png` + Masken mit Mesh Fr |
 
 ## Masken-Formate
 
