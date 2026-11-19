@@ -146,7 +146,7 @@ Echte 3+-Label-Knoten und Zonenwechsel am Kartenrand. Die Kartenrand-Bögen selb
 
 ## P1c2 – Zonen auf Basis #60, q3-Fundgruppen (Branch `art/dv2-zonen2`)
 
-Kosten: 0 EUR, ohne Codex, 18:06-18:25 (Europe/Berlin)
+Kosten: 0 EUR, ohne Codex, 18:06-18:23 (Europe/Berlin)
 
 Basis ist `art/dv2-vektor-wasser-q3` @ d563688 (PR #60, Wasser/Ufer gleichmäßig auf 0,05 m abgetastet, Geometrie wie #58); der Branch enthält #57.
 
