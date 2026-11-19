@@ -1,0 +1,15 @@
+{
+ "mesh": "/tmp/dv2_viewer/dummy_dicht",
+ "quelle": "DUMMY aus GB (relief_daten.json.gz), Schritt 0.5 m - kein echtes Mesh",
+ "ladezeit": {
+  "gesamt_ms": 295,
+  "manifest_ms": 33,
+  "kacheln_ms": 202,
+  "bodenindex_ms": 50,
+  "erstes_bild_ms": 33
+ },
+ "dreiecke": 814464,
+ "bytes": 26511036,
+ "gruen": true,
+ "pruefungen": 23
+}

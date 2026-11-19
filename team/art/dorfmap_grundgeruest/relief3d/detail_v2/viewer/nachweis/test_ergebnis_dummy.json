@@ -1,0 +1,201 @@
+{
+ "mesh": "/tmp/dv2_viewer/dummy_mesh",
+ "quelle": "DUMMY aus GB (relief_daten.json.gz), Schritt 1 m - kein echtes Mesh",
+ "ladezeit": {
+  "gesamt_ms": 161,
+  "manifest_ms": 29,
+  "kacheln_ms": 86,
+  "bodenindex_ms": 19,
+  "erstes_bild_ms": 28
+ },
+ "dreiecke": 203616,
+ "bytes": 6772632,
+ "erg": [
+  {
+   "name": "alle Kacheln geladen",
+   "ok": true,
+   "wert": 56
+  },
+  {
+   "name": "Dreiecke = Manifest",
+   "ok": true,
+   "wert": {
+    "viewer": 203616,
+    "manifest": 203616
+   }
+  },
+  {
+   "name": "Budget je Kachel <= 60000, gesamt <= 1,6 Mio.",
+   "ok": true,
+   "wert": 3780
+  },
+  {
+   "name": "Ladezeit gemessen",
+   "ok": true,
+   "wert": {
+    "gesamt_ms": 161,
+    "manifest_ms": 29,
+    "kacheln_ms": 86,
+    "bodenindex_ms": 19,
+    "erstes_bild_ms": 28
+   }
+  },
+  {
+   "name": "Bodenstrahl = Raster an Gitterpunkten (|dh| < 1 mm)",
+   "ok": true,
+   "wert": 0
+  },
+  {
+   "name": "Boden ueberall abfragbar (keine Loecher)",
+   "ok": true,
+   "wert": {
+    "n": 45248,
+    "leer": 0
+   }
+  },
+  {
+   "name": "lauf: Kamera 1,7 m ueber Grund",
+   "ok": true,
+   "wert": {
+    "y": 1.7,
+    "boden": 0
+   }
+  },
+  {
+   "name": "Schattenkarte folgt der Kamera",
+   "ok": true,
+   "wert": {
+    "s1": [
+     204.9,
+     0,
+     129.3
+    ],
+    "s2": [
+     162,
+     0,
+     60
+    ],
+    "halb": 40
+   }
+  },
+  {
+   "name": "Tempo: 3 m/s gehen, 7 m/s mit Shift, Hoehe gehalten",
+   "ok": true,
+   "wert": {
+    "x1": 212,
+    "x2": 219
+   }
+  },
+  {
+   "name": "kam: Orbit-Abstand 5 m und 1 m moeglich (< 25 m)",
+   "ok": true,
+   "wert": {
+    "a5": 5.408,
+    "a1": 1.1,
+    "min": 0.3
+   }
+  },
+  {
+   "name": "Standardbild 1,7 m hat Gelaende",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.568,
+    "streuung": 10.3
+   }
+  },
+  {
+   "name": "Clay 1,7 m Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.569,
+    "streuung": 25.8,
+    "bild": "/tmp/dv2_viewer/bilder/clay_1m7_dorfkern.jpg"
+   }
+  },
+  {
+   "name": "Clay 5 m Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.653,
+    "streuung": 26.7,
+    "ueber_grund": 5,
+    "bild": "/tmp/dv2_viewer/bilder/clay_5m_dorfkern.jpg"
+   }
+  },
+  {
+   "name": "?wire=1&kachelrand=1: Linien da, Bild ok",
+   "ok": true,
+   "wert": {
+    "linien": 57,
+    "nicht_himmel": 0.896,
+    "streuung": 59,
+    "bild": "/tmp/dv2_viewer/bilder/wire_rand_5m_E3E4.jpg"
+   }
+  },
+  {
+   "name": "Clay 5 m Grat G3 Bild",
+   "ok": true,
+   "wert": {
+    "nicht_himmel": 0.836,
+    "streuung": 20.2,
+    "bild": "/tmp/dv2_viewer/bilder/clay_5m_grat_g3.jpg"
+   }
+  },
+  {
+   "name": "Schattenkarte wirkt (dunklere Pixel mit Schatten)",
+   "ok": true,
+   "wert": {
+    "anteil": 0.0086
+   }
+  },
+  {
+   "name": "WASD: W laeuft nach Norden, 1,7 m gehalten",
+   "ok": true,
+   "wert": {
+    "x": 209,
+    "z": 111.86,
+    "blick": 0,
+    "ueber_grund": 1.7
+   }
+  },
+  {
+   "name": "WASD: D laeuft nach Osten",
+   "ok": true,
+   "wert": {
+    "x": 216.55
+   }
+  },
+  {
+   "name": "Taste O -> Orbit, Mausrad zoomt unter 25 m",
+   "ok": true,
+   "wert": {
+    "start": 10.14,
+    "nach_rad": 0.86
+   }
+  },
+  {
+   "name": "Knopf -> zurueck Laufen (1,7 m)",
+   "ok": true,
+   "wert": "lauf"
+  },
+  {
+   "name": "Touch links: Stick laeuft (1,7 m)",
+   "ok": true,
+   "wert": {
+    "z": 115.74
+   }
+  },
+  {
+   "name": "Touch rechts: schaut (Gier aendert sich)",
+   "ok": true,
+   "wert": {
+    "blick": 16.1
+   }
+  },
+  {
+   "name": "keine Konsolen-/Seitenfehler",
+   "ok": true,
+   "wert": []
+  }
+ ]
+}
