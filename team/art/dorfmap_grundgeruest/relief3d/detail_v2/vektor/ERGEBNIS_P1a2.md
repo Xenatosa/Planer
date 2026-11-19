@@ -1,6 +1,6 @@
 # ERGEBNIS P1a2 – Nachbesserung Q3-Zacken (Branch art/dv2-vektor-wege-q3)
 
-Kosten: 0 € · Codex: nein · Laufzeit: 15:47–ENDE (Europe/Berlin, 19.11.2026)
+Kosten: 0 € · Codex: nein · Laufzeit: 15:47–16:38 (Unterbrechung ~16:35–16:37) (Europe/Berlin, 19.11.2026)
 
 Basis: art/dorfmap-fertig 8a38922 (#56 ist gemergt, daher nicht gestapelt). Geändert werden nur Dateien in detail_v2/vektor/.
 
@@ -65,14 +65,22 @@ Top 5 nachher, Methode A, Ränder (cm): G018/0 re 2,18 · G009/1 re 2,12 · G015
 Top 5 vorher, Methode B, Kreuzungen (cm): K041 3,40 · K025 3,40 · K014 3,40 · K083 3,39 · K077 3,39
 Top 5 nachher, Methode B, Kreuzungen (cm): K004 2,67 · K043 2,67 · K011 2,67 · K013 2,66 · K005 2,65
 
-## Gate-Regression
+## Gate-Regression, über export_gate.sh
+Das Gate lief NUR über `pruefung/export_gate.sh`, mit Lochscan:
+1. `NODE_PATH=/tmp/relief3d_bau_node/node_modules HTML=index.html OUT=/tmp/dv2_wege/loch.json RAND=0.6 node pruefung/loch_o18g.js` ergab 9 Meshes, 88 728 Dreiecke, offen_innen 0.
+2. `GATE_LOCH_JSON=/tmp/dv2_wege/loch.json sh pruefung/export_gate.sh` lief in einem Wegwerf-Worktree des PR-Stands unter /tmp. So landen die `*_letzter_lauf.json` des Skripts nicht im Repo.
+
 | Prüfer | Ergebnis | Referenz |
 |---|---|---|
-| pruefe_regeln.py | 360 | 359 |
-| r8_kreuzung.py | 31 | 31 |
-| r9_form.py | 321 | 321 |
+| pruefe_regeln.py (mit LOCHSCAN) | **359** | 359 |
+| R8 | 31 (21 Kreuzungen) | 31 |
+| R9 | 321 | 321 |
+| W1 index.html | 0 | 0 |
+| W1 alle 56 Kacheln | 0 | 0 |
 
-Die Werte sind unverändert gegenüber #56. Die +1 bei pruefe_regeln ist die Umgebungsprüfung `G1_lochscan_fehlt`, wie auf der Basis.
+Das Gate meldet „GATE ROT“ wie auf der Referenz. Die 359 Treffer bestehen schon vorher. Die Regeln lesen nur relief_daten.json.gz und index.html, dieser PR ändert nur detail_v2/vektor/.
+
+**Korrektur zu #56:** Dort stand „pruefe_regeln 360, identisch auf d2d4824“. Das war falsch. Ursache: Ich habe pruefe_regeln.py direkt aufgerufen, ohne LOCHSCAN. Dann zählt die Regel `G1_lochscan_fehlt` +1. Über export_gate.sh mit GATE_LOCH_JSON ergeben d2d4824 (laut Aufseher) und der neue Stand **359**. Künftig läuft das Gate nur so.
 
 ## Restrisiken / Vereinfachungen
 - **G018/0 re:** Zacken B genau 2,70 cm, also keine Reserve unter dem Ziel. Gegen 3,0 cm bleiben 0,3 cm.
