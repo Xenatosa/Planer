@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "einheit": "m",
+  "ursprung": "weltecke",
+  "karte": {
+    "breite": 336,
+    "tiefe": 303
+  },
+  "klassen": {
+    "0": "grund",
+    "1": "weg",
+    "2": "ufer",
+    "3": "fels_klippe",
+    "4": "wasser",
+    "5": "bruecke"
+  },
+  "attribute": {
+    "flaeche": "_FLAECHE"
+  },
+  "uv": {
+    "TEXCOORD_0": "welt_xz_m",
+    "TEXCOORD_1": "karte_norm",
+    "TEXCOORD_2": "wegband"
+  },
+  "kacheln": [
+    {
+      "id": "E2",
+      "glb": "kacheln/E2.glb",
+      "bbox": [
+        168,
+        43,
+        210,
+        86
+      ],
+      "dreiecke": 119888,
+      "klassen_anteil": {
+        "grund": 6.857612728264333e-05,
+        "weg": 0.9997571336875003,
+        "ufer": 0.00011450313860213905,
+        "wasser": 4.74424884190798e-05,
+        "bruecke": 1.2344558195888275e-05
+      }
+    },
+    {
+      "id": "D3",
+      "glb": "kacheln/D3.glb",
+      "bbox": [
+        126,
+        86,
+        168,
+        129
+      ],
+      "dreiecke": 28824,
+      "klassen_anteil": {
+        "grund": 5.5409385115093e-05,
+        "weg": 0.999933906548269,
+        "fels_klippe": 1.0684066615990262e-05
+      }
+    },
+    {
+      "id": "E3",
+      "glb": "kacheln/E3.glb",
+      "bbox": [
+        168,
+        86,
+        210,
+        129
+      ],
+      "dreiecke": 31566,
+      "klassen_anteil": {
+        "grund": 4.71068972478109e-05,
+        "weg": 0.9829189550992209,
+        "ufer": 5.2574881191746316e-05,
+        "wasser": 6.174296308558796e-05,
+        "bruecke": 0.016919620159253947
+      }
+    }
+  ],
+  "modelle": [
+    {
+      "id": "wasser_W01",
+      "glb": "modelle/wasser_W01.glb",
+      "klasse": 4,
+      "spiegel_m": -17.108
+    },
+    {
+      "id": "wasser_W02",
+      "glb": "modelle/wasser_W02.glb",
+      "klasse": 4,
+      "spiegel_m": -10.25
+    },
+    {
+      "id": "wasser_W03",
+      "glb": "modelle/wasser_W03.glb",
+      "klasse": 4,
+      "spiegel_m": 12.462
+    },
+    {
+      "id": "wasser_W04",
+      "glb": "modelle/wasser_W04.glb",
+      "klasse": 4,
+      "spiegel_m": -9.062
+    },
+    {
+      "id": "wasser_W05",
+      "glb": "modelle/wasser_W05.glb",
+      "klasse": 4,
+      "spiegel_m": -9.685
+    },
+    {
+      "id": "wasser_W06",
+      "glb": "modelle/wasser_W06.glb",
+      "klasse": 4,
+      "spiegel_m": -1.066
+    },
+    {
+      "id": "wasser_W07",
+      "glb": "modelle/wasser_W07.glb",
+      "klasse": 4,
+      "spiegel_m": -9.73
+    }
+  ]
+}
