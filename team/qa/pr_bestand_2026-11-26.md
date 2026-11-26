@@ -5,17 +5,23 @@
 **Offene PRs:** 46. Default-Basis ist `main`, Abweichungen sind genannt.  
 **Kritiker:** Gemeint ist Epochen Kritiker (Dateien unter `team/kritik/`, ggf. als PR-Review von Xenatosa gespiegelt). Das Bot-Konto `quinn-at-outlook[bot]` ist ein statisches Code-Review und ausdrücklich keine Freigabe.  
 **Queue-Datei:** nicht im Planer-Repo unter `team/`, sondern `/workspace/uploads/codex_queue.md` (Verweis in `team/TEAM.md` und `team/entscheidungen.md`). Im Arbeitsbaum von `/workspace/handygame-plan` lag eine stark veränderte, nicht committete Arbeitskopie; deshalb wurde nur `git fetch origin` ausgeführt, kein `git pull`, der lokale Änderungen verworfen hätte.  
-**Kosten:** 08:04–08:18 MEZ, 0 € (ohne Codex).
+**Kosten Erstfassung:** 08:04–08:18 MEZ, 0 € (ohne Codex). Korrektur und Codex-Pakete: siehe Kostenzeile am Ende und die Korrektur-Zeile in der Kurzfassung.
 
 ## Kurzfassung
 
-- Technisch am ehesten mergebereit (Checks grün, keine Konflikte, 0 Commits hinter der Basis, inhaltlich getragen): **#158** (Kritiker 10/10). Daneben kleine, grüne, aktuelle PRs ohne Kritiker-Prüfung: **#161, #160, #159**.
+**Korrektur 26.11.2026 08:31 MEZ:** In der Erstfassung (08:04–08:18 MEZ) bedeutete „Checks grün“ bei den meisten PRs nur 2× Job „Geheimnisse suchen“ (Gitleaks, je einmal für `push` und `pull_request`). Ein Unity-Lauf (EditMode + PlayMode) steckt nicht darin. Ursache ist nicht ein paths-Filter: In `.github/workflows/android.yml` auf `main` gibt es **keinen `paths:`-Block**. Der Workflow startet nur bei `workflow_dispatch` (Z. 32–37) oder bei `push` auf die Branches `main`, `cursor/**`, `gameplay/**`, `ui/**`, `ci/self-hosted-all` (Z. 38–44). Der Dateikopf sagt ausdrücklich, dass Pull Requests ihn nicht starten (Z. 7–8). Deshalb laufen EditMode/PlayMode nicht, wenn der Head-Branch nur unter `data/`, `nova/`, `tests/`, `quests/`, `art/`, `research/` u. a. liegt. Gitleaks läuft dagegen bei Push/PR (mit `paths-ignore` nur für Medien, `.github/workflows/gitleaks.yml`). Server-Jobs nur bei Änderungen unter `server/**`.
+
+Empfehlungen, die auf diesem „grün“ beruhten, sind angepasst: **#161, #160, #159, #158, #123, #165**. **#57** hatte New Bot als Beispiel ohne Unity-Lauf genannt; das trifft nicht zu: Branch `cursor/**` hat EditMode + PlayMode SUCCESS (APK/Emulator skipped).
+
+Kritiker-Notiz 26.11.2026 (lokal `team/kritik/PRUEFNOTIZ_prs_159_160_161_2026-11-26.md`; nach `git fetch` nicht auf `origin/main` und keinem anderen Remote-Branch gefunden, unversionierte Arbeitsdatei, mtime 08:25 MEZ): **#161 Note 3/10** (6 Muss, davon 3 Compile-Fehler), **#159 und #160 je 9/10** (Muss leer, Sollte offen). **#155 ist vollständig in #158 enthalten.**
+
+- Fachlich am ehesten mergebereit bleibt **#158** (Kritiker 10/10, Quest/Doku, #155 vollständig enthalten). Die Checks dazu waren nur Gitleaks, kein Unity; das ändert die fachliche Freigabe nicht, darf aber nicht als Test-Grün gelesen werden. **#161, #160, #159 sind nicht mergebereit**, solange die Punkte aus der Notiz offen sind.
 - **#109** (Beschwörungsvergleich): Die vier Kritiker-Auflagen vom 17.10. sind in den Kernpunkten (P7-Werte, Featured ohne 50/50, PvP-Deckel als Beschluss) erfüllt. Offen bleiben die niedrig priorisierte Ergänzung Whiteout Survival / Last War, die spätere Präzisierung „deckeln, nicht komplett angleichen“ (Wortlaut noch vermischt), der fehlende Kritiker-Recheck und der nie geschriebene PR-Kommentar. **Nicht sofort mergen.**
 - Die Behauptung „Queue-Zeile 10, nichts gepusht“ ist **für den Git-Stand falsch**. Drei Commits landeten am 17.10.2026 08:17:51–08:18:28 MESZ auf dem PR-Branch, 2–3 Minuten nach Job-Start 08:15. Die Queue-Zeile blieb auf `[GESTARTET]` und wurde nie `[ERLEDIGT]`; das ist die wahrscheinlichste Quelle der Fehleinschätzung. Siehe Abschnitt P7-Ursache.
-- Häufigste Check-Ursachen sind Infrastruktur, nicht der Diff: Runner 24 h nicht zugewiesen (CANCELLED), Billing/Spending-Limit, Artifact-Speicherquota. Echte Code-Fehler sind belegt bei **#156** (Compiler, Unity-Exit 1), vermutlich **#85/#62** (Unity-Exit 1) und **#88** (Gitleaks Exit 1, ohne Billing-Text).
+- Häufigste Check-Ursachen sind Infrastruktur, nicht der Diff: Runner 24 h nicht zugewiesen (CANCELLED), Billing/Spending-Limit, Artifact-Speicherquota. Echte Code-Fehler sind belegt bei **#156** (Compiler, Unity-Exit 1), **#161** (drei Compile-Fehler plus drei falsche Assertions, von Epochen Kritiker am 26.11. gelesen, Unity nie gelaufen), vermutlich **#85/#62** (Unity-Exit 1) und **#88** (Gitleaks Exit 1, ohne Billing-Text).
 - Sieben PRs haben Merge-Konflikte mit der Basis (`DIRTY`): **#102, #101, #100, #85, #76, #62, #60**.
 - Stapeln: `#151 → #152 → #162 → #164` (D2-Menüs). `#108` sitzt auf dem Head von `#88`. `#110` zielt nicht auf `main`, sondern auf `cursor/rechtsrecherche-play-e9e7`.
-- Backend-Reihenfolge laut Queue-Kopf: zuerst **#66**, dann **#91**, dann **#67** (alle Draft, Checks grün, weit hinter `main`).
+- Backend-Reihenfolge laut Queue-Kopf: zuerst **#66**, dann **#91**, dann **#67** (alle Draft, Gitleaks + Server-Jobs grün, kein Unity, weit hinter `main`).
 - Viele PRs vom 13.–17.10. sind 40+ Tage offen und 68–111 Commits hinter `main`. Das allein ist kein Schließgrund, aber Merge ohne Einholen von `main` ist riskant.
 
 ## Liste der offenen PRs
@@ -23,10 +29,10 @@
 ### [#165](https://github.com/Xenatosa/epodarien/pull/165) — Dorfkarte E1: konfiguriertes 5x4 Chunk-Raster
 - **Branch:** `art/dorfkarte-e1-chunkraster-v1` → `main` (10 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 31 Tage (erstellt 26.10.2026 08:26 MEZ, zuletzt 06.11.2026 10:13 MEZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf — Branch `art/**` steht nicht in android.yml Z. 38–44; der Diff umfasst aber Code und viele Assets (289 Dateien).
 - **Kritiker:** keine Epochen-Kritiker-Datei. Quinn: statisch „sauber, keine Blocker“, Freigabe liege beim Chef.
 - **Duplikat/überholt:** nicht belegt. Die spätere Dorfmap-Arbeit (detail_v2) liegt vor allem im Planer-/Art-Zweig; ob dieses Unity-Chunk-Raster noch der aktuelle Integrationsweg ist, ist hier nicht entschieden.
-- **Empfehlung:** mergen möglich technisch; vorher klären, ob der E1-Chunk-Stand nach der November-Dorfmap noch gewollt ist.
+- **Empfehlung:** fixen — nicht mergen allein wegen „grün“ (nur Gitleaks). Zuerst EditMode/PlayMode nachholen (z. B. `workflow_dispatch` auf dem Branch oder Push nach `ci/self-hosted-all`) und klären, ob der E1-Chunk-Stand nach der November-Dorfmap noch gewollt ist.
 
 ### [#164](https://github.com/Xenatosa/epodarien/pull/164) — UI: Einstellungen-Inhalte datengetrieben (Allgemein/Konto, DE/EN)
 - **Branch:** `ui/menus-d2-einstellungen-inhalte` → `ui/menus-d2-einstellungen-geruest` (#162; 1 voraus, 0 hinter, `MERGEABLE`/`UNSTABLE`)
@@ -46,36 +52,36 @@
 ### [#161](https://github.com/Xenatosa/epodarien/pull/161) — test: Grundlagen-EditMode-Tests ergänzt
 - **Branch:** `tests/qci-grundlagen-editmode-2310` → `main` (1 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 33 Tage (erstellt 23.10.2026 21:17 MESZ, zuletzt 10.11.2026 18:23 MEZ)
-- **Checks:** grün (2)
-- **Kritiker:** nicht geprüft. Quinn: sauber, keine Blocker (CI-Lauf damals noch offen, heute grün).
-- **Empfehlung:** mergen möglich (nur Tests, Checks grün).
+- **Checks:** nur 2× Gitleaks SUCCESS. Kein Unity-Lauf — Branch `tests/**` steht nicht in android.yml Z. 38–44. Compile und EditMode sind nie gelaufen.
+- **Kritiker:** geprüft 26.11.2026, **Note 3/10** (`team/kritik/PRUEFNOTIZ_prs_159_160_161_2026-11-26.md`, Head `b6fe0b39`). Muss M-1–M-6: CS0104, CS1503, CS0102 sowie falsche Erwartungen bei Winter-Nahrung (1259 statt 1260), Unterhalt (Army nie befüllt) und `starter`. S-1: Trigger `tests/**` oder Lauf auf `ci/self-hosted-all`. Quinn-Review ist damit überholt.
+- **Empfehlung:** fixen — M-1 bis M-6 beheben, Erwartungen gegen `data/` und GDD v1.7.17 prüfen, S-1 umsetzen, danach Unity-Lauf und Kritiker-Recheck (Pakete unter `team/qa/vorschlaege_lead_dev/`). Nicht mergen.
 
 ### [#160](https://github.com/Xenatosa/epodarien/pull/160) — docs: Abgleich Grundlagen 23.10.
 - **Branch:** `nova/abgleich-grundlagen-2310` → `main` (1 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 33 Tage (erstellt 23.10.2026 20:25 MESZ, zuletzt 11.11.2026 14:17 MEZ)
-- **Checks:** grün (2)
-- **Kritiker:** nicht geprüft. Quinn: dokumentiert, kein Blocker.
-- **Empfehlung:** mergen möglich (reine Doku).
+- **Checks:** nur 2× Gitleaks SUCCESS. Kein Unity-Lauf — Branch `nova/**` steht nicht in android.yml Z. 38–44 (für reine Doku fachlich entbehrlich, darf aber nicht als Test-Grün gelten).
+- **Kritiker:** geprüft 26.11.2026, **Note 9/10** (Notiz wie bei #161, Head `bec9d5bb`). Muss leer. Sollte S-1–S-5: Quelle/Stand auf GDD v1.7.17, Satz zu #155/#158 aktualisieren, `Apply`/validate_quests/Datumszeile präzisieren.
+- **Empfehlung:** fixen — Sollte-Punkte einarbeiten, dann mergen möglich. Nicht auf das Gitleaks-Grün stützen.
 
 ### [#159](https://github.com/Xenatosa/epodarien/pull/159) — data: ranking_rewards_fallback shards → 0
 - **Branch:** `data/ranking-fallback-shards-zero` → `main` (1 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 33 Tage (erstellt 23.10.2026 20:15 MESZ, zuletzt 11.11.2026 14:17 MEZ)
-- **Checks:** grün (2)
-- **Kritiker:** nicht geprüft. Quinn: sauber, eine CSV-Änderung, Begründung stimmig.
-- **Empfehlung:** mergen möglich (kleine Datenkorrektur).
+- **Checks:** nur 2× Gitleaks SUCCESS. Kein Unity-Lauf — Branch `data/**` steht nicht in android.yml Z. 38–44. Kein Check berührt die CSV.
+- **Kritiker:** geprüft 26.11.2026, **Note 9/10** (Head `39c66e93`). Muss leer. Inhalt passt zu GDD v1.7.17 Z. 6140 / R.4.7. Sollte S-1–S-3: CRLF→LF im Diff nennen oder Zeilenenden behalten, Quelle auf v1.7.17 Z. 6140 (G3 offen) setzen, Importer-/Validate-Lauf vor Merge nennen.
+- **Empfehlung:** fixen — Sollte-Punkte einarbeiten, dann mergen möglich. Nicht auf das Gitleaks-Grün stützen.
 
 ### [#158](https://github.com/Xenatosa/epodarien/pull/158) — quests: Epoche 1 K1–K3 — Quest-System v2, Timeline, Story-Romane
 - **Branch:** `quests/kampagne-e1-k1-k3` → `main` (15 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 33 Tage (erstellt 23.10.2026 16:33 MESZ, zuletzt 11.11.2026 18:25 MEZ)
-- **Checks:** grün (2)
-- **Kritiker:** geprüft ja, Note 10/10 (Recheck 6, 23.10., `team/kritik/review_quest_timeline_e1_k1_k3.md`, HEAD `fbe7dcd`). Muss/Sollte geschlossen.
+- **Checks:** nur 2× Gitleaks SUCCESS. Kein Unity-Lauf — Branch `quests/**` steht nicht in android.yml Z. 38–44. Der Diff ist Doku/Questtexte, kein C#.
+- **Kritiker:** geprüft ja, Note 10/10 (Recheck 6, 23.10., `team/kritik/review_quest_timeline_e1_k1_k3.md`, HEAD `fbe7dcd`). Muss/Sollte geschlossen. Nachtrag 26.11.: #155 ist vollständig in diesem Head enthalten (alle 3 Commits und 8 Dateien von #155 sind Vorfahren bzw. byte-gleich; Notiz 26.11.).
 - **Duplikat/überholt:** überlappt thematisch mit dem älteren Entwurf #155; #158 ist der jüngere, geprüfte Stand.
-- **Empfehlung:** mergen.
+- **Empfehlung:** mergen als Quest-/Doku-Stand (Kritiker 10/10, #155 vollständig enthalten). Die Checks waren nur Gitleaks, kein Unity; das ist hier kein Blocker, weil kein Spielcode im Diff liegt. Merge-Commit bevorzugen, damit GitHub #155 als aufgegangen erkennt; andernfalls #155 danach als überholt schließen (nur auf Anweisung).
 
 ### [#157](https://github.com/Xenatosa/epodarien/pull/157) — campaign: Story-v2-Bosse statt GDD-E1-Bosse
 - **Branch:** `campaign/story-v2-bosse` → `main` (1 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 34 Tage (erstellt 23.10.2026 07:08 MESZ, zuletzt 11.11.2026 18:25 MEZ)
-- **Checks:** grün (2). Review-Entscheidung: `CHANGES_REQUESTED` (Quinn).
+- **Checks:** nur 2× Gitleaks SUCCESS. Kein Unity-Lauf (`campaign/**` steht nicht in android.yml Z. 38–44). Review-Entscheidung: `CHANGES_REQUESTED` (Quinn).
 - **Kritiker:** keine eigene Kritikdatei zu #157. Quinn und ein Kampfreview (Kommentar Xenatosa, 10.11.2026) nennen denselben Blocker: `maps.csv` nutzt `boss_e1_knirsch` usw., die Wellen bleiben bei `unit_boss_*`; `AutoBattleSimulator.FindMappedBoss` matcht nicht, Bosse und Phasen greifen nicht.
 - **Empfehlung:** fixen — Boss-ID-Namespace in Maps/Wellen/Simulator angleichen, danach Review aufheben und mergen.
 
@@ -89,10 +95,10 @@
 ### [#155](https://github.com/Xenatosa/epodarien/pull/155) — quests: System v2 mit Buch-1-Quests (Entwurf)
 - **Branch:** `quests/system-v2-buch-1` → `main` (3 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 34 Tage (erstellt 23.10.2026 06:36 MESZ, zuletzt 23.10.2026 07:02 MESZ — danach keine Bewegung)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft.
 - **Duplikat/überholt:** sehr wahrscheinlich durch #158 überholt (jüngerer Stand, Kritiker 10/10, 11.11. noch aktualisiert). Inhalt vor einem Schließen gegen #158 prüfen.
-- **Empfehlung:** schließen, falls #158 denselben Entwurf vollständig enthält; sonst fixen/abgrenzen. Nicht parallel zu #158 mergen, ohne die Überschneidung zu prüfen.
+- **Empfehlung:** schließen als überholt — Kritiker 26.11.: #155 ist vollständig in #158 enthalten (Heads und 8 Dateien byte-gleich; #158 hat nur zusätzliche Timeline-Dateien). Nur auf Anweisung schließen; bei Squash-Merge von #158 erkennt GitHub #155 nicht automatisch als gemergt.
 
 ### [#153](https://github.com/Xenatosa/epodarien/pull/153) — Art: E1-Gebäude Variante B (gebaeude_neu_b)
 - **Branch:** `art/gebaeude-neu-b` → `main` (1 voraus, 4 hinter, divergiert, `MERGEABLE`/`CLEAN`)
@@ -104,7 +110,7 @@
 ### [#152](https://github.com/Xenatosa/epodarien/pull/152) — feat(ui): leere D2-Gerüste für 14 fehlende Menüs
 - **Branch:** `ui/menus-d2-geruest` → `ui/menus-d2` (#151; 13 voraus, 0 hinter, `MERGEABLE`/`CLEAN`)
 - **Alter:** 34 Tage (erstellt 22.10.2026 15:11 MESZ, zuletzt 12.11.2026 06:18 MEZ)
-- **Checks:** grün (5, inkl. EditMode + PlayMode)
+- **Checks:** EditMode + PlayMode SUCCESS, 2× Gitleaks SUCCESS, Build Android APK SKIPPED, Android Emulator Evidence SKIPPED (Branch `ui/**` löst den Test-Job aus, APK nur auf main / ci/self-hosted-all, Z. 99).
 - **Kritiker:** geprüft, mehrere Rechecks in `team/kritik/review_pr152.md` und als Reviews von Xenatosa; Recheck 3 Note 9/10 (fachlich erledigt, zur 10 fehlte damals grüne CI — CI ist am Head `929b95c` inzwischen grün). Quinn (11.11., derselbe Head): Note 8/10, **Muss:** `android.yml` und `ci/Invoke-Unity.ps1` gehören nicht in diesen UI-PR (Paket markiert android.yml als tabu).
 - **Empfehlung:** fixen — CI-Änderungen aus diesem PR nehmen oder in einen eigenen PR legen, dann mergen (nach bzw. mit #151).
 
@@ -146,56 +152,56 @@
 ### [#125](https://github.com/Xenatosa/epodarien/pull/125) — gameplay: Kampfsystem v2 Vorschau und General-Button
 - **Branch:** `gameplay/kampfsystem-v2` → `main` (13 voraus, 57 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 17.10.2026 08:30 MESZ, zuletzt 12.11.2026 18:33 MEZ)
-- **Checks:** grün (5)
+- **Checks:** EditMode + PlayMode SUCCESS, 2× Gitleaks SUCCESS, Build Android APK SUCCESS, Android Emulator Evidence SKIPPED (Branch `gameplay/**` löst den Test-Job aus).
 - **Kritiker:** keine eigene Datei zu #125 gefunden. Thematisch verwandt mit #148 und #106.
-- **Empfehlung:** fixen — `main` einholen und gegen #148 abgrenzen (Reihenfolge/Überlappung), dann neu bewerten; nicht ungeprüft mergen trotz grüner Checks.
+- **Empfehlung:** fixen — `main` einholen und gegen #148 abgrenzen (Reihenfolge/Überlappung), dann neu bewerten; nicht ungeprüft mergen, obwohl hier tatsächlich Unity-Tests grün sind.
 
 ### [#124](https://github.com/Xenatosa/epodarien/pull/124) — Event-Tokens: Option B als Config und Entwurf (Draft)
 - **Branch:** `finanzen/event-tokens-option-b` → `main` (1 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt und zuletzt 17.10.2026 08:23 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht an diesem PR. Die Event-Kritik zu #84 (eigene Event-Marken, Kaufschleife) betrifft dasselbe Thema; ob Option B die Auflagen erfüllt, ist an diesem Head nicht nachgeprüft.
 - **Empfehlung:** fixen — Draft belassen, `main` einholen, gegen die Event-/Währungsauflagen prüfen; nicht mergen ohne diese Prüfung.
 
 ### [#123](https://github.com/Xenatosa/epodarien/pull/123) — Recherche: PvP-Sternevergleich und Bonusdeckel
 - **Branch:** `research/pvp-star-comparison-2026-10` → `main` (1 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt und zuletzt 17.10.2026 08:19 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft (Recherche-Paket, Queue-Zeile 12).
-- **Empfehlung:** mergen möglich als Recherche-Doku nach Einholen von `main` und kurzer Sichtprüfung; kein Spielcode.
+- **Empfehlung:** mergen als Recherche-Doku nach Einholen von `main` und kurzer Sichtprüfung (kein Spielcode). Checks waren nur Gitleaks, kein Unity — das ist hier kein Test-Beleg und auch kein Blocker. Nicht als „CI grün“ verbuchen.
 
 ### [#122](https://github.com/Xenatosa/epodarien/pull/122) — Gildenwährung und Saisonbeitrag vereinheitlichen
 - **Branch:** `codex/gilden-waehrung` → `main` (1 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt und zuletzt 17.10.2026 08:18 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** geprüft ja mit Auflagen (`team/kritik/kritik_2026-10-17_pr79_pr84_gilden.md`, Abschnitt Gilden): sichtbarer Beitragsbalken; keine Doppelwaren zu Chronik-/Sternstaub, Wochenlimits, 24-h-Hopping-Sperre. Ob der PR-Head diese Auflagen enthält, ist in den PR-Kommentaren nicht dokumentiert.
 - **Empfehlung:** fixen — Auflagen am aktuellen Diff prüfen bzw. Kritiker-Recheck, `main` einholen, dann mergen möglich.
 
 ### [#121](https://github.com/Xenatosa/epodarien/pull/121) — [Entwurf] Währungs-Inventur und Zusammenlegungsvorschlag (Draft)
 - **Branch:** `finanzen/waehrungen-inventur-v1` → `main` (2 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 17.10.2026 08:17 MESZ, zuletzt 08:18 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft.
 - **Empfehlung:** Draft belassen; fixen nur nach Finanz-/Kritiker-Prüfung, nicht ungeprüft mergen.
 
 ### [#111](https://github.com/Xenatosa/epodarien/pull/111) — Rechner: Beschwörungs-Bilanz v1 (Monte Carlo)
 - **Branch:** `rechner/beschwoerung-bilanz-v1` → `main` (9 voraus, 86 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 23:32 MESZ, zuletzt 17.10.2026 06:45 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** Erstprüfung 17.10.: **nicht mergen**, v1.1 anfordern (`team/kritik/kritik_pr109_110_111.md`). Danach zwei Commits am 17.10. 06:44–06:45 MESZ: „Paket v1.1 … Featured ohne 50/50 … nur MANIFEST“ (`24c86b27`) und „T10 PvP-Deckel präzisiert“ (`0774994`). **Kein Recheck** in `team/kritik/` und keine PR-Kommentare gefunden.
 - **Empfehlung:** fixen — Epochen Kritiker prüft v1.1 (`0774994`); erst danach mergen. Nicht auf Basis der alten „nicht mergen“-Wertung schließen, weil v1.1 bereits auf dem Branch liegt.
 
 ### [#110](https://github.com/Xenatosa/epodarien/pull/110) — Law: Moderationsauflagen umsetzen
 - **Branch:** `law/moderation-auflagen` → `cursor/rechtsrecherche-play-e9e7` (nicht `main`; 4 voraus, 0 hinter dieser Basis, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt und zuletzt 16.10.2026 23:10 MESZ — **vor** der Kritiker-Auflage)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** freigegeben, mergen nach 1 Fix (`kritik_pr109_110_111.md`): `team/entscheidungen.md` nach `docs/law/launch-blocker.md` umbenennen; später zusätzlich Vertretung eintragen, 24 h bleibt fest. Der aktuelle Diff **legt `team/entscheidungen.md` weiterhin neu an** (4 Dateien, letzter Commit `824febaa` 16.10. 23:10 MESZ). Queue-Zeile 11 war am 17.10. 08:15 als gestartet markiert; auf dem Branch ist danach nichts gepusht.
 - **Empfehlung:** fixen — Umbenennung und Vertretung committen, danach Kritiker-Endprüfung, dann mergen (Basis-Branch beachten, nicht still auf `main` annehmen).
 
 ### [#109](https://github.com/Xenatosa/epodarien/pull/109) — Recherche: Heldenbeschwörung erfolgreicher Mobile-Games
 - **Branch:** `research/hero-summon-comparison-2026-10` → `main` (4 voraus, 85 hinter, divergiert, `MERGEABLE`/`CLEAN`), Head `a78a7d28`
 - **Alter:** 40 Tage (erstellt 16.10.2026 23:04 MESZ, zuletzt 17.10.2026 08:18 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** Freigabe mit Auflagen am 17.10. gegen den Vor-P7-Stand; **kein Recheck** nach den drei P7-Commits. Keine GitHub-Reviews/Kommentare.
 - **Empfehlung:** fixen — Whiteout/Last War nachziehen, PvP-Wortlaut an „deckeln, nicht komplett angleichen“ angleichen, Kritiker-Recheck, optional `main` einholen; erst dann mergen. Details im Abschnitt #109-Auflagen.
 
@@ -209,49 +215,49 @@
 ### [#107](https://github.com/Xenatosa/epodarien/pull/107) — Balancing P6: Analyse zur Level-Rückholung
 - **Branch:** `balancing/level-rueckholung-v1` → `main` (2 voraus, 86 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 21:54 MESZ, zuletzt 17.10.2026 08:14 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** P6-Übernahme wurde mit Auflagen freigegeben (u. a. Reset-Kosten festhalten); ob der PR-Head das enthält, ist hier nicht am Diff gegengeprüft.
 - **Empfehlung:** fixen — `main` einholen, Auflagen am Diff prüfen, dann mergen möglich.
 
 ### [#106](https://github.com/Xenatosa/epodarien/pull/106) — docs: Kampfsystem v2 Abgleich mit Fabian-Nachträgen
 - **Branch:** `docs/kampfsystem-v2-abgleich-fabian-20261016` → `main` (2 voraus, 86 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 21:39 MESZ, zuletzt 17.10.2026 08:11 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht als Freigabe dieses PRs gefunden. Queue-Zeile 1 (3 Doku-Fixes) war am 17.10. 08:15 gestartet; letzter PR-Update 08:11, also vor oder ohne dokumentiertes Ende dieser Fixes.
 - **Empfehlung:** fixen — prüfen, ob die drei Doku-Fixes im Head sind, `main` einholen, gegen #125/#148 halten.
 
 ### [#102](https://github.com/Xenatosa/epodarien/pull/102) — PvE-Kampfkonzept v1: Phasen P0–P6 (Draft)
 - **Branch:** `pve/kampf-konzept-v1` → `main` (12 voraus, 86 hinter, **CONFLICTING** / `DIRTY`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 14:17 MESZ, zuletzt 16.10.2026 18:48 MESZ)
-- **Checks:** grün (2) — am alten Head, nicht nach Konfliktlösung.
+- **Checks:** nur 2× Gitleaks SUCCESS am alten Head, kein Unity-Lauf; nach einer neuen Konfliktlösung wäre das ohnehin neu zu belegen.
 - **Kritiker:** nicht geprüft. Kommentar Xenatosa 16.10.: main wurde per Merge geholt (kein Force-Push), Konflikte in 25 Dateien damals gelöst; der aktuelle API-Status ist trotzdem `CONFLICTING` (main ist seither weitergegangen).
 - **Empfehlung:** fixen — Konflikte erneut gegen heutiges `main` lösen oder als veralteten Draft schließen, falls durch spätere Kampf-PRs ersetzt (das Ersetzen ist nicht belegt).
 
 ### [#101](https://github.com/Xenatosa/epodarien/pull/101) — Glossar: Siegelscherbe und Lichtsiegel
 - **Branch:** `loc/glossar-siegelscherbe` → `main` (5 voraus, 70 hinter, **CONFLICTING** / `DIRTY`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 13:02 MESZ, zuletzt 17.10.2026 07:51 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft.
 - **Empfehlung:** fixen — Konflikte lösen, dann mergen möglich (Lokalisierung, überschaubar) oder bei Überholung durch spätere Loc-PRs schließen (nicht belegt).
 
 ### [#100](https://github.com/Xenatosa/epodarien/pull/100) — feat: Epochenwechsel-Animation als wiederverwendbares Template
 - **Branch:** `feature/epoch-transition-template` → `main` (6 voraus, 86 hinter, **CONFLICTING** / `DIRTY`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 13:02 MESZ, zuletzt 16.10.2026 18:55 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft.
 - **Empfehlung:** fixen — Konflikte gegen `main` lösen und fachlich prüfen; sonst als veralteter Feature-PR offen lassen, nicht mergen.
 
 ### [#97](https://github.com/Xenatosa/epodarien/pull/97) — Kampagne E1 v1.9: Brakka, Ausrüstung und Lore
 - **Branch:** `kampagne/e1-v2-sammel` → `main` (5 voraus, 86 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 40 Tage (erstellt 16.10.2026 11:06 MESZ, zuletzt 17.10.2026 08:17 MESZ)
-- **Checks:** grün (2)
+- **Checks:** nur 2× Gitleaks SUCCESS (push + pull_request). Kein Unity-Lauf (Head-Branch nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht geprüft. Thematisch überlappend mit #157/#149/#158 (Bosse, Lore, E1).
 - **Empfehlung:** fixen — Überlappung mit #157/#149/#158 klären, bevor gemergt wird; `main` einholen. Nicht als Duplikat schließen ohne Diff-Abgleich.
 
 ### [#91](https://github.com/Xenatosa/epodarien/pull/91) — Testkonten: Grants nur für konfigurierte IDs (Draft)
 - **Branch:** `backend/test-accounts` → `main` (2 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 41 Tage (erstellt 15.10.2026 11:14 MESZ, zuletzt 17.10.2026 08:11 MESZ)
-- **Checks:** grün (4)
+- **Checks:** 2× Gitleaks SUCCESS, Lint und Tests SUCCESS (Server), Nakama Compose SUCCESS (Server). Kein Unity-Lauf (`backend/**` steht nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht Epochen Kritiker. Epochen Security (Kommentar Xenatosa 17.10. 06:40 MESZ): **freigegeben, keine Blocker** (Tip `7d4aae5`).
 - **Empfehlung:** fixen — laut Queue-Kopf erst nach #66 mergen; `main` einholen, Draft aufheben, dann mergen.
 
@@ -279,21 +285,21 @@
 ### [#76](https://github.com/Xenatosa/epodarien/pull/76) — UI-Häuptlingsfeuer mit tauschbarer KI-Art
 - **Branch:** `ui/center-ki-variant` → `main` (3 voraus, 68 hinter, **CONFLICTING** / `DIRTY`)
 - **Alter:** 41 Tage (erstellt 15.10.2026 10:57 MESZ, zuletzt 17.10.2026 08:14 MESZ)
-- **Checks:** grün (5)
+- **Checks:** EditMode + PlayMode SUCCESS, 2× Gitleaks SUCCESS, Build Android APK SKIPPED, Android Emulator Evidence SKIPPED (Branch `ui/**`).
 - **Kritiker:** nicht geprüft.
-- **Empfehlung:** fixen — Konflikte lösen und fachlich prüfen; nicht mergen solange `DIRTY`.
+- **Empfehlung:** fixen — Konflikte lösen und fachlich prüfen; nicht mergen solange `DIRTY`. Unity-Tests waren am Head grün, ersetzen aber keine Konfliktlösung.
 
 ### [#67](https://github.com/Xenatosa/epodarien/pull/67) — Play-Kauf serverseitig prüfen und erstatten (Draft)
 - **Branch:** `backend/play-purchase-verify-73e7` → `main` (7 voraus, 87 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 41 Tage (erstellt 15.10.2026 10:38 MESZ, zuletzt 16.10.2026 15:23 MESZ)
-- **Checks:** grün (4)
+- **Checks:** 2× Gitleaks SUCCESS, Lint und Tests SUCCESS (Server), Nakama Compose SUCCESS (Server). Kein Unity-Lauf (`backend/**` steht nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht Epochen Kritiker. Cursor-Kommentare: lokale Nakama-Tests grün; Queue: Security-Fix `applyVoid` erst starten, wenn #66 und #91 gemergt sind — ob dieser Fix im Head ist, wurde hier nicht am Diff geprüft.
 - **Empfehlung:** fixen — Reihenfolge #66 → #91 → #67 einhalten, `main` einholen, offenen Security-Fix bestätigen, dann mergen.
 
 ### [#66](https://github.com/Xenatosa/epodarien/pull/66) — U18-Monatslimit serverseitig (hart, UTC) (Draft)
 - **Branch:** `backend/minor-spend-limit-73e7` → `main` (3 voraus, 68 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 41 Tage (erstellt 15.10.2026 10:17 MESZ, zuletzt 17.10.2026 08:11 MESZ)
-- **Checks:** grün (4)
+- **Checks:** 2× Gitleaks SUCCESS, Lint und Tests SUCCESS (Server), Nakama Compose SUCCESS (Server). Kein Unity-Lauf (`backend/**` steht nicht in android.yml Z. 38–44).
 - **Kritiker:** nicht Epochen Kritiker. Lokale Nakama-Kommentare (Cursor) berichten grüne Suites; Queue wollte zuerst main in #66/#91 einholen.
 - **Empfehlung:** fixen — `main` einholen, Draft aufheben, dann als erstes der Backend-Kette mergen.
 
@@ -322,9 +328,9 @@
 ### [#57](https://github.com/Xenatosa/epodarien/pull/57) — Doku: PowerShell 7 und Unity 6000.3.26f1 als Runner-Voraussetzungen
 - **Branch:** `cursor/self-hosted-runner-pwsh-9906` → `main` (3 voraus, 75 hinter, divergiert, `MERGEABLE`/`CLEAN`)
 - **Alter:** 42 Tage (erstellt 14.10.2026 17:58 MESZ, zuletzt 16.10.2026 23:24 MESZ)
-- **Checks:** grün (5)
+- **Checks:** EditMode + PlayMode SUCCESS, 2× Gitleaks SUCCESS, Build Android APK SKIPPED, Android Emulator Evidence SKIPPED. Branch `cursor/**` steht in android.yml Z. 41; Unity ist hier tatsächlich gelaufen (im Gegensatz zu #159–#161).
 - **Kritiker:** nicht geprüft (Doku).
-- **Empfehlung:** mergen möglich nach Einholen von `main` und kurzer Prüfung, ob die Runner-Daten noch stimmen.
+- **Empfehlung:** mergen möglich nach Einholen von `main` und kurzer Prüfung, ob die Runner-Daten noch stimmen. Empfehlung unverändert, nur die Check-Angabe präzisiert.
 
 ### [#5](https://github.com/Xenatosa/epodarien/pull/5) — Bump actions/checkout 4.4.0 → 7.0.1
 - **Branch:** Dependabot → `main` (1 voraus, 89 hinter, divergiert, `MERGEABLE`/`UNSTABLE`)
@@ -400,4 +406,5 @@ Nicht belegt als Push-Fehler: Auth-Ablehnung, Merge-Konflikt beim Push, Abbruch 
 
 ## Kostenzeile
 
-Laufzeit **08:04–08:18 MEZ** (Europe/Berlin), 0 €, ohne Codex.
+Erstfassung 26.11.2026 **08:04–08:18 MEZ**, 0 €, ohne Codex.  
+Korrektur der Check-Angaben, Kritiker-Noten #159/#160/#161 und Codex-Pakete: **08:27–08:35 MEZ**, 0 €, ohne Codex.
