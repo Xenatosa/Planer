@@ -407,4 +407,4 @@ Nicht belegt als Push-Fehler: Auth-Ablehnung, Merge-Konflikt beim Push, Abbruch 
 ## Kostenzeile
 
 Erstfassung 26.11.2026 **08:04–08:18 MEZ**, 0 €, ohne Codex.  
-Korrektur der Check-Angaben, Kritiker-Noten #159/#160/#161 und Codex-Pakete: **08:27–08:35 MEZ**, 0 €, ohne Codex.
+Korrektur der Check-Angaben, Kritiker-Noten #159/#160/#161 und Codex-Pakete: **08:27–08:34 MEZ**, 0 €, ohne Codex.
